@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test.describe("About modal", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/components/about-modal");
   });
 
   test("modal is hidden by default", async ({ page }) => {

@@ -1,30 +1,20 @@
 {#include layouts/base}
-{#title}Hello World{/title}
+{#title}Component Showcase{/title}
 {#body}
 <div style="padding: 2rem;">
-  <h1>Hello World</h1>
-  <p>quarkus-pha is running.</p>
+  <h1>Component Showcase</h1>
+  <p>Browse the available quarkus-pha components below.</p>
 
-  <button class="pf-v6-c-button pf-m-primary" type="button"
-          @click="$dispatch('open-about-modal')">
-    About
-  </button>
+  <nav class="pf-v6-c-nav" aria-label="Component navigation" style="margin-top: 1rem;">
+    <ul class="pf-v6-c-nav__list">
+      <li class="pf-v6-c-nav__item">
+        <a href="/components/about-modal" class="pf-v6-c-nav__link">About Modal</a>
+      </li>
+      <li class="pf-v6-c-nav__item">
+        <a href="/components/accordion" class="pf-v6-c-nav__link">Accordion</a>
+      </li>
+    </ul>
+  </nav>
 </div>
-
-{#include components/feedback/about-modal productName="quarkus-pha" brandImageSrc="/web/images/PF-IconLogo.svg" brandImageAlt="quarkus-pha logo" backgroundImage="/web/images/pf-background.svg"}
-{#content}
-<dl class="pf-v6-c-description-list pf-m-horizontal">
-  <div class="pf-v6-c-description-list__group">
-    <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Version</span></dt>
-    <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">1.0.0-SNAPSHOT</div></dd>
-  </div>
-  <div class="pf-v6-c-description-list__group">
-    <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Quarkus</span></dt>
-    <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">3.31.4</div></dd>
-  </div>
-</dl>
-{/content}
-{#strapline}Copyright &copy; 2026 SiteNetSoft{/strapline}
-{/include}
 {/body}
 {/include}
