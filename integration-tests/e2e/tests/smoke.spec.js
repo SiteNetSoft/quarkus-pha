@@ -3,20 +3,27 @@ import { test, expect } from "@playwright/test";
 test.describe("Smoke tests", () => {
   test("homepage loads with correct title", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle("Hello World");
+    await expect(page).toHaveTitle("Component Showcase");
   });
 
-  test("PatternFly button renders with correct classes", async ({ page }) => {
+  test("homepage displays component navigation", async ({ page }) => {
     await page.goto("/");
-    const button = page.locator("button.pf-v6-c-button.pf-m-primary");
-    await expect(button).toBeVisible();
-    await expect(button).toHaveText("About");
+    const heading = page.locator("h1");
+    await expect(heading).toHaveText("Component Showcase");
+
+    const nav = page.locator("nav.pf-v6-c-nav");
+    await expect(nav).toBeVisible();
   });
 
-  test("Alpine.js backdrop is hidden by default", async ({ page }) => {
+  test("navigation contains links to component pages", async ({ page }) => {
     await page.goto("/");
-    const backdrop = page.locator(".pf-v6-c-backdrop");
-    await expect(backdrop).toBeHidden();
+    const aboutModalLink = page.locator('a.pf-v6-c-nav__link[href="/components/about-modal"]');
+    await expect(aboutModalLink).toBeVisible();
+    await expect(aboutModalLink).toHaveText("About Modal");
+
+    const accordionLink = page.locator('a.pf-v6-c-nav__link[href="/components/accordion"]');
+    await expect(accordionLink).toBeVisible();
+    await expect(accordionLink).toHaveText("Accordion");
   });
 
   test("/hello REST endpoint returns 200", async ({ request }) => {
