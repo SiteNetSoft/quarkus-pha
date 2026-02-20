@@ -13,6 +13,9 @@
         var t = localStorage.getItem('pha-theme') || 'auto';
         var dark = t === 'dark' || (t === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
         if (dark) document.documentElement.classList.add('pf-v6-theme-dark');
+        var c = localStorage.getItem('pha-contrast') || 'system';
+        var hc = c === 'on' || (c === 'system' && window.matchMedia('(prefers-contrast: more)').matches);
+        if (hc) document.documentElement.classList.add('pf-v6-theme-high-contrast');
       })();
     </script>
 
