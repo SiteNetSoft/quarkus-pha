@@ -38,6 +38,15 @@ test.describe("About modal", () => {
     const img = page.locator(".pf-v6-c-about-modal-box__brand-image");
     await expect(img).toBeVisible();
     await expect(img).toHaveAttribute("alt", "quarkus-pha logo");
+    await expect(img).toHaveAttribute("src", "/web/images/PF-IconLogo.svg");
+  });
+
+  test("background image is applied", async ({ page }) => {
+    await page.locator("button", { hasText: "About" }).click();
+
+    const modal = page.locator(".pf-v6-c-about-modal-box");
+    const style = await modal.getAttribute("style");
+    expect(style).toContain("/web/images/pf-background.svg");
   });
 
   test("close button closes modal", async ({ page }) => {
