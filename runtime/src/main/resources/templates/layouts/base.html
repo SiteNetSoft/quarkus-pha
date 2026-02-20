@@ -8,6 +8,14 @@
     <meta name="color-scheme" content="light dark">
     <meta name="application-name" content="{applicationName}">
 
+    <script>
+      (function() {
+        var t = localStorage.getItem('pha-theme') || 'auto';
+        var dark = t === 'dark' || (t === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (dark) document.documentElement.classList.add('pf-v6-theme-dark');
+      })();
+    </script>
+
     <link rel="stylesheet" href="/web/vendor/patternfly/patternfly.css">
     <link rel="stylesheet" href="/web/vendor/patternfly/patternfly-addons.css">
 
@@ -17,6 +25,7 @@
     <script src="/web/vendor/htmx/htmx.min.js"></script>
 </head>
 <body> <!--class="pf-v6-c-page"-->
+{#include components/navigation/theme-selector /}
 {#insert body}{/insert}
 </body>
 </html>
