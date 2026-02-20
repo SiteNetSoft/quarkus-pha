@@ -1,0 +1,30 @@
+{#include layouts/base}
+{#title}Hello World{/title}
+{#body}
+<div style="padding: 2rem;">
+  <h1>Hello World</h1>
+  <p>quarkus-pha is running.</p>
+
+  <button class="pf-v6-c-button pf-m-primary" type="button"
+          @click="$dispatch('open-about-modal')">
+    About
+  </button>
+</div>
+
+{#include components/feedback/about-modal productName="quarkus-pha" brandImageSrc="https://www.patternfly.org/images/PF-IconLogo.svg" brandImageAlt="quarkus-pha logo"}
+{#content}
+<dl class="pf-v6-c-description-list pf-m-horizontal">
+  <div class="pf-v6-c-description-list__group">
+    <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Version</span></dt>
+    <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">1.0.0-SNAPSHOT</div></dd>
+  </div>
+  <div class="pf-v6-c-description-list__group">
+    <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Quarkus</span></dt>
+    <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">3.31.4</div></dd>
+  </div>
+</dl>
+{/content}
+{#strapline}Copyright &copy; 2026 SiteNetSoft{/strapline}
+{/include}
+{/body}
+{/include}

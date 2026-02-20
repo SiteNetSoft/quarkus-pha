@@ -1,0 +1,18 @@
+plugins {
+    id 'io.quarkus.extension'
+}
+
+dependencies {
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    implementation 'io.quarkus:quarkus-arc'
+    implementation 'io.quarkus:quarkus-qute'
+
+    annotationProcessor enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    annotationProcessor 'io.quarkus:quarkus-extension-processor'
+}
+
+processResources {
+    from('src/main/resources/web') {
+        into 'META-INF/resources/web'
+    }
+}
