@@ -10,22 +10,35 @@ test.describe("Theme selector", () => {
     await expect(menu).toBeHidden();
   });
 
-  test("click toggle opens dropdown with 3 options", async ({ page }) => {
+  test("click toggle opens dropdown with Color scheme and High contrast sections", async ({ page }) => {
     await page.locator(".pf-v6-c-menu-toggle").click();
 
     const menu = page.locator(".pf-v6-c-menu");
     await expect(menu).toBeVisible();
 
-    const items = menu.locator(".pf-v6-c-menu__item-text");
-    await expect(items).toHaveCount(3);
-    await expect(items.nth(0)).toHaveText("Light");
-    await expect(items.nth(1)).toHaveText("Dark");
-    await expect(items.nth(2)).toHaveText("Auto");
+    // Color scheme section
+    await expect(menu.locator("#theme-selector-color-scheme-title")).toHaveText("Color scheme");
+    const colorButtons = menu.locator('[aria-labelledby="theme-selector-color-scheme-title"] .pf-v6-c-toggle-group__text');
+    await expect(colorButtons).toHaveCount(3);
+    await expect(colorButtons.nth(0)).toHaveText("System");
+    await expect(colorButtons.nth(1)).toHaveText("Light");
+    await expect(colorButtons.nth(2)).toHaveText("Dark");
+
+    // Divider
+    await expect(menu.locator("hr.pf-v6-c-divider")).toBeVisible();
+
+    // High contrast section
+    await expect(menu.locator("#theme-selector-contrast-title")).toHaveText("High contrast");
+    const contrastButtons = menu.locator('[aria-labelledby="theme-selector-contrast-title"] .pf-v6-c-toggle-group__text');
+    await expect(contrastButtons).toHaveCount(3);
+    await expect(contrastButtons.nth(0)).toHaveText("System");
+    await expect(contrastButtons.nth(1)).toHaveText("On");
+    await expect(contrastButtons.nth(2)).toHaveText("Off");
   });
 
   test('select "Dark" adds pf-v6-theme-dark class to html', async ({ page }) => {
     await page.locator(".pf-v6-c-menu-toggle").click();
-    await page.locator(".pf-v6-c-menu__item-text", { hasText: "Dark" }).click();
+    await page.locator('[aria-labelledby="theme-selector-color-scheme-title"] .pf-v6-c-toggle-group__button', { hasText: "Dark" }).click();
 
     const hasDark = await page.evaluate(() =>
       document.documentElement.classList.contains("pf-v6-theme-dark")
@@ -36,11 +49,10 @@ test.describe("Theme selector", () => {
   test('select "Light" removes pf-v6-theme-dark class from html', async ({ page }) => {
     // First set dark
     await page.locator(".pf-v6-c-menu-toggle").click();
-    await page.locator(".pf-v6-c-menu__item-text", { hasText: "Dark" }).click();
+    await page.locator('[aria-labelledby="theme-selector-color-scheme-title"] .pf-v6-c-toggle-group__button', { hasText: "Dark" }).click();
 
-    // Then switch to light
-    await page.locator(".pf-v6-c-menu-toggle").click();
-    await page.locator(".pf-v6-c-menu__item-text", { hasText: "Light" }).click();
+    // Then switch to light (dropdown stays open with toggle groups)
+    await page.locator('[aria-labelledby="theme-selector-color-scheme-title"] .pf-v6-c-toggle-group__button', { hasText: "Light" }).click();
 
     const hasDark = await page.evaluate(() =>
       document.documentElement.classList.contains("pf-v6-theme-dark")
@@ -48,11 +60,11 @@ test.describe("Theme selector", () => {
     expect(hasDark).toBe(false);
   });
 
-  test('select "Auto" respects system preference', async ({ page }) => {
+  test('select "System" respects system preference', async ({ page }) => {
     // Emulate dark color scheme
     await page.emulateMedia({ colorScheme: "dark" });
     await page.locator(".pf-v6-c-menu-toggle").click();
-    await page.locator(".pf-v6-c-menu__item-text", { hasText: "Auto" }).click();
+    await page.locator('[aria-labelledby="theme-selector-color-scheme-title"] .pf-v6-c-toggle-group__button', { hasText: "System" }).click();
 
     const hasDark = await page.evaluate(() =>
       document.documentElement.classList.contains("pf-v6-theme-dark")
@@ -61,7 +73,6 @@ test.describe("Theme selector", () => {
 
     // Switch to light system preference
     await page.emulateMedia({ colorScheme: "light" });
-    // Wait for the media query listener to fire
     await page.waitForFunction(
       () => !document.documentElement.classList.contains("pf-v6-theme-dark")
     );
@@ -69,7 +80,7 @@ test.describe("Theme selector", () => {
 
   test("theme persists across page reload", async ({ page }) => {
     await page.locator(".pf-v6-c-menu-toggle").click();
-    await page.locator(".pf-v6-c-menu__item-text", { hasText: "Dark" }).click();
+    await page.locator('[aria-labelledby="theme-selector-color-scheme-title"] .pf-v6-c-toggle-group__button', { hasText: "Dark" }).click();
 
     await page.reload();
 
@@ -78,18 +89,58 @@ test.describe("Theme selector", () => {
     );
     expect(hasDark).toBe(true);
 
-    // Verify the stored value
     const stored = await page.evaluate(() =>
       localStorage.getItem("pha-theme")
     );
     expect(stored).toBe("dark");
   });
 
+  test("toggle icon changes based on selected color scheme", async ({ page }) => {
+    const toggleIcon = page.locator(".pf-v6-c-menu-toggle__icon");
+
+    // Default is auto — desktop/system icon should be visible
+    await expect(toggleIcon.locator('svg[x-show="theme === \'auto\'"]')).toBeVisible();
+    await expect(toggleIcon.locator('svg[x-show="theme === \'light\'"]')).toBeHidden();
+    await expect(toggleIcon.locator('svg[x-show="theme === \'dark\'"]')).toBeHidden();
+
+    // Switch to dark
+    await page.locator(".pf-v6-c-menu-toggle").click();
+    await page.locator('[aria-labelledby="theme-selector-color-scheme-title"] .pf-v6-c-toggle-group__button', { hasText: "Dark" }).click();
+
+    await expect(toggleIcon.locator('svg[x-show="theme === \'dark\'"]')).toBeVisible();
+    await expect(toggleIcon.locator('svg[x-show="theme === \'auto\'"]')).toBeHidden();
+
+    // Switch to light
+    await page.locator('[aria-labelledby="theme-selector-color-scheme-title"] .pf-v6-c-toggle-group__button', { hasText: "Light" }).click();
+
+    await expect(toggleIcon.locator('svg[x-show="theme === \'light\'"]')).toBeVisible();
+    await expect(toggleIcon.locator('svg[x-show="theme === \'dark\'"]')).toBeHidden();
+  });
+
+  test("high contrast toggle works", async ({ page }) => {
+    await page.locator(".pf-v6-c-menu-toggle").click();
+
+    // Enable high contrast
+    await page.locator('[aria-labelledby="theme-selector-contrast-title"] .pf-v6-c-toggle-group__button', { hasText: "On" }).click();
+
+    const hasHc = await page.evaluate(() =>
+      document.documentElement.classList.contains("pf-v6-theme-high-contrast")
+    );
+    expect(hasHc).toBe(true);
+
+    // Disable high contrast
+    await page.locator('[aria-labelledby="theme-selector-contrast-title"] .pf-v6-c-toggle-group__button', { hasText: "Off" }).click();
+
+    const hasHcAfter = await page.evaluate(() =>
+      document.documentElement.classList.contains("pf-v6-theme-high-contrast")
+    );
+    expect(hasHcAfter).toBe(false);
+  });
+
   test("click outside closes dropdown", async ({ page }) => {
     await page.locator(".pf-v6-c-menu-toggle").click();
     await expect(page.locator(".pf-v6-c-menu")).toBeVisible();
 
-    // Click on the page body, away from the dropdown
     await page.locator("body").click({ position: { x: 10, y: 300 } });
     await expect(page.locator(".pf-v6-c-menu")).toBeHidden();
   });
@@ -110,7 +161,8 @@ test.describe("Theme selector", () => {
     await toggle.click();
     await expect(toggle).toHaveAttribute("aria-expanded", "true");
 
-    await toggle.click();
+    // Click outside to close
+    await page.locator("body").click({ position: { x: 10, y: 300 } });
     await expect(toggle).toHaveAttribute("aria-expanded", "false");
   });
 });
