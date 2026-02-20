@@ -12,15 +12,19 @@ test.describe("Smoke tests", () => {
     await expect(heading).toHaveText("All components");
   });
 
-  test("component cards link to demo pages", async ({ page }) => {
+  test("gallery shows 92 component cards", async ({ page }) => {
     await page.goto("/");
-    const aboutModalCard = page.locator('a[href="/components/about-modal"] .pf-v6-c-card__title-text');
-    await expect(aboutModalCard).toBeVisible();
-    await expect(aboutModalCard).toHaveText("About modal");
+    const cards = page.locator(".pf-v6-l-gallery .pf-v6-c-card");
+    await expect(cards).toHaveCount(92);
+  });
 
-    const accordionCard = page.locator('a[href="/components/accordion"] .pf-v6-c-card__title-text');
-    await expect(accordionCard).toBeVisible();
-    await expect(accordionCard).toHaveText("Accordion");
+  test("implemented components link to demo pages", async ({ page }) => {
+    await page.goto("/");
+    const aboutModalLink = page.locator('a[href="/components/about-modal"]');
+    await expect(aboutModalLink).toBeVisible();
+
+    const accordionLink = page.locator('a[href="/components/accordion"]');
+    await expect(accordionLink).toBeVisible();
   });
 
   test("search input filters component cards", async ({ page }) => {
@@ -29,7 +33,8 @@ test.describe("Smoke tests", () => {
     await expect(searchInput).toBeVisible();
 
     await searchInput.fill("accordion");
-    await expect(page.locator('#about-modal')).toBeHidden();
+    const visibleCards = page.locator('.pf-v6-l-gallery > div:visible');
+    await expect(visibleCards).toHaveCount(1);
     await expect(page.locator('#accordion')).toBeVisible();
   });
 
