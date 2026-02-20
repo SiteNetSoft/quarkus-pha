@@ -1,0 +1,47 @@
+{#include layouts/base}
+{#title}Accordion{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Accordion</h1>
+  <p>PatternFly v6 accordion with all supported variants.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="fluid-heading">Fluid</h2>
+    <p>Default accordion with no extra modifiers.</p>
+    {#include components/data-display/accordion items=sampleItems id="accordion-fluid" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="fixed-heading">Fixed</h2>
+    <p>Expandable content has a fixed max-height with scrollbar.</p>
+    {#include components/data-display/accordion items=sampleItems id="accordion-fixed" fixed=true /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="definition-list-heading">Definition list</h2>
+    <p>Renders as a definition list using dl, dt, and dd elements.</p>
+    {#include components/data-display/accordion items=sampleItems id="accordion-dl" definitionList=true /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="bordered-heading">Bordered</h2>
+    <p>Accordion with bordered styling.</p>
+    {#include components/data-display/accordion items=sampleItems id="accordion-bordered" bordered=true /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="large-bordered-heading">Large bordered</h2>
+    <p>Bordered accordion with large display size.</p>
+    {#include components/data-display/accordion items=sampleItems id="accordion-large-bordered" bordered=true displayLg=true /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="toggle-start-heading">Toggle icon at start</h2>
+    <p>Toggle icon appears before the text instead of after.</p>
+    {#include components/data-display/accordion items=sampleItems id="accordion-toggle-start" toggleStart=true /}
+  </section>
+</div>
+{/body}
+{/include}
