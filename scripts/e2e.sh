@@ -2,20 +2,22 @@
 set -euo pipefail
 
 # Run Playwright E2E tests inside a Podman container
-# Starts Quarkus if not already running on :8080
+# Starts Quarkus in a Podman container if not already running on :8080
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 E2E_DIR="$PROJECT_ROOT/integration-tests/e2e"
-QUARKUS_PID=""
+QUARKUS_APP="$PROJECT_ROOT/integration-tests/build/quarkus-app"
+QUARKUS_STARTED=""
 
+QUARKUS_CONTAINER="quarkus-pha-e2e"
+QUARKUS_IMAGE="registry.access.redhat.com/ubi9/openjdk-25-runtime:1.24"
 PLAYWRIGHT_IMAGE="mcr.microsoft.com/playwright:v1.50.1-noble"
 
 cleanup() {
-  if [ -n "$QUARKUS_PID" ]; then
-    echo "==> Stopping Quarkus (PID $QUARKUS_PID)..."
-    kill "$QUARKUS_PID" 2>/dev/null || true
-    wait "$QUARKUS_PID" 2>/dev/null || true
+  if [ -n "$QUARKUS_STARTED" ]; then
+    echo "==> Stopping Quarkus container..."
+    podman stop "$QUARKUS_CONTAINER" 2>/dev/null || true
   fi
 }
 trap cleanup EXIT
@@ -28,10 +30,17 @@ else
   JAVA_HOME="${JAVA_HOME:-/usr/lib/jvm/java-25-openjdk-amd64}" \
     "$PROJECT_ROOT/gradlew" -p "$PROJECT_ROOT" :integration-tests:quarkusBuild
 
-  echo "==> Starting Quarkus..."
-  JAVA_HOME="${JAVA_HOME:-/usr/lib/jvm/java-25-openjdk-amd64}" \
-    java -jar "$PROJECT_ROOT/integration-tests/build/quarkus-app/quarkus-run.jar" &
-  QUARKUS_PID=$!
+  # Remove stale container from a previous failed run
+  podman rm -f "$QUARKUS_CONTAINER" 2>/dev/null || true
+
+  echo "==> Starting Quarkus in Podman container..."
+  podman run --rm -d \
+    --name "$QUARKUS_CONTAINER" \
+    --network=host \
+    -e JAVA_APP_JAR=/deployments/quarkus-run.jar \
+    -v "$QUARKUS_APP:/deployments:Z" \
+    "$QUARKUS_IMAGE"
+  QUARKUS_STARTED=1
 
   echo "==> Waiting for Quarkus to start..."
   for i in $(seq 1 30); do
@@ -41,6 +50,8 @@ else
     fi
     if [ "$i" -eq 30 ]; then
       echo "==> ERROR: Quarkus did not start within 30 seconds"
+      echo "==> Container logs:"
+      podman logs "$QUARKUS_CONTAINER" 2>&1 || true
       exit 1
     fi
     sleep 1
