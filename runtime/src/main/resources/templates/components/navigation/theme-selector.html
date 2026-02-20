@@ -1,46 +1,71 @@
-{! Theme Selector — PatternFly v6 menu-toggle + menu !}
-{! Switches between Light, Dark, and Auto (system) themes !}
+{! Theme Selector — PatternFly v6, matches patternfly.org site theme switcher !}
+{! Toggle-group based color scheme + high contrast switcher !}
 <div x-data="{
        open: false,
        theme: 'auto',
+       contrast: 'system',
        init() {
          this.theme = localStorage.getItem('pha-theme') || 'auto';
+         this.contrast = localStorage.getItem('pha-contrast') || 'system';
          this.applyTheme();
-         this._mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-         this._onMediaChange = () => { if (this.theme === 'auto') this.applyTheme(); };
-         this._mediaQuery.addEventListener('change', this._onMediaChange);
+         this.applyContrast();
+         this._darkMq = window.matchMedia('(prefers-color-scheme: dark)');
+         this._contrastMq = window.matchMedia('(prefers-contrast: more)');
+         this._onDarkChange = () => { if (this.theme === 'auto') this.applyTheme(); };
+         this._onContrastChange = () => { if (this.contrast === 'system') this.applyContrast(); };
+         this._darkMq.addEventListener('change', this._onDarkChange);
+         this._contrastMq.addEventListener('change', this._onContrastChange);
        },
        destroy() {
-         if (this._mediaQuery) this._mediaQuery.removeEventListener('change', this._onMediaChange);
+         if (this._darkMq) this._darkMq.removeEventListener('change', this._onDarkChange);
+         if (this._contrastMq) this._contrastMq.removeEventListener('change', this._onContrastChange);
        },
        setTheme(t) {
          this.theme = t;
          localStorage.setItem('pha-theme', t);
          this.applyTheme();
-         this.open = false;
+       },
+       setContrast(c) {
+         this.contrast = c;
+         localStorage.setItem('pha-contrast', c);
+         this.applyContrast();
        },
        applyTheme() {
          var dark = this.theme === 'dark' ||
            (this.theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
          document.documentElement.classList.toggle('pf-v6-theme-dark', dark);
+       },
+       applyContrast() {
+         var on = this.contrast === 'on' ||
+           (this.contrast === 'system' && window.matchMedia('(prefers-contrast: more)').matches);
+         document.documentElement.classList.toggle('pf-v6-theme-high-contrast', on);
        }
      }"
      @click.outside="open = false"
      @keydown.escape.window="if (open) { open = false; $event.stopPropagation(); }"
      style="position: fixed; bottom: var(--pf-t--global--spacer--md); left: var(--pf-t--global--spacer--md); z-index: var(--pf-t--global--z-index--lg);">
 
-  {! Toggle button !}
+  {! Toggle button — icon only, dynamic icon based on selected color scheme !}
   <button class="pf-v6-c-menu-toggle"
           :class="{ 'pf-m-expanded': open }"
           type="button"
           :aria-expanded="open.toString()"
+          :aria-label="'Theme: ' + (theme === 'light' ? 'Light' : theme === 'dark' ? 'Dark' : 'System')"
           @click="open = !open">
     <span class="pf-v6-c-menu-toggle__icon">
-      <svg viewBox="0 0 512 512" fill="currentColor" aria-hidden="true" width="1em" height="1em">
-        <path d="M375.7 19.7c-1.5-8-6.9-14.7-14.4-17.8s-16.1-2.2-22.8 2.4L256 61.1 173.5 4.2c-6.7-4.6-15.3-5.5-22.8-2.4s-12.9 9.8-14.4 17.8l-18.1 98.5L19.7 136.3c-8 1.5-14.7 6.9-17.8 14.4s-2.2 16.1 2.4 22.8L61.1 256 4.2 338.5c-4.6 6.7-5.5 15.3-2.4 22.8s9.8 12.9 17.8 14.4l98.5 18.1 18.1 98.5c1.5 8 6.9 14.7 14.4 17.8s16.1 2.2 22.8-2.4L256 450.9l82.5 56.9c6.7 4.6 15.3 5.5 22.8 2.4s12.9-9.8 14.4-17.8l18.1-98.5 98.5-18.1c8-1.5 14.7-6.9 17.8-14.4s2.2-16.1-2.4-22.8L450.9 256l56.9-82.5c4.6-6.7 5.5-15.3 2.4-22.8s-9.8-12.9-17.8-14.4l-98.5-18.1L375.7 19.7zM269.6 110l65.6-45.2 14.4 78.3c1.8 9.8 9.5 17.5 19.3 19.3l78.3 14.4L402 242.4c-5.7 8.2-5.7 19 0 27.2l45.2 65.6-78.3 14.4c-9.8 1.8-17.5 9.5-19.3 19.3l-14.4 78.3L269.6 402c-8.2-5.7-19-5.7-27.2 0l-65.6 45.2-14.4-78.3c-1.8-9.8-9.5-17.5-19.3-19.3L64.8 335.2 110 269.6c5.7-8.2 5.7-19 0-27.2L64.8 176.8l78.3-14.4c9.8-1.8 17.5-9.5 19.3-19.3l14.4-78.3L242.4 110c8.2 5.7 19 5.7 27.2 0zM256 368a112 112 0 1 0 0-224 112 112 0 1 0 0 224zM192 256a64 64 0 1 1 128 0 64 64 0 1 1-128 0z"/>
+      {! Sun icon — Light !}
+      <svg x-show="theme === 'light'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="pf-v6-svg" fill="currentColor" aria-hidden="true" width="1em" height="1em">
+        <path d="M16 25c-4.963 0-9-4.038-9-9s4.037-9 9-9 9 4.038 9 9-4.037 9-9 9Zm0-16c-3.86 0-7 3.14-7 7s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7Zm0-4a1 1 0 0 1-1-1V1a1 1 0 1 1 2 0v3a1 1 0 0 1-1 1Zm0 27a1 1 0 0 1-1-1v-3a1 1 0 1 1 2 0v3a1 1 0 0 1-1 1ZM4 17H1a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Zm27 0h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2ZM5.394 27.606a1 1 0 0 1-.707-1.707l2.12-2.12a1 1 0 1 1 1.415 1.413L6.1 27.313a.997.997 0 0 1-.707.293ZM24.485 8.515a1 1 0 0 1-.707-1.707L25.9 4.686a1 1 0 1 1 1.415 1.415l-2.122 2.12a.997.997 0 0 1-.707.294Zm-16.97 0a.997.997 0 0 1-.707-.293L4.686 6.1a1 1 0 1 1 1.415-1.415l2.12 2.122a1 1 0 0 1-.706 1.707Zm19.091 19.091a.997.997 0 0 1-.707-.293l-2.12-2.12a1 1 0 1 1 1.413-1.415l2.122 2.121a1 1 0 0 1-.707 1.707Z"/>
+      </svg>
+      {! Moon icon — Dark !}
+      <svg x-show="theme === 'dark'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="pf-v6-svg" fill="currentColor" aria-hidden="true" width="1em" height="1em">
+        <path d="M16.457 30C8.485 30 2 23.515 2 15.543c0-5.93 3.715-11.345 9.243-13.476a.999.999 0 0 1 1.289 1.3 12.185 12.185 0 0 0-.843 4.487c0 6.869 5.588 12.457 12.457 12.457 1.56 0 3.07-.284 4.487-.844a.998.998 0 0 1 1.3 1.29C27.802 26.285 22.387 30 16.456 30ZM9.992 4.904C6.338 7.134 4 11.177 4 15.544 4 22.412 9.588 28 16.457 28c4.367 0 8.41-2.338 10.639-5.992a14.39 14.39 0 0 1-2.95.302c-7.971 0-14.457-6.485-14.457-14.456 0-1.003.102-1.989.303-2.95Z"/>
+      </svg>
+      {! Desktop icon — System/Auto !}
+      <svg x-show="theme === 'auto'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="pf-v6-svg" fill="currentColor" aria-hidden="true" width="1em" height="1em">
+        <path d="M23.94 16a1 1 0 0 1-.992-.876 6.957 6.957 0 0 0-6.069-6.062 1 1 0 1 1 .242-1.985 8.953 8.953 0 0 1 7.812 7.8A.999.999 0 0 1 23.94 16ZM16 5a1 1 0 0 1-1-1V1a1 1 0 1 1 2 0v3a1 1 0 0 1-1 1Zm0 27a1 1 0 0 1-1-1v-3a1 1 0 1 1 2 0v3a1 1 0 0 1-1 1ZM4 17H1a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Zm27 0h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2ZM5.394 27.606a1 1 0 0 1-.707-1.707l2.12-2.12a1 1 0 1 1 1.415 1.413L6.1 27.313a.997.997 0 0 1-.707.293ZM24.485 8.515a1 1 0 0 1-.707-1.707L25.9 4.686a1 1 0 1 1 1.415 1.415l-2.122 2.12a.997.997 0 0 1-.707.294Zm-16.97 0a.997.997 0 0 1-.707-.293L4.686 6.1a1 1 0 1 1 1.415-1.415l2.12 2.122a1 1 0 0 1-.706 1.707Zm19.091 19.091a.997.997 0 0 1-.707-.293l-2.12-2.12a1 1 0 1 1 1.413-1.415l2.122 2.121a1 1 0 0 1-.707 1.707ZM16 24.875c-4.894 0-8.875-3.981-8.875-8.875a8.879 8.879 0 0 1 5.227-8.088.876.876 0 0 1 1.153 1.163 6.945 6.945 0 0 0-.63 2.925A7.133 7.133 0 0 0 20 19.125a6.948 6.948 0 0 0 2.925-.63.876.876 0 0 1 1.163 1.154A8.88 8.88 0 0 1 16 24.875Zm-4.785-14.153A7.135 7.135 0 0 0 8.875 16 7.133 7.133 0 0 0 16 23.125a7.13 7.13 0 0 0 5.278-2.34c-.419.06-.845.09-1.278.09-4.894 0-8.875-3.981-8.875-8.875 0-.433.03-.86.09-1.278Z"/>
       </svg>
     </span>
-    <span class="pf-v6-c-menu-toggle__text">Theme</span>
     <span class="pf-v6-c-menu-toggle__controls">
       <span class="pf-v6-c-menu-toggle__toggle-icon">
         <svg viewBox="0 0 320 512" fill="currentColor" aria-hidden="true" width="1em" height="1em">
@@ -50,47 +75,82 @@
     </span>
   </button>
 
-  {! Dropdown menu — opens upward since toggle is at bottom !}
+  {! Dropdown menu — opens upward !}
   <div class="pf-v6-c-menu" x-show="open" x-transition style="display: none; position: absolute; left: 0; bottom: 100%;">
     <div class="pf-v6-c-menu__content">
-      <ul class="pf-v6-c-menu__list" role="menu">
-        <li class="pf-v6-c-menu__list-item" role="none">
-          <button class="pf-v6-c-menu__item" :class="{ 'pf-m-selected': theme === 'light' }" type="button" role="menuitem" @click="setTheme('light')">
-            <span class="pf-v6-c-menu__item-main">
-              <span class="pf-v6-c-menu__item-text">Light</span>
-              <span class="pf-v6-c-menu__item-select-icon">
-                <svg viewBox="0 0 512 512" fill="currentColor" aria-hidden="true" width="1em" height="1em">
-                  <path d="M173.9 439.4l-166.4-166.4c-10-10-10-26.2 0-36.2l36.2-36.2c10-10 26.2-10 36.2 0L192 312.7 432.1 72.6c10-10 26.2-10 36.2 0l36.2 36.2c10 10 10 26.2 0 36.2l-294.4 294.4c-10 10-26.2 10-36.2 0z"/>
-                </svg>
-              </span>
-            </span>
-          </button>
-        </li>
-        <li class="pf-v6-c-menu__list-item" role="none">
-          <button class="pf-v6-c-menu__item" :class="{ 'pf-m-selected': theme === 'dark' }" type="button" role="menuitem" @click="setTheme('dark')">
-            <span class="pf-v6-c-menu__item-main">
-              <span class="pf-v6-c-menu__item-text">Dark</span>
-              <span class="pf-v6-c-menu__item-select-icon">
-                <svg viewBox="0 0 512 512" fill="currentColor" aria-hidden="true" width="1em" height="1em">
-                  <path d="M173.9 439.4l-166.4-166.4c-10-10-10-26.2 0-36.2l36.2-36.2c10-10 26.2-10 36.2 0L192 312.7 432.1 72.6c10-10 26.2-10 36.2 0l36.2 36.2c10 10 10 26.2 0 36.2l-294.4 294.4c-10 10-26.2 10-36.2 0z"/>
-                </svg>
-              </span>
-            </span>
-          </button>
-        </li>
-        <li class="pf-v6-c-menu__list-item" role="none">
-          <button class="pf-v6-c-menu__item" :class="{ 'pf-m-selected': theme === 'auto' }" type="button" role="menuitem" @click="setTheme('auto')">
-            <span class="pf-v6-c-menu__item-main">
-              <span class="pf-v6-c-menu__item-text">Auto</span>
-              <span class="pf-v6-c-menu__item-select-icon">
-                <svg viewBox="0 0 512 512" fill="currentColor" aria-hidden="true" width="1em" height="1em">
-                  <path d="M173.9 439.4l-166.4-166.4c-10-10-10-26.2 0-36.2l36.2-36.2c10-10 26.2-10 36.2 0L192 312.7 432.1 72.6c10-10 26.2-10 36.2 0l36.2 36.2c10 10 10 26.2 0 36.2l-294.4 294.4c-10 10-26.2 10-36.2 0z"/>
-                </svg>
-              </span>
-            </span>
-          </button>
-        </li>
-      </ul>
+
+      {! Color scheme section !}
+      <section class="pf-v6-c-menu__group">
+        <div class="pf-v6-c-menu__group-title" id="theme-selector-color-scheme-title">Color scheme</div>
+        <div class="pf-v6-c-menu__search">
+          <div class="pf-v6-c-menu__search-input">
+            <div class="pf-v6-c-toggle-group" role="group" aria-labelledby="theme-selector-color-scheme-title">
+              <div class="pf-v6-c-toggle-group__item">
+                <button type="button" class="pf-v6-c-toggle-group__button"
+                        :class="{ 'pf-m-selected': theme === 'auto' }"
+                        :aria-pressed="(theme === 'auto').toString()"
+                        @click="setTheme('auto')">
+                  <span class="pf-v6-c-toggle-group__text">System</span>
+                </button>
+              </div>
+              <div class="pf-v6-c-toggle-group__item">
+                <button type="button" class="pf-v6-c-toggle-group__button"
+                        :class="{ 'pf-m-selected': theme === 'light' }"
+                        :aria-pressed="(theme === 'light').toString()"
+                        @click="setTheme('light')">
+                  <span class="pf-v6-c-toggle-group__text">Light</span>
+                </button>
+              </div>
+              <div class="pf-v6-c-toggle-group__item">
+                <button type="button" class="pf-v6-c-toggle-group__button"
+                        :class="{ 'pf-m-selected': theme === 'dark' }"
+                        :aria-pressed="(theme === 'dark').toString()"
+                        @click="setTheme('dark')">
+                  <span class="pf-v6-c-toggle-group__text">Dark</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="pf-v6-c-divider">
+
+      {! High contrast section !}
+      <section class="pf-v6-c-menu__group">
+        <div class="pf-v6-c-menu__group-title" id="theme-selector-contrast-title">High contrast</div>
+        <div class="pf-v6-c-menu__search">
+          <div class="pf-v6-c-menu__search-input">
+            <div class="pf-v6-c-toggle-group" role="group" aria-labelledby="theme-selector-contrast-title">
+              <div class="pf-v6-c-toggle-group__item">
+                <button type="button" class="pf-v6-c-toggle-group__button"
+                        :class="{ 'pf-m-selected': contrast === 'system' }"
+                        :aria-pressed="(contrast === 'system').toString()"
+                        @click="setContrast('system')">
+                  <span class="pf-v6-c-toggle-group__text">System</span>
+                </button>
+              </div>
+              <div class="pf-v6-c-toggle-group__item">
+                <button type="button" class="pf-v6-c-toggle-group__button"
+                        :class="{ 'pf-m-selected': contrast === 'on' }"
+                        :aria-pressed="(contrast === 'on').toString()"
+                        @click="setContrast('on')">
+                  <span class="pf-v6-c-toggle-group__text">On</span>
+                </button>
+              </div>
+              <div class="pf-v6-c-toggle-group__item">
+                <button type="button" class="pf-v6-c-toggle-group__button"
+                        :class="{ 'pf-m-selected': contrast === 'off' }"
+                        :aria-pressed="(contrast === 'off').toString()"
+                        @click="setContrast('off')">
+                  <span class="pf-v6-c-toggle-group__text">Off</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
   </div>
 </div>
