@@ -1,0 +1,7 @@
+{! Banner — PatternFly v6 !}
+{! Parameters: id (required), variant (required) !}
+{! Optional: sticky, screenReaderText !}
+{! Block: content (required) !}
+<div class="pf-v6-c-banner pf-m-{variant}{#if sticky??} pf-m-sticky{/if}" id="{id}">
+  <p>{#if screenReaderText??}<span class="pf-screen-reader">{screenReaderText}</span>{/if}{#insert content}{/insert}</p>
+</div>

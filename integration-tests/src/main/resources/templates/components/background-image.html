@@ -1,0 +1,29 @@
+{#include layouts/base}
+{#title}Background Image{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Background Image</h1>
+  <p>PatternFly v6 background image — a fixed full-viewport background via CSS custom property.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>Background image using the default PatternFly SVG pattern.</p>
+    {#include components/feedback/background-image id="bg-image-basic" src="/web/images/pf-background.svg" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="custom-heading">Custom image</h2>
+    <p>Background image with a custom CSS gradient to demonstrate <code>src</code> flexibility.</p>
+    <div style="position: relative; height: 200px; overflow: hidden; border: 1px solid var(--pf-t--global--border--color--default); border-radius: var(--pf-t--global--border--radius--small);">
+      <div class="pf-v6-c-background-image" id="bg-image-custom"
+           style="--pf-v6-c-background-image--BackgroundImage: linear-gradient(135deg, #004080, #0066cc, #3399ff); position: absolute; inset: 0;"></div>
+      <div style="position: relative; z-index: 1; padding: 2rem; color: white;">
+        <p>Content overlaying a custom gradient background.</p>
+      </div>
+    </div>
+  </section>
+</div>
+{/body}
+{/include}

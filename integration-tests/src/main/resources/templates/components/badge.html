@@ -1,0 +1,41 @@
+{#include layouts/base}
+{#title}Badge{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Badge</h1>
+  <p>PatternFly v6 badge — a small count indicator with read, unread, and disabled states.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="read-heading">Read</h2>
+    <p>Read badges indicate already-viewed items.</p>
+    <div style="display: flex; gap: 0.5rem;">
+      {#include components/data-display/badge id="badge-read-7" value="7" variant="read" /}
+      {#include components/data-display/badge id="badge-read-24" value="24" variant="read" /}
+      {#include components/data-display/badge id="badge-read-999" value="999+" variant="read" /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="unread-heading">Unread</h2>
+    <p>Unread badges indicate new or unseen items.</p>
+    <div style="display: flex; gap: 0.5rem;">
+      {#include components/data-display/badge id="badge-unread-7" value="7" variant="unread" /}
+      {#include components/data-display/badge id="badge-unread-24" value="24" variant="unread" /}
+      {#include components/data-display/badge id="badge-unread-999" value="999+" variant="unread" /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="disabled-heading">Disabled</h2>
+    <p>Disabled badges indicate inactive or unavailable counts.</p>
+    <div style="display: flex; gap: 0.5rem;">
+      {#include components/data-display/badge id="badge-disabled-7" value="7" variant="disabled" /}
+      {#include components/data-display/badge id="badge-disabled-24" value="24" variant="disabled" /}
+      {#include components/data-display/badge id="badge-disabled-999" value="999+" variant="disabled" /}
+    </div>
+  </section>
+</div>
+{/body}
+{/include}
