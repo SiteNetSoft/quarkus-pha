@@ -1,0 +1,51 @@
+{#include layouts/base}
+{#title}Avatar{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Avatar</h1>
+  <p>PatternFly v6 avatar — a visual representation of a user.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>Default medium avatar with no extra modifiers.</p>
+    {#include components/data-display/avatar id="avatar-basic" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%23d2d2d2'/%3E%3Ccircle cx='18' cy='12' r='7' fill='%23fff'/%3E%3Cpath d='M4 32c0-8 6-12 14-12s14 4 14 12' fill='%23fff'/%3E%3C/svg%3E" alt="Avatar" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="sizes-heading">Sizes</h2>
+    <p>All four size variants: sm, md, lg, xl.</p>
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      {#include components/data-display/avatar id="avatar-sm" size="sm" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%23d2d2d2'/%3E%3Ccircle cx='18' cy='12' r='7' fill='%23fff'/%3E%3Cpath d='M4 32c0-8 6-12 14-12s14 4 14 12' fill='%23fff'/%3E%3C/svg%3E" alt="Small avatar" /}
+      {#include components/data-display/avatar id="avatar-md" size="md" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%23d2d2d2'/%3E%3Ccircle cx='18' cy='12' r='7' fill='%23fff'/%3E%3Cpath d='M4 32c0-8 6-12 14-12s14 4 14 12' fill='%23fff'/%3E%3C/svg%3E" alt="Medium avatar" /}
+      {#include components/data-display/avatar id="avatar-lg" size="lg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%23d2d2d2'/%3E%3Ccircle cx='18' cy='12' r='7' fill='%23fff'/%3E%3Cpath d='M4 32c0-8 6-12 14-12s14 4 14 12' fill='%23fff'/%3E%3C/svg%3E" alt="Large avatar" /}
+      {#include components/data-display/avatar id="avatar-xl" size="xl" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%23d2d2d2'/%3E%3Ccircle cx='18' cy='12' r='7' fill='%23fff'/%3E%3Cpath d='M4 32c0-8 6-12 14-12s14 4 14 12' fill='%23fff'/%3E%3C/svg%3E" alt="Extra large avatar" /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="bordered-heading">Bordered</h2>
+    <p>Avatar with a border.</p>
+    {#include components/data-display/avatar id="avatar-bordered" bordered=true src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%23d2d2d2'/%3E%3Ccircle cx='18' cy='12' r='7' fill='%23fff'/%3E%3Cpath d='M4 32c0-8 6-12 14-12s14 4 14 12' fill='%23fff'/%3E%3C/svg%3E" alt="Bordered avatar" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="bordered-sizes-heading">Bordered sizes</h2>
+    <p>All four bordered size variants.</p>
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      {#include components/data-display/avatar id="avatar-bordered-sm" size="sm" bordered=true src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%23d2d2d2'/%3E%3Ccircle cx='18' cy='12' r='7' fill='%23fff'/%3E%3Cpath d='M4 32c0-8 6-12 14-12s14 4 14 12' fill='%23fff'/%3E%3C/svg%3E" alt="Small bordered avatar" /}
+      {#include components/data-display/avatar id="avatar-bordered-md" size="md" bordered=true src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%23d2d2d2'/%3E%3Ccircle cx='18' cy='12' r='7' fill='%23fff'/%3E%3Cpath d='M4 32c0-8 6-12 14-12s14 4 14 12' fill='%23fff'/%3E%3C/svg%3E" alt="Medium bordered avatar" /}
+      {#include components/data-display/avatar id="avatar-bordered-lg" size="lg" bordered=true src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%23d2d2d2'/%3E%3Ccircle cx='18' cy='12' r='7' fill='%23fff'/%3E%3Cpath d='M4 32c0-8 6-12 14-12s14 4 14 12' fill='%23fff'/%3E%3C/svg%3E" alt="Large bordered avatar" /}
+      {#include components/data-display/avatar id="avatar-bordered-xl" size="xl" bordered=true src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%23d2d2d2'/%3E%3Ccircle cx='18' cy='12' r='7' fill='%23fff'/%3E%3Cpath d='M4 32c0-8 6-12 14-12s14 4 14 12' fill='%23fff'/%3E%3C/svg%3E" alt="Extra large bordered avatar" /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="custom-image-heading">Custom image</h2>
+    <p>Avatar with a custom user-provided image.</p>
+    {#include components/data-display/avatar id="avatar-custom" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%230066cc'/%3E%3Ctext x='18' y='23' text-anchor='middle' fill='%23fff' font-size='16' font-family='sans-serif'%3EJD%3C/text%3E%3C/svg%3E" alt="John Doe" /}
+  </section>
+</div>
+{/body}
+{/include}
