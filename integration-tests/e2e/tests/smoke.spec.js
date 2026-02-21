@@ -15,7 +15,7 @@ test.describe("Smoke tests", () => {
   test("gallery shows 92 component cards", async ({ page }) => {
     await page.goto("/");
     const cards = page.locator(".pf-v6-l-gallery .pf-v6-c-card");
-    await expect(cards).toHaveCount(93);
+    await expect(cards).toHaveCount(94);
   });
 
   test("implemented components link to demo pages", async ({ page }) => {
@@ -298,6 +298,9 @@ test.describe("Smoke tests", () => {
 
     const rectangleSelectionLink = page.locator('a[href="/components/rectangle-selection"]');
     await expect(rectangleSelectionLink).toBeVisible();
+
+    const mapLink = page.locator('a[href="/components/map"]');
+    await expect(mapLink).toBeVisible();
   });
 
   test("search input filters component cards", async ({ page }) => {

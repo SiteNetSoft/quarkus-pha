@@ -114,7 +114,8 @@ public class HelloResource {
         Map.entry("password-strength", "/components/password-strength"),
         Map.entry("table",           "/components/table"),
         Map.entry("time-picker",     "/components/time-picker"),
-        Map.entry("rectangle-selection", "/components/rectangle-selection")
+        Map.entry("rectangle-selection", "/components/rectangle-selection"),
+        Map.entry("map",                "/components/map")
     );
 
     /** Components tagged with a footer label. */
@@ -129,7 +130,8 @@ public class HelloResource {
         Map.entry("password-generator",   "Demo"),
         Map.entry("password-strength",    "Demo"),
         Map.entry("select",               "Beta"),
-        Map.entry("rectangle-selection",  "Custom")
+        Map.entry("rectangle-selection",  "Custom"),
+        Map.entry("map",                "Custom")
     );
 
     /** Label text → PF label color modifier. */
@@ -191,6 +193,7 @@ public class HelloResource {
         {"label",                "Label"},
         {"list",                 "List"},
         {"login-page",           "Login page"},
+        {"map",                  "Map"},
         {"masthead",             "Masthead"},
         {"menu",                 "Menu"},
         {"menu-toggle",          "Menu toggle"},
