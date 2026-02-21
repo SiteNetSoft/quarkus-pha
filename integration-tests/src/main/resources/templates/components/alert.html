@@ -1,0 +1,71 @@
+{#include layouts/base}
+{#title}Alert{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Alert</h1>
+  <p>PatternFly v6 alert for non-intrusive user notifications.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="types-heading">Types</h2>
+    <p>All five severity variants with title only.</p>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      {#include components/feedback/alert id="alert-custom" variant="custom" title="Custom alert title" /}
+      {#include components/feedback/alert id="alert-info" variant="info" title="Info alert title" /}
+      {#include components/feedback/alert id="alert-success" variant="success" title="Success alert title" /}
+      {#include components/feedback/alert id="alert-warning" variant="warning" title="Warning alert title" /}
+      {#include components/feedback/alert id="alert-danger" variant="danger" title="Danger alert title" /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="descriptions-heading">Descriptions</h2>
+    <p>Alert with a description below the title.</p>
+    {#include components/feedback/alert id="alert-description" variant="info" title="Info alert with description" description="This is the alert description providing additional context and details." /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="action-close-heading">Action close button</h2>
+    <p>Dismissible alert with close button.</p>
+    {#include components/feedback/alert id="alert-closable" variant="success" title="Success alert that can be dismissed" closable=true /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="action-links-heading">Action links</h2>
+    <p>Alert with action links and description.</p>
+    {#include components/feedback/alert id="alert-action-links" variant="info" title="Info alert with action links" description="This alert has action links below the description." actionLinks=sampleActionLinks /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="inline-heading">Inline</h2>
+    <p>All five inline variants.</p>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      {#include components/feedback/alert id="alert-inline-custom" variant="custom" title="Inline custom alert" inline=true /}
+      {#include components/feedback/alert id="alert-inline-info" variant="info" title="Inline info alert" inline=true /}
+      {#include components/feedback/alert id="alert-inline-success" variant="success" title="Inline success alert" inline=true /}
+      {#include components/feedback/alert id="alert-inline-warning" variant="warning" title="Inline warning alert" inline=true /}
+      {#include components/feedback/alert id="alert-inline-danger" variant="danger" title="Inline danger alert" inline=true /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="inline-plain-heading">Inline plain</h2>
+    <p>Plain inline alert with reduced visual emphasis.</p>
+    {#include components/feedback/alert id="alert-inline-plain" variant="info" title="Inline plain alert" inline=true plain=true /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="expandable-heading">Expandable</h2>
+    <p>Expandable alert with toggle, description, and close button.</p>
+    {#include components/feedback/alert id="alert-expandable" variant="info" title="Expandable info alert" description="This content is revealed when the alert toggle is clicked." expandable=true closable=true /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="truncated-heading">Truncated title</h2>
+    <p>Long title truncated to a single line.</p>
+    {#include components/feedback/alert id="alert-truncated" variant="info" title="This is a very long alert title that should be truncated with an ellipsis when it overflows the available horizontal space in the alert component container" truncate=true /}
+  </section>
+</div>
+{/body}
+{/include}
