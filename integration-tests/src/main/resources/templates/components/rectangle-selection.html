@@ -1,0 +1,169 @@
+{#include layouts/base}
+{#title}Rectangle Selection{/title}
+{#head}
+<link rel="stylesheet" href="/web/css/components/rectangle-selection.css">
+<script src="/web/js/alpine/components/rectangle-selection.js"></script>
+<style>
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pf-t--global--spacer--md, 1rem);
+  padding: var(--pf-t--global--spacer--md, 1rem);
+}
+.product-card {
+  width: 150px;
+  height: 175px;
+  position: relative;
+  border: 1px solid var(--pf-t--global--border--color--default, #eee);
+  border-bottom-width: 2px;
+  border-right-width: 2px;
+  background-color: var(--pf-t--global--background--color--primary--default, #fff);
+  background-size: cover;
+  background-position: center;
+  cursor: default;
+  transition: outline 0.1s ease;
+}
+.product-card__label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  background-color: var(--pf-t--global--background--color--primary--default, #fff);
+  font-weight: var(--pf-t--global--font--weight--body--bold, 700);
+  font-size: var(--pf-t--global--font--size--body--sm, 0.75rem);
+  padding: var(--pf-t--global--spacer--xs, 0.25rem) 0;
+}
+.product-card--color-1 { background-color: #e7f1ff; }
+.product-card--color-2 { background-color: #f2e7ff; }
+.product-card--color-3 { background-color: #e7fff0; }
+.product-card--color-4 { background-color: #fff5e7; }
+.product-card--color-5 { background-color: #ffe7e7; }
+.product-card--color-6 { background-color: #e7fbff; }
+.selection-count {
+  padding: var(--pf-t--global--spacer--sm, 0.5rem) var(--pf-t--global--spacer--md, 1rem);
+  font-weight: var(--pf-t--global--font--weight--body--bold, 700);
+}
+</style>
+{/head}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Rectangle Selection</h1>
+  <p>A rectangle selection component that lets users select multiple items by dragging a selection rectangle over them, similar to desktop OS file selection. Translated from the original <a href="https://github.com/jnbdz/RectangleSelection" class="pf-v6-c-button pf-m-link pf-m-inline">MooTools RectangleSelection</a> to vanilla JS / Alpine.js. Drag near the viewport edges to auto-scroll.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>Click and drag on the background to draw a selection rectangle. Items that overlap will be highlighted. Drag to the bottom or top edge of the browser window to auto-scroll.</p>
+    <div class="selection-count" id="rs-count" x-data="{ count: 0 }" @rectangle-selected.window="count = $event.detail.selected.length" @rectangle-deselected.window="count = 0">
+      <span x-text="count + ' item(s) selected'"></span>
+    </div>
+    {#include components/data-display/rectangle-selection id="rs-basic"}{#content}
+    <div class="product-grid">
+      <div class="product-card product-card--color-1" data-selectable><span class="product-card__label">Shirt 1 ($10)</span></div>
+      <div class="product-card product-card--color-2" data-selectable><span class="product-card__label">Shirt 2 ($20)</span></div>
+      <div class="product-card product-card--color-3" data-selectable><span class="product-card__label">Shirt 3 ($30)</span></div>
+      <div class="product-card product-card--color-4" data-selectable><span class="product-card__label">Shirt 4 ($40)</span></div>
+      <div class="product-card product-card--color-5" data-selectable><span class="product-card__label">Shirt 5 ($50)</span></div>
+      <div class="product-card product-card--color-6" data-selectable><span class="product-card__label">Shirt 6 ($60)</span></div>
+      <div class="product-card product-card--color-1" data-selectable><span class="product-card__label">Shirt 7 ($10)</span></div>
+      <div class="product-card product-card--color-2" data-selectable><span class="product-card__label">Shirt 8 ($20)</span></div>
+      <div class="product-card product-card--color-3" data-selectable><span class="product-card__label">Shirt 9 ($30)</span></div>
+      <div class="product-card product-card--color-4" data-selectable><span class="product-card__label">Shirt 10 ($40)</span></div>
+      <div class="product-card product-card--color-5" data-selectable><span class="product-card__label">Shirt 11 ($50)</span></div>
+      <div class="product-card product-card--color-6" data-selectable><span class="product-card__label">Shirt 12 ($60)</span></div>
+      <div class="product-card product-card--color-1" data-selectable><span class="product-card__label">Shirt 13 ($10)</span></div>
+      <div class="product-card product-card--color-2" data-selectable><span class="product-card__label">Shirt 14 ($20)</span></div>
+      <div class="product-card product-card--color-3" data-selectable><span class="product-card__label">Shirt 15 ($30)</span></div>
+      <div class="product-card product-card--color-4" data-selectable><span class="product-card__label">Shirt 16 ($40)</span></div>
+      <div class="product-card product-card--color-5" data-selectable><span class="product-card__label">Shirt 17 ($50)</span></div>
+      <div class="product-card product-card--color-6" data-selectable><span class="product-card__label">Shirt 18 ($60)</span></div>
+      <div class="product-card product-card--color-1" data-selectable><span class="product-card__label">Shirt 19 ($10)</span></div>
+      <div class="product-card product-card--color-2" data-selectable><span class="product-card__label">Shirt 20 ($20)</span></div>
+      <div class="product-card product-card--color-3" data-selectable><span class="product-card__label">Shirt 21 ($30)</span></div>
+      <div class="product-card product-card--color-4" data-selectable><span class="product-card__label">Shirt 22 ($40)</span></div>
+      <div class="product-card product-card--color-5" data-selectable><span class="product-card__label">Shirt 23 ($50)</span></div>
+      <div class="product-card product-card--color-6" data-selectable><span class="product-card__label">Shirt 24 ($60)</span></div>
+      <div class="product-card product-card--color-1" data-selectable><span class="product-card__label">Shirt 25 ($10)</span></div>
+      <div class="product-card product-card--color-2" data-selectable><span class="product-card__label">Shirt 26 ($20)</span></div>
+      <div class="product-card product-card--color-3" data-selectable><span class="product-card__label">Shirt 27 ($30)</span></div>
+      <div class="product-card product-card--color-4" data-selectable><span class="product-card__label">Shirt 28 ($40)</span></div>
+      <div class="product-card product-card--color-5" data-selectable><span class="product-card__label">Shirt 29 ($50)</span></div>
+      <div class="product-card product-card--color-6" data-selectable><span class="product-card__label">Shirt 30 ($60)</span></div>
+      <div class="product-card product-card--color-1" data-selectable><span class="product-card__label">Shirt 31 ($10)</span></div>
+      <div class="product-card product-card--color-2" data-selectable><span class="product-card__label">Shirt 32 ($20)</span></div>
+      <div class="product-card product-card--color-3" data-selectable><span class="product-card__label">Shirt 33 ($30)</span></div>
+      <div class="product-card product-card--color-4" data-selectable><span class="product-card__label">Shirt 34 ($40)</span></div>
+      <div class="product-card product-card--color-5" data-selectable><span class="product-card__label">Shirt 35 ($50)</span></div>
+      <div class="product-card product-card--color-6" data-selectable><span class="product-card__label">Shirt 36 ($60)</span></div>
+      <div class="product-card product-card--color-1" data-selectable><span class="product-card__label">Shirt 37 ($10)</span></div>
+      <div class="product-card product-card--color-2" data-selectable><span class="product-card__label">Shirt 38 ($20)</span></div>
+      <div class="product-card product-card--color-3" data-selectable><span class="product-card__label">Shirt 39 ($30)</span></div>
+      <div class="product-card product-card--color-4" data-selectable><span class="product-card__label">Shirt 40 ($40)</span></div>
+      <div class="product-card product-card--color-5" data-selectable><span class="product-card__label">Shirt 41 ($50)</span></div>
+      <div class="product-card product-card--color-6" data-selectable><span class="product-card__label">Shirt 42 ($60)</span></div>
+      <div class="product-card product-card--color-1" data-selectable><span class="product-card__label">Shirt 43 ($10)</span></div>
+      <div class="product-card product-card--color-2" data-selectable><span class="product-card__label">Shirt 44 ($20)</span></div>
+      <div class="product-card product-card--color-3" data-selectable><span class="product-card__label">Shirt 45 ($30)</span></div>
+      <div class="product-card product-card--color-4" data-selectable><span class="product-card__label">Shirt 46 ($40)</span></div>
+      <div class="product-card product-card--color-5" data-selectable><span class="product-card__label">Shirt 47 ($50)</span></div>
+      <div class="product-card product-card--color-6" data-selectable><span class="product-card__label">Shirt 48 ($60)</span></div>
+      <div class="product-card product-card--color-1" data-selectable><span class="product-card__label">Shirt 49 ($10)</span></div>
+      <div class="product-card product-card--color-2" data-selectable><span class="product-card__label">Shirt 50 ($20)</span></div>
+      <div class="product-card product-card--color-3" data-selectable><span class="product-card__label">Shirt 51 ($30)</span></div>
+      <div class="product-card product-card--color-4" data-selectable><span class="product-card__label">Shirt 52 ($40)</span></div>
+      <div class="product-card product-card--color-5" data-selectable><span class="product-card__label">Shirt 53 ($50)</span></div>
+      <div class="product-card product-card--color-6" data-selectable><span class="product-card__label">Shirt 54 ($60)</span></div>
+      <div class="product-card product-card--color-1" data-selectable><span class="product-card__label">Shirt 55 ($10)</span></div>
+      <div class="product-card product-card--color-2" data-selectable><span class="product-card__label">Shirt 56 ($20)</span></div>
+      <div class="product-card product-card--color-3" data-selectable><span class="product-card__label">Shirt 57 ($30)</span></div>
+      <div class="product-card product-card--color-4" data-selectable><span class="product-card__label">Shirt 58 ($40)</span></div>
+      <div class="product-card product-card--color-5" data-selectable><span class="product-card__label">Shirt 59 ($50)</span></div>
+      <div class="product-card product-card--color-6" data-selectable><span class="product-card__label">Shirt 60 ($60)</span></div>
+    </div>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="with-cards-heading">With PatternFly cards</h2>
+    <p>Rectangle selection over a PatternFly gallery of cards.</p>
+    {#include components/data-display/rectangle-selection id="rs-cards"}{#content}
+    <div class="pf-v6-l-gallery pf-m-gutter" style="--pf-v6-l-gallery--GridTemplateColumns--min: 150px;">
+      <div class="pf-v6-c-card pf-m-compact" data-selectable>
+        <div class="pf-v6-c-card__title"><h3 class="pf-v6-c-card__title-text">Server A</h3></div>
+        <div class="pf-v6-c-card__body">Running</div>
+      </div>
+      <div class="pf-v6-c-card pf-m-compact" data-selectable>
+        <div class="pf-v6-c-card__title"><h3 class="pf-v6-c-card__title-text">Server B</h3></div>
+        <div class="pf-v6-c-card__body">Stopped</div>
+      </div>
+      <div class="pf-v6-c-card pf-m-compact" data-selectable>
+        <div class="pf-v6-c-card__title"><h3 class="pf-v6-c-card__title-text">Server C</h3></div>
+        <div class="pf-v6-c-card__body">Running</div>
+      </div>
+      <div class="pf-v6-c-card pf-m-compact" data-selectable>
+        <div class="pf-v6-c-card__title"><h3 class="pf-v6-c-card__title-text">Server D</h3></div>
+        <div class="pf-v6-c-card__body">Running</div>
+      </div>
+      <div class="pf-v6-c-card pf-m-compact" data-selectable>
+        <div class="pf-v6-c-card__title"><h3 class="pf-v6-c-card__title-text">Server E</h3></div>
+        <div class="pf-v6-c-card__body">Stopped</div>
+      </div>
+      <div class="pf-v6-c-card pf-m-compact" data-selectable>
+        <div class="pf-v6-c-card__title"><h3 class="pf-v6-c-card__title-text">Server F</h3></div>
+        <div class="pf-v6-c-card__body">Running</div>
+      </div>
+      <div class="pf-v6-c-card pf-m-compact" data-selectable>
+        <div class="pf-v6-c-card__title"><h3 class="pf-v6-c-card__title-text">Server G</h3></div>
+        <div class="pf-v6-c-card__body">Running</div>
+      </div>
+      <div class="pf-v6-c-card pf-m-compact" data-selectable>
+        <div class="pf-v6-c-card__title"><h3 class="pf-v6-c-card__title-text">Server H</h3></div>
+        <div class="pf-v6-c-card__body">Stopped</div>
+      </div>
+    </div>
+    {/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

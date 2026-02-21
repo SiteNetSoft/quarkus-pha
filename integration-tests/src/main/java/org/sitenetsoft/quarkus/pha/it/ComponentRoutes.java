@@ -384,6 +384,10 @@ public class ComponentRoutes {
     @Inject
     Template timePickerPage;
 
+    @Location("components/rectangle-selection")
+    @Inject
+    Template rectangleSelectionPage;
+
     @GET
     @Path("/about-modal")
     @Produces(MediaType.TEXT_HTML)
@@ -1159,6 +1163,13 @@ public class ComponentRoutes {
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance timePicker() {
         return timePickerPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/rectangle-selection")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance rectangleSelection() {
+        return rectangleSelectionPage.data("applicationName", "quarkus-pha");
     }
 
     private static Map<String, Object> day(int date, String... flags) {
