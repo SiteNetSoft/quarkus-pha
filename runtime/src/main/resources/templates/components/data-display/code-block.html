@@ -1,0 +1,23 @@
+{! Code block — PatternFly v6 !}
+{! Parameters: id (required), copyButton (optional — show copy-to-clipboard in header) !}
+{! Content: pass code text via {#content}...{/content} block !}
+<div class="pf-v6-c-code-block" id="{id}"{#if copyButton??} x-data="{ copied: false }"{/if}>
+  {#if copyButton??}
+  <div class="pf-v6-c-code-block__header">
+    <div class="pf-v6-c-code-block__actions">
+      <div class="pf-v6-c-code-block__actions-item">
+        <button class="pf-v6-c-button pf-m-plain" type="button"
+                :aria-label="copied ? 'Successfully copied to clipboard!' : 'Copy to clipboard'"
+                @click="navigator.clipboard.writeText($el.closest('.pf-v6-c-code-block').querySelector('.pf-v6-c-code-block__code').textContent); copied = true; setTimeout(() => copied = false, 2000)">
+          <span class="pf-v6-c-button__icon">
+            <i :class="copied ? 'fas fa-check' : 'fas fa-copy'" aria-hidden="true"></i>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+  {/if}
+  <div class="pf-v6-c-code-block__content">
+    <pre class="pf-v6-c-code-block__pre"><code class="pf-v6-c-code-block__code">{#insert content}{/insert}</code></pre>
+  </div>
+</div>

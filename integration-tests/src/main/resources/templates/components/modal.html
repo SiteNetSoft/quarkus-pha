@@ -1,0 +1,53 @@
+{#include layouts/base}
+{#title}Modal{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Modal</h1>
+  <p>PatternFly v6 modal component for displaying content in a dialog overlay.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic small modal dialog with a title, body content, and action buttons.</p>
+    <button class="pf-v6-c-button pf-m-primary" type="button" @click="$dispatch('open-modal', 'modal-basic')">Open basic modal</button>
+    {#include components/feedback/modal id="modal-basic" titleText="Basic modal" size="sm"}
+      {#body}<p>This is a basic modal dialog with a small size. It can be used for confirmations or simple messages.</p>{/body}
+      {#footer}
+        <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = false">Confirm</button>
+        <button class="pf-v6-c-button pf-m-link" type="button" @click="open = false">Cancel</button>
+      {/footer}
+    {/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="large-heading">Large</h2>
+    <p>A large modal dialog for displaying more substantial content or forms.</p>
+    <button class="pf-v6-c-button pf-m-primary" type="button" @click="$dispatch('open-modal', 'modal-large')">Open large modal</button>
+    {#include components/feedback/modal id="modal-large" titleText="Large modal" size="lg"}
+      {#body}
+        <p>This is a large modal dialog that provides more space for detailed content.</p>
+        <p>It can be used for complex forms, detailed information displays, or step-by-step wizards.</p>
+        <p>The larger size ensures that users have enough space to interact with the content comfortably.</p>
+      {/body}
+      {#footer}
+        <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = false">Save</button>
+        <button class="pf-v6-c-button pf-m-link" type="button" @click="open = false">Cancel</button>
+      {/footer}
+    {/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="warning-heading">Warning variant</h2>
+    <p>A warning modal dialog for displaying alerts that require user acknowledgement.</p>
+    <button class="pf-v6-c-button pf-m-warning" type="button" @click="$dispatch('open-modal', 'modal-warning')">Open warning modal</button>
+    {#include components/feedback/modal id="modal-warning" titleText="Warning" variant="warning" size="sm"}
+      {#body}<p>This action may have unintended consequences. Are you sure you want to proceed?</p>{/body}
+      {#footer}
+        <button class="pf-v6-c-button pf-m-warning" type="button" @click="open = false">Proceed</button>
+        <button class="pf-v6-c-button pf-m-link" type="button" @click="open = false">Cancel</button>
+      {/footer}
+    {/include}
+  </section>
+</div>
+{/body}
+{/include}

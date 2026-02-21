@@ -1,0 +1,29 @@
+{#include layouts/base}
+{#title}Text Input{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Text Input</h1>
+  <p>PatternFly v6 text input for single-line text entry.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic text input for entering a single line of text.</p>
+    {#include components/forms/text-input id="ti-basic" placeholder="Enter value" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="disabled-heading">Disabled</h2>
+    <p>A disabled text input that prevents user interaction.</p>
+    {#include components/forms/text-input id="ti-disabled" placeholder="Disabled" disabled=true /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="readonly-heading">Read only</h2>
+    <p>A read-only text input that displays a value without allowing edits.</p>
+    {#include components/forms/text-input id="ti-readonly" value="Read only" readonly=true /}
+  </section>
+</div>
+{/body}
+{/include}

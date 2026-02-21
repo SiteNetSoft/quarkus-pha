@@ -1,0 +1,11 @@
+{! Simple file upload — PatternFly v6 (file-upload) !}
+{! Parameters: id, browseText (optional), clearText (optional), disabled (optional) !}
+<div class="pf-v6-c-file-upload" id="{id}">
+  <div class="pf-v6-c-file-upload__file-select">
+    <span class="pf-v6-c-form-control">
+      <input type="text" id="{id}-filename" readonly placeholder="No file chosen" aria-label="File name">
+    </span>
+    <button class="pf-v6-c-button pf-m-control" type="button"{#if disabled??} disabled{/if}>{#if browseText??}{browseText}{#else}Browse...{/if}</button>
+    <button class="pf-v6-c-button pf-m-control" type="button"{#if disabled??} disabled{/if}>{#if clearText??}{clearText}{#else}Clear{/if}</button>
+  </div>
+</div>

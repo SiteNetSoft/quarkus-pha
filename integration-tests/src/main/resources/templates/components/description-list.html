@@ -1,0 +1,53 @@
+{#include layouts/base}
+{#title}Description List{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Description List</h1>
+  <p>PatternFly v6 description list for displaying term-description pairs in a structured layout.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic description list with term-description groups.</p>
+    {#include components/data-display/description-list id="desc-basic"}{#content}
+    <div class="pf-v6-c-description-list__group">
+      <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Name</span></dt>
+      <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">Example application</div></dd>
+    </div>
+    <div class="pf-v6-c-description-list__group">
+      <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Version</span></dt>
+      <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">1.0.0</div></dd>
+    </div>
+    <div class="pf-v6-c-description-list__group">
+      <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Status</span></dt>
+      <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">Active</div></dd>
+    </div>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="fill-columns-heading">Fill columns</h2>
+    <p>A description list that fills available columns.</p>
+    {#include components/data-display/description-list id="desc-fill" fillColumns=true}{#content}
+    <div class="pf-v6-c-description-list__group">
+      <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Host</span></dt>
+      <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">localhost</div></dd>
+    </div>
+    <div class="pf-v6-c-description-list__group">
+      <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Port</span></dt>
+      <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">8080</div></dd>
+    </div>
+    <div class="pf-v6-c-description-list__group">
+      <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Protocol</span></dt>
+      <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">HTTPS</div></dd>
+    </div>
+    <div class="pf-v6-c-description-list__group">
+      <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Region</span></dt>
+      <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">US East</div></dd>
+    </div>
+    {/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

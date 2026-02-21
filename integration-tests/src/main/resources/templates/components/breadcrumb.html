@@ -1,0 +1,29 @@
+{#include layouts/base}
+{#title}Breadcrumb{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Breadcrumb</h1>
+  <p>PatternFly v6 breadcrumb — a navigational hierarchy showing the current page location.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A standard breadcrumb with links and the current page highlighted.</p>
+    {#include components/navigation/breadcrumb id="breadcrumb-basic" items=basicItems}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="no-home-heading">Without home link</h2>
+    <p>The first item is plain text instead of a link.</p>
+    {#include components/navigation/breadcrumb id="breadcrumb-no-home" items=noHomeItems}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="heading-heading">With heading</h2>
+    <p>The current page item is wrapped in an <code>&lt;h1&gt;</code> heading element.</p>
+    {#include components/navigation/breadcrumb id="breadcrumb-heading" items=headingItems}{/include}
+  </section>
+</div>
+{/body}
+{/include}

@@ -1,0 +1,39 @@
+{#include layouts/base}
+{#title}Panel{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Panel</h1>
+  <p>PatternFly v6 panel — a container for grouping content with optional header and footer.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic panel with body content.</p>
+    {#include components/data-display/panel id="panel-basic"}{#content}
+    <div class="pf-v6-c-panel__main-body">Main body content of the panel.</div>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="bordered-heading">Bordered</h2>
+    <p>A panel with a visible border.</p>
+    {#include components/data-display/panel id="panel-bordered" bordered=true}{#content}
+    <div class="pf-v6-c-panel__header">Panel header</div>
+    <hr class="pf-v6-c-divider">
+    <div class="pf-v6-c-panel__main-body">Panel body content.</div>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="raised-heading">Raised</h2>
+    <p>A panel with a raised shadow.</p>
+    {#include components/data-display/panel id="panel-raised" raised=true}{#content}
+    <div class="pf-v6-c-panel__header">Raised panel</div>
+    <hr class="pf-v6-c-divider">
+    <div class="pf-v6-c-panel__main-body">This panel has a raised appearance with a shadow.</div>
+    <div class="pf-v6-c-panel__footer">Panel footer</div>
+    {/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

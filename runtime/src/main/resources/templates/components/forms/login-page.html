@@ -1,0 +1,24 @@
+{! Login page — PatternFly v6 (pf-v6-c-login) !}
+{! Parameters: id, titleText (optional) !}
+<div class="pf-v6-c-login" id="{id}">
+  <div class="pf-v6-c-login__container">
+    <header class="pf-v6-c-login__header">
+      {#insert header}{/insert}
+    </header>
+    <main class="pf-v6-c-login__main">
+      <header class="pf-v6-c-login__main-header">
+        {#if titleText??}<h1 class="pf-v6-c-title pf-m-3xl">{titleText}</h1>{/if}
+        {#insert headerDesc}{/insert}
+      </header>
+      <div class="pf-v6-c-login__main-body">
+        {#insert body}{/insert}
+      </div>
+      <footer class="pf-v6-c-login__main-footer">
+        {#insert footer}{/insert}
+      </footer>
+    </main>
+    <footer class="pf-v6-c-login__footer">
+      {#insert pageFooter}{/insert}
+    </footer>
+  </div>
+</div>

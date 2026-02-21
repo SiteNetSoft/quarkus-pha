@@ -1,0 +1,32 @@
+{#include layouts/base}
+{#title}Toolbar{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Toolbar</h1>
+  <p>A toolbar is a container for controls used to manipulate and filter a data set.</p>
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic toolbar with action buttons.</p>
+    {#include components/navigation/toolbar id="tb-basic"}{#content}
+    <div class="pf-v6-c-toolbar__item"><button class="pf-v6-c-button pf-m-primary" type="button">Action</button></div>
+    <div class="pf-v6-c-toolbar__item"><button class="pf-v6-c-button pf-m-secondary" type="button">Secondary</button></div>
+    {/content}{/include}
+  </section>
+  <section style="margin-top: 2rem;">
+    <h2 id="with-groups-heading">With groups</h2>
+    <p>A toolbar with grouped items for better organization.</p>
+    {#include components/navigation/toolbar id="tb-groups"}{#content}
+    <div class="pf-v6-c-toolbar__group">
+      <div class="pf-v6-c-toolbar__item"><button class="pf-v6-c-button pf-m-primary" type="button">Action</button></div>
+      <div class="pf-v6-c-toolbar__item"><button class="pf-v6-c-button pf-m-secondary" type="button">Secondary</button></div>
+    </div>
+    <div class="pf-v6-c-toolbar__group">
+      <div class="pf-v6-c-toolbar__item"><button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Filter"><i class="fas fa-filter" aria-hidden="true"></i></button></div>
+      <div class="pf-v6-c-toolbar__item"><button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Sort"><i class="fas fa-sort" aria-hidden="true"></i></button></div>
+    </div>
+    {/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

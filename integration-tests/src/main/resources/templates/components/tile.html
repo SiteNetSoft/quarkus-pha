@@ -1,0 +1,34 @@
+{#include layouts/base}
+{#title}Tile{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Tile</h1>
+  <p>PatternFly v6 tile for presenting a selectable card-like option.</p>
+
+  <div class="pf-v6-c-banner pf-m-gold" style="margin-top: 1rem;">
+    <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+    Deprecated: Tile is deprecated. Use Card with selectable modifier instead.
+  </div>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic tile with a title only.</p>
+    {#include components/data-display/tile id="tile-basic" title="Basic tile" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="with-icon-heading">With icon</h2>
+    <p>A tile displaying an icon and body text alongside the title.</p>
+    {#include components/data-display/tile id="tile-icon" title="With icon" iconClass="fas fa-plus" bodyText="This tile has an icon and body text." /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="selected-heading">Selected</h2>
+    <p>A tile in the selected state.</p>
+    {#include components/data-display/tile id="tile-selected" title="Selected" selected=true /}
+  </section>
+</div>
+{/body}
+{/include}

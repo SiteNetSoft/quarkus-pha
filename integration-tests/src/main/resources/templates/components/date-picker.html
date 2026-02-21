@@ -1,0 +1,28 @@
+{#include layouts/base}
+{#title}Date Picker{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Date Picker</h1>
+  <p>PatternFly v6 date picker component for selecting dates from a calendar or entering them manually.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic date picker with a placeholder.</p>
+    {#include components/forms/date-picker id="dp-basic" placeholder="YYYY-MM-DD" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="with-value-heading">With value</h2>
+    <p>A date picker pre-populated with a date value.</p>
+    {#include components/forms/date-picker id="dp-value" placeholder="YYYY-MM-DD" value="2024-03-15" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="disabled-heading">Disabled</h2>
+    <p>A date picker in the disabled state.</p>
+    {#include components/forms/date-picker id="dp-disabled" placeholder="YYYY-MM-DD" disabled=true /}
+  </section>
+</div>
+{/body}
+{/include}

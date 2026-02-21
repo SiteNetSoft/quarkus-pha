@@ -1,0 +1,49 @@
+{#include layouts/base}
+{#title}Drawer{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Drawer</h1>
+  <p>PatternFly v6 drawer component that slides in a panel alongside main content.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic drawer with a toggle button that opens and closes the panel.</p>
+    {#include components/data-display/drawer id="dr-basic"}
+      {#content}
+        <button class="pf-v6-c-button pf-m-primary" type="button" @click="expanded = !expanded">Toggle drawer</button>
+        <p>Main content area. Click the button to open the drawer panel.</p>
+      {/content}
+      {#panelTitle}Drawer panel{/panelTitle}
+      {#panelBody}<p>Drawer panel content goes here. You can put any information or controls in this panel.</p>{/panelBody}
+    {/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="inline-heading">Inline</h2>
+    <p>An inline drawer where the panel sits alongside the content rather than overlapping it.</p>
+    {#include components/data-display/drawer id="dr-inline" inline=true}
+      {#content}
+        <button class="pf-v6-c-button pf-m-primary" type="button" @click="expanded = !expanded">Toggle inline drawer</button>
+        <p>Main content area for the inline drawer variant. The panel appears beside this content.</p>
+      {/content}
+      {#panelTitle}Inline panel{/panelTitle}
+      {#panelBody}<p>This panel is displayed inline with the main content, pushing it to the left rather than overlapping.</p>{/panelBody}
+    {/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="panel-left-heading">Panel left</h2>
+    <p>A drawer where the panel appears on the left side of the content.</p>
+    {#include components/data-display/drawer id="dr-panel-left" panelLeft=true}
+      {#content}
+        <button class="pf-v6-c-button pf-m-primary" type="button" @click="expanded = !expanded">Toggle left panel</button>
+        <p>Main content area for the panel-left variant. The panel slides in from the left.</p>
+      {/content}
+      {#panelTitle}Left panel{/panelTitle}
+      {#panelBody}<p>This panel appears on the left side of the main content area.</p>{/panelBody}
+    {/include}
+  </section>
+</div>
+{/body}
+{/include}

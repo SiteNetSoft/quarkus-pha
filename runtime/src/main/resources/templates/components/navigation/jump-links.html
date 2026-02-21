@@ -1,0 +1,7 @@
+{! Jump links — PatternFly v6 !}
+{! Parameters: id, vertical (optional), center (optional), ariaLabel (optional) !}
+<nav class="pf-v6-c-jump-links{#if vertical??} pf-m-vertical{/if}{#if center??} pf-m-center{/if}" id="{id}" aria-label="{#if ariaLabel??}{ariaLabel}{#else}Jump to section{/if}">
+  <ul class="pf-v6-c-jump-links__list">
+    {#insert content}{/insert}
+  </ul>
+</nav>

@@ -1,0 +1,40 @@
+{#include layouts/base}
+{#title}Simple List{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Simple List</h1>
+  <p>PatternFly v6 simple list for displaying a navigable list of actionable items.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic simple list with selectable items.</p>
+    {#include components/data-display/simple-list id="sl-basic"}{#content}
+    <ul class="pf-v6-c-simple-list__list">
+      <li><button class="pf-v6-c-simple-list__item-link pf-m-current" type="button">Item 1</button></li>
+      <li><button class="pf-v6-c-simple-list__item-link" type="button">Item 2</button></li>
+      <li><button class="pf-v6-c-simple-list__item-link" type="button">Item 3</button></li>
+    </ul>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="grouped-heading">With grouped sections</h2>
+    <p>A simple list organized into named groups.</p>
+    {#include components/data-display/simple-list id="sl-grouped"}{#content}
+    <h2 class="pf-v6-c-simple-list__title">Group A</h2>
+    <ul class="pf-v6-c-simple-list__list">
+      <li><button class="pf-v6-c-simple-list__item-link pf-m-current" type="button">Item A1</button></li>
+      <li><button class="pf-v6-c-simple-list__item-link" type="button">Item A2</button></li>
+    </ul>
+    <h2 class="pf-v6-c-simple-list__title">Group B</h2>
+    <ul class="pf-v6-c-simple-list__list">
+      <li><button class="pf-v6-c-simple-list__item-link" type="button">Item B1</button></li>
+      <li><button class="pf-v6-c-simple-list__item-link" type="button">Item B2</button></li>
+    </ul>
+    {/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

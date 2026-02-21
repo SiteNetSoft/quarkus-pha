@@ -1,0 +1,23 @@
+{#include layouts/base}
+{#title}Wizard{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Wizard</h1>
+  <p>A wizard guides users through a multi-step process with a navigation sidebar.</p>
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic wizard with three steps and navigation controls.</p>
+    {#include components/navigation/wizard id="wiz-basic"}{#navItems}
+    <li class="pf-v6-c-wizard__nav-item"><a class="pf-v6-c-wizard__nav-link pf-m-current"><span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">Step 1</span></span></a></li>
+    <li class="pf-v6-c-wizard__nav-item"><a class="pf-v6-c-wizard__nav-link"><span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">Step 2</span></span></a></li>
+    <li class="pf-v6-c-wizard__nav-item"><a class="pf-v6-c-wizard__nav-link"><span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">Review</span></span></a></li>
+    {/navItems}{#body}<p>Step content goes here.</p>{/body}{#footer}
+    <button class="pf-v6-c-button pf-m-primary" type="button">Next</button>
+    <button class="pf-v6-c-button pf-m-secondary" type="button">Back</button>
+    <div class="pf-v6-c-wizard__footer-cancel"><button class="pf-v6-c-button pf-m-link" type="button">Cancel</button></div>
+    {/footer}{/include}
+  </section>
+</div>
+{/body}
+{/include}

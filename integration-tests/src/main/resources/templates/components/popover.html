@@ -1,0 +1,34 @@
+{#include layouts/base}
+{#title}Popover{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Popover</h1>
+  <p>PatternFly v6 popover component for displaying additional contextual information on user interaction.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="top-heading">Top</h2>
+    <p>A popover positioned above the trigger element.</p>
+    {#include components/feedback/popover id="po-top" position="top"}
+      {#body}This is a popover body displayed above the trigger element.{/body}
+    {/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="right-heading">Right</h2>
+    <p>A popover positioned to the right of the trigger element.</p>
+    {#include components/feedback/popover id="po-right" position="right"}
+      {#body}This is a popover body displayed to the right of the trigger element.{/body}
+    {/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="with-header-heading">With header</h2>
+    <p>A popover with a title heading and body content for more structured information.</p>
+    {#include components/feedback/popover id="po-header" position="top" titleText="Popover heading"}
+      {#body}This popover includes a title heading to provide additional context for the content displayed within.{/body}
+    {/include}
+  </section>
+</div>
+{/body}
+{/include}

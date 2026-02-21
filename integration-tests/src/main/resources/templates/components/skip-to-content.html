@@ -1,0 +1,18 @@
+{#include layouts/base}
+{#title}Skip to Content{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Skip to Content</h1>
+  <p>A skip to content link allows keyboard users to bypass navigation and jump directly to the main content.</p>
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic skip to content link. Focus the link by pressing Tab to see it appear.</p>
+    {#include components/navigation/skip-to-content id="stc-basic" href="#main-content" /}
+    <div id="main-content" style="margin-top: 1rem; padding: 1rem; border: 1px dashed var(--pf-v6-global--BorderColor--100);">
+      <p>Main content area (target of skip link)</p>
+    </div>
+  </section>
+</div>
+{/body}
+{/include}

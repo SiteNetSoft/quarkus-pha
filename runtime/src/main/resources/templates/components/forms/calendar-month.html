@@ -1,0 +1,51 @@
+{! Calendar month — PatternFly v6 !}
+{! Parameters: id (required), month (required), year (required), weeks (required — list of week lists) !}
+{! Week list: list of day maps with {date, adjacent?, current?, selected?, disabled?, startRange?, endRange?, inRange?} !}
+<div class="pf-v6-c-calendar-month" id="{id}">
+  <div class="pf-v6-c-calendar-month__header">
+    <div class="pf-v6-c-calendar-month__header-nav-control pf-m-prev-month">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Previous month">
+        <i class="fas fa-angle-left" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="pf-v6-c-input-group">
+      <div class="pf-v6-c-input-group__item pf-m-fill">
+        <span class="pf-v6-c-calendar-month__header-month">{month}</span>
+      </div>
+      <div class="pf-v6-c-input-group__item">
+        <div class="pf-v6-c-calendar-month__header-year">
+          <input class="pf-v6-c-form-control" type="number" value="{year}" id="{id}-year" aria-label="Select year" />
+        </div>
+      </div>
+    </div>
+    <div class="pf-v6-c-calendar-month__header-nav-control pf-m-next-month">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Next month">
+        <i class="fas fa-angle-right" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  <table class="pf-v6-c-calendar-month__calendar">
+    <thead class="pf-v6-c-calendar-month__days">
+      <tr class="pf-v6-c-calendar-month__days-row">
+        <th class="pf-v6-c-calendar-month__day"><span class="pf-screen-reader">Sunday</span><span aria-hidden="true">S</span></th>
+        <th class="pf-v6-c-calendar-month__day"><span class="pf-screen-reader">Monday</span><span aria-hidden="true">M</span></th>
+        <th class="pf-v6-c-calendar-month__day"><span class="pf-screen-reader">Tuesday</span><span aria-hidden="true">T</span></th>
+        <th class="pf-v6-c-calendar-month__day"><span class="pf-screen-reader">Wednesday</span><span aria-hidden="true">W</span></th>
+        <th class="pf-v6-c-calendar-month__day"><span class="pf-screen-reader">Thursday</span><span aria-hidden="true">T</span></th>
+        <th class="pf-v6-c-calendar-month__day"><span class="pf-screen-reader">Friday</span><span aria-hidden="true">F</span></th>
+        <th class="pf-v6-c-calendar-month__day"><span class="pf-screen-reader">Saturday</span><span aria-hidden="true">S</span></th>
+      </tr>
+    </thead>
+    <tbody class="pf-v6-c-calendar-month__dates">
+      {#for week in weeks}
+      <tr class="pf-v6-c-calendar-month__dates-row">
+        {#for day in week}
+        <td class="pf-v6-c-calendar-month__dates-cell{#if day.adjacent??} pf-m-adjacent-month{/if}{#if day.current??} pf-m-current{/if}{#if day.selected??} pf-m-selected{/if}{#if day.disabled??} pf-m-disabled{/if}{#if day.startRange??} pf-m-start-range{/if}{#if day.endRange??} pf-m-end-range{/if}{#if day.inRange??} pf-m-in-range{/if}">
+          <button class="pf-v6-c-calendar-month__date" type="button" aria-label="{day.date} {month} {year}"{#if day.disabled??} disabled{/if}>{day.date}</button>
+        </td>
+        {/for}
+      </tr>
+      {/for}
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,42 @@
+{#include layouts/base}
+{#title}Tooltip{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Tooltip</h1>
+  <p>PatternFly v6 tooltip component for displaying brief descriptive text on hover.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="top-heading">Top</h2>
+    <p>A tooltip that appears above the trigger element.</p>
+    <div style="display: inline-block; position: relative;">
+      {#include components/feedback/tooltip id="tt-top" text="Tooltip on top" position="top" /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="bottom-heading">Bottom</h2>
+    <p>A tooltip that appears below the trigger element.</p>
+    <div style="display: inline-block; position: relative;">
+      {#include components/feedback/tooltip id="tt-bottom" text="Tooltip on bottom" position="bottom" /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="left-heading">Left</h2>
+    <p>A tooltip that appears to the left of the trigger element.</p>
+    <div style="display: inline-block; position: relative; margin-left: 8rem;">
+      {#include components/feedback/tooltip id="tt-left" text="Tooltip on left" position="left" /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="right-heading">Right</h2>
+    <p>A tooltip that appears to the right of the trigger element.</p>
+    <div style="display: inline-block; position: relative;">
+      {#include components/feedback/tooltip id="tt-right" text="Tooltip on right" position="right" /}
+    </div>
+  </section>
+</div>
+{/body}
+{/include}

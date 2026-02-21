@@ -1,0 +1,28 @@
+{#include layouts/base}
+{#title}Hint{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Hint</h1>
+  <p>PatternFly v6 hint — inline guidance or tips for the user.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A hint with body text.</p>
+    {#include components/feedback/hint id="hint-basic" bodyText="This is a hint with some guidance for the user." /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="with-title-heading">With title</h2>
+    <p>A hint with a title and body.</p>
+    {#include components/feedback/hint id="hint-title" title="Helpful tip" bodyText="You can use keyboard shortcuts to navigate this page more efficiently." /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="with-actions-heading">With actions</h2>
+    <p>A hint with a footer containing actions.</p>
+    {#include components/feedback/hint id="hint-actions" title="Did you know?" bodyText="You can customize your dashboard layout."}{#content}<div class="pf-v6-c-hint__footer"><a href="#" class="pf-v6-c-button pf-m-link pf-m-inline">Learn more</a></div>{/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

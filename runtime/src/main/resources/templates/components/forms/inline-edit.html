@@ -1,0 +1,31 @@
+{! Inline edit — PatternFly v6 !}
+{! Parameters: id, value (optional) !}
+<form class="pf-v6-c-inline-edit" id="{id}" x-data="{ editing: false, val: '{#if value??}{value}{#else}{/if}' }" :class="{ 'pf-m-inline-editable': editing }">
+  <div class="pf-v6-c-inline-edit__group">
+    <div class="pf-v6-c-inline-edit__value" x-show="!editing" x-text="val"></div>
+    <div class="pf-v6-c-inline-edit__action pf-m-enable-editable" x-show="!editing">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Edit" @click="editing = true">
+        <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  <div class="pf-v6-c-inline-edit__group" x-show="editing" x-cloak>
+    <div class="pf-v6-c-inline-edit__input">
+      <span class="pf-v6-c-form-control">
+        <input type="text" x-model="val" aria-label="Editable text input">
+      </span>
+    </div>
+    <div class="pf-v6-c-inline-edit__group pf-m-action-group pf-m-icon-group">
+      <div class="pf-v6-c-inline-edit__action pf-m-valid">
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Save" @click="editing = false">
+          <i class="fas fa-check" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="pf-v6-c-inline-edit__action">
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Cancel" @click="editing = false">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

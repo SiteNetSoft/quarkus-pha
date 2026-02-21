@@ -1,0 +1,64 @@
+{#include layouts/base}
+{#title}Chip{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Chip</h1>
+  <p>PatternFly v6 chip — a compact element for displaying discrete information.</p>
+
+  <div class="pf-v6-c-alert pf-m-warning pf-m-inline" style="margin-top: 1rem; margin-bottom: 1rem;" id="deprecation-notice">
+    <div class="pf-v6-c-alert__icon"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i></div>
+    <h4 class="pf-v6-c-alert__title"><span class="pf-screen-reader">Warning:</span> Deprecated</h4>
+    <div class="pf-v6-c-alert__description">
+      <p>The Chip component is deprecated in PatternFly v6. Use the <a href="/components/label">Label</a> component instead. This implementation wraps <code>pf-v6-c-label</code>.</p>
+    </div>
+  </div>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A read-only chip displaying text.</p>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      {#include components/data-display/chip id="chip-basic" text="Chip" /}
+      {#include components/data-display/chip id="chip-basic-2" text="Really long chip that goes on and on" /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="badge-heading">With badge</h2>
+    <p>A chip with a count badge.</p>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      {#include components/data-display/chip id="chip-badge" text="Chip" badge="7" /}
+      {#include components/data-display/chip id="chip-badge-2" text="Chip" badge="24" /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="removable-heading">Removable</h2>
+    <p>A chip with a close button to remove it.</p>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;" x-data="{ chips: ['Chip 1', 'Chip 2', 'Chip 3'] }">
+      <template x-for="(chip, i) in chips" :key="chip">
+        <span class="pf-v6-c-label pf-m-filled">
+          <span class="pf-v6-c-label__content">
+            <span class="pf-v6-c-label__text" x-text="chip" :id="'chip-removable-' + i + '-text'"></span>
+          </span>
+          <span class="pf-v6-c-label__actions">
+            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Remove" @click="chips = chips.filter((_, idx) => idx !== i)">
+              <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+          </span>
+        </span>
+      </template>
+    </div>
+    <p style="margin-top: 1rem;">Static removable chip:</p>
+    {#include components/data-display/chip id="chip-removable-static" text="Removable chip" removable=true /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="overflow-heading">Overflow</h2>
+    <p>An overflow chip that acts as a button to show more items.</p>
+    {#include components/data-display/chip id="chip-overflow" text="3 more" overflow=true /}
+  </section>
+</div>
+{/body}
+{/include}

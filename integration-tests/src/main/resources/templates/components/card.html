@@ -1,0 +1,82 @@
+{#include layouts/base}
+{#title}Card{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Card</h1>
+  <p>PatternFly v6 card — a flexible container for grouping related content.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A standard card with title, body, and footer.</p>
+    <div style="max-width: 400px;">
+      {#include components/data-display/card id="card-basic"}{#content}
+        <div class="pf-v6-c-card__title"><div class="pf-v6-c-card__title-text">Title</div></div>
+        <div class="pf-v6-c-card__body">Body</div>
+        <div class="pf-v6-c-card__footer">Footer</div>
+      {/content}{/include}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="compact-heading">Compact</h2>
+    <p>A card with reduced padding.</p>
+    <div style="max-width: 400px;">
+      {#include components/data-display/card id="card-compact" compact=true}{#content}
+        <div class="pf-v6-c-card__title"><div class="pf-v6-c-card__title-text">Title</div></div>
+        <div class="pf-v6-c-card__body">Body</div>
+        <div class="pf-v6-c-card__footer">Footer</div>
+      {/content}{/include}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="large-heading">Large</h2>
+    <p>A card with larger display styling.</p>
+    <div style="max-width: 400px;">
+      {#include components/data-display/card id="card-large" displayLg=true}{#content}
+        <div class="pf-v6-c-card__title"><div class="pf-v6-c-card__title-text">Title</div></div>
+        <div class="pf-v6-c-card__body">Body</div>
+        <div class="pf-v6-c-card__footer">Footer</div>
+      {/content}{/include}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="plain-heading">Plain</h2>
+    <p>A borderless card.</p>
+    <div style="max-width: 400px;">
+      {#include components/data-display/card id="card-plain" plain=true}{#content}
+        <div class="pf-v6-c-card__title"><div class="pf-v6-c-card__title-text">Title</div></div>
+        <div class="pf-v6-c-card__body">Body</div>
+        <div class="pf-v6-c-card__footer">Footer</div>
+      {/content}{/include}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="flat-heading">Flat</h2>
+    <p>A flat card with no shadow.</p>
+    <div style="max-width: 400px;">
+      {#include components/data-display/card id="card-flat" flat=true}{#content}
+        <div class="pf-v6-c-card__title"><div class="pf-v6-c-card__title-text">Title</div></div>
+        <div class="pf-v6-c-card__body">Body</div>
+        <div class="pf-v6-c-card__footer">Footer</div>
+      {/content}{/include}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="no-footer-heading">No footer</h2>
+    <p>A card with only title and body.</p>
+    <div style="max-width: 400px;">
+      {#include components/data-display/card id="card-no-footer"}{#content}
+        <div class="pf-v6-c-card__title"><div class="pf-v6-c-card__title-text">Title</div></div>
+        <div class="pf-v6-c-card__body">This card has no footer</div>
+      {/content}{/include}
+    </div>
+  </section>
+</div>
+{/body}
+{/include}

@@ -1,0 +1,22 @@
+{#include layouts/base}
+{#title}Expandable section{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Expandable section</h1>
+  <p>PatternFly v6 expandable section — a collapsible content area with a toggle button.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A collapsed expandable section.</p>
+    {#include components/data-display/expandable-section id="es-basic" toggleText="Show more"}{#content}<p>This content is revealed when the section is expanded. It can contain any HTML.</p>{/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="expanded-heading">Expanded by default</h2>
+    <p>An expandable section that starts in the open state.</p>
+    {#include components/data-display/expandable-section id="es-expanded" toggleText="Show more" expanded=true}{#content}<p>This content is visible by default because the section starts expanded.</p>{/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

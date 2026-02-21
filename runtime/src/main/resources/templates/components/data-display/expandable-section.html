@@ -1,0 +1,17 @@
+{! Expandable section — PatternFly v6 !}
+{! Parameters: id, toggleText, expanded (optional) !}
+<div class="pf-v6-c-expandable-section" id="{id}"
+     x-data="{ expanded: {#if expanded??}true{#else}false{/if} }"
+     :class="{ 'pf-m-expanded': expanded }">
+  <button class="pf-v6-c-expandable-section__toggle" type="button"
+          :aria-expanded="expanded"
+          @click="expanded = !expanded">
+    <span class="pf-v6-c-expandable-section__toggle-icon">
+      <i class="fas fa-angle-right" aria-hidden="true"></i>
+    </span>
+    <span class="pf-v6-c-expandable-section__toggle-text">{toggleText}</span>
+  </button>
+  <div class="pf-v6-c-expandable-section__content" x-show="expanded" x-cloak>
+    {#insert content}{/insert}
+  </div>
+</div>
