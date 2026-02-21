@@ -1,0 +1,16 @@
+{! Back to top — PatternFly v6 !}
+{! Parameters: id (required) !}
+{! Optional: alwaysVisible !}
+<div class="pf-v6-c-back-to-top" id="{id}"
+     x-data="{ visible: {#if alwaysVisible??}true{#else}false{/if} }"
+     {#if !alwaysVisible??}@scroll.window="visible = window.scrollY > 400"{/if}
+     x-show="visible"
+     x-transition>
+  <button class="pf-v6-c-button pf-m-primary" type="button"
+          @click="window.scrollTo({ top: 0, behavior: 'smooth' })">
+    Back to top
+    <span class="pf-v6-c-button__icon pf-m-end">
+      <svg viewBox="0 0 320 512" fill="currentColor" aria-hidden="true" width="1em" height="1em"><path d="M177 159.7l108.9 108.9c9.4 9.4 9.4 24.6 0 33.9l-22.7 22.7c-9.4 9.4-24.5 9.4-33.9 0L160 256.3l-69.3 69c-9.4 9.4-24.5 9.4-33.9 0l-22.7-22.7c-9.4-9.4-9.4-24.6 0-33.9L143 159.7c9.4-9.5 24.6-9.5 34 0z"/></svg>
+    </span>
+  </button>
+</div>
