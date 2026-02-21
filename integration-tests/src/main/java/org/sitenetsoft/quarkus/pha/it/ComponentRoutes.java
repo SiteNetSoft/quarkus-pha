@@ -39,6 +39,22 @@ public class ComponentRoutes {
     @Inject
     Template backToTopPage;
 
+    @Location("components/backdrop")
+    @Inject
+    Template backdropPage;
+
+    @Location("components/background-image")
+    @Inject
+    Template backgroundImagePage;
+
+    @Location("components/badge")
+    @Inject
+    Template badgePage;
+
+    @Location("components/banner")
+    @Inject
+    Template bannerPage;
+
     @GET
     @Path("/about-modal")
     @Produces(MediaType.TEXT_HTML)
@@ -162,6 +178,34 @@ public class ComponentRoutes {
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance backToTop() {
         return backToTopPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/backdrop")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance backdrop() {
+        return backdropPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/background-image")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance backgroundImage() {
+        return backgroundImagePage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/badge")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance badge() {
+        return badgePage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/banner")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance banner() {
+        return bannerPage.data("applicationName", "quarkus-pha");
     }
 
     @GET

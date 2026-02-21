@@ -37,6 +37,18 @@ test.describe("Smoke tests", () => {
 
     const backToTopLink = page.locator('a[href="/components/back-to-top"]');
     await expect(backToTopLink).toBeVisible();
+
+    const backdropLink = page.locator('a[href="/components/backdrop"]');
+    await expect(backdropLink).toBeVisible();
+
+    const backgroundImageLink = page.locator('a[href="/components/background-image"]');
+    await expect(backgroundImageLink).toBeVisible();
+
+    const badgeLink = page.locator('a[href="/components/badge"]');
+    await expect(badgeLink).toBeVisible();
+
+    const bannerLink = page.locator('a[href="/components/banner"]');
+    await expect(bannerLink).toBeVisible();
   });
 
   test("search input filters component cards", async ({ page }) => {

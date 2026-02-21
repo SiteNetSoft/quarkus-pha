@@ -1,0 +1,65 @@
+{#include layouts/base}
+{#title}Banner{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Banner</h1>
+  <p>PatternFly v6 banner — a full-width message strip with status and color variants.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="status-heading">Status variants</h2>
+    <p>Banners for all five status types.</p>
+    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+      {#include components/feedback/banner id="banner-success" variant="success"}{#content}Success banner message{/content}{/include}
+      {#include components/feedback/banner id="banner-warning" variant="warning"}{#content}Warning banner message{/content}{/include}
+      {#include components/feedback/banner id="banner-danger" variant="danger"}{#content}Danger banner message{/content}{/include}
+      {#include components/feedback/banner id="banner-info" variant="info"}{#content}Info banner message{/content}{/include}
+      {#include components/feedback/banner id="banner-custom" variant="custom"}{#content}Custom banner message{/content}{/include}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="colors-heading">Color variants</h2>
+    <p>Banners with all eight color modifiers.</p>
+    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+      {#include components/feedback/banner id="banner-red" variant="red"}{#content}Red banner{/content}{/include}
+      {#include components/feedback/banner id="banner-orangered" variant="orangered"}{#content}Orangered banner{/content}{/include}
+      {#include components/feedback/banner id="banner-orange" variant="orange"}{#content}Orange banner{/content}{/include}
+      {#include components/feedback/banner id="banner-yellow" variant="yellow"}{#content}Yellow banner{/content}{/include}
+      {#include components/feedback/banner id="banner-green" variant="green"}{#content}Green banner{/content}{/include}
+      {#include components/feedback/banner id="banner-teal" variant="teal"}{#content}Teal banner{/content}{/include}
+      {#include components/feedback/banner id="banner-blue" variant="blue"}{#content}Blue banner{/content}{/include}
+      {#include components/feedback/banner id="banner-purple" variant="purple"}{#content}Purple banner{/content}{/include}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="links-heading">With links</h2>
+    <p>Banner containing inline link elements.</p>
+    {#include components/feedback/banner id="banner-links" variant="info"}{#content}This is a banner with <a href="#">a link</a> and <a href="#">another link</a> inside.{/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="screen-reader-heading">With screen reader text</h2>
+    <p>Banner with hidden accessible text for screen readers.</p>
+    {#include components/feedback/banner id="banner-sr" variant="info" screenReaderText="Info alert:"}{#content}This banner has screen reader text.{/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="sticky-heading">Sticky</h2>
+    <p>A sticky banner inside a scrollable container.</p>
+    <div style="height: 200px; overflow-y: auto; border: 1px solid var(--pf-t--global--border--color--default); border-radius: var(--pf-t--global--border--radius--small);" id="sticky-container">
+      {#include components/feedback/banner id="banner-sticky" variant="warning" sticky=true}{#content}Sticky warning banner{/content}{/include}
+      <div style="padding: 1rem;">
+        <p>Scroll down to see the sticky banner stay at top.</p>
+        <p style="margin-top: 4rem;">More content below...</p>
+        <p style="margin-top: 4rem;">Even more content...</p>
+        <p style="margin-top: 4rem;">Almost at the bottom...</p>
+        <p style="margin-top: 4rem;">End of scrollable content.</p>
+      </div>
+    </div>
+  </section>
+</div>
+{/body}
+{/include}
