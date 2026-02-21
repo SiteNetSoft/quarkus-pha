@@ -1,0 +1,31 @@
+/* Map — PHA custom component wrapping MapLibre GL JS */
+
+.pha-c-map {
+  position: relative;
+  border: 1px solid var(--pf-t--global--border--color--default, #d2d2d2);
+  border-radius: var(--pf-t--global--border--radius--small, 3px);
+  overflow: hidden;
+}
+
+.pha-c-map__container {
+  width: 100%;
+  height: 400px;
+}
+
+.pha-c-map__container canvas {
+  outline: none;
+}
+
+.pha-c-map__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  padding: var(--pf-t--global--spacer--sm, 0.5rem);
+  z-index: 1;
+}
+
+.pha-c-map__overlay > * {
+  pointer-events: auto;
+}
