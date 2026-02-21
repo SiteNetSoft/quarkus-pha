@@ -27,6 +27,18 @@ public class ComponentRoutes {
     @Inject
     Template actionListPage;
 
+    @Location("components/alert")
+    @Inject
+    Template alertPage;
+
+    @Location("components/avatar")
+    @Inject
+    Template avatarPage;
+
+    @Location("components/back-to-top")
+    @Inject
+    Template backToTopPage;
+
     @GET
     @Path("/about-modal")
     @Produces(MediaType.TEXT_HTML)
@@ -136,5 +148,32 @@ public class ComponentRoutes {
             .data("cancelFormData", cancelFormData)
             .data("cancelWizardData", cancelWizardData)
             .data("verticalData", verticalData);
+    }
+
+    @GET
+    @Path("/avatar")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance avatar() {
+        return avatarPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/back-to-top")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance backToTop() {
+        return backToTopPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/alert")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance alert() {
+        List<Map<String, String>> sampleActionLinks = List.of(
+            Map.of("text", "View details", "href", "#"),
+            Map.of("text", "Ignore", "href", "#")
+        );
+
+        return alertPage.data("applicationName", "quarkus-pha")
+            .data("sampleActionLinks", sampleActionLinks);
     }
 }
