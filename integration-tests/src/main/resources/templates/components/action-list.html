@@ -1,0 +1,53 @@
+{#include layouts/base}
+{#title}Action list{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Action list</h1>
+  <p>PatternFly v6 action list for grouping actions with standardized spacing.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="single-group-heading">Single group</h2>
+    <p>Primary and secondary buttons in a single group.</p>
+    {#include components/actions/action-list groups=singleGroupData id="action-list-single" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="with-icons-heading">With icons</h2>
+    <p>Icon-only action list with <code>pf-m-icons</code> on the root.</p>
+    {#include components/actions/action-list groups=iconsData id="action-list-icons" icons=true /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="group-icons-heading">Group icons</h2>
+    <p><code>pf-m-icons</code> applied on individual group elements.</p>
+    {#include components/actions/action-list groups=groupIconsData id="action-list-group-icons" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="multiple-groups-heading">Multiple groups</h2>
+    <p>Two separate button groups.</p>
+    {#include components/actions/action-list groups=multiGroupData id="action-list-multi" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="cancel-form-heading">Cancel button (forms/modals)</h2>
+    <p>Save and cancel pattern for forms and modals.</p>
+    {#include components/actions/action-list groups=cancelFormData id="action-list-cancel-form" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="cancel-wizard-heading">Cancel button (wizards)</h2>
+    <p>Next, back, and cancel pattern for wizards.</p>
+    {#include components/actions/action-list groups=cancelWizardData id="action-list-cancel-wizard" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="vertical-heading">Vertical</h2>
+    <p>Vertically stacked action list.</p>
+    {#include components/actions/action-list groups=verticalData id="action-list-vertical" vertical=true /}
+  </section>
+</div>
+{/body}
+{/include}

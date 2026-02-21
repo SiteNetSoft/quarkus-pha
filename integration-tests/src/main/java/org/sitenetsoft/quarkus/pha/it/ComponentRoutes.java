@@ -23,6 +23,10 @@ public class ComponentRoutes {
     @Inject
     Template accordionPage;
 
+    @Location("components/action-list")
+    @Inject
+    Template actionListPage;
+
     @GET
     @Path("/about-modal")
     @Produces(MediaType.TEXT_HTML)
@@ -47,5 +51,90 @@ public class ComponentRoutes {
 
         return accordionPage.data("applicationName", "quarkus-pha")
             .data("sampleItems", sampleItems);
+    }
+
+    @GET
+    @Path("/action-list")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance actionList() {
+        String iconEdit = "<svg fill=\"currentColor\" viewBox=\"0 0 16 16\" width=\"1em\" height=\"1em\" aria-hidden=\"true\"><path d=\"M11.013 1.427a1.75 1.75 0 012.474 0l1.086 1.086a1.75 1.75 0 010 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 01-.927-.928l.929-3.25a1.75 1.75 0 01.445-.758l8.61-8.61z\"/></svg>";
+        String iconClone = "<svg fill=\"currentColor\" viewBox=\"0 0 16 16\" width=\"1em\" height=\"1em\" aria-hidden=\"true\"><path d=\"M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z\"/><path d=\"M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z\"/></svg>";
+        String iconTrash = "<svg fill=\"currentColor\" viewBox=\"0 0 16 16\" width=\"1em\" height=\"1em\" aria-hidden=\"true\"><path d=\"M6.5 1.75a.25.25 0 01.25-.25h2.5a.25.25 0 01.25.25V3h-3V1.75zm4.5 0V3h2.25a.75.75 0 010 1.5H2.75a.75.75 0 010-1.5H5V1.75C5 .784 5.784 0 6.75 0h2.5C10.216 0 11 .784 11 1.75zM4.496 6.675a.75.75 0 10-1.492.15l.66 6.6A1.75 1.75 0 005.405 15h5.19a1.75 1.75 0 001.741-1.575l.66-6.6a.75.75 0 00-1.492-.15l-.66 6.6a.25.25 0 01-.249.225h-5.19a.25.25 0 01-.249-.225l-.66-6.6z\"/></svg>";
+
+        // 1. Single group — Primary + Secondary
+        List<Map<String, Object>> singleGroupData = List.of(
+            Map.of("items", List.of(
+                Map.of("text", "Next", "variant", "primary"),
+                Map.of("text", "Back", "variant", "secondary")
+            ))
+        );
+
+        // 2. With icons — root-level pf-m-icons
+        List<Map<String, Object>> iconsData = List.of(
+            Map.of("items", List.of(
+                Map.of("icon", true, "ariaLabel", "Edit", "iconSvg", iconEdit),
+                Map.of("icon", true, "ariaLabel", "Clone", "iconSvg", iconClone),
+                Map.of("icon", true, "ariaLabel", "Delete", "iconSvg", iconTrash)
+            ))
+        );
+
+        // 3. Group icons — pf-m-icons on individual groups
+        List<Map<String, Object>> groupIconsData = List.of(
+            Map.of("items", List.of(
+                Map.of("icon", true, "ariaLabel", "Edit", "iconSvg", iconEdit),
+                Map.of("icon", true, "ariaLabel", "Clone", "iconSvg", iconClone)
+            ), "icons", true),
+            Map.of("items", List.of(
+                Map.of("text", "Save", "variant", "primary")
+            ))
+        );
+
+        // 4. Multiple groups
+        List<Map<String, Object>> multiGroupData = List.of(
+            Map.of("items", List.of(
+                Map.of("text", "Action 1", "variant", "primary"),
+                Map.of("text", "Action 2", "variant", "secondary")
+            )),
+            Map.of("items", List.of(
+                Map.of("text", "Action 3", "variant", "secondary"),
+                Map.of("text", "Action 4", "variant", "secondary")
+            ))
+        );
+
+        // 5. Cancel button — forms/modals
+        List<Map<String, Object>> cancelFormData = List.of(
+            Map.of("items", List.of(
+                Map.of("text", "Save", "variant", "primary"),
+                Map.of("text", "Cancel", "variant", "link")
+            ))
+        );
+
+        // 6. Cancel button — wizards
+        List<Map<String, Object>> cancelWizardData = List.of(
+            Map.of("items", List.of(
+                Map.of("text", "Next", "variant", "primary"),
+                Map.of("text", "Back", "variant", "secondary")
+            )),
+            Map.of("items", List.of(
+                Map.of("text", "Cancel", "variant", "link")
+            ))
+        );
+
+        // 7. Vertical
+        List<Map<String, Object>> verticalData = List.of(
+            Map.of("items", List.of(
+                Map.of("text", "Save", "variant", "primary"),
+                Map.of("text", "Cancel", "variant", "link")
+            ))
+        );
+
+        return actionListPage.data("applicationName", "quarkus-pha")
+            .data("singleGroupData", singleGroupData)
+            .data("iconsData", iconsData)
+            .data("groupIconsData", groupIconsData)
+            .data("multiGroupData", multiGroupData)
+            .data("cancelFormData", cancelFormData)
+            .data("cancelWizardData", cancelWizardData)
+            .data("verticalData", verticalData);
     }
 }
