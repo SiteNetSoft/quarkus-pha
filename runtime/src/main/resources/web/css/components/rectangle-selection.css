@@ -1,0 +1,23 @@
+/* Rectangle Selection — PHA custom component */
+
+.pha-c-rectangle-selection {
+  position: relative;
+  user-select: none;
+  cursor: crosshair;
+}
+
+.pha-c-rectangle-selection__rect {
+  display: none;
+  position: absolute;
+  border: 1px solid var(--pf-t--global--border--color--default, #000);
+  background-color: var(--pf-t--global--color--brand--default, #06c);
+  opacity: 0.2;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.pha-c-rectangle-selection [data-selectable].pha-m-selected {
+  outline: 2px solid var(--pf-t--global--color--brand--default, #06c);
+  outline-offset: -2px;
+  box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.15);
+}
