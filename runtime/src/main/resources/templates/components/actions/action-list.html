@@ -1,0 +1,18 @@
+{! Action List — PatternFly v6 !}
+{! Parameters: id (required), groups (required list) !}
+{! Optional: icons, vertical !}
+<div class="pf-v6-c-action-list{#if icons??} pf-m-icons{/if}{#if vertical??} pf-m-vertical{/if}" id="{id}">
+  {#for group in groups}
+  <div class="pf-v6-c-action-list__group{#if group.icons??} pf-m-icons{/if}">
+    {#for item in group.items}
+    <div class="pf-v6-c-action-list__item">
+      {#if item.icon??}
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="{item.ariaLabel}">{item.iconSvg.raw}</button>
+      {#else}
+      <button class="pf-v6-c-button pf-m-{item.variant}" type="button">{item.text}</button>
+      {/if}
+    </div>
+    {/for}
+  </div>
+  {/for}
+</div>
