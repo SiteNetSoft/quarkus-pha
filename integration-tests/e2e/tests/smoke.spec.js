@@ -28,6 +28,15 @@ test.describe("Smoke tests", () => {
 
     const actionListLink = page.locator('a[href="/components/action-list"]');
     await expect(actionListLink).toBeVisible();
+
+    const alertLink = page.locator('a[href="/components/alert"]');
+    await expect(alertLink).toBeVisible();
+
+    const avatarLink = page.locator('a[href="/components/avatar"]');
+    await expect(avatarLink).toBeVisible();
+
+    const backToTopLink = page.locator('a[href="/components/back-to-top"]');
+    await expect(backToTopLink).toBeVisible();
   });
 
   test("search input filters component cards", async ({ page }) => {
