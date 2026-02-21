@@ -1,0 +1,87 @@
+{#include layouts/base}
+{#title}Map{/title}
+{#head}
+<link rel="stylesheet" href="/web/vendor/maplibre/maplibre-gl.css">
+<link rel="stylesheet" href="/web/css/components/map.css">
+<script src="/web/vendor/maplibre/maplibre-gl.js"></script>
+<script src="/web/js/alpine/components/map.js"></script>
+{/head}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Map</h1>
+  <p>An interactive map component built on <a href="https://maplibre.org/" class="pf-v6-c-button pf-m-link pf-m-inline">MapLibre GL JS</a> with Alpine.js integration and PatternFly styling. Uses free OpenStreetMap and CARTO tiles &mdash; no API key required.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>Simple map centered on North America with navigation controls.</p>
+    {#include components/maps/map id="map-basic" lng="-98.5" lat="39.8" zoom="3"}{#content}{/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="markers-heading">With Markers</h2>
+    <p>Map with markers for major cities. Click a marker to see a popup.</p>
+    <div class="pha-c-map" id="map-markers"
+         x-data="phaMap({
+           center: [-96, 40],
+           zoom: 3,
+           markers: [
+             { lngLat: [-74.006, 40.7128], popup: '<strong>New York</strong><br>The Big Apple', color: '#06c' },
+             { lngLat: [-87.6298, 41.8781], popup: '<strong>Chicago</strong><br>The Windy City', color: '#06c' },
+             { lngLat: [-118.2437, 34.0522], popup: '<strong>Los Angeles</strong><br>City of Angels', color: '#06c' },
+             { lngLat: [-122.4194, 37.7749], popup: '<strong>San Francisco</strong><br>The Golden City', color: '#06c' },
+             { lngLat: [-75.6972, 45.4215], popup: '<strong>Ottawa</strong><br>Capital of Canada', color: '#c00' },
+             { lngLat: [-73.5674, 45.5019], popup: '<strong>Montréal</strong><br>La Métropole', color: '#c00' }
+           ]
+         })">
+      <div class="pha-c-map__container"></div>
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="dark-heading">Dark Theme</h2>
+    <p>Map using CARTO Dark Matter tiles for a dark UI.</p>
+    {#include components/maps/map id="map-dark" lng="-73.9857" lat="40.7484" zoom="11" style="dark"}{#content}{/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="controls-heading">Full Controls</h2>
+    <p>Map with navigation, scale bar, and fullscreen controls.</p>
+    {#include components/maps/map id="map-controls" lng="-122.4194" lat="37.7749" zoom="12" scaleControl="true" fullscreenControl="true"}{#content}{/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="geojson-heading">GeoJSON Layer</h2>
+    <p>Map with a GeoJSON polygon overlay highlighting Central Park, New York.</p>
+    <div class="pha-c-map" id="map-geojson"
+         x-data="phaMap({
+           center: [-73.968, 40.785],
+           zoom: 14,
+           style: 'light',
+           geoJson: {
+             type: 'Feature',
+             geometry: {
+               type: 'Polygon',
+               coordinates: [[
+                 [-73.9813, 40.7681],
+                 [-73.9580, 40.8006],
+                 [-73.9494, 40.7968],
+                 [-73.9728, 40.7644],
+                 [-73.9813, 40.7681]
+               ]]
+             },
+             properties: { name: 'Central Park' }
+           }
+         })">
+      <div class="pha-c-map__container"></div>
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="compact-heading">Compact</h2>
+    <p>A smaller map suitable for sidebars or cards.</p>
+    {#include components/maps/map id="map-compact" lng="-75.6972" lat="45.4215" zoom="13" height="200px" style="light"}{#content}{/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

@@ -388,6 +388,10 @@ public class ComponentRoutes {
     @Inject
     Template rectangleSelectionPage;
 
+    @Location("components/map")
+    @Inject
+    Template mapPage;
+
     @GET
     @Path("/about-modal")
     @Produces(MediaType.TEXT_HTML)
@@ -1170,6 +1174,13 @@ public class ComponentRoutes {
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance rectangleSelection() {
         return rectangleSelectionPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/map")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance map() {
+        return mapPage.data("applicationName", "quarkus-pha");
     }
 
     private static Map<String, Object> day(int date, String... flags) {
