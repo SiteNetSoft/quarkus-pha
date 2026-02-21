@@ -113,28 +113,31 @@ public class HelloResource {
         Map.entry("password-generator", "/components/password-generator"),
         Map.entry("password-strength", "/components/password-strength"),
         Map.entry("table",           "/components/table"),
-        Map.entry("time-picker",     "/components/time-picker")
+        Map.entry("time-picker",     "/components/time-picker"),
+        Map.entry("rectangle-selection", "/components/rectangle-selection")
     );
 
     /** Components tagged with a footer label. */
-    private static final Map<String, String> LABELS = Map.of(
-        "application-launcher", "Demo",
-        "chip",                 "Deprecated",
-        "context-selector",     "Demo",
-        "custom-menus",         "Demo",
-        "date-and-time-picker", "Demo",
-        "dropdown",             "Beta",
-        "options-menu",         "Demo",
-        "password-generator",   "Demo",
-        "password-strength",    "Demo",
-        "select",               "Beta"
+    private static final Map<String, String> LABELS = Map.ofEntries(
+        Map.entry("application-launcher", "Demo"),
+        Map.entry("chip",                 "Deprecated"),
+        Map.entry("context-selector",     "Demo"),
+        Map.entry("custom-menus",         "Demo"),
+        Map.entry("date-and-time-picker", "Demo"),
+        Map.entry("dropdown",             "Beta"),
+        Map.entry("options-menu",         "Demo"),
+        Map.entry("password-generator",   "Demo"),
+        Map.entry("password-strength",    "Demo"),
+        Map.entry("select",               "Beta"),
+        Map.entry("rectangle-selection",  "Custom")
     );
 
     /** Label text → PF label color modifier. */
     private static final Map<String, String> LABEL_COLORS = Map.of(
         "Demo",       "pf-m-purple",
         "Beta",       "pf-m-blue",
-        "Deprecated", ""
+        "Deprecated", "",
+        "Custom",     "pf-m-teal"
     );
 
     /** Deprecated components also need "Tile". */
@@ -208,6 +211,7 @@ public class HelloResource {
         {"progress",             "Progress"},
         {"progress-stepper",     "Progress stepper"},
         {"radio",                "Radio"},
+        {"rectangle-selection",  "Rectangle selection"},
         {"search-input",         "Search input"},
         {"select",               "Select"},
         {"sidebar",              "Sidebar"},
