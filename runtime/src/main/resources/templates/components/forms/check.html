@@ -1,0 +1,21 @@
+{! Check (Checkbox) — PatternFly v6 !}
+{! Parameters: id (required), label (optional), checked (optional), disabled (optional), !}
+{!   required (optional), description (optional), body (optional), !}
+{!   standalone (optional), reversed (optional), ariaLabel (optional for standalone) !}
+{#if standalone??}
+<div class="pf-v6-c-check pf-m-standalone" id="{id}-wrap">
+  <input class="pf-v6-c-check__input" type="checkbox" id="{id}" name="{id}"{#if checked??} checked{/if}{#if disabled??} disabled{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
+</div>
+{#else if reversed??}
+<div class="pf-v6-c-check pf-m-reversed" id="{id}-wrap">
+  <span class="pf-v6-c-check__label{#if disabled??} pf-m-disabled{/if}">{label}</span>
+  <input class="pf-v6-c-check__input" type="checkbox" id="{id}" name="{id}"{#if checked??} checked{/if}{#if disabled??} disabled{/if}>
+</div>
+{#else}
+<label class="pf-v6-c-check" for="{id}" id="{id}-wrap">
+  <input class="pf-v6-c-check__input" type="checkbox" id="{id}" name="{id}"{#if checked??} checked{/if}{#if disabled??} disabled{/if}{#if required??} required{/if}{#if description??} aria-describedby="{id}-description"{/if}>
+  <span class="pf-v6-c-check__label{#if disabled??} pf-m-disabled{/if}">{label}{#if required??} <span class="pf-v6-c-check__label-required" aria-hidden="true">&#42;</span>{/if}</span>
+  {#if description??}<span class="pf-v6-c-check__description" id="{id}-description">{description}</span>{/if}
+  {#if body??}<span class="pf-v6-c-check__body">{body}</span>{/if}
+</label>
+{/if}

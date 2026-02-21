@@ -1,0 +1,108 @@
+{#include layouts/base}
+{#title}Dropdown{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Dropdown</h1>
+  <p>PatternFly v6 dropdown component composed of a menu toggle and a menu.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic dropdown with a toggle button and a list of actions.</p>
+    <div id="dd-basic" x-data="{ open: false }">
+      <button class="pf-v6-c-menu-toggle" type="button" @click="open = !open" :class="{ 'pf-m-expanded': open }" :aria-expanded="open.toString()">
+        <span class="pf-v6-c-menu-toggle__text">Dropdown</span>
+        <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon"><i class="fas fa-caret-down" aria-hidden="true"></i></span></span>
+      </button>
+      <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false">
+        <div class="pf-v6-c-menu__content">
+          <ul class="pf-v6-c-menu__list" role="menu">
+            <li class="pf-v6-c-menu__list-item" role="none">
+              <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Action 1</span></span>
+              </button>
+            </li>
+            <li class="pf-v6-c-menu__list-item" role="none">
+              <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Action 2</span></span>
+              </button>
+            </li>
+            <li class="pf-v6-c-menu__list-item" role="none">
+              <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Action 3</span></span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="kebab-heading">Kebab</h2>
+    <p>A plain menu toggle with a kebab (ellipsis) icon for compact action menus.</p>
+    <div id="dd-kebab" x-data="{ open: false }">
+      <button class="pf-v6-c-menu-toggle pf-m-plain" type="button" @click="open = !open" :class="{ 'pf-m-expanded': open }" :aria-expanded="open.toString()" aria-label="Kebab dropdown">
+        <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
+      </button>
+      <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false">
+        <div class="pf-v6-c-menu__content">
+          <ul class="pf-v6-c-menu__list" role="menu">
+            <li class="pf-v6-c-menu__list-item" role="none">
+              <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Edit</span></span>
+              </button>
+            </li>
+            <li class="pf-v6-c-menu__list-item" role="none">
+              <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Duplicate</span></span>
+              </button>
+            </li>
+            <li class="pf-v6-c-menu__list-item" role="none">
+              <button class="pf-v6-c-menu__item pf-m-danger" type="button" role="menuitem">
+                <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Delete</span></span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="with-description-heading">With description</h2>
+    <p>Menu items that include additional description text below the main label.</p>
+    <div id="dd-description" x-data="{ open: false }">
+      <button class="pf-v6-c-menu-toggle" type="button" @click="open = !open" :class="{ 'pf-m-expanded': open }" :aria-expanded="open.toString()">
+        <span class="pf-v6-c-menu-toggle__text">Options</span>
+        <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon"><i class="fas fa-caret-down" aria-hidden="true"></i></span></span>
+      </button>
+      <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false">
+        <div class="pf-v6-c-menu__content">
+          <ul class="pf-v6-c-menu__list" role="menu">
+            <li class="pf-v6-c-menu__list-item" role="none">
+              <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Start instance</span></span>
+                <span class="pf-v6-c-menu__item-description">Starts a new compute instance</span>
+              </button>
+            </li>
+            <li class="pf-v6-c-menu__list-item" role="none">
+              <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Stop instance</span></span>
+                <span class="pf-v6-c-menu__item-description">Gracefully stops the running instance</span>
+              </button>
+            </li>
+            <li class="pf-v6-c-menu__list-item" role="none">
+              <button class="pf-v6-c-menu__item pf-m-danger" type="button" role="menuitem">
+                <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Terminate instance</span></span>
+                <span class="pf-v6-c-menu__item-description">Permanently destroys the instance and all data</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{/body}
+{/include}

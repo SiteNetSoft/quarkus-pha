@@ -1,0 +1,22 @@
+{#include layouts/base}
+{#title}Timestamp{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Timestamp</h1>
+  <p>PatternFly v6 timestamp — displays a date or time value.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="default-heading">Default</h2>
+    <p>A basic timestamp display.</p>
+    {#include components/data-display/timestamp id="ts-default" text="January 1, 2026, 12:00:00 AM" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="help-text-heading">With help text</h2>
+    <p>A timestamp with a help text tooltip indicator.</p>
+    {#include components/data-display/timestamp id="ts-help" text="2 hours ago" helpText=true /}
+  </section>
+</div>
+{/body}
+{/include}

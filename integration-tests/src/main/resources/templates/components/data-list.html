@@ -1,0 +1,67 @@
+{#include layouts/base}
+{#title}Data List{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Data List</h1>
+  <p>PatternFly v6 data list for displaying large data sets in a flexible rows-and-columns layout.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic data list with three items.</p>
+    {#include components/data-display/data-list id="dl-basic"}{#content}
+    <li class="pf-v6-c-data-list__item">
+      <div class="pf-v6-c-data-list__item-row">
+        <div class="pf-v6-c-data-list__item-content">
+          <div class="pf-v6-c-data-list__cell">First item</div>
+        </div>
+      </div>
+    </li>
+    <li class="pf-v6-c-data-list__item">
+      <div class="pf-v6-c-data-list__item-row">
+        <div class="pf-v6-c-data-list__item-content">
+          <div class="pf-v6-c-data-list__cell">Second item</div>
+        </div>
+      </div>
+    </li>
+    <li class="pf-v6-c-data-list__item">
+      <div class="pf-v6-c-data-list__item-row">
+        <div class="pf-v6-c-data-list__item-content">
+          <div class="pf-v6-c-data-list__cell">Third item</div>
+        </div>
+      </div>
+    </li>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="compact-heading">Compact</h2>
+    <p>A compact data list with reduced spacing between items.</p>
+    {#include components/data-display/data-list id="dl-compact" compact=true}{#content}
+    <li class="pf-v6-c-data-list__item">
+      <div class="pf-v6-c-data-list__item-row">
+        <div class="pf-v6-c-data-list__item-content">
+          <div class="pf-v6-c-data-list__cell">First item</div>
+        </div>
+      </div>
+    </li>
+    <li class="pf-v6-c-data-list__item">
+      <div class="pf-v6-c-data-list__item-row">
+        <div class="pf-v6-c-data-list__item-content">
+          <div class="pf-v6-c-data-list__cell">Second item</div>
+        </div>
+      </div>
+    </li>
+    <li class="pf-v6-c-data-list__item">
+      <div class="pf-v6-c-data-list__item-row">
+        <div class="pf-v6-c-data-list__item-content">
+          <div class="pf-v6-c-data-list__cell">Third item</div>
+        </div>
+      </div>
+    </li>
+    {/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

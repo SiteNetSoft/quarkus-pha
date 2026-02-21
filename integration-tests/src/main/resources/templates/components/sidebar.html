@@ -1,0 +1,25 @@
+{#include layouts/base}
+{#title}Sidebar{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Sidebar</h1>
+  <p>A sidebar component renders a panel alongside main content.</p>
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic sidebar with a panel on the left and main content on the right.</p>
+    {#include components/data-display/sidebar id="sb-basic"}{#panel}<p>Panel content</p>{/panel}{#content}<p>Main content area that wraps alongside the sidebar panel.</p>{/content}{/include}
+  </section>
+  <section style="margin-top: 2rem;">
+    <h2 id="panel-right-heading">Panel right</h2>
+    <p>A sidebar with the panel positioned on the right.</p>
+    {#include components/data-display/sidebar id="sb-right" panelRight=true}{#panel}<p>Panel content</p>{/panel}{#content}<p>Main content area that wraps alongside the sidebar panel.</p>{/content}{/include}
+  </section>
+  <section style="margin-top: 2rem;">
+    <h2 id="with-gutter-heading">With gutter</h2>
+    <p>A sidebar with a gutter between the panel and main content.</p>
+    {#include components/data-display/sidebar id="sb-gutter" gutter=true}{#panel}<p>Panel content</p>{/panel}{#content}<p>Main content area that wraps alongside the sidebar panel.</p>{/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

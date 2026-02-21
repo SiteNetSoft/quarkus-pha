@@ -1,0 +1,11 @@
+{! Hint — PatternFly v6 !}
+{! Parameters: id, title (optional), bodyText (optional) !}
+<div class="pf-v6-c-hint" id="{id}">
+  {#if title??}
+  <div class="pf-v6-c-hint__title">{title}</div>
+  {/if}
+  {#if bodyText??}
+  <div class="pf-v6-c-hint__body">{bodyText}</div>
+  {/if}
+  {#insert content}{/insert}
+</div>

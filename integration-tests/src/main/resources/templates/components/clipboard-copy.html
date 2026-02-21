@@ -1,0 +1,47 @@
+{#include layouts/base}
+{#title}Clipboard copy{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Clipboard copy</h1>
+  <p>PatternFly v6 clipboard copy — a text field with a copy-to-clipboard button.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="readonly-heading">Read-only</h2>
+    <p>A read-only text input with a copy button.</p>
+    <div style="max-width: 600px;">
+      {#include components/forms/clipboard-copy id="cc-readonly" text="curl -O https://example.com/install.sh" readonly=true /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="editable-heading">Editable</h2>
+    <p>An editable text input that can be modified before copying.</p>
+    <div style="max-width: 600px;">
+      {#include components/forms/clipboard-copy id="cc-editable" text="This is editable" /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="expandable-heading">Expandable</h2>
+    <p>A clipboard copy with a toggle to reveal the full content.</p>
+    <div style="max-width: 600px;">
+      {#include components/forms/clipboard-copy id="cc-expandable" text="This is an expandable clipboard copy component..." readonly=true expandable=true expandedText="This is an expandable clipboard copy component with a longer body of text. Got a lot of text here, need to see all of it? Click that arrow on the left side and check out the resulting expansion." /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="inline-heading">Inline compact</h2>
+    <p>An inline clipboard copy for embedding in running text.</p>
+    <p>The version is {#include components/forms/clipboard-copy id="cc-inline" text="2.3.4-2-redhat" inline=true /} for this release.</p>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="inline-code-heading">Inline compact code</h2>
+    <p>An inline clipboard copy styled as a code snippet.</p>
+    <p>Install with {#include components/forms/clipboard-copy id="cc-inline-code" text="npm install @patternfly/react-core" inline=true code=true /} to get started.</p>
+  </section>
+</div>
+{/body}
+{/include}

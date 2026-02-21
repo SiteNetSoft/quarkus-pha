@@ -1,0 +1,29 @@
+{#include layouts/base}
+{#title}Form Control{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Form Control</h1>
+  <p>PatternFly v6 form control for rendering styled text inputs.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic form control text input.</p>
+    {#include components/forms/form-control id="fc-basic" placeholder="Enter value" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="disabled-heading">Disabled</h2>
+    <p>A disabled form control that prevents user interaction.</p>
+    {#include components/forms/form-control id="fc-disabled" placeholder="Disabled" disabled=true /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="readonly-heading">Read only</h2>
+    <p>A read-only form control that displays a value without allowing edits.</p>
+    {#include components/forms/form-control id="fc-readonly" value="Read only value" readonly=true /}
+  </section>
+</div>
+{/body}
+{/include}

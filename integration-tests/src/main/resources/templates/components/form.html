@@ -1,0 +1,41 @@
+{#include layouts/base}
+{#title}Form{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Form</h1>
+  <p>PatternFly v6 form for organizing and presenting input controls in a structured layout.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic (vertical)</h2>
+    <p>A basic vertical form with labeled input fields.</p>
+    {#include components/forms/form id="form-basic"}{#content}
+    <div class="pf-v6-c-form__group">
+      <div class="pf-v6-c-form__group-label"><label class="pf-v6-c-form__label" for="name"><span class="pf-v6-c-form__label-text">Name</span></label></div>
+      <div class="pf-v6-c-form__group-control">{#include components/forms/form-control id="name" placeholder="Enter name" /}</div>
+    </div>
+    <div class="pf-v6-c-form__group">
+      <div class="pf-v6-c-form__group-label"><label class="pf-v6-c-form__label" for="email"><span class="pf-v6-c-form__label-text">Email</span></label></div>
+      <div class="pf-v6-c-form__group-control">{#include components/forms/form-control id="email" placeholder="Enter email" /}</div>
+    </div>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="horizontal-heading">Horizontal</h2>
+    <p>A horizontal form with labels placed beside the input fields.</p>
+    {#include components/forms/form id="form-horizontal" horizontal=true}{#content}
+    <div class="pf-v6-c-form__group">
+      <div class="pf-v6-c-form__group-label"><label class="pf-v6-c-form__label" for="h-name"><span class="pf-v6-c-form__label-text">Name</span></label></div>
+      <div class="pf-v6-c-form__group-control">{#include components/forms/form-control id="h-name" placeholder="Enter name" /}</div>
+    </div>
+    <div class="pf-v6-c-form__group">
+      <div class="pf-v6-c-form__group-label"><label class="pf-v6-c-form__label" for="h-email"><span class="pf-v6-c-form__label-text">Email</span></label></div>
+      <div class="pf-v6-c-form__group-control">{#include components/forms/form-control id="h-email" placeholder="Enter email" /}</div>
+    </div>
+    {/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

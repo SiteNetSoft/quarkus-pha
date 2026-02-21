@@ -1,0 +1,25 @@
+{#include layouts/base}
+{#title}Slider{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Slider</h1>
+  <p>A slider provides a draggable control for selecting a value within a range.</p>
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic slider with default value.</p>
+    {#include components/forms/slider id="sl-basic" /}
+  </section>
+  <section style="margin-top: 2rem;">
+    <h2 id="with-value-heading">With value</h2>
+    <p>A slider with a preset value of 75.</p>
+    {#include components/forms/slider id="sl-value" value="75" /}
+  </section>
+  <section style="margin-top: 2rem;">
+    <h2 id="disabled-heading">Disabled</h2>
+    <p>A disabled slider that cannot be interacted with.</p>
+    {#include components/forms/slider id="sl-disabled" disabled=true /}
+  </section>
+</div>
+{/body}
+{/include}

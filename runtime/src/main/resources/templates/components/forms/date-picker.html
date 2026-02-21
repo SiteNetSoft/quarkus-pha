@@ -1,0 +1,21 @@
+{! Date picker — PatternFly v6 !}
+{! Parameters: id, value (optional), placeholder (optional), disabled (optional), ariaLabel (optional) !}
+<div class="pf-v6-c-date-picker" id="{id}" x-data="{ open: false }">
+  <div class="pf-v6-c-date-picker__input">
+    <div class="pf-v6-c-input-group">
+      <div class="pf-v6-c-input-group__item pf-m-fill">
+        <span class="pf-v6-c-form-control">
+          <input type="text"{#if value??} value="{value}"{/if}{#if placeholder??} placeholder="{placeholder}"{/if}{#if disabled??} disabled{/if} aria-label="{#if ariaLabel??}{ariaLabel}{#else}Date picker{/if}">
+        </span>
+      </div>
+      <div class="pf-v6-c-input-group__item">
+        <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Toggle date picker"{#if disabled??} disabled{/if} @click="open = !open">
+          <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="pf-v6-c-date-picker__calendar" x-show="open" x-cloak @click.outside="open = false">
+    {#insert calendar}{/insert}
+  </div>
+</div>

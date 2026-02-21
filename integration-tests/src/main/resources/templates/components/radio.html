@@ -1,0 +1,33 @@
+{#include layouts/base}
+{#title}Radio{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Radio</h1>
+  <p>PatternFly v6 radio button for selecting a single option from a group of choices.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A group of radio buttons where only one can be selected at a time.</p>
+    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+      {#include components/forms/radio id="radio-1" name="radio-group" label="Option 1" checked=true /}
+      {#include components/forms/radio id="radio-2" name="radio-group" label="Option 2" /}
+      {#include components/forms/radio id="radio-3" name="radio-group" label="Option 3" /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="with-description-heading">With description</h2>
+    <p>A radio button with additional descriptive text below the label.</p>
+    {#include components/forms/radio id="radio-desc" name="radio-desc-group" label="With description" description="This is a description." /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="disabled-heading">Disabled</h2>
+    <p>A disabled radio button that prevents user interaction.</p>
+    {#include components/forms/radio id="radio-disabled" name="radio-disabled-group" label="Disabled" disabled=true /}
+  </section>
+</div>
+{/body}
+{/include}

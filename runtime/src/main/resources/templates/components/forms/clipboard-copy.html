@@ -1,0 +1,69 @@
+{! Clipboard copy — PatternFly v6 !}
+{! Parameters: id (required), text (required), readonly (optional), expandable (optional), !}
+{!   expandedText (optional — full text for expandable panel), !}
+{!   inline (optional), code (optional — inline code style), block (optional — inline block) !}
+{#if inline??}
+<div class="pf-v6-c-clipboard-copy pf-m-inline{#if block??} pf-m-block{/if}" id="{id}"
+     x-data="{ copied: false }">
+  {#if code??}<code class="pf-v6-c-clipboard-copy__text pf-m-code" x-ref="text">{text}</code>{#else}<span class="pf-v6-c-clipboard-copy__text" x-ref="text">{text}</span>{/if}
+  <span class="pf-v6-c-clipboard-copy__actions">
+    <span class="pf-v6-c-clipboard-copy__actions-item">
+      <button class="pf-v6-c-button pf-m-plain pf-m-no-padding" type="button"
+              :aria-label="copied ? 'Successfully copied to clipboard!' : 'Copy to clipboard'"
+              @click="navigator.clipboard.writeText($refs.text.textContent.trim()); copied = true; setTimeout(() => copied = false, 2000)">
+        <span class="pf-v6-c-button__icon">
+          <i :class="copied ? 'fas fa-check' : 'fas fa-copy'" aria-hidden="true"></i>
+        </span>
+      </button>
+    </span>
+  </span>
+</div>
+{#else if expandable??}
+<div class="pf-v6-c-clipboard-copy" id="{id}"
+     x-data="{ copied: false, expanded: false }"
+     :class="expanded && 'pf-m-expanded'">
+  <div class="pf-v6-c-clipboard-copy__group">
+    <button class="pf-v6-c-button pf-m-control" type="button"
+            :aria-expanded="expanded.toString()"
+            aria-label="Toggle content"
+            aria-controls="{id}-content"
+            @click="expanded = !expanded">
+      <span class="pf-v6-c-button__icon">
+        <div class="pf-v6-c-clipboard-copy__toggle-icon">
+          <i class="fas fa-angle-right" aria-hidden="true"></i>
+        </div>
+      </span>
+    </button>
+    <span class="pf-v6-c-form-control{#if readonly??} pf-m-readonly{/if}">
+      <input type="text" value="{text}" id="{id}-input" aria-label="Copyable input" x-ref="input"{#if readonly??} readonly{/if}>
+    </span>
+    <button class="pf-v6-c-button pf-m-control" type="button"
+            :aria-label="copied ? 'Successfully copied to clipboard!' : 'Copy to clipboard'"
+            @click="navigator.clipboard.writeText($refs.input.value); copied = true; setTimeout(() => copied = false, 2000)">
+      <span class="pf-v6-c-button__icon">
+        <i :class="copied ? 'fas fa-check' : 'fas fa-copy'" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+  <div class="pf-v6-c-clipboard-copy__expandable-content" id="{id}-content"
+       x-show="expanded" x-cloak>
+    {#if expandedText??}{expandedText}{#else}{text}{/if}
+  </div>
+</div>
+{#else}
+<div class="pf-v6-c-clipboard-copy" id="{id}"
+     x-data="{ copied: false }">
+  <div class="pf-v6-c-clipboard-copy__group">
+    <span class="pf-v6-c-form-control{#if readonly??} pf-m-readonly{/if}">
+      <input type="text" value="{text}" id="{id}-input" aria-label="Copyable input" x-ref="input"{#if readonly??} readonly{/if}>
+    </span>
+    <button class="pf-v6-c-button pf-m-control" type="button"
+            :aria-label="copied ? 'Successfully copied to clipboard!' : 'Copy to clipboard'"
+            @click="navigator.clipboard.writeText($refs.input.value); copied = true; setTimeout(() => copied = false, 2000)">
+      <span class="pf-v6-c-button__icon">
+        <i :class="copied ? 'fas fa-check' : 'fas fa-copy'" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+</div>
+{/if}

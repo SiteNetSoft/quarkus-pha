@@ -1,0 +1,69 @@
+{#include layouts/base}
+{#title}Button{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Button</h1>
+  <p>PatternFly v6 button — interactive elements for actions and navigation.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="variations-heading">Variations</h2>
+    <p>All button variant styles.</p>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+      {#include components/actions/button id="btn-primary" variant="primary"}{#content}Primary{/content}{/include}
+      {#include components/actions/button id="btn-secondary" variant="secondary"}{#content}Secondary{/content}{/include}
+      {#include components/actions/button id="btn-tertiary" variant="tertiary"}{#content}Tertiary{/content}{/include}
+      {#include components/actions/button id="btn-danger" variant="danger"}{#content}Danger{/content}{/include}
+      {#include components/actions/button id="btn-warning" variant="warning"}{#content}Warning{/content}{/include}
+      {#include components/actions/button id="btn-link" variant="link"}{#content}Link{/content}{/include}
+      {#include components/actions/button id="btn-plain" variant="plain" ariaLabel="Close"}{#content}<i class="fas fa-times" aria-hidden="true"></i>{/content}{/include}
+      {#include components/actions/button id="btn-control" variant="control"}{#content}Control{/content}{/include}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="disabled-heading">Disabled</h2>
+    <p>Disabled buttons are non-interactive.</p>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      {#include components/actions/button id="btn-disabled-primary" variant="primary" disabled=true}{#content}Primary disabled{/content}{/include}
+      {#include components/actions/button id="btn-disabled-secondary" variant="secondary" disabled=true}{#content}Secondary disabled{/content}{/include}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="small-heading">Small</h2>
+    <p>Smaller button size for compact layouts.</p>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      {#include components/actions/button id="btn-small-primary" variant="primary" small=true}{#content}Small primary{/content}{/include}
+      {#include components/actions/button id="btn-small-secondary" variant="secondary" small=true}{#content}Small secondary{/content}{/include}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="block-heading">Block level</h2>
+    <p>A full-width button that spans its container.</p>
+    {#include components/actions/button id="btn-block" variant="primary" block=true}{#content}Block level button{/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="links-heading">Links as buttons</h2>
+    <p>Anchor elements styled as buttons for navigation.</p>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      {#include components/actions/button id="btn-anchor-primary" variant="primary" href="#links-heading"}{#content}Primary link{/content}{/include}
+      {#include components/actions/button id="btn-anchor-link" variant="link" href="#links-heading"}{#content}Link style{/content}{/include}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="cta-heading">Call to action</h2>
+    <p>Large display buttons for prominent actions.</p>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      {#include components/actions/button id="btn-cta-primary" variant="primary" displayLg=true}{#content}Call to action{/content}{/include}
+      {#include components/actions/button id="btn-cta-secondary" variant="secondary" displayLg=true}{#content}Call to action{/content}{/include}
+      {#include components/actions/button id="btn-cta-tertiary" variant="tertiary" displayLg=true}{#content}Call to action{/content}{/include}
+    </div>
+  </section>
+</div>
+{/body}
+{/include}

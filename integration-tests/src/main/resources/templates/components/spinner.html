@@ -1,0 +1,27 @@
+{#include layouts/base}
+{#title}Spinner{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Spinner</h1>
+  <p>PatternFly v6 spinner — an animated indicator showing that content is loading.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="sizes-heading">Sizes</h2>
+    <p>Spinners at different size modifiers.</p>
+    <div style="display: flex; align-items: center; gap: 1.5rem;">
+      {#include components/feedback/spinner size="sm" label="Loading small" /}
+      {#include components/feedback/spinner size="md" label="Loading medium" /}
+      {#include components/feedback/spinner size="lg" label="Loading large" /}
+      {#include components/feedback/spinner size="xl" label="Loading extra large" /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="inline-heading">Inline</h2>
+    <p>An inline spinner that flows with surrounding text.</p>
+    <p>Loading data {#include components/feedback/spinner size="sm" inline=true label="Loading" /} please wait...</p>
+  </section>
+</div>
+{/body}
+{/include}

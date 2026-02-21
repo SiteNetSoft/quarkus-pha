@@ -1,0 +1,37 @@
+{#include layouts/base}
+{#title}Tabs{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Tabs</h1>
+  <p>Tabs organize content into multiple sections and allow users to navigate between them.</p>
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic set of tabs.</p>
+    {#include components/navigation/tabs id="tabs-basic"}{#content}
+    <li class="pf-v6-c-tabs__item pf-m-current"><button class="pf-v6-c-tabs__link"><span class="pf-v6-c-tabs__item-text">Tab 1</span></button></li>
+    <li class="pf-v6-c-tabs__item"><button class="pf-v6-c-tabs__link"><span class="pf-v6-c-tabs__item-text">Tab 2</span></button></li>
+    <li class="pf-v6-c-tabs__item"><button class="pf-v6-c-tabs__link"><span class="pf-v6-c-tabs__item-text">Tab 3</span></button></li>
+    {/content}{/include}
+  </section>
+  <section style="margin-top: 2rem;">
+    <h2 id="boxed-heading">Boxed</h2>
+    <p>Tabs with a boxed style.</p>
+    {#include components/navigation/tabs id="tabs-boxed" box=true}{#content}
+    <li class="pf-v6-c-tabs__item pf-m-current"><button class="pf-v6-c-tabs__link"><span class="pf-v6-c-tabs__item-text">Tab 1</span></button></li>
+    <li class="pf-v6-c-tabs__item"><button class="pf-v6-c-tabs__link"><span class="pf-v6-c-tabs__item-text">Tab 2</span></button></li>
+    <li class="pf-v6-c-tabs__item"><button class="pf-v6-c-tabs__link"><span class="pf-v6-c-tabs__item-text">Tab 3</span></button></li>
+    {/content}{/include}
+  </section>
+  <section style="margin-top: 2rem;">
+    <h2 id="vertical-heading">Vertical</h2>
+    <p>Tabs displayed vertically.</p>
+    {#include components/navigation/tabs id="tabs-vertical" vertical=true}{#content}
+    <li class="pf-v6-c-tabs__item pf-m-current"><button class="pf-v6-c-tabs__link"><span class="pf-v6-c-tabs__item-text">Tab 1</span></button></li>
+    <li class="pf-v6-c-tabs__item"><button class="pf-v6-c-tabs__link"><span class="pf-v6-c-tabs__item-text">Tab 2</span></button></li>
+    <li class="pf-v6-c-tabs__item"><button class="pf-v6-c-tabs__link"><span class="pf-v6-c-tabs__item-text">Tab 3</span></button></li>
+    {/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

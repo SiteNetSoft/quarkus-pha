@@ -1,0 +1,39 @@
+{! Context selector — PatternFly v6 (MenuToggle + Menu composition) !}
+{! Parameters: id, toggleText !}
+{! Content block: <li> menu items !}
+<div id="{id}" x-data="{ open: false, search: '', selected: '{toggleText}' }" style="position: relative; display: inline-block;">
+  <button class="pf-v6-c-menu-toggle" type="button"
+          :class="{ 'pf-m-expanded': open }"
+          :aria-expanded="open"
+          @click="open = !open">
+    <span class="pf-v6-c-menu-toggle__text" x-text="selected"></span>
+    <span class="pf-v6-c-menu-toggle__controls">
+      <span class="pf-v6-c-menu-toggle__toggle-icon">
+        <i class="fas fa-caret-down" aria-hidden="true"></i>
+      </span>
+    </span>
+  </button>
+  <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false"
+       style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 15rem;">
+    <div class="pf-v6-c-menu__search">
+      <div class="pf-v6-c-text-input-group">
+        <div class="pf-v6-c-text-input-group__main pf-m-icon">
+          <span class="pf-v6-c-text-input-group__text">
+            <span class="pf-v6-c-text-input-group__icon">
+              <i class="fas fa-search" aria-hidden="true"></i>
+            </span>
+            <input class="pf-v6-c-text-input-group__text-input" type="text"
+                   placeholder="Search" aria-label="Search"
+                   x-model="search" @keydown.escape="open = false">
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="pf-v6-c-menu__content">
+      <ul class="pf-v6-c-menu__list" role="menu"
+          x-effect="$el.querySelectorAll('.pf-v6-c-menu__list-item').forEach(li => { const text = li.querySelector('.pf-v6-c-menu__item-text'); li.style.display = !search || (text && text.textContent.toLowerCase().includes(search.toLowerCase())) ? '' : 'none'; })">
+        {#insert content}{/insert}
+      </ul>
+    </div>
+  </div>
+</div>

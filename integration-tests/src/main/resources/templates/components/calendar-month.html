@@ -1,0 +1,27 @@
+{#include layouts/base}
+{#title}Calendar month{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Calendar month</h1>
+  <p>PatternFly v6 calendar month — a monthly date grid for date selection.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="selected-heading">Date selected</h2>
+    <p>A calendar with a single date selected and today highlighted.</p>
+    <div style="max-width: 320px;">
+      {#include components/forms/calendar-month id="cal-selected" month=selectedMonth year=selectedYear weeks=selectedWeeks}{/include}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="range-heading">Date range</h2>
+    <p>A calendar with a start and end date range highlighted.</p>
+    <div style="max-width: 320px;">
+      {#include components/forms/calendar-month id="cal-range" month=rangeMonth year=rangeYear weeks=rangeWeeks}{/include}
+    </div>
+  </section>
+</div>
+{/body}
+{/include}

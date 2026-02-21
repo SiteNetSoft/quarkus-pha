@@ -1,0 +1,12 @@
+{! Helper text — PatternFly v6 !}
+{! Parameters: id, text, status (optional: indeterminate|warning|success|error), dynamic (optional), iconClass (optional) !}
+<div class="pf-v6-c-helper-text"{#if id??} id="{id}"{/if}>
+  <div class="pf-v6-c-helper-text__item{#if status??} pf-m-{status}{/if}{#if dynamic??} pf-m-dynamic{/if}">
+    {#if iconClass??}
+    <span class="pf-v6-c-helper-text__item-icon">
+      <i class="{iconClass}" aria-hidden="true"></i>
+    </span>
+    {/if}
+    <span class="pf-v6-c-helper-text__item-text">{text}</span>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+{#include layouts/base}
+{#title}Toggle Group{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Toggle Group</h1>
+  <p>PatternFly v6 toggle group for selecting one or more options from a set of buttons.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic toggle group with text-only buttons.</p>
+    {#include components/forms/toggle-group id="tg-basic"}{#content}
+    <div class="pf-v6-c-toggle-group__item"><button class="pf-v6-c-toggle-group__button pf-m-selected" type="button">Option A</button></div>
+    <div class="pf-v6-c-toggle-group__item"><button class="pf-v6-c-toggle-group__button" type="button">Option B</button></div>
+    <div class="pf-v6-c-toggle-group__item"><button class="pf-v6-c-toggle-group__button" type="button">Option C</button></div>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="with-icons-heading">With icons</h2>
+    <p>A toggle group with icons alongside button text.</p>
+    {#include components/forms/toggle-group id="tg-icons"}{#content}
+    <div class="pf-v6-c-toggle-group__item"><button class="pf-v6-c-toggle-group__button pf-m-selected" type="button"><span class="pf-v6-c-toggle-group__icon"><i class="fas fa-list" aria-hidden="true"></i></span><span class="pf-v6-c-toggle-group__text">List</span></button></div>
+    <div class="pf-v6-c-toggle-group__item"><button class="pf-v6-c-toggle-group__button" type="button"><span class="pf-v6-c-toggle-group__icon"><i class="fas fa-th" aria-hidden="true"></i></span><span class="pf-v6-c-toggle-group__text">Grid</span></button></div>
+    <div class="pf-v6-c-toggle-group__item"><button class="pf-v6-c-toggle-group__button" type="button"><span class="pf-v6-c-toggle-group__icon"><i class="fas fa-table" aria-hidden="true"></i></span><span class="pf-v6-c-toggle-group__text">Table</span></button></div>
+    {/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

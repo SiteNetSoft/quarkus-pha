@@ -1,0 +1,110 @@
+{#include layouts/base}
+{#title}Content{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Content</h1>
+  <p>PatternFly v6 content — a component for styling blocks of HTML content with consistent typography.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="headings-heading">Headings</h2>
+    <p>Heading elements h1 through h6 styled within a content wrapper.</p>
+    {#include components/data-display/content id="content-headings"}{#content}
+    <h1>First level heading</h1>
+    <h2>Second level heading</h2>
+    <h3>Third level heading</h3>
+    <h4>Fourth level heading</h4>
+    <h5>Fifth level heading</h5>
+    <h6>Sixth level heading</h6>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="body-heading">Body text</h2>
+    <p>Paragraphs, small text, blockquotes, and preformatted text.</p>
+    {#include components/data-display/content id="content-body"}{#content}
+    <p>This is a paragraph of body text. It demonstrates the default content typography styling provided by PatternFly.</p>
+    <p><small>This is small text used for fine print or secondary information.</small></p>
+    <blockquote>This is a blockquote. It is used to highlight a section of quoted text with a left border accent.</blockquote>
+    <pre>This is preformatted text.
+It preserves whitespace and line breaks.</pre>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="links-heading">Links</h2>
+    <p>Link styling within content, including visited state.</p>
+    <div style="margin-bottom: 1rem;">
+      {#include components/data-display/content id="content-links"}{#content}
+      <p>This is a <a href="#">default link</a> inside a content block.</p>
+      {/content}{/include}
+    </div>
+    {#include components/data-display/content id="content-links-visited" visited=true}{#content}
+    <p>This is a <a href="#">visited link</a> inside a content block with visited styling.</p>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="ul-heading">Unordered list</h2>
+    <p>A standard unordered list inside a content block.</p>
+    {#include components/data-display/content id="content-ul"}{#content}
+    <ul>
+      <li>First item</li>
+      <li>Second item</li>
+      <li>Third item</li>
+    </ul>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="ol-heading">Ordered list</h2>
+    <p>A standard ordered list inside a content block.</p>
+    {#include components/data-display/content id="content-ol"}{#content}
+    <ol>
+      <li>First item</li>
+      <li>Second item</li>
+      <li>Third item</li>
+    </ol>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="plain-heading">Plain list</h2>
+    <p>A list with the plain modifier removes default list styling.</p>
+    {#include components/data-display/content id="content-plain"}{#content}
+    <ul class="pf-m-plain">
+      <li>Unstyled item one</li>
+      <li>Unstyled item two</li>
+      <li>Unstyled item three</li>
+    </ul>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="dl-heading">Definition list</h2>
+    <p>A definition list with term-description pairs in a responsive grid layout.</p>
+    {#include components/data-display/content id="content-dl"}{#content}
+    <dl>
+      <dt>Name</dt>
+      <dd>Example application</dd>
+      <dt>Version</dt>
+      <dd>1.0.0</dd>
+      <dt>Description</dt>
+      <dd>A sample definition list demonstrating term-description pairs.</dd>
+    </dl>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="editorial-heading">Editorial</h2>
+    <p>Editorial modifier increases body and small text size by one tier.</p>
+    {#include components/data-display/content id="content-editorial" editorial=true}{#content}
+    <h2>Editorial heading</h2>
+    <p>This paragraph uses editorial styling, which increases the font size for improved readability in long-form content.</p>
+    <p><small>Even small text is larger in editorial mode.</small></p>
+    {/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

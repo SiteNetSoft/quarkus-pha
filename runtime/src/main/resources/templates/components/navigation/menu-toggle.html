@@ -1,0 +1,12 @@
+{! Menu toggle — PatternFly v6 !}
+{! Parameters: id, text (optional), plain (optional), primary (optional), expanded (optional), disabled (optional), ariaLabel (optional) !}
+<button class="pf-v6-c-menu-toggle{#if plain??} pf-m-plain{/if}{#if primary??} pf-m-primary{/if}{#if expanded??} pf-m-expanded{/if}" type="button" id="{id}"{#if disabled??} disabled{/if} aria-expanded="{#if expanded??}true{#else}false{/if}"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
+  {#if text??}<span class="pf-v6-c-menu-toggle__text">{text}</span>{/if}
+  {#if plain??}{#else}
+  <span class="pf-v6-c-menu-toggle__controls">
+    <span class="pf-v6-c-menu-toggle__toggle-icon">
+      <i class="fas fa-caret-down" aria-hidden="true"></i>
+    </span>
+  </span>
+  {/if}
+</button>

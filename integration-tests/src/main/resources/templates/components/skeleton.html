@@ -1,0 +1,41 @@
+{#include layouts/base}
+{#title}Skeleton{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Skeleton</h1>
+  <p>PatternFly v6 skeleton — a loading placeholder that indicates content is being loaded.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="text-heading">Text lines</h2>
+    <p>Skeleton placeholders for text content at different sizes.</p>
+    <div style="display: grid; gap: 0.5rem; max-width: 400px;">
+      {#include components/feedback/skeleton id="sk-heading" textSize="4xl" width="50" screenreaderText="Loading heading" /}
+      {#include components/feedback/skeleton id="sk-body1" width="75" screenreaderText="Loading text" /}
+      {#include components/feedback/skeleton id="sk-body2" screenreaderText="Loading text" /}
+      {#include components/feedback/skeleton id="sk-body3" width="66" screenreaderText="Loading text" /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="shapes-heading">Shapes</h2>
+    <p>Circle and square skeleton shapes.</p>
+    <div style="display: flex; gap: 1rem; align-items: center;">
+      {#include components/feedback/skeleton id="sk-circle" shape="circle" width="sm" height="sm" screenreaderText="Loading avatar" /}
+      {#include components/feedback/skeleton id="sk-square" shape="square" width="sm" height="sm" screenreaderText="Loading image" /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="sizes-heading">Custom sizes</h2>
+    <p>Skeletons with various width and height modifiers.</p>
+    <div style="display: grid; gap: 0.5rem; max-width: 600px;">
+      {#include components/feedback/skeleton id="sk-w25" width="25" screenreaderText="Loading" /}
+      {#include components/feedback/skeleton id="sk-w50" width="50" screenreaderText="Loading" /}
+      {#include components/feedback/skeleton id="sk-w75" width="75" screenreaderText="Loading" /}
+      {#include components/feedback/skeleton id="sk-full" screenreaderText="Loading" /}
+    </div>
+  </section>
+</div>
+{/body}
+{/include}

@@ -1,0 +1,39 @@
+{#include layouts/base}
+{#title}Search Input{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Search Input</h1>
+  <p>A search input allows users to enter search terms to filter content.</p>
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic search input field.</p>
+    <div class="pf-v6-c-text-input-group" id="si-basic">
+      <div class="pf-v6-c-text-input-group__main pf-m-icon">
+        <span class="pf-v6-c-text-input-group__text">
+          <span class="pf-v6-c-text-input-group__icon"><i class="fas fa-search" aria-hidden="true"></i></span>
+          <input class="pf-v6-c-text-input-group__text-input" type="search" placeholder="Search..." aria-label="Search">
+        </span>
+      </div>
+    </div>
+  </section>
+  <section style="margin-top: 2rem;">
+    <h2 id="with-clear-heading">With clear button</h2>
+    <p>A search input with a clear button to reset the field.</p>
+    <div class="pf-v6-c-text-input-group" id="si-clear" x-data="{ value: 'Search term' }">
+      <div class="pf-v6-c-text-input-group__main pf-m-icon">
+        <span class="pf-v6-c-text-input-group__text">
+          <span class="pf-v6-c-text-input-group__icon"><i class="fas fa-search" aria-hidden="true"></i></span>
+          <input class="pf-v6-c-text-input-group__text-input" type="search" placeholder="Search..." aria-label="Search" x-model="value">
+        </span>
+      </div>
+      <div class="pf-v6-c-text-input-group__utilities" x-show="value">
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Clear search" @click="value = ''">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+{/body}
+{/include}

@@ -1,0 +1,15 @@
+{#include layouts/base}
+{#title}Page{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Page</h1>
+  <p>The page component is used to define the basic layout of a page with a sidebar and main content area.</p>
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic page layout with a sidebar and main content area.</p>
+    {#include components/navigation/page id="pg-basic"}{#content}<aside class="pf-v6-c-page__sidebar"><div class="pf-v6-c-page__sidebar-body">Sidebar content</div></aside><main class="pf-v6-c-page__main"><section class="pf-v6-c-page__main-section"><div class="pf-v6-c-page__main-body">Main content area</div></section></main>{/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

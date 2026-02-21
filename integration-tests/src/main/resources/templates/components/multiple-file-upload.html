@@ -1,0 +1,46 @@
+{#include layouts/base}
+{#title}Multiple File Upload{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Multiple File Upload</h1>
+  <p>PatternFly v6 multiple file upload component with drag-and-drop zone and file status.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic multiple file upload with a drop zone and browse button.</p>
+    {#include components/forms/multiple-file-upload id="mfu-basic"}{#content}
+    <div class="pf-v6-c-multiple-file-upload__main">
+      <div class="pf-v6-c-multiple-file-upload__title">
+        <div class="pf-v6-c-multiple-file-upload__title-icon"><i class="fas fa-upload" aria-hidden="true"></i></div>
+        <div class="pf-v6-c-multiple-file-upload__title-text">Drag and drop files here</div>
+        <div class="pf-v6-c-multiple-file-upload__title-text-separator">or</div>
+      </div>
+      <button class="pf-v6-c-button pf-m-secondary" type="button">Browse</button>
+    </div>
+    <div class="pf-v6-c-multiple-file-upload__status">
+      <div class="pf-v6-c-multiple-file-upload__status-text">0 files uploaded</div>
+    </div>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="horizontal-heading">Horizontal</h2>
+    <p>A horizontal variant of the multiple file upload with side-by-side layout.</p>
+    {#include components/forms/multiple-file-upload id="mfu-horizontal" horizontal=true}{#content}
+    <div class="pf-v6-c-multiple-file-upload__main">
+      <div class="pf-v6-c-multiple-file-upload__title">
+        <div class="pf-v6-c-multiple-file-upload__title-icon"><i class="fas fa-upload" aria-hidden="true"></i></div>
+        <div class="pf-v6-c-multiple-file-upload__title-text">Drag and drop files here</div>
+        <div class="pf-v6-c-multiple-file-upload__title-text-separator">or</div>
+      </div>
+      <button class="pf-v6-c-button pf-m-secondary" type="button">Browse</button>
+    </div>
+    <div class="pf-v6-c-multiple-file-upload__status">
+      <div class="pf-v6-c-multiple-file-upload__status-text">0 files uploaded</div>
+    </div>
+    {/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

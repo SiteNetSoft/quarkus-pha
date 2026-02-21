@@ -1,0 +1,23 @@
+{#include layouts/base}
+{#title}Text Area{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Text Area</h1>
+  <p>PatternFly v6 text area for multi-line text input.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic text area for entering multiple lines of text.</p>
+    {#include components/forms/text-area id="ta-basic" placeholder="Enter text" rows="5" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="disabled-heading">Disabled</h2>
+    <p>A disabled text area that prevents user interaction.</p>
+    {#include components/forms/text-area id="ta-disabled" placeholder="Disabled" disabled=true rows="3" /}
+  </section>
+</div>
+{/body}
+{/include}

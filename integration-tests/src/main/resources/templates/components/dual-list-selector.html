@@ -1,0 +1,39 @@
+{#include layouts/base}
+{#title}Dual List Selector{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Dual List Selector</h1>
+  <p>PatternFly v6 dual list selector for moving items between available and chosen lists.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic dual list selector with available and chosen panes.</p>
+    {#include components/forms/dual-list-selector id="dls-basic"}{#content}
+    <div class="pf-v6-c-dual-list-selector__pane">
+      <div class="pf-v6-c-dual-list-selector__header"><div class="pf-v6-c-dual-list-selector__title"><div class="pf-v6-c-dual-list-selector__title-text">Available</div></div></div>
+      <div class="pf-v6-c-dual-list-selector__menu">
+        <ul class="pf-v6-c-dual-list-selector__list">
+          <li class="pf-v6-c-dual-list-selector__list-item"><button class="pf-v6-c-dual-list-selector__item"><span class="pf-v6-c-dual-list-selector__item-main"><span class="pf-v6-c-dual-list-selector__item-text">Option 1</span></span></button></li>
+          <li class="pf-v6-c-dual-list-selector__list-item"><button class="pf-v6-c-dual-list-selector__item"><span class="pf-v6-c-dual-list-selector__item-main"><span class="pf-v6-c-dual-list-selector__item-text">Option 2</span></span></button></li>
+          <li class="pf-v6-c-dual-list-selector__list-item"><button class="pf-v6-c-dual-list-selector__item"><span class="pf-v6-c-dual-list-selector__item-main"><span class="pf-v6-c-dual-list-selector__item-text">Option 3</span></span></button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__controls">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Add selected"><i class="fas fa-angle-right" aria-hidden="true"></i></button>
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Remove selected"><i class="fas fa-angle-left" aria-hidden="true"></i></button>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__pane">
+      <div class="pf-v6-c-dual-list-selector__header"><div class="pf-v6-c-dual-list-selector__title"><div class="pf-v6-c-dual-list-selector__title-text">Chosen</div></div></div>
+      <div class="pf-v6-c-dual-list-selector__menu">
+        <ul class="pf-v6-c-dual-list-selector__list">
+          <li class="pf-v6-c-dual-list-selector__list-item"><button class="pf-v6-c-dual-list-selector__item"><span class="pf-v6-c-dual-list-selector__item-main"><span class="pf-v6-c-dual-list-selector__item-text">Chosen 1</span></span></button></li>
+        </ul>
+      </div>
+    </div>
+    {/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

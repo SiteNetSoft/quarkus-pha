@@ -1,0 +1,115 @@
+{#include layouts/base}
+{#title}Table{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Table</h1>
+  <p>PatternFly v6 table component for displaying structured data in rows and columns.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic table with column headers and data rows.</p>
+    {#include components/data-display/table id="tbl-basic"}{#content}
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John Doe</td>
+        <td>Active</td>
+        <td>Admin</td>
+        <td><button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">Edit</button></td>
+      </tr>
+      <tr>
+        <td>Jane Smith</td>
+        <td>Inactive</td>
+        <td>Editor</td>
+        <td><button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">Edit</button></td>
+      </tr>
+      <tr>
+        <td>Bob Johnson</td>
+        <td>Active</td>
+        <td>Viewer</td>
+        <td><button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">Edit</button></td>
+      </tr>
+    </tbody>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="compact-heading">Compact</h2>
+    <p>A compact table with reduced row height for denser data display.</p>
+    {#include components/data-display/table id="tbl-compact" compact=true}{#content}
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John Doe</td>
+        <td>Active</td>
+        <td>Admin</td>
+        <td><button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">Edit</button></td>
+      </tr>
+      <tr>
+        <td>Jane Smith</td>
+        <td>Inactive</td>
+        <td>Editor</td>
+        <td><button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">Edit</button></td>
+      </tr>
+      <tr>
+        <td>Bob Johnson</td>
+        <td>Active</td>
+        <td>Viewer</td>
+        <td><button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">Edit</button></td>
+      </tr>
+    </tbody>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="striped-heading">Striped</h2>
+    <p>A striped table with alternating row backgrounds for improved readability.</p>
+    {#include components/data-display/table id="tbl-striped" striped=true}{#content}
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John Doe</td>
+        <td>Active</td>
+        <td>Admin</td>
+        <td><button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">Edit</button></td>
+      </tr>
+      <tr>
+        <td>Jane Smith</td>
+        <td>Inactive</td>
+        <td>Editor</td>
+        <td><button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">Edit</button></td>
+      </tr>
+      <tr>
+        <td>Bob Johnson</td>
+        <td>Active</td>
+        <td>Viewer</td>
+        <td><button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">Edit</button></td>
+      </tr>
+    </tbody>
+    {/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

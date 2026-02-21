@@ -1,0 +1,29 @@
+{#include layouts/base}
+{#title}Drag and Drop{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Drag and Drop</h1>
+  <p>PatternFly v6 drag and drop component for reordering items in a list.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic list of draggable items with grip handles.</p>
+    {#include components/data-display/drag-and-drop id="dnd-basic"}{#content}
+    <div class="pf-v6-c-draggable" draggable="true">
+      <span class="pf-v6-c-draggable__icon"><i class="fas fa-grip-vertical" aria-hidden="true"></i></span>
+      <span>Item 1</span>
+    </div>
+    <div class="pf-v6-c-draggable" draggable="true">
+      <span class="pf-v6-c-draggable__icon"><i class="fas fa-grip-vertical" aria-hidden="true"></i></span>
+      <span>Item 2</span>
+    </div>
+    <div class="pf-v6-c-draggable" draggable="true">
+      <span class="pf-v6-c-draggable__icon"><i class="fas fa-grip-vertical" aria-hidden="true"></i></span>
+      <span>Item 3</span>
+    </div>
+    {/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

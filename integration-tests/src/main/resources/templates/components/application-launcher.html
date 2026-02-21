@@ -1,0 +1,41 @@
+{#include layouts/base}
+{#title}Application Launcher{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Application Launcher</h1>
+  <p>PatternFly v6 application launcher composed of a plain menu toggle with a grid icon and a menu of application links.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic application launcher with a grid icon toggle that opens a menu of applications.</p>
+    <div id="al-basic" x-data="{ open: false }">
+      <button class="pf-v6-c-menu-toggle pf-m-plain" type="button" @click="open = !open" :class="{ 'pf-m-expanded': open }" :aria-expanded="open.toString()" aria-label="Application launcher">
+        <i class="fas fa-th" aria-hidden="true"></i>
+      </button>
+      <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false">
+        <div class="pf-v6-c-menu__content">
+          <ul class="pf-v6-c-menu__list" role="menu">
+            <li class="pf-v6-c-menu__list-item" role="none">
+              <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Application 1</span></span>
+              </button>
+            </li>
+            <li class="pf-v6-c-menu__list-item" role="none">
+              <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Application 2</span></span>
+              </button>
+            </li>
+            <li class="pf-v6-c-menu__list-item" role="none">
+              <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Application 3</span></span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{/body}
+{/include}
