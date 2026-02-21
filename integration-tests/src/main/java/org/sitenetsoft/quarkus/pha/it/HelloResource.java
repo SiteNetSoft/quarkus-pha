@@ -22,8 +22,9 @@ public class HelloResource {
 
     /** Components that have a working demo page. */
     private static final Map<String, String> IMPLEMENTED = Map.of(
-        "about-modal", "/components/about-modal",
-        "accordion",   "/components/accordion"
+        "about-modal",  "/components/about-modal",
+        "accordion",    "/components/accordion",
+        "action-list",  "/components/action-list"
     );
 
     /** Components tagged with a footer label. */

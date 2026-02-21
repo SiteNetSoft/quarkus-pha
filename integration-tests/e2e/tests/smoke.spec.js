@@ -25,6 +25,9 @@ test.describe("Smoke tests", () => {
 
     const accordionLink = page.locator('a[href="/components/accordion"]');
     await expect(accordionLink).toBeVisible();
+
+    const actionListLink = page.locator('a[href="/components/action-list"]');
+    await expect(actionListLink).toBeVisible();
   });
 
   test("search input filters component cards", async ({ page }) => {
