@@ -1,0 +1,66 @@
+{#include layouts/base}
+{#title}Backdrop{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Backdrop</h1>
+  <p>PatternFly v6 backdrop — a fixed full-viewport semi-transparent overlay.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>Click the button to toggle the backdrop. Click the backdrop to dismiss.</p>
+    <div x-data="{ showBackdrop: false }">
+      <button class="pf-v6-c-button pf-m-primary" type="button"
+              @click="showBackdrop = true" id="backdrop-basic-toggle">Toggle backdrop</button>
+      <div x-show="showBackdrop" x-transition.opacity style="display: none;"
+           @click="showBackdrop = false">
+        {#include components/feedback/backdrop id="backdrop-basic" /}
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="with-content-heading">With content</h2>
+    <p>Backdrop with centered spinner overlay content.</p>
+    <div x-data="{ showBackdrop: false }">
+      <button class="pf-v6-c-button pf-m-primary" type="button"
+              @click="showBackdrop = true" id="backdrop-content-toggle">Toggle backdrop with content</button>
+      <div x-show="showBackdrop" x-transition.opacity style="display: none;"
+           @click="showBackdrop = false">
+        {#include components/feedback/backdrop id="backdrop-content" /}
+        <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 401; text-align: center; color: white;"
+             id="backdrop-content-overlay" @click.stop>
+          <span class="pf-v6-c-spinner" role="progressbar" aria-label="Loading">
+            <span class="pf-v6-c-spinner__clipper"></span>
+            <span class="pf-v6-c-spinner__lead-ball"></span>
+            <span class="pf-v6-c-spinner__tail-ball"></span>
+          </span>
+          <p style="margin-top: 1rem;">Loading...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="non-dismissible-heading">Non-dismissible</h2>
+    <p>Backdrop that can only be closed via the close button, not by clicking the backdrop.</p>
+    <div x-data="{ showBackdrop: false }">
+      <button class="pf-v6-c-button pf-m-primary" type="button"
+              @click="showBackdrop = true" id="backdrop-nondismiss-toggle">Toggle non-dismissible backdrop</button>
+      <div x-show="showBackdrop" x-transition.opacity style="display: none;">
+        {#include components/feedback/backdrop id="backdrop-nondismiss" /}
+        <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 401; text-align: center;"
+             id="backdrop-nondismiss-overlay">
+          <div class="pf-v6-c-card" style="padding: 2rem;">
+            <p style="margin-bottom: 1rem;">This backdrop cannot be dismissed by clicking outside.</p>
+            <button class="pf-v6-c-button pf-m-primary" type="button"
+                    @click="showBackdrop = false" id="backdrop-nondismiss-close">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{/body}
+{/include}

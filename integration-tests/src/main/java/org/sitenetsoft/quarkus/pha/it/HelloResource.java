@@ -21,13 +21,17 @@ public class HelloResource {
     Template hello;
 
     /** Components that have a working demo page. */
-    private static final Map<String, String> IMPLEMENTED = Map.of(
-        "about-modal",  "/components/about-modal",
-        "accordion",    "/components/accordion",
-        "action-list",  "/components/action-list",
-        "alert",        "/components/alert",
-        "avatar",       "/components/avatar",
-        "back-to-top",  "/components/back-to-top"
+    private static final Map<String, String> IMPLEMENTED = Map.ofEntries(
+        Map.entry("about-modal",      "/components/about-modal"),
+        Map.entry("accordion",        "/components/accordion"),
+        Map.entry("action-list",      "/components/action-list"),
+        Map.entry("alert",            "/components/alert"),
+        Map.entry("avatar",           "/components/avatar"),
+        Map.entry("back-to-top",      "/components/back-to-top"),
+        Map.entry("backdrop",         "/components/backdrop"),
+        Map.entry("background-image", "/components/background-image"),
+        Map.entry("badge",            "/components/badge"),
+        Map.entry("banner",           "/components/banner")
     );
 
     /** Components tagged with a footer label. */
