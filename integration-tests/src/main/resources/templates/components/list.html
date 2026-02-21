@@ -1,0 +1,50 @@
+{#include layouts/base}
+{#title}List{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>List</h1>
+  <p>PatternFly v6 list — a styled list of items with various layout options.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A standard unordered list.</p>
+    {#include components/data-display/list id="list-basic"}{#content}
+    <li>First item</li>
+    <li>Second item</li>
+    <li>Third item</li>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="inline-heading">Inline</h2>
+    <p>Items displayed inline in a horizontal row.</p>
+    {#include components/data-display/list id="list-inline" inline=true}{#content}
+    <li>First</li>
+    <li>Second</li>
+    <li>Third</li>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="plain-heading">Plain</h2>
+    <p>A list without bullet markers.</p>
+    {#include components/data-display/list id="list-plain" plain=true}{#content}
+    <li>No bullets here</li>
+    <li>Just plain text</li>
+    <li>Clean and simple</li>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="bordered-heading">Bordered</h2>
+    <p>A list with bordered items.</p>
+    {#include components/data-display/list id="list-bordered" bordered=true plain=true}{#content}
+    <li>Bordered item one</li>
+    <li>Bordered item two</li>
+    <li>Bordered item three</li>
+    {/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

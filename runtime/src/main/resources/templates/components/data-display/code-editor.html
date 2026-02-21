@@ -1,0 +1,51 @@
+{! Code editor — PatternFly v6 !}
+{! Parameters: id (required), language (optional — tab text), readonly (optional), !}
+{!   copyButton (optional), downloadButton (optional), uploadButton (optional) !}
+{! Content: pass code text via {#content}...{/content} block !}
+<div class="pf-v6-c-code-editor{#if readonly??} pf-m-read-only{/if}" id="{id}"{#if copyButton??} x-data="{ copied: false }"{/if}>
+  <div class="pf-v6-c-code-editor__header">
+    {#if copyButton?? || downloadButton?? || uploadButton??}
+    <div class="pf-v6-c-code-editor__header-content">
+      <div class="pf-v6-c-code-editor__controls">
+        {#if copyButton??}
+        <button class="pf-v6-c-button pf-m-plain" type="button"
+                :aria-label="copied ? 'Successfully copied to clipboard!' : 'Copy to clipboard'"
+                @click="navigator.clipboard.writeText($el.closest('.pf-v6-c-code-editor').querySelector('.pf-v6-c-code-editor__code-pre').textContent); copied = true; setTimeout(() => copied = false, 2000)">
+          <span class="pf-v6-c-button__icon">
+            <i :class="copied ? 'fas fa-check' : 'fas fa-copy'" aria-hidden="true"></i>
+          </span>
+        </button>
+        {/if}
+        {#if downloadButton??}
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Download code">
+          <span class="pf-v6-c-button__icon">
+            <i class="fas fa-download" aria-hidden="true"></i>
+          </span>
+        </button>
+        {/if}
+        {#if uploadButton??}
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Upload code">
+          <span class="pf-v6-c-button__icon">
+            <i class="fas fa-upload" aria-hidden="true"></i>
+          </span>
+        </button>
+        {/if}
+      </div>
+      <div class="pf-v6-c-code-editor__header-main"></div>
+    </div>
+    {/if}
+    {#if language??}
+    <div class="pf-v6-c-code-editor__tab">
+      <span class="pf-v6-c-code-editor__tab-icon">
+        <i class="fas fa-code" aria-hidden="true"></i>
+      </span>
+      <span class="pf-v6-c-code-editor__tab-text">{language}</span>
+    </div>
+    {/if}
+  </div>
+  <div class="pf-v6-c-code-editor__main">
+    <div dir="ltr" class="pf-v6-c-code-editor__code">
+      <pre class="pf-v6-c-code-editor__code-pre">{#insert content}{/insert}</pre>
+    </div>
+  </div>
+</div>

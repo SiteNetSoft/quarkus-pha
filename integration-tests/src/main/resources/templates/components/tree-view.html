@@ -1,0 +1,52 @@
+{#include layouts/base}
+{#title}Tree View{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Tree View</h1>
+  <p>A tree view displays hierarchical data in a nested list structure.</p>
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic tree view with nested items.</p>
+    {#include components/navigation/tree-view id="tv-basic"}{#content}
+    <li class="pf-v6-c-tree-view__list-item pf-m-expanded">
+      <div class="pf-v6-c-tree-view__content">
+        <button class="pf-v6-c-tree-view__node" type="button">
+          <span class="pf-v6-c-tree-view__node-container">
+            <span class="pf-v6-c-tree-view__node-toggle"><span class="pf-v6-c-tree-view__node-toggle-icon"><i class="fas fa-angle-right" aria-hidden="true"></i></span></span>
+            <span class="pf-v6-c-tree-view__node-text">Application launcher</span>
+          </span>
+        </button>
+      </div>
+      <ul class="pf-v6-c-tree-view__list" role="group">
+        <li class="pf-v6-c-tree-view__list-item"><div class="pf-v6-c-tree-view__content"><button class="pf-v6-c-tree-view__node pf-m-current" type="button"><span class="pf-v6-c-tree-view__node-container"><span class="pf-v6-c-tree-view__node-text">Application 1</span></span></button></div></li>
+        <li class="pf-v6-c-tree-view__list-item"><div class="pf-v6-c-tree-view__content"><button class="pf-v6-c-tree-view__node" type="button"><span class="pf-v6-c-tree-view__node-container"><span class="pf-v6-c-tree-view__node-text">Application 2</span></span></button></div></li>
+      </ul>
+    </li>
+    <li class="pf-v6-c-tree-view__list-item"><div class="pf-v6-c-tree-view__content"><button class="pf-v6-c-tree-view__node" type="button"><span class="pf-v6-c-tree-view__node-container"><span class="pf-v6-c-tree-view__node-text">Cost management</span></span></button></div></li>
+    {/content}{/include}
+  </section>
+  <section style="margin-top: 2rem;">
+    <h2 id="with-guides-heading">With guides</h2>
+    <p>A tree view with visual guide lines connecting items.</p>
+    {#include components/navigation/tree-view id="tv-guides" guides=true}{#content}
+    <li class="pf-v6-c-tree-view__list-item pf-m-expanded">
+      <div class="pf-v6-c-tree-view__content">
+        <button class="pf-v6-c-tree-view__node" type="button">
+          <span class="pf-v6-c-tree-view__node-container">
+            <span class="pf-v6-c-tree-view__node-toggle"><span class="pf-v6-c-tree-view__node-toggle-icon"><i class="fas fa-angle-right" aria-hidden="true"></i></span></span>
+            <span class="pf-v6-c-tree-view__node-text">Application launcher</span>
+          </span>
+        </button>
+      </div>
+      <ul class="pf-v6-c-tree-view__list" role="group">
+        <li class="pf-v6-c-tree-view__list-item"><div class="pf-v6-c-tree-view__content"><button class="pf-v6-c-tree-view__node" type="button"><span class="pf-v6-c-tree-view__node-container"><span class="pf-v6-c-tree-view__node-text">Application 1</span></span></button></div></li>
+        <li class="pf-v6-c-tree-view__list-item"><div class="pf-v6-c-tree-view__content"><button class="pf-v6-c-tree-view__node" type="button"><span class="pf-v6-c-tree-view__node-container"><span class="pf-v6-c-tree-view__node-text">Application 2</span></span></button></div></li>
+      </ul>
+    </li>
+    <li class="pf-v6-c-tree-view__list-item"><div class="pf-v6-c-tree-view__content"><button class="pf-v6-c-tree-view__node" type="button"><span class="pf-v6-c-tree-view__node-container"><span class="pf-v6-c-tree-view__node-text">Cost management</span></span></button></div></li>
+    {/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

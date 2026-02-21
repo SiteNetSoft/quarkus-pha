@@ -1,0 +1,12 @@
+{! Sidebar — PatternFly v6 !}
+{! Parameters: id, panelRight (optional), gutter (optional), stack (optional) !}
+<div class="pf-v6-c-sidebar{#if panelRight??} pf-m-panel-right{/if}{#if gutter??} pf-m-gutter{/if}{#if stack??} pf-m-stack{/if}" id="{id}">
+  <div class="pf-v6-c-sidebar__main">
+    <div class="pf-v6-c-sidebar__panel">
+      {#insert panel}{/insert}
+    </div>
+    <div class="pf-v6-c-sidebar__content">
+      {#insert content}{/insert}
+    </div>
+  </div>
+</div>

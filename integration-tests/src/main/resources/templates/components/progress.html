@@ -1,0 +1,46 @@
+{#include layouts/base}
+{#title}Progress{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Progress</h1>
+  <p>PatternFly v6 progress — a bar that indicates the completion status of a task.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A progress bar at 50%.</p>
+    {#include components/feedback/progress id="prog-basic" value="50" description="Basic progress" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="small-heading">Small</h2>
+    <p>A small-sized progress bar.</p>
+    {#include components/feedback/progress id="prog-small" value="33" description="Small progress" size="sm" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="large-heading">Large</h2>
+    <p>A large-sized progress bar.</p>
+    {#include components/feedback/progress id="prog-large" value="75" description="Large progress" size="lg" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="success-heading">Success</h2>
+    <p>A completed progress bar.</p>
+    {#include components/feedback/progress id="prog-success" value="100" description="Completed" status="success" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="warning-heading">Warning</h2>
+    <p>A progress bar with warning status.</p>
+    {#include components/feedback/progress id="prog-warning" value="60" description="Warning state" status="warning" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="danger-heading">Danger</h2>
+    <p>A progress bar with danger status.</p>
+    {#include components/feedback/progress id="prog-danger" value="25" description="Danger state" status="danger" /}
+  </section>
+</div>
+{/body}
+{/include}

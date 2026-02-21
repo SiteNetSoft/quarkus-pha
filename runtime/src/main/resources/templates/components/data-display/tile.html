@@ -1,0 +1,15 @@
+{! Tile — PatternFly v6 (Deprecated) !}
+{! Parameters: id, title, iconClass (optional), bodyText (optional), selected (optional), disabled (optional) !}
+<div class="pf-v6-c-tile{#if selected??} pf-m-selected{/if}{#if disabled??} pf-m-disabled{/if}" id="{id}" tabindex="0">
+  <div class="pf-v6-c-tile__header">
+    {#if iconClass??}
+    <div class="pf-v6-c-tile__icon">
+      <i class="{iconClass}" aria-hidden="true"></i>
+    </div>
+    {/if}
+    <div class="pf-v6-c-tile__title">{title}</div>
+  </div>
+  {#if bodyText??}
+  <div class="pf-v6-c-tile__body">{bodyText}</div>
+  {/if}
+</div>

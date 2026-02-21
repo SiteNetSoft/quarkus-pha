@@ -1,0 +1,23 @@
+{#include layouts/base}
+{#title}Form Select{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Form Select</h1>
+  <p>PatternFly v6 form select for choosing a single option from a dropdown list.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic form select with multiple options.</p>
+    {#include components/forms/form-select id="fs-basic"}{#content}<option value="">Select one</option><option value="1">Option 1</option><option value="2">Option 2</option><option value="3">Option 3</option>{/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="disabled-heading">Disabled</h2>
+    <p>A disabled form select that prevents user interaction.</p>
+    {#include components/forms/form-select id="fs-disabled" disabled=true}{#content}<option value="">Select one</option><option value="1">Option 1</option><option value="2">Option 2</option><option value="3">Option 3</option>{/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

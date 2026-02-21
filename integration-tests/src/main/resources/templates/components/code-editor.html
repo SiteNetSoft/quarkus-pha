@@ -1,0 +1,57 @@
+{#include layouts/base}
+{#title}Code editor{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Code editor</h1>
+  <p>PatternFly v6 code editor — a component for displaying and editing code with header controls and language tab.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A code editor with copy, download, and upload controls.</p>
+    <div style="max-width: 700px;">
+      {#include components/data-display/code-editor id="ce-basic" language="HTML" copyButton=true downloadButton=true uploadButton=true}{#content}apiVersion: helm.openshift.io/v1beta1/
+kind: HelmChartRepository
+metadata:
+  name: azure-sample-repo
+spec:
+  connectionConfig:
+    url: https://raw.githubusercontent.com/Azure-Samples/helm-charts/master/docs{/content}{/include}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="readonly-heading">Read-only</h2>
+    <p>A code editor with read-only styling.</p>
+    <div style="max-width: 700px;">
+      {#include components/data-display/code-editor id="ce-readonly" language="YAML" readonly=true copyButton=true}{#content}apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-config
+data:
+  key: value{/content}{/include}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="no-actions-heading">Without actions</h2>
+    <p>A code editor with only a language tab and no header controls.</p>
+    <div style="max-width: 700px;">
+      {#include components/data-display/code-editor id="ce-no-actions" language="JSON"}{#content}{
+  "name": "example",
+  "version": "1.0.0"
+}{/content}{/include}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="minimal-heading">Minimal</h2>
+    <p>A code editor with no controls and no language tab.</p>
+    <div style="max-width: 700px;">
+      {#include components/data-display/code-editor id="ce-minimal"}{#content}console.log("Hello, world!");{/content}{/include}
+    </div>
+  </section>
+</div>
+{/body}
+{/include}

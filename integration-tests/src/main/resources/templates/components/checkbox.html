@@ -1,0 +1,62 @@
+{#include layouts/base}
+{#title}Checkbox{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Checkbox</h1>
+  <p>PatternFly v6 check — a form control for selecting one or more options.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A standard checkbox with a label.</p>
+    {#include components/forms/check id="check-basic" label="Checkbox" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="checked-heading">Checked</h2>
+    <p>A checkbox that is pre-selected.</p>
+    {#include components/forms/check id="check-checked" label="Checkbox checked" checked=true /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="disabled-heading">Disabled</h2>
+    <p>Disabled checkboxes, both unchecked and checked.</p>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      {#include components/forms/check id="check-disabled" label="Disabled checkbox" disabled=true /}
+      {#include components/forms/check id="check-disabled-checked" label="Disabled checked checkbox" disabled=true checked=true /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="description-heading">With description</h2>
+    <p>A checkbox with additional description text.</p>
+    {#include components/forms/check id="check-description" label="Checkbox with description" description="Single-tenant cloud service hosted and managed by Red Hat that offers additional customization abilities for clusters." /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="body-heading">With body</h2>
+    <p>A checkbox with custom body content.</p>
+    {#include components/forms/check id="check-body" label="Checkbox with body" body="This is where custom content goes." /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="desc-body-heading">With description and body</h2>
+    <p>A checkbox with both description and body.</p>
+    {#include components/forms/check id="check-desc-body" label="Checkbox with description and body" description="Single-tenant cloud service hosted and managed by Red Hat that offers additional customization abilities for clusters." body="This is where custom content goes." /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="standalone-heading">Standalone</h2>
+    <p>A checkbox with no visible label.</p>
+    {#include components/forms/check id="check-standalone" standalone=true ariaLabel="Standalone checkbox" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="required-heading">Required</h2>
+    <p>A checkbox marked as required.</p>
+    {#include components/forms/check id="check-required" label="Required checkbox" required=true /}
+  </section>
+</div>
+{/body}
+{/include}

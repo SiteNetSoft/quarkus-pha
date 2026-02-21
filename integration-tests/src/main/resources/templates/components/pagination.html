@@ -1,0 +1,39 @@
+{#include layouts/base}
+{#title}Pagination{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Pagination</h1>
+  <p>Pagination splits content across multiple pages, allowing users to navigate between them.</p>
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A standard pagination control.</p>
+    {#include components/navigation/pagination id="pn-basic"}{#content}
+    <nav class="pf-v6-c-pagination__nav" aria-label="Pagination">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to first page"><i class="fas fa-angle-double-left" aria-hidden="true"></i></button>
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to previous page"><i class="fas fa-angle-left" aria-hidden="true"></i></button>
+      <span class="pf-v6-c-pagination__nav-page-select">
+        <input class="pf-v6-c-form-control" aria-label="Current page" type="number" min="1" value="1">
+        <span aria-hidden="true">of 10</span>
+      </span>
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to next page"><i class="fas fa-angle-right" aria-hidden="true"></i></button>
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to last page"><i class="fas fa-angle-double-right" aria-hidden="true"></i></button>
+    </nav>
+    {/content}{/include}
+  </section>
+  <section style="margin-top: 2rem;">
+    <h2 id="compact-heading">Compact</h2>
+    <p>A compact pagination control for use in tight spaces.</p>
+    {#include components/navigation/pagination id="pn-compact" compact=true}{#content}
+    <nav class="pf-v6-c-pagination__nav" aria-label="Pagination">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to previous page"><i class="fas fa-angle-left" aria-hidden="true"></i></button>
+      <span class="pf-v6-c-pagination__nav-page-select">
+        <span aria-hidden="true">1 - 10 of 100</span>
+      </span>
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to next page"><i class="fas fa-angle-right" aria-hidden="true"></i></button>
+    </nav>
+    {/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

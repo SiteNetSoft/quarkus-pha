@@ -1,0 +1,44 @@
+{#include layouts/base}
+{#title}Select{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Select</h1>
+  <p>A select component allows users to choose one or more items from a list.</p>
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic select dropdown.</p>
+    <div id="sel-basic" x-data="{ open: false, selected: 'Select an option' }">
+      <button class="pf-v6-c-menu-toggle" type="button" @click="open = !open" :class="{ 'pf-m-expanded': open }" :aria-expanded="open">
+        <span class="pf-v6-c-menu-toggle__text" x-text="selected"></span>
+        <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon"><i class="fas fa-caret-down" aria-hidden="true"></i></span></span>
+      </button>
+      <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false">
+        <div class="pf-v6-c-menu__content"><ul class="pf-v6-c-menu__list" role="listbox">
+          <li class="pf-v6-c-menu__list-item" role="option"><button class="pf-v6-c-menu__item" type="button" @click="selected = 'Option 1'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Option 1</span></span></button></li>
+          <li class="pf-v6-c-menu__list-item" role="option"><button class="pf-v6-c-menu__item" type="button" @click="selected = 'Option 2'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Option 2</span></span></button></li>
+          <li class="pf-v6-c-menu__list-item" role="option"><button class="pf-v6-c-menu__item" type="button" @click="selected = 'Option 3'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Option 3</span></span></button></li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+  <section style="margin-top: 2rem;">
+    <h2 id="preselected-heading">With preselected</h2>
+    <p>A select dropdown with a preselected option.</p>
+    <div id="sel-preselected" x-data="{ open: false, selected: 'Option 2' }">
+      <button class="pf-v6-c-menu-toggle" type="button" @click="open = !open" :class="{ 'pf-m-expanded': open }" :aria-expanded="open">
+        <span class="pf-v6-c-menu-toggle__text" x-text="selected"></span>
+        <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon"><i class="fas fa-caret-down" aria-hidden="true"></i></span></span>
+      </button>
+      <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false">
+        <div class="pf-v6-c-menu__content"><ul class="pf-v6-c-menu__list" role="listbox">
+          <li class="pf-v6-c-menu__list-item" role="option"><button class="pf-v6-c-menu__item" type="button" @click="selected = 'Option 1'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Option 1</span></span></button></li>
+          <li class="pf-v6-c-menu__list-item" role="option"><button class="pf-v6-c-menu__item pf-m-selected" type="button" @click="selected = 'Option 2'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Option 2</span></span></button></li>
+          <li class="pf-v6-c-menu__list-item" role="option"><button class="pf-v6-c-menu__item" type="button" @click="selected = 'Option 3'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Option 3</span></span></button></li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+</div>
+{/body}
+{/include}

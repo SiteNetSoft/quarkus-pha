@@ -1,0 +1,28 @@
+{#include layouts/base}
+{#title}Empty state{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Empty state</h1>
+  <p>PatternFly v6 empty state — a placeholder shown when there is no data to display.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>An empty state with title and body text.</p>
+    {#include components/feedback/empty-state id="es-basic" titleText="No results found" bodyText="No results match the filter criteria. Clear all filters and try again." /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="with-icon-heading">With icon</h2>
+    <p>An empty state with an icon.</p>
+    {#include components/feedback/empty-state id="es-icon" titleText="No data available" bodyText="There is no data to display at this time." iconClass="fas fa-cubes" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="with-actions-heading">With actions</h2>
+    <p>An empty state with primary and secondary actions.</p>
+    {#include components/feedback/empty-state id="es-actions" titleText="Get started" bodyText="Create your first item to begin." iconClass="fas fa-plus-circle" primaryAction="Create item" secondaryAction="Learn more" /}
+  </section>
+</div>
+{/body}
+{/include}

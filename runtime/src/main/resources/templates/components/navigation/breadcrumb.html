@@ -1,0 +1,14 @@
+{! Breadcrumb — PatternFly v6 !}
+{! Parameters: id (required), items (required — list of {text, href?, current?, heading?}) !}
+<nav class="pf-v6-c-breadcrumb" id="{id}" aria-label="Breadcrumb">
+  <ol class="pf-v6-c-breadcrumb__list">
+    {#for item in items}
+    <li class="pf-v6-c-breadcrumb__item">
+      <span class="pf-v6-c-breadcrumb__item-divider">
+        <i class="fas fa-angle-right" aria-hidden="true"></i>
+      </span>
+      {#if item.heading??}<h1 class="pf-v6-c-breadcrumb__heading"><a href="{item.href}" class="pf-v6-c-breadcrumb__link pf-m-current" aria-current="page">{item.text}</a></h1>{#else}{#if item.href??}<a href="{item.href}" class="pf-v6-c-breadcrumb__link{#if item.current??} pf-m-current{/if}"{#if item.current??} aria-current="page"{/if}>{item.text}</a>{#else}{item.text}{/if}{/if}
+    </li>
+    {/for}
+  </ol>
+</nav>

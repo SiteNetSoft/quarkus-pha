@@ -1,0 +1,51 @@
+{#include layouts/base}
+{#title}Label{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Label</h1>
+  <p>PatternFly v6 label — a compact element for displaying metadata, status, or tags.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="filled-heading">Filled</h2>
+    <p>Labels with filled color variants.</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+      {#include components/data-display/label id="lbl-grey" text="Grey" /}
+      {#include components/data-display/label id="lbl-blue" text="Blue" color="blue" /}
+      {#include components/data-display/label id="lbl-green" text="Green" color="green" /}
+      {#include components/data-display/label id="lbl-orange" text="Orange" color="orange" /}
+      {#include components/data-display/label id="lbl-red" text="Red" color="red" /}
+      {#include components/data-display/label id="lbl-purple" text="Purple" color="purple" /}
+      {#include components/data-display/label id="lbl-teal" text="Teal" color="teal" /}
+      {#include components/data-display/label id="lbl-yellow" text="Yellow" color="yellow" /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="outline-heading">Outline</h2>
+    <p>Labels with outline styling.</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+      {#include components/data-display/label id="lbl-outline-grey" text="Grey" outline=true /}
+      {#include components/data-display/label id="lbl-outline-blue" text="Blue" color="blue" outline=true /}
+      {#include components/data-display/label id="lbl-outline-green" text="Green" color="green" outline=true /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="with-icon-heading">With icon</h2>
+    <p>A label with an icon before the text.</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+      {#include components/data-display/label id="lbl-icon" text="With icon" color="blue" iconClass="fas fa-info-circle" /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="removable-heading">Removable</h2>
+    <p>A label with a close button for removal.</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+      {#include components/data-display/label id="lbl-removable" text="Removable" color="blue" removable=true /}
+    </div>
+  </section>
+</div>
+{/body}
+{/include}

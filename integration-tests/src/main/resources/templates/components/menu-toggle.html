@@ -1,0 +1,34 @@
+{#include layouts/base}
+{#title}Menu Toggle{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Menu Toggle</h1>
+  <p>PatternFly v6 menu toggle component used as a trigger for menus and dropdowns.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic menu toggle with a text label and a caret icon.</p>
+    {#include components/navigation/menu-toggle id="mt-basic" text="Actions" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="primary-heading">Primary</h2>
+    <p>A primary styled menu toggle with emphasis for the main action.</p>
+    {#include components/navigation/menu-toggle id="mt-primary" text="Primary" primary=true /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="plain-heading">Plain</h2>
+    <p>A plain menu toggle without background, typically used for kebab menus.</p>
+    {#include components/navigation/menu-toggle id="mt-plain" plain=true ariaLabel="Kebab" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="expanded-heading">Expanded</h2>
+    <p>A menu toggle in the expanded state showing it is currently active.</p>
+    {#include components/navigation/menu-toggle id="mt-expanded" text="Expanded" expanded=true /}
+  </section>
+</div>
+{/body}
+{/include}

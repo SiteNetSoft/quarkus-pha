@@ -1,0 +1,22 @@
+{#include layouts/base}
+{#title}Inline Edit{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Inline Edit</h1>
+  <p>PatternFly v6 inline edit component for editing text values in place without a separate form.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic inline edit field showing static text that can be activated for editing.</p>
+    {#include components/forms/inline-edit id="ie-basic" value="Editable text" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="active-editing-heading">Active editing</h2>
+    <p>An inline edit field that starts in the active editing state.</p>
+    {#include components/forms/inline-edit id="ie-active" value="Click to edit this value" editing=true /}
+  </section>
+</div>
+{/body}
+{/include}

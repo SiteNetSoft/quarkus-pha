@@ -1,0 +1,37 @@
+{#include layouts/base}
+{#title}Notification Badge{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Notification Badge</h1>
+  <p>PatternFly v6 notification badge component for indicating the presence and state of notifications.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="read-heading">Read</h2>
+    <p>A notification badge in the read state indicating all notifications have been seen.</p>
+    <button class="pf-v6-c-button pf-m-stateful pf-m-read" id="nb-read" type="button" aria-label="Notifications: 3 read">
+      <span class="pf-v6-c-button__icon"><i class="fas fa-bell" aria-hidden="true"></i></span>
+      <span class="pf-v6-c-button__text">3</span>
+    </button>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="unread-heading">Unread</h2>
+    <p>A notification badge in the unread state indicating there are new notifications to view.</p>
+    <button class="pf-v6-c-button pf-m-stateful pf-m-unread" id="nb-unread" type="button" aria-label="Notifications: 5 unread">
+      <span class="pf-v6-c-button__icon"><i class="fas fa-bell" aria-hidden="true"></i></span>
+      <span class="pf-v6-c-button__text">5</span>
+    </button>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="attention-heading">Attention</h2>
+    <p>A notification badge in the attention state indicating urgent or critical notifications.</p>
+    <button class="pf-v6-c-button pf-m-stateful pf-m-attention" id="nb-attention" type="button" aria-label="Notifications: 2 require attention">
+      <span class="pf-v6-c-button__icon"><i class="fas fa-bell" aria-hidden="true"></i></span>
+      <span class="pf-v6-c-button__text">2</span>
+    </button>
+  </section>
+</div>
+{/body}
+{/include}

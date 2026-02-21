@@ -1,0 +1,20 @@
+{#include layouts/base}
+{#title}Masthead{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Masthead</h1>
+  <p>A masthead contains the main navigation header for an application.</p>
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A standard masthead with a logo and toolbar area.</p>
+    {#include components/navigation/masthead id="mh-basic"}{#brand}<a class="pf-v6-c-masthead__logo" href="#">Logo</a>{/brand}{#content}<span>Toolbar area</span>{/content}{/include}
+  </section>
+  <section style="margin-top: 2rem;">
+    <h2 id="stacked-heading">Stacked</h2>
+    <p>A masthead with stacked display layout.</p>
+    {#include components/navigation/masthead id="mh-stacked" displayStack=true}{#brand}<a class="pf-v6-c-masthead__logo" href="#">Logo</a>{/brand}{#content}<span>Toolbar area</span>{/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

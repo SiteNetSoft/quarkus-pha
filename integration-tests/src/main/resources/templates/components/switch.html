@@ -1,0 +1,29 @@
+{#include layouts/base}
+{#title}Switch{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Switch</h1>
+  <p>PatternFly v6 switch for toggling between two states such as on and off.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic switch in its default unchecked state.</p>
+    {#include components/forms/switch id="sw-basic" label="Basic switch" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="checked-heading">Checked</h2>
+    <p>A switch that is initially checked (on).</p>
+    {#include components/forms/switch id="sw-checked" label="Checked switch" checked=true /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="reversed-heading">Reversed</h2>
+    <p>A switch with the label displayed before the toggle.</p>
+    {#include components/forms/switch id="sw-reversed" label="Reversed switch" reversed=true /}
+  </section>
+</div>
+{/body}
+{/include}

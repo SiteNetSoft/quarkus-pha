@@ -1,0 +1,39 @@
+{#include layouts/base}
+{#title}Brand{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Brand</h1>
+  <p>PatternFly v6 brand — a visual representation of a product logo or identity.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A simple brand image with default sizing.</p>
+    {#include components/data-display/brand id="brand-basic" src="/web/images/brand-logo.svg" alt="Brand logo"}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="width-heading">Custom width</h2>
+    <p>Brand constrained to a specific width via the <code>--pf-v6-c-brand--Width</code> CSS custom property.</p>
+    {#include components/data-display/brand id="brand-width" src="/web/images/brand-logo.svg" alt="Brand logo" width="200px"}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="height-heading">Custom height</h2>
+    <p>Brand constrained to a specific height via the <code>--pf-v6-c-brand--Height</code> CSS custom property.</p>
+    {#include components/data-display/brand id="brand-height" src="/web/images/brand-logo.svg" alt="Brand logo" height="36px"}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="picture-heading">Responsive (picture element)</h2>
+    <p>A responsive brand using the <code>&lt;picture&gt;</code> element with different sources for different viewport sizes.</p>
+    {#include components/data-display/brand id="brand-picture" src="/web/images/brand-icon.svg" alt="Brand logo" picture=true}
+      {#sources}
+        <source media="(min-width: 768px)" srcset="/web/images/brand-logo.svg" />
+      {/sources}
+    {/include}
+  </section>
+</div>
+{/body}
+{/include}

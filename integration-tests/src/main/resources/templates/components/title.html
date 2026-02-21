@@ -1,0 +1,33 @@
+{#include layouts/base}
+{#title}Title{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Title</h1>
+  <p>PatternFly v6 title — a styled heading element with size modifiers.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="sizes-heading">Sizes</h2>
+    <p>Title component at all available size modifiers.</p>
+    <div style="display: grid; gap: 1rem;">
+      {#include components/data-display/title text="4xl title" size="4xl" id="title-4xl" /}
+      {#include components/data-display/title text="3xl title" size="3xl" id="title-3xl" /}
+      {#include components/data-display/title text="2xl title" size="2xl" id="title-2xl" /}
+      {#include components/data-display/title text="xl title" size="xl" id="title-xl" /}
+      {#include components/data-display/title text="lg title" size="lg" id="title-lg" /}
+      {#include components/data-display/title text="md title" size="md" id="title-md" /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="heading-levels-heading">Heading levels</h2>
+    <p>Title rendered at different HTML heading levels.</p>
+    <div style="display: grid; gap: 1rem;">
+      {#include components/data-display/title text="Heading 1" size="2xl" id="title-h1" /}
+      {#include components/data-display/title text="Heading 2" size="xl" headingLevel="h2" id="title-h2" /}
+      {#include components/data-display/title text="Heading 3" size="lg" headingLevel="h3" id="title-h3" /}
+    </div>
+  </section>
+</div>
+{/body}
+{/include}

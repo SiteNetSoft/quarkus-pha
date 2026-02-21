@@ -1,0 +1,29 @@
+{#include layouts/base}
+{#title}Truncate{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Truncate</h1>
+  <p>PatternFly v6 truncate — text overflow handling with ellipsis.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="default-heading">Default</h2>
+    <p>Text truncated at the end with an ellipsis.</p>
+    <div style="max-width: 300px;">
+      {#include components/data-display/truncate id="trunc-default" text="This is a very long text string that will be truncated because it overflows the container width" /}
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="middle-heading">Middle truncation</h2>
+    <p>Text truncated in the middle, preserving both start and end.</p>
+    <div style="max-width: 300px;">
+      <span class="pf-v6-c-truncate" id="trunc-middle">
+        <span class="pf-v6-c-truncate__start">This is a long filename that needs to be tr</span>
+        <span class="pf-v6-c-truncate__end">uncated-in-the-middle.tar.gz</span>
+      </span>
+    </div>
+  </section>
+</div>
+{/body}
+{/include}

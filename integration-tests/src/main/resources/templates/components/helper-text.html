@@ -1,0 +1,34 @@
+{#include layouts/base}
+{#title}Helper text{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Helper text</h1>
+  <p>PatternFly v6 helper text — informational text displayed below form fields.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="static-heading">Static</h2>
+    <p>Default helper text without a status.</p>
+    {#include components/feedback/helper-text id="ht-static" text="Enter your username." /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="success-heading">Success</h2>
+    <p>Helper text indicating a successful validation.</p>
+    {#include components/feedback/helper-text id="ht-success" text="Username is available." status="success" dynamic=true iconClass="fas fa-check-circle" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="warning-heading">Warning</h2>
+    <p>Helper text indicating a warning.</p>
+    {#include components/feedback/helper-text id="ht-warning" text="Username is very short." status="warning" dynamic=true iconClass="fas fa-exclamation-triangle" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="error-heading">Error</h2>
+    <p>Helper text indicating an error.</p>
+    {#include components/feedback/helper-text id="ht-error" text="Username is already taken." status="error" dynamic=true iconClass="fas fa-exclamation-circle" /}
+  </section>
+</div>
+{/body}
+{/include}

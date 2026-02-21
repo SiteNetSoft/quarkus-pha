@@ -1,0 +1,23 @@
+{#include layouts/base}
+{#title}Text Input Group{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Text Input Group</h1>
+  <p>PatternFly v6 text input group for combining a text input with additional elements like icons or buttons.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic text input group.</p>
+    {#include components/forms/text-input-group id="tig-basic" placeholder="Search..." /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="with-icon-heading">With icon</h2>
+    <p>A text input group with a search icon.</p>
+    {#include components/forms/text-input-group id="tig-icon" placeholder="Search..." iconClass="fas fa-search" /}
+  </section>
+</div>
+{/body}
+{/include}

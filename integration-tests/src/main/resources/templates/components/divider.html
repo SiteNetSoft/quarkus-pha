@@ -1,0 +1,35 @@
+{#include layouts/base}
+{#title}Divider{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Divider</h1>
+  <p>PatternFly v6 divider — a visual separator between content sections.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="hr-heading">Using hr</h2>
+    <p>A basic horizontal divider rendered as an hr element.</p>
+    {#include components/data-display/divider /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="inset-heading">With inset</h2>
+    <p>Dividers with various inset sizes.</p>
+    <div style="margin-bottom: 1rem;">{#include components/data-display/divider inset="md" /}</div>
+    <div>{#include components/data-display/divider inset="xl" /}</div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="vertical-heading">Vertical</h2>
+    <p>A vertical divider between inline elements.</p>
+    <div style="display: flex; align-items: center; gap: 1rem; height: 3rem;">
+      <span>Item A</span>
+      {#include components/data-display/divider vertical=true /}
+      <span>Item B</span>
+      {#include components/data-display/divider vertical=true /}
+      <span>Item C</span>
+    </div>
+  </section>
+</div>
+{/body}
+{/include}

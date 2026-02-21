@@ -1,0 +1,84 @@
+{#include layouts/base}
+{#title}Notification Drawer{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Notification Drawer</h1>
+  <p>PatternFly v6 notification drawer component for displaying a list of system notifications.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic notification drawer with info, warning, and danger notification items.</p>
+    {#include components/feedback/notification-drawer id="nd-basic"}{#content}
+      <ul class="pf-v6-c-notification-drawer__list">
+        <li class="pf-v6-c-notification-drawer__list-item pf-m-info">
+          <div class="pf-v6-c-notification-drawer__list-item-header">
+            <span class="pf-v6-c-notification-drawer__list-item-header-icon"><i class="fas fa-info-circle" aria-hidden="true"></i></span>
+            <h2 class="pf-v6-c-notification-drawer__list-item-header-title">Info notification</h2>
+          </div>
+          <div class="pf-v6-c-notification-drawer__list-item-body">This is an informational notification about a system event.</div>
+          <div class="pf-v6-c-notification-drawer__list-item-timestamp">5 minutes ago</div>
+        </li>
+        <li class="pf-v6-c-notification-drawer__list-item pf-m-warning">
+          <div class="pf-v6-c-notification-drawer__list-item-header">
+            <span class="pf-v6-c-notification-drawer__list-item-header-icon"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i></span>
+            <h2 class="pf-v6-c-notification-drawer__list-item-header-title">Warning notification</h2>
+          </div>
+          <div class="pf-v6-c-notification-drawer__list-item-body">This is a warning notification that requires your attention.</div>
+          <div class="pf-v6-c-notification-drawer__list-item-timestamp">15 minutes ago</div>
+        </li>
+        <li class="pf-v6-c-notification-drawer__list-item pf-m-danger">
+          <div class="pf-v6-c-notification-drawer__list-item-header">
+            <span class="pf-v6-c-notification-drawer__list-item-header-icon"><i class="fas fa-times-circle" aria-hidden="true"></i></span>
+            <h2 class="pf-v6-c-notification-drawer__list-item-header-title">Danger notification</h2>
+          </div>
+          <div class="pf-v6-c-notification-drawer__list-item-body">This is a critical notification that requires immediate action.</div>
+          <div class="pf-v6-c-notification-drawer__list-item-timestamp">1 hour ago</div>
+        </li>
+      </ul>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="with-groups-heading">With groups</h2>
+    <p>A notification drawer with notifications organized into labeled groups.</p>
+    {#include components/feedback/notification-drawer id="nd-groups"}{#content}
+      <section class="pf-v6-c-notification-drawer__group">
+        <h1 class="pf-v6-c-notification-drawer__group-title">System alerts</h1>
+        <ul class="pf-v6-c-notification-drawer__list">
+          <li class="pf-v6-c-notification-drawer__list-item pf-m-danger">
+            <div class="pf-v6-c-notification-drawer__list-item-header">
+              <span class="pf-v6-c-notification-drawer__list-item-header-icon"><i class="fas fa-times-circle" aria-hidden="true"></i></span>
+              <h2 class="pf-v6-c-notification-drawer__list-item-header-title">CPU usage critical</h2>
+            </div>
+            <div class="pf-v6-c-notification-drawer__list-item-body">CPU usage has exceeded 95% on node-3.</div>
+            <div class="pf-v6-c-notification-drawer__list-item-timestamp">2 minutes ago</div>
+          </li>
+          <li class="pf-v6-c-notification-drawer__list-item pf-m-warning">
+            <div class="pf-v6-c-notification-drawer__list-item-header">
+              <span class="pf-v6-c-notification-drawer__list-item-header-icon"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i></span>
+              <h2 class="pf-v6-c-notification-drawer__list-item-header-title">Memory usage high</h2>
+            </div>
+            <div class="pf-v6-c-notification-drawer__list-item-body">Memory usage is at 80% on node-1.</div>
+            <div class="pf-v6-c-notification-drawer__list-item-timestamp">10 minutes ago</div>
+          </li>
+        </ul>
+      </section>
+      <section class="pf-v6-c-notification-drawer__group">
+        <h1 class="pf-v6-c-notification-drawer__group-title">Application events</h1>
+        <ul class="pf-v6-c-notification-drawer__list">
+          <li class="pf-v6-c-notification-drawer__list-item pf-m-info">
+            <div class="pf-v6-c-notification-drawer__list-item-header">
+              <span class="pf-v6-c-notification-drawer__list-item-header-icon"><i class="fas fa-info-circle" aria-hidden="true"></i></span>
+              <h2 class="pf-v6-c-notification-drawer__list-item-header-title">Deployment complete</h2>
+            </div>
+            <div class="pf-v6-c-notification-drawer__list-item-body">Application v2.3.1 was successfully deployed.</div>
+            <div class="pf-v6-c-notification-drawer__list-item-timestamp">30 minutes ago</div>
+          </li>
+        </ul>
+      </section>
+    {/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

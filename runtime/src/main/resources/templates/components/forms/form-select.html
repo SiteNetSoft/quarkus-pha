@@ -1,0 +1,10 @@
+{! Form select — PatternFly v6 (uses form-control with select element) !}
+{! Parameters: id, disabled (optional) !}
+<span class="pf-v6-c-form-control" id="{id}">
+  <select id="{id}-field" name="{id}"{#if disabled??} disabled{/if}>
+    {#insert content}{/insert}
+  </select>
+  <span class="pf-v6-c-form-control__toggle-icon">
+    <i class="fas fa-caret-down" aria-hidden="true"></i>
+  </span>
+</span>

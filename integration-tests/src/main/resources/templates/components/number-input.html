@@ -1,0 +1,23 @@
+{#include layouts/base}
+{#title}Number Input{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Number Input</h1>
+  <p>PatternFly v6 number input for entering numeric values with increment and decrement controls.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic number input with min and max bounds.</p>
+    {#include components/forms/number-input id="ni-basic" value="5" min="0" max="10" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="with-unit-heading">With unit</h2>
+    <p>A number input displaying a unit label alongside the value.</p>
+    {#include components/forms/number-input id="ni-unit" value="50" min="0" max="100" unit="%" /}
+  </section>
+</div>
+{/body}
+{/include}

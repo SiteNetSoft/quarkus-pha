@@ -1,0 +1,66 @@
+{#include layouts/base}
+{#title}Overflow Menu{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Overflow Menu</h1>
+  <p>PatternFly v6 overflow menu component for showing visible actions with additional items hidden in a kebab menu.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic overflow menu with primary and secondary visible buttons plus a kebab control for additional items.</p>
+    {#include components/navigation/overflow-menu id="om-basic"}{#content}
+      <div class="pf-v6-c-overflow-menu__content">
+        <div class="pf-v6-c-overflow-menu__group pf-m-button-group">
+          <div class="pf-v6-c-overflow-menu__item">
+            <button class="pf-v6-c-button pf-m-primary" type="button">Primary</button>
+          </div>
+          <div class="pf-v6-c-overflow-menu__item">
+            <button class="pf-v6-c-button pf-m-secondary" type="button">Secondary</button>
+          </div>
+          <div class="pf-v6-c-overflow-menu__item">
+            <button class="pf-v6-c-button pf-m-secondary" type="button">Tertiary</button>
+          </div>
+        </div>
+      </div>
+      <div class="pf-v6-c-overflow-menu__control">
+        <button class="pf-v6-c-menu-toggle pf-m-plain" type="button" aria-label="Overflow menu">
+          <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
+        </button>
+      </div>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="icon-button-group-heading">Icon button group</h2>
+    <p>An overflow menu with icon buttons as the visible actions for a compact toolbar layout.</p>
+    {#include components/navigation/overflow-menu id="om-icons"}{#content}
+      <div class="pf-v6-c-overflow-menu__content">
+        <div class="pf-v6-c-overflow-menu__group pf-m-icon-button-group">
+          <div class="pf-v6-c-overflow-menu__item">
+            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Edit">
+              <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="pf-v6-c-overflow-menu__item">
+            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Clone">
+              <i class="fas fa-clone" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="pf-v6-c-overflow-menu__item">
+            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Sync">
+              <i class="fas fa-sync" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="pf-v6-c-overflow-menu__control">
+        <button class="pf-v6-c-menu-toggle pf-m-plain" type="button" aria-label="Overflow menu">
+          <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
+        </button>
+      </div>
+    {/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

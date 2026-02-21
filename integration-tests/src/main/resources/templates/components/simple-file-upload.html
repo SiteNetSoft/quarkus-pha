@@ -1,0 +1,23 @@
+{#include layouts/base}
+{#title}Simple File Upload{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Simple File Upload</h1>
+  <p>PatternFly v6 simple file upload for selecting and uploading a single file.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="basic-heading">Basic</h2>
+    <p>A basic file upload control.</p>
+    {#include components/forms/simple-file-upload id="sfu-basic" /}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="disabled-heading">Disabled</h2>
+    <p>A disabled file upload that prevents user interaction.</p>
+    {#include components/forms/simple-file-upload id="sfu-disabled" disabled=true /}
+  </section>
+</div>
+{/body}
+{/include}

@@ -1,0 +1,27 @@
+{! Empty state — PatternFly v6 !}
+{! Parameters: id, titleText, bodyText (optional), iconClass (optional), primaryAction (optional), secondaryAction (optional) !}
+<div class="pf-v6-c-empty-state" id="{id}">
+  <div class="pf-v6-c-empty-state__content">
+    {#if iconClass??}
+    <div class="pf-v6-c-empty-state__icon">
+      <div class="pf-v6-c-icon pf-m-lg">
+        <span class="pf-v6-c-icon__content">
+          <i class="{iconClass}" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+    {/if}
+    <div class="pf-v6-c-empty-state__title-text">{titleText}</div>
+    {#if bodyText??}
+    <div class="pf-v6-c-empty-state__body">{bodyText}</div>
+    {/if}
+    {#if primaryAction?? || secondaryAction??}
+    <div class="pf-v6-c-empty-state__footer">
+      <div class="pf-v6-c-empty-state__actions">
+        {#if primaryAction??}<button class="pf-v6-c-button pf-m-primary" type="button">{primaryAction}</button>{/if}
+        {#if secondaryAction??}<button class="pf-v6-c-button pf-m-link" type="button">{secondaryAction}</button>{/if}
+      </div>
+    </div>
+    {/if}
+  </div>
+</div>

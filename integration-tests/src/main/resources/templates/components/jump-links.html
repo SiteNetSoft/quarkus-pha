@@ -1,0 +1,48 @@
+{#include layouts/base}
+{#title}Jump Links{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Jump Links</h1>
+  <p>PatternFly v6 jump links component for navigating to sections within a page.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="vertical-heading">Vertical</h2>
+    <p>Vertical jump links displayed in a stacked list with the current section highlighted.</p>
+    {#include components/navigation/jump-links id="jl-vertical" vertical=true}{#content}
+      <li class="pf-v6-c-jump-links__item pf-m-current">
+        <a class="pf-v6-c-jump-links__link" href="#section-1"><span class="pf-v6-c-jump-links__link-text">Section 1</span></a>
+      </li>
+      <li class="pf-v6-c-jump-links__item">
+        <a class="pf-v6-c-jump-links__link" href="#section-2"><span class="pf-v6-c-jump-links__link-text">Section 2</span></a>
+      </li>
+      <li class="pf-v6-c-jump-links__item">
+        <a class="pf-v6-c-jump-links__link" href="#section-3"><span class="pf-v6-c-jump-links__link-text">Section 3</span></a>
+      </li>
+      <li class="pf-v6-c-jump-links__item">
+        <a class="pf-v6-c-jump-links__link" href="#section-4"><span class="pf-v6-c-jump-links__link-text">Section 4</span></a>
+      </li>
+    {/content}{/include}
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="horizontal-heading">Horizontal</h2>
+    <p>Horizontal jump links displayed in a row across the page.</p>
+    {#include components/navigation/jump-links id="jl-horizontal"}{#content}
+      <li class="pf-v6-c-jump-links__item pf-m-current">
+        <a class="pf-v6-c-jump-links__link" href="#section-1"><span class="pf-v6-c-jump-links__link-text">Section 1</span></a>
+      </li>
+      <li class="pf-v6-c-jump-links__item">
+        <a class="pf-v6-c-jump-links__link" href="#section-2"><span class="pf-v6-c-jump-links__link-text">Section 2</span></a>
+      </li>
+      <li class="pf-v6-c-jump-links__item">
+        <a class="pf-v6-c-jump-links__link" href="#section-3"><span class="pf-v6-c-jump-links__link-text">Section 3</span></a>
+      </li>
+      <li class="pf-v6-c-jump-links__item">
+        <a class="pf-v6-c-jump-links__link" href="#section-4"><span class="pf-v6-c-jump-links__link-text">Section 4</span></a>
+      </li>
+    {/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

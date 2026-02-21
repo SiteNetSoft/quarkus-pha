@@ -9,6 +9,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -54,6 +55,334 @@ public class ComponentRoutes {
     @Location("components/banner")
     @Inject
     Template bannerPage;
+
+    @Location("components/brand")
+    @Inject
+    Template brandPage;
+
+    @Location("components/breadcrumb")
+    @Inject
+    Template breadcrumbPage;
+
+    @Location("components/button")
+    @Inject
+    Template buttonPage;
+
+    @Location("components/calendar-month")
+    @Inject
+    Template calendarMonthPage;
+
+    @Location("components/card")
+    @Inject
+    Template cardPage;
+
+    @Location("components/checkbox")
+    @Inject
+    Template checkboxPage;
+
+    @Location("components/chip")
+    @Inject
+    Template chipPage;
+
+    @Location("components/clipboard-copy")
+    @Inject
+    Template clipboardCopyPage;
+
+    @Location("components/code-block")
+    @Inject
+    Template codeBlockPage;
+
+    @Location("components/code-editor")
+    @Inject
+    Template codeEditorPage;
+
+    @Location("components/content")
+    @Inject
+    Template contentPage;
+
+    @Location("components/context-selector")
+    @Inject
+    Template contextSelectorPage;
+
+    @Location("components/custom-menus")
+    @Inject
+    Template customMenusPage;
+
+    @Location("components/divider")
+    @Inject
+    Template dividerPage;
+
+    @Location("components/empty-state")
+    @Inject
+    Template emptyStatePage;
+
+    @Location("components/expandable-section")
+    @Inject
+    Template expandableSectionPage;
+
+    @Location("components/helper-text")
+    @Inject
+    Template helperTextPage;
+
+    @Location("components/hint")
+    @Inject
+    Template hintPage;
+
+    @Location("components/icon")
+    @Inject
+    Template iconPage;
+
+    @Location("components/label")
+    @Inject
+    Template labelPage;
+
+    @Location("components/list")
+    @Inject
+    Template listPage;
+
+    @Location("components/panel")
+    @Inject
+    Template panelPage;
+
+    @Location("components/progress")
+    @Inject
+    Template progressPage;
+
+    @Location("components/skeleton")
+    @Inject
+    Template skeletonPage;
+
+    @Location("components/spinner")
+    @Inject
+    Template spinnerPage;
+
+    @Location("components/timestamp")
+    @Inject
+    Template timestampPage;
+
+    @Location("components/title")
+    @Inject
+    Template titlePage;
+
+    @Location("components/truncate")
+    @Inject
+    Template truncatePage;
+
+    @Location("components/data-list")
+    @Inject
+    Template dataListPage;
+
+    @Location("components/description-list")
+    @Inject
+    Template descriptionListPage;
+
+    @Location("components/form")
+    @Inject
+    Template formPage;
+
+    @Location("components/form-control")
+    @Inject
+    Template formControlPage;
+
+    @Location("components/form-select")
+    @Inject
+    Template formSelectPage;
+
+    @Location("components/number-input")
+    @Inject
+    Template numberInputPage;
+
+    @Location("components/radio")
+    @Inject
+    Template radioPage;
+
+    @Location("components/switch")
+    @Inject
+    Template switchPage;
+
+    @Location("components/text-area")
+    @Inject
+    Template textAreaPage;
+
+    @Location("components/text-input")
+    @Inject
+    Template textInputPage;
+
+    @Location("components/text-input-group")
+    @Inject
+    Template textInputGroupPage;
+
+    @Location("components/toggle-group")
+    @Inject
+    Template toggleGroupPage;
+
+    @Location("components/simple-list")
+    @Inject
+    Template simpleListPage;
+
+    @Location("components/simple-file-upload")
+    @Inject
+    Template simpleFileUploadPage;
+
+    @Location("components/tile")
+    @Inject
+    Template tilePage;
+
+    @Location("components/date-picker")
+    @Inject
+    Template datePickerPage;
+
+    @Location("components/dropdown")
+    @Inject
+    Template dropdownPage;
+
+    @Location("components/drawer")
+    @Inject
+    Template drawerPage;
+
+    @Location("components/inline-edit")
+    @Inject
+    Template inlineEditPage;
+
+    @Location("components/input-group")
+    @Inject
+    Template inputGroupPage;
+
+    @Location("components/jump-links")
+    @Inject
+    Template jumpLinksPage;
+
+    @Location("components/menu")
+    @Inject
+    Template menuPage;
+
+    @Location("components/menu-toggle")
+    @Inject
+    Template menuTogglePage;
+
+    @Location("components/modal")
+    @Inject
+    Template modalPage;
+
+    @Location("components/notification-badge")
+    @Inject
+    Template notificationBadgePage;
+
+    @Location("components/notification-drawer")
+    @Inject
+    Template notificationDrawerPage;
+
+    @Location("components/overflow-menu")
+    @Inject
+    Template overflowMenuPage;
+
+    @Location("components/popover")
+    @Inject
+    Template popoverPage;
+
+    @Location("components/tooltip")
+    @Inject
+    Template tooltipPage;
+
+    @Location("components/progress-stepper")
+    @Inject
+    Template progressStepperPage;
+
+    @Location("components/login-page")
+    @Inject
+    Template loginPagePage;
+
+    @Location("components/masthead")
+    @Inject
+    Template mastheadPage;
+
+    @Location("components/navigation")
+    @Inject
+    Template navigationPage;
+
+    @Location("components/page")
+    @Inject
+    Template pagePage;
+
+    @Location("components/pagination")
+    @Inject
+    Template paginationPage;
+
+    @Location("components/search-input")
+    @Inject
+    Template searchInputPage;
+
+    @Location("components/select")
+    @Inject
+    Template selectPage;
+
+    @Location("components/sidebar")
+    @Inject
+    Template sidebarPage;
+
+    @Location("components/skip-to-content")
+    @Inject
+    Template skipToContentPage;
+
+    @Location("components/slider")
+    @Inject
+    Template sliderPage;
+
+    @Location("components/tabs")
+    @Inject
+    Template tabsPage;
+
+    @Location("components/toolbar")
+    @Inject
+    Template toolbarPage;
+
+    @Location("components/tree-view")
+    @Inject
+    Template treeViewPage;
+
+    @Location("components/wizard")
+    @Inject
+    Template wizardPage;
+
+    @Location("components/application-launcher")
+    @Inject
+    Template applicationLauncherPage;
+
+    @Location("components/date-and-time-picker")
+    @Inject
+    Template dateAndTimePickerPage;
+
+    @Location("components/drag-and-drop")
+    @Inject
+    Template dragAndDropPage;
+
+    @Location("components/dual-list-selector")
+    @Inject
+    Template dualListSelectorPage;
+
+    @Location("components/multiple-file-upload")
+    @Inject
+    Template multipleFileUploadPage;
+
+    @Location("components/options-menu")
+    @Inject
+    Template optionsMenuPage;
+
+    @Location("components/password-generator")
+    @Inject
+    Template passwordGeneratorPage;
+
+    @Location("components/password-strength")
+    @Inject
+    Template passwordStrengthPage;
+
+    @Location("components/table")
+    @Inject
+    Template tablePage;
+
+    @Location("components/time-picker")
+    @Inject
+    Template timePickerPage;
 
     @GET
     @Path("/about-modal")
@@ -206,6 +535,637 @@ public class ComponentRoutes {
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance banner() {
         return bannerPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/brand")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance brand() {
+        return brandPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/breadcrumb")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance breadcrumb() {
+        List<Map<String, Object>> basicItems = List.of(
+            Map.of("text", "Section home", "href", "#"),
+            Map.of("text", "Section title", "href", "#"),
+            Map.of("text", "Section title", "href", "#"),
+            Map.of("text", "Section landing", "href", "#", "current", true)
+        );
+
+        List<Map<String, Object>> noHomeItems = List.of(
+            Map.of("text", "Section home"),
+            Map.of("text", "Section title", "href", "#"),
+            Map.of("text", "Section title", "href", "#"),
+            Map.of("text", "Section title", "href", "#"),
+            Map.of("text", "Section landing", "href", "#", "current", true)
+        );
+
+        List<Map<String, Object>> headingItems = List.of(
+            Map.of("text", "Section home", "href", "#"),
+            Map.of("text", "Section title", "href", "#"),
+            Map.of("text", "Section title", "href", "#"),
+            Map.of("text", "Section landing", "href", "#", "heading", true)
+        );
+
+        return breadcrumbPage.data("applicationName", "quarkus-pha")
+            .data("basicItems", basicItems)
+            .data("noHomeItems", noHomeItems)
+            .data("headingItems", headingItems);
+    }
+
+    @GET
+    @Path("/button")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance button() {
+        return buttonPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/calendar-month")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance calendarMonth() {
+        // October 2020 — date selected (day 9 = current, day 21 = selected)
+        List<List<Map<String, Object>>> selectedWeeks = List.of(
+            List.of(day(29, "adjacent"), day(30, "adjacent"), day(1), day(2), day(3), day(4), day(5)),
+            List.of(day(6), day(7), day(8), day(9, "current"), day(10), day(11), day(12)),
+            List.of(day(13), day(14), day(15), day(16), day(17), day(18), day(19)),
+            List.of(day(20), day(21, "selected"), day(22), day(23), day(24), day(25), day(26)),
+            List.of(day(27), day(28), day(29), day(30), day(31), day(1, "adjacent"), day(2, "adjacent"))
+        );
+
+        // October 2020 — date range (day 9 = current, range 11–29)
+        List<List<Map<String, Object>>> rangeWeeks = List.of(
+            List.of(day(29, "adjacent"), day(30, "adjacent"), day(1), day(2), day(3), day(4), day(5)),
+            List.of(day(6), day(7), day(8), day(9, "current"), day(10),
+                    day(11, "selected", "startRange", "inRange"), day(12, "inRange")),
+            List.of(day(13, "inRange"), day(14, "inRange"), day(15, "inRange"), day(16, "inRange"),
+                    day(17, "inRange"), day(18, "inRange"), day(19, "inRange")),
+            List.of(day(20, "inRange"), day(21, "inRange"), day(22, "inRange"), day(23, "inRange"),
+                    day(24, "inRange"), day(25, "inRange"), day(26, "inRange")),
+            List.of(day(27, "inRange"), day(28, "inRange"),
+                    day(29, "selected", "endRange", "inRange"), day(30), day(31),
+                    day(1, "adjacent"), day(2, "adjacent"))
+        );
+
+        return calendarMonthPage.data("applicationName", "quarkus-pha")
+            .data("selectedMonth", "October").data("selectedYear", 2020).data("selectedWeeks", selectedWeeks)
+            .data("rangeMonth", "October").data("rangeYear", 2020).data("rangeWeeks", rangeWeeks);
+    }
+
+    @GET
+    @Path("/card")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance card() {
+        return cardPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/checkbox")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance checkbox() {
+        return checkboxPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/chip")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance chip() {
+        return chipPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/clipboard-copy")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance clipboardCopy() {
+        return clipboardCopyPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/code-block")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance codeBlock() {
+        return codeBlockPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/code-editor")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance codeEditor() {
+        return codeEditorPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/content")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance content() {
+        return contentPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/context-selector")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance contextSelector() {
+        return contextSelectorPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/custom-menus")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance customMenus() {
+        return customMenusPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/divider")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance divider() {
+        return dividerPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/empty-state")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance emptyState() {
+        return emptyStatePage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/expandable-section")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance expandableSection() {
+        return expandableSectionPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/helper-text")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance helperText() {
+        return helperTextPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/hint")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance hint() {
+        return hintPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/icon")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance icon() {
+        return iconPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/label")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance label() {
+        return labelPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/list")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance list() {
+        return listPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/panel")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance panel() {
+        return panelPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/progress")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance progress() {
+        return progressPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/skeleton")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance skeleton() {
+        return skeletonPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/spinner")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance spinner() {
+        return spinnerPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/timestamp")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance timestamp() {
+        return timestampPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/title")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance title() {
+        return titlePage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/truncate")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance truncate() {
+        return truncatePage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/data-list")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance dataList() {
+        return dataListPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/description-list")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance descriptionList() {
+        return descriptionListPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/form")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance form() {
+        return formPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/form-control")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance formControl() {
+        return formControlPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/form-select")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance formSelect() {
+        return formSelectPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/number-input")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance numberInput() {
+        return numberInputPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/radio")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance radio() {
+        return radioPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/switch")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance switchComponent() {
+        return switchPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/text-area")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance textArea() {
+        return textAreaPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/text-input")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance textInput() {
+        return textInputPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/text-input-group")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance textInputGroup() {
+        return textInputGroupPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/toggle-group")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance toggleGroup() {
+        return toggleGroupPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/simple-list")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance simpleList() {
+        return simpleListPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/simple-file-upload")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance simpleFileUpload() {
+        return simpleFileUploadPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/tile")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance tile() {
+        return tilePage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/date-picker")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance datePicker() {
+        return datePickerPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/dropdown")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance dropdown() {
+        return dropdownPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/drawer")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance drawer() {
+        return drawerPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/inline-edit")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance inlineEdit() {
+        return inlineEditPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/input-group")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance inputGroup() {
+        return inputGroupPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/jump-links")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance jumpLinks() {
+        return jumpLinksPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/menu")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance menu() {
+        return menuPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/menu-toggle")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance menuToggle() {
+        return menuTogglePage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/modal")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance modal() {
+        return modalPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/notification-badge")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance notificationBadge() {
+        return notificationBadgePage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/notification-drawer")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance notificationDrawer() {
+        return notificationDrawerPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/overflow-menu")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance overflowMenu() {
+        return overflowMenuPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/popover")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance popover() {
+        return popoverPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/tooltip")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance tooltip() {
+        return tooltipPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/progress-stepper")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance progressStepper() {
+        return progressStepperPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/login-page")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance loginPage() {
+        return loginPagePage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/masthead")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance masthead() {
+        return mastheadPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/navigation")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance navigation() {
+        return navigationPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/page")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance page() {
+        return pagePage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/pagination")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance pagination() {
+        return paginationPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/search-input")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance searchInput() {
+        return searchInputPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/select")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance selectComponent() {
+        return selectPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/sidebar")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance sidebar() {
+        return sidebarPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/skip-to-content")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance skipToContent() {
+        return skipToContentPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/slider")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance slider() {
+        return sliderPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/tabs")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance tabs() {
+        return tabsPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/toolbar")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance toolbar() {
+        return toolbarPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/tree-view")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance treeView() {
+        return treeViewPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/wizard")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance wizard() {
+        return wizardPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/application-launcher")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance applicationLauncher() {
+        return applicationLauncherPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/date-and-time-picker")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance dateAndTimePicker() {
+        return dateAndTimePickerPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/drag-and-drop")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance dragAndDrop() {
+        return dragAndDropPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/dual-list-selector")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance dualListSelector() {
+        return dualListSelectorPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/multiple-file-upload")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance multipleFileUpload() {
+        return multipleFileUploadPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/options-menu")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance optionsMenu() {
+        return optionsMenuPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/password-generator")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance passwordGenerator() {
+        return passwordGeneratorPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/password-strength")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance passwordStrength() {
+        return passwordStrengthPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/table")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance tableComponent() {
+        return tablePage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/time-picker")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance timePicker() {
+        return timePickerPage.data("applicationName", "quarkus-pha");
+    }
+
+    private static Map<String, Object> day(int date, String... flags) {
+        Map<String, Object> d = new HashMap<>();
+        d.put("date", date);
+        for (String flag : flags) d.put(flag, true);
+        return d;
     }
 
     @GET

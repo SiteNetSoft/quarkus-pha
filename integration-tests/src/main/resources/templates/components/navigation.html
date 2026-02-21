@@ -1,0 +1,20 @@
+{#include layouts/base}
+{#title}Navigation{/title}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Navigation</h1>
+  <p>Navigation links allow users to move through an application.</p>
+  <section style="margin-top: 2rem;">
+    <h2 id="vertical-heading">Vertical</h2>
+    <p>A vertical navigation list.</p>
+    {#include components/navigation/nav id="nav-vertical"}{#content}<li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link pf-m-current" aria-current="page">Link 1</a></li><li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link">Link 2</a></li><li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link">Link 3</a></li>{/content}{/include}
+  </section>
+  <section style="margin-top: 2rem;">
+    <h2 id="horizontal-heading">Horizontal</h2>
+    <p>A horizontal navigation list.</p>
+    {#include components/navigation/nav id="nav-horizontal" horizontal=true}{#content}<li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link pf-m-current" aria-current="page">Link 1</a></li><li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link">Link 2</a></li><li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link">Link 3</a></li>{/content}{/include}
+  </section>
+</div>
+{/body}
+{/include}

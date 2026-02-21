@@ -1,0 +1,5 @@
+{! Button — PatternFly v6 !}
+{! Parameters: id (required), variant (required — primary/secondary/tertiary/danger/warning/link/plain/control) !}
+{! Optional: disabled, small, block, displayLg, inline, type (submit/reset), href, ariaLabel !}
+{! Block: content (required) !}
+{#if href??}<a href="{href}" class="pf-v6-c-button pf-m-{variant}{#if small??} pf-m-small{/if}{#if block??} pf-m-block{/if}{#if displayLg??} pf-m-display-lg{/if}{#if inline??} pf-m-inline{/if}{#if disabled??} pf-m-disabled{/if}" id="{id}"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}{#if disabled??} aria-disabled="true" tabindex="-1"{/if}>{#insert content}{/insert}</a>{#else}<button class="pf-v6-c-button pf-m-{variant}{#if small??} pf-m-small{/if}{#if block??} pf-m-block{/if}{#if displayLg??} pf-m-display-lg{/if}{#if inline??} pf-m-inline{/if}" type="{#if type??}{type}{#else}button{/if}" id="{id}"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}{#if disabled??} disabled{/if}>{#insert content}{/insert}</button>{/if}
