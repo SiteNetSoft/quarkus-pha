@@ -16,8 +16,8 @@ QUARKUS_IMAGE="registry.access.redhat.com/ubi9/openjdk-25-runtime:1.24"
 PLAYWRIGHT_IMAGE="mcr.microsoft.com/playwright:v1.50.1-noble"
 
 cmd_start() {
-  if curl -sf http://localhost:8080 > /dev/null 2>&1; then
-    echo "==> Quarkus already running on :8080"
+  if curl -sf http://localhost:9090 > /dev/null 2>&1; then
+    echo "==> Quarkus already running on :9090"
     return
   fi
 
@@ -38,7 +38,7 @@ cmd_start() {
 
   echo "==> Waiting for Quarkus to start..."
   for i in $(seq 1 30); do
-    if curl -sf http://localhost:8080 > /dev/null 2>&1; then
+    if curl -sf http://localhost:9090 > /dev/null 2>&1; then
       echo "==> Quarkus is ready"
       return
     fi
@@ -67,11 +67,11 @@ cmd_test() {
   }
   trap cleanup EXIT
 
-  if ! curl -sf http://localhost:8080 > /dev/null 2>&1; then
+  if ! curl -sf http://localhost:9090 > /dev/null 2>&1; then
     cmd_start
     QUARKUS_STARTED=1
   else
-    echo "==> Quarkus already running on :8080"
+    echo "==> Quarkus already running on :9090"
   fi
 
   echo "==> Running Playwright tests in Podman container..."
