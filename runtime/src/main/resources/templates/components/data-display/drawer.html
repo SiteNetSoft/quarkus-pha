@@ -1,13 +1,13 @@
 {! Drawer — PatternFly v6 !}
 {! Parameters: id, inline (optional), panelLeft (optional), panelBottom (optional), static (optional) !}
-<div class="pf-v6-c-drawer{#if inline??} pf-m-inline{/if}{#if panelLeft??} pf-m-panel-left{/if}{#if panelBottom??} pf-m-panel-bottom{/if}{#if static??} pf-m-static{/if}" id="{id}" x-data="{ expanded: {#if static??}true{#else}false{/if} }" :class="{ 'pf-m-expanded': expanded }">
+<div class="pf-v6-c-drawer{#if inline??} pf-m-inline{/if}{#if panelLeft??} pf-m-panel-left{/if}{#if panelBottom??} pf-m-panel-bottom{/if}{#if static??} pf-m-static{/if}" id="{id}" x-data="{ expanded: {#if static??}true{#else}false{/if} }" :class="{ 'pf-m-expanded': expanded }" :aria-expanded="expanded.toString()">
   <div class="pf-v6-c-drawer__main">
     <div class="pf-v6-c-drawer__content">
       <div class="pf-v6-c-drawer__body">
         {#insert content}{/insert}
       </div>
     </div>
-    <div class="pf-v6-c-drawer__panel" x-show="expanded" x-cloak>
+    <div class="pf-v6-c-drawer__panel" x-show="expanded" x-cloak :aria-hidden="(!expanded).toString()">
       <div class="pf-v6-c-drawer__body">
         <div class="pf-v6-c-drawer__head">
           {#insert panelTitle}Panel title{/insert}

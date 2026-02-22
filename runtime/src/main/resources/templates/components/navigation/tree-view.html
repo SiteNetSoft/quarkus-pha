@@ -1,7 +1,23 @@
 {! Tree view — PatternFly v6 !}
 {! Parameters: id, compact (optional), guides (optional) !}
-<div class="pf-v6-c-tree-view{#if compact??} pf-m-compact{/if}{#if guides??} pf-m-guides{/if}" id="{id}">
-  <ul class="pf-v6-c-tree-view__list" role="tree">
+<div class="pf-v6-c-tree-view{#if compact??} pf-m-compact{/if}{#if guides??} pf-m-guides{/if}" id="{id}" x-data="{
+  handleKeyNav(e) {
+    var items = Array.from($el.querySelectorAll('[role=treeitem]'));
+    var idx = items.indexOf(e.target.closest('[role=treeitem]'));
+    if (idx < 0) return;
+    var next = -1;
+    if (e.key === 'ArrowDown') next = Math.min(idx + 1, items.length - 1);
+    else if (e.key === 'ArrowUp') next = Math.max(idx - 1, 0);
+    else if (e.key === 'Home') next = 0;
+    else if (e.key === 'End') next = items.length - 1;
+    if (next >= 0 && next !== idx) {
+      e.preventDefault();
+      var btn = items[next].querySelector('.pf-v6-c-tree-view__node');
+      if (btn) btn.focus();
+    }
+  }
+}">
+  <ul class="pf-v6-c-tree-view__list" role="tree" @keydown="handleKeyNav($event)">
     {#insert content}{/insert}
   </ul>
 </div>

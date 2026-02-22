@@ -1,0 +1,33 @@
+{! Lazy Modal — HTMX modal with lazy-loaded content !}
+{! Parameters: id, titleText, loadUrl, size (optional: sm|md|lg) !}
+<div class="pf-v6-c-backdrop" id="{id}-backdrop" x-data="{ open: false, loaded: false }" x-show="open" x-cloak @open-modal.window="if ($event.detail === '{id}') open = true" @keydown.escape.window="if (open) open = false">
+  <div class="pf-v6-c-bullseye">
+    <div class="pf-v6-c-modal-box{#if size??} pf-m-{size}{/if}" role="dialog" aria-modal="true" aria-labelledby="{id}-title">
+      <div class="pf-v6-c-modal-box__close">
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="open = false">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+      <header class="pf-v6-c-modal-box__header">
+        <h1 class="pf-v6-c-modal-box__title" id="{id}-title">
+          <span class="pf-v6-c-modal-box__title-text">{titleText}</span>
+        </h1>
+      </header>
+      <div class="pf-v6-c-modal-box__body" id="{id}-body"
+           hx-get="{loadUrl}"
+           hx-trigger="intersect once"
+           hx-indicator="#{id}-spinner">
+        <div class="htmx-indicator" id="{id}-spinner" style="text-align: center; padding: 2rem;">
+          <span class="pf-v6-c-spinner pf-m-lg" role="progressbar" aria-label="Loading content">
+            <span class="pf-v6-c-spinner__clipper"></span>
+            <span class="pf-v6-c-spinner__lead-ball"></span>
+            <span class="pf-v6-c-spinner__tail-ball"></span>
+          </span>
+        </div>
+      </div>
+      <footer class="pf-v6-c-modal-box__footer">
+        {#insert footer}<button class="pf-v6-c-button pf-m-link" type="button" @click="open = false">Close</button>{/insert}
+      </footer>
+    </div>
+  </div>
+</div>

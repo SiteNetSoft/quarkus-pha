@@ -400,6 +400,22 @@ public class ComponentRoutes {
     @Inject
     Template chartPage;
 
+    @Location("components/live-search")
+    @Inject
+    Template liveSearchPage;
+
+    @Location("components/infinite-scroll")
+    @Inject
+    Template infiniteScrollPage;
+
+    @Location("components/click-to-load")
+    @Inject
+    Template clickToLoadPage;
+
+    @Location("components/lazy-modal")
+    @Inject
+    Template lazyModalPage;
+
     @GET
     @Path("/about-modal")
     @Produces(MediaType.TEXT_HTML)
@@ -1223,5 +1239,33 @@ public class ComponentRoutes {
 
         return alertPage.data("applicationName", "quarkus-pha")
             .data("sampleActionLinks", sampleActionLinks);
+    }
+
+    @GET
+    @Path("/live-search")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance liveSearch() {
+        return liveSearchPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/infinite-scroll")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance infiniteScroll() {
+        return infiniteScrollPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/click-to-load")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance clickToLoad() {
+        return clickToLoadPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/lazy-modal")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance lazyModal() {
+        return lazyModalPage.data("applicationName", "quarkus-pha");
     }
 }

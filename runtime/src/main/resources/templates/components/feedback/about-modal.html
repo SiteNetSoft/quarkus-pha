@@ -3,7 +3,8 @@
 {! Blocks: content, strapline !}
 <div x-data="{ open: false }"
      @open-about-modal.window="open = true"
-     @keydown.escape.window="open = false">
+     @keydown.escape.window="if (open) open = false"
+     x-effect="if (open) PHA.trapFocus($el); else PHA.releaseFocus($el);">
   <div class="pf-v6-c-backdrop"
        x-show="open"
        x-transition.opacity
