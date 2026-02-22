@@ -1,0 +1,76 @@
+{#include layouts/sidebar}
+{#title}Data Management — {applicationName}{/title}
+{#head}<link rel="stylesheet" href="/web/css/components/htmx.css">{/head}
+{#brand}<a href="/demos/dashboard" class="pf-v6-c-masthead__brand" style="font-weight: 700; text-decoration: none; color: inherit;">{applicationName}</a>{/brand}
+{#sidebarNav}
+  <li class="pf-v6-c-nav__item"><a href="/demos/dashboard" class="pf-v6-c-nav__link">Dashboard</a></li>
+  <li class="pf-v6-c-nav__item"><a href="/demos/data-management" class="pf-v6-c-nav__link pf-m-current" aria-current="page">Data Management</a></li>
+  <li class="pf-v6-c-nav__item"><a href="/demos/settings" class="pf-v6-c-nav__link">Settings</a></li>
+  <li class="pf-v6-c-nav__item"><a href="/demos/landing" class="pf-v6-c-nav__link">Landing Page</a></li>
+  <li class="pf-v6-c-nav__item pf-m-separator" role="separator"></li>
+  <li class="pf-v6-c-nav__item"><a href="/" class="pf-v6-c-nav__link">&larr; Component Showcase</a></li>
+{/sidebarNav}
+{#mainContent}
+
+  <section class="pf-v6-c-page__main-section">
+    <div data-pf-content="true" class="pf-v6-c-content">
+      <h1 id="data-management-heading">Data Management</h1>
+      <p>Search, browse, and manage infrastructure items using HTMX-powered server interactions.</p>
+    </div>
+  </section>
+
+  {! Toolbar with live search !}
+  <section class="pf-v6-c-page__main-section pf-m-no-padding pf-m-padding-on-md">
+    <div class="pf-v6-c-toolbar" id="data-toolbar">
+      <div class="pf-v6-c-toolbar__content">
+        <div class="pf-v6-c-toolbar__content-section">
+          <div class="pf-v6-c-toolbar__item" style="flex: 1; max-width: 400px;">
+            {#include components/htmx/live-search id="data-search" searchUrl="/api/htmx/search" targetId="data-search-results" placeholder="Filter infrastructure..." /}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {! Search results !}
+  <section class="pf-v6-c-page__main-section" id="data-results-section">
+    <div class="pf-v6-c-card">
+      <div class="pf-v6-c-card__header">
+        <div class="pf-v6-c-card__header-main">
+          <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Search Results</span></div>
+        </div>
+      </div>
+      <div class="pf-v6-c-card__body">
+        <div class="pf-v6-c-menu" style="box-shadow: none; border: none;">
+          <div class="pf-v6-c-menu__content">
+            <ul class="pf-v6-c-menu__list" id="data-search-results" role="listbox">
+              <li class="pf-v6-c-menu__list-item">
+                <div class="pf-v6-c-menu__item">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Type in the search box above to filter...</span></span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {! Click-to-load section !}
+  <section class="pf-v6-c-page__main-section" id="data-browse-section">
+    <div class="pf-v6-c-card">
+      <div class="pf-v6-c-card__header">
+        <div class="pf-v6-c-card__header-main">
+          <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Browse All Items</span></div>
+        </div>
+      </div>
+      <div class="pf-v6-c-card__body">
+        <div class="pf-v6-c-data-list" id="data-browse-list" role="list">
+        </div>
+        {#include components/htmx/click-to-load id="data-load-more-0" loadUrl="/api/htmx/load-more?page=0" /}
+      </div>
+    </div>
+  </section>
+
+{/mainContent}
+{/include}

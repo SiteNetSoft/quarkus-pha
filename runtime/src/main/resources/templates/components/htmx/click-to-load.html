@@ -1,0 +1,15 @@
+{! Click to Load — HTMX button that replaces itself with new content !}
+{! Parameters: id, loadUrl, buttonText (optional) !}
+<div class="pha-c-htmx-load-more" id="{id}">
+  <button class="pf-v6-c-button pf-m-primary"
+          type="button"
+          hx-get="{loadUrl}"
+          hx-swap="outerHTML"
+          hx-target="#{id}"
+          hx-indicator="#{id}-indicator">
+    {#if buttonText??}{buttonText}{#else}Load more{/if}
+    <span class="htmx-indicator" id="{id}-indicator" aria-hidden="true">
+      <span class="pha-c-htmx-spinner" style="margin-left: 0.5em;"></span>
+    </span>
+  </button>
+</div>

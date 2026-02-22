@@ -12,10 +12,10 @@ test.describe("Smoke tests", () => {
     await expect(heading).toHaveText("All components");
   });
 
-  test("gallery shows 92 component cards", async ({ page }) => {
+  test("gallery shows component cards", async ({ page }) => {
     await page.goto("/");
     const cards = page.locator(".pf-v6-l-gallery .pf-v6-c-card");
-    await expect(cards).toHaveCount(96);
+    await expect(cards).toHaveCount(104);
   });
 
   test("implemented components link to demo pages", async ({ page }) => {
@@ -307,6 +307,26 @@ test.describe("Smoke tests", () => {
 
     const chartLink = page.locator('a[href="/components/chart"]');
     await expect(chartLink).toBeVisible();
+
+    const liveSearchLink = page.locator('a[href="/components/live-search"]');
+    await expect(liveSearchLink).toBeVisible();
+
+    const infiniteScrollLink = page.locator('a[href="/components/infinite-scroll"]');
+    await expect(infiniteScrollLink).toBeVisible();
+
+    const clickToLoadLink = page.locator('a[href="/components/click-to-load"]');
+    await expect(clickToLoadLink).toBeVisible();
+
+    const lazyModalLink = page.locator('a[href="/components/lazy-modal"]');
+    await expect(lazyModalLink).toBeVisible();
+  });
+
+  test("demo page links are visible on index", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.locator('#demo-dashboard')).toBeVisible();
+    await expect(page.locator('#demo-data-management')).toBeVisible();
+    await expect(page.locator('#demo-settings')).toBeVisible();
+    await expect(page.locator('#demo-landing')).toBeVisible();
   });
 
   test("search input filters component cards", async ({ page }) => {

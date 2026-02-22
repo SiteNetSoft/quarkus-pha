@@ -1,0 +1,35 @@
+/* HTMX — indicator and transition styles for server-driven UI */
+
+.htmx-indicator {
+  display: none;
+}
+
+.htmx-request .htmx-indicator,
+.htmx-request.htmx-indicator {
+  display: inline-block;
+}
+
+.pha-c-htmx-spinner {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  border: 2px solid var(--pf-t--global--border--color--default, #d2d2d2);
+  border-top-color: var(--pf-t--global--color--brand--default, #06c);
+  border-radius: 50%;
+  animation: pha-spin 0.6s linear infinite;
+}
+
+@keyframes pha-spin {
+  to { transform: rotate(360deg); }
+}
+
+.pha-c-htmx-sentinel {
+  height: 1px;
+  width: 100%;
+}
+
+.pha-c-htmx-load-more {
+  text-align: center;
+  padding: var(--pf-t--global--spacer--md, 1rem);
+}

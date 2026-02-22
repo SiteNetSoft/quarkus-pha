@@ -1,0 +1,115 @@
+{#include layouts/sidebar}
+{#title}Dashboard — {applicationName}{/title}
+{#head}
+<link rel="stylesheet" href="/web/css/components/chart.css">
+<link rel="stylesheet" href="/web/css/components/htmx.css">
+{/head}
+{#brand}<a href="/demos/dashboard" class="pf-v6-c-masthead__brand" style="font-weight: 700; text-decoration: none; color: inherit;">{applicationName}</a>{/brand}
+{#sidebarNav}
+  <li class="pf-v6-c-nav__item"><a href="/demos/dashboard" class="pf-v6-c-nav__link pf-m-current" aria-current="page">Dashboard</a></li>
+  <li class="pf-v6-c-nav__item"><a href="/demos/data-management" class="pf-v6-c-nav__link">Data Management</a></li>
+  <li class="pf-v6-c-nav__item"><a href="/demos/settings" class="pf-v6-c-nav__link">Settings</a></li>
+  <li class="pf-v6-c-nav__item"><a href="/demos/landing" class="pf-v6-c-nav__link">Landing Page</a></li>
+  <li class="pf-v6-c-nav__item pf-m-separator" role="separator"></li>
+  <li class="pf-v6-c-nav__item"><a href="/" class="pf-v6-c-nav__link">&larr; Component Showcase</a></li>
+{/sidebarNav}
+{#mainContent}
+
+  {! Alert banner !}
+  <div class="pf-v6-c-page__main-section pf-m-no-padding pf-m-padding-on-md">
+    <div class="pf-v6-c-alert pf-m-info pf-m-inline" id="dashboard-alert">
+      <div class="pf-v6-c-alert__icon"><i class="fas fa-info-circle" aria-hidden="true"></i></div>
+      <p class="pf-v6-c-alert__title">System maintenance scheduled for Sunday 02:00 UTC.</p>
+    </div>
+  </div>
+
+  {! Stat cards !}
+  <section class="pf-v6-c-page__main-section" id="dashboard-stats">
+    <div class="pf-v6-l-gallery pf-m-gutter" style="--pf-v6-l-gallery--GridTemplateColumns--min: 200px;">
+      {#for stat in stats}
+      <div class="pf-v6-c-card" id="stat-card-{stat_count}">
+        <div class="pf-v6-c-card__header">
+          <div class="pf-v6-c-card__header-main">
+            <div class="pf-v6-c-card__title">
+              <span class="pf-v6-c-card__title-text"><i class="{stat.icon}" aria-hidden="true" style="margin-right: 0.5rem;"></i>{stat.title}</span>
+            </div>
+          </div>
+        </div>
+        <div class="pf-v6-c-card__body">
+          <span class="pf-v6-c-title pf-m-3xl">{stat.value}</span>
+        </div>
+      </div>
+      {/for}
+    </div>
+  </section>
+
+  {! Chart placeholder !}
+  <section class="pf-v6-c-page__main-section" id="dashboard-chart-section">
+    <div class="pf-v6-c-card">
+      <div class="pf-v6-c-card__header">
+        <div class="pf-v6-c-card__header-main">
+          <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Request Volume (7 days)</span></div>
+        </div>
+      </div>
+      <div class="pf-v6-c-card__body">
+        <div class="pha-c-chart" id="dashboard-chart">
+          <div class="pha-c-chart__canvas" id="dashboard-chart-canvas"></div>
+        </div>
+        <script src="/web/vendor/echarts/echarts.min.js"></script>
+        <script>
+          (function() {
+            var el = document.getElementById('dashboard-chart-canvas');
+            if (!el || typeof echarts === 'undefined') return;
+            var chart = echarts.init(el);
+            var days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+            chart.setOption({
+              tooltip: { trigger: 'axis' },
+              xAxis: { type: 'category', data: days },
+              yAxis: { type: 'value' },
+              series: [
+                { name: 'Requests', type: 'line', smooth: true, data: [820, 932, 901, 1034, 1290, 1130, 1420], areaStyle: {} },
+                { name: 'Errors', type: 'bar', data: [12, 8, 15, 7, 22, 5, 10] }
+              ]
+            });
+            window.addEventListener('resize', function() { chart.resize(); });
+          })();
+        </script>
+      </div>
+    </div>
+  </section>
+
+  {! Recent activity table !}
+  <section class="pf-v6-c-page__main-section" id="dashboard-activity">
+    <div class="pf-v6-c-card">
+      <div class="pf-v6-c-card__header">
+        <div class="pf-v6-c-card__header-main">
+          <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Recent Activity</span></div>
+        </div>
+      </div>
+      <div class="pf-v6-c-card__body">
+        <table class="pf-v6-c-table pf-m-compact pf-m-grid-md" role="grid" id="activity-table">
+          <thead>
+            <tr role="row">
+              <th role="columnheader" scope="col">Time</th>
+              <th role="columnheader" scope="col">Event</th>
+              <th role="columnheader" scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody role="rowgroup">
+            {#for item in recentActivity}
+            <tr role="row">
+              <td role="cell" data-label="Time">{item.time}</td>
+              <td role="cell" data-label="Event">{item.event}</td>
+              <td role="cell" data-label="Status">
+                <span class="pf-v6-c-label pf-m-compact{#if item.status is 'Warning'} pf-m-gold{#else if item.status is 'Info'} pf-m-blue{#else} pf-m-green{/if}"><span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text">{item.status}</span></span></span>
+              </td>
+            </tr>
+            {/for}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+{/mainContent}
+{/include}

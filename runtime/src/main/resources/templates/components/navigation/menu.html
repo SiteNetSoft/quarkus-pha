@@ -1,8 +1,20 @@
 {! Menu — PatternFly v6 !}
 {! Parameters: id, plain (optional), scrollable (optional) !}
-<div class="pf-v6-c-menu{#if plain??} pf-m-plain{/if}{#if scrollable??} pf-m-scrollable{/if}" id="{id}">
+<div class="pf-v6-c-menu{#if plain??} pf-m-plain{/if}{#if scrollable??} pf-m-scrollable{/if}" id="{id}" x-data="{
+  handleKeyNav(e) {
+    var items = Array.from($el.querySelectorAll('[role=menuitem]'));
+    var idx = items.indexOf(e.target);
+    if (idx < 0) return;
+    var next = -1;
+    if (e.key === 'ArrowDown') next = (idx + 1) % items.length;
+    else if (e.key === 'ArrowUp') next = (idx - 1 + items.length) % items.length;
+    else if (e.key === 'Home') next = 0;
+    else if (e.key === 'End') next = items.length - 1;
+    if (next >= 0) { e.preventDefault(); items[next].focus(); }
+  }
+}">
   <div class="pf-v6-c-menu__content">
-    <ul class="pf-v6-c-menu__list" role="menu">
+    <ul class="pf-v6-c-menu__list" role="menu" @keydown="handleKeyNav($event)">
       {#insert content}{/insert}
     </ul>
   </div>
