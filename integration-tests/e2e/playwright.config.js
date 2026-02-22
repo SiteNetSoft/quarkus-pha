@@ -15,7 +15,7 @@ export default defineConfig({
     ["list"]
   ],
   use: {
-    baseURL: "http://localhost:8080",
+    baseURL: "http://localhost:9090",
     trace: "on-first-retry",
     screenshot: "only-on-failure"
   },
