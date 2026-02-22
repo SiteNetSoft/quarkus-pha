@@ -1,0 +1,33 @@
+{! Document editor — PHA custom component wrapping Collabora Online !}
+{! Parameters: id, collaboraUrl (optional), wopiSrc (optional), accessToken (optional), !}
+{!             fileName (optional), readOnly (optional), lang (optional), height (optional) !}
+{! Requires: /web/js/alpine/components/document-editor.js loaded before Alpine !}
+{! Requires: /web/css/components/document-editor.css !}
+<div class="pha-c-document-editor" id="{id}"
+     x-data="phaDocumentEditor({ collaboraUrl: '{#if collaboraUrl??}{collaboraUrl}{/if}', wopiSrc: '{#if wopiSrc??}{wopiSrc}{/if}', accessToken: '{#if accessToken??}{accessToken}{/if}', fileName: '{#if fileName??}{fileName}{#else}Untitled{/if}', readOnly: {#if readOnly??}{readOnly}{#else}false{/if}, lang: '{#if lang??}{lang}{/if}' })">
+  {#insert content}{/insert}
+  <div class="pha-c-document-editor__body"{#if height??} style="min-height: {height}"{/if}>
+    <iframe class="pha-c-document-editor__frame"
+            title="{#if fileName??}{fileName}{#else}Document Editor{/if}"
+            sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-modals"
+            allow="clipboard-read; clipboard-write"></iframe>
+    <div class="pha-c-document-editor__empty" x-show="!connected">
+      <div class="pf-v6-c-empty-state pf-m-sm">
+        <div class="pf-v6-c-empty-state__content">
+          <div class="pf-v6-c-empty-state__header">
+            <div class="pf-v6-c-empty-state__icon">
+              <svg fill="currentColor" viewBox="0 0 384 512" width="1em" height="1em" aria-hidden="true"><path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128z"/></svg>
+            </div>
+            <div class="pf-v6-c-empty-state__title">
+              <h4 class="pf-v6-c-empty-state__title-text">No document loaded</h4>
+            </div>
+          </div>
+          <div class="pf-v6-c-empty-state__body">
+            Connect a Collabora Online server and provide a WOPI source URL to open a document.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {#insert footer}{/insert}
+</div>

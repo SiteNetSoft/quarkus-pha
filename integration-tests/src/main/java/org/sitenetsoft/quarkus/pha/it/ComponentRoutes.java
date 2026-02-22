@@ -392,6 +392,10 @@ public class ComponentRoutes {
     @Inject
     Template mapPage;
 
+    @Location("components/document-editor")
+    @Inject
+    Template documentEditorPage;
+
     @GET
     @Path("/about-modal")
     @Produces(MediaType.TEXT_HTML)
@@ -1181,6 +1185,13 @@ public class ComponentRoutes {
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance map() {
         return mapPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/document-editor")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance documentEditor() {
+        return documentEditorPage.data("applicationName", "quarkus-pha");
     }
 
     private static Map<String, Object> day(int date, String... flags) {
