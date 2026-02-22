@@ -1,0 +1,157 @@
+{#include layouts/base}
+{#title}Chart{/title}
+{#head}
+<link rel="stylesheet" href="/web/css/components/chart.css">
+<script src="/web/vendor/echarts/echarts.min.js"></script>
+<script src="/web/js/alpine/components/chart.js"></script>
+{/head}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+  <h1>Chart</h1>
+  <p>Interactive chart components powered by <a href="https://echarts.apache.org/" class="pf-v6-c-button pf-m-link pf-m-inline">Apache ECharts</a> with Alpine.js integration and a PatternFly-aligned color theme. Supports bar, line, pie, area, gauge, and mixed chart types.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="bar-heading">Bar Chart</h2>
+    <p>Basic bar chart showing quarterly revenue data.</p>
+    <div class="pha-c-chart" id="chart-bar"
+         x-data="phaChart({
+           option: {
+             tooltip: { trigger: 'axis' },
+             xAxis: { type: 'category', data: ['Q1', 'Q2', 'Q3', 'Q4'] },
+             yAxis: { type: 'value', name: 'Revenue ($K)' },
+             series: [
+               { name: '2024', type: 'bar', data: [320, 410, 390, 480] },
+               { name: '2025', type: 'bar', data: [380, 450, 470, 520] }
+             ],
+             legend: { data: ['2024', '2025'] }
+           }
+         })">
+      <div class="pha-c-chart__canvas"></div>
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="line-heading">Line Chart</h2>
+    <p>Multi-series line chart with smooth curves showing monthly trends.</p>
+    <div class="pha-c-chart" id="chart-line"
+         x-data="phaChart({
+           option: {
+             tooltip: { trigger: 'axis' },
+             xAxis: { type: 'category', data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] },
+             yAxis: { type: 'value', name: 'Users' },
+             series: [
+               { name: 'Active', type: 'line', smooth: true, data: [820, 932, 901, 934, 1290, 1330, 1320, 1450, 1500, 1620, 1780, 1900] },
+               { name: 'New', type: 'line', smooth: true, data: [120, 200, 150, 180, 270, 310, 250, 380, 320, 410, 390, 450] }
+             ],
+             legend: { data: ['Active', 'New'] }
+           }
+         })">
+      <div class="pha-c-chart__canvas"></div>
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="pie-heading">Pie Chart</h2>
+    <p>Donut chart showing resource distribution with labels.</p>
+    <div class="pha-c-chart" id="chart-pie"
+         x-data="phaChart({
+           option: {
+             tooltip: { trigger: 'item', formatter: '\{b}: \{c} (\{d}%)' },
+             legend: { orient: 'vertical', left: 'left' },
+             series: [{
+               name: 'Resources',
+               type: 'pie',
+               radius: ['40%', '70%'],
+               center: ['55%', '50%'],
+               avoidLabelOverlap: true,
+               itemStyle: { borderRadius: 6, borderColor: '#fff', borderWidth: 2 },
+               label: { show: true, formatter: '\{b}\n\{d}%' },
+               data: [
+                 { value: 1048, name: 'Compute' },
+                 { value: 735, name: 'Storage' },
+                 { value: 580, name: 'Network' },
+                 { value: 484, name: 'Database' },
+                 { value: 300, name: 'Other' }
+               ]
+             }]
+           }
+         })">
+      <div class="pha-c-chart__canvas"></div>
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="area-heading">Area Chart</h2>
+    <p>Stacked area chart showing traffic sources over time.</p>
+    <div class="pha-c-chart" id="chart-area"
+         x-data="phaChart({
+           option: {
+             tooltip: { trigger: 'axis' },
+             xAxis: { type: 'category', boundaryGap: false, data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] },
+             yAxis: { type: 'value', name: 'Visits' },
+             series: [
+               { name: 'Direct', type: 'line', stack: 'total', areaStyle: {}, data: [320, 332, 301, 334, 390, 330, 320] },
+               { name: 'Search', type: 'line', stack: 'total', areaStyle: {}, data: [120, 132, 101, 134, 90, 230, 210] },
+               { name: 'Referral', type: 'line', stack: 'total', areaStyle: {}, data: [220, 182, 191, 234, 290, 330, 310] }
+             ],
+             legend: { data: ['Direct', 'Search', 'Referral'] }
+           }
+         })">
+      <div class="pha-c-chart__canvas"></div>
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="gauge-heading">Gauge</h2>
+    <p>Dashboard gauge showing a single KPI metric.</p>
+    <div class="pha-c-chart" id="chart-gauge"
+         x-data="phaChart({
+           option: {
+             series: [{
+               type: 'gauge',
+               startAngle: 200,
+               endAngle: -20,
+               min: 0,
+               max: 100,
+               progress: { show: true, width: 18, itemStyle: { color: '#06c' } },
+               pointer: { show: false },
+               axisLine: { lineStyle: { width: 18, color: [[1, '#f0f0f0']] } },
+               axisTick: { show: false },
+               splitLine: { show: false },
+               axisLabel: { show: false },
+               title: { offsetCenter: [0, '30%'], fontSize: 14, color: '#6a6e73' },
+               detail: { fontSize: 36, offsetCenter: [0, '-10%'], formatter: '\{value}%', color: '#151515' },
+               data: [{ value: 73, name: 'CPU Usage' }]
+             }]
+           }
+         })">
+      <div class="pha-c-chart__canvas"></div>
+    </div>
+  </section>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="mixed-heading">Mixed Chart</h2>
+    <p>Combined bar and line chart on the same axis for correlation analysis.</p>
+    <div class="pha-c-chart" id="chart-mixed"
+         x-data="phaChart({
+           option: {
+             tooltip: { trigger: 'axis' },
+             xAxis: { type: 'category', data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'] },
+             yAxis: [
+               { type: 'value', name: 'Sales ($K)', position: 'left' },
+               { type: 'value', name: 'Growth (%)', position: 'right', splitLine: { show: false } }
+             ],
+             series: [
+               { name: 'Sales', type: 'bar', data: [85, 92, 78, 110, 125, 140] },
+               { name: 'Growth', type: 'line', yAxisIndex: 1, smooth: true, data: [8.2, 12.5, -3.1, 15.8, 22.1, 18.4] }
+             ],
+             legend: { data: ['Sales', 'Growth'] }
+           }
+         })">
+      <div class="pha-c-chart__canvas"></div>
+    </div>
+  </section>
+</div>
+{/body}
+{/include}

@@ -396,6 +396,10 @@ public class ComponentRoutes {
     @Inject
     Template documentEditorPage;
 
+    @Location("components/chart")
+    @Inject
+    Template chartPage;
+
     @GET
     @Path("/about-modal")
     @Produces(MediaType.TEXT_HTML)
@@ -1192,6 +1196,13 @@ public class ComponentRoutes {
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance documentEditor() {
         return documentEditorPage.data("applicationName", "quarkus-pha");
+    }
+
+    @GET
+    @Path("/chart")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance chart() {
+        return chartPage.data("applicationName", "quarkus-pha");
     }
 
     private static Map<String, Object> day(int date, String... flags) {

@@ -116,7 +116,8 @@ public class HelloResource {
         Map.entry("time-picker",     "/components/time-picker"),
         Map.entry("rectangle-selection", "/components/rectangle-selection"),
         Map.entry("map",                "/components/map"),
-        Map.entry("document-editor",   "/components/document-editor")
+        Map.entry("document-editor",   "/components/document-editor"),
+        Map.entry("chart",             "/components/chart")
     );
 
     /** Components tagged with a footer label. */
@@ -133,7 +134,8 @@ public class HelloResource {
         Map.entry("select",               "Beta"),
         Map.entry("rectangle-selection",  "Custom"),
         Map.entry("map",                "Custom"),
-        Map.entry("document-editor",   "Custom")
+        Map.entry("document-editor",   "Custom"),
+        Map.entry("chart",             "Custom")
     );
 
     /** Label text → PF label color modifier. */
@@ -164,6 +166,7 @@ public class HelloResource {
         {"button",               "Button"},
         {"calendar-month",       "Calendar month"},
         {"card",                 "Card"},
+        {"chart",                "Chart"},
         {"checkbox",             "Checkbox"},
         {"chip",                 "Chip"},
         {"clipboard-copy",       "Clipboard copy"},
