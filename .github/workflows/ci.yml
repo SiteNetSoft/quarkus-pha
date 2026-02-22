@@ -69,7 +69,7 @@ jobs:
         run: |
           java -jar integration-tests/build/quarkus-app/quarkus-run.jar &
           for i in $(seq 1 30); do
-            if curl -sf http://localhost:8080 > /dev/null 2>&1; then
+            if curl -sf http://localhost:9090 > /dev/null 2>&1; then
               echo "Quarkus is ready"
               break
             fi
