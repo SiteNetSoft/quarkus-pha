@@ -117,7 +117,11 @@ public class HelloResource {
         Map.entry("rectangle-selection", "/components/rectangle-selection"),
         Map.entry("map",                "/components/map"),
         Map.entry("document-editor",   "/components/document-editor"),
-        Map.entry("chart",             "/components/chart")
+        Map.entry("chart",             "/components/chart"),
+        Map.entry("live-search",       "/components/live-search"),
+        Map.entry("infinite-scroll",   "/components/infinite-scroll"),
+        Map.entry("click-to-load",     "/components/click-to-load"),
+        Map.entry("lazy-modal",        "/components/lazy-modal")
     );
 
     /** Components tagged with a footer label. */
@@ -135,7 +139,11 @@ public class HelloResource {
         Map.entry("rectangle-selection",  "Custom"),
         Map.entry("map",                "Custom"),
         Map.entry("document-editor",   "Custom"),
-        Map.entry("chart",             "Custom")
+        Map.entry("chart",             "Custom"),
+        Map.entry("live-search",       "HTMX"),
+        Map.entry("infinite-scroll",   "HTMX"),
+        Map.entry("click-to-load",     "HTMX"),
+        Map.entry("lazy-modal",        "HTMX")
     );
 
     /** Label text → PF label color modifier. */
@@ -143,7 +151,8 @@ public class HelloResource {
         "Demo",       "pf-m-purple",
         "Beta",       "pf-m-blue",
         "Deprecated", "",
-        "Custom",     "pf-m-teal"
+        "Custom",     "pf-m-teal",
+        "HTMX",       "pf-m-green"
     );
 
     /** Deprecated components also need "Tile". */
@@ -169,6 +178,7 @@ public class HelloResource {
         {"chart",                "Chart"},
         {"checkbox",             "Checkbox"},
         {"chip",                 "Chip"},
+        {"click-to-load",        "Click to load"},
         {"clipboard-copy",       "Clipboard copy"},
         {"code-block",           "Code block"},
         {"code-editor",          "Code editor"},
@@ -193,11 +203,14 @@ public class HelloResource {
         {"helper-text",          "Helper text"},
         {"hint",                 "Hint"},
         {"icon",                 "Icon"},
+        {"infinite-scroll",      "Infinite scroll"},
         {"inline-edit",          "Inline edit"},
         {"input-group",          "Input group"},
         {"jump-links",           "Jump links"},
         {"label",                "Label"},
+        {"lazy-modal",           "Lazy modal"},
         {"list",                 "List"},
+        {"live-search",          "Live search"},
         {"login-page",           "Login page"},
         {"map",                  "Map"},
         {"masthead",             "Masthead"},

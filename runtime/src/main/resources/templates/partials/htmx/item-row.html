@@ -1,0 +1,21 @@
+{! Item row — reusable list row for HTMX-loaded content !}
+{! Parameters: id, title, description (optional), status (optional) !}
+<div class="pf-v6-c-data-list__item" id="{id}">
+  <div class="pf-v6-c-data-list__item-row">
+    <div class="pf-v6-c-data-list__item-content">
+      <div class="pf-v6-c-data-list__cell pf-m-align-left">
+        <span class="pf-v6-c-data-list__cell-text">{title}</span>
+      </div>
+      {#if description??}
+      <div class="pf-v6-c-data-list__cell">
+        <span class="pf-v6-c-data-list__cell-text">{description}</span>
+      </div>
+      {/if}
+      {#if status??}
+      <div class="pf-v6-c-data-list__cell pf-m-align-right pf-m-no-fill">
+        <span class="pf-v6-c-label pf-m-compact pf-m-blue"><span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text">{status}</span></span></span>
+      </div>
+      {/if}
+    </div>
+  </div>
+</div>

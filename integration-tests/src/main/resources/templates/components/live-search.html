@@ -1,0 +1,31 @@
+{#include layouts/base}
+{#title}Live Search{/title}
+{#head}<link rel="stylesheet" href="/web/css/components/htmx.css">{/head}
+{#body}
+<div style="padding: 2rem;">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+
+  <h1>Live Search</h1>
+  <p>HTMX-powered search that queries the server on each keystroke with a 300ms debounce.</p>
+
+  <section style="margin-top: 2rem;">
+    <h2 id="live-search-heading">Server-filtered search</h2>
+    <p>Type to search infrastructure items. Results are fetched from <code>/api/htmx/search</code>.</p>
+    <div style="max-width: 400px;">
+      {#include components/htmx/live-search id="htmx-search" searchUrl="/api/htmx/search" targetId="search-results" placeholder="Search infrastructure..." /}
+    </div>
+    <div class="pf-v6-c-menu" style="max-width: 400px; margin-top: 0.5rem;">
+      <div class="pf-v6-c-menu__content">
+        <ul class="pf-v6-c-menu__list" id="search-results" role="listbox">
+          <li class="pf-v6-c-menu__list-item">
+            <div class="pf-v6-c-menu__item">
+              <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Type to search...</span></span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+{/body}
+{/include}
