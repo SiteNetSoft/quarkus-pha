@@ -1,0 +1,72 @@
+/* Document Editor — PHA custom component wrapping Collabora Online */
+
+.pha-c-document-editor {
+  position: relative;
+  border: 1px solid var(--pf-t--global--border--color--default, #d2d2d2);
+  border-radius: var(--pf-t--global--border--radius--small, 3px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--pf-t--global--background--color--primary--default, #fff);
+}
+
+.pha-c-document-editor__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--pf-t--global--spacer--sm, 0.5rem);
+  padding: var(--pf-t--global--spacer--xs, 0.25rem) var(--pf-t--global--spacer--md, 1rem);
+  border-bottom: 1px solid var(--pf-t--global--border--color--default, #d2d2d2);
+  background-color: var(--pf-t--global--background--color--secondary--default, #f0f0f0);
+}
+
+.pha-c-document-editor__toolbar-title {
+  font-weight: var(--pf-t--global--font--weight--body--bold, 700);
+  font-size: var(--pf-t--global--font--size--body--default, 0.875rem);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pha-c-document-editor__toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--pf-t--global--spacer--xs, 0.25rem);
+}
+
+.pha-c-document-editor__body {
+  position: relative;
+  flex: 1;
+  min-height: 500px;
+}
+
+.pha-c-document-editor__frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.pha-c-document-editor__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--pf-t--global--background--color--secondary--default, #f0f0f0);
+}
+
+.pha-c-document-editor__status {
+  display: flex;
+  align-items: center;
+  gap: var(--pf-t--global--spacer--sm, 0.5rem);
+  padding: var(--pf-t--global--spacer--xs, 0.25rem) var(--pf-t--global--spacer--md, 1rem);
+  border-top: 1px solid var(--pf-t--global--border--color--default, #d2d2d2);
+  background-color: var(--pf-t--global--background--color--secondary--default, #f0f0f0);
+  font-size: var(--pf-t--global--font--size--body--sm, 0.75rem);
+}
