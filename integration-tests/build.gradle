@@ -12,6 +12,21 @@ dependencies {
     testImplementation 'io.rest-assured:rest-assured'
 }
 
+// Live reload runtime templates and web assets in dev mode
+sourceSets {
+    main {
+        resources {
+            srcDir "${project(':runtime').projectDir}/src/main/resources"
+        }
+    }
+}
+
+processResources {
+    from("${project(':runtime').projectDir}/src/main/resources/web") {
+        into 'META-INF/resources/web'
+    }
+}
+
 test {
     exclude '**/*IT.class'
 }
