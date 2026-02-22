@@ -115,7 +115,8 @@ public class HelloResource {
         Map.entry("table",           "/components/table"),
         Map.entry("time-picker",     "/components/time-picker"),
         Map.entry("rectangle-selection", "/components/rectangle-selection"),
-        Map.entry("map",                "/components/map")
+        Map.entry("map",                "/components/map"),
+        Map.entry("document-editor",   "/components/document-editor")
     );
 
     /** Components tagged with a footer label. */
@@ -131,7 +132,8 @@ public class HelloResource {
         Map.entry("password-strength",    "Demo"),
         Map.entry("select",               "Beta"),
         Map.entry("rectangle-selection",  "Custom"),
-        Map.entry("map",                "Custom")
+        Map.entry("map",                "Custom"),
+        Map.entry("document-editor",   "Custom")
     );
 
     /** Label text → PF label color modifier. */
@@ -175,6 +177,7 @@ public class HelloResource {
         {"date-picker",          "Date picker"},
         {"description-list",     "Description list"},
         {"divider",              "Divider"},
+        {"document-editor",      "Document editor"},
         {"drag-and-drop",        "Drag and drop"},
         {"drawer",               "Drawer"},
         {"dropdown",             "Dropdown"},
