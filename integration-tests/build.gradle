@@ -4,7 +4,7 @@ plugins {
 
 dependencies {
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
-    implementation project(':runtime')
+    implementation project(':quarkus-pha')
     implementation 'io.quarkus:quarkus-rest'
     implementation 'io.quarkus:quarkus-rest-qute'
 
@@ -16,13 +16,13 @@ dependencies {
 sourceSets {
     main {
         resources {
-            srcDir "${project(':runtime').projectDir}/src/main/resources"
+            srcDir "${project(':quarkus-pha').projectDir}/src/main/resources"
         }
     }
 }
 
 processResources {
-    from("${project(':runtime').projectDir}/src/main/resources/web") {
+    from("${project(':quarkus-pha').projectDir}/src/main/resources/web") {
         into 'META-INF/resources/web'
     }
 }
