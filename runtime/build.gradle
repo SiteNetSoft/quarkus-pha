@@ -2,6 +2,10 @@ plugins {
     id 'io.quarkus.extension'
 }
 
+quarkusExtension {
+    deploymentModule = 'quarkus-pha-deployment'
+}
+
 dependencies {
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
     implementation 'io.quarkus:quarkus-arc'
