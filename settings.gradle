@@ -10,6 +10,9 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'quarkus-pha'
+rootProject.name = 'quarkus-pha-parent'
 
 include 'runtime', 'deployment', 'integration-tests'
+project(':runtime').name = 'quarkus-pha'
+project(':deployment').name = 'quarkus-pha-deployment'
+project(':integration-tests').name = 'quarkus-pha-integration-tests'
