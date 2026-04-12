@@ -1,15 +1,35 @@
 {#include layouts/base}
-{#title}Login Page{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-  <h1>Login Page</h1>
-  <p>A login page collects a user's credentials for authentication.</p>
-  <section style="margin-top: 2rem;">
-    <h2 id="basic-heading">Basic</h2>
-    <p>A standard login page with username and password fields.</p>
-    {#include components/forms/login-page id="lp-basic" titleText="Log in to your account"}{#body}<form class="pf-v6-c-form"><div class="pf-v6-c-form__group"><label class="pf-v6-c-form__label" for="lp-user"><span class="pf-v6-c-form__label-text">Username</span></label><span class="pf-v6-c-form-control"><input id="lp-user" type="text" required></span></div><div class="pf-v6-c-form__group"><label class="pf-v6-c-form__label" for="lp-pass"><span class="pf-v6-c-form__label-text">Password</span></label><span class="pf-v6-c-form-control"><input id="lp-pass" type="password" required></span></div><button class="pf-v6-c-button pf-m-primary pf-m-block" type="submit">Log in</button></form>{/body}{/include}
-  </section>
-</div>
-{/body}
+    {#title}Login Page{/title}
+    {#body}
+        <div style="padding: 2rem;">
+            <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline"
+               style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+            <h1>Login Page</h1>
+            <p>A login page collects a user's credentials for authentication.</p>
+            <section style="margin-top: 2rem;">
+                <h2 id="basic-heading">Basic</h2>
+                <p>A standard login page with username and password fields.</p>
+                {#include components/forms/login-page id = "lp-basic" titleText = "Log in to your account"}{#body}
+                    <form class="pf-v6-c-form">
+                        <div class="pf-v6-c-form__group">
+                            <label class="pf-v6-c-form__label" for="lp-user">
+                                <span class="pf-v6-c-form__label-text">Username</span>
+                            </label>
+                            <span class="pf-v6-c-form-control">
+                                <input id="lp-user" type="text" required>
+                            </span>
+                        </div>
+                        <div class="pf-v6-c-form__group">
+                            <label class="pf-v6-c-form__label" for="lp-pass">
+                                <span class="pf-v6-c-form__label-text">Password</span>
+                            </label>
+                            <span class="pf-v6-c-form-control">
+                                <input id="lp-pass" type="password" required>
+                            </span>
+                        </div>
+                        <button class="pf-v6-c-button pf-m-primary pf-m-block" type="submit">Log in</button>
+                    </form>{/body}{/include}
+            </section>
+        </div>
+    {/body}
 {/include}
