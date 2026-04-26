@@ -13,7 +13,7 @@ QUARKUS_APP="$PROJECT_ROOT/integration-tests/build/quarkus-app"
 
 QUARKUS_CONTAINER="quarkus-pha-e2e"
 QUARKUS_IMAGE="registry.access.redhat.com/ubi9/openjdk-25-runtime:1.24"
-PLAYWRIGHT_IMAGE="mcr.microsoft.com/playwright:v1.50.1-noble"
+PLAYWRIGHT_IMAGE="mcr.microsoft.com/playwright:v1.59.1-noble"
 
 cmd_start() {
   if curl -sf http://localhost:9090 > /dev/null 2>&1; then
@@ -23,7 +23,7 @@ cmd_start() {
 
   echo "==> Building Quarkus application..."
   JAVA_HOME="${JAVA_HOME:-/usr/lib/jvm/java-25-openjdk-amd64}" \
-    "$PROJECT_ROOT/gradlew" -p "$PROJECT_ROOT" :integration-tests:quarkusBuild
+    "$PROJECT_ROOT/gradlew" -p "$PROJECT_ROOT" :quarkus-pha-integration-tests:quarkusBuild
 
   # Remove stale container from a previous failed run
   podman rm -f "$QUARKUS_CONTAINER" 2>/dev/null || true
