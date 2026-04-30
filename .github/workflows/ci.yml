@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [master]
+    branches: [master, develop]
   pull_request:
-    branches: [master]
+    branches: [master, develop]
 
 jobs:
   build:
@@ -27,8 +27,6 @@ jobs:
 
       - name: Build and run unit tests
         run: ./gradlew build
-        env:
-          JAVA_HOME: ${{ env.JAVA_HOME }}
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
@@ -43,8 +41,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run linters
-        run: bash scripts/lint.sh
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install lint deps
+        run: npm install --no-audit --no-fund
+
+      - name: ESLint
+        run: npx eslint .
+
+      - name: Stylelint
+        run: npx stylelint 'runtime/src/main/resources/META-INF/resources/web/css/**/*.css'
+
+      - name: HTMLHint
+        run: npx htmlhint 'runtime/src/main/resources/templates/**/*.html'
 
   e2e:
     name: E2E Tests
@@ -67,27 +79,47 @@ jobs:
 
       - name: Start Quarkus
         run: |
-          java -jar integration-tests/build/quarkus-app/quarkus-run.jar &
+          java -jar integration-tests/build/quarkus-app/quarkus-run.jar > quarkus.log 2>&1 &
+          echo $! > quarkus.pid
           for i in $(seq 1 30); do
-            if curl -sf http://localhost:9090 > /dev/null 2>&1; then
+            # Any HTTP response means the port is up. -f only fails on 4xx/5xx, which
+            # incorrectly keeps us waiting when routes return 500 during boot.
+            if curl -s -o /dev/null --max-time 2 http://localhost:9090/q/health 2>/dev/null \
+              || curl -s -o /dev/null --max-time 2 http://localhost:9090/ 2>/dev/null; then
               echo "Quarkus is ready"
               break
             fi
             if [ "$i" -eq 30 ]; then
               echo "ERROR: Quarkus did not start within 30 seconds"
+              cat quarkus.log
               exit 1
             fi
             sleep 1
           done
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: integration-tests/e2e/package-lock.json
+
       - name: Run Playwright tests
         run: |
           cd integration-tests/e2e
-          npm install --no-audit --no-fund
+          npm ci --no-audit --no-fund
           npx playwright install --with-deps chromium
           npx playwright test
         env:
           CI: true
+
+      - name: Upload Quarkus log
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quarkus-log
+          path: quarkus.log
+          retention-days: 7
 
       - name: Upload test results
         if: always()

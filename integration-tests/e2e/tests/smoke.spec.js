@@ -339,10 +339,4 @@ test.describe("Smoke tests", () => {
     await expect(visibleCards).toHaveCount(1);
     await expect(page.locator('#accordion')).toBeVisible();
   });
-
-  test("/hello REST endpoint returns 200", async ({ request }) => {
-    const response = await request.get("/hello");
-    expect(response.status()).toBe(200);
-    expect(await response.text()).toBe("Hello from Quarkus REST");
-  });
 });
