@@ -420,7 +420,7 @@ public class ComponentRoutes {
     @Path("/about-modal")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance aboutModal() {
-        return aboutModalDemo.data("applicationName", "quarkus-pha");
+        return aboutModalDemo.instance();
     }
 
     @GET
@@ -438,7 +438,7 @@ public class ComponentRoutes {
                    "content", "This is the expandable content for item four. It provides details and additional information.")
         );
 
-        return accordionPage.data("applicationName", "quarkus-pha")
+        return accordionPage
             .data("sampleItems", sampleItems);
     }
 
@@ -517,7 +517,7 @@ public class ComponentRoutes {
             ))
         );
 
-        return actionListPage.data("applicationName", "quarkus-pha")
+        return actionListPage
             .data("singleGroupData", singleGroupData)
             .data("iconsData", iconsData)
             .data("groupIconsData", groupIconsData)
@@ -531,49 +531,49 @@ public class ComponentRoutes {
     @Path("/avatar")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance avatar() {
-        return avatarPage.data("applicationName", "quarkus-pha");
+        return avatarPage.instance();
     }
 
     @GET
     @Path("/back-to-top")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance backToTop() {
-        return backToTopPage.data("applicationName", "quarkus-pha");
+        return backToTopPage.instance();
     }
 
     @GET
     @Path("/backdrop")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance backdrop() {
-        return backdropPage.data("applicationName", "quarkus-pha");
+        return backdropPage.instance();
     }
 
     @GET
     @Path("/background-image")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance backgroundImage() {
-        return backgroundImagePage.data("applicationName", "quarkus-pha");
+        return backgroundImagePage.instance();
     }
 
     @GET
     @Path("/badge")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance badge() {
-        return badgePage.data("applicationName", "quarkus-pha");
+        return badgePage.instance();
     }
 
     @GET
     @Path("/banner")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance banner() {
-        return bannerPage.data("applicationName", "quarkus-pha");
+        return bannerPage.instance();
     }
 
     @GET
     @Path("/brand")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance brand() {
-        return brandPage.data("applicationName", "quarkus-pha");
+        return brandPage.instance();
     }
 
     @GET
@@ -602,7 +602,7 @@ public class ComponentRoutes {
             Map.of("text", "Section landing", "href", "#", "heading", true)
         );
 
-        return breadcrumbPage.data("applicationName", "quarkus-pha")
+        return breadcrumbPage
             .data("basicItems", basicItems)
             .data("noHomeItems", noHomeItems)
             .data("headingItems", headingItems);
@@ -612,7 +612,7 @@ public class ComponentRoutes {
     @Path("/button")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance button() {
-        return buttonPage.data("applicationName", "quarkus-pha");
+        return buttonPage.instance();
     }
 
     @GET
@@ -642,7 +642,7 @@ public class ComponentRoutes {
                     day(1, "adjacent"), day(2, "adjacent"))
         );
 
-        return calendarMonthPage.data("applicationName", "quarkus-pha")
+        return calendarMonthPage
             .data("selectedMonth", "October").data("selectedYear", 2020).data("selectedWeeks", selectedWeeks)
             .data("rangeMonth", "October").data("rangeYear", 2020).data("rangeWeeks", rangeWeeks);
     }
@@ -651,574 +651,574 @@ public class ComponentRoutes {
     @Path("/card")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance card() {
-        return cardPage.data("applicationName", "quarkus-pha");
+        return cardPage.instance();
     }
 
     @GET
     @Path("/checkbox")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance checkbox() {
-        return checkboxPage.data("applicationName", "quarkus-pha");
+        return checkboxPage.instance();
     }
 
     @GET
     @Path("/chip")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance chip() {
-        return chipPage.data("applicationName", "quarkus-pha");
+        return chipPage.instance();
     }
 
     @GET
     @Path("/clipboard-copy")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance clipboardCopy() {
-        return clipboardCopyPage.data("applicationName", "quarkus-pha");
+        return clipboardCopyPage.instance();
     }
 
     @GET
     @Path("/code-block")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance codeBlock() {
-        return codeBlockPage.data("applicationName", "quarkus-pha");
+        return codeBlockPage.instance();
     }
 
     @GET
     @Path("/code-editor")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance codeEditor() {
-        return codeEditorPage.data("applicationName", "quarkus-pha");
+        return codeEditorPage.instance();
     }
 
     @GET
     @Path("/content")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance content() {
-        return contentPage.data("applicationName", "quarkus-pha");
+        return contentPage.instance();
     }
 
     @GET
     @Path("/context-selector")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance contextSelector() {
-        return contextSelectorPage.data("applicationName", "quarkus-pha");
+        return contextSelectorPage.instance();
     }
 
     @GET
     @Path("/custom-menus")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance customMenus() {
-        return customMenusPage.data("applicationName", "quarkus-pha");
+        return customMenusPage.instance();
     }
 
     @GET
     @Path("/divider")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance divider() {
-        return dividerPage.data("applicationName", "quarkus-pha");
+        return dividerPage.instance();
     }
 
     @GET
     @Path("/empty-state")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance emptyState() {
-        return emptyStatePage.data("applicationName", "quarkus-pha");
+        return emptyStatePage.instance();
     }
 
     @GET
     @Path("/expandable-section")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance expandableSection() {
-        return expandableSectionPage.data("applicationName", "quarkus-pha");
+        return expandableSectionPage.instance();
     }
 
     @GET
     @Path("/helper-text")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance helperText() {
-        return helperTextPage.data("applicationName", "quarkus-pha");
+        return helperTextPage.instance();
     }
 
     @GET
     @Path("/hint")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance hint() {
-        return hintPage.data("applicationName", "quarkus-pha");
+        return hintPage.instance();
     }
 
     @GET
     @Path("/icon")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance icon() {
-        return iconPage.data("applicationName", "quarkus-pha");
+        return iconPage.instance();
     }
 
     @GET
     @Path("/label")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance label() {
-        return labelPage.data("applicationName", "quarkus-pha");
+        return labelPage.instance();
     }
 
     @GET
     @Path("/list")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance list() {
-        return listPage.data("applicationName", "quarkus-pha");
+        return listPage.instance();
     }
 
     @GET
     @Path("/panel")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance panel() {
-        return panelPage.data("applicationName", "quarkus-pha");
+        return panelPage.instance();
     }
 
     @GET
     @Path("/progress")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance progress() {
-        return progressPage.data("applicationName", "quarkus-pha");
+        return progressPage.instance();
     }
 
     @GET
     @Path("/skeleton")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance skeleton() {
-        return skeletonPage.data("applicationName", "quarkus-pha");
+        return skeletonPage.instance();
     }
 
     @GET
     @Path("/spinner")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance spinner() {
-        return spinnerPage.data("applicationName", "quarkus-pha");
+        return spinnerPage.instance();
     }
 
     @GET
     @Path("/timestamp")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance timestamp() {
-        return timestampPage.data("applicationName", "quarkus-pha");
+        return timestampPage.instance();
     }
 
     @GET
     @Path("/title")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance title() {
-        return titlePage.data("applicationName", "quarkus-pha");
+        return titlePage.instance();
     }
 
     @GET
     @Path("/truncate")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance truncate() {
-        return truncatePage.data("applicationName", "quarkus-pha");
+        return truncatePage.instance();
     }
 
     @GET
     @Path("/data-list")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance dataList() {
-        return dataListPage.data("applicationName", "quarkus-pha");
+        return dataListPage.instance();
     }
 
     @GET
     @Path("/description-list")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance descriptionList() {
-        return descriptionListPage.data("applicationName", "quarkus-pha");
+        return descriptionListPage.instance();
     }
 
     @GET
     @Path("/form")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance form() {
-        return formPage.data("applicationName", "quarkus-pha");
+        return formPage.instance();
     }
 
     @GET
     @Path("/form-control")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance formControl() {
-        return formControlPage.data("applicationName", "quarkus-pha");
+        return formControlPage.instance();
     }
 
     @GET
     @Path("/form-select")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance formSelect() {
-        return formSelectPage.data("applicationName", "quarkus-pha");
+        return formSelectPage.instance();
     }
 
     @GET
     @Path("/number-input")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance numberInput() {
-        return numberInputPage.data("applicationName", "quarkus-pha");
+        return numberInputPage.instance();
     }
 
     @GET
     @Path("/radio")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance radio() {
-        return radioPage.data("applicationName", "quarkus-pha");
+        return radioPage.instance();
     }
 
     @GET
     @Path("/switch")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance switchComponent() {
-        return switchPage.data("applicationName", "quarkus-pha");
+        return switchPage.instance();
     }
 
     @GET
     @Path("/text-area")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance textArea() {
-        return textAreaPage.data("applicationName", "quarkus-pha");
+        return textAreaPage.instance();
     }
 
     @GET
     @Path("/text-input")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance textInput() {
-        return textInputPage.data("applicationName", "quarkus-pha");
+        return textInputPage.instance();
     }
 
     @GET
     @Path("/text-input-group")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance textInputGroup() {
-        return textInputGroupPage.data("applicationName", "quarkus-pha");
+        return textInputGroupPage.instance();
     }
 
     @GET
     @Path("/toggle-group")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance toggleGroup() {
-        return toggleGroupPage.data("applicationName", "quarkus-pha");
+        return toggleGroupPage.instance();
     }
 
     @GET
     @Path("/simple-list")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance simpleList() {
-        return simpleListPage.data("applicationName", "quarkus-pha");
+        return simpleListPage.instance();
     }
 
     @GET
     @Path("/simple-file-upload")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance simpleFileUpload() {
-        return simpleFileUploadPage.data("applicationName", "quarkus-pha");
+        return simpleFileUploadPage.instance();
     }
 
     @GET
     @Path("/tile")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance tile() {
-        return tilePage.data("applicationName", "quarkus-pha");
+        return tilePage.instance();
     }
 
     @GET
     @Path("/date-picker")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance datePicker() {
-        return datePickerPage.data("applicationName", "quarkus-pha");
+        return datePickerPage.instance();
     }
 
     @GET
     @Path("/dropdown")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance dropdown() {
-        return dropdownPage.data("applicationName", "quarkus-pha");
+        return dropdownPage.instance();
     }
 
     @GET
     @Path("/drawer")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance drawer() {
-        return drawerPage.data("applicationName", "quarkus-pha");
+        return drawerPage.instance();
     }
 
     @GET
     @Path("/inline-edit")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance inlineEdit() {
-        return inlineEditPage.data("applicationName", "quarkus-pha");
+        return inlineEditPage.instance();
     }
 
     @GET
     @Path("/input-group")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance inputGroup() {
-        return inputGroupPage.data("applicationName", "quarkus-pha");
+        return inputGroupPage.instance();
     }
 
     @GET
     @Path("/jump-links")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance jumpLinks() {
-        return jumpLinksPage.data("applicationName", "quarkus-pha");
+        return jumpLinksPage.instance();
     }
 
     @GET
     @Path("/menu")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance menu() {
-        return menuPage.data("applicationName", "quarkus-pha");
+        return menuPage.instance();
     }
 
     @GET
     @Path("/menu-toggle")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance menuToggle() {
-        return menuTogglePage.data("applicationName", "quarkus-pha");
+        return menuTogglePage.instance();
     }
 
     @GET
     @Path("/modal")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance modal() {
-        return modalPage.data("applicationName", "quarkus-pha");
+        return modalPage.instance();
     }
 
     @GET
     @Path("/notification-badge")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance notificationBadge() {
-        return notificationBadgePage.data("applicationName", "quarkus-pha");
+        return notificationBadgePage.instance();
     }
 
     @GET
     @Path("/notification-drawer")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance notificationDrawer() {
-        return notificationDrawerPage.data("applicationName", "quarkus-pha");
+        return notificationDrawerPage.instance();
     }
 
     @GET
     @Path("/overflow-menu")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance overflowMenu() {
-        return overflowMenuPage.data("applicationName", "quarkus-pha");
+        return overflowMenuPage.instance();
     }
 
     @GET
     @Path("/popover")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance popover() {
-        return popoverPage.data("applicationName", "quarkus-pha");
+        return popoverPage.instance();
     }
 
     @GET
     @Path("/tooltip")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance tooltip() {
-        return tooltipPage.data("applicationName", "quarkus-pha");
+        return tooltipPage.instance();
     }
 
     @GET
     @Path("/progress-stepper")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance progressStepper() {
-        return progressStepperPage.data("applicationName", "quarkus-pha");
+        return progressStepperPage.instance();
     }
 
     @GET
     @Path("/login-page")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance loginPage() {
-        return loginPagePage.data("applicationName", "quarkus-pha");
+        return loginPagePage.instance();
     }
 
     @GET
     @Path("/masthead")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance masthead() {
-        return mastheadPage.data("applicationName", "quarkus-pha");
+        return mastheadPage.instance();
     }
 
     @GET
     @Path("/navigation")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance navigation() {
-        return navigationPage.data("applicationName", "quarkus-pha");
+        return navigationPage.instance();
     }
 
     @GET
     @Path("/page")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance page() {
-        return pagePage.data("applicationName", "quarkus-pha");
+        return pagePage.instance();
     }
 
     @GET
     @Path("/pagination")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance pagination() {
-        return paginationPage.data("applicationName", "quarkus-pha");
+        return paginationPage.instance();
     }
 
     @GET
     @Path("/search-input")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance searchInput() {
-        return searchInputPage.data("applicationName", "quarkus-pha");
+        return searchInputPage.instance();
     }
 
     @GET
     @Path("/select")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance selectComponent() {
-        return selectPage.data("applicationName", "quarkus-pha");
+        return selectPage.instance();
     }
 
     @GET
     @Path("/sidebar")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance sidebar() {
-        return sidebarPage.data("applicationName", "quarkus-pha");
+        return sidebarPage.instance();
     }
 
     @GET
     @Path("/skip-to-content")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance skipToContent() {
-        return skipToContentPage.data("applicationName", "quarkus-pha");
+        return skipToContentPage.instance();
     }
 
     @GET
     @Path("/slider")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance slider() {
-        return sliderPage.data("applicationName", "quarkus-pha");
+        return sliderPage.instance();
     }
 
     @GET
     @Path("/tabs")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance tabs() {
-        return tabsPage.data("applicationName", "quarkus-pha");
+        return tabsPage.instance();
     }
 
     @GET
     @Path("/toolbar")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance toolbar() {
-        return toolbarPage.data("applicationName", "quarkus-pha");
+        return toolbarPage.instance();
     }
 
     @GET
     @Path("/tree-view")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance treeView() {
-        return treeViewPage.data("applicationName", "quarkus-pha");
+        return treeViewPage.instance();
     }
 
     @GET
     @Path("/wizard")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance wizard() {
-        return wizardPage.data("applicationName", "quarkus-pha");
+        return wizardPage.instance();
     }
 
     @GET
     @Path("/application-launcher")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance applicationLauncher() {
-        return applicationLauncherPage.data("applicationName", "quarkus-pha");
+        return applicationLauncherPage.instance();
     }
 
     @GET
     @Path("/date-and-time-picker")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance dateAndTimePicker() {
-        return dateAndTimePickerPage.data("applicationName", "quarkus-pha");
+        return dateAndTimePickerPage.instance();
     }
 
     @GET
     @Path("/drag-and-drop")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance dragAndDrop() {
-        return dragAndDropPage.data("applicationName", "quarkus-pha");
+        return dragAndDropPage.instance();
     }
 
     @GET
     @Path("/dual-list-selector")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance dualListSelector() {
-        return dualListSelectorPage.data("applicationName", "quarkus-pha");
+        return dualListSelectorPage.instance();
     }
 
     @GET
     @Path("/multiple-file-upload")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance multipleFileUpload() {
-        return multipleFileUploadPage.data("applicationName", "quarkus-pha");
+        return multipleFileUploadPage.instance();
     }
 
     @GET
     @Path("/options-menu")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance optionsMenu() {
-        return optionsMenuPage.data("applicationName", "quarkus-pha");
+        return optionsMenuPage.instance();
     }
 
     @GET
     @Path("/password-generator")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance passwordGenerator() {
-        return passwordGeneratorPage.data("applicationName", "quarkus-pha");
+        return passwordGeneratorPage.instance();
     }
 
     @GET
     @Path("/password-strength")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance passwordStrength() {
-        return passwordStrengthPage.data("applicationName", "quarkus-pha");
+        return passwordStrengthPage.instance();
     }
 
     @GET
     @Path("/table")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance tableComponent() {
-        return tablePage.data("applicationName", "quarkus-pha");
+        return tablePage.instance();
     }
 
     @GET
     @Path("/time-picker")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance timePicker() {
-        return timePickerPage.data("applicationName", "quarkus-pha");
+        return timePickerPage.instance();
     }
 
     @GET
     @Path("/rectangle-selection")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance rectangleSelection() {
-        return rectangleSelectionPage.data("applicationName", "quarkus-pha");
+        return rectangleSelectionPage.instance();
     }
 
     @GET
     @Path("/map")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance map() {
-        return mapPage.data("applicationName", "quarkus-pha");
+        return mapPage.instance();
     }
 
     @GET
     @Path("/document-editor")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance documentEditor() {
-        return documentEditorPage.data("applicationName", "quarkus-pha");
+        return documentEditorPage.instance();
     }
 
     @GET
     @Path("/chart")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance chart() {
-        return chartPage.data("applicationName", "quarkus-pha");
+        return chartPage.instance();
     }
 
     private static Map<String, Object> day(int date, String... flags) {
@@ -1237,7 +1237,7 @@ public class ComponentRoutes {
             Map.of("text", "Ignore", "href", "#")
         );
 
-        return alertPage.data("applicationName", "quarkus-pha")
+        return alertPage
             .data("sampleActionLinks", sampleActionLinks);
     }
 
@@ -1245,27 +1245,27 @@ public class ComponentRoutes {
     @Path("/live-search")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance liveSearch() {
-        return liveSearchPage.data("applicationName", "quarkus-pha");
+        return liveSearchPage.instance();
     }
 
     @GET
     @Path("/infinite-scroll")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance infiniteScroll() {
-        return infiniteScrollPage.data("applicationName", "quarkus-pha");
+        return infiniteScrollPage.instance();
     }
 
     @GET
     @Path("/click-to-load")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance clickToLoad() {
-        return clickToLoadPage.data("applicationName", "quarkus-pha");
+        return clickToLoadPage.instance();
     }
 
     @GET
     @Path("/lazy-modal")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance lazyModal() {
-        return lazyModalPage.data("applicationName", "quarkus-pha");
+        return lazyModalPage.instance();
     }
 }
