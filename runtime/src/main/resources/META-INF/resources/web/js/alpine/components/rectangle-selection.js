@@ -28,8 +28,8 @@
  * License: MIT
  * Original author: Jean-Nicolas Boulay (http://jean-nicolas.com/)
  */
-document.addEventListener('alpine:init', () => {
-  Alpine.data('rectangleSelection', (config = {}) => ({
+document.addEventListener("alpine:init", () => {
+  Alpine.data("rectangleSelection", (config = {}) => ({
     mousedown: false,
     rectEl: null,
     selected: [],
@@ -41,7 +41,7 @@ document.addEventListener('alpine:init', () => {
     _containerLeft: 0,
     _containerTop: 0,
 
-    _selector: config.selector || '[data-selectable]',
+    _selector: config.selector || "[data-selectable]",
     _fadeOut: config.fadeOut !== false,
     _scrollInterval: null,
     _scrollToX: 0,
@@ -51,21 +51,21 @@ document.addEventListener('alpine:init', () => {
     _boundStop: null,
 
     init() {
-      this.rectEl = document.createElement('div');
-      this.rectEl.className = 'pha-c-rectangle-selection__rect';
+      this.rectEl = document.createElement("div");
+      this.rectEl.className = "pha-c-rectangle-selection__rect";
       this.$el.appendChild(this.rectEl);
 
       this._boundDrag = this._onDrag.bind(this);
       this._boundStop = this._onStop.bind(this);
 
-      this.$el.addEventListener('mousedown', this._onStart.bind(this));
-      document.addEventListener('mousemove', this._boundDrag);
-      document.addEventListener('mouseup', this._boundStop);
+      this.$el.addEventListener("mousedown", this._onStart.bind(this));
+      document.addEventListener("mousemove", this._boundDrag);
+      document.addEventListener("mouseup", this._boundStop);
     },
 
     destroy() {
-      document.removeEventListener('mousemove', this._boundDrag);
-      document.removeEventListener('mouseup', this._boundStop);
+      document.removeEventListener("mousemove", this._boundDrag);
+      document.removeEventListener("mouseup", this._boundStop);
       clearInterval(this._scrollInterval);
       if (this.rectEl && this.rectEl.parentNode) {
         this.rectEl.parentNode.removeChild(this.rectEl);
@@ -92,13 +92,13 @@ document.addEventListener('alpine:init', () => {
       this.mousedown = true;
 
       Object.assign(this.rectEl.style, {
-        display: 'block',
-        left: this._pox + 'px',
-        top: this._poy + 'px',
-        width: '0',
-        height: '0',
-        opacity: '',
-        transition: ''
+        display: "block",
+        left: this._pox + "px",
+        top: this._poy + "px",
+        width: "0",
+        height: "0",
+        opacity: "",
+        transition: "",
       });
     },
 
@@ -122,8 +122,7 @@ document.addEventListener('alpine:init', () => {
       if (e.clientY > winH - 5) this._scrollToY = 30;
       else if (e.clientY > winH - 10) this._scrollToY = 20;
       else if (e.clientY > winH - 20) this._scrollToY = 10;
-      /* top edge */
-      else if (e.clientY < 5) this._scrollToY = -30;
+      /* top edge */ else if (e.clientY < 5) this._scrollToY = -30;
       else if (e.clientY < 10) this._scrollToY = -20;
       else if (e.clientY < 20) this._scrollToY = -10;
 
@@ -131,8 +130,7 @@ document.addEventListener('alpine:init', () => {
       if (e.clientX > winW - 5) this._scrollToX = 30;
       else if (e.clientX > winW - 10) this._scrollToX = 20;
       else if (e.clientX > winW - 20) this._scrollToX = 10;
-      /* left edge */
-      else if (e.clientX < 5) this._scrollToX = -30;
+      /* left edge */ else if (e.clientX < 5) this._scrollToX = -30;
       else if (e.clientX < 10) this._scrollToX = -20;
       else if (e.clientX < 20) this._scrollToX = -10;
 
@@ -156,12 +154,10 @@ document.addEventListener('alpine:init', () => {
       var maxX = document.documentElement.scrollWidth - window.innerWidth;
 
       /* stop at document boundaries (matches original MooTools guard) */
-      if ((scrollY <= 0 && this._scrollToY < 0) ||
-          (scrollY >= maxY && this._scrollToY > 0)) {
+      if ((scrollY <= 0 && this._scrollToY < 0) || (scrollY >= maxY && this._scrollToY > 0)) {
         this._scrollToY = 0;
       }
-      if ((scrollX <= 0 && this._scrollToX < 0) ||
-          (scrollX >= maxX && this._scrollToX > 0)) {
+      if ((scrollX <= 0 && this._scrollToX < 0) || (scrollX >= maxX && this._scrollToX > 0)) {
         this._scrollToX = 0;
       }
       if (!this._scrollToX && !this._scrollToY) {
@@ -209,10 +205,10 @@ document.addEventListener('alpine:init', () => {
       }
 
       Object.assign(this.rectEl.style, {
-        left: left + 'px',
-        top: top + 'px',
-        width: width + 'px',
-        height: height + 'px'
+        left: left + "px",
+        top: top + "px",
+        width: width + "px",
+        height: height + "px",
       });
 
       this._checkCollisions();
@@ -223,20 +219,18 @@ document.addEventListener('alpine:init', () => {
       this.mousedown = false;
       clearInterval(this._scrollInterval);
 
-      this.selected = Array.from(
-        this.$el.querySelectorAll(this._selector + '.pha-m-selected')
-      );
-      this.$dispatch('rectangle-selected', { selected: this.selected });
+      this.selected = Array.from(this.$el.querySelectorAll(this._selector + ".pha-m-selected"));
+      this.$dispatch("rectangle-selected", { selected: this.selected });
 
       if (this._fadeOut) {
-        this.rectEl.style.transition = 'opacity 0.3s ease';
-        this.rectEl.style.opacity = '0';
+        this.rectEl.style.transition = "opacity 0.3s ease";
+        this.rectEl.style.opacity = "0";
         setTimeout(() => {
-          this.rectEl.style.display = 'none';
-          this.rectEl.style.transition = '';
+          this.rectEl.style.display = "none";
+          this.rectEl.style.transition = "";
         }, 300);
       } else {
-        this.rectEl.style.display = 'none';
+        this.rectEl.style.display = "none";
       }
     },
 
@@ -244,19 +238,24 @@ document.addEventListener('alpine:init', () => {
 
     _checkCollisions() {
       var rectBounds = this.rectEl.getBoundingClientRect();
-      this.$el.querySelectorAll(this._selector).forEach(function(el) {
+      this.$el.querySelectorAll(this._selector).forEach(function (el) {
         var b = el.getBoundingClientRect();
-        var hit = !(b.bottom < rectBounds.top || b.top > rectBounds.bottom ||
-                    b.right < rectBounds.left || b.left > rectBounds.right);
-        el.classList.toggle('pha-m-selected', hit);
+        var hit = !(
+          b.bottom < rectBounds.top ||
+          b.top > rectBounds.bottom ||
+          b.right < rectBounds.left ||
+          b.left > rectBounds.right
+        );
+        el.classList.toggle("pha-m-selected", hit);
       });
     },
 
     _deselect() {
-      this.$el.querySelectorAll(this._selector + '.pha-m-selected')
-        .forEach(function(el) { el.classList.remove('pha-m-selected'); });
+      this.$el.querySelectorAll(this._selector + ".pha-m-selected").forEach(function (el) {
+        el.classList.remove("pha-m-selected");
+      });
       this.selected = [];
-      this.$dispatch('rectangle-deselected');
-    }
+      this.$dispatch("rectangle-deselected");
+    },
   }));
 });

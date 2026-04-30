@@ -286,7 +286,7 @@ public class HelloResource {
             components.add(comp);
         }
 
-        return hello.data("applicationName", "quarkus-pha")
+        return hello
                      .data("components", components)
                      .data("componentCount", components.size());
     }

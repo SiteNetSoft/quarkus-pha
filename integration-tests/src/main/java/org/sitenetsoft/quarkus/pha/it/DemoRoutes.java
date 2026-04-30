@@ -50,7 +50,7 @@ public class DemoRoutes {
             Map.of("time", "5 hours ago", "event", "High CPU alert triggered", "status", "Warning")
         );
 
-        return dashboardPage.data("applicationName", "quarkus-pha")
+        return dashboardPage
             .data("stats", stats)
             .data("recentActivity", recentActivity);
     }
@@ -59,14 +59,14 @@ public class DemoRoutes {
     @Path("/data-management")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance dataManagement() {
-        return dataManagementPage.data("applicationName", "quarkus-pha");
+        return dataManagementPage.instance();
     }
 
     @GET
     @Path("/settings")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance settings() {
-        return settingsPage.data("applicationName", "quarkus-pha");
+        return settingsPage.instance();
     }
 
     @GET
@@ -82,7 +82,7 @@ public class DemoRoutes {
             Map.of("title", "Quarkus Native", "description", "Built as a Quarkus extension — any Quarkus app can consume these components.", "icon", "fas fa-rocket")
         );
 
-        return landingPage.data("applicationName", "quarkus-pha")
+        return landingPage
             .data("features", features);
     }
 }
