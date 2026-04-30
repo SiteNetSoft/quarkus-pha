@@ -88,42 +88,62 @@ quarkus-pha/
 ├── settings.gradle
 ├── runtime/
 │   └── src/main/
-│       ├── java/                    # Extension runtime Java code
+│       ├── java/                            # Extension runtime Java code
 │       └── resources/
 │           ├── META-INF/
-│           └── web/
-│               ├── css/
-│               │   ├── tokens.css   # PatternFly design tokens / CSS vars
-│               │   ├── base.css     # Resets and PatternFly overrides
-│               │   └── components/  # Component-specific styles
-│               ├── js/
-│               │   ├── alpine/
-│               │   │   ├── components/   # Alpine.data() factories
-│               │   │   └── stores/       # Alpine.store() definitions
-│               │   ├── htmx/
-│               │   │   └── extensions/   # Custom HTMX event handlers
+│           │   └── resources/
+│           │       └── web/                 # Static assets, served at /web/...
+│           │           ├── css/
+│           │           │   ├── pha.css      # Project-wide styles
+│           │           │   └── components/  # Component-specific styles
+│           │           ├── js/
+│           │           │   ├── alpine/
+│           │           │   │   ├── components/   # Alpine.data() factories
+│           │           │   │   └── stores/       # Alpine.store() definitions
+│           │           │   ├── htmx/
+│           │           │   │   └── extensions/   # Custom HTMX event handlers
+│           │           │   ├── charts/
+│           │           │   │   ├── echarts/      # Reusable ECharts config builders
+│           │           │   │   └── d3/           # Reusable D3 utilities
+│           │           │   ├── maps/
+│           │           │   │   └── maplibre/     # MapLibre wrappers
+│           │           │   ├── utils/            # Vanilla JS utilities
+│           │           │   └── main.js           # Entry point
+│           │           └── vendor/          # Vendored bundles (git-ignored, regenerated)
+│           └── templates/
+│               ├── layouts/                 # Base page layouts
+│               ├── components/              # HTML fragment components
+│               │   ├── navigation/
+│               │   ├── forms/
+│               │   ├── tables/
 │               │   ├── charts/
-│               │   │   ├── echarts/      # Reusable ECharts config builders
-│               │   │   └── d3/           # Reusable D3 utilities
 │               │   ├── maps/
-│               │   │   └── maplibre/     # MapLibre wrappers
-│               │   ├── utils/            # Vanilla JS utilities
-│               │   └── main.js           # Entry point
-│               └── templates/
-│                   ├── layouts/          # Base page layouts
-│                   ├── components/       # HTML fragment components
-│                   │   ├── navigation/
-│                   │   ├── forms/
-│                   │   ├── tables/
-│                   │   ├── charts/
-│                   │   ├── maps/
-│                   │   └── feedback/
-│                   └── partials/         # HTMX partial swap targets
+│               │   └── feedback/
+│               └── partials/                # HTMX partial swap targets
 ├── deployment/
 │   └── src/main/java/               # Extension deployment/build-time code
 └── integration-tests/
     └── src/                         # Extension integration tests
 ```
+
+---
+
+## Formatting
+HTML, CSS, JS, and JSON files are formatted with Prettier, run inside a Podman container so nothing touches the host. Use the project script:
+
+```bash
+bash scripts/format.sh                          # format default targets in-place
+bash scripts/format.sh --check                  # check only (CI-style); fails if changes are needed
+bash scripts/format.sh path/to/file-or-dir      # format a specific file or directory
+```
+
+Default targets:
+- `runtime/src/main/resources/templates/**/*.html`
+- `runtime/src/main/resources/META-INF/resources/web/css/**/*.css`
+- `runtime/src/main/resources/META-INF/resources/web/js/**/*.js`
+- `integration-tests/src/main/resources/templates/**/*.html`
+
+Excluded via `.prettierignore`: `runtime/.../web/vendor/`, `build/`, `node_modules/`, Playwright reports, lock files. Qute expressions (`{...}`, `{#...}{/...}`) are treated as plain text by Prettier and pass through untouched.
 
 ---
 
