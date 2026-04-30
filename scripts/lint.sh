@@ -6,7 +6,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-WEB_DIR="$PROJECT_ROOT/runtime/src/main/resources/web"
+WEB_DIR="$PROJECT_ROOT/runtime/src/main/resources/META-INF/resources/web"
 TEMPLATE_DIR="$PROJECT_ROOT/runtime/src/main/resources/templates"
 
 IMAGE="docker.io/library/node:22-alpine"
@@ -24,7 +24,7 @@ MOUNTS+=("-v" "$PROJECT_ROOT/.htmlhintrc:/work/.htmlhintrc:ro,Z")
 JS_DIR="$WEB_DIR/js"
 HAS_JS=false
 if [ -d "$JS_DIR" ] && [ -n "$(find "$JS_DIR" -name '*.js' -not -path '*/vendor/*' 2>/dev/null)" ]; then
-  MOUNTS+=("-v" "$JS_DIR:/work/runtime/src/main/resources/web/js:ro,Z")
+  MOUNTS+=("-v" "$JS_DIR:/work/runtime/src/main/resources/META-INF/resources/web/js:ro,Z")
   HAS_JS=true
 fi
 
@@ -32,7 +32,7 @@ fi
 CSS_DIR="$WEB_DIR/css"
 HAS_CSS=false
 if [ -d "$CSS_DIR" ] && [ -n "$(find "$CSS_DIR" -name '*.css' 2>/dev/null)" ]; then
-  MOUNTS+=("-v" "$CSS_DIR:/work/runtime/src/main/resources/web/css:ro,Z")
+  MOUNTS+=("-v" "$CSS_DIR:/work/runtime/src/main/resources/META-INF/resources/web/css:ro,Z")
   HAS_CSS=true
 fi
 
@@ -73,7 +73,7 @@ podman run --rm \
     if [ '$HAS_CSS' = 'true' ]; then
       echo ''
       echo '--- Stylelint ---'
-      npx stylelint 'runtime/src/main/resources/web/css/**/*.css' || EXIT_CODE=\$?
+      npx stylelint 'runtime/src/main/resources/META-INF/resources/web/css/**/*.css' || EXIT_CODE=\$?
     else
       echo ''
       echo '--- Stylelint: no CSS files found, skipping ---'

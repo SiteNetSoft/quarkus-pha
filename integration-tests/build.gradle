@@ -21,12 +21,6 @@ sourceSets {
     }
 }
 
-processResources {
-    from("${project(':quarkus-pha').projectDir}/src/main/resources/web") {
-        into 'META-INF/resources/web'
-    }
-}
-
 test {
     exclude '**/*IT.class'
 }
