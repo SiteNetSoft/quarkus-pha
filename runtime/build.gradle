@@ -14,9 +14,3 @@ dependencies {
     annotationProcessor enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
     annotationProcessor 'io.quarkus:quarkus-extension-processor'
 }
-
-processResources {
-    from('src/main/resources/web') {
-        into 'META-INF/resources/web'
-    }
-}

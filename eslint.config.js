@@ -1,6 +1,6 @@
 export default [
   {
-    files: ["runtime/src/main/resources/web/js/**/*.js"],
+    files: ["runtime/src/main/resources/META-INF/resources/web/js/**/*.js"],
     ignores: [
       "**/vendor/**",
       "**/node_modules/**",

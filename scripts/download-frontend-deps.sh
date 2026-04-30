@@ -6,7 +6,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-WEB_DIR="$PROJECT_ROOT/runtime/src/main/resources/web"
+WEB_DIR="$PROJECT_ROOT/runtime/src/main/resources/META-INF/resources/web"
 VENDOR_DIR="$WEB_DIR/vendor"
 
 echo "==> Creating vendor output directory..."
