@@ -94,12 +94,19 @@ cmd_test() {
   bash "$SCRIPT_DIR/validate.sh" > "$HTML_VALIDATE_LOG" 2>&1 &
   HTML_VALIDATE_PID=$!
 
+  # JS console-error reports written by tests/console-errors.spec.js
+  JS_REPORT_DIR="$REPORTS_DIR/js-validation"
+  rm -rf "$JS_REPORT_DIR"
+  mkdir -p "$JS_REPORT_DIR"
+
   set +e
   podman run --rm \
     --network=host \
     --ipc=host \
     -e CI="${CI:-}" \
+    -e JS_REPORT_DIR=/reports \
     -v "$E2E_DIR:/work:Z" \
+    -v "$JS_REPORT_DIR:/reports:Z" \
     -w /work \
     "$PLAYWRIGHT_IMAGE" \
     bash -c '
@@ -108,6 +115,18 @@ cmd_test() {
       npx playwright test
     '
   PLAYWRIGHT_EXIT=$?
+
+  # Build summary.txt from the per-page report files
+  {
+    for f in "$JS_REPORT_DIR"/*.txt; do
+      [ -e "$f" ] || continue
+      [ "$(basename "$f")" = "summary.txt" ] && continue
+      p=$(awk -F": " '/^Path: /{print $2; exit}' "$f")
+      s=$(awk -F": " '/^Status: /{print $2; exit}' "$f")
+      n=$(awk -F": " '/^Errors: /{print $2; exit}' "$f")
+      printf '%s\t%s\t%s\n' "$s" "$p" "$n"
+    done | sort -k2
+  } > "$JS_REPORT_DIR/summary.txt"
 
   echo ""
   echo "==> Waiting for HTML validation to finish..."
@@ -137,9 +156,10 @@ cmd_test() {
   echo ""
   if [ $EXIT_CODE -ne 0 ]; then
     echo "==> E2E tests failed (Playwright=$PLAYWRIGHT_EXIT, html=$HTML_VALIDATE_EXIT, css=$CSS_VALIDATE_EXIT)"
-    echo "    HTML report:        $E2E_DIR/playwright-report/index.html"
+    echo "    HTML report:         $E2E_DIR/playwright-report/index.html"
     echo "    HTML validation log: $HTML_VALIDATE_LOG"
     echo "    CSS validation log:  $CSS_VALIDATE_LOG"
+    echo "    JS reports:          $JS_REPORT_DIR/"
   else
     echo "==> All E2E tests + HTML/CSS validation passed"
   fi
