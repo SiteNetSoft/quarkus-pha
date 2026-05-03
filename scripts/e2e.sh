@@ -77,6 +77,12 @@ cmd_test() {
   bash "$SCRIPT_DIR/validate-css.sh" > "$CSS_VALIDATE_LOG" 2>&1 &
   CSS_VALIDATE_PID=$!
 
+  # JS type-check (tsc --checkJs) is also Quarkus-independent
+  echo "==> Launching JS type-check (background)..."
+  JS_TYPECHECK_LOG="$REPORTS_DIR/typecheck-js.log"
+  bash "$SCRIPT_DIR/typecheck-js.sh" > "$JS_TYPECHECK_LOG" 2>&1 &
+  JS_TYPECHECK_PID=$!
+
   if ! curl -sf http://localhost:9090 > /dev/null 2>&1; then
     cmd_start
     QUARKUS_STARTED=1
@@ -136,6 +142,10 @@ cmd_test() {
   echo "==> Waiting for CSS validation to finish..."
   wait "$CSS_VALIDATE_PID"
   CSS_VALIDATE_EXIT=$?
+
+  echo "==> Waiting for JS type-check to finish..."
+  wait "$JS_TYPECHECK_PID"
+  JS_TYPECHECK_EXIT=$?
   set -e
 
   echo ""
@@ -146,8 +156,12 @@ cmd_test() {
   echo "--- CSS validation log ($CSS_VALIDATE_LOG) ---"
   cat "$CSS_VALIDATE_LOG"
   echo "--- end CSS validation log ---"
+  echo ""
+  echo "--- JS type-check log ($JS_TYPECHECK_LOG) ---"
+  cat "$JS_TYPECHECK_LOG"
+  echo "--- end JS type-check log ---"
 
-  if [ "$PLAYWRIGHT_EXIT" -ne 0 ] || [ "$HTML_VALIDATE_EXIT" -ne 0 ] || [ "$CSS_VALIDATE_EXIT" -ne 0 ]; then
+  if [ "$PLAYWRIGHT_EXIT" -ne 0 ] || [ "$HTML_VALIDATE_EXIT" -ne 0 ] || [ "$CSS_VALIDATE_EXIT" -ne 0 ] || [ "$JS_TYPECHECK_EXIT" -ne 0 ]; then
     EXIT_CODE=1
   else
     EXIT_CODE=0
@@ -155,13 +169,15 @@ cmd_test() {
 
   echo ""
   if [ $EXIT_CODE -ne 0 ]; then
-    echo "==> E2E tests failed (Playwright=$PLAYWRIGHT_EXIT, html=$HTML_VALIDATE_EXIT, css=$CSS_VALIDATE_EXIT)"
-    echo "    HTML report:         $E2E_DIR/playwright-report/index.html"
-    echo "    HTML validation log: $HTML_VALIDATE_LOG"
-    echo "    CSS validation log:  $CSS_VALIDATE_LOG"
-    echo "    JS reports:          $JS_REPORT_DIR/"
+    echo "==> E2E tests failed (Playwright=$PLAYWRIGHT_EXIT, html=$HTML_VALIDATE_EXIT, css=$CSS_VALIDATE_EXIT, jsTypecheck=$JS_TYPECHECK_EXIT)"
+    echo "    HTML report:           $E2E_DIR/playwright-report/index.html"
+    echo "    HTML validation log:   $HTML_VALIDATE_LOG"
+    echo "    CSS validation log:    $CSS_VALIDATE_LOG"
+    echo "    JS console reports:    $JS_REPORT_DIR/"
+    echo "    JS type-check log:     $JS_TYPECHECK_LOG"
+    echo "    JS type-check reports: $REPORTS_DIR/js-typecheck/"
   else
-    echo "==> All E2E tests + HTML/CSS validation passed"
+    echo "==> All E2E tests + HTML/CSS validation + JS type-check passed"
   fi
 
   exit $EXIT_CODE
