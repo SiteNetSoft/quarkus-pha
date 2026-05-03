@@ -90,12 +90,9 @@ podman run --rm \
         printf "PASS\t%s\t0\n" "$rel" >> /reports/summary.txt
       else
         echo "  FAIL  $rel ($errors errors)"
-        {
-          printf "File: %s\n"   "$rel"
-          printf "Errors: %s\n" "$errors"
-          printf "\n"
-          cat "$raw"
-        } > "$report"
+        # Per-file report is the raw csstree-validator JSON output, unmodified.
+        # Metadata (path, error count) lives in summary.txt.
+        cp "$raw" "$report"
         printf "FAIL\t%s\t%s\n" "$rel" "$errors" >> /reports/summary.txt
       fi
     done
