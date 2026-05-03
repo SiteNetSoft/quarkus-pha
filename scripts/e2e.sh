@@ -67,6 +67,16 @@ cmd_test() {
   }
   trap cleanup EXIT
 
+  # Reports live in a gitignored .reports/ directory at the repo root
+  REPORTS_DIR="$PROJECT_ROOT/.reports"
+  mkdir -p "$REPORTS_DIR"
+
+  # CSS validation doesn't need Quarkus running, so kick it off immediately
+  echo "==> Launching CSS validation (background)..."
+  CSS_VALIDATE_LOG="$REPORTS_DIR/validate-css.log"
+  bash "$SCRIPT_DIR/validate-css.sh" > "$CSS_VALIDATE_LOG" 2>&1 &
+  CSS_VALIDATE_PID=$!
+
   if ! curl -sf http://localhost:9090 > /dev/null 2>&1; then
     cmd_start
     QUARKUS_STARTED=1
@@ -74,11 +84,17 @@ cmd_test() {
     echo "==> Quarkus already running on :9090"
   fi
 
-  echo "==> Running Playwright tests in Podman container..."
+  echo "==> Running HTML validation (background) and Playwright tests (foreground) in parallel..."
 
   # Create output directories on host so reports are preserved
   mkdir -p "$E2E_DIR/test-results" "$E2E_DIR/playwright-report"
 
+  # HTML validation in the background; needs Quarkus
+  HTML_VALIDATE_LOG="$REPORTS_DIR/validate.log"
+  bash "$SCRIPT_DIR/validate.sh" > "$HTML_VALIDATE_LOG" 2>&1 &
+  HTML_VALIDATE_PID=$!
+
+  set +e
   podman run --rm \
     --network=host \
     --ipc=host \
@@ -91,15 +107,41 @@ cmd_test() {
       npm install --no-audit --no-fund 2>&1
       npx playwright test
     '
+  PLAYWRIGHT_EXIT=$?
 
-  EXIT_CODE=$?
+  echo ""
+  echo "==> Waiting for HTML validation to finish..."
+  wait "$HTML_VALIDATE_PID"
+  HTML_VALIDATE_EXIT=$?
+
+  echo "==> Waiting for CSS validation to finish..."
+  wait "$CSS_VALIDATE_PID"
+  CSS_VALIDATE_EXIT=$?
+  set -e
+
+  echo ""
+  echo "--- HTML validation log ($HTML_VALIDATE_LOG) ---"
+  cat "$HTML_VALIDATE_LOG"
+  echo "--- end HTML validation log ---"
+  echo ""
+  echo "--- CSS validation log ($CSS_VALIDATE_LOG) ---"
+  cat "$CSS_VALIDATE_LOG"
+  echo "--- end CSS validation log ---"
+
+  if [ "$PLAYWRIGHT_EXIT" -ne 0 ] || [ "$HTML_VALIDATE_EXIT" -ne 0 ] || [ "$CSS_VALIDATE_EXIT" -ne 0 ]; then
+    EXIT_CODE=1
+  else
+    EXIT_CODE=0
+  fi
 
   echo ""
   if [ $EXIT_CODE -ne 0 ]; then
-    echo "==> E2E tests failed (exit code $EXIT_CODE)"
-    echo "    HTML report: $E2E_DIR/playwright-report/index.html"
+    echo "==> E2E tests failed (Playwright=$PLAYWRIGHT_EXIT, html=$HTML_VALIDATE_EXIT, css=$CSS_VALIDATE_EXIT)"
+    echo "    HTML report:        $E2E_DIR/playwright-report/index.html"
+    echo "    HTML validation log: $HTML_VALIDATE_LOG"
+    echo "    CSS validation log:  $CSS_VALIDATE_LOG"
   else
-    echo "==> All E2E tests passed"
+    echo "==> All E2E tests + HTML/CSS validation passed"
   fi
 
   exit $EXIT_CODE
