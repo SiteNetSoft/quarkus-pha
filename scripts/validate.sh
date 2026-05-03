@@ -123,13 +123,9 @@ validate_path() {
   printf '  FAIL  %s (%s errors)\n' "$path" "$errors"
   printf '%s\n' "$filtered" | sed 's/^/        /'
 
-  # Persist per-path report for later inspection
-  {
-    printf 'URL: %s\n' "$url"
-    printf 'Errors: %s\n' "$errors"
-    printf '\n'
-    printf '%s\n' "$filtered"
-  } > "$REPORT_DIR/${slug}.txt"
+  # Per-path report is the raw filtered vnu output. Metadata (path, error count)
+  # lives in summary.txt; URL is recoverable from the filename slug.
+  printf '%s\n' "$filtered" > "$REPORT_DIR/${slug}.txt"
 
   printf 'FAIL\t%s\t%s\n' "$path" "$errors" >> "$SUMMARY_FILE"
   return 1
