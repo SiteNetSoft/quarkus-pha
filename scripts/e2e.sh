@@ -105,6 +105,8 @@ cmd_test() {
   rm -rf "$JS_REPORT_DIR"
   mkdir -p "$JS_REPORT_DIR"
 
+  PLAYWRIGHT_LOG="$REPORTS_DIR/playwright.log"
+
   set +e
   podman run --rm \
     --network=host \
@@ -119,8 +121,8 @@ cmd_test() {
       set -e
       npm install --no-audit --no-fund 2>&1
       npx playwright test
-    '
-  PLAYWRIGHT_EXIT=$?
+    ' 2>&1 | tee "$PLAYWRIGHT_LOG"
+  PLAYWRIGHT_EXIT=${PIPESTATUS[0]}
 
   # Build summary.txt from the per-page report files
   {
@@ -167,6 +169,62 @@ cmd_test() {
     EXIT_CODE=0
   fi
 
+  # Top-level overview summary across all four pipelines
+  write_summary() {
+    local summary_file="$REPORTS_DIR/summary.txt"
+
+    # Per-job PASS/FAIL counts pulled from each sub-summary.txt.
+    # awk gives a clean single-line count whether or not anything matches.
+    count_status() {
+      local file="$1" tag="$2"
+      [ -f "$file" ] || { printf '0'; return; }
+      awk -v t="$tag" 'index($0, t) == 1 {n++} END {print n+0}' "$file"
+    }
+    local html_pass html_fail css_pass css_fail jsv_pass jsv_fail jst_pass jst_fail
+    html_pass=$(count_status "$REPORTS_DIR/html-validation/summary.txt" "PASS")
+    html_fail=$(count_status "$REPORTS_DIR/html-validation/summary.txt" "FAIL")
+    css_pass=$(count_status "$REPORTS_DIR/css-validation/summary.txt" "PASS")
+    css_fail=$(count_status "$REPORTS_DIR/css-validation/summary.txt" "FAIL")
+    jsv_pass=$(count_status "$JS_REPORT_DIR/summary.txt" "PASS")
+    jsv_fail=$(count_status "$JS_REPORT_DIR/summary.txt" "FAIL")
+    jst_pass=$(count_status "$REPORTS_DIR/js-typecheck/summary.txt" "PASS")
+    jst_fail=$(count_status "$REPORTS_DIR/js-typecheck/summary.txt" "FAIL")
+
+    # Playwright stats: parsed from its run log (last "X passed" / "X failed" lines)
+    local pw_pass pw_fail
+    pw_pass=$(grep -oE '[0-9]+ passed' "$PLAYWRIGHT_LOG" 2>/dev/null | tail -1 | grep -oE '[0-9]+' || true)
+    pw_fail=$(grep -oE '[0-9]+ failed' "$PLAYWRIGHT_LOG" 2>/dev/null | tail -1 | grep -oE '[0-9]+' || true)
+    pw_pass=${pw_pass:-0}
+    pw_fail=${pw_fail:-0}
+
+    status_label() {
+      [ "$1" -eq 0 ] && printf 'PASS' || printf 'FAIL'
+    }
+
+    {
+      printf 'quarkus-pha E2E run summary\n'
+      printf 'Run at: %s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+      printf '\n'
+      printf '%-16s  %-6s  %s\n' 'Job' 'Status' 'Detail'
+      printf '%-16s  %-6s  %s\n' '----------------' '------' '-----------------------------------------------'
+      printf '%-16s  %-6s  %s\n' 'Playwright'      "$(status_label "$PLAYWRIGHT_EXIT")"     "${pw_pass} passed, ${pw_fail} failed"
+      printf '%-16s  %-6s  %s\n' 'HTML validation' "$(status_label "$HTML_VALIDATE_EXIT")"  "${html_pass} PASS, ${html_fail} FAIL"
+      printf '%-16s  %-6s  %s\n' 'CSS validation'  "$(status_label "$CSS_VALIDATE_EXIT")"   "${css_pass} PASS, ${css_fail} FAIL"
+      printf '%-16s  %-6s  %s\n' 'JS console'      "$(status_label "$PLAYWRIGHT_EXIT")"     "${jsv_pass} PASS, ${jsv_fail} FAIL  (rolls into Playwright)"
+      printf '%-16s  %-6s  %s\n' 'JS type-check'   "$(status_label "$JS_TYPECHECK_EXIT")"   "${jst_pass} PASS, ${jst_fail} FAIL"
+      printf '\n'
+      printf 'Per-job reports:\n'
+      printf '  HTML:           %s\n' "$REPORTS_DIR/html-validation/"
+      printf '  CSS:            %s\n' "$REPORTS_DIR/css-validation/"
+      printf '  JS console:     %s\n' "$JS_REPORT_DIR/"
+      printf '  JS type-check:  %s\n' "$REPORTS_DIR/js-typecheck/"
+      printf '  Playwright:     %s\n' "$E2E_DIR/playwright-report/index.html"
+      printf '\n'
+      printf 'Overall: %s\n' "$([ "$EXIT_CODE" -eq 0 ] && printf 'PASS' || printf 'FAIL')"
+    } > "$summary_file"
+  }
+  write_summary
+
   echo ""
   if [ $EXIT_CODE -ne 0 ]; then
     echo "==> E2E tests failed (Playwright=$PLAYWRIGHT_EXIT, html=$HTML_VALIDATE_EXIT, css=$CSS_VALIDATE_EXIT, jsTypecheck=$JS_TYPECHECK_EXIT)"
@@ -176,8 +234,10 @@ cmd_test() {
     echo "    JS console reports:    $JS_REPORT_DIR/"
     echo "    JS type-check log:     $JS_TYPECHECK_LOG"
     echo "    JS type-check reports: $REPORTS_DIR/js-typecheck/"
+    echo "    Top-level summary:     $REPORTS_DIR/summary.txt"
   else
     echo "==> All E2E tests + HTML/CSS validation + JS type-check passed"
+    echo "    Top-level summary:     $REPORTS_DIR/summary.txt"
   fi
 
   exit $EXIT_CODE
