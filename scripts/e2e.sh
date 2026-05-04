@@ -107,6 +107,20 @@ cmd_test() {
   bash "$SCRIPT_DIR/validate.sh" > "$HTML_VALIDATE_LOG" 2>&1 &
   HTML_VALIDATE_PID=$!
 
+  # Server-side smoke tests (@QuarkusTest + RestAssured). Launched after
+  # cmd_start so the Gradle daemon used by quarkusBuild is free. The test
+  # spawns its own Quarkus instance on a separate port — no conflict with
+  # the :9090 instance Playwright/HTML-validate use.
+  SERVER_TEST_LOG="$REPORTS_DIR/server-tests.log"
+  (
+    cd "$PROJECT_ROOT"
+    JAVA_HOME="${JAVA_HOME:-/usr/lib/jvm/java-25-openjdk-amd64}" \
+      ./gradlew --no-daemon \
+        :quarkus-pha-integration-tests:test \
+        --tests 'org.sitenetsoft.quarkus.pha.it.*SmokeTest'
+  ) > "$SERVER_TEST_LOG" 2>&1 &
+  SERVER_TEST_PID=$!
+
   # JS console-error reports written by tests/console-errors.spec.js
   JS_REPORT_DIR="$REPORTS_DIR/js-validation"
   rm -rf "$JS_REPORT_DIR"
@@ -182,6 +196,36 @@ cmd_test() {
   echo "==> Waiting for reference checks to finish..."
   wait "$REFS_PID"
   REFS_EXIT=$?
+
+  echo "==> Waiting for server-side smoke tests to finish..."
+  wait "$SERVER_TEST_PID"
+  SERVER_TEST_EXIT=$?
+
+  # Pull JUnit XML totals; fall back to gradle log scrape if XML missing.
+  SERVER_TEST_DIR="$REPORTS_DIR/server-tests"
+  rm -rf "$SERVER_TEST_DIR"
+  mkdir -p "$SERVER_TEST_DIR"
+  cp -f "$PROJECT_ROOT/integration-tests/build/test-results/test/"*.xml \
+        "$SERVER_TEST_DIR/" 2>/dev/null || true
+
+  ST_TOTAL=0; ST_FAIL=0; ST_ERR=0
+  for xml in "$SERVER_TEST_DIR"/*.xml; do
+    [ -f "$xml" ] || continue
+    t=$(awk -F'"' '/<testsuite[[:space:]]/ {for(i=1;i<NF;i++)if($i~/tests=$/){print $(i+1);exit}}' "$xml")
+    f=$(awk -F'"' '/<testsuite[[:space:]]/ {for(i=1;i<NF;i++)if($i~/failures=$/){print $(i+1);exit}}' "$xml")
+    e=$(awk -F'"' '/<testsuite[[:space:]]/ {for(i=1;i<NF;i++)if($i~/errors=$/){print $(i+1);exit}}' "$xml")
+    ST_TOTAL=$((ST_TOTAL + ${t:-0}))
+    ST_FAIL=$((ST_FAIL + ${f:-0}))
+    ST_ERR=$((ST_ERR + ${e:-0}))
+  done
+
+  {
+    if [ "$ST_FAIL" = "0" ] && [ "$ST_ERR" = "0" ]; then
+      printf 'PASS\tserver-tests\t%s tests, 0 failures\n' "$ST_TOTAL"
+    else
+      printf 'FAIL\tserver-tests\t%s tests, %s failures, %s errors\n' "$ST_TOTAL" "$ST_FAIL" "$ST_ERR"
+    fi
+  } > "$SERVER_TEST_DIR/summary.txt"
   set -e
 
   echo ""
@@ -200,8 +244,12 @@ cmd_test() {
   echo "--- Reference checks log ($REFS_LOG) ---"
   cat "$REFS_LOG"
   echo "--- end Reference checks log ---"
+  echo ""
+  echo "--- Server-side smoke tests log ($SERVER_TEST_LOG) ---"
+  tail -40 "$SERVER_TEST_LOG"
+  echo "--- end Server-side smoke tests log ---"
 
-  if [ "$PLAYWRIGHT_EXIT" -ne 0 ] || [ "$HTML_VALIDATE_EXIT" -ne 0 ] || [ "$CSS_VALIDATE_EXIT" -ne 0 ] || [ "$JS_TYPECHECK_EXIT" -ne 0 ] || [ "$REFS_EXIT" -ne 0 ]; then
+  if [ "$PLAYWRIGHT_EXIT" -ne 0 ] || [ "$HTML_VALIDATE_EXIT" -ne 0 ] || [ "$CSS_VALIDATE_EXIT" -ne 0 ] || [ "$JS_TYPECHECK_EXIT" -ne 0 ] || [ "$REFS_EXIT" -ne 0 ] || [ "$SERVER_TEST_EXIT" -ne 0 ]; then
     EXIT_CODE=1
   else
     EXIT_CODE=0
@@ -255,22 +303,24 @@ cmd_test() {
       printf '\n'
       printf '%-16s  %-6s  %s\n' 'Job' 'Status' 'Detail'
       printf '%-16s  %-6s  %s\n' '----------------' '------' '-----------------------------------------------'
-      printf '%-18s  %-6s  %s\n' 'Playwright'       "$(status_label "$PLAYWRIGHT_EXIT")"     "${pw_pass} passed, ${pw_fail} failed"
-      printf '%-18s  %-6s  %s\n' 'HTML validation'  "$(status_label "$HTML_VALIDATE_EXIT")"  "${html_pass} PASS, ${html_fail} FAIL"
-      printf '%-18s  %-6s  %s\n' 'CSS validation'   "$(status_label "$CSS_VALIDATE_EXIT")"   "${css_pass} PASS, ${css_fail} FAIL"
-      printf '%-18s  %-6s  %s\n' 'JS console'       "$(status_label "$PLAYWRIGHT_EXIT")"     "${jsv_pass} PASS, ${jsv_fail} FAIL  (rolls into Playwright)"
-      printf '%-18s  %-6s  %s\n' 'JS type-check'    "$(status_label "$JS_TYPECHECK_EXIT")"   "${jst_pass} PASS, ${jst_fail} FAIL"
-      printf '%-18s  %-6s  %s\n' 'a11y (axe)'       "$(status_label "$PLAYWRIGHT_EXIT")"     "${a11y_pass} PASS, ${a11y_fail} FAIL  (rolls into Playwright)"
-      printf '%-18s  %-6s  %s\n' 'Reference checks' "$(status_label "$REFS_EXIT")"           "$refs_summary"
+      printf '%-18s  %-6s  %s\n' 'Server-side tests' "$(status_label "$SERVER_TEST_EXIT")"   "${ST_TOTAL} tests, ${ST_FAIL} failures, ${ST_ERR} errors"
+      printf '%-18s  %-6s  %s\n' 'Playwright'        "$(status_label "$PLAYWRIGHT_EXIT")"     "${pw_pass} passed, ${pw_fail} failed"
+      printf '%-18s  %-6s  %s\n' 'HTML validation'   "$(status_label "$HTML_VALIDATE_EXIT")"  "${html_pass} PASS, ${html_fail} FAIL"
+      printf '%-18s  %-6s  %s\n' 'CSS validation'    "$(status_label "$CSS_VALIDATE_EXIT")"   "${css_pass} PASS, ${css_fail} FAIL"
+      printf '%-18s  %-6s  %s\n' 'JS console'        "$(status_label "$PLAYWRIGHT_EXIT")"     "${jsv_pass} PASS, ${jsv_fail} FAIL  (rolls into Playwright)"
+      printf '%-18s  %-6s  %s\n' 'JS type-check'     "$(status_label "$JS_TYPECHECK_EXIT")"   "${jst_pass} PASS, ${jst_fail} FAIL"
+      printf '%-18s  %-6s  %s\n' 'a11y (axe)'        "$(status_label "$PLAYWRIGHT_EXIT")"     "${a11y_pass} PASS, ${a11y_fail} FAIL  (rolls into Playwright)"
+      printf '%-18s  %-6s  %s\n' 'Reference checks'  "$(status_label "$REFS_EXIT")"           "$refs_summary"
       printf '\n'
       printf 'Per-job reports:\n'
-      printf '  HTML:             %s\n' "$REPORTS_DIR/html-validation/"
-      printf '  CSS:              %s\n' "$REPORTS_DIR/css-validation/"
-      printf '  JS console:       %s\n' "$JS_REPORT_DIR/"
-      printf '  JS type-check:    %s\n' "$REPORTS_DIR/js-typecheck/"
-      printf '  a11y (axe):       %s\n' "$A11Y_REPORT_DIR/"
-      printf '  Reference checks: %s\n' "$REPORTS_DIR/references/"
-      printf '  Playwright:       %s\n' "$E2E_DIR/playwright-report/index.html"
+      printf '  Server-side tests: %s\n' "$SERVER_TEST_DIR/"
+      printf '  HTML:              %s\n' "$REPORTS_DIR/html-validation/"
+      printf '  CSS:               %s\n' "$REPORTS_DIR/css-validation/"
+      printf '  JS console:        %s\n' "$JS_REPORT_DIR/"
+      printf '  JS type-check:     %s\n' "$REPORTS_DIR/js-typecheck/"
+      printf '  a11y (axe):        %s\n' "$A11Y_REPORT_DIR/"
+      printf '  Reference checks:  %s\n' "$REPORTS_DIR/references/"
+      printf '  Playwright:        %s\n' "$E2E_DIR/playwright-report/index.html"
       printf '\n'
       printf 'Overall: %s\n' "$([ "$EXIT_CODE" -eq 0 ] && printf 'PASS' || printf 'FAIL')"
     } > "$summary_file"
@@ -279,7 +329,7 @@ cmd_test() {
 
   echo ""
   if [ $EXIT_CODE -ne 0 ]; then
-    echo "==> E2E tests failed (Playwright=$PLAYWRIGHT_EXIT, html=$HTML_VALIDATE_EXIT, css=$CSS_VALIDATE_EXIT, jsTypecheck=$JS_TYPECHECK_EXIT, refs=$REFS_EXIT)"
+    echo "==> E2E tests failed (Playwright=$PLAYWRIGHT_EXIT, server-tests=$SERVER_TEST_EXIT, html=$HTML_VALIDATE_EXIT, css=$CSS_VALIDATE_EXIT, jsTypecheck=$JS_TYPECHECK_EXIT, refs=$REFS_EXIT)"
     echo "    HTML report:           $E2E_DIR/playwright-report/index.html"
     echo "    HTML validation log:   $HTML_VALIDATE_LOG"
     echo "    CSS validation log:    $CSS_VALIDATE_LOG"
@@ -289,9 +339,11 @@ cmd_test() {
     echo "    a11y reports:          $A11Y_REPORT_DIR/"
     echo "    Reference checks log:  $REFS_LOG"
     echo "    Reference checks dir:  $REPORTS_DIR/references/"
+    echo "    Server-tests log:      $SERVER_TEST_LOG"
+    echo "    Server-tests dir:      $SERVER_TEST_DIR/"
     echo "    Top-level summary:     $REPORTS_DIR/summary.txt"
   else
-    echo "==> All E2E tests + validation/typecheck/a11y/refs passed"
+    echo "==> All server-tests + E2E + validation/typecheck/a11y/refs passed"
     echo "    Top-level summary:     $REPORTS_DIR/summary.txt"
   fi
 
