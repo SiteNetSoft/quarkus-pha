@@ -4,6 +4,21 @@ This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
 
+## Testing
+
+The project ships a multi-layer test pipeline (lint, HTML/CSS/JS validation,
+type-check, server-side smoke + contract, Playwright E2E with console-error
+capture, axe a11y, HTMX target/header contracts, keyboard-nav, reference
+checks). Run everything with:
+
+```shell script
+bash scripts/e2e.sh
+```
+
+Reports land under `.reports/` (gitignored). See [TESTING.md](TESTING.md) for
+the full breakdown of what each layer catches, how to run each one
+standalone, and how to add a new test layer.
+
 ## Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:
