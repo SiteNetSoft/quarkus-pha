@@ -116,8 +116,7 @@ cmd_test() {
     cd "$PROJECT_ROOT"
     JAVA_HOME="${JAVA_HOME:-/usr/lib/jvm/java-25-openjdk-amd64}" \
       ./gradlew --no-daemon \
-        :quarkus-pha-integration-tests:test \
-        --tests 'org.sitenetsoft.quarkus.pha.it.*SmokeTest'
+        :quarkus-pha-integration-tests:test
   ) > "$SERVER_TEST_LOG" 2>&1 &
   SERVER_TEST_PID=$!
 
