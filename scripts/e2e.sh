@@ -131,6 +131,11 @@ cmd_test() {
   rm -rf "$A11Y_REPORT_DIR"
   mkdir -p "$A11Y_REPORT_DIR"
 
+  # HTMX swap-target contract reports written by tests/htmx-targets.spec.js
+  HTMX_TARGETS_REPORT_DIR="$REPORTS_DIR/htmx-targets"
+  rm -rf "$HTMX_TARGETS_REPORT_DIR"
+  mkdir -p "$HTMX_TARGETS_REPORT_DIR"
+
   PLAYWRIGHT_LOG="$REPORTS_DIR/playwright.log"
 
   set +e
@@ -140,9 +145,11 @@ cmd_test() {
     -e CI="${CI:-}" \
     -e JS_REPORT_DIR=/reports/js \
     -e A11Y_REPORT_DIR=/reports/a11y \
+    -e HTMX_TARGETS_REPORT_DIR=/reports/htmx-targets \
     -v "$E2E_DIR:/work:Z" \
     -v "$JS_REPORT_DIR:/reports/js:Z" \
     -v "$A11Y_REPORT_DIR:/reports/a11y:Z" \
+    -v "$HTMX_TARGETS_REPORT_DIR:/reports/htmx-targets:Z" \
     -w /work \
     "$PLAYWRIGHT_IMAGE" \
     bash -c '
@@ -179,6 +186,21 @@ cmd_test() {
       fi
     done | sort -k2
   } > "$A11Y_REPORT_DIR/summary.txt"
+
+  # Build summary.txt for htmx-targets from per-page JSON files (path, broken count)
+  {
+    for f in "$HTMX_TARGETS_REPORT_DIR"/*.json; do
+      [ -e "$f" ] || continue
+      p=$(awk -F'"' '/"path":/ {print $4; exit}' "$f")
+      # Each file has a "broken" array; count its entries by matching "trigger":
+      n=$(awk '/"broken":[[:space:]]*\[/,/\]/{ if ($0 ~ /"trigger":/) c++ } END {print c+0}' "$f")
+      if [ "${n:-0}" = "0" ]; then
+        printf 'PASS\t%s\t0\n' "$p"
+      else
+        printf 'FAIL\t%s\t%s\n' "$p" "$n"
+      fi
+    done | sort -k2
+  } > "$HTMX_TARGETS_REPORT_DIR/summary.txt"
 
   echo ""
   echo "==> Waiting for HTML validation to finish..."
@@ -277,6 +299,9 @@ cmd_test() {
     jst_fail=$(count_status "$REPORTS_DIR/js-typecheck/summary.txt" "FAIL")
     a11y_pass=$(count_status "$A11Y_REPORT_DIR/summary.txt" "PASS")
     a11y_fail=$(count_status "$A11Y_REPORT_DIR/summary.txt" "FAIL")
+    local hxt_pass hxt_fail
+    hxt_pass=$(count_status "$HTMX_TARGETS_REPORT_DIR/summary.txt" "PASS")
+    hxt_fail=$(count_status "$HTMX_TARGETS_REPORT_DIR/summary.txt" "FAIL")
 
     # Reference check has its own summary.txt with three sub-check rows
     local refs_summary
@@ -310,6 +335,7 @@ cmd_test() {
       printf '%-18s  %-6s  %s\n' 'JS console'        "$(status_label "$PLAYWRIGHT_EXIT")"     "${jsv_pass} PASS, ${jsv_fail} FAIL  (rolls into Playwright)"
       printf '%-18s  %-6s  %s\n' 'JS type-check'     "$(status_label "$JS_TYPECHECK_EXIT")"   "${jst_pass} PASS, ${jst_fail} FAIL"
       printf '%-18s  %-6s  %s\n' 'a11y (axe)'        "$(status_label "$PLAYWRIGHT_EXIT")"     "${a11y_pass} PASS, ${a11y_fail} FAIL  (rolls into Playwright)"
+      printf '%-18s  %-6s  %s\n' 'HTMX targets'      "$(status_label "$PLAYWRIGHT_EXIT")"     "${hxt_pass} PASS, ${hxt_fail} FAIL  (rolls into Playwright)"
       printf '%-18s  %-6s  %s\n' 'Reference checks'  "$(status_label "$REFS_EXIT")"           "$refs_summary"
       printf '\n'
       printf 'Per-job reports:\n'
@@ -319,6 +345,7 @@ cmd_test() {
       printf '  JS console:        %s\n' "$JS_REPORT_DIR/"
       printf '  JS type-check:     %s\n' "$REPORTS_DIR/js-typecheck/"
       printf '  a11y (axe):        %s\n' "$A11Y_REPORT_DIR/"
+      printf '  HTMX targets:      %s\n' "$HTMX_TARGETS_REPORT_DIR/"
       printf '  Reference checks:  %s\n' "$REPORTS_DIR/references/"
       printf '  Playwright:        %s\n' "$E2E_DIR/playwright-report/index.html"
       printf '\n'
@@ -337,6 +364,7 @@ cmd_test() {
     echo "    JS type-check log:     $JS_TYPECHECK_LOG"
     echo "    JS type-check reports: $REPORTS_DIR/js-typecheck/"
     echo "    a11y reports:          $A11Y_REPORT_DIR/"
+    echo "    HTMX targets reports:  $HTMX_TARGETS_REPORT_DIR/"
     echo "    Reference checks log:  $REFS_LOG"
     echo "    Reference checks dir:  $REPORTS_DIR/references/"
     echo "    Server-tests log:      $SERVER_TEST_LOG"
