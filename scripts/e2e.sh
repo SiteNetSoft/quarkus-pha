@@ -135,6 +135,11 @@ cmd_test() {
   rm -rf "$HTMX_TARGETS_REPORT_DIR"
   mkdir -p "$HTMX_TARGETS_REPORT_DIR"
 
+  # Keyboard navigation reports written by tests/keyboard-nav.spec.js
+  KEYBOARD_NAV_REPORT_DIR="$REPORTS_DIR/keyboard-nav"
+  rm -rf "$KEYBOARD_NAV_REPORT_DIR"
+  mkdir -p "$KEYBOARD_NAV_REPORT_DIR"
+
   PLAYWRIGHT_LOG="$REPORTS_DIR/playwright.log"
 
   set +e
@@ -145,10 +150,12 @@ cmd_test() {
     -e JS_REPORT_DIR=/reports/js \
     -e A11Y_REPORT_DIR=/reports/a11y \
     -e HTMX_TARGETS_REPORT_DIR=/reports/htmx-targets \
+    -e KEYBOARD_NAV_REPORT_DIR=/reports/keyboard-nav \
     -v "$E2E_DIR:/work:Z" \
     -v "$JS_REPORT_DIR:/reports/js:Z" \
     -v "$A11Y_REPORT_DIR:/reports/a11y:Z" \
     -v "$HTMX_TARGETS_REPORT_DIR:/reports/htmx-targets:Z" \
+    -v "$KEYBOARD_NAV_REPORT_DIR:/reports/keyboard-nav:Z" \
     -w /work \
     "$PLAYWRIGHT_IMAGE" \
     bash -c '
@@ -200,6 +207,16 @@ cmd_test() {
       fi
     done | sort -k2
   } > "$HTMX_TARGETS_REPORT_DIR/summary.txt"
+
+  # Build summary.txt for keyboard-nav (each file has top-level "status")
+  {
+    for f in "$KEYBOARD_NAV_REPORT_DIR"/*.json; do
+      [ -e "$f" ] || continue
+      p=$(awk -F'"' '/"path":/ {print $4; exit}' "$f")
+      s=$(awk -F'"' '/"status":/ {print $4; exit}' "$f")
+      printf '%s\t%s\t-\n' "${s:-FAIL}" "$p"
+    done | sort -k2
+  } > "$KEYBOARD_NAV_REPORT_DIR/summary.txt"
 
   echo ""
   echo "==> Waiting for HTML validation to finish..."
@@ -301,6 +318,10 @@ cmd_test() {
     local hxt_pass hxt_fail
     hxt_pass=$(count_status "$HTMX_TARGETS_REPORT_DIR/summary.txt" "PASS")
     hxt_fail=$(count_status "$HTMX_TARGETS_REPORT_DIR/summary.txt" "FAIL")
+    local kbd_pass kbd_fail kbd_skip
+    kbd_pass=$(count_status "$KEYBOARD_NAV_REPORT_DIR/summary.txt" "PASS")
+    kbd_fail=$(count_status "$KEYBOARD_NAV_REPORT_DIR/summary.txt" "FAIL")
+    kbd_skip=$(count_status "$KEYBOARD_NAV_REPORT_DIR/summary.txt" "SKIP")
 
     # Reference check has its own summary.txt with three sub-check rows
     local refs_summary
@@ -335,6 +356,7 @@ cmd_test() {
       printf '%-18s  %-6s  %s\n' 'JS type-check'     "$(status_label "$JS_TYPECHECK_EXIT")"   "${jst_pass} PASS, ${jst_fail} FAIL"
       printf '%-18s  %-6s  %s\n' 'a11y (axe)'        "$(status_label "$PLAYWRIGHT_EXIT")"     "${a11y_pass} PASS, ${a11y_fail} FAIL  (rolls into Playwright)"
       printf '%-18s  %-6s  %s\n' 'HTMX targets'      "$(status_label "$PLAYWRIGHT_EXIT")"     "${hxt_pass} PASS, ${hxt_fail} FAIL  (rolls into Playwright)"
+      printf '%-18s  %-6s  %s\n' 'Keyboard nav'      "$(status_label "$PLAYWRIGHT_EXIT")"     "${kbd_pass} PASS, ${kbd_fail} FAIL, ${kbd_skip} SKIP  (rolls into Playwright)"
       printf '%-18s  %-6s  %s\n' 'Reference checks'  "$(status_label "$REFS_EXIT")"           "$refs_summary"
       printf '\n'
       printf 'Per-job reports:\n'
@@ -345,6 +367,7 @@ cmd_test() {
       printf '  JS type-check:     %s\n' "$REPORTS_DIR/js-typecheck/"
       printf '  a11y (axe):        %s\n' "$A11Y_REPORT_DIR/"
       printf '  HTMX targets:      %s\n' "$HTMX_TARGETS_REPORT_DIR/"
+      printf '  Keyboard nav:      %s\n' "$KEYBOARD_NAV_REPORT_DIR/"
       printf '  Reference checks:  %s\n' "$REPORTS_DIR/references/"
       printf '  Playwright:        %s\n' "$E2E_DIR/playwright-report/index.html"
       printf '\n'
@@ -364,6 +387,7 @@ cmd_test() {
     echo "    JS type-check reports: $REPORTS_DIR/js-typecheck/"
     echo "    a11y reports:          $A11Y_REPORT_DIR/"
     echo "    HTMX targets reports:  $HTMX_TARGETS_REPORT_DIR/"
+    echo "    Keyboard nav reports:  $KEYBOARD_NAV_REPORT_DIR/"
     echo "    Reference checks log:  $REFS_LOG"
     echo "    Reference checks dir:  $REPORTS_DIR/references/"
     echo "    Server-tests log:      $SERVER_TEST_LOG"
