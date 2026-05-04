@@ -83,6 +83,13 @@ cmd_test() {
   bash "$SCRIPT_DIR/typecheck-js.sh" > "$JS_TYPECHECK_LOG" 2>&1 &
   JS_TYPECHECK_PID=$!
 
+  # Reference / inventory checks (vendor refs, deps drift, unused JS) — pure
+  # filesystem inspection, no Quarkus needed
+  echo "==> Launching reference checks (background)..."
+  REFS_LOG="$REPORTS_DIR/check-references.log"
+  bash "$SCRIPT_DIR/check-references.sh" > "$REFS_LOG" 2>&1 &
+  REFS_PID=$!
+
   if ! curl -sf http://localhost:9090 > /dev/null 2>&1; then
     cmd_start
     QUARKUS_STARTED=1
@@ -105,6 +112,11 @@ cmd_test() {
   rm -rf "$JS_REPORT_DIR"
   mkdir -p "$JS_REPORT_DIR"
 
+  # axe-core a11y reports written by tests/a11y.spec.js
+  A11Y_REPORT_DIR="$REPORTS_DIR/a11y"
+  rm -rf "$A11Y_REPORT_DIR"
+  mkdir -p "$A11Y_REPORT_DIR"
+
   PLAYWRIGHT_LOG="$REPORTS_DIR/playwright.log"
 
   set +e
@@ -112,9 +124,11 @@ cmd_test() {
     --network=host \
     --ipc=host \
     -e CI="${CI:-}" \
-    -e JS_REPORT_DIR=/reports \
+    -e JS_REPORT_DIR=/reports/js \
+    -e A11Y_REPORT_DIR=/reports/a11y \
     -v "$E2E_DIR:/work:Z" \
-    -v "$JS_REPORT_DIR:/reports:Z" \
+    -v "$JS_REPORT_DIR:/reports/js:Z" \
+    -v "$A11Y_REPORT_DIR:/reports/a11y:Z" \
     -w /work \
     "$PLAYWRIGHT_IMAGE" \
     bash -c '
@@ -124,7 +138,7 @@ cmd_test() {
     ' 2>&1 | tee "$PLAYWRIGHT_LOG"
   PLAYWRIGHT_EXIT=${PIPESTATUS[0]}
 
-  # Build summary.txt from the per-page report files
+  # Build summary.txt for JS console-errors from per-page report files
   {
     for f in "$JS_REPORT_DIR"/*.txt; do
       [ -e "$f" ] || continue
@@ -135,6 +149,22 @@ cmd_test() {
       printf '%s\t%s\t%s\n' "$s" "$p" "$n"
     done | sort -k2
   } > "$JS_REPORT_DIR/summary.txt"
+
+  # Build summary.txt for a11y from per-page JSON files (path, blocking count)
+  {
+    for f in "$A11Y_REPORT_DIR"/*.json; do
+      [ -e "$f" ] || continue
+      # Each file has top-level "path" and "blocking" fields
+      p=$(awk -F'"' '/"path":/ {print $4; exit}' "$f")
+      n=$(awk -F'[:, ]+' '/"blocking":/ {gsub(/[^0-9]/,"",$3); print $3; exit}' "$f")
+      n=${n:-0}
+      if [ "$n" = "0" ]; then
+        printf 'PASS\t%s\t0\n' "$p"
+      else
+        printf 'FAIL\t%s\t%s\n' "$p" "$n"
+      fi
+    done | sort -k2
+  } > "$A11Y_REPORT_DIR/summary.txt"
 
   echo ""
   echo "==> Waiting for HTML validation to finish..."
@@ -148,6 +178,10 @@ cmd_test() {
   echo "==> Waiting for JS type-check to finish..."
   wait "$JS_TYPECHECK_PID"
   JS_TYPECHECK_EXIT=$?
+
+  echo "==> Waiting for reference checks to finish..."
+  wait "$REFS_PID"
+  REFS_EXIT=$?
   set -e
 
   echo ""
@@ -162,8 +196,12 @@ cmd_test() {
   echo "--- JS type-check log ($JS_TYPECHECK_LOG) ---"
   cat "$JS_TYPECHECK_LOG"
   echo "--- end JS type-check log ---"
+  echo ""
+  echo "--- Reference checks log ($REFS_LOG) ---"
+  cat "$REFS_LOG"
+  echo "--- end Reference checks log ---"
 
-  if [ "$PLAYWRIGHT_EXIT" -ne 0 ] || [ "$HTML_VALIDATE_EXIT" -ne 0 ] || [ "$CSS_VALIDATE_EXIT" -ne 0 ] || [ "$JS_TYPECHECK_EXIT" -ne 0 ]; then
+  if [ "$PLAYWRIGHT_EXIT" -ne 0 ] || [ "$HTML_VALIDATE_EXIT" -ne 0 ] || [ "$CSS_VALIDATE_EXIT" -ne 0 ] || [ "$JS_TYPECHECK_EXIT" -ne 0 ] || [ "$REFS_EXIT" -ne 0 ]; then
     EXIT_CODE=1
   else
     EXIT_CODE=0
@@ -180,7 +218,7 @@ cmd_test() {
       [ -f "$file" ] || { printf '0'; return; }
       awk -v t="$tag" 'index($0, t) == 1 {n++} END {print n+0}' "$file"
     }
-    local html_pass html_fail css_pass css_fail jsv_pass jsv_fail jst_pass jst_fail
+    local html_pass html_fail css_pass css_fail jsv_pass jsv_fail jst_pass jst_fail a11y_pass a11y_fail
     html_pass=$(count_status "$REPORTS_DIR/html-validation/summary.txt" "PASS")
     html_fail=$(count_status "$REPORTS_DIR/html-validation/summary.txt" "FAIL")
     css_pass=$(count_status "$REPORTS_DIR/css-validation/summary.txt" "PASS")
@@ -189,6 +227,16 @@ cmd_test() {
     jsv_fail=$(count_status "$JS_REPORT_DIR/summary.txt" "FAIL")
     jst_pass=$(count_status "$REPORTS_DIR/js-typecheck/summary.txt" "PASS")
     jst_fail=$(count_status "$REPORTS_DIR/js-typecheck/summary.txt" "FAIL")
+    a11y_pass=$(count_status "$A11Y_REPORT_DIR/summary.txt" "PASS")
+    a11y_fail=$(count_status "$A11Y_REPORT_DIR/summary.txt" "FAIL")
+
+    # Reference check has its own summary.txt with three sub-check rows
+    local refs_summary
+    if [ -f "$REPORTS_DIR/references/summary.txt" ]; then
+      refs_summary=$(awk '/^(vendor-refs|deps-vs-vendor|unused-js)/ {printf "%s=%s ", $1, $2}' "$REPORTS_DIR/references/summary.txt")
+    else
+      refs_summary="(no report)"
+    fi
 
     # Playwright stats: parsed from its run log (last "X passed" / "X failed" lines)
     local pw_pass pw_fail
@@ -207,18 +255,22 @@ cmd_test() {
       printf '\n'
       printf '%-16s  %-6s  %s\n' 'Job' 'Status' 'Detail'
       printf '%-16s  %-6s  %s\n' '----------------' '------' '-----------------------------------------------'
-      printf '%-16s  %-6s  %s\n' 'Playwright'      "$(status_label "$PLAYWRIGHT_EXIT")"     "${pw_pass} passed, ${pw_fail} failed"
-      printf '%-16s  %-6s  %s\n' 'HTML validation' "$(status_label "$HTML_VALIDATE_EXIT")"  "${html_pass} PASS, ${html_fail} FAIL"
-      printf '%-16s  %-6s  %s\n' 'CSS validation'  "$(status_label "$CSS_VALIDATE_EXIT")"   "${css_pass} PASS, ${css_fail} FAIL"
-      printf '%-16s  %-6s  %s\n' 'JS console'      "$(status_label "$PLAYWRIGHT_EXIT")"     "${jsv_pass} PASS, ${jsv_fail} FAIL  (rolls into Playwright)"
-      printf '%-16s  %-6s  %s\n' 'JS type-check'   "$(status_label "$JS_TYPECHECK_EXIT")"   "${jst_pass} PASS, ${jst_fail} FAIL"
+      printf '%-18s  %-6s  %s\n' 'Playwright'       "$(status_label "$PLAYWRIGHT_EXIT")"     "${pw_pass} passed, ${pw_fail} failed"
+      printf '%-18s  %-6s  %s\n' 'HTML validation'  "$(status_label "$HTML_VALIDATE_EXIT")"  "${html_pass} PASS, ${html_fail} FAIL"
+      printf '%-18s  %-6s  %s\n' 'CSS validation'   "$(status_label "$CSS_VALIDATE_EXIT")"   "${css_pass} PASS, ${css_fail} FAIL"
+      printf '%-18s  %-6s  %s\n' 'JS console'       "$(status_label "$PLAYWRIGHT_EXIT")"     "${jsv_pass} PASS, ${jsv_fail} FAIL  (rolls into Playwright)"
+      printf '%-18s  %-6s  %s\n' 'JS type-check'    "$(status_label "$JS_TYPECHECK_EXIT")"   "${jst_pass} PASS, ${jst_fail} FAIL"
+      printf '%-18s  %-6s  %s\n' 'a11y (axe)'       "$(status_label "$PLAYWRIGHT_EXIT")"     "${a11y_pass} PASS, ${a11y_fail} FAIL  (rolls into Playwright)"
+      printf '%-18s  %-6s  %s\n' 'Reference checks' "$(status_label "$REFS_EXIT")"           "$refs_summary"
       printf '\n'
       printf 'Per-job reports:\n'
-      printf '  HTML:           %s\n' "$REPORTS_DIR/html-validation/"
-      printf '  CSS:            %s\n' "$REPORTS_DIR/css-validation/"
-      printf '  JS console:     %s\n' "$JS_REPORT_DIR/"
-      printf '  JS type-check:  %s\n' "$REPORTS_DIR/js-typecheck/"
-      printf '  Playwright:     %s\n' "$E2E_DIR/playwright-report/index.html"
+      printf '  HTML:             %s\n' "$REPORTS_DIR/html-validation/"
+      printf '  CSS:              %s\n' "$REPORTS_DIR/css-validation/"
+      printf '  JS console:       %s\n' "$JS_REPORT_DIR/"
+      printf '  JS type-check:    %s\n' "$REPORTS_DIR/js-typecheck/"
+      printf '  a11y (axe):       %s\n' "$A11Y_REPORT_DIR/"
+      printf '  Reference checks: %s\n' "$REPORTS_DIR/references/"
+      printf '  Playwright:       %s\n' "$E2E_DIR/playwright-report/index.html"
       printf '\n'
       printf 'Overall: %s\n' "$([ "$EXIT_CODE" -eq 0 ] && printf 'PASS' || printf 'FAIL')"
     } > "$summary_file"
@@ -227,16 +279,19 @@ cmd_test() {
 
   echo ""
   if [ $EXIT_CODE -ne 0 ]; then
-    echo "==> E2E tests failed (Playwright=$PLAYWRIGHT_EXIT, html=$HTML_VALIDATE_EXIT, css=$CSS_VALIDATE_EXIT, jsTypecheck=$JS_TYPECHECK_EXIT)"
+    echo "==> E2E tests failed (Playwright=$PLAYWRIGHT_EXIT, html=$HTML_VALIDATE_EXIT, css=$CSS_VALIDATE_EXIT, jsTypecheck=$JS_TYPECHECK_EXIT, refs=$REFS_EXIT)"
     echo "    HTML report:           $E2E_DIR/playwright-report/index.html"
     echo "    HTML validation log:   $HTML_VALIDATE_LOG"
     echo "    CSS validation log:    $CSS_VALIDATE_LOG"
     echo "    JS console reports:    $JS_REPORT_DIR/"
     echo "    JS type-check log:     $JS_TYPECHECK_LOG"
     echo "    JS type-check reports: $REPORTS_DIR/js-typecheck/"
+    echo "    a11y reports:          $A11Y_REPORT_DIR/"
+    echo "    Reference checks log:  $REFS_LOG"
+    echo "    Reference checks dir:  $REPORTS_DIR/references/"
     echo "    Top-level summary:     $REPORTS_DIR/summary.txt"
   else
-    echo "==> All E2E tests + HTML/CSS validation + JS type-check passed"
+    echo "==> All E2E tests + validation/typecheck/a11y/refs passed"
     echo "    Top-level summary:     $REPORTS_DIR/summary.txt"
   fi
 
