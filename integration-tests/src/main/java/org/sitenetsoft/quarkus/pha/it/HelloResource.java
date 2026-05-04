@@ -20,6 +20,19 @@ public class HelloResource {
     @Inject
     Template hello;
 
+    /**
+     * Components without a homepage thumbnail in /web/images/components/.
+     * Listed here so the template renders a placeholder instead of an
+     * &lt;img&gt; that would 404. Drop an id from this set once a real
+     * thumbnail PNG is added.
+     */
+    private static final Set<String> NO_THUMBNAIL = Set.of(
+        "chart",
+        "document-editor",
+        "map",
+        "rectangle-selection"
+    );
+
     /** Components that have a working demo page. */
     private static final Map<String, String> IMPLEMENTED = Map.ofEntries(
         Map.entry("about-modal",      "/components/about-modal"),
@@ -273,7 +286,9 @@ public class HelloResource {
             Map<String, String> comp = new HashMap<>();
             comp.put("id", id);
             comp.put("name", name);
-            comp.put("image", "/web/images/components/" + id + ".png");
+            if (!NO_THUMBNAIL.contains(id)) {
+                comp.put("image", "/web/images/components/" + id + ".png");
+            }
             comp.put("href", IMPLEMENTED.getOrDefault(id, "#"));
 
             String labelText = LABELS.get(id);
