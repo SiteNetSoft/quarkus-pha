@@ -8,6 +8,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,15 @@ import java.util.Map;
 
 @Path("/components")
 public class ComponentRoutes {
+
+    @ConfigProperty(name = "collabora.url")
+    String collaboraUrl;
+
+    @ConfigProperty(name = "collabora.wopi-host")
+    String collaboraWopiHost;
+
+    @ConfigProperty(name = "collabora.access-token")
+    String collaboraAccessToken;
 
     @Location("components/about-modal-demo")
     @Inject
@@ -1211,7 +1221,13 @@ public class ComponentRoutes {
     @Path("/document-editor")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance documentEditor() {
-        return documentEditorPage.instance();
+        return documentEditorPage.instance()
+            .data("collaboraUrl", collaboraUrl)
+            .data("accessToken", collaboraAccessToken)
+            .data("wopiWelcome", collaboraWopiHost + "/wopi/files/welcome")
+            .data("wopiBudget",  collaboraWopiHost + "/wopi/files/budget")
+            .data("wopiSlides",  collaboraWopiHost + "/wopi/files/slides")
+            .data("wopiPolicy",  collaboraWopiHost + "/wopi/files/policy");
     }
 
     @GET
