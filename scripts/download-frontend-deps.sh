@@ -61,6 +61,11 @@ podman run --rm \
     cp node_modules/maplibre-gl/dist/maplibre-gl.js /output/maplibre/
     cp node_modules/maplibre-gl/dist/maplibre-gl.css /output/maplibre/
 
+    # Monaco Editor (AMD loader bundle — no build step needed at runtime)
+    echo "  Monaco Editor..."
+    mkdir -p /output/monaco
+    cp -r node_modules/monaco-editor/min/vs /output/monaco/
+
     echo ""
     echo "--- Done! Vendor files written to /output ---"
     echo ""
@@ -88,6 +93,10 @@ podman run --rm \
     node -e "
       const pkg = require(\"/work/node_modules/maplibre-gl/package.json\");
       console.log(\"  MapLibre GL: \" + pkg.version);
+    "
+    node -e "
+      const pkg = require(\"/work/node_modules/monaco-editor/package.json\");
+      console.log(\"  Monaco:      \" + pkg.version);
     "
   '
 

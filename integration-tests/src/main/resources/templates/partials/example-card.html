@@ -1,0 +1,99 @@
+{! Example card — heading + example body + collapsible Qute source viewer. Parameters: title — h3 text (e.g. "Single
+selectable") slug — id segment used for anchors and the standalone/source URLs (e.g. "single-selectable") component —
+parent component slug (e.g. "tree-view") used to build the /components/{component}/source/{slug} and standalone hrefs
+Slot: {#content} — the example markup (the demo body itself, no chrome) !}
+<div
+  class="pf-v6-l-stack pf-m-gutter"
+  data-source-href="/components/{component}/source/{slug}"
+  x-data="phaCodeExample()"
+>
+  <div class="pf-v6-l-stack__item">
+    <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+      <div>
+        <h3 id="{slug}" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">{title}</h3>
+      </div>
+    </div>
+  </div>
+  <div class="pf-v6-l-stack__item">{#insert content}{/insert}</div>
+  <div class="pf-v6-l-stack__item">
+    <div class="pf-v6-c-code-editor ws-code-editor">
+      <div class="pf-v6-c-code-editor__header pf-m-plain">
+        <div class="pf-v6-c-code-editor__header-content">
+          <div class="pf-v6-c-code-editor__controls">
+            <button
+              type="button"
+              class="pf-v6-c-button pf-m-plain ws-code-editor-control"
+              :aria-expanded="open ? 'true' : 'false'"
+              aria-label="Toggle Qute code in {title} example"
+              @click="toggle()"
+            >
+              <span class="pf-v6-c-button__icon">
+                <svg
+                  class="pf-v6-svg"
+                  viewBox="0 0 640 512"
+                  fill="currentColor"
+                  aria-hidden="true"
+                  role="img"
+                  width="1em"
+                  height="1em"
+                >
+                  <path
+                    d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"
+                  ></path>
+                </svg>
+                Qute
+              </span>
+            </button>
+            <button
+              type="button"
+              class="pf-v6-c-button pf-m-plain ws-code-editor-control"
+              aria-label="Copy {title} example code to clipboard"
+              @click="copy()"
+            >
+              <span class="pf-v6-c-button__icon">
+                <svg
+                  class="pf-v6-svg"
+                  viewBox="0 0 448 512"
+                  fill="currentColor"
+                  aria-hidden="true"
+                  role="img"
+                  width="1em"
+                  height="1em"
+                >
+                  <path
+                    d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56h168zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24zm120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97z"
+                  ></path>
+                </svg>
+              </span>
+            </button>
+            <a
+              href="/components/{component}/{slug}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="pf-v6-c-button pf-m-plain ws-code-editor-control"
+              aria-label="Open {title} example in new window"
+            >
+              <span class="pf-v6-c-button__icon">
+                <svg
+                  class="pf-v6-svg"
+                  viewBox="0 0 512 512"
+                  fill="currentColor"
+                  aria-hidden="true"
+                  role="img"
+                  width="1em"
+                  height="1em"
+                >
+                  <path
+                    d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"
+                  ></path>
+                </svg>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="pf-v6-c-code-editor__main" x-show="open" x-ref="host" style="height: 400px"></div>
+      <div class="pf-v6-c-code-editor__main" x-show="open && error" x-text="error" role="alert"></div>
+    </div>
+  </div>
+</div>
