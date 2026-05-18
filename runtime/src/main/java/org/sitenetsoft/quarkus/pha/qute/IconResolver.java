@@ -158,11 +158,13 @@ public final class IconResolver {
     private static String renderSvg(Parsed parsed, String label) {
         StringBuilder sb = new StringBuilder(parsed.inner.length() + 192);
         sb.append("<svg xmlns=\"http://www.w3.org/2000/svg\"")
+          .append(" class=\"pf-v6-svg\"")
           .append(" width=\"1em\" height=\"1em\"")
           .append(" fill=\"currentColor\"")
+          .append(" role=\"img\"")
           .append(" viewBox=\"").append(parsed.viewBox).append("\"");
         if (label != null && !label.isEmpty()) {
-            sb.append(" role=\"img\" aria-label=\"").append(escapeAttr(label)).append("\"");
+            sb.append(" aria-label=\"").append(escapeAttr(label)).append("\"");
         } else {
             sb.append(" aria-hidden=\"true\" focusable=\"false\"");
         }
@@ -176,6 +178,7 @@ public final class IconResolver {
             ? label
             : "missing icon: " + displayName;
         return "<svg xmlns=\"http://www.w3.org/2000/svg\""
+            + " class=\"pf-v6-svg\""
             + " width=\"1em\" height=\"1em\""
             + " viewBox=\"0 0 24 24\" fill=\"none\""
             + " stroke=\"#c9190b\" stroke-width=\"2\""
