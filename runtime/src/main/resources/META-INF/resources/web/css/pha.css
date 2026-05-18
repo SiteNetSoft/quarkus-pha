@@ -49861,6 +49861,18 @@ p.pf-v6-c-content--p.ws-p {
     --ws-code-editor--tooltip--MaxWidth: 16ch;
 }
 
+/*
+ * Note: Baseline nudge for inline SVG icons emitted by IconResolver.
+ * FA Free 7 (what we vendor) draws many glyphs edge-to-edge inside their
+ * viewBox while FA 5 (what PF docs renders) leaves vertical padding, so
+ * without this rule our icons sit ~11% higher than their PF docs equivalent
+ * relative to the surrounding text baseline. -0.125em is Font Awesome's
+ * long-standing convention for aligning inline icons to text.
+ */
+.pf-v6-svg {
+    vertical-align: -0.125em;
+}
+
 /*.ws-code-editor {
     border: var(--pf-t--global--border--width--box--default) solid var(--pf-t--global--border--color--default);
     border-radius: var(--pf-t--global--border--radius--small);
