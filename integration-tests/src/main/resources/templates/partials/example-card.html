@@ -20,41 +20,32 @@ Slot: {#content} — the example markup (the demo body itself, no chrome) !}
       <div class="pf-v6-c-code-editor__header pf-m-plain">
         <div class="pf-v6-c-code-editor__header-content">
           <div class="pf-v6-c-code-editor__controls">
-            <div style="display: contents">
-              <button
-                type="button"
-                class="pf-v6-c-button pf-m-plain ws-code-editor-control"
-                :aria-expanded="open ? 'true' : 'false'"
-                aria-label="Toggle Qute code in {title} example"
-                data-ouia-component-type="PF6/Button"
-                data-ouia-safe="true"
-                data-ouia-component-id="OUIA-Generated-Button-plain-2"
-                @click="toggle()"
-              >
-                <span class="pf-v6-c-button__icon">{icons:svg('fa:code').raw} TS</span>
-              </button>
-            </div>
-            <div style="display: contents">
-              <button
-                type="button"
-                class="pf-v6-c-button pf-m-plain ws-code-editor-control"
-                aria-label="Copy {title} example code to clipboard"
-                @click="copy()"
-              >
-                <span class="pf-v6-c-button__icon">{icons:svg('fa:copy').raw}</span>
-              </button>
-            </div>
-            <div style="display: contents">
-              <a
-                href="/components/{component}/{slug}"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="pf-v6-c-button pf-m-plain ws-code-editor-control"
-                aria-label="Open {title} example in new window"
-              >
-                <span class="pf-v6-c-button__icon">{icons:svg('fa:up-right-from-square').raw}</span>
-              </a>
-            </div>
+            <button
+              type="button"
+              class="pf-v6-c-button pf-m-plain ws-code-editor-control"
+              :aria-expanded="open ? 'true' : 'false'"
+              aria-label="Toggle Qute code in {title} example"
+              @click="toggle()"
+            >
+              <span class="pf-v6-c-button__icon">{icons:svg('fa:code').raw} TS</span>
+            </button>
+            <button
+              type="button"
+              class="pf-v6-c-button pf-m-plain ws-code-editor-control"
+              aria-label="Copy {title} example code to clipboard"
+              @click="copy()"
+            >
+              <span class="pf-v6-c-button__icon">{icons:svg('fa:copy').raw}</span>
+            </button>
+            <a
+              href="/components/{component}/{slug}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="pf-v6-c-button pf-m-plain ws-code-editor-control"
+              aria-label="Open {title} example in new window"
+            >
+              <span class="pf-v6-c-button__icon">{icons:svg('fa:up-right-from-square').raw}</span>
+            </a>
           </div>
         </div>
       </div>
