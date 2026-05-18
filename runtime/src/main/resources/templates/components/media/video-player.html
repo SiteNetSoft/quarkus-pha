@@ -1,0 +1,17 @@
+{! Video player — PHA custom component wrapping Video.js !}
+{! Parameters: id, src (optional), type (optional), poster (optional), height (optional), !}
+{!             autoplay (optional), loop (optional), muted (optional), controls (optional), !}
+{!             preload (optional), fluid (optional), playbackRates (optional) !}
+{! Requires: /web/vendor/videojs/video.min.js loaded before Alpine !}
+{! Requires: /web/vendor/videojs/video-js.min.css !}
+{! Requires: /web/js/alpine/components/video-player.js loaded before Alpine !}
+{! Requires: /web/css/components/video-player.css !}
+<div class="pha-c-video-player" id="{id}"
+     x-data="phaVideoPlayer({ src: '{#if src??}{src}{/if}', type: '{#if type??}{type}{/if}', autoplay: {#if autoplay??}{autoplay}{#else}false{/if}, loop: {#if loop??}{loop}{#else}false{/if}, muted: {#if muted??}{muted}{#else}false{/if}, controls: {#if controls??}{controls}{#else}true{/if}, preload: '{#if preload??}{preload}{#else}auto{/if}', fluid: {#if fluid??}{fluid}{#else}true{/if}, playbackRates: {#if playbackRates??}{playbackRates}{#else}null{/if} })">
+  {#insert content}{/insert}
+  <video-js class="pha-c-video-player__video video-js"
+            id="{id}-field"
+            {#if poster??}poster="{poster}"{/if}
+            {#if height??}style="height: {height}"{/if}
+            playsinline></video-js>
+</div>
