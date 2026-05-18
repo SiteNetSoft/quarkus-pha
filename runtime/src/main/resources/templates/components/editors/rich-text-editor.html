@@ -1,0 +1,17 @@
+{! Rich text editor — PHA custom component wrapping Quill !}
+{! Parameters: id, theme (optional, 'snow'|'bubble'), placeholder (optional), readOnly (optional), !}
+{!             height (optional), toolbar (optional, 'full'|'basic'|'minimal'), name (optional) !}
+{! The initial HTML value is passed via the {#content}...{/content} insert block. !}
+{! Requires: /web/vendor/quill/quill.js loaded before Alpine !}
+{! Requires: /web/vendor/quill/quill.snow.css and/or quill.bubble.css !}
+{! Requires: /web/js/alpine/components/rich-text-editor.js loaded before Alpine !}
+{! Requires: /web/css/components/rich-text-editor.css !}
+<div class="pha-c-rich-text-editor" id="{id}"
+     x-data="phaRichTextEditor({ theme: '{#if theme??}{theme}{#else}snow{/if}', placeholder: '{#if placeholder??}{placeholder}{/if}', readOnly: {#if readOnly??}{readOnly}{#else}false{/if}, toolbar: '{#if toolbar??}{toolbar}{#else}full{/if}', name: '{#if name??}{name}{/if}' })">
+  {#insert toolbar}{/insert}
+  <div class="pha-c-rich-text-editor__surface"
+       id="{id}-field"
+       {#if height??}style="min-height: {height}"{/if}>{#insert content}{/insert}</div>
+  {#if name??}<input type="hidden" name="{name}" x-ref="hidden">{/if}
+  {#insert footer}{/insert}
+</div>
