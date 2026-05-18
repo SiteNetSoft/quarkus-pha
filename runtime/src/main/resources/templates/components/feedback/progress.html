@@ -8,7 +8,7 @@
     <span class="pf-v6-c-progress__measure">{#if label??}{label}{#else}{value}%{/if}</span>
     {#if status??}
     <span class="pf-v6-c-progress__status-icon">
-      {#if status is 'success'}<i class="fas fa-check-circle" aria-hidden="true"></i>{#else if status is 'warning'}<i class="fas fa-exclamation-triangle" aria-hidden="true"></i>{#else if status is 'danger'}<i class="fas fa-times-circle" aria-hidden="true"></i>{/if}
+      {#if status is 'success'}{icons:svg('fa:check-circle').raw}{#else if status is 'warning'}{icons:svg('fa:exclamation-triangle').raw}{#else if status is 'danger'}{icons:svg('fa:times-circle').raw}{/if}
     </span>
     {/if}
   </div>

@@ -81,6 +81,40 @@ podman run --rm \
     cp node_modules/quill/dist/quill.bubble.css /output/quill/
     cp node_modules/quill/dist/quill.core.css /output/quill/
 
+    # Icons — raw SVGs from Font Awesome Free + PatternFly v6 source
+    # FA Free ships per-icon SVGs directly; pficon SVGs are not on npm so we
+    # generate them from the PF v6 source repo (pficons.mjs definitions).
+    echo "  Icons (FA Free solid/regular/brands)..."
+    mkdir -p /output/icons/fa-solid /output/icons/fa-regular /output/icons/fa-brands
+    cp node_modules/@fortawesome/fontawesome-free/svgs/solid/*.svg   /output/icons/fa-solid/
+    cp node_modules/@fortawesome/fontawesome-free/svgs/regular/*.svg /output/icons/fa-regular/
+    cp node_modules/@fortawesome/fontawesome-free/svgs/brands/*.svg  /output/icons/fa-brands/
+    cp node_modules/@fortawesome/fontawesome-free/LICENSE.txt        /output/icons/fa-LICENSE.txt 2>/dev/null || true
+
+    echo "  Icons (PatternFly v6.4.0 pficons from GitHub source)..."
+    apk add --no-cache curl tar >/dev/null 2>&1
+    mkdir -p /output/icons/pficon /tmp/pf
+    cd /tmp/pf
+    curl -fsSL https://github.com/patternfly/patternfly/archive/refs/tags/v6.4.0.tar.gz \
+      | tar -xz --strip-components=1 \
+          patternfly-6.4.0/src/icons/definitions/pficons.mjs \
+          patternfly-6.4.0/LICENSE.txt
+    cp LICENSE.txt /output/icons/pficon-LICENSE.txt 2>/dev/null || true
+    cat > /tmp/pf/build-pficons.mjs <<EOF
+import { pfIcons } from "/tmp/pf/src/icons/definitions/pficons.mjs";
+import { writeFileSync } from "fs";
+
+let count = 0;
+for (const [name, def] of Object.entries(pfIcons)) {
+  const svg = \`<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 \${def.width} \${def.height}" role="img"><path d="\${def.svgPathData}"/></svg>\`;
+  writeFileSync(\`/output/icons/pficon/\${name}.svg\`, svg);
+  count++;
+}
+console.log(\`    wrote \${count} pficon SVGs\`);
+EOF
+    node /tmp/pf/build-pficons.mjs
+    cd /work
+
     echo ""
     echo "--- Done! Vendor files written to /output ---"
     echo ""
@@ -121,6 +155,11 @@ podman run --rm \
       const pkg = require(\"/work/node_modules/quill/package.json\");
       console.log(\"  Quill:       \" + pkg.version);
     "
+    node -e "
+      const pkg = require(\"/work/node_modules/@fortawesome/fontawesome-free/package.json\");
+      console.log(\"  FA Free:     \" + pkg.version);
+    "
+    echo "  pficon:      patternfly/patternfly@v6.4.0 (GitHub source)"
   '
 
 echo ""

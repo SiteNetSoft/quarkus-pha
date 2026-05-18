@@ -11,7 +11,7 @@
     <div class="pf-v6-c-text-input-group" id="si-basic">
       <div class="pf-v6-c-text-input-group__main pf-m-icon">
         <span class="pf-v6-c-text-input-group__text">
-          <span class="pf-v6-c-text-input-group__icon"><i class="fas fa-search" aria-hidden="true"></i></span>
+          <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:search').raw}</span>
           <input class="pf-v6-c-text-input-group__text-input" type="search" placeholder="Search..." aria-label="Search">
         </span>
       </div>
@@ -23,13 +23,13 @@
     <div class="pf-v6-c-text-input-group" id="si-clear" x-data="{ value: 'Search term' }">
       <div class="pf-v6-c-text-input-group__main pf-m-icon">
         <span class="pf-v6-c-text-input-group__text">
-          <span class="pf-v6-c-text-input-group__icon"><i class="fas fa-search" aria-hidden="true"></i></span>
+          <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:search').raw}</span>
           <input class="pf-v6-c-text-input-group__text-input" type="search" placeholder="Search..." aria-label="Search" x-model="value">
         </span>
       </div>
       <div class="pf-v6-c-text-input-group__utilities" x-show="value">
         <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Clear search" @click="value = ''">
-          <i class="fas fa-times" aria-hidden="true"></i>
+          {icons:svg('fa:times').raw}
         </button>
       </div>
     </div>

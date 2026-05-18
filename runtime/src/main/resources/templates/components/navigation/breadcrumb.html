@@ -5,7 +5,7 @@
     {#for item in items}
     <li class="pf-v6-c-breadcrumb__item">
       <span class="pf-v6-c-breadcrumb__item-divider">
-        <i class="fas fa-angle-right" aria-hidden="true"></i>
+        {icons:svg('fa:angle-right').raw}
       </span>
       {#if item.heading??}<h1 class="pf-v6-c-breadcrumb__heading"><a href="{item.href}" class="pf-v6-c-breadcrumb__link pf-m-current" aria-current="page">{item.text}</a></h1>{#else}{#if item.href??}<a href="{item.href}" class="pf-v6-c-breadcrumb__link{#if item.current??} pf-m-current{/if}"{#if item.current??} aria-current="page"{/if}>{item.text}</a>{#else}{item.text}{/if}{/if}
     </li>

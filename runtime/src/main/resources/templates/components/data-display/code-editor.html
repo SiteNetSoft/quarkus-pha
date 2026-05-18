@@ -12,21 +12,21 @@
                 :aria-label="copied ? 'Successfully copied to clipboard!' : 'Copy to clipboard'"
                 @click="navigator.clipboard.writeText($el.closest('.pf-v6-c-code-editor').querySelector('.pf-v6-c-code-editor__code-pre').textContent); copied = true; setTimeout(() => copied = false, 2000)">
           <span class="pf-v6-c-button__icon">
-            <i :class="copied ? 'fas fa-check' : 'fas fa-copy'" aria-hidden="true"></i>
+            <span x-show="!copied">{icons:svg('fa:copy').raw}</span><span x-show="copied" x-cloak>{icons:svg('fa:check').raw}</span>
           </span>
         </button>
         {/if}
         {#if downloadButton??}
         <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Download code">
           <span class="pf-v6-c-button__icon">
-            <i class="fas fa-download" aria-hidden="true"></i>
+            {icons:svg('fa:download').raw}
           </span>
         </button>
         {/if}
         {#if uploadButton??}
         <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Upload code">
           <span class="pf-v6-c-button__icon">
-            <i class="fas fa-upload" aria-hidden="true"></i>
+            {icons:svg('fa:upload').raw}
           </span>
         </button>
         {/if}
@@ -37,7 +37,7 @@
     {#if language??}
     <div class="pf-v6-c-code-editor__tab">
       <span class="pf-v6-c-code-editor__tab-icon">
-        <i class="fas fa-code" aria-hidden="true"></i>
+        {icons:svg('fa:code').raw}
       </span>
       <span class="pf-v6-c-code-editor__tab-text">{language}</span>
     </div>

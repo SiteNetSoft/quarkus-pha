@@ -1,13 +1,11 @@
 {! Empty state — PatternFly v6 !}
-{! Parameters: id, titleText, bodyText (optional), iconClass (optional), primaryAction (optional), secondaryAction (optional) !}
+{! Parameters: id, titleText, bodyText (optional), iconName (optional, "set:slug"), primaryAction (optional), secondaryAction (optional) !}
 <div class="pf-v6-c-empty-state" id="{id}">
   <div class="pf-v6-c-empty-state__content">
-    {#if iconClass??}
+    {#if iconName??}
     <div class="pf-v6-c-empty-state__icon">
       <div class="pf-v6-c-icon pf-m-lg">
-        <span class="pf-v6-c-icon__content">
-          <i class="{iconClass}" aria-hidden="true"></i>
-        </span>
+        <span class="pf-v6-c-icon__content">{icons:svg(iconName).raw}</span>
       </div>
     </div>
     {/if}
