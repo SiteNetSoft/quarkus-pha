@@ -10,14 +10,14 @@
     <p>A standard pagination control.</p>
     {#include components/navigation/pagination id="pn-basic"}{#content}
     <nav class="pf-v6-c-pagination__nav" aria-label="Pagination">
-      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to first page"><i class="fas fa-angle-double-left" aria-hidden="true"></i></button>
-      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to previous page"><i class="fas fa-angle-left" aria-hidden="true"></i></button>
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to first page">{icons:svg('fa:angle-double-left').raw}</button>
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to previous page">{icons:svg('fa:angle-left').raw}</button>
       <span class="pf-v6-c-pagination__nav-page-select">
         <input class="pf-v6-c-form-control" aria-label="Current page" type="number" min="1" value="1">
         <span aria-hidden="true">of 10</span>
       </span>
-      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to next page"><i class="fas fa-angle-right" aria-hidden="true"></i></button>
-      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to last page"><i class="fas fa-angle-double-right" aria-hidden="true"></i></button>
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to next page">{icons:svg('fa:angle-right').raw}</button>
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to last page">{icons:svg('fa:angle-double-right').raw}</button>
     </nav>
     {/content}{/include}
   </section>
@@ -26,11 +26,11 @@
     <p>A compact pagination control for use in tight spaces.</p>
     {#include components/navigation/pagination id="pn-compact" compact=true}{#content}
     <nav class="pf-v6-c-pagination__nav" aria-label="Pagination">
-      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to previous page"><i class="fas fa-angle-left" aria-hidden="true"></i></button>
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to previous page">{icons:svg('fa:angle-left').raw}</button>
       <span class="pf-v6-c-pagination__nav-page-select">
         <span aria-hidden="true">1 - 10 of 100</span>
       </span>
-      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to next page"><i class="fas fa-angle-right" aria-hidden="true"></i></button>
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to next page">{icons:svg('fa:angle-right').raw}</button>
     </nav>
     {/content}{/include}
   </section>

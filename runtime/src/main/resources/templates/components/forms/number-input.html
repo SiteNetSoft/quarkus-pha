@@ -4,7 +4,7 @@
   <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Minus"
           @click="val = Math.max(val - 1, {#if min??}{min}{#else}-Infinity{/if})"
           :disabled="{#if min??}val <= {min}{#else}false{/if}"{#if disabled??} disabled{/if}>
-    <span class="pf-v6-c-number-input__icon"><i class="fas fa-minus" aria-hidden="true"></i></span>
+    <span class="pf-v6-c-number-input__icon">{icons:svg('fa:minus').raw}</span>
   </button>
   <span class="pf-v6-c-form-control">
     <input type="number" x-model.number="val"{#if min??} min="{min}"{/if}{#if max??} max="{max}"{/if}{#if disabled??} disabled{/if}>
@@ -12,7 +12,7 @@
   <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Plus"
           @click="val = Math.min(val + 1, {#if max??}{max}{#else}Infinity{/if})"
           :disabled="{#if max??}val >= {max}{#else}false{/if}"{#if disabled??} disabled{/if}>
-    <span class="pf-v6-c-number-input__icon"><i class="fas fa-plus" aria-hidden="true"></i></span>
+    <span class="pf-v6-c-number-input__icon">{icons:svg('fa:plus').raw}</span>
   </button>
   {#if unit??}
   <span class="pf-v6-c-number-input__unit">{unit}</span>

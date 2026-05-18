@@ -11,7 +11,7 @@
     <p>A basic application launcher with a grid icon toggle that opens a menu of applications.</p>
     <div id="al-basic" x-data="{ open: false }">
       <button class="pf-v6-c-menu-toggle pf-m-plain" type="button" @click="open = !open" :class="{ 'pf-m-expanded': open }" :aria-expanded="open.toString()" aria-label="Application launcher">
-        <i class="fas fa-th" aria-hidden="true"></i>
+        {icons:svg('fa:th').raw}
       </button>
       <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false">
         <div class="pf-v6-c-menu__content">
