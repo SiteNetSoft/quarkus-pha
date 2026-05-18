@@ -12,7 +12,7 @@
     <div id="om-basic" x-data="{ open: false }">
       <button class="pf-v6-c-menu-toggle" type="button" @click="open = !open" :class="{ 'pf-m-expanded': open }" :aria-expanded="open.toString()">
         <span class="pf-v6-c-menu-toggle__text">Options</span>
-        <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon"><i class="fas fa-caret-down" aria-hidden="true"></i></span></span>
+        <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
       </button>
       <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false">
         <div class="pf-v6-c-menu__content">
@@ -43,7 +43,7 @@
     <p>A plain options menu with an icon-only toggle for sort direction controls.</p>
     <div id="om-plain" x-data="{ open: false }">
       <button class="pf-v6-c-menu-toggle pf-m-plain" type="button" @click="open = !open" :class="{ 'pf-m-expanded': open }" :aria-expanded="open.toString()" aria-label="Sort options">
-        <i class="fas fa-sort-amount-down" aria-hidden="true"></i>
+        {icons:svg('fa:sort-amount-down').raw}
       </button>
       <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false">
         <div class="pf-v6-c-menu__content">

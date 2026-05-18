@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWithIgnoringCase;
 
 /**
@@ -162,5 +163,80 @@ class RoutesSmokeTest {
                 .contentType(containsString("text/html"))
                 .body(startsWithIgnoringCase("<!doctype html>"))
                 .body(containsString("</html>"));
+    }
+
+    /**
+     * Every rendered route must be free of the missing-icon placeholder marker.
+     * The icon-demo page intentionally renders one to show the placeholder UX,
+     * so it's excluded. A typo anywhere else fails CI loudly.
+     */
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "/",
+        "/components/about-modal",
+        "/components/accordion",
+        "/components/action-list",
+        "/components/alert",
+        "/components/application-launcher",
+        "/components/avatar",
+        "/components/breadcrumb",
+        "/components/button",
+        "/components/card",
+        "/components/chart",
+        "/components/chip",
+        "/components/clipboard-copy",
+        "/components/code-block",
+        "/components/code-editor",
+        "/components/context-selector",
+        "/components/custom-menus",
+        "/components/document-editor",
+        "/components/drag-and-drop",
+        "/components/dropdown",
+        "/components/dual-list-selector",
+        "/components/empty-state",
+        "/components/expandable-section",
+        "/components/form-select",
+        "/components/helper-text",
+        "/components/inline-edit",
+        "/components/label",
+        "/components/lazy-modal",
+        "/components/live-search",
+        "/components/menu-toggle",
+        "/components/modal",
+        "/components/multiple-file-upload",
+        "/components/navigation",
+        "/components/notification-badge",
+        "/components/notification-drawer",
+        "/components/number-input",
+        "/components/options-menu",
+        "/components/overflow-menu",
+        "/components/pagination",
+        "/components/password-generator",
+        "/components/password-strength",
+        "/components/popover",
+        "/components/progress",
+        "/components/progress-stepper",
+        "/components/rich-text-editor",
+        "/components/search-input",
+        "/components/select",
+        "/components/sidebar",
+        "/components/switch",
+        "/components/text-input-group",
+        "/components/tile",
+        "/components/time-picker",
+        "/components/toggle-group",
+        "/components/toolbar",
+        "/components/tree-view",
+        "/components/video-player",
+        "/demos/dashboard",
+        "/demos/data-management",
+        "/demos/landing"
+    })
+    void route_has_no_missing_icons(String path) {
+        given()
+            .when().get(path)
+            .then()
+                .statusCode(200)
+                .body(not(containsString("data-missing-icon")));
     }
 }

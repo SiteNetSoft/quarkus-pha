@@ -1,0 +1,12 @@
+{! Icon — server-rendered inline SVG wrapped in PatternFly v6 icon chrome !}
+{! Parameters: !}
+{!   name       (required) — "set:slug" where set is fa | fa-regular | fa-brands | pficon !}
+{!   size       (optional) — sm | md | lg | xl | 2xl | 3xl | body-sm | body-default | body-lg !}
+{!                          | heading-sm | heading-md | heading-lg | heading-xl | heading-2xl | heading-3xl !}
+{!   status     (optional) — info | success | warning | danger | custom !}
+{!   inline     (optional) — boolean, flow with surrounding text !}
+{!   inProgress (optional) — boolean, applies the pf-m-in-progress modifier !}
+{!   label      (optional) — accessible label; when omitted the SVG is aria-hidden !}
+<span class="pf-v6-c-icon{#if size??} pf-m-{size}{/if}{#if inline??} pf-m-inline{/if}{#if inProgress??} pf-m-in-progress{/if}">
+  <span class="pf-v6-c-icon__content{#if status??} pf-m-{status}{/if}">{#if label??}{icons:svg(name, label).raw}{#else}{icons:svg(name).raw}{/if}</span>
+</span>

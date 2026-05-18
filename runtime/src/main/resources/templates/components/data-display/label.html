@@ -1,18 +1,16 @@
 {! Label — PatternFly v6 !}
-{! Parameters: id, text, color (optional: blue|red|orange|orangered|yellow|green|teal|purple), outline (optional), iconClass (optional), removable (optional), clickable (optional) !}
+{! Parameters: id, text, color (optional: blue|red|orange|orangered|yellow|green|teal|purple), outline (optional), iconName (optional, "set:slug"), removable (optional), clickable (optional) !}
 <span class="pf-v6-c-label{#if color??} pf-m-{color}{/if}{#if outline??} pf-m-outline{#else} pf-m-filled{/if}{#if clickable??} pf-m-clickable{/if}" id="{id}">
   <span class="pf-v6-c-label__content">
-    {#if iconClass??}
-    <span class="pf-v6-c-label__icon">
-      <i class="{iconClass}" aria-hidden="true"></i>
-    </span>
+    {#if iconName??}
+    <span class="pf-v6-c-label__icon">{icons:svg(iconName).raw}</span>
     {/if}
     <span class="pf-v6-c-label__text">{text}</span>
   </span>
   {#if removable??}
   <span class="pf-v6-c-label__actions">
     <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Remove">
-      <i class="fas fa-times" aria-hidden="true"></i>
+      {icons:svg('fa:times').raw}
     </button>
   </span>
   {/if}

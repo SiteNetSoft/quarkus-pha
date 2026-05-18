@@ -45,7 +45,7 @@ spec:
                       :aria-label="copied ? 'Successfully copied to clipboard!' : 'Copy to clipboard'"
                       @click="navigator.clipboard.writeText($el.closest('.pf-v6-c-code-block').querySelector('.pf-v6-c-code-block__code').textContent); copied = true; setTimeout(() => copied = false, 2000)">
                 <span class="pf-v6-c-button__icon">
-                  <i :class="copied ? 'fas fa-check' : 'fas fa-copy'" aria-hidden="true"></i>
+                  <span x-show="!copied">{icons:svg('fa:copy').raw}</span><span x-show="copied" x-cloak>{icons:svg('fa:check').raw}</span>
                 </span>
               </button>
             </div>
@@ -67,7 +67,7 @@ spec:
                       @click="expanded = !expanded"
                       id="cb-expandable-toggle">
                 <span class="pf-v6-c-expandable-section__toggle-icon pf-m-expand-top">
-                  <i class="fas fa-angle-right" aria-hidden="true"></i>
+                  {icons:svg('fa:angle-right').raw}
                 </span>
                 <span x-text="expanded ? 'Show less' : 'Show more'"></span>
               </button>
