@@ -66,6 +66,21 @@ podman run --rm \
     mkdir -p /output/monaco
     cp -r node_modules/monaco-editor/min/vs /output/monaco/
 
+    # Video.js (HTML5 video player)
+    echo "  Video.js..."
+    mkdir -p /output/videojs
+    cp node_modules/video.js/dist/video.min.js /output/videojs/
+    cp node_modules/video.js/dist/video-js.min.css /output/videojs/
+    cp -r node_modules/video.js/dist/font /output/videojs/
+
+    # Quill (rich text editor)
+    echo "  Quill..."
+    mkdir -p /output/quill
+    cp node_modules/quill/dist/quill.js /output/quill/
+    cp node_modules/quill/dist/quill.snow.css /output/quill/
+    cp node_modules/quill/dist/quill.bubble.css /output/quill/
+    cp node_modules/quill/dist/quill.core.css /output/quill/
+
     echo ""
     echo "--- Done! Vendor files written to /output ---"
     echo ""
@@ -97,6 +112,14 @@ podman run --rm \
     node -e "
       const pkg = require(\"/work/node_modules/monaco-editor/package.json\");
       console.log(\"  Monaco:      \" + pkg.version);
+    "
+    node -e "
+      const pkg = require(\"/work/node_modules/video.js/package.json\");
+      console.log(\"  Video.js:    \" + pkg.version);
+    "
+    node -e "
+      const pkg = require(\"/work/node_modules/quill/package.json\");
+      console.log(\"  Quill:       \" + pkg.version);
     "
   '
 

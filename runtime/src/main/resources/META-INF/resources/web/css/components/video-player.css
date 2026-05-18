@@ -1,0 +1,36 @@
+/* Video player — PHA custom component wrapping Video.js */
+
+.pha-c-video-player {
+  position: relative;
+  border: 1px solid var(--pf-t--global--border--color--default, #d2d2d2);
+  border-radius: var(--pf-t--global--border--radius--small, 3px);
+  overflow: hidden;
+  background-color: var(--pf-t--global--background--color--primary--default, #000);
+}
+
+.pha-c-video-player__video {
+  width: 100%;
+  display: block;
+}
+
+.pha-c-video-player__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pf-t--global--spacer--sm, 0.5rem);
+  padding: var(--pf-t--global--spacer--sm, 0.5rem) var(--pf-t--global--spacer--md, 1rem);
+  background-color: var(--pf-t--global--background--color--secondary--default, #f0f0f0);
+  border-bottom: 1px solid var(--pf-t--global--border--color--default, #d2d2d2);
+}
+
+.pha-c-video-player__toolbar-title {
+  font-weight: var(--pf-t--global--font--weight--body--bold, 700);
+  font-size: var(--pf-t--global--font--size--body--default, 0.875rem);
+  color: var(--pf-t--global--text--color--regular, #151515);
+}
+
+.pha-c-video-player__toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--pf-t--global--spacer--xs, 0.25rem);
+}

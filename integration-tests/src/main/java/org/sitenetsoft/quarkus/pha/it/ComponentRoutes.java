@@ -426,6 +426,14 @@ public class ComponentRoutes {
     @Inject
     Template lazyModalPage;
 
+    @Location("components/video-player")
+    @Inject
+    Template videoPlayerPage;
+
+    @Location("components/rich-text-editor")
+    @Inject
+    Template richTextEditorPage;
+
     @GET
     @Path("/about-modal")
     @Produces(MediaType.TEXT_HTML)
@@ -1283,5 +1291,19 @@ public class ComponentRoutes {
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance lazyModal() {
         return lazyModalPage.instance();
+    }
+
+    @GET
+    @Path("/video-player")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance videoPlayer() {
+        return videoPlayerPage.instance();
+    }
+
+    @GET
+    @Path("/rich-text-editor")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance richTextEditor() {
+        return richTextEditorPage.instance();
     }
 }

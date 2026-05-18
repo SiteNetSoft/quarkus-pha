@@ -109,6 +109,7 @@ class RoutesSmokeTest {
         "/components/progress-stepper",
         "/components/radio",
         "/components/rectangle-selection",
+        "/components/rich-text-editor",
         "/components/search-input",
         "/components/select",
         "/components/sidebar",
@@ -133,6 +134,7 @@ class RoutesSmokeTest {
         "/components/tooltip",
         "/components/tree-view",
         "/components/truncate",
+        "/components/video-player",
         "/components/wizard"
     })
     void component_demo_renders(String path) {

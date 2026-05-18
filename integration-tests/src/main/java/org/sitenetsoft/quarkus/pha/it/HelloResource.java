@@ -30,7 +30,9 @@ public class HelloResource {
         "chart",
         "document-editor",
         "map",
-        "rectangle-selection"
+        "rectangle-selection",
+        "rich-text-editor",
+        "video-player"
     );
 
     /** Components that have a working demo page. */
@@ -134,7 +136,9 @@ public class HelloResource {
         Map.entry("live-search",       "/components/live-search"),
         Map.entry("infinite-scroll",   "/components/infinite-scroll"),
         Map.entry("click-to-load",     "/components/click-to-load"),
-        Map.entry("lazy-modal",        "/components/lazy-modal")
+        Map.entry("lazy-modal",        "/components/lazy-modal"),
+        Map.entry("video-player",      "/components/video-player"),
+        Map.entry("rich-text-editor",  "/components/rich-text-editor")
     );
 
     /** Components tagged with a footer label. */
@@ -156,7 +160,9 @@ public class HelloResource {
         Map.entry("live-search",       "HTMX"),
         Map.entry("infinite-scroll",   "HTMX"),
         Map.entry("click-to-load",     "HTMX"),
-        Map.entry("lazy-modal",        "HTMX")
+        Map.entry("lazy-modal",        "HTMX"),
+        Map.entry("video-player",      "Custom"),
+        Map.entry("rich-text-editor",  "Custom")
     );
 
     /** Label text → PF label color modifier. */
@@ -247,6 +253,7 @@ public class HelloResource {
         {"progress-stepper",     "Progress stepper"},
         {"radio",                "Radio"},
         {"rectangle-selection",  "Rectangle selection"},
+        {"rich-text-editor",     "Rich text editor"},
         {"search-input",         "Search input"},
         {"select",               "Select"},
         {"sidebar",              "Sidebar"},
@@ -271,6 +278,7 @@ public class HelloResource {
         {"tooltip",              "Tooltip"},
         {"tree-view",            "Tree view"},
         {"truncate",             "Truncate"},
+        {"video-player",         "Video player"},
         {"wizard",               "Wizard"},
     };
 
