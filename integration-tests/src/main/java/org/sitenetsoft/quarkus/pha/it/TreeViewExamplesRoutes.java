@@ -35,16 +35,18 @@ public class TreeViewExamplesRoutes {
     private static final Set<String> EXAMPLES = Set.of(
         "single-selectable",
         "multiselectable",
+        "with-separate-selection-and-expansion",
         "with-search",
         "with-checkboxes",
         "with-icons",
+        "with-unique-icon-per-item",
         "with-badges",
-        "with-action-item",
-        "with-non-expandable-top-level-nodes",
-        "with-selectable-expandable-nodes",
+        "with-custom-badges",
+        "with-action-items",
         "guides",
         "compact",
-        "compact-no-background"
+        "compact-no-background",
+        "with-non-expandable-top-level-nodes"
     );
 
     @Inject

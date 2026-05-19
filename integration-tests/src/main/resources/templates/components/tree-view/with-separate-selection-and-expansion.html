@@ -1,10 +1,12 @@
-<div id="ws-core-c-tree-view-with-selectable-expandable-nodes" class="ws-core-c-tree-view" x-data="phaTreeView()">
+<div id="ws-core-c-tree-view-with-separate-selection-and-expansion" class="ws-core-c-tree-view" x-data="phaTreeView()">
   <div class="ws-preview-html">
     <div class="pf-v6-c-tree-view">
       <ul
         class="pf-v6-c-tree-view__list"
         role="tree"
         aria-label="Tree View with selectable, expandable nodes example"
+        @keydown="handleKeyNav($event)"
+        @click="handleToggle($event)"
       >
         <li
           class="pf-v6-c-tree-view__list-item pf-m-expanded"
@@ -15,18 +17,16 @@
         >
           <div class="pf-v6-c-tree-view__content">
             <div
-              class="pf-v6-c-tree-view__node pf-m-selectable"
-              tabindex="0"
-              id="node-tree-view-selectable-expandable-1"
-              aria-label="Select"
-              aria-labelledby="node-tree-view-selectable-expandable-1 text-tree-view-selectable-expandable-1"
+              class="pf-v6-c-tree-view__node"
+              id="node-tree-view-separate-selection-1"
+                            aria-labelledby="node-tree-view-separate-selection-1 text-tree-view-separate-selection-1"
             >
               <span class="pf-v6-c-tree-view__node-container">
                 <button
                   class="pf-v6-c-tree-view__node-toggle"
-                  id="toggle-tree-view-selectable-expandable-1"
-                  aria-label="Toggle"
-                  aria-labelledby="toggle-tree-view-selectable-expandable-1 text-tree-view-selectable-expandable-1"
+                  type="button"
+                  tabindex="-1"
+                  aria-labelledby="node-tree-view-separate-selection-1"
                 >
                   <span class="pf-v6-c-tree-view__node-toggle-icon">
                     {icons:svg('fa:angle-right').raw}
@@ -34,7 +34,8 @@
                 </button>
                 <button
                   class="pf-v6-c-tree-view__node-text"
-                  id="text-tree-view-selectable-expandable-1"
+                  type="button"
+                  tabindex="-1"
                 >
                   Application launcher
                 </button>
@@ -51,27 +52,26 @@
             >
               <div class="pf-v6-c-tree-view__content">
                 <div
-                  class="pf-v6-c-tree-view__node pf-m-selectable"
-                  tabindex="0"
-                  id="node-tree-view-selectable-expandable-2"
-                  aria-label="Select"
-                  aria-labelledby="node-tree-view-selectable-expandable-2 text-tree-view-selectable-expandable-2"
+                  class="pf-v6-c-tree-view__node"
+                  id="node-tree-view-separate-selection-2"
+                                aria-labelledby="node-tree-view-separate-selection-2 text-tree-view-separate-selection-2"
                 >
                   <span class="pf-v6-c-tree-view__node-container">
                     <button
-                      class="pf-v6-c-tree-view__node-toggle"
-                      id="toggle-tree-view-selectable-expandable-2"
-                      aria-label="Toggle"
-                      aria-labelledby="toggle-tree-view-selectable-expandable-2 text-tree-view-selectable-expandable-2"
-                    >
+                  class="pf-v6-c-tree-view__node-toggle"
+                  type="button"
+                  tabindex="-1"
+                  aria-labelledby="node-tree-view-separate-selection-2"
+                >
                       <span class="pf-v6-c-tree-view__node-toggle-icon">
                         {icons:svg('fa:angle-right').raw}
                       </span>
                     </button>
                     <button
-                      class="pf-v6-c-tree-view__node-text"
-                      id="text-tree-view-selectable-expandable-2"
-                    >
+                  class="pf-v6-c-tree-view__node-text"
+                  type="button"
+                  tabindex="-1"
+                >
                       Application 1
                     </button>
                   </span>
@@ -115,27 +115,26 @@
                 >
                   <div class="pf-v6-c-tree-view__content">
                     <div
-                      class="pf-v6-c-tree-view__node pf-m-selectable"
-                      tabindex="0"
-                      id="node-tree-view-selectable-expandable-3"
-                      aria-label="Select"
-                      aria-labelledby="node-tree-view-selectable-expandable-3 text-tree-view-selectable-expandable-3"
+                      class="pf-v6-c-tree-view__node"
+                      id="node-tree-view-separate-selection-3"
+                                    aria-labelledby="node-tree-view-separate-selection-3 text-tree-view-separate-selection-3"
                     >
                       <span class="pf-v6-c-tree-view__node-container">
                         <button
-                          class="pf-v6-c-tree-view__node-toggle"
-                          id="toggle-tree-view-selectable-expandable-3"
-                          aria-label="Toggle"
-                          aria-labelledby="toggle-tree-view-selectable-expandable-3 text-tree-view-selectable-expandable-3"
-                        >
+                  class="pf-v6-c-tree-view__node-toggle"
+                  type="button"
+                  tabindex="-1"
+                  aria-labelledby="node-tree-view-separate-selection-3"
+                >
                           <span class="pf-v6-c-tree-view__node-toggle-icon">
                             {icons:svg('fa:angle-right').raw}
                           </span>
                         </button>
                         <button
-                          class="pf-v6-c-tree-view__node-text"
-                          id="text-tree-view-selectable-expandable-3"
-                        >
+                  class="pf-v6-c-tree-view__node-text"
+                  type="button"
+                  tabindex="-1"
+                >
                           Loader
                         </button>
                       </span>
@@ -153,27 +152,26 @@
             >
               <div class="pf-v6-c-tree-view__content">
                 <div
-                  class="pf-v6-c-tree-view__node pf-m-selectable"
-                  tabindex="0"
-                  id="node-tree-view-selectable-expandable-4"
-                  aria-label="Select"
-                  aria-labelledby="node-tree-view-selectable-expandable-4 text-tree-view-selectable-expandable-4"
+                  class="pf-v6-c-tree-view__node"
+                  id="node-tree-view-separate-selection-4"
+                                aria-labelledby="node-tree-view-separate-selection-4 text-tree-view-separate-selection-4"
                 >
                   <span class="pf-v6-c-tree-view__node-container">
                     <button
-                      class="pf-v6-c-tree-view__node-toggle"
-                      id="toggle-tree-view-selectable-expandable-4"
-                      aria-label="Toggle"
-                      aria-labelledby="toggle-tree-view-selectable-expandable-4 text-tree-view-selectable-expandable-4"
-                    >
+                  class="pf-v6-c-tree-view__node-toggle"
+                  type="button"
+                  tabindex="-1"
+                  aria-labelledby="node-tree-view-separate-selection-4"
+                >
                       <span class="pf-v6-c-tree-view__node-toggle-icon">
                         {icons:svg('fa:angle-right').raw}
                       </span>
                     </button>
                     <button
-                      class="pf-v6-c-tree-view__node-text"
-                      id="text-tree-view-selectable-expandable-4"
-                    >
+                  class="pf-v6-c-tree-view__node-text"
+                  type="button"
+                  tabindex="-1"
+                >
                       Application 2
                     </button>
                   </span>
@@ -203,27 +201,26 @@
                 >
                   <div class="pf-v6-c-tree-view__content">
                     <div
-                      class="pf-v6-c-tree-view__node pf-m-selectable"
-                      tabindex="0"
-                      id="node-tree-view-selectable-expandable-5"
-                      aria-label="Select"
-                      aria-labelledby="node-tree-view-selectable-expandable-5 text-tree-view-selectable-expandable-5"
+                      class="pf-v6-c-tree-view__node"
+                      id="node-tree-view-separate-selection-5"
+                                    aria-labelledby="node-tree-view-separate-selection-5 text-tree-view-separate-selection-5"
                     >
                       <span class="pf-v6-c-tree-view__node-container">
                         <button
-                          class="pf-v6-c-tree-view__node-toggle"
-                          id="toggle-tree-view-selectable-expandable-5"
-                          aria-label="Toggle"
-                          aria-labelledby="toggle-tree-view-selectable-expandable-5 text-tree-view-selectable-expandable-5"
-                        >
+                  class="pf-v6-c-tree-view__node-toggle"
+                  type="button"
+                  tabindex="-1"
+                  aria-labelledby="node-tree-view-separate-selection-5"
+                >
                           <span class="pf-v6-c-tree-view__node-toggle-icon">
                             {icons:svg('fa:angle-right').raw}
                           </span>
                         </button>
                         <button
-                          class="pf-v6-c-tree-view__node-text"
-                          id="text-tree-view-selectable-expandable-5"
-                        >
+                  class="pf-v6-c-tree-view__node-text"
+                  type="button"
+                  tabindex="-1"
+                >
                           Settings
                         </button>
                       </span>
@@ -239,27 +236,26 @@
                 >
                   <div class="pf-v6-c-tree-view__content">
                     <div
-                      class="pf-v6-c-tree-view__node pf-m-selectable"
-                      tabindex="0"
-                      id="node-tree-view-selectable-expandable-6"
-                      aria-label="Select"
-                      aria-labelledby="node-tree-view-selectable-expandable-6 text-tree-view-selectable-expandable-6"
+                      class="pf-v6-c-tree-view__node"
+                      id="node-tree-view-separate-selection-6"
+                                    aria-labelledby="node-tree-view-separate-selection-6 text-tree-view-separate-selection-6"
                     >
                       <span class="pf-v6-c-tree-view__node-container">
                         <button
-                          class="pf-v6-c-tree-view__node-toggle"
-                          id="toggle-tree-view-selectable-expandable-6"
-                          aria-label="Toggle"
-                          aria-labelledby="toggle-tree-view-selectable-expandable-6 text-tree-view-selectable-expandable-6"
-                        >
+                  class="pf-v6-c-tree-view__node-toggle"
+                  type="button"
+                  tabindex="-1"
+                  aria-labelledby="node-tree-view-separate-selection-6"
+                >
                           <span class="pf-v6-c-tree-view__node-toggle-icon">
                             {icons:svg('fa:angle-right').raw}
                           </span>
                         </button>
                         <button
-                          class="pf-v6-c-tree-view__node-text"
-                          id="text-tree-view-selectable-expandable-6"
-                        >
+                  class="pf-v6-c-tree-view__node-text"
+                  type="button"
+                  tabindex="-1"
+                >
                           Loader
                         </button>
                       </span>
@@ -277,25 +273,26 @@
                         <div
                           class="pf-v6-c-tree-view__node pf-m-selectable pf-m-current"
                           tabindex="0"
-                          id="node-tree-view-selectable-expandable-7"
+                          id="node-tree-view-separate-selection-7"
                           aria-label="Select"
-                          aria-labelledby="node-tree-view-selectable-expandable-7 text-tree-view-selectable-expandable-7"
+                          aria-labelledby="node-tree-view-separate-selection-7 text-tree-view-separate-selection-7"
                         >
                           <span class="pf-v6-c-tree-view__node-container">
                             <button
-                              class="pf-v6-c-tree-view__node-toggle"
-                              id="toggle-tree-view-selectable-expandable-7"
-                              aria-label="Toggle"
-                              aria-labelledby="toggle-tree-view-selectable-expandable-7 text-tree-view-selectable-expandable-7"
-                            >
+                  class="pf-v6-c-tree-view__node-toggle"
+                  type="button"
+                  tabindex="-1"
+                  aria-labelledby="node-tree-view-separate-selection-7"
+                >
                               <span class="pf-v6-c-tree-view__node-toggle-icon">
                                 {icons:svg('fa:angle-right').raw}
                               </span>
                             </button>
                             <button
-                              class="pf-v6-c-tree-view__node-text"
-                              id="text-tree-view-selectable-expandable-7"
-                            >
+                  class="pf-v6-c-tree-view__node-text"
+                  type="button"
+                  tabindex="-1"
+                >
                               Loader app 1
                             </button>
                           </span>
@@ -345,18 +342,16 @@
         >
           <div class="pf-v6-c-tree-view__content">
             <div
-              class="pf-v6-c-tree-view__node pf-m-selectable"
-              tabindex="0"
-              id="node-tree-view-selectable-expandable-8"
-              aria-label="Select"
-              aria-labelledby="node-tree-view-selectable-expandable-8 text-tree-view-selectable-expandable-8"
+              class="pf-v6-c-tree-view__node"
+              id="node-tree-view-separate-selection-8"
+                            aria-labelledby="node-tree-view-separate-selection-8 text-tree-view-separate-selection-8"
             >
               <span class="pf-v6-c-tree-view__node-container">
                 <button
                   class="pf-v6-c-tree-view__node-toggle"
-                  id="toggle-tree-view-selectable-expandable-8"
-                  aria-label="Toggle"
-                  aria-labelledby="toggle-tree-view-selectable-expandable-8 text-tree-view-selectable-expandable-8"
+                  type="button"
+                  tabindex="-1"
+                  aria-labelledby="node-tree-view-separate-selection-8"
                 >
                   <span class="pf-v6-c-tree-view__node-toggle-icon">
                     {icons:svg('fa:angle-right').raw}
@@ -364,7 +359,8 @@
                 </button>
                 <button
                   class="pf-v6-c-tree-view__node-text"
-                  id="text-tree-view-selectable-expandable-8"
+                  type="button"
+                  tabindex="-1"
                 >
                   Cost management
                 </button>
@@ -381,18 +377,16 @@
         >
           <div class="pf-v6-c-tree-view__content">
             <div
-              class="pf-v6-c-tree-view__node pf-m-selectable"
-              tabindex="0"
-              id="node-tree-view-selectable-expandable-9"
-              aria-label="Select"
-              aria-labelledby="node-tree-view-selectable-expandable-9 text-tree-view-selectable-expandable-9"
+              class="pf-v6-c-tree-view__node"
+              id="node-tree-view-separate-selection-9"
+                            aria-labelledby="node-tree-view-separate-selection-9 text-tree-view-separate-selection-9"
             >
               <span class="pf-v6-c-tree-view__node-container">
                 <button
                   class="pf-v6-c-tree-view__node-toggle"
-                  id="toggle-tree-view-selectable-expandable-9"
-                  aria-label="Toggle"
-                  aria-labelledby="toggle-tree-view-selectable-expandable-9 text-tree-view-selectable-expandable-9"
+                  type="button"
+                  tabindex="-1"
+                  aria-labelledby="node-tree-view-separate-selection-9"
                 >
                   <span class="pf-v6-c-tree-view__node-toggle-icon">
                     {icons:svg('fa:angle-right').raw}
@@ -400,7 +394,8 @@
                 </button>
                 <button
                   class="pf-v6-c-tree-view__node-text"
-                  id="text-tree-view-selectable-expandable-9"
+                  type="button"
+                  tabindex="-1"
                 >
                   Sources
                 </button>
@@ -417,18 +412,16 @@
         >
           <div class="pf-v6-c-tree-view__content">
             <div
-              class="pf-v6-c-tree-view__node pf-m-selectable"
-              tabindex="0"
-              id="node-tree-view-selectable-expandable-10"
-              aria-label="Select"
-              aria-labelledby="node-tree-view-selectable-expandable-10 text-tree-view-selectable-expandable-10"
+              class="pf-v6-c-tree-view__node"
+              id="node-tree-view-separate-selection-10"
+                            aria-labelledby="node-tree-view-separate-selection-10 text-tree-view-separate-selection-10"
             >
               <span class="pf-v6-c-tree-view__node-container">
                 <button
                   class="pf-v6-c-tree-view__node-toggle"
-                  id="toggle-tree-view-selectable-expandable-10"
-                  aria-label="Toggle"
-                  aria-labelledby="toggle-tree-view-selectable-expandable-10 text-tree-view-selectable-expandable-10"
+                  type="button"
+                  tabindex="-1"
+                  aria-labelledby="node-tree-view-separate-selection-10"
                 >
                   <span class="pf-v6-c-tree-view__node-toggle-icon">
                     {icons:svg('fa:angle-right').raw}
@@ -436,7 +429,8 @@
                 </button>
                 <button
                   class="pf-v6-c-tree-view__node-text"
-                  id="text-tree-view-selectable-expandable-10"
+                  type="button"
+                  tabindex="-1"
                 >
                   This is a really really really long folder name that overflows from the
                   width of the container.
