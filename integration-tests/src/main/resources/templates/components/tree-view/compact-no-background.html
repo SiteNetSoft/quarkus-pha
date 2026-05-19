@@ -1,0 +1,330 @@
+<div id="ws-core-c-tree-view-compact-no-background" class="ws-core-c-tree-view" x-data="phaTreeView()">
+  <div class="ws-preview-html">
+    <div class="pf-v6-c-tree-view pf-m-compact pf-m-no-background">
+      <ul
+        class="pf-v6-c-tree-view__list"
+        role="tree"
+        aria-label="Tree View compact no background example"
+      >
+        <li
+          class="pf-v6-c-tree-view__list-item"
+          role="treeitem"
+          aria-selected="false"
+          tabindex="-1"
+        >
+          <div class="pf-v6-c-tree-view__content">
+            <button class="pf-v6-c-tree-view__node">
+              <span class="pf-v6-c-tree-view__node-container">
+                <span class="pf-v6-c-tree-view__node-content">
+                  <span class="pf-v6-c-tree-view__node-title">apiVersion</span>
+                  <span class="pf-v6-c-tree-view__node-text"
+                    >APIVersion defines the versioned schema of this representation of an
+                    object. Servers should convert recognized schemas to the latest internal
+                    value and may reject unrecognized values.</span
+                  >
+                </span>
+              </span>
+            </button>
+          </div>
+        </li>
+        <li
+          class="pf-v6-c-tree-view__list-item"
+          role="treeitem"
+          aria-selected="false"
+          tabindex="-1"
+        >
+          <div class="pf-v6-c-tree-view__content">
+            <button class="pf-v6-c-tree-view__node">
+              <span class="pf-v6-c-tree-view__node-container">
+                <span class="pf-v6-c-tree-view__node-content">
+                  <span class="pf-v6-c-tree-view__node-title">kind</span>
+                  <span class="pf-v6-c-tree-view__node-text"
+                    >Kind is a string value representing the REST resource this object
+                    represents. Servers may infer this from the endpoint the client submits
+                    requests to. Cannot be updated is CamelCase. More info:</span
+                  >
+                </span>
+              </span>
+            </button>
+          </div>
+        </li>
+        <li
+          class="pf-v6-c-tree-view__list-item"
+          role="treeitem"
+          aria-selected="false"
+          tabindex="-1"
+        >
+          <div class="pf-v6-c-tree-view__content">
+            <button class="pf-v6-c-tree-view__node">
+              <span class="pf-v6-c-tree-view__node-container">
+                <span class="pf-v6-c-tree-view__node-content">
+                  <span class="pf-v6-c-tree-view__node-title">metadata</span>
+                  <span class="pf-v6-c-tree-view__node-text">Standard object metadata</span>
+                </span>
+              </span>
+            </button>
+          </div>
+        </li>
+        <li
+          class="pf-v6-c-tree-view__list-item pf-m-expanded"
+          role="treeitem"
+          aria-selected="false"
+          aria-expanded="true"
+          tabindex="0"
+        >
+          <div class="pf-v6-c-tree-view__content">
+            <button class="pf-v6-c-tree-view__node">
+              <span class="pf-v6-c-tree-view__node-container">
+                <span class="pf-v6-c-tree-view__node-toggle">
+                  <span class="pf-v6-c-tree-view__node-toggle-icon">
+                    {icons:svg('fa:angle-right').raw}
+                  </span>
+                </span>
+                <span class="pf-v6-c-tree-view__node-content">
+                  <span class="pf-v6-c-tree-view__node-title">spec</span>
+                  <span class="pf-v6-c-tree-view__node-text"
+                    >Specification of the desired behavior of deployment.</span
+                  >
+                </span>
+              </span>
+            </button>
+          </div>
+          <ul class="pf-v6-c-tree-view__list" role="group">
+            <li
+              class="pf-v6-c-tree-view__list-item"
+              role="treeitem"
+              aria-selected="false"
+              tabindex="-1"
+            >
+              <div class="pf-v6-c-tree-view__content">
+                <button class="pf-v6-c-tree-view__node">
+                  <span class="pf-v6-c-tree-view__node-container">
+                    <span class="pf-v6-c-tree-view__node-content">
+                      <span class="pf-v6-c-tree-view__node-title">minReadySeconds</span>
+                      <span class="pf-v6-c-tree-view__node-text"
+                        >Minimum number of seconds for which a newly created pod should be
+                        ready without any of its container crashing, for it to be considered
+                        available. Default to 0 (pod will be considered available as soon as
+                        it is ready).</span
+                      >
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </li>
+            <li
+              class="pf-v6-c-tree-view__list-item"
+              role="treeitem"
+              aria-selected="false"
+              tabindex="-1"
+            >
+              <div class="pf-v6-c-tree-view__content">
+                <button class="pf-v6-c-tree-view__node">
+                  <span class="pf-v6-c-tree-view__node-container">
+                    <span class="pf-v6-c-tree-view__node-content">
+                      <span class="pf-v6-c-tree-view__node-title">paused</span>
+                      <span class="pf-v6-c-tree-view__node-text"
+                        >Indicates that the deployment is paused</span
+                      >
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </li>
+            <li
+              class="pf-v6-c-tree-view__list-item"
+              role="treeitem"
+              aria-selected="false"
+              tabindex="-1"
+            >
+              <div class="pf-v6-c-tree-view__content">
+                <button class="pf-v6-c-tree-view__node">
+                  <span class="pf-v6-c-tree-view__node-container">
+                    <span class="pf-v6-c-tree-view__node-content">
+                      <span class="pf-v6-c-tree-view__node-title"
+                        >progressDeadlineSeconds</span
+                      >
+                      <span class="pf-v6-c-tree-view__node-text"
+                        >The maximum time in seconds for a deployment to make progress
+                        before it is considered to be failed. The deployment controller will
+                        continue to process failed deployments and a condition with a
+                        ProgressDeadlineExceeded reason will be surfaced in the deployment
+                        status. Note that the progress will not de estimated during the time
+                        a deployment is paused. Defaults to 600s.</span
+                      >
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </li>
+            <li
+              class="pf-v6-c-tree-view__list-item"
+              role="treeitem"
+              aria-selected="false"
+              tabindex="-1"
+            >
+              <div class="pf-v6-c-tree-view__content">
+                <button class="pf-v6-c-tree-view__node">
+                  <span class="pf-v6-c-tree-view__node-container">
+                    <span class="pf-v6-c-tree-view__node-content">
+                      <span class="pf-v6-c-tree-view__node-title">replicas</span>
+                      <span class="pf-v6-c-tree-view__node-text"
+                        >Number of desired pods. This is a pointer to distinguish between
+                        explicit zero and not specified. Defaults to 1.</span
+                      >
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </li>
+            <li
+              class="pf-v6-c-tree-view__list-item"
+              role="treeitem"
+              aria-selected="false"
+              tabindex="-1"
+            >
+              <div class="pf-v6-c-tree-view__content">
+                <button class="pf-v6-c-tree-view__node">
+                  <span class="pf-v6-c-tree-view__node-container">
+                    <span class="pf-v6-c-tree-view__node-content">
+                      <span class="pf-v6-c-tree-view__node-title"
+                        >revisionHistoryLimit</span
+                      >
+                      <span class="pf-v6-c-tree-view__node-text"
+                        >The number of old ReplicaSets to retain to allow rollback. This is
+                        a pointer to distinguish between explicit zero and not specified.
+                        Defaults to 10.</span
+                      >
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </li>
+            <li
+              class="pf-v6-c-tree-view__list-item pf-m-expanded"
+              role="treeitem"
+              aria-selected="false"
+              aria-expanded="true"
+              tabindex="0"
+            >
+              <div class="pf-v6-c-tree-view__content">
+                <button class="pf-v6-c-tree-view__node">
+                  <span class="pf-v6-c-tree-view__node-container">
+                    <span class="pf-v6-c-tree-view__node-toggle">
+                      <span class="pf-v6-c-tree-view__node-toggle-icon">
+                        {icons:svg('fa:angle-right').raw}
+                      </span>
+                    </span>
+                    <span class="pf-v6-c-tree-view__node-content">
+                      <span class="pf-v6-c-tree-view__node-title">Selector</span>
+                      <span class="pf-v6-c-tree-view__node-text"
+                        >Label selector for pods. Existing ReplicaSets whose pods are
+                        selected by this will be the ones affected by this deployment</span
+                      >
+                    </span>
+                  </span>
+                </button>
+              </div>
+              <ul class="pf-v6-c-tree-view__list" role="group">
+                <li
+                  class="pf-v6-c-tree-view__list-item pf-m-expanded"
+                  role="treeitem"
+                  aria-selected="false"
+                  aria-expanded="true"
+                  tabindex="0"
+                >
+                  <div class="pf-v6-c-tree-view__content">
+                    <button class="pf-v6-c-tree-view__node">
+                      <span class="pf-v6-c-tree-view__node-container">
+                        <span class="pf-v6-c-tree-view__node-toggle">
+                          <span class="pf-v6-c-tree-view__node-toggle-icon">
+                            {icons:svg('fa:angle-right').raw}
+                          </span>
+                        </span>
+                        <span class="pf-v6-c-tree-view__node-content">
+                          <span class="pf-v6-c-tree-view__node-title"
+                            >matchExpressions</span
+                          >
+                          <span class="pf-v6-c-tree-view__node-text"
+                            >matchExpressions is a list of the label selector requirements.
+                            The requirements and ANDed.</span
+                          >
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                  <ul class="pf-v6-c-tree-view__list" role="group">
+                    <li
+                      class="pf-v6-c-tree-view__list-item"
+                      role="treeitem"
+                      aria-selected="false"
+                      tabindex="-1"
+                    >
+                      <div class="pf-v6-c-tree-view__content">
+                        <button class="pf-v6-c-tree-view__node">
+                          <span class="pf-v6-c-tree-view__node-container">
+                            <span class="pf-v6-c-tree-view__node-content">
+                              <span class="pf-v6-c-tree-view__node-title">matchLabels</span>
+                              <span class="pf-v6-c-tree-view__node-text"
+                                >matchExpressions is a list of the label selector
+                                requirements. The requirements and ANDed.</span
+                              >
+                            </span>
+                          </span>
+                        </button>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                <li
+                  class="pf-v6-c-tree-view__list-item"
+                  role="treeitem"
+                  aria-selected="false"
+                  tabindex="-1"
+                >
+                  <div class="pf-v6-c-tree-view__content">
+                    <button class="pf-v6-c-tree-view__node">
+                      <span class="pf-v6-c-tree-view__node-container">
+                        <span class="pf-v6-c-tree-view__node-content">
+                          <span class="pf-v6-c-tree-view__node-title">matchLabels</span>
+                          <span class="pf-v6-c-tree-view__node-text"
+                            >Map of \{key.value} pairs. A single \{key.value} in the
+                            matchLabels map is equivalent to an element of matchExpressions,
+                            whose key field is "key", the operator is "In" and the values
+                            array contains only "value". The requirements are ANDed.</span
+                          >
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                </li>
+              </ul>
+            </li>
+            <li
+              class="pf-v6-c-tree-view__list-item"
+              role="treeitem"
+              aria-selected="false"
+              tabindex="-1"
+            >
+              <div class="pf-v6-c-tree-view__content">
+                <button class="pf-v6-c-tree-view__node">
+                  <span class="pf-v6-c-tree-view__node-container">
+                    <span class="pf-v6-c-tree-view__node-content">
+                      <span class="pf-v6-c-tree-view__node-title">matchLabels</span>
+                      <span class="pf-v6-c-tree-view__node-text"
+                        >Map of \{key.value} pairs. A single \{key.value} in the matchLabels
+                        map is equivalent to an element of matchExpressions, whose key field
+                        is "key", the operator is "In" and the values array contains only
+                        "value". The requirements are ANDed.</span
+                      >
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
