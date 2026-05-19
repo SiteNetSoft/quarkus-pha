@@ -1,6 +1,35 @@
 {! Tree view — PatternFly v6 !}
 {! Parameters: id, compact (optional), guides (optional) !}
 {! Requires: /web/js/alpine/components/tree-view.js loaded before Alpine !}
+{! !}
+{! This template renders the outer wrapper only. Each <li> tree item is the !}
+{! consumer's responsibility, passed via the {#content} block. PF v6 ships !}
+{! two interaction patterns for the node itself — pick one per item: !}
+{! !}
+{!   Default: clicking the whole node toggles both expansion and selection. !}
+{!   The node is a single <button class="pf-v6-c-tree-view__node">: !}
+{!     <button class="pf-v6-c-tree-view__node" type="button"> !}
+{!       <span class="pf-v6-c-tree-view__node-container"> !}
+{!         <span class="pf-v6-c-tree-view__node-toggle">...icon...</span> !}
+{!         <span class="pf-v6-c-tree-view__node-text">Label</span> !}
+{!       </span> !}
+{!     </button> !}
+{! !}
+{!   Separate selection and expansion (PF's hasSelectableNodes): the toggle !}
+{!   button only expands/collapses; the text button selects without changing !}
+{!   expansion. The node wrapper becomes a <div>, with two child <button>s: !}
+{!     <div class="pf-v6-c-tree-view__node" id="label-X"> !}
+{!       <span class="pf-v6-c-tree-view__node-container"> !}
+{!         <button class="pf-v6-c-tree-view__node-toggle" type="button" !}
+{!                 tabindex="-1" aria-labelledby="label-X">...icon...</button> !}
+{!         <button class="pf-v6-c-tree-view__node-text" type="button" !}
+{!                 tabindex="-1">Label</button> !}
+{!       </span> !}
+{!     </div> !}
+{! !}
+{! See integration-tests/.../templates/components/tree-view/{single-selectable, !}
+{! multiselectable, with-separate-selection-and-expansion}.html for working !}
+{! examples of each pattern. !}
 <div class="pf-v6-c-tree-view{#if compact??} pf-m-compact{/if}{#if guides??} pf-m-guides{/if}" id="{id}" x-data="phaTreeView()">
   <ul class="pf-v6-c-tree-view__list" role="tree" @keydown="handleKeyNav($event)">
     {#insert content}{/insert}

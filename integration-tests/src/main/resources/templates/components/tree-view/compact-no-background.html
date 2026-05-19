@@ -5,6 +5,8 @@
         class="pf-v6-c-tree-view__list"
         role="tree"
         aria-label="Tree View compact no background example"
+        @keydown="handleKeyNav($event)"
+        @click="handleToggle($event)"
       >
         <li
           class="pf-v6-c-tree-view__list-item"

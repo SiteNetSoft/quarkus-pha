@@ -1,7 +1,10 @@
 <div id="ws-core-c-tree-view-guides" class="ws-core-c-tree-view" x-data="phaTreeView()">
   <div class="ws-preview-html">
     <div class="pf-v6-c-tree-view pf-m-guides">
-      <ul class="pf-v6-c-tree-view__list" role="tree" aria-label="Tree View guides example">
+      <ul class="pf-v6-c-tree-view__list" role="tree" aria-label="Tree View guides example"
+        @keydown="handleKeyNav($event)"
+        @click="handleToggle($event)"
+      >
         <li
           class="pf-v6-c-tree-view__list-item pf-m-expanded"
           role="treeitem"

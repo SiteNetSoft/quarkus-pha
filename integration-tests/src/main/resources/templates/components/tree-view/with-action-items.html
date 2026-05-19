@@ -1,10 +1,12 @@
-<div id="ws-core-c-tree-view-with-action-item" class="ws-core-c-tree-view" x-data="phaTreeView()">
+<div id="ws-core-c-tree-view-with-action-items" class="ws-core-c-tree-view" x-data="phaTreeView()">
   <div class="ws-preview-html">
     <div class="pf-v6-c-tree-view">
       <ul
         class="pf-v6-c-tree-view__list"
         role="tree"
         aria-label="Tree View with action item example"
+        @keydown="handleKeyNav($event)"
+        @click="handleToggle($event)"
       >
         <li
           class="pf-v6-c-tree-view__list-item pf-m-expanded"
