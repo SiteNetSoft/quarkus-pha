@@ -1,0 +1,294 @@
+<div id="ws-core-c-tree-view-multiselectable" class="ws-core-c-tree-view" x-data="phaTreeView()">
+  <div class="ws-preview-html">
+    <div class="pf-v6-c-tree-view">
+      <ul
+        class="pf-v6-c-tree-view__list"
+        role="tree"
+        aria-multiselectable="true"
+        aria-label="Tree View multiselectable example"
+      >
+        <li
+          class="pf-v6-c-tree-view__list-item pf-m-expanded"
+          role="treeitem"
+          aria-selected="false"
+          aria-expanded="true"
+          tabindex="0"
+        >
+          <div class="pf-v6-c-tree-view__content">
+            <button class="pf-v6-c-tree-view__node">
+              <span class="pf-v6-c-tree-view__node-container">
+                <span class="pf-v6-c-tree-view__node-toggle">
+                  <span class="pf-v6-c-tree-view__node-toggle-icon">
+                    {icons:svg('fa:angle-right').raw}
+                  </span>
+                </span>
+                <span class="pf-v6-c-tree-view__node-text">Application launcher</span>
+              </span>
+            </button>
+          </div>
+          <ul class="pf-v6-c-tree-view__list" role="group">
+            <li
+              class="pf-v6-c-tree-view__list-item pf-m-expanded"
+              role="treeitem"
+              aria-selected="false"
+              aria-expanded="true"
+              tabindex="0"
+            >
+              <div class="pf-v6-c-tree-view__content">
+                <button class="pf-v6-c-tree-view__node">
+                  <span class="pf-v6-c-tree-view__node-container">
+                    <span class="pf-v6-c-tree-view__node-toggle">
+                      <span class="pf-v6-c-tree-view__node-toggle-icon">
+                        {icons:svg('fa:angle-right').raw}
+                      </span>
+                    </span>
+                    <span class="pf-v6-c-tree-view__node-text">Application 1</span>
+                  </span>
+                </button>
+              </div>
+              <ul class="pf-v6-c-tree-view__list" role="group">
+                <li
+                  class="pf-v6-c-tree-view__list-item"
+                  role="treeitem"
+                  aria-selected="false"
+                  tabindex="-1"
+                >
+                  <div class="pf-v6-c-tree-view__content">
+                    <button class="pf-v6-c-tree-view__node">
+                      <span class="pf-v6-c-tree-view__node-container">
+                        <span class="pf-v6-c-tree-view__node-text">Settings</span>
+                      </span>
+                    </button>
+                  </div>
+                </li>
+                <li
+                  class="pf-v6-c-tree-view__list-item"
+                  role="treeitem"
+                  aria-selected="true"
+                  tabindex="-1"
+                >
+                  <div class="pf-v6-c-tree-view__content">
+                    <button class="pf-v6-c-tree-view__node pf-m-current">
+                      <span class="pf-v6-c-tree-view__node-container">
+                        <span class="pf-v6-c-tree-view__node-text">Current</span>
+                      </span>
+                    </button>
+                  </div>
+                </li>
+                <li
+                  class="pf-v6-c-tree-view__list-item"
+                  role="treeitem"
+                  aria-selected="false"
+                  aria-expanded="false"
+                  tabindex="0"
+                >
+                  <div class="pf-v6-c-tree-view__content">
+                    <button class="pf-v6-c-tree-view__node">
+                      <span class="pf-v6-c-tree-view__node-container">
+                        <span class="pf-v6-c-tree-view__node-toggle">
+                          <span class="pf-v6-c-tree-view__node-toggle-icon">
+                            {icons:svg('fa:angle-right').raw}
+                          </span>
+                        </span>
+                        <span class="pf-v6-c-tree-view__node-text">Loader</span>
+                      </span>
+                    </button>
+                  </div>
+                </li>
+              </ul>
+            </li>
+            <li
+              class="pf-v6-c-tree-view__list-item pf-m-expanded"
+              role="treeitem"
+              aria-selected="false"
+              aria-expanded="true"
+              tabindex="0"
+            >
+              <div class="pf-v6-c-tree-view__content">
+                <button class="pf-v6-c-tree-view__node">
+                  <span class="pf-v6-c-tree-view__node-container">
+                    <span class="pf-v6-c-tree-view__node-toggle">
+                      <span class="pf-v6-c-tree-view__node-toggle-icon">
+                        {icons:svg('fa:angle-right').raw}
+                      </span>
+                    </span>
+                    <span class="pf-v6-c-tree-view__node-text">Application 2</span>
+                  </span>
+                </button>
+              </div>
+              <ul class="pf-v6-c-tree-view__list" role="group">
+                <li
+                  class="pf-v6-c-tree-view__list-item"
+                  role="treeitem"
+                  aria-selected="false"
+                  tabindex="-1"
+                >
+                  <div class="pf-v6-c-tree-view__content">
+                    <button class="pf-v6-c-tree-view__node">
+                      <span class="pf-v6-c-tree-view__node-container">
+                        <span class="pf-v6-c-tree-view__node-text">Settings</span>
+                      </span>
+                    </button>
+                  </div>
+                </li>
+                <li
+                  class="pf-v6-c-tree-view__list-item"
+                  role="treeitem"
+                  aria-selected="false"
+                  aria-expanded="false"
+                  tabindex="0"
+                >
+                  <div class="pf-v6-c-tree-view__content">
+                    <button class="pf-v6-c-tree-view__node">
+                      <span class="pf-v6-c-tree-view__node-container">
+                        <span class="pf-v6-c-tree-view__node-toggle">
+                          <span class="pf-v6-c-tree-view__node-toggle-icon">
+                            {icons:svg('fa:angle-right').raw}
+                          </span>
+                        </span>
+                        <span class="pf-v6-c-tree-view__node-text">Settings</span>
+                      </span>
+                    </button>
+                  </div>
+                </li>
+                <li
+                  class="pf-v6-c-tree-view__list-item pf-m-expanded"
+                  role="treeitem"
+                  aria-selected="false"
+                  aria-expanded="true"
+                  tabindex="0"
+                >
+                  <div class="pf-v6-c-tree-view__content">
+                    <button class="pf-v6-c-tree-view__node">
+                      <span class="pf-v6-c-tree-view__node-container">
+                        <span class="pf-v6-c-tree-view__node-toggle">
+                          <span class="pf-v6-c-tree-view__node-toggle-icon">
+                            {icons:svg('fa:angle-right').raw}
+                          </span>
+                        </span>
+                        <span class="pf-v6-c-tree-view__node-text">Loader</span>
+                      </span>
+                    </button>
+                  </div>
+                  <ul class="pf-v6-c-tree-view__list" role="group">
+                    <li
+                      class="pf-v6-c-tree-view__list-item"
+                      role="treeitem"
+                      aria-selected="false"
+                      aria-expanded="false"
+                      tabindex="0"
+                    >
+                      <div class="pf-v6-c-tree-view__content">
+                        <button class="pf-v6-c-tree-view__node">
+                          <span class="pf-v6-c-tree-view__node-container">
+                            <span class="pf-v6-c-tree-view__node-toggle">
+                              <span class="pf-v6-c-tree-view__node-toggle-icon">
+                                {icons:svg('fa:angle-right').raw}
+                              </span>
+                            </span>
+                            <span class="pf-v6-c-tree-view__node-text">Loader app 1</span>
+                          </span>
+                        </button>
+                      </div>
+                    </li>
+                    <li
+                      class="pf-v6-c-tree-view__list-item"
+                      role="treeitem"
+                      aria-selected="true"
+                      tabindex="-1"
+                    >
+                      <div class="pf-v6-c-tree-view__content">
+                        <button class="pf-v6-c-tree-view__node pf-m-current">
+                          <span class="pf-v6-c-tree-view__node-container">
+                            <span class="pf-v6-c-tree-view__node-text">Loader app 2</span>
+                          </span>
+                        </button>
+                      </div>
+                    </li>
+                    <li
+                      class="pf-v6-c-tree-view__list-item"
+                      role="treeitem"
+                      aria-selected="false"
+                      tabindex="-1"
+                    >
+                      <div class="pf-v6-c-tree-view__content">
+                        <button class="pf-v6-c-tree-view__node">
+                          <span class="pf-v6-c-tree-view__node-container">
+                            <span class="pf-v6-c-tree-view__node-text">Loader app 3</span>
+                          </span>
+                        </button>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li
+          class="pf-v6-c-tree-view__list-item"
+          role="treeitem"
+          aria-selected="false"
+          aria-expanded="false"
+          tabindex="0"
+        >
+          <div class="pf-v6-c-tree-view__content">
+            <button class="pf-v6-c-tree-view__node">
+              <span class="pf-v6-c-tree-view__node-container">
+                <span class="pf-v6-c-tree-view__node-toggle">
+                  <span class="pf-v6-c-tree-view__node-toggle-icon">
+                    {icons:svg('fa:angle-right').raw}
+                  </span>
+                </span>
+                <span class="pf-v6-c-tree-view__node-text">Cost management</span>
+              </span>
+            </button>
+          </div>
+        </li>
+        <li
+          class="pf-v6-c-tree-view__list-item"
+          role="treeitem"
+          aria-selected="false"
+          aria-expanded="false"
+          tabindex="0"
+        >
+          <div class="pf-v6-c-tree-view__content">
+            <button class="pf-v6-c-tree-view__node">
+              <span class="pf-v6-c-tree-view__node-container">
+                <span class="pf-v6-c-tree-view__node-toggle">
+                  <span class="pf-v6-c-tree-view__node-toggle-icon">
+                    {icons:svg('fa:angle-right').raw}
+                  </span>
+                </span>
+                <span class="pf-v6-c-tree-view__node-text">Sources</span>
+              </span>
+            </button>
+          </div>
+        </li>
+        <li
+          class="pf-v6-c-tree-view__list-item"
+          role="treeitem"
+          aria-selected="false"
+          aria-expanded="false"
+          tabindex="0"
+        >
+          <div class="pf-v6-c-tree-view__content">
+            <button class="pf-v6-c-tree-view__node">
+              <span class="pf-v6-c-tree-view__node-container">
+                <span class="pf-v6-c-tree-view__node-toggle">
+                  <span class="pf-v6-c-tree-view__node-toggle-icon">
+                    {icons:svg('fa:angle-right').raw}
+                  </span>
+                </span>
+                <span class="pf-v6-c-tree-view__node-text"
+                  >This is a really really really long folder name that overflows from the
+                  width of the container.</span
+                >
+              </span>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
