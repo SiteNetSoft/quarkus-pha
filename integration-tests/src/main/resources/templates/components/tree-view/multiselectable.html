@@ -6,6 +6,8 @@
         role="tree"
         aria-multiselectable="true"
         aria-label="Tree View multiselectable example"
+        @keydown="handleKeyNav($event)"
+        @click="handleToggle($event)"
       >
         <li
           class="pf-v6-c-tree-view__list-item pf-m-expanded"

@@ -1,10 +1,10 @@
-<div id="ws-core-c-tree-view-with-icons" class="ws-core-c-tree-view" x-data="phaTreeView()">
+<div id="ws-core-c-tree-view-with-custom-badges" class="ws-core-c-tree-view" x-data="phaTreeView()">
   <div class="ws-preview-html">
     <div class="pf-v6-c-tree-view">
       <ul
         class="pf-v6-c-tree-view__list"
         role="tree"
-        aria-label="Tree View with icons example"
+        aria-label="Tree View with custom badges example"
         @keydown="handleKeyNav($event)"
         @click="handleToggle($event)"
       >
@@ -23,10 +23,10 @@
                     {icons:svg('fa:angle-right').raw}
                   </span>
                 </span>
-                <span class="pf-v6-c-tree-view__node-icon">
-                  {icons:svg('fa:folder-open').raw}
-                </span>
                 <span class="pf-v6-c-tree-view__node-text">Application launcher</span>
+                <span class="pf-v6-c-tree-view__node-count">
+                  <span class="pf-v6-c-badge pf-m-read">2 applications</span>
+                </span>
               </span>
             </button>
           </div>
@@ -46,10 +46,10 @@
                         {icons:svg('fa:angle-right').raw}
                       </span>
                     </span>
-                    <span class="pf-v6-c-tree-view__node-icon">
-                      {icons:svg('fa:folder-open').raw}
-                    </span>
                     <span class="pf-v6-c-tree-view__node-text">Application 1</span>
+                    <span class="pf-v6-c-tree-view__node-count">
+                      <span class="pf-v6-c-badge pf-m-read">2 children</span>
+                    </span>
                   </span>
                 </button>
               </div>
@@ -63,9 +63,6 @@
                   <div class="pf-v6-c-tree-view__content">
                     <button class="pf-v6-c-tree-view__node">
                       <span class="pf-v6-c-tree-view__node-container">
-                        <span class="pf-v6-c-tree-view__node-icon">
-                          {icons:svg('fa:folder').raw}
-                        </span>
                         <span class="pf-v6-c-tree-view__node-text">Settings</span>
                       </span>
                     </button>
@@ -80,9 +77,6 @@
                   <div class="pf-v6-c-tree-view__content">
                     <button class="pf-v6-c-tree-view__node pf-m-current">
                       <span class="pf-v6-c-tree-view__node-container">
-                        <span class="pf-v6-c-tree-view__node-icon">
-                          {icons:svg('fa:folder').raw}
-                        </span>
                         <span class="pf-v6-c-tree-view__node-text">Current</span>
                       </span>
                     </button>
@@ -105,10 +99,10 @@
                         {icons:svg('fa:angle-right').raw}
                       </span>
                     </span>
-                    <span class="pf-v6-c-tree-view__node-icon">
-                      {icons:svg('fa:folder-open').raw}
-                    </span>
                     <span class="pf-v6-c-tree-view__node-text">Application 2</span>
+                    <span class="pf-v6-c-tree-view__node-count">
+                      <span class="pf-v6-c-badge pf-m-read">2 children</span>
+                    </span>
                   </span>
                 </button>
               </div>
@@ -128,10 +122,10 @@
                             {icons:svg('fa:angle-right').raw}
                           </span>
                         </span>
-                        <span class="pf-v6-c-tree-view__node-icon">
-                          {icons:svg('fa:folder').raw}
-                        </span>
                         <span class="pf-v6-c-tree-view__node-text">Settings</span>
+                        <span class="pf-v6-c-tree-view__node-count">
+                          <span class="pf-v6-c-badge pf-m-read">3 loading apps</span>
+                        </span>
                       </span>
                     </button>
                   </div>
@@ -151,10 +145,10 @@
                             {icons:svg('fa:angle-right').raw}
                           </span>
                         </span>
-                        <span class="pf-v6-c-tree-view__node-icon">
-                          {icons:svg('fa:folder-open').raw}
-                        </span>
                         <span class="pf-v6-c-tree-view__node-text">Loader</span>
+                        <span class="pf-v6-c-tree-view__node-count">
+                          <span class="pf-v6-c-badge pf-m-read">5 items</span>
+                        </span>
                       </span>
                     </button>
                   </div>
@@ -174,10 +168,10 @@
                                 {icons:svg('fa:angle-right').raw}
                               </span>
                             </span>
-                            <span class="pf-v6-c-tree-view__node-icon">
-                              {icons:svg('fa:folder').raw}
-                            </span>
                             <span class="pf-v6-c-tree-view__node-text">Loader app 1</span>
+                            <span class="pf-v6-c-tree-view__node-count">
+                              <span class="pf-v6-c-badge pf-m-read">2 children</span>
+                            </span>
                           </span>
                         </button>
                       </div>
@@ -191,9 +185,6 @@
                       <div class="pf-v6-c-tree-view__content">
                         <button class="pf-v6-c-tree-view__node">
                           <span class="pf-v6-c-tree-view__node-container">
-                            <span class="pf-v6-c-tree-view__node-icon">
-                              {icons:svg('fa:folder').raw}
-                            </span>
                             <span class="pf-v6-c-tree-view__node-text">Loader app 2</span>
                           </span>
                         </button>
@@ -208,9 +199,6 @@
                       <div class="pf-v6-c-tree-view__content">
                         <button class="pf-v6-c-tree-view__node">
                           <span class="pf-v6-c-tree-view__node-container">
-                            <span class="pf-v6-c-tree-view__node-icon">
-                              {icons:svg('fa:folder').raw}
-                            </span>
                             <span class="pf-v6-c-tree-view__node-text">Loader app 3</span>
                           </span>
                         </button>
@@ -237,10 +225,10 @@
                     {icons:svg('fa:angle-right').raw}
                   </span>
                 </span>
-                <span class="pf-v6-c-tree-view__node-icon">
-                  {icons:svg('fa:folder').raw}
-                </span>
                 <span class="pf-v6-c-tree-view__node-text">Cost management</span>
+                <span class="pf-v6-c-tree-view__node-count">
+                  <span class="pf-v6-c-badge pf-m-read">3 settings</span>
+                </span>
               </span>
             </button>
           </div>
@@ -259,11 +247,11 @@
                   <span class="pf-v6-c-tree-view__node-toggle-icon">
                     {icons:svg('fa:angle-right').raw}
                   </span>
-                </span>
-                <span class="pf-v6-c-tree-view__node-icon">
-                  {icons:svg('fa:folder').raw}
                 </span>
                 <span class="pf-v6-c-tree-view__node-text">Sources</span>
+                <span class="pf-v6-c-tree-view__node-count">
+                  <span class="pf-v6-c-badge pf-m-read">4 items</span>
+                </span>
               </span>
             </button>
           </div>
@@ -282,14 +270,14 @@
                   <span class="pf-v6-c-tree-view__node-toggle-icon">
                     {icons:svg('fa:angle-right').raw}
                   </span>
-                </span>
-                <span class="pf-v6-c-tree-view__node-icon">
-                  {icons:svg('fa:folder').raw}
                 </span>
                 <span class="pf-v6-c-tree-view__node-text"
                   >This is a really really really long folder name that overflows from the
                   width of the container.</span
                 >
+                <span class="pf-v6-c-tree-view__node-count">
+                  <span class="pf-v6-c-badge pf-m-read">2 nested</span>
+                </span>
               </span>
             </button>
           </div>

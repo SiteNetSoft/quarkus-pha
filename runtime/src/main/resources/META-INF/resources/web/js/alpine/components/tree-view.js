@@ -3,7 +3,14 @@
  *
  * Provides:
  *   - Roving-focus arrow-key navigation across [role=treeitem] (Up/Down/Home/End).
- *   - Per-node expand/collapse via click on `.pf-v6-c-tree-view__node-toggle`.
+ *   - Per-node expand/collapse via click. Two PF v6 markup patterns are
+ *     supported:
+ *       1) Whole-node button — `<button class="pf-v6-c-tree-view__node">` —
+ *          clicking anywhere on it toggles the containing list-item.
+ *       2) Separate toggle button (PF's hasSelectableNodes pattern) — the
+ *          node wrapper is a `<div>` with two child buttons; only
+ *          `<button class="pf-v6-c-tree-view__node-toggle">` toggles.
+ *          The `__node-text` button selects without toggling (no JS here).
  *   - WAI-ARIA tree expand/collapse via ArrowRight/ArrowLeft.
  *   - Bulk expandAll() / collapseAll() / toggleAll() with reactive `allExpanded`
  *     for binding to a header button (e.g. "Expand all" ↔ "Collapse all").
@@ -73,10 +80,22 @@ phaAlpine("phaTreeView", (config = {}) => ({
   },
 
   handleToggle(e) {
-    let toggle = e.target.closest(".pf-v6-c-tree-view__node-toggle");
-    if (!toggle || !this.$root.contains(toggle)) return;
-    let li = toggle.closest("li.pf-v6-c-tree-view__list-item");
-    if (!li) return;
+    /*
+     * Toggle fires for clicks anywhere on:
+     *   - <button class="pf-v6-c-tree-view__node">         (whole-node button)
+     *   - <button class="pf-v6-c-tree-view__node-toggle">  (separate toggle)
+     * NOT for clicks on:
+     *   - <button class="pf-v6-c-tree-view__node-text">    (selection only)
+     *   - anything outside the tree (e.g. an external "Expand all" button)
+     */
+    let btn = e.target.closest("button");
+    if (!btn || !this.$root.contains(btn)) return;
+    let triggersToggle =
+      btn.classList.contains("pf-v6-c-tree-view__node") ||
+      btn.classList.contains("pf-v6-c-tree-view__node-toggle");
+    if (!triggersToggle) return;
+    let li = btn.closest("li.pf-v6-c-tree-view__list-item");
+    if (!li || !this._childList(li)) return;
     e.preventDefault();
     e.stopPropagation();
     this._setExpanded(li, !this._isExpanded(li));

@@ -1,7 +1,12 @@
-{! Example card — heading + example body + collapsible Qute source viewer. Parameters: title — h3 text (e.g. "Single
-selectable") slug — id segment used for anchors and the standalone/source URLs (e.g. "single-selectable") component —
-parent component slug (e.g. "tree-view") used to build the /components/{component}/source/{slug} and standalone hrefs
-Slot: {#content} — the example markup (the demo body itself, no chrome) !}
+{! Example card — heading + (optional) description + example body + collapsible Qute source viewer. !}
+{! Parameters: !}
+{!   title       — h3 text (e.g. "Single selectable") !}
+{!   slug        — id segment used for anchors and the standalone/source URLs (e.g. "single-selectable") !}
+{!   component   — parent component slug (e.g. "tree-view") used to build the !}
+{!                 /components/{component}/source/{slug} and standalone hrefs !}
+{!   description — (optional) explanatory paragraph rendered between the heading and the example body !}
+{! Slot: !}
+{!   {#content}  — the example markup (the demo body itself, no chrome) !}
 <div
   class="pf-v6-l-stack pf-m-gutter"
   data-source-href="/components/{component}/source/{slug}"
@@ -13,6 +18,9 @@ Slot: {#content} — the example markup (the demo body itself, no chrome) !}
         <h3 id="{slug}" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">{title}</h3>
       </div>
     </div>
+    {#if description??}
+    <p class="pf-v6-c-content--p pf-m-editorial ws-p">{description.raw}</p>
+    {/if}
   </div>
   <div class="pf-v6-l-stack__item">{#insert content}{/insert}</div>
   <div class="pf-v6-l-stack__item">

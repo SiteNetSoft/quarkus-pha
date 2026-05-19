@@ -446,13 +446,19 @@
                             </h2>
                           </div>
                         </div>
-                        {#include partials/example-card title="Single selectable" slug="single-selectable"
-                        component="tree-view"} {#content} {#include components/tree-view/single-selectable /} {/content}
+                        {#include partials/example-card title="Single selectable" slug="single-selectable" component="tree-view"}
+                        {#content}{#include components/tree-view/single-selectable /}{/content}
                         {/include}
-                        {#include partials/example-card title="Multiselectable" slug="multiselectable" component="tree-view"}
+                        {#include partials/example-card title="Multiselectable" slug="multiselectable" component="tree-view"
+                          description="A tree can be set up to allow multiple nodes to be selected. To turn on multiple selection, set <code class=&quot;ws-code&quot;>aria-multiselectable=&quot;true&quot;</code> on the root <code class=&quot;ws-code&quot;>ul[role=&quot;tree&quot;]</code> element."}
                         {#content}{#include components/tree-view/multiselectable /}{/content}
                         {/include}
-                        {#include partials/example-card title="With search" slug="with-search" component="tree-view"}
+                        {#include partials/example-card title="With separate selection and expansion" slug="with-separate-selection-and-expansion" component="tree-view"
+                          description="The node renders its toggle button and text button separately so a parent node can be selected (or deselected) without toggling its expansion. The wrapper becomes a <code class=&quot;ws-code&quot;>div.pf-v6-c-tree-view__node</code> containing two child <code class=&quot;ws-code&quot;>button</code>s — one for toggle, one for the label."}
+                        {#content}{#include components/tree-view/with-separate-selection-and-expansion /}{/content}
+                        {/include}
+                        {#include partials/example-card title="With search" slug="with-search" component="tree-view"
+                          description="A search input can be used to filter tree view items. It is recommended that a tree view with more than 7 nodes includes a search input."}
                         {#content}{#include components/tree-view/with-search /}{/content}
                         {/include}
                         {#include partials/example-card title="With checkboxes" slug="with-checkboxes" component="tree-view"}
@@ -461,17 +467,17 @@
                         {#include partials/example-card title="With icons" slug="with-icons" component="tree-view"}
                         {#content}{#include components/tree-view/with-icons /}{/content}
                         {/include}
+                        {#include partials/example-card title="With unique icon per item" slug="with-unique-icon-per-item" component="tree-view"}
+                        {#content}{#include components/tree-view/with-unique-icon-per-item /}{/content}
+                        {/include}
                         {#include partials/example-card title="With badges" slug="with-badges" component="tree-view"}
                         {#content}{#include components/tree-view/with-badges /}{/content}
                         {/include}
-                        {#include partials/example-card title="With action item" slug="with-action-item" component="tree-view"}
-                        {#content}{#include components/tree-view/with-action-item /}{/content}
+                        {#include partials/example-card title="With custom badges" slug="with-custom-badges" component="tree-view"}
+                        {#content}{#include components/tree-view/with-custom-badges /}{/content}
                         {/include}
-                        {#include partials/example-card title="With non-expandable top level nodes" slug="with-non-expandable-top-level-nodes" component="tree-view"}
-                        {#content}{#include components/tree-view/with-non-expandable-top-level-nodes /}{/content}
-                        {/include}
-                        {#include partials/example-card title="With selectable expandable nodes" slug="with-selectable-expandable-nodes" component="tree-view"}
-                        {#content}{#include components/tree-view/with-selectable-expandable-nodes /}{/content}
+                        {#include partials/example-card title="With action items" slug="with-action-items" component="tree-view"}
+                        {#content}{#include components/tree-view/with-action-items /}{/content}
                         {/include}
                         {#include partials/example-card title="Guides" slug="guides" component="tree-view"}
                         {#content}{#include components/tree-view/guides /}{/content}
@@ -481,6 +487,9 @@
                         {/include}
                         {#include partials/example-card title="Compact no background" slug="compact-no-background" component="tree-view"}
                         {#content}{#include components/tree-view/compact-no-background /}{/content}
+                        {/include}
+                        {#include partials/example-card title="With non-expandable top level nodes" slug="with-non-expandable-top-level-nodes" component="tree-view"}
+                        {#content}{#include components/tree-view/with-non-expandable-top-level-nodes /}{/content}
                         {/include}
                         <div class="pf-v6-l-stack__item">
                           <br /><a
