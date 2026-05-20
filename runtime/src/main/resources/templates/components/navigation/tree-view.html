@@ -31,7 +31,9 @@
 {! multiselectable, with-separate-selection-and-expansion}.html for working !}
 {! examples of each pattern. !}
 <div class="pf-v6-c-tree-view{#if compact??} pf-m-compact{/if}{#if guides??} pf-m-guides{/if}" id="{id}" x-data="phaTreeView()">
-  <ul class="pf-v6-c-tree-view__list" role="tree" @keydown="handleKeyNav($event)">
+  <ul class="pf-v6-c-tree-view__list" role="tree"{#if multi??} aria-multiselectable="true"{/if}
+      @keydown="handleKeyNav($event)"
+      @click="handleClick($event)">
     {#insert content}{/insert}
   </ul>
 </div>

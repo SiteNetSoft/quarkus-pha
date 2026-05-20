@@ -4,16 +4,17 @@
       <ul
         class="pf-v6-c-tree-view__list"
         role="tree"
+        aria-multiselectable="false"
         aria-label="Tree View with badges example"
         @keydown="handleKeyNav($event)"
-        @click="handleToggle($event)"
+        @click="handleClick($event)"
       >
         <li
           class="pf-v6-c-tree-view__list-item pf-m-expanded"
           role="treeitem"
           aria-selected="false"
           aria-expanded="true"
-          tabindex="0"
+          tabindex="-1"
         >
           <div class="pf-v6-c-tree-view__content">
             <button class="pf-v6-c-tree-view__node">
@@ -36,7 +37,7 @@
               role="treeitem"
               aria-selected="false"
               aria-expanded="true"
-              tabindex="0"
+              tabindex="-1"
             >
               <div class="pf-v6-c-tree-view__content">
                 <button class="pf-v6-c-tree-view__node">
@@ -70,12 +71,11 @@
                 </li>
                 <li
                   class="pf-v6-c-tree-view__list-item"
-                  role="treeitem"
-                  aria-selected="true"
+                  role="treeitem" aria-selected="false"
                   tabindex="-1"
                 >
                   <div class="pf-v6-c-tree-view__content">
-                    <button class="pf-v6-c-tree-view__node pf-m-current">
+                    <button class="pf-v6-c-tree-view__node">
                       <span class="pf-v6-c-tree-view__node-container">
                         <span class="pf-v6-c-tree-view__node-text">Current</span>
                       </span>
@@ -89,7 +89,7 @@
               role="treeitem"
               aria-selected="false"
               aria-expanded="true"
-              tabindex="0"
+              tabindex="-1"
             >
               <div class="pf-v6-c-tree-view__content">
                 <button class="pf-v6-c-tree-view__node">
@@ -112,7 +112,7 @@
                   role="treeitem"
                   aria-selected="false"
                   aria-expanded="false"
-                  tabindex="0"
+                  tabindex="-1"
                 >
                   <div class="pf-v6-c-tree-view__content">
                     <button class="pf-v6-c-tree-view__node">
@@ -135,7 +135,7 @@
                   role="treeitem"
                   aria-selected="false"
                   aria-expanded="true"
-                  tabindex="0"
+                  tabindex="-1"
                 >
                   <div class="pf-v6-c-tree-view__content">
                     <button class="pf-v6-c-tree-view__node">
@@ -158,7 +158,7 @@
                       role="treeitem"
                       aria-selected="false"
                       aria-expanded="false"
-                      tabindex="0"
+                      tabindex="-1"
                     >
                       <div class="pf-v6-c-tree-view__content">
                         <button class="pf-v6-c-tree-view__node">
@@ -215,7 +215,7 @@
           role="treeitem"
           aria-selected="false"
           aria-expanded="false"
-          tabindex="0"
+          tabindex="-1"
         >
           <div class="pf-v6-c-tree-view__content">
             <button class="pf-v6-c-tree-view__node">
@@ -238,7 +238,7 @@
           role="treeitem"
           aria-selected="false"
           aria-expanded="false"
-          tabindex="0"
+          tabindex="-1"
         >
           <div class="pf-v6-c-tree-view__content">
             <button class="pf-v6-c-tree-view__node">
@@ -261,7 +261,7 @@
           role="treeitem"
           aria-selected="false"
           aria-expanded="false"
-          tabindex="0"
+          tabindex="-1"
         >
           <div class="pf-v6-c-tree-view__content">
             <button class="pf-v6-c-tree-view__node">
