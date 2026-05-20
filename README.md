@@ -1,4 +1,5 @@
-# quarkus-pha
+# Quarkus pha
+> pha = [PatternFly](https://www.patternfly.org/) [HTMX](https://htmx.org/) [Alpine.js](https://alpinejs.dev/)
 
 <p align="center">
   <img alt="Logo" src="./assets/logo.png" style="width:300px;">
