@@ -4,16 +4,17 @@
       <ul
         class="pf-v6-c-tree-view__list"
         role="tree"
+        aria-multiselectable="false"
         aria-label="Tree View with unique icon per item example"
         @keydown="handleKeyNav($event)"
-        @click="handleToggle($event)"
+        @click="handleClick($event)"
       >
         <li
           class="pf-v6-c-tree-view__list-item pf-m-expanded"
           role="treeitem"
           aria-selected="false"
           aria-expanded="true"
-          tabindex="0"
+          tabindex="-1"
         >
           <div class="pf-v6-c-tree-view__content">
             <button class="pf-v6-c-tree-view__node">

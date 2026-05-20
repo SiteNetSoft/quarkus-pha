@@ -4,16 +4,17 @@
       <ul
         class="pf-v6-c-tree-view__list"
         role="tree"
+        aria-multiselectable="false"
         aria-label="Tree View with selectable, expandable nodes example"
         @keydown="handleKeyNav($event)"
-        @click="handleToggle($event)"
+        @click="handleClick($event)"
       >
         <li
           class="pf-v6-c-tree-view__list-item pf-m-expanded"
           role="treeitem"
           aria-selected="false"
           aria-expanded="true"
-          tabindex="0"
+          tabindex="-1"
         >
           <div class="pf-v6-c-tree-view__content">
             <div
@@ -48,7 +49,7 @@
               role="treeitem"
               aria-selected="false"
               aria-expanded="true"
-              tabindex="0"
+              tabindex="-1"
             >
               <div class="pf-v6-c-tree-view__content">
                 <div
@@ -111,7 +112,7 @@
                   role="treeitem"
                   aria-selected="false"
                   aria-expanded="false"
-                  tabindex="0"
+                  tabindex="-1"
                 >
                   <div class="pf-v6-c-tree-view__content">
                     <div
@@ -148,7 +149,7 @@
               role="treeitem"
               aria-selected="false"
               aria-expanded="true"
-              tabindex="0"
+              tabindex="-1"
             >
               <div class="pf-v6-c-tree-view__content">
                 <div
@@ -197,7 +198,7 @@
                   role="treeitem"
                   aria-selected="false"
                   aria-expanded="false"
-                  tabindex="0"
+                  tabindex="-1"
                 >
                   <div class="pf-v6-c-tree-view__content">
                     <div
@@ -232,7 +233,7 @@
                   role="treeitem"
                   aria-selected="false"
                   aria-expanded="true"
-                  tabindex="0"
+                  tabindex="-1"
                 >
                   <div class="pf-v6-c-tree-view__content">
                     <div
@@ -264,15 +265,14 @@
                   <ul class="pf-v6-c-tree-view__list" role="group">
                     <li
                       class="pf-v6-c-tree-view__list-item"
-                      role="treeitem"
-                      aria-selected="true"
+                      role="treeitem" aria-selected="false"
                       aria-expanded="false"
-                      tabindex="0"
+                      tabindex="-1"
                     >
                       <div class="pf-v6-c-tree-view__content">
                         <div
-                          class="pf-v6-c-tree-view__node pf-m-selectable pf-m-current"
-                          tabindex="0"
+                          class="pf-v6-c-tree-view__node"
+                          tabindex="-1"
                           id="node-tree-view-separate-selection-7"
                           aria-label="Select"
                           aria-labelledby="node-tree-view-separate-selection-7 text-tree-view-separate-selection-7"
@@ -338,7 +338,7 @@
           role="treeitem"
           aria-selected="false"
           aria-expanded="false"
-          tabindex="0"
+          tabindex="-1"
         >
           <div class="pf-v6-c-tree-view__content">
             <div
@@ -373,7 +373,7 @@
           role="treeitem"
           aria-selected="false"
           aria-expanded="false"
-          tabindex="0"
+          tabindex="-1"
         >
           <div class="pf-v6-c-tree-view__content">
             <div
@@ -408,7 +408,7 @@
           role="treeitem"
           aria-selected="false"
           aria-expanded="false"
-          tabindex="0"
+          tabindex="-1"
         >
           <div class="pf-v6-c-tree-view__content">
             <div

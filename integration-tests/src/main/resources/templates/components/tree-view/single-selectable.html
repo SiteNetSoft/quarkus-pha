@@ -19,7 +19,7 @@
         aria-multiselectable="false"
         aria-label="Tree View single selectable example"
         @keydown="handleKeyNav($event)"
-        @click="handleToggle($event)"
+        @click="handleClick($event)"
       >
         <li
           id="example1-AppLaunch"
@@ -30,7 +30,7 @@
           aria-selected="false"
         >
           <div class="pf-v6-c-tree-view__content">
-            <button class="pf-v6-c-tree-view__node" type="button" tabindex="0">
+            <button class="pf-v6-c-tree-view__node" type="button" tabindex="-1">
               <span class="pf-v6-c-tree-view__node-container"
                 ><span class="pf-v6-c-tree-view__node-toggle" tabindex="-1"
                   ><span class="pf-v6-c-tree-view__node-toggle-icon"
@@ -196,11 +196,10 @@
                       class="pf-v6-c-tree-view__list-item pf-m-expanded"
                       aria-expanded="true"
                       role="treeitem"
-                      tabindex="-1"
-                      aria-selected="true"
+                      tabindex="-1" aria-selected="false"
                     >
                       <div class="pf-v6-c-tree-view__content">
-                        <button class="pf-v6-c-tree-view__node pf-m-current" type="button">
+                        <button class="pf-v6-c-tree-view__node" type="button">
                           <span class="pf-v6-c-tree-view__node-container"
                             ><span class="pf-v6-c-tree-view__node-text">Loading App 1</span></span
                           >
