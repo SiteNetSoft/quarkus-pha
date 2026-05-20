@@ -1,7 +1,7 @@
 # quarkus-pha
 
 <p align="center">
-  <img alt="Logo" src="./assets/logo.png" style="max-width:20rem;">
+  <img alt="Logo" src="./assets/logo.png" style="max-width:10rem;">
 </p>
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
