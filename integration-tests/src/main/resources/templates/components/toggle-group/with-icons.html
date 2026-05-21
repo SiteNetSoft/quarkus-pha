@@ -1,0 +1,17 @@
+<div class="pf-v6-c-toggle-group" id="tg-icons" role="group" aria-label="Alignment" x-data="{ align: 'left' }">
+  <div class="pf-v6-c-toggle-group__item">
+    <button class="pf-v6-c-toggle-group__button" type="button" :aria-pressed="align === 'left'" :class="align === 'left' ? 'pf-m-selected' : ''" @click="align = 'left'" aria-label="Align left">
+      <span class="pf-v6-c-toggle-group__icon">{icons:svg('fa:align-left').raw}</span>
+    </button>
+  </div>
+  <div class="pf-v6-c-toggle-group__item">
+    <button class="pf-v6-c-toggle-group__button" type="button" :aria-pressed="align === 'center'" :class="align === 'center' ? 'pf-m-selected' : ''" @click="align = 'center'" aria-label="Align center">
+      <span class="pf-v6-c-toggle-group__icon">{icons:svg('fa:align-center').raw}</span>
+    </button>
+  </div>
+  <div class="pf-v6-c-toggle-group__item">
+    <button class="pf-v6-c-toggle-group__button" type="button" :aria-pressed="align === 'right'" :class="align === 'right' ? 'pf-m-selected' : ''" @click="align = 'right'" aria-label="Align right">
+      <span class="pf-v6-c-toggle-group__icon">{icons:svg('fa:align-right').raw}</span>
+    </button>
+  </div>
+</div>

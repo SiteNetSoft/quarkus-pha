@@ -1,0 +1,7 @@
+{! Notification badge — PatternFly v6 !}
+{! Required: id !}
+{! Optional: variant (read | unread | attention — default read), count (visible number), ariaLabel !}
+<button class="pf-v6-c-notification-badge pf-m-{#if variant??}{variant}{#else}read{/if}" type="button" id="{id}"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
+  <span class="pf-v6-c-notification-badge__icon">{icons:svg('fa:bell').raw}</span>
+  {#if count??}<span class="pf-v6-c-notification-badge__count">{count}</span>{/if}
+</button>

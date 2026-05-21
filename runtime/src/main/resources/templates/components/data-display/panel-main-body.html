@@ -1,0 +1,8 @@
+{! Panel main body — PatternFly v6 !}
+{! Content goes in the default content slot. !}
+{!                                                                                  !}
+{! No id param: Qute include inheritance would leak the outer panel's id onto every !}
+{! nested helper, producing duplicate ids. Hand-code the markup if you need an id.  !}
+<div class="pf-v6-c-panel__main-body">
+  {#insert content}{/insert}
+</div>

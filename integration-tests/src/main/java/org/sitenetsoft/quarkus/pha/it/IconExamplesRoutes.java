@@ -1,0 +1,90 @@
+package org.sitenetsoft.quarkus.pha.it;
+
+import io.quarkus.qute.Engine;
+import io.quarkus.qute.Location;
+import io.quarkus.qute.Template;
+import io.quarkus.qute.TemplateInstance;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.NotFoundException;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Set;
+
+/**
+ * Per-example endpoints for the icon demo page:
+ *   GET /components/icon/source/{example} → raw Qute source as text/plain
+ *   GET /components/icon/{example}        → standalone page wrapping the
+ *                                            example in layouts/base
+ *
+ * Lives under /components (not /components/icon) so it doesn't collide
+ * with ComponentRoutes.icon() at /components/icon.
+ *
+ * Example names are allowlisted so this route doesn't double as an arbitrary
+ * classpath resource reader.
+ */
+@Path("/components")
+public class IconExamplesRoutes {
+
+    private static final Set<String> EXAMPLES = Set.of(
+        "basic",
+        "sets",
+        "sizes",
+        "body-sizes",
+        "heading-sizes",
+        "sizing-within-container",
+        "inline",
+        "status-colors",
+        "in-progress",
+        "custom-in-progress-icon",
+        "with-label"
+    );
+
+    @Inject
+    Engine engine;
+
+    @Location("components/icon/_standalone")
+    @Inject
+    Template standalonePage;
+
+    @GET
+    @Path("/icon/source/{example}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String source(@PathParam("example") String example) {
+        if (!EXAMPLES.contains(example)) {
+            throw new NotFoundException("Unknown icon example: " + example);
+        }
+        String resourcePath = "/templates/components/icon/" + example + ".html";
+        try (InputStream in = getClass().getResourceAsStream(resourcePath)) {
+            if (in == null) {
+                throw new NotFoundException("Missing source for: " + example);
+            }
+            return new String(in.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed reading " + resourcePath, e);
+        }
+    }
+
+    @GET
+    @Path("/icon/{example}")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance standalone(@PathParam("example") String example) {
+        if (!EXAMPLES.contains(example)) {
+            throw new NotFoundException("Unknown icon example: " + example);
+        }
+        Template inner = engine.getTemplate("components/icon/" + example);
+        if (inner == null) {
+            throw new NotFoundException("Template not found for: " + example);
+        }
+        String rendered = inner.instance().render();
+        return standalonePage.instance()
+            .data("example", example)
+            .data("content", rendered);
+    }
+}

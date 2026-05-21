@@ -1,5 +1,28 @@
 {! Skeleton — PatternFly v6 !}
-{! Parameters: id (optional), shape (optional: circle|square), width (optional: sm|md|lg|25|33|50|66|75), height (optional: sm|md|lg|25|33|50|66|75|100), textSize (optional: sm|md|lg|xl|2xl|3xl|4xl), screenreaderText (optional) !}
-<div class="pf-v6-c-skeleton{#if shape??} pf-m-{shape}{/if}{#if width??} pf-m-width-{width}{/if}{#if height??} pf-m-height-{height}{/if}{#if textSize??} pf-m-text-{textSize}{/if}"{#if id??} id="{id}"{/if}>
+{!                                                                                  !}
+{! Loading placeholder. Size it with either modifier tokens (recommended for the    !}
+{! preset percentages / t-shirt sizes) or inline CSS lengths (for pixel-exact       !}
+{! shapes that don't match a token).                                                !}
+{!                                                                                  !}
+{! Parameters:                                                                      !}
+{!   id              (optional) — DOM id                                            !}
+{!   shape           (optional) — circle | square                                   !}
+{!   width           (optional) — modifier token: sm | md | lg |                    !}
+{!                                25 | 33 | 50 | 66 | 75. Renders pf-m-width-{val}. !}
+{!   widthValue      (optional) — arbitrary CSS length (e.g. "200px", "10rem").    !}
+{!                                Emits inline style="width: ...".                  !}
+{!                                Mutually exclusive with width.                    !}
+{!   height          (optional) — modifier token: sm | md | lg |                    !}
+{!                                25 | 33 | 50 | 66 | 75 | 100.                    !}
+{!                                Renders pf-m-height-{val}. (height percentages    !}
+{!                                require a parent with an explicit height.)        !}
+{!   heightValue     (optional) — arbitrary CSS length. Emits inline style.         !}
+{!                                Mutually exclusive with height.                   !}
+{!   fontSize        (optional) — sm | md | lg | xl | 2xl | 3xl | 4xl.              !}
+{!                                Renders pf-m-text-{val} — sets the height to the  !}
+{!                                matching text size. Useful for text-line skeletons!}
+{!   screenreaderText (optional) — text rendered inside pf-v6-screen-reader for     !}
+{!                                  assistive tech.                                 !}
+<div class="pf-v6-c-skeleton{#if shape??} pf-m-{shape}{/if}{#if width??} pf-m-width-{width}{/if}{#if height??} pf-m-height-{height}{/if}{#if fontSize??} pf-m-text-{fontSize}{/if}"{#if id??} id="{id}"{/if}{#if widthValue??} style="width: {widthValue}{#if heightValue??}; height: {heightValue}{/if}"{#else if heightValue??} style="height: {heightValue}"{/if}>
   {#if screenreaderText??}<span class="pf-v6-screen-reader">{screenreaderText}</span>{/if}
 </div>

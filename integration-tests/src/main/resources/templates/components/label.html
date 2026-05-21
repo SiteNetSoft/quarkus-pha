@@ -1,51 +1,260 @@
 {#include layouts/base}
 {#title}Label{/title}
+{#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+<script src="/web/js/alpine/components/label-editable.js"></script>
+<script src="/web/js/alpine/components/label-group.js"></script>
+<script src="/web/js/alpine/components/label-group-add.js"></script>
+{/head}
 {#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-  <h1>Label</h1>
-  <p>PatternFly v6 label — a compact element for displaying metadata, status, or tags.</p>
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary">
+          <span class="pf-v6-c-button__text">Skip to content</span>
+        </a>
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Label</h1>
+                    <p>
+                      Compact tags for metadata, status, and filters. PF v6 supports nine colors, filled / outline / compact
+                      variants, a <code class="ws-code">status</code> shorthand (info / success / warning / danger / custom) that
+                      auto-picks an icon, removable and clickable behaviours, and an editable mode. Multiple labels group together
+                      inside a <code class="ws-code">label-group</code> with optional categories, overflow, vertical layout, and
+                      add-button editing.
+                    </p>
+                  </div>
+                </div>
+              </section>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="filled-heading">Filled</h2>
-    <p>Labels with filled color variants.</p>
-    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-      {#include components/data-display/label id="lbl-grey" text="Grey" /}
-      {#include components/data-display/label id="lbl-blue" text="Blue" color="blue" /}
-      {#include components/data-display/label id="lbl-green" text="Green" color="green" /}
-      {#include components/data-display/label id="lbl-orange" text="Orange" color="orange" /}
-      {#include components/data-display/label id="lbl-red" text="Red" color="red" /}
-      {#include components/data-display/label id="lbl-purple" text="Purple" color="purple" /}
-      {#include components/data-display/label id="lbl-teal" text="Teal" color="teal" /}
-      {#include components/data-display/label id="lbl-yellow" text="Yellow" color="yellow" /}
-    </div>
-  </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-u-h-100">
+                    <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                      <nav class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc" aria-label="Table of contents">
+                        <div class="pf-v6-c-jump-links__main">
+                          <ul class="pf-v6-c-jump-links__list" role="list">
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"><a href="#examples" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Examples</span></span></a></span>
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#filled-labels" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Filled labels</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#outlined-labels" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Outlined labels</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#compact-labels" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Compact labels</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#label-with-custom-render" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Custom render</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#editable-labels" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Editable labels</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#basic-label-group" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Basic label group</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#label-group-with-overflow" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Group with overflow</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#label-group-with-categories" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Group with categories</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#label-group-with-removable-categories" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Removable categories</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#vertical-label-group" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Vertical group</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#editable-label-group" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Editable group</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#editable-label-group-with-add-button" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Editable with add</span></span></a></span></li>
+                              </ul>
+                            </li>
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"><a href="#documentation" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Documentation</span></span></a></span>
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#props-label" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Label props</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#props-group" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">LabelGroup props</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#usage" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Usage</span></span></a></span></li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="outline-heading">Outline</h2>
-    <p>Labels with outline styling.</p>
-    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-      {#include components/data-display/label id="lbl-outline-grey" text="Grey" outline=true /}
-      {#include components/data-display/label id="lbl-outline-blue" text="Blue" color="blue" outline=true /}
-      {#include components/data-display/label id="lbl-outline-green" text="Green" color="green" outline=true /}
-    </div>
-  </section>
+                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                          <div>
+                            <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
+                          </div>
+                        </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="with-icon-heading">With icon</h2>
-    <p>A label with an icon before the text.</p>
-    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-      {#include components/data-display/label id="lbl-icon" text="With icon" color="blue" iconName="fa:circle-info" /}
-    </div>
-  </section>
+                        {#include partials/example-card title="Filled labels" slug="filled-labels" component="label"
+                          description="All nine colors, the four status auto-icons (info / success / warning / danger), removable + disabled + clickable variants."}
+                        {#content}{#include components/label/filled-labels /}{/content}
+                        {/include}
 
-  <section style="margin-top: 2rem;">
-    <h2 id="removable-heading">Removable</h2>
-    <p>A label with a close button for removal.</p>
-    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-      {#include components/data-display/label id="lbl-removable" text="Removable" color="blue" removable=true /}
+                        {#include partials/example-card title="Outlined labels" slug="outlined-labels" component="label"
+                          description="Pass &lt;code class=&quot;ws-code&quot;&gt;variant=&quot;outline&quot;&lt;/code&gt; for the outlined treatment. All color and removable / icon combinations work the same way."}
+                        {#content}{#include components/label/outlined-labels /}{/content}
+                        {/include}
+
+                        {#include partials/example-card title="Compact labels" slug="compact-labels" component="label"
+                          description="Pass &lt;code class=&quot;ws-code&quot;&gt;compact=true&lt;/code&gt; for the tighter density used in toolbars, filter chips, and table action columns."}
+                        {#content}{#include components/label/compact-labels /}{/content}
+                        {/include}
+
+                        {#include partials/example-card title="Custom render" slug="label-with-custom-render" component="label"
+                          description="PF React's &lt;code class=&quot;ws-code&quot;&gt;render&lt;/code&gt; prop has no direct Qute equivalent. For custom inner content (bold / mixed children) hand-code the &lt;code class=&quot;ws-code&quot;&gt;pf-v6-c-label__text&lt;/code&gt; span; for clickable navigation, pass &lt;code class=&quot;ws-code&quot;&gt;href&lt;/code&gt; to render the whole label as an anchor."}
+                        {#content}{#include components/label/label-with-custom-render /}{/content}
+                        {/include}
+
+                        {#include partials/example-card title="Editable labels" slug="editable-labels" component="label"
+                          description="&lt;code class=&quot;ws-code&quot;&gt;editable=true&lt;/code&gt; opts into PF v6's edit-in-place chrome. Wire the Alpine &lt;code class=&quot;ws-code&quot;&gt;phaLabelEditable&lt;/code&gt; component for the click-to-edit / Enter-to-commit / Esc-to-cancel interaction."}
+                        {#content}{#include components/label/editable-labels /}{/content}
+                        {/include}
+
+                        {#include partials/example-card title="Basic label group" slug="basic-label-group" component="label"
+                          description="Wrap labels in &lt;code class=&quot;ws-code&quot;&gt;label-group&lt;/code&gt; to lay them out as a single navigable group. Each label sits in its own &lt;code class=&quot;ws-code&quot;&gt;&amp;lt;li class=&quot;pf-v6-c-label-group__list-item&quot;&amp;gt;&lt;/code&gt;."}
+                        {#content}{#include components/label/basic-label-group /}{/content}
+                        {/include}
+
+                        {#include partials/example-card title="Label group with overflow" slug="label-group-with-overflow" component="label"
+                          description="Pass &lt;code class=&quot;ws-code&quot;&gt;numLabels&lt;/code&gt; to collapse extras behind an &quot;N more&quot; toggle. The Alpine &lt;code class=&quot;ws-code&quot;&gt;phaLabelGroup&lt;/code&gt; component hides items past the threshold and renders the toggle button."}
+                        {#content}{#include components/label/label-group-with-overflow /}{/content}
+                        {/include}
+
+                        {#include partials/example-card title="Label group with categories" slug="label-group-with-categories" component="label"
+                          description="Pass &lt;code class=&quot;ws-code&quot;&gt;categoryName&lt;/code&gt; to prepend a category label and apply &lt;code class=&quot;ws-code&quot;&gt;pf-m-category&lt;/code&gt;. Common pattern for filter chip stacks (Platform: ..., Language: ...)."}
+                        {#content}{#include components/label/label-group-with-categories /}{/content}
+                        {/include}
+
+                        {#include partials/example-card title="Label group with removable categories" slug="label-group-with-removable-categories" component="label"
+                          description="&lt;code class=&quot;ws-code&quot;&gt;closable=true&lt;/code&gt; on the group adds a category-level close button; &lt;code class=&quot;ws-code&quot;&gt;removable=true&lt;/code&gt; on each label adds the per-label close. Useful for &quot;applied filters&quot; toolbars."}
+                        {#content}{#include components/label/label-group-with-removable-categories /}{/content}
+                        {/include}
+
+                        {#include partials/example-card title="Vertical label group" slug="vertical-label-group" component="label"
+                          description="&lt;code class=&quot;ws-code&quot;&gt;vertical=true&lt;/code&gt; stacks labels in a column. Often paired with a category name as a labelled facet stack in a side panel."}
+                        {#content}{#include components/label/vertical-label-group /}{/content}
+                        {/include}
+
+                        {#include partials/example-card title="Editable label group" slug="editable-label-group" component="label"
+                          description="Drop editable labels (each with its own &lt;code class=&quot;ws-code&quot;&gt;phaLabelEditable&lt;/code&gt; Alpine binding) into a label-group to let users edit chip text in place."}
+                        {#content}{#include components/label/editable-label-group /}{/content}
+                        {/include}
+
+                        {#include partials/example-card title="Editable label group with add button" slug="editable-label-group-with-add-button" component="label"
+                          description="The &lt;code class=&quot;ws-code&quot;&gt;variant=&quot;add&quot;&lt;/code&gt; label inside a group becomes a &quot;new tag&quot; input. The Alpine &lt;code class=&quot;ws-code&quot;&gt;phaLabelGroupAdd&lt;/code&gt; component clones a template &lt;li&gt; for each entry."}
+                        {#content}{#include components/label/editable-label-group-with-add-button /}{/content}
+                        {/include}
+
+                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                            <div>
+                              <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Documentation</h2>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-label" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Label props</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by <code class="ws-code">{|{#include components/data-display/label ... /}|}</code>.
+                            See the runtime template's <code class="ws-code">{|{! ... !}|}</code> comment block for the
+                            full list — <code class="ws-code">id</code>, <code class="ws-code">text</code>,
+                            <code class="ws-code">color</code>, <code class="ws-code">variant</code>,
+                            <code class="ws-code">status</code>, <code class="ws-code">compact</code>,
+                            <code class="ws-code">disabled</code>, <code class="ws-code">clickable</code>,
+                            <code class="ws-code">editable</code>, <code class="ws-code">removable</code>,
+                            <code class="ws-code">removeAria</code>, <code class="ws-code">href</code>,
+                            <code class="ws-code">iconName</code>.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Status shorthand:</strong> setting <code class="ws-code">status</code> applies
+                            <code class="ws-code">{|pf-m-{status}|}</code> AND auto-renders the matching icon — info →
+                            <code class="ws-code">fa:circle-info</code>, success → <code class="ws-code">fa:circle-check</code>,
+                            warning → <code class="ws-code">fa:triangle-exclamation</code>, danger →
+                            <code class="ws-code">fa:circle-exclamation</code>, custom → <code class="ws-code">fa:bell</code>.
+                            Override the auto-icon with <code class="ws-code">iconName</code>.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Divergence from PF React.</strong> We skip <code class="ws-code">closeBtn</code> /
+                            <code class="ws-code">closeBtnProps</code> (hand-code <code class="ws-code">__actions</code>
+                            instead), <code class="ws-code">render</code> (write the inner span by hand or pass
+                            <code class="ws-code">href</code>), <code class="ws-code">textMaxWidth</code> +
+                            <code class="ws-code">tooltipPosition</code> (no truncation tooltip pattern yet), and the JS
+                            callbacks (<code class="ws-code">onClick</code> / <code class="ws-code">onClose</code> /
+                            <code class="ws-code">onEditComplete</code>) — wire those at the consumer level via Alpine or
+                            HTMX.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-group" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">LabelGroup props</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by <code class="ws-code">{|{#include components/data-display/label-group ... /}|}</code>.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Params:</strong> <code class="ws-code">id</code>, <code class="ws-code">categoryName</code>
+                            (renders the category label and applies <code class="ws-code">pf-m-category</code>),
+                            <code class="ws-code">vertical</code> (stack labels), <code class="ws-code">numLabels</code>
+                            (default 3 — overflow threshold), <code class="ws-code">closable</code> +
+                            <code class="ws-code">closeBtnAria</code> (category-level close button),
+                            <code class="ws-code">ariaLabel</code>, <code class="ws-code">collapsedText</code> /
+                            <code class="ws-code">expandedText</code> (override the overflow toggle copy).
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Slot:</strong> one <code class="ws-code">&lt;li class="pf-v6-c-label-group__list-item"&gt;</code>
+                            per label include.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Overflow text token:</strong> the <code class="ws-code">collapsedText</code> default is
+                            <code class="ws-code">"REMAINING_PLACEHOLDER more"</code>. The Alpine
+                            <code class="ws-code">phaLabelGroup</code> component substitutes
+                            <code class="ws-code">REMAINING_PLACEHOLDER</code> for the hidden-count integer. We use the
+                            explicit token (not <code class="ws-code">{|{remaining}|}</code> like PF React) because Qute
+                            would try to evaluate <code class="ws-code">{|{remaining}|}</code> as a template expression.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Status shorthand vs. color + iconName.</strong> For semantic-tagged labels (validation
+                            results, status indicators), reach for <code class="ws-code">status</code> — one parameter sets
+                            both the color modifier and the conventional icon. For free-form colored tags (project tags,
+                            taxonomy labels), pass <code class="ws-code">color</code> directly.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Editable labels need Alpine.</strong> The runtime template emits the
+                            <code class="ws-code">pf-m-editable</code> class and a <code class="ws-code">tabindex="0"</code>
+                            content span, but the actual edit-in-place interaction lives in
+                            <code class="ws-code">phaLabelEditable</code>. Listen for
+                            <code class="ws-code">pha:label:edit-complete</code> /
+                            <code class="ws-code">pha:label:edit-cancel</code> events on the label to persist the change.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Group overflow.</strong> The <code class="ws-code">phaLabelGroup</code> Alpine component
+                            hides <code class="ws-code">&lt;li&gt;</code> items past <code class="ws-code">numLabels</code> and
+                            renders an "N more" toggle. Combine with <code class="ws-code">categoryName</code> for filter chip
+                            stacks, or <code class="ws-code">vertical=true</code> for side-panel facets.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Add button.</strong> The <code class="ws-code">variant="add"</code> +
+                            <code class="ws-code">phaLabelGroupAdd</code> pattern uses a hidden
+                            <code class="ws-code">&lt;template&gt;</code> cloned per new label. The template defines the
+                            per-row markup once; the Alpine component stamps it into the list each time the user submits.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <br /><a
+                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/label.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Edit label.html on GitHub</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
 </div>
 {/body}
 {/include}

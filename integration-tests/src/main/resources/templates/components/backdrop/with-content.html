@@ -1,0 +1,31 @@
+<div class="ws-preview-html" x-data="{ open: false }">
+  <button class="pf-v6-c-button pf-m-primary" type="button" id="backdrop-content-toggle" @click="open = true">
+    <span class="pf-v6-c-button__text">Show backdrop with spinner</span>
+  </button>
+  <div x-show="open" x-transition.opacity style="display: none" @click="open = false">
+    {#include components/feedback/backdrop id="backdrop-content"} {#overlay}
+    <div
+      id="backdrop-content-overlay"
+      style="
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        color: white;
+      "
+      @click.stop
+    >
+      {#include components/feedback/spinner size="xl" label="Loading" /}
+      <p style="margin: 0">Loading…</p>
+    </div>
+    {/overlay} {/include}
+  </div>
+  <p style="margin-top: 0.75rem; color: var(--pf-t--global--text--color--subtle, #888); font-size: 0.875rem">
+    Pass content into the backdrop's slot. <code class="ws-code">@click.stop</code> on the inner panel prevents clicks
+    on the content from bubbling up and dismissing the backdrop.
+  </p>
+</div>

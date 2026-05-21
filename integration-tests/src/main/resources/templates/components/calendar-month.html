@@ -1,27 +1,216 @@
-{#include layouts/base}
-{#title}Calendar month{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-
-  <h1>Calendar month</h1>
-  <p>PatternFly v6 calendar month — a monthly date grid for date selection.</p>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="selected-heading">Date selected</h2>
-    <p>A calendar with a single date selected and today highlighted.</p>
-    <div style="max-width: 320px;">
-      {#include components/forms/calendar-month id="cal-selected" month=selectedMonth year=selectedYear weeks=selectedWeeks}{/include}
+{#include layouts/base} {#title}Calendar month{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Calendar month</h1>
+                    <p>
+                      The month-view date grid. Drop it inside the
+                      <a href="/components/date-picker">Date picker</a> popup or use it standalone for date-range
+                      selection. Day cells support per-state modifiers (selected, current, disabled, range).
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                    <nav
+                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                      aria-label="Table of contents"
+                    >
+                      <div class="pf-v6-c-jump-links__main">
+                        <ul class="pf-v6-c-jump-links__list" role="list">
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#props-calendar-month" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Calendar month props</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
+                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                        <div>
+                          <h2
+                            id="examples"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                          >
+                            Examples
+                          </h2>
+                        </div>
+                      </div>
+                      {#include partials/example-card title="Basic" slug="basic" component="calendar-month"
+                      description="May 2026 — selected + current day on the 20th. Hand-rendered for the demo; the
+                      runtime template wants a structured weeks array."} {#content}{#include
+                      components/calendar-month/basic /}{/content} {/include}
+                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                        <h2
+                          id="documentation"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Documentation
+                        </h2>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3
+                          id="props-calendar-month"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h3 pf-m-editorial ws-heading"
+                        >
+                          Calendar month props
+                        </h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          Parameters accepted by
+                          <code class="ws-code">{|{#include components/forms/calendar-month ... /}|}</code>.
+                        </p>
+                        <table
+                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                          role="grid"
+                          aria-label="Calendar month props"
+                        >
+                          <caption class="pf-v6-c-table__caption">
+                            <span class="ws-prop-required">*</span>
+                            required
+                          </caption>
+                          <thead class="pf-v6-c-table__thead">
+                            <tr class="pf-v6-c-table__tr">
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                              <th scope="col" class="pf-v6-c-table__th">Description</th>
+                            </tr>
+                          </thead>
+                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">month</code> /
+                                  <code class="ws-code">year</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">String / Integer</span>
+                              </td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">Visible month name and year.</span>
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">weeks</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">List&lt;List&lt;Day&gt;&gt;</span>
+                              </td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Each day map:
+                                  <code class="ws-code"
+                                    >{|{date, adjacent?, current?, selected?, disabled?, startRange?, endRange?,
+                                    inRange?}|}</code
+                                  >. Build in Java and pass via <code class="ws-code">.data("weeks", ...)</code>.</span
+                                >
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Build the grid on the server.</strong> A Java helper that takes a YearMonth + selected
+                          date and returns <code class="ws-code">List&lt;List&lt;Map&gt;&gt;</code> keeps the template
+                          trivial.
+                        </p>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <br /><a
+                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/forms/calendar-month.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Edit calendar-month.html on GitHub</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
     </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="range-heading">Date range</h2>
-    <p>A calendar with a start and end date range highlighted.</p>
-    <div style="max-width: 320px;">
-      {#include components/forms/calendar-month id="cal-range" month=rangeMonth year=rangeYear weeks=rangeWeeks}{/include}
-    </div>
-  </section>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

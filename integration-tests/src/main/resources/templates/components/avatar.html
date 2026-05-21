@@ -1,51 +1,346 @@
-{#include layouts/base}
-{#title}Avatar{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+{#include layouts/base} {#title}Avatar{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary">
+          <span class="pf-v6-c-button__text">Skip to content</span>
+        </a>
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Avatar</h1>
+                    <p>
+                      A small image representing a user. Renders a single <code class="ws-code">&lt;img&gt;</code> with
+                      PatternFly's avatar classes — sizing, optional border, accessible
+                      <code class="ws-code">alt</code>. No JavaScript required; pure CSS.
+                    </p>
+                  </div>
+                </div>
+              </section>
 
-  <h1>Avatar</h1>
-  <p>PatternFly v6 avatar — a visual representation of a user.</p>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-u-h-100">
+                    <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                      <nav
+                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                        aria-label="Table of contents"
+                      >
+                        <div class="pf-v6-c-jump-links__main">
+                          <ul class="pf-v6-c-jump-links__list" role="list">
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#bordered" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Bordered</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#sizes" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Sizes</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#bordered-sizes" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Bordered sizes</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#initials" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Initials</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-avatar" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Avatar props</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="basic-heading">Basic</h2>
-    <p>Default medium avatar with no extra modifiers.</p>
-    {#include components/data-display/avatar id="avatar-basic" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%23d2d2d2'/%3E%3Ccircle cx='18' cy='12' r='7' fill='%23fff'/%3E%3Cpath d='M4 32c0-8 6-12 14-12s14 4 14 12' fill='%23fff'/%3E%3C/svg%3E" alt="Avatar" /}
-  </section>
+                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                          <div>
+                            <h2
+                              id="examples"
+                              tabindex="-1"
+                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                            >
+                              Examples
+                            </h2>
+                          </div>
+                        </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="sizes-heading">Sizes</h2>
-    <p>All four size variants: sm, md, lg, xl.</p>
-    <div style="display: flex; align-items: center; gap: 1rem;">
-      {#include components/data-display/avatar id="avatar-sm" size="sm" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%23d2d2d2'/%3E%3Ccircle cx='18' cy='12' r='7' fill='%23fff'/%3E%3Cpath d='M4 32c0-8 6-12 14-12s14 4 14 12' fill='%23fff'/%3E%3C/svg%3E" alt="Small avatar" /}
-      {#include components/data-display/avatar id="avatar-md" size="md" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%23d2d2d2'/%3E%3Ccircle cx='18' cy='12' r='7' fill='%23fff'/%3E%3Cpath d='M4 32c0-8 6-12 14-12s14 4 14 12' fill='%23fff'/%3E%3C/svg%3E" alt="Medium avatar" /}
-      {#include components/data-display/avatar id="avatar-lg" size="lg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%23d2d2d2'/%3E%3Ccircle cx='18' cy='12' r='7' fill='%23fff'/%3E%3Cpath d='M4 32c0-8 6-12 14-12s14 4 14 12' fill='%23fff'/%3E%3C/svg%3E" alt="Large avatar" /}
-      {#include components/data-display/avatar id="avatar-xl" size="xl" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%23d2d2d2'/%3E%3Ccircle cx='18' cy='12' r='7' fill='%23fff'/%3E%3Cpath d='M4 32c0-8 6-12 14-12s14 4 14 12' fill='%23fff'/%3E%3C/svg%3E" alt="Extra large avatar" /}
+                        {#include partials/example-card title="Basic" slug="basic" component="avatar"
+                        description="Default medium avatar — circle image with no extra modifiers. The src here is an
+                        inline SVG silhouette; in production point it at a real user-image URL."} {#content}{#include
+                        components/avatar/basic /}{/content} {/include} {#include partials/example-card title="Bordered"
+                        slug="bordered" component="avatar" description="Add &lt;code
+                        class=&quot;ws-code&quot;&gt;pf-m-bordered&lt;/code&gt; for a hairline ring around the image.
+                        Useful to distinguish stacked or overlapping avatars."} {#content}{#include
+                        components/avatar/bordered /}{/content} {/include} {#include partials/example-card title="Sizes"
+                        slug="sizes" component="avatar" description="All four size modifiers: &lt;code
+                        class=&quot;ws-code&quot;&gt;pf-m-sm&lt;/code&gt; (1.5rem), &lt;code
+                        class=&quot;ws-code&quot;&gt;pf-m-md&lt;/code&gt; (default 2.25rem), &lt;code
+                        class=&quot;ws-code&quot;&gt;pf-m-lg&lt;/code&gt; (4.5rem), &lt;code
+                        class=&quot;ws-code&quot;&gt;pf-m-xl&lt;/code&gt; (8rem)."} {#content}{#include
+                        components/avatar/sizes /}{/content} {/include} {#include partials/example-card title="Bordered
+                        sizes" slug="bordered-sizes" component="avatar" description="The same four sizes with &lt;code
+                        class=&quot;ws-code&quot;&gt;pf-m-bordered&lt;/code&gt; — the border thickness scales subtly
+                        with size."} {#content}{#include components/avatar/bordered-sizes /}{/content} {/include}
+                        {#include partials/example-card title="Initials" slug="initials" component="avatar"
+                        description="A common fallback pattern for users without a profile photo — the avatar element
+                        itself is unchanged; the trick is generating a small SVG of the user's initials on a colored
+                        circle and serving it as the &lt;code class=&quot;ws-code&quot;&gt;src&lt;/code&gt;."}
+                        {#content}{#include components/avatar/initials /}{/content} {/include}
+
+                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                            <div>
+                              <h2
+                                id="documentation"
+                                tabindex="-1"
+                                class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                              >
+                                Documentation
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-avatar" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                            Avatar props
+                          </h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by
+                            <code class="ws-code">{|{#include components/data-display/avatar ... /}|}</code>.
+                          </p>
+                          <table
+                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                            role="grid"
+                            aria-label="Avatar props"
+                          >
+                            <caption class="pf-v6-c-table__caption">
+                              <span class="ws-prop-required">*</span>
+                              required
+                            </caption>
+                            <thead class="pf-v6-c-table__thead">
+                              <tr class="pf-v6-c-table__tr">
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                                <th scope="col" class="pf-v6-c-table__th">Default</th>
+                                <th scope="col" class="pf-v6-c-table__th">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">DOM id on the &lt;img&gt; element.</span>
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><span class="ws-prop-required">*</span> <code class="ws-code">src</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String (URL)</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Image source. Accepts any URL the browser can render — http(s)://, relative paths,
+                                    data URIs, blob URLs.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><span class="ws-prop-required">*</span> <code class="ws-code">alt</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Accessible alternative text. For named avatars use the person's name (e.g.
+                                    <code class="ws-code">"Jane Doe"</code>); for decorative use an empty string.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">size</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">sm | md | lg | xl</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">md</code> (implicit)</span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Size modifier — emits <code class="ws-code">{|pf-m-{size}|}</code>. Omit for the
+                                    default medium size.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">bordered</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Adds <code class="ws-code">pf-m-bordered</code> for a ring around the image. PF
+                                    React's <code class="ws-code">isBordered</code>.</span
+                                  >
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Divergence from PF React.</strong> We skip
+                            <code class="ws-code">className</code> (React-specific). Our
+                            <code class="ws-code">bordered</code> is PF's <code class="ws-code">isBordered</code> — same
+                            semantic, shorter name. We do not validate the URL or fall back when the image fails to load
+                            — pair with a server-side default or an <code class="ws-code">onerror</code> handler if you
+                            need a placeholder.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Pick a size.</strong> Use <code class="ws-code">sm</code> in dense table rows and
+                            inline mentions; <code class="ws-code">md</code> (default) in masthead and nav bars;
+                            <code class="ws-code">lg</code> on profile cards; <code class="ws-code">xl</code> only on
+                            dedicated profile pages.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Always set <code class="ws-code">alt</code>.</strong> The avatar is interactive
+                            content if wrapped in a button or link, and decorative otherwise. Either way the
+                            <code class="ws-code">alt</code> attribute is required — use the person's name when known,
+                            or an empty string for purely decorative cases.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Initials fallback.</strong> Avatar is just an
+                            <code class="ws-code">&lt;img&gt;</code>; to render initials, generate an inline SVG with
+                            the initials over a colored circle and pass it as a data URI in
+                            <code class="ws-code">src</code>. See the <a href="#initials">Initials</a> example.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Failed-load fallback.</strong> PatternFly's CSS has no built-in placeholder for
+                            broken <code class="ws-code">src</code>. Either serve a default image from the backend or
+                            attach an <code class="ws-code">onerror</code> handler that swaps in a known-good URL.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Stacking.</strong> The bordered variant exists specifically to make adjacent avatars
+                            (e.g. a group-chat header) visually distinct — set
+                            <code class="ws-code">bordered=true</code> and negative-margin them together with a
+                            container.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <br /><a
+                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/avatar.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Edit avatar.html on GitHub</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
     </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="bordered-heading">Bordered</h2>
-    <p>Avatar with a border.</p>
-    {#include components/data-display/avatar id="avatar-bordered" bordered=true src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%23d2d2d2'/%3E%3Ccircle cx='18' cy='12' r='7' fill='%23fff'/%3E%3Cpath d='M4 32c0-8 6-12 14-12s14 4 14 12' fill='%23fff'/%3E%3C/svg%3E" alt="Bordered avatar" /}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="bordered-sizes-heading">Bordered sizes</h2>
-    <p>All four bordered size variants.</p>
-    <div style="display: flex; align-items: center; gap: 1rem;">
-      {#include components/data-display/avatar id="avatar-bordered-sm" size="sm" bordered=true src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%23d2d2d2'/%3E%3Ccircle cx='18' cy='12' r='7' fill='%23fff'/%3E%3Cpath d='M4 32c0-8 6-12 14-12s14 4 14 12' fill='%23fff'/%3E%3C/svg%3E" alt="Small bordered avatar" /}
-      {#include components/data-display/avatar id="avatar-bordered-md" size="md" bordered=true src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%23d2d2d2'/%3E%3Ccircle cx='18' cy='12' r='7' fill='%23fff'/%3E%3Cpath d='M4 32c0-8 6-12 14-12s14 4 14 12' fill='%23fff'/%3E%3C/svg%3E" alt="Medium bordered avatar" /}
-      {#include components/data-display/avatar id="avatar-bordered-lg" size="lg" bordered=true src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%23d2d2d2'/%3E%3Ccircle cx='18' cy='12' r='7' fill='%23fff'/%3E%3Cpath d='M4 32c0-8 6-12 14-12s14 4 14 12' fill='%23fff'/%3E%3C/svg%3E" alt="Large bordered avatar" /}
-      {#include components/data-display/avatar id="avatar-bordered-xl" size="xl" bordered=true src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%23d2d2d2'/%3E%3Ccircle cx='18' cy='12' r='7' fill='%23fff'/%3E%3Cpath d='M4 32c0-8 6-12 14-12s14 4 14 12' fill='%23fff'/%3E%3C/svg%3E" alt="Extra large bordered avatar" /}
-    </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="custom-image-heading">Custom image</h2>
-    <p>Avatar with a custom user-provided image.</p>
-    {#include components/data-display/avatar id="avatar-custom" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%230066cc'/%3E%3Ctext x='18' y='23' text-anchor='middle' fill='%23fff' font-size='16' font-family='sans-serif'%3EJD%3C/text%3E%3C/svg%3E" alt="John Doe" /}
-  </section>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

@@ -1,29 +1,343 @@
-{#include layouts/base}
-{#title}Text Input{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+{#include layouts/base} {#title}Text input{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Text input</h1>
+                    <p>
+                      Single-line input. Renders a <code class="ws-code">pf-v6-c-form-control</code> wrapper around an
+                      <code class="ws-code">&lt;input&gt;</code> with type, validation state, prefix-icon, and disabled
+                      / readonly modifiers.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                    <nav
+                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                      aria-label="Table of contents"
+                    >
+                      <div class="pf-v6-c-jump-links__main">
+                        <ul class="pf-v6-c-jump-links__list" role="list">
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#disabled" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Disabled</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#readonly" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Read only</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#invalid" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Invalid</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-icon" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With icon</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#types" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Input types</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#props-text-input" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Text input props</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
+                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                        <div>
+                          <h2
+                            id="examples"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                          >
+                            Examples
+                          </h2>
+                        </div>
+                      </div>
 
-  <h1>Text Input</h1>
-  <p>PatternFly v6 text input for single-line text entry.</p>
+                      {#include partials/example-card title="Basic" slug="basic" component="text-input"
+                      description="Default text input with a placeholder."} {#content}{#include
+                      components/text-input/basic /}{/content} {/include} {#include partials/example-card
+                      title="Disabled" slug="disabled" component="text-input" description="&lt;code
+                      class=&quot;ws-code&quot;&gt;disabled=true&lt;/code&gt; emits the disabled HTML attribute plus
+                      &lt;code class=&quot;ws-code&quot;&gt;pf-m-disabled&lt;/code&gt; on the form-control wrapper."}
+                      {#content}{#include components/text-input/disabled /}{/content} {/include} {#include
+                      partials/example-card title="Read only" slug="readonly" component="text-input"
+                      description="&lt;code class=&quot;ws-code&quot;&gt;readonly=true&lt;/code&gt; — value shows but
+                      isn't editable. Adds &lt;code class=&quot;ws-code&quot;&gt;pf-m-readonly&lt;/code&gt; for the
+                      muted styling."} {#content}{#include components/text-input/readonly /}{/content} {/include}
+                      {#include partials/example-card title="Invalid" slug="invalid" component="text-input"
+                      description="Pass &lt;code class=&quot;ws-code&quot;&gt;validated=&quot;error&quot;&lt;/code&gt;
+                      for &lt;code class=&quot;ws-code&quot;&gt;pf-m-error&lt;/code&gt; + the matching status icon. Also
+                      sets &lt;code class=&quot;ws-code&quot;&gt;aria-invalid=&quot;true&quot;&lt;/code&gt;. Available
+                      variants: &lt;code class=&quot;ws-code&quot;&gt;success | warning | error&lt;/code&gt;."}
+                      {#content}{#include components/text-input/invalid /}{/content} {/include} {#include
+                      partials/example-card title="With icon" slug="with-icon" component="text-input"
+                      description="Prefix icon — &lt;code
+                      class=&quot;ws-code&quot;&gt;iconName=&quot;fa:magnifying-glass&quot;&lt;/code&gt; emits &lt;code
+                      class=&quot;ws-code&quot;&gt;pf-m-icon&lt;/code&gt; and renders the SVG inside the form-control."}
+                      {#content}{#include components/text-input/with-icon /}{/content} {/include} {#include
+                      partials/example-card title="Input types" slug="types" component="text-input" description="Common
+                      type variants — email, password, number, date. Type maps directly to the HTML &lt;code
+                      class=&quot;ws-code&quot;&gt;type&lt;/code&gt; attribute."} {#content}{#include
+                      components/text-input/types /}{/content} {/include}
 
-  <section style="margin-top: 2rem;">
-    <h2 id="basic-heading">Basic</h2>
-    <p>A basic text input for entering a single line of text.</p>
-    {#include components/forms/text-input id="ti-basic" placeholder="Enter value" /}
-  </section>
+                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                        <h2
+                          id="documentation"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Documentation
+                        </h2>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="props-text-input" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                          Text input props
+                        </h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          Parameters accepted by
+                          <code class="ws-code">{|{#include components/forms/text-input ... /}|}</code>.
+                        </p>
+                        <table
+                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                          role="grid"
+                          aria-label="Text input props"
+                        >
+                          <caption class="pf-v6-c-table__caption">
+                            <span class="ws-prop-required">*</span>
+                            required
+                          </caption>
+                          <thead class="pf-v6-c-table__thead">
+                            <tr class="pf-v6-c-table__tr">
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                              <th scope="col" class="pf-v6-c-table__th">Description</th>
+                            </tr>
+                          </thead>
+                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Used for the form-control wrapper id; the inner &lt;input&gt; gets
+                                  <code class="ws-code">{|{id}-field|}</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">type</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Input type — text, password, email, number, tel, url, search, date, time, etc.
+                                  Default <code class="ws-code">text</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">value</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Initial value rendered as the HTML
+                                  <code class="ws-code">value</code> attribute.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">placeholder</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">HTML placeholder attribute.</span>
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">disabled</code> / <code class="ws-code">readonly</code> /
+                                  <code class="ws-code">required</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Standard HTML form attributes — also emit matching
+                                  <code class="ws-code">pf-m-*</code> on the wrapper.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">validated</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">success | warning | error</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Validation state — emits <code class="ws-code">{|pf-m-{validated}|}</code>, renders
+                                  the matching status icon, and sets <code class="ws-code">aria-invalid</code> on
+                                  error.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">iconName</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >String (icon resolver name, e.g.
+                                  <code class="ws-code">fa:magnifying-glass</code>)</span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Prefix icon — emits <code class="ws-code">pf-m-icon</code> and renders the SVG inside
+                                  the form-control.</span
+                                >
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="disabled-heading">Disabled</h2>
-    <p>A disabled text input that prevents user interaction.</p>
-    {#include components/forms/text-input id="ti-disabled" placeholder="Disabled" disabled=true /}
-  </section>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Wrap in a form-group.</strong> Standalone text inputs are fine for filter bars and
+                          inline editors, but for collected data use the full <a href="/components/form">Form</a> group
+                          structure — label + control + helper-text.
+                        </p>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Server-driven validation.</strong> Don't rely on the browser's native validation
+                          popups. Send the input to the server (HTMX <code class="ws-code">hx-post</code> or form
+                          submit) and re-render with <code class="ws-code">validated="error"</code> + a helper-text item
+                          carrying the message.
+                        </p>
+                      </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="readonly-heading">Read only</h2>
-    <p>A read-only text input that displays a value without allowing edits.</p>
-    {#include components/forms/text-input id="ti-readonly" value="Read only" readonly=true /}
-  </section>
+                      <div class="pf-v6-l-stack__item">
+                        <br /><a
+                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/forms/text-input.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Edit text-input.html on GitHub</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

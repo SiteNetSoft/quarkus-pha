@@ -5,24 +5,45 @@ test.describe("Spinner", () => {
     await page.goto("/components/spinner");
   });
 
-  test("page loads with all 2 section headings", async ({ page }) => {
-    await expect(page.locator("#sizes-heading")).toBeVisible();
-    await expect(page.locator("#inline-heading")).toBeVisible();
+  test("page loads with example and documentation TOC anchors", async ({ page }) => {
+    await expect(page.locator("#examples")).toBeAttached();
+    await expect(page.locator("#basic")).toBeAttached();
+    await expect(page.locator("#size-variations")).toBeAttached();
+    await expect(page.locator("#custom-size")).toBeAttached();
+    await expect(page.locator("#inline")).toBeAttached();
+    await expect(page.locator("#documentation")).toBeAttached();
+    await expect(page.locator("#props-spinner")).toBeAttached();
+    await expect(page.locator("#usage")).toBeAttached();
   });
 
-  test("has spinners at different sizes", async ({ page }) => {
+  test("renders all five size modifiers", async ({ page }) => {
+    await expect(page.locator(".pf-v6-c-spinner.pf-m-xs").first()).toBeVisible();
     await expect(page.locator(".pf-v6-c-spinner.pf-m-sm").first()).toBeVisible();
     await expect(page.locator(".pf-v6-c-spinner.pf-m-md").first()).toBeVisible();
     await expect(page.locator(".pf-v6-c-spinner.pf-m-lg").first()).toBeVisible();
     await expect(page.locator(".pf-v6-c-spinner.pf-m-xl").first()).toBeVisible();
   });
 
-  test("spinners are SVG elements with progressbar role", async ({ page }) => {
-    const spinner = page.locator(".pf-v6-c-spinner").first();
-    await expect(spinner).toHaveAttribute("role", "progressbar");
+  test("renders a custom-diameter spinner with inline style", async ({ page }) => {
+    const customSized = page.locator('.pf-v6-c-spinner[style*="--pf-v6-c-spinner--diameter"]').first();
+    await expect(customSized).toBeVisible();
   });
 
-  test("has inline spinner", async ({ page }) => {
-    await expect(page.locator(".pf-v6-c-spinner.pf-m-inline")).toBeVisible();
+  test("renders an inline spinner", async ({ page }) => {
+    await expect(page.locator(".pf-v6-c-spinner.pf-m-inline").first()).toBeVisible();
+  });
+
+  test("spinner SVGs have role=progressbar and aria-valuetext", async ({ page }) => {
+    const spinner = page.locator(".pf-v6-c-spinner").first();
+    await expect(spinner).toHaveAttribute("role", "progressbar");
+    await expect(spinner).toHaveAttribute("aria-valuetext", /.+/);
+  });
+
+  test("standalone example routes render", async ({ page }) => {
+    for (const slug of ["basic", "size-variations", "custom-size", "inline"]) {
+      const res = await page.goto(`/components/spinner/${slug}`);
+      expect(res.status()).toBe(200);
+      await expect(page.locator(".pf-v6-c-spinner").first()).toBeVisible();
+    }
   });
 });

@@ -1,44 +1,161 @@
-{#include layouts/base}
-{#title}Select{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-  <h1>Select</h1>
-  <p>A select component allows users to choose one or more items from a list.</p>
-  <section style="margin-top: 2rem;">
-    <h2 id="basic-heading">Basic</h2>
-    <p>A basic select dropdown.</p>
-    <div id="sel-basic" x-data="{ open: false, selected: 'Select an option' }">
-      <button class="pf-v6-c-menu-toggle" type="button" @click="open = !open" :class="{ 'pf-m-expanded': open }" :aria-expanded="open">
-        <span class="pf-v6-c-menu-toggle__text" x-text="selected"></span>
-        <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
-      </button>
-      <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false">
-        <div class="pf-v6-c-menu__content"><ul class="pf-v6-c-menu__list" role="listbox">
-          <li class="pf-v6-c-menu__list-item" role="option"><button class="pf-v6-c-menu__item" type="button" @click="selected = 'Option 1'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Option 1</span></span></button></li>
-          <li class="pf-v6-c-menu__list-item" role="option"><button class="pf-v6-c-menu__item" type="button" @click="selected = 'Option 2'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Option 2</span></span></button></li>
-          <li class="pf-v6-c-menu__list-item" role="option"><button class="pf-v6-c-menu__item" type="button" @click="selected = 'Option 3'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Option 3</span></span></button></li>
-        </ul></div>
+{#include layouts/base} {#title}Select{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Select</h1>
+                    <p>
+                      Composition pattern — Menu toggle + Menu with the toggle label tracking the chosen value. For
+                      native &lt;select&gt; styling see <a href="/components/form-select">Form select</a>.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                    <nav
+                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                      aria-label="Table of contents"
+                    >
+                      <div class="pf-v6-c-jump-links__main">
+                        <ul class="pf-v6-c-jump-links__list" role="list">
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#single" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Single</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#checkboxes" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Checkboxes</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#props-select" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Select pattern</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
+                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                        <div>
+                          <h2
+                            id="examples"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                          >
+                            Examples
+                          </h2>
+                        </div>
+                      </div>
+                      {#include partials/example-card title="Single" slug="single" component="select" description="Pick
+                      one — toggle label updates to the chosen value."} {#content}{#include components/select/single
+                      /}{/content} {/include} {#include partials/example-card title="Checkboxes" slug="checkboxes"
+                      component="select" description="Multi-select with checkboxes inside the menu items."}
+                      {#content}{#include components/select/checkboxes /}{/content} {/include}
+                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                        <h2
+                          id="documentation"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Documentation
+                        </h2>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="props-select" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                          Select pattern
+                        </h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          Select is composition — same structure as Dropdown but with role="listbox" on the menu and
+                          role="option" on each item. For multi-select use role="menuitemcheckbox" + checkbox markup
+                          inside each item.
+                        </p>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Form select vs. Select.</strong> Native
+                          <a href="/components/form-select">Form select</a> for small static lists; this richer Select
+                          when you need search, custom rendering, or multi-select.
+                        </p>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <br /><a
+                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/integration-tests/src/main/resources/templates/components/select/single.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Edit select example on GitHub</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
       </div>
     </div>
-  </section>
-  <section style="margin-top: 2rem;">
-    <h2 id="preselected-heading">With preselected</h2>
-    <p>A select dropdown with a preselected option.</p>
-    <div id="sel-preselected" x-data="{ open: false, selected: 'Option 2' }">
-      <button class="pf-v6-c-menu-toggle" type="button" @click="open = !open" :class="{ 'pf-m-expanded': open }" :aria-expanded="open">
-        <span class="pf-v6-c-menu-toggle__text" x-text="selected"></span>
-        <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
-      </button>
-      <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false">
-        <div class="pf-v6-c-menu__content"><ul class="pf-v6-c-menu__list" role="listbox">
-          <li class="pf-v6-c-menu__list-item" role="option"><button class="pf-v6-c-menu__item" type="button" @click="selected = 'Option 1'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Option 1</span></span></button></li>
-          <li class="pf-v6-c-menu__list-item" role="option"><button class="pf-v6-c-menu__item pf-m-selected" type="button" @click="selected = 'Option 2'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Option 2</span></span></button></li>
-          <li class="pf-v6-c-menu__list-item" role="option"><button class="pf-v6-c-menu__item" type="button" @click="selected = 'Option 3'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Option 3</span></span></button></li>
-        </ul></div>
-      </div>
-    </div>
-  </section>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

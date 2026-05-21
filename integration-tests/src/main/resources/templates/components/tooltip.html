@@ -1,42 +1,267 @@
-{#include layouts/base}
-{#title}Tooltip{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-  <h1>Tooltip</h1>
-  <p>PatternFly v6 tooltip component for displaying brief descriptive text on hover.</p>
+{#include layouts/base} {#title}Tooltip{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Tooltip</h1>
+                    <p>
+                      The PatternFly tooltip — a positioned bubble with an arrow, shown on hover/focus of a target. The
+                      runtime template renders just the bubble; positioning and trigger logic live with the consumer
+                      (either CSS positioning, browser-native <code class="ws-code">title</code>, or an Alpine wrapper).
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                    <nav
+                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                      aria-label="Table of contents"
+                    >
+                      <div class="pf-v6-c-jump-links__main">
+                        <ul class="pf-v6-c-jump-links__list" role="list">
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#top" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Top</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#bottom" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Bottom</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#left-right" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Left / right</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#props-tooltip" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Tooltip props</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
+                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                        <div>
+                          <h2
+                            id="examples"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                          >
+                            Examples
+                          </h2>
+                        </div>
+                      </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="top-heading">Top</h2>
-    <p>A tooltip that appears above the trigger element.</p>
-    <div style="display: inline-block; position: relative;">
-      {#include components/feedback/tooltip id="tt-top" text="Tooltip on top" position="top" /}
-    </div>
-  </section>
+                      {#include partials/example-card title="Top" slug="top" component="tooltip" description="&lt;code
+                      class=&quot;ws-code&quot;&gt;position=&quot;top&quot;&lt;/code&gt; — bubble sits above the target
+                      with an arrow pointing down. The default."} {#content}{#include components/tooltip/top
+                      /}{/content} {/include} {#include partials/example-card title="Bottom" slug="bottom"
+                      component="tooltip" description="&lt;code
+                      class=&quot;ws-code&quot;&gt;position=&quot;bottom&quot;&lt;/code&gt; — bubble below the target."}
+                      {#content}{#include components/tooltip/bottom /}{/content} {/include} {#include
+                      partials/example-card title="Left / right" slug="left-right" component="tooltip"
+                      description="&lt;code class=&quot;ws-code&quot;&gt;position=&quot;left&quot;&lt;/code&gt; and
+                      &lt;code class=&quot;ws-code&quot;&gt;position=&quot;right&quot;&lt;/code&gt; — horizontal
+                      placements."} {#content}{#include components/tooltip/left-right /}{/content} {/include}
 
-  <section style="margin-top: 2rem;">
-    <h2 id="bottom-heading">Bottom</h2>
-    <p>A tooltip that appears below the trigger element.</p>
-    <div style="display: inline-block; position: relative;">
-      {#include components/feedback/tooltip id="tt-bottom" text="Tooltip on bottom" position="bottom" /}
-    </div>
-  </section>
+                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                        <h2
+                          id="documentation"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Documentation
+                        </h2>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="props-tooltip" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                          Tooltip props
+                        </h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          Parameters accepted by
+                          <code class="ws-code">{|{#include components/feedback/tooltip ... /}|}</code>.
+                        </p>
+                        <table
+                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                          role="grid"
+                          aria-label="Tooltip props"
+                        >
+                          <caption class="pf-v6-c-table__caption">
+                            <span class="ws-prop-required">*</span>
+                            required
+                          </caption>
+                          <thead class="pf-v6-c-table__thead">
+                            <tr class="pf-v6-c-table__tr">
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                              <th scope="col" class="pf-v6-c-table__th">Description</th>
+                            </tr>
+                          </thead>
+                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >DOM id — used as the <code class="ws-code">aria-describedby</code> target on the
+                                  trigger.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">text</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Tooltip content. Keep it short — one line is ideal.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">position</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">top | bottom | left | right</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Where the bubble sits relative to its container. Default
+                                  <code class="ws-code">top</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">visible</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Adds <code class="ws-code">pf-m-visible</code> — keeps the tooltip shown without a
+                                  trigger. Used in demos.</span
+                                >
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Divergence from PF React.</strong> PF React's Tooltip wraps a trigger element and
+                          manages show/hide on hover/focus via JS. Our runtime only renders the bubble; positioning is
+                          done with CSS in the demo wrapper and show/hide should be wired by the consumer — either via
+                          the browser's built-in <code class="ws-code">title</code> attribute (simplest, no JS) or a
+                          small Alpine x-data component listening for mouseenter/focusin on the trigger.
+                        </p>
+                      </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="left-heading">Left</h2>
-    <p>A tooltip that appears to the left of the trigger element.</p>
-    <div style="display: inline-block; position: relative; margin-left: 8rem;">
-      {#include components/feedback/tooltip id="tt-left" text="Tooltip on left" position="left" /}
-    </div>
-  </section>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Tooltips are a labelling tool, not a UI panel.</strong> Use them for short,
+                          single-line context — icon button labels, abbreviation expansions, full ISO timestamps. For
+                          longer help content use <a href="/components/popover">Popover</a>.
+                        </p>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Wire <code class="ws-code">aria-describedby</code> on the trigger.</strong> The
+                          trigger element should reference the tooltip's <code class="ws-code">id</code> via
+                          <code class="ws-code">aria-describedby</code> so AT consumers hear the tooltip text without
+                          needing to hover.
+                        </p>
+                      </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="right-heading">Right</h2>
-    <p>A tooltip that appears to the right of the trigger element.</p>
-    <div style="display: inline-block; position: relative;">
-      {#include components/feedback/tooltip id="tt-right" text="Tooltip on right" position="right" /}
+                      <div class="pf-v6-l-stack__item">
+                        <br /><a
+                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/feedback/tooltip.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Edit tooltip.html on GitHub</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

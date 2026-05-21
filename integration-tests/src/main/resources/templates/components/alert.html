@@ -1,71 +1,273 @@
-{#include layouts/base}
-{#title}Alert{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+{#include layouts/base} {#title}Alert{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Alert</h1>
+                    <p>
+                      An inline notification — five severity variants with auto icons. Use for time-sensitive feedback
+                      (success after save, warning before action, danger on failure). For full-width tinted strips see
+                      <a href="/components/banner">Banner</a>.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                    <nav
+                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                      aria-label="Table of contents"
+                    >
+                      <div class="pf-v6-c-jump-links__main">
+                        <ul class="pf-v6-c-jump-links__list" role="list">
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#variants" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Variants</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-description" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With description</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#closable" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Closable</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#inline" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Inline</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#props-alert" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Alert props</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
+                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                        <div>
+                          <h2
+                            id="examples"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                          >
+                            Examples
+                          </h2>
+                        </div>
+                      </div>
+                      {#include partials/example-card title="Variants" slug="variants" component="alert"
+                      description="All five severity variants — info, success, warning, danger, custom. Each (except
+                      custom) auto-renders the matching status icon."} {#content}{#include components/alert/variants
+                      /}{/content} {/include} {#include partials/example-card title="With description"
+                      slug="with-description" component="alert" description="Pass &lt;code
+                      class=&quot;ws-code&quot;&gt;description&lt;/code&gt; for a second line of explanatory text under
+                      the title."} {#content}{#include components/alert/with-description /}{/content} {/include}
+                      {#include partials/example-card title="Closable" slug="closable" component="alert"
+                      description="&lt;code class=&quot;ws-code&quot;&gt;closable=true&lt;/code&gt; — adds a dismiss
+                      button; Alpine sets visible=false on click."} {#content}{#include components/alert/closable
+                      /}{/content} {/include} {#include partials/example-card title="Inline" slug="inline"
+                      component="alert" description="&lt;code class=&quot;ws-code&quot;&gt;inline=true&lt;/code&gt; —
+                      removes the boxed treatment for use inside content blocks."} {#content}{#include
+                      components/alert/inline /}{/content} {/include}
 
-  <h1>Alert</h1>
-  <p>PatternFly v6 alert for non-intrusive user notifications.</p>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="types-heading">Types</h2>
-    <p>All five severity variants with title only.</p>
-    <div style="display: flex; flex-direction: column; gap: 1rem;">
-      {#include components/feedback/alert id="alert-custom" variant="custom" title="Custom alert title" /}
-      {#include components/feedback/alert id="alert-info" variant="info" title="Info alert title" /}
-      {#include components/feedback/alert id="alert-success" variant="success" title="Success alert title" /}
-      {#include components/feedback/alert id="alert-warning" variant="warning" title="Warning alert title" /}
-      {#include components/feedback/alert id="alert-danger" variant="danger" title="Danger alert title" /}
+                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                        <h2
+                          id="documentation"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Documentation
+                        </h2>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="props-alert" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                          Alert props
+                        </h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          Parameters accepted by
+                          <code class="ws-code">{|{#include components/feedback/alert ... /}|}</code>.
+                        </p>
+                        <table
+                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                          role="grid"
+                          aria-label="Alert props"
+                        >
+                          <caption class="pf-v6-c-table__caption">
+                            <span class="ws-prop-required">*</span>
+                            required
+                          </caption>
+                          <thead class="pf-v6-c-table__thead">
+                            <tr class="pf-v6-c-table__tr">
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                              <th scope="col" class="pf-v6-c-table__th">Description</th>
+                            </tr>
+                          </thead>
+                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">variant</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">info | success | warning | danger | custom</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Severity — emits <code class="ws-code">{|pf-m-{variant}|}</code> + the matching
+                                  icon.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">title</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">Main alert headline.</span>
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">description</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">Secondary line of text.</span>
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">inline</code> / <code class="ws-code">plain</code> /
+                                  <code class="ws-code">expandable</code> / <code class="ws-code">closable</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Modifier flags — emit matching pf-m-* classes; closable adds a dismiss button.</span
+                                >
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Pick the variant by severity.</strong> Success after completion, info for context,
+                          warning before destructive actions, danger after failures. Custom for app-specific colors.
+                        </p>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Alert vs. Banner vs. Toast.</strong> Alert sits inside content;
+                          <a href="/components/banner">Banner</a> is global / persistent at the top of the page; a toast
+                          is dismissable + temporary (often built on Alert + auto-dismiss timer).
+                        </p>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <br /><a
+                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/feedback/alert.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Edit alert.html on GitHub</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
     </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="descriptions-heading">Descriptions</h2>
-    <p>Alert with a description below the title.</p>
-    {#include components/feedback/alert id="alert-description" variant="info" title="Info alert with description" description="This is the alert description providing additional context and details." /}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="action-close-heading">Action close button</h2>
-    <p>Dismissible alert with close button.</p>
-    {#include components/feedback/alert id="alert-closable" variant="success" title="Success alert that can be dismissed" closable=true /}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="action-links-heading">Action links</h2>
-    <p>Alert with action links and description.</p>
-    {#include components/feedback/alert id="alert-action-links" variant="info" title="Info alert with action links" description="This alert has action links below the description." actionLinks=sampleActionLinks /}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="inline-heading">Inline</h2>
-    <p>All five inline variants.</p>
-    <div style="display: flex; flex-direction: column; gap: 1rem;">
-      {#include components/feedback/alert id="alert-inline-custom" variant="custom" title="Inline custom alert" inline=true /}
-      {#include components/feedback/alert id="alert-inline-info" variant="info" title="Inline info alert" inline=true /}
-      {#include components/feedback/alert id="alert-inline-success" variant="success" title="Inline success alert" inline=true /}
-      {#include components/feedback/alert id="alert-inline-warning" variant="warning" title="Inline warning alert" inline=true /}
-      {#include components/feedback/alert id="alert-inline-danger" variant="danger" title="Inline danger alert" inline=true /}
-    </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="inline-plain-heading">Inline plain</h2>
-    <p>Plain inline alert with reduced visual emphasis.</p>
-    {#include components/feedback/alert id="alert-inline-plain" variant="info" title="Inline plain alert" inline=true plain=true /}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="expandable-heading">Expandable</h2>
-    <p>Expandable alert with toggle, description, and close button.</p>
-    {#include components/feedback/alert id="alert-expandable" variant="info" title="Expandable info alert" description="This content is revealed when the alert toggle is clicked." expandable=true closable=true /}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="truncated-heading">Truncated title</h2>
-    <p>Long title truncated to a single line.</p>
-    {#include components/feedback/alert id="alert-truncated" variant="info" title="This is a very long alert title that should be truncated with an ellipsis when it overflows the available horizontal space in the alert component container" truncate=true /}
-  </section>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

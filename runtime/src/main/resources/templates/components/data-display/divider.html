@@ -1,3 +1,32 @@
 {! Divider — PatternFly v6 !}
-{! Parameters: vertical (optional), inset (optional: none|xs|sm|md|lg|xl|2xl|3xl) !}
-{#if vertical??}<div class="pf-v6-c-divider pf-m-vertical{#if inset??} pf-m-inset-{inset}{/if}" role="separator"></div>{#else}<hr class="pf-v6-c-divider{#if inset??} pf-m-inset-{inset}{/if}">{/if}
+{!                                                                                  !}
+{! Renders a horizontal rule, a list separator, or a flex-child separator depending !}
+{! on the host context. The same wrapper handles vertical mode and per-breakpoint   !}
+{! responsive inset / orientation switches.                                         !}
+{!                                                                                  !}
+{! Parameters:                                                                      !}
+{!   component       (optional) — "hr" (default) | "li" | "div".                    !}
+{!                               "hr" emits <hr> with no role attribute.            !}
+{!                               "li"/"div" emit the element with role.             !}
+{!   vertical        (optional) — boolean. Applies pf-m-vertical (column layout).   !}
+{!                               Implies component="div" when component is omitted. !}
+{!   inset           (optional) — base inset token.                                 !}
+{!                               none | xs | sm | md | lg | xl | 2xl | 3xl          !}
+{!   insetOnSm /     (optional) — per-breakpoint inset overrides, same token set.   !}
+{!     OnMd / OnLg /                Applies pf-m-inset-{size}-on-{bp}.              !}
+{!     OnXl / On2xl                                                                 !}
+{!   verticalOnMd /  (optional) — boolean. Switches to vertical orientation at the  !}
+{!     OnLg / OnXl /              named breakpoint and above.                       !}
+{!     On2xl                                                                        !}
+{!   horizontalOnMd /(optional) — boolean. Switches back to horizontal at the named !}
+{!     OnLg / OnXl /              breakpoint and above. Pair with vertical (or      !}
+{!     On2xl                      verticalOn*) to alternate orientations.           !}
+{!   role            (optional) — "separator" (default) | "presentation". Applied   !}
+{!                               to li/div modes (hr is implicit).                  !}
+{#if component?? && component is 'li'}
+<li class="pf-v6-c-divider{#if vertical??} pf-m-vertical{/if}{#if inset??} pf-m-inset-{inset}{/if}{#if insetOnSm??} pf-m-inset-{insetOnSm}-on-sm{/if}{#if insetOnMd??} pf-m-inset-{insetOnMd}-on-md{/if}{#if insetOnLg??} pf-m-inset-{insetOnLg}-on-lg{/if}{#if insetOnXl??} pf-m-inset-{insetOnXl}-on-xl{/if}{#if insetOn2xl??} pf-m-inset-{insetOn2xl}-on-2xl{/if}{#if verticalOnMd??} pf-m-vertical-on-md{/if}{#if verticalOnLg??} pf-m-vertical-on-lg{/if}{#if verticalOnXl??} pf-m-vertical-on-xl{/if}{#if verticalOn2xl??} pf-m-vertical-on-2xl{/if}{#if horizontalOnMd??} pf-m-horizontal-on-md{/if}{#if horizontalOnLg??} pf-m-horizontal-on-lg{/if}{#if horizontalOnXl??} pf-m-horizontal-on-xl{/if}{#if horizontalOn2xl??} pf-m-horizontal-on-2xl{/if}"{#if role??} role="{role}"{#else} role="separator"{/if}></li>
+{#else if vertical?? || (component?? && component is 'div')}
+<div class="pf-v6-c-divider{#if vertical??} pf-m-vertical{/if}{#if inset??} pf-m-inset-{inset}{/if}{#if insetOnSm??} pf-m-inset-{insetOnSm}-on-sm{/if}{#if insetOnMd??} pf-m-inset-{insetOnMd}-on-md{/if}{#if insetOnLg??} pf-m-inset-{insetOnLg}-on-lg{/if}{#if insetOnXl??} pf-m-inset-{insetOnXl}-on-xl{/if}{#if insetOn2xl??} pf-m-inset-{insetOn2xl}-on-2xl{/if}{#if verticalOnMd??} pf-m-vertical-on-md{/if}{#if verticalOnLg??} pf-m-vertical-on-lg{/if}{#if verticalOnXl??} pf-m-vertical-on-xl{/if}{#if verticalOn2xl??} pf-m-vertical-on-2xl{/if}{#if horizontalOnMd??} pf-m-horizontal-on-md{/if}{#if horizontalOnLg??} pf-m-horizontal-on-lg{/if}{#if horizontalOnXl??} pf-m-horizontal-on-xl{/if}{#if horizontalOn2xl??} pf-m-horizontal-on-2xl{/if}"{#if role??} role="{role}"{#else} role="separator"{/if}></div>
+{#else}
+<hr class="pf-v6-c-divider{#if inset??} pf-m-inset-{inset}{/if}{#if insetOnSm??} pf-m-inset-{insetOnSm}-on-sm{/if}{#if insetOnMd??} pf-m-inset-{insetOnMd}-on-md{/if}{#if insetOnLg??} pf-m-inset-{insetOnLg}-on-lg{/if}{#if insetOnXl??} pf-m-inset-{insetOnXl}-on-xl{/if}{#if insetOn2xl??} pf-m-inset-{insetOn2xl}-on-2xl{/if}{#if verticalOnMd??} pf-m-vertical-on-md{/if}{#if verticalOnLg??} pf-m-vertical-on-lg{/if}{#if verticalOnXl??} pf-m-vertical-on-xl{/if}{#if verticalOn2xl??} pf-m-vertical-on-2xl{/if}{#if horizontalOnMd??} pf-m-horizontal-on-md{/if}{#if horizontalOnLg??} pf-m-horizontal-on-lg{/if}{#if horizontalOnXl??} pf-m-horizontal-on-xl{/if}{#if horizontalOn2xl??} pf-m-horizontal-on-2xl{/if}">
+{/if}

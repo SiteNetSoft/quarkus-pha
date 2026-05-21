@@ -1,0 +1,43 @@
+<div class="ws-preview-html">
+  {#include components/data-display/label-group id="lbg-edit" categoryName="Tags"} {#content}
+  <li class="pf-v6-c-label-group__list-item">
+    <span
+      class="pf-v6-c-label pf-m-blue pf-m-editable"
+      id="lbg-edit-1"
+      x-data="phaLabelEditable()"
+      @click="start()"
+      @keydown="onKey($event)"
+    >
+      <span class="pf-v6-c-label__content" tabindex="0">
+        <span class="pf-v6-c-label__text" x-ref="text" @blur="commit()" @keydown="onKey($event)">infrastructure</span>
+      </span>
+    </span>
+  </li>
+  <li class="pf-v6-c-label-group__list-item">
+    <span
+      class="pf-v6-c-label pf-m-blue pf-m-editable"
+      id="lbg-edit-2"
+      x-data="phaLabelEditable()"
+      @click="start()"
+      @keydown="onKey($event)"
+    >
+      <span class="pf-v6-c-label__content" tabindex="0">
+        <span class="pf-v6-c-label__text" x-ref="text" @blur="commit()" @keydown="onKey($event)">monitoring</span>
+      </span>
+    </span>
+  </li>
+  <li class="pf-v6-c-label-group__list-item">
+    <span
+      class="pf-v6-c-label pf-m-blue pf-m-editable"
+      id="lbg-edit-3"
+      x-data="phaLabelEditable()"
+      @click="start()"
+      @keydown="onKey($event)"
+    >
+      <span class="pf-v6-c-label__content" tabindex="0">
+        <span class="pf-v6-c-label__text" x-ref="text" @blur="commit()" @keydown="onKey($event)">backups</span>
+      </span>
+    </span>
+  </li>
+  {/content} {/include}
+</div>

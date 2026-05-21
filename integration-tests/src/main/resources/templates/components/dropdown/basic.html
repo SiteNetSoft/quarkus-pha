@@ -1,0 +1,17 @@
+{! Dropdown = Menu toggle + Menu. Composition pattern — Alpine handles open/close. !}
+<div x-data="{ open: false }" style="position: relative; display: inline-block">
+  <button class="pf-v6-c-menu-toggle" type="button" :class="open ? 'pf-m-expanded' : ''" :aria-expanded="open" @click="open = !open" id="dd-basic-toggle">
+    <span class="pf-v6-c-menu-toggle__text">Actions</span>
+    <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
+  </button>
+  <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 12rem">
+    <div class="pf-v6-c-menu__content">
+      <ul class="pf-v6-c-menu__list" role="menu">
+        <li class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Edit</span></span></button></li>
+        <li class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Duplicate</span></span></button></li>
+        <li class="pf-v6-c-divider" role="separator"></li>
+        <li class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item pf-m-danger" type="button" role="menuitem" @click="open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Delete</span></span></button></li>
+      </ul>
+    </div>
+  </div>
+</div>

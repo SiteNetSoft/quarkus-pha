@@ -1,48 +1,255 @@
-{#include layouts/base}
-{#title}Jump Links{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-  <h1>Jump Links</h1>
-  <p>PatternFly v6 jump links component for navigating to sections within a page.</p>
+{#include layouts/base} {#title}Jump links{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Jump links</h1>
+                    <p>
+                      In-page anchor navigation — a list of links to section headings on the same page. Horizontal,
+                      vertical, or centered. This page (and every demo in the showcase) uses the vertical variant in the
+                      left sidebar.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                    <nav
+                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                      aria-label="Table of contents"
+                    >
+                      <div class="pf-v6-c-jump-links__main">
+                        <ul class="pf-v6-c-jump-links__list" role="list">
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#horizontal" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Horizontal</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#vertical" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Vertical</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#centered" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Centered</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#props-jump-links" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Jump links props</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
+                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                        <div>
+                          <h2
+                            id="examples"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                          >
+                            Examples
+                          </h2>
+                        </div>
+                      </div>
+                      {#include partials/example-card title="Horizontal" slug="horizontal" component="jump-links"
+                      description="Default — items in a row. Best for short TOCs at the top of a page."}
+                      {#content}{#include components/jump-links/horizontal /}{/content} {/include} {#include
+                      partials/example-card title="Vertical" slug="vertical" component="jump-links"
+                      description="&lt;code class=&quot;ws-code&quot;&gt;vertical=true&lt;/code&gt; — stacked items. The
+                      showcase uses this in the left sidebar of every demo."} {#content}{#include
+                      components/jump-links/vertical /}{/content} {/include} {#include partials/example-card
+                      title="Centered" slug="centered" component="jump-links" description="&lt;code
+                      class=&quot;ws-code&quot;&gt;center=true&lt;/code&gt; — &lt;code
+                      class=&quot;ws-code&quot;&gt;pf-m-center&lt;/code&gt; horizontally centers a horizontal list."}
+                      {#content}{#include components/jump-links/centered /}{/content} {/include}
 
-  <section style="margin-top: 2rem;">
-    <h2 id="vertical-heading">Vertical</h2>
-    <p>Vertical jump links displayed in a stacked list with the current section highlighted.</p>
-    {#include components/navigation/jump-links id="jl-vertical" vertical=true}{#content}
-      <li class="pf-v6-c-jump-links__item pf-m-current">
-        <a class="pf-v6-c-jump-links__link" href="#section-1"><span class="pf-v6-c-jump-links__link-text">Section 1</span></a>
-      </li>
-      <li class="pf-v6-c-jump-links__item">
-        <a class="pf-v6-c-jump-links__link" href="#section-2"><span class="pf-v6-c-jump-links__link-text">Section 2</span></a>
-      </li>
-      <li class="pf-v6-c-jump-links__item">
-        <a class="pf-v6-c-jump-links__link" href="#section-3"><span class="pf-v6-c-jump-links__link-text">Section 3</span></a>
-      </li>
-      <li class="pf-v6-c-jump-links__item">
-        <a class="pf-v6-c-jump-links__link" href="#section-4"><span class="pf-v6-c-jump-links__link-text">Section 4</span></a>
-      </li>
-    {/content}{/include}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="horizontal-heading">Horizontal</h2>
-    <p>Horizontal jump links displayed in a row across the page.</p>
-    {#include components/navigation/jump-links id="jl-horizontal"}{#content}
-      <li class="pf-v6-c-jump-links__item pf-m-current">
-        <a class="pf-v6-c-jump-links__link" href="#section-1"><span class="pf-v6-c-jump-links__link-text">Section 1</span></a>
-      </li>
-      <li class="pf-v6-c-jump-links__item">
-        <a class="pf-v6-c-jump-links__link" href="#section-2"><span class="pf-v6-c-jump-links__link-text">Section 2</span></a>
-      </li>
-      <li class="pf-v6-c-jump-links__item">
-        <a class="pf-v6-c-jump-links__link" href="#section-3"><span class="pf-v6-c-jump-links__link-text">Section 3</span></a>
-      </li>
-      <li class="pf-v6-c-jump-links__item">
-        <a class="pf-v6-c-jump-links__link" href="#section-4"><span class="pf-v6-c-jump-links__link-text">Section 4</span></a>
-      </li>
-    {/content}{/include}
-  </section>
+                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                        <h2
+                          id="documentation"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Documentation
+                        </h2>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="props-jump-links" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                          Jump links props
+                        </h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          Parameters accepted by
+                          <code class="ws-code">{|{#include components/navigation/jump-links ... /}|}</code>.
+                        </p>
+                        <table
+                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                          role="grid"
+                          aria-label="Jump links props"
+                        >
+                          <caption class="pf-v6-c-table__caption">
+                            <span class="ws-prop-required">*</span>
+                            required
+                          </caption>
+                          <thead class="pf-v6-c-table__thead">
+                            <tr class="pf-v6-c-table__tr">
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                              <th scope="col" class="pf-v6-c-table__th">Description</th>
+                            </tr>
+                          </thead>
+                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">vertical</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Adds <code class="ws-code">pf-m-vertical</code> — stacks items vertically.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">center</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Adds <code class="ws-code">pf-m-center</code> — center-aligns horizontal items.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">ariaLabel</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >aria-label on the &lt;nav&gt;. Default
+                                  <code class="ws-code">"Jump to section"</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">slot <code class="ws-code">content</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >&lt;li class="pf-v6-c-jump-links__item"&gt; items containing the anchor links.</span
+                                >
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Match anchors to section ids.</strong> Each
+                          <code class="ws-code">href="#xxx"</code> needs a matching
+                          <code class="ws-code">id="xxx"</code> on a heading or scrollable target.
+                        </p>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Current section.</strong> Set <code class="ws-code">pf-m-current</code> on the active
+                          item and <code class="ws-code">aria-current="page"</code> on the link. Updating that on scroll
+                          is consumer concern — wire an IntersectionObserver in JS.
+                        </p>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <br /><a
+                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/navigation/jump-links.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Edit jump-links.html on GitHub</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

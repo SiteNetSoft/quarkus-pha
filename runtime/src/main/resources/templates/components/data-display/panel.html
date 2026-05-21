@@ -1,5 +1,19 @@
-{! Panel — PatternFly v6 !}
-{! Parameters: id, bordered (optional), raised (optional), scrollable (optional) !}
-<div class="pf-v6-c-panel{#if bordered??} pf-m-bordered{/if}{#if raised??} pf-m-raised{/if}{#if scrollable??} pf-m-scrollable{/if}" id="{id}">
+{! Panel container — PatternFly v6 !}
+{! Parameters:                                                                  !}
+{!   id          (optional) — DOM id on the container                            !}
+{!   bordered    (optional) — boolean; applies pf-m-bordered                     !}
+{!   raised      (optional) — boolean; applies pf-m-raised                       !}
+{!   secondary   (optional) — boolean; applies pf-m-secondary                    !}
+{!   scrollable  (optional) — boolean; applies pf-m-scrollable                   !}
+{!                                                                                !}
+{! Compose the body with the helper templates:                                   !}
+{!   components/data-display/panel-header                                        !}
+{!   components/data-display/panel-main (with optional maxHeight)                !}
+{!   components/data-display/panel-main-body                                     !}
+{!   components/data-display/panel-footer                                        !}
+{!                                                                                !}
+{! Slot:                                                                          !}
+{!   {#content} — panel-header / panel-main / panel-footer includes              !}
+<div class="pf-v6-c-panel{#if bordered??} pf-m-bordered{/if}{#if raised??} pf-m-raised{/if}{#if secondary??} pf-m-secondary{/if}{#if scrollable??} pf-m-scrollable{/if}"{#if id??} id="{id}"{/if}>
   {#insert content}{/insert}
 </div>

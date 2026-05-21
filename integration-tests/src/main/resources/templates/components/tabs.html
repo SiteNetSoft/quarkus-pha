@@ -1,37 +1,233 @@
-{#include layouts/base}
-{#title}Tabs{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-  <h1>Tabs</h1>
-  <p>Tabs organize content into multiple sections and allow users to navigate between them.</p>
-  <section style="margin-top: 2rem;">
-    <h2 id="basic-heading">Basic</h2>
-    <p>A basic set of tabs.</p>
-    {#include components/navigation/tabs id="tabs-basic"}{#content}
-    <li class="pf-v6-c-tabs__item pf-m-current"><button class="pf-v6-c-tabs__link"><span class="pf-v6-c-tabs__item-text">Tab 1</span></button></li>
-    <li class="pf-v6-c-tabs__item"><button class="pf-v6-c-tabs__link"><span class="pf-v6-c-tabs__item-text">Tab 2</span></button></li>
-    <li class="pf-v6-c-tabs__item"><button class="pf-v6-c-tabs__link"><span class="pf-v6-c-tabs__item-text">Tab 3</span></button></li>
-    {/content}{/include}
-  </section>
-  <section style="margin-top: 2rem;">
-    <h2 id="boxed-heading">Boxed</h2>
-    <p>Tabs with a boxed style.</p>
-    {#include components/navigation/tabs id="tabs-boxed" box=true}{#content}
-    <li class="pf-v6-c-tabs__item pf-m-current"><button class="pf-v6-c-tabs__link"><span class="pf-v6-c-tabs__item-text">Tab 1</span></button></li>
-    <li class="pf-v6-c-tabs__item"><button class="pf-v6-c-tabs__link"><span class="pf-v6-c-tabs__item-text">Tab 2</span></button></li>
-    <li class="pf-v6-c-tabs__item"><button class="pf-v6-c-tabs__link"><span class="pf-v6-c-tabs__item-text">Tab 3</span></button></li>
-    {/content}{/include}
-  </section>
-  <section style="margin-top: 2rem;">
-    <h2 id="vertical-heading">Vertical</h2>
-    <p>Tabs displayed vertically.</p>
-    {#include components/navigation/tabs id="tabs-vertical" vertical=true}{#content}
-    <li class="pf-v6-c-tabs__item pf-m-current"><button class="pf-v6-c-tabs__link"><span class="pf-v6-c-tabs__item-text">Tab 1</span></button></li>
-    <li class="pf-v6-c-tabs__item"><button class="pf-v6-c-tabs__link"><span class="pf-v6-c-tabs__item-text">Tab 2</span></button></li>
-    <li class="pf-v6-c-tabs__item"><button class="pf-v6-c-tabs__link"><span class="pf-v6-c-tabs__item-text">Tab 3</span></button></li>
-    {/content}{/include}
-  </section>
+{#include layouts/base} {#title}Tabs{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Tabs</h1>
+                    <p>
+                      Tabbed navigation between sibling panels. Selection is driven by Alpine; arrow keys move focus
+                      between tabs via the runtime template's <code class="ws-code">handleKeyNav</code>.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                    <nav
+                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                      aria-label="Table of contents"
+                    >
+                      <div class="pf-v6-c-jump-links__main">
+                        <ul class="pf-v6-c-jump-links__list" role="list">
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#box" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Box</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#vertical" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Vertical</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#props-tabs" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Tabs props</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
+                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                        <div>
+                          <h2
+                            id="examples"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                          >
+                            Examples
+                          </h2>
+                        </div>
+                      </div>
+                      {#include partials/example-card title="Basic" slug="basic" component="tabs" description="Default
+                      horizontal tabs with three panels. Click or arrow-key between tabs."} {#content}{#include
+                      components/tabs/basic /}{/content} {/include} {#include partials/example-card title="Box"
+                      slug="box" component="tabs" description="&lt;code
+                      class=&quot;ws-code&quot;&gt;box=true&lt;/code&gt; — bordered, paper-card appearance."}
+                      {#content}{#include components/tabs/box /}{/content} {/include} {#include partials/example-card
+                      title="Vertical" slug="vertical" component="tabs" description="&lt;code
+                      class=&quot;ws-code&quot;&gt;vertical=true&lt;/code&gt; — tabs stacked on the side, panels next to
+                      them."} {#content}{#include components/tabs/vertical /}{/content} {/include}
+                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                        <h2
+                          id="documentation"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Documentation
+                        </h2>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="props-tabs" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                          Tabs props
+                        </h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          Parameters accepted by
+                          <code class="ws-code">{|{#include components/navigation/tabs ... /}|}</code>. Tab list items
+                          go in the slot.
+                        </p>
+                        <table
+                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                          role="grid"
+                          aria-label="Tabs props"
+                        >
+                          <caption class="pf-v6-c-table__caption">
+                            <span class="ws-prop-required">*</span>
+                            required
+                          </caption>
+                          <thead class="pf-v6-c-table__thead">
+                            <tr class="pf-v6-c-table__tr">
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                              <th scope="col" class="pf-v6-c-table__th">Description</th>
+                            </tr>
+                          </thead>
+                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">box</code> / <code class="ws-code">vertical</code> /
+                                  <code class="ws-code">filled</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Layout modifiers — emit matching <code class="ws-code">pf-m-*</code> on the
+                                  wrapper.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">slot <code class="ws-code">content</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >&lt;li class="pf-v6-c-tabs__item"&gt; entries with tab buttons.</span
+                                >
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Tabs vs. anchors.</strong> Tabs hide siblings — useful when only one panel is relevant
+                          at a time. For browsable in-page sections use
+                          <a href="/components/jump-links">Jump links</a> instead.
+                        </p>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Server-driven tabs.</strong> Replace Alpine with HTMX — each tab does
+                          <code class="ws-code">hx-get="/tab/N"</code> targeting a single panel div. Mark the active tab
+                          on the server.
+                        </p>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <br /><a
+                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/navigation/tabs.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Edit tabs.html on GitHub</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

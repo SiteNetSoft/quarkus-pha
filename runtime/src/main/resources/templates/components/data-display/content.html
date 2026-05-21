@@ -1,5 +1,32 @@
 {! Content — PatternFly v6 !}
-{! Parameters: id, editorial (optional), visited (optional) !}
+{!                                                                                !}
+{! Two modes:                                                                     !}
+{!   1. Wrapper mode (component omitted): renders <div class="pf-v6-c-content">  !}
+{!      containing the slot. PF v6's CSS styles raw descendant tags (h1-h6, p,    !}
+{!      ul, ol, dl, blockquote, etc.) automatically.                              !}
+{!   2. Element mode (component set): renders the element itself with             !}
+{!      pf-v6-c-content--{component} as its class.                                !}
+{!                                                                                !}
+{! Parameters:                                                                    !}
+{!   id          (optional) — DOM id                                              !}
+{!   component   (optional) — one of: h1 | h2 | h3 | h4 | h5 | h6 | p | a |       !}
+{!                            small | blockquote | pre | hr | ul | ol | dl |      !}
+{!                            li | dt | dd                                        !}
+{!   text        (optional, element mode) — simple text content. Falls back to    !}
+{!                                          the content slot when text is omitted.!}
+{!   href        (optional, when component="a") — link target                     !}
+{!   editorial   (optional) — applies pf-m-editorial (larger body / small text)   !}
+{!   visited     (optional) — applies pf-m-visited (link visited styling)         !}
+{!   plainList   (optional) — applies pf-m-plain (no bullets) when component is   !}
+{!                            ul / ol / dl                                        !}
+{!                                                                                !}
+{! Slot:                                                                          !}
+{!   {#content} — children. In wrapper mode, use raw HTML (h1, p, ul, etc.). In   !}
+{!                element mode, use whatever inline markup the tag accepts.       !}
+{#if component??}
+<{component} class="pf-v6-c-content--{component}{#if editorial??} pf-m-editorial{/if}{#if visited??} pf-m-visited{/if}{#if plainList??} pf-m-plain{/if}"{#if id??} id="{id}"{/if}{#if href??} href="{href}"{/if}>{#if text??}{text}{#else}{#insert content}{/insert}{/if}</{component}>
+{#else}
 <div class="pf-v6-c-content{#if editorial??} pf-m-editorial{/if}{#if visited??} pf-m-visited{/if}"{#if id??} id="{id}"{/if}>
-{#insert content}{/insert}
+  {#insert content}{/insert}
 </div>
+{/if}

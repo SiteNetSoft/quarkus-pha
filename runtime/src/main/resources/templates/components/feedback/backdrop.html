@@ -1,3 +1,19 @@
 {! Backdrop — PatternFly v6 !}
-{! Parameters: id (required) !}
-<div class="pf-v6-c-backdrop" id="{id}"></div>
+{!                                                                                  !}
+{! A fixed full-viewport semi-transparent overlay. Sits below modal / popover       !}
+{! content via PF v6's z-index token; clicking it typically dismisses whatever       !}
+{! it sits behind (consumer-controlled via Alpine / HTMX).                          !}
+{!                                                                                  !}
+{! Parameters:                                                                      !}
+{!   id      (required) — DOM id on the overlay.                                    !}
+{!                                                                                  !}
+{! Slot:                                                                            !}
+{!   {#overlay} — optional overlay content (spinner, dialog body, custom panel).    !}
+{!                Slot name is "overlay" (not "content") to avoid collision with    !}
+{!                the example-card partial's "content" slot when this template is   !}
+{!                nested inside a demo card. Qute resolves {#insert} against the    !}
+{!                nearest enclosing slot of the same name in the call stack, so     !}
+{!                reusing "content" would recurse infinitely.                       !}
+<div class="pf-v6-c-backdrop" id="{id}">
+  {#insert overlay}{/insert}
+</div>

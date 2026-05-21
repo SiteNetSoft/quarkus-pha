@@ -1,0 +1,34 @@
+<div class="ws-preview-html" x-data="{ open: false }">
+  <button class="pf-v6-c-button pf-m-primary" type="button" id="backdrop-nondismiss-toggle" @click="open = true">
+    <span class="pf-v6-c-button__text">Show non-dismissible backdrop</span>
+  </button>
+  <div x-show="open" x-transition.opacity style="display: none">
+    {#include components/feedback/backdrop id="backdrop-nondismiss"} {#overlay}
+    <div
+      id="backdrop-nondismiss-overlay"
+      style="
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: var(--pf-t--global--background--color--primary--default, #fff);
+        padding: 1.5rem;
+        border-radius: var(--pf-t--global--border--radius--medium, 4px);
+        box-shadow: var(--pf-t--global--box-shadow--lg, 0 8px 16px rgba(0, 0, 0, 0.2));
+        max-width: 22rem;
+      "
+    >
+      <p style="margin: 0 0 1rem">
+        This backdrop can only be dismissed via the close button — clicking outside has no effect.
+      </p>
+      <button class="pf-v6-c-button pf-m-primary" type="button" id="backdrop-nondismiss-close" @click="open = false">
+        <span class="pf-v6-c-button__text">Close</span>
+      </button>
+    </div>
+    {/overlay} {/include}
+  </div>
+  <p style="margin-top: 0.75rem; color: var(--pf-t--global--text--color--subtle, #888); font-size: 0.875rem">
+    Omit the dismiss handler on the wrapper. Only the explicit close button calls
+    <code class="ws-code">open = false</code>. Use for actions the user must complete or cancel deliberately.
+  </p>
+</div>

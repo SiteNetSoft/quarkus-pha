@@ -464,81 +464,7 @@ public class ComponentRoutes {
     @Path("/action-list")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance actionList() {
-        // 1. Single group — Primary + Secondary
-        List<Map<String, Object>> singleGroupData = List.of(
-            Map.of("items", List.of(
-                Map.of("text", "Next", "variant", "primary"),
-                Map.of("text", "Back", "variant", "secondary")
-            ))
-        );
-
-        // 2. With icons — root-level pf-m-icons
-        List<Map<String, Object>> iconsData = List.of(
-            Map.of("items", List.of(
-                Map.of("icon", true, "ariaLabel", "Edit",   "iconName", "fa:pen-to-square"),
-                Map.of("icon", true, "ariaLabel", "Clone",  "iconName", "fa:copy"),
-                Map.of("icon", true, "ariaLabel", "Delete", "iconName", "fa:trash")
-            ))
-        );
-
-        // 3. Group icons — pf-m-icons on individual groups
-        List<Map<String, Object>> groupIconsData = List.of(
-            Map.of("items", List.of(
-                Map.of("icon", true, "ariaLabel", "Edit",  "iconName", "fa:pen-to-square"),
-                Map.of("icon", true, "ariaLabel", "Clone", "iconName", "fa:copy")
-            ), "icons", true),
-            Map.of("items", List.of(
-                Map.of("text", "Save", "variant", "primary")
-            ))
-        );
-
-        // 4. Multiple groups
-        List<Map<String, Object>> multiGroupData = List.of(
-            Map.of("items", List.of(
-                Map.of("text", "Action 1", "variant", "primary"),
-                Map.of("text", "Action 2", "variant", "secondary")
-            )),
-            Map.of("items", List.of(
-                Map.of("text", "Action 3", "variant", "secondary"),
-                Map.of("text", "Action 4", "variant", "secondary")
-            ))
-        );
-
-        // 5. Cancel button — forms/modals
-        List<Map<String, Object>> cancelFormData = List.of(
-            Map.of("items", List.of(
-                Map.of("text", "Save", "variant", "primary"),
-                Map.of("text", "Cancel", "variant", "link")
-            ))
-        );
-
-        // 6. Cancel button — wizards
-        List<Map<String, Object>> cancelWizardData = List.of(
-            Map.of("items", List.of(
-                Map.of("text", "Next", "variant", "primary"),
-                Map.of("text", "Back", "variant", "secondary")
-            )),
-            Map.of("items", List.of(
-                Map.of("text", "Cancel", "variant", "link")
-            ))
-        );
-
-        // 7. Vertical
-        List<Map<String, Object>> verticalData = List.of(
-            Map.of("items", List.of(
-                Map.of("text", "Save", "variant", "primary"),
-                Map.of("text", "Cancel", "variant", "link")
-            ))
-        );
-
-        return actionListPage
-            .data("singleGroupData", singleGroupData)
-            .data("iconsData", iconsData)
-            .data("groupIconsData", groupIconsData)
-            .data("multiGroupData", multiGroupData)
-            .data("cancelFormData", cancelFormData)
-            .data("cancelWizardData", cancelWizardData)
-            .data("verticalData", verticalData);
+        return actionListPage.instance();
     }
 
     @GET
@@ -594,32 +520,7 @@ public class ComponentRoutes {
     @Path("/breadcrumb")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance breadcrumb() {
-        List<Map<String, Object>> basicItems = List.of(
-            Map.of("text", "Section home", "href", "#"),
-            Map.of("text", "Section title", "href", "#"),
-            Map.of("text", "Section title", "href", "#"),
-            Map.of("text", "Section landing", "href", "#", "current", true)
-        );
-
-        List<Map<String, Object>> noHomeItems = List.of(
-            Map.of("text", "Section home"),
-            Map.of("text", "Section title", "href", "#"),
-            Map.of("text", "Section title", "href", "#"),
-            Map.of("text", "Section title", "href", "#"),
-            Map.of("text", "Section landing", "href", "#", "current", true)
-        );
-
-        List<Map<String, Object>> headingItems = List.of(
-            Map.of("text", "Section home", "href", "#"),
-            Map.of("text", "Section title", "href", "#"),
-            Map.of("text", "Section title", "href", "#"),
-            Map.of("text", "Section landing", "href", "#", "heading", true)
-        );
-
-        return breadcrumbPage
-            .data("basicItems", basicItems)
-            .data("noHomeItems", noHomeItems)
-            .data("headingItems", headingItems);
+        return breadcrumbPage.instance();
     }
 
     @GET

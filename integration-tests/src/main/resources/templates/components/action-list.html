@@ -1,53 +1,552 @@
-{#include layouts/base}
-{#title}Action list{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+{#include layouts/base} {#title}Action list{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary">
+          <span class="pf-v6-c-button__text">Skip to content</span>
+        </a>
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Action list</h1>
+                    <p>
+                      A horizontal group of related actions with standardized spacing. Two or more
+                      <code class="ws-code">groups</code> sit side-by-side; each group lays out its
+                      <code class="ws-code">items</code> with a small gap. Used in wizard footers, modal/form action
+                      bars, and inline row controls.
+                    </p>
+                  </div>
+                </div>
+              </section>
 
-  <h1>Action list</h1>
-  <p>PatternFly v6 action list for grouping actions with standardized spacing.</p>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-u-h-100">
+                    <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                      <nav
+                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                        aria-label="Table of contents"
+                      >
+                        <div class="pf-v6-c-jump-links__main">
+                          <ul class="pf-v6-c-jump-links__list" role="list">
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#single-group" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Single group</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#with-kebab" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">With kebab</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#icons-list" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Icons on list</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#icons-group" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Icons on group</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#multiple-groups" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Multiple groups</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#cancel-form" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Cancel — form</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#cancel-wizard" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Cancel — wizard</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#vertical" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Vertical</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-action-list" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Action list props</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-group" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Group fields</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-item" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Item fields</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="single-group-heading">Single group</h2>
-    <p>Primary and secondary buttons in a single group.</p>
-    {#include components/actions/action-list groups=singleGroupData id="action-list-single" /}
-  </section>
+                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                          <div>
+                            <h2
+                              id="examples"
+                              tabindex="-1"
+                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                            >
+                              Examples
+                            </h2>
+                          </div>
+                        </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="with-icons-heading">With icons</h2>
-    <p>Icon-only action list with <code>pf-m-icons</code> on the root.</p>
-    {#include components/actions/action-list groups=iconsData id="action-list-icons" icons=true /}
-  </section>
+                        {#include partials/example-card title="Single group" slug="single-group" component="action-list"
+                        description="One group with a primary and a secondary button — the canonical Next / Back
+                        pairing."} {#content}{#include components/action-list/single-group /}{/content} {/include}
+                        {#include partials/example-card title="With kebab" slug="with-kebab" component="action-list"
+                        description="Same Next / Back pair with a kebab menu toggle for overflow actions. The kebab
+                        button is a static placeholder; wire it to a real Menu or Dropdown in production."}
+                        {#content}{#include components/action-list/with-kebab /}{/content} {/include} {#include
+                        partials/example-card title="Icons on list" slug="icons-list" component="action-list"
+                        description="Set &lt;code class=&quot;ws-code&quot;&gt;iconList=true&lt;/code&gt; to apply
+                        &lt;code class=&quot;ws-code&quot;&gt;pf-m-icons&lt;/code&gt; on the root — every item gets
+                        tight icon spacing."} {#content}{#include components/action-list/icons-list /}{/content}
+                        {/include} {#include partials/example-card title="Icons on group" slug="icons-group"
+                        component="action-list" description="Set &lt;code class=&quot;ws-code&quot;&gt;iconGroup:
+                        true&lt;/code&gt; on a specific group to apply tight icon spacing only to that group while
+                        sibling groups keep default spacing."} {#content}{#include components/action-list/icons-group
+                        /}{/content} {/include} {#include partials/example-card title="Multiple groups"
+                        slug="multiple-groups" component="action-list" description="Two groups laid out side-by-side. PF
+                        separates groups with a wider column gap than items within a group, signaling a step boundary or
+                        a primary / destructive split."} {#content}{#include components/action-list/multiple-groups
+                        /}{/content} {/include} {#include partials/example-card title="Cancel — form" slug="cancel-form"
+                        component="action-list" description="The standard modal / form footer — primary &lt;code
+                        class=&quot;ws-code&quot;&gt;Save&lt;/code&gt; plus a link-styled &lt;code
+                        class=&quot;ws-code&quot;&gt;Cancel&lt;/code&gt;."} {#content}{#include
+                        components/action-list/cancel-form /}{/content} {/include} {#include partials/example-card
+                        title="Cancel — wizard" slug="cancel-wizard" component="action-list" description="Wizard footer
+                        — Next / Back navigate in one group, with the cancel sitting alone in its own group to keep it
+                        visually distinct from the primary nav."} {#content}{#include
+                        components/action-list/cancel-wizard /}{/content} {/include} {#include partials/example-card
+                        title="Vertical" slug="vertical" component="action-list" description="Divergence from PF —
+                        &lt;code class=&quot;ws-code&quot;&gt;vertical=true&lt;/code&gt; applies &lt;code
+                        class=&quot;ws-code&quot;&gt;pf-m-vertical&lt;/code&gt; to stack actions vertically. Useful in
+                        narrow side panels or as icon menus inside sidebars."} {#content}{#include
+                        components/action-list/vertical /}{/content} {/include}
 
-  <section style="margin-top: 2rem;">
-    <h2 id="group-icons-heading">Group icons</h2>
-    <p><code>pf-m-icons</code> applied on individual group elements.</p>
-    {#include components/actions/action-list groups=groupIconsData id="action-list-group-icons" /}
-  </section>
+                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                            <div>
+                              <h2
+                                id="documentation"
+                                tabindex="-1"
+                                class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                              >
+                                Documentation
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="multiple-groups-heading">Multiple groups</h2>
-    <p>Two separate button groups.</p>
-    {#include components/actions/action-list groups=multiGroupData id="action-list-multi" /}
-  </section>
+                        <div class="pf-v6-l-stack__item">
+                          <h3
+                            id="props-action-list"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h3 pf-m-editorial ws-heading"
+                          >
+                            Action list props
+                          </h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by
+                            <code class="ws-code">{|{#include components/actions/action-list ... /}|}</code>.
+                          </p>
+                          <table
+                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                            role="grid"
+                            aria-label="Action list props"
+                          >
+                            <caption class="pf-v6-c-table__caption">
+                              <span class="ws-prop-required">*</span>
+                              required
+                            </caption>
+                            <thead class="pf-v6-c-table__thead">
+                              <tr class="pf-v6-c-table__tr">
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                                <th scope="col" class="pf-v6-c-table__th">Default</th>
+                                <th scope="col" class="pf-v6-c-table__th">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">DOM id on the action-list container.</span>
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><span class="ws-prop-required">*</span> <code class="ws-code">groups</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">List&lt;Group&gt;</span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Ordered list of action groups. Each group renders a
+                                    <code class="ws-code">pf-v6-c-action-list__group</code> wrapper around its
+                                    items.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">iconList</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Applies <code class="ws-code">pf-m-icons</code> on the root — removes item padding
+                                    for tighter spacing across the whole list. PF's
+                                    <code class="ws-code">isIconList</code>.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">vertical</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >PHA divergence — applies <code class="ws-code">pf-m-vertical</code> to stack groups
+                                    and items vertically.</span
+                                  >
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Divergence from PF React.</strong> We skip
+                            <code class="ws-code">className</code> (React-specific). Our
+                            <code class="ws-code">iconList</code> is PF's <code class="ws-code">isIconList</code> — same
+                            semantic, shorter name. PF React doesn't ship a vertical layout; we add
+                            <code class="ws-code">vertical</code> for narrow side-panel use cases.
+                          </p>
+                        </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="cancel-form-heading">Cancel button (forms/modals)</h2>
-    <p>Save and cancel pattern for forms and modals.</p>
-    {#include components/actions/action-list groups=cancelFormData id="action-list-cancel-form" /}
-  </section>
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-group" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                            Group fields
+                          </h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Each entry in <code class="ws-code">groups</code> is a map with these fields.
+                          </p>
+                          <table
+                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                            role="grid"
+                            aria-label="Group fields"
+                          >
+                            <caption class="pf-v6-c-table__caption">
+                              <span class="ws-prop-required">*</span>
+                              required
+                            </caption>
+                            <thead class="pf-v6-c-table__thead">
+                              <tr class="pf-v6-c-table__tr">
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                                <th scope="col" class="pf-v6-c-table__th">Default</th>
+                                <th scope="col" class="pf-v6-c-table__th">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><span class="ws-prop-required">*</span> <code class="ws-code">items</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">List&lt;Item&gt;</span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Ordered list of items inside the group. Each item renders a
+                                    <code class="ws-code">pf-v6-c-action-list__item</code> wrapper.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">iconGroup</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Applies <code class="ws-code">pf-m-icons</code> on this group only — tightens
+                                    spacing for icon-heavy groups. PF's <code class="ws-code">isIconGroup</code>.</span
+                                  >
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="cancel-wizard-heading">Cancel button (wizards)</h2>
-    <p>Next, back, and cancel pattern for wizards.</p>
-    {#include components/actions/action-list groups=cancelWizardData id="action-list-cancel-wizard" /}
-  </section>
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-item" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                            Item fields
+                          </h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Each entry in a group's <code class="ws-code">items</code> takes one of three shapes — text
+                            button, icon button, or raw HTML escape hatch.
+                          </p>
+                          <table
+                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                            role="grid"
+                            aria-label="Item fields"
+                          >
+                            <thead class="pf-v6-c-table__thead">
+                              <tr class="pf-v6-c-table__tr">
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                                <th scope="col" class="pf-v6-c-table__th">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">text</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Button label. Pair with <code class="ws-code">variant</code>.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">variant</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Button variant —
+                                    <code class="ws-code">primary | secondary | tertiary | link | plain | danger</code
+                                    >.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">icon</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Flag — when present, the item renders as an icon-only button. Pair with
+                                    <code class="ws-code">iconName</code> and
+                                    <code class="ws-code">ariaLabel</code>.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">iconName</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Icon name passed to the <code class="ws-code">icons:svg(...)</code> Qute extension
+                                    (e.g. <code class="ws-code">fa:pen-to-square</code>).</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">ariaLabel</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Required for icon items — accessible name for the icon-only button.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">raw</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">String (HTML)</span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Escape hatch — emit arbitrary HTML inside the item wrapper. Useful for kebab
+                                    toggles, dropdowns, or any non-button control. Bypasses Qute escaping; sanitize
+                                    upstream.</span
+                                  >
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="vertical-heading">Vertical</h2>
-    <p>Vertically stacked action list.</p>
-    {#include components/actions/action-list groups=verticalData id="action-list-vertical" vertical=true /}
-  </section>
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>One group vs. many.</strong> Use a single group for tightly related actions (Save +
+                            Cancel). Use multiple groups when actions belong to distinct mental categories — e.g. wizard
+                            navigation (Next / Back) separated from cancellation. PF widens the gutter between groups
+                            relative to items inside a group, so the visual split is automatic.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Icon-only groups.</strong> Use <code class="ws-code">iconList</code> when every item
+                            is an icon. Use <code class="ws-code">iconGroup</code> when only some groups are icon-heavy
+                            — for example, inline row actions next to a save bar.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Cancel placement.</strong> In forms and modals, cancel is the last item in the same
+                            group as the save button. In wizards, cancel sits in its own group at the trailing edge so
+                            it's visually separated from the next / back navigation.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Accessibility.</strong> Icon-only items require
+                            <code class="ws-code">ariaLabel</code>. The component doesn't add a
+                            <code class="ws-code">role="toolbar"</code> — wrap in PF's
+                            <code class="ws-code">pf-v6-c-toolbar</code> if your action list is the page's primary
+                            toolbar.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>The <code class="ws-code">raw</code> escape hatch.</strong> Reserved for cases the
+                            structured shape doesn't cover (kebab toggles, dropdowns, custom popovers). Because it's
+                            emitted with <code class="ws-code">.raw</code>, the HTML is not escaped — sanitize at the
+                            source if it could contain user input.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <br /><a
+                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/actions/action-list.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Edit action-list.html on GitHub</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

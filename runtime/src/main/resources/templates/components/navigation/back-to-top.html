@@ -1,16 +1,20 @@
 {! Back to top — PatternFly v6 !}
-{! Parameters: id (required) !}
-{! Optional: alwaysVisible !}
-<div class="pf-v6-c-back-to-top" id="{id}"
-     x-data="{ visible: {#if alwaysVisible??}true{#else}false{/if} }"
-     {#if !alwaysVisible??}@scroll.window="visible = window.scrollY > 400"{/if}
-     x-show="visible"
-     x-transition>
-  <button class="pf-v6-c-button pf-m-primary" type="button"
-          @click="window.scrollTo({ top: 0, behavior: 'smooth' })">
-    Back to top
-    <span class="pf-v6-c-button__icon pf-m-end">
-      <svg viewBox="0 0 320 512" fill="currentColor" aria-hidden="true" width="1em" height="1em"><path d="M177 159.7l108.9 108.9c9.4 9.4 9.4 24.6 0 33.9l-22.7 22.7c-9.4 9.4-24.5 9.4-33.9 0L160 256.3l-69.3 69c-9.4 9.4-24.5 9.4-33.9 0l-22.7-22.7c-9.4-9.4-9.4-24.6 0-33.9L143 159.7c9.4-9.5 24.6-9.5 34 0z"/></svg>
-    </span>
+{!                                                                                  !}
+{! A sticky-positioned button that appears once the user has scrolled past 400px    !}
+{! and smooth-scrolls back to top on click. Alpine.js handles visibility +          !}
+{! interaction via the phaBackToTop component.                                      !}
+{!                                                                                  !}
+{! Parameters:                                                                      !}
+{!   id                 (required) — DOM id on the container.                       !}
+{!   title              (optional) — button label text (default: "Back to top").    !}
+{!   alwaysVisible      (optional) — boolean; skip the scroll threshold and keep    !}
+{!                                   the button visible.                            !}
+{!   scrollableSelector (optional) — CSS selector for a scrollable element to spy   !}
+{!                                   on instead of window scroll. The button also   !}
+{!                                   scrolls THAT element back to 0 on click.       !}
+<div class="pf-v6-c-back-to-top" id="{id}" x-data="phaBackToTop({#if scrollableSelector??}'{scrollableSelector}'{#else}null{/if}, {#if alwaysVisible??}true{#else}false{/if})" x-show="visible" x-cloak x-transition>
+  <button class="pf-v6-c-button pf-m-primary" type="button" @click="scrollToTop()">
+    <span class="pf-v6-c-button__text">{#if title??}{title}{#else}Back to top{/if}</span>
+    <span class="pf-v6-c-button__icon pf-m-end">{icons:svg('fa:angle-up').raw}</span>
   </button>
 </div>

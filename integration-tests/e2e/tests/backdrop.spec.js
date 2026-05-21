@@ -5,10 +5,18 @@ test.describe("Backdrop", () => {
     await page.goto("/components/backdrop");
   });
 
-  test("page loads with all 3 section headings", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#with-content-heading")).toBeVisible();
-    await expect(page.locator("#non-dismissible-heading")).toBeVisible();
+  test("page loads with example and documentation TOC anchors", async ({ page }) => {
+    for (const id of [
+      "examples",
+      "basic",
+      "with-content",
+      "non-dismissible",
+      "documentation",
+      "props-backdrop",
+      "usage",
+    ]) {
+      await expect(page.locator(`#${id}`)).toBeAttached();
+    }
   });
 
   test.describe("Basic", () => {
@@ -16,23 +24,29 @@ test.describe("Backdrop", () => {
       await expect(page.locator("#backdrop-basic")).not.toBeVisible();
     });
 
-    test("toggle shows backdrop then click dismisses", async ({ page }) => {
+    test("toggle shows backdrop; click dismisses", async ({ page }) => {
       await page.locator("#backdrop-basic-toggle").click();
       await expect(page.locator("#backdrop-basic")).toBeVisible();
+      await expect(page.locator("#backdrop-basic")).toHaveClass(/pf-v6-c-backdrop/);
       await page.locator("#backdrop-basic").click();
       await expect(page.locator("#backdrop-basic")).not.toBeVisible();
-    });
-
-    test("has correct pf-v6-c-backdrop class", async ({ page }) => {
-      await expect(page.locator("#backdrop-basic")).toHaveClass(/pf-v6-c-backdrop/);
     });
   });
 
   test.describe("With content", () => {
-    test("overlay is visible on toggle", async ({ page }) => {
+    test("overlay content renders inside the backdrop", async ({ page }) => {
       await page.locator("#backdrop-content-toggle").click();
       await expect(page.locator("#backdrop-content")).toBeVisible();
-      await expect(page.locator("#backdrop-content-overlay")).toBeVisible();
+      // Content slot should be a descendant of the backdrop.
+      await expect(page.locator("#backdrop-content #backdrop-content-overlay")).toBeVisible();
+      // Spinner inside the content slot.
+      await expect(page.locator("#backdrop-content .pf-v6-c-spinner")).toBeVisible();
+    });
+
+    test("clicking the inner panel does NOT dismiss", async ({ page }) => {
+      await page.locator("#backdrop-content-toggle").click();
+      await page.locator("#backdrop-content-overlay").click();
+      await expect(page.locator("#backdrop-content")).toBeVisible();
     });
   });
 
@@ -50,5 +64,12 @@ test.describe("Backdrop", () => {
       await page.locator("#backdrop-nondismiss-close").click();
       await expect(page.locator("#backdrop-nondismiss")).not.toBeVisible();
     });
+  });
+
+  test("standalone example routes render", async ({ page }) => {
+    for (const slug of ["basic", "with-content", "non-dismissible"]) {
+      const res = await page.goto(`/components/backdrop/${slug}`);
+      expect(res.status()).toBe(200);
+    }
   });
 });

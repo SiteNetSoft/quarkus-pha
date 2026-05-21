@@ -1,5 +1,53 @@
 {! Button — PatternFly v6 !}
-{! Parameters: id (required), variant (required — primary/secondary/tertiary/danger/warning/link/plain/control) !}
-{! Optional: disabled, small, block, displayLg, inline, type (submit/reset), href, ariaLabel !}
-{! Block: content (required) !}
-{#if href??}<a href="{href}" class="pf-v6-c-button pf-m-{variant}{#if small??} pf-m-small{/if}{#if block??} pf-m-block{/if}{#if displayLg??} pf-m-display-lg{/if}{#if inline??} pf-m-inline{/if}{#if disabled??} pf-m-disabled{/if}" id="{id}"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}{#if disabled??} aria-disabled="true" tabindex="-1"{/if}>{#insert content}{/insert}</a>{#else}<button class="pf-v6-c-button pf-m-{variant}{#if small??} pf-m-small{/if}{#if block??} pf-m-block{/if}{#if displayLg??} pf-m-display-lg{/if}{#if inline??} pf-m-inline{/if}" type="{#if type??}{type}{#else}button{/if}" id="{id}"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}{#if disabled??} disabled{/if}>{#insert content}{/insert}</button>{/if}
+{!                                                                                  !}
+{! Renders as <button>, <a> (when href is set), or a custom element (component).    !}
+{!                                                                                  !}
+{! Parameters:                                                                      !}
+{!   id            (required) — DOM id                                              !}
+{!   variant       (optional) — primary (default) | secondary | tertiary | danger | !}
+{!                              warning | link | plain | control | stateful.        !}
+{!                              Not applied when hamburger/favorite/settings is set !}
+{!                              (those imply their own plain variant).              !}
+{!   size          (optional) — sm | lg. Default size is unmodified.                !}
+{!   block         (optional) — boolean; pf-m-block                                 !}
+{!   inline        (optional) — boolean; pf-m-inline. Used with variant="link".     !}
+{!   disabled      (optional) — boolean; renders the HTML disabled attribute.       !}
+{!   ariaDisabled  (optional) — boolean; renders aria-disabled but keeps focusable. !}
+{!   clicked       (optional) — boolean; pf-m-clicked (active styling).             !}
+{!   hasNoPadding  (optional) — boolean; pf-m-no-padding (only meaningful for plain)!}
+{!   isLoading     (optional) — boolean; pf-m-progress + pf-m-in-progress + spinner !}
+{!   spinnerLabel  (optional) — aria-label on the loading spinner                   !}
+{!   component     (optional) — element override: "span" (or any other tag) makes   !}
+{!                              the button render as that tag. Default is "button"  !}
+{!                              (or "a" when href is set).                          !}
+{!   href          (optional) — link target. When set, renders <a> by default.     !}
+{!   type          (optional) — submit | reset (default "button" for <button>)     !}
+{!   ariaLabel     (optional) — accessible label                                    !}
+{!   ariaExpanded  (optional) — true | false. For toggling buttons (hamburger etc.) !}
+{!                                                                                  !}
+{!   icon          (optional) — icon name (set:slug) to render inside __icon span. !}
+{!   iconPosition  (optional) — start (default) | end                                !}
+{!                                                                                  !}
+{!   count         (optional) — integer. Renders __count badge to the end.         !}
+{!   countRead     (optional) — boolean; adds pf-m-read on the count badge.        !}
+{!                                                                                  !}
+{!   stateful      (optional) — boolean; pf-m-stateful                              !}
+{!   state         (optional) — read | unread | attention (for stateful)            !}
+{!                                                                                  !}
+{!   favorite      (optional) — boolean; pf-m-favorite (implies pf-m-plain).        !}
+{!   favorited     (optional) — boolean; pf-m-favorited.                            !}
+{!   settings      (optional) — boolean; pf-m-settings (implies pf-m-plain).        !}
+{!                                                                                  !}
+{!   hamburger        (optional) — boolean; pf-m-hamburger (implies pf-m-plain).    !}
+{!   hamburgerVariant (optional) — expand | collapse. Adds pf-m-{value}.            !}
+{!                                                                                  !}
+{! Slot:                                                                            !}
+{!   {#content} — button text (wrapped in pf-v6-c-button__text), or omit for        !}
+{!                icon-only buttons.                                                !}
+{#if component?? && !(component is 'a' || component is 'button')}
+<{component} class="pf-v6-c-button{#if !(hamburger?? || favorite?? || settings??)}{#if variant??} pf-m-{variant}{#else} pf-m-primary{/if}{/if}{#if size??} pf-m-{size}{/if}{#if block??} pf-m-block{/if}{#if inline??} pf-m-inline{/if}{#if clicked??} pf-m-clicked{/if}{#if hasNoPadding??} pf-m-no-padding{/if}{#if isLoading??} pf-m-progress pf-m-in-progress{/if}{#if disabled??} pf-m-disabled{/if}{#if ariaDisabled??} pf-m-aria-disabled{/if}{#if stateful??} pf-m-stateful{/if}{#if state??} pf-m-{state}{/if}{#if favorite??} pf-m-favorite pf-m-plain{/if}{#if favorited??} pf-m-favorited{/if}{#if settings??} pf-m-settings pf-m-plain{/if}{#if hamburger??} pf-m-hamburger pf-m-plain{/if}{#if hamburgerVariant??} pf-m-{hamburgerVariant}{/if}" id="{id}"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}{#if ariaExpanded??} aria-expanded="{ariaExpanded}"{/if}{#if ariaDisabled??} aria-disabled="true"{/if}>{#include components/actions/button-body /}</{component}>
+{#else if href??}
+<a class="pf-v6-c-button{#if !(hamburger?? || favorite?? || settings??)}{#if variant??} pf-m-{variant}{#else} pf-m-primary{/if}{/if}{#if size??} pf-m-{size}{/if}{#if block??} pf-m-block{/if}{#if inline??} pf-m-inline{/if}{#if clicked??} pf-m-clicked{/if}{#if hasNoPadding??} pf-m-no-padding{/if}{#if isLoading??} pf-m-progress pf-m-in-progress{/if}{#if disabled??} pf-m-disabled{/if}{#if ariaDisabled??} pf-m-aria-disabled{/if}{#if stateful??} pf-m-stateful{/if}{#if state??} pf-m-{state}{/if}{#if favorite??} pf-m-favorite pf-m-plain{/if}{#if favorited??} pf-m-favorited{/if}{#if settings??} pf-m-settings pf-m-plain{/if}{#if hamburger??} pf-m-hamburger pf-m-plain{/if}{#if hamburgerVariant??} pf-m-{hamburgerVariant}{/if}" href="{href}" id="{id}"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}{#if ariaExpanded??} aria-expanded="{ariaExpanded}"{/if}{#if disabled??} aria-disabled="true" tabindex="-1"{/if}{#if ariaDisabled??} aria-disabled="true"{/if}>{#include components/actions/button-body /}</a>
+{#else}
+<button class="pf-v6-c-button{#if !(hamburger?? || favorite?? || settings??)}{#if variant??} pf-m-{variant}{#else} pf-m-primary{/if}{/if}{#if size??} pf-m-{size}{/if}{#if block??} pf-m-block{/if}{#if inline??} pf-m-inline{/if}{#if clicked??} pf-m-clicked{/if}{#if hasNoPadding??} pf-m-no-padding{/if}{#if isLoading??} pf-m-progress pf-m-in-progress{/if}{#if disabled??} pf-m-disabled{/if}{#if ariaDisabled??} pf-m-aria-disabled{/if}{#if stateful??} pf-m-stateful{/if}{#if state??} pf-m-{state}{/if}{#if favorite??} pf-m-favorite pf-m-plain{/if}{#if favorited??} pf-m-favorited{/if}{#if settings??} pf-m-settings pf-m-plain{/if}{#if hamburger??} pf-m-hamburger pf-m-plain{/if}{#if hamburgerVariant??} pf-m-{hamburgerVariant}{/if}" type="{#if type??}{type}{#else}button{/if}" id="{id}"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}{#if ariaExpanded??} aria-expanded="{ariaExpanded}"{/if}{#if disabled??} disabled{/if}{#if ariaDisabled??} aria-disabled="true"{/if}>{#include components/actions/button-body /}</button>
+{/if}

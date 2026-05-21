@@ -1,53 +1,226 @@
-{#include layouts/base}
-{#title}Description List{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+{#include layouts/base} {#title}Description list{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Description list</h1>
+                    <p>
+                      Term + description pairs rendered semantically as a &lt;dl&gt; with PF v6 styling. Use for record
+                      details — entity properties displayed read-only.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                    <nav
+                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                      aria-label="Table of contents"
+                    >
+                      <div class="pf-v6-c-jump-links__main">
+                        <ul class="pf-v6-c-jump-links__list" role="list">
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#fill-columns" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Fill columns</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#props-description-list" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Description list props</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
+                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                        <div>
+                          <h2
+                            id="examples"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                          >
+                            Examples
+                          </h2>
+                        </div>
+                      </div>
+                      {#include partials/example-card title="Basic" slug="basic" component="description-list"
+                      description="Default stacked layout — each &lt;dt&gt; on top of its &lt;dd&gt;. Inner structure
+                      (groups, terms, descriptions) is hand-rendered in the slot."} {#content}{#include
+                      components/description-list/basic /}{/content} {/include} {#include partials/example-card
+                      title="Fill columns" slug="fill-columns" component="description-list" description="&lt;code
+                      class=&quot;ws-code&quot;&gt;fillColumns=true&lt;/code&gt; — term and description sit side-by-side
+                      in equal columns."} {#content}{#include components/description-list/fill-columns /}{/content}
+                      {/include}
 
-  <h1>Description List</h1>
-  <p>PatternFly v6 description list for displaying term-description pairs in a structured layout.</p>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="basic-heading">Basic</h2>
-    <p>A basic description list with term-description groups.</p>
-    {#include components/data-display/description-list id="desc-basic"}{#content}
-    <div class="pf-v6-c-description-list__group">
-      <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Name</span></dt>
-      <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">Example application</div></dd>
+                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                        <h2
+                          id="documentation"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Documentation
+                        </h2>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3
+                          id="props-description-list"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h3 pf-m-editorial ws-heading"
+                        >
+                          Description list props
+                        </h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          Parameters accepted by
+                          <code class="ws-code">{|{#include components/data-display/description-list ... /}|}</code>.
+                          Inner structure (groups + terms + descriptions) is hand-rendered using PF subclasses.
+                        </p>
+                        <table
+                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                          role="grid"
+                          aria-label="Description list props"
+                        >
+                          <caption class="pf-v6-c-table__caption">
+                            <span class="ws-prop-required">*</span>
+                            required
+                          </caption>
+                          <thead class="pf-v6-c-table__thead">
+                            <tr class="pf-v6-c-table__tr">
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                              <th scope="col" class="pf-v6-c-table__th">Description</th>
+                            </tr>
+                          </thead>
+                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">DOM id on the &lt;dl&gt;.</span>
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">fillColumns</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Adds <code class="ws-code">pf-m-fill-columns</code> — terms and descriptions sit in
+                                  equal-width columns.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">slot <code class="ws-code">content</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >One or more <code class="ws-code">.pf-v6-c-description-list__group</code> blocks
+                                  containing &lt;dt&gt; / &lt;dd&gt;.</span
+                                >
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Read-only data.</strong> Description list is for displaying record details. For
+                          editable fields use a <a href="/components/form">Form</a>.
+                        </p>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Vs. Data list.</strong> Description list shows the properties of one item.
+                          <a href="/components/data-list">Data list</a> shows multiple items as rows.
+                        </p>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <br /><a
+                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/description-list.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Edit description-list.html on GitHub</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
     </div>
-    <div class="pf-v6-c-description-list__group">
-      <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Version</span></dt>
-      <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">1.0.0</div></dd>
-    </div>
-    <div class="pf-v6-c-description-list__group">
-      <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Status</span></dt>
-      <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">Active</div></dd>
-    </div>
-    {/content}{/include}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="fill-columns-heading">Fill columns</h2>
-    <p>A description list that fills available columns.</p>
-    {#include components/data-display/description-list id="desc-fill" fillColumns=true}{#content}
-    <div class="pf-v6-c-description-list__group">
-      <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Host</span></dt>
-      <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">localhost</div></dd>
-    </div>
-    <div class="pf-v6-c-description-list__group">
-      <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Port</span></dt>
-      <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">8080</div></dd>
-    </div>
-    <div class="pf-v6-c-description-list__group">
-      <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Protocol</span></dt>
-      <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">HTTPS</div></dd>
-    </div>
-    <div class="pf-v6-c-description-list__group">
-      <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Region</span></dt>
-      <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">US East</div></dd>
-    </div>
-    {/content}{/include}
-  </section>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

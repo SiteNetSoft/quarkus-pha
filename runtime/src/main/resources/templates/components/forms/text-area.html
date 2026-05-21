@@ -1,5 +1,16 @@
-{! Text area — PatternFly v6 (uses form-control) !}
-{! Parameters: id, placeholder (optional), disabled (optional), readonly (optional), required (optional), rows (optional) !}
-<span class="pf-v6-c-form-control" id="{id}">
-  <textarea id="{id}-field" name="{id}"{#if placeholder??} placeholder="{placeholder}"{/if}{#if disabled??} disabled{/if}{#if readonly??} readonly{/if}{#if required??} required{/if}{#if rows??} rows="{rows}"{/if}></textarea>
+{! Text area — PatternFly v6 (form-control wrapper around <textarea>) !}
+{! Required: id !}
+{! Optional: placeholder, value (rendered as initial textarea content), rows, !}
+{!           disabled, readonly, required, expanded, !}
+{!           resize (vertical | horizontal | both — emits pf-m-resize-*; default = browser default), !}
+{!           validated (success|warning|error) !}
+<span class="pf-v6-c-form-control pf-m-textarea{#if validated??} pf-m-{validated}{/if}{#if resize??} pf-m-resize-{resize}{/if}{#if disabled??} pf-m-disabled{/if}{#if readonly??} pf-m-readonly{/if}{#if expanded??} pf-m-expanded{/if}" id="{id}">
+  <textarea id="{id}-field" name="{id}"{#if placeholder??} placeholder="{placeholder}"{/if}{#if disabled??} disabled{/if}{#if readonly??} readonly{/if}{#if required??} required{/if}{#if rows??} rows="{rows}"{/if}{#if validated??}{#if validated is 'error'} aria-invalid="true"{/if}{/if}>{#if value??}{value}{/if}</textarea>
+  {#if validated??}
+  <span class="pf-v6-c-form-control__utilities">
+    <span class="pf-v6-c-form-control__icon pf-m-status">
+      {#if validated is 'success'}{icons:svg('fa:circle-check').raw}{#else if validated is 'warning'}{icons:svg('fa:triangle-exclamation').raw}{#else if validated is 'error'}{icons:svg('fa:circle-exclamation').raw}{/if}
+    </span>
+  </span>
+  {/if}
 </span>

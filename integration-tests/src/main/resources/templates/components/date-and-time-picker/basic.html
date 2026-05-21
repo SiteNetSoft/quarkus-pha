@@ -1,0 +1,18 @@
+{! Date + time pair — compose Date picker + Time picker side-by-side. !}
+<div style="display: flex; gap: 0.5rem">
+  {#include components/forms/date-picker id="dtp-date" value="2026-05-20" /}
+  <div class="pf-v6-c-time-picker" id="dtp-time" x-data="{ open: false, value: '14:30' }" style="position: relative">
+    <div class="pf-v6-c-input-group">
+      <div class="pf-v6-c-input-group__item pf-m-fill">
+        <span class="pf-v6-c-form-control">
+          <input type="text" x-model="value" placeholder="HH:MM" aria-label="Time picker">
+        </span>
+      </div>
+      <div class="pf-v6-c-input-group__item">
+        <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Toggle time picker" @click="open = !open">
+          <span class="pf-v6-c-button__icon">{icons:svg('fa:clock').raw}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

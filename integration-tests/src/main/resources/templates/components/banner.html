@@ -1,65 +1,340 @@
-{#include layouts/base}
-{#title}Banner{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+{#include layouts/base} {#title}Banner{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Banner</h1>
+                    <p>
+                      A full-width tinted strip used for global messages — system status, marketing, persistent
+                      warnings. Available in eight color tones and five semantic status variants (with auto icons), with
+                      optional sticky positioning and AT-only prefix text.
+                    </p>
+                  </div>
+                </div>
+              </section>
 
-  <h1>Banner</h1>
-  <p>PatternFly v6 banner — a full-width message strip with status and color variants.</p>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-u-h-100">
+                    <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                      <nav
+                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                        aria-label="Table of contents"
+                      >
+                        <div class="pf-v6-c-jump-links__main">
+                          <ul class="pf-v6-c-jump-links__list" role="list">
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#basic-colors" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Basic colors</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#status" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Status</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#with-links" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">With links</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#screen-reader" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Screen reader text</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#sticky" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Sticky</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-banner" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Banner props</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="status-heading">Status variants</h2>
-    <p>Banners for all five status types.</p>
-    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-      {#include components/feedback/banner id="banner-success" variant="success"}{#content}Success banner message{/content}{/include}
-      {#include components/feedback/banner id="banner-warning" variant="warning"}{#content}Warning banner message{/content}{/include}
-      {#include components/feedback/banner id="banner-danger" variant="danger"}{#content}Danger banner message{/content}{/include}
-      {#include components/feedback/banner id="banner-info" variant="info"}{#content}Info banner message{/content}{/include}
-      {#include components/feedback/banner id="banner-custom" variant="custom"}{#content}Custom banner message{/content}{/include}
-    </div>
-  </section>
+                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                          <div>
+                            <h2
+                              id="examples"
+                              tabindex="-1"
+                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                            >
+                              Examples
+                            </h2>
+                          </div>
+                        </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="colors-heading">Color variants</h2>
-    <p>Banners with all eight color modifiers.</p>
-    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-      {#include components/feedback/banner id="banner-red" variant="red"}{#content}Red banner{/content}{/include}
-      {#include components/feedback/banner id="banner-orangered" variant="orangered"}{#content}Orangered banner{/content}{/include}
-      {#include components/feedback/banner id="banner-orange" variant="orange"}{#content}Orange banner{/content}{/include}
-      {#include components/feedback/banner id="banner-yellow" variant="yellow"}{#content}Yellow banner{/content}{/include}
-      {#include components/feedback/banner id="banner-green" variant="green"}{#content}Green banner{/content}{/include}
-      {#include components/feedback/banner id="banner-teal" variant="teal"}{#content}Teal banner{/content}{/include}
-      {#include components/feedback/banner id="banner-blue" variant="blue"}{#content}Blue banner{/content}{/include}
-      {#include components/feedback/banner id="banner-purple" variant="purple"}{#content}Purple banner{/content}{/include}
-    </div>
-  </section>
+                        {#include partials/example-card title="Basic colors" slug="basic-colors" component="banner"
+                        description="The eight tonal variants — red, orangered, orange, yellow, green, teal, blue,
+                        purple. Use for marketing or content emphasis without implying severity."} {#content}{#include
+                        components/banner/basic-colors /}{/content} {/include} {#include partials/example-card
+                        title="Status" slug="status" component="banner" description="Five semantic states — success,
+                        warning, danger, info, custom. Each (except custom) auto-renders the matching icon. Pair with
+                        &lt;code class=&quot;ws-code&quot;&gt;screenReaderText&lt;/code&gt; for AT context."}
+                        {#content}{#include components/banner/status /}{/content} {/include} {#include
+                        partials/example-card title="With links" slug="with-links" component="banner"
+                        description="Inline anchors inside a banner — pair with the info status for help / docs links."}
+                        {#content}{#include components/banner/with-links /}{/content} {/include} {#include
+                        partials/example-card title="Screen reader text" slug="screen-reader" component="banner"
+                        description="Prepend a visually-hidden prefix that AT announces but sighted users don't see —
+                        e.g. &quot;Info alert:&quot; before the visible message."} {#content}{#include
+                        components/banner/screen-reader /}{/content} {/include} {#include partials/example-card
+                        title="Sticky" slug="sticky" component="banner" description="Add &lt;code
+                        class=&quot;ws-code&quot;&gt;sticky=true&lt;/code&gt; for &lt;code
+                        class=&quot;ws-code&quot;&gt;pf-m-sticky&lt;/code&gt; — the banner pins to the top of its
+                        nearest scroll parent (here a 220px-tall box). Useful for persistent warnings in scrollable
+                        panels."} {#content}{#include components/banner/sticky /}{/content} {/include}
 
-  <section style="margin-top: 2rem;">
-    <h2 id="links-heading">With links</h2>
-    <p>Banner containing inline link elements.</p>
-    {#include components/feedback/banner id="banner-links" variant="info"}{#content}This is a banner with <a href="#">a link</a> and <a href="#">another link</a> inside.{/content}{/include}
-  </section>
+                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                            <div>
+                              <h2
+                                id="documentation"
+                                tabindex="-1"
+                                class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                              >
+                                Documentation
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="screen-reader-heading">With screen reader text</h2>
-    <p>Banner with hidden accessible text for screen readers.</p>
-    {#include components/feedback/banner id="banner-sr" variant="info" screenReaderText="Info alert:"}{#content}This banner has screen reader text.{/content}{/include}
-  </section>
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-banner" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                            Banner props
+                          </h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by
+                            <code class="ws-code">{|{#include components/feedback/banner ... /}|}</code>. The visible
+                            text goes in a <code class="ws-code">{|{#message}...{/message}|}</code> block.
+                          </p>
+                          <table
+                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                            role="grid"
+                            aria-label="Banner props"
+                          >
+                            <caption class="pf-v6-c-table__caption">
+                              <span class="ws-prop-required">*</span>
+                              required
+                            </caption>
+                            <thead class="pf-v6-c-table__thead">
+                              <tr class="pf-v6-c-table__tr">
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                                <th scope="col" class="pf-v6-c-table__th">Default</th>
+                                <th scope="col" class="pf-v6-c-table__th">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">DOM id on the banner container.</span>
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><span class="ws-prop-required">*</span> <code class="ws-code">variant</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Color:
+                                    <code class="ws-code"
+                                      >red | orangered | orange | yellow | green | teal | blue | purple</code
+                                    ><br />Status:
+                                    <code class="ws-code">success | warning | danger | info | custom</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Emits <code class="ws-code">{|pf-m-{variant}|}</code>. Status variants (except
+                                    <code class="ws-code">custom</code>) auto-render an icon; color variants are
+                                    plain.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">sticky</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Adds <code class="ws-code">pf-m-sticky</code>. Banner pins to the top of its
+                                    nearest scroll-parent. PF React's <code class="ws-code">isSticky</code>.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">screenReaderText</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Visually-hidden prefix announced before the message — e.g.
+                                    <code class="ws-code">"Warning:"</code>. Recommended for status banners.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">slot <code class="ws-code">message</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >The visible banner content. Supports inline HTML — links, strong, em.</span
+                                  >
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Divergence from PF React.</strong> PF React has separate
+                            <code class="ws-code">color</code> and <code class="ws-code">status</code> props; we
+                            collapse them into one <code class="ws-code">variant</code> enum (they're mutually exclusive
+                            in PF too). The slot is named <code class="ws-code">message</code> (not
+                            <code class="ws-code">content</code>) to avoid the Qute slot-name collision inside
+                            example-card. PF React's <code class="ws-code">isSticky</code> is our shorter
+                            <code class="ws-code">sticky</code>.
+                          </p>
+                        </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="sticky-heading">Sticky</h2>
-    <p>A sticky banner inside a scrollable container.</p>
-    <div style="height: 200px; overflow-y: auto; border: 1px solid var(--pf-t--global--border--color--default); border-radius: var(--pf-t--global--border--radius--small);" id="sticky-container">
-      {#include components/feedback/banner id="banner-sticky" variant="warning" sticky=true}{#content}Sticky warning banner{/content}{/include}
-      <div style="padding: 1rem;">
-        <p>Scroll down to see the sticky banner stay at top.</p>
-        <p style="margin-top: 4rem;">More content below...</p>
-        <p style="margin-top: 4rem;">Even more content...</p>
-        <p style="margin-top: 4rem;">Almost at the bottom...</p>
-        <p style="margin-top: 4rem;">End of scrollable content.</p>
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Color vs. status.</strong> Use a <em>status</em> variant when the message has a
+                            clear severity (success, warning, danger, info). Use a <em>color</em> variant for content /
+                            marketing emphasis where icon + label would be visual noise.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Where to put it.</strong> Banners live above the masthead for global messages, or
+                            inside a content section for scoped notices. They're never inline in body copy — use
+                            <a href="/components/alert">Alert</a> for that.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Sticky requires a scroll parent.</strong>
+                            <code class="ws-code">pf-m-sticky</code> uses CSS
+                            <code class="ws-code">position: sticky</code> — it pins relative to the nearest scroll
+                            container. If your banner doesn't stick, check that an ancestor has
+                            <code class="ws-code">overflow-y: auto</code> or <code class="ws-code">scroll</code>.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Always set <code class="ws-code">screenReaderText</code> on status banners.</strong>
+                            The visible icon communicates severity to sighted users; AT consumers can't see it. A short
+                            prefix (<code class="ws-code">"Warning:"</code>, <code class="ws-code">"Success:"</code>)
+                            gives them the same context.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <br /><a
+                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/feedback/banner.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Edit banner.html on GitHub</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

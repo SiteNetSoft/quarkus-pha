@@ -1,185 +1,150 @@
-{#include layouts/base}
-{#title}Custom menus{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-
-  <h1>Custom menus</h1>
-  <p>PatternFly v6 custom menus — flexible menu patterns composed from MenuToggle and Menu components.</p>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="actions-heading">Actions menu</h2>
-    <p>A dropdown menu with action items. Clicking an item performs an action.</p>
-    <div style="min-height: 240px;">
-      <div id="cm-actions" x-data="{ open: false }" style="position: relative; display: inline-block;">
-        <button class="pf-v6-c-menu-toggle" type="button"
-                :class="{ 'pf-m-expanded': open }"
-                :aria-expanded="open"
-                @click="open = !open">
-          <span class="pf-v6-c-menu-toggle__text">Actions</span>
-          <span class="pf-v6-c-menu-toggle__controls">
-            <span class="pf-v6-c-menu-toggle__toggle-icon">
-              {icons:svg('fa:caret-down').raw}
-            </span>
-          </span>
-        </button>
-        <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false"
-             style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 15rem;">
-          <div class="pf-v6-c-menu__content">
-            <ul class="pf-v6-c-menu__list" role="menu">
-              <li class="pf-v6-c-menu__list-item" role="none">
-                <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false">
-                  <span class="pf-v6-c-menu__item-main">
-                    <span class="pf-v6-c-menu__item-text">Edit</span>
-                  </span>
-                </button>
-              </li>
-              <li class="pf-v6-c-menu__list-item" role="none">
-                <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false">
-                  <span class="pf-v6-c-menu__item-main">
-                    <span class="pf-v6-c-menu__item-text">Clone</span>
-                  </span>
-                </button>
-              </li>
-              <li class="pf-v6-c-menu__list-item" role="none">
-                <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false">
-                  <span class="pf-v6-c-menu__item-main">
-                    <span class="pf-v6-c-menu__item-text">Download</span>
-                  </span>
-                </button>
-              </li>
-              <li class="pf-v6-c-divider" role="separator"></li>
-              <li class="pf-v6-c-menu__list-item pf-m-danger" role="none">
-                <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false">
-                  <span class="pf-v6-c-menu__item-main">
-                    <span class="pf-v6-c-menu__item-text">Delete</span>
-                  </span>
-                </button>
-              </li>
-            </ul>
-          </div>
+{#include layouts/base} {#title}Custom menus{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Custom menus</h1>
+                    <p>
+                      Composition pattern — a Menu with arbitrary header / footer / search slots. Use for richer
+                      dropdowns that aren't just a flat action list (e.g. project pickers with a search box).
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                    <nav
+                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                      aria-label="Table of contents"
+                    >
+                      <div class="pf-v6-c-jump-links__main">
+                        <ul class="pf-v6-c-jump-links__list" role="list">
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#props-custom-menus" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Custom menus pattern</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
+                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                        <div>
+                          <h2
+                            id="examples"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                          >
+                            Examples
+                          </h2>
+                        </div>
+                      </div>
+                      {#include partials/example-card title="Basic" slug="basic" component="custom-menus"
+                      description="Menu with a header (&quot;Recent projects&quot;), items with descriptions, and a
+                      footer link."} {#content}{#include components/custom-menus/basic /}{/content} {/include}
+                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                        <h2
+                          id="documentation"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Documentation
+                        </h2>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="props-custom-menus" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                          Custom menus pattern
+                        </h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          Composition — add <code class="ws-code">.pf-v6-c-menu__header</code> and
+                          <code class="ws-code">.pf-v6-c-menu__footer</code> around the standard menu list. Search bars
+                          use <code class="ws-code">.pf-v6-c-menu__search</code>.
+                        </p>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Keep the menu list a list.</strong> Even with header/footer, the inner items should
+                          still be &lt;li&gt; with <code class="ws-code">role="menuitem"</code> for proper keyboard
+                          navigation.
+                        </p>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <br /><a
+                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/integration-tests/src/main/resources/templates/components/custom-menus/basic.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Edit custom-menus example on GitHub</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
         </div>
       </div>
     </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="grouped-heading">Grouped menu</h2>
-    <p>A menu with items organized into labeled groups.</p>
-    <div style="min-height: 320px;">
-      <div id="cm-grouped" x-data="{ open: false }" style="position: relative; display: inline-block;">
-        <button class="pf-v6-c-menu-toggle" type="button"
-                :class="{ 'pf-m-expanded': open }"
-                :aria-expanded="open"
-                @click="open = !open">
-          <span class="pf-v6-c-menu-toggle__text">Group actions</span>
-          <span class="pf-v6-c-menu-toggle__controls">
-            <span class="pf-v6-c-menu-toggle__toggle-icon">
-              {icons:svg('fa:caret-down').raw}
-            </span>
-          </span>
-        </button>
-        <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false"
-             style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 15rem;">
-          <div class="pf-v6-c-menu__content">
-            <section class="pf-v6-c-menu__group">
-              <h1 class="pf-v6-c-menu__group-title">Group 1</h1>
-              <ul class="pf-v6-c-menu__list" role="menu">
-                <li class="pf-v6-c-menu__list-item" role="none">
-                  <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false">
-                    <span class="pf-v6-c-menu__item-main">
-                      <span class="pf-v6-c-menu__item-text">Option 1</span>
-                    </span>
-                  </button>
-                </li>
-                <li class="pf-v6-c-menu__list-item" role="none">
-                  <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false">
-                    <span class="pf-v6-c-menu__item-main">
-                      <span class="pf-v6-c-menu__item-text">Option 2</span>
-                    </span>
-                  </button>
-                </li>
-              </ul>
-            </section>
-            <li class="pf-v6-c-divider" role="separator"></li>
-            <section class="pf-v6-c-menu__group">
-              <h1 class="pf-v6-c-menu__group-title">Group 2</h1>
-              <ul class="pf-v6-c-menu__list" role="menu">
-                <li class="pf-v6-c-menu__list-item" role="none">
-                  <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false">
-                    <span class="pf-v6-c-menu__item-main">
-                      <span class="pf-v6-c-menu__item-text">Option 3</span>
-                    </span>
-                  </button>
-                </li>
-                <li class="pf-v6-c-menu__list-item" role="none">
-                  <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false">
-                    <span class="pf-v6-c-menu__item-main">
-                      <span class="pf-v6-c-menu__item-text">Option 4</span>
-                    </span>
-                  </button>
-                </li>
-              </ul>
-            </section>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="descriptions-heading">Menu with descriptions</h2>
-    <p>A menu where each item includes a description below the main text.</p>
-    <div style="min-height: 280px;">
-      <div id="cm-descriptions" x-data="{ open: false, selected: '' }" style="position: relative; display: inline-block;">
-        <button class="pf-v6-c-menu-toggle" type="button"
-                :class="{ 'pf-m-expanded': open }"
-                :aria-expanded="open"
-                @click="open = !open">
-          <span class="pf-v6-c-menu-toggle__text" x-text="selected || 'Choose an option'"></span>
-          <span class="pf-v6-c-menu-toggle__controls">
-            <span class="pf-v6-c-menu-toggle__toggle-icon">
-              {icons:svg('fa:caret-down').raw}
-            </span>
-          </span>
-        </button>
-        <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false"
-             style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 20rem;">
-          <div class="pf-v6-c-menu__content">
-            <ul class="pf-v6-c-menu__list" role="menu">
-              <li class="pf-v6-c-menu__list-item" role="none">
-                <button class="pf-v6-c-menu__item" type="button" role="menuitem"
-                        @click="selected = 'Start rollout'; open = false">
-                  <span class="pf-v6-c-menu__item-main">
-                    <span class="pf-v6-c-menu__item-text">Start rollout</span>
-                  </span>
-                  <span class="pf-v6-c-menu__item-description">Deploys the current build to production.</span>
-                </button>
-              </li>
-              <li class="pf-v6-c-menu__list-item" role="none">
-                <button class="pf-v6-c-menu__item" type="button" role="menuitem"
-                        @click="selected = 'Pause rollout'; open = false">
-                  <span class="pf-v6-c-menu__item-main">
-                    <span class="pf-v6-c-menu__item-text">Pause rollout</span>
-                  </span>
-                  <span class="pf-v6-c-menu__item-description">Temporarily stops the deployment process.</span>
-                </button>
-              </li>
-              <li class="pf-v6-c-menu__list-item" role="none">
-                <button class="pf-v6-c-menu__item" type="button" role="menuitem"
-                        @click="selected = 'Restart rollout'; open = false">
-                  <span class="pf-v6-c-menu__item-main">
-                    <span class="pf-v6-c-menu__item-text">Restart rollout</span>
-                  </span>
-                  <span class="pf-v6-c-menu__item-description">Restarts the deployment from the beginning.</span>
-                </button>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

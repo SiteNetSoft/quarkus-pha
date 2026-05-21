@@ -1,34 +1,441 @@
-{#include layouts/base}
-{#title}Helper text{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-  <h1>Helper text</h1>
-  <p>PatternFly v6 helper text — informational text displayed below form fields.</p>
+{#include layouts/base} {#title}Helper text{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary">
+          <span class="pf-v6-c-button__text">Skip to content</span>
+        </a>
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Helper text</h1>
+                    <p>
+                      Inline guidance beneath form fields and other inputs. Each helper-text container holds one or more
+                      items; items pick a default icon based on their <code class="ws-code">status</code> (success,
+                      warning, error, indeterminate) or render with a custom icon.
+                    </p>
+                  </div>
+                </div>
+              </section>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="static-heading">Static</h2>
-    <p>Default helper text without a status.</p>
-    {#include components/feedback/helper-text id="ht-static" text="Enter your username." /}
-  </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-u-h-100">
+                    <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                      <nav
+                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                        aria-label="Table of contents"
+                      >
+                        <div class="pf-v6-c-jump-links__main">
+                          <ul class="pf-v6-c-jump-links__list" role="list">
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#with-custom-icons" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">With custom icons</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#multiple-items" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Multiple items</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-container" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Container props</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-item" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Item props</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="success-heading">Success</h2>
-    <p>Helper text indicating a successful validation.</p>
-    {#include components/feedback/helper-text id="ht-success" text="Username is available." status="success" dynamic=true iconName="fa:circle-check" /}
-  </section>
+                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                          <div>
+                            <h2
+                              id="examples"
+                              tabindex="-1"
+                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                            >
+                              Examples
+                            </h2>
+                          </div>
+                        </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="warning-heading">Warning</h2>
-    <p>Helper text indicating a warning.</p>
-    {#include components/feedback/helper-text id="ht-warning" text="Username is very short." status="warning" dynamic=true iconName="fa:triangle-exclamation" /}
-  </section>
+                        {#include partials/example-card title="Basic" slug="basic" component="helper-text"
+                        description="Single-item helper text at every status. Each status auto-renders a default icon
+                        when no &lt;code class=&quot;ws-code&quot;&gt;iconName&lt;/code&gt; is passed."}
+                        {#content}{#include components/helper-text/basic /}{/content} {/include} {#include
+                        partials/example-card title="With custom icons" slug="with-custom-icons" component="helper-text"
+                        description="Pass &lt;code class=&quot;ws-code&quot;&gt;iconName&lt;/code&gt; to override the
+                        default status icon with a Font Awesome / pficon glyph."} {#content}{#include
+                        components/helper-text/with-custom-icons /}{/content} {/include} {#include partials/example-card
+                        title="Multiple items" slug="multiple-items" component="helper-text" description="Compose many
+                        items inside one container by opening the &lt;code
+                        class=&quot;ws-code&quot;&gt;helper-text&lt;/code&gt; include's &lt;code
+                        class=&quot;ws-code&quot;&gt;items&lt;/code&gt; slot and including &lt;code
+                        class=&quot;ws-code&quot;&gt;helper-text-item&lt;/code&gt; per row. Useful for
+                        password-requirement checklists, multi-field validation summaries, etc."} {#content}{#include
+                        components/helper-text/multiple-items /}{/content} {/include}
 
-  <section style="margin-top: 2rem;">
-    <h2 id="error-heading">Error</h2>
-    <p>Helper text indicating an error.</p>
-    {#include components/feedback/helper-text id="ht-error" text="Username is already taken." status="error" dynamic=true iconName="fa:circle-exclamation" /}
-  </section>
+                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                            <div>
+                              <h2
+                                id="documentation"
+                                tabindex="-1"
+                                class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                              >
+                                Documentation
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-container" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                            Container props
+                          </h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by
+                            <code class="ws-code">{|{#include components/feedback/helper-text ... /}|}</code>. The
+                            container has two modes — single-item (when <code class="ws-code">text</code> is set) or
+                            multi-item (when an <code class="ws-code">items</code> slot is provided).
+                          </p>
+                          <table
+                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                            role="grid"
+                            aria-label="HelperText container props"
+                          >
+                            <thead class="pf-v6-c-table__thead">
+                              <tr class="pf-v6-c-table__tr">
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                                <th scope="col" class="pf-v6-c-table__th">Default</th>
+                                <th scope="col" class="pf-v6-c-table__th">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >DOM id on the container. Reference it from a form control's
+                                    <code class="ws-code">aria-describedby</code> to announce all items together.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">text</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >When set, switches to single-item mode and renders one item with the remaining
+                                    params (<code class="ws-code">status</code>, <code class="ws-code">dynamic</code>,
+                                    <code class="ws-code">iconName</code>). Mutually exclusive with the
+                                    <code class="ws-code">items</code> slot.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">status</code> / <code class="ws-code">dynamic</code> /
+                                    <code class="ws-code">iconName</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">See item props</span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Passed through to the single item rendered in single-item mode. Ignored in
+                                    multi-item mode (set them on each
+                                    <code class="ws-code">helper-text-item</code> instead).</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">items</code> (slot)</span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute insert</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Multi-item mode. Wrap one or more
+                                    <code class="ws-code">helper-text-item</code> includes in
+                                    <code class="ws-code">{|{#items}...{/items}|}</code>.</span
+                                  >
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-item" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                            Item props
+                          </h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by
+                            <code class="ws-code">{|{#include components/feedback/helper-text-item ... /}|}</code>.
+                          </p>
+                          <table
+                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                            role="grid"
+                            aria-label="HelperTextItem props"
+                          >
+                            <caption class="pf-v6-c-table__caption">
+                              <span class="ws-prop-required">*</span>
+                              required
+                            </caption>
+                            <thead class="pf-v6-c-table__thead">
+                              <tr class="pf-v6-c-table__tr">
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                                <th scope="col" class="pf-v6-c-table__th">Default</th>
+                                <th scope="col" class="pf-v6-c-table__th">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><span class="ws-prop-required">*</span> <code class="ws-code">text</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">Body text of the item.</span>
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">status</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code"
+                                      >"indeterminate" | "warning" | "success" | "error"</code
+                                    ></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Applies <code class="ws-code">{|pf-m-{status}|}</code> and auto-picks a default
+                                    icon (<code class="ws-code">fa:circle-check</code> for success,
+                                    <code class="ws-code">fa:triangle-exclamation</code> for warning,
+                                    <code class="ws-code">fa:circle-exclamation</code> for error,
+                                    <code class="ws-code">fa:minus</code> for indeterminate).</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">dynamic</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Applies <code class="ws-code">pf-m-dynamic</code> for status transitions (PF v6
+                                    fades in the changed text + icon).</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">iconName</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >String <code class="ws-code">"set:slug"</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">Auto by status</span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Override the default per-status icon. Same naming convention as the icon component
+                                    (e.g. <code class="ws-code">fa:lightbulb</code>,
+                                    <code class="ws-code">pficon:cluster</code>).</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >DOM id on the item element. Reference it from
+                                    <code class="ws-code">aria-describedby</code> to announce a specific item without
+                                    the rest.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">screenReaderText</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Screen-reader-only suffix (wrapped in
+                                    <code class="ws-code">pf-v6-screen-reader</code>). Useful to announce the variant
+                                    explicitly when the icon alone isn't sufficient.</span
+                                  >
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Divergence from PF React.</strong> PF exposes additional props we don't implement:
+                            <code class="ws-code">component</code> (switch container/item to
+                            <code class="ws-code">ul</code>/<code class="ws-code">li</code>),
+                            <code class="ws-code">isLiveRegion</code> (add <code class="ws-code">aria-live</code> for
+                            dynamic announcements), and <code class="ws-code">aria-label</code> on the container.
+                            They're not used anywhere in this project yet — add when a real consumer needs them.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Single-item vs. multi-item.</strong> If you only need one helper-text row, pass
+                            <code class="ws-code">text</code> directly on the container — the include emits both the
+                            container and the single item. If you need multiple rows (e.g. a password-requirement
+                            checklist), open the <code class="ws-code">items</code> slot and include one
+                            <code class="ws-code">helper-text-item</code> per row inside it.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Default icons.</strong> Setting <code class="ws-code">status</code> on an item
+                            without an <code class="ws-code">iconName</code> auto-renders the matching status icon —
+                            success gets a check, warning gets a triangle, error gets an x-circle, indeterminate gets a
+                            dash. Skip both <code class="ws-code">status</code> and
+                            <code class="ws-code">iconName</code> for plain informational text (no icon, default text
+                            color).
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Wiring to a form field.</strong> Set <code class="ws-code">id</code> on the
+                            container, then reference it from the input's <code class="ws-code">aria-describedby</code>:
+                            <code class="ws-code">{|&lt;input aria-describedby="ht-username"&gt;|}</code> paired with
+                            <code class="ws-code"
+                              >{|{#include components/feedback/helper-text id="ht-username" .../}|}</code
+                            >. Screen readers will announce the helper text together with the field's label.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Dynamic updates.</strong> When the helper text is updated by client-side validation
+                            (e.g. HTMX swap), set <code class="ws-code">dynamic=true</code> on the item so PF's
+                            transition fades the change in. For announcements to screen readers, you'd want
+                            <code class="ws-code">isLiveRegion</code> on the container — not implemented yet (see
+                            divergence note above).
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <br /><a
+                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/feedback/helper-text.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Edit helper-text.html on GitHub</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

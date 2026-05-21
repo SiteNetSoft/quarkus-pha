@@ -1,15 +1,28 @@
 {! Action List — PatternFly v6 !}
-{! Parameters: id (required), groups (required list) !}
-{! Optional: icons, vertical !}
-<div class="pf-v6-c-action-list{#if icons??} pf-m-icons{/if}{#if vertical??} pf-m-vertical{/if}" id="{id}">
+{! Required: id, groups !}
+{! Optional flags (root): iconList — pf-m-icons on the list (was: icons) !}
+{!                        vertical — pf-m-vertical (PHA-only divergence) !}
+{! Group: { items: [...], iconGroup?: bool }  — iconGroup adds pf-m-icons on the group !}
+{! Item shape (one of): !}
+{!   { text, variant }                          — text button (variant: primary|secondary|tertiary|link|plain|danger) !}
+{!   { icon: true, iconName, ariaLabel,         — icon-only button (variant defaults to plain) !}
+{!     variant?: <button variant> }             !}
+{!   { raw: <html string> }                     — escape hatch for custom content (kebab, dropdown, etc.) !}
+<div class="pf-v6-c-action-list{#if iconList??} pf-m-icons{/if}{#if vertical??} pf-m-vertical{/if}" id="{id}">
   {#for group in groups}
-  <div class="pf-v6-c-action-list__group{#if group.icons??} pf-m-icons{/if}">
+  <div class="pf-v6-c-action-list__group{#if group.iconGroup??} pf-m-icons{/if}">
     {#for item in group.items}
     <div class="pf-v6-c-action-list__item">
-      {#if item.icon??}
-      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="{item.ariaLabel}">{icons:svg(item.iconName).raw}</button>
+      {#if item.raw??}
+      {item.raw.raw}
+      {#else if item.icon??}
+      <button class="pf-v6-c-button pf-m-{#if item.variant??}{item.variant}{#else}plain{/if}" type="button" aria-label="{item.ariaLabel}">
+        <span class="pf-v6-c-button__icon">{icons:svg(item.iconName).raw}</span>
+      </button>
       {#else}
-      <button class="pf-v6-c-button pf-m-{item.variant}" type="button">{item.text}</button>
+      <button class="pf-v6-c-button pf-m-{item.variant}" type="button">
+        <span class="pf-v6-c-button__text">{item.text}</span>
+      </button>
       {/if}
     </div>
     {/for}
