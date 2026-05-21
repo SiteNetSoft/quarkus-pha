@@ -5,30 +5,46 @@ test.describe("Helper text", () => {
     await page.goto("/components/helper-text");
   });
 
-  test("page loads with all 4 section headings", async ({ page }) => {
-    await expect(page.locator("#static-heading")).toBeVisible();
-    await expect(page.locator("#success-heading")).toBeVisible();
-    await expect(page.locator("#warning-heading")).toBeVisible();
-    await expect(page.locator("#error-heading")).toBeVisible();
+  test("page loads with example and documentation TOC anchors", async ({ page }) => {
+    await expect(page.locator("#examples")).toBeAttached();
+    await expect(page.locator("#basic")).toBeAttached();
+    await expect(page.locator("#with-custom-icons")).toBeAttached();
+    await expect(page.locator("#multiple-items")).toBeAttached();
+    await expect(page.locator("#documentation")).toBeAttached();
+    await expect(page.locator("#props-container")).toBeAttached();
+    await expect(page.locator("#props-item")).toBeAttached();
+    await expect(page.locator("#usage")).toBeAttached();
   });
 
-  test("static helper text has text content", async ({ page }) => {
-    await expect(page.locator("#ht-static .pf-v6-c-helper-text__item-text")).toHaveText("Enter your username.");
+  test("basic card renders all status variants with auto-icons", async ({ page }) => {
+    await expect(page.locator("#ht-basic-static .pf-v6-c-helper-text__item-text")).toHaveText("Enter your username.");
+    await expect(page.locator("#ht-basic-success .pf-v6-c-helper-text__item")).toHaveClass(/pf-m-success/);
+    await expect(page.locator("#ht-basic-warning .pf-v6-c-helper-text__item")).toHaveClass(/pf-m-warning/);
+    await expect(page.locator("#ht-basic-error .pf-v6-c-helper-text__item")).toHaveClass(/pf-m-error/);
+    await expect(page.locator("#ht-basic-indeterminate .pf-v6-c-helper-text__item")).toHaveClass(/pf-m-indeterminate/);
+    await expect(page.locator("#ht-basic-success .pf-v6-c-helper-text__item-icon")).toBeVisible();
+    await expect(page.locator("#ht-basic-warning .pf-v6-c-helper-text__item-icon")).toBeVisible();
+    await expect(page.locator("#ht-basic-error .pf-v6-c-helper-text__item-icon")).toBeVisible();
+    await expect(page.locator("#ht-basic-indeterminate .pf-v6-c-helper-text__item-icon")).toBeVisible();
   });
 
-  test("success variant has success modifier", async ({ page }) => {
-    await expect(page.locator("#ht-success .pf-v6-c-helper-text__item")).toHaveClass(/pf-m-success/);
+  test("custom-icons card overrides the default icon", async ({ page }) => {
+    await expect(page.locator("#ht-icon-info .pf-v6-c-helper-text__item-icon svg")).toBeVisible();
+    await expect(page.locator("#ht-icon-warning .pf-v6-c-helper-text__item-icon svg")).toBeVisible();
+    await expect(page.locator("#ht-icon-error .pf-v6-c-helper-text__item-icon svg")).toBeVisible();
   });
 
-  test("warning variant has warning modifier", async ({ page }) => {
-    await expect(page.locator("#ht-warning .pf-v6-c-helper-text__item")).toHaveClass(/pf-m-warning/);
+  test("multiple-items card renders 4 items in one container", async ({ page }) => {
+    const container = page.locator("#ht-multi-pwd");
+    await expect(container).toBeVisible();
+    await expect(container.locator(".pf-v6-c-helper-text__item")).toHaveCount(4);
   });
 
-  test("error variant has error modifier", async ({ page }) => {
-    await expect(page.locator("#ht-error .pf-v6-c-helper-text__item")).toHaveClass(/pf-m-error/);
-  });
-
-  test("dynamic variants have icon", async ({ page }) => {
-    await expect(page.locator("#ht-success .pf-v6-c-helper-text__item-icon")).toBeVisible();
+  test("standalone example routes render", async ({ page }) => {
+    for (const slug of ["basic", "with-custom-icons", "multiple-items"]) {
+      const res = await page.goto(`/components/helper-text/${slug}`);
+      expect(res.status()).toBe(200);
+      await expect(page.locator(".pf-v6-c-helper-text").first()).toBeVisible();
+    }
   });
 });

@@ -1,41 +1,371 @@
-{#include layouts/base}
-{#title}Skeleton{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-  <h1>Skeleton</h1>
-  <p>PatternFly v6 skeleton — a loading placeholder that indicates content is being loaded.</p>
+{#include layouts/base} {#title}Skeleton{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary">
+          <span class="pf-v6-c-button__text">Skip to content</span>
+        </a>
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Skeleton</h1>
+                    <p>
+                      Loading placeholder. Use to reserve space while content fetches in. PF v6 ships preset width /
+                      height percentages, text-line height tokens, and circle / square shapes. Pass
+                      <code class="ws-code">widthValue</code> / <code class="ws-code">heightValue</code> for pixel-exact
+                      shapes that don't match a token.
+                    </p>
+                  </div>
+                </div>
+              </section>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="text-heading">Text lines</h2>
-    <p>Skeleton placeholders for text content at different sizes.</p>
-    <div style="display: grid; gap: 0.5rem; max-width: 400px;">
-      {#include components/feedback/skeleton id="sk-heading" textSize="4xl" width="50" screenreaderText="Loading heading" /}
-      {#include components/feedback/skeleton id="sk-body1" width="75" screenreaderText="Loading text" /}
-      {#include components/feedback/skeleton id="sk-body2" screenreaderText="Loading text" /}
-      {#include components/feedback/skeleton id="sk-body3" width="66" screenreaderText="Loading text" /}
-    </div>
-  </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-u-h-100">
+                    <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                      <nav
+                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                        aria-label="Table of contents"
+                      >
+                        <div class="pf-v6-c-jump-links__main">
+                          <ul class="pf-v6-c-jump-links__list" role="list">
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#default" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Default</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#percentage-widths" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Percentage widths</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#percentage-heights" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Percentage heights</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#text-modifiers" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Text modifiers</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#shapes" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Shapes</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-skeleton" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Skeleton props</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="shapes-heading">Shapes</h2>
-    <p>Circle and square skeleton shapes.</p>
-    <div style="display: flex; gap: 1rem; align-items: center;">
-      {#include components/feedback/skeleton id="sk-circle" shape="circle" width="sm" height="sm" screenreaderText="Loading avatar" /}
-      {#include components/feedback/skeleton id="sk-square" shape="square" width="sm" height="sm" screenreaderText="Loading image" /}
-    </div>
-  </section>
+                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                          <div>
+                            <h2
+                              id="examples"
+                              tabindex="-1"
+                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                            >
+                              Examples
+                            </h2>
+                          </div>
+                        </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="sizes-heading">Custom sizes</h2>
-    <p>Skeletons with various width and height modifiers.</p>
-    <div style="display: grid; gap: 0.5rem; max-width: 600px;">
-      {#include components/feedback/skeleton id="sk-w25" width="25" screenreaderText="Loading" /}
-      {#include components/feedback/skeleton id="sk-w50" width="50" screenreaderText="Loading" /}
-      {#include components/feedback/skeleton id="sk-w75" width="75" screenreaderText="Loading" /}
-      {#include components/feedback/skeleton id="sk-full" screenreaderText="Loading" /}
+                        {#include partials/example-card title="Default" slug="default" component="skeleton"
+                        description="Bare skeleton. Fills its container's width at the base PF v6 height token. Provide
+                        &lt;code class=&quot;ws-code&quot;&gt;screenreaderText&lt;/code&gt; so assistive tech announces
+                        loading state."} {#content}{#include components/skeleton/default /}{/content} {/include}
+                        {#include partials/example-card title="Percentage widths" slug="percentage-widths"
+                        component="skeleton" description="Pass &lt;code
+                        class=&quot;ws-code&quot;&gt;width=&quot;25&quot;|&quot;33&quot;|&quot;50&quot;|&quot;66&quot;|&quot;75&quot;&lt;/code&gt;
+                        to constrain the skeleton to a fraction of its container."} {#content}{#include
+                        components/skeleton/percentage-widths /}{/content} {/include} {#include partials/example-card
+                        title="Percentage heights" slug="percentage-heights" component="skeleton" description="&lt;code
+                        class=&quot;ws-code&quot;&gt;height=&quot;25&quot;|&quot;50&quot;|&quot;75&quot;|&quot;100&quot;&lt;/code&gt;
+                        works the same way — but the parent must have an explicit height for the percentage to
+                        resolve."} {#content}{#include components/skeleton/percentage-heights /}{/content} {/include}
+                        {#include partials/example-card title="Text modifiers" slug="text-modifiers"
+                        component="skeleton" description="&lt;code
+                        class=&quot;ws-code&quot;&gt;fontSize=&quot;sm&quot;..&quot;4xl&quot;&lt;/code&gt; sets the
+                        skeleton's height to the matching text-size token. Use for line-skeleton placeholders inside
+                        content blocks."} {#content}{#include components/skeleton/text-modifiers /}{/content} {/include}
+                        {#include partials/example-card title="Shapes" slug="shapes" component="skeleton"
+                        description="&lt;code
+                        class=&quot;ws-code&quot;&gt;shape=&quot;circle&quot;|&quot;square&quot;&lt;/code&gt; — pair
+                        with matching width / height for the size. The right-hand example uses &lt;code
+                        class=&quot;ws-code&quot;&gt;widthValue&lt;/code&gt; + &lt;code
+                        class=&quot;ws-code&quot;&gt;heightValue&lt;/code&gt; for a pixel-exact circle the tokens don't
+                        cover."} {#content}{#include components/skeleton/shapes /}{/content} {/include}
+
+                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                            <div>
+                              <h2
+                                id="documentation"
+                                tabindex="-1"
+                                class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                              >
+                                Documentation
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-skeleton" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                            Skeleton props
+                          </h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by
+                            <code class="ws-code">{|{#include components/feedback/skeleton ... /}|}</code>.
+                          </p>
+                          <table
+                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                            role="grid"
+                            aria-label="Skeleton props"
+                          >
+                            <thead class="pf-v6-c-table__thead">
+                              <tr class="pf-v6-c-table__tr">
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                                <th scope="col" class="pf-v6-c-table__th">Default</th>
+                                <th scope="col" class="pf-v6-c-table__th">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">shape</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">"circle" | "square"</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Applies <code class="ws-code">pf-m-circle</code> or
+                                    <code class="ws-code">pf-m-square</code>. Pair with matching
+                                    <code class="ws-code">width</code> + <code class="ws-code">height</code> (or their
+                                    <code class="ws-code">Value</code> counterparts) to size the shape.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">width</code> / <code class="ws-code">height</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">"sm" | "md" | "lg" | "25" | "33" | "50" | "66" | "75"</code>
+                                    (+ <code class="ws-code">"100"</code> for height)</span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Modifier tokens. Each renders the matching
+                                    <code class="ws-code">{|pf-m-{axis}-{value}|}</code> class. Percentage tokens (25 /
+                                    33 / 50 / 66 / 75 / 100) require the parent to have an explicit size on that
+                                    axis.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">widthValue</code> /
+                                    <code class="ws-code">heightValue</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >CSS length (<code class="ws-code">"200px"</code>,
+                                    <code class="ws-code">"10rem"</code>, …)</span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Emits an inline <code class="ws-code">style="width: ...; height: ..."</code>. Use
+                                    when the modifier tokens don't match the size you need (pixel-exact avatars,
+                                    oddly-sized placeholders). Mutually exclusive with the token form for that
+                                    axis.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">fontSize</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code"
+                                      >"sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl"</code
+                                    ></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Renders <code class="ws-code">{|pf-m-text-{value}|}</code>; sets the height to the
+                                    matching PF v6 text-size token. Useful for line-skeleton placeholders that should
+                                    match the line heights of surrounding paragraphs / headings.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">screenreaderText</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Text wrapped in <code class="ws-code">pf-v6-screen-reader</code> for assistive
+                                    tech. Always set so a screen reader announces that something is loading.</span
+                                  >
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Divergence from PF React.</strong> PF exposes <code class="ws-code">width</code> /
+                            <code class="ws-code">height</code> as free-form CSS length strings. We split that into two
+                            params per axis — modifier tokens (<code class="ws-code">width</code>) for the common
+                            percentages and t-shirt sizes, plus <code class="ws-code">widthValue</code> for arbitrary
+                            lengths. This keeps the modifier classes discoverable while still allowing pixel-exact
+                            shapes. PF's <code class="ws-code">className</code> is React-specific; skipped.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Match the skeleton to its content.</strong> Use
+                            <code class="ws-code">fontSize</code>
+                            with the same size as the heading or body text the skeleton replaces — when the content
+                            arrives, the layout doesn't shift. For media (avatars, thumbnails), use the
+                            <code class="ws-code">shape</code> + width/height combo so the placeholder matches the
+                            loaded shape's geometry.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Token vs. value precedence.</strong> If you set both
+                            <code class="ws-code">width</code> (token) and <code class="ws-code">widthValue</code> (CSS
+                            length), both apply — the modifier class sets a width via the token, and the inline style
+                            overrides it. Stick to one form per axis.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>HTMX swap-in pattern.</strong> Render the skeleton from the server during the first
+                            request; swap it for the real content via HTMX's <code class="ws-code">hx-get</code> +
+                            <code class="ws-code">hx-trigger="load"</code> on the same element. The skeleton's
+                            <code class="ws-code">screenreaderText</code> covers the gap before the swap happens.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Don't over-skeletonise.</strong> Skeletons help when the load takes more than a few
+                            hundred milliseconds. For fast responses, a plain spinner or no indicator at all reads less
+                            cluttered.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <br /><a
+                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/feedback/skeleton.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Edit skeleton.html on GitHub</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

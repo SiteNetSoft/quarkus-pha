@@ -1,22 +1,41 @@
 {! Progress — PatternFly v6 !}
-{! Parameters: id, value, description (optional), size (optional: sm|lg), status (optional: success|warning|danger), measureLocation (optional: inside|outside), label (optional) !}
-<div class="pf-v6-c-progress{#if size??} pf-m-{size}{/if}{#if status??} pf-m-{status}{/if}{#if measureLocation??} pf-m-{measureLocation}{/if}" id="{id}">
-  {#if description??}
-  <div class="pf-v6-c-progress__description">{description}</div>
-  {/if}
+{!                                                                                  !}
+{! A progress bar with optional title, measure (percentage / step text), status     !}
+{! variants, and helper text.                                                       !}
+{!                                                                                  !}
+{! Parameters:                                                                      !}
+{!   id              (required) — DOM id on the container                           !}
+{!   value           (required) — current progress (number).                        !}
+{!   min             (optional) — minimum value (default 0).                        !}
+{!   max             (optional) — maximum value (default 100). When set, the        !}
+{!                                indicator width is value / (max - min) * 100%.    !}
+{!   title           (optional) — heading line above the bar.                       !}
+{!   truncateTitle   (optional) — boolean; truncates long titles with ellipsis.     !}
+{!   label           (optional) — text shown in place of the percentage in the      !}
+{!                                measure slot (e.g. "3 of 5 done").                !}
+{!   valueText       (optional) — aria-valuetext for the bar. Use when the value    !}
+{!                                isn't a percentage.                               !}
+{!   helperText      (optional) — additional context rendered below the bar.        !}
+{!   size            (optional) — sm | lg (default size is unmodified).             !}
+{!   status          (optional) — success | warning | danger. Renders an icon and   !}
+{!                                applies the matching pf-m-{status} modifier.      !}
+{!   measureLocation (optional) — top (default) | outside | inside | none.          !}
+{!                                Controls where the measure text renders.          !}
+{!   singleline      (optional) — boolean; pf-m-singleline (compact, no title row). !}
+{!   ariaLabel       (optional) — aria-label on the bar. Required when no title.    !}
+{!   ariaLabelledBy  (optional) — aria-labelledby on the bar.                       !}
+{!   ariaDescribedBy (optional) — aria-describedby on the bar. Required when        !}
+{!                                helperText is set.                                !}
+<div class="pf-v6-c-progress{#if size??} pf-m-{size}{/if}{#if status??} pf-m-{status}{/if}{#if measureLocation?? && (measureLocation is 'outside' || measureLocation is 'inside')} pf-m-{measureLocation}{/if}{#if singleline??} pf-m-singleline{/if}" id="{id}">
+  {#if title??}<div class="pf-v6-c-progress__description{#if truncateTitle??} pf-m-truncate{/if}">{title}</div>{/if}
   <div class="pf-v6-c-progress__status">
-    <span class="pf-v6-c-progress__measure">{#if label??}{label}{#else}{value}%{/if}</span>
-    {#if status??}
-    <span class="pf-v6-c-progress__status-icon">
-      {#if status is 'success'}{icons:svg('fa:check-circle').raw}{#else if status is 'warning'}{icons:svg('fa:exclamation-triangle').raw}{#else if status is 'danger'}{icons:svg('fa:times-circle').raw}{/if}
-    </span>
-    {/if}
+    {#if !(measureLocation?? && (measureLocation is 'inside' || measureLocation is 'none'))}<span class="pf-v6-c-progress__measure">{#if label??}{label}{#else}{value}%{/if}</span>{/if}
+    {#if status??}<span class="pf-v6-c-progress__status-icon">{#if status is 'success'}{icons:svg('fa:circle-check').raw}{#else if status is 'warning'}{icons:svg('fa:triangle-exclamation').raw}{#else if status is 'danger'}{icons:svg('fa:circle-exclamation').raw}{/if}</span>{/if}
   </div>
-  <div class="pf-v6-c-progress__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{value}">
-    <div class="pf-v6-c-progress__indicator" style="width: {value}%;">
-      {#if measureLocation?? && measureLocation is 'inside'}
-      <span class="pf-v6-c-progress__measure">{value}%</span>
-      {/if}
+  <div class="pf-v6-c-progress__bar" role="progressbar" aria-valuemin="{#if min??}{min}{#else}0{/if}" aria-valuemax="{#if max??}{max}{#else}100{/if}" aria-valuenow="{value}"{#if valueText??} aria-valuetext="{valueText}"{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if}{#if ariaLabelledBy??} aria-labelledby="{ariaLabelledBy}"{/if}{#if ariaDescribedBy??} aria-describedby="{ariaDescribedBy}"{/if}>
+    <div class="pf-v6-c-progress__indicator" style="width: {value}%">
+      {#if measureLocation?? && measureLocation is 'inside'}<span class="pf-v6-c-progress__measure">{#if label??}{label}{#else}{value}%{/if}</span>{/if}
     </div>
   </div>
+  {#if helperText??}<div class="pf-v6-c-progress__helper-text">{helperText}</div>{/if}
 </div>

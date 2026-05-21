@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
 
-/** Scroll the page and wait for Alpine.js to process the scroll event. */
-async function scrollDown(page) {
+/** Scroll the page past the back-to-top threshold and wait for Alpine to react. */
+async function scrollPastThreshold(page) {
   await page.evaluate(() => {
-    window.scrollTo(0, 500);
+    window.scrollTo(0, 600);
     window.dispatchEvent(new Event("scroll"));
   });
   await page.waitForFunction(() => window.scrollY > 400);
@@ -14,48 +14,40 @@ test.describe("Back to top", () => {
     await page.goto("/components/back-to-top");
   });
 
-  test("page loads with all 3 section headings", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#always-visible-heading")).toBeVisible();
-    await expect(page.locator("#scroll-content-heading")).toBeVisible();
+  test("page loads with example and documentation TOC anchors", async ({ page }) => {
+    for (const id of ["examples", "basic", "documentation", "props-back-to-top", "usage"]) {
+      await expect(page.locator(`#${id}`)).toBeAttached();
+    }
   });
 
-  test("hidden at top of page", async ({ page }) => {
+  test("back-to-top is hidden at top of page", async ({ page }) => {
     await expect(page.locator("#back-to-top-basic")).toBeHidden();
   });
 
-  test("visible after scrolling", async ({ page }) => {
-    await scrollDown(page);
+  test("appears after scrolling past 400px", async ({ page }) => {
+    await scrollPastThreshold(page);
     await expect(page.locator("#back-to-top-basic")).toBeVisible();
+    await expect(page.locator("#back-to-top-basic")).toHaveClass(/pf-v6-c-back-to-top/);
   });
 
-  test("click scrolls to top", async ({ page }) => {
-    await scrollDown(page);
+  test("click scrolls back to top", async ({ page }) => {
+    await scrollPastThreshold(page);
     await expect(page.locator("#back-to-top-basic")).toBeVisible();
-
     await page.locator("#back-to-top-basic button").click();
     await page.waitForFunction(() => window.scrollY < 50);
-
-    const scrollY = await page.evaluate(() => window.scrollY);
-    expect(scrollY).toBeLessThan(50);
+    expect(await page.evaluate(() => window.scrollY)).toBeLessThan(50);
   });
 
-  test("always visible variant is visible without scrolling", async ({ page }) => {
-    await expect(page.locator("#back-to-top-visible")).toBeVisible();
+  test("button renders title + icon", async ({ page }) => {
+    await scrollPastThreshold(page);
+    const btn = page.locator("#back-to-top-basic button");
+    await expect(btn.locator(".pf-v6-c-button__text")).toHaveText("Back to top");
+    await expect(btn.locator(".pf-v6-c-button__icon svg")).toBeVisible();
   });
 
-  test("correct CSS classes", async ({ page }) => {
-    await expect(page.locator("#back-to-top-basic")).toHaveClass(/pf-v6-c-back-to-top/);
-    await expect(page.locator("#back-to-top-basic button")).toHaveClass(/pf-v6-c-button/);
-    await expect(page.locator("#back-to-top-basic button")).toHaveClass(/pf-m-primary/);
-  });
-
-  test("button has icon", async ({ page }) => {
-    await scrollDown(page);
-    await expect(page.locator("#back-to-top-basic")).toBeVisible();
-
-    const icon = page.locator("#back-to-top-basic .pf-v6-c-button__icon");
-    await expect(icon).toBeVisible();
-    await expect(icon.locator("svg")).toBeVisible();
+  test("standalone example route renders", async ({ page }) => {
+    const res = await page.goto("/components/back-to-top/basic");
+    expect(res.status()).toBe(200);
+    await expect(page.locator("#back-to-top-basic")).toBeAttached();
   });
 });

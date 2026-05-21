@@ -1,4 +1,4 @@
 {! Badge — PatternFly v6 !}
-{! Parameters: id (required), value (required), variant (required — read/unread/disabled) !}
-{! Optional: screenReaderText !}
-<span class="pf-v6-c-badge pf-m-{variant}" id="{id}">{value}{#if screenReaderText??} <span class="pf-screen-reader">{screenReaderText}</span>{/if}</span>
+{! Required: id, value !}
+{! Optional: variant (read | unread | disabled) — default unread; screenReaderText — visually-hidden text appended for AT consumers !}
+<span class="pf-v6-c-badge pf-m-{#if variant??}{variant}{#else}unread{/if}" id="{id}">{value}{#if screenReaderText??} <span class="pf-v6-screen-reader">{screenReaderText}</span>{/if}</span>

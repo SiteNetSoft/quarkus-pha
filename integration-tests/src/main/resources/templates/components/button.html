@@ -1,69 +1,768 @@
-{#include layouts/base}
-{#title}Button{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+{#include layouts/base} {#title}Button{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary">
+          <span class="pf-v6-c-button__text">Skip to content</span>
+        </a>
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Button</h1>
+                    <p>
+                      Interactive controls for actions and navigation. Renders as a
+                      <code class="ws-code">&lt;button&gt;</code> by default, an
+                      <code class="ws-code">&lt;a&gt;</code> when <code class="ws-code">href</code> is set, or any tag
+                      via <code class="ws-code">component</code>. Variants, sizes, count badges, progress states, and
+                      specialised treatments (hamburger, favorite, settings, stateful) are all composed on the same
+                      wrapper.
+                    </p>
+                  </div>
+                </div>
+              </section>
 
-  <h1>Button</h1>
-  <p>PatternFly v6 button — interactive elements for actions and navigation.</p>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-u-h-100">
+                    <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                      <nav
+                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                        aria-label="Table of contents"
+                      >
+                        <div class="pf-v6-c-jump-links__main">
+                          <ul class="pf-v6-c-jump-links__list" role="list">
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#variant-examples" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Variant examples</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#disabled-buttons" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Disabled buttons</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#small-buttons" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Small buttons</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#call-to-action" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Call to action</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#block-level" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Block level</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#progress-indicators" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Progress indicators</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#links-as-buttons" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Links as buttons</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#inline-link-as-span" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Inline link as span</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#custom-component" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Custom component</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#aria-disabled-examples" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Aria-disabled</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#button-with-count" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Button with count</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#plain-with-no-padding" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Plain with no padding</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#stateful" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Stateful</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#favorite" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Favorite</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#settings" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Settings</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#hamburger" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Hamburger</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-button" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Button props</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="variations-heading">Variations</h2>
-    <p>All button variant styles.</p>
-    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
-      {#include components/actions/button id="btn-primary" variant="primary"}{#content}Primary{/content}{/include}
-      {#include components/actions/button id="btn-secondary" variant="secondary"}{#content}Secondary{/content}{/include}
-      {#include components/actions/button id="btn-tertiary" variant="tertiary"}{#content}Tertiary{/content}{/include}
-      {#include components/actions/button id="btn-danger" variant="danger"}{#content}Danger{/content}{/include}
-      {#include components/actions/button id="btn-warning" variant="warning"}{#content}Warning{/content}{/include}
-      {#include components/actions/button id="btn-link" variant="link"}{#content}Link{/content}{/include}
-      {#include components/actions/button id="btn-plain" variant="plain" ariaLabel="Close"}{#content}{icons:svg('fa:times').raw}{/content}{/include}
-      {#include components/actions/button id="btn-control" variant="control"}{#content}Control{/content}{/include}
+                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                          <div>
+                            <h2
+                              id="examples"
+                              tabindex="-1"
+                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                            >
+                              Examples
+                            </h2>
+                          </div>
+                        </div>
+
+                        {#include partials/example-card title="Variant examples" slug="variant-examples"
+                        component="button" description="All eight variants: primary, secondary, tertiary, danger,
+                        warning, link, plain (icon-only), control."} {#content}{#include
+                        components/button/variant-examples /}{/content} {/include} {#include partials/example-card
+                        title="Disabled buttons" slug="disabled-buttons" component="button" description="&lt;code
+                        class=&quot;ws-code&quot;&gt;disabled=true&lt;/code&gt; renders the HTML &lt;code
+                        class=&quot;ws-code&quot;&gt;disabled&lt;/code&gt; attribute — fully non-interactive, removed
+                        from the tab order. For an aria-disabled variant that stays focusable, see below."}
+                        {#content}{#include components/button/disabled-buttons /}{/content} {/include} {#include
+                        partials/example-card title="Small buttons" slug="small-buttons" component="button"
+                        description="Pass &lt;code class=&quot;ws-code&quot;&gt;size=&quot;sm&quot;&lt;/code&gt; for
+                        compact contexts (toolbars, dense forms, table action columns)."} {#content}{#include
+                        components/button/small-buttons /}{/content} {/include} {#include partials/example-card
+                        title="Call to action" slug="call-to-action" component="button" description="Pass &lt;code
+                        class=&quot;ws-code&quot;&gt;size=&quot;lg&quot;&lt;/code&gt; for prominent CTAs (hero sections,
+                        marketing tiles)."} {#content}{#include components/button/call-to-action /}{/content} {/include}
+                        {#include partials/example-card title="Block level" slug="block-level" component="button"
+                        description="&lt;code class=&quot;ws-code&quot;&gt;block=true&lt;/code&gt; stretches the button
+                        to fill its container width. Common inside modal footers and login forms."} {#content}{#include
+                        components/button/block-level /}{/content} {/include} {#include partials/example-card
+                        title="Progress indicators" slug="progress-indicators" component="button" description="&lt;code
+                        class=&quot;ws-code&quot;&gt;isLoading=true&lt;/code&gt; adds &lt;code
+                        class=&quot;ws-code&quot;&gt;pf-m-progress&lt;/code&gt; / &lt;code
+                        class=&quot;ws-code&quot;&gt;pf-m-in-progress&lt;/code&gt; and renders the PF v6 spinner inside
+                        a &lt;code class=&quot;ws-code&quot;&gt;__progress&lt;/code&gt; span. Pair with &lt;code
+                        class=&quot;ws-code&quot;&gt;spinnerLabel&lt;/code&gt; for screen readers."} {#content}{#include
+                        components/button/progress-indicators /}{/content} {/include} {#include partials/example-card
+                        title="Links as buttons" slug="links-as-buttons" component="button" description="Pass &lt;code
+                        class=&quot;ws-code&quot;&gt;href=&quot;...&quot;&lt;/code&gt; to render an &lt;code
+                        class=&quot;ws-code&quot;&gt;&amp;lt;a&amp;gt;&lt;/code&gt; with button styling. Combine with
+                        &lt;code class=&quot;ws-code&quot;&gt;icon&lt;/code&gt; + &lt;code
+                        class=&quot;ws-code&quot;&gt;iconPosition=&quot;end&quot;&lt;/code&gt; for the common &quot;open
+                        external&quot; pattern."} {#content}{#include components/button/links-as-buttons /}{/content}
+                        {/include} {#include partials/example-card title="Inline link as span"
+                        slug="inline-link-as-span" component="button" description="&lt;code
+                        class=&quot;ws-code&quot;&gt;component=&quot;span&quot; variant=&quot;link&quot;
+                        inline=true&lt;/code&gt; renders the styled element as a &lt;code
+                        class=&quot;ws-code&quot;&gt;&amp;lt;span&amp;gt;&lt;/code&gt; — useful inside running prose
+                        where &lt;code class=&quot;ws-code&quot;&gt;&amp;lt;a&amp;gt;&lt;/code&gt; or &lt;code
+                        class=&quot;ws-code&quot;&gt;&amp;lt;button&amp;gt;&lt;/code&gt; would be invalid (e.g. already
+                        inside another anchor)."} {#content}{#include components/button/inline-link-as-span /}{/content}
+                        {/include} {#include partials/example-card title="Custom component" slug="custom-component"
+                        component="button" description="&lt;code
+                        class=&quot;ws-code&quot;&gt;component=&quot;span&quot;&lt;/code&gt; / &lt;code
+                        class=&quot;ws-code&quot;&gt;&quot;div&quot;&lt;/code&gt; / etc. replaces the host element. Use
+                        sparingly — the host element loses its native button semantics (no Enter/Space activation, no
+                        implicit role) unless you reintroduce them yourself."} {#content}{#include
+                        components/button/custom-component /}{/content} {/include} {#include partials/example-card
+                        title="Aria-disabled examples" slug="aria-disabled-examples" component="button"
+                        description="&lt;code class=&quot;ws-code&quot;&gt;ariaDisabled=true&lt;/code&gt; communicates
+                        the disabled state to assistive tech without setting the HTML &lt;code
+                        class=&quot;ws-code&quot;&gt;disabled&lt;/code&gt; attribute — the button stays focusable, so
+                        tooltips and pointer handlers still work."} {#content}{#include
+                        components/button/aria-disabled-examples /}{/content} {/include} {#include partials/example-card
+                        title="Button with count" slug="button-with-count" component="button" description="Pass &lt;code
+                        class=&quot;ws-code&quot;&gt;count&lt;/code&gt; to render a PF v6 badge on the trailing edge of
+                        the button. &lt;code class=&quot;ws-code&quot;&gt;countRead=true&lt;/code&gt; switches the badge
+                        to the muted (read) treatment."} {#content}{#include components/button/button-with-count
+                        /}{/content} {/include} {#include partials/example-card title="Plain with no padding"
+                        slug="plain-with-no-padding" component="button" description="&lt;code
+                        class=&quot;ws-code&quot;&gt;hasNoPadding=true&lt;/code&gt; strips the inline padding on
+                        &lt;code class=&quot;ws-code&quot;&gt;variant=&quot;plain&quot;&lt;/code&gt; buttons. Useful
+                        when a plain icon button sits inside another inline element and you want the icon flush."}
+                        {#content}{#include components/button/plain-with-no-padding /}{/content} {/include} {#include
+                        partials/example-card title="Stateful" slug="stateful" component="button" description="&lt;code
+                        class=&quot;ws-code&quot;&gt;variant=&quot;stateful&quot;&lt;/code&gt; + &lt;code
+                        class=&quot;ws-code&quot;&gt;stateful=true&lt;/code&gt; + &lt;code
+                        class=&quot;ws-code&quot;&gt;state=&quot;read&quot;|&quot;unread&quot;|&quot;attention&quot;&lt;/code&gt;
+                        renders a notification-style icon button that reflects the current state via PF's stateful
+                        tokens."} {#content}{#include components/button/stateful /}{/content} {/include} {#include
+                        partials/example-card title="Favorite" slug="favorite" component="button" description="&lt;code
+                        class=&quot;ws-code&quot;&gt;favorite=true&lt;/code&gt; turns the button into a star toggle.
+                        &lt;code class=&quot;ws-code&quot;&gt;favorited=true&lt;/code&gt; switches to the filled state —
+                        PF v6 cross-fades the outline / filled star automatically via the two &lt;code
+                        class=&quot;ws-code&quot;&gt;__icon-favorite&lt;/code&gt; / &lt;code
+                        class=&quot;ws-code&quot;&gt;__icon-favorited&lt;/code&gt; sub-spans."} {#content}{#include
+                        components/button/favorite /}{/content} {/include} {#include partials/example-card
+                        title="Settings" slug="settings" component="button" description="&lt;code
+                        class=&quot;ws-code&quot;&gt;settings=true&lt;/code&gt; renders a gear icon with PF v6's
+                        rotate-on-hover transition. Always pair with &lt;code
+                        class=&quot;ws-code&quot;&gt;ariaLabel&lt;/code&gt; since the button is icon-only."}
+                        {#content}{#include components/button/settings /}{/content} {/include} {#include
+                        partials/example-card title="Hamburger" slug="hamburger" component="button"
+                        description="&lt;code class=&quot;ws-code&quot;&gt;hamburger=true&lt;/code&gt; renders the
+                        three-line menu icon. Add &lt;code
+                        class=&quot;ws-code&quot;&gt;hamburgerVariant=&quot;expand&quot;|&quot;collapse&quot;&lt;/code&gt;
+                        to morph between the bars and an arrow. Wire to a real toggle via Alpine.js to drive &lt;code
+                        class=&quot;ws-code&quot;&gt;ariaExpanded&lt;/code&gt;."} {#content}{#include
+                        components/button/hamburger /}{/content} {/include}
+
+                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                            <div>
+                              <h2
+                                id="documentation"
+                                tabindex="-1"
+                                class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                              >
+                                Documentation
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-button" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                            Button props
+                          </h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by
+                            <code class="ws-code">{|{#include components/actions/button ... /}|}</code>. The content
+                            slot wraps button text in <code class="ws-code">pf-v6-c-button__text</code>; skip the slot
+                            for icon-only buttons (favorite / settings / hamburger).
+                          </p>
+                          <table
+                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                            role="grid"
+                            aria-label="Button props"
+                          >
+                            <caption class="pf-v6-c-table__caption">
+                              <span class="ws-prop-required">*</span>
+                              required
+                            </caption>
+                            <thead class="pf-v6-c-table__thead">
+                              <tr class="pf-v6-c-table__tr">
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                                <th scope="col" class="pf-v6-c-table__th">Default</th>
+                                <th scope="col" class="pf-v6-c-table__th">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">variant</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code"
+                                      >"primary" | "secondary" | "tertiary" | "danger" | "warning" | "link" | "plain" |
+                                      "control" | "stateful"</code
+                                    ></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">"primary"</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Visual treatment. Not applied when <code class="ws-code">hamburger</code> /
+                                    <code class="ws-code">favorite</code> / <code class="ws-code">settings</code> is set
+                                    — those imply <code class="ws-code">pf-m-plain</code>.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">size</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">"sm" | "lg"</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">default</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Compact (<code class="ws-code">sm</code>) or call-to-action (<code class="ws-code"
+                                      >lg</code
+                                    >) sizing. Omit for the standard size.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">block</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Stretches the button to fill its container width.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">inline</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Strips block-level padding (only meaningful for
+                                    <code class="ws-code">variant="link"</code>).</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">disabled</code> /
+                                    <code class="ws-code">ariaDisabled</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">disabled</code> sets the HTML
+                                    <code class="ws-code">disabled</code> attribute (non-focusable, no events).
+                                    <code class="ws-code">ariaDisabled</code> sets
+                                    <code class="ws-code">aria-disabled</code> only (still focusable, useful with
+                                    tooltips).</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">icon</code> / <code class="ws-code">iconPosition</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >String <code class="ws-code">"set:slug"</code> /
+                                    <code class="ws-code">"start" | "end"</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">— / <code class="ws-code">"start"</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Renders the icon inside <code class="ws-code">pf-v6-c-button__icon</code> with
+                                    <code class="ws-code">pf-m-start</code> or <code class="ws-code">pf-m-end</code>.
+                                    Omit content to make an icon-only button (pair with
+                                    <code class="ws-code">ariaLabel</code>).</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">isLoading</code> /
+                                    <code class="ws-code">spinnerLabel</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">boolean / String</span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code> / —</span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Adds <code class="ws-code">pf-m-progress</code> +
+                                    <code class="ws-code">pf-m-in-progress</code> and renders the PF v6 spinner inside
+                                    <code class="ws-code">__progress</code>.
+                                    <code class="ws-code">spinnerLabel</code> becomes the spinner's
+                                    <code class="ws-code">aria-label</code>.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">count</code> / <code class="ws-code">countRead</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">Integer / boolean</span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">— / <code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Renders a PF v6 badge on the trailing edge with the count value.
+                                    <code class="ws-code">countRead=true</code> switches to the muted (read)
+                                    treatment.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">component</code> / <code class="ws-code">href</code> /
+                                    <code class="ws-code">type</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Tag string / URL / <code class="ws-code">"submit" | "reset"</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">"button"</code> / — /
+                                    <code class="ws-code">"button"</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Element override. <code class="ws-code">href</code> implies
+                                    <code class="ws-code">&lt;a&gt;</code>;
+                                    <code class="ws-code">component</code> forces a specific tag.
+                                    <code class="ws-code">type</code> applies to
+                                    <code class="ws-code">&lt;button&gt;</code> only.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">ariaLabel</code> /
+                                    <code class="ws-code">ariaExpanded</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >String / <code class="ws-code">"true" | "false"</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Accessibility hooks. Required for icon-only buttons.
+                                    <code class="ws-code">ariaExpanded</code> drives the open/closed indication on
+                                    hamburger and disclosure buttons.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">clicked</code> /
+                                    <code class="ws-code">hasNoPadding</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">clicked</code> applies active-state styling.
+                                    <code class="ws-code">hasNoPadding</code> strips the plain variant's inline
+                                    padding.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">stateful</code> / <code class="ws-code">state</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >boolean / <code class="ws-code">"read" | "unread" | "attention"</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Stateful button for notification-style toggles. Pair
+                                    <code class="ws-code">variant="stateful"</code> with
+                                    <code class="ws-code">stateful=true</code> and a
+                                    <code class="ws-code">state</code> value.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">favorite</code> /
+                                    <code class="ws-code">favorited</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Star-toggle button. Implies <code class="ws-code">pf-m-plain</code>.
+                                    <code class="ws-code">favorited=true</code> shows the filled state.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">settings</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Gear-icon button with rotate-on-hover. Implies
+                                    <code class="ws-code">pf-m-plain</code>.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">hamburger</code> /
+                                    <code class="ws-code">hamburgerVariant</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >boolean / <code class="ws-code">"expand" | "collapse"</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code> / —</span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Three-line menu button. Implies <code class="ws-code">pf-m-plain</code>.
+                                    <code class="ws-code">hamburgerVariant</code> morphs the icon between bars and an
+                                    arrow for nav drawers.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">content</code> (slot)</span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute insert</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Button text. Wrapped in <code class="ws-code">pf-v6-c-button__text</code>. Omit for
+                                    icon-only buttons.</span
+                                  >
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Divergence from PF React.</strong> We skip <code class="ws-code">ouiaId</code> /
+                            <code class="ws-code">ouiaSafe</code> (testing tooling we don't use),
+                            <code class="ws-code">className</code> (React-specific),
+                            <code class="ws-code">inoperableEvents</code> (managed at the consumer level here),
+                            <code class="ws-code">tabIndex</code>, <code class="ws-code">spinnerAriaLabelledBy</code>,
+                            and <code class="ws-code">spinnerAriaValueText</code> (the latter two are subsumed by the
+                            spinner component's own props if you compose by hand). PF's
+                            <code class="ws-code">countOptions</code> object is flattened into
+                            <code class="ws-code">count</code> + <code class="ws-code">countRead</code>.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Variant precedence.</strong> The specialised flags (<code class="ws-code"
+                              >favorite</code
+                            >, <code class="ws-code">settings</code>, <code class="ws-code">hamburger</code>) imply
+                            their own plain treatment and override <code class="ws-code">variant</code>. Don't set both
+                            — pick one.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Disabled vs. aria-disabled.</strong> Use
+                            <code class="ws-code">disabled=true</code> for buttons that are genuinely non-interactive
+                            (form submit while the form is invalid, action that requires another step first). Use
+                            <code class="ws-code">ariaDisabled=true</code> when you still want pointer / focus events to
+                            fire — e.g. when a tooltip needs to explain why the button is unavailable.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Icon-only buttons need a label.</strong> Plain / favorite / settings / hamburger
+                            buttons don't have visible text. PF v6's HTML smoke tests assert each button has an
+                            accessible name — always pass <code class="ws-code">ariaLabel</code> (or wire
+                            <code class="ws-code">ariaLabelledBy</code>
+                            via the consumer template).
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Component override caveats.</strong> Setting
+                            <code class="ws-code">component="span"</code> (or another non-interactive tag) strips the
+                            native button semantics — no Enter/Space activation, no role, no tab-order. Use only when
+                            the host element constrains your choice (inline link inside an anchor, span inside a list).
+                            Re-add <code class="ws-code">role="button"</code> and keyboard handlers yourself if you need
+                            them.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <br /><a
+                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/actions/button.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Edit button.html on GitHub</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
     </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="disabled-heading">Disabled</h2>
-    <p>Disabled buttons are non-interactive.</p>
-    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-      {#include components/actions/button id="btn-disabled-primary" variant="primary" disabled=true}{#content}Primary disabled{/content}{/include}
-      {#include components/actions/button id="btn-disabled-secondary" variant="secondary" disabled=true}{#content}Secondary disabled{/content}{/include}
-    </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="small-heading">Small</h2>
-    <p>Smaller button size for compact layouts.</p>
-    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-      {#include components/actions/button id="btn-small-primary" variant="primary" small=true}{#content}Small primary{/content}{/include}
-      {#include components/actions/button id="btn-small-secondary" variant="secondary" small=true}{#content}Small secondary{/content}{/include}
-    </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="block-heading">Block level</h2>
-    <p>A full-width button that spans its container.</p>
-    {#include components/actions/button id="btn-block" variant="primary" block=true}{#content}Block level button{/content}{/include}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="links-heading">Links as buttons</h2>
-    <p>Anchor elements styled as buttons for navigation.</p>
-    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-      {#include components/actions/button id="btn-anchor-primary" variant="primary" href="#links-heading"}{#content}Primary link{/content}{/include}
-      {#include components/actions/button id="btn-anchor-link" variant="link" href="#links-heading"}{#content}Link style{/content}{/include}
-    </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="cta-heading">Call to action</h2>
-    <p>Large display buttons for prominent actions.</p>
-    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-      {#include components/actions/button id="btn-cta-primary" variant="primary" displayLg=true}{#content}Call to action{/content}{/include}
-      {#include components/actions/button id="btn-cta-secondary" variant="secondary" displayLg=true}{#content}Call to action{/content}{/include}
-      {#include components/actions/button id="btn-cta-tertiary" variant="tertiary" displayLg=true}{#content}Call to action{/content}{/include}
-    </div>
-  </section>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

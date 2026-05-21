@@ -1,0 +1,7 @@
+{! Stack layout — vertical layout where one item can fill remaining space (pf-m-fill on that __item). !}
+{! Required: id !}
+{! Optional: gutter (boolean — pf-m-gutter for 1rem row-gap) !}
+{! Slot: items — stack children, typically wrapped in pf-v6-l-stack__item. !}
+<div class="pf-v6-l-stack{#if gutter??} pf-m-gutter{/if}" id="{id}">
+  {#insert items}{/insert}
+</div>

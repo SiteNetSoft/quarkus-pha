@@ -1,50 +1,445 @@
-{#include layouts/base}
-{#title}List{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-  <h1>List</h1>
-  <p>PatternFly v6 list — a styled list of items with various layout options.</p>
+{#include layouts/base} {#title}List{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary">
+          <span class="pf-v6-c-button__text">Skip to content</span>
+        </a>
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">List</h1>
+                    <p>
+                      Styled <code class="ws-code">&lt;ul&gt;</code> or
+                      <code class="ws-code">&lt;ol&gt;</code> containers with PatternFly v6 modifiers for inline layout,
+                      plain styling, horizontal rules between rows, and bullet-replacement icons. Pass list items into
+                      the <code class="ws-code">content</code> slot — everything else is configuration on the wrapper.
+                    </p>
+                  </div>
+                </div>
+              </section>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="basic-heading">Basic</h2>
-    <p>A standard unordered list.</p>
-    {#include components/data-display/list id="list-basic"}{#content}
-    <li>First item</li>
-    <li>Second item</li>
-    <li>Third item</li>
-    {/content}{/include}
-  </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-u-h-100">
+                    <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                      <nav
+                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                        aria-label="Table of contents"
+                      >
+                        <div class="pf-v6-c-jump-links__main">
+                          <ul class="pf-v6-c-jump-links__list" role="list">
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#inline" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Inline</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#ordered" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Ordered</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#plain" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Plain</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#with-horizontal-rules" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">With horizontal rules</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#with-icons" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">With icons</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#with-large-icons" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">With large icons</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-list" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">List props</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="inline-heading">Inline</h2>
-    <p>Items displayed inline in a horizontal row.</p>
-    {#include components/data-display/list id="list-inline" inline=true}{#content}
-    <li>First</li>
-    <li>Second</li>
-    <li>Third</li>
-    {/content}{/include}
-  </section>
+                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                          <div>
+                            <h2
+                              id="examples"
+                              tabindex="-1"
+                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                            >
+                              Examples
+                            </h2>
+                          </div>
+                        </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="plain-heading">Plain</h2>
-    <p>A list without bullet markers.</p>
-    {#include components/data-display/list id="list-plain" plain=true}{#content}
-    <li>No bullets here</li>
-    <li>Just plain text</li>
-    <li>Clean and simple</li>
-    {/content}{/include}
-  </section>
+                        {#include partials/example-card title="Basic" slug="basic" component="list" description="A
+                        standard unordered list rendered as &lt;code
+                        class=&quot;ws-code&quot;&gt;&amp;lt;ul&amp;gt;&lt;/code&gt; with default bullets and indent."}
+                        {#content}{#include components/list/basic /}{/content} {/include} {#include
+                        partials/example-card title="Inline" slug="inline" component="list" description="Set &lt;code
+                        class=&quot;ws-code&quot;&gt;inline=true&lt;/code&gt; for &lt;code
+                        class=&quot;ws-code&quot;&gt;pf-m-inline&lt;/code&gt; — items flow horizontally on one row
+                        (wrapping as needed)."} {#content}{#include components/list/inline /}{/content} {/include}
+                        {#include partials/example-card title="Ordered" slug="ordered" component="list" description="Set
+                        &lt;code class=&quot;ws-code&quot;&gt;ordered=true&lt;/code&gt; to render an &lt;code
+                        class=&quot;ws-code&quot;&gt;&amp;lt;ol&amp;gt;&lt;/code&gt;. Pair with &lt;code
+                        class=&quot;ws-code&quot;&gt;type&lt;/code&gt; (&lt;code
+                        class=&quot;ws-code&quot;&gt;1&lt;/code&gt; | &lt;code
+                        class=&quot;ws-code&quot;&gt;A&lt;/code&gt; | &lt;code
+                        class=&quot;ws-code&quot;&gt;a&lt;/code&gt; | &lt;code
+                        class=&quot;ws-code&quot;&gt;I&lt;/code&gt; | &lt;code
+                        class=&quot;ws-code&quot;&gt;i&lt;/code&gt;) for non-numeric numbering."} {#content}{#include
+                        components/list/ordered /}{/content} {/include} {#include partials/example-card title="Plain"
+                        slug="plain" component="list" description="Set &lt;code
+                        class=&quot;ws-code&quot;&gt;plain=true&lt;/code&gt; for &lt;code
+                        class=&quot;ws-code&quot;&gt;pf-m-plain&lt;/code&gt; — bullets removed, no inline-start padding.
+                        Useful when the items themselves provide their own visual cues."} {#content}{#include
+                        components/list/plain /}{/content} {/include} {#include partials/example-card title="With
+                        horizontal rules" slug="with-horizontal-rules" component="list" description="Combine &lt;code
+                        class=&quot;ws-code&quot;&gt;bordered=true&lt;/code&gt; with &lt;code
+                        class=&quot;ws-code&quot;&gt;plain=true&lt;/code&gt; to render dividing lines between items. PF
+                        v6 calls this the 'with horizontal rules' variant."} {#content}{#include
+                        components/list/with-horizontal-rules /}{/content} {/include} {#include partials/example-card
+                        title="With icons" slug="with-icons" component="list" description="Render an icon in place of
+                        the bullet by wrapping each &lt;code
+                        class=&quot;ws-code&quot;&gt;&amp;lt;li&amp;gt;&lt;/code&gt;'s leading element in &lt;code
+                        class=&quot;ws-code&quot;&gt;&amp;lt;span
+                        class=&amp;quot;pf-v6-c-list__item-icon&amp;quot;&amp;gt;&lt;/code&gt;. Use the &lt;code
+                        class=&quot;ws-code&quot;&gt;icons:svg()&lt;/code&gt; namespace for the SVG content. Plain mode
+                        is required so the default bullet isn't doubled."} {#content}{#include
+                        components/list/with-icons /}{/content} {/include} {#include partials/example-card title="With
+                        large icons" slug="with-large-icons" component="list" description="Add &lt;code
+                        class=&quot;ws-code&quot;&gt;iconLg=true&lt;/code&gt; on top of the icon pattern to size icons
+                        at PF v6's &lt;code class=&quot;ws-code&quot;&gt;icon-size--lg&lt;/code&gt; token. Best for
+                        media-style rows with title + supporting copy."} {#content}{#include
+                        components/list/with-large-icons /}{/content} {/include}
 
-  <section style="margin-top: 2rem;">
-    <h2 id="bordered-heading">Bordered</h2>
-    <p>A list with bordered items.</p>
-    {#include components/data-display/list id="list-bordered" bordered=true plain=true}{#content}
-    <li>Bordered item one</li>
-    <li>Bordered item two</li>
-    <li>Bordered item three</li>
-    {/content}{/include}
-  </section>
+                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                            <div>
+                              <h2
+                                id="documentation"
+                                tabindex="-1"
+                                class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                              >
+                                Documentation
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-list" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                            List props
+                          </h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by
+                            <code class="ws-code">{|{#include components/data-display/list ... /}|}</code>. List items
+                            go in the <code class="ws-code">content</code> slot.
+                          </p>
+                          <table
+                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                            role="grid"
+                            aria-label="List props"
+                          >
+                            <thead class="pf-v6-c-table__thead">
+                              <tr class="pf-v6-c-table__tr">
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                                <th scope="col" class="pf-v6-c-table__th">Default</th>
+                                <th scope="col" class="pf-v6-c-table__th">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">DOM id on the list element.</span>
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">ordered</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Render <code class="ws-code">&lt;ol&gt;</code> instead of
+                                    <code class="ws-code">&lt;ul&gt;</code>.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">type</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">"1" | "A" | "a" | "I" | "i"</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">"1"</code> (HTML default)</span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Numbering style for ordered lists. Passes through to the HTML
+                                    <code class="ws-code">type</code> attr on <code class="ws-code">&lt;ol&gt;</code>.
+                                    Ignored when <code class="ws-code">ordered</code> is falsy.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">inline</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Applies <code class="ws-code">pf-m-inline</code> — items flow horizontally,
+                                    wrapping as needed.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">plain</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Applies <code class="ws-code">pf-m-plain</code> — removes bullets and inline-start
+                                    padding. Required when using <code class="ws-code">__item-icon</code> spans inside
+                                    items, and when combining with <code class="ws-code">bordered</code>.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">bordered</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Applies <code class="ws-code">pf-m-bordered</code> — horizontal rule between
+                                    adjacent items. (PF docs call this 'With horizontal rules'.)</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">iconLg</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Applies <code class="ws-code">pf-m-icon-lg</code> — switches
+                                    <code class="ws-code">__item-icon</code> glyphs to PF v6's large icon size token.
+                                    Equivalent to PF React's <code class="ws-code">iconSize="large"</code>.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">ariaLabel</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Sets <code class="ws-code">aria-label</code> on the list element. Use when the
+                                    list's purpose isn't clear from surrounding context.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">content</code> (slot)</span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute insert</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >One or more <code class="ws-code">&lt;li&gt;</code> children. For icon rows,
+                                    prepend
+                                    <code class="ws-code"
+                                      >&lt;span
+                                      class="pf-v6-c-list__item-icon"&gt;{|{icons:svg('...').raw}|}&lt;/span&gt;</code
+                                    >
+                                    inside the item.</span
+                                  >
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Divergence from PF React.</strong> PF exposes
+                            <code class="ws-code">className</code>, <code class="ws-code">ref</code>, and a typed
+                            <code class="ws-code">iconSize</code> enum. We model
+                            <code class="ws-code">iconSize</code> as the boolean
+                            <code class="ws-code">iconLg</code> (only the large variant exists in CSS);
+                            <code class="ws-code">className</code> / <code class="ws-code">ref</code>
+                            are React-specific.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Compose items inside the slot.</strong> The container is just chrome — list items
+                            live inside <code class="ws-code">{|{#content}...{/content}|}</code>. That's deliberate so
+                            consumers can mix plain text, links, icons, and arbitrary markup without the runtime
+                            template needing to know about every shape.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Icons replace bullets.</strong> The PF v6 markup expects each
+                            <code class="ws-code">&lt;li&gt;</code> to contain a leading
+                            <code class="ws-code">&lt;span class="pf-v6-c-list__item-icon"&gt;</code> followed by the
+                            row's content. The container needs <code class="ws-code">plain=true</code> in this mode so
+                            the default bullet doesn't double up. Use <code class="ws-code">iconLg=true</code> when the
+                            row is media-style (icon + title + supporting copy).
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Ordered with custom numbering.</strong> Pass <code class="ws-code">type</code> for
+                            non-numeric ordered lists — alphabetic (<code class="ws-code">A</code>/<code class="ws-code"
+                              >a</code
+                            >) or roman (<code class="ws-code">I</code>/<code class="ws-code">i</code>). PF v6's CSS
+                            doesn't style the numbering itself; the html <code class="ws-code">type</code> attribute
+                            drives it.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>When to reach for something else.</strong> For richer per-item structure
+                            (checkboxes, actions, badges), use <code class="ws-code">simple-list</code> or
+                            <code class="ws-code">data-list</code>
+                            — they ship richer slot conventions and selection semantics.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <br /><a
+                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/list.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Edit list.html on GitHub</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

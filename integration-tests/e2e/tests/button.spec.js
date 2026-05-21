@@ -55,7 +55,7 @@ test.describe("Button", () => {
       const primaryLink = page.locator("#btn-anchor-primary");
       await expect(primaryLink).toHaveAttribute("href", "#links-heading");
 
-      const tagName = await primaryLink.evaluate(el => el.tagName.toLowerCase());
+      const tagName = await primaryLink.evaluate((el) => el.tagName.toLowerCase());
       expect(tagName).toBe("a");
     });
   });

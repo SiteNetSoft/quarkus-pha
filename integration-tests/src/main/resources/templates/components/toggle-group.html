@@ -1,31 +1,237 @@
-{#include layouts/base}
-{#title}Toggle Group{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+{#include layouts/base} {#title}Toggle group{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Toggle group</h1>
+                    <p>
+                      A row of buttons that act as a single-select or multi-select toggle — like radio buttons or
+                      checkboxes, but rendered as a button-bar. Selection state is driven by
+                      <code class="ws-code">aria-pressed</code> on each button.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                    <nav
+                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                      aria-label="Table of contents"
+                    >
+                      <div class="pf-v6-c-jump-links__main">
+                        <ul class="pf-v6-c-jump-links__list" role="list">
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#single-select" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Single select</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#multi-select" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Multi select</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-icons" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With icons</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#props-toggle-group" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Toggle group props</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
+                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                        <div>
+                          <h2
+                            id="examples"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                          >
+                            Examples
+                          </h2>
+                        </div>
+                      </div>
+                      {#include partials/example-card title="Single select" slug="single-select"
+                      component="toggle-group" description="Three options, only one can be selected. Alpine tracks the
+                      active item; clicking another swaps."} {#content}{#include components/toggle-group/single-select
+                      /}{/content} {/include} {#include partials/example-card title="Multi select" slug="multi-select"
+                      component="toggle-group" description="Independent toggles — bold / italic / underline. Each
+                      maintains its own pressed state."} {#content}{#include components/toggle-group/multi-select
+                      /}{/content} {/include} {#include partials/example-card title="With icons" slug="with-icons"
+                      component="toggle-group" description="Icon-only buttons via the &lt;code
+                      class=&quot;ws-code&quot;&gt;__icon&lt;/code&gt; subclass. Pair with &lt;code
+                      class=&quot;ws-code&quot;&gt;aria-label&lt;/code&gt; on each button."} {#content}{#include
+                      components/toggle-group/with-icons /}{/content} {/include}
 
-  <h1>Toggle Group</h1>
-  <p>PatternFly v6 toggle group for selecting one or more options from a set of buttons.</p>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="basic-heading">Basic</h2>
-    <p>A basic toggle group with text-only buttons.</p>
-    {#include components/forms/toggle-group id="tg-basic"}{#content}
-    <div class="pf-v6-c-toggle-group__item"><button class="pf-v6-c-toggle-group__button pf-m-selected" type="button">Option A</button></div>
-    <div class="pf-v6-c-toggle-group__item"><button class="pf-v6-c-toggle-group__button" type="button">Option B</button></div>
-    <div class="pf-v6-c-toggle-group__item"><button class="pf-v6-c-toggle-group__button" type="button">Option C</button></div>
-    {/content}{/include}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="with-icons-heading">With icons</h2>
-    <p>A toggle group with icons alongside button text.</p>
-    {#include components/forms/toggle-group id="tg-icons"}{#content}
-    <div class="pf-v6-c-toggle-group__item"><button class="pf-v6-c-toggle-group__button pf-m-selected" type="button"><span class="pf-v6-c-toggle-group__icon">{icons:svg('fa:list').raw}</span><span class="pf-v6-c-toggle-group__text">List</span></button></div>
-    <div class="pf-v6-c-toggle-group__item"><button class="pf-v6-c-toggle-group__button" type="button"><span class="pf-v6-c-toggle-group__icon">{icons:svg('fa:th').raw}</span><span class="pf-v6-c-toggle-group__text">Grid</span></button></div>
-    <div class="pf-v6-c-toggle-group__item"><button class="pf-v6-c-toggle-group__button" type="button"><span class="pf-v6-c-toggle-group__icon">{icons:svg('fa:table').raw}</span><span class="pf-v6-c-toggle-group__text">Table</span></button></div>
-    {/content}{/include}
-  </section>
+                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                        <h2
+                          id="documentation"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Documentation
+                        </h2>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="props-toggle-group" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                          Toggle group props
+                        </h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          Parameters accepted by
+                          <code class="ws-code">{|{#include components/forms/toggle-group ... /}|}</code>. Items are
+                          hand-rendered in the slot (each item is a
+                          <code class="ws-code">pf-v6-c-toggle-group__item</code> wrapping a button with
+                          <code class="ws-code">aria-pressed</code> and an optional
+                          <code class="ws-code">pf-m-selected</code> modifier).
+                        </p>
+                        <table
+                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                          role="grid"
+                          aria-label="Toggle group props"
+                        >
+                          <caption class="pf-v6-c-table__caption">
+                            <span class="ws-prop-required">*</span>
+                            required
+                          </caption>
+                          <thead class="pf-v6-c-table__thead">
+                            <tr class="pf-v6-c-table__tr">
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                              <th scope="col" class="pf-v6-c-table__th">Description</th>
+                            </tr>
+                          </thead>
+                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">DOM id on the container.</span>
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">ariaLabel</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Group-level accessible name (since the group has role="group").</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">slot <code class="ws-code">content</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">Toggle items — see examples for the structure.</span>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Selection state is consumer-driven.</strong> The runtime template only renders the
+                          container. Use Alpine (as shown in the examples) or server-side rendering with
+                          <code class="ws-code">pf-m-selected</code> +
+                          <code class="ws-code">aria-pressed="true"</code> on the active button.
+                        </p>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Vs. Radio / Checkbox.</strong> Use toggle-group when the choice is visually a "button
+                          bar" — view mode, alignment, formatting toggles. Use <a href="/components/radio">radios</a> in
+                          forms where you submit a value.
+                        </p>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <br /><a
+                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/forms/toggle-group.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Edit toggle-group.html on GitHub</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

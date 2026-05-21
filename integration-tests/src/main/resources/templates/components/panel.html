@@ -1,39 +1,285 @@
 {#include layouts/base}
 {#title}Panel{/title}
+{#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head}
 {#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-  <h1>Panel</h1>
-  <p>PatternFly v6 panel — a container for grouping content with optional header and footer.</p>
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary">
+          <span class="pf-v6-c-button__text">Skip to content</span>
+        </a>
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Panel</h1>
+                    <p>
+                      A grouping container with optional header, body, and footer slots. Pick a visual treatment with
+                      <code class="ws-code">raised</code>, <code class="ws-code">bordered</code>, or
+                      <code class="ws-code">secondary</code>; enable scrolling with
+                      <code class="ws-code">scrollable=true</code> on the panel and
+                      <code class="ws-code">maxHeight</code> on <code class="ws-code">panel-main</code>.
+                    </p>
+                  </div>
+                </div>
+              </section>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="basic-heading">Basic</h2>
-    <p>A basic panel with body content.</p>
-    {#include components/data-display/panel id="panel-basic"}{#content}
-    <div class="pf-v6-c-panel__main-body">Main body content of the panel.</div>
-    {/content}{/include}
-  </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-u-h-100">
+                    <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                      <nav class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc" aria-label="Table of contents">
+                        <div class="pf-v6-c-jump-links__main">
+                          <ul class="pf-v6-c-jump-links__list" role="list">
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"><a href="#examples" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Examples</span></span></a></span>
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#basic" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Basic</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#header" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Header</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#footer" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Footer</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#header-and-footer" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Header and footer</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#no-body" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">No body</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#raised" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Raised</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#bordered" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Bordered</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#secondary-variant" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Secondary variant</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#scrollable" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Scrollable</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#scrollable-with-header-and-footer" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Scrollable with header / footer</span></span></a></span></li>
+                              </ul>
+                            </li>
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"><a href="#documentation" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Documentation</span></span></a></span>
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#props-panel" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Panel props</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#props-parts" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Part templates</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#usage" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Usage</span></span></a></span></li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="bordered-heading">Bordered</h2>
-    <p>A panel with a visible border.</p>
-    {#include components/data-display/panel id="panel-bordered" bordered=true}{#content}
-    <div class="pf-v6-c-panel__header">Panel header</div>
-    <hr class="pf-v6-c-divider">
-    <div class="pf-v6-c-panel__main-body">Panel body content.</div>
-    {/content}{/include}
-  </section>
+                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                          <div>
+                            <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
+                          </div>
+                        </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="raised-heading">Raised</h2>
-    <p>A panel with a raised shadow.</p>
-    {#include components/data-display/panel id="panel-raised" raised=true}{#content}
-    <div class="pf-v6-c-panel__header">Raised panel</div>
-    <hr class="pf-v6-c-divider">
-    <div class="pf-v6-c-panel__main-body">This panel has a raised appearance with a shadow.</div>
-    <div class="pf-v6-c-panel__footer">Panel footer</div>
-    {/content}{/include}
-  </section>
+                        {#include partials/example-card title="Basic" slug="basic" component="panel"
+                          description="Container with a single &lt;code class=&quot;ws-code&quot;&gt;panel-main&lt;/code&gt; / &lt;code class=&quot;ws-code&quot;&gt;panel-main-body&lt;/code&gt; pair. No header, no footer, no decoration."}
+                        {#content}{#include components/panel/basic /}{/content}
+                        {/include}
+
+                        {#include partials/example-card title="Header" slug="header" component="panel"
+                          description="Add a &lt;code class=&quot;ws-code&quot;&gt;panel-header&lt;/code&gt; before the main slot to caption the panel."}
+                        {#content}{#include components/panel/header /}{/content}
+                        {/include}
+
+                        {#include partials/example-card title="Footer" slug="footer" component="panel"
+                          description="Add a &lt;code class=&quot;ws-code&quot;&gt;panel-footer&lt;/code&gt; after the main slot. PF v6 paints a top border on the footer automatically."}
+                        {#content}{#include components/panel/footer /}{/content}
+                        {/include}
+
+                        {#include partials/example-card title="Header and footer" slug="header-and-footer" component="panel"
+                          description="Compose both: header + main + footer. Useful as a contained editor / detail card."}
+                        {#content}{#include components/panel/header-and-footer /}{/content}
+                        {/include}
+
+                        {#include partials/example-card title="No body" slug="no-body" component="panel"
+                          description="Skip the &lt;code class=&quot;ws-code&quot;&gt;panel-main-body&lt;/code&gt; helper when you don't want the body's spacer padding — put content directly inside &lt;code class=&quot;ws-code&quot;&gt;panel-main&lt;/code&gt; (e.g. for an embedded table or list that brings its own padding)."}
+                        {#content}{#include components/panel/no-body /}{/content}
+                        {/include}
+
+                        {#include partials/example-card title="Raised" slug="raised" component="panel"
+                          description="&lt;code class=&quot;ws-code&quot;&gt;raised=true&lt;/code&gt; lifts the panel with a drop shadow. Use for panels that should feel like they sit above the page background."}
+                        {#content}{#include components/panel/raised /}{/content}
+                        {/include}
+
+                        {#include partials/example-card title="Bordered" slug="bordered" component="panel"
+                          description="&lt;code class=&quot;ws-code&quot;&gt;bordered=true&lt;/code&gt; outlines the panel with a 1px border. Use when the panel sits inside a busy background and you need a clean edge."}
+                        {#content}{#include components/panel/bordered /}{/content}
+                        {/include}
+
+                        {#include partials/example-card title="Secondary variant" slug="secondary-variant" component="panel"
+                          description="&lt;code class=&quot;ws-code&quot;&gt;secondary=true&lt;/code&gt; uses PF's secondary background token. Useful for nested panels or aside content that should recede visually."}
+                        {#content}{#include components/panel/secondary-variant /}{/content}
+                        {/include}
+
+                        {#include partials/example-card title="Scrollable" slug="scrollable" component="panel"
+                          description="Pair &lt;code class=&quot;ws-code&quot;&gt;scrollable=true&lt;/code&gt; on the panel with &lt;code class=&quot;ws-code&quot;&gt;maxHeight&lt;/code&gt; on &lt;code class=&quot;ws-code&quot;&gt;panel-main&lt;/code&gt;. PF v6 sets overflow on &lt;code class=&quot;ws-code&quot;&gt;__main&lt;/code&gt; and the body content scrolls inside."}
+                        {#content}{#include components/panel/scrollable /}{/content}
+                        {/include}
+
+                        {#include partials/example-card title="Scrollable with header and footer" slug="scrollable-with-header-and-footer" component="panel"
+                          description="Header and footer stay put while panel-main scrolls. Useful for detail panes with a sticky title / actions row."}
+                        {#content}{#include components/panel/scrollable-with-header-and-footer /}{/content}
+                        {/include}
+
+                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                            <div>
+                              <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Documentation</h2>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-panel" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Panel props</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by <code class="ws-code">{|{#include components/data-display/panel ... /}|}</code>.
+                          </p>
+                          <table class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact" role="grid" aria-label="Panel props">
+                            <thead class="pf-v6-c-table__thead">
+                              <tr class="pf-v6-c-table__tr">
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                                <th scope="col" class="pf-v6-c-table__th">Default</th>
+                                <th scope="col" class="pf-v6-c-table__th">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">id</code></span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id on the panel container.</span></td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">raised</code></span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">false</code></span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Applies <code class="ws-code">pf-m-raised</code> — drop shadow. Mutually exclusive with the other variants.</span></td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">bordered</code></span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">false</code></span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Applies <code class="ws-code">pf-m-bordered</code> — 1px border outline.</span></td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">secondary</code></span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">false</code></span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Applies <code class="ws-code">pf-m-secondary</code> — uses the secondary background token. Useful for nested or aside panels.</span></td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">scrollable</code></span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">false</code></span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Applies <code class="ws-code">pf-m-scrollable</code>. Pair with <code class="ws-code">maxHeight</code> on the <code class="ws-code">panel-main</code> include to actually scroll.</span></td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">content</code> (slot)</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute insert</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Includes for the panel parts (header / main / footer). See the next section.</span></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-parts" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Part templates</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Each panel part is its own runtime include. None accepts an <code class="ws-code">id</code> param —
+                            see the divergence note below for why.
+                          </p>
+                          <table class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact" role="grid" aria-label="Panel part templates">
+                            <thead class="pf-v6-c-table__thead">
+                              <tr class="pf-v6-c-table__tr">
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-30">Template</th>
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Params</th>
+                                <th scope="col" class="pf-v6-c-table__th">Emits</th>
+                              </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">components/data-display/panel-header</code></span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">— (content slot only)</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">&lt;div class="pf-v6-c-panel__header"&gt;{|{slot}|}&lt;/div&gt;</code></span></td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">components/data-display/panel-main</code></span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">maxHeight</code> (CSS length)</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">&lt;div class="pf-v6-c-panel__main"&gt;</code> with optional inline <code class="ws-code">--pf-v6-c-panel__main--MaxHeight</code>.</span></td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">components/data-display/panel-main-body</code></span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">— (content slot only)</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">&lt;div class="pf-v6-c-panel__main-body"&gt;{|{slot}|}&lt;/div&gt;</code></span></td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">components/data-display/panel-footer</code></span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">— (content slot only)</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">&lt;div class="pf-v6-c-panel__footer"&gt;{|{slot}|}&lt;/div&gt;</code></span></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Divergence from PF React.</strong> PF's PanelHeader / PanelMain / PanelMainBody / PanelFooter
+                            each accept their own <code class="ws-code">className</code> and <code class="ws-code">id</code>. We
+                            skip <code class="ws-code">className</code> (React-specific) and omit <code class="ws-code">id</code>
+                            on the inner parts because Qute include data inheritance leaks the outer panel's <code class="ws-code">id</code>
+                            into every nested helper — producing duplicate ids on the page. If you need an id on a specific
+                            inner element, hand-code the markup (e.g. <code class="ws-code">&lt;div class="pf-v6-c-panel__header" id="my-header"&gt;…&lt;/div&gt;</code>).
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Compose, don't configure.</strong> The panel container exposes only modifiers
+                            (raised / bordered / secondary / scrollable). Everything visible inside the panel — header text,
+                            body content, footer actions — lives in the slot composed from the four part templates. This
+                            keeps the runtime template small and lets consumers nest arbitrary markup.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Scrollable layouts.</strong> The scroll happens on
+                            <code class="ws-code">panel-main</code>, not the container. Set
+                            <code class="ws-code">scrollable=true</code> on the container (to opt into overflow behavior)
+                            AND <code class="ws-code">maxHeight</code> on <code class="ws-code">panel-main</code> (to give it
+                            a height to scroll inside). Header and footer stay outside the scroll region.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Variant precedence.</strong> If you set more than one of
+                            <code class="ws-code">raised</code> / <code class="ws-code">bordered</code> /
+                            <code class="ws-code">secondary</code>, all of them apply as classes. PF v6's CSS handles the
+                            cascade, but mixing them is unusual — pick one and stick with it.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>vs. Card.</strong> Panel and Card overlap in purpose. Pick panel when you want a
+                            simple grouping container with optional header / body / footer slots — no decoration unless you
+                            opt into it. Pick card when you need richer chrome (selectability, expandable, footer actions
+                            with built-in spacing).
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <br /><a
+                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/panel.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Edit panel.html on GitHub</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {/body}
 {/include}

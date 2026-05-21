@@ -1,20 +1,171 @@
-{#include layouts/base}
-{#title}Navigation{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-  <h1>Navigation</h1>
-  <p>Navigation links allow users to move through an application.</p>
-  <section style="margin-top: 2rem;">
-    <h2 id="vertical-heading">Vertical</h2>
-    <p>A vertical navigation list.</p>
-    {#include components/navigation/nav id="nav-vertical"}{#content}<li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link pf-m-current" aria-current="page">Link 1</a></li><li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link">Link 2</a></li><li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link">Link 3</a></li>{/content}{/include}
-  </section>
-  <section style="margin-top: 2rem;">
-    <h2 id="horizontal-heading">Horizontal</h2>
-    <p>A horizontal navigation list.</p>
-    {#include components/navigation/nav id="nav-horizontal" horizontal=true}{#content}<li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link pf-m-current" aria-current="page">Link 1</a></li><li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link">Link 2</a></li><li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link">Link 3</a></li>{/content}{/include}
-  </section>
+{#include layouts/base} {#title}Navigation{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Navigation</h1>
+                    <p>
+                      Side-rail navigation for app sections. PF v6 ships flat lists, grouped sections, and expandable
+                      trees. The page-layout templates (<code class="ws-code">layouts/sidebar</code>) embed this
+                      automatically.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                    <nav
+                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                      aria-label="Table of contents"
+                    >
+                      <div class="pf-v6-c-jump-links__main">
+                        <ul class="pf-v6-c-jump-links__list" role="list">
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#vertical" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Vertical</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#grouped" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Grouped</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#props-navigation" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Navigation pattern</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
+                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                        <div>
+                          <h2
+                            id="examples"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                          >
+                            Examples
+                          </h2>
+                        </div>
+                      </div>
+                      {#include partials/example-card title="Vertical" slug="vertical" component="navigation"
+                      description="Flat list of links. The active item gets &lt;code
+                      class=&quot;ws-code&quot;&gt;pf-m-current&lt;/code&gt; + &lt;code
+                      class=&quot;ws-code&quot;&gt;aria-current=&quot;page&quot;&lt;/code&gt;."} {#content}{#include
+                      components/navigation/vertical /}{/content} {/include} {#include partials/example-card
+                      title="Grouped" slug="grouped" component="navigation" description="Multiple labelled sections
+                      inside one nav. Each section has its own &lt;code
+                      class=&quot;ws-code&quot;&gt;__section-title&lt;/code&gt; and &lt;code
+                      class=&quot;ws-code&quot;&gt;__list&lt;/code&gt;."} {#content}{#include
+                      components/navigation/grouped /}{/content} {/include}
+                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                        <h2
+                          id="documentation"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Documentation
+                        </h2>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="props-navigation" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                          Navigation pattern
+                        </h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          No runtime template — the markup is plain &lt;nav&gt; + PF subclasses. The base classes are
+                          <code class="ws-code">.pf-v6-c-nav</code>, <code class="ws-code">.pf-v6-c-nav__list</code>,
+                          <code class="ws-code">.pf-v6-c-nav__item</code>,
+                          <code class="ws-code">.pf-v6-c-nav__link</code>, plus
+                          <code class="ws-code">.pf-v6-c-nav__section</code> +
+                          <code class="ws-code">.pf-v6-c-nav__section-title</code> for grouping.
+                        </p>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Server-marked active item.</strong> Mark the active link with
+                          <code class="ws-code">pf-m-current</code> +
+                          <code class="ws-code">aria-current="page"</code> on the server; no client state needed for the
+                          nav rail.
+                        </p>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <br /><a
+                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/integration-tests/src/main/resources/templates/components/navigation/vertical.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Edit navigation example on GitHub</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

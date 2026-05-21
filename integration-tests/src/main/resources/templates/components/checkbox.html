@@ -1,62 +1,351 @@
-{#include layouts/base}
-{#title}Checkbox{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+{#include layouts/base} {#title}Checkbox{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Checkbox</h1>
+                    <p>
+                      Single binary input with a label. PF v6 wraps the input + label in a
+                      <code class="ws-code">&lt;label class="pf-v6-c-check"&gt;</code> so the whole row is clickable,
+                      plus optional description and body blocks.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                    <nav
+                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                      aria-label="Table of contents"
+                    >
+                      <div class="pf-v6-c-jump-links__main">
+                        <ul class="pf-v6-c-jump-links__list" role="list">
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#checked" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Checked</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#disabled" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Disabled</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#reversed" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Reversed</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-description" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With description</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-body" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With body</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#required" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Required</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#standalone" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Standalone</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#props-checkbox" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Checkbox props</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
+                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                        <div>
+                          <h2
+                            id="examples"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                          >
+                            Examples
+                          </h2>
+                        </div>
+                      </div>
 
-  <h1>Checkbox</h1>
-  <p>PatternFly v6 check — a form control for selecting one or more options.</p>
+                      {#include partials/example-card title="Basic" slug="basic" component="checkbox"
+                      description="Default unchecked checkbox with a label."} {#content}{#include
+                      components/checkbox/basic /}{/content} {/include} {#include partials/example-card title="Checked"
+                      slug="checked" component="checkbox" description="&lt;code
+                      class=&quot;ws-code&quot;&gt;checked=true&lt;/code&gt; — initial state checked."}
+                      {#content}{#include components/checkbox/checked /}{/content} {/include} {#include
+                      partials/example-card title="Disabled" slug="disabled" component="checkbox" description="Disabled
+                      — both unchecked and pre-checked variants."} {#content}{#include components/checkbox/disabled
+                      /}{/content} {/include} {#include partials/example-card title="Reversed" slug="reversed"
+                      component="checkbox" description="&lt;code class=&quot;ws-code&quot;&gt;reversed=true&lt;/code&gt;
+                      renders label before input."} {#content}{#include components/checkbox/reversed /}{/content}
+                      {/include} {#include partials/example-card title="With description" slug="with-description"
+                      component="checkbox" description="A secondary line of muted text under the label."}
+                      {#content}{#include components/checkbox/with-description /}{/content} {/include} {#include
+                      partials/example-card title="With body" slug="with-body" component="checkbox" description="The
+                      body slot — extra content under the label."} {#content}{#include components/checkbox/with-body
+                      /}{/content} {/include} {#include partials/example-card title="Required" slug="required"
+                      component="checkbox" description="&lt;code class=&quot;ws-code&quot;&gt;required=true&lt;/code&gt;
+                      appends the red &amp;quot;*&amp;quot; marker."} {#content}{#include components/checkbox/required
+                      /}{/content} {/include} {#include partials/example-card title="Standalone" slug="standalone"
+                      component="checkbox" description="&lt;code
+                      class=&quot;ws-code&quot;&gt;standalone=true&lt;/code&gt; — no label. Pair with &lt;code
+                      class=&quot;ws-code&quot;&gt;ariaLabel&lt;/code&gt;."} {#content}{#include
+                      components/checkbox/standalone /}{/content} {/include}
 
-  <section style="margin-top: 2rem;">
-    <h2 id="basic-heading">Basic</h2>
-    <p>A standard checkbox with a label.</p>
-    {#include components/forms/check id="check-basic" label="Checkbox" /}
-  </section>
+                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                        <h2
+                          id="documentation"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Documentation
+                        </h2>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="props-checkbox" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                          Checkbox props
+                        </h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          Parameters accepted by
+                          <code class="ws-code">{|{#include components/forms/check ... /}|}</code> — the runtime
+                          template is named <code class="ws-code">check.html</code> to mirror PF's
+                          <code class="ws-code">.pf-v6-c-check</code> class.
+                        </p>
+                        <table
+                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                          role="grid"
+                          aria-label="Checkbox props"
+                        >
+                          <caption class="pf-v6-c-table__caption">
+                            <span class="ws-prop-required">*</span>
+                            required
+                          </caption>
+                          <thead class="pf-v6-c-table__thead">
+                            <tr class="pf-v6-c-table__tr">
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                              <th scope="col" class="pf-v6-c-table__th">Description</th>
+                            </tr>
+                          </thead>
+                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >id of the input. Wrapper gets <code class="ws-code">{|{id}-wrap|}</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">label</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Visible label. Required for non-standalone checkboxes.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">checked</code> / <code class="ws-code">disabled</code> /
+                                  <code class="ws-code">required</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">Standard HTML form attributes.</span>
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">description</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Secondary muted text under the label — wired with aria-describedby.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">body</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String (HTML)</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">Extra content under label/description.</span>
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">standalone</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >No label — emits <code class="ws-code">pf-m-standalone</code>. Pair with
+                                  <code class="ws-code">ariaLabel</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">reversed</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Label before input — emits <code class="ws-code">pf-m-reversed</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">ariaLabel</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">Accessible label for standalone checkboxes.</span>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="checked-heading">Checked</h2>
-    <p>A checkbox that is pre-selected.</p>
-    {#include components/forms/check id="check-checked" label="Checkbox checked" checked=true /}
-  </section>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Checkbox vs. radio vs. switch.</strong> Checkbox for many independent on/off choices.
+                          <a href="/components/radio">Radio</a> for one-of-many.
+                          <a href="/components/switch">Switch</a> for binary settings that take effect immediately.
+                        </p>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Standalone needs an aria-label.</strong> A checkbox with no label is invisible to
+                          screen readers — always set <code class="ws-code">ariaLabel</code>.
+                        </p>
+                      </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="disabled-heading">Disabled</h2>
-    <p>Disabled checkboxes, both unchecked and checked.</p>
-    <div style="display: flex; flex-direction: column; gap: 1rem;">
-      {#include components/forms/check id="check-disabled" label="Disabled checkbox" disabled=true /}
-      {#include components/forms/check id="check-disabled-checked" label="Disabled checked checkbox" disabled=true checked=true /}
+                      <div class="pf-v6-l-stack__item">
+                        <br /><a
+                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/forms/check.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Edit check.html on GitHub</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
     </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="description-heading">With description</h2>
-    <p>A checkbox with additional description text.</p>
-    {#include components/forms/check id="check-description" label="Checkbox with description" description="Single-tenant cloud service hosted and managed by Red Hat that offers additional customization abilities for clusters." /}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="body-heading">With body</h2>
-    <p>A checkbox with custom body content.</p>
-    {#include components/forms/check id="check-body" label="Checkbox with body" body="This is where custom content goes." /}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="desc-body-heading">With description and body</h2>
-    <p>A checkbox with both description and body.</p>
-    {#include components/forms/check id="check-desc-body" label="Checkbox with description and body" description="Single-tenant cloud service hosted and managed by Red Hat that offers additional customization abilities for clusters." body="This is where custom content goes." /}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="standalone-heading">Standalone</h2>
-    <p>A checkbox with no visible label.</p>
-    {#include components/forms/check id="check-standalone" standalone=true ariaLabel="Standalone checkbox" /}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="required-heading">Required</h2>
-    <p>A checkbox marked as required.</p>
-    {#include components/forms/check id="check-required" label="Required checkbox" required=true /}
-  </section>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

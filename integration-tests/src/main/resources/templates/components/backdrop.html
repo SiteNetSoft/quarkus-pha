@@ -1,66 +1,270 @@
-{#include layouts/base}
-{#title}Backdrop{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-
-  <h1>Backdrop</h1>
-  <p>PatternFly v6 backdrop — a fixed full-viewport semi-transparent overlay.</p>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="basic-heading">Basic</h2>
-    <p>Click the button to toggle the backdrop. Click the backdrop to dismiss.</p>
-    <div x-data="{ showBackdrop: false }">
-      <button class="pf-v6-c-button pf-m-primary" type="button"
-              @click="showBackdrop = true" id="backdrop-basic-toggle">Toggle backdrop</button>
-      <div x-show="showBackdrop" x-transition.opacity style="display: none;"
-           @click="showBackdrop = false">
-        {#include components/feedback/backdrop id="backdrop-basic" /}
+{#include layouts/base} {#title}Backdrop{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary">
+          <span class="pf-v6-c-button__text">Skip to content</span>
+        </a>
       </div>
-    </div>
-  </section>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Backdrop</h1>
+                    <p>
+                      A fixed full-viewport semi-transparent overlay used to focus user attention on whatever sits on
+                      top of it — typically a modal, popover, or loading indicator. The component itself is a single
+                      <code class="ws-code">&lt;div&gt;</code>; the interaction (show / hide / dismiss) lives at the
+                      consumer level via Alpine.js or HTMX.
+                    </p>
+                  </div>
+                </div>
+              </section>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="with-content-heading">With content</h2>
-    <p>Backdrop with centered spinner overlay content.</p>
-    <div x-data="{ showBackdrop: false }">
-      <button class="pf-v6-c-button pf-m-primary" type="button"
-              @click="showBackdrop = true" id="backdrop-content-toggle">Toggle backdrop with content</button>
-      <div x-show="showBackdrop" x-transition.opacity style="display: none;"
-           @click="showBackdrop = false">
-        {#include components/feedback/backdrop id="backdrop-content" /}
-        <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 401; text-align: center; color: white;"
-             id="backdrop-content-overlay" @click.stop>
-          <span class="pf-v6-c-spinner" role="progressbar" aria-label="Loading">
-            <span class="pf-v6-c-spinner__clipper"></span>
-            <span class="pf-v6-c-spinner__lead-ball"></span>
-            <span class="pf-v6-c-spinner__tail-ball"></span>
-          </span>
-          <p style="margin-top: 1rem;">Loading...</p>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-u-h-100">
+                    <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                      <nav
+                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                        aria-label="Table of contents"
+                      >
+                        <div class="pf-v6-c-jump-links__main">
+                          <ul class="pf-v6-c-jump-links__list" role="list">
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#with-content" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">With content</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#non-dismissible" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Non-dismissible</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-backdrop" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Backdrop props</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
+
+                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                          <div>
+                            <h2
+                              id="examples"
+                              tabindex="-1"
+                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                            >
+                              Examples
+                            </h2>
+                          </div>
+                        </div>
+
+                        {#include partials/example-card title="Basic" slug="basic" component="backdrop"
+                        description="Click the button to show the backdrop, then click the backdrop to dismiss. Alpine's
+                        x-show handles mount; the backdrop itself just renders the overlay surface."}
+                        {#content}{#include components/backdrop/basic /}{/content} {/include} {#include
+                        partials/example-card title="With content" slug="with-content" component="backdrop"
+                        description="Pass overlay content (spinner, dialog body, custom panel) into the backdrop's
+                        content slot. @click.stop on the inner panel prevents the dismiss bubble."} {#content}{#include
+                        components/backdrop/with-content /}{/content} {/include} {#include partials/example-card
+                        title="Non-dismissible" slug="non-dismissible" component="backdrop" description="Omit the
+                        dismiss handler on the wrapper. Only the explicit close button calls open = false. Use when the
+                        user must complete or cancel an action deliberately."} {#content}{#include
+                        components/backdrop/non-dismissible /}{/content} {/include}
+
+                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                            <div>
+                              <h2
+                                id="documentation"
+                                tabindex="-1"
+                                class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                              >
+                                Documentation
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-backdrop" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                            Backdrop props
+                          </h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by
+                            <code class="ws-code">{|{#include components/feedback/backdrop ... /}|}</code>.
+                          </p>
+                          <table
+                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                            role="grid"
+                            aria-label="Backdrop props"
+                          >
+                            <caption class="pf-v6-c-table__caption">
+                              <span class="ws-prop-required">*</span>
+                              required
+                            </caption>
+                            <thead class="pf-v6-c-table__thead">
+                              <tr class="pf-v6-c-table__tr">
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                                <th scope="col" class="pf-v6-c-table__th">Default</th>
+                                <th scope="col" class="pf-v6-c-table__th">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >DOM id on the overlay <code class="ws-code">&lt;div&gt;</code>. Used by Alpine /
+                                    e2e selectors to drive show/hide.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">overlay</code> (slot)</span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute insert</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Optional overlay content rendered inside the backdrop. Use for spinners, dialog
+                                    bodies, or any panel that should sit on top of the gray-out. Add
+                                    <code class="ws-code">@click.stop</code> on the inner panel so clicks on the content
+                                    don't bubble up and dismiss. The slot is named
+                                    <code class="ws-code">overlay</code> (not
+                                    <code class="ws-code">content</code>) to avoid colliding with the demo's
+                                    example-card content slot when this template renders inside a demo card.</span
+                                  >
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Divergence from PF docs:</strong> PF v6 docs only show a single &quot;Basic&quot;
+                            example because the component is meant to be composed with Modal / Popover (which have their
+                            own pages). We ship three concrete patterns (basic dismiss, with overlay content,
+                            non-dismissible) since this project doesn't always pair backdrop with a modal — sometimes
+                            it's just a loading overlay. <code class="ws-code">className</code> is React-specific;
+                            skipped.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Drive visibility from the consumer.</strong> The backdrop component is a static
+                            <code class="ws-code">&lt;div&gt;</code>; show / hide is the caller's job. The examples use
+                            Alpine's <code class="ws-code">x-show</code> with a boolean — substitute HTMX's
+                            <code class="ws-code">hx-target</code> / <code class="ws-code">hx-swap</code> if the open
+                            state is server-driven.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Dismiss handler placement.</strong> Attach the dismiss to the wrapper around the
+                            backdrop (not the backdrop element itself) so the click hits the outer "overlay" region. Add
+                            <code class="ws-code">@click.stop</code> on any inner panel that should NOT dismiss.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>z-index.</strong> PF v6's CSS sets the backdrop's z-index via the
+                            <code class="ws-code">--pf-t--global--z-index--lg</code> token. Inner content automatically
+                            stacks above; if you nest the backdrop inside another stacking context, the global token
+                            still wins.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Focus management.</strong> The backdrop component doesn't trap focus on its own.
+                            Pair with the project's <code class="ws-code">focus-trap.js</code> utility (or a modal /
+                            popover component that handles it) when the overlay carries interactive content.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <br /><a
+                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/feedback/backdrop.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Edit backdrop.html on GitHub</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
         </div>
       </div>
     </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="non-dismissible-heading">Non-dismissible</h2>
-    <p>Backdrop that can only be closed via the close button, not by clicking the backdrop.</p>
-    <div x-data="{ showBackdrop: false }">
-      <button class="pf-v6-c-button pf-m-primary" type="button"
-              @click="showBackdrop = true" id="backdrop-nondismiss-toggle">Toggle non-dismissible backdrop</button>
-      <div x-show="showBackdrop" x-transition.opacity style="display: none;">
-        {#include components/feedback/backdrop id="backdrop-nondismiss" /}
-        <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 401; text-align: center;"
-             id="backdrop-nondismiss-overlay">
-          <div class="pf-v6-c-card" style="padding: 2rem;">
-            <p style="margin-bottom: 1rem;">This backdrop cannot be dismissed by clicking outside.</p>
-            <button class="pf-v6-c-button pf-m-primary" type="button"
-                    @click="showBackdrop = false" id="backdrop-nondismiss-close">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

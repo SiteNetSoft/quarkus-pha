@@ -1,0 +1,20 @@
+{! Sticky banner inside a scroll container. PF uses position: sticky; top: 0 — the banner pins
+   to the top of its scroll parent, not the viewport. !}
+<div
+  id="sticky-container"
+  style="
+    height: 220px;
+    overflow-y: auto;
+    border: 1px solid var(--pf-t--global--border--color--default);
+    border-radius: var(--pf-t--global--border--radius--small);
+  "
+>
+  {#include components/feedback/banner id="banner-sticky" variant="warning" sticky=true screenReaderText="Warning:"}{#message}Sticky warning banner{/message}{/include}
+  <div style="padding: 1rem">
+    <p>Scroll down to see the sticky banner stay at the top.</p>
+    <p style="margin-top: 4rem">More content below…</p>
+    <p style="margin-top: 4rem">Even more content…</p>
+    <p style="margin-top: 4rem">Almost at the bottom…</p>
+    <p style="margin-top: 4rem">End of scrollable content.</p>
+  </div>
+</div>

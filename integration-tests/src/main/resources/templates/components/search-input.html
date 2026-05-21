@@ -1,39 +1,182 @@
-{#include layouts/base}
-{#title}Search Input{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-  <h1>Search Input</h1>
-  <p>A search input allows users to enter search terms to filter content.</p>
-  <section style="margin-top: 2rem;">
-    <h2 id="basic-heading">Basic</h2>
-    <p>A basic search input field.</p>
-    <div class="pf-v6-c-text-input-group" id="si-basic">
-      <div class="pf-v6-c-text-input-group__main pf-m-icon">
-        <span class="pf-v6-c-text-input-group__text">
-          <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:search').raw}</span>
-          <input class="pf-v6-c-text-input-group__text-input" type="search" placeholder="Search..." aria-label="Search">
-        </span>
+{#include layouts/base} {#title}Search input{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Search input</h1>
+                    <p>
+                      An input specialized for search — text-input-group with the magnifying-glass icon and an optional
+                      clear button. Composition pattern: PF v6 has no dedicated runtime template; the search-input
+                      markup is built from text-input-group classes + Alpine for the clear button.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                    <nav
+                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                      aria-label="Table of contents"
+                    >
+                      <div class="pf-v6-c-jump-links__main">
+                        <ul class="pf-v6-c-jump-links__list" role="list">
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-clear" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With clear</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#props-search-input" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Search input structure</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
+                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                        <div>
+                          <h2
+                            id="examples"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                          >
+                            Examples
+                          </h2>
+                        </div>
+                      </div>
+                      {#include partials/example-card title="Basic" slug="basic" component="search-input"
+                      description="Plain search input with magnifying-glass icon. type=&quot;search&quot; gets
+                      browser-native clear UI in some browsers."} {#content}{#include components/search-input/basic
+                      /}{/content} {/include} {#include partials/example-card title="With clear" slug="with-clear"
+                      component="search-input" description="Alpine-driven clear button — appears only when the input has
+                      a value, clicking empties it."} {#content}{#include components/search-input/with-clear
+                      /}{/content} {/include}
+
+                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                        <h2
+                          id="documentation"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Documentation
+                        </h2>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="props-search-input" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                          Search input structure
+                        </h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          Search input is a <em>composition</em>, not a separate runtime template. The markup is:
+                        </p>
+                        <ul class="pf-v6-c-content--ul" style="margin-left: 2rem">
+                          <li><code class="ws-code">.pf-v6-c-text-input-group</code> wrapper</li>
+                          <li>
+                            Inside: <code class="ws-code">.pf-v6-c-text-input-group__main.pf-m-icon</code> containing
+                            the icon span + the &lt;input type="search"&gt;
+                          </li>
+                          <li>
+                            Optional: <code class="ws-code">.pf-v6-c-text-input-group__utilities</code> with the clear
+                            button
+                          </li>
+                        </ul>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          See the <a href="#with-clear">With clear</a> example for the full structure.
+                        </p>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>HTMX pairing.</strong> The standard server-side search pattern is
+                          <code class="ws-code"
+                            >hx-get="/search" hx-trigger="input changed delay:200ms" hx-target="#results"</code
+                          >.
+                        </p>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Accessibility.</strong> Always set <code class="ws-code">aria-label="Search"</code> on
+                          the input — there's no visible label.
+                        </p>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <br /><a
+                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/integration-tests/src/main/resources/templates/components/search-input/with-clear.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Edit search-input examples on GitHub</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
       </div>
     </div>
-  </section>
-  <section style="margin-top: 2rem;">
-    <h2 id="with-clear-heading">With clear button</h2>
-    <p>A search input with a clear button to reset the field.</p>
-    <div class="pf-v6-c-text-input-group" id="si-clear" x-data="{ value: 'Search term' }">
-      <div class="pf-v6-c-text-input-group__main pf-m-icon">
-        <span class="pf-v6-c-text-input-group__text">
-          <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:search').raw}</span>
-          <input class="pf-v6-c-text-input-group__text-input" type="search" placeholder="Search..." aria-label="Search" x-model="value">
-        </span>
-      </div>
-      <div class="pf-v6-c-text-input-group__utilities" x-show="value">
-        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Clear search" @click="value = ''">
-          {icons:svg('fa:times').raw}
-        </button>
-      </div>
-    </div>
-  </section>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

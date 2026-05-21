@@ -1,6 +1,8 @@
 {! Tooltip — PatternFly v6 !}
-{! Parameters: id, text, position (optional: top|bottom|left|right) !}
-<div class="pf-v6-c-tooltip{#if position??} pf-m-{position}{#else} pf-m-top{/if}" id="{id}" role="tooltip">
+{! Required: id, text !}
+{! Optional: position (top | bottom | left | right — default top), visible (boolean — show immediately for static demos) !}
+{! Static markup — for trigger-driven tooltips wrap a target element with the phaTooltip Alpine component (not bundled by default). !}
+<div class="pf-v6-c-tooltip{#if position??} pf-m-{position}{#else} pf-m-top{/if}{#if visible??} pf-m-visible{/if}" id="{id}" role="tooltip">
   <div class="pf-v6-c-tooltip__arrow"></div>
   <div class="pf-v6-c-tooltip__content">{text}</div>
 </div>

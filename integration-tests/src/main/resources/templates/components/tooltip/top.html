@@ -1,0 +1,7 @@
+{! Static markup — visible=true keeps it shown for the demo. In a real page wire it to a trigger. !}
+<div style="position: relative; display: inline-block; padding: 2.5rem 0">
+  <button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">Hover target</span></button>
+  <div style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%)">
+    {#include components/feedback/tooltip id="tt-top" position="top" visible=true text="I am a top tooltip" /}
+  </div>
+</div>

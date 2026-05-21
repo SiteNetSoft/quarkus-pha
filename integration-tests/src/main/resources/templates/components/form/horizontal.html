@@ -1,0 +1,11 @@
+{! Horizontal form — labels render in a fixed-width column next to controls. !}
+{#include components/forms/form id="form-horizontal" horizontal=true}{#content}
+  <div class="pf-v6-c-form__group">
+    <div class="pf-v6-c-form__group-label"><label class="pf-v6-c-form__label" for="form-h-name-field"><span class="pf-v6-c-form__label-text">Name</span></label></div>
+    <div class="pf-v6-c-form__group-control">{#include components/forms/text-input id="form-h-name" placeholder="Enter name" /}</div>
+  </div>
+  <div class="pf-v6-c-form__group">
+    <div class="pf-v6-c-form__group-label"><label class="pf-v6-c-form__label" for="form-h-email-field"><span class="pf-v6-c-form__label-text">Email</span></label></div>
+    <div class="pf-v6-c-form__group-control">{#include components/forms/text-input id="form-h-email" type="email" placeholder="name@example.com" /}</div>
+  </div>
+{/content}{/include}

@@ -1,0 +1,36 @@
+{! Application launcher = a grid-of-icons menu attached to a toggle. !}
+<div x-data="{ open: false }" style="position: relative; display: inline-block">
+  <button class="pf-v6-c-menu-toggle pf-m-plain" type="button" :class="open ? 'pf-m-expanded' : ''" :aria-expanded="open" @click="open = !open" aria-label="Application launcher" id="al-basic-toggle">
+    <span class="pf-v6-c-menu-toggle__icon">{icons:svg('fa:table-cells-large').raw}</span>
+  </button>
+  <div class="pf-v6-c-menu pf-m-plain" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; right: 0; z-index: 200; padding: 1rem; min-width: 18rem">
+    <div class="pf-v6-c-menu__content">
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem">
+        <a href="#" class="pf-v6-c-menu__item" style="text-align: center; padding: 1rem 0.5rem; text-decoration: none">
+          <div style="font-size: 1.5rem">{icons:svg('fa:chart-line').raw}</div>
+          <div class="pf-v6-c-menu__item-text" style="margin-top: 0.5rem">Analytics</div>
+        </a>
+        <a href="#" class="pf-v6-c-menu__item" style="text-align: center; padding: 1rem 0.5rem; text-decoration: none">
+          <div style="font-size: 1.5rem">{icons:svg('fa:folder').raw}</div>
+          <div class="pf-v6-c-menu__item-text" style="margin-top: 0.5rem">Files</div>
+        </a>
+        <a href="#" class="pf-v6-c-menu__item" style="text-align: center; padding: 1rem 0.5rem; text-decoration: none">
+          <div style="font-size: 1.5rem">{icons:svg('fa:envelope').raw}</div>
+          <div class="pf-v6-c-menu__item-text" style="margin-top: 0.5rem">Mail</div>
+        </a>
+        <a href="#" class="pf-v6-c-menu__item" style="text-align: center; padding: 1rem 0.5rem; text-decoration: none">
+          <div style="font-size: 1.5rem">{icons:svg('fa:calendar').raw}</div>
+          <div class="pf-v6-c-menu__item-text" style="margin-top: 0.5rem">Calendar</div>
+        </a>
+        <a href="#" class="pf-v6-c-menu__item" style="text-align: center; padding: 1rem 0.5rem; text-decoration: none">
+          <div style="font-size: 1.5rem">{icons:svg('fa:users').raw}</div>
+          <div class="pf-v6-c-menu__item-text" style="margin-top: 0.5rem">People</div>
+        </a>
+        <a href="#" class="pf-v6-c-menu__item" style="text-align: center; padding: 1rem 0.5rem; text-decoration: none">
+          <div style="font-size: 1.5rem">{icons:svg('fa:gear').raw}</div>
+          <div class="pf-v6-c-menu__item-text" style="margin-top: 0.5rem">Settings</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

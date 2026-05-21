@@ -1,0 +1,16 @@
+{! Select = Dropdown that tracks the chosen value in the toggle label. !}
+<div x-data="{ open: false, selected: 'Pick one' }" style="position: relative; display: inline-block">
+  <button class="pf-v6-c-menu-toggle" type="button" :class="open ? 'pf-m-expanded' : ''" :aria-expanded="open" @click="open = !open" id="sl-single-toggle">
+    <span class="pf-v6-c-menu-toggle__text" x-text="selected"></span>
+    <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
+  </button>
+  <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 12rem">
+    <div class="pf-v6-c-menu__content">
+      <ul class="pf-v6-c-menu__list" role="listbox">
+        <template x-for="opt in ['Mr', 'Mrs', 'Ms', 'Dr', 'Other']" :key="opt">
+          <li class="pf-v6-c-menu__list-item" :class="selected === opt ? 'pf-m-selected' : ''"><button class="pf-v6-c-menu__item" type="button" role="option" :aria-selected="selected === opt" @click="selected = opt; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text" x-text="opt"></span></span></button></li>
+        </template>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+{! Helper text item — PatternFly v6 !}
+{! Renders the inner __item markup; pair with components/feedback/helper-text as the container. !}
+{!                                                                                !}
+{! Parameters:                                                                    !}
+{!   text             (required) — body text                                      !}
+{!   status           (optional) — indeterminate | warning | success | error      !}
+{!   dynamic          (optional) — boolean; applies pf-m-dynamic for transition animations !}
+{!   iconName         (optional) — overrides the default per-status icon          !}
+{!   screenReaderText (optional) — screen-reader-only suffix announcing the variant !}
+{!                                                                                !}
+{! No id param: Qute include inheritance would leak the outer helper-text id onto !}
+{! every nested item, producing duplicate ids. Hand-code the markup if you need a !}
+{! per-item id (e.g. for aria-describedby).                                       !}
+{!                                                                                !}
+{! Default icons (when status is set but iconName is not):                        !}
+{!   success       → fa:circle-check                                              !}
+{!   warning       → fa:triangle-exclamation                                      !}
+{!   error         → fa:circle-exclamation                                        !}
+{!   indeterminate → fa:minus                                                     !}
+<div class="pf-v6-c-helper-text__item{#if status??} pf-m-{status}{/if}{#if dynamic??} pf-m-dynamic{/if}">
+  {#if iconName??}
+  <span class="pf-v6-c-helper-text__item-icon">{icons:svg(iconName).raw}</span>
+  {#else if status??}
+  <span class="pf-v6-c-helper-text__item-icon">{#if status is 'success'}{icons:svg('fa:circle-check').raw}{#else if status is 'warning'}{icons:svg('fa:triangle-exclamation').raw}{#else if status is 'error'}{icons:svg('fa:circle-exclamation').raw}{#else if status is 'indeterminate'}{icons:svg('fa:minus').raw}{/if}</span>
+  {/if}
+  <span class="pf-v6-c-helper-text__item-text">{text}</span>
+  {#if screenReaderText??}<span class="pf-v6-screen-reader">{screenReaderText}</span>{/if}
+</div>

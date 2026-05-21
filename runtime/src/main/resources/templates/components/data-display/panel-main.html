@@ -1,0 +1,11 @@
+{! Panel main — PatternFly v6 !}
+{! Parameters:                                                              !}
+{!   maxHeight (optional) — CSS length (e.g. "20rem", "400px"). Sets        !}
+{!                          --pf-v6-c-panel__main--MaxHeight inline.        !}
+{!                          Pair with scrollable=true on the panel.         !}
+{!                                                                                  !}
+{! No id param: Qute include inheritance would leak the outer panel's id onto every !}
+{! nested helper, producing duplicate ids. Hand-code the markup if you need an id.  !}
+<div class="pf-v6-c-panel__main"{#if maxHeight??} style="--pf-v6-c-panel__main--MaxHeight: {maxHeight}"{/if}>
+  {#insert content}{/insert}
+</div>

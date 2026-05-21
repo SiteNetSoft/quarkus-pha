@@ -1,127 +1,242 @@
-{#include layouts/base}
-{#title}Progress Stepper{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-  <h1>Progress Stepper</h1>
-  <p>PatternFly v6 progress stepper component for displaying the steps of a multi-step process.</p>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="basic-heading">Basic</h2>
-    <p>A horizontal progress stepper with four steps showing completed, current, and pending states.</p>
-    {#include components/feedback/progress-stepper id="ps-basic"}{#content}
-      <li class="pf-v6-c-progress-stepper__step pf-m-success" role="listitem" aria-label="Completed step 1">
-        <div class="pf-v6-c-progress-stepper__step-connector">
-          <span class="pf-v6-c-progress-stepper__step-icon">{icons:svg('fa:check-circle').raw}</span>
+{#include layouts/base} {#title}Progress stepper{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Progress stepper</h1>
+                    <p>
+                      Visualize progress through a sequence of named steps — pipeline stages, multi-step workflows,
+                      deployment phases. Each step has a state (success / current / pending) and an icon.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                    <nav
+                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                      aria-label="Table of contents"
+                    >
+                      <div class="pf-v6-c-jump-links__main">
+                        <ul class="pf-v6-c-jump-links__list" role="list">
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#horizontal" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Horizontal</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#vertical" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Vertical</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#compact" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Compact</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#props-progress-stepper" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Progress stepper props</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
+                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                        <div>
+                          <h2
+                            id="examples"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                          >
+                            Examples
+                          </h2>
+                        </div>
+                      </div>
+                      {#include partials/example-card title="Horizontal" slug="horizontal" component="progress-stepper"
+                      description="Default layout — steps laid out left-to-right with the connector between them.
+                      States: &lt;code class=&quot;ws-code&quot;&gt;pf-m-success&lt;/code&gt;, &lt;code
+                      class=&quot;ws-code&quot;&gt;pf-m-current&lt;/code&gt;, &lt;code
+                      class=&quot;ws-code&quot;&gt;pf-m-pending&lt;/code&gt;."} {#content}{#include
+                      components/progress-stepper/horizontal /}{/content} {/include} {#include partials/example-card
+                      title="Vertical" slug="vertical" component="progress-stepper" description="&lt;code
+                      class=&quot;ws-code&quot;&gt;vertical=true&lt;/code&gt; — stacked top to bottom. Better in narrow
+                      columns."} {#content}{#include components/progress-stepper/vertical /}{/content} {/include}
+                      {#include partials/example-card title="Compact" slug="compact" component="progress-stepper"
+                      description="&lt;code class=&quot;ws-code&quot;&gt;compact=true&lt;/code&gt; — drops descriptions
+                      for a denser stepper, useful in headers."} {#content}{#include components/progress-stepper/compact
+                      /}{/content} {/include}
+                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                        <h2
+                          id="documentation"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Documentation
+                        </h2>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3
+                          id="props-progress-stepper"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h3 pf-m-editorial ws-heading"
+                        >
+                          Progress stepper props
+                        </h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          Parameters accepted by
+                          <code class="ws-code">{|{#include components/feedback/progress-stepper ... /}|}</code>. Steps
+                          go in the slot — each is a &lt;li&gt; with state-modifier classes.
+                        </p>
+                        <table
+                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                          role="grid"
+                          aria-label="Progress stepper props"
+                        >
+                          <caption class="pf-v6-c-table__caption">
+                            <span class="ws-prop-required">*</span>
+                            required
+                          </caption>
+                          <thead class="pf-v6-c-table__thead">
+                            <tr class="pf-v6-c-table__tr">
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                              <th scope="col" class="pf-v6-c-table__th">Description</th>
+                            </tr>
+                          </thead>
+                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">vertical</code> / <code class="ws-code">compact</code> /
+                                  <code class="ws-code">center</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Layout modifiers — emit matching <code class="ws-code">pf-m-*</code> on the
+                                  &lt;ol&gt;.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">slot <code class="ws-code">content</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >&lt;li class="pf-v6-c-progress-stepper__step ..."&gt; entries with their state
+                                  classes.</span
+                                >
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>One step is current.</strong> Mark exactly one step with
+                          <code class="ws-code">pf-m-current</code> + <code class="ws-code">aria-current="step"</code>.
+                          Past steps get <code class="ws-code">pf-m-success</code> (or other terminal states); future
+                          steps get no state class.
+                        </p>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Live updates.</strong> Wrap the &lt;ol&gt; in an HTMX target and re-render server-side
+                          as steps progress.
+                        </p>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <br /><a
+                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/feedback/progress-stepper.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Edit progress-stepper.html on GitHub</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
         </div>
-        <div class="pf-v6-c-progress-stepper__step-main">
-          <div class="pf-v6-c-progress-stepper__step-title">Installation</div>
-        </div>
-      </li>
-      <li class="pf-v6-c-progress-stepper__step pf-m-success" role="listitem" aria-label="Completed step 2">
-        <div class="pf-v6-c-progress-stepper__step-connector">
-          <span class="pf-v6-c-progress-stepper__step-icon">{icons:svg('fa:check-circle').raw}</span>
-        </div>
-        <div class="pf-v6-c-progress-stepper__step-main">
-          <div class="pf-v6-c-progress-stepper__step-title">Configuration</div>
-        </div>
-      </li>
-      <li class="pf-v6-c-progress-stepper__step pf-m-info pf-m-current" role="listitem" aria-label="Current step 3" aria-current="step">
-        <div class="pf-v6-c-progress-stepper__step-connector">
-          <span class="pf-v6-c-progress-stepper__step-icon">{icons:svg('fa:info-circle').raw}</span>
-        </div>
-        <div class="pf-v6-c-progress-stepper__step-main">
-          <div class="pf-v6-c-progress-stepper__step-title">Validation</div>
-        </div>
-      </li>
-      <li class="pf-v6-c-progress-stepper__step" role="listitem" aria-label="Pending step 4">
-        <div class="pf-v6-c-progress-stepper__step-connector">
-          <span class="pf-v6-c-progress-stepper__step-icon"></span>
-        </div>
-        <div class="pf-v6-c-progress-stepper__step-main">
-          <div class="pf-v6-c-progress-stepper__step-title">Deployment</div>
-        </div>
-      </li>
-    {/content}{/include}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="vertical-heading">Vertical</h2>
-    <p>A vertical progress stepper with steps stacked top to bottom.</p>
-    {#include components/feedback/progress-stepper id="ps-vertical" vertical=true}{#content}
-      <li class="pf-v6-c-progress-stepper__step pf-m-success" role="listitem" aria-label="Completed step 1">
-        <div class="pf-v6-c-progress-stepper__step-connector">
-          <span class="pf-v6-c-progress-stepper__step-icon">{icons:svg('fa:check-circle').raw}</span>
-        </div>
-        <div class="pf-v6-c-progress-stepper__step-main">
-          <div class="pf-v6-c-progress-stepper__step-title">Installation</div>
-        </div>
-      </li>
-      <li class="pf-v6-c-progress-stepper__step pf-m-success" role="listitem" aria-label="Completed step 2">
-        <div class="pf-v6-c-progress-stepper__step-connector">
-          <span class="pf-v6-c-progress-stepper__step-icon">{icons:svg('fa:check-circle').raw}</span>
-        </div>
-        <div class="pf-v6-c-progress-stepper__step-main">
-          <div class="pf-v6-c-progress-stepper__step-title">Configuration</div>
-        </div>
-      </li>
-      <li class="pf-v6-c-progress-stepper__step pf-m-info pf-m-current" role="listitem" aria-label="Current step 3" aria-current="step">
-        <div class="pf-v6-c-progress-stepper__step-connector">
-          <span class="pf-v6-c-progress-stepper__step-icon">{icons:svg('fa:info-circle').raw}</span>
-        </div>
-        <div class="pf-v6-c-progress-stepper__step-main">
-          <div class="pf-v6-c-progress-stepper__step-title">Validation</div>
-        </div>
-      </li>
-      <li class="pf-v6-c-progress-stepper__step" role="listitem" aria-label="Pending step 4">
-        <div class="pf-v6-c-progress-stepper__step-connector">
-          <span class="pf-v6-c-progress-stepper__step-icon"></span>
-        </div>
-        <div class="pf-v6-c-progress-stepper__step-main">
-          <div class="pf-v6-c-progress-stepper__step-title">Deployment</div>
-        </div>
-      </li>
-    {/content}{/include}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="compact-heading">Compact</h2>
-    <p>A compact progress stepper with reduced spacing for use in constrained layouts.</p>
-    {#include components/feedback/progress-stepper id="ps-compact" compact=true}{#content}
-      <li class="pf-v6-c-progress-stepper__step pf-m-success" role="listitem" aria-label="Completed step 1">
-        <div class="pf-v6-c-progress-stepper__step-connector">
-          <span class="pf-v6-c-progress-stepper__step-icon">{icons:svg('fa:check-circle').raw}</span>
-        </div>
-        <div class="pf-v6-c-progress-stepper__step-main">
-          <div class="pf-v6-c-progress-stepper__step-title">Installation</div>
-        </div>
-      </li>
-      <li class="pf-v6-c-progress-stepper__step pf-m-success" role="listitem" aria-label="Completed step 2">
-        <div class="pf-v6-c-progress-stepper__step-connector">
-          <span class="pf-v6-c-progress-stepper__step-icon">{icons:svg('fa:check-circle').raw}</span>
-        </div>
-        <div class="pf-v6-c-progress-stepper__step-main">
-          <div class="pf-v6-c-progress-stepper__step-title">Configuration</div>
-        </div>
-      </li>
-      <li class="pf-v6-c-progress-stepper__step pf-m-info pf-m-current" role="listitem" aria-label="Current step 3" aria-current="step">
-        <div class="pf-v6-c-progress-stepper__step-connector">
-          <span class="pf-v6-c-progress-stepper__step-icon">{icons:svg('fa:info-circle').raw}</span>
-        </div>
-        <div class="pf-v6-c-progress-stepper__step-main">
-          <div class="pf-v6-c-progress-stepper__step-title">Validation</div>
-        </div>
-      </li>
-      <li class="pf-v6-c-progress-stepper__step" role="listitem" aria-label="Pending step 4">
-        <div class="pf-v6-c-progress-stepper__step-connector">
-          <span class="pf-v6-c-progress-stepper__step-icon"></span>
-        </div>
-        <div class="pf-v6-c-progress-stepper__step-main">
-          <div class="pf-v6-c-progress-stepper__step-title">Deployment</div>
-        </div>
-      </li>
-    {/content}{/include}
-  </section>
+      </div>
+    </div>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

@@ -1,0 +1,13 @@
+<div x-data="{ open: false }" style="position: relative; display: inline-block">
+  <button class="pf-v6-c-menu-toggle pf-m-plain" type="button" :class="open ? 'pf-m-expanded' : ''" :aria-expanded="open" @click="open = !open" aria-label="More actions">
+    <span class="pf-v6-c-menu-toggle__icon">{icons:svg('fa:ellipsis-vertical').raw}</span>
+  </button>
+  <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 12rem">
+    <div class="pf-v6-c-menu__content">
+      <ul class="pf-v6-c-menu__list" role="menu">
+        <li class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Refresh</span></span></button></li>
+        <li class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Export</span></span></button></li>
+      </ul>
+    </div>
+  </div>
+</div>

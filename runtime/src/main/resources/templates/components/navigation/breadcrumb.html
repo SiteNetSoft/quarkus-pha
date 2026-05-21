@@ -1,14 +1,20 @@
-{! Breadcrumb — PatternFly v6 !}
-{! Parameters: id (required), items (required — list of {text, href?, current?, heading?}) !}
-<nav class="pf-v6-c-breadcrumb" id="{id}" aria-label="Breadcrumb">
+{! Breadcrumb container — PatternFly v6 !}
+{!                                                                                  !}
+{! Renders <nav>/<ol> chrome. Each crumb is its own include of                      !}
+{! components/navigation/breadcrumb-item inside the items slot.                     !}
+{!                                                                                  !}
+{! Parameters:                                                                      !}
+{!   id        (required) — DOM id on the nav element                               !}
+{!   ariaLabel (optional) — accessible label (default: "Breadcrumb")                !}
+{!                                                                                  !}
+{! Slot:                                                                            !}
+{!   {#items}  — one or more {#include components/navigation/breadcrumb-item ... /} !}
+{!              calls. Slot name is "items" (not "content") to avoid colliding      !}
+{!              with the example-card partial's "content" slot — Qute resolves      !}
+{!              {#insert name} against the nearest enclosing {#name} in the call    !}
+{!              stack, and reusing "content" recurses infinitely.                   !}
+<nav class="pf-v6-c-breadcrumb" id="{id}" aria-label="{#if ariaLabel??}{ariaLabel}{#else}Breadcrumb{/if}">
   <ol class="pf-v6-c-breadcrumb__list">
-    {#for item in items}
-    <li class="pf-v6-c-breadcrumb__item">
-      <span class="pf-v6-c-breadcrumb__item-divider">
-        {icons:svg('fa:angle-right').raw}
-      </span>
-      {#if item.heading??}<h1 class="pf-v6-c-breadcrumb__heading"><a href="{item.href}" class="pf-v6-c-breadcrumb__link pf-m-current" aria-current="page">{item.text}</a></h1>{#else}{#if item.href??}<a href="{item.href}" class="pf-v6-c-breadcrumb__link{#if item.current??} pf-m-current{/if}"{#if item.current??} aria-current="page"{/if}>{item.text}</a>{#else}{item.text}{/if}{/if}
-    </li>
-    {/for}
+    {#insert items}{/insert}
   </ol>
 </nav>

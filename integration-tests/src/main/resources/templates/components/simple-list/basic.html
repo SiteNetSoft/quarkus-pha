@@ -1,0 +1,16 @@
+<div class="pf-v6-c-simple-list" id="sl-basic" x-data="{ selected: 'inbox' }">
+  <ul class="pf-v6-c-simple-list__list" role="list">
+    <li class="pf-v6-c-simple-list__list-item">
+      <a class="pf-v6-c-simple-list__item-link" href="#" :aria-current="selected === 'inbox' ? 'page' : null" :class="selected === 'inbox' ? 'pf-m-current' : ''" @click.prevent="selected = 'inbox'">Inbox</a>
+    </li>
+    <li class="pf-v6-c-simple-list__list-item">
+      <a class="pf-v6-c-simple-list__item-link" href="#" :aria-current="selected === 'sent' ? 'page' : null" :class="selected === 'sent' ? 'pf-m-current' : ''" @click.prevent="selected = 'sent'">Sent</a>
+    </li>
+    <li class="pf-v6-c-simple-list__list-item">
+      <a class="pf-v6-c-simple-list__item-link" href="#" :aria-current="selected === 'drafts' ? 'page' : null" :class="selected === 'drafts' ? 'pf-m-current' : ''" @click.prevent="selected = 'drafts'">Drafts</a>
+    </li>
+    <li class="pf-v6-c-simple-list__list-item">
+      <a class="pf-v6-c-simple-list__item-link" href="#" :aria-current="selected === 'spam' ? 'page' : null" :class="selected === 'spam' ? 'pf-m-current' : ''" @click.prevent="selected = 'spam'">Spam</a>
+    </li>
+  </ul>
+</div>

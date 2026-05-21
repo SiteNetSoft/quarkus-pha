@@ -1,0 +1,84 @@
+<div class="ws-preview-html" x-data="phaLabelGroupAdd()">
+  <template x-ref="template">
+    <li class="pf-v6-c-label-group__list-item">
+      <span class="pf-v6-c-label pf-m-blue" id="placeholder">
+        <span class="pf-v6-c-label__content">
+          <span class="pf-v6-c-label__text">placeholder</span>
+        </span>
+        <span class="pf-v6-c-label__actions">
+          <button
+            class="pf-v6-c-button pf-m-plain"
+            type="button"
+            aria-label="Remove"
+            @click="$el.closest('li').remove()"
+          >
+            {icons:svg('fa:xmark').raw}
+          </button>
+        </span>
+      </span>
+    </li>
+  </template>
+  <div class="pf-v6-c-label-group pf-m-category" id="lbg-add" role="group" aria-label="Tags with add button">
+    <div class="pf-v6-c-label-group__main">
+      <span class="pf-v6-c-label-group__label" aria-hidden="true">Tags</span>
+      <ul class="pf-v6-c-label-group__list" role="list" x-ref="list">
+        <li class="pf-v6-c-label-group__list-item">
+          <span class="pf-v6-c-label pf-m-blue" id="lbg-add-existing-1">
+            <span class="pf-v6-c-label__content">
+              <span class="pf-v6-c-label__text">monitoring</span>
+            </span>
+            <span class="pf-v6-c-label__actions">
+              <button
+                class="pf-v6-c-button pf-m-plain"
+                type="button"
+                aria-label="Remove"
+                @click="$el.closest('li').remove()"
+              >
+                {icons:svg('fa:xmark').raw}
+              </button>
+            </span>
+          </span>
+        </li>
+        <li class="pf-v6-c-label-group__list-item">
+          <span class="pf-v6-c-label pf-m-blue" id="lbg-add-existing-2">
+            <span class="pf-v6-c-label__content">
+              <span class="pf-v6-c-label__text">infrastructure</span>
+            </span>
+            <span class="pf-v6-c-label__actions">
+              <button
+                class="pf-v6-c-button pf-m-plain"
+                type="button"
+                aria-label="Remove"
+                @click="$el.closest('li').remove()"
+              >
+                {icons:svg('fa:xmark').raw}
+              </button>
+            </span>
+          </span>
+        </li>
+        <li class="pf-v6-c-label-group__list-item" x-ref="overflowSlot">
+          <form @submit.prevent="addLabel()" style="display: inline-flex; gap: 0.25rem; align-items: center">
+            <input
+              type="text"
+              class="pf-v6-c-form-control"
+              x-model="draft"
+              placeholder="New label"
+              style="height: 1.5rem; padding: 0 0.5rem; font-size: 0.875rem"
+            />
+            <button
+              class="pf-v6-c-label pf-m-add"
+              type="submit"
+              :disabled="!draft.trim()"
+              :aria-disabled="!draft.trim() ? 'true' : 'false'"
+            >
+              <span class="pf-v6-c-label__content">
+                <span class="pf-v6-c-label__icon">{icons:svg('fa:plus').raw}</span>
+                <span class="pf-v6-c-label__text">Add</span>
+              </span>
+            </button>
+          </form>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

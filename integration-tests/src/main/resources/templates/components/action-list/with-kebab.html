@@ -1,0 +1,28 @@
+{! Single group plus a kebab menu placeholder.
+   Written by hand instead of via {#include components/actions/action-list ... /} because the
+   kebab toggle's HTML contains {...} expressions that confuse Qute when embedded inside
+   the include's map argument. Matches the runtime template's class structure. !}
+<div class="pf-v6-c-action-list" id="action-list-with-kebab">
+  <div class="pf-v6-c-action-list__group">
+    <div class="pf-v6-c-action-list__item">
+      <button class="pf-v6-c-button pf-m-primary" type="button">
+        <span class="pf-v6-c-button__text">Next</span>
+      </button>
+    </div>
+    <div class="pf-v6-c-action-list__item">
+      <button class="pf-v6-c-button pf-m-secondary" type="button">
+        <span class="pf-v6-c-button__text">Back</span>
+      </button>
+    </div>
+    <div class="pf-v6-c-action-list__item">
+      <button
+        class="pf-v6-c-menu-toggle pf-m-plain"
+        type="button"
+        aria-label="More actions"
+        aria-expanded="false"
+      >
+        <span class="pf-v6-c-menu-toggle__icon">{icons:svg('fa:ellipsis-vertical').raw}</span>
+      </button>
+    </div>
+  </div>
+</div>

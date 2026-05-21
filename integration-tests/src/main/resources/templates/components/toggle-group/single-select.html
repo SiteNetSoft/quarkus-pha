@@ -1,0 +1,18 @@
+{! Single-select pattern — only one item can be pressed at a time. Driven by aria-pressed. !}
+<div class="pf-v6-c-toggle-group" id="tg-single" role="group" aria-label="View mode" x-data="{ selected: 'list' }">
+  <div class="pf-v6-c-toggle-group__item">
+    <button class="pf-v6-c-toggle-group__button" type="button" :aria-pressed="selected === 'list'" :class="selected === 'list' ? 'pf-m-selected' : ''" @click="selected = 'list'">
+      <span class="pf-v6-c-toggle-group__text">List</span>
+    </button>
+  </div>
+  <div class="pf-v6-c-toggle-group__item">
+    <button class="pf-v6-c-toggle-group__button" type="button" :aria-pressed="selected === 'grid'" :class="selected === 'grid' ? 'pf-m-selected' : ''" @click="selected = 'grid'">
+      <span class="pf-v6-c-toggle-group__text">Grid</span>
+    </button>
+  </div>
+  <div class="pf-v6-c-toggle-group__item">
+    <button class="pf-v6-c-toggle-group__button" type="button" :aria-pressed="selected === 'table'" :class="selected === 'table' ? 'pf-m-selected' : ''" @click="selected = 'table'">
+      <span class="pf-v6-c-toggle-group__text">Table</span>
+    </button>
+  </div>
+</div>

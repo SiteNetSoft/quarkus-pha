@@ -1,110 +1,459 @@
-{#include layouts/base}
-{#title}Content{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+{#include layouts/base} {#title}Content{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary">
+          <span class="pf-v6-c-button__text">Skip to content</span>
+        </a>
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Content</h1>
+                    <p>
+                      Typography styling for blocks of HTML. Use the Content component in two modes: as a
+                      <strong>wrapper</strong> around arbitrary HTML (every descendant gets PF v6 styling automatically)
+                      or as a <strong>specific element</strong> via the <code class="ws-code">component</code> param
+                      (renders an <code class="ws-code">&lt;h2&gt;</code>, <code class="ws-code">&lt;p&gt;</code>,
+                      <code class="ws-code">&lt;a&gt;</code>, <code class="ws-code">&lt;ul&gt;</code>, etc. with the
+                      matching <code class="ws-code">pf-v6-c-content--{|{tag}|}</code> class).
+                    </p>
+                  </div>
+                </div>
+              </section>
 
-  <h1>Content</h1>
-  <p>PatternFly v6 content — a component for styling blocks of HTML content with consistent typography.</p>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-u-h-100">
+                    <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                      <nav
+                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                        aria-label="Table of contents"
+                      >
+                        <div class="pf-v6-c-jump-links__main">
+                          <ul class="pf-v6-c-jump-links__list" role="list">
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#content-as-a-wrapper" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Content as a wrapper</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#headings" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Headings</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#body" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Body</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#unordered-list" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Unordered list</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#ordered-list" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Ordered list</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#plain-list" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Plain list</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#description-list" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Description list</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#link-and-visited-link" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Link and visited link</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#editorial-content" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Editorial content</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-content" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Content props</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="headings-heading">Headings</h2>
-    <p>Heading elements h1 through h6 styled within a content wrapper.</p>
-    {#include components/data-display/content id="content-headings"}{#content}
-    <h1>First level heading</h1>
-    <h2>Second level heading</h2>
-    <h3>Third level heading</h3>
-    <h4>Fourth level heading</h4>
-    <h5>Fifth level heading</h5>
-    <h6>Sixth level heading</h6>
-    {/content}{/include}
-  </section>
+                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                          <div>
+                            <h2
+                              id="examples"
+                              tabindex="-1"
+                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                            >
+                              Examples
+                            </h2>
+                          </div>
+                        </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="body-heading">Body text</h2>
-    <p>Paragraphs, small text, blockquotes, and preformatted text.</p>
-    {#include components/data-display/content id="content-body"}{#content}
-    <p>This is a paragraph of body text. It demonstrates the default content typography styling provided by PatternFly.</p>
-    <p><small>This is small text used for fine print or secondary information.</small></p>
-    <blockquote>This is a blockquote. It is used to highlight a section of quoted text with a left border accent.</blockquote>
-    <pre>This is preformatted text.
-It preserves whitespace and line breaks.</pre>
-    {/content}{/include}
-  </section>
+                        {#include partials/example-card title="Content as a wrapper" slug="content-as-a-wrapper"
+                        component="content" description="Wrap arbitrary HTML in a &lt;code
+                        class=&quot;ws-code&quot;&gt;&amp;lt;div
+                        class=&amp;quot;pf-v6-c-content&amp;quot;&amp;gt;&lt;/code&gt;. PF v6's CSS styles every
+                        descendant tag (h1-h6, p, ul, ol, dl, blockquote, etc.) automatically — no per-element wrappers
+                        needed."} {#content}{#include components/content/content-as-a-wrapper /}{/content} {/include}
+                        {#include partials/example-card title="Headings" slug="headings" component="content"
+                        description="Render any heading level via &lt;code
+                        class=&quot;ws-code&quot;&gt;component=&quot;h1&quot;&lt;/code&gt;..&lt;code
+                        class=&quot;ws-code&quot;&gt;component=&quot;h6&quot;&lt;/code&gt;. Each emits the matching tag
+                        with &lt;code class=&quot;ws-code&quot;&gt;{|pf-v6-c-content--{component}|}&lt;/code&gt; as its
+                        class."} {#content}{#include components/content/headings /}{/content} {/include} {#include
+                        partials/example-card title="Body" slug="body" component="content" description="Body-level
+                        elements: &lt;code class=&quot;ws-code&quot;&gt;p&lt;/code&gt;, &lt;code
+                        class=&quot;ws-code&quot;&gt;small&lt;/code&gt;, &lt;code
+                        class=&quot;ws-code&quot;&gt;blockquote&lt;/code&gt;, &lt;code
+                        class=&quot;ws-code&quot;&gt;pre&lt;/code&gt;. Pass each through with the appropriate &lt;code
+                        class=&quot;ws-code&quot;&gt;component&lt;/code&gt; param."} {#content}{#include
+                        components/content/body /}{/content} {/include} {#include partials/example-card title="Unordered
+                        list" slug="unordered-list" component="content" description="Set &lt;code
+                        class=&quot;ws-code&quot;&gt;component=&quot;ul&quot;&lt;/code&gt; and pass &lt;code
+                        class=&quot;ws-code&quot;&gt;&amp;lt;li&amp;gt;&lt;/code&gt; children through the content slot.
+                        The wrapper itself becomes the &lt;code
+                        class=&quot;ws-code&quot;&gt;&amp;lt;ul&amp;gt;&lt;/code&gt;."} {#content}{#include
+                        components/content/unordered-list /}{/content} {/include} {#include partials/example-card
+                        title="Ordered list" slug="ordered-list" component="content" description="Same shape as the
+                        unordered list with &lt;code class=&quot;ws-code&quot;&gt;component=&quot;ol&quot;&lt;/code&gt;
+                        — emits a numbered list."} {#content}{#include components/content/ordered-list /}{/content}
+                        {/include} {#include partials/example-card title="Plain list" slug="plain-list"
+                        component="content" description="Combine &lt;code
+                        class=&quot;ws-code&quot;&gt;component=&quot;ul&quot;&lt;/code&gt; (or &lt;code
+                        class=&quot;ws-code&quot;&gt;ol&lt;/code&gt;) with &lt;code
+                        class=&quot;ws-code&quot;&gt;plainList=true&lt;/code&gt; to strip default bullet / numbering
+                        styling."} {#content}{#include components/content/plain-list /}{/content} {/include} {#include
+                        partials/example-card title="Description list" slug="description-list" component="content"
+                        description="Set &lt;code class=&quot;ws-code&quot;&gt;component=&quot;dl&quot;&lt;/code&gt; and
+                        pass alternating &lt;code class=&quot;ws-code&quot;&gt;&amp;lt;dt&amp;gt;&lt;/code&gt; /
+                        &lt;code class=&quot;ws-code&quot;&gt;&amp;lt;dd&amp;gt;&lt;/code&gt; children. PF v6's CSS lays
+                        the pairs out in a responsive grid."} {#content}{#include components/content/description-list
+                        /}{/content} {/include} {#include partials/example-card title="Link and visited link"
+                        slug="link-and-visited-link" component="content" description="Set &lt;code
+                        class=&quot;ws-code&quot;&gt;component=&quot;a&quot;&lt;/code&gt; with &lt;code
+                        class=&quot;ws-code&quot;&gt;href&lt;/code&gt; to render a styled anchor. Add &lt;code
+                        class=&quot;ws-code&quot;&gt;visited=true&lt;/code&gt; for the visited-state styling."}
+                        {#content}{#include components/content/link-and-visited-link /}{/content} {/include} {#include
+                        partials/example-card title="Editorial content" slug="editorial-content" component="content"
+                        description="In wrapper mode, &lt;code class=&quot;ws-code&quot;&gt;editorial=true&lt;/code&gt;
+                        bumps body and small text up one size tier — better for long-form prose where readability
+                        matters more than density."} {#content}{#include components/content/editorial-content
+                        /}{/content} {/include}
 
-  <section style="margin-top: 2rem;">
-    <h2 id="links-heading">Links</h2>
-    <p>Link styling within content, including visited state.</p>
-    <div style="margin-bottom: 1rem;">
-      {#include components/data-display/content id="content-links"}{#content}
-      <p>This is a <a href="#">default link</a> inside a content block.</p>
-      {/content}{/include}
+                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                            <div>
+                              <h2
+                                id="documentation"
+                                tabindex="-1"
+                                class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                              >
+                                Documentation
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-content" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                            Content props
+                          </h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by
+                            <code class="ws-code">{|{#include components/data-display/content ... /}|}</code>.
+                          </p>
+                          <table
+                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                            role="grid"
+                            aria-label="Content props"
+                          >
+                            <thead class="pf-v6-c-table__thead">
+                              <tr class="pf-v6-c-table__tr">
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                                <th scope="col" class="pf-v6-c-table__th">Default</th>
+                                <th scope="col" class="pf-v6-c-table__th">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">component</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code"
+                                      >"h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "a" | "small" | "blockquote" |
+                                      "pre" | "hr" | "ul" | "ol" | "dl" | "li" | "dt" | "dd"</code
+                                    ></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >When set, switches to element mode — the include renders the named tag with
+                                    <code class="ws-code">{|pf-v6-c-content--{component}|}</code> as its class instead
+                                    of the wrapper div. Omit to render the default
+                                    <code class="ws-code">&lt;div class="pf-v6-c-content"&gt;</code> wrapper around the
+                                    slot content.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">text</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Convenience: simple text body for element mode. When set, fills the element with
+                                    this string; when omitted, the content slot is used. Ignored in wrapper mode.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">href</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Link target when <code class="ws-code">component="a"</code>. Ignored
+                                    otherwise.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">editorial</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Applies <code class="ws-code">pf-m-editorial</code> — bumps body and small text up
+                                    one size tier. Most useful in wrapper mode.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">visited</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Applies <code class="ws-code">pf-m-visited</code>. In wrapper mode, applies to all
+                                    descendant links; with <code class="ws-code">component="a"</code>, applies to the
+                                    link itself.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">plainList</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Applies <code class="ws-code">pf-m-plain</code> when
+                                    <code class="ws-code">component</code> is <code class="ws-code">ul</code> /
+                                    <code class="ws-code">ol</code> / <code class="ws-code">dl</code>. Strips default
+                                    list styling.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >DOM id on the rendered element (either the wrapper div or the chosen
+                                    <code class="ws-code">component</code> tag).</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">content</code> (slot)</span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute insert</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Children. In wrapper mode, raw HTML descendants get auto-styled. In element mode,
+                                    used as the inner content (e.g. <code class="ws-code">&lt;li&gt;</code> children of
+                                    a <code class="ws-code">component="ul"</code> include).</span
+                                  >
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Divergence from PF React.</strong> We skip <code class="ws-code">ouiaId</code> /
+                            <code class="ws-code">ouiaSafe</code> (PF testing tooling we don't use yet) and
+                            <code class="ws-code">className</code> (React-specific). Param naming is shortened:
+                            <code class="ws-code">isEditorial</code> → <code class="ws-code">editorial</code>,
+                            <code class="ws-code">isPlainList</code> → <code class="ws-code">plainList</code>,
+                            <code class="ws-code">isVisitedLink</code> → <code class="ws-code">visited</code>.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Wrapper vs. element mode.</strong> Wrapper mode is the right default when you have a
+                            block of HTML (article body, markdown output, server-rendered prose) and want PF typography
+                            applied to everything inside. Element mode is what you reach for when you need to style a
+                            single element (a one-off styled paragraph, a stand-alone heading, a styled link inside
+                            other non-Content markup).
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Text vs. slot.</strong> For single-line element content (heading text, paragraph
+                            copy, link label), pass <code class="ws-code">text</code> as a parameter. For richer inline
+                            structure (a paragraph with embedded links, lists with mixed children), open the
+                            <code class="ws-code">content</code> slot.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Overlap with Title.</strong> Both
+                            <code class="ws-code">components/data-display/title</code> and
+                            <code class="ws-code">components/data-display/content</code> with
+                            <code class="ws-code">component="h1"</code>..<code class="ws-code">"h6"</code> render styled
+                            headings. Title is the right pick for the page-title slot (independent
+                            <code class="ws-code">size</code> modifier, anchor-friendly <code class="ws-code">id</code>
+                            pattern). Use Content's element mode when the heading lives inside other Content-styled
+                            prose and you want the typography to feel coherent with the surrounding body text.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Overlap with List.</strong> Both
+                            <code class="ws-code">components/data-display/list</code> and
+                            <code class="ws-code">components/data-display/content component="ul"</code> render styled
+                            lists. List is purpose-built (inline / bordered / icon-replacement modifiers); Content's
+                            list mode is the right pick when the list is part of an article-style body where you want it
+                            visually consistent with surrounding paragraphs.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <br /><a
+                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/content.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Edit content.html on GitHub</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
     </div>
-    {#include components/data-display/content id="content-links-visited" visited=true}{#content}
-    <p>This is a <a href="#">visited link</a> inside a content block with visited styling.</p>
-    {/content}{/include}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="ul-heading">Unordered list</h2>
-    <p>A standard unordered list inside a content block.</p>
-    {#include components/data-display/content id="content-ul"}{#content}
-    <ul>
-      <li>First item</li>
-      <li>Second item</li>
-      <li>Third item</li>
-    </ul>
-    {/content}{/include}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="ol-heading">Ordered list</h2>
-    <p>A standard ordered list inside a content block.</p>
-    {#include components/data-display/content id="content-ol"}{#content}
-    <ol>
-      <li>First item</li>
-      <li>Second item</li>
-      <li>Third item</li>
-    </ol>
-    {/content}{/include}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="plain-heading">Plain list</h2>
-    <p>A list with the plain modifier removes default list styling.</p>
-    {#include components/data-display/content id="content-plain"}{#content}
-    <ul class="pf-m-plain">
-      <li>Unstyled item one</li>
-      <li>Unstyled item two</li>
-      <li>Unstyled item three</li>
-    </ul>
-    {/content}{/include}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="dl-heading">Definition list</h2>
-    <p>A definition list with term-description pairs in a responsive grid layout.</p>
-    {#include components/data-display/content id="content-dl"}{#content}
-    <dl>
-      <dt>Name</dt>
-      <dd>Example application</dd>
-      <dt>Version</dt>
-      <dd>1.0.0</dd>
-      <dt>Description</dt>
-      <dd>A sample definition list demonstrating term-description pairs.</dd>
-    </dl>
-    {/content}{/include}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="editorial-heading">Editorial</h2>
-    <p>Editorial modifier increases body and small text size by one tier.</p>
-    {#include components/data-display/content id="content-editorial" editorial=true}{#content}
-    <h2>Editorial heading</h2>
-    <p>This paragraph uses editorial styling, which increases the font size for improved readability in long-form content.</p>
-    <p><small>Even small text is larger in editorial mode.</small></p>
-    {/content}{/include}
-  </section>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

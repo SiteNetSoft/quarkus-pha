@@ -1,0 +1,14 @@
+{! Bullseye with a richer centered block — useful for empty-state pages, "loading" pages, etc. !}
+<div style="height: 280px; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">
+  {#include layouts/primitives/bullseye id="bullseye-with-content"}
+    {#child}
+      <div style="text-align: center">
+        <h2 class="pf-v6-c-content--h2" style="margin: 0">Nothing here yet</h2>
+        <p class="pf-v6-c-content--p" style="margin-top: 0.5rem">Create your first record to get started.</p>
+        <button type="button" class="pf-v6-c-button pf-m-primary" style="margin-top: 1rem">
+          <span class="pf-v6-c-button__text">Create</span>
+        </button>
+      </div>
+    {/child}
+  {/include}
+</div>
