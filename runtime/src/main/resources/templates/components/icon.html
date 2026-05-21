@@ -1,12 +1,21 @@
-{! Icon — server-rendered inline SVG wrapped in PatternFly v6 icon chrome !}
-{! Parameters: !}
-{!   name       (required) — "set:slug" where set is fa | fa-regular | fa-brands | pficon !}
-{!   size       (optional) — sm | md | lg | xl | 2xl | 3xl | body-sm | body-default | body-lg !}
-{!                          | heading-sm | heading-md | heading-lg | heading-xl | heading-2xl | heading-3xl !}
-{!   status     (optional) — info | success | warning | danger | custom !}
-{!   inline     (optional) — boolean, flow with surrounding text !}
-{!   inProgress (optional) — boolean, applies the pf-m-in-progress modifier !}
-{!   label      (optional) — accessible label; when omitted the SVG is aria-hidden !}
-<span class="pf-v6-c-icon{#if size??} pf-m-{size}{/if}{#if inline??} pf-m-inline{/if}{#if inProgress??} pf-m-in-progress{/if}">
-  <span class="pf-v6-c-icon__content{#if status??} pf-m-{status}{/if}">{#if label??}{icons:svg(name, label).raw}{#else}{icons:svg(name).raw}{/if}</span>
+{! Icon — server-rendered inline SVG wrapped in PatternFly v6 icon chrome !} {! Parameters: !} {! name (required) —
+"set:slug" where set is fa | fa-regular | fa-brands | pficon !} {! size (optional) — sm | md | lg | xl | 2xl | 3xl |
+body-sm | body-default | body-lg !} {! | heading-sm | heading-md | heading-lg | heading-xl | heading-2xl | heading-3xl
+!} {! iconSize (optional) — same scale as `size`; sizes the glyph independently from its container !} {! status
+(optional) — info | success | warning | danger | custom !} {! inline (optional) — boolean, flow with surrounding text !}
+{! inProgress (optional) — boolean. Adds pf-m-in-progress on the wrapper AND renders a __progress overlay. !} {! PF v6
+CSS hides __content and shows __progress via opacity. !} {! progressIcon (optional) — icon name rendered inside
+__progress when inProgress=true. !} {! Defaults to the PF v6 spinner component. !} {! label (optional) — accessible
+label. Applied to the visible SVG (or spinner). !}
+<span
+  class="pf-v6-c-icon{#if size??} pf-m-{size}{/if}{#if inline??} pf-m-inline{/if}{#if inProgress??} pf-m-in-progress{/if}"
+>
+  <span class="pf-v6-c-icon__content{#if iconSize??} pf-m-{iconSize}{/if}{#if status??} pf-m-{status}{/if}"
+    >{#if label??}{icons:svg(name, label).raw}{#else}{icons:svg(name).raw}{/if}</span
+  >
+  {#if inProgress??}<span class="pf-v6-c-icon__progress{#if iconSize??} pf-m-{iconSize}{/if}"
+    >{#if progressIcon??}{#if label??}{icons:svg(progressIcon,
+    label).raw}{#else}{icons:svg(progressIcon).raw}{/if}{#else}{#if label??}{#include components/feedback/spinner
+    label=label /}{#else}{#include components/feedback/spinner /}{/if}{/if}</span
+  >{/if}
 </span>

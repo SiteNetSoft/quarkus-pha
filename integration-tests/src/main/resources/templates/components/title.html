@@ -1,33 +1,296 @@
-{#include layouts/base}
-{#title}Title{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-  <h1>Title</h1>
-  <p>PatternFly v6 title — a styled heading element with size modifiers.</p>
+{#include layouts/base} {#title}Title{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary">
+          <span class="pf-v6-c-button__text">Skip to content</span>
+        </a>
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Title</h1>
+                    <p>
+                      A styled heading. PF v6 ships size modifiers
+                      <code class="ws-code">md</code> through <code class="ws-code">4xl</code> that you compose
+                      independently of the semantic heading level (<code class="ws-code">h1</code>–<code class="ws-code"
+                        >h6</code
+                      >) — visual hierarchy and document outline don't have to match.
+                    </p>
+                  </div>
+                </div>
+              </section>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="sizes-heading">Sizes</h2>
-    <p>Title component at all available size modifiers.</p>
-    <div style="display: grid; gap: 1rem;">
-      {#include components/data-display/title text="4xl title" size="4xl" id="title-4xl" /}
-      {#include components/data-display/title text="3xl title" size="3xl" id="title-3xl" /}
-      {#include components/data-display/title text="2xl title" size="2xl" id="title-2xl" /}
-      {#include components/data-display/title text="xl title" size="xl" id="title-xl" /}
-      {#include components/data-display/title text="lg title" size="lg" id="title-lg" /}
-      {#include components/data-display/title text="md title" size="md" id="title-md" /}
-    </div>
-  </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-u-h-100">
+                    <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                      <nav
+                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                        aria-label="Table of contents"
+                      >
+                        <div class="pf-v6-c-jump-links__main">
+                          <ul class="pf-v6-c-jump-links__list" role="list">
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#default-sizes" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Default sizes</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#custom-sizes" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Custom sizes</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-title" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Title props</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="heading-levels-heading">Heading levels</h2>
-    <p>Title rendered at different HTML heading levels.</p>
-    <div style="display: grid; gap: 1rem;">
-      {#include components/data-display/title text="Heading 1" size="2xl" id="title-h1" /}
-      {#include components/data-display/title text="Heading 2" size="xl" headingLevel="h2" id="title-h2" /}
-      {#include components/data-display/title text="Heading 3" size="lg" headingLevel="h3" id="title-h3" /}
+                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                          <div>
+                            <h2
+                              id="examples"
+                              tabindex="-1"
+                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                            >
+                              Examples
+                            </h2>
+                          </div>
+                        </div>
+
+                        {#include partials/example-card title="Default sizes" slug="default-sizes" component="title"
+                        description="Each heading level rendered without a &lt;code
+                        class=&quot;ws-code&quot;&gt;size&lt;/code&gt; override. The visual styling tracks the heading
+                        element's default styling — h1 is largest, h6 smallest."} {#content}{#include
+                        components/title/default-sizes /}{/content} {/include} {#include partials/example-card
+                        title="Custom sizes" slug="custom-sizes" component="title" description="Same h1–h6 elements,
+                        each with an explicit &lt;code class=&quot;ws-code&quot;&gt;size&lt;/code&gt; that intentionally
+                        mismatches the semantic level. Demonstrates that the semantic heading level and the visual size
+                        are picked independently."} {#content}{#include components/title/custom-sizes /}{/content}
+                        {/include}
+
+                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                            <div>
+                              <h2
+                                id="documentation"
+                                tabindex="-1"
+                                class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                              >
+                                Documentation
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-title" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                            Title props
+                          </h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by
+                            <code class="ws-code">{|{#include components/data-display/title ... /}|}</code>. All are
+                            passed as Qute named parameters.
+                          </p>
+                          <table
+                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                            role="grid"
+                            aria-label="Title props"
+                          >
+                            <caption class="pf-v6-c-table__caption">
+                              <span class="ws-prop-required">*</span>
+                              required
+                            </caption>
+                            <thead class="pf-v6-c-table__thead">
+                              <tr class="pf-v6-c-table__tr">
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                                <th scope="col" class="pf-v6-c-table__th">Default</th>
+                                <th scope="col" class="pf-v6-c-table__th">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><span class="ws-prop-required">*</span> <code class="ws-code">text</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">Heading text content.</span>
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">headingLevel</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">"h1" | "h2" | "h3" | "h4" | "h5" | "h6"</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">"h1"</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Semantic heading tag. Drives the document outline and the accessibility tree — pick
+                                    based on document structure, not visual size.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">size</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">"md" | "lg" | "xl" | "2xl" | "3xl" | "4xl"</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Visual size. Renders <code class="ws-code">{|pf-m-{size}|}</code> on the heading.
+                                    Choose independently of <code class="ws-code">headingLevel</code> — large visual
+                                    emphasis can sit at any semantic level.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >DOM id, attached to the heading element. Useful for in-page jump links and ARIA
+                                    labelling.</span
+                                  >
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Divergence from PF React.</strong> PF's React component marks
+                            <code class="ws-code">headingLevel</code> as required and exposes
+                            <code class="ws-code">ouiaId</code> / <code class="ws-code">ouiaSafe</code> testing-tooling
+                            attrs. We default <code class="ws-code">headingLevel</code> to
+                            <code class="ws-code">"h1"</code> (more forgiving for callers) and skip the OUIA attrs — we
+                            don't use OUIA-based assertions anywhere in this project yet.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Semantic level vs. visual size.</strong> Pick
+                            <code class="ws-code">headingLevel</code> based on the document outline — the order of
+                            sections under the page's <code class="ws-code">h1</code>. Pick
+                            <code class="ws-code">size</code> based on the visual emphasis you want. The two are
+                            independent. A sidebar callout might be <code class="ws-code">h2</code> for the outline but
+                            only rendered at <code class="ws-code">size="lg"</code>; a hero unit might be
+                            <code class="ws-code">h1</code> at <code class="ws-code">size="4xl"</code>.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>One <code class="ws-code">h1</code> per page.</strong> The heading level you pick
+                            participates in the accessibility tree — keep one <code class="ws-code">h1</code> per route
+                            (typically the page title), and nest deeper levels under it. The Title component doesn't
+                            enforce this; it's a markup rule you maintain at the page level.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Jump-link anchors.</strong> Pass <code class="ws-code">id</code> when you want to
+                            link to the heading from a TOC or another part of the page. Combine with the jump-links
+                            pattern (see <code class="ws-code">structure/jump-links</code>) for in-page navigation.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>When to compose by hand instead.</strong> Some PF runtime components (<code
+                              class="ws-code"
+                              >about-modal</code
+                            >, <code class="ws-code">login-page</code>, <code class="ws-code">empty-state</code>)
+                            hard-code <code class="ws-code">&lt;h1 class="pf-v6-c-title pf-m-4xl"&gt;</code>
+                            directly because they need the heading inside very specific sibling chrome. Both approaches
+                            ship the same markup — the include just centralises the heading-level switch.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <br /><a
+                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/title.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Edit title.html on GitHub</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

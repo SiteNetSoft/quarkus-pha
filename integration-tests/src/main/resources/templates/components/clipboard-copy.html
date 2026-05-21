@@ -1,47 +1,266 @@
-{#include layouts/base}
-{#title}Clipboard copy{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+{#include layouts/base} {#title}Clipboard copy{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Clipboard copy</h1>
+                    <p>
+                      A field with a copy-to-clipboard button. Three layouts: standard (input + button), inline (compact
+                      in-line snippet), and expandable (single-line summary + collapsible full content).
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                    <nav
+                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                      aria-label="Table of contents"
+                    >
+                      <div class="pf-v6-c-jump-links__main">
+                        <ul class="pf-v6-c-jump-links__list" role="list">
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#readonly" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Read only</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#expandable" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Expandable</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#inline" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Inline</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#props-clipboard-copy" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Clipboard copy props</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
+                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                        <div>
+                          <h2
+                            id="examples"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                          >
+                            Examples
+                          </h2>
+                        </div>
+                      </div>
+                      {#include partials/example-card title="Basic" slug="basic" component="clipboard-copy"
+                      description="Standard input + copy button. Click the button to copy the value via &lt;code
+                      class=&quot;ws-code&quot;&gt;navigator.clipboard&lt;/code&gt;; icon swaps to a check for 2
+                      seconds."} {#content}{#include components/clipboard-copy/basic /}{/content} {/include} {#include
+                      partials/example-card title="Read only" slug="readonly" component="clipboard-copy"
+                      description="&lt;code class=&quot;ws-code&quot;&gt;readonly=true&lt;/code&gt; — input can't be
+                      edited. Use for tokens, API keys, computed identifiers."} {#content}{#include
+                      components/clipboard-copy/readonly /}{/content} {/include} {#include partials/example-card
+                      title="Expandable" slug="expandable" component="clipboard-copy" description="&lt;code
+                      class=&quot;ws-code&quot;&gt;expandable=true&lt;/code&gt; — single-line summary in the input;
+                      click the chevron to reveal &lt;code class=&quot;ws-code&quot;&gt;expandedText&lt;/code&gt;
+                      below."} {#content}{#include components/clipboard-copy/expandable /}{/content} {/include}
+                      {#include partials/example-card title="Inline" slug="inline" component="clipboard-copy"
+                      description="&lt;code class=&quot;ws-code&quot;&gt;inline=true&lt;/code&gt; — compact in-flow
+                      variant. Pair with &lt;code class=&quot;ws-code&quot;&gt;code=true&lt;/code&gt; for monospace
+                      styling."} {#content}{#include components/clipboard-copy/inline /}{/content} {/include}
 
-  <h1>Clipboard copy</h1>
-  <p>PatternFly v6 clipboard copy — a text field with a copy-to-clipboard button.</p>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="readonly-heading">Read-only</h2>
-    <p>A read-only text input with a copy button.</p>
-    <div style="max-width: 600px;">
-      {#include components/forms/clipboard-copy id="cc-readonly" text="curl -O https://example.com/install.sh" readonly=true /}
+                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                        <h2
+                          id="documentation"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Documentation
+                        </h2>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3
+                          id="props-clipboard-copy"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h3 pf-m-editorial ws-heading"
+                        >
+                          Clipboard copy props
+                        </h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          Parameters accepted by
+                          <code class="ws-code">{|{#include components/forms/clipboard-copy ... /}|}</code>.
+                        </p>
+                        <table
+                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                          role="grid"
+                          aria-label="Clipboard copy props"
+                        >
+                          <caption class="pf-v6-c-table__caption">
+                            <span class="ws-prop-required">*</span>
+                            required
+                          </caption>
+                          <thead class="pf-v6-c-table__thead">
+                            <tr class="pf-v6-c-table__tr">
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                              <th scope="col" class="pf-v6-c-table__th">Description</th>
+                            </tr>
+                          </thead>
+                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">text</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">The value shown + copied.</span>
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">readonly</code> / <code class="ws-code">expandable</code> /
+                                  <code class="ws-code">inline</code> / <code class="ws-code">code</code> /
+                                  <code class="ws-code">block</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Layout modifiers. <code class="ws-code">expandable</code> shows a chevron toggle;
+                                  <code class="ws-code">inline</code> uses compact in-flow rendering.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">expandedText</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Used with <code class="ws-code">expandable=true</code> — full multi-line content
+                                  shown when expanded.</span
+                                >
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Browser support.</strong> The component uses
+                          <code class="ws-code">navigator.clipboard.writeText()</code> — supported in all modern
+                          browsers but requires HTTPS or localhost.
+                        </p>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Pick the layout.</strong> Inline for short snippets ("run
+                          <code class="ws-code">npm install</code>"). Standard for tokens / URLs. Expandable for long
+                          config blocks where the headline alone is meaningful.
+                        </p>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <br /><a
+                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/forms/clipboard-copy.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Edit clipboard-copy.html on GitHub</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
     </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="editable-heading">Editable</h2>
-    <p>An editable text input that can be modified before copying.</p>
-    <div style="max-width: 600px;">
-      {#include components/forms/clipboard-copy id="cc-editable" text="This is editable" /}
-    </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="expandable-heading">Expandable</h2>
-    <p>A clipboard copy with a toggle to reveal the full content.</p>
-    <div style="max-width: 600px;">
-      {#include components/forms/clipboard-copy id="cc-expandable" text="This is an expandable clipboard copy component..." readonly=true expandable=true expandedText="This is an expandable clipboard copy component with a longer body of text. Got a lot of text here, need to see all of it? Click that arrow on the left side and check out the resulting expansion." /}
-    </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="inline-heading">Inline compact</h2>
-    <p>An inline clipboard copy for embedding in running text.</p>
-    <p>The version is {#include components/forms/clipboard-copy id="cc-inline" text="2.3.4-2-redhat" inline=true /} for this release.</p>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="inline-code-heading">Inline compact code</h2>
-    <p>An inline clipboard copy styled as a code snippet.</p>
-    <p>Install with {#include components/forms/clipboard-copy id="cc-inline-code" text="npm install @patternfly/react-core" inline=true code=true /} to get started.</p>
-  </section>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

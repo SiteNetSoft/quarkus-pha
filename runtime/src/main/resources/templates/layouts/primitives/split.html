@@ -1,0 +1,7 @@
+{! Split layout — horizontal layout where one item fills the remaining space (pf-m-fill on that __item). !}
+{! Required: id !}
+{! Optional: gutter (boolean — pf-m-gutter), wrap (boolean — pf-m-wrap allows wrapping) !}
+{! Slot: items — split children, typically with pf-v6-l-split__item plus pf-m-fill on one of them. !}
+<div class="pf-v6-l-split{#if gutter??} pf-m-gutter{/if}{#if wrap??} pf-m-wrap{/if}" id="{id}">
+  {#insert items}{/insert}
+</div>

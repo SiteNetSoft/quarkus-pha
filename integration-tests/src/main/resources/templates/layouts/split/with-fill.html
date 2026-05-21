@@ -1,0 +1,8 @@
+{! pf-m-fill on the middle item — it grows to consume remaining width. !}
+{#include layouts/primitives/split id="split-fill" gutter=true}
+  {#items}
+    <div class="pf-v6-l-split__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">Sidebar</div>
+    <div class="pf-v6-l-split__item pf-m-fill" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">Body — fills the space</div>
+    <div class="pf-v6-l-split__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">Aside</div>
+  {/items}
+{/include}

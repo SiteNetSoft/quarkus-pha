@@ -1,27 +1,358 @@
-{#include layouts/base}
-{#title}Spinner{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-  <h1>Spinner</h1>
-  <p>PatternFly v6 spinner — an animated indicator showing that content is loading.</p>
+{#include layouts/base} {#title}Spinner{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary">
+          <span class="pf-v6-c-button__text">Skip to content</span>
+        </a>
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Spinner</h1>
+                    <p>
+                      PF v6's animated loading indicator. A single SVG with a rotating arc, sized via standalone
+                      modifiers (<code class="ws-code">xs</code>–<code class="ws-code">xl</code>), a custom
+                      <code class="ws-code">diameter</code>, or by inheriting the surrounding text size with
+                      <code class="ws-code">inline=true</code>.
+                    </p>
+                  </div>
+                </div>
+              </section>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="sizes-heading">Sizes</h2>
-    <p>Spinners at different size modifiers.</p>
-    <div style="display: flex; align-items: center; gap: 1.5rem;">
-      {#include components/feedback/spinner size="sm" label="Loading small" /}
-      {#include components/feedback/spinner size="md" label="Loading medium" /}
-      {#include components/feedback/spinner size="lg" label="Loading large" /}
-      {#include components/feedback/spinner size="xl" label="Loading extra large" /}
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-u-h-100">
+                    <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                      <nav
+                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                        aria-label="Table of contents"
+                      >
+                        <div class="pf-v6-c-jump-links__main">
+                          <ul class="pf-v6-c-jump-links__list" role="list">
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#size-variations" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Size variations</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#custom-size" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Custom size</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#inline" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Inline</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-spinner" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Spinner props</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
+
+                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                          <div>
+                            <h2
+                              id="examples"
+                              tabindex="-1"
+                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                            >
+                              Examples
+                            </h2>
+                          </div>
+                        </div>
+
+                        {#include partials/example-card title="Basic" slug="basic" component="spinner" description="A
+                        default spinner with no size override. PF v6's base styles render it at medium diameter with an
+                        accessible label of &quot;Loading&quot;."} {#content}{#include components/spinner/basic
+                        /}{/content} {/include} {#include partials/example-card title="Size variations"
+                        slug="size-variations" component="spinner" description="PF v6 ships five size modifiers —
+                        &lt;code class=&quot;ws-code&quot;&gt;xs&lt;/code&gt;, &lt;code
+                        class=&quot;ws-code&quot;&gt;sm&lt;/code&gt;, &lt;code
+                        class=&quot;ws-code&quot;&gt;md&lt;/code&gt;, &lt;code
+                        class=&quot;ws-code&quot;&gt;lg&lt;/code&gt;, &lt;code
+                        class=&quot;ws-code&quot;&gt;xl&lt;/code&gt; — that resolve to global spinner-diameter tokens."}
+                        {#content}{#include components/spinner/size-variations /}{/content} {/include} {#include
+                        partials/example-card title="Custom size" slug="custom-size" component="spinner"
+                        description="Pass &lt;code class=&quot;ws-code&quot;&gt;diameter&lt;/code&gt; with any CSS
+                        length to set &lt;code class=&quot;ws-code&quot;&gt;--pf-v6-c-spinner--diameter&lt;/code&gt;
+                        inline. Useful when the preset size modifiers don't match a layout exactly."}
+                        {#content}{#include components/spinner/custom-size /}{/content} {/include} {#include
+                        partials/example-card title="Inline" slug="inline" component="spinner" description="Set &lt;code
+                        class=&quot;ws-code&quot;&gt;inline=true&lt;/code&gt; so the spinner inherits the surrounding
+                        font size and color via &lt;code class=&quot;ws-code&quot;&gt;pf-m-inline&lt;/code&gt;. Useful
+                        inside running prose, headings, or buttons."} {#content}{#include components/spinner/inline
+                        /}{/content} {/include}
+
+                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                            <div>
+                              <h2
+                                id="documentation"
+                                tabindex="-1"
+                                class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                              >
+                                Documentation
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-spinner" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                            Spinner props
+                          </h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by
+                            <code class="ws-code">{|{#include components/feedback/spinner ... /}|}</code>. All are
+                            passed as Qute named parameters.
+                          </p>
+                          <table
+                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                            role="grid"
+                            aria-label="Spinner props"
+                          >
+                            <thead class="pf-v6-c-table__thead">
+                              <tr class="pf-v6-c-table__tr">
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                                <th scope="col" class="pf-v6-c-table__th">Default</th>
+                                <th scope="col" class="pf-v6-c-table__th">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">size</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">"xs" | "sm" | "md" | "lg" | "xl"</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">PF v6 base diameter</span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Renders <code class="ws-code">{|pf-m-{size}|}</code> on the SVG. Each value
+                                    resolves to a token via
+                                    <code class="ws-code">--pf-v6-c-spinner--diameter</code>.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">diameter</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >CSS length (e.g. <code class="ws-code">"2rem"</code>,
+                                    <code class="ws-code">"80px"</code>)</span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Sets <code class="ws-code">--pf-v6-c-spinner--diameter</code> inline. Overrides
+                                    <code class="ws-code">size</code> when both are present.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">inline</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Applies <code class="ws-code">pf-m-inline</code>; the spinner inherits the parent's
+                                    font size and color.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">label</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">"Loading"</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Accessible label rendered as <code class="ws-code">aria-label</code>. Ignored when
+                                    <code class="ws-code">ariaLabelledBy</code> is set.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">ariaLabelledBy</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">String (element id)</span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Renders <code class="ws-code">aria-labelledby</code> pointing at an existing
+                                    element. Use this when the spinner's name lives in adjacent text. Overrides
+                                    <code class="ws-code">label</code>.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">ariaValuetext</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">"Loading..."</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Sets <code class="ws-code">aria-valuetext</code>. Useful when the spinner's
+                                    progress can be narrated more precisely (e.g.
+                                    <code class="ws-code">"45% complete"</code>).</span
+                                  >
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Standalone vs. inside an icon overlay.</strong> The spinner is its own component
+                            (<code class="ws-code">components/feedback/spinner</code>) and uses PF v6's
+                            <code class="ws-code">.pf-v6-c-spinner</code> CSS — not the icon's
+                            <code class="ws-code">.pf-v6-c-icon</code> chrome. The icon component renders the spinner
+                            internally as its default <code class="ws-code">progressIcon</code> when
+                            <code class="ws-code">inProgress=true</code>. For standalone loading indicators (no resting
+                            icon to swap with), include this component directly.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Sizing precedence.</strong> Both <code class="ws-code">size</code> and
+                            <code class="ws-code">diameter</code> drive
+                            <code class="ws-code">--pf-v6-c-spinner--diameter</code>.
+                            <code class="ws-code">diameter</code> wins because it's an inline style — use the preset
+                            <code class="ws-code">size</code> tokens when possible and reach for
+                            <code class="ws-code">diameter</code> only when a layout requires an exact pixel/rem value.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Accessibility.</strong> The SVG always has
+                            <code class="ws-code">role="progressbar"</code>. Provide an accessible name in one of two
+                            ways: <code class="ws-code">label</code> (renders as
+                            <code class="ws-code">aria-label</code>) or
+                            <code class="ws-code">ariaLabelledBy</code> (points at an existing element's id — preferred
+                            when the spinner sits next to text that already names it).
+                            <code class="ws-code">ariaValuetext</code> defaults to
+                            <code class="ws-code">"Loading..."</code>; override it for determinate states (<code
+                              class="ws-code"
+                              >"45% complete"</code
+                            >, <code class="ws-code">"3 of 5 done"</code>, etc.).
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Animation.</strong> The rotation is pure CSS — no JavaScript. The
+                            <code class="ws-code">.pf-v6-c-spinner__path</code> circle uses
+                            <code class="ws-code">stroke-dasharray</code> /
+                            <code class="ws-code">stroke-dashoffset</code>
+                            animation; visit any standalone example route to verify the spin in isolation.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <br /><a
+                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/feedback/spinner.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Edit spinner.html on GitHub</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
     </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="inline-heading">Inline</h2>
-    <p>An inline spinner that flows with surrounding text.</p>
-    <p>Loading data {#include components/feedback/spinner size="sm" inline=true label="Loading" /} please wait...</p>
-  </section>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

@@ -1,0 +1,24 @@
+<div class="ws-preview-html">
+  {#include components/navigation/breadcrumb id="breadcrumb-dropdown"} {#items} {#include
+  components/navigation/breadcrumb-item text="Section home" href="#" /} {#include components/navigation/breadcrumb-item
+  text="Section title" isDropdown=true dropdownId="bc-dropdown-section"} {#dropdown}
+  <ul class="pf-v6-c-menu__list" role="menu">
+    <li class="pf-v6-c-menu__list-item" role="none">
+      <a href="#" class="pf-v6-c-menu__item" role="menuitem">
+        <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Sibling page A</span></span>
+      </a>
+    </li>
+    <li class="pf-v6-c-menu__list-item" role="none">
+      <a href="#" class="pf-v6-c-menu__item" role="menuitem">
+        <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Sibling page B</span></span>
+      </a>
+    </li>
+    <li class="pf-v6-c-menu__list-item" role="none">
+      <a href="#" class="pf-v6-c-menu__item" role="menuitem">
+        <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Sibling page C</span></span>
+      </a>
+    </li>
+  </ul>
+  {/dropdown} {/include} {#include components/navigation/breadcrumb-item text="Section landing" href="#" current=true /}
+  {/items} {/include}
+</div>

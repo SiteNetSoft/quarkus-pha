@@ -1,0 +1,9 @@
+{! Flex layout — flexbox container with PF v6 modifiers. !}
+{! Required: id !}
+{! Optional: direction (row | column), justify (start | center | end | space-between | space-around),
+              align (start | center | end | baseline | stretch), gap (none | xs | sm | md | lg | xl | 2xl | 3xl | 4xl),
+              wrap (true | false) !}
+{! Slot: items — one or more flex children. !}
+<div class="pf-v6-l-flex{#if direction??} pf-m-{direction}{/if}{#if justify??} pf-m-justify-content-{justify}{/if}{#if align??} pf-m-align-items-{align}{/if}{#if gap??} pf-m-gap-{gap}{/if}{#if wrap??}{#if wrap}{#else} pf-m-nowrap{/if}{/if}" id="{id}">
+  {#insert items}{/insert}
+</div>

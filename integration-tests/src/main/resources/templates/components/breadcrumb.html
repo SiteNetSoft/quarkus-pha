@@ -1,29 +1,279 @@
-{#include layouts/base}
-{#title}Breadcrumb{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+{#include layouts/base} {#title}Breadcrumb{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+<script src="/web/js/alpine/components/breadcrumb-dropdown.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary">
+          <span class="pf-v6-c-button__text">Skip to content</span>
+        </a>
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Breadcrumb</h1>
+                    <p>
+                      Hierarchical navigation showing the current page's location. Compose the container with
+                      <code class="ws-code">breadcrumb-item</code> helpers — each item is a link, the current page is
+                      marked with <code class="ws-code">current=true</code>, and a dropdown crumb can collapse sibling
+                      pages behind a menu toggle.
+                    </p>
+                  </div>
+                </div>
+              </section>
 
-  <h1>Breadcrumb</h1>
-  <p>PatternFly v6 breadcrumb — a navigational hierarchy showing the current page location.</p>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-u-h-100">
+                    <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                      <nav
+                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                        aria-label="Table of contents"
+                      >
+                        <div class="pf-v6-c-jump-links__main">
+                          <ul class="pf-v6-c-jump-links__list" role="list">
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#without-home-link" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Without home link</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#with-heading" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">With heading</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#with-dropdown" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">With dropdown</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-breadcrumb" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Breadcrumb props</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-item" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">BreadcrumbItem props</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="basic-heading">Basic</h2>
-    <p>A standard breadcrumb with links and the current page highlighted.</p>
-    {#include components/navigation/breadcrumb id="breadcrumb-basic" items=basicItems}{/include}
-  </section>
+                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                          <div>
+                            <h2
+                              id="examples"
+                              tabindex="-1"
+                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                            >
+                              Examples
+                            </h2>
+                          </div>
+                        </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="no-home-heading">Without home link</h2>
-    <p>The first item is plain text instead of a link.</p>
-    {#include components/navigation/breadcrumb id="breadcrumb-no-home" items=noHomeItems}{/include}
-  </section>
+                        {#include partials/example-card title="Basic" slug="basic" component="breadcrumb"
+                        description="Standard hierarchy: home → ... → current page. Each crumb except the last is a
+                        link; the last is marked current."} {#content}{#include components/breadcrumb/basic /}{/content}
+                        {/include} {#include partials/example-card title="Without home link" slug="without-home-link"
+                        component="breadcrumb" description="Omit href on the first crumb to render it as plain text
+                        instead of a link. Useful when the home node isn't navigable from the current view (e.g. the
+                        user came from a deep link)."} {#content}{#include components/breadcrumb/without-home-link
+                        /}{/content} {/include} {#include partials/example-card title="With heading" slug="with-heading"
+                        component="breadcrumb" description="heading=true wraps the current crumb in an h1 — the
+                        breadcrumb doubles as the page title for screen readers. Skip a separate page title row when
+                        using this pattern."} {#content}{#include components/breadcrumb/with-heading /}{/content}
+                        {/include} {#include partials/example-card title="With dropdown" slug="with-dropdown"
+                        component="breadcrumb" description="isDropdown=true swaps the crumb's link for a menu toggle.
+                        The dropdown slot holds a PF v6 menu. Useful when a level has many sibling pages users might
+                        want to jump between."} {#content}{#include components/breadcrumb/with-dropdown /}{/content}
+                        {/include}
 
-  <section style="margin-top: 2rem;">
-    <h2 id="heading-heading">With heading</h2>
-    <p>The current page item is wrapped in an <code>&lt;h1&gt;</code> heading element.</p>
-    {#include components/navigation/breadcrumb id="breadcrumb-heading" items=headingItems}{/include}
-  </section>
+                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                            <div>
+                              <h2
+                                id="documentation"
+                                tabindex="-1"
+                                class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                              >
+                                Documentation
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-breadcrumb" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                            Breadcrumb props
+                          </h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by
+                            <code class="ws-code">{|{#include components/navigation/breadcrumb ... /}|}</code>. Crumbs
+                            live in the <code class="ws-code">items</code> slot (named that way to avoid colliding with
+                            example-card's <code class="ws-code">content</code> slot — see the runtime template comment
+                            for the <code class="ws-code">StackOverflowError</code> that the obvious naming would have
+                            caused).
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Required:</strong> <code class="ws-code">id</code>. <strong>Optional:</strong>
+                            <code class="ws-code">ariaLabel</code> (default <code class="ws-code">"Breadcrumb"</code>).
+                            <strong>Slot:</strong> <code class="ws-code">items</code> — one or more
+                            <code class="ws-code">breadcrumb-item</code> includes.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-item" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                            BreadcrumbItem props
+                          </h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by
+                            <code class="ws-code">{|{#include components/navigation/breadcrumb-item ... /}|}</code>.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Required:</strong> <code class="ws-code">text</code> (the crumb label).
+                            <strong>Link target:</strong> <code class="ws-code">href</code> renders an
+                            <code class="ws-code">&lt;a&gt;</code>; omit for plain text.
+                            <code class="ws-code">target</code> sets the link target (e.g.
+                            <code class="ws-code">"_blank"</code>). <strong>Status:</strong>
+                            <code class="ws-code">current=true</code> marks the active crumb (pf-m-current +
+                            aria-current="page"). <strong>Heading variant:</strong>
+                            <code class="ws-code">heading=true</code> wraps the current crumb in
+                            <code class="ws-code">&lt;h1&gt;</code>. <strong>Dropdown variant:</strong>
+                            <code class="ws-code">isDropdown=true</code> renders a menu toggle instead of a link.
+                            Provide the menu markup in the <code class="ws-code">dropdown</code> slot.
+                            <code class="ws-code">dropdownId</code> sets a stable DOM id (defaults to a text-derived
+                            value).
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Divergence from PF React.</strong> We skip <code class="ws-code">component</code> /
+                            <code class="ws-code">render</code> / <code class="ws-code">to</code> (React routing
+                            concerns) and <code class="ws-code">className</code>. PF auto-injects a
+                            <code class="ws-code">showDivider</code> on all but the first crumb; our runtime always
+                            emits a divider span (PF's CSS hides the first divider visually via
+                            <code class="ws-code">:first-child</code> selectors).
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Pick one current pattern.</strong> Either mark the final crumb with
+                            <code class="ws-code">current=true</code> (plain styling) or
+                            <code class="ws-code">heading=true</code> (h1 wrapper). Don't combine — the heading variant
+                            already implies current state, and the markup gets confused.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Dropdown items need stable ids.</strong> Pass an explicit
+                            <code class="ws-code">dropdownId</code>
+                            on the dropdown crumb if you'll target it from another part of the page (e.g. for HTMX swaps
+                            or JS focus management). Otherwise the runtime generates one from the text, which may
+                            collide if two crumbs share text.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Dropdown content is your responsibility.</strong> The dropdown slot wraps the menu
+                            in PF v6's <code class="ws-code">pf-v6-c-menu</code> chrome but the inner items are
+                            hand-coded (typically
+                            <code class="ws-code">&lt;a class="pf-v6-c-menu__item"&gt;...&lt;/a&gt;</code>). The
+                            phaBreadcrumbDropdown Alpine component handles open/close + click-away dismissal.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Slot-name collisions.</strong> Both the container's
+                            <code class="ws-code">items</code> slot and the item's
+                            <code class="ws-code">dropdown</code> slot use role-specific names rather than generic
+                            <code class="ws-code">content</code>. Re-using <code class="ws-code">content</code> would
+                            recurse infinitely (see the runtime template comments).
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <br /><a
+                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/navigation/breadcrumb.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Edit breadcrumb.html on GitHub</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

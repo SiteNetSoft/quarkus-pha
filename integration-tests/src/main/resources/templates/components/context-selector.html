@@ -1,122 +1,205 @@
-{#include layouts/base}
-{#title}Context selector{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-
-  <h1>Context selector</h1>
-  <p>PatternFly v6 context selector — a menu toggle with a searchable dropdown for selecting a context. Composed from MenuToggle and Menu components.</p>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="basic-heading">Basic</h2>
-    <p>A basic context selector with selectable items.</p>
-    <div style="min-height: 280px;">
-      {#include components/navigation/context-selector id="cs-basic" toggleText="My project"}{#content}
-        <li class="pf-v6-c-menu__list-item" role="none">
-          <button class="pf-v6-c-menu__item" type="button" role="menuitem"
-                  @click="selected = 'My project'; open = false">
-            <span class="pf-v6-c-menu__item-text">My project</span>
-          </button>
-        </li>
-        <li class="pf-v6-c-menu__list-item" role="none">
-          <button class="pf-v6-c-menu__item" type="button" role="menuitem"
-                  @click="selected = 'OpenShift cluster'; open = false">
-            <span class="pf-v6-c-menu__item-text">OpenShift cluster</span>
-          </button>
-        </li>
-        <li class="pf-v6-c-menu__list-item" role="none">
-          <button class="pf-v6-c-menu__item" type="button" role="menuitem"
-                  @click="selected = 'Production'; open = false">
-            <span class="pf-v6-c-menu__item-text">Production</span>
-          </button>
-        </li>
-        <li class="pf-v6-c-menu__list-item" role="none">
-          <button class="pf-v6-c-menu__item" type="button" role="menuitem"
-                  @click="selected = 'Staging'; open = false">
-            <span class="pf-v6-c-menu__item-text">Staging</span>
-          </button>
-        </li>
-        <li class="pf-v6-c-menu__list-item" role="none">
-          <button class="pf-v6-c-menu__item" type="button" role="menuitem"
-                  @click="selected = 'Development'; open = false">
-            <span class="pf-v6-c-menu__item-text">Development</span>
-          </button>
-        </li>
-      {/content}{/include}
-    </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="preselected-heading">With preselected item</h2>
-    <p>A context selector with a different default selection.</p>
-    <div style="min-height: 220px;">
-      {#include components/navigation/context-selector id="cs-preselected" toggleText="Production"}{#content}
-        <li class="pf-v6-c-menu__list-item" role="none">
-          <button class="pf-v6-c-menu__item" type="button" role="menuitem"
-                  @click="selected = 'Development'; open = false">
-            <span class="pf-v6-c-menu__item-text">Development</span>
-          </button>
-        </li>
-        <li class="pf-v6-c-menu__list-item" role="none">
-          <button class="pf-v6-c-menu__item" type="button" role="menuitem"
-                  @click="selected = 'Staging'; open = false">
-            <span class="pf-v6-c-menu__item-text">Staging</span>
-          </button>
-        </li>
-        <li class="pf-v6-c-menu__list-item" role="none">
-          <button class="pf-v6-c-menu__item" type="button" role="menuitem"
-                  @click="selected = 'Production'; open = false">
-            <span class="pf-v6-c-menu__item-text">Production</span>
-          </button>
-        </li>
-      {/content}{/include}
-    </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="plain-heading">Plain toggle</h2>
-    <p>A context selector with a plain (borderless) toggle button.</p>
-    <div style="min-height: 220px;">
-      <div id="cs-plain" x-data="{ open: false, search: '', selected: 'Select a project' }" style="position: relative; display: inline-block;">
-        <button class="pf-v6-c-menu-toggle pf-m-plain" type="button"
-                :class="{ 'pf-m-expanded': open }"
-                :aria-expanded="open"
-                @click="open = !open">
-          <span class="pf-v6-c-menu-toggle__text" x-text="selected"></span>
-          <span class="pf-v6-c-menu-toggle__controls">
-            <span class="pf-v6-c-menu-toggle__toggle-icon">
-              {icons:svg('fa:caret-down').raw}
-            </span>
-          </span>
-        </button>
-        <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false"
-             style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 15rem;">
-          <div class="pf-v6-c-menu__content">
-            <ul class="pf-v6-c-menu__list" role="menu">
-              <li class="pf-v6-c-menu__list-item" role="none">
-                <button class="pf-v6-c-menu__item" type="button" role="menuitem"
-                        @click="selected = 'Alpha'; open = false">
-                  <span class="pf-v6-c-menu__item-text">Alpha</span>
-                </button>
-              </li>
-              <li class="pf-v6-c-menu__list-item" role="none">
-                <button class="pf-v6-c-menu__item" type="button" role="menuitem"
-                        @click="selected = 'Beta'; open = false">
-                  <span class="pf-v6-c-menu__item-text">Beta</span>
-                </button>
-              </li>
-              <li class="pf-v6-c-menu__list-item" role="none">
-                <button class="pf-v6-c-menu__item" type="button" role="menuitem"
-                        @click="selected = 'Gamma'; open = false">
-                  <span class="pf-v6-c-menu__item-text">Gamma</span>
-                </button>
-              </li>
-            </ul>
-          </div>
+{#include layouts/base} {#title}Context selector{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Context selector</h1>
+                    <p>
+                      A dropdown for switching the active context — project, workspace, organization. PF v6's
+                      context-selector is a Menu-toggle + searchable Menu combination; ours wires it via Alpine.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                    <nav
+                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                      aria-label="Table of contents"
+                    >
+                      <div class="pf-v6-c-jump-links__main">
+                        <ul class="pf-v6-c-jump-links__list" role="list">
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#props-context-selector" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Context selector props</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
+                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                        <div>
+                          <h2
+                            id="examples"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                          >
+                            Examples
+                          </h2>
+                        </div>
+                      </div>
+                      {#include partials/example-card title="Basic" slug="basic" component="context-selector"
+                      description="Toggle reveals a list of projects with a search box. Click an item to swap the toggle
+                      label."} {#content}{#include components/context-selector/basic /}{/content} {/include}
+                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                        <h2
+                          id="documentation"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Documentation
+                        </h2>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3
+                          id="props-context-selector"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h3 pf-m-editorial ws-heading"
+                        >
+                          Context selector props
+                        </h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          Parameters accepted by
+                          <code class="ws-code">{|{#include components/navigation/context-selector ... /}|}</code>.
+                          Items live in the slot — each &lt;li&gt; should set
+                          <code class="ws-code">selected = '...'; open = false</code> on click.
+                        </p>
+                        <table
+                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                          role="grid"
+                          aria-label="Context selector props"
+                        >
+                          <caption class="pf-v6-c-table__caption">
+                            <span class="ws-prop-required">*</span>
+                            required
+                          </caption>
+                          <thead class="pf-v6-c-table__thead">
+                            <tr class="pf-v6-c-table__tr">
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                              <th scope="col" class="pf-v6-c-table__th">Description</th>
+                            </tr>
+                          </thead>
+                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">toggleText</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">Initial toggle label.</span>
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">slot <code class="ws-code">content</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Menu items — &lt;li class="pf-v6-c-menu__list-item"&gt;.</span
+                                >
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>HTMX-driven swap.</strong> Click handlers should fire
+                          <code class="ws-code">hx-post="/switch-context"</code> to swap the page's data behind the new
+                          selection.
+                        </p>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <br /><a
+                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/navigation/context-selector.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Edit context-selector.html on GitHub</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

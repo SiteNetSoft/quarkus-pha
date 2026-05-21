@@ -1,5 +1,24 @@
 {! List — PatternFly v6 !}
-{! Parameters: id, plain (optional), inline (optional), bordered (optional), iconLg (optional) !}
-<ul class="pf-v6-c-list{#if plain??} pf-m-plain{/if}{#if inline??} pf-m-inline{/if}{#if bordered??} pf-m-bordered{/if}{#if iconLg??} pf-m-icon-lg{/if}"{#if id??} id="{id}"{/if}>
+{! Parameters:                                                                   !}
+{!   id        (optional) — DOM id on the list container                          !}
+{!   ordered   (optional) — boolean; renders <ol> instead of <ul>                 !}
+{!   type      (optional) — when ordered=true, passes through to the html type    !}
+{!                          attr. Values: "1" (default) | "A" | "a" | "I" | "i"   !}
+{!   plain     (optional) — applies pf-m-plain (no bullets, no indent)            !}
+{!   inline    (optional) — applies pf-m-inline (horizontal row)                  !}
+{!   bordered  (optional) — applies pf-m-bordered (horizontal rules between rows) !}
+{!   iconLg    (optional) — applies pf-m-icon-lg (larger __item-icon glyphs)      !}
+{!   ariaLabel (optional) — accessible label on the list element                  !}
+{!                                                                                !}
+{! Slot:                                                                          !}
+{!   {#content} — one or more <li> elements. For icon rows, include a            !}
+{!                <span class="pf-v6-c-list__item-icon"> sibling.                 !}
+{#if ordered??}
+<ol class="pf-v6-c-list{#if plain??} pf-m-plain{/if}{#if inline??} pf-m-inline{/if}{#if bordered??} pf-m-bordered{/if}{#if iconLg??} pf-m-icon-lg{/if}"{#if id??} id="{id}"{/if}{#if type??} type="{type}"{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
+  {#insert content}{/insert}
+</ol>
+{#else}
+<ul class="pf-v6-c-list{#if plain??} pf-m-plain{/if}{#if inline??} pf-m-inline{/if}{#if bordered??} pf-m-bordered{/if}{#if iconLg??} pf-m-icon-lg{/if}"{#if id??} id="{id}"{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
   {#insert content}{/insert}
 </ul>
+{/if}

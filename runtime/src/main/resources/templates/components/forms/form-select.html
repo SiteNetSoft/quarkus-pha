@@ -1,10 +1,17 @@
-{! Form select — PatternFly v6 (uses form-control with select element) !}
-{! Parameters: id, disabled (optional) !}
-<span class="pf-v6-c-form-control" id="{id}">
-  <select id="{id}-field" name="{id}"{#if disabled??} disabled{/if}>
-    {#insert content}{/insert}
+{! Form select — PatternFly v6 (form-control wrapper around <select>) !}
+{! Required: id !}
+{! Optional: disabled, required, validated (success|warning|error) !}
+{! Slot: options — one or more <option> / <optgroup> elements. !}
+<span class="pf-v6-c-form-control{#if validated??} pf-m-{validated}{/if}{#if disabled??} pf-m-disabled{/if}" id="{id}">
+  <select id="{id}-field" name="{id}"{#if disabled??} disabled{/if}{#if required??} required{/if}{#if validated??}{#if validated is 'error'} aria-invalid="true"{/if}{/if}>
+    {#insert options}{/insert}
   </select>
-  <span class="pf-v6-c-form-control__toggle-icon">
-    {icons:svg('fa:caret-down').raw}
+  <span class="pf-v6-c-form-control__toggle-icon">{icons:svg('fa:caret-down').raw}</span>
+  {#if validated??}
+  <span class="pf-v6-c-form-control__utilities">
+    <span class="pf-v6-c-form-control__icon pf-m-status">
+      {#if validated is 'success'}{icons:svg('fa:circle-check').raw}{#else if validated is 'warning'}{icons:svg('fa:triangle-exclamation').raw}{#else if validated is 'error'}{icons:svg('fa:circle-exclamation').raw}{/if}
+    </span>
   </span>
+  {/if}
 </span>

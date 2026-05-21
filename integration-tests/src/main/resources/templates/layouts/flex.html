@@ -1,0 +1,118 @@
+{#include layouts/base} {#title}Flex — Layouts{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Flex</h1>
+                    <p>
+                      A flexbox-based responsive layout. Direction, justification, alignment, gap, and wrap are all
+                      driven by PF modifier classes — no custom CSS needed for the common cases.
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                    <nav class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc" aria-label="Table of contents">
+                      <div class="pf-v6-c-jump-links__main">
+                        <ul class="pf-v6-c-jump-links__list" role="list">
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"><a href="#examples" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Examples</span></span></a></span>
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#basic" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Basic</span></span></a></span></li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#direction-column" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Direction column</span></span></a></span></li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#with-gap" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">With gap</span></span></a></span></li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#justify-content" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Justify content</span></span></a></span></li>
+                            </ul>
+                          </li>
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"><a href="#documentation" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Documentation</span></span></a></span>
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#props-flex" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Flex props</span></span></a></span></li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#usage" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Usage</span></span></a></span></li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
+
+                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                        <div><h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2></div>
+                      </div>
+
+                      {#include partials/example-card title="Basic" slug="basic" component="../layouts/flex"
+                      description="Default row direction with a medium gap. Items size to content."} {#content}{#include layouts/flex/basic /}{/content} {/include}
+                      {#include partials/example-card title="Direction column" slug="direction-column" component="../layouts/flex"
+                      description="Pass &lt;code class=&quot;ws-code&quot;&gt;direction=&quot;column&quot;&lt;/code&gt; to stack
+                      vertically — emits &lt;code class=&quot;ws-code&quot;&gt;pf-m-column&lt;/code&gt;."} {#content}{#include layouts/flex/direction-column /}{/content} {/include}
+                      {#include partials/example-card title="With gap" slug="with-gap" component="../layouts/flex"
+                      description="The &lt;code class=&quot;ws-code&quot;&gt;gap&lt;/code&gt; parameter maps to PF's spacer
+                      tokens (xs / sm / md / lg / xl / 2xl / 3xl / 4xl)."} {#content}{#include layouts/flex/with-gap /}{/content} {/include}
+                      {#include partials/example-card title="Justify content" slug="justify-content" component="../layouts/flex"
+                      description="&lt;code class=&quot;ws-code&quot;&gt;justify=&quot;space-between&quot;&lt;/code&gt; pushes
+                      children to either edge of the container."} {#content}{#include layouts/flex/justify-content /}{/content} {/include}
+
+                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                        <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Documentation</h2>
+                      </div>
+
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="props-flex" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Flex props</h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">Parameters accepted by <code class="ws-code">{|{#include layouts/primitives/flex ... /}|}</code>.</p>
+                        <table class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact" role="grid" aria-label="Flex props">
+                          <caption class="pf-v6-c-table__caption"><span class="ws-prop-required">*</span> required</caption>
+                          <thead class="pf-v6-c-table__thead">
+                            <tr class="pf-v6-c-table__tr">
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                              <th scope="col" class="pf-v6-c-table__th">Description</th>
+                            </tr>
+                          </thead>
+                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                            <tr class="pf-v6-c-table__tr"><td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span></td><td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td><td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id on the container.</span></td></tr>
+                            <tr class="pf-v6-c-table__tr"><td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">direction</code></span></td><td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">row | column</code></span></td><td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Flex direction — emits <code class="ws-code">{|pf-m-{direction}|}</code>. Default is row.</span></td></tr>
+                            <tr class="pf-v6-c-table__tr"><td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">justify</code></span></td><td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">start | center | end | space-between | space-around</code></span></td><td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">justify-content — emits <code class="ws-code">{|pf-m-justify-content-{justify}|}</code>.</span></td></tr>
+                            <tr class="pf-v6-c-table__tr"><td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">align</code></span></td><td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">start | center | end | baseline | stretch</code></span></td><td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">align-items — emits <code class="ws-code">{|pf-m-align-items-{align}|}</code>.</span></td></tr>
+                            <tr class="pf-v6-c-table__tr"><td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">gap</code></span></td><td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">none | xs | sm | md | lg | xl | 2xl | 3xl | 4xl</code></span></td><td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">CSS gap between items — emits <code class="ws-code">{|pf-m-gap-{gap}|}</code>.</span></td></tr>
+                            <tr class="pf-v6-c-table__tr"><td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">wrap</code></span></td><td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td><td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text"><code class="ws-code">true</code> (default — wraps). Pass <code class="ws-code">false</code> to emit <code class="ws-code">pf-m-nowrap</code>.</span></td></tr>
+                            <tr class="pf-v6-c-table__tr"><td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">slot <code class="ws-code">items</code></span></td><td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td><td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Flex children — wrap each in <code class="ws-code">pf-v6-l-flex__item</code> and add per-item modifiers (<code class="ws-code">pf-m-grow</code>, <code class="ws-code">pf-m-flex-N</code>, <code class="ws-code">pf-m-align-self-*</code>) as needed.</span></td></tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial"><strong>Reach for Flex when the layout is one row or one column.</strong> For two-dimensional layouts use <a href="/layouts/grid">Grid</a>; for auto-filled card grids use <a href="/layouts/gallery">Gallery</a>.</p>
+                        <p class="pf-v6-c-content--p pf-m-editorial"><strong>Per-item modifiers.</strong> Flex doesn't bake per-child controls into the include — add <code class="ws-code">pf-m-grow</code>, <code class="ws-code">pf-m-shrink</code>, <code class="ws-code">pf-m-flex-1</code> through <code class="ws-code">pf-m-flex-4</code>, and <code class="ws-code">pf-m-align-self-*</code> directly on each <code class="ws-code">pf-v6-l-flex__item</code>.</p>
+                      </div>
+
+                      <div class="pf-v6-l-stack__item"><br /><a href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/layouts/primitives/flex.html" target="_blank" rel="noopener noreferrer">Edit flex.html on GitHub</a></div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/body} {/include}

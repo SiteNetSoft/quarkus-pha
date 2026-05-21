@@ -1,52 +1,68 @@
 import { test, expect } from "@playwright/test";
 
+const EXAMPLES = ["read", "unread", "disabled", "screen-reader"];
+
 test.describe("Badge", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/components/badge");
   });
 
-  test("page loads with all 3 section headings", async ({ page }) => {
-    await expect(page.locator("#read-heading")).toBeVisible();
-    await expect(page.locator("#unread-heading")).toBeVisible();
-    await expect(page.locator("#disabled-heading")).toBeVisible();
+  test("TOC anchors render", async ({ page }) => {
+    const anchors = ["examples", ...EXAMPLES, "documentation", "props-badge", "usage"];
+    for (const id of anchors) {
+      await expect(page.locator(`#${id}`)).toBeAttached();
+    }
   });
 
   test.describe("Read", () => {
-    test("read badges have correct modifier class", async ({ page }) => {
-      await expect(page.locator("#badge-read-7")).toHaveClass(/pf-m-read/);
-      await expect(page.locator("#badge-read-24")).toHaveClass(/pf-m-read/);
-      await expect(page.locator("#badge-read-999")).toHaveClass(/pf-m-read/);
+    test("read badges carry pf-m-read", async ({ page }) => {
+      for (const v of ["7", "24", "999"]) {
+        await expect(page.locator(`#badge-read-${v}`)).toHaveClass(/pf-m-read/);
+      }
     });
   });
 
   test.describe("Unread", () => {
-    test("unread badges have correct modifier class", async ({ page }) => {
-      await expect(page.locator("#badge-unread-7")).toHaveClass(/pf-m-unread/);
-      await expect(page.locator("#badge-unread-24")).toHaveClass(/pf-m-unread/);
-      await expect(page.locator("#badge-unread-999")).toHaveClass(/pf-m-unread/);
+    test("unread badges carry pf-m-unread", async ({ page }) => {
+      for (const v of ["7", "24", "999"]) {
+        await expect(page.locator(`#badge-unread-${v}`)).toHaveClass(/pf-m-unread/);
+      }
     });
   });
 
   test.describe("Disabled", () => {
-    test("disabled badges have correct modifier class", async ({ page }) => {
-      await expect(page.locator("#badge-disabled-7")).toHaveClass(/pf-m-disabled/);
-      await expect(page.locator("#badge-disabled-24")).toHaveClass(/pf-m-disabled/);
-      await expect(page.locator("#badge-disabled-999")).toHaveClass(/pf-m-disabled/);
+    test("disabled badges carry pf-m-disabled", async ({ page }) => {
+      for (const v of ["7", "24", "999"]) {
+        await expect(page.locator(`#badge-disabled-${v}`)).toHaveClass(/pf-m-disabled/);
+      }
     });
   });
 
-  test("badges display numeric content", async ({ page }) => {
-    await expect(page.locator("#badge-read-7")).toContainText("7");
-    await expect(page.locator("#badge-unread-24")).toContainText("24");
-    await expect(page.locator("#badge-disabled-999")).toContainText("999+");
+  test.describe("Screen reader", () => {
+    test("renders a visually-hidden span with the SR text", async ({ page }) => {
+      const badge = page.locator("#badge-sr");
+      await expect(badge).toContainText("3");
+      await expect(badge.locator(".pf-v6-screen-reader")).toHaveText(/unread notifications/);
+    });
   });
 
-  test("all 9 badges are span elements with base class", async ({ page }) => {
+  test("every badge is a span with pf-v6-c-badge", async ({ page }) => {
     const badges = page.locator(".pf-v6-c-badge");
-    await expect(badges).toHaveCount(9);
-    for (let i = 0; i < 9; i++) {
-      const tagName = await badges.nth(i).evaluate((el) => el.tagName);
-      expect(tagName).toBe("SPAN");
+    const count = await badges.count();
+    expect(count).toBeGreaterThan(0);
+    for (let i = 0; i < count; i++) {
+      const tag = await badges.nth(i).evaluate((el) => el.tagName);
+      expect(tag).toBe("SPAN");
+    }
+  });
+
+  test.describe("Standalone routes", () => {
+    for (const example of EXAMPLES) {
+      test(`/components/badge/${example} returns 200`, async ({ page }) => {
+        const res = await page.goto(`/components/badge/${example}`);
+        expect(res.status()).toBe(200);
+        await expect(page.locator(".pf-v6-c-badge").first()).toBeAttached();
+      });
     }
   });
 });

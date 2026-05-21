@@ -5,59 +5,66 @@ test.describe("Breadcrumb", () => {
     await page.goto("/components/breadcrumb");
   });
 
-  test("page loads with all 3 section headings", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#no-home-heading")).toBeVisible();
-    await expect(page.locator("#heading-heading")).toBeVisible();
+  test("page loads with example and documentation TOC anchors", async ({ page }) => {
+    for (const id of [
+      "examples",
+      "basic",
+      "without-home-link",
+      "with-heading",
+      "with-dropdown",
+      "documentation",
+      "props-breadcrumb",
+      "props-item",
+      "usage",
+    ]) {
+      await expect(page.locator(`#${id}`)).toBeAttached();
+    }
   });
 
-  test.describe("Basic", () => {
-    test("renders as a nav element with breadcrumb class and aria-label", async ({ page }) => {
-      const nav = page.locator("#breadcrumb-basic");
-      await expect(nav).toBeVisible();
-      await expect(nav).toHaveClass(/pf-v6-c-breadcrumb/);
-      await expect(nav).toHaveAttribute("aria-label", "Breadcrumb");
-    });
-
-    test("contains 4 breadcrumb items with dividers", async ({ page }) => {
-      const items = page.locator("#breadcrumb-basic .pf-v6-c-breadcrumb__item");
-      await expect(items).toHaveCount(4);
-
-      const dividers = page.locator("#breadcrumb-basic .pf-v6-c-breadcrumb__item-divider");
-      await expect(dividers).toHaveCount(4);
-    });
-
-    test("last item has pf-m-current class and aria-current", async ({ page }) => {
-      const currentLink = page.locator("#breadcrumb-basic .pf-v6-c-breadcrumb__link.pf-m-current");
-      await expect(currentLink).toHaveCount(1);
-      await expect(currentLink).toHaveAttribute("aria-current", "page");
-      await expect(currentLink).toHaveText("Section landing");
-    });
+  test("basic breadcrumb is a nav with aria-label + 4 items + 4 dividers + 1 current", async ({ page }) => {
+    const nav = page.locator("#breadcrumb-basic");
+    await expect(nav).toHaveClass(/pf-v6-c-breadcrumb/);
+    await expect(nav).toHaveAttribute("aria-label", "Breadcrumb");
+    await expect(nav.locator(".pf-v6-c-breadcrumb__item")).toHaveCount(4);
+    await expect(nav.locator(".pf-v6-c-breadcrumb__item-divider")).toHaveCount(4);
+    const current = nav.locator(".pf-v6-c-breadcrumb__link.pf-m-current");
+    await expect(current).toHaveCount(1);
+    await expect(current).toHaveAttribute("aria-current", "page");
   });
 
-  test.describe("Without home link", () => {
-    test("first item has no link element", async ({ page }) => {
-      const firstItem = page.locator("#breadcrumb-no-home .pf-v6-c-breadcrumb__item").first();
-      const link = firstItem.locator(".pf-v6-c-breadcrumb__link");
-      await expect(link).toHaveCount(0);
-    });
-
-    test("last item has pf-m-current class", async ({ page }) => {
-      const currentLink = page.locator("#breadcrumb-no-home .pf-v6-c-breadcrumb__link.pf-m-current");
-      await expect(currentLink).toHaveCount(1);
-    });
+  test("without-home-link: first item is plain text (no anchor)", async ({ page }) => {
+    const firstItem = page.locator("#breadcrumb-no-home .pf-v6-c-breadcrumb__item").first();
+    await expect(firstItem.locator(".pf-v6-c-breadcrumb__link")).toHaveCount(0);
   });
 
-  test.describe("With heading", () => {
-    test("last item contains an h1 heading element", async ({ page }) => {
-      const heading = page.locator("#breadcrumb-heading .pf-v6-c-breadcrumb__heading");
-      await expect(heading).toHaveCount(1);
-    });
+  test("with-heading: current crumb is wrapped in h1.pf-v6-c-breadcrumb__heading", async ({ page }) => {
+    const heading = page.locator("#breadcrumb-heading h1.pf-v6-c-breadcrumb__heading");
+    await expect(heading).toBeVisible();
+    const link = heading.locator(".pf-v6-c-breadcrumb__link.pf-m-current");
+    await expect(link).toHaveAttribute("aria-current", "page");
+  });
 
-    test("heading wraps the current link", async ({ page }) => {
-      const headingLink = page.locator("#breadcrumb-heading .pf-v6-c-breadcrumb__heading .pf-v6-c-breadcrumb__link.pf-m-current");
-      await expect(headingLink).toHaveCount(1);
-      await expect(headingLink).toHaveAttribute("aria-current", "page");
-    });
+  test("with-dropdown: renders dropdown chrome + menu list", async ({ page }) => {
+    const dropdown = page.locator("#breadcrumb-dropdown .pf-v6-c-breadcrumb__dropdown");
+    await expect(dropdown).toBeVisible();
+    await expect(dropdown.locator(".pf-v6-c-menu-toggle")).toBeVisible();
+    const toggle = dropdown.locator(".pf-v6-c-menu-toggle");
+    await expect(toggle).toHaveAttribute("aria-expanded", "false");
+    // Click toggles open.
+    await toggle.click();
+    await expect(toggle).toHaveAttribute("aria-expanded", "true");
+    await expect(dropdown.locator(".pf-v6-c-menu")).toBeVisible();
+    await expect(dropdown.locator(".pf-v6-c-menu__list .pf-v6-c-menu__item")).toHaveCount(3);
+    // Click outside closes.
+    await page.locator("h1#ws-page-title").click();
+    await expect(toggle).toHaveAttribute("aria-expanded", "false");
+  });
+
+  test("standalone example routes render", async ({ page }) => {
+    for (const slug of ["basic", "without-home-link", "with-heading", "with-dropdown"]) {
+      const res = await page.goto(`/components/breadcrumb/${slug}`);
+      expect(res.status()).toBe(200);
+      await expect(page.locator(".pf-v6-c-breadcrumb")).toBeVisible();
+    }
   });
 });

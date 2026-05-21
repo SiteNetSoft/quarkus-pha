@@ -1,39 +1,359 @@
-{#include layouts/base}
-{#title}Brand{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+{#include layouts/base} {#title}Brand{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Brand</h1>
+                    <p>
+                      The product logo — typically pinned to the masthead. Renders an
+                      <code class="ws-code">&lt;img&gt;</code> by default, or a
+                      <code class="ws-code">&lt;picture&gt;</code> with one or more
+                      <code class="ws-code">&lt;source&gt;</code> elements for responsive layouts. Width and height are
+                      driven by PF's CSS custom properties so the logo can be re-sized without re-exporting the asset.
+                    </p>
+                  </div>
+                </div>
+              </section>
 
-  <h1>Brand</h1>
-  <p>PatternFly v6 brand — a visual representation of a product logo or identity.</p>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-u-h-100">
+                    <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                      <nav
+                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                        aria-label="Table of contents"
+                      >
+                        <div class="pf-v6-c-jump-links__main">
+                          <ul class="pf-v6-c-jump-links__list" role="list">
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#with-width" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">With width</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#with-height" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">With height</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#responsive" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Responsive</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-brand" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Brand props</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="basic-heading">Basic</h2>
-    <p>A simple brand image with default sizing.</p>
-    {#include components/data-display/brand id="brand-basic" src="/web/images/brand-logo.svg" alt="Brand logo"}{/include}
-  </section>
+                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                          <div>
+                            <h2
+                              id="examples"
+                              tabindex="-1"
+                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                            >
+                              Examples
+                            </h2>
+                          </div>
+                        </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="width-heading">Custom width</h2>
-    <p>Brand constrained to a specific width via the <code>--pf-v6-c-brand--Width</code> CSS custom property.</p>
-    {#include components/data-display/brand id="brand-width" src="/web/images/brand-logo.svg" alt="Brand logo" width="200px"}{/include}
-  </section>
+                        {#include partials/example-card title="Basic" slug="basic" component="brand" description="The
+                        default brand img — natural size of the source SVG. No CSS custom properties applied."}
+                        {#content}{#include components/brand/basic /}{/content} {/include} {#include
+                        partials/example-card title="With width" slug="with-width" component="brand" description="Pass
+                        &lt;code class=&quot;ws-code&quot;&gt;width&lt;/code&gt; to set &lt;code
+                        class=&quot;ws-code&quot;&gt;--pf-v6-c-brand--Width&lt;/code&gt;. Height auto-scales to preserve
+                        aspect ratio."} {#content}{#include components/brand/with-width /}{/content} {/include}
+                        {#include partials/example-card title="With height" slug="with-height" component="brand"
+                        description="Pass &lt;code class=&quot;ws-code&quot;&gt;height&lt;/code&gt; to set &lt;code
+                        class=&quot;ws-code&quot;&gt;--pf-v6-c-brand--Height&lt;/code&gt;. Use this on a masthead with a
+                        fixed-height bar."} {#content}{#include components/brand/with-height /}{/content} {/include}
+                        {#include partials/example-card title="Responsive" slug="responsive" component="brand"
+                        description="Pass &lt;code class=&quot;ws-code&quot;&gt;picture=true&lt;/code&gt; to switch from
+                        &lt;code class=&quot;ws-code&quot;&gt;&amp;lt;img&amp;gt;&lt;/code&gt; to &lt;code
+                        class=&quot;ws-code&quot;&gt;&amp;lt;picture&amp;gt;&lt;/code&gt;, then inject one or more
+                        &lt;code class=&quot;ws-code&quot;&gt;&amp;lt;source&amp;gt;&lt;/code&gt; via the &lt;code
+                        class=&quot;ws-code&quot;&gt;sources&lt;/code&gt; slot. Smaller viewports get the fallback
+                        &lt;code class=&quot;ws-code&quot;&gt;src&lt;/code&gt;; larger viewports get the matching
+                        &lt;code class=&quot;ws-code&quot;&gt;srcset&lt;/code&gt;."} {#content}{#include
+                        components/brand/responsive /}{/content} {/include}
 
-  <section style="margin-top: 2rem;">
-    <h2 id="height-heading">Custom height</h2>
-    <p>Brand constrained to a specific height via the <code>--pf-v6-c-brand--Height</code> CSS custom property.</p>
-    {#include components/data-display/brand id="brand-height" src="/web/images/brand-logo.svg" alt="Brand logo" height="36px"}{/include}
-  </section>
+                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                            <div>
+                              <h2
+                                id="documentation"
+                                tabindex="-1"
+                                class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                              >
+                                Documentation
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="picture-heading">Responsive (picture element)</h2>
-    <p>A responsive brand using the <code>&lt;picture&gt;</code> element with different sources for different viewport sizes.</p>
-    {#include components/data-display/brand id="brand-picture" src="/web/images/brand-icon.svg" alt="Brand logo" picture=true}
-      {#sources}
-        <source media="(min-width: 768px)" srcset="/web/images/brand-logo.svg" />
-      {/sources}
-    {/include}
-  </section>
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-brand" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                            Brand props
+                          </h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by
+                            <code class="ws-code">{|{#include components/data-display/brand ... /}|}</code>.
+                          </p>
+                          <table
+                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                            role="grid"
+                            aria-label="Brand props"
+                          >
+                            <caption class="pf-v6-c-table__caption">
+                              <span class="ws-prop-required">*</span>
+                              required
+                            </caption>
+                            <thead class="pf-v6-c-table__thead">
+                              <tr class="pf-v6-c-table__tr">
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                                <th scope="col" class="pf-v6-c-table__th">Default</th>
+                                <th scope="col" class="pf-v6-c-table__th">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">DOM id on the brand element.</span>
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><span class="ws-prop-required">*</span> <code class="ws-code">src</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String (URL)</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Logo URL. With <code class="ws-code">picture=true</code>, this is the fallback used
+                                    when no &lt;source&gt; matches.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><span class="ws-prop-required">*</span> <code class="ws-code">alt</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Accessible name — usually the product name. Required by PF and by accessibility
+                                    rules.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">width</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">String (CSS length)</span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Sets <code class="ws-code">--pf-v6-c-brand--Width</code> on the element style.
+                                    Height auto-scales to preserve aspect ratio.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">height</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">String (CSS length)</span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Sets <code class="ws-code">--pf-v6-c-brand--Height</code>. Pair with a fixed-height
+                                    nav bar.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">picture</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Switch to a <code class="ws-code">&lt;picture&gt;</code> element with a
+                                    <code class="ws-code">pf-m-picture</code> modifier and a
+                                    <code class="ws-code">sources</code> slot for breakpoint-specific assets.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">slot <code class="ws-code">sources</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Only used with <code class="ws-code">picture=true</code>. Place one or more
+                                    <code class="ws-code">&lt;source&gt;</code> elements with their own
+                                    <code class="ws-code">media</code> /
+                                    <code class="ws-code">srcset</code> attributes.</span
+                                  >
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Divergence from PF React.</strong> We skip
+                            <code class="ws-code">className</code> (React-specific). PF React exposes
+                            <code class="ws-code">heights</code> / <code class="ws-code">widths</code> as breakpoint
+                            maps; we leave responsive sizing to plain CSS — set
+                            <code class="ws-code">--pf-v6-c-brand--Width</code> /
+                            <code class="ws-code">--pf-v6-c-brand--Height</code> in your own stylesheet under media
+                            queries. <code class="ws-code">picture=true</code> + the
+                            <code class="ws-code">sources</code> slot replaces PF React's
+                            <code class="ws-code">children</code> escape hatch.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>One brand per page.</strong> The brand is a wayfinding anchor — repeat instances are
+                            confusing. Use it in the masthead, login page, and not much else.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>SVG over raster.</strong> The default
+                            <code class="ws-code">/web/images/brand-logo.svg</code> is vector — it scales to any size
+                            without blurring. Reserve PNGs for cases where the logo is genuinely raster-based.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Responsive logos.</strong> Many products ship two logo variants — a full lockup for
+                            wide layouts and an icon-only version for narrow ones. Use
+                            <code class="ws-code">picture=true</code> + a
+                            <code class="ws-code">&lt;source media="(min-width: 768px)" srcset="..."&gt;</code> to
+                            switch at the breakpoint.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Wrap in a link.</strong> If clicking the brand should navigate to the home page,
+                            wrap the include in an <code class="ws-code">&lt;a href="/"&gt;</code>. PF doesn't bake this
+                            in — the brand itself is just the image.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <br /><a
+                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/brand.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Edit brand.html on GitHub</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

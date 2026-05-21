@@ -1,84 +1,210 @@
-{#include layouts/base}
-{#title}Notification Drawer{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-  <h1>Notification Drawer</h1>
-  <p>PatternFly v6 notification drawer component for displaying a list of system notifications.</p>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="basic-heading">Basic</h2>
-    <p>A basic notification drawer with info, warning, and danger notification items.</p>
-    {#include components/feedback/notification-drawer id="nd-basic"}{#content}
-      <ul class="pf-v6-c-notification-drawer__list">
-        <li class="pf-v6-c-notification-drawer__list-item pf-m-info">
-          <div class="pf-v6-c-notification-drawer__list-item-header">
-            <span class="pf-v6-c-notification-drawer__list-item-header-icon">{icons:svg('fa:info-circle').raw}</span>
-            <h2 class="pf-v6-c-notification-drawer__list-item-header-title">Info notification</h2>
-          </div>
-          <div class="pf-v6-c-notification-drawer__list-item-body">This is an informational notification about a system event.</div>
-          <div class="pf-v6-c-notification-drawer__list-item-timestamp">5 minutes ago</div>
-        </li>
-        <li class="pf-v6-c-notification-drawer__list-item pf-m-warning">
-          <div class="pf-v6-c-notification-drawer__list-item-header">
-            <span class="pf-v6-c-notification-drawer__list-item-header-icon">{icons:svg('fa:exclamation-triangle').raw}</span>
-            <h2 class="pf-v6-c-notification-drawer__list-item-header-title">Warning notification</h2>
-          </div>
-          <div class="pf-v6-c-notification-drawer__list-item-body">This is a warning notification that requires your attention.</div>
-          <div class="pf-v6-c-notification-drawer__list-item-timestamp">15 minutes ago</div>
-        </li>
-        <li class="pf-v6-c-notification-drawer__list-item pf-m-danger">
-          <div class="pf-v6-c-notification-drawer__list-item-header">
-            <span class="pf-v6-c-notification-drawer__list-item-header-icon">{icons:svg('fa:times-circle').raw}</span>
-            <h2 class="pf-v6-c-notification-drawer__list-item-header-title">Danger notification</h2>
-          </div>
-          <div class="pf-v6-c-notification-drawer__list-item-body">This is a critical notification that requires immediate action.</div>
-          <div class="pf-v6-c-notification-drawer__list-item-timestamp">1 hour ago</div>
-        </li>
-      </ul>
-    {/content}{/include}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="with-groups-heading">With groups</h2>
-    <p>A notification drawer with notifications organized into labeled groups.</p>
-    {#include components/feedback/notification-drawer id="nd-groups"}{#content}
-      <section class="pf-v6-c-notification-drawer__group">
-        <h1 class="pf-v6-c-notification-drawer__group-title">System alerts</h1>
-        <ul class="pf-v6-c-notification-drawer__list">
-          <li class="pf-v6-c-notification-drawer__list-item pf-m-danger">
-            <div class="pf-v6-c-notification-drawer__list-item-header">
-              <span class="pf-v6-c-notification-drawer__list-item-header-icon">{icons:svg('fa:times-circle').raw}</span>
-              <h2 class="pf-v6-c-notification-drawer__list-item-header-title">CPU usage critical</h2>
+{#include layouts/base} {#title}Notification drawer{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Notification drawer</h1>
+                    <p>
+                      A side panel listing alerts and events — typically opened from a bell icon in the masthead. Items
+                      have severity, read/unread state, and a timestamp.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                    <nav
+                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                      aria-label="Table of contents"
+                    >
+                      <div class="pf-v6-c-jump-links__main">
+                        <ul class="pf-v6-c-jump-links__list" role="list">
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#props-notification-drawer" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Notification drawer props</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
+                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                        <div>
+                          <h2
+                            id="examples"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                          >
+                            Examples
+                          </h2>
+                        </div>
+                      </div>
+                      {#include partials/example-card title="Basic" slug="basic" component="notification-drawer"
+                      description="Header with title + count, body listing three notifications across info / warning /
+                      success severities."} {#content}{#include components/notification-drawer/basic /}{/content}
+                      {/include}
+                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                        <h2
+                          id="documentation"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Documentation
+                        </h2>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3
+                          id="props-notification-drawer"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h3 pf-m-editorial ws-heading"
+                        >
+                          Notification drawer props
+                        </h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          Parameters accepted by
+                          <code class="ws-code">{|{#include components/feedback/notification-drawer ... /}|}</code>.
+                        </p>
+                        <table
+                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                          role="grid"
+                          aria-label="Notification drawer props"
+                        >
+                          <caption class="pf-v6-c-table__caption">
+                            <span class="ws-prop-required">*</span>
+                            required
+                          </caption>
+                          <thead class="pf-v6-c-table__thead">
+                            <tr class="pf-v6-c-table__tr">
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                              <th scope="col" class="pf-v6-c-table__th">Description</th>
+                            </tr>
+                          </thead>
+                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">titleText</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Title shown in the header. Default
+                                  <code class="ws-code">"Notifications"</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >slots <code class="ws-code">headerStatus</code> /
+                                  <code class="ws-code">headerAction</code> / <code class="ws-code">content</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Header status text, header actions (mark-all-read), and the notifications list.</span
+                                >
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Pair with a Drawer.</strong> Render the notification-drawer inside a
+                          <a href="/components/drawer">Drawer</a>'s panel — Drawer handles open/close from a masthead
+                          bell icon.
+                        </p>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <br /><a
+                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/feedback/notification-drawer.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Edit notification-drawer.html on GitHub</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
             </div>
-            <div class="pf-v6-c-notification-drawer__list-item-body">CPU usage has exceeded 95% on node-3.</div>
-            <div class="pf-v6-c-notification-drawer__list-item-timestamp">2 minutes ago</div>
-          </li>
-          <li class="pf-v6-c-notification-drawer__list-item pf-m-warning">
-            <div class="pf-v6-c-notification-drawer__list-item-header">
-              <span class="pf-v6-c-notification-drawer__list-item-header-icon">{icons:svg('fa:exclamation-triangle').raw}</span>
-              <h2 class="pf-v6-c-notification-drawer__list-item-header-title">Memory usage high</h2>
-            </div>
-            <div class="pf-v6-c-notification-drawer__list-item-body">Memory usage is at 80% on node-1.</div>
-            <div class="pf-v6-c-notification-drawer__list-item-timestamp">10 minutes ago</div>
-          </li>
-        </ul>
-      </section>
-      <section class="pf-v6-c-notification-drawer__group">
-        <h1 class="pf-v6-c-notification-drawer__group-title">Application events</h1>
-        <ul class="pf-v6-c-notification-drawer__list">
-          <li class="pf-v6-c-notification-drawer__list-item pf-m-info">
-            <div class="pf-v6-c-notification-drawer__list-item-header">
-              <span class="pf-v6-c-notification-drawer__list-item-header-icon">{icons:svg('fa:info-circle').raw}</span>
-              <h2 class="pf-v6-c-notification-drawer__list-item-header-title">Deployment complete</h2>
-            </div>
-            <div class="pf-v6-c-notification-drawer__list-item-body">Application v2.3.1 was successfully deployed.</div>
-            <div class="pf-v6-c-notification-drawer__list-item-timestamp">30 minutes ago</div>
-          </li>
-        </ul>
-      </section>
-    {/content}{/include}
-  </section>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

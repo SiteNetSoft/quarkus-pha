@@ -1,0 +1,35 @@
+{! Alpine-driven two-pane chooser — items move between Available and Chosen on click. !}
+<div class="pf-v6-c-dual-list-selector" id="dls-basic"
+     x-data="{
+       available: ['Apple', 'Banana', 'Cherry', 'Date', 'Fig'],
+       chosen: [],
+       focusAvail: null,
+       focusChosen: null,
+       moveRight() { if (this.focusAvail !== null) { this.chosen.push(this.focusAvail); this.available = this.available.filter(x => x !== this.focusAvail); this.focusAvail = null; } },
+       moveLeft() { if (this.focusChosen !== null) { this.available.push(this.focusChosen); this.chosen = this.chosen.filter(x => x !== this.focusChosen); this.focusChosen = null; } }
+     }">
+  <div class="pf-v6-c-dual-list-selector__pane" style="display: inline-block; width: 35%; vertical-align: top; border: 1px solid var(--pf-t--global--border--color--default)">
+    <div class="pf-v6-c-dual-list-selector__header" style="padding: 0.5rem; background: var(--pf-t--global--background--color--secondary--default)"><strong>Available</strong> <span x-text="'(' + available.length + ')'"></span></div>
+    <ul class="pf-v6-c-dual-list-selector__list" style="list-style: none; padding: 0; margin: 0; min-height: 160px">
+      <template x-for="item in available" :key="item">
+        <li class="pf-v6-c-dual-list-selector__list-item" :class="focusAvail === item ? 'pf-m-selected' : ''" @click="focusAvail = item" style="padding: 0.5rem; cursor: pointer" :style="focusAvail === item ? 'background: var(--pf-t--global--background--color--brand--default--alpha--10)' : ''" x-text="item"></li>
+      </template>
+    </ul>
+  </div>
+  <div class="pf-v6-c-dual-list-selector__controls" style="display: inline-block; width: 10%; text-align: center; vertical-align: top; padding: 1rem 0">
+    <button class="pf-v6-c-button pf-m-plain" type="button" :disabled="focusAvail === null" @click="moveRight()" aria-label="Move right" style="display: block; margin: 0.25rem auto">
+      <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-right').raw}</span>
+    </button>
+    <button class="pf-v6-c-button pf-m-plain" type="button" :disabled="focusChosen === null" @click="moveLeft()" aria-label="Move left" style="display: block; margin: 0.25rem auto">
+      <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-left').raw}</span>
+    </button>
+  </div>
+  <div class="pf-v6-c-dual-list-selector__pane" style="display: inline-block; width: 35%; vertical-align: top; border: 1px solid var(--pf-t--global--border--color--default)">
+    <div class="pf-v6-c-dual-list-selector__header" style="padding: 0.5rem; background: var(--pf-t--global--background--color--secondary--default)"><strong>Chosen</strong> <span x-text="'(' + chosen.length + ')'"></span></div>
+    <ul class="pf-v6-c-dual-list-selector__list" style="list-style: none; padding: 0; margin: 0; min-height: 160px">
+      <template x-for="item in chosen" :key="item">
+        <li class="pf-v6-c-dual-list-selector__list-item" :class="focusChosen === item ? 'pf-m-selected' : ''" @click="focusChosen = item" style="padding: 0.5rem; cursor: pointer" :style="focusChosen === item ? 'background: var(--pf-t--global--background--color--brand--default--alpha--10)' : ''" x-text="item"></li>
+      </template>
+    </ul>
+  </div>
+</div>

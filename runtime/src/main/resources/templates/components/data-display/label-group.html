@@ -1,0 +1,37 @@
+{! Label group — PatternFly v6 !}
+{!                                                                                  !}
+{! Parameters:                                                                      !}
+{!   id              (required) — DOM id on the group container                     !}
+{!   categoryName    (optional) — category label rendered before the chips.         !}
+{!                                Implies pf-m-category.                            !}
+{!   vertical        (optional) — boolean; pf-m-vertical (stacks labels).           !}
+{!   numLabels       (optional) — integer (default 3). Overflow threshold; consumed !}
+{!                                by the Alpine component. Passed through as        !}
+{!                                data-num-labels.                                  !}
+{!   closable        (optional) — boolean; renders a close button on the group.    !}
+{!   closeBtnAria    (optional) — aria-label for the group's close button.          !}
+{!   ariaLabel       (optional) — aria-label on the group when categoryName isn't   !}
+{!                                set. Defaults to "Label group category".          !}
+{!   collapsedText   (optional) — text on the "N more" overflow toggle.             !}
+{!                                Defaults to "{remaining} more".                   !}
+{!   expandedText    (optional) — text on the "Show less" toggle.                   !}
+{!                                Defaults to "Show less".                          !}
+{!                                                                                  !}
+{! Slot:                                                                            !}
+{!   {#content}  — label includes. Each label is wrapped in an <li> by the group.  !}
+<div class="pf-v6-c-label-group{#if categoryName??} pf-m-category{/if}{#if vertical??} pf-m-vertical{/if}" id="{id}" role="group"{#if categoryName??} aria-label="{categoryName}"{#else if ariaLabel??} aria-label="{ariaLabel}"{#else} aria-label="Label group category"{/if} x-data="phaLabelGroup({#if numLabels??}{numLabels}{#else}3{/if})">
+  <div class="pf-v6-c-label-group__main">
+    {#if categoryName??}<span class="pf-v6-c-label-group__label" aria-hidden="true">{categoryName}</span>{/if}
+    <ul class="pf-v6-c-label-group__list" role="list" x-ref="list">
+      {#insert content}{/insert}
+      <li class="pf-v6-c-label-group__list-item pha-label-group__overflow" x-show="overflowVisible" x-cloak>
+        <button class="pf-v6-c-label pf-m-overflow" type="button" @click="toggle()" :aria-expanded="expanded.toString()">
+          <span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text" x-text="expanded ? (expandedText || 'Show less') : (collapsedTextTemplate.replace('REMAINING_PLACEHOLDER', hiddenCount.toString()))"></span></span>
+        </button>
+      </li>
+    </ul>
+  </div>
+  {#if closable??}<div class="pf-v6-c-label-group__close">
+    <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="{#if closeBtnAria??}{closeBtnAria}{#else}Close label group{/if}">{icons:svg('fa:xmark').raw}</button>
+  </div>{/if}
+</div>

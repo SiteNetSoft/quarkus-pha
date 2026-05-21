@@ -1,0 +1,24 @@
+<div x-data="{ open: false }">
+  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = true"><span class="pf-v6-c-button__text">Open modal</span></button>
+  <div class="pf-v6-c-backdrop" x-show="open" x-cloak @keydown.escape.window="open = false">
+    <div class="pf-v6-c-bullseye">
+      <div class="pf-v6-c-modal-box pf-m-md" id="mo-basic" role="dialog" aria-modal="true" aria-labelledby="mo-basic-title">
+        <div class="pf-v6-c-modal-box__close">
+          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="open = false">
+            <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+          </button>
+        </div>
+        <header class="pf-v6-c-modal-box__header">
+          <h1 class="pf-v6-c-modal-box__title" id="mo-basic-title"><span class="pf-v6-c-modal-box__title-text">Are you sure?</span></h1>
+        </header>
+        <div class="pf-v6-c-modal-box__body">
+          <p>This action removes the project and all its associated data. It cannot be undone.</p>
+        </div>
+        <footer class="pf-v6-c-modal-box__footer">
+          <button class="pf-v6-c-button pf-m-danger" type="button" @click="open = false"><span class="pf-v6-c-button__text">Delete</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button" @click="open = false"><span class="pf-v6-c-button__text">Cancel</span></button>
+        </footer>
+      </div>
+    </div>
+  </div>
+</div>

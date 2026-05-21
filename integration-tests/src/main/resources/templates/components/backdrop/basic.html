@@ -1,0 +1,12 @@
+<div class="ws-preview-html" x-data="{ open: false }">
+  <button class="pf-v6-c-button pf-m-primary" type="button" id="backdrop-basic-toggle" @click="open = true">
+    <span class="pf-v6-c-button__text">Show backdrop</span>
+  </button>
+  <div x-show="open" x-transition.opacity style="display: none" @click="open = false">
+    {#include components/feedback/backdrop id="backdrop-basic" /}
+  </div>
+  <p style="margin-top: 0.75rem; color: var(--pf-t--global--text--color--subtle, #888); font-size: 0.875rem">
+    Click the button to show the overlay. Click the backdrop to dismiss. Alpine's
+    <code class="ws-code">x-show</code> handles the mount; the backdrop element handles the visual.
+  </p>
+</div>

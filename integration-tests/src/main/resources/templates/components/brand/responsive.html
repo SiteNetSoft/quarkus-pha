@@ -1,0 +1,7 @@
+{! Responsive brand using a <picture> with a <source> element. Below 768px the fallback `src`
+   renders (smaller icon); at 768px+ the source's srcset takes over (wider logo). !}
+{#include components/data-display/brand id="brand-picture" src="/web/images/brand-icon.svg" alt="Brand logo" picture=true}
+  {#sources}
+    <source media="(min-width: 768px)" srcset="/web/images/brand-logo.svg" />
+  {/sources}
+{/include}

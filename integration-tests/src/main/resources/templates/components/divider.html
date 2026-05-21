@@ -1,35 +1,500 @@
-{#include layouts/base}
-{#title}Divider{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-  <h1>Divider</h1>
-  <p>PatternFly v6 divider — a visual separator between content sections.</p>
+{#include layouts/base} {#title}Divider{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary">
+          <span class="pf-v6-c-button__text">Skip to content</span>
+        </a>
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Divider</h1>
+                    <p>
+                      A visual separator. Renders as a semantic <code class="ws-code">&lt;hr&gt;</code> by default, or
+                      as <code class="ws-code">&lt;li&gt;</code> / <code class="ws-code">&lt;div&gt;</code> when the
+                      host element disallows <code class="ws-code">&lt;hr&gt;</code>. Supports horizontal or vertical
+                      orientation (and switching between the two at responsive breakpoints), plus inset modifiers that
+                      pull the divider line in from the parent edges.
+                    </p>
+                  </div>
+                </div>
+              </section>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="hr-heading">Using hr</h2>
-    <p>A basic horizontal divider rendered as an hr element.</p>
-    {#include components/data-display/divider /}
-  </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-u-h-100">
+                    <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                      <nav
+                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                        aria-label="Table of contents"
+                      >
+                        <div class="pf-v6-c-jump-links__main">
+                          <ul class="pf-v6-c-jump-links__list" role="list">
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#using-hr" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Using hr</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#using-li" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Using li</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#using-div" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Using div</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#inset-medium" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Inset medium</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#inset-at-various-breakpoints" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text"
+                                          >Inset at various breakpoints</span
+                                        ></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#vertical-in-flex-layout" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text"
+                                          >Vertical in flex layout</span
+                                        ></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#vertical-in-flex-layout-inset-small" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Vertical, inset small</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a
+                                      href="#vertical-in-flex-layout-inset-at-various-breakpoints"
+                                      class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text"
+                                          >Vertical, inset at breakpoints</span
+                                        ></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a
+                                      href="#switch-orientation-at-various-breakpoints"
+                                      class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text"
+                                          >Switch orientation at breakpoints</span
+                                        ></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-divider" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Divider props</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="inset-heading">With inset</h2>
-    <p>Dividers with various inset sizes.</p>
-    <div style="margin-bottom: 1rem;">{#include components/data-display/divider inset="md" /}</div>
-    <div>{#include components/data-display/divider inset="xl" /}</div>
-  </section>
+                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                          <div>
+                            <h2
+                              id="examples"
+                              tabindex="-1"
+                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                            >
+                              Examples
+                            </h2>
+                          </div>
+                        </div>
 
-  <section style="margin-top: 2rem;">
-    <h2 id="vertical-heading">Vertical</h2>
-    <p>A vertical divider between inline elements.</p>
-    <div style="display: flex; align-items: center; gap: 1rem; height: 3rem;">
-      <span>Item A</span>
-      {#include components/data-display/divider vertical=true /}
-      <span>Item B</span>
-      {#include components/data-display/divider vertical=true /}
-      <span>Item C</span>
+                        {#include partials/example-card title="Using hr" slug="using-hr" component="divider"
+                        description="The default — render a semantic &lt;code
+                        class=&quot;ws-code&quot;&gt;&amp;lt;hr&amp;gt;&lt;/code&gt; with PF v6 styling. Use anywhere
+                        &lt;code class=&quot;ws-code&quot;&gt;&amp;lt;hr&amp;gt;&lt;/code&gt; is valid HTML."}
+                        {#content}{#include components/divider/using-hr /}{/content} {/include} {#include
+                        partials/example-card title="Using li" slug="using-li" component="divider" description="Pass
+                        &lt;code class=&quot;ws-code&quot;&gt;component=&quot;li&quot;&lt;/code&gt; to render as a list
+                        separator. Use inside &lt;code class=&quot;ws-code&quot;&gt;&amp;lt;ul&amp;gt;&lt;/code&gt; /
+                        &lt;code class=&quot;ws-code&quot;&gt;&amp;lt;ol&amp;gt;&lt;/code&gt; / &lt;code
+                        class=&quot;ws-code&quot;&gt;&amp;lt;menu&amp;gt;&lt;/code&gt; where an &lt;code
+                        class=&quot;ws-code&quot;&gt;&amp;lt;hr&amp;gt;&lt;/code&gt; would be invalid HTML."}
+                        {#content}{#include components/divider/using-li /}{/content} {/include} {#include
+                        partials/example-card title="Using div" slug="using-div" component="divider" description="Pass
+                        &lt;code class=&quot;ws-code&quot;&gt;component=&quot;div&quot;&lt;/code&gt; for hosts where
+                        &lt;code class=&quot;ws-code&quot;&gt;&amp;lt;hr&amp;gt;&lt;/code&gt; is awkward (button groups,
+                        custom flex layouts). Same visual treatment, valid in any block context."} {#content}{#include
+                        components/divider/using-div /}{/content} {/include} {#include partials/example-card
+                        title="Inset medium" slug="inset-medium" component="divider" description="Pass &lt;code
+                        class=&quot;ws-code&quot;&gt;inset=&quot;md&quot;&lt;/code&gt; to pull the divider line in from
+                        the edges by the medium spacer token. Available tokens: &lt;code
+                        class=&quot;ws-code&quot;&gt;none&lt;/code&gt;, &lt;code
+                        class=&quot;ws-code&quot;&gt;xs&lt;/code&gt;, &lt;code
+                        class=&quot;ws-code&quot;&gt;sm&lt;/code&gt;, &lt;code
+                        class=&quot;ws-code&quot;&gt;md&lt;/code&gt;, &lt;code
+                        class=&quot;ws-code&quot;&gt;lg&lt;/code&gt;, &lt;code
+                        class=&quot;ws-code&quot;&gt;xl&lt;/code&gt;, &lt;code
+                        class=&quot;ws-code&quot;&gt;2xl&lt;/code&gt;, &lt;code
+                        class=&quot;ws-code&quot;&gt;3xl&lt;/code&gt;."} {#content}{#include
+                        components/divider/inset-medium /}{/content} {/include} {#include partials/example-card
+                        title="Inset at various breakpoints" slug="inset-at-various-breakpoints" component="divider"
+                        description="Stack the per-breakpoint params (&lt;code
+                        class=&quot;ws-code&quot;&gt;insetOnSm&lt;/code&gt;, &lt;code
+                        class=&quot;ws-code&quot;&gt;insetOnMd&lt;/code&gt;, &lt;code
+                        class=&quot;ws-code&quot;&gt;insetOnLg&lt;/code&gt;, &lt;code
+                        class=&quot;ws-code&quot;&gt;insetOnXl&lt;/code&gt;, &lt;code
+                        class=&quot;ws-code&quot;&gt;insetOn2xl&lt;/code&gt;) to make the inset scale with the viewport
+                        — denser on small screens, breathier on large ones."} {#content}{#include
+                        components/divider/inset-at-various-breakpoints /}{/content} {/include} {#include
+                        partials/example-card title="Vertical in flex layout" slug="vertical-in-flex-layout"
+                        component="divider" description="Set &lt;code
+                        class=&quot;ws-code&quot;&gt;vertical=true&lt;/code&gt; inside a flex container. The divider
+                        switches to a vertical line and stretches to the row height. Implies &lt;code
+                        class=&quot;ws-code&quot;&gt;component=&quot;div&quot;&lt;/code&gt; when component is omitted."}
+                        {#content}{#include components/divider/vertical-in-flex-layout /}{/content} {/include} {#include
+                        partials/example-card title="Vertical, inset small" slug="vertical-in-flex-layout-inset-small"
+                        component="divider" description="Combine &lt;code
+                        class=&quot;ws-code&quot;&gt;vertical=true&lt;/code&gt; with &lt;code
+                        class=&quot;ws-code&quot;&gt;inset=&quot;sm&quot;&lt;/code&gt; to shorten the line so it doesn't
+                        span the full container height — useful inside toolbars."} {#content}{#include
+                        components/divider/vertical-in-flex-layout-inset-small /}{/content} {/include} {#include
+                        partials/example-card title="Vertical, inset at breakpoints"
+                        slug="vertical-in-flex-layout-inset-at-various-breakpoints" component="divider"
+                        description="Vertical divider whose inset grows with the viewport. Compose &lt;code
+                        class=&quot;ws-code&quot;&gt;vertical=true&lt;/code&gt; with the per-breakpoint inset params."}
+                        {#content}{#include components/divider/vertical-in-flex-layout-inset-at-various-breakpoints
+                        /}{/content} {/include} {#include partials/example-card title="Switch orientation at
+                        breakpoints" slug="switch-orientation-at-various-breakpoints" component="divider"
+                        description="Use &lt;code class=&quot;ws-code&quot;&gt;verticalOnMd&lt;/code&gt; / &lt;code
+                        class=&quot;ws-code&quot;&gt;verticalOnLg&lt;/code&gt; etc. to flip from horizontal to vertical
+                        at a breakpoint. Pair with &lt;code class=&quot;ws-code&quot;&gt;horizontalOn{|XX|}&lt;/code&gt;
+                        to flip back. Requires a flex parent."} {#content}{#include
+                        components/divider/switch-orientation-at-various-breakpoints /}{/content} {/include}
+
+                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                            <div>
+                              <h2
+                                id="documentation"
+                                tabindex="-1"
+                                class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                              >
+                                Documentation
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-divider" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                            Divider props
+                          </h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by
+                            <code class="ws-code">{|{#include components/data-display/divider ... /}|}</code>.
+                          </p>
+                          <table
+                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                            role="grid"
+                            aria-label="Divider props"
+                          >
+                            <thead class="pf-v6-c-table__thead">
+                              <tr class="pf-v6-c-table__tr">
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                                <th scope="col" class="pf-v6-c-table__th">Default</th>
+                                <th scope="col" class="pf-v6-c-table__th">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">component</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">"hr" | "li" | "div"</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">"hr"</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Host element to render. <code class="ws-code">"hr"</code> emits a semantic
+                                    <code class="ws-code">&lt;hr&gt;</code> (no role attribute); the other two emit the
+                                    named element with <code class="ws-code">role</code>. Setting
+                                    <code class="ws-code">vertical=true</code> implies
+                                    <code class="ws-code">"div"</code> when component is omitted (since
+                                    <code class="ws-code">&lt;hr&gt;</code> can't be vertical).</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">vertical</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Applies <code class="ws-code">pf-m-vertical</code>. The divider stretches to the
+                                    row height of its flex parent. Requires the parent to be a flex container.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">inset</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code"
+                                      >"none" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl"</code
+                                    ></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Base inset. Applies <code class="ws-code">{|pf-m-inset-{inset}|}</code>, pulling
+                                    the divider line in from the parent's edges by the named spacer token.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">insetOnSm</code> / <code class="ws-code">insetOnMd</code> /
+                                    <code class="ws-code">insetOnLg</code> / <code class="ws-code">insetOnXl</code> /
+                                    <code class="ws-code">insetOn2xl</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Same union as <code class="ws-code">inset</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Per-breakpoint inset overrides. Each emits
+                                    <code class="ws-code">{|pf-m-inset-{size}-on-{bp}|}</code>. Stack them to grow /
+                                    shrink the inset as the viewport changes.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">verticalOnMd</code> /
+                                    <code class="ws-code">verticalOnLg</code> /
+                                    <code class="ws-code">verticalOnXl</code> /
+                                    <code class="ws-code">verticalOn2xl</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Switch to vertical orientation at the named breakpoint and above. Requires a flex
+                                    parent. Useful for cards that stack on small screens and lay out horizontally on
+                                    large screens.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">horizontalOnMd</code> /
+                                    <code class="ws-code">horizontalOnLg</code> /
+                                    <code class="ws-code">horizontalOnXl</code> /
+                                    <code class="ws-code">horizontalOn2xl</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Switch back to horizontal orientation at the named breakpoint. Pair with
+                                    <code class="ws-code">vertical</code> (or a lower
+                                    <code class="ws-code">verticalOn{|XX|}</code>) to alternate orientations across
+                                    breakpoints.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">role</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">"separator" | "presentation"</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">"separator"</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >ARIA role on <code class="ws-code">"li"</code> /
+                                    <code class="ws-code">"div"</code> modes. Use
+                                    <code class="ws-code">"presentation"</code> when the divider is purely decorative
+                                    and shouldn't appear in the accessibility tree. Ignored for
+                                    <code class="ws-code">"hr"</code> mode (the tag itself conveys the semantic).</span
+                                  >
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Divergence from PF React.</strong> PF accepts <code class="ws-code">inset</code> and
+                            <code class="ws-code">orientation</code> as object-with-breakpoint-keys (e.g.
+                            <code class="ws-code">{|inset={ md: 'sm', lg: 'md' }|}</code>). Qute includes can't easily
+                            destructure objects, so we expose one named param per breakpoint instead (<code
+                              class="ws-code"
+                              >insetOnMd</code
+                            >, <code class="ws-code">insetOnLg</code>, …). <code class="ws-code">className</code> is
+                            React-specific; skipped.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Pick the right host element.</strong> Default to <code class="ws-code">"hr"</code>.
+                            Switch to <code class="ws-code">"li"</code> inside lists / menus (HTML forbids
+                            <code class="ws-code">&lt;hr&gt;</code> there). Switch to
+                            <code class="ws-code">"div"</code> inside flex layouts where you need vertical orientation
+                            or specific role overrides.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Inset vs. parent padding.</strong> Inset modifiers shrink the visible divider line —
+                            they don't change the divider element's bounding box. Use inset when you want the divider to
+                            be visually contained within a content block (e.g. a card whose body has its own padding)
+                            and still maintain horizontal alignment with siblings.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Vertical dividers need a flex parent.</strong> PF v6's
+                            <code class="ws-code">pf-m-vertical</code> (and the responsive
+                            <code class="ws-code">pf-m-vertical-on-{|bp|}</code>) variants use
+                            <code class="ws-code">align-self: stretch</code> on the divider. Without a flex container,
+                            the divider collapses to zero height.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Accessibility.</strong> <code class="ws-code">&lt;hr&gt;</code> mode is implicit
+                            (the tag itself is announced as a "horizontal rule" by screen readers). For
+                            <code class="ws-code">"li"</code> / <code class="ws-code">"div"</code> modes, we emit
+                            <code class="ws-code">role="separator"</code> by default; pass
+                            <code class="ws-code">role="presentation"</code> when the divider is purely decorative.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <br /><a
+                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/divider.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Edit divider.html on GitHub</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

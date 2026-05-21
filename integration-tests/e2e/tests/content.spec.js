@@ -5,123 +5,98 @@ test.describe("Content", () => {
     await page.goto("/components/content");
   });
 
-  test("page loads with all 8 section headings", async ({ page }) => {
-    await expect(page.locator("#headings-heading")).toBeVisible();
-    await expect(page.locator("#body-heading")).toBeVisible();
-    await expect(page.locator("#links-heading")).toBeVisible();
-    await expect(page.locator("#ul-heading")).toBeVisible();
-    await expect(page.locator("#ol-heading")).toBeVisible();
-    await expect(page.locator("#plain-heading")).toBeVisible();
-    await expect(page.locator("#dl-heading")).toBeVisible();
-    await expect(page.locator("#editorial-heading")).toBeVisible();
+  test("page loads with example and documentation TOC anchors", async ({ page }) => {
+    for (const id of [
+      "examples",
+      "content-as-a-wrapper",
+      "headings",
+      "body",
+      "unordered-list",
+      "ordered-list",
+      "plain-list",
+      "description-list",
+      "link-and-visited-link",
+      "editorial-content",
+      "documentation",
+      "props-content",
+      "usage",
+    ]) {
+      await expect(page.locator(`#${id}`)).toBeAttached();
+    }
   });
 
-  test.describe("Headings", () => {
-    test("has content class", async ({ page }) => {
-      await expect(page.locator("#content-headings")).toHaveClass(/pf-v6-c-content/);
-    });
-
-    test("contains all six heading levels", async ({ page }) => {
-      const wrapper = page.locator("#content-headings");
-      await expect(wrapper.locator("h1")).toHaveText("First level heading");
-      await expect(wrapper.locator("h2")).toHaveText("Second level heading");
-      await expect(wrapper.locator("h3")).toHaveText("Third level heading");
-      await expect(wrapper.locator("h4")).toHaveText("Fourth level heading");
-      await expect(wrapper.locator("h5")).toHaveText("Fifth level heading");
-      await expect(wrapper.locator("h6")).toHaveText("Sixth level heading");
-    });
+  test("wrapper example renders pf-v6-c-content div with mixed children", async ({ page }) => {
+    const wrapper = page.locator("#content-wrapper");
+    await expect(wrapper).toBeVisible();
+    await expect(wrapper).toHaveClass(/pf-v6-c-content/);
+    await expect(wrapper.locator("h2")).toBeVisible();
+    await expect(wrapper.locator("p").first()).toBeVisible();
+    await expect(wrapper.locator("ul li")).toHaveCount(3);
+    await expect(wrapper.locator("blockquote")).toBeVisible();
   });
 
-  test.describe("Body text", () => {
-    test("contains a paragraph", async ({ page }) => {
-      await expect(page.locator("#content-body p").first()).toContainText(
-        "paragraph of body text"
-      );
-    });
-
-    test("contains small text", async ({ page }) => {
-      await expect(page.locator("#content-body small")).toContainText(
-        "small text"
-      );
-    });
-
-    test("contains a blockquote", async ({ page }) => {
-      await expect(page.locator("#content-body blockquote")).toContainText(
-        "blockquote"
-      );
-    });
-
-    test("contains preformatted text", async ({ page }) => {
-      await expect(page.locator("#content-body pre")).toContainText(
-        "preformatted text"
-      );
-    });
+  test("headings example renders h1..h6 each with the matching pf-v6-c-content--hN class", async ({ page }) => {
+    const card = page.locator('[data-source-href="/components/content/source/headings"]');
+    for (const level of [1, 2, 3, 4, 5, 6]) {
+      await expect(card.locator(`h${level}.pf-v6-c-content--h${level}`)).toBeVisible();
+    }
   });
 
-  test.describe("Links", () => {
-    test("has a default link", async ({ page }) => {
-      await expect(page.locator("#content-links a")).toBeVisible();
-    });
-
-    test("visited variant has visited modifier", async ({ page }) => {
-      await expect(page.locator("#content-links-visited")).toHaveClass(
-        /pf-m-visited/
-      );
-    });
+  test("body example renders p, small, blockquote, pre with matching classes", async ({ page }) => {
+    const card = page.locator('[data-source-href="/components/content/source/body"]');
+    await expect(card.locator("p.pf-v6-c-content--p")).toBeVisible();
+    await expect(card.locator("small.pf-v6-c-content--small")).toBeVisible();
+    await expect(card.locator("blockquote.pf-v6-c-content--blockquote")).toBeVisible();
+    await expect(card.locator("pre.pf-v6-c-content--pre")).toBeVisible();
   });
 
-  test.describe("Unordered list", () => {
-    test("contains an unordered list with 3 items", async ({ page }) => {
-      const items = page.locator("#content-ul ul > li");
-      await expect(items).toHaveCount(3);
-    });
+  test("unordered list renders a ul.pf-v6-c-content--ul with 3 items", async ({ page }) => {
+    const ul = page.locator("ul#content-ul.pf-v6-c-content--ul");
+    await expect(ul).toBeVisible();
+    await expect(ul.locator("> li")).toHaveCount(3);
   });
 
-  test.describe("Ordered list", () => {
-    test("contains an ordered list with 3 items", async ({ page }) => {
-      const items = page.locator("#content-ol ol > li");
-      await expect(items).toHaveCount(3);
-    });
+  test("ordered list renders an ol.pf-v6-c-content--ol with 3 items", async ({ page }) => {
+    const ol = page.locator("ol#content-ol.pf-v6-c-content--ol");
+    await expect(ol).toBeVisible();
+    await expect(ol.locator("> li")).toHaveCount(3);
   });
 
-  test.describe("Plain list", () => {
-    test("has plain modifier on list", async ({ page }) => {
-      await expect(page.locator("#content-plain ul")).toHaveClass(/pf-m-plain/);
-    });
-
-    test("contains 3 items", async ({ page }) => {
-      const items = page.locator("#content-plain ul > li");
-      await expect(items).toHaveCount(3);
-    });
+  test("plain list has pf-m-plain modifier", async ({ page }) => {
+    await expect(page.locator("#content-plain")).toHaveClass(/pf-m-plain/);
   });
 
-  test.describe("Definition list", () => {
-    test("contains dt and dd pairs", async ({ page }) => {
-      const terms = page.locator("#content-dl dt");
-      const defs = page.locator("#content-dl dd");
-      await expect(terms).toHaveCount(3);
-      await expect(defs).toHaveCount(3);
-    });
-
-    test("first term is Name", async ({ page }) => {
-      await expect(page.locator("#content-dl dt").first()).toHaveText("Name");
-    });
+  test("description list renders dl with dt/dd pairs", async ({ page }) => {
+    const dl = page.locator("dl#content-dl.pf-v6-c-content--dl");
+    await expect(dl).toBeVisible();
+    await expect(dl.locator("dt")).toHaveCount(3);
+    await expect(dl.locator("dd")).toHaveCount(3);
   });
 
-  test.describe("Editorial", () => {
-    test("has editorial modifier", async ({ page }) => {
-      await expect(page.locator("#content-editorial")).toHaveClass(
-        /pf-m-editorial/
-      );
-    });
+  test("link example renders default + visited anchors", async ({ page }) => {
+    const card = page.locator('[data-source-href="/components/content/source/link-and-visited-link"]');
+    await expect(card.locator('a.pf-v6-c-content--a[href="#default"]')).toBeVisible();
+    await expect(card.locator('a.pf-v6-c-content--a.pf-m-visited[href="#visited"]')).toBeVisible();
+  });
 
-    test("contains editorial heading and paragraph", async ({ page }) => {
-      await expect(page.locator("#content-editorial h2")).toHaveText(
-        "Editorial heading"
-      );
-      await expect(page.locator("#content-editorial p").first()).toContainText(
-        "editorial styling"
-      );
-    });
+  test("editorial card has pf-m-editorial on the wrapper", async ({ page }) => {
+    await expect(page.locator("#content-editorial")).toHaveClass(/pf-m-editorial/);
+  });
+
+  test("standalone example routes render", async ({ page }) => {
+    for (const slug of [
+      "content-as-a-wrapper",
+      "headings",
+      "body",
+      "unordered-list",
+      "ordered-list",
+      "plain-list",
+      "description-list",
+      "link-and-visited-link",
+      "editorial-content",
+    ]) {
+      const res = await page.goto(`/components/content/${slug}`);
+      expect(res.status()).toBe(200);
+    }
   });
 });

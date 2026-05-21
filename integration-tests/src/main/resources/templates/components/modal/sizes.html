@@ -1,0 +1,22 @@
+{! Three buttons + three modals — sm / md / lg variants. !}
+<div x-data="{ open: null }" style="display: flex; gap: 0.5rem">
+  <button class="pf-v6-c-button pf-m-secondary" type="button" @click="open = 'sm'"><span class="pf-v6-c-button__text">Small</span></button>
+  <button class="pf-v6-c-button pf-m-secondary" type="button" @click="open = 'md'"><span class="pf-v6-c-button__text">Medium</span></button>
+  <button class="pf-v6-c-button pf-m-secondary" type="button" @click="open = 'lg'"><span class="pf-v6-c-button__text">Large</span></button>
+  <div class="pf-v6-c-backdrop" x-show="open" x-cloak @keydown.escape.window="open = null">
+    <div class="pf-v6-c-bullseye">
+      <div class="pf-v6-c-modal-box" :class="open === 'sm' ? 'pf-m-sm' : (open === 'lg' ? 'pf-m-lg' : 'pf-m-md')" role="dialog" aria-modal="true" aria-labelledby="mo-size-title">
+        <div class="pf-v6-c-modal-box__close">
+          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="open = null"><span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span></button>
+        </div>
+        <header class="pf-v6-c-modal-box__header">
+          <h1 class="pf-v6-c-modal-box__title" id="mo-size-title"><span class="pf-v6-c-modal-box__title-text" x-text="(open || '').toUpperCase() + ' modal'">Modal</span></h1>
+        </header>
+        <div class="pf-v6-c-modal-box__body"><p>Modal width is driven by the <code>pf-m-sm</code> / <code>pf-m-md</code> / <code>pf-m-lg</code> modifier.</p></div>
+        <footer class="pf-v6-c-modal-box__footer">
+          <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = null"><span class="pf-v6-c-button__text">Close</span></button>
+        </footer>
+      </div>
+    </div>
+  </div>
+</div>

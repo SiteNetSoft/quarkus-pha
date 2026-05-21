@@ -1,0 +1,32 @@
+{! Password generator pattern — input + regenerate button + copy. Client-side via Alpine. !}
+<div style="max-width: 480px" x-data="{
+  pwd: '',
+  charset: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*',
+  copied: false,
+  generate() {
+    const len = 16;
+    let out = '';
+    const arr = new Uint32Array(len);
+    crypto.getRandomValues(arr);
+    for (let i = 0; i < len; i++) out += this.charset[arr[i] % this.charset.length];
+    this.pwd = out;
+  }
+}" x-init="generate()">
+  <div class="pf-v6-c-text-input-group">
+    <div class="pf-v6-c-text-input-group__main">
+      <span class="pf-v6-c-text-input-group__text">
+        <input class="pf-v6-c-text-input-group__text-input" type="text" x-model="pwd" aria-label="Generated password" id="pg-basic-input" readonly>
+      </span>
+    </div>
+    <div class="pf-v6-c-text-input-group__utilities">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Regenerate" @click="generate()">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:arrow-rotate-right').raw}</span>
+      </button>
+      <button class="pf-v6-c-button pf-m-plain" type="button" :aria-label="copied ? 'Copied' : 'Copy'" @click="navigator.clipboard.writeText(pwd); copied = true; setTimeout(() => copied = false, 1500)">
+        <span class="pf-v6-c-button__icon">
+          <span x-show="!copied">{icons:svg('fa:copy').raw}</span><span x-show="copied" x-cloak>{icons:svg('fa:check').raw}</span>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>

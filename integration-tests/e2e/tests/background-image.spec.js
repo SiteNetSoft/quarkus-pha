@@ -1,28 +1,25 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Background Image", () => {
+test.describe("Background image", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/components/background-image");
   });
 
-  test("page loads with all 2 section headings", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#custom-heading")).toBeVisible();
+  test("page loads with example and documentation TOC anchors", async ({ page }) => {
+    for (const id of ["examples", "basic", "documentation", "props-background-image", "usage"]) {
+      await expect(page.locator(`#${id}`)).toBeAttached();
+    }
   });
 
-  test.describe("Basic", () => {
-    test("has correct class and background style", async ({ page }) => {
-      const el = page.locator("#bg-image-basic");
-      await expect(el).toHaveClass(/pf-v6-c-background-image/);
-      await expect(el).toHaveAttribute("style", /pf-background\.svg/);
-    });
+  test("basic example renders pf-v6-c-background-image with the src as inline style", async ({ page }) => {
+    const el = page.locator("#bg-image-basic");
+    await expect(el).toHaveClass(/pf-v6-c-background-image/);
+    await expect(el).toHaveAttribute("style", /pf-background\.svg/);
   });
 
-  test.describe("Custom", () => {
-    test("has correct class and gradient in style", async ({ page }) => {
-      const el = page.locator("#bg-image-custom");
-      await expect(el).toHaveClass(/pf-v6-c-background-image/);
-      await expect(el).toHaveAttribute("style", /linear-gradient/);
-    });
+  test("standalone example route renders", async ({ page }) => {
+    const res = await page.goto(`/components/background-image/basic`);
+    expect(res.status()).toBe(200);
+    await expect(page.locator(".pf-v6-c-background-image")).toBeVisible();
   });
 });
