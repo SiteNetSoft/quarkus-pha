@@ -1,0 +1,259 @@
+{! Shared chart-type demo page — parameterised by Java route. !} {! Data passed in: type (slug like "bar"), title ("Bar
+chart"), intro (HTML string). !} {#include layouts/base} {#title}{title}{/title} {#head}
+<link rel="stylesheet" href="/web/css/components/chart.css" />
+<script src="/web/vendor/echarts/echarts.min.js"></script>
+<script src="/web/js/alpine/components/chart.js"></script>
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <p>
+                      <a class="pf-v6-c-button pf-m-link pf-m-inline" href="/components/chart"
+                        ><span class="pf-v6-c-button__text">&larr; All charts</span></a
+                      >
+                    </p>
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">{title}</h1>
+                    <p>{intro.raw}</p>
+                  </div>
+                </div>
+              </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                    <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                      <div>
+                        <h2
+                          id="examples"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Examples
+                        </h2>
+                      </div>
+                    </div>
+                    {#include partials/example-card title="Basic" slug="basic" component="chart/{type}"
+                    description="Default rendering via &lt;code class=&quot;ws-code&quot;&gt;phaChart&lt;/code&gt; with
+                    the PatternFly theme."} {#content} {#if type == 'area'}{#include components/chart/area/basic /}{/if}
+                    {#if type == 'bar'}{#include components/chart/bar/basic /}{/if} {#if type == 'box-plot'}{#include
+                    components/chart/box-plot/basic /}{/if} {#if type == 'bullet'}{#include
+                    components/chart/bullet/basic /}{/if} {#if type == 'donut'}{#include components/chart/donut/basic
+                    /}{/if} {#if type == 'donut-utilization'}{#include components/chart/donut-utilization/basic /}{/if}
+                    {#if type == 'line'}{#include components/chart/line/basic /}{/if} {#if type == 'pie'}{#include
+                    components/chart/pie/basic /}{/if} {#if type == 'sankey'}{#include components/chart/sankey/basic
+                    /}{/if} {#if type == 'scatter'}{#include components/chart/scatter/basic /}{/if} {#if type ==
+                    'sparkline'}{#include components/chart/sparkline/basic /}{/if} {#if type == 'stack'}{#include
+                    components/chart/stack/basic /}{/if} {#if type == 'threshold'}{#include
+                    components/chart/threshold/basic /}{/if} {/content} {/include}
+
+                    <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                      <h2
+                        id="documentation"
+                        tabindex="-1"
+                        class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                      >
+                        Documentation
+                      </h2>
+                    </div>
+                    <div class="pf-v6-l-stack__item">
+                      <h3 id="props-chart" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                        Chart wrapper props
+                      </h3>
+                      <p class="pf-v6-c-content--p pf-m-editorial">
+                        Every chart uses the same wrapper —
+                        <code class="ws-code">{|{#include components/charts/chart id="..." /}|}</code> with the ECharts
+                        option supplied via Alpine
+                        <code class="ws-code">x-data="phaChart({ option: { ... } })"</code> on the wrapping
+                        <code class="ws-code">&lt;div&gt;</code>.
+                      </p>
+                      <table
+                        class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                        role="grid"
+                        aria-label="Chart wrapper props"
+                      >
+                        <caption class="pf-v6-c-table__caption">
+                          <span class="ws-prop-required">*</span>
+                          required
+                        </caption>
+                        <thead class="pf-v6-c-table__thead">
+                          <tr class="pf-v6-c-table__tr">
+                            <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                            <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                            <th scope="col" class="pf-v6-c-table__th">Description</th>
+                          </tr>
+                        </thead>
+                        <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                          <tr class="pf-v6-c-table__tr">
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"
+                                ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                              >
+                            </td>
+                            <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text">DOM id on the chart container.</span>
+                            </td>
+                          </tr>
+                          <tr class="pf-v6-c-table__tr">
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"><code class="ws-code">height</code></span>
+                            </td>
+                            <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"
+                                >Inline canvas height (e.g. <code class="ws-code">350px</code>). Default 350px via
+                                CSS.</span
+                              >
+                            </td>
+                          </tr>
+                          <tr class="pf-v6-c-table__tr">
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text">slot <code class="ws-code">content</code></span>
+                            </td>
+                            <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"
+                                >Optional title / toolbar rendered above the canvas.</span
+                              >
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <h3 id="props-phachart" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                        phaChart() options
+                      </h3>
+                      <p class="pf-v6-c-content--p pf-m-editorial">Argument shape passed to the Alpine factory.</p>
+                      <table
+                        class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                        role="grid"
+                        aria-label="phaChart() options"
+                      >
+                        <thead class="pf-v6-c-table__thead">
+                          <tr class="pf-v6-c-table__tr">
+                            <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                            <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                            <th scope="col" class="pf-v6-c-table__th">Description</th>
+                          </tr>
+                        </thead>
+                        <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                          <tr class="pf-v6-c-table__tr">
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"><code class="ws-code">option</code></span>
+                            </td>
+                            <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Object</span></td>
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"
+                                >ECharts option object. See
+                                <a
+                                  href="https://echarts.apache.org/en/option.html"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  >ECharts docs</a
+                                >
+                                for the full schema.</span
+                              >
+                            </td>
+                          </tr>
+                          <tr class="pf-v6-c-table__tr">
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"><code class="ws-code">theme</code></span>
+                            </td>
+                            <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String | Object</span></td>
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"
+                                >Theme name or option. Defaults to the registered
+                                <code class="ws-code">patternfly</code> theme.</span
+                              >
+                            </td>
+                          </tr>
+                          <tr class="pf-v6-c-table__tr">
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"><code class="ws-code">renderer</code></span>
+                            </td>
+                            <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">"canvas" | "svg"</span></td>
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"
+                                >Renderer. Default <code class="ws-code">canvas</code>.</span
+                              >
+                            </td>
+                          </tr>
+                          <tr class="pf-v6-c-table__tr">
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"><code class="ws-code">autoResize</code></span>
+                            </td>
+                            <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"
+                                >Bind a window <code class="ws-code">resize</code> handler. Default
+                                <code class="ws-code">true</code>.</span
+                              >
+                            </td>
+                          </tr>
+                          <tr class="pf-v6-c-table__tr">
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"><code class="ws-code">loading</code></span>
+                            </td>
+                            <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"
+                                >Show ECharts loading spinner until the first <code class="ws-code">setOption</code>.
+                                Default <code class="ws-code">false</code>.</span
+                              >
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="pf-v6-l-stack__item">
+                      <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                      <p class="pf-v6-c-content--p pf-m-editorial">
+                        <strong>Data lives in the Alpine x-data.</strong> The server renders the chart wrapper and an
+                        Alpine factory call with the ECharts option object inline; the browser only paints. Keep all
+                        data-shaping in your Quarkus route.
+                      </p>
+                      <p class="pf-v6-c-content--p pf-m-editorial">
+                        <strong>Live updates via HTMX.</strong> To re-render a chart, return an
+                        <code class="ws-code">x-data</code>-bearing fragment from an
+                        <code class="ws-code">hx-get</code> response and swap it in. The new Alpine instance will
+                        replace the old chart cleanly because the wrapper's
+                        <code class="ws-code">destroy()</code> disposes the ECharts handle.
+                      </p>
+                      <p class="pf-v6-c-content--p pf-m-editorial">
+                        <strong>Theming.</strong> Charts inherit the PF v6 palette via the registered
+                        <code class="ws-code">patternfly</code> theme (see
+                        <code class="ws-code">/web/js/alpine/components/chart.js</code>). Pass
+                        <code class="ws-code">theme: "dark"</code> or your own theme name to override.
+                      </p>
+                    </div>
+                    <div class="pf-v6-l-stack__item">
+                      <br /><a
+                        href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/charts/chart.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Edit chart.html on GitHub</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/body} {/include}

@@ -1,0 +1,9 @@
+{#include components/data-display/code-editor id="ce-basic" language="YAML" copyButton=true downloadButton=true uploadButton=true}
+{#content}apiVersion: helm.openshift.io/v1beta1
+kind: HelmChartRepository
+metadata:
+  name: azure-sample-repo
+spec:
+  connectionConfig:
+    url: https://raw.githubusercontent.com/Azure-Samples/helm-charts/master/docs{/content}
+{/include}

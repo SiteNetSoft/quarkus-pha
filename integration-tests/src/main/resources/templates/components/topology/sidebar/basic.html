@@ -1,0 +1,65 @@
+<div x-data="{ details: null }" style="position: relative">
+  <div
+    class="pha-c-topology"
+    id="cy-sidebar"
+    role="img"
+    aria-label="Graph that opens a sidebar with the selected node's details"
+    style="position: relative"
+    x-ref="topo"
+    x-data="phaTopology({
+      elements: [
+        { data: { id: 'gateway',  label: 'gateway',  owner: 'platform', region: 'us-east-1', state: 'healthy'  } },
+        { data: { id: 'orders',   label: 'orders',   owner: 'orders',   region: 'us-east-1', state: 'healthy'  } },
+        { data: { id: 'payments', label: 'payments', owner: 'payments', region: 'eu-west-1', state: 'degraded' } },
+        { data: { id: 'queue',    label: 'queue',    owner: 'platform', region: 'us-east-1', state: 'healthy'  } },
+        { data: { source: 'gateway',  target: 'orders'   } },
+        { data: { source: 'orders',   target: 'payments' } },
+        { data: { source: 'orders',   target: 'queue'    } }
+      ],
+      layout: { name: 'cose', animate: false },
+      onTap: ({ target, id, event }) => {
+        if (target === 'node') {
+          let n = event.target;
+          details = {
+            id: n.id(),
+            owner: n.data('owner'),
+            region: n.data('region'),
+            state: n.data('state')
+          };
+        } else if (target === 'core') {
+          details = null;
+        }
+      }
+    })"
+  >
+    <div class="pha-c-topology__canvas"></div>
+    <aside class="pha-c-topology__sidebar" x-show="details" x-cloak x-transition.opacity>
+      <div class="pf-v6-l-flex pf-m-justify-content-space-between pf-m-align-items-center">
+        <h3 class="pf-v6-c-content--h3" x-text="details?.id || ''"></h3>
+        <button
+          class="pf-v6-c-button pf-m-plain"
+          type="button"
+          aria-label="Close"
+          @click="details = null; $refs.topo.getCy().$(':selected').unselect();"
+        >
+          <span class="pf-v6-c-button__text">×</span>
+        </button>
+      </div>
+      <dl class="pf-v6-c-description-list">
+        <div class="pf-v6-c-description-list__group">
+          <dt class="pf-v6-c-description-list__term">Owner</dt>
+          <dd class="pf-v6-c-description-list__description" x-text="details?.owner || ''"></dd>
+        </div>
+        <div class="pf-v6-c-description-list__group">
+          <dt class="pf-v6-c-description-list__term">Region</dt>
+          <dd class="pf-v6-c-description-list__description" x-text="details?.region || ''"></dd>
+        </div>
+        <div class="pf-v6-c-description-list__group">
+          <dt class="pf-v6-c-description-list__term">State</dt>
+          <dd class="pf-v6-c-description-list__description" x-text="details?.state || ''"></dd>
+        </div>
+      </dl>
+    </aside>
+  </div>
+  <p class="pf-v6-u-mt-md pf-v6-u-color-200" style="font-size: 0.875rem">Tap a node to open its sidebar.</p>
+</div>

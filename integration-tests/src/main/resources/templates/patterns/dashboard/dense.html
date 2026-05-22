@@ -1,0 +1,93 @@
+<div class="pf-v6-l-stack pf-m-gutter">
+  <div class="pf-v6-l-gallery pf-m-gutter" style="--pf-v6-l-gallery--GridTemplateColumns--min: 140px">
+    <div class="pf-v6-c-card pf-m-compact">
+      <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">rpm</span></div>
+      <div class="pf-v6-c-card__body" style="font-size: 1.5rem; font-weight: 700">4 820</div>
+    </div>
+    <div class="pf-v6-c-card pf-m-compact">
+      <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">P95</span></div>
+      <div class="pf-v6-c-card__body" style="font-size: 1.5rem; font-weight: 700">182 ms</div>
+    </div>
+    <div class="pf-v6-c-card pf-m-compact">
+      <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">P99</span></div>
+      <div class="pf-v6-c-card__body" style="font-size: 1.5rem; font-weight: 700">412 ms</div>
+    </div>
+    <div class="pf-v6-c-card pf-m-compact">
+      <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Errors</span></div>
+      <div class="pf-v6-c-card__body" style="font-size: 1.5rem; font-weight: 700">0.42 %</div>
+    </div>
+    <div class="pf-v6-c-card pf-m-compact">
+      <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">CPU</span></div>
+      <div class="pf-v6-c-card__body" style="font-size: 1.5rem; font-weight: 700">61 %</div>
+    </div>
+    <div class="pf-v6-c-card pf-m-compact">
+      <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Mem</span></div>
+      <div class="pf-v6-c-card__body" style="font-size: 1.5rem; font-weight: 700">74 %</div>
+    </div>
+    <div class="pf-v6-c-card pf-m-compact">
+      <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Pods</span></div>
+      <div class="pf-v6-c-card__body" style="font-size: 1.5rem; font-weight: 700">24 / 28</div>
+    </div>
+    <div class="pf-v6-c-card pf-m-compact">
+      <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Saturation</span></div>
+      <div class="pf-v6-c-card__body" style="font-size: 1.5rem; font-weight: 700">0.71</div>
+    </div>
+  </div>
+
+  <div class="pf-v6-l-grid pf-m-gutter">
+    <div class="pf-v6-l-grid__item pf-m-6-col">
+      <div class="pf-v6-c-card">
+        <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Requests by service (24h)</span></div>
+        <div class="pf-v6-c-card__body">
+          <div
+            class="pha-c-chart"
+            id="dashboard-dense-chart-a"
+            x-data="phaChart({
+              option: {
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+                legend: { },
+                xAxis: { type: 'category', data: ['00','04','08','12','16','20'] },
+                yAxis: { type: 'value' },
+                series: [
+                  { name: 'web',    type: 'bar', stack: 'all', data: [220, 180, 410, 720, 690, 540] },
+                  { name: 'api',    type: 'bar', stack: 'all', data: [160, 140, 330, 580, 560, 420] },
+                  { name: 'orders', type: 'bar', stack: 'all', data: [ 90,  80, 210, 380, 360, 290] }
+                ]
+              }
+            })"
+          >
+            <div class="pha-c-chart__canvas" style="height: 220px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pf-v6-l-grid__item pf-m-6-col">
+      <div class="pf-v6-c-card">
+        <div class="pf-v6-c-card__title">
+          <span class="pf-v6-c-card__title-text">Latency by quantile (P50/P95/P99)</span>
+        </div>
+        <div class="pf-v6-c-card__body">
+          <div
+            class="pha-c-chart"
+            id="dashboard-dense-chart-b"
+            x-data="phaChart({
+              option: {
+                tooltip: { trigger: 'axis' },
+                legend: { },
+                xAxis: { type: 'category', data: ['00','04','08','12','16','20'] },
+                yAxis: { type: 'value', name: 'ms' },
+                series: [
+                  { name: 'P50', type: 'line', smooth: true, data: [42, 38, 48, 64, 60, 52] },
+                  { name: 'P95', type: 'line', smooth: true, data: [120, 110, 140, 220, 200, 170] },
+                  { name: 'P99', type: 'line', smooth: true, data: [260, 240, 310, 460, 420, 380] }
+                ]
+              }
+            })"
+          >
+            <div class="pha-c-chart__canvas" style="height: 220px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

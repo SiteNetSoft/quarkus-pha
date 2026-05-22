@@ -1,0 +1,43 @@
+<div
+  class="pha-c-topology"
+  id="cy-custom-nodes"
+  role="img"
+  aria-label="Service / DB / cache / API nodes coloured by type"
+  x-data="phaTopology({
+    elements: [
+      { data: { id: 'web',   label: 'web',   type: 'service' } },
+      { data: { id: 'api',   label: 'api',   type: 'api'     } },
+      { data: { id: 'auth',  label: 'auth',  type: 'service' } },
+      { data: { id: 'db',    label: 'db',    type: 'db'      } },
+      { data: { id: 'cache', label: 'cache', type: 'cache'   } },
+      { data: { source: 'web',  target: 'api'   } },
+      { data: { source: 'api',  target: 'auth'  } },
+      { data: { source: 'api',  target: 'db'    } },
+      { data: { source: 'api',  target: 'cache' } }
+    ],
+    layout: { name: 'cose', animate: false },
+    style: [
+      { selector: 'node', style: {
+        'label': 'data(label)',
+        'color': '#fff',
+        'text-valign': 'center',
+        'text-halign': 'center',
+        'font-size': 12,
+        'font-family': 'RedHatText, Helvetica, Arial, sans-serif',
+        'width': 56, 'height': 56,
+        'border-width': 2
+      } },
+      { selector: 'node[type=\"service\"]', style: { 'background-color': '#06c',    'shape': 'round-rectangle', 'border-color': '#003366' } },
+      { selector: 'node[type=\"api\"]',     style: { 'background-color': '#4cb140', 'shape': 'diamond',         'border-color': '#1e4f18', 'width': 64, 'height': 64 } },
+      { selector: 'node[type=\"db\"]',      style: { 'background-color': '#6753ac', 'shape': 'barrel',          'border-color': '#3d316b' } },
+      { selector: 'node[type=\"cache\"]',   style: { 'background-color': '#ec7a08', 'shape': 'hexagon',         'border-color': '#7d3f00' } },
+      { selector: 'edge', style: {
+        'width': 2, 'line-color': '#8a8d90',
+        'target-arrow-color': '#8a8d90', 'target-arrow-shape': 'triangle',
+        'curve-style': 'bezier'
+      } }
+    ]
+  })"
+>
+  <div class="pha-c-topology__canvas"></div>
+</div>

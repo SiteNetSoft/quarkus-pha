@@ -1,0 +1,73 @@
+<div
+  x-data="{
+    services: [
+      { id: 'orders',    name: 'orders',    region: 'us-east-1',     latencyP95: 142, status: 'healthy',  endpoints: [{ path: '/api/orders',    rpm: 1820 }, { path: '/api/orders/refund', rpm: 240 }] },
+      { id: 'payments',  name: 'payments',  region: 'eu-west-1',     latencyP95: 320, status: 'degraded', endpoints: [{ path: '/api/payments',  rpm: 980 }, { path: '/api/payments/charge', rpm: 410 }] },
+      { id: 'search',    name: 'search',    region: 'ap-southeast-1',latencyP95: 88,  status: 'healthy',  endpoints: [{ path: '/api/search',    rpm: 2430 }] },
+      { id: 'inventory', name: 'inventory', region: 'us-west-2',     latencyP95: 110, status: 'healthy',  endpoints: [{ path: '/api/stock',     rpm: 640 }, { path: '/api/stock/audit', rpm: 32 }] }
+    ],
+    selectedId: 'orders',
+    get selected() { return this.services.find(s =&gt; s.id === this.selectedId); }
+  }"
+  class="pf-v6-l-flex pf-m-gap-md"
+  style="border: 1px solid #d2d2d2; border-radius: 4px; min-height: 360px"
+>
+  <ul
+    class="pf-v6-c-data-list"
+    role="listbox"
+    aria-label="Services"
+    style="flex: 0 0 260px; border-right: 1px solid #d2d2d2; margin: 0; padding: 0; list-style: none"
+  >
+    <template x-for="s in services" :key="s.id">
+      <li class="pf-v6-c-data-list__item" :class="selectedId === s.id ? 'pf-m-selected' : ''">
+        <button
+          type="button"
+          @click="selectedId = s.id"
+          style="
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            background: transparent;
+            border: 0;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+          "
+          :style="selectedId === s.id ? 'background: #e7f1fa;' : ''"
+        >
+          <div style="font-weight: 600" x-text="s.name"></div>
+          <div
+            class="pf-v6-u-color-200"
+            style="font-size: 0.875rem"
+            x-text="s.region + ' · P95 ' + s.latencyP95 + 'ms'"
+          ></div>
+        </button>
+      </li>
+    </template>
+  </ul>
+  <div style="flex: 1; padding: 1rem">
+    <div class="pf-v6-l-flex pf-m-justify-content-space-between pf-m-align-items-center">
+      <h3 class="pf-v6-c-content--h3" x-text="selected.name"></h3>
+      <span class="pf-v6-c-label pf-m-compact" :class="selected.status === 'healthy' ? 'pf-m-green' : 'pf-m-orange'"
+        ><span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text" x-text="selected.status"></span></span
+      ></span>
+    </div>
+    <p class="pf-v6-u-color-200" x-text="selected.region + ' · P95 latency ' + selected.latencyP95 + 'ms'"></p>
+    <table class="pf-v6-c-table pf-m-compact" role="grid" aria-label="Endpoints" style="margin-top: 1rem">
+      <thead>
+        <tr>
+          <th scope="col">Endpoint</th>
+          <th scope="col">Requests / min</th>
+        </tr>
+      </thead>
+      <tbody>
+        <template x-for="e in selected.endpoints" :key="e.path">
+          <tr>
+            <td><code class="ws-code" x-text="e.path"></code></td>
+            <td x-text="e.rpm.toLocaleString()"></td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+  </div>
+</div>

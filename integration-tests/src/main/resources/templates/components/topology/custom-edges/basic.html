@@ -1,0 +1,41 @@
+<div
+  class="pha-c-topology"
+  id="cy-custom-edges"
+  role="img"
+  aria-label="Service graph with sync, async and critical edge styles"
+  x-data="phaTopology({
+    elements: [
+      { data: { id: 'gateway', label: 'gateway' } },
+      { data: { id: 'orders',  label: 'orders'  } },
+      { data: { id: 'pay',     label: 'pay'     } },
+      { data: { id: 'queue',   label: 'queue'   } },
+      { data: { id: 'notify',  label: 'notify'  } },
+      { data: { source: 'gateway', target: 'orders', kind: 'sync',     label: 'POST' } },
+      { data: { source: 'orders',  target: 'pay',    kind: 'critical', label: 'charge' } },
+      { data: { source: 'orders',  target: 'queue',  kind: 'async',    label: 'enqueue' } },
+      { data: { source: 'queue',   target: 'notify', kind: 'async',    label: 'consume' } }
+    ],
+    layout: { name: 'breadthfirst', directed: true, animate: false, padding: 30 },
+    style: [
+      { selector: 'node', style: {
+        'background-color': '#06c', 'color': '#fff',
+        'label': 'data(label)', 'text-valign': 'center', 'text-halign': 'center',
+        'font-size': 12, 'font-family': 'RedHatText, Helvetica, Arial, sans-serif',
+        'width': 56, 'height': 44, 'shape': 'round-rectangle',
+        'border-width': 2, 'border-color': '#003366'
+      } },
+      { selector: 'edge', style: {
+        'width': 2, 'curve-style': 'bezier',
+        'target-arrow-shape': 'triangle',
+        'label': 'data(label)', 'font-size': 10, 'color': '#151515',
+        'font-family': 'RedHatText, Helvetica, Arial, sans-serif',
+        'text-background-color': '#fff', 'text-background-opacity': 0.9, 'text-background-padding': 2
+      } },
+      { selector: 'edge[kind=\"sync\"]',     style: { 'line-color': '#06c',    'target-arrow-color': '#06c' } },
+      { selector: 'edge[kind=\"async\"]',    style: { 'line-color': '#6753ac', 'target-arrow-color': '#6753ac', 'line-style': 'dashed' } },
+      { selector: 'edge[kind=\"critical\"]', style: { 'line-color': '#c9190b', 'target-arrow-color': '#c9190b', 'width': 4 } }
+    ]
+  })"
+>
+  <div class="pha-c-topology__canvas"></div>
+</div>

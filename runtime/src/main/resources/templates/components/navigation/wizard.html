@@ -1,19 +1,16 @@
-{! Wizard — PatternFly v6 !}
-{! Parameters: id !}
+{! Wizard — PatternFly v6 !} {! Parameters: id, navLabel (optional) !} {! Slots: navItems, body, footer !}
 <div class="pf-v6-c-wizard" id="{id}">
   <div class="pf-v6-c-wizard__outer-wrap">
-    <nav class="pf-v6-c-wizard__nav" aria-label="Steps">
-      <ol class="pf-v6-c-wizard__nav-list">
-        {#insert navItems}{/insert}
-      </ol>
-    </nav>
-    <main class="pf-v6-c-wizard__main">
-      <div class="pf-v6-c-wizard__main-body">
-        {#insert body}{/insert}
-      </div>
-    </main>
+    <div class="pf-v6-c-wizard__inner-wrap">
+      <nav class="pf-v6-c-wizard__nav" aria-label="{#if navLabel??}{navLabel}{#else}Steps{/if}">
+        <ol class="pf-v6-c-wizard__nav-list">
+          {#insert navItems}{/insert}
+        </ol>
+      </nav>
+      <main class="pf-v6-c-wizard__main">
+        <div class="pf-v6-c-wizard__main-body">{#insert body}{/insert}</div>
+      </main>
+    </div>
+    <footer class="pf-v6-c-wizard__footer">{#insert footer}{/insert}</footer>
   </div>
-  <footer class="pf-v6-c-wizard__footer">
-    {#insert footer}{/insert}
-  </footer>
 </div>

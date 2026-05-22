@@ -1,0 +1,72 @@
+{#include components/navigation/wizard id="wiz-basic" navLabel="Cluster setup steps"} {#navItems}
+<li class="pf-v6-c-wizard__nav-item">
+  <button
+    type="button"
+    class="pf-v6-c-wizard__nav-link pf-m-current"
+    aria-current="step"
+    hx-get="/api/htmx/wizard/basic/step/1"
+    hx-target="#wiz-basic"
+    hx-swap="outerHTML"
+  >
+    <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">General info</span></span>
+  </button>
+</li>
+<li class="pf-v6-c-wizard__nav-item">
+  <button type="button" class="pf-v6-c-wizard__nav-link" disabled>
+    <span class="pf-v6-c-wizard__nav-link-main"
+      ><span class="pf-v6-c-wizard__nav-link-text">Connection details</span></span
+    >
+  </button>
+</li>
+<li class="pf-v6-c-wizard__nav-item">
+  <button type="button" class="pf-v6-c-wizard__nav-link" disabled>
+    <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">Permissions</span></span>
+  </button>
+</li>
+<li class="pf-v6-c-wizard__nav-item">
+  <button type="button" class="pf-v6-c-wizard__nav-link" disabled>
+    <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">Review</span></span>
+  </button>
+</li>
+{/navItems} {#body}
+<h2 class="pf-v6-c-content--h2">General info</h2>
+<p>Tell us about the cluster you're creating.</p>
+<form class="pf-v6-c-form">
+  <div class="pf-v6-c-form__group">
+    <div class="pf-v6-c-form__group-label">
+      <label class="pf-v6-c-form__label" for="wiz-basic-name"><span class="pf-v6-c-form__label-text">Name</span></label>
+    </div>
+    <div class="pf-v6-c-form__group-control">
+      <input class="pf-v6-c-form-control" type="text" id="wiz-basic-name" value="production-east" />
+    </div>
+  </div>
+  <div class="pf-v6-c-form__group">
+    <div class="pf-v6-c-form__group-label">
+      <label class="pf-v6-c-form__label" for="wiz-basic-region"
+        ><span class="pf-v6-c-form__label-text">Region</span></label
+      >
+    </div>
+    <div class="pf-v6-c-form__group-control">
+      <input class="pf-v6-c-form-control" type="text" id="wiz-basic-region" value="us-east-1" />
+    </div>
+  </div>
+</form>
+{/body} {#footer}
+<button
+  type="button"
+  class="pf-v6-c-button pf-m-primary"
+  hx-get="/api/htmx/wizard/basic/step/2"
+  hx-target="#wiz-basic"
+  hx-swap="outerHTML"
+>
+  <span class="pf-v6-c-button__text">Next</span>
+</button>
+<button type="button" class="pf-v6-c-button pf-m-secondary" disabled>
+  <span class="pf-v6-c-button__text">Back</span>
+</button>
+<div class="pf-v6-c-wizard__footer-cancel">
+  <button type="button" class="pf-v6-c-button pf-m-link">
+    <span class="pf-v6-c-button__text">Cancel</span>
+  </button>
+</div>
+{/footer} {/include}

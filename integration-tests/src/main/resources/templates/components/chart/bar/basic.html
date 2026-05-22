@@ -1,0 +1,18 @@
+<div
+  class="pha-c-chart"
+  id="ch-bar-basic"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'axis' },
+      legend: { data: ['2024', '2025'] },
+      xAxis: { type: 'category', data: ['Q1', 'Q2', 'Q3', 'Q4'] },
+      yAxis: { type: 'value', name: 'Revenue ($K)' },
+      series: [
+        { name: '2024', type: 'bar', data: [320, 410, 390, 480] },
+        { name: '2025', type: 'bar', data: [380, 450, 470, 520] }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>

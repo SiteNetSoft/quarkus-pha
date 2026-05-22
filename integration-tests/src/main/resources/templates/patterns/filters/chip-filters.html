@@ -1,0 +1,46 @@
+<div
+  x-data="{ filters: [{ attr: 'Status', value: 'Active' }, { attr: 'Region', value: 'us-east-1' }, { attr: 'Owner', value: 'platform' }] }"
+>
+  <div class="pf-v6-c-toolbar" role="region" aria-label="Filter toolbar">
+    <div class="pf-v6-c-toolbar__content">
+      <div class="pf-v6-c-toolbar__content-section">
+        <div class="pf-v6-c-toolbar__group">
+          <div class="pf-v6-c-toolbar__item">
+            <span class="pf-v6-c-label pf-m-outline pf-m-compact"
+              ><span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text">Filters</span></span></span
+            >
+          </div>
+          <template x-for="(f, i) in filters" :key="f.attr + ':' + f.value">
+            <div class="pf-v6-c-toolbar__item">
+              <span class="pf-v6-c-label pf-m-blue pf-m-compact">
+                <span class="pf-v6-c-label__content"
+                  ><span class="pf-v6-c-label__text"
+                    ><strong x-text="f.attr + ': '"></strong><span x-text="f.value"></span></span
+                ></span>
+                <button
+                  type="button"
+                  class="pf-v6-c-label__action"
+                  :aria-label="'Remove ' + f.attr + ' filter'"
+                  @click="filters.splice(i, 1)"
+                >
+                  <span class="pf-v6-c-label__action-icon">×</span>
+                </button>
+              </span>
+            </div>
+          </template>
+          <div class="pf-v6-c-toolbar__item" x-show="filters.length > 0">
+            <button type="button" class="pf-v6-c-button pf-m-link pf-m-inline" @click="filters = []">
+              <span class="pf-v6-c-button__text">Clear all</span>
+            </button>
+          </div>
+          <div class="pf-v6-c-toolbar__item" x-show="filters.length === 0">
+            <span class="pf-v6-u-color-200">No filters applied</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="pf-v6-u-mt-md pf-v6-u-color-200" style="font-size: 0.875rem">
+    Click the × on a filter to remove it; the underlying list would re-query the server via HTMX.
+  </p>
+</div>

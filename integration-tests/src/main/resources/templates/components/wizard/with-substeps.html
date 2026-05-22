@@ -1,0 +1,79 @@
+{#include components/navigation/wizard id="wiz-substeps" navLabel="Pipeline setup steps"} {#navItems}
+<li class="pf-v6-c-wizard__nav-item">
+  <button
+    type="button"
+    class="pf-v6-c-wizard__nav-link pf-m-current"
+    aria-current="step"
+    hx-get="/api/htmx/wizard/substeps/step/1"
+    hx-target="#wiz-substeps"
+    hx-swap="outerHTML"
+  >
+    <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">Source</span></span>
+  </button>
+</li>
+<li class="pf-v6-c-wizard__nav-item">
+  <button type="button" class="pf-v6-c-wizard__nav-link" disabled aria-expanded="true">
+    <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">Build</span></span>
+  </button>
+  <ol class="pf-v6-c-wizard__nav-list">
+    <li class="pf-v6-c-wizard__nav-item">
+      <button type="button" class="pf-v6-c-wizard__nav-link" disabled>
+        <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">Compile</span></span>
+      </button>
+    </li>
+    <li class="pf-v6-c-wizard__nav-item">
+      <button type="button" class="pf-v6-c-wizard__nav-link" disabled>
+        <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">Test</span></span>
+      </button>
+    </li>
+  </ol>
+</li>
+<li class="pf-v6-c-wizard__nav-item">
+  <button type="button" class="pf-v6-c-wizard__nav-link" disabled>
+    <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">Deploy</span></span>
+  </button>
+</li>
+{/navItems} {#body}
+<h2 class="pf-v6-c-content--h2">Source</h2>
+<p>Choose where the pipeline pulls code from.</p>
+<form class="pf-v6-c-form">
+  <div class="pf-v6-c-form__group">
+    <div class="pf-v6-c-form__group-label">
+      <label class="pf-v6-c-form__label" for="wiz-substeps-repo"
+        ><span class="pf-v6-c-form__label-text">Repository URL</span></label
+      >
+    </div>
+    <div class="pf-v6-c-form__group-control">
+      <input class="pf-v6-c-form-control" type="text" id="wiz-substeps-repo" value="github.com/example/web" />
+    </div>
+  </div>
+  <div class="pf-v6-c-form__group">
+    <div class="pf-v6-c-form__group-label">
+      <label class="pf-v6-c-form__label" for="wiz-substeps-branch"
+        ><span class="pf-v6-c-form__label-text">Branch</span></label
+      >
+    </div>
+    <div class="pf-v6-c-form__group-control">
+      <input class="pf-v6-c-form-control" type="text" id="wiz-substeps-branch" value="main" />
+    </div>
+  </div>
+</form>
+{/body} {#footer}
+<button
+  type="button"
+  class="pf-v6-c-button pf-m-primary"
+  hx-get="/api/htmx/wizard/substeps/step/2"
+  hx-target="#wiz-substeps"
+  hx-swap="outerHTML"
+>
+  <span class="pf-v6-c-button__text">Next</span>
+</button>
+<button type="button" class="pf-v6-c-button pf-m-secondary" disabled>
+  <span class="pf-v6-c-button__text">Back</span>
+</button>
+<div class="pf-v6-c-wizard__footer-cancel">
+  <button type="button" class="pf-v6-c-button pf-m-link">
+    <span class="pf-v6-c-button__text">Cancel</span>
+  </button>
+</div>
+{/footer} {/include}

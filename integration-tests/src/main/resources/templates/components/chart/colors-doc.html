@@ -1,0 +1,92 @@
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading">The palette</h2>
+<p>
+  Every chart inherits the same 10-step palette via the registered
+  <code class="ws-code">patternfly</code> ECharts theme (see
+  <code class="ws-code">/web/js/alpine/components/chart.js</code>). Use it in series order — the first series gets the
+  first colour, the second gets the second, and so on. The sequence is chosen so adjacent colours stay distinguishable
+  for users with the most common forms of colour-vision deficiency.
+</p>
+
+<div
+  class="pf-v6-l-flex pf-m-gap-sm pf-m-flex-wrap"
+  style="margin: 1rem 0"
+  role="list"
+  aria-label="PatternFly chart colour palette"
+>
+  <div role="listitem" style="flex: 0 0 96px">
+    <div style="background: #06c; width: 96px; height: 48px; border-radius: 4px; border: 1px solid #d2d2d2"></div>
+    <div style="font-size: 0.75rem; margin-top: 0.25rem"><code class="ws-code">#06c</code> · blue-400</div>
+  </div>
+  <div role="listitem" style="flex: 0 0 96px">
+    <div style="background: #4cb140; width: 96px; height: 48px; border-radius: 4px; border: 1px solid #d2d2d2"></div>
+    <div style="font-size: 0.75rem; margin-top: 0.25rem"><code class="ws-code">#4cb140</code> · green-400</div>
+  </div>
+  <div role="listitem" style="flex: 0 0 96px">
+    <div style="background: #009596; width: 96px; height: 48px; border-radius: 4px; border: 1px solid #d2d2d2"></div>
+    <div style="font-size: 0.75rem; margin-top: 0.25rem"><code class="ws-code">#009596</code> · cyan-400</div>
+  </div>
+  <div role="listitem" style="flex: 0 0 96px">
+    <div style="background: #f4c145; width: 96px; height: 48px; border-radius: 4px; border: 1px solid #d2d2d2"></div>
+    <div style="font-size: 0.75rem; margin-top: 0.25rem"><code class="ws-code">#f4c145</code> · gold-400</div>
+  </div>
+  <div role="listitem" style="flex: 0 0 96px">
+    <div style="background: #ec7a08; width: 96px; height: 48px; border-radius: 4px; border: 1px solid #d2d2d2"></div>
+    <div style="font-size: 0.75rem; margin-top: 0.25rem"><code class="ws-code">#ec7a08</code> · orange-400</div>
+  </div>
+  <div role="listitem" style="flex: 0 0 96px">
+    <div style="background: #7d1007; width: 96px; height: 48px; border-radius: 4px; border: 1px solid #d2d2d2"></div>
+    <div style="font-size: 0.75rem; margin-top: 0.25rem"><code class="ws-code">#7d1007</code> · red-700</div>
+  </div>
+  <div role="listitem" style="flex: 0 0 96px">
+    <div style="background: #6753ac; width: 96px; height: 48px; border-radius: 4px; border: 1px solid #d2d2d2"></div>
+    <div style="font-size: 0.75rem; margin-top: 0.25rem"><code class="ws-code">#6753ac</code> · purple-400</div>
+  </div>
+  <div role="listitem" style="flex: 0 0 96px">
+    <div style="background: #c9190b; width: 96px; height: 48px; border-radius: 4px; border: 1px solid #d2d2d2"></div>
+    <div style="font-size: 0.75rem; margin-top: 0.25rem"><code class="ws-code">#c9190b</code> · red-400</div>
+  </div>
+  <div role="listitem" style="flex: 0 0 96px">
+    <div style="background: #8bc1f7; width: 96px; height: 48px; border-radius: 4px; border: 1px solid #d2d2d2"></div>
+    <div style="font-size: 0.75rem; margin-top: 0.25rem"><code class="ws-code">#8bc1f7</code> · blue-200</div>
+  </div>
+  <div role="listitem" style="flex: 0 0 96px">
+    <div style="background: #bde2b9; width: 96px; height: 48px; border-radius: 4px; border: 1px solid #d2d2d2"></div>
+    <div style="font-size: 0.75rem; margin-top: 0.25rem"><code class="ws-code">#bde2b9</code> · green-200</div>
+  </div>
+</div>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading">In a chart</h2>
+<p>
+  A bar chart with seven series picks up the first seven colours automatically — no per-series
+  <code class="ws-code">itemStyle</code> needed.
+</p>
+<div
+  class="pha-c-chart"
+  id="ch-colors-demo"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'axis' },
+      legend: { },
+      xAxis: { type: 'category', data: ['Mon','Tue','Wed','Thu','Fri'] },
+      yAxis: { type: 'value' },
+      series: [
+        { name: 'web',      type: 'bar', data: [12, 18, 14, 22, 26] },
+        { name: 'api',      type: 'bar', data: [ 9, 12, 11, 17, 20] },
+        { name: 'auth',     type: 'bar', data: [ 4,  6,  5,  9, 11] },
+        { name: 'orders',   type: 'bar', data: [ 7, 10,  8, 13, 16] },
+        { name: 'payments', type: 'bar', data: [ 3,  5,  4,  6,  8] },
+        { name: 'search',   type: 'bar', data: [ 6,  8,  7, 11, 13] },
+        { name: 'queue',    type: 'bar', data: [ 2,  4,  3,  5,  7] }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">Overriding</h2>
+<p>
+  For semantic colour (status, severity), bypass the palette and assign per-series
+  <code class="ws-code">itemStyle.color</code> directly. PF chart green for <em>healthy</em>, orange for
+  <em>warning</em>, red for <em>critical</em>.
+</p>

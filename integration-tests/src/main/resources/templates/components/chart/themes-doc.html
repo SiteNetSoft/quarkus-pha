@@ -1,0 +1,63 @@
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading">The default — <code class="ws-code">patternfly</code></h2>
+<p>
+  The Alpine factory registers a single global ECharts theme called
+  <code class="ws-code">patternfly</code> on script load. Every <code class="ws-code">phaChart</code> call defaults to
+  it — you don't need to opt in. The theme defines:
+</p>
+<ul>
+  <li>The 10-step PF colour palette (see <a href="/components/chart/colors">Colors for charts</a>)</li>
+  <li>Red Hat Text font family, with PF-aligned text colours</li>
+  <li>Subtle grey axis lines and tick marks, with a light grid</li>
+  <li>White tooltip background with a 1px PF-grey border</li>
+</ul>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading">Same data, default theme</h2>
+<div
+  class="pha-c-chart"
+  id="ch-theme-default"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'axis' },
+      legend: { },
+      xAxis: { type: 'category', data: ['Mon','Tue','Wed','Thu','Fri'] },
+      yAxis: { type: 'value' },
+      series: [
+        { name: 'requests', type: 'line', smooth: true, data: [12, 18, 14, 22, 26] },
+        { name: 'errors',   type: 'line', smooth: true, data: [ 1,  2,  3,  2,  4] }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">Registering a custom theme</h2>
+<p>
+  Themes are ordinary ECharts theme objects. Register one at script-load time and reference it by name in the factory
+  call:
+</p>
+<div class="pf-v6-c-code-editor" style="margin: 1rem 0">
+  <div class="pf-v6-c-code-editor__header">
+    <div class="pf-v6-c-code-editor__tab"><span class="pf-v6-c-code-editor__tab-text">JavaScript</span></div>
+  </div>
+  <div class="pf-v6-c-code-editor__main">
+    <div class="pf-v6-c-code-editor__code">
+      <pre class="pf-v6-c-code-editor__code-pre">
+echarts.registerTheme('dark', {
+  backgroundColor: '#1b1d21',
+  textStyle: { color: '#f0f0f0' },
+  color: ['#73bcf7', '#7cc674', '#73c5c5', '#f6d173', '#ef9234']
+});
+
+// Use it:
+&lt;div x-data="phaChart({ theme: 'dark', option: { ... } })"&gt;</pre
+      >
+    </div>
+  </div>
+</div>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading">Per-chart override</h2>
+<p>
+  A theme can also be passed inline as an object via the
+  <code class="ws-code">theme</code> config key — handy for quick experiments without polluting the global registry.
+</p>

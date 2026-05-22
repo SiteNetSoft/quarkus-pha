@@ -406,10 +406,6 @@ public class ComponentRoutes {
     @Inject
     Template documentEditorPage;
 
-    @Location("components/chart")
-    @Inject
-    Template chartPage;
-
     @Location("components/live-search")
     @Inject
     Template liveSearchPage;
@@ -1135,12 +1131,6 @@ public class ComponentRoutes {
             .data("wopiPolicy",  collaboraWopiHost + "/wopi/files/policy");
     }
 
-    @GET
-    @Path("/chart")
-    @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance chart() {
-        return chartPage.instance();
-    }
 
     private static Map<String, Object> day(int date, String... flags) {
         Map<String, Object> d = new HashMap<>();

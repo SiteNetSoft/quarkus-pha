@@ -1,13 +1,17 @@
 package org.sitenetsoft.quarkus.pha.it;
 
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 @Path("/api/htmx")
 public class HtmxRoutes {
@@ -165,6 +169,367 @@ public class HtmxRoutes {
              + "</div>"
              + "</dl>"
              + "</div>";
+    }
+
+    private static final List<String[]> TABLE_ROWS = List.of(
+        new String[]{"Alice Chen",   "Admin",  "us-east-1"},
+        new String[]{"Bob Johnson",  "Viewer", "eu-west-1"},
+        new String[]{"Diego Ramos",  "Viewer", "ap-southeast-1"},
+        new String[]{"Jane Smith",   "Editor", "eu-west-1"},
+        new String[]{"John Doe",     "Admin",  "us-west-2"}
+    );
+
+    private static final List<String[]> TABLE_COLUMNS = List.of(
+        new String[]{"name",   "Name"},
+        new String[]{"role",   "Role"},
+        new String[]{"region", "Region"}
+    );
+
+    @GET
+    @Path("/table-sort")
+    @Produces(MediaType.TEXT_HTML)
+    public String tableSort(@QueryParam("col") String col, @QueryParam("dir") String dir) {
+        int colIdx = 0;
+        for (int i = 0; i < TABLE_COLUMNS.size(); i++) {
+            if (TABLE_COLUMNS.get(i)[0].equals(col)) {
+                colIdx = i;
+                break;
+            }
+        }
+        boolean ascending = !"desc".equalsIgnoreCase(dir);
+
+        List<String[]> sorted = new ArrayList<>(TABLE_ROWS);
+        final int sortIdx = colIdx;
+        Comparator<String[]> cmp = Comparator.comparing(r -> r[sortIdx], String.CASE_INSENSITIVE_ORDER);
+        if (!ascending) {
+            cmp = cmp.reversed();
+        }
+        sorted.sort(cmp);
+
+        StringBuilder html = new StringBuilder();
+        html.append("<table class=\"pf-v6-c-table\" role=\"grid\" id=\"tbl-sortable\" aria-label=\"Sortable table example\">");
+        html.append("<thead><tr>");
+        for (int i = 0; i < TABLE_COLUMNS.size(); i++) {
+            String key = TABLE_COLUMNS.get(i)[0];
+            String label = TABLE_COLUMNS.get(i)[1];
+            boolean active = i == colIdx;
+            String ariaSort = active ? (ascending ? "ascending" : "descending") : "none";
+            String nextDir = active && ascending ? "desc" : "asc";
+            String iconClass;
+            if (active) {
+                iconClass = ascending ? "fas fa-long-arrow-alt-up" : "fas fa-long-arrow-alt-down";
+            } else {
+                iconClass = "fas fa-arrows-alt-v";
+            }
+            html.append("<th scope=\"col\" class=\"pf-v6-c-table__sort").append(active ? " pf-m-selected" : "").append("\" aria-sort=\"").append(ariaSort).append("\">");
+            html.append("<button type=\"button\" class=\"pf-v6-c-table__button\"");
+            html.append(" hx-get=\"/api/htmx/table-sort?col=").append(key).append("&amp;dir=").append(nextDir).append("\"");
+            html.append(" hx-target=\"#tbl-sortable\" hx-swap=\"outerHTML\">");
+            html.append("<div class=\"pf-v6-c-table__button-content\">");
+            html.append("<span class=\"pf-v6-c-table__text\">").append(escapeHtml(label)).append("</span>");
+            html.append("<span class=\"pf-v6-c-table__sort-indicator\"><i class=\"").append(iconClass).append("\" aria-hidden=\"true\"></i></span>");
+            html.append("</div></button></th>");
+        }
+        html.append("</tr></thead><tbody>");
+        for (String[] row : sorted) {
+            html.append("<tr>");
+            for (String cell : row) {
+                html.append("<td>").append(escapeHtml(cell)).append("</td>");
+            }
+            html.append("</tr>");
+        }
+        html.append("</tbody></table>");
+        return html.toString();
+    }
+
+    // ---------- Wizard step rendering ----------
+
+    private static final Map<String, Integer> WIZARD_TOTAL_STEPS = Map.of(
+        "basic", 4,
+        "substeps", 4,
+        "review", 3
+    );
+
+    @GET
+    @Path("/wizard/{flavor}/step/{n}")
+    @Produces(MediaType.TEXT_HTML)
+    public String wizardStep(@PathParam("flavor") String flavor, @PathParam("n") int step) {
+        Integer total = WIZARD_TOTAL_STEPS.get(flavor);
+        if (total == null) {
+            throw new NotFoundException("Unknown wizard flavor: " + flavor);
+        }
+        if (step < 1 || step > total) {
+            throw new NotFoundException("Step out of range: " + step);
+        }
+        return switch (flavor) {
+            case "basic" -> renderBasicWizard(step);
+            case "substeps" -> renderSubstepsWizard(step);
+            case "review" -> renderReviewWizard(step);
+            default -> throw new NotFoundException("Unknown wizard flavor: " + flavor);
+        };
+    }
+
+    private static String wizardShell(String id, String navLabel, String navHtml, String bodyHtml, String footerHtml) {
+        return "<div class=\"pf-v6-c-wizard\" id=\"" + id + "\">"
+             + "<div class=\"pf-v6-c-wizard__outer-wrap\">"
+             + "<div class=\"pf-v6-c-wizard__inner-wrap\">"
+             + "<nav class=\"pf-v6-c-wizard__nav\" aria-label=\"" + escapeHtml(navLabel) + "\">"
+             + "<ol class=\"pf-v6-c-wizard__nav-list\">" + navHtml + "</ol>"
+             + "</nav>"
+             + "<main class=\"pf-v6-c-wizard__main\">"
+             + "<div class=\"pf-v6-c-wizard__main-body\">" + bodyHtml + "</div>"
+             + "</main>"
+             + "</div>"
+             + "<footer class=\"pf-v6-c-wizard__footer\">" + footerHtml + "</footer>"
+             + "</div></div>";
+    }
+
+    /** Build one flat nav item. state: 0=current, 1=visited (clickable), 2=future (disabled). */
+    private static String navItem(String id, String label, int state, String url) {
+        StringBuilder sb = new StringBuilder("<li class=\"pf-v6-c-wizard__nav-item\">");
+        sb.append("<button type=\"button\" class=\"pf-v6-c-wizard__nav-link");
+        if (state == 0) sb.append(" pf-m-current");
+        sb.append("\"");
+        if (state == 0) sb.append(" aria-current=\"step\"");
+        if (state == 2) {
+            sb.append(" disabled");
+        } else {
+            sb.append(" hx-get=\"").append(url).append("\" hx-target=\"#").append(id)
+              .append("\" hx-swap=\"outerHTML\"");
+        }
+        sb.append("><span class=\"pf-v6-c-wizard__nav-link-main\"><span class=\"pf-v6-c-wizard__nav-link-text\">")
+          .append(escapeHtml(label))
+          .append("</span></span></button></li>");
+        return sb.toString();
+    }
+
+    private static String footerButtons(String id, String flavor, int step, int total, boolean finishLabel) {
+        StringBuilder sb = new StringBuilder();
+        String primaryLabel = finishLabel && step == total ? "Finish" : "Next";
+        if (step < total) {
+            sb.append("<button type=\"button\" class=\"pf-v6-c-button pf-m-primary\"")
+              .append(" hx-get=\"/api/htmx/wizard/").append(flavor).append("/step/").append(step + 1).append("\"")
+              .append(" hx-target=\"#").append(id).append("\" hx-swap=\"outerHTML\">")
+              .append("<span class=\"pf-v6-c-button__text\">").append(primaryLabel).append("</span></button>");
+        } else {
+            sb.append("<button type=\"button\" class=\"pf-v6-c-button pf-m-primary\">")
+              .append("<span class=\"pf-v6-c-button__text\">Finish</span></button>");
+        }
+        if (step > 1) {
+            sb.append("<button type=\"button\" class=\"pf-v6-c-button pf-m-secondary\"")
+              .append(" hx-get=\"/api/htmx/wizard/").append(flavor).append("/step/").append(step - 1).append("\"")
+              .append(" hx-target=\"#").append(id).append("\" hx-swap=\"outerHTML\">")
+              .append("<span class=\"pf-v6-c-button__text\">Back</span></button>");
+        } else {
+            sb.append("<button type=\"button\" class=\"pf-v6-c-button pf-m-secondary\" disabled>")
+              .append("<span class=\"pf-v6-c-button__text\">Back</span></button>");
+        }
+        sb.append("<div class=\"pf-v6-c-wizard__footer-cancel\">")
+          .append("<button type=\"button\" class=\"pf-v6-c-button pf-m-link\">")
+          .append("<span class=\"pf-v6-c-button__text\">Cancel</span></button></div>");
+        return sb.toString();
+    }
+
+    // -- basic flavor --
+    private static final List<String> BASIC_LABELS =
+        List.of("General info", "Connection details", "Permissions", "Review");
+
+    private static String renderBasicWizard(int step) {
+        String id = "wiz-basic";
+        StringBuilder nav = new StringBuilder();
+        for (int i = 1; i <= BASIC_LABELS.size(); i++) {
+            int state = i == step ? 0 : (i < step ? 1 : 2);
+            nav.append(navItem(id, BASIC_LABELS.get(i - 1), state, "/api/htmx/wizard/basic/step/" + i));
+        }
+        String body = switch (step) {
+            case 1 -> basicStep1Body();
+            case 2 -> basicStep2Body();
+            case 3 -> basicStep3Body();
+            case 4 -> basicStep4Body();
+            default -> "<p>Unknown step.</p>";
+        };
+        return wizardShell(id, "Cluster setup steps", nav.toString(), body,
+            footerButtons(id, "basic", step, BASIC_LABELS.size(), true));
+    }
+
+    private static String basicStep1Body() {
+        return "<h2 class=\"pf-v6-c-content--h2\">General info</h2>"
+             + "<p>Tell us about the cluster you're creating.</p>"
+             + "<form class=\"pf-v6-c-form\">"
+             + formGroup("wiz-basic-name", "Name", "production-east")
+             + formGroup("wiz-basic-region", "Region", "us-east-1")
+             + "</form>";
+    }
+
+    private static String basicStep2Body() {
+        return "<h2 class=\"pf-v6-c-content--h2\">Connection details</h2>"
+             + "<p>Where should the cluster live on the network?</p>"
+             + "<form class=\"pf-v6-c-form\">"
+             + formGroup("wiz-basic-vpc", "VPC", "vpc-prod-shared")
+             + formGroup("wiz-basic-subnet", "Subnet CIDR", "10.42.0.0/16")
+             + "</form>";
+    }
+
+    private static String basicStep3Body() {
+        return "<h2 class=\"pf-v6-c-content--h2\">Permissions</h2>"
+             + "<p>Pick the IAM role the cluster should assume.</p>"
+             + "<form class=\"pf-v6-c-form\">"
+             + formGroup("wiz-basic-role", "IAM role", "ClusterAdminRole")
+             + "</form>";
+    }
+
+    private static String basicStep4Body() {
+        return "<h2 class=\"pf-v6-c-content--h2\">Review</h2>"
+             + "<p>Confirm your settings, then click Finish to create the cluster.</p>"
+             + "<dl class=\"pf-v6-c-description-list\">"
+             + dlRow("Name", "production-east")
+             + dlRow("Region", "us-east-1")
+             + dlRow("VPC", "vpc-prod-shared")
+             + dlRow("Subnet CIDR", "10.42.0.0/16")
+             + dlRow("IAM role", "ClusterAdminRole")
+             + "</dl>";
+    }
+
+    // -- substeps flavor --
+    private static String renderSubstepsWizard(int step) {
+        String id = "wiz-substeps";
+        // Nav: 3 top-level items; "Build" has 2 children. Step 1 = Source,
+        // step 2 = Compile, step 3 = Test, step 4 = Deploy.
+        StringBuilder nav = new StringBuilder();
+        // Step 1: Source
+        nav.append(navItem(id, "Source", stateFor(step, 1, 1), "/api/htmx/wizard/substeps/step/1"));
+        // Step 2 parent: Build (current when on substeps; visited after)
+        int buildState;
+        boolean buildExpanded = step >= 2;
+        if (step >= 2 && step <= 3) buildState = 0; // parent "current" while in substeps
+        else if (step > 3) buildState = 1;
+        else buildState = 2;
+        nav.append("<li class=\"pf-v6-c-wizard__nav-item\">");
+        nav.append("<button type=\"button\" class=\"pf-v6-c-wizard__nav-link");
+        if (buildState == 0) nav.append(" pf-m-current");
+        nav.append("\"");
+        if (buildState == 0) nav.append(" aria-current=\"step\"");
+        nav.append(" aria-expanded=\"").append(buildExpanded ? "true" : "false").append("\"");
+        if (buildState == 2) nav.append(" disabled");
+        nav.append("><span class=\"pf-v6-c-wizard__nav-link-main\"><span class=\"pf-v6-c-wizard__nav-link-text\">Build</span></span></button>");
+        nav.append("<ol class=\"pf-v6-c-wizard__nav-list\">");
+        nav.append(navItem(id, "Compile", stateFor(step, 2, 1), "/api/htmx/wizard/substeps/step/2"));
+        nav.append(navItem(id, "Test", stateFor(step, 3, 2), "/api/htmx/wizard/substeps/step/3"));
+        nav.append("</ol></li>");
+        // Step 4: Deploy
+        nav.append(navItem(id, "Deploy", stateFor(step, 4, 3), "/api/htmx/wizard/substeps/step/4"));
+
+        String body = switch (step) {
+            case 1 -> "<h2 class=\"pf-v6-c-content--h2\">Source</h2>"
+                + "<p>Choose where the pipeline pulls code from.</p>"
+                + "<form class=\"pf-v6-c-form\">"
+                + formGroup("wiz-substeps-repo", "Repository URL", "github.com/example/web")
+                + formGroup("wiz-substeps-branch", "Branch", "main")
+                + "</form>";
+            case 2 -> "<h2 class=\"pf-v6-c-content--h2\">Compile</h2>"
+                + "<p>Build command and Docker base image for the compile stage.</p>"
+                + "<form class=\"pf-v6-c-form\">"
+                + formGroup("wiz-substeps-cmd", "Build command", "npm ci &amp;&amp; npm run build")
+                + formGroup("wiz-substeps-image", "Base image", "node:22-alpine")
+                + "</form>";
+            case 3 -> "<h2 class=\"pf-v6-c-content--h2\">Test</h2>"
+                + "<p>How to run the suite and what counts as success.</p>"
+                + "<form class=\"pf-v6-c-form\">"
+                + formGroup("wiz-substeps-test", "Test command", "npm test")
+                + formGroup("wiz-substeps-cov", "Min coverage", "80%")
+                + "</form>";
+            case 4 -> "<h2 class=\"pf-v6-c-content--h2\">Deploy</h2>"
+                + "<p>Target environment for the deploy step.</p>"
+                + "<form class=\"pf-v6-c-form\">"
+                + formGroup("wiz-substeps-env", "Environment", "production")
+                + formGroup("wiz-substeps-strategy", "Strategy", "blue-green")
+                + "</form>";
+            default -> "<p>Unknown step.</p>";
+        };
+        return wizardShell(id, "Pipeline setup steps", nav.toString(), body,
+            footerButtons(id, "substeps", step, 4, true));
+    }
+
+    /** Step-by-step state helper used by the substeps flavor. */
+    private static int stateFor(int currentStep, int itemStep, int orderRelativeToBuild) {
+        // Unused param kept for readability of caller; actual logic is straightforward.
+        if (itemStep == currentStep) return 0;
+        if (itemStep < currentStep) return 1;
+        return 2;
+    }
+
+    // -- review flavor --
+    private static final List<String> REVIEW_LABELS = List.of("Project details", "Team", "Review");
+
+    private static String renderReviewWizard(int step) {
+        String id = "wiz-review";
+        StringBuilder nav = new StringBuilder();
+        for (int i = 1; i <= REVIEW_LABELS.size(); i++) {
+            int state = i == step ? 0 : (i < step ? 1 : 2);
+            nav.append(navItem(id, REVIEW_LABELS.get(i - 1), state, "/api/htmx/wizard/review/step/" + i));
+        }
+        String body = switch (step) {
+            case 1 -> "<h2 class=\"pf-v6-c-content--h2\">Project details</h2>"
+                + "<p>Name the project and pick a visibility.</p>"
+                + "<form class=\"pf-v6-c-form\">"
+                + formGroup("wiz-review-name", "Project name", "Atlas migration")
+                + selectGroup("wiz-review-visibility", "Visibility",
+                    List.of(new String[]{"private", "Private"}, new String[]{"internal", "Internal"}, new String[]{"public", "Public"}),
+                    "private")
+                + "</form>";
+            case 2 -> "<h2 class=\"pf-v6-c-content--h2\">Team</h2>"
+                + "<p>Who should have access to this project?</p>"
+                + "<form class=\"pf-v6-c-form\">"
+                + formGroup("wiz-review-owner", "Owner", "alice@example.com")
+                + formGroup("wiz-review-reviewers", "Reviewers (comma-separated)", "bob, carla, diego")
+                + "</form>";
+            case 3 -> "<h2 class=\"pf-v6-c-content--h2\">Review</h2>"
+                + "<p>Confirm the project before creating it.</p>"
+                + "<dl class=\"pf-v6-c-description-list\">"
+                + dlRow("Project name", "Atlas migration")
+                + dlRow("Visibility", "Private")
+                + dlRow("Owner", "alice@example.com")
+                + dlRow("Reviewers", "bob, carla, diego")
+                + "</dl>";
+            default -> "<p>Unknown step.</p>";
+        };
+        return wizardShell(id, "New project steps", nav.toString(), body,
+            footerButtons(id, "review", step, REVIEW_LABELS.size(), true));
+    }
+
+    private static String formGroup(String id, String label, String value) {
+        return "<div class=\"pf-v6-c-form__group\">"
+             + "<div class=\"pf-v6-c-form__group-label\">"
+             + "<label class=\"pf-v6-c-form__label\" for=\"" + id + "\">"
+             + "<span class=\"pf-v6-c-form__label-text\">" + escapeHtml(label) + "</span></label></div>"
+             + "<div class=\"pf-v6-c-form__group-control\">"
+             + "<input class=\"pf-v6-c-form-control\" type=\"text\" id=\"" + id + "\" value=\"" + value + "\" />"
+             + "</div></div>";
+    }
+
+    private static String selectGroup(String id, String label, List<String[]> options, String selected) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<div class=\"pf-v6-c-form__group\">")
+          .append("<div class=\"pf-v6-c-form__group-label\">")
+          .append("<label class=\"pf-v6-c-form__label\" for=\"").append(id).append("\">")
+          .append("<span class=\"pf-v6-c-form__label-text\">").append(escapeHtml(label)).append("</span></label></div>")
+          .append("<div class=\"pf-v6-c-form__group-control\">")
+          .append("<select class=\"pf-v6-c-form-control\" id=\"").append(id).append("\">");
+        for (String[] o : options) {
+            sb.append("<option value=\"").append(o[0]).append("\"");
+            if (o[0].equals(selected)) sb.append(" selected");
+            sb.append(">").append(escapeHtml(o[1])).append("</option>");
+        }
+        sb.append("</select></div></div>");
+        return sb.toString();
+    }
+
+    private static String dlRow(String term, String desc) {
+        return "<div class=\"pf-v6-c-description-list__group\">"
+             + "<dt class=\"pf-v6-c-description-list__term\">"
+             + "<span class=\"pf-v6-c-description-list__text\">" + escapeHtml(term) + "</span></dt>"
+             + "<dd class=\"pf-v6-c-description-list__description\">"
+             + "<div class=\"pf-v6-c-description-list__text\">" + escapeHtml(desc) + "</div></dd></div>";
     }
 
     private static String escapeHtml(String text) {

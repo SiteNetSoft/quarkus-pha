@@ -1,0 +1,86 @@
+<div
+  x-data="{
+    open: true,
+    length: 16,
+    upper: true, lower: true, digits: true, symbols: true,
+    pwd: '',
+    generate() {
+      let pool = '';
+      if (this.upper) pool += 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+      if (this.lower) pool += 'abcdefghjkmnpqrstuvwxyz';
+      if (this.digits) pool += '23456789';
+      if (this.symbols) pool += '!@#$%^&*-_=+?';
+      if (!pool) { this.pwd = ''; return; }
+      let out = '';
+      let r = new Uint32Array(this.length);
+      crypto.getRandomValues(r);
+      for (let i = 0; i &lt; this.length; i++) out += pool[r[i] % pool.length];
+      this.pwd = out;
+    }
+  }"
+  x-init="generate()"
+>
+  <button type="button" class="pf-v6-c-button pf-m-primary" @click="open = true" x-show="!open">
+    <span class="pf-v6-c-button__text">Open "Create user" modal</span>
+  </button>
+  <div
+    class="pf-v6-c-backdrop"
+    x-show="open"
+    x-cloak
+    style="position: fixed; inset: 0; background: rgba(3, 3, 3, 0.62); z-index: 5"
+  >
+    <div
+      class="pf-v6-c-modal-box pf-m-md"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="pwd-modal-title"
+      style="position: absolute; top: 5rem; left: 50%; transform: translateX(-50%); max-width: 520px; width: 90%"
+    >
+      <header class="pf-v6-c-modal-box__header">
+        <h2 id="pwd-modal-title" class="pf-v6-c-modal-box__title">Create user</h2>
+      </header>
+      <div class="pf-v6-c-modal-box__body">
+        <form class="pf-v6-c-form">
+          <div class="pf-v6-c-form__group">
+            <div class="pf-v6-c-form__group-label">
+              <label class="pf-v6-c-form__label" for="modal-username"
+                ><span class="pf-v6-c-form__label-text">Username</span></label
+              >
+            </div>
+            <div class="pf-v6-c-form__group-control">
+              <input class="pf-v6-c-form-control" id="modal-username" type="text" value="dramos" />
+            </div>
+          </div>
+          <div class="pf-v6-c-form__group">
+            <div class="pf-v6-c-form__group-label">
+              <label class="pf-v6-c-form__label" for="modal-pwd"
+                ><span class="pf-v6-c-form__label-text">Initial password</span></label
+              >
+            </div>
+            <div class="pf-v6-c-form__group-control" style="display: flex; gap: 0.5rem; align-items: center">
+              <input class="pf-v6-c-form-control" id="modal-pwd" type="text" readonly x-model="pwd" style="flex: 1" />
+              <button type="button" class="pf-v6-c-button pf-m-secondary" @click="generate()">
+                <span class="pf-v6-c-button__text">Regenerate</span>
+              </button>
+            </div>
+            <small style="display: block; margin-top: 0.5rem" class="pf-v6-u-color-200"
+              >Length: <span x-text="length"></span> ·
+              <label><input type="checkbox" x-model="upper" @change="generate()" /> A–Z</label>
+              <label><input type="checkbox" x-model="lower" @change="generate()" /> a–z</label>
+              <label><input type="checkbox" x-model="digits" @change="generate()" /> 0–9</label>
+              <label><input type="checkbox" x-model="symbols" @change="generate()" /> !@#</label></small
+            >
+          </div>
+        </form>
+      </div>
+      <footer class="pf-v6-c-modal-box__footer">
+        <button type="button" class="pf-v6-c-button pf-m-primary" @click="open = false">
+          <span class="pf-v6-c-button__text">Create</span>
+        </button>
+        <button type="button" class="pf-v6-c-button pf-m-link" @click="open = false">
+          <span class="pf-v6-c-button__text">Cancel</span>
+        </button>
+      </footer>
+    </div>
+  </div>
+</div>

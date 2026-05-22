@@ -1,0 +1,266 @@
+{! Shared topology-type demo page — parameterised by Java route. !} {! Data passed in: type (slug like "selection"),
+title ("Selection"), intro (HTML string). !} {#include layouts/base} {#title}{title}{/title} {#head}
+<link rel="stylesheet" href="/web/css/components/topology.css" />
+<script src="/web/vendor/cytoscape/cytoscape.min.js"></script>
+<script src="/web/js/alpine/components/topology.js"></script>
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <p>
+                      <a class="pf-v6-c-button pf-m-link pf-m-inline" href="/components/topology"
+                        ><span class="pf-v6-c-button__text">&larr; All topology demos</span></a
+                      >
+                    </p>
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">{title}</h1>
+                    <p>{intro.raw}</p>
+                  </div>
+                </div>
+              </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                    <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                      <div>
+                        <h2
+                          id="examples"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Examples
+                        </h2>
+                      </div>
+                    </div>
+                    {#include partials/example-card title="Basic" slug="basic" component="topology/{type}"
+                    description="Cytoscape graph wrapped by &lt;code
+                    class=&quot;ws-code&quot;&gt;phaTopology&lt;/code&gt;."} {#content} {#if type ==
+                    'custom-nodes'}{#include components/topology/custom-nodes/basic /}{/if} {#if type ==
+                    'custom-edges'}{#include components/topology/custom-edges/basic /}{/if} {#if type ==
+                    'anchors'}{#include components/topology/anchors/basic /}{/if} {#if type == 'selection'}{#include
+                    components/topology/selection/basic /}{/if} {#if type == 'pan-and-zoom'}{#include
+                    components/topology/pan-and-zoom/basic /}{/if} {#if type == 'context-menu'}{#include
+                    components/topology/context-menu/basic /}{/if} {#if type == 'drag-and-drop'}{#include
+                    components/topology/drag-and-drop/basic /}{/if} {#if type == 'control-bar'}{#include
+                    components/topology/control-bar/basic /}{/if} {#if type == 'toolbar'}{#include
+                    components/topology/toolbar/basic /}{/if} {#if type == 'sidebar'}{#include
+                    components/topology/sidebar/basic /}{/if} {#if type == 'layouts'}{#include
+                    components/topology/layouts/basic /}{/if} {#if type == 'pipelines'}{#include
+                    components/topology/pipelines/basic /}{/if} {/content} {/include}
+
+                    <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                      <h2
+                        id="documentation"
+                        tabindex="-1"
+                        class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                      >
+                        Documentation
+                      </h2>
+                    </div>
+                    <div class="pf-v6-l-stack__item">
+                      <h3 id="props-topology" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                        Topology wrapper props
+                      </h3>
+                      <p class="pf-v6-c-content--p pf-m-editorial">
+                        Every demo uses the same wrapper —
+                        <code class="ws-code">{|{#include components/charts/topology id="..." /}|}</code> with the
+                        Cytoscape config supplied via Alpine
+                        <code class="ws-code">x-data="phaTopology({ elements: [...], layout: { ... } })"</code> on the
+                        outer <code class="ws-code">&lt;div&gt;</code>.
+                      </p>
+                      <table
+                        class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                        role="grid"
+                        aria-label="Topology wrapper props"
+                      >
+                        <caption class="pf-v6-c-table__caption">
+                          <span class="ws-prop-required">*</span>
+                          required
+                        </caption>
+                        <thead class="pf-v6-c-table__thead">
+                          <tr class="pf-v6-c-table__tr">
+                            <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                            <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                            <th scope="col" class="pf-v6-c-table__th">Description</th>
+                          </tr>
+                        </thead>
+                        <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                          <tr class="pf-v6-c-table__tr">
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"
+                                ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                              >
+                            </td>
+                            <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text">DOM id on the wrapper.</span>
+                            </td>
+                          </tr>
+                          <tr class="pf-v6-c-table__tr">
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"><code class="ws-code">height</code></span>
+                            </td>
+                            <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"
+                                >Inline canvas height (e.g. <code class="ws-code">400px</code>). Default 400px via
+                                CSS.</span
+                              >
+                            </td>
+                          </tr>
+                          <tr class="pf-v6-c-table__tr">
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"><code class="ws-code">ariaLabel</code></span>
+                            </td>
+                            <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"
+                                >Sets <code class="ws-code">aria-label</code> on the wrapper for screen readers.
+                                Defaults to <code class="ws-code">Topology graph</code>.</span
+                              >
+                            </td>
+                          </tr>
+                          <tr class="pf-v6-c-table__tr">
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text">slot <code class="ws-code">content</code></span>
+                            </td>
+                            <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"
+                                >Optional toolbar / sidebar / overlay rendered above or beside the canvas.</span
+                              >
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <h3 id="props-phatopology" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                        phaTopology() config
+                      </h3>
+                      <table
+                        class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                        role="grid"
+                        aria-label="phaTopology() config"
+                      >
+                        <thead class="pf-v6-c-table__thead">
+                          <tr class="pf-v6-c-table__tr">
+                            <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                            <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                            <th scope="col" class="pf-v6-c-table__th">Description</th>
+                          </tr>
+                        </thead>
+                        <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                          <tr class="pf-v6-c-table__tr">
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"><code class="ws-code">elements</code></span>
+                            </td>
+                            <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Array</span></td>
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"
+                                >Cytoscape elements — nodes (<code class="ws-code"
+                                  >{|{ data: { id, label, ... } }|}</code
+                                >) and edges (<code class="ws-code">{|{ data: { source, target, label } }|}</code
+                                >).</span
+                              >
+                            </td>
+                          </tr>
+                          <tr class="pf-v6-c-table__tr">
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"><code class="ws-code">layout</code></span>
+                            </td>
+                            <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Object</span></td>
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"
+                                >Cytoscape layout config. Default
+                                <code class="ws-code">{|{ name: 'cose', animate: false }|}</code>.</span
+                              >
+                            </td>
+                          </tr>
+                          <tr class="pf-v6-c-table__tr">
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"><code class="ws-code">style</code></span>
+                            </td>
+                            <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Array</span></td>
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"
+                                >Cytoscape style rules. Defaults to a PF v6-aligned palette — blue nodes, grey edges,
+                                triangle arrowheads.</span
+                              >
+                            </td>
+                          </tr>
+                          <tr class="pf-v6-c-table__tr">
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"><code class="ws-code">userZoomingEnabled</code></span>
+                            </td>
+                            <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text">Default <code class="ws-code">true</code>.</span>
+                            </td>
+                          </tr>
+                          <tr class="pf-v6-c-table__tr">
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"><code class="ws-code">onTap</code></span>
+                            </td>
+                            <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Function</span></td>
+                            <td class="pf-v6-c-table__td">
+                              <span class="pf-v6-c-table__text"
+                                >Callback receiving
+                                <code class="ws-code">{|{ target: 'node'|'edge'|'core', id, event }|}</code>. A
+                                <code class="ws-code">topology-tap</code> event is also dispatched on the wrapper.</span
+                              >
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="pf-v6-l-stack__item">
+                      <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                      <p class="pf-v6-c-content--p pf-m-editorial">
+                        <strong>Server builds the graph, Cytoscape paints.</strong> Render the elements list (nodes +
+                        edges) on the server and embed it as Alpine <code class="ws-code">x-data</code>. The browser
+                        does no graph computation beyond the layout.
+                      </p>
+                      <p class="pf-v6-c-content--p pf-m-editorial">
+                        <strong>HTMX-driven updates.</strong> To swap data live, return a new wrapper from an
+                        <code class="ws-code">hx-get</code> and replace the existing one with
+                        <code class="ws-code">hx-swap="outerHTML"</code>. The Alpine
+                        <code class="ws-code">destroy()</code> hook disposes the Cytoscape instance cleanly so there's
+                        no leak.
+                      </p>
+                      <p class="pf-v6-c-content--p pf-m-editorial">
+                        <strong>Listening for taps.</strong> Subscribe with
+                        <code class="ws-code">@topology-tap</code> on the wrapper or pass an
+                        <code class="ws-code">onTap</code> in the config.
+                      </p>
+                    </div>
+                    <div class="pf-v6-l-stack__item">
+                      <br /><a
+                        href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/charts/topology.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Edit topology.html on GitHub</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/body} {/include}

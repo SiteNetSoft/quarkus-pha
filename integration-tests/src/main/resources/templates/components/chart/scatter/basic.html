@@ -1,0 +1,22 @@
+<div
+  class="pha-c-chart"
+  id="ch-scatter-basic"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'item' },
+      xAxis: { type: 'value', name: 'Response time (ms)' },
+      yAxis: { type: 'value', name: 'Error rate (%)' },
+      series: [{
+        type: 'scatter',
+        symbolSize: 14,
+        data: [
+          [120, 0.4], [180, 0.6], [95, 0.2], [240, 1.1], [310, 1.4],
+          [150, 0.5], [420, 2.2], [200, 0.7], [275, 0.9], [350, 1.7],
+          [110, 0.3], [220, 0.8], [380, 1.9], [165, 0.5], [290, 1.0]
+        ]
+      }]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>

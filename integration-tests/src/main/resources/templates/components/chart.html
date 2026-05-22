@@ -1,157 +1,346 @@
-{#include layouts/base}
-{#title}Chart{/title}
-{#head}
-<link rel="stylesheet" href="/web/css/components/chart.css">
-<script src="/web/vendor/echarts/echarts.min.js"></script>
-<script src="/web/js/alpine/components/chart.js"></script>
-{/head}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-  <h1>Chart</h1>
-  <p>Interactive chart components powered by <a href="https://echarts.apache.org/" class="pf-v6-c-button pf-m-link pf-m-inline">Apache ECharts</a> with Alpine.js integration and a PatternFly-aligned color theme. Supports bar, line, pie, area, gauge, and mixed chart types.</p>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="bar-heading">Bar Chart</h2>
-    <p>Basic bar chart showing quarterly revenue data.</p>
-    <div class="pha-c-chart" id="chart-bar"
-         x-data="phaChart({
-           option: {
-             tooltip: { trigger: 'axis' },
-             xAxis: { type: 'category', data: ['Q1', 'Q2', 'Q3', 'Q4'] },
-             yAxis: { type: 'value', name: 'Revenue ($K)' },
-             series: [
-               { name: '2024', type: 'bar', data: [320, 410, 390, 480] },
-               { name: '2025', type: 'bar', data: [380, 450, 470, 520] }
-             ],
-             legend: { data: ['2024', '2025'] }
-           }
-         })">
-      <div class="pha-c-chart__canvas"></div>
+{#include layouts/base} {#title}Charts{/title} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Charts</h1>
+                    <p>
+                      Server-rendered chart wrappers. The shared <code class="ws-code">pha-c-chart</code> wrapper hosts
+                      an Alpine factory (<code class="ws-code">phaChart</code>) that pipes an ECharts option object into
+                      an auto-resizing canvas with a PatternFly-aligned color theme.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2" id="chart-types">
+                    Chart types
+                  </h2>
+                  <div class="pf-v6-l-gallery pf-m-gutter" style="--pf-v6-l-gallery--GridTemplateColumns--min: 220px">
+                    <a
+                      href="/components/chart/area"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="chart-card-area"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Area chart</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body"><p>Filled line chart for cumulative values over time.</p></div>
+                    </a>
+                    <a
+                      href="/components/chart/bar"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="chart-card-bar"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Bar chart</span></div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body"><p>Categorical comparisons — vertical or grouped.</p></div>
+                    </a>
+                    <a
+                      href="/components/chart/box-plot"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="chart-card-box-plot"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Box plot chart</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body">
+                        <p>Distribution per category — quartiles, median, outliers.</p>
+                      </div>
+                    </a>
+                    <a
+                      href="/components/chart/bullet"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="chart-card-bullet"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Bullet chart</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body"><p>Actual vs. target with quantitative range bands.</p></div>
+                    </a>
+                    <a
+                      href="/components/chart/donut"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="chart-card-donut"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Donut chart</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body"><p>Pie with a hole — room for a centred label.</p></div>
+                    </a>
+                    <a
+                      href="/components/chart/donut-utilization"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="chart-card-donut-utilization"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Donut utilization chart</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body"><p>Single-value utilization gauge with threshold colour.</p></div>
+                    </a>
+                    <a
+                      href="/components/chart/line"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="chart-card-line"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Line chart</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body"><p>Continuous values over time — single or multi-series.</p></div>
+                    </a>
+                    <a
+                      href="/components/chart/pie"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="chart-card-pie"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Pie chart</span></div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body"><p>Parts of a whole — use when categories are few.</p></div>
+                    </a>
+                    <a
+                      href="/components/chart/sankey"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="chart-card-sankey"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Sankey chart</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body"><p>Flow diagram — directional volume between nodes.</p></div>
+                    </a>
+                    <a
+                      href="/components/chart/scatter"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="chart-card-scatter"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Scatter chart</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body"><p>Correlation between two numeric variables.</p></div>
+                    </a>
+                    <a
+                      href="/components/chart/sparkline"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="chart-card-sparkline"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Sparkline chart</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body"><p>Tiny inline trend chart with no axes or legend.</p></div>
+                    </a>
+                    <a
+                      href="/components/chart/stack"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="chart-card-stack"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Stack chart</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body">
+                        <p>Stacked bars — parts of a whole compared across categories.</p>
+                      </div>
+                    </a>
+                    <a
+                      href="/components/chart/threshold"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="chart-card-threshold"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Threshold chart</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body"><p>Line chart with a warning + critical band overlay.</p></div>
+                    </a>
+                  </div>
+                  <h2
+                    class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                    id="chart-docs"
+                    style="margin-top: 2rem"
+                  >
+                    Chart documentation
+                  </h2>
+                  <div class="pf-v6-l-gallery pf-m-gutter" style="--pf-v6-l-gallery--GridTemplateColumns--min: 220px">
+                    <a
+                      href="/components/chart/colors"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="chart-doc-colors"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Colors for charts</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body">
+                        <p>PF chart palette — used by all wrappers via the theme.</p>
+                      </div>
+                    </a>
+                    <a
+                      href="/components/chart/legends"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="chart-doc-legends"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Legends</span></div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body"><p>Legend placement and interaction patterns.</p></div>
+                    </a>
+                    <a
+                      href="/components/chart/patterns"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="chart-doc-patterns"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Patterns</span></div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body">
+                        <p>Hatch fills for accessibility-safe series differentiation.</p>
+                      </div>
+                    </a>
+                    <a
+                      href="/components/chart/resize-observer"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="chart-doc-resize-observer"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Resize observer</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body"><p>How the Alpine factory rebinds on container resize.</p></div>
+                    </a>
+                    <a
+                      href="/components/chart/skeletons"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="chart-doc-skeletons"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Skeletons</span></div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body"><p>Loading placeholders that match the chart's shape.</p></div>
+                    </a>
+                    <a
+                      href="/components/chart/themes"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="chart-doc-themes"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Themes</span></div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body"><p>PatternFly theme and how to register a custom one.</p></div>
+                    </a>
+                    <a
+                      href="/components/chart/tooltips"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="chart-doc-tooltips"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Tooltips</span></div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body"><p>Tooltip configuration — axis, item, cross-shared.</p></div>
+                    </a>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
     </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="line-heading">Line Chart</h2>
-    <p>Multi-series line chart with smooth curves showing monthly trends.</p>
-    <div class="pha-c-chart" id="chart-line"
-         x-data="phaChart({
-           option: {
-             tooltip: { trigger: 'axis' },
-             xAxis: { type: 'category', data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] },
-             yAxis: { type: 'value', name: 'Users' },
-             series: [
-               { name: 'Active', type: 'line', smooth: true, data: [820, 932, 901, 934, 1290, 1330, 1320, 1450, 1500, 1620, 1780, 1900] },
-               { name: 'New', type: 'line', smooth: true, data: [120, 200, 150, 180, 270, 310, 250, 380, 320, 410, 390, 450] }
-             ],
-             legend: { data: ['Active', 'New'] }
-           }
-         })">
-      <div class="pha-c-chart__canvas"></div>
-    </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="pie-heading">Pie Chart</h2>
-    <p>Donut chart showing resource distribution with labels.</p>
-    <div class="pha-c-chart" id="chart-pie"
-         x-data="phaChart({
-           option: {
-             tooltip: { trigger: 'item', formatter: '\{b}: \{c} (\{d}%)' },
-             legend: { orient: 'vertical', left: 'left' },
-             series: [{
-               name: 'Resources',
-               type: 'pie',
-               radius: ['40%', '70%'],
-               center: ['55%', '50%'],
-               avoidLabelOverlap: true,
-               itemStyle: { borderRadius: 6, borderColor: '#fff', borderWidth: 2 },
-               label: { show: true, formatter: '\{b}\n\{d}%' },
-               data: [
-                 { value: 1048, name: 'Compute' },
-                 { value: 735, name: 'Storage' },
-                 { value: 580, name: 'Network' },
-                 { value: 484, name: 'Database' },
-                 { value: 300, name: 'Other' }
-               ]
-             }]
-           }
-         })">
-      <div class="pha-c-chart__canvas"></div>
-    </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="area-heading">Area Chart</h2>
-    <p>Stacked area chart showing traffic sources over time.</p>
-    <div class="pha-c-chart" id="chart-area"
-         x-data="phaChart({
-           option: {
-             tooltip: { trigger: 'axis' },
-             xAxis: { type: 'category', boundaryGap: false, data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] },
-             yAxis: { type: 'value', name: 'Visits' },
-             series: [
-               { name: 'Direct', type: 'line', stack: 'total', areaStyle: {}, data: [320, 332, 301, 334, 390, 330, 320] },
-               { name: 'Search', type: 'line', stack: 'total', areaStyle: {}, data: [120, 132, 101, 134, 90, 230, 210] },
-               { name: 'Referral', type: 'line', stack: 'total', areaStyle: {}, data: [220, 182, 191, 234, 290, 330, 310] }
-             ],
-             legend: { data: ['Direct', 'Search', 'Referral'] }
-           }
-         })">
-      <div class="pha-c-chart__canvas"></div>
-    </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="gauge-heading">Gauge</h2>
-    <p>Dashboard gauge showing a single KPI metric.</p>
-    <div class="pha-c-chart" id="chart-gauge"
-         x-data="phaChart({
-           option: {
-             series: [{
-               type: 'gauge',
-               startAngle: 200,
-               endAngle: -20,
-               min: 0,
-               max: 100,
-               progress: { show: true, width: 18, itemStyle: { color: '#06c' } },
-               pointer: { show: false },
-               axisLine: { lineStyle: { width: 18, color: [[1, '#f0f0f0']] } },
-               axisTick: { show: false },
-               splitLine: { show: false },
-               axisLabel: { show: false },
-               title: { offsetCenter: [0, '30%'], fontSize: 14, color: '#6a6e73' },
-               detail: { fontSize: 36, offsetCenter: [0, '-10%'], formatter: '\{value}%', color: '#151515' },
-               data: [{ value: 73, name: 'CPU Usage' }]
-             }]
-           }
-         })">
-      <div class="pha-c-chart__canvas"></div>
-    </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="mixed-heading">Mixed Chart</h2>
-    <p>Combined bar and line chart on the same axis for correlation analysis.</p>
-    <div class="pha-c-chart" id="chart-mixed"
-         x-data="phaChart({
-           option: {
-             tooltip: { trigger: 'axis' },
-             xAxis: { type: 'category', data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'] },
-             yAxis: [
-               { type: 'value', name: 'Sales ($K)', position: 'left' },
-               { type: 'value', name: 'Growth (%)', position: 'right', splitLine: { show: false } }
-             ],
-             series: [
-               { name: 'Sales', type: 'bar', data: [85, 92, 78, 110, 125, 140] },
-               { name: 'Growth', type: 'line', yAxisIndex: 1, smooth: true, data: [8.2, 12.5, -3.1, 15.8, 22.1, 18.4] }
-             ],
-             legend: { data: ['Sales', 'Growth'] }
-           }
-         })">
-      <div class="pha-c-chart__canvas"></div>
-    </div>
-  </section>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

@@ -1,0 +1,95 @@
+{#include components/data-display/table id="tbl-expandable" expandable=true ariaLabel="Expandable table example"}
+{#content}
+<thead>
+  <tr>
+    <td></td>
+    <th scope="col">Name</th>
+    <th scope="col">Status</th>
+    <th scope="col">Region</th>
+  </tr>
+</thead>
+<tbody x-data="{ open: false }" :class="open ? 'pf-m-expanded' : ''">
+  <tr>
+    <td class="pf-v6-c-table__toggle">
+      <button
+        type="button"
+        class="pf-v6-c-button pf-m-plain"
+        :aria-expanded="open"
+        aria-label="Toggle row details for api-gateway"
+        @click="open = !open"
+      >
+        <span class="pf-v6-c-table__toggle-icon"
+          ><i class="fas fa-angle-right" :class="open ? 'pf-m-rotate' : ''" aria-hidden="true"></i
+        ></span>
+      </button>
+    </td>
+    <td>api-gateway</td>
+    <td>Healthy</td>
+    <td>us-east-1</td>
+  </tr>
+  <tr class="pf-v6-c-table__expandable-row" :class="open ? 'pf-m-expanded' : ''" x-show="open" x-cloak>
+    <td></td>
+    <td colspan="3">
+      <div class="pf-v6-c-table__expandable-row-content">
+        <p>12 healthy instances across 3 availability zones. Average latency 42ms. Last deployed 4 hours ago.</p>
+      </div>
+    </td>
+  </tr>
+</tbody>
+<tbody x-data="{ open: false }" :class="open ? 'pf-m-expanded' : ''">
+  <tr>
+    <td class="pf-v6-c-table__toggle">
+      <button
+        type="button"
+        class="pf-v6-c-button pf-m-plain"
+        :aria-expanded="open"
+        aria-label="Toggle row details for payments"
+        @click="open = !open"
+      >
+        <span class="pf-v6-c-table__toggle-icon"
+          ><i class="fas fa-angle-right" :class="open ? 'pf-m-rotate' : ''" aria-hidden="true"></i
+        ></span>
+      </button>
+    </td>
+    <td>payments</td>
+    <td>Degraded</td>
+    <td>eu-west-1</td>
+  </tr>
+  <tr class="pf-v6-c-table__expandable-row" :class="open ? 'pf-m-expanded' : ''" x-show="open" x-cloak>
+    <td></td>
+    <td colspan="3">
+      <div class="pf-v6-c-table__expandable-row-content">
+        <p>8 healthy instances, 1 unhealthy. P99 latency 320ms (threshold 250ms). Oncall has been paged.</p>
+      </div>
+    </td>
+  </tr>
+</tbody>
+<tbody x-data="{ open: false }" :class="open ? 'pf-m-expanded' : ''">
+  <tr>
+    <td class="pf-v6-c-table__toggle">
+      <button
+        type="button"
+        class="pf-v6-c-button pf-m-plain"
+        :aria-expanded="open"
+        aria-label="Toggle row details for search"
+        @click="open = !open"
+      >
+        <span class="pf-v6-c-table__toggle-icon"
+          ><i class="fas fa-angle-right" :class="open ? 'pf-m-rotate' : ''" aria-hidden="true"></i
+        ></span>
+      </button>
+    </td>
+    <td>search</td>
+    <td>Healthy</td>
+    <td>ap-southeast-1</td>
+  </tr>
+  <tr class="pf-v6-c-table__expandable-row" :class="open ? 'pf-m-expanded' : ''" x-show="open" x-cloak>
+    <td></td>
+    <td colspan="3">
+      <div class="pf-v6-c-table__expandable-row-content">
+        <p>4 healthy instances. Index size 2.4 GB across 16 shards. No alerts.</p>
+      </div>
+    </td>
+  </tr>
+</tbody>
+{/content} {/include}

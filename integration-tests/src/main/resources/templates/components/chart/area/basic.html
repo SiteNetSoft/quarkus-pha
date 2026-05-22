@@ -1,0 +1,23 @@
+<div
+  class="pha-c-chart"
+  id="ch-area-basic"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'axis' },
+      legend: { data: ['Direct', 'Search', 'Referral'] },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      },
+      yAxis: { type: 'value', name: 'Visits' },
+      series: [
+        { name: 'Direct',   type: 'line', stack: 'total', areaStyle: {}, data: [320, 332, 301, 334, 390, 330, 320] },
+        { name: 'Search',   type: 'line', stack: 'total', areaStyle: {}, data: [120, 132, 101, 134,  90, 230, 210] },
+        { name: 'Referral', type: 'line', stack: 'total', areaStyle: {}, data: [220, 182, 191, 234, 290, 330, 310] }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>

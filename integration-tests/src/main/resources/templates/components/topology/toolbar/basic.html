@@ -1,0 +1,74 @@
+<div x-data="{ filter: 'all', layout: 'cose' }">
+  <div class="pha-c-topology__toolbar" style="border: 1px solid #d2d2d2; border-bottom: 0; border-radius: 4px 4px 0 0">
+    <span class="pf-v6-c-label pf-m-compact pf-m-outline"><span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text">Filter</span></span></span>
+    <button class="pf-v6-c-button pf-m-control pf-m-small" type="button" :class="filter === 'all' ? 'pf-m-primary' : ''" @click="filter = 'all'; applyFilter($refs.topo, filter)">
+      <span class="pf-v6-c-button__text">All</span>
+    </button>
+    <button class="pf-v6-c-button pf-m-control pf-m-small" type="button" :class="filter === 'healthy' ? 'pf-m-primary' : ''" @click="filter = 'healthy'; applyFilter($refs.topo, filter)">
+      <span class="pf-v6-c-button__text">Healthy</span>
+    </button>
+    <button class="pf-v6-c-button pf-m-control pf-m-small" type="button" :class="filter === 'degraded' ? 'pf-m-primary' : ''" @click="filter = 'degraded'; applyFilter($refs.topo, filter)">
+      <span class="pf-v6-c-button__text">Degraded</span>
+    </button>
+    <span style="flex: 1"></span>
+    <span class="pf-v6-c-label pf-m-compact pf-m-outline"><span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text">Layout</span></span></span>
+    <select class="pf-v6-c-form-control" style="width: auto" x-model="layout" @change="$refs.topo.getCy().layout({ name: layout, animate: false }).run()">
+      <option value="cose">cose</option>
+      <option value="breadthfirst">breadthfirst</option>
+      <option value="concentric">concentric</option>
+      <option value="grid">grid</option>
+    </select>
+  </div>
+  <div
+    class="pha-c-topology"
+    id="cy-toolbar"
+    role="img"
+    aria-label="Graph with toolbar above for filtering and layout switching"
+    style="border-radius: 0 0 4px 4px; border-top: 0"
+    x-ref="topo"
+    x-data="phaTopology({
+      elements: [
+        { data: { id: 'web',     label: 'web',     state: 'healthy' } },
+        { data: { id: 'api',     label: 'api',     state: 'healthy' } },
+        { data: { id: 'auth',    label: 'auth',    state: 'degraded' } },
+        { data: { id: 'orders',  label: 'orders',  state: 'healthy' } },
+        { data: { id: 'payments',label: 'payments',state: 'degraded' } },
+        { data: { source: 'web',    target: 'api'      } },
+        { data: { source: 'api',    target: 'auth'     } },
+        { data: { source: 'api',    target: 'orders'   } },
+        { data: { source: 'orders', target: 'payments' } }
+      ],
+      layout: { name: 'cose', animate: false },
+      style: [
+        { selector: 'node', style: {
+          'label': 'data(label)', 'color': '#fff', 'text-valign': 'center', 'text-halign': 'center',
+          'font-size': 12, 'width': 56, 'height': 44, 'shape': 'round-rectangle',
+          'border-width': 2
+        } },
+        { selector: 'node[state=\"healthy\"]',  style: { 'background-color': '#4cb140', 'border-color': '#1e4f18' } },
+        { selector: 'node[state=\"degraded\"]', style: { 'background-color': '#ec7a08', 'border-color': '#7d3f00' } },
+        { selector: 'edge', style: { 'width': 2, 'line-color': '#8a8d90', 'target-arrow-color': '#8a8d90', 'target-arrow-shape': 'triangle', 'curve-style': 'bezier' } }
+      ]
+    })"
+  >
+    <div class="pha-c-topology__canvas"></div>
+  </div>
+</div>
+<script>
+  /* Filter helper used by the buttons above. */
+  function applyFilter(topo, filter) {
+    let cy = topo.getCy();
+    if (filter === "all") {
+      cy.elements().style("display", "element");
+    } else {
+      cy.nodes().forEach((n) => {
+        n.style("display", n.data("state") === filter ? "element" : "none");
+      });
+      cy.edges().forEach((e) => {
+        let src = e.source().style("display");
+        let tgt = e.target().style("display");
+        e.style("display", src === "none" || tgt === "none" ? "none" : "element");
+      });
+    }
+  }
+</script>
