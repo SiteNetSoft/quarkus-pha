@@ -1,0 +1,55 @@
+<div x-data="{ attr: 'Status', value: '', applied: [] }">
+  <div class="pf-v6-c-toolbar" role="region" aria-label="Advanced filter">
+    <div class="pf-v6-c-toolbar__content">
+      <div class="pf-v6-c-toolbar__content-section">
+        <div class="pf-v6-c-toolbar__group">
+          <div class="pf-v6-c-toolbar__item">
+            <select class="pf-v6-c-form-control" x-model="attr" aria-label="Attribute">
+              <option>Status</option>
+              <option>Region</option>
+              <option>Owner</option>
+              <option>Created</option>
+            </select>
+          </div>
+          <div class="pf-v6-c-toolbar__item">
+            <input
+              type="text"
+              class="pf-v6-c-form-control"
+              x-model="value"
+              :placeholder="'Filter by ' + attr.toLowerCase()"
+              :aria-label="'Filter by ' + attr.toLowerCase()"
+            />
+          </div>
+          <div class="pf-v6-c-toolbar__item">
+            <button
+              type="button"
+              class="pf-v6-c-button pf-m-primary"
+              :disabled="!value"
+              @click="if (value) { applied.push({ attr, value }); value = ''; }"
+            >
+              <span class="pf-v6-c-button__text">Apply</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top: 0.75rem" x-show="applied.length > 0">
+    <strong>Applied:</strong>
+    <template x-for="(f, i) in applied" :key="i">
+      <span class="pf-v6-c-label pf-m-compact" style="margin: 0 0.25rem">
+        <span class="pf-v6-c-label__content"
+          ><span class="pf-v6-c-label__text" x-text="f.attr + ' = ' + f.value"></span
+        ></span>
+        <button
+          type="button"
+          class="pf-v6-c-label__action"
+          :aria-label="'Remove ' + f.attr + ' filter'"
+          @click="applied.splice(i, 1)"
+        >
+          <span class="pf-v6-c-label__action-icon">×</span>
+        </button>
+      </span>
+    </template>
+  </div>
+</div>

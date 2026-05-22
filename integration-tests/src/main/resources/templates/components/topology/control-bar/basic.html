@@ -1,0 +1,71 @@
+<div
+  class="pha-c-topology"
+  id="cy-control-bar"
+  role="img"
+  aria-label="Graph with overlay control-bar for zoom and fit"
+  style="position: relative"
+  x-ref="topo"
+  x-data="phaTopology({
+    elements: [
+      { data: { id: 'core', label: 'core' } },
+      { data: { id: 'a', label: 'a' } }, { data: { id: 'b', label: 'b' } },
+      { data: { id: 'c', label: 'c' } }, { data: { id: 'd', label: 'd' } },
+      { data: { source: 'core', target: 'a' } }, { data: { source: 'core', target: 'b' } },
+      { data: { source: 'core', target: 'c' } }, { data: { source: 'core', target: 'd' } }
+    ],
+    layout: { name: 'concentric', animate: false, padding: 30 }
+  })"
+>
+  <div
+    class="pha-c-topology__canvas"
+    style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; height: auto"
+  ></div>
+  <div
+    style="
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid #d2d2d2;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      padding: 4px;
+      gap: 2px;
+      z-index: 2;
+    "
+  >
+    <button
+      class="pf-v6-c-button pf-m-control pf-m-small"
+      type="button"
+      aria-label="Zoom in"
+      @click="$refs.topo.getCy().zoom($refs.topo.getCy().zoom() * 1.2); $refs.topo.center();"
+    >
+      <span class="pf-v6-c-button__text">+</span>
+    </button>
+    <button
+      class="pf-v6-c-button pf-m-control pf-m-small"
+      type="button"
+      aria-label="Zoom out"
+      @click="$refs.topo.getCy().zoom($refs.topo.getCy().zoom() / 1.2); $refs.topo.center();"
+    >
+      <span class="pf-v6-c-button__text">−</span>
+    </button>
+    <button
+      class="pf-v6-c-button pf-m-control pf-m-small"
+      type="button"
+      aria-label="Fit to view"
+      @click="$refs.topo.fit()"
+    >
+      <span class="pf-v6-c-button__text">⤢</span>
+    </button>
+    <button
+      class="pf-v6-c-button pf-m-control pf-m-small"
+      type="button"
+      aria-label="Re-run layout"
+      @click="$refs.topo.getCy().layout({ name: 'concentric', animate: true }).run()"
+    >
+      <span class="pf-v6-c-button__text">↻</span>
+    </button>
+  </div>
+</div>

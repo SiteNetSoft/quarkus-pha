@@ -1,0 +1,10 @@
+{! Topology — PHA custom component wrapping Cytoscape.js !}
+{! Parameters: id, height (optional, default 400px), ariaLabel (optional) !}
+{! The Cytoscape config object is passed via Alpine x-data on the outer element !}
+{! Requires: /web/vendor/cytoscape/cytoscape.min.js loaded before Alpine !}
+{! Requires: /web/js/alpine/components/topology.js loaded before Alpine !}
+{! Requires: /web/css/components/topology.css !}
+<div class="pha-c-topology" id="{id}" role="img" aria-label="{#if ariaLabel??}{ariaLabel}{#else}Topology graph{/if}">
+  {#insert content}{/insert}
+  <div class="pha-c-topology__canvas"{#if height??} style="height: {height}"{/if}></div>
+</div>

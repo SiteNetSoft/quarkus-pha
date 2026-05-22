@@ -1,0 +1,86 @@
+<div
+  x-data="{
+    length: 14,
+    pwd: '',
+    generate() {
+      let pool = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789!@#$%^&amp;*';
+      let out = '';
+      let r = new Uint32Array(this.length);
+      crypto.getRandomValues(r);
+      for (let i = 0; i &lt; this.length; i++) out += pool[r[i] % pool.length];
+      this.pwd = out;
+    },
+    score() {
+      let s = 0;
+      if (this.pwd.length &gt;= 8)  s++;
+      if (this.pwd.length &gt;= 12) s++;
+      if (/[a-z]/.test(this.pwd) &amp;&amp; /[A-Z]/.test(this.pwd)) s++;
+      if (/[0-9]/.test(this.pwd)) s++;
+      if (/[^a-zA-Z0-9]/.test(this.pwd)) s++;
+      return s;
+    }
+  }"
+  x-init="generate()"
+>
+  <div class="pf-v6-l-flex pf-m-gap-md pf-m-flex-wrap">
+    <form class="pf-v6-c-form" style="flex: 1; min-width: 260px">
+      <div class="pf-v6-c-form__group">
+        <div class="pf-v6-c-form__group-label">
+          <label class="pf-v6-c-form__label" for="pwd-gen-with-strength"
+            ><span class="pf-v6-c-form__label-text">Password</span></label
+          >
+        </div>
+        <div class="pf-v6-c-form__group-control" style="display: flex; gap: 0.5rem">
+          <input class="pf-v6-c-form-control" id="pwd-gen-with-strength" type="text" x-model="pwd" style="flex: 1" />
+          <button type="button" class="pf-v6-c-button pf-m-secondary" @click="generate()">
+            <span class="pf-v6-c-button__text">Generate</span>
+          </button>
+        </div>
+      </div>
+      <div class="pf-v6-c-form__group">
+        <div class="pf-v6-c-form__group-label">
+          <label class="pf-v6-c-form__label" for="pwd-gen-length"
+            ><span class="pf-v6-c-form__label-text">Length: <span x-text="length"></span></span
+          ></label>
+        </div>
+        <div class="pf-v6-c-form__group-control">
+          <input
+            type="range"
+            class="pf-v6-c-form-control"
+            id="pwd-gen-length"
+            min="8"
+            max="32"
+            x-model.number="length"
+            @input="generate()"
+          />
+        </div>
+      </div>
+    </form>
+    <div style="flex: 1; min-width: 240px" aria-live="polite">
+      <p
+        style="margin-bottom: 0.5rem; font-weight: 600"
+        x-text="['', 'Very weak', 'Weak', 'Fair', 'Strong', 'Very strong'][score()]"
+      ></p>
+      <div
+        class="pf-v6-c-progress pf-m-singleline"
+        role="progressbar"
+        :aria-valuenow="score() * 20"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+        <div
+          class="pf-v6-c-progress__bar"
+          :style="'width: ' + (score() * 20) + '%; height: 8px; background: ' + ['#d2d2d2','#c9190b','#ec7a08','#f4c145','#4cb140','#06c'][score()]"
+        ></div>
+      </div>
+      <ul style="margin-top: 0.5rem; list-style: none; padding: 0; font-size: 0.875rem">
+        <li :style="pwd.length &gt;= 8 ? 'color:#4cb140' : 'color:#6a6e73'">✓ At least 8 characters</li>
+        <li :style="/[A-Z]/.test(pwd) &amp;&amp; /[a-z]/.test(pwd) ? 'color:#4cb140' : 'color:#6a6e73'">
+          ✓ Mixed case
+        </li>
+        <li :style="/[0-9]/.test(pwd) ? 'color:#4cb140' : 'color:#6a6e73'">✓ A digit</li>
+        <li :style="/[^a-zA-Z0-9]/.test(pwd) ? 'color:#4cb140' : 'color:#6a6e73'">✓ A symbol</li>
+      </ul>
+    </div>
+  </div>
+</div>

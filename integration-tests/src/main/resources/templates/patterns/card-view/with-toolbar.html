@@ -1,0 +1,77 @@
+<div x-data="{ search: '', sort: 'name', layout: 'grid' }">
+  <div class="pf-v6-c-toolbar" role="region" aria-label="Card view toolbar">
+    <div class="pf-v6-c-toolbar__content">
+      <div class="pf-v6-c-toolbar__content-section">
+        <div class="pf-v6-c-toolbar__group">
+          <div class="pf-v6-c-toolbar__item">
+            <input
+              type="search"
+              class="pf-v6-c-form-control"
+              placeholder="Search projects"
+              x-model="search"
+              aria-label="Search projects"
+            />
+          </div>
+        </div>
+        <div class="pf-v6-c-toolbar__group">
+          <div class="pf-v6-c-toolbar__item">
+            <select class="pf-v6-c-form-control" aria-label="Sort" x-model="sort">
+              <option value="name">Name (A→Z)</option>
+              <option value="recent">Most recent</option>
+              <option value="status">Status</option>
+            </select>
+          </div>
+        </div>
+        <div class="pf-v6-c-toolbar__group pf-m-icon-button-group" style="margin-left: auto">
+          <div class="pf-v6-c-toolbar__item">
+            <button
+              type="button"
+              class="pf-v6-c-button pf-m-control"
+              :class="layout === 'grid' ? 'pf-m-primary' : ''"
+              @click="layout = 'grid'"
+              aria-label="Grid layout"
+            >
+              <span class="pf-v6-c-button__text">Grid</span>
+            </button>
+            <button
+              type="button"
+              class="pf-v6-c-button pf-m-control"
+              :class="layout === 'list' ? 'pf-m-primary' : ''"
+              @click="layout = 'list'"
+              aria-label="List layout"
+            >
+              <span class="pf-v6-c-button__text">List</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pf-v6-l-gallery pf-m-gutter" style="--pf-v6-l-gallery--GridTemplateColumns--min: 220px; margin-top: 1rem">
+    <template
+      x-for="proj in [
+        { name: 'Atlas',   desc: 'Reporting DB migration to PostgreSQL 16',    label: 'Active', color: 'green' },
+        { name: 'Mercury', desc: 'Internal search appliance',                  label: 'Active', color: 'green' },
+        { name: 'Apollo',  desc: 'Customer dashboard rewrite (beta)',          label: 'Beta',   color: 'blue'  },
+        { name: 'Gemini',  desc: 'Event-driven order pipeline',                label: 'Paused', color: 'gold'  },
+        { name: 'Orion',   desc: 'Autoscaler + cost reporter (staging)',       label: 'Active', color: 'green' },
+        { name: 'Artemis', desc: 'SSO refresh onto internal IdP',              label: 'Blocked',color: 'red'   }
+      ].filter(p => p.name.toLowerCase().includes(search.toLowerCase()))"
+      :key="proj.name"
+    >
+      <div class="pf-v6-c-card">
+        <div class="pf-v6-c-card__header">
+          <div class="pf-v6-c-card__header-main">
+            <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text" x-text="proj.name"></span></div>
+          </div>
+        </div>
+        <div class="pf-v6-c-card__body"><p x-text="proj.desc"></p></div>
+        <div class="pf-v6-c-card__footer">
+          <span class="pf-v6-c-label pf-m-compact" :class="'pf-m-' + proj.color">
+            <span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text" x-text="proj.label"></span></span>
+          </span>
+        </div>
+      </div>
+    </template>
+  </div>
+</div>

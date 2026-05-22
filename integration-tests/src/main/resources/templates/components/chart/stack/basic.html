@@ -1,0 +1,20 @@
+<div
+  class="pha-c-chart"
+  id="ch-stack-basic"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+      legend: { data: ['Direct', 'Search', 'Referral', 'Social'] },
+      xAxis: { type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] },
+      yAxis: { type: 'value', name: 'Visits' },
+      series: [
+        { name: 'Direct',   type: 'bar', stack: 'visits', data: [320, 332, 301, 334, 390, 330, 320] },
+        { name: 'Search',   type: 'bar', stack: 'visits', data: [120, 132, 101, 134,  90, 230, 210] },
+        { name: 'Referral', type: 'bar', stack: 'visits', data: [220, 182, 191, 234, 290, 330, 310] },
+        { name: 'Social',   type: 'bar', stack: 'visits', data: [150, 232, 201, 154, 190, 330, 410] }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>

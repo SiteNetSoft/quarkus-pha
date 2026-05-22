@@ -1,0 +1,42 @@
+<div
+  x-data="{ selectedIds: [] }"
+  @topology-tap="
+    let cy = $refs.cy.getCy();
+    selectedIds = cy.$(':selected').map(el => el.id());
+  "
+>
+  <div
+    class="pha-c-topology"
+    id="cy-selection"
+    role="img"
+    aria-label="Graph supporting single click and box-select selection"
+    x-ref="cy"
+    x-data="phaTopology({
+      elements: [
+        { data: { id: 'a', label: 'a' } },
+        { data: { id: 'b', label: 'b' } },
+        { data: { id: 'c', label: 'c' } },
+        { data: { id: 'd', label: 'd' } },
+        { data: { id: 'e', label: 'e' } },
+        { data: { source: 'a', target: 'b' } },
+        { data: { source: 'b', target: 'c' } },
+        { data: { source: 'a', target: 'd' } },
+        { data: { source: 'd', target: 'e' } }
+      ],
+      layout: { name: 'cose', animate: false }
+    })"
+  >
+    <div class="pha-c-topology__canvas"></div>
+  </div>
+  <p class="pf-v6-u-mt-md">
+    <strong>Selected:</strong>
+    <span x-show="selectedIds.length === 0" class="pf-v6-u-color-200">none — click a node or drag to box-select</span>
+    <span x-show="selectedIds.length > 0">
+      <template x-for="id in selectedIds" :key="id">
+        <span class="pf-v6-c-label pf-m-blue pf-m-compact" style="margin-right: 0.25rem"
+          ><span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text" x-text="id"></span></span
+        ></span>
+      </template>
+    </span>
+  </p>
+</div>

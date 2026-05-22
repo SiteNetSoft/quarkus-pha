@@ -1,0 +1,27 @@
+<div
+  class="pha-c-chart"
+  id="ch-box-plot-basic"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'item' },
+      xAxis: {
+        type: 'category',
+        data: ['api', 'auth', 'payments', 'search', 'storage'],
+        boundaryGap: true
+      },
+      yAxis: { type: 'value', name: 'Latency (ms)' },
+      series: [{
+        type: 'boxplot',
+        data: [
+          [40, 55, 70, 95, 140],
+          [30, 45, 60, 80, 120],
+          [55, 75, 100, 145, 220],
+          [25, 35, 45, 60, 110],
+          [60, 80, 110, 160, 240]
+        ]
+      }]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>

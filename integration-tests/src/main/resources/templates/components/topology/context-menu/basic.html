@@ -1,0 +1,60 @@
+<div x-data="{ menu: { open: false, x: 0, y: 0, nodeId: null } }">
+  <div
+    class="pha-c-topology"
+    id="cy-context-menu"
+    role="img"
+    aria-label="Graph supporting right-click context menu on nodes"
+    style="position: relative"
+    x-ref="topo"
+    @contextmenu.prevent
+    x-data="phaTopology({
+      elements: [
+        { data: { id: 'svc-a', label: 'svc-a' } },
+        { data: { id: 'svc-b', label: 'svc-b' } },
+        { data: { id: 'svc-c', label: 'svc-c' } },
+        { data: { source: 'svc-a', target: 'svc-b' } },
+        { data: { source: 'svc-b', target: 'svc-c' } }
+      ],
+      layout: { name: 'cose', animate: false }
+    })"
+    x-init="
+      $watch('$el', () => {});
+      let self = this;
+      $nextTick(() => {
+        let cy = $refs.topo.getCy();
+        cy.on('cxttap', 'node', evt => {
+          let pos = evt.renderedPosition;
+          menu.open = true; menu.x = pos.x; menu.y = pos.y; menu.nodeId = evt.target.id();
+        });
+        cy.on('tap', evt => { if (evt.target === cy) menu.open = false; });
+      })
+    "
+  >
+    <div class="pha-c-topology__canvas"></div>
+    <ul
+      x-show="menu.open"
+      x-cloak
+      @click.outside="menu.open = false"
+      class="pf-v6-c-menu__list"
+      role="menu"
+      :style="'position: absolute; top: ' + menu.y + 'px; left: ' + menu.x + 'px; background: #fff; border: 1px solid #d2d2d2; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 4px 0; min-width: 140px; z-index: 5;'"
+    >
+      <li role="none">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="menu.open = false">
+          <span class="pf-v6-c-menu__item-text" x-text="'Inspect ' + menu.nodeId"></span>
+        </button>
+      </li>
+      <li role="none">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="menu.open = false">
+          <span class="pf-v6-c-menu__item-text">Restart</span>
+        </button>
+      </li>
+      <li role="none">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="menu.open = false">
+          <span class="pf-v6-c-menu__item-text">Remove</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+  <p class="pf-v6-u-mt-md pf-v6-u-color-200" style="font-size: 0.875rem">Right-click a node to open the menu.</p>
+</div>

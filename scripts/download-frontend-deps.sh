@@ -73,6 +73,11 @@ podman run --rm \
     cp node_modules/video.js/dist/video-js.min.css /output/videojs/
     cp -r node_modules/video.js/dist/font /output/videojs/
 
+    # Cytoscape.js (graph visualization for the topology bucket)
+    echo "  Cytoscape.js..."
+    mkdir -p /output/cytoscape
+    cp node_modules/cytoscape/dist/cytoscape.min.js /output/cytoscape/
+
     # Quill (rich text editor)
     echo "  Quill..."
     mkdir -p /output/quill
@@ -158,6 +163,10 @@ EOF
     node -e "
       const pkg = require(\"/work/node_modules/@fortawesome/fontawesome-free/package.json\");
       console.log(\"  FA Free:     \" + pkg.version);
+    "
+    node -e "
+      const pkg = require(\"/work/node_modules/cytoscape/package.json\");
+      console.log(\"  Cytoscape:   \" + pkg.version);
     "
     echo "  pficon:      patternfly/patternfly@v6.4.0 (GitHub source)"
   '

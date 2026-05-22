@@ -1,0 +1,28 @@
+<div
+  class="pha-c-chart"
+  id="ch-donut-basic"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'item' },
+      legend: { orient: 'vertical', left: 'left' },
+      series: [{
+        name: 'Resources',
+        type: 'pie',
+        radius: ['45%', '70%'],
+        center: ['58%', '50%'],
+        avoidLabelOverlap: true,
+        itemStyle: { borderRadius: 6, borderColor: '#fff', borderWidth: 2 },
+        label: { show: true, formatter: '\{b}: \{d}%' },
+        data: [
+          { value: 1048, name: 'Compute' },
+          { value: 735, name: 'Storage' },
+          { value: 580, name: 'Network' },
+          { value: 484, name: 'Database' },
+          { value: 300, name: 'Other' }
+        ]
+      }]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>

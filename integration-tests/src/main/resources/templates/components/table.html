@@ -1,115 +1,339 @@
-{#include layouts/base}
-{#title}Table{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
-  <h1>Table</h1>
-  <p>PatternFly v6 table component for displaying structured data in rows and columns.</p>
+{#include layouts/base} {#title}Table{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Table</h1>
+                    <p>
+                      A grid of rows and columns for structured data. Use when every row has the same shape and column
+                      headers carry meaning. For list-shaped data without column headers, prefer
+                      <a href="/components/data-list">Data list</a>.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                    <nav
+                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                      aria-label="Table of contents"
+                    >
+                      <div class="pf-v6-c-jump-links__main">
+                        <ul class="pf-v6-c-jump-links__list" role="list">
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#compact" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Compact</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#striped" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Striped</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#borderless" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Borderless</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#sortable" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Sortable (HTMX)</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#expandable" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Expandable (Alpine)</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#props-table" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Table props</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
+                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                        <div>
+                          <h2
+                            id="examples"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                          >
+                            Examples
+                          </h2>
+                        </div>
+                      </div>
+                      {#include partials/example-card title="Basic" slug="basic" component="table" description="Default
+                      rows — three users with a name, status, role and edit action."} {#content}{#include
+                      components/table/basic /}{/content} {/include} {#include partials/example-card title="Compact"
+                      slug="compact" component="table" description="&lt;code
+                      class=&quot;ws-code&quot;&gt;compact=true&lt;/code&gt; — denser padding for info-heavy tables."}
+                      {#content}{#include components/table/compact /}{/content} {/include} {#include
+                      partials/example-card title="Striped" slug="striped" component="table" description="&lt;code
+                      class=&quot;ws-code&quot;&gt;striped=true&lt;/code&gt; — alternating row background for easier
+                      horizontal scanning."} {#content}{#include components/table/striped /}{/content} {/include}
+                      {#include partials/example-card title="Borderless" slug="borderless" component="table"
+                      description="&lt;code class=&quot;ws-code&quot;&gt;borderless=true&lt;/code&gt; — removes row
+                      dividers; pairs well with striped on dashboards."} {#content}{#include components/table/borderless
+                      /}{/content} {/include} {#include partials/example-card title="Sortable (HTMX)" slug="sortable"
+                      component="table" description="Column headers post to &lt;code
+                      class=&quot;ws-code&quot;&gt;/api/htmx/table-sort&lt;/code&gt; and swap the table; no client-side
+                      sorting logic."} {#content}{#include components/table/sortable /}{/content} {/include} {#include
+                      partials/example-card title="Expandable (Alpine)" slug="expandable" component="table"
+                      description="Per-row toggle reveals a detail row beneath; state lives in &lt;code
+                      class=&quot;ws-code&quot;&gt;x-data&lt;/code&gt; on the &amp;lt;tbody&amp;gt;."}
+                      {#content}{#include components/table/expandable /}{/content} {/include}
 
-  <section style="margin-top: 2rem;">
-    <h2 id="basic-heading">Basic</h2>
-    <p>A basic table with column headers and data rows.</p>
-    {#include components/data-display/table id="tbl-basic"}{#content}
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Status</th>
-        <th>Role</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>John Doe</td>
-        <td>Active</td>
-        <td>Admin</td>
-        <td><button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">Edit</button></td>
-      </tr>
-      <tr>
-        <td>Jane Smith</td>
-        <td>Inactive</td>
-        <td>Editor</td>
-        <td><button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">Edit</button></td>
-      </tr>
-      <tr>
-        <td>Bob Johnson</td>
-        <td>Active</td>
-        <td>Viewer</td>
-        <td><button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">Edit</button></td>
-      </tr>
-    </tbody>
-    {/content}{/include}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="compact-heading">Compact</h2>
-    <p>A compact table with reduced row height for denser data display.</p>
-    {#include components/data-display/table id="tbl-compact" compact=true}{#content}
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Status</th>
-        <th>Role</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>John Doe</td>
-        <td>Active</td>
-        <td>Admin</td>
-        <td><button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">Edit</button></td>
-      </tr>
-      <tr>
-        <td>Jane Smith</td>
-        <td>Inactive</td>
-        <td>Editor</td>
-        <td><button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">Edit</button></td>
-      </tr>
-      <tr>
-        <td>Bob Johnson</td>
-        <td>Active</td>
-        <td>Viewer</td>
-        <td><button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">Edit</button></td>
-      </tr>
-    </tbody>
-    {/content}{/include}
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="striped-heading">Striped</h2>
-    <p>A striped table with alternating row backgrounds for improved readability.</p>
-    {#include components/data-display/table id="tbl-striped" striped=true}{#content}
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Status</th>
-        <th>Role</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>John Doe</td>
-        <td>Active</td>
-        <td>Admin</td>
-        <td><button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">Edit</button></td>
-      </tr>
-      <tr>
-        <td>Jane Smith</td>
-        <td>Inactive</td>
-        <td>Editor</td>
-        <td><button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">Edit</button></td>
-      </tr>
-      <tr>
-        <td>Bob Johnson</td>
-        <td>Active</td>
-        <td>Viewer</td>
-        <td><button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">Edit</button></td>
-      </tr>
-    </tbody>
-    {/content}{/include}
-  </section>
+                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                        <h2
+                          id="documentation"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Documentation
+                        </h2>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="props-table" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                          Table props
+                        </h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          Parameters accepted by
+                          <code class="ws-code">{|{#include components/data-display/table ... /}|}</code>. Thead/tbody
+                          markup lives in the slot using bare elements (PF v6 styles them via descendant selectors).
+                        </p>
+                        <table
+                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                          role="grid"
+                          aria-label="Table props"
+                        >
+                          <caption class="pf-v6-c-table__caption">
+                            <span class="ws-prop-required">*</span>
+                            required
+                          </caption>
+                          <thead class="pf-v6-c-table__thead">
+                            <tr class="pf-v6-c-table__tr">
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                              <th scope="col" class="pf-v6-c-table__th">Description</th>
+                            </tr>
+                          </thead>
+                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">DOM id on the &lt;table&gt;.</span>
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">compact</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Adds <code class="ws-code">pf-m-compact</code> for denser rows.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">gridMd</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Adds <code class="ws-code">pf-m-grid-md</code> — collapses to stacked cards below
+                                  md.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">striped</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Adds <code class="ws-code">pf-m-striped</code> for alternating row background.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">borderless</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Adds <code class="ws-code">pf-m-no-border-rows</code> — removes between-row
+                                  dividers.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">expandable</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Adds <code class="ws-code">pf-m-expandable</code> — opt-in for the expandable-row
+                                  layout.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">ariaLabel</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Sets <code class="ws-code">aria-label</code> on the table for screen readers.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">slot <code class="ws-code">content</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >&lt;thead&gt; and &lt;tbody&gt; rows — bare elements; PF v6 styles them via
+                                  descendant selectors.</span
+                                >
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Table vs. Data list.</strong> Use Table when every row has the same shape and column
+                          headers carry the meaning of each cell. Use <a href="/components/data-list">Data list</a> when
+                          rows are list-shaped (variable inner layout, no shared column meaning).
+                        </p>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Sorting.</strong> Server-side. The sort buttons send
+                          <code class="ws-code">hx-get</code> with the column + direction; the endpoint returns a new
+                          &lt;table&gt; with rows reordered and the right column flagged with
+                          <code class="ws-code">aria-sort</code>. No client-side sort logic — keeps a single source of
+                          truth.
+                        </p>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Expandable rows.</strong> Each pair of rows lives inside its own
+                          <code class="ws-code">&lt;tbody&gt;</code> with
+                          <code class="ws-code">x-data="{ open: false }"</code>. Toggle the
+                          <code class="ws-code">pf-m-expanded</code> class on the &lt;tbody&gt; and
+                          <code class="ws-code">x-show</code> on the detail row.
+                        </p>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <br /><a
+                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/table.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Edit table.html on GitHub</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

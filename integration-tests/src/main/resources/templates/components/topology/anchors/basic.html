@@ -1,0 +1,36 @@
+<div
+  class="pha-c-topology"
+  id="cy-anchors"
+  role="img"
+  aria-label="Graph with edges anchored to specific compass points on nodes"
+  x-data="phaTopology({
+    elements: [
+      { data: { id: 'load-balancer', label: 'load balancer' } },
+      { data: { id: 'a', label: 'app-a' } },
+      { data: { id: 'b', label: 'app-b' } },
+      { data: { id: 'c', label: 'app-c' } },
+      { data: { source: 'load-balancer', target: 'a' } },
+      { data: { source: 'load-balancer', target: 'b' } },
+      { data: { source: 'load-balancer', target: 'c' } }
+    ],
+    layout: { name: 'breadthfirst', directed: true, animate: false, padding: 30 },
+    style: [
+      { selector: 'node', style: {
+        'background-color': '#06c', 'color': '#fff',
+        'label': 'data(label)', 'text-valign': 'center', 'text-halign': 'center',
+        'font-size': 11, 'font-family': 'RedHatText, Helvetica, Arial, sans-serif',
+        'width': 72, 'height': 44, 'shape': 'round-rectangle',
+        'border-width': 2, 'border-color': '#003366'
+      } },
+      { selector: 'edge', style: {
+        'width': 2, 'line-color': '#06c', 'curve-style': 'taxi',
+        'taxi-direction': 'vertical', 'taxi-turn': 30,
+        'target-arrow-color': '#06c', 'target-arrow-shape': 'triangle',
+        'source-endpoint': 'outside-to-node',
+        'target-endpoint': 'outside-to-node'
+      } }
+    ]
+  })"
+>
+  <div class="pha-c-topology__canvas"></div>
+</div>

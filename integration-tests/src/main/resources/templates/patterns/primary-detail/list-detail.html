@@ -1,0 +1,68 @@
+<div
+  x-data="{
+    items: [
+      { id: 'apollo',  name: 'Apollo',  owner: 'platform', region: 'us-east-1', status: 'Active' },
+      { id: 'mercury', name: 'Mercury', owner: 'search',   region: 'eu-west-1', status: 'Active' },
+      { id: 'gemini',  name: 'Gemini',  owner: 'orders',   region: 'us-west-2', status: 'Paused' },
+      { id: 'orion',   name: 'Orion',   owner: 'platform', region: 'ap-southeast-1', status: 'Active' },
+      { id: 'artemis', name: 'Artemis', owner: 'auth',     region: 'eu-west-1', status: 'Blocked' }
+    ],
+    selectedId: 'apollo',
+    get selected() { return this.items.find(i =&gt; i.id === this.selectedId); }
+  }"
+  class="pf-v6-l-flex pf-m-gap-md"
+  style="border: 1px solid #d2d2d2; border-radius: 4px; min-height: 320px"
+>
+  <ul
+    class="pf-v6-c-simple-list pf-v6-c-simple-list__list"
+    style="flex: 0 0 220px; border-right: 1px solid #d2d2d2; margin: 0; padding: 0.5rem 0; list-style: none"
+    role="listbox"
+    aria-label="Projects"
+  >
+    <template x-for="i in items" :key="i.id">
+      <li class="pf-v6-c-simple-list__list-item">
+        <button
+          type="button"
+          class="pf-v6-c-simple-list__item-link"
+          :class="selectedId === i.id ? 'pf-m-current' : ''"
+          :aria-current="selectedId === i.id ? 'true' : 'false'"
+          @click="selectedId = i.id"
+          style="
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 0;
+          "
+        >
+          <span x-text="i.name"></span>
+        </button>
+      </li>
+    </template>
+  </ul>
+  <div style="flex: 1; padding: 1rem">
+    <h3 class="pf-v6-c-content--h3" x-text="selected.name"></h3>
+    <dl class="pf-v6-c-description-list">
+      <div class="pf-v6-c-description-list__group">
+        <dt class="pf-v6-c-description-list__term">Owner</dt>
+        <dd class="pf-v6-c-description-list__description" x-text="selected.owner"></dd>
+      </div>
+      <div class="pf-v6-c-description-list__group">
+        <dt class="pf-v6-c-description-list__term">Region</dt>
+        <dd class="pf-v6-c-description-list__description" x-text="selected.region"></dd>
+      </div>
+      <div class="pf-v6-c-description-list__group">
+        <dt class="pf-v6-c-description-list__term">Status</dt>
+        <dd class="pf-v6-c-description-list__description">
+          <span
+            class="pf-v6-c-label pf-m-compact"
+            :class="selected.status === 'Active' ? 'pf-m-green' : (selected.status === 'Paused' ? 'pf-m-gold' : 'pf-m-red')"
+            ><span class="pf-v6-c-label__content"
+              ><span class="pf-v6-c-label__text" x-text="selected.status"></span></span
+          ></span>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
