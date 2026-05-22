@@ -1,57 +1,303 @@
-{#include layouts/base}
-{#title}Code editor{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+{#include layouts/base} {#title}Code editor{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Code editor</h1>
+                    <p>
+                      A code viewer with header controls (copy / download / upload) and an optional language tab.
+                      Renders the content as a styled <code class="ws-code">&lt;pre&gt;</code> with no client-side
+                      editing — layer Monaco on top of the <code class="ws-code">__code-pre</code> element if you need
+                      real editing.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                    <nav
+                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                      aria-label="Table of contents"
+                    >
+                      <div class="pf-v6-c-jump-links__main">
+                        <ul class="pf-v6-c-jump-links__list" role="list">
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#read-only" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Read-only</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#without-actions" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Without actions</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#minimal" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Minimal</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#props-code-editor" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Code editor props</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
+                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                        <div>
+                          <h2
+                            id="examples"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                          >
+                            Examples
+                          </h2>
+                        </div>
+                      </div>
+                      {#include partials/example-card title="Basic" slug="basic" component="code-editor"
+                      description="All three header controls visible: copy, download, upload. The Copy control flips its
+                      icon to a check for 2s on success (Alpine-managed)."} {#content}{#include
+                      components/code-editor/basic /}{/content} {/include} {#include partials/example-card
+                      title="Read-only" slug="read-only" component="code-editor" description="&lt;code
+                      class=&quot;ws-code&quot;&gt;readonly=true&lt;/code&gt; adds &lt;code
+                      class=&quot;ws-code&quot;&gt;pf-m-read-only&lt;/code&gt;. Keep the Copy control so users can still
+                      lift the contents."} {#content}{#include components/code-editor/read-only /}{/content} {/include}
+                      {#include partials/example-card title="Without actions" slug="without-actions"
+                      component="code-editor" description="Language tab only — no header controls. Use when the code is
+                      purely illustrative."} {#content}{#include components/code-editor/without-actions /}{/content}
+                      {/include} {#include partials/example-card title="Minimal" slug="minimal" component="code-editor"
+                      description="No header, no language tab. The wrapper falls back to a bare &lt;code
+                      class=&quot;ws-code&quot;&gt;pf-v6-c-code-editor&lt;/code&gt; with just the &lt;pre&gt; inside."}
+                      {#content}{#include components/code-editor/minimal /}{/content} {/include}
 
-  <h1>Code editor</h1>
-  <p>PatternFly v6 code editor — a component for displaying and editing code with header controls and language tab.</p>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="basic-heading">Basic</h2>
-    <p>A code editor with copy, download, and upload controls.</p>
-    <div style="max-width: 700px;">
-      {#include components/data-display/code-editor id="ce-basic" language="HTML" copyButton=true downloadButton=true uploadButton=true}{#content}apiVersion: helm.openshift.io/v1beta1/
-kind: HelmChartRepository
-metadata:
-  name: azure-sample-repo
-spec:
-  connectionConfig:
-    url: https://raw.githubusercontent.com/Azure-Samples/helm-charts/master/docs{/content}{/include}
+                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                        <h2
+                          id="documentation"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Documentation
+                        </h2>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="props-code-editor" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                          Code editor props
+                        </h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          Parameters accepted by
+                          <code class="ws-code">{|{#include components/data-display/code-editor ... /}|}</code>. Code
+                          text lives in the <code class="ws-code">content</code> slot — leading whitespace is preserved
+                          verbatim.
+                        </p>
+                        <table
+                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                          role="grid"
+                          aria-label="Code editor props"
+                        >
+                          <caption class="pf-v6-c-table__caption">
+                            <span class="ws-prop-required">*</span>
+                            required
+                          </caption>
+                          <thead class="pf-v6-c-table__thead">
+                            <tr class="pf-v6-c-table__tr">
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                              <th scope="col" class="pf-v6-c-table__th">Description</th>
+                            </tr>
+                          </thead>
+                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">DOM id on the wrapper.</span>
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">language</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Text shown in the language tab (e.g. <code class="ws-code">YAML</code>). Omit for no
+                                  tab.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">readonly</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Adds <code class="ws-code">pf-m-read-only</code>. Cosmetic only.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">copyButton</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Show copy-to-clipboard button. Toggles an Alpine
+                                  <code class="ws-code">copied</code> flag for 2s to swap the icon to a check.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">downloadButton</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Show download button. Wire your own handler via
+                                  <code class="ws-code">@click</code> or <code class="ws-code">hx-get</code> — the
+                                  runtime button has no behavior.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">uploadButton</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Show upload button. Same caveat as download — bring your own handler.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">slot <code class="ws-code">content</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Code text. Wrap in <code class="ws-code">{|...|}</code> if it contains
+                                  <code class="ws-code">{|{varname}|}</code> sequences Qute would otherwise evaluate.</span
+                                >
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Display, not edit.</strong> The runtime template is a
+                          <code class="ws-code">&lt;pre&gt;</code>-based viewer. Use it for snippets, kubectl/curl
+                          examples, configuration blocks — anywhere the user reads code and maybe copies it. For real
+                          editing (autocomplete, syntax highlighting, multi-cursor) layer Monaco on top of the
+                          <code class="ws-code">__code-pre</code> element via an Alpine factory.
+                        </p>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Server-pushed updates.</strong> Replace the wrapper via
+                          <code class="ws-code">hx-get</code> on a sibling button —
+                          <code class="ws-code">hx-target="#ce-basic"</code>,
+                          <code class="ws-code">hx-swap="outerHTML"</code>. The fresh markup brings its own Alpine state
+                          so the copy-button counter resets.
+                        </p>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <br /><a
+                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/code-editor.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Edit code-editor.html on GitHub</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
     </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="readonly-heading">Read-only</h2>
-    <p>A code editor with read-only styling.</p>
-    <div style="max-width: 700px;">
-      {#include components/data-display/code-editor id="ce-readonly" language="YAML" readonly=true copyButton=true}{#content}apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: my-config
-data:
-  key: value{/content}{/include}
-    </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="no-actions-heading">Without actions</h2>
-    <p>A code editor with only a language tab and no header controls.</p>
-    <div style="max-width: 700px;">
-      {#include components/data-display/code-editor id="ce-no-actions" language="JSON"}{#content}{
-  "name": "example",
-  "version": "1.0.0"
-}{/content}{/include}
-    </div>
-  </section>
-
-  <section style="margin-top: 2rem;">
-    <h2 id="minimal-heading">Minimal</h2>
-    <p>A code editor with no controls and no language tab.</p>
-    <div style="max-width: 700px;">
-      {#include components/data-display/code-editor id="ce-minimal"}{#content}console.log("Hello, world!");{/content}{/include}
-    </div>
-  </section>
+  </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

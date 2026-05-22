@@ -1,0 +1,56 @@
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading">Two flavours</h2>
+<p>
+  A chart skeleton signals <em>"data is loading, the chart will appear here"</em>. There are two ways to produce one:
+</p>
+<ul>
+  <li>
+    <strong>ECharts loading spinner</strong> — pass <code class="ws-code">loading: true</code> when creating
+    <code class="ws-code">phaChart</code>. The factory calls <code class="ws-code">chart.showLoading()</code> until the
+    first <code class="ws-code">setOption</code> completes.
+  </li>
+  <li>
+    <strong>PatternFly skeleton</strong> — render a
+    <a href="/components/skeleton">PF v6 skeleton</a>
+    sized to match the chart, then HTMX-swap the wrapper in once data arrives. Best for SSR-first pages where the chart
+    arrives after the page paint.
+  </li>
+</ul>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading">ECharts loading spinner</h2>
+<p>The spinner sits inside the chart canvas and disappears the moment the first option is set.</p>
+<div
+  class="pha-c-chart"
+  id="ch-loading-demo"
+  x-data="phaChart({
+    loading: true,
+    option: {
+      tooltip: { trigger: 'axis' },
+      xAxis: { type: 'category', data: ['Jan','Feb','Mar','Apr','May'] },
+      yAxis: { type: 'value' },
+      series: [{ type: 'line', smooth: true, data: [12, 18, 14, 22, 26] }]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">PatternFly skeleton placeholder</h2>
+<p>
+  Render this from the server when you know the chart will need extra time to load. Swap it for the real
+  <code class="ws-code">pha-c-chart</code> wrapper via HTMX:
+  <code class="ws-code">hx-get="/api/data/latency-chart"</code>, <code class="ws-code">hx-trigger="load"</code>,
+  <code class="ws-code">hx-swap="outerHTML"</code>.
+</p>
+<div
+  class="pf-v6-c-skeleton pf-m-text-3xl"
+  style="height: 320px; border: 1px solid #d2d2d2; border-radius: 4px"
+  aria-label="Loading chart"
+></div>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">Which to use</h2>
+<p>
+  <strong>Spinner</strong> when the chart is already mounted and you're waiting on follow-up data (HTMX
+  <code class="ws-code">hx-get</code> + Alpine <code class="ws-code">setOption</code>).<br />
+  <strong>PF skeleton</strong> when the chart wrapper itself isn't mounted yet and you want layout stability before the
+  swap.
+</p>

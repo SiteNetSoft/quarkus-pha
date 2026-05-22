@@ -1,0 +1,26 @@
+<div
+  class="pha-c-chart"
+  id="ch-pie-basic"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'item', formatter: '\{b}: \{c} (\{d}%)' },
+      legend: { orient: 'vertical', left: 'left' },
+      series: [{
+        name: 'Browsers',
+        type: 'pie',
+        radius: '65%',
+        center: ['58%', '50%'],
+        label: { show: true, formatter: '\{b}: \{d}%' },
+        data: [
+          { value: 1048, name: 'Chrome' },
+          { value:  580, name: 'Safari' },
+          { value:  484, name: 'Firefox' },
+          { value:  300, name: 'Edge' },
+          { value:  150, name: 'Other' }
+        ]
+      }]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>

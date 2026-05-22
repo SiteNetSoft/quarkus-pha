@@ -1,0 +1,32 @@
+<div
+  class="pha-c-chart"
+  id="ch-donut-utilization-basic"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'item' },
+      series: [{
+        type: 'pie',
+        radius: ['68%', '85%'],
+        center: ['50%', '52%'],
+        startAngle: 90,
+        avoidLabelOverlap: false,
+        itemStyle: { borderRadius: 0 },
+        label: {
+          show: true, position: 'center',
+          formatter: '{|{value|72%}\n{label|Disk used}|}',
+          rich: {
+            value: { fontSize: 36, fontWeight: 700, color: '#151515' },
+            label: { fontSize: 13, color: '#6a6e73', padding: [6, 0, 0, 0] }
+          }
+        },
+        labelLine: { show: false },
+        data: [
+          { value: 72, name: 'Used',  itemStyle: { color: '#ec7a08' } },
+          { value: 28, name: 'Free',  itemStyle: { color: '#f0f0f0' } }
+        ]
+      }]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>

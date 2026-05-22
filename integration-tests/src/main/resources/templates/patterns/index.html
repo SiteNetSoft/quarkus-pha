@@ -1,0 +1,151 @@
+{#include layouts/base} {#title}Patterns{/title} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Patterns</h1>
+                    <p>
+                      Composite layouts built from the existing components — they show what the parts look like when
+                      they're glued together for a specific job (browse a catalogue, manage a queue, build a settings
+                      page). Each pattern carries 2 worked examples you can lift and adapt.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-gallery pf-m-gutter" style="--pf-v6-l-gallery--GridTemplateColumns--min: 240px">
+                    <a
+                      href="/patterns/card-view"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="pattern-card-card-view"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Card view</span></div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body">
+                        <p>Browseable card grid with toolbar (search, sort, layout toggle) and pagination.</p>
+                      </div>
+                    </a>
+                    <a
+                      href="/patterns/dashboard"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="pattern-card-dashboard"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Dashboard</span></div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body">
+                        <p>Stat tiles + chart + recent-activity table inside a gallery layout.</p>
+                      </div>
+                    </a>
+                    <a
+                      href="/patterns/filters"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="pattern-card-filters"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Filters</span></div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body">
+                        <p>Attribute filters in a toolbar — chip-style and advanced dropdown.</p>
+                      </div>
+                    </a>
+                    <a
+                      href="/patterns/password-generator"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="pattern-card-password-generator"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Password generator</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body"><p>The generator embedded in a "create user" modal flow.</p></div>
+                    </a>
+                    <a
+                      href="/patterns/password-strength"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="pattern-card-password-strength"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Password strength</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body">
+                        <p>Strength meter + criteria checklist next to a password input.</p>
+                      </div>
+                    </a>
+                    <a
+                      href="/patterns/primary-detail"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="pattern-card-primary-detail"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Primary-detail</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body">
+                        <p>List on the left, panel of detail on the right — the classic master-detail shape.</p>
+                      </div>
+                    </a>
+                    <a
+                      href="/patterns/right-to-left"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="pattern-card-right-to-left"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Right-to-left</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body">
+                        <p>How the same components render with <code class="ws-code">dir="rtl"</code>.</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/body} {/include}

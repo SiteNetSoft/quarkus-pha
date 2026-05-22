@@ -1,0 +1,73 @@
+{#include components/navigation/wizard id="wiz-review" navLabel="New project steps"} {#navItems}
+<li class="pf-v6-c-wizard__nav-item">
+  <button
+    type="button"
+    class="pf-v6-c-wizard__nav-link pf-m-current"
+    aria-current="step"
+    hx-get="/api/htmx/wizard/review/step/1"
+    hx-target="#wiz-review"
+    hx-swap="outerHTML"
+  >
+    <span class="pf-v6-c-wizard__nav-link-main"
+      ><span class="pf-v6-c-wizard__nav-link-text">Project details</span></span
+    >
+  </button>
+</li>
+<li class="pf-v6-c-wizard__nav-item">
+  <button type="button" class="pf-v6-c-wizard__nav-link" disabled>
+    <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">Team</span></span>
+  </button>
+</li>
+<li class="pf-v6-c-wizard__nav-item">
+  <button type="button" class="pf-v6-c-wizard__nav-link" disabled>
+    <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">Review</span></span>
+  </button>
+</li>
+{/navItems} {#body}
+<h2 class="pf-v6-c-content--h2">Project details</h2>
+<p>Name the project and pick a visibility.</p>
+<form class="pf-v6-c-form">
+  <div class="pf-v6-c-form__group">
+    <div class="pf-v6-c-form__group-label">
+      <label class="pf-v6-c-form__label" for="wiz-review-name"
+        ><span class="pf-v6-c-form__label-text">Project name</span></label
+      >
+    </div>
+    <div class="pf-v6-c-form__group-control">
+      <input class="pf-v6-c-form-control" type="text" id="wiz-review-name" name="name" value="Atlas migration" />
+    </div>
+  </div>
+  <div class="pf-v6-c-form__group">
+    <div class="pf-v6-c-form__group-label">
+      <label class="pf-v6-c-form__label" for="wiz-review-visibility"
+        ><span class="pf-v6-c-form__label-text">Visibility</span></label
+      >
+    </div>
+    <div class="pf-v6-c-form__group-control">
+      <select class="pf-v6-c-form-control" id="wiz-review-visibility" name="visibility">
+        <option value="private" selected>Private</option>
+        <option value="internal">Internal</option>
+        <option value="public">Public</option>
+      </select>
+    </div>
+  </div>
+</form>
+{/body} {#footer}
+<button
+  type="button"
+  class="pf-v6-c-button pf-m-primary"
+  hx-get="/api/htmx/wizard/review/step/2"
+  hx-target="#wiz-review"
+  hx-swap="outerHTML"
+>
+  <span class="pf-v6-c-button__text">Next</span>
+</button>
+<button type="button" class="pf-v6-c-button pf-m-secondary" disabled>
+  <span class="pf-v6-c-button__text">Back</span>
+</button>
+<div class="pf-v6-c-wizard__footer-cancel">
+  <button type="button" class="pf-v6-c-button pf-m-link">
+    <span class="pf-v6-c-button__text">Cancel</span>
+  </button>
+</div>
+{/footer} {/include}

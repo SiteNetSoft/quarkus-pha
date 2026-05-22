@@ -1,0 +1,237 @@
+{#include layouts/base} {#title}Topology{/title} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Topology</h1>
+                    <p>
+                      Graph-visualisation wrappers built on
+                      <a href="https://js.cytoscape.org/" target="_blank" rel="noopener noreferrer">Cytoscape.js</a>.
+                      The shared <code class="ws-code">pha-c-topology</code> wrapper hosts an Alpine factory (<code
+                        class="ws-code"
+                        >phaTopology</code
+                      >) that accepts a Cytoscape config — elements, layout, style — with a PatternFly-aligned default
+                      theme.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2" id="topology-types">
+                    Topology demos
+                  </h2>
+                  <div class="pf-v6-l-gallery pf-m-gutter" style="--pf-v6-l-gallery--GridTemplateColumns--min: 220px">
+                    <a
+                      href="/components/topology/custom-nodes"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="topology-card-custom-nodes"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Custom nodes</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body">
+                        <p>Per-node colour, shape and badge driven by node <code class="ws-code">data</code>.</p>
+                      </div>
+                    </a>
+                    <a
+                      href="/components/topology/custom-edges"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="topology-card-custom-edges"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Custom edges</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body">
+                        <p>Dashed, thick and coloured edges from edge-level <code class="ws-code">data</code>.</p>
+                      </div>
+                    </a>
+                    <a
+                      href="/components/topology/anchors"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="topology-card-anchors"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Anchors</span></div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body">
+                        <p>Edge endpoints anchored to compass points instead of node centre.</p>
+                      </div>
+                    </a>
+                    <a
+                      href="/components/topology/selection"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="topology-card-selection"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Selection</span></div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body">
+                        <p>Single + box-select with a live readout of the current set.</p>
+                      </div>
+                    </a>
+                    <a
+                      href="/components/topology/pan-and-zoom"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="topology-card-pan-and-zoom"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Pan and zoom</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body">
+                        <p>Mouse + trackpad zoom with overlay buttons for fit / reset.</p>
+                      </div>
+                    </a>
+                    <a
+                      href="/components/topology/context-menu"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="topology-card-context-menu"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Context menu</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body">
+                        <p>Right-click reveals a per-node Alpine-driven menu — no Cytoscape extension.</p>
+                      </div>
+                    </a>
+                    <a
+                      href="/components/topology/drag-and-drop"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="topology-card-drag-and-drop"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Drag and drop</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body"><p>Move nodes; the layout is preserved across drags.</p></div>
+                    </a>
+                    <a
+                      href="/components/topology/control-bar"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="topology-card-control-bar"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title">
+                            <span class="pf-v6-c-card__title-text">Control bar</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body">
+                        <p>Overlay buttons for zoom in / zoom out / fit / reset, anchored bottom-left.</p>
+                      </div>
+                    </a>
+                    <a
+                      href="/components/topology/toolbar"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="topology-card-toolbar"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Toolbar</span></div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body">
+                        <p>Persistent toolbar above the canvas for filters and layout switchers.</p>
+                      </div>
+                    </a>
+                    <a
+                      href="/components/topology/sidebar"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="topology-card-sidebar"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Sidebar</span></div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body">
+                        <p>Selection opens a slide-in sidebar with the node's metadata.</p>
+                      </div>
+                    </a>
+                    <a
+                      href="/components/topology/layouts"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="topology-card-layouts"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Layouts</span></div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body">
+                        <p>Switch between grid / breadthfirst / concentric / cose without leaving the page.</p>
+                      </div>
+                    </a>
+                    <a
+                      href="/components/topology/pipelines"
+                      class="pf-v6-c-card pf-m-clickable"
+                      id="topology-card-pipelines"
+                      style="text-decoration: none; color: inherit"
+                    >
+                      <div class="pf-v6-c-card__header">
+                        <div class="pf-v6-c-card__header-main">
+                          <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Pipelines</span></div>
+                        </div>
+                      </div>
+                      <div class="pf-v6-c-card__body">
+                        <p>Build → Test → Deploy pipeline laid out left-to-right with status badges.</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/body} {/include}

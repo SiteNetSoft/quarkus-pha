@@ -1,0 +1,44 @@
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading">Why patterns</h2>
+<p>
+  Series fills should not rely on colour alone — a chart printed in black-and-white, or seen by a user with strong
+  colour-vision deficiency, has to remain readable. The standard mitigation is to combine colour with a hatch
+  <em>pattern</em>: each series gets a distinct stroke direction or dot density on top of its colour.
+</p>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading">In ECharts</h2>
+<p>
+  Use the <code class="ws-code">itemStyle.decal</code> field on a series. Each decal is a small repeating pattern —
+  <code class="ws-code">{|{ symbol: 'rect', dashArrayX: [4, 4], dashArrayY: [2, 2], rotation: Math.PI/4 }|}</code> —
+  composited over the series colour. The
+  <a href="https://echarts.apache.org/handbook/en/concepts/decal/" target="_blank" rel="noopener noreferrer"
+    >ECharts decal handbook</a
+  >
+  has the full schema.
+</p>
+
+<div
+  class="pha-c-chart"
+  id="ch-patterns-demo"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'axis' },
+      legend: { },
+      xAxis: { type: 'category', data: ['Mon','Tue','Wed','Thu','Fri'] },
+      yAxis: { type: 'value' },
+      aria: { enabled: true, decal: { show: true } },
+      series: [
+        { name: 'requests',   type: 'bar', stack: 'total', data: [120, 132, 101, 134,  90] },
+        { name: 'cached',     type: 'bar', stack: 'total', data: [220, 182, 191, 234, 290] },
+        { name: 'rate-limited', type: 'bar', stack: 'total', data: [ 32,  22,  41,  18,  29] }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
+
+<p style="margin-top: 1rem">
+  Setting <code class="ws-code">aria.decal.show: true</code> tells ECharts to auto-assign decal patterns from a default
+  cycle, matched to the series colour cycle. Each series gets a different pattern without per-series config — this is
+  the lowest-friction win.
+</p>

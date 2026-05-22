@@ -1,0 +1,85 @@
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading">Triggers</h2>
+<p>
+  ECharts tooltips have two trigger modes:
+  <code class="ws-code">'item'</code> — hover an individual data point — and <code class="ws-code">'axis'</code> — hover
+  anywhere along the axis and see all series at that x. Pick by chart type:
+</p>
+<ul>
+  <li><code class="ws-code">item</code> — pie, scatter, sankey, bubble — anything where each datum stands alone.</li>
+  <li>
+    <code class="ws-code">axis</code> — line, area, bar, stacked variants — anything indexed by a shared category axis.
+  </li>
+</ul>
+
+<h3 class="pf-v6-c-content--h3 pf-m-editorial ws-heading" style="margin-top: 1rem">
+  <code class="ws-code">trigger: 'axis'</code>
+</h3>
+<div
+  class="pha-c-chart"
+  id="ch-tooltip-axis"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'axis', axisPointer: { type: 'line' } },
+      xAxis: { type: 'category', data: ['Mon','Tue','Wed','Thu','Fri'] },
+      yAxis: { type: 'value' },
+      series: [
+        { name: 'web', type: 'line', smooth: true, data: [12, 18, 14, 22, 26] },
+        { name: 'api', type: 'line', smooth: true, data: [ 9, 12, 11, 17, 20] }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
+
+<h3 class="pf-v6-c-content--h3 pf-m-editorial ws-heading" style="margin-top: 1rem">
+  <code class="ws-code">trigger: 'item'</code> with a custom formatter
+</h3>
+<div
+  class="pha-c-chart"
+  id="ch-tooltip-item"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'item', formatter: '\{b}: \{c} (\{d}%)' },
+      legend: { orient: 'vertical', left: 'left' },
+      series: [{
+        type: 'pie',
+        radius: ['45%', '70%'],
+        center: ['62%', '50%'],
+        data: [
+          { value: 1048, name: 'Compute' },
+          { value:  735, name: 'Storage' },
+          { value:  580, name: 'Network' }
+        ]
+      }]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">Cross-shared (axisPointer)</h2>
+<p>
+  When several charts share an x-axis, an axis-pointer tooltip can be linked across them — moving the cursor on chart A
+  highlights the same x on chart B. ECharts calls this
+  <code class="ws-code">axisPointer.link</code> — see the
+  <a href="https://echarts.apache.org/handbook/en/concepts/axis/#axis-pointer" target="_blank" rel="noopener noreferrer"
+    >ECharts handbook</a
+  >
+  for the full pattern.
+</p>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading">Escaping in Qute templates</h2>
+<p>
+  ECharts placeholder tokens — <code class="ws-code">\{b}</code>, <code class="ws-code">\{c}</code>,
+  <code class="ws-code">\{d}</code> — collide with Qute's expression syntax. Backslash-escape each one inside the
+  formatter string (as shown above) or wrap the whole formatter in a Qute <code class="ws-code">{|...|}</code> block.
+  The
+  <a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/integration-tests/src/main/resources/templates/components/chart/pie/basic.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Pie chart example</a
+  >
+  uses the backslash form.
+</p>

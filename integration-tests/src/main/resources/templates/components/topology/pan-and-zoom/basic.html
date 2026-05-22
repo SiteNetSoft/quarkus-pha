@@ -1,0 +1,59 @@
+<div
+  class="pha-c-topology"
+  id="cy-pan-and-zoom"
+  role="img"
+  aria-label="Graph with pan and zoom controls"
+  x-ref="topo"
+  x-data="phaTopology({
+    elements: [
+      { data: { id: 'r', label: 'root' } },
+      { data: { id: 'a', label: 'a' } }, { data: { id: 'b', label: 'b' } },
+      { data: { id: 'c', label: 'c' } }, { data: { id: 'd', label: 'd' } },
+      { data: { id: 'e', label: 'e' } }, { data: { id: 'f', label: 'f' } },
+      { data: { source: 'r', target: 'a' } }, { data: { source: 'r', target: 'b' } },
+      { data: { source: 'a', target: 'c' } }, { data: { source: 'a', target: 'd' } },
+      { data: { source: 'b', target: 'e' } }, { data: { source: 'b', target: 'f' } }
+    ],
+    layout: { name: 'breadthfirst', directed: true, animate: false, padding: 20 }
+  })"
+>
+  <div
+    class="pha-c-topology__toolbar"
+    style="
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 4px;
+      border: 1px solid #d2d2d2;
+      padding: 4px;
+      z-index: 2;
+    "
+  >
+    <button
+      class="pf-v6-c-button pf-m-control pf-m-small"
+      type="button"
+      @click="$refs.topo.getCy().zoom($refs.topo.getCy().zoom() * 1.2); $refs.topo.center();"
+      aria-label="Zoom in"
+    >
+      <span class="pf-v6-c-button__text">+</span>
+    </button>
+    <button
+      class="pf-v6-c-button pf-m-control pf-m-small"
+      type="button"
+      @click="$refs.topo.getCy().zoom($refs.topo.getCy().zoom() / 1.2); $refs.topo.center();"
+      aria-label="Zoom out"
+    >
+      <span class="pf-v6-c-button__text">−</span>
+    </button>
+    <button
+      class="pf-v6-c-button pf-m-control pf-m-small"
+      type="button"
+      @click="$refs.topo.fit()"
+      aria-label="Fit to view"
+    >
+      <span class="pf-v6-c-button__text">Fit</span>
+    </button>
+  </div>
+  <div class="pha-c-topology__canvas"></div>
+</div>

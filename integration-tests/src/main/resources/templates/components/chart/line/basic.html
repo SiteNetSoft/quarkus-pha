@@ -1,0 +1,21 @@
+<div
+  class="pha-c-chart"
+  id="ch-line-basic"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'axis' },
+      legend: { data: ['Active', 'New'] },
+      xAxis: {
+        type: 'category',
+        data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      },
+      yAxis: { type: 'value', name: 'Users' },
+      series: [
+        { name: 'Active', type: 'line', smooth: true, data: [820, 932, 901, 934, 1290, 1330, 1320, 1450, 1500, 1620, 1780, 1900] },
+        { name: 'New',    type: 'line', smooth: true, data: [120, 200, 150, 180,  270,  310,  250,  380,  320,  410,  390,  450] }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>

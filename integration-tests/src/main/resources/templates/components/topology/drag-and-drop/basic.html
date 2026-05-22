@@ -1,0 +1,25 @@
+<div
+  class="pha-c-topology"
+  id="cy-drag-and-drop"
+  role="img"
+  aria-label="Graph where nodes are drag-and-droppable"
+  x-data="phaTopology({
+    elements: [
+      { data: { id: 'frontend',  label: 'frontend'  } },
+      { data: { id: 'gateway',   label: 'gateway'   } },
+      { data: { id: 'orders',    label: 'orders'    } },
+      { data: { id: 'inventory', label: 'inventory' } },
+      { data: { id: 'shipping',  label: 'shipping'  } },
+      { data: { source: 'frontend',  target: 'gateway'   } },
+      { data: { source: 'gateway',   target: 'orders'    } },
+      { data: { source: 'orders',    target: 'inventory' } },
+      { data: { source: 'orders',    target: 'shipping'  } }
+    ],
+    layout: { name: 'cose', animate: false }
+  })"
+>
+  <div class="pha-c-topology__canvas"></div>
+</div>
+<p class="pf-v6-u-mt-md pf-v6-u-color-200" style="font-size: 0.875rem">
+  Click and drag any node to reposition it; node positions persist while the page is open.
+</p>

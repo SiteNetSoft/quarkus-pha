@@ -1,0 +1,61 @@
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading">Why resize handling matters</h2>
+<p>
+  ECharts measures its container once at init. Without a resize hook it stays at that initial size forever — a chart
+  inside a sidebar that opens later, a dashboard tile that re-flows when the parent grid changes columns, or any chart
+  embedded in an HTMX-swapped fragment will all render at the wrong dimensions.
+</p>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading">What <code class="ws-code">phaChart</code> does</h2>
+<p>
+  On <code class="ws-code">init()</code>, the Alpine factory registers a single
+  <code class="ws-code">resize</code> handler on <code class="ws-code">window</code> that calls
+  <code class="ws-code">chart.resize()</code>. On <code class="ws-code">destroy()</code> it removes the handler and
+  disposes the ECharts instance so there's no leak.
+</p>
+
+<p>
+  This covers the common viewport-resize case. To opt out, pass
+  <code class="ws-code">{|phaChart({ option, autoResize: false })|}</code>; you keep
+  <code class="ws-code">getChart().resize()</code> as a public method you can call manually from elsewhere in the page.
+</p>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading">When the parent re-flows without a window resize</h2>
+<p>
+  A window listener won't catch <em>container</em>-only resizes — e.g. a CSS-grid cell that grows because a sibling tile
+  collapses, or an HTMX swap that resizes the parent flexbox. For those, attach a
+  <code class="ws-code">ResizeObserver</code> to the wrapper:
+</p>
+
+<div class="pf-v6-c-code-editor" style="margin: 1rem 0">
+  <div class="pf-v6-c-code-editor__header">
+    <div class="pf-v6-c-code-editor__tab">
+      <span class="pf-v6-c-code-editor__tab-text">JavaScript</span>
+    </div>
+  </div>
+  <div class="pf-v6-c-code-editor__main">
+    <div class="pf-v6-c-code-editor__code">
+      <pre class="pf-v6-c-code-editor__code-pre">
+document.addEventListener('alpine:init', () =&gt; {
+  Alpine.directive('chart-resize', (el, { expression }, { evaluateLater }) =&gt; {
+    let target = el.querySelector('.pha-c-chart');
+    if (!target || !target.__phaChart) return;
+    let ro = new ResizeObserver(() =&gt; target.__phaChart.resize());
+    ro.observe(el);
+  });
+});</pre
+      >
+    </div>
+  </div>
+</div>
+
+<p>
+  Then add <code class="ws-code">x-chart-resize</code> to the parent container — any dimension change on the parent
+  triggers a chart re-layout.
+</p>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading">HTMX swaps clean up cleanly</h2>
+<p>
+  When HTMX replaces a wrapper via <code class="ws-code">outerHTML</code>, Alpine's
+  <code class="ws-code">destroy()</code> runs on the old node — which disposes the old ECharts instance — and the new
+  node's <code class="ws-code">init()</code> creates a fresh one. There's nothing to wire up.
+</p>

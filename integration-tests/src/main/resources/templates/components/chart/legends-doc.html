@@ -1,0 +1,66 @@
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading">Where the legend lives</h2>
+<p>
+  ECharts' <code class="ws-code">legend</code> block accepts <code class="ws-code">orient</code> (horizontal / vertical)
+  and a 2-axis position (<code class="ws-code">left</code>, <code class="ws-code">right</code>,
+  <code class="ws-code">top</code>, <code class="ws-code">bottom</code>). Names come from
+  <code class="ws-code">series[].name</code>.
+</p>
+
+<h3 class="pf-v6-c-content--h3 pf-m-editorial ws-heading" style="margin-top: 1rem">Horizontal — top (default)</h3>
+<div
+  class="pha-c-chart"
+  id="ch-legend-top"
+  x-data="phaChart({
+    option: {
+      legend: { top: 'top' },
+      tooltip: { trigger: 'axis' },
+      xAxis: { type: 'category', data: ['Q1','Q2','Q3','Q4'] },
+      yAxis: { type: 'value' },
+      series: [
+        { name: '2024', type: 'line', data: [320, 410, 390, 480] },
+        { name: '2025', type: 'line', data: [380, 450, 470, 520] }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
+
+<h3 class="pf-v6-c-content--h3 pf-m-editorial ws-heading" style="margin-top: 1rem">Vertical — left</h3>
+<div
+  class="pha-c-chart"
+  id="ch-legend-vert"
+  x-data="phaChart({
+    option: {
+      legend: { orient: 'vertical', left: 'left', top: 'middle' },
+      tooltip: { trigger: 'item' },
+      series: [{
+        type: 'pie',
+        radius: ['40%', '70%'],
+        center: ['65%', '50%'],
+        data: [
+          { value: 1048, name: 'Compute' },
+          { value: 735,  name: 'Storage' },
+          { value: 580,  name: 'Network' },
+          { value: 484,  name: 'Database' }
+        ]
+      }]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">Click to toggle</h2>
+<p>
+  Default behaviour — click a legend item to hide its series. To make a series un-hideable, set
+  <code class="ws-code">selectedMode: false</code> on the legend. To start with a series hidden, set
+  <code class="ws-code">selected</code>: <code class="ws-code">{|legend: { selected: { '2024': false } }|}</code>.
+</p>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading">No legend at all</h2>
+<p>
+  For sparklines and single-series visualisations skip the legend entirely — omit the
+  <code class="ws-code">legend</code> block from the option. See <a href="/components/chart/sparkline">Sparkline</a> for
+  an example.
+</p>

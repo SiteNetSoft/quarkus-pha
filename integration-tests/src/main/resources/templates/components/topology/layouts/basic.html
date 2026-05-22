@@ -1,0 +1,39 @@
+<div x-data="{ layout: 'cose' }">
+  <div class="pha-c-topology__toolbar" style="border: 1px solid #d2d2d2; border-bottom: 0; border-radius: 4px 4px 0 0">
+    <span class="pf-v6-c-label pf-m-compact pf-m-outline"
+      ><span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text">Layout</span></span></span
+    >
+    <template x-for="l in ['cose','breadthfirst','concentric','grid','circle']" :key="l">
+      <button
+        type="button"
+        class="pf-v6-c-button pf-m-control pf-m-small"
+        :class="layout === l ? 'pf-m-primary' : ''"
+        @click="layout = l; $refs.topo.getCy().layout({ name: l, animate: true, animationDuration: 400 }).run()"
+        x-text="l"
+      ></button>
+    </template>
+  </div>
+  <div
+    class="pha-c-topology"
+    id="cy-layouts"
+    role="img"
+    aria-label="Graph supporting switching between five layouts"
+    style="border-radius: 0 0 4px 4px; border-top: 0"
+    x-ref="topo"
+    x-data="phaTopology({
+      elements: [
+        { data: { id: 'r', label: 'root' } },
+        { data: { id: 'a', label: 'a' } }, { data: { id: 'b', label: 'b' } }, { data: { id: 'c', label: 'c' } },
+        { data: { id: 'd', label: 'd' } }, { data: { id: 'e', label: 'e' } }, { data: { id: 'f', label: 'f' } },
+        { data: { id: 'g', label: 'g' } }, { data: { id: 'h', label: 'h' } },
+        { data: { source: 'r', target: 'a' } }, { data: { source: 'r', target: 'b' } }, { data: { source: 'r', target: 'c' } },
+        { data: { source: 'a', target: 'd' } }, { data: { source: 'a', target: 'e' } },
+        { data: { source: 'b', target: 'f' } }, { data: { source: 'b', target: 'g' } },
+        { data: { source: 'c', target: 'h' } }
+      ],
+      layout: { name: 'cose', animate: false }
+    })"
+  >
+    <div class="pha-c-topology__canvas"></div>
+  </div>
+</div>

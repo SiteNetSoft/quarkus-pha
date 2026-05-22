@@ -104,3 +104,15 @@ integration-tests/src/main/resources/templates/components/password-strength/
 integration-tests/src/main/resources/templates/components/date-and-time-picker/
 integration-tests/src/main/resources/templates/components/time-picker/
 integration-tests/src/main/resources/templates/components/navigation/
+
+# Code-editor examples — newlines inside {#content}...{/content} blocks are
+# significant (they're rendered verbatim into a <pre>). Prettier collapses
+# them which corrupts YAML/JSON examples.
+integration-tests/src/main/resources/templates/components/code-editor/
+
+# Topology runtime template — conditional attribute block ({#if height??} style="...") trips Prettier's parser.
+runtime/src/main/resources/templates/components/charts/topology.html
+
+# Topology examples — deep inline Cytoscape config objects inside x-data
+# attributes are not safely reflowable by Prettier.
+integration-tests/src/main/resources/templates/components/topology/
