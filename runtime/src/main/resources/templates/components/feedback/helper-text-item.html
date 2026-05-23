@@ -1,8 +1,8 @@
 {! Helper text item — PatternFly v6 !}
 {! Renders the inner __item markup; pair with components/feedback/helper-text as the container. !}
 {!                                                                                !}
+{! Content slot: body text (required, passed as the include body).                !}
 {! Parameters:                                                                    !}
-{!   text             (required) — body text                                      !}
 {!   status           (optional) — indeterminate | warning | success | error      !}
 {!   dynamic          (optional) — boolean; applies pf-m-dynamic for transition animations !}
 {!   iconName         (optional) — overrides the default per-status icon          !}
@@ -23,6 +23,6 @@
   {#else if status??}
   <span class="pf-v6-c-helper-text__item-icon">{#if status is 'success'}{icons:svg('fa:circle-check').raw}{#else if status is 'warning'}{icons:svg('fa:triangle-exclamation').raw}{#else if status is 'error'}{icons:svg('fa:circle-exclamation').raw}{#else if status is 'indeterminate'}{icons:svg('fa:minus').raw}{/if}</span>
   {/if}
-  <span class="pf-v6-c-helper-text__item-text">{text}</span>
+  <span class="pf-v6-c-helper-text__item-text">{#insert/}</span>
   {#if screenReaderText??}<span class="pf-v6-screen-reader">{screenReaderText}</span>{/if}
 </div>
