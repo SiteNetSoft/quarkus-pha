@@ -145,32 +145,44 @@
                         </div>
                       </div>
 
-                      {#include partials/example-card title="Basic" slug="basic" component="text-input"
-                      description="Default text input with a placeholder."} {#content}{#include
-                      components/text-input/basic /}{/content} {/include} {#include partials/example-card
-                      title="Disabled" slug="disabled" component="text-input" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;disabled=true&lt;/code&gt; emits the disabled HTML attribute plus
-                      &lt;code class=&quot;ws-code&quot;&gt;pf-m-disabled&lt;/code&gt; on the form-control wrapper."}
-                      {#content}{#include components/text-input/disabled /}{/content} {/include} {#include
-                      partials/example-card title="Read only" slug="readonly" component="text-input"
-                      description="&lt;code class=&quot;ws-code&quot;&gt;readonly=true&lt;/code&gt; — value shows but
-                      isn't editable. Adds &lt;code class=&quot;ws-code&quot;&gt;pf-m-readonly&lt;/code&gt; for the
-                      muted styling."} {#content}{#include components/text-input/readonly /}{/content} {/include}
-                      {#include partials/example-card title="Invalid" slug="invalid" component="text-input"
-                      description="Pass &lt;code class=&quot;ws-code&quot;&gt;validated=&quot;error&quot;&lt;/code&gt;
-                      for &lt;code class=&quot;ws-code&quot;&gt;pf-m-error&lt;/code&gt; + the matching status icon. Also
-                      sets &lt;code class=&quot;ws-code&quot;&gt;aria-invalid=&quot;true&quot;&lt;/code&gt;. Available
-                      variants: &lt;code class=&quot;ws-code&quot;&gt;success | warning | error&lt;/code&gt;."}
-                      {#content}{#include components/text-input/invalid /}{/content} {/include} {#include
-                      partials/example-card title="With icon" slug="with-icon" component="text-input"
-                      description="Prefix icon — &lt;code
-                      class=&quot;ws-code&quot;&gt;iconName=&quot;fa:magnifying-glass&quot;&lt;/code&gt; emits &lt;code
-                      class=&quot;ws-code&quot;&gt;pf-m-icon&lt;/code&gt; and renders the SVG inside the form-control."}
-                      {#content}{#include components/text-input/with-icon /}{/content} {/include} {#include
-                      partials/example-card title="Input types" slug="types" component="text-input" description="Common
-                      type variants — email, password, number, date. Type maps directly to the HTML &lt;code
-                      class=&quot;ws-code&quot;&gt;type&lt;/code&gt; attribute."} {#content}{#include
-                      components/text-input/types /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="text-input"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Default text input with a placeholder.</p>
+                      {/description} {#content}{#include components/text-input/basic /}{/content} {/include} {#include
+                      partials/example-card title="Disabled" slug="disabled" component="text-input"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">disabled=true</code> emits the disabled HTML attribute plus
+                        <code class="ws-code">pf-m-disabled</code> on the form-control wrapper.
+                      </p>
+                      {/description} {#content}{#include components/text-input/disabled /}{/content} {/include}
+                      {#include partials/example-card title="Read only" slug="readonly" component="text-input"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">readonly=true</code> — value shows but isn't editable. Adds
+                        <code class="ws-code">pf-m-readonly</code> for the muted styling.
+                      </p>
+                      {/description} {#content}{#include components/text-input/readonly /}{/content} {/include}
+                      {#include partials/example-card title="Invalid" slug="invalid" component="text-input"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Pass <code class="ws-code">validated="error"</code> for
+                        <code class="ws-code">pf-m-error</code> + the matching status icon. Also sets
+                        <code class="ws-code">aria-invalid="true"</code>. Available variants:
+                        <code class="ws-code">success | warning | error</code>.
+                      </p>
+                      {/description} {#content}{#include components/text-input/invalid /}{/content} {/include} {#include
+                      partials/example-card title="With icon" slug="with-icon" component="text-input"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Prefix icon — <code class="ws-code">iconName="fa:magnifying-glass"</code> emits
+                        <code class="ws-code">pf-m-icon</code> and renders the SVG inside the form-control.
+                      </p>
+                      {/description} {#content}{#include components/text-input/with-icon /}{/content} {/include}
+                      {#include partials/example-card title="Input types" slug="types" component="text-input"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Common type variants — email, password, number, date. Type maps directly to the HTML
+                        <code class="ws-code">type</code> attribute.
+                      </p>
+                      {/description} {#content}{#include components/text-input/types /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

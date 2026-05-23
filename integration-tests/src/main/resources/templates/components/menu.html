@@ -108,12 +108,18 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="menu" description="Four
-                      items, a divider, and a danger-tinted Delete. Arrow-key nav baked into the runtime template via
-                      Alpine."} {#content}{#include components/menu/basic /}{/content} {/include} {#include
-                      partials/example-card title="With descriptions" slug="with-descriptions" component="menu"
-                      description="Two items, each with a muted second-line description."} {#content}{#include
-                      components/menu/with-descriptions /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="menu"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Four items, a divider, and a danger-tinted Delete. Arrow-key nav baked into the runtime template
+                        via Alpine.
+                      </p>
+                      {/description} {#content}{#include components/menu/basic /}{/content} {/include} {#include
+                      partials/example-card title="With descriptions" slug="with-descriptions" component="menu"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Two items, each with a muted second-line description.
+                      </p>
+                      {/description} {#content}{#include components/menu/with-descriptions /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

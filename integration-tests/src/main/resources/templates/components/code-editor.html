@@ -127,20 +127,28 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="code-editor"
-                      description="All three header controls visible: copy, download, upload. The Copy control flips its
-                      icon to a check for 2s on success (Alpine-managed)."} {#content}{#include
+                      {#include partials/example-card title="Basic" slug="basic" component="code-editor"}
+  {#description}
+  <p class="pf-v6-c-content--p pf-m-editorial ws-p">All three header controls visible: copy, download, upload. The Copy control flips its icon to a check for 2s on success (Alpine-managed).</p>
+  {/description}
+ {#content}{#include
                       components/code-editor/basic /}{/content} {/include} {#include partials/example-card
-                      title="Read-only" slug="read-only" component="code-editor" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;readonly=true&lt;/code&gt; adds &lt;code
-                      class=&quot;ws-code&quot;&gt;pf-m-read-only&lt;/code&gt;. Keep the Copy control so users can still
-                      lift the contents."} {#content}{#include components/code-editor/read-only /}{/content} {/include}
+                      title="Read-only" slug="read-only" component="code-editor"}
+  {#description}
+  <p class="pf-v6-c-content--p pf-m-editorial ws-p"><code class="ws-code">readonly=true</code> adds <code class="ws-code">pf-m-read-only</code>. Keep the Copy control so users can still lift the contents.</p>
+  {/description}
+ {#content}{#include components/code-editor/read-only /}{/content} {/include}
                       {#include partials/example-card title="Without actions" slug="without-actions"
-                      component="code-editor" description="Language tab only — no header controls. Use when the code is
-                      purely illustrative."} {#content}{#include components/code-editor/without-actions /}{/content}
-                      {/include} {#include partials/example-card title="Minimal" slug="minimal" component="code-editor"
-                      description="No header, no language tab. The wrapper falls back to a bare &lt;code
-                      class=&quot;ws-code&quot;&gt;pf-v6-c-code-editor&lt;/code&gt; with just the &lt;pre&gt; inside."}
+                      component="code-editor"}
+  {#description}
+  <p class="pf-v6-c-content--p pf-m-editorial ws-p">Language tab only — no header controls. Use when the code is purely illustrative.</p>
+  {/description}
+ {#content}{#include components/code-editor/without-actions /}{/content}
+                      {/include} {#include partials/example-card title="Minimal" slug="minimal" component="code-editor"}
+  {#description}
+  <p class="pf-v6-c-content--p pf-m-editorial ws-p">No header, no language tab. The wrapper falls back to a bare <code class="ws-code">pf-v6-c-code-editor</code> with just the <pre> inside.</p>
+  {/description}
+
                       {#content}{#include components/code-editor/minimal /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">

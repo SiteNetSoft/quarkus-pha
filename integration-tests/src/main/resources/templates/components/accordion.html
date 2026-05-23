@@ -142,30 +142,43 @@
                         </div>
 
                         {#include partials/example-card title="Definition list" slug="definition-list"
-                        component="accordion" description="The PF default — renders as &lt;code
-                        class=&quot;ws-code&quot;&gt;&amp;lt;dl&amp;gt;&lt;/code&gt; / &lt;code
-                        class=&quot;ws-code&quot;&gt;&amp;lt;dt&amp;gt;&lt;/code&gt; / &lt;code
-                        class=&quot;ws-code&quot;&gt;&amp;lt;dd&amp;gt;&lt;/code&gt; for term/definition semantics.
-                        Multiple items may be expanded at once."} {#content}{#include
-                        components/accordion/definition-list /}{/content} {/include} {#include partials/example-card
-                        title="Single expand" slug="single-expand" component="accordion" description="Only one item open
-                        at a time. Requires shared Alpine state across items, so this variant is hand-rolled rather than
-                        using the runtime template — the technique is reusable when single-expand UX is preferred."}
-                        {#content}{#include components/accordion/single-expand /}{/content} {/include} {#include
-                        partials/example-card title="Fixed (multiple expand)" slug="fixed-multiple"
-                        component="accordion" description="&lt;code class=&quot;ws-code&quot;&gt;fixed=true&lt;/code&gt;
-                        caps each expanded body at &lt;code class=&quot;ws-code&quot;&gt;9.375rem&lt;/code&gt; (PF
-                        default) with overflow scroll. Multiple items can be open simultaneously."} {#content}{#include
-                        components/accordion/fixed-multiple /}{/content} {/include} {#include partials/example-card
-                        title="Bordered" slug="bordered" component="accordion" description="&lt;code
-                        class=&quot;ws-code&quot;&gt;bordered=true&lt;/code&gt; adds &lt;code
-                        class=&quot;ws-code&quot;&gt;pf-m-bordered&lt;/code&gt; — items are separated by bottom borders
-                        and the container has no rounded corners."} {#content}{#include components/accordion/bordered
-                        /}{/content} {/include} {#include partials/example-card title="Toggle at start"
-                        slug="toggle-start" component="accordion" description="&lt;code
-                        class=&quot;ws-code&quot;&gt;toggleStart=true&lt;/code&gt; flips the toggle icon to the left of
-                        the text — PF's &lt;code class=&quot;ws-code&quot;&gt;togglePosition='start'&lt;/code&gt;."}
-                        {#content}{#include components/accordion/toggle-start /}{/content} {/include}
+                        component="accordion"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          The PF default — renders as <code class="ws-code">&lt;dl&gt;</code> /
+                          <code class="ws-code">&lt;dt&gt;</code> / <code class="ws-code">&lt;dd&gt;</code> for
+                          term/definition semantics. Multiple items may be expanded at once.
+                        </p>
+                        {/description} {#content}{#include components/accordion/definition-list /}{/content} {/include}
+                        {#include partials/example-card title="Single expand" slug="single-expand"
+                        component="accordion"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Only one item open at a time. Requires shared Alpine state across items, so this variant is
+                          hand-rolled rather than using the runtime template — the technique is reusable when
+                          single-expand UX is preferred.
+                        </p>
+                        {/description} {#content}{#include components/accordion/single-expand /}{/content} {/include}
+                        {#include partials/example-card title="Fixed (multiple expand)" slug="fixed-multiple"
+                        component="accordion"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          <code class="ws-code">fixed=true</code> caps each expanded body at
+                          <code class="ws-code">9.375rem</code> (PF default) with overflow scroll. Multiple items can be
+                          open simultaneously.
+                        </p>
+                        {/description} {#content}{#include components/accordion/fixed-multiple /}{/content} {/include}
+                        {#include partials/example-card title="Bordered" slug="bordered" component="accordion"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          <code class="ws-code">bordered=true</code> adds <code class="ws-code">pf-m-bordered</code> —
+                          items are separated by bottom borders and the container has no rounded corners.
+                        </p>
+                        {/description} {#content}{#include components/accordion/bordered /}{/content} {/include}
+                        {#include partials/example-card title="Toggle at start" slug="toggle-start"
+                        component="accordion"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          <code class="ws-code">toggleStart=true</code> flips the toggle icon to the left of the text —
+                          PF's <code class="ws-code">togglePosition='start'</code>.
+                        </p>
+                        {/description} {#content}{#include components/accordion/toggle-start /}{/content} {/include}
 
                         <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                           <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">

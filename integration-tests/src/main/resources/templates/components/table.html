@@ -144,26 +144,41 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="table" description="Default
-                      rows — three users with a name, status, role and edit action."} {#content}{#include
-                      components/table/basic /}{/content} {/include} {#include partials/example-card title="Compact"
-                      slug="compact" component="table" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;compact=true&lt;/code&gt; — denser padding for info-heavy tables."}
-                      {#content}{#include components/table/compact /}{/content} {/include} {#include
-                      partials/example-card title="Striped" slug="striped" component="table" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;striped=true&lt;/code&gt; — alternating row background for easier
-                      horizontal scanning."} {#content}{#include components/table/striped /}{/content} {/include}
-                      {#include partials/example-card title="Borderless" slug="borderless" component="table"
-                      description="&lt;code class=&quot;ws-code&quot;&gt;borderless=true&lt;/code&gt; — removes row
-                      dividers; pairs well with striped on dashboards."} {#content}{#include components/table/borderless
-                      /}{/content} {/include} {#include partials/example-card title="Sortable (HTMX)" slug="sortable"
-                      component="table" description="Column headers post to &lt;code
-                      class=&quot;ws-code&quot;&gt;/api/htmx/table-sort&lt;/code&gt; and swap the table; no client-side
-                      sorting logic."} {#content}{#include components/table/sortable /}{/content} {/include} {#include
-                      partials/example-card title="Expandable (Alpine)" slug="expandable" component="table"
-                      description="Per-row toggle reveals a detail row beneath; state lives in &lt;code
-                      class=&quot;ws-code&quot;&gt;x-data&lt;/code&gt; on the &amp;lt;tbody&amp;gt;."}
-                      {#content}{#include components/table/expandable /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="table"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Default rows — three users with a name, status, role and edit action.
+                      </p>
+                      {/description} {#content}{#include components/table/basic /}{/content} {/include} {#include
+                      partials/example-card title="Compact" slug="compact" component="table"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">compact=true</code> — denser padding for info-heavy tables.
+                      </p>
+                      {/description} {#content}{#include components/table/compact /}{/content} {/include} {#include
+                      partials/example-card title="Striped" slug="striped" component="table"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">striped=true</code> — alternating row background for easier horizontal
+                        scanning.
+                      </p>
+                      {/description} {#content}{#include components/table/striped /}{/content} {/include} {#include
+                      partials/example-card title="Borderless" slug="borderless" component="table"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">borderless=true</code> — removes row dividers; pairs well with striped on
+                        dashboards.
+                      </p>
+                      {/description} {#content}{#include components/table/borderless /}{/content} {/include} {#include
+                      partials/example-card title="Sortable (HTMX)" slug="sortable" component="table"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Column headers post to <code class="ws-code">/api/htmx/table-sort</code> and swap the table; no
+                        client-side sorting logic.
+                      </p>
+                      {/description} {#content}{#include components/table/sortable /}{/content} {/include} {#include
+                      partials/example-card title="Expandable (Alpine)" slug="expandable" component="table"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Per-row toggle reveals a detail row beneath; state lives in
+                        <code class="ws-code">x-data</code> on the &lt;tbody&gt;.
+                      </p>
+                      {/description} {#content}{#include components/table/expandable /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

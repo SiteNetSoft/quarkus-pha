@@ -126,21 +126,29 @@
                         </div>
                       </div>
 
-                      {#include partials/example-card title="Basic" slug="basic" component="text-area"
-                      description="Plain text area, 4 visible rows."} {#content}{#include components/text-area/basic
-                      /}{/content} {/include} {#include partials/example-card title="Resize vertical"
-                      slug="resize-vertical" component="text-area" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;resize=&quot;vertical&quot;&lt;/code&gt; lets users drag the corner
-                      to grow height. Available values: &lt;code class=&quot;ws-code&quot;&gt;vertical | horizontal |
-                      both&lt;/code&gt;."} {#content}{#include components/text-area/resize-vertical /}{/content}
-                      {/include} {#include partials/example-card title="Invalid" slug="invalid" component="text-area"
-                      description="&lt;code class=&quot;ws-code&quot;&gt;validated=&quot;error&quot;&lt;/code&gt; plus
-                      the status icon. Same enum as text-input."} {#content}{#include components/text-area/invalid
-                      /}{/content} {/include} {#include partials/example-card title="Disabled / read only"
-                      slug="disabled-readonly" component="text-area" description="Two forms of non-editable — &lt;code
-                      class=&quot;ws-code&quot;&gt;disabled=true&lt;/code&gt; and &lt;code
-                      class=&quot;ws-code&quot;&gt;readonly=true&lt;/code&gt;."} {#content}{#include
-                      components/text-area/disabled-readonly /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="text-area"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Plain text area, 4 visible rows.</p>
+                      {/description} {#content}{#include components/text-area/basic /}{/content} {/include} {#include
+                      partials/example-card title="Resize vertical" slug="resize-vertical" component="text-area"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">resize="vertical"</code> lets users drag the corner to grow height.
+                        Available values: <code class="ws-code">vertical | horizontal | both</code>.
+                      </p>
+                      {/description} {#content}{#include components/text-area/resize-vertical /}{/content} {/include}
+                      {#include partials/example-card title="Invalid" slug="invalid" component="text-area"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">validated="error"</code> plus the status icon. Same enum as text-input.
+                      </p>
+                      {/description} {#content}{#include components/text-area/invalid /}{/content} {/include} {#include
+                      partials/example-card title="Disabled / read only" slug="disabled-readonly" component="text-area"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Two forms of non-editable — <code class="ws-code">disabled=true</code> and
+                        <code class="ws-code">readonly=true</code>.
+                      </p>
+                      {/description} {#content}{#include components/text-area/disabled-readonly /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

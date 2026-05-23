@@ -107,13 +107,21 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="description-list"
-                      description="Default stacked layout — each &lt;dt&gt; on top of its &lt;dd&gt;. Inner structure
-                      (groups, terms, descriptions) is hand-rendered in the slot."} {#content}{#include
-                      components/description-list/basic /}{/content} {/include} {#include partials/example-card
-                      title="Fill columns" slug="fill-columns" component="description-list" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;fillColumns=true&lt;/code&gt; — term and description sit side-by-side
-                      in equal columns."} {#content}{#include components/description-list/fill-columns /}{/content}
+                      {#include partials/example-card title="Basic" slug="basic" component="description-list"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Default stacked layout — each
+                        <dt>on top of its</dt>
+                        <dd>. Inner structure (groups, terms, descriptions) is hand-rendered in the slot.</dd>
+                      </p>
+                      {/description} {#content}{#include components/description-list/basic /}{/content} {/include}
+                      {#include partials/example-card title="Fill columns" slug="fill-columns"
+                      component="description-list"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">fillColumns=true</code> — term and description sit side-by-side in equal
+                        columns.
+                      </p>
+                      {/description} {#content}{#include components/description-list/fill-columns /}{/content}
                       {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">

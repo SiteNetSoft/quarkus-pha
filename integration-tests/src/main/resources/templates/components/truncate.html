@@ -118,18 +118,25 @@
                         </div>
                       </div>
 
-                      {#include partials/example-card title="End (default)" slug="end" component="truncate"
-                      description="Default behavior — ellipsis at the end. The container width determines the cutoff
-                      point."} {#content}{#include components/truncate/end /}{/content} {/include} {#include
-                      partials/example-card title="Start" slug="start" component="truncate" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;position=&quot;start&quot;&lt;/code&gt; — ellipsis at the start.
-                      Useful for file paths where the tail (filename) matters most."} {#content}{#include
-                      components/truncate/start /}{/content} {/include} {#include partials/example-card title="Middle"
-                      slug="middle" component="truncate" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;position=&quot;middle&quot;&lt;/code&gt; — splits at &lt;code
-                      class=&quot;ws-code&quot;&gt;trailingNumChars&lt;/code&gt; (default 7). The last N chars stay
-                      visible; the rest gets the ellipsis."} {#content}{#include components/truncate/middle /}{/content}
-                      {/include}
+                      {#include partials/example-card title="End (default)" slug="end" component="truncate"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Default behavior — ellipsis at the end. The container width determines the cutoff point.
+                      </p>
+                      {/description} {#content}{#include components/truncate/end /}{/content} {/include} {#include
+                      partials/example-card title="Start" slug="start" component="truncate"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">position="start"</code> — ellipsis at the start. Useful for file paths
+                        where the tail (filename) matters most.
+                      </p>
+                      {/description} {#content}{#include components/truncate/start /}{/content} {/include} {#include
+                      partials/example-card title="Middle" slug="middle" component="truncate"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">position="middle"</code> — splits at
+                        <code class="ws-code">trailingNumChars</code> (default 7). The last N chars stay visible; the
+                        rest gets the ellipsis.
+                      </p>
+                      {/description} {#content}{#include components/truncate/middle /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

@@ -98,9 +98,12 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="context-selector"
-                      description="Toggle reveals a list of projects with a search box. Click an item to swap the toggle
-                      label."} {#content}{#include components/context-selector/basic /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="context-selector"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Toggle reveals a list of projects with a search box. Click an item to swap the toggle label.
+                      </p>
+                      {/description} {#content}{#include components/context-selector/basic /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

@@ -98,10 +98,12 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="toolbar" description="Search
-                      + Filter on the left, Create + kebab on the right. Use &lt;code
-                      class=&quot;ws-code&quot;&gt;pf-m-align-end&lt;/code&gt; on the right group."} {#content}{#include
-                      components/toolbar/basic /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="toolbar"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Search + Filter on the left, Create + kebab on the right. Use
+                        <code class="ws-code">pf-m-align-end</code> on the right group.
+                      </p>
+                      {/description} {#content}{#include components/toolbar/basic /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

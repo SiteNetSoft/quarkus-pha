@@ -108,13 +108,17 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="sidebar" description="Panel
-                      on the left, content on the right — the default for filter rails."} {#content}{#include
-                      components/sidebar/basic /}{/content} {/include} {#include partials/example-card title="Panel
-                      right" slug="panel-right" component="sidebar" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;panelRight=true&lt;/code&gt; — panel switches to the right. Pair with
-                      &lt;code class=&quot;ws-code&quot;&gt;gutter=true&lt;/code&gt; for a small gap."}
-                      {#content}{#include components/sidebar/panel-right /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="sidebar"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Panel on the left, content on the right — the default for filter rails.
+                      </p>
+                      {/description} {#content}{#include components/sidebar/basic /}{/content} {/include} {#include
+                      partials/example-card title="Panel right" slug="panel-right" component="sidebar"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">panelRight=true</code> — panel switches to the right. Pair with
+                        <code class="ws-code">gutter=true</code> for a small gap.
+                      </p>
+                      {/description} {#content}{#include components/sidebar/panel-right /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

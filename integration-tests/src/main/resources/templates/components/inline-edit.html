@@ -99,10 +99,12 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="inline-edit"
-                      description="Click the pencil to enter edit mode. Alpine tracks the &lt;code
-                      class=&quot;ws-code&quot;&gt;editing&lt;/code&gt; flag + the live value."} {#content}{#include
-                      components/inline-edit/basic /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="inline-edit"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Click the pencil to enter edit mode. Alpine tracks the <code class="ws-code">editing</code> flag
+                        + the live value.
+                      </p>
+                      {/description} {#content}{#include components/inline-edit/basic /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

@@ -139,28 +139,40 @@
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Basic" slug="basic" component="avatar"
-                        description="Default medium avatar — circle image with no extra modifiers. The src here is an
-                        inline SVG silhouette; in production point it at a real user-image URL."} {#content}{#include
-                        components/avatar/basic /}{/content} {/include} {#include partials/example-card title="Bordered"
-                        slug="bordered" component="avatar" description="Add &lt;code
-                        class=&quot;ws-code&quot;&gt;pf-m-bordered&lt;/code&gt; for a hairline ring around the image.
-                        Useful to distinguish stacked or overlapping avatars."} {#content}{#include
-                        components/avatar/bordered /}{/content} {/include} {#include partials/example-card title="Sizes"
-                        slug="sizes" component="avatar" description="All four size modifiers: &lt;code
-                        class=&quot;ws-code&quot;&gt;pf-m-sm&lt;/code&gt; (1.5rem), &lt;code
-                        class=&quot;ws-code&quot;&gt;pf-m-md&lt;/code&gt; (default 2.25rem), &lt;code
-                        class=&quot;ws-code&quot;&gt;pf-m-lg&lt;/code&gt; (4.5rem), &lt;code
-                        class=&quot;ws-code&quot;&gt;pf-m-xl&lt;/code&gt; (8rem)."} {#content}{#include
-                        components/avatar/sizes /}{/content} {/include} {#include partials/example-card title="Bordered
-                        sizes" slug="bordered-sizes" component="avatar" description="The same four sizes with &lt;code
-                        class=&quot;ws-code&quot;&gt;pf-m-bordered&lt;/code&gt; — the border thickness scales subtly
-                        with size."} {#content}{#include components/avatar/bordered-sizes /}{/content} {/include}
-                        {#include partials/example-card title="Initials" slug="initials" component="avatar"
-                        description="A common fallback pattern for users without a profile photo — the avatar element
-                        itself is unchanged; the trick is generating a small SVG of the user's initials on a colored
-                        circle and serving it as the &lt;code class=&quot;ws-code&quot;&gt;src&lt;/code&gt;."}
-                        {#content}{#include components/avatar/initials /}{/content} {/include}
+                        {#include partials/example-card title="Basic" slug="basic" component="avatar"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Default medium avatar — circle image with no extra modifiers. The src here is an inline SVG
+                          silhouette; in production point it at a real user-image URL.
+                        </p>
+                        {/description} {#content}{#include components/avatar/basic /}{/content} {/include} {#include
+                        partials/example-card title="Bordered" slug="bordered" component="avatar"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Add <code class="ws-code">pf-m-bordered</code> for a hairline ring around the image. Useful to
+                          distinguish stacked or overlapping avatars.
+                        </p>
+                        {/description} {#content}{#include components/avatar/bordered /}{/content} {/include} {#include
+                        partials/example-card title="Sizes" slug="sizes" component="avatar"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          All four size modifiers: <code class="ws-code">pf-m-sm</code> (1.5rem),
+                          <code class="ws-code">pf-m-md</code> (default 2.25rem),
+                          <code class="ws-code">pf-m-lg</code> (4.5rem), <code class="ws-code">pf-m-xl</code> (8rem).
+                        </p>
+                        {/description} {#content}{#include components/avatar/sizes /}{/content} {/include} {#include
+                        partials/example-card title="Bordered sizes" slug="bordered-sizes" component="avatar"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          The same four sizes with <code class="ws-code">pf-m-bordered</code> — the border thickness
+                          scales subtly with size.
+                        </p>
+                        {/description} {#content}{#include components/avatar/bordered-sizes /}{/content} {/include}
+                        {#include partials/example-card title="Initials" slug="initials" component="avatar"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          A common fallback pattern for users without a profile photo — the avatar element itself is
+                          unchanged; the trick is generating a small SVG of the user's initials on a colored circle and
+                          serving it as the <code class="ws-code">src</code>.
+                        </p>
+                        {/description} {#content}{#include components/avatar/initials /}{/content} {/include}
 
                         <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                           <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">

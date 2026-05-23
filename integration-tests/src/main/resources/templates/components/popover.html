@@ -108,13 +108,18 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="popover" description="Header
-                      + body — the standard help-popover shape. Positioned above the trigger button via CSS in the
-                      example."} {#content}{#include components/popover/basic /}{/content} {/include} {#include
-                      partials/example-card title="Danger" slug="danger" component="popover" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;pf-m-danger&lt;/code&gt; for a red-tinted popover with footer actions
-                      — perfect for confirm-deletion prompts."} {#content}{#include components/popover/danger
-                      /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="popover"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Header + body — the standard help-popover shape. Positioned above the trigger button via CSS in
+                        the example.
+                      </p>
+                      {/description} {#content}{#include components/popover/basic /}{/content} {/include} {#include
+                      partials/example-card title="Danger" slug="danger" component="popover"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-danger</code> for a red-tinted popover with footer actions — perfect
+                        for confirm-deletion prompts.
+                      </p>
+                      {/description} {#content}{#include components/popover/danger /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

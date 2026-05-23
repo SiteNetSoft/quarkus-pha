@@ -107,13 +107,17 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="pagination"
-                      description="Full pagination — total items text + first/prev/page-of/next/last controls."}
-                      {#content}{#include components/pagination/basic /}{/content} {/include} {#include
-                      partials/example-card title="Compact" slug="compact" component="pagination" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;compact=true&lt;/code&gt; — emits &lt;code
-                      class=&quot;ws-code&quot;&gt;pf-m-compact&lt;/code&gt;, shrinks padding and shows only
-                      prev/next."} {#content}{#include components/pagination/compact /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="pagination"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Full pagination — total items text + first/prev/page-of/next/last controls.
+                      </p>
+                      {/description} {#content}{#include components/pagination/basic /}{/content} {/include} {#include
+                      partials/example-card title="Compact" slug="compact" component="pagination"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">compact=true</code> — emits <code class="ws-code">pf-m-compact</code>,
+                        shrinks padding and shows only prev/next.
+                      </p>
+                      {/description} {#content}{#include components/pagination/compact /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

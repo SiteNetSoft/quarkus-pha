@@ -107,11 +107,16 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Single" slug="single" component="select" description="Pick
-                      one — toggle label updates to the chosen value."} {#content}{#include components/select/single
-                      /}{/content} {/include} {#include partials/example-card title="Checkboxes" slug="checkboxes"
-                      component="select" description="Multi-select with checkboxes inside the menu items."}
-                      {#content}{#include components/select/checkboxes /}{/content} {/include}
+                      {#include partials/example-card title="Single" slug="single" component="select"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Pick one — toggle label updates to the chosen value.
+                      </p>
+                      {/description} {#content}{#include components/select/single /}{/content} {/include} {#include
+                      partials/example-card title="Checkboxes" slug="checkboxes" component="select"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Multi-select with checkboxes inside the menu items.
+                      </p>
+                      {/description} {#content}{#include components/select/checkboxes /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

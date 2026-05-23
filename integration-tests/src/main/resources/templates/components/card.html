@@ -116,16 +116,23 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="card" description="Title +
-                      body + footer. Subsections (title / body / footer) are hand-rendered inside the content slot."}
-                      {#content}{#include components/card/basic /}{/content} {/include} {#include partials/example-card
-                      title="Compact" slug="compact" component="card" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;compact=true&lt;/code&gt; — tighter padding. Good for dense card
-                      grids."} {#content}{#include components/card/compact /}{/content} {/include} {#include
-                      partials/example-card title="Flat" slug="flat" component="card" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;flat=true&lt;/code&gt; — no shadow. Use when the card sits inside an
-                      already-elevated container (e.g. a Drawer)."} {#content}{#include components/card/flat
-                      /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="card"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Title + body + footer. Subsections (title / body / footer) are hand-rendered inside the content
+                        slot.
+                      </p>
+                      {/description} {#content}{#include components/card/basic /}{/content} {/include} {#include
+                      partials/example-card title="Compact" slug="compact" component="card"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">compact=true</code> — tighter padding. Good for dense card grids.
+                      </p>
+                      {/description} {#content}{#include components/card/compact /}{/content} {/include} {#include
+                      partials/example-card title="Flat" slug="flat" component="card"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">flat=true</code> — no shadow. Use when the card sits inside an
+                        already-elevated container (e.g. a Drawer).
+                      </p>
+                      {/description} {#content}{#include components/card/flat /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

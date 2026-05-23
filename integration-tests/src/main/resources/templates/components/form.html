@@ -127,22 +127,31 @@
                         </div>
                       </div>
 
-                      {#include partials/example-card title="Basic" slug="basic" component="form" description="Vertical
-                      form with two labelled fields. The default layout."} {#content}{#include components/form/basic
-                      /}{/content} {/include} {#include partials/example-card title="Horizontal" slug="horizontal"
-                      component="form" description="Pass &lt;code
-                      class=&quot;ws-code&quot;&gt;horizontal=true&lt;/code&gt; for &lt;code
-                      class=&quot;ws-code&quot;&gt;pf-m-horizontal&lt;/code&gt; — labels render in a fixed-width column
-                      next to controls. Best for setting/preference forms."} {#content}{#include
-                      components/form/horizontal /}{/content} {/include} {#include partials/example-card title="With
-                      helper text" slug="with-helper" component="form" description="Form group with an explanatory
-                      helper line under the control, using the &lt;a href=&quot;/components/helper-text&quot;&gt;Helper
-                      text&lt;/a&gt; component."} {#content}{#include components/form/with-helper /}{/content}
-                      {/include} {#include partials/example-card title="Invalid" slug="invalid" component="form"
-                      description="Form group with an error state — the text-input gets &lt;code
-                      class=&quot;ws-code&quot;&gt;validated=&quot;error&quot;&lt;/code&gt; and the helper text item
-                      gets &lt;code class=&quot;ws-code&quot;&gt;pf-m-error&lt;/code&gt; + the matching icon."}
-                      {#content}{#include components/form/invalid /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="form"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Vertical form with two labelled fields. The default layout.
+                      </p>
+                      {/description} {#content}{#include components/form/basic /}{/content} {/include} {#include
+                      partials/example-card title="Horizontal" slug="horizontal" component="form"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Pass <code class="ws-code">horizontal=true</code> for
+                        <code class="ws-code">pf-m-horizontal</code> — labels render in a fixed-width column next to
+                        controls. Best for setting/preference forms.
+                      </p>
+                      {/description} {#content}{#include components/form/horizontal /}{/content} {/include} {#include
+                      partials/example-card title="With helper text" slug="with-helper" component="form"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Form group with an explanatory helper line under the control, using the
+                        <a href="/components/helper-text">Helper text</a> component.
+                      </p>
+                      {/description} {#content}{#include components/form/with-helper /}{/content} {/include} {#include
+                      partials/example-card title="Invalid" slug="invalid" component="form"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Form group with an error state — the text-input gets
+                        <code class="ws-code">validated="error"</code> and the helper text item gets
+                        <code class="ws-code">pf-m-error</code> + the matching icon.
+                      </p>
+                      {/description} {#content}{#include components/form/invalid /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

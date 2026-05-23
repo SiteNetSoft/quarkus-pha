@@ -126,20 +126,28 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="number-input"
-                      description="Unbounded — increment / decrement freely."} {#content}{#include
-                      components/number-input/basic /}{/content} {/include} {#include partials/example-card
-                      title="Bounded" slug="bounded" component="number-input" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;min=0&lt;/code&gt; / &lt;code
-                      class=&quot;ws-code&quot;&gt;max=10&lt;/code&gt; — the +/− buttons disable at the bounds."}
-                      {#content}{#include components/number-input/bounded /}{/content} {/include} {#include
-                      partials/example-card title="With unit" slug="with-unit" component="number-input"
-                      description="Pass &lt;code class=&quot;ws-code&quot;&gt;unit&lt;/code&gt; for a trailing unit
-                      label (hours, pixels, %)."} {#content}{#include components/number-input/with-unit /}{/content}
-                      {/include} {#include partials/example-card title="Disabled" slug="disabled"
-                      component="number-input" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;disabled=true&lt;/code&gt; — input + both buttons disabled."}
-                      {#content}{#include components/number-input/disabled /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="number-input"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Unbounded — increment / decrement freely.</p>
+                      {/description} {#content}{#include components/number-input/basic /}{/content} {/include} {#include
+                      partials/example-card title="Bounded" slug="bounded" component="number-input"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">min=0</code> / <code class="ws-code">max=10</code> — the +/− buttons
+                        disable at the bounds.
+                      </p>
+                      {/description} {#content}{#include components/number-input/bounded /}{/content} {/include}
+                      {#include partials/example-card title="With unit" slug="with-unit" component="number-input"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Pass <code class="ws-code">unit</code> for a trailing unit label (hours, pixels, %).
+                      </p>
+                      {/description} {#content}{#include components/number-input/with-unit /}{/content} {/include}
+                      {#include partials/example-card title="Disabled" slug="disabled" component="number-input"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">disabled=true</code> — input + both buttons disabled.
+                      </p>
+                      {/description} {#content}{#include components/number-input/disabled /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

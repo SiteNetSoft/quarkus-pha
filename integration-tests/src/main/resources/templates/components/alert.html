@@ -126,20 +126,31 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Variants" slug="variants" component="alert"
-                      description="All five severity variants — info, success, warning, danger, custom. Each (except
-                      custom) auto-renders the matching status icon."} {#content}{#include components/alert/variants
-                      /}{/content} {/include} {#include partials/example-card title="With description"
-                      slug="with-description" component="alert" description="Pass &lt;code
-                      class=&quot;ws-code&quot;&gt;description&lt;/code&gt; for a second line of explanatory text under
-                      the title."} {#content}{#include components/alert/with-description /}{/content} {/include}
-                      {#include partials/example-card title="Closable" slug="closable" component="alert"
-                      description="&lt;code class=&quot;ws-code&quot;&gt;closable=true&lt;/code&gt; — adds a dismiss
-                      button; Alpine sets visible=false on click."} {#content}{#include components/alert/closable
-                      /}{/content} {/include} {#include partials/example-card title="Inline" slug="inline"
-                      component="alert" description="&lt;code class=&quot;ws-code&quot;&gt;inline=true&lt;/code&gt; —
-                      removes the boxed treatment for use inside content blocks."} {#content}{#include
-                      components/alert/inline /}{/content} {/include}
+                      {#include partials/example-card title="Variants" slug="variants" component="alert"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        All five severity variants — info, success, warning, danger, custom. Each (except custom)
+                        auto-renders the matching status icon.
+                      </p>
+                      {/description} {#content}{#include components/alert/variants /}{/content} {/include} {#include
+                      partials/example-card title="With description" slug="with-description" component="alert"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Pass <code class="ws-code">description</code> for a second line of explanatory text under the
+                        title.
+                      </p>
+                      {/description} {#content}{#include components/alert/with-description /}{/content} {/include}
+                      {#include partials/example-card title="Closable" slug="closable" component="alert"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">closable=true</code> — adds a dismiss button; Alpine sets visible=false on
+                        click.
+                      </p>
+                      {/description} {#content}{#include components/alert/closable /}{/content} {/include} {#include
+                      partials/example-card title="Inline" slug="inline" component="alert"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">inline=true</code> — removes the boxed treatment for use inside content
+                        blocks.
+                      </p>
+                      {/description} {#content}{#include components/alert/inline /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

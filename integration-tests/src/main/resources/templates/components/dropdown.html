@@ -108,12 +108,16 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="dropdown"
-                      description="Labelled toggle with caret. Edit / Duplicate / Delete actions inside the menu."}
-                      {#content}{#include components/dropdown/basic /}{/content} {/include} {#include
-                      partials/example-card title="Plain kebab" slug="plain-kebab" component="dropdown"
-                      description="Compact icon toggle — used in row actions and toolbars."} {#content}{#include
-                      components/dropdown/plain-kebab /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="dropdown"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Labelled toggle with caret. Edit / Duplicate / Delete actions inside the menu.
+                      </p>
+                      {/description} {#content}{#include components/dropdown/basic /}{/content} {/include} {#include
+                      partials/example-card title="Plain kebab" slug="plain-kebab" component="dropdown"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Compact icon toggle — used in row actions and toolbars.
+                      </p>
+                      {/description} {#content}{#include components/dropdown/plain-kebab /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

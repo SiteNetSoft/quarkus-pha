@@ -132,26 +132,36 @@
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Basic" slug="basic" component="brand" description="The
-                        default brand img — natural size of the source SVG. No CSS custom properties applied."}
-                        {#content}{#include components/brand/basic /}{/content} {/include} {#include
-                        partials/example-card title="With width" slug="with-width" component="brand" description="Pass
-                        &lt;code class=&quot;ws-code&quot;&gt;width&lt;/code&gt; to set &lt;code
-                        class=&quot;ws-code&quot;&gt;--pf-v6-c-brand--Width&lt;/code&gt;. Height auto-scales to preserve
-                        aspect ratio."} {#content}{#include components/brand/with-width /}{/content} {/include}
-                        {#include partials/example-card title="With height" slug="with-height" component="brand"
-                        description="Pass &lt;code class=&quot;ws-code&quot;&gt;height&lt;/code&gt; to set &lt;code
-                        class=&quot;ws-code&quot;&gt;--pf-v6-c-brand--Height&lt;/code&gt;. Use this on a masthead with a
-                        fixed-height bar."} {#content}{#include components/brand/with-height /}{/content} {/include}
-                        {#include partials/example-card title="Responsive" slug="responsive" component="brand"
-                        description="Pass &lt;code class=&quot;ws-code&quot;&gt;picture=true&lt;/code&gt; to switch from
-                        &lt;code class=&quot;ws-code&quot;&gt;&amp;lt;img&amp;gt;&lt;/code&gt; to &lt;code
-                        class=&quot;ws-code&quot;&gt;&amp;lt;picture&amp;gt;&lt;/code&gt;, then inject one or more
-                        &lt;code class=&quot;ws-code&quot;&gt;&amp;lt;source&amp;gt;&lt;/code&gt; via the &lt;code
-                        class=&quot;ws-code&quot;&gt;sources&lt;/code&gt; slot. Smaller viewports get the fallback
-                        &lt;code class=&quot;ws-code&quot;&gt;src&lt;/code&gt;; larger viewports get the matching
-                        &lt;code class=&quot;ws-code&quot;&gt;srcset&lt;/code&gt;."} {#content}{#include
-                        components/brand/responsive /}{/content} {/include}
+                        {#include partials/example-card title="Basic" slug="basic" component="brand"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          The default brand img — natural size of the source SVG. No CSS custom properties applied.
+                        </p>
+                        {/description} {#content}{#include components/brand/basic /}{/content} {/include} {#include
+                        partials/example-card title="With width" slug="with-width" component="brand"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Pass <code class="ws-code">width</code> to set
+                          <code class="ws-code">--pf-v6-c-brand--Width</code>. Height auto-scales to preserve aspect
+                          ratio.
+                        </p>
+                        {/description} {#content}{#include components/brand/with-width /}{/content} {/include} {#include
+                        partials/example-card title="With height" slug="with-height" component="brand"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Pass <code class="ws-code">height</code> to set
+                          <code class="ws-code">--pf-v6-c-brand--Height</code>. Use this on a masthead with a
+                          fixed-height bar.
+                        </p>
+                        {/description} {#content}{#include components/brand/with-height /}{/content} {/include}
+                        {#include partials/example-card title="Responsive" slug="responsive" component="brand"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Pass <code class="ws-code">picture=true</code> to switch from
+                          <code class="ws-code">&lt;img&gt;</code> to <code class="ws-code">&lt;picture&gt;</code>, then
+                          inject one or more <code class="ws-code">&lt;source&gt;</code> via the
+                          <code class="ws-code">sources</code> slot. Smaller viewports get the fallback
+                          <code class="ws-code">src</code>; larger viewports get the matching
+                          <code class="ws-code">srcset</code>.
+                        </p>
+                        {/description} {#content}{#include components/brand/responsive /}{/content} {/include}
 
                         <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                           <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">

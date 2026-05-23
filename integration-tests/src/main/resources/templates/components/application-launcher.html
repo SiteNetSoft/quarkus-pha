@@ -100,9 +100,12 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="application-launcher"
-                      description="Waffle-icon toggle reveals a 3×2 grid of app shortcuts."} {#content}{#include
-                      components/application-launcher/basic /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="application-launcher"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Waffle-icon toggle reveals a 3×2 grid of app shortcuts.
+                      </p>
+                      {/description} {#content}{#include components/application-launcher/basic /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"
