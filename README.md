@@ -93,7 +93,10 @@ Easily start your REST Web Services
 ### `ws-preview-html` marker class
 
 Every example fragment under `integration-tests/.../templates/components/*/` is
-wrapped in `<div class="ws-preview-html">…</div>`. It carries **no CSS rule in
+wrapped in `<div class="ws-preview-html">…</div>`. The `ws-` prefix stands for
+**workspace** — PatternFly's name for the docs-site preview area (see
+[patternfly/patternfly#887](https://github.com/patternfly/patternfly/issues/887),
+which references the original `workspace.scss`). It carries **no CSS rule in
 this repo** — and none upstream either.
 
 Why we keep it anyway: it's the same marker the official patternfly.org docs
