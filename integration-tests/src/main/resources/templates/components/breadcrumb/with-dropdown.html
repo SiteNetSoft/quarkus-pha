@@ -1,7 +1,6 @@
 <div class="ws-preview-html">
-  {#include components/navigation/breadcrumb id="breadcrumb-dropdown"} {#items} {#include
-  components/navigation/breadcrumb-item text="Section home" href="#" /} {#include components/navigation/breadcrumb-item
-  text="Section title" isDropdown=true dropdownId="bc-dropdown-section"} {#dropdown}
+  {#include components/navigation/breadcrumb id="breadcrumb-dropdown"} {#items} {#include components/navigation/breadcrumb-item text="Section home" href="#" /}
+  {#include components/navigation/breadcrumb-item text="Section title" isDropdown=true dropdownId="bc-dropdown-section"} {#dropdown}
   <ul class="pf-v6-c-menu__list" role="menu">
     <li class="pf-v6-c-menu__list-item" role="none">
       <a href="#" class="pf-v6-c-menu__item" role="menuitem">
@@ -19,6 +18,7 @@
       </a>
     </li>
   </ul>
-  {/dropdown} {/include} {#include components/navigation/breadcrumb-item text="Section landing" href="#" current=true /}
+  {/dropdown} {/include}
+{#include components/navigation/breadcrumb-item text="Section landing" href="#" current=true /}
   {/items} {/include}
 </div>
