@@ -7,6 +7,7 @@ chrome) !}
 <div
   class="pf-v6-l-stack pf-m-gutter"
   data-source-href="/components/{component}/source/{slug}"
+  data-rendered-href="/components/{component}/{slug}"
   x-data="phaCodeExample()"
 >
   <div class="pf-v6-l-stack__item">
@@ -21,18 +22,29 @@ chrome) !}
   </div>
   <div class="pf-v6-l-stack__item">{#insert content}{/insert}</div>
   <div class="pf-v6-l-stack__item">
-    <div class="pf-v6-c-code-editor ws-code-editor" :class="open ? 'ws-example-code-expanded' : ''">
+    <div class="pf-v6-c-code-editor ws-code-editor" :class="mode ? 'ws-example-code-expanded' : ''">
       <div class="pf-v6-c-code-editor__header pf-m-plain">
         <div class="pf-v6-c-code-editor__header-content">
           <div class="pf-v6-c-code-editor__controls">
             <button
               type="button"
               class="pf-v6-c-button pf-m-plain ws-code-editor-control"
-              :aria-expanded="open ? 'true' : 'false'"
-              aria-label="Toggle Qute code in {title} example"
-              @click="toggle()"
+              :class="mode === 'qute' ? 'pf-m-active' : ''"
+              :aria-expanded="mode === 'qute' ? 'true' : 'false'"
+              aria-label="Toggle Qute source in {title} example"
+              @click="toggleMode('qute')"
             >
               <span class="pf-v6-c-button__icon">{icons:svg('fa:code').raw} Qute</span>
+            </button>
+            <button
+              type="button"
+              class="pf-v6-c-button pf-m-plain ws-code-editor-control"
+              :class="mode === 'html' ? 'pf-m-active' : ''"
+              :aria-expanded="mode === 'html' ? 'true' : 'false'"
+              aria-label="Toggle rendered HTML in {title} example"
+              @click="toggleMode('html')"
+            >
+              <span class="pf-v6-c-button__icon">{icons:svg('fa:code').raw} HTML</span>
             </button>
             <button
               type="button"
@@ -54,7 +66,7 @@ chrome) !}
           </div>
         </div>
       </div>
-      <div class="pf-v6-c-code-editor__main" x-show="open" x-cloak>
+      <div class="pf-v6-c-code-editor__main" x-show="mode" x-cloak>
         <div class="pf-v6-c-code-editor__code" x-show="!error" x-ref="host" style="height: 400px"></div>
         <div
           class="pf-v6-c-code-editor__code pha-c-code-editor__error"
