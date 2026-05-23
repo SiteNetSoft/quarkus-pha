@@ -170,7 +170,7 @@ public class ComponentRoutes {
     @Inject
     Template timestampPage;
 
-    @Location("components/title")
+    @Location("components/title-demo")
     @Inject
     Template titlePage;
 

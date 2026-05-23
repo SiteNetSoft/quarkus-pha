@@ -1,16 +1,23 @@
 /*
  * Code example — Alpine.js component that wraps a demo example with a
- * collapsible Monaco editor showing the underlying Qute source.
+ * collapsible Monaco editor showing either the underlying Qute source or the
+ * rendered HTML output (after Qute processing).
  *
  * Lazy-loads Monaco (AMD bundle from /web/vendor/monaco/vs) the first time the
- * user expands the panel. The source URL is read from data-source-href on the
- * x-data element. The editor is created read-only and follows the page's
- * light/dark/contrast theme via a MutationObserver on <html> class.
+ * user opens a view. URLs are read from data-source-href (raw Qute) and
+ * data-rendered-href (the standalone HTML page; we extract the <main> body)
+ * on the x-data element. The editor is created read-only and follows the
+ * page's light/dark/contrast theme via a MutationObserver on <html> class.
  *
  * Usage:
- *   <div data-source-href="/components/x/source/y" x-data="phaCodeExample()">
- *     <button type="button" :aria-expanded="open" @click="toggle()">Qute</button>
- *     <div x-show="open" x-ref="host" style="height: 400px"></div>
+ *   <div
+ *     data-source-href="/components/x/source/y"
+ *     data-rendered-href="/components/x/y"
+ *     x-data="phaCodeExample()"
+ *   >
+ *     <button :aria-expanded="mode === 'qute'" @click="toggleMode('qute')">Qute</button>
+ *     <button :aria-expanded="mode === 'html'" @click="toggleMode('html')">HTML</button>
+ *     <div x-show="mode" x-ref="host" style="height: 400px"></div>
  *   </div>
  *
  * License: Apache 2.0
@@ -63,88 +70,114 @@
     });
   }
 
-  phaAlpine("phaCodeExample", () => ({
-    open: false,
-    loaded: false,
-    loading: false,
-    error: null,
-    sourceHref: null,
-    _editor: null,
-    _pendingSource: null,
+  phaAlpine("phaCodeExample", () => {
+    // Non-reactive per-instance state. Alpine's reactivity wraps the returned
+    // object in a Proxy; storing Monaco's editor or cached source strings on
+    // `this` would route every internal Monaco property access through that
+    // Proxy, which freezes the main thread on `setValue`. Keep these in the
+    // factory closure so they stay raw.
+    let editor = null;
+    let quteSource = null;
+    let htmlSource = null;
 
-    init() {
-      this.sourceHref = this.$root.dataset.sourceHref;
-    },
-
-    destroy() {
-      if (this._editor) {
-        this._editor.dispose();
-        this._editor = null;
+    async function fetchSource(self, target) {
+      if (target === "qute") {
+        if (quteSource != null) return quteSource;
+        let r = await fetch(self.sourceHref, {
+          headers: { Accept: "text/plain" },
+        });
+        if (!r.ok) throw new Error("Source fetch failed: " + r.status);
+        quteSource = await r.text();
+        return quteSource;
       }
-    },
+      if (htmlSource != null) return htmlSource;
+      let r = await fetch(self.renderedHref, {
+        headers: { Accept: "text/html" },
+      });
+      if (!r.ok) throw new Error("Rendered fetch failed: " + r.status);
+      let doc = new DOMParser().parseFromString(await r.text(), "text/html");
+      let main = doc.querySelector("main");
+      if (!main) throw new Error("No <main> in rendered page");
+      htmlSource = main.innerHTML.trim();
+      return htmlSource;
+    }
 
-    async toggle() {
-      this.open = !this.open;
-      if (this.open && !this.loaded && !this.loading) {
-        await this._mount();
-      }
-    },
+    return {
+      mode: null, // null | 'qute' | 'html'
+      loading: false,
+      error: null,
+      sourceHref: null,
+      renderedHref: null,
 
-    async copy() {
-      if (!this._editor) {
+      init() {
+        this.sourceHref = this.$root.dataset.sourceHref;
+        this.renderedHref = this.$root.dataset.renderedHref;
+      },
+
+      destroy() {
+        if (editor) {
+          editor.dispose();
+          editor = null;
+        }
+      },
+
+      async toggleMode(target) {
+        if (this.mode === target) {
+          this.mode = null;
+          return;
+        }
+        this.mode = target;
+        await this._show(target);
+      },
+
+      async copy() {
+        let target = this.mode || "qute";
+        let value;
         try {
-          await this._fetchSource();
+          value = await fetchSource(this, target);
         } catch (e) {
           this.error = String(e);
           return;
         }
-      }
-      let value = this._editor ? this._editor.getValue() : this._pendingSource || "";
-      try {
-        await navigator.clipboard.writeText(value);
-      } catch (_) {
-        /* ignore — clipboard may be unavailable in non-secure contexts */
-      }
-    },
+        try {
+          await navigator.clipboard.writeText(value);
+        } catch (_) {
+          /* ignore — clipboard may be unavailable in non-secure contexts */
+        }
+      },
 
-    async _fetchSource() {
-      if (this._pendingSource != null) return this._pendingSource;
-      let r = await fetch(this.sourceHref, {
-        headers: { Accept: "text/plain" },
-      });
-      if (!r.ok) throw new Error("Source fetch failed: " + r.status);
-      this._pendingSource = await r.text();
-      return this._pendingSource;
-    },
-
-    async _mount() {
-      this.loading = true;
-      this.error = null;
-      try {
-        let [monaco, source] = await Promise.all([
-          loadMonaco("/web/vendor/monaco/vs"),
-          this._fetchSource(),
-        ]);
-        installThemeObserver();
-        await this.$nextTick();
-        this._editor = monaco.editor.create(this.$refs.host, {
-          value: source,
-          language: "html",
-          readOnly: true,
-          automaticLayout: true,
-          minimap: { enabled: false },
-          scrollBeyondLastLine: false,
-          fontSize: 13,
-          lineNumbers: "on",
-          renderLineHighlight: "none",
-          theme: currentMonacoTheme(),
-        });
-        this.loaded = true;
-      } catch (e) {
-        this.error = e && e.message ? e.message : String(e);
-      } finally {
-        this.loading = false;
-      }
-    },
-  }));
+      async _show(target) {
+        this.loading = true;
+        this.error = null;
+        try {
+          let [monaco, source] = await Promise.all([
+            loadMonaco("/web/vendor/monaco/vs"),
+            fetchSource(this, target),
+          ]);
+          installThemeObserver();
+          await this.$nextTick();
+          if (!editor) {
+            editor = monaco.editor.create(this.$refs.host, {
+              value: source,
+              language: "html",
+              readOnly: true,
+              automaticLayout: true,
+              minimap: { enabled: false },
+              scrollBeyondLastLine: false,
+              fontSize: 13,
+              lineNumbers: "on",
+              renderLineHighlight: "none",
+              theme: currentMonacoTheme(),
+            });
+          } else {
+            editor.setValue(source);
+          }
+        } catch (e) {
+          this.error = e && e.message ? e.message : String(e);
+        } finally {
+          this.loading = false;
+        }
+      },
+    };
+  });
 })();
