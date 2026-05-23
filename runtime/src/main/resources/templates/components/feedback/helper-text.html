@@ -1,34 +1,31 @@
 {! Helper text container — PatternFly v6 !}
-{!                                                                                !}
-{! Two modes:                                                                     !}
-{!   1. Single-item (legacy, backward-compat):                                    !}
-{!      {#include components/feedback/helper-text id="..." text="..." status="..." dynamic=true iconName="..." /}        !}
-{!      Renders a container with exactly one item. Status auto-picks a default icon when iconName is omitted.            !}
-{!   2. Multi-item (via items slot):                                              !}
-{!      {#include components/feedback/helper-text id="..."}                       !}
-{!        {#items}                                                                !}
-{!          {#include components/feedback/helper-text-item text="..." status="..." /}                                    !}
-{!          ...                                                                   !}
-{!        {/items}                                                                !}
-{!      {/include}                                                                !}
-{!                                                                                !}
-{! Parameters (single-item mode):                                                 !}
-{!   text       (required in single-item mode) — body text                        !}
-{!   status     (optional) — indeterminate | warning | success | error            !}
-{!   dynamic    (optional) — boolean, applies pf-m-dynamic for transition animations !}
-{!   iconName   (optional) — overrides the default per-status icon                !}
-{!   id         (optional) — id on the container, useful as aria-describedby      !}
+{! Two modes:                                                                       !}
+{!   Single-item (default): the include body becomes the text inside one __item.    !}
+{!     {#include components/feedback/helper-text id="..." status="..."}text{/include} !}
+{!   Multi-item: pass multi=true and put helper-text-item includes in the body.     !}
+{!     {#include components/feedback/helper-text id="..." multi=true}               !}
+{!       {#include components/feedback/helper-text-item status="success"}t1{/include} !}
+{!       ...                                                                        !}
+{!     {/include}                                                                   !}
+{!                                                                                  !}
+{! Parameters:                                                                      !}
+{!   id        (optional) — id on the container, useful as aria-describedby         !}
+{!   multi     (optional, single-item by default) — when true, the body is passed   !}
+{!             through verbatim; container does no per-item wrapping                !}
+{!   status    (single-item only) — indeterminate | warning | success | error       !}
+{!   dynamic   (single-item only) — boolean; applies pf-m-dynamic for animations    !}
+{!   iconName  (single-item only) — overrides the default per-status icon           !}
 <div class="pf-v6-c-helper-text"{#if id??} id="{id}"{/if}>
-  {#if text??}
+  {#if multi??}
+  {#insert/}
+  {#else}
   <div class="pf-v6-c-helper-text__item{#if status??} pf-m-{status}{/if}{#if dynamic??} pf-m-dynamic{/if}">
     {#if iconName??}
     <span class="pf-v6-c-helper-text__item-icon">{icons:svg(iconName).raw}</span>
     {#else if status??}
     <span class="pf-v6-c-helper-text__item-icon">{#if status is 'success'}{icons:svg('fa:circle-check').raw}{#else if status is 'warning'}{icons:svg('fa:triangle-exclamation').raw}{#else if status is 'error'}{icons:svg('fa:circle-exclamation').raw}{#else if status is 'indeterminate'}{icons:svg('fa:minus').raw}{/if}</span>
     {/if}
-    <span class="pf-v6-c-helper-text__item-text">{text}</span>
+    <span class="pf-v6-c-helper-text__item-text">{#insert/}</span>
   </div>
-  {#else}
-    {#insert items}{/insert}
   {/if}
 </div>

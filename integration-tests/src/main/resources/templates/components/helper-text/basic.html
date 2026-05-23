@@ -1,7 +1,5 @@
-<div class="ws-preview-html" style="display: grid; gap: 1rem">
-  {#include components/feedback/helper-text id="ht-basic-static" text="Enter your username." /}
-  {#include components/feedback/helper-text id="ht-basic-success" text="Username is available." status="success" /}
-  {#include components/feedback/helper-text id="ht-basic-warning" text="Username is very short." status="warning" /}
-  {#include components/feedback/helper-text id="ht-basic-error" text="Username is already taken." status="error" /}
-  {#include components/feedback/helper-text id="ht-basic-indeterminate" text="Checking availability…" status="indeterminate" /}
-</div>
+{#include components/feedback/helper-text id="ht-basic-static"}This is default helper text{/include}
+{#include components/feedback/helper-text id="ht-basic-indeterminate" status="indeterminate"}This is indeterminate helper text{/include}
+{#include components/feedback/helper-text id="ht-basic-warning" status="warning"}This is warning helper text{/include}
+{#include components/feedback/helper-text id="ht-basic-success" status="success"}This is success helper text{/include}
+{#include components/feedback/helper-text id="ht-basic-error" status="error"}This is error helper text{/include}

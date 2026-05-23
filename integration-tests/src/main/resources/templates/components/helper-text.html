@@ -174,9 +174,10 @@
                           </h3>
                           <p class="pf-v6-c-content--p pf-m-editorial">
                             Parameters accepted by
-                            <code class="ws-code">{|{#include components/feedback/helper-text ... /}|}</code>. The
-                            container has two modes — single-item (when <code class="ws-code">text</code> is set) or
-                            multi-item (when an <code class="ws-code">items</code> slot is provided).
+                            <code class="ws-code">{|{#include components/feedback/helper-text ... }...{/include}|}</code>.
+                            The container has two modes — single-item (default; the include body becomes the text of
+                            one wrapped item) or multi-item (pass <code class="ws-code">multi=true</code> and put
+                            <code class="ws-code">helper-text-item</code> includes in the body).
                           </p>
                           <table
                             class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
@@ -207,16 +208,32 @@
                               </tr>
                               <tr class="pf-v6-c-table__tr">
                                 <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">text</code></span>
+                                  <span class="pf-v6-c-table__text"><em>(content slot)</em></span>
                                 </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Slot</span></td>
                                 <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
                                 <td class="pf-v6-c-table__td">
                                   <span class="pf-v6-c-table__text"
-                                    >When set, switches to single-item mode and renders one item with the remaining
-                                    params (<code class="ws-code">status</code>, <code class="ws-code">dynamic</code>,
-                                    <code class="ws-code">iconName</code>). Mutually exclusive with the
-                                    <code class="ws-code">items</code> slot.</span
+                                    >Include body. In single-item mode (default), it becomes the text inside one
+                                    wrapped item. In multi-item mode (<code class="ws-code">multi=true</code>), it's
+                                    passed through verbatim — put one or more
+                                    <code class="ws-code">helper-text-item</code> includes here.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">multi</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >When true, the container does no per-item wrapping; the content slot is rendered
+                                    as-is. Use when you're including
+                                    <code class="ws-code">helper-text-item</code> children.</span
                                   >
                                 </td>
                               </tr>
@@ -233,23 +250,9 @@
                                 <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
                                 <td class="pf-v6-c-table__td">
                                   <span class="pf-v6-c-table__text"
-                                    >Passed through to the single item rendered in single-item mode. Ignored in
-                                    multi-item mode (set them on each
+                                    >Applied to the single item rendered in single-item mode. Ignored when
+                                    <code class="ws-code">multi=true</code> (set them on each
                                     <code class="ws-code">helper-text-item</code> instead).</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">items</code> (slot)</span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute insert</span></td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Multi-item mode. Wrap one or more
-                                    <code class="ws-code">helper-text-item</code> includes in
-                                    <code class="ws-code">{|{#items}...{/items}|}</code>.</span
                                   >
                                 </td>
                               </tr>
@@ -286,13 +289,13 @@
                               <tr class="pf-v6-c-table__tr">
                                 <td class="pf-v6-c-table__td">
                                   <span class="pf-v6-c-table__text"
-                                    ><span class="ws-prop-required">*</span> <code class="ws-code">text</code></span
+                                    ><span class="ws-prop-required">*</span> <em>(content slot)</em></span
                                   >
                                 </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Slot</span></td>
                                 <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
                                 <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text">Body text of the item.</span>
+                                  <span class="pf-v6-c-table__text">Body text of the item, passed as the include body.</span>
                                 </td>
                               </tr>
                               <tr class="pf-v6-c-table__tr">
@@ -396,10 +399,10 @@
                           <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
                           <p class="pf-v6-c-content--p pf-m-editorial">
                             <strong>Single-item vs. multi-item.</strong> If you only need one helper-text row, pass
-                            <code class="ws-code">text</code> directly on the container — the include emits both the
-                            container and the single item. If you need multiple rows (e.g. a password-requirement
-                            checklist), open the <code class="ws-code">items</code> slot and include one
-                            <code class="ws-code">helper-text-item</code> per row inside it.
+                            the text as the include body — the container wraps it as a single item with the status
+                            and icon you supplied. If you need multiple rows (e.g. a password-requirement checklist),
+                            add <code class="ws-code">multi=true</code> to the container and put one
+                            <code class="ws-code">helper-text-item</code> include per row in the body.
                           </p>
                           <p class="pf-v6-c-content--p pf-m-editorial">
                             <strong>Default icons.</strong> Setting <code class="ws-code">status</code> on an item
