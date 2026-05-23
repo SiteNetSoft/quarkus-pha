@@ -169,13 +169,19 @@
                               <tr class="pf-v6-c-table__tr">
                                 <td class="pf-v6-c-table__td">
                                   <span class="pf-v6-c-table__text"
-                                    ><span class="ws-prop-required">*</span> <code class="ws-code">text</code></span
+                                    ><span class="ws-prop-required">*</span> <em>(content slot)</em></span
                                   >
                                 </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Slot</span></td>
                                 <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
                                 <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text">Heading text content.</span>
+                                  <span class="pf-v6-c-table__text"
+                                    >Heading text, passed as the include body:
+                                    <code class="ws-code"
+                                      >{|{#include components/data-display/title headingLevel="h2"}My
+                                      title{/include}|}</code
+                                    >.</span
+                                  >
                                 </td>
                               </tr>
                               <tr class="pf-v6-c-table__tr">
@@ -206,12 +212,19 @@
                                     ><code class="ws-code">"md" | "lg" | "xl" | "2xl" | "3xl" | "4xl"</code></span
                                   >
                                 </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">{|pf-m-{headingLevel}|}</code> (e.g.
+                                    <code class="ws-code">pf-m-h2</code> for an <code class="ws-code">h2</code>)</span
+                                  >
+                                </td>
                                 <td class="pf-v6-c-table__td">
                                   <span class="pf-v6-c-table__text"
                                     >Visual size. Renders <code class="ws-code">{|pf-m-{size}|}</code> on the heading.
                                     Choose independently of <code class="ws-code">headingLevel</code> — large visual
-                                    emphasis can sit at any semantic level.</span
+                                    emphasis can sit at any semantic level. When omitted, defaults to
+                                    <code class="ws-code">{|pf-m-{headingLevel}|}</code> so the visual size tracks the
+                                    semantic level (matches PF React's default-sizes behavior).</span
                                   >
                                 </td>
                               </tr>
