@@ -90,6 +90,25 @@ Easily start your REST Web Services
 ## E2E Integration Tests
 - [components](integration-tests/src/main/resources/templates/components)
 
+### `ws-preview-html` marker class
+
+Every example fragment under `integration-tests/.../templates/components/*/` is
+wrapped in `<div class="ws-preview-html">…</div>`. It carries **no CSS rule in
+this repo** — and none upstream either.
+
+Why we keep it anyway: it's the same marker the official patternfly.org docs
+site puts on its rendered HTML previews (see
+[`example.js`](https://github.com/patternfly/patternfly-org/blob/main/packages/documentation-framework/components/example/example.js)
+— `<div className={css('ws-preview-html', ...)} dangerouslySetInnerHTML={...} />`).
+PatternFly's docs framework leaves it unstyled on purpose so consumers have a
+stable hook to target the preview area. Keeping the class means our example
+markup is copy-paste compatible with PF's own examples, and we get the same
+hook if we ever want to add preview-only styling.
+
+If you ever need to add demo-only styling (e.g. consistent padding around the
+example body), define `.ws-preview-html { … }` in `pha.css` rather than
+inlining `style="…"` on each fragment.
+
 ## TODO
 - [x] Icon (https://www.patternfly.org/components/icon)
 - [x] Title (https://www.patternfly.org/components/title)
