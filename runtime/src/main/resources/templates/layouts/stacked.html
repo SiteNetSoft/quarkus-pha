@@ -1,49 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-US" x-data>
-<head>
+  <head>
     {#include layouts/_head /}
-</head>
-<body>
-{#include components/navigation/theme-selector /}
+  </head>
+  <body>
+    {#include components/navigation/theme-selector /}
 
-<div class="pf-v6-c-page" id="layout-stacked-page">
+    <div class="pf-v6-c-page" id="layout-stacked-page">
+      {! Skip to content !}
+      <a href="#main-content" class="pf-v6-c-skip-to-content">Skip to content</a>
 
-  {! Skip to content !}
-  <a href="#main-content" class="pf-v6-c-skip-to-content">Skip to content</a>
+      {! Masthead with primary nav !}
+      <header class="pf-v6-c-masthead pf-m-display-stack" id="layout-masthead">
+        <div class="pf-v6-c-masthead__main">
+          <div class="pf-v6-c-masthead__brand">
+            {#insert brand}<a href="/" class="pf-v6-c-masthead__brand">{applicationName}</a>{/insert}
+          </div>
+        </div>
+        <div class="pf-v6-c-masthead__content">
+          <nav class="pf-v6-c-nav pf-m-horizontal" aria-label="Primary navigation">
+            <ul class="pf-v6-c-nav__list">
+              {#insert primaryNav}{/insert}
+            </ul>
+          </nav>
+          <div style="margin-left: auto">{#insert mastheadToolbar}{/insert}</div>
+        </div>
+      </header>
 
-  {! Masthead with primary nav !}
-  <header class="pf-v6-c-masthead pf-m-display-stack" id="layout-masthead">
-    <div class="pf-v6-c-masthead__main">
-      <div class="pf-v6-c-masthead__brand">
-        {#insert brand}<a href="/" class="pf-v6-c-masthead__brand">{applicationName}</a>{/insert}
+      {! Secondary nav bar !}
+      <div class="pf-v6-c-page__main-subnav">
+        <nav class="pf-v6-c-nav pf-m-horizontal pf-m-tertiary" aria-label="Secondary navigation">
+          <ul class="pf-v6-c-nav__list">
+            {#insert secondaryNav}{/insert}
+          </ul>
+        </nav>
       </div>
+
+      {! Main content area !}
+      <main class="pf-v6-c-page__main" id="main-content" tabindex="-1">{#insert mainContent}{/insert}</main>
     </div>
-    <div class="pf-v6-c-masthead__content">
-      <nav class="pf-v6-c-nav pf-m-horizontal" aria-label="Primary navigation">
-        <ul class="pf-v6-c-nav__list">
-          {#insert primaryNav}{/insert}
-        </ul>
-      </nav>
-      <div style="margin-left: auto;">
-        {#insert mastheadToolbar}{/insert}
-      </div>
-    </div>
-  </header>
-
-  {! Secondary nav bar !}
-  <div class="pf-v6-c-page__main-subnav">
-    <nav class="pf-v6-c-nav pf-m-horizontal pf-m-tertiary" aria-label="Secondary navigation">
-      <ul class="pf-v6-c-nav__list">
-        {#insert secondaryNav}{/insert}
-      </ul>
-    </nav>
-  </div>
-
-  {! Main content area !}
-  <main class="pf-v6-c-page__main" id="main-content" tabindex="-1">
-    {#insert mainContent}{/insert}
-  </main>
-
-</div>
-</body>
+  </body>
 </html>

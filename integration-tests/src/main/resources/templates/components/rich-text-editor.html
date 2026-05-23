@@ -1,63 +1,95 @@
-{#include layouts/base}
-{#title}Rich text editor{/title}
-{#head}
-<link rel="stylesheet" href="/web/vendor/quill/quill.snow.css">
-<link rel="stylesheet" href="/web/vendor/quill/quill.bubble.css">
-<link rel="stylesheet" href="/web/css/components/rich-text-editor.css">
+{#include layouts/base} {#title}Rich text editor{/title} {#head}
+<link rel="stylesheet" href="/web/vendor/quill/quill.snow.css" />
+<link rel="stylesheet" href="/web/vendor/quill/quill.bubble.css" />
+<link rel="stylesheet" href="/web/css/components/rich-text-editor.css" />
 <script src="/web/vendor/quill/quill.js"></script>
 <script src="/web/js/alpine/components/rich-text-editor.js"></script>
-{/head}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+{/head} {#body}
+<div style="padding: 2rem">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block"
+    >&larr; Back to showcase</a
+  >
   <h1>Rich text editor</h1>
-  <p>An embedded WYSIWYG editor powered by <a href="https://quilljs.com/" class="pf-v6-c-button pf-m-link pf-m-inline">Quill</a>. Wraps a Quill instance with an Alpine.js API for reading/writing HTML, optional hidden-input mirroring for plain form submission, and toolbar presets.</p>
+  <p>
+    An embedded WYSIWYG editor powered by
+    <a href="https://quilljs.com/" class="pf-v6-c-button pf-m-link pf-m-inline">Quill</a>. Wraps a Quill instance with
+    an Alpine.js API for reading/writing HTML, optional hidden-input mirroring for plain form submission, and toolbar
+    presets.
+  </p>
 
-  <section style="margin-top: 2rem;">
+  <section style="margin-top: 2rem">
     <h2 id="basic-heading">Basic (Snow theme)</h2>
     <p>Default snow toolbar with the full set of formatting controls and an initial HTML value.</p>
-    <div style="max-width: 720px;">
-      {#include components/editors/rich-text-editor id="rte-basic" placeholder="Write something…"}{#content}<p>Hello from <strong>quarkus-pha</strong>. Try editing this text, applying <em>formatting</em>, or pasting in some content.</p>{/content}{/include}
+    <div style="max-width: 720px">
+      {#include components/editors/rich-text-editor id="rte-basic" placeholder="Write something…"}{#content}
+      <p>
+        Hello from <strong>quarkus-pha</strong>. Try editing this text, applying <em>formatting</em>, or pasting in some
+        content.
+      </p>
+      {/content}{/include}
     </div>
   </section>
 
-  <section style="margin-top: 2rem;">
+  <section style="margin-top: 2rem">
     <h2 id="basic-toolbar-heading">Basic toolbar</h2>
     <p>Reduced toolbar: bold/italic/underline, lists, and links. Useful for comment fields or short-form inputs.</p>
-    <div style="max-width: 720px;">
-      {#include components/editors/rich-text-editor id="rte-basic-toolbar" toolbar="basic" placeholder="Leave a comment…"}{#content}{/content}{/include}
+    <div style="max-width: 720px">
+      {#include components/editors/rich-text-editor id="rte-basic-toolbar" toolbar="basic" placeholder="Leave a
+      comment…"}{#content}{/content}{/include}
     </div>
   </section>
 
-  <section style="margin-top: 2rem;">
+  <section style="margin-top: 2rem">
     <h2 id="minimal-heading">Minimal toolbar</h2>
     <p>Bare-bones controls — bold, italic, underline only.</p>
-    <div style="max-width: 720px;">
-      {#include components/editors/rich-text-editor id="rte-minimal" toolbar="minimal" placeholder="Quick note…" height="6rem"}{#content}{/content}{/include}
+    <div style="max-width: 720px">
+      {#include components/editors/rich-text-editor id="rte-minimal" toolbar="minimal" placeholder="Quick note…"
+      height="6rem"}{#content}{/content}{/include}
     </div>
   </section>
 
-  <section style="margin-top: 2rem;">
+  <section style="margin-top: 2rem">
     <h2 id="bubble-heading">Bubble theme</h2>
     <p>Floating bubble toolbar — formatting controls appear when text is selected.</p>
-    <div style="max-width: 720px;">
-      {#include components/editors/rich-text-editor id="rte-bubble" theme="bubble" placeholder="Select text to format…"}{#content}<p>Select any portion of this paragraph to see the bubble toolbar appear.</p>{/content}{/include}
+    <div style="max-width: 720px">
+      {#include components/editors/rich-text-editor id="rte-bubble" theme="bubble" placeholder="Select text to
+      format…"}{#content}
+      <p>Select any portion of this paragraph to see the bubble toolbar appear.</p>
+      {/content}{/include}
     </div>
   </section>
 
-  <section style="margin-top: 2rem;">
+  <section style="margin-top: 2rem">
     <h2 id="readonly-heading">Read-only viewer</h2>
     <p>Read-only mode renders content but disables editing — handy for previews.</p>
-    <div style="max-width: 720px;">
-      {#include components/editors/rich-text-editor id="rte-readonly" readOnly=true toolbar="minimal"}{#content}<h3>Release notes</h3><p>This is read-only content rendered through the editor for consistent styling.</p><ul><li>Item one</li><li>Item two</li></ul>{/content}{/include}
+    <div style="max-width: 720px">
+      {#include components/editors/rich-text-editor id="rte-readonly" readOnly=true toolbar="minimal"}{#content}
+      <h3>Release notes</h3>
+      <p>This is read-only content rendered through the editor for consistent styling.</p>
+      <ul>
+        <li>Item one</li>
+        <li>Item two</li>
+      </ul>
+      {/content}{/include}
     </div>
   </section>
 
-  <section style="margin-top: 2rem;">
+  <section style="margin-top: 2rem">
     <h2 id="form-heading">With hidden form input</h2>
-    <p>When <code>name</code> is set the editor mirrors its HTML to a hidden input so the value travels with a plain form submit (or HTMX request).</p>
-    <form style="max-width: 720px;" onsubmit="event.preventDefault(); alert(this.elements['body'].value);">
-      {#include components/editors/rich-text-editor id="rte-form" name="body" toolbar="basic"}{#content}<p>Edit me and click Submit.</p>{/content}{#footer}
+    <p>
+      When <code>name</code> is set the editor mirrors its HTML to a hidden input so the value travels with a plain form
+      submit (or HTMX request).
+    </p>
+    <form
+      style="max-width: 720px"
+      onsubmit="
+        event.preventDefault();
+        alert(this.elements['body'].value);
+      "
+    >
+      {#include components/editors/rich-text-editor id="rte-form" name="body" toolbar="basic"}{#content}
+      <p>Edit me and click Submit.</p>
+      {/content}{#footer}
       <div class="pha-c-rich-text-editor__footer">
         <span x-text="length + ' characters'"></span>
         <button class="pf-v6-c-button pf-m-primary" type="submit">
@@ -68,5 +100,4 @@
     </form>
   </section>
 </div>
-{/body}
-{/include}
+{/body} {/include}

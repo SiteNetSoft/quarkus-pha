@@ -1,9 +1,6 @@
-{#include layouts/base}
-{#title}Progress{/title}
-{#head}
+{#include layouts/base} {#title}Progress{/title} {#head}
 <script src="/web/js/alpine/components/code-example.js"></script>
-{/head}
-{#body}
+{/head} {#body}
 <div id="root">
   <div style="outline: none" tabindex="-1" id="ws-router">
     <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
@@ -37,37 +34,214 @@
                 <div class="pf-v6-c-page__main-body">
                   <div class="pf-v6-u-h-100">
                     <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
-                      <nav class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc" aria-label="Table of contents">
+                      <nav
+                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                        aria-label="Table of contents"
+                      >
                         <div class="pf-v6-c-jump-links__main">
                           <ul class="pf-v6-c-jump-links__list" role="list">
                             <li class="pf-v6-c-jump-links__item ws-toc-item">
-                              <span class="pf-v6-c-jump-links__link"><a href="#examples" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Examples</span></span></a></span>
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                  ></a
+                                ></span
+                              >
                               <ul class="pf-v6-c-jump-links__list" role="list">
-                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#basic" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Basic</span></span></a></span></li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#small" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Small</span></span></a></span></li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#large" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Large</span></span></a></span></li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#outside" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Outside</span></span></a></span></li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#inside" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Inside</span></span></a></span></li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#single-line" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Single line</span></span></a></span></li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#without-measure" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Without measure</span></span></a></span></li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#finite-step" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Finite step</span></span></a></span></li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#step-instructions" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Step instructions</span></span></a></span></li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#truncate-title" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Truncate title</span></span></a></span></li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#title-outside" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Title outside</span></span></a></span></li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#helper-text" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Helper text</span></span></a></span></li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#success" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Success</span></span></a></span></li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#failure" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Failure</span></span></a></span></li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#warning" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Warning</span></span></a></span></li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#inside-success" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Inside success</span></span></a></span></li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#outside-failure" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Outside failure</span></span></a></span></li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#failure-without-measure" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Failure without measure</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#small" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Small</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#large" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Large</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#outside" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Outside</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#inside" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Inside</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#single-line" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Single line</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#without-measure" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Without measure</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#finite-step" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Finite step</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#step-instructions" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Step instructions</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#truncate-title" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Truncate title</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#title-outside" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Title outside</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#helper-text" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Helper text</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#success" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Success</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#failure" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Failure</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#warning" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Warning</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#inside-success" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Inside success</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#outside-failure" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Outside failure</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#failure-without-measure" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text"
+                                          >Failure without measure</span
+                                        ></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
                               </ul>
                             </li>
                             <li class="pf-v6-c-jump-links__item ws-toc-item">
-                              <span class="pf-v6-c-jump-links__link"><a href="#documentation" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Documentation</span></span></a></span>
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                  ></a
+                                ></span
+                              >
                               <ul class="pf-v6-c-jump-links__list" role="list">
-                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#props-progress" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Progress props</span></span></a></span></li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#usage" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Usage</span></span></a></span></li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-progress" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Progress props</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
                               </ul>
                             </li>
                           </ul>
@@ -77,140 +251,161 @@
                       <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
                         <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
                           <div>
-                            <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
+                            <h2
+                              id="examples"
+                              tabindex="-1"
+                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                            >
+                              Examples
+                            </h2>
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Basic" slug="basic" component="progress" description="Default size, default measure location (top), no status. Percentage measure rendered above-right of the bar."}
-                        {#content}{#include components/progress/basic /}{/content}
-                        {/include}
-
-                        {#include partials/example-card title="Small" slug="small" component="progress" description="size=&quot;sm&quot; — compact bar height."}
-                        {#content}{#include components/progress/small /}{/content}
-                        {/include}
-
-                        {#include partials/example-card title="Large" slug="large" component="progress" description="size=&quot;lg&quot; — taller bar. Use with measureLocation=&quot;inside&quot; so the inline label has room to render."}
-                        {#content}{#include components/progress/large /}{/content}
-                        {/include}
-
-                        {#include partials/example-card title="Outside" slug="outside" component="progress" description="measureLocation=&quot;outside&quot; — the percentage trails to the right of the bar instead of sitting above it."}
-                        {#content}{#include components/progress/outside /}{/content}
-                        {/include}
-
-                        {#include partials/example-card title="Inside" slug="inside" component="progress" description="measureLocation=&quot;inside&quot; — the percentage renders inside the filled indicator. Pair with size=&quot;lg&quot; so the label fits."}
-                        {#content}{#include components/progress/inside /}{/content}
-                        {/include}
-
-                        {#include partials/example-card title="Single line" slug="single-line" component="progress" description="singleline=true — compact one-row layout. Skip title and provide ariaLabel instead."}
-                        {#content}{#include components/progress/single-line /}{/content}
-                        {/include}
-
-                        {#include partials/example-card title="Without measure" slug="without-measure" component="progress" description="measureLocation=&quot;none&quot; — hides the visible percentage. The bar still announces its value via aria-valuenow."}
-                        {#content}{#include components/progress/without-measure /}{/content}
-                        {/include}
-
-                        {#include partials/example-card title="Finite step" slug="finite-step" component="progress" description="Step-based progress: min / max / label / valueText replace the percentage with a step counter."}
-                        {#content}{#include components/progress/finite-step /}{/content}
-                        {/include}
-
-                        {#include partials/example-card title="Step instructions" slug="step-instructions" component="progress" description="Step progress paired with helperText describing the current / next action. Wire ariaDescribedBy to expose the helper to assistive tech."}
-                        {#content}{#include components/progress/step-instructions /}{/content}
-                        {/include}
-
-                        {#include partials/example-card title="Truncate title" slug="truncate-title" component="progress" description="truncateTitle=true ellipses long titles instead of wrapping. Useful inside narrow containers (sidebars, table cells)."}
-                        {#content}{#include components/progress/truncate-title /}{/content}
-                        {/include}
-
-                        {#include partials/example-card title="Title outside" slug="title-outside" component="progress" description="Combine title with measureLocation=&quot;outside&quot; to keep the title row clean while pushing the measure to the right of the bar."}
-                        {#content}{#include components/progress/title-outside /}{/content}
-                        {/include}
-
-                        {#include partials/example-card title="Helper text" slug="helper-text" component="progress" description="Add explanatory copy under the bar with helperText. Wire ariaDescribedBy (PF requires this when helperText is set)."}
-                        {#content}{#include components/progress/helper-text /}{/content}
-                        {/include}
-
-                        {#include partials/example-card title="Success" slug="success" component="progress" description="status=&quot;success&quot; — green accent + check icon."}
-                        {#content}{#include components/progress/success /}{/content}
-                        {/include}
-
-                        {#include partials/example-card title="Failure" slug="failure" component="progress" description="status=&quot;danger&quot; — red accent + x-circle icon. Useful with helperText describing why the run failed."}
-                        {#content}{#include components/progress/failure /}{/content}
-                        {/include}
-
-                        {#include partials/example-card title="Warning" slug="warning" component="progress" description="status=&quot;warning&quot; — amber accent + triangle icon."}
-                        {#content}{#include components/progress/warning /}{/content}
-                        {/include}
-
-                        {#include partials/example-card title="Inside success" slug="inside-success" component="progress" description="Compose status with measureLocation=&quot;inside&quot; — the percentage sits inside the filled bar at success completion."}
-                        {#content}{#include components/progress/inside-success /}{/content}
-                        {/include}
-
-                        {#include partials/example-card title="Outside failure" slug="outside-failure" component="progress" description="status=&quot;danger&quot; + measureLocation=&quot;outside&quot;. The status icon swaps in for the percentage at the right of the bar."}
-                        {#content}{#include components/progress/outside-failure /}{/content}
-                        {/include}
-
-                        {#include partials/example-card title="Failure without measure" slug="failure-without-measure" component="progress" description="status=&quot;danger&quot; + measureLocation=&quot;none&quot;. Useful when the partial percentage isn't meaningful for the user (e.g. an indeterminate step that errored)."}
-                        {#content}{#include components/progress/failure-without-measure /}{/content}
+                        {#include partials/example-card title="Basic" slug="basic" component="progress"
+                        description="Default size, default measure location (top), no status. Percentage measure
+                        rendered above-right of the bar."} {#content}{#include components/progress/basic /}{/content}
+                        {/include} {#include partials/example-card title="Small" slug="small" component="progress"
+                        description="size=&quot;sm&quot; — compact bar height."} {#content}{#include
+                        components/progress/small /}{/content} {/include} {#include partials/example-card title="Large"
+                        slug="large" component="progress" description="size=&quot;lg&quot; — taller bar. Use with
+                        measureLocation=&quot;inside&quot; so the inline label has room to render."} {#content}{#include
+                        components/progress/large /}{/content} {/include} {#include partials/example-card
+                        title="Outside" slug="outside" component="progress"
+                        description="measureLocation=&quot;outside&quot; — the percentage trails to the right of the bar
+                        instead of sitting above it."} {#content}{#include components/progress/outside /}{/content}
+                        {/include} {#include partials/example-card title="Inside" slug="inside" component="progress"
+                        description="measureLocation=&quot;inside&quot; — the percentage renders inside the filled
+                        indicator. Pair with size=&quot;lg&quot; so the label fits."} {#content}{#include
+                        components/progress/inside /}{/content} {/include} {#include partials/example-card title="Single
+                        line" slug="single-line" component="progress" description="singleline=true — compact one-row
+                        layout. Skip title and provide ariaLabel instead."} {#content}{#include
+                        components/progress/single-line /}{/content} {/include} {#include partials/example-card
+                        title="Without measure" slug="without-measure" component="progress"
+                        description="measureLocation=&quot;none&quot; — hides the visible percentage. The bar still
+                        announces its value via aria-valuenow."} {#content}{#include components/progress/without-measure
+                        /}{/content} {/include} {#include partials/example-card title="Finite step" slug="finite-step"
+                        component="progress" description="Step-based progress: min / max / label / valueText replace the
+                        percentage with a step counter."} {#content}{#include components/progress/finite-step
+                        /}{/content} {/include} {#include partials/example-card title="Step instructions"
+                        slug="step-instructions" component="progress" description="Step progress paired with helperText
+                        describing the current / next action. Wire ariaDescribedBy to expose the helper to assistive
+                        tech."} {#content}{#include components/progress/step-instructions /}{/content} {/include}
+                        {#include partials/example-card title="Truncate title" slug="truncate-title"
+                        component="progress" description="truncateTitle=true ellipses long titles instead of wrapping.
+                        Useful inside narrow containers (sidebars, table cells)."} {#content}{#include
+                        components/progress/truncate-title /}{/content} {/include} {#include partials/example-card
+                        title="Title outside" slug="title-outside" component="progress" description="Combine title with
+                        measureLocation=&quot;outside&quot; to keep the title row clean while pushing the measure to the
+                        right of the bar."} {#content}{#include components/progress/title-outside /}{/content}
+                        {/include} {#include partials/example-card title="Helper text" slug="helper-text"
+                        component="progress" description="Add explanatory copy under the bar with helperText. Wire
+                        ariaDescribedBy (PF requires this when helperText is set)."} {#content}{#include
+                        components/progress/helper-text /}{/content} {/include} {#include partials/example-card
+                        title="Success" slug="success" component="progress" description="status=&quot;success&quot; —
+                        green accent + check icon."} {#content}{#include components/progress/success /}{/content}
+                        {/include} {#include partials/example-card title="Failure" slug="failure" component="progress"
+                        description="status=&quot;danger&quot; — red accent + x-circle icon. Useful with helperText
+                        describing why the run failed."} {#content}{#include components/progress/failure /}{/content}
+                        {/include} {#include partials/example-card title="Warning" slug="warning" component="progress"
+                        description="status=&quot;warning&quot; — amber accent + triangle icon."} {#content}{#include
+                        components/progress/warning /}{/content} {/include} {#include partials/example-card
+                        title="Inside success" slug="inside-success" component="progress" description="Compose status
+                        with measureLocation=&quot;inside&quot; — the percentage sits inside the filled bar at success
+                        completion."} {#content}{#include components/progress/inside-success /}{/content} {/include}
+                        {#include partials/example-card title="Outside failure" slug="outside-failure"
+                        component="progress" description="status=&quot;danger&quot; +
+                        measureLocation=&quot;outside&quot;. The status icon swaps in for the percentage at the right of
+                        the bar."} {#content}{#include components/progress/outside-failure /}{/content} {/include}
+                        {#include partials/example-card title="Failure without measure" slug="failure-without-measure"
+                        component="progress" description="status=&quot;danger&quot; + measureLocation=&quot;none&quot;.
+                        Useful when the partial percentage isn't meaningful for the user (e.g. an indeterminate step
+                        that errored)."} {#content}{#include components/progress/failure-without-measure /}{/content}
                         {/include}
 
                         <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                           <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
                             <div>
-                              <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Documentation</h2>
+                              <h2
+                                id="documentation"
+                                tabindex="-1"
+                                class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                              >
+                                Documentation
+                              </h2>
                             </div>
                           </div>
                         </div>
 
                         <div class="pf-v6-l-stack__item">
-                          <h3 id="props-progress" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Progress props</h3>
+                          <h3 id="props-progress" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                            Progress props
+                          </h3>
                           <p class="pf-v6-c-content--p pf-m-editorial">
-                            Parameters accepted by <code class="ws-code">{|{#include components/feedback/progress ... /}|}</code>.
+                            Parameters accepted by
+                            <code class="ws-code">{|{#include components/feedback/progress ... /}|}</code>.
                           </p>
                           <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Required:</strong> <code class="ws-code">id</code>, <code class="ws-code">value</code>.
-                            <strong>Bounds:</strong> <code class="ws-code">min</code> (default 0), <code class="ws-code">max</code> (default 100).
-                            <strong>Title row:</strong> <code class="ws-code">title</code>, <code class="ws-code">truncateTitle</code>.
-                            <strong>Measure:</strong> <code class="ws-code">label</code> (visible), <code class="ws-code">valueText</code> (aria-valuetext), <code class="ws-code">measureLocation</code> (<code class="ws-code">"top"</code> default | <code class="ws-code">"outside"</code> | <code class="ws-code">"inside"</code> | <code class="ws-code">"none"</code>).
-                            <strong>Helper:</strong> <code class="ws-code">helperText</code>.
-                            <strong>Layout:</strong> <code class="ws-code">size</code> (<code class="ws-code">"sm"</code> | <code class="ws-code">"lg"</code>), <code class="ws-code">singleline</code>.
-                            <strong>Status:</strong> <code class="ws-code">status</code> (<code class="ws-code">"success"</code> | <code class="ws-code">"warning"</code> | <code class="ws-code">"danger"</code>) — auto-renders the matching icon.
-                            <strong>ARIA:</strong> <code class="ws-code">ariaLabel</code> (required without title), <code class="ws-code">ariaLabelledBy</code>, <code class="ws-code">ariaDescribedBy</code> (required with helperText).
+                            <strong>Required:</strong> <code class="ws-code">id</code>,
+                            <code class="ws-code">value</code>. <strong>Bounds:</strong>
+                            <code class="ws-code">min</code> (default 0), <code class="ws-code">max</code> (default
+                            100). <strong>Title row:</strong> <code class="ws-code">title</code>,
+                            <code class="ws-code">truncateTitle</code>. <strong>Measure:</strong>
+                            <code class="ws-code">label</code> (visible),
+                            <code class="ws-code">valueText</code> (aria-valuetext),
+                            <code class="ws-code">measureLocation</code> (<code class="ws-code">"top"</code> default |
+                            <code class="ws-code">"outside"</code> | <code class="ws-code">"inside"</code> |
+                            <code class="ws-code">"none"</code>). <strong>Helper:</strong>
+                            <code class="ws-code">helperText</code>. <strong>Layout:</strong>
+                            <code class="ws-code">size</code> (<code class="ws-code">"sm"</code> |
+                            <code class="ws-code">"lg"</code>), <code class="ws-code">singleline</code>.
+                            <strong>Status:</strong> <code class="ws-code">status</code> (<code class="ws-code"
+                              >"success"</code
+                            >
+                            | <code class="ws-code">"warning"</code> | <code class="ws-code">"danger"</code>) —
+                            auto-renders the matching icon. <strong>ARIA:</strong>
+                            <code class="ws-code">ariaLabel</code> (required without title),
+                            <code class="ws-code">ariaLabelledBy</code>,
+                            <code class="ws-code">ariaDescribedBy</code> (required with helperText).
                           </p>
                           <p class="pf-v6-c-content--p pf-m-editorial">
                             <strong>Divergence from PF React.</strong> We skip <code class="ws-code">className</code>,
-                            <code class="ws-code">tooltipPosition</code>; rename <code class="ws-code">isTitleTruncated</code> →
-                            <code class="ws-code">truncateTitle</code>.
+                            <code class="ws-code">tooltipPosition</code>; rename
+                            <code class="ws-code">isTitleTruncated</code> → <code class="ws-code">truncateTitle</code>.
                           </p>
                           <p class="pf-v6-c-content--p pf-m-editorial">
                             <strong>Bug fixed in this rewrite:</strong> the previous runtime referenced FA 5 icon names
-                            (<code class="ws-code">fa:check-circle</code> / <code class="ws-code">fa:exclamation-triangle</code> /
+                            (<code class="ws-code">fa:check-circle</code> /
+                            <code class="ws-code">fa:exclamation-triangle</code> /
                             <code class="ws-code">fa:times-circle</code>) — our vendor ships FA 7, which uses
-                            <code class="ws-code">fa:circle-check</code> / <code class="ws-code">fa:triangle-exclamation</code> /
-                            <code class="ws-code">fa:circle-exclamation</code>. Status icons were silently rendering as the
-                            red "missing-icon" placeholder before.
+                            <code class="ws-code">fa:circle-check</code> /
+                            <code class="ws-code">fa:triangle-exclamation</code> /
+                            <code class="ws-code">fa:circle-exclamation</code>. Status icons were silently rendering as
+                            the red "missing-icon" placeholder before.
                           </p>
                         </div>
 
                         <div class="pf-v6-l-stack__item">
                           <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
                           <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Picking a measure location.</strong> <code class="ws-code">"top"</code> is the default and
-                            reads best at any size. <code class="ws-code">"outside"</code> keeps the title row clean. Use
-                            <code class="ws-code">"inside"</code> only with <code class="ws-code">size="lg"</code> so the label
-                            is readable. <code class="ws-code">"none"</code> when the partial-percentage value isn't
-                            meaningful (cancelled / indeterminate run).
+                            <strong>Picking a measure location.</strong> <code class="ws-code">"top"</code> is the
+                            default and reads best at any size. <code class="ws-code">"outside"</code> keeps the title
+                            row clean. Use <code class="ws-code">"inside"</code> only with
+                            <code class="ws-code">size="lg"</code> so the label is readable.
+                            <code class="ws-code">"none"</code> when the partial-percentage value isn't meaningful
+                            (cancelled / indeterminate run).
                           </p>
                           <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Step progress.</strong> Pair <code class="ws-code">min</code> / <code class="ws-code">max</code>
-                            with <code class="ws-code">label="Step N of M"</code> and a matching
-                            <code class="ws-code">valueText</code>. Update both each tick so the visible measure and the
-                            screen-reader text stay in sync.
+                            <strong>Step progress.</strong> Pair <code class="ws-code">min</code> /
+                            <code class="ws-code">max</code> with <code class="ws-code">label="Step N of M"</code> and a
+                            matching <code class="ws-code">valueText</code>. Update both each tick so the visible
+                            measure and the screen-reader text stay in sync.
                           </p>
                           <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Status + value semantics.</strong> Setting <code class="ws-code">status</code> communicates
-                            outcome regardless of value (e.g. failure at 42%). PF's CSS hides the percentage in the status
-                            row and shows the icon instead. If you want both visible, drop <code class="ws-code">status</code>
-                            and add an icon via <code class="ws-code">helperText</code> markup.
+                            <strong>Status + value semantics.</strong> Setting
+                            <code class="ws-code">status</code> communicates outcome regardless of value (e.g. failure
+                            at 42%). PF's CSS hides the percentage in the status row and shows the icon instead. If you
+                            want both visible, drop <code class="ws-code">status</code> and add an icon via
+                            <code class="ws-code">helperText</code> markup.
                           </p>
                           <p class="pf-v6-c-content--p pf-m-editorial">
                             <strong>HTMX live updates.</strong> Re-render the progress bar via
@@ -223,7 +418,8 @@
                             href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/feedback/progress.html"
                             target="_blank"
                             rel="noopener noreferrer"
-                            >Edit progress.html on GitHub</a>
+                            >Edit progress.html on GitHub</a
+                          >
                         </div>
                       </div>
                     </div>
@@ -237,5 +433,4 @@
     </div>
   </div>
 </div>
-{/body}
-{/include}
+{/body} {/include}

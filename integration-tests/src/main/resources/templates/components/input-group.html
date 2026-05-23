@@ -1,45 +1,54 @@
-{#include layouts/base}
-{#title}Input Group{/title}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+{#include layouts/base} {#title}Input Group{/title} {#body}
+<div style="padding: 2rem">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block"
+    >&larr; Back to showcase</a
+  >
   <h1>Input Group</h1>
   <p>PatternFly v6 input group component for combining inputs with labels, buttons, or other elements.</p>
 
-  <section style="margin-top: 2rem;">
+  <section style="margin-top: 2rem">
     <h2 id="basic-heading">Basic</h2>
     <p>An input group with an @ prefix label and a text input for entering a username.</p>
     {#include components/forms/input-group id="ig-basic"}{#content}
-      <div class="pf-v6-c-input-group__item pf-m-box"><span class="pf-v6-c-input-group__text">@</span></div>
-      <div class="pf-v6-c-input-group__item pf-m-fill"><span class="pf-v6-c-form-control"><input type="text" aria-label="Username" placeholder="Username"></span></div>
+    <div class="pf-v6-c-input-group__item pf-m-box"><span class="pf-v6-c-input-group__text">@</span></div>
+    <div class="pf-v6-c-input-group__item pf-m-fill">
+      <span class="pf-v6-c-form-control"><input type="text" aria-label="Username" placeholder="Username" /></span>
+    </div>
     {/content}{/include}
   </section>
 
-  <section style="margin-top: 2rem;">
+  <section style="margin-top: 2rem">
     <h2 id="with-button-heading">With button</h2>
     <p>An input group combining a text input with a submit button.</p>
     {#include components/forms/input-group id="ig-button"}{#content}
-      <div class="pf-v6-c-input-group__item pf-m-fill"><span class="pf-v6-c-form-control"><input type="text" aria-label="Search" placeholder="Search..."></span></div>
-      <div class="pf-v6-c-input-group__item"><button class="pf-v6-c-button pf-m-control" type="button" aria-label="Search">{icons:svg('fa:search').raw}</button></div>
+    <div class="pf-v6-c-input-group__item pf-m-fill">
+      <span class="pf-v6-c-form-control"><input type="text" aria-label="Search" placeholder="Search..." /></span>
+    </div>
+    <div class="pf-v6-c-input-group__item">
+      <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Search">
+        {icons:svg('fa:search').raw}
+      </button>
+    </div>
     {/content}{/include}
   </section>
 
-  <section style="margin-top: 2rem;">
+  <section style="margin-top: 2rem">
     <h2 id="with-select-heading">With select</h2>
     <p>An input group combining a select dropdown with a text input field.</p>
     {#include components/forms/input-group id="ig-select"}{#content}
-      <div class="pf-v6-c-input-group__item pf-m-box">
-        <span class="pf-v6-c-form-control">
-          <select aria-label="Filter type">
-            <option value="name">Name</option>
-            <option value="status">Status</option>
-            <option value="type">Type</option>
-          </select>
-        </span>
-      </div>
-      <div class="pf-v6-c-input-group__item pf-m-fill"><span class="pf-v6-c-form-control"><input type="text" aria-label="Filter value" placeholder="Filter..."></span></div>
+    <div class="pf-v6-c-input-group__item pf-m-box">
+      <span class="pf-v6-c-form-control">
+        <select aria-label="Filter type">
+          <option value="name">Name</option>
+          <option value="status">Status</option>
+          <option value="type">Type</option>
+        </select>
+      </span>
+    </div>
+    <div class="pf-v6-c-input-group__item pf-m-fill">
+      <span class="pf-v6-c-form-control"><input type="text" aria-label="Filter value" placeholder="Filter..." /></span>
+    </div>
     {/content}{/include}
   </section>
 </div>
-{/body}
-{/include}
+{/body} {/include}

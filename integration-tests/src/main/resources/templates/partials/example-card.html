@@ -1,12 +1,9 @@
-{! Example card — heading + (optional) description + example body + collapsible Qute source viewer. !}
-{! Parameters: !}
-{!   title       — h3 text (e.g. "Single selectable") !}
-{!   slug        — id segment used for anchors and the standalone/source URLs (e.g. "single-selectable") !}
-{!   component   — parent component slug (e.g. "tree-view") used to build the !}
-{!                 /components/{component}/source/{slug} and standalone hrefs !}
-{!   description — (optional) explanatory paragraph rendered between the heading and the example body !}
-{! Slot: !}
-{!   {#content}  — the example markup (the demo body itself, no chrome) !}
+{! Example card — heading + (optional) description + example body + collapsible Qute source viewer. !} {! Parameters: !}
+{! title — h3 text (e.g. "Single selectable") !} {! slug — id segment used for anchors and the standalone/source URLs
+(e.g. "single-selectable") !} {! component — parent component slug (e.g. "tree-view") used to build the !} {!
+/components/{component}/source/{slug} and standalone hrefs !} {! description — (optional) explanatory paragraph rendered
+between the heading and the example body !} {! Slot: !} {! {#content} — the example markup (the demo body itself, no
+chrome) !}
 <div
   class="pf-v6-l-stack pf-m-gutter"
   data-source-href="/components/{component}/source/{slug}"
@@ -59,7 +56,12 @@
       </div>
       <div class="pf-v6-c-code-editor__main" x-show="open" x-cloak>
         <div class="pf-v6-c-code-editor__code" x-show="!error" x-ref="host" style="height: 400px"></div>
-        <div class="pf-v6-c-code-editor__code pha-c-code-editor__error" x-show="error" x-text="error" role="alert"></div>
+        <div
+          class="pf-v6-c-code-editor__code pha-c-code-editor__error"
+          x-show="error"
+          x-text="error"
+          role="alert"
+        ></div>
       </div>
     </div>
   </div>

@@ -1,8 +1,41 @@
 <div x-data="{ active: 'v1' }" style="display: flex; gap: 1rem">
   {#include components/navigation/tabs id="tabs-vertical" vertical=true}{#content}
-    <li class="pf-v6-c-tabs__item" :class="active === 'v1' ? 'pf-m-current' : ''"><button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'v1'" :tabindex="active === 'v1' ? 0 : -1" @click="active = 'v1'"><span class="pf-v6-c-tabs__item-text">General</span></button></li>
-    <li class="pf-v6-c-tabs__item" :class="active === 'v2' ? 'pf-m-current' : ''"><button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'v2'" :tabindex="active === 'v2' ? 0 : -1" @click="active = 'v2'"><span class="pf-v6-c-tabs__item-text">Security</span></button></li>
-    <li class="pf-v6-c-tabs__item" :class="active === 'v3' ? 'pf-m-current' : ''"><button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'v3'" :tabindex="active === 'v3' ? 0 : -1" @click="active = 'v3'"><span class="pf-v6-c-tabs__item-text">Notifications</span></button></li>
+  <li class="pf-v6-c-tabs__item" :class="active === 'v1' ? 'pf-m-current' : ''">
+    <button
+      class="pf-v6-c-tabs__link"
+      type="button"
+      role="tab"
+      :aria-selected="active === 'v1'"
+      :tabindex="active === 'v1' ? 0 : -1"
+      @click="active = 'v1'"
+    >
+      <span class="pf-v6-c-tabs__item-text">General</span>
+    </button>
+  </li>
+  <li class="pf-v6-c-tabs__item" :class="active === 'v2' ? 'pf-m-current' : ''">
+    <button
+      class="pf-v6-c-tabs__link"
+      type="button"
+      role="tab"
+      :aria-selected="active === 'v2'"
+      :tabindex="active === 'v2' ? 0 : -1"
+      @click="active = 'v2'"
+    >
+      <span class="pf-v6-c-tabs__item-text">Security</span>
+    </button>
+  </li>
+  <li class="pf-v6-c-tabs__item" :class="active === 'v3' ? 'pf-m-current' : ''">
+    <button
+      class="pf-v6-c-tabs__link"
+      type="button"
+      role="tab"
+      :aria-selected="active === 'v3'"
+      :tabindex="active === 'v3' ? 0 : -1"
+      @click="active = 'v3'"
+    >
+      <span class="pf-v6-c-tabs__item-text">Notifications</span>
+    </button>
+  </li>
   {/content}{/include}
   <div style="flex: 1">
     <div role="tabpanel" x-show="active === 'v1'" style="padding: 1rem">General settings.</div>

@@ -1,23 +1,29 @@
-{#include layouts/base}
-{#title}Lazy Modal{/title}
-{#head}<link rel="stylesheet" href="/web/css/components/htmx.css">{/head}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+{#include layouts/base} {#title}Lazy Modal{/title} {#head}<link
+  rel="stylesheet"
+  href="/web/css/components/htmx.css"
+/>{/head} {#body}
+<div style="padding: 2rem">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block"
+    >&larr; Back to showcase</a
+  >
 
   <h1>Lazy Modal</h1>
   <p>HTMX-powered modal that loads its content on demand when opened.</p>
 
-  <section style="margin-top: 2rem;">
+  <section style="margin-top: 2rem">
     <h2 id="lazy-modal-heading">On-demand content loading</h2>
     <p>Click the button to open a modal whose body is fetched from <code>/api/htmx/modal-content</code>.</p>
-    <button class="pf-v6-c-button pf-m-primary" type="button" id="open-lazy-modal-btn"
-            @click="$dispatch('open-modal', 'lazy-modal-demo')">
+    <button
+      class="pf-v6-c-button pf-m-primary"
+      type="button"
+      id="open-lazy-modal-btn"
+      @click="$dispatch('open-modal', 'lazy-modal-demo')"
+    >
       Open lazy modal
     </button>
   </section>
 
-  {#include components/htmx/lazy-modal id="lazy-modal-demo" titleText="Server Details" loadUrl="/api/htmx/modal-content/details" size="md" /}
+  {#include components/htmx/lazy-modal id="lazy-modal-demo" titleText="Server Details"
+  loadUrl="/api/htmx/modal-content/details" size="md" /}
 </div>
-{/body}
-{/include}
+{/body} {/include}

@@ -1,13 +1,8 @@
-{! Masthead — PatternFly v6 !}
-{! Parameters: id, displayStack (optional) !}
+{! Masthead — PatternFly v6 !} {! Parameters: id, displayStack (optional) !}
 <header class="pf-v6-c-masthead{#if displayStack??} pf-m-display-stack{/if}" id="{id}">
   <div class="pf-v6-c-masthead__main">
     {#insert toggle}{/insert}
-    <div class="pf-v6-c-masthead__brand">
-      {#insert brand}{/insert}
-    </div>
+    <div class="pf-v6-c-masthead__brand">{#insert brand}{/insert}</div>
   </div>
-  <div class="pf-v6-c-masthead__content">
-    {#insert content}{/insert}
-  </div>
+  <div class="pf-v6-c-masthead__content">{#insert content}{/insert}</div>
 </header>
