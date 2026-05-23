@@ -1,11 +1,9 @@
-{! noContentContainer=true skips the default __content wrapper so the body can custom-position its own layout. !} {!
-Useful for marketing/launch screens where the standard description-list layout doesn't fit. !}
+{! noContentContainer=true skips the default __content wrapper so the body can custom-position its own layout. !}
+{! Useful for marketing/launch screens where the standard description-list layout doesn't fit. !}
 <button class="pf-v6-c-button pf-m-primary" type="button" @click="$dispatch('open-about-modal-complex')">
   About (complex content)
 </button>
-{#include components/feedback/about-modal id="complex" productName="quarkus-pha"
-brandImageSrc="/web/images/PF-IconLogo.svg" brandImageAlt="quarkus-pha logo"
-backgroundImage="/web/images/pf-background.svg" noContentContainer=true} {#content}
+{#include components/feedback/about-modal id="complex" productName="quarkus-pha" brandImageSrc="/web/images/PF-IconLogo.svg" brandImageAlt="quarkus-pha logo" backgroundImage="/web/images/pf-background.svg" noContentContainer=true} {#content}
 <div class="pf-v6-c-about-modal-box__content">
   <div class="pf-v6-l-stack pf-m-gutter">
     <div class="pf-v6-l-stack__item">

@@ -44,75 +44,24 @@ runtime/src/main/resources/templates/components/navigation/breadcrumb.html
 runtime/src/main/resources/templates/components/navigation/breadcrumb-item.html
 runtime/src/main/resources/templates/components/navigation/back-to-top.html
 runtime/src/main/resources/templates/components/actions/action-list.html
-
-# Example fragments built from {#include ... map=[...] /} — Prettier folds
-# the multi-line JSON-ish args into one line, harming readability, and trips
-# on embedded HTML strings inside the args.
-integration-tests/src/main/resources/templates/components/action-list/
-integration-tests/src/main/resources/templates/components/avatar/
 runtime/src/main/resources/templates/components/data-display/badge.html
 runtime/src/main/resources/templates/components/feedback/banner.html
-integration-tests/src/main/resources/templates/components/banner/
 runtime/src/main/resources/templates/components/data-display/brand.html
-integration-tests/src/main/resources/templates/components/brand/
-runtime/src/main/resources/templates/layouts/primitives/
-integration-tests/src/main/resources/templates/layouts/
 runtime/src/main/resources/templates/components/forms/text-input.html
 runtime/src/main/resources/templates/components/forms/text-area.html
 runtime/src/main/resources/templates/components/forms/form-select.html
-integration-tests/src/main/resources/templates/components/form/
-integration-tests/src/main/resources/templates/components/form-control/
-integration-tests/src/main/resources/templates/components/checkbox/
-integration-tests/src/main/resources/templates/components/form-select/
-integration-tests/src/main/resources/templates/components/radio/
-integration-tests/src/main/resources/templates/components/text-area/
-integration-tests/src/main/resources/templates/components/text-input/
 runtime/src/main/resources/templates/components/data-display/timestamp.html
 runtime/src/main/resources/templates/components/data-display/truncate.html
 runtime/src/main/resources/templates/components/feedback/tooltip.html
-integration-tests/src/main/resources/templates/components/timestamp/
-integration-tests/src/main/resources/templates/components/truncate/
-integration-tests/src/main/resources/templates/components/tooltip/
-integration-tests/src/main/resources/templates/components/switch/
-integration-tests/src/main/resources/templates/components/toggle-group/
-integration-tests/src/main/resources/templates/components/slider/
-integration-tests/src/main/resources/templates/components/text-input-group/
-integration-tests/src/main/resources/templates/components/search-input/
-integration-tests/src/main/resources/templates/components/jump-links/
-integration-tests/src/main/resources/templates/components/simple-list/
-integration-tests/src/main/resources/templates/components/notification-drawer/
-integration-tests/src/main/resources/templates/components/drawer/
-integration-tests/src/main/resources/templates/components/toolbar/
-integration-tests/src/main/resources/templates/components/modal/
-integration-tests/src/main/resources/templates/components/multiple-file-upload/
-integration-tests/src/main/resources/templates/components/date-picker/
-integration-tests/src/main/resources/templates/components/menu/
-integration-tests/src/main/resources/templates/components/menu-toggle/
 runtime/src/main/resources/templates/components/feedback/notification-badge.html
-integration-tests/src/main/resources/templates/components/notification-badge/
-integration-tests/src/main/resources/templates/components/page/
-integration-tests/src/main/resources/templates/components/context-selector/
-integration-tests/src/main/resources/templates/components/dual-list-selector/
-integration-tests/src/main/resources/templates/components/calendar-month/
-integration-tests/src/main/resources/templates/components/dropdown/
-integration-tests/src/main/resources/templates/components/select/
-integration-tests/src/main/resources/templates/components/application-launcher/
-integration-tests/src/main/resources/templates/components/options-menu/
-integration-tests/src/main/resources/templates/components/custom-menus/
-integration-tests/src/main/resources/templates/components/password-generator/
-integration-tests/src/main/resources/templates/components/password-strength/
-integration-tests/src/main/resources/templates/components/date-and-time-picker/
-integration-tests/src/main/resources/templates/components/time-picker/
-integration-tests/src/main/resources/templates/components/navigation/
-
-# Code-editor examples — newlines inside {#content}...{/content} blocks are
-# significant (they're rendered verbatim into a <pre>). Prettier collapses
-# them which corrupts YAML/JSON examples.
-integration-tests/src/main/resources/templates/components/code-editor/
-
-# Topology runtime template — conditional attribute block ({#if height??} style="...") trips Prettier's parser.
 runtime/src/main/resources/templates/components/charts/topology.html
 
-# Topology examples — deep inline Cytoscape config objects inside x-data
-# attributes are not safely reflowable by Prettier.
-integration-tests/src/main/resources/templates/components/topology/
+# Layout primitives — multi-line attribute blocks Prettier doesn't safely reflow.
+runtime/src/main/resources/templates/layouts/primitives/
+integration-tests/src/main/resources/templates/layouts/
+
+# Example fragments — hand-authored Qute snippets meant to read top-to-bottom,
+# one {#include} per line. Prettier packs them up to printWidth which makes
+# the Qute source unreadable, mangles inline JSON/YAML inside {#content}, and
+# trips on deep inline x-data="{...}" configs.
+integration-tests/src/main/resources/templates/components/*/
