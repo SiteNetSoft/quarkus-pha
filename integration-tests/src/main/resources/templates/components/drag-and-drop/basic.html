@@ -1,6 +1,9 @@
 {! Alpine-driven drag-and-drop list. Use HTML5 draggable + native dragover/drop events. !}
-<ul class="pf-v6-c-data-list" id="dd-basic" role="list"
-    x-data="{
+<ul
+  class="pf-v6-c-data-list"
+  id="dd-basic"
+  role="list"
+  x-data="{
       items: ['Plan release', 'Cut branch', 'Run tests', 'Tag and push'],
       dragIdx: null,
       onStart(i) { this.dragIdx = i; },
@@ -11,17 +14,25 @@
         this.items.splice(i, 0, item);
         this.dragIdx = null;
       }
-    }">
+    }"
+>
   <template x-for="(item, i) in items" :key="i">
-    <li class="pf-v6-c-data-list__item"
-        draggable="true"
-        @dragstart="onStart(i)"
-        @dragover="onOver($event, i)"
-        @drop="onDrop(i)"
-        style="cursor: move">
-      <div class="pf-v6-c-data-list__item-row"><div class="pf-v6-c-data-list__item-content">
-        <div class="pf-v6-c-data-list__cell"><span style="margin-right: 0.5rem; color: var(--pf-t--global--color--brand--default)">⋮⋮</span><span x-text="item"></span></div>
-      </div></div>
+    <li
+      class="pf-v6-c-data-list__item"
+      draggable="true"
+      @dragstart="onStart(i)"
+      @dragover="onOver($event, i)"
+      @drop="onDrop(i)"
+      style="cursor: move"
+    >
+      <div class="pf-v6-c-data-list__item-row">
+        <div class="pf-v6-c-data-list__item-content">
+          <div class="pf-v6-c-data-list__cell">
+            <span style="margin-right: 0.5rem; color: var(--pf-t--global--color--brand--default)">⋮⋮</span
+            ><span x-text="item"></span>
+          </div>
+        </div>
+      </div>
     </li>
   </template>
 </ul>

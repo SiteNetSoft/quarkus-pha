@@ -10,17 +10,17 @@
  *   PHA.releaseFocus(containerEl);
  */
 (function () {
-  'use strict';
+  "use strict";
 
   var FOCUSABLE = [
-    'a[href]',
-    'button:not([disabled])',
+    "a[href]",
+    "button:not([disabled])",
     'input:not([disabled]):not([type="hidden"])',
-    'select:not([disabled])',
-    'textarea:not([disabled])',
+    "select:not([disabled])",
+    "textarea:not([disabled])",
     '[tabindex]:not([tabindex="-1"])',
-    '[contenteditable="true"]'
-  ].join(',');
+    '[contenteditable="true"]',
+  ].join(",");
 
   var traps = new WeakMap();
 
@@ -37,7 +37,7 @@
     var previousFocus = document.activeElement;
 
     function handler(e) {
-      if (e.key !== 'Tab') return;
+      if (e.key !== "Tab") return;
 
       var focusable = getFocusable(container);
       if (focusable.length === 0) {
@@ -61,7 +61,7 @@
       }
     }
 
-    container.addEventListener('keydown', handler);
+    container.addEventListener("keydown", handler);
     traps.set(container, { handler: handler, previousFocus: previousFocus });
 
     // Focus first focusable element
@@ -75,7 +75,7 @@
     var data = traps.get(container);
     if (!data) return;
 
-    container.removeEventListener('keydown', data.handler);
+    container.removeEventListener("keydown", data.handler);
 
     // Return focus to the element that had focus before the trap
     if (data.previousFocus && data.previousFocus.focus) {

@@ -5,74 +5,110 @@ test.describe("About modal", () => {
     await page.goto("/components/about-modal");
   });
 
-  test("modal is hidden by default", async ({ page }) => {
-    const modal = page.locator(".pf-v6-c-about-modal-box");
-    await expect(modal).toBeHidden();
+  test("all three example sections in ToC", async ({ page }) => {
+    await expect(page.locator("#basic")).toBeVisible();
+    await expect(page.locator("#without-product-name")).toBeVisible();
+    await expect(page.locator("#complex-content")).toBeVisible();
   });
 
-  test("opens on About button click and shows product name", async ({ page }) => {
-    await page.locator("button", { hasText: "About" }).click();
+  test.describe("Basic variant", () => {
+    const card = '[data-source-href="/components/about-modal/basic"]';
 
-    const modal = page.locator(".pf-v6-c-about-modal-box");
-    await expect(modal).toBeVisible();
+    test("modal hidden by default", async ({ page }) => {
+      const modal = page.locator(`${card} .pf-v6-c-about-modal-box`);
+      await expect(modal).toBeHidden();
+    });
 
-    const title = page.locator("#about-modal-title");
-    await expect(title).toHaveText("quarkus-pha");
+    test("opens via id-scoped event with product name title", async ({ page }) => {
+      await page.locator(`${card} button`, { hasText: "About" }).first().click();
+      const modal = page.locator(`${card} .pf-v6-c-about-modal-box`);
+      await expect(modal).toBeVisible();
+      await expect(page.locator("#basic-title")).toHaveText("quarkus-pha");
+    });
+
+    test("dialog aria attributes link to the basic title", async ({ page }) => {
+      await page.locator(`${card} button`, { hasText: "About" }).first().click();
+      const modal = page.locator(`${card} .pf-v6-c-about-modal-box`);
+      await expect(modal).toHaveAttribute("role", "dialog");
+      await expect(modal).toHaveAttribute("aria-modal", "true");
+      await expect(modal).toHaveAttribute("aria-labelledby", "basic-title");
+    });
+
+    test("brand image, description-list body, trademark, strapline render", async ({ page }) => {
+      await page.locator(`${card} button`, { hasText: "About" }).first().click();
+      await expect(page.locator(`${card} .pf-v6-c-about-modal-box__brand-image`)).toBeVisible();
+      await expect(page.locator(`${card} .pf-v6-c-about-modal-box__body`)).toContainText("1.0.0-SNAPSHOT");
+      await expect(page.locator(`${card} .pf-v6-c-about-modal-box__strapline`).last()).toContainText("Copyright");
+    });
+
+    test("Escape closes", async ({ page }) => {
+      await page.locator(`${card} button`, { hasText: "About" }).first().click();
+      const modal = page.locator(`${card} .pf-v6-c-about-modal-box`);
+      await expect(modal).toBeVisible();
+      await page.keyboard.press("Escape");
+      await expect(modal).toBeHidden();
+    });
+
+    test("close button closes", async ({ page }) => {
+      await page.locator(`${card} button`, { hasText: "About" }).first().click();
+      const modal = page.locator(`${card} .pf-v6-c-about-modal-box`);
+      await expect(modal).toBeVisible();
+      await page.locator(`${card} .pf-v6-c-about-modal-box__close button`).click();
+      await expect(modal).toBeHidden();
+    });
   });
 
-  test("displays version info and strapline", async ({ page }) => {
-    await page.locator("button", { hasText: "About" }).click();
+  test.describe("Without product name variant", () => {
+    const card = '[data-source-href="/components/about-modal/without-product-name"]';
 
-    const body = page.locator(".pf-v6-c-about-modal-box__body");
-    await expect(body).toContainText("1.0.0-SNAPSHOT");
-    await expect(body).toContainText("3.31.4");
+    test("dialog uses aria-label instead of aria-labelledby", async ({ page }) => {
+      await page.locator(`${card} button`).first().click();
+      const modal = page.locator(`${card} .pf-v6-c-about-modal-box`);
+      await expect(modal).toHaveAttribute("aria-label", "About this product");
+      await expect(modal).not.toHaveAttribute("aria-labelledby", /.+/);
+    });
 
-    const strapline = page.locator(".pf-v6-c-about-modal-box__strapline");
-    await expect(strapline).toContainText("Copyright");
-    await expect(strapline).toContainText("SiteNetSoft");
+    test("no h1 title element", async ({ page }) => {
+      await page.locator(`${card} button`).first().click();
+      await expect(page.locator("#noname-title")).toHaveCount(0);
+    });
   });
 
-  test("brand image is visible with alt text", async ({ page }) => {
-    await page.locator("button", { hasText: "About" }).click();
+  test.describe("Complex content variant", () => {
+    const card = '[data-source-href="/components/about-modal/complex-content"]';
 
-    const img = page.locator(".pf-v6-c-about-modal-box__brand-image");
-    await expect(img).toBeVisible();
-    await expect(img).toHaveAttribute("alt", "quarkus-pha logo");
-    await expect(img).toHaveAttribute("src", "/web/images/PF-IconLogo.svg");
+    test("default __content wrapper is skipped (only the example's own wrapper is present)", async ({ page }) => {
+      await page.locator(`${card} button`).first().click();
+      // noContentContainer=true → the runtime template does NOT emit a default __content wrapper;
+      // the only __content div is the one the example fragment renders itself
+      await expect(page.locator(`${card} .pf-v6-c-about-modal-box__content`)).toHaveCount(1);
+    });
   });
 
-  test("background image is applied", async ({ page }) => {
-    await page.locator("button", { hasText: "About" }).click();
-
-    const modal = page.locator(".pf-v6-c-about-modal-box");
-    const style = await modal.getAttribute("style");
-    expect(style).toContain("/web/images/pf-background.svg");
+  test.describe("Multiple instances coexist", () => {
+    test("opening basic does not open complex", async ({ page }) => {
+      await page
+        .locator('[data-source-href="/components/about-modal/basic"] button', { hasText: "About" })
+        .first()
+        .click();
+      await expect(page.locator('[data-source-href="/components/about-modal/basic"] .pf-v6-c-about-modal-box')).toBeVisible();
+      await expect(page.locator('[data-source-href="/components/about-modal/complex-content"] .pf-v6-c-about-modal-box')).toBeHidden();
+    });
   });
 
-  test("close button closes modal", async ({ page }) => {
-    await page.locator("button", { hasText: "About" }).click();
-    const modal = page.locator(".pf-v6-c-about-modal-box");
-    await expect(modal).toBeVisible();
+  test.describe("Per-example code viewer", () => {
+    test("Toggle Qute opens Monaco with the fragment source", async ({ page }) => {
+      const card = page.locator('[data-source-href="/components/about-modal/basic"]');
+      const toggle = card.locator('button[aria-label*="Toggle Qute"]');
+      await toggle.click();
+      await expect(card.locator(".monaco-editor").first()).toBeVisible({ timeout: 10000 });
+    });
 
-    await page.locator(".pf-v6-c-about-modal-box__close button").click();
-    await expect(modal).toBeHidden();
-  });
-
-  test("Escape key closes modal", async ({ page }) => {
-    await page.locator("button", { hasText: "About" }).click();
-    const modal = page.locator(".pf-v6-c-about-modal-box");
-    await expect(modal).toBeVisible();
-
-    await page.keyboard.press("Escape");
-    await expect(modal).toBeHidden();
-  });
-
-  test("ARIA attributes are correct", async ({ page }) => {
-    await page.locator("button", { hasText: "About" }).click();
-
-    const modal = page.locator(".pf-v6-c-about-modal-box");
-    await expect(modal).toHaveAttribute("role", "dialog");
-    await expect(modal).toHaveAttribute("aria-modal", "true");
-    await expect(modal).toHaveAttribute("aria-labelledby", "about-modal-title");
+    test("Open-in-new-window link points to the standalone route", async ({ page }) => {
+      const card = page.locator('[data-source-href="/components/about-modal/complex-content"]');
+      const link = card.locator('a[aria-label*="Open"]');
+      await expect(link).toHaveAttribute("href", "/components/about-modal/complex-content");
+      await expect(link).toHaveAttribute("target", "_blank");
+    });
   });
 });

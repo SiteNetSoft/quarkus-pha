@@ -1,8 +1,6 @@
-{! Chip — PatternFly v6 (DEPRECATED — use Label instead) !}
-{! Wraps pf-v6-c-label since pf-v6-c-chip was removed in v6. !}
-{! Parameters: id (required), text (required), removable (optional), overflow (optional), !}
-{!   badge (optional — badge count text), ariaLabel (optional — for close button) !}
-{#if overflow??}
+{! Chip — PatternFly v6 (DEPRECATED — use Label instead) !} {! Wraps pf-v6-c-label since pf-v6-c-chip was removed in v6.
+!} {! Parameters: id (required), text (required), removable (optional), overflow (optional), !} {! badge (optional —
+badge count text), ariaLabel (optional — for close button) !} {#if overflow??}
 <button class="pf-v6-c-label pf-m-overflow" type="button" id="{id}">
   <span class="pf-v6-c-label__content">
     <span class="pf-v6-c-label__text">{text}</span>
@@ -18,7 +16,13 @@
   </span>
   {#if removable??}
   <span class="pf-v6-c-label__actions">
-    <button class="pf-v6-c-button pf-m-plain" type="button" aria-labelledby="{id}-remove {id}-text" aria-label="{#if ariaLabel??}{ariaLabel}{#else}Remove{/if}" id="{id}-remove">
+    <button
+      class="pf-v6-c-button pf-m-plain"
+      type="button"
+      aria-labelledby="{id}-remove {id}-text"
+      aria-label="{#if ariaLabel??}{ariaLabel}{#else}Remove{/if}"
+      id="{id}-remove"
+    >
       {icons:svg('fa:times').raw}
     </button>
   </span>

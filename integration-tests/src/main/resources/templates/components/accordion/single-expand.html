@@ -1,0 +1,90 @@
+{! Single-expand: only one item open at a time. Hand-rolled because it requires a SHARED Alpine state across items, !}
+{! which is outside the runtime template's per-item self-state model. The technique is reusable in consumer apps. !}
+<div class="pf-v6-c-accordion" id="acc-single" x-data="{ open: null }">
+  <div class="pf-v6-c-accordion__item" :class="{ 'pf-m-expanded': open === 'one' }">
+    <h3>
+      <button
+        class="pf-v6-c-accordion__toggle"
+        id="acc-single-item-1-toggle"
+        aria-controls="acc-single-item-1-content"
+        @click="open = open === 'one' ? null : 'one'"
+        :aria-expanded="(open === 'one').toString()"
+      >
+        <span class="pf-v6-c-accordion__toggle-text">Item one</span>
+        <span class="pf-v6-c-accordion__toggle-icon">
+          <svg viewBox="0 0 256 512" fill="currentColor" aria-hidden="true" width="1em" height="1em">
+            <path
+              d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
+            />
+          </svg>
+        </span>
+      </button>
+    </h3>
+    <div
+      class="pf-v6-c-accordion__expandable-content"
+      id="acc-single-item-1-content"
+      aria-labelledby="acc-single-item-1-toggle"
+      :class="{ 'pf-m-expanded': open === 'one' }"
+    >
+      <div class="pf-v6-c-accordion__expandable-content-body">
+        Body content for item one. Opening another item collapses this one.
+      </div>
+    </div>
+  </div>
+  <div class="pf-v6-c-accordion__item" :class="{ 'pf-m-expanded': open === 'two' }">
+    <h3>
+      <button
+        class="pf-v6-c-accordion__toggle"
+        id="acc-single-item-2-toggle"
+        aria-controls="acc-single-item-2-content"
+        @click="open = open === 'two' ? null : 'two'"
+        :aria-expanded="(open === 'two').toString()"
+      >
+        <span class="pf-v6-c-accordion__toggle-text">Item two</span>
+        <span class="pf-v6-c-accordion__toggle-icon">
+          <svg viewBox="0 0 256 512" fill="currentColor" aria-hidden="true" width="1em" height="1em">
+            <path
+              d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
+            />
+          </svg>
+        </span>
+      </button>
+    </h3>
+    <div
+      class="pf-v6-c-accordion__expandable-content"
+      id="acc-single-item-2-content"
+      aria-labelledby="acc-single-item-2-toggle"
+      :class="{ 'pf-m-expanded': open === 'two' }"
+    >
+      <div class="pf-v6-c-accordion__expandable-content-body">Body content for item two.</div>
+    </div>
+  </div>
+  <div class="pf-v6-c-accordion__item" :class="{ 'pf-m-expanded': open === 'three' }">
+    <h3>
+      <button
+        class="pf-v6-c-accordion__toggle"
+        id="acc-single-item-3-toggle"
+        aria-controls="acc-single-item-3-content"
+        @click="open = open === 'three' ? null : 'three'"
+        :aria-expanded="(open === 'three').toString()"
+      >
+        <span class="pf-v6-c-accordion__toggle-text">Item three</span>
+        <span class="pf-v6-c-accordion__toggle-icon">
+          <svg viewBox="0 0 256 512" fill="currentColor" aria-hidden="true" width="1em" height="1em">
+            <path
+              d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
+            />
+          </svg>
+        </span>
+      </button>
+    </h3>
+    <div
+      class="pf-v6-c-accordion__expandable-content"
+      id="acc-single-item-3-content"
+      aria-labelledby="acc-single-item-3-toggle"
+      :class="{ 'pf-m-expanded': open === 'three' }"
+    >
+      <div class="pf-v6-c-accordion__expandable-content-body">Body content for item three.</div>
+    </div>
+  </div>
+</div>

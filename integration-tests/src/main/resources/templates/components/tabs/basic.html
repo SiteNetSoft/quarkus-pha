@@ -1,9 +1,42 @@
 {! Hand-rendered with Alpine for tab-panel switching. !}
 <div x-data="{ active: 'tab-1' }">
   {#include components/navigation/tabs id="tabs-basic"}{#content}
-    <li class="pf-v6-c-tabs__item" :class="active === 'tab-1' ? 'pf-m-current' : ''"><button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'tab-1'" :tabindex="active === 'tab-1' ? 0 : -1" @click="active = 'tab-1'"><span class="pf-v6-c-tabs__item-text">Overview</span></button></li>
-    <li class="pf-v6-c-tabs__item" :class="active === 'tab-2' ? 'pf-m-current' : ''"><button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'tab-2'" :tabindex="active === 'tab-2' ? 0 : -1" @click="active = 'tab-2'"><span class="pf-v6-c-tabs__item-text">Details</span></button></li>
-    <li class="pf-v6-c-tabs__item" :class="active === 'tab-3' ? 'pf-m-current' : ''"><button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'tab-3'" :tabindex="active === 'tab-3' ? 0 : -1" @click="active = 'tab-3'"><span class="pf-v6-c-tabs__item-text">Logs</span></button></li>
+  <li class="pf-v6-c-tabs__item" :class="active === 'tab-1' ? 'pf-m-current' : ''">
+    <button
+      class="pf-v6-c-tabs__link"
+      type="button"
+      role="tab"
+      :aria-selected="active === 'tab-1'"
+      :tabindex="active === 'tab-1' ? 0 : -1"
+      @click="active = 'tab-1'"
+    >
+      <span class="pf-v6-c-tabs__item-text">Overview</span>
+    </button>
+  </li>
+  <li class="pf-v6-c-tabs__item" :class="active === 'tab-2' ? 'pf-m-current' : ''">
+    <button
+      class="pf-v6-c-tabs__link"
+      type="button"
+      role="tab"
+      :aria-selected="active === 'tab-2'"
+      :tabindex="active === 'tab-2' ? 0 : -1"
+      @click="active = 'tab-2'"
+    >
+      <span class="pf-v6-c-tabs__item-text">Details</span>
+    </button>
+  </li>
+  <li class="pf-v6-c-tabs__item" :class="active === 'tab-3' ? 'pf-m-current' : ''">
+    <button
+      class="pf-v6-c-tabs__link"
+      type="button"
+      role="tab"
+      :aria-selected="active === 'tab-3'"
+      :tabindex="active === 'tab-3' ? 0 : -1"
+      @click="active = 'tab-3'"
+    >
+      <span class="pf-v6-c-tabs__item-text">Logs</span>
+    </button>
+  </li>
   {/content}{/include}
   <div role="tabpanel" x-show="active === 'tab-1'" style="padding: 1rem">Overview panel — high-level summary.</div>
   <div role="tabpanel" x-show="active === 'tab-2'" x-cloak style="padding: 1rem">Details panel — per-field values.</div>

@@ -26,9 +26,9 @@ public class ComponentRoutes {
     @ConfigProperty(name = "collabora.access-token")
     String collaboraAccessToken;
 
-    @Location("components/about-modal-demo")
+    @Location("components/about-modal")
     @Inject
-    Template aboutModalDemo;
+    Template aboutModalPage;
 
     @Location("components/accordion")
     @Inject
@@ -434,7 +434,7 @@ public class ComponentRoutes {
     @Path("/about-modal")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance aboutModal() {
-        return aboutModalDemo.instance();
+        return aboutModalPage.instance();
     }
 
     @GET

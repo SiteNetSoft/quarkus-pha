@@ -1,21 +1,20 @@
-{! Live Search — HTMX server-driven search !}
-{! Parameters: id, searchUrl, targetId, placeholder (optional) !}
+{! Live Search — HTMX server-driven search !} {! Parameters: id, searchUrl, targetId, placeholder (optional) !}
 <div class="pf-v6-c-text-input-group" id="{id}">
   <div class="pf-v6-c-text-input-group__main pf-m-icon">
     <span class="pf-v6-c-text-input-group__text">
-      <span class="pf-v6-c-text-input-group__icon">
-        {icons:svg('fa:search').raw}
-      </span>
-      <input type="search"
-             class="pf-v6-c-text-input-group__text-input"
-             id="{id}-field"
-             name="q"
-             placeholder="{#if placeholder??}{placeholder}{#else}Search...{/if}"
-             aria-label="{#if placeholder??}{placeholder}{#else}Search{/if}"
-             hx-get="{searchUrl}"
-             hx-trigger="keyup changed delay:300ms, search"
-             hx-target="#{targetId}"
-             hx-indicator="#{id}-indicator">
+      <span class="pf-v6-c-text-input-group__icon"> {icons:svg('fa:search').raw} </span>
+      <input
+        type="search"
+        class="pf-v6-c-text-input-group__text-input"
+        id="{id}-field"
+        name="q"
+        placeholder="{#if placeholder??}{placeholder}{#else}Search...{/if}"
+        aria-label="{#if placeholder??}{placeholder}{#else}Search{/if}"
+        hx-get="{searchUrl}"
+        hx-trigger="keyup changed delay:300ms, search"
+        hx-target="#{targetId}"
+        hx-indicator="#{id}-indicator"
+      />
     </span>
   </div>
   <span class="htmx-indicator" id="{id}-indicator" aria-hidden="true">

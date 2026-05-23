@@ -1,7 +1,8 @@
-{! Card — PatternFly v6 !}
-{! Parameters: id (required) !}
-{! Optional: compact, displayLg, plain, flat, rounded, fullHeight !}
-{! Block: content (required — use card__title, card__body, card__footer divs) !}
-<div class="pf-v6-c-card{#if compact??} pf-m-compact{/if}{#if displayLg??} pf-m-display-lg{/if}{#if plain??} pf-m-plain{/if}{#if flat??} pf-m-flat{/if}{#if rounded??} pf-m-rounded{/if}{#if fullHeight??} pf-m-full-height{/if}" id="{id}">
+{! Card — PatternFly v6 !} {! Parameters: id (required) !} {! Optional: compact, displayLg, plain, flat, rounded,
+fullHeight !} {! Block: content (required — use card__title, card__body, card__footer divs) !}
+<div
+  class="pf-v6-c-card{#if compact??} pf-m-compact{/if}{#if displayLg??} pf-m-display-lg{/if}{#if plain??} pf-m-plain{/if}{#if flat??} pf-m-flat{/if}{#if rounded??} pf-m-rounded{/if}{#if fullHeight??} pf-m-full-height{/if}"
+  id="{id}"
+>
   {#insert content}{/insert}
 </div>

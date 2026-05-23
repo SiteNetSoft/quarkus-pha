@@ -1,37 +1,22 @@
 {! Accordion — PatternFly v6 !}
-{! Parameters: id (required), items (required list) !}
-{! Optional: bordered, displayLg, toggleStart, fixed, definitionList !}
+{! Required: id, items (list of {title, content, expanded?}) !}
+{! Optional: bordered, displayLg, toggleStart, fixed, definitionList, headingLevel (default h3), ariaLabel, isCustomContent !}
 {#if definitionList??}
-<dl class="pf-v6-c-accordion{#if bordered??} pf-m-bordered{/if}{#if displayLg??} pf-m-display-lg{/if}{#if toggleStart??} pf-m-toggle-start{/if}" id="{id}">
+<dl
+  class="pf-v6-c-accordion{#if bordered??} pf-m-bordered{/if}{#if displayLg??} pf-m-display-lg{/if}{#if toggleStart??} pf-m-toggle-start{/if}"
+  id="{id}"
+  {#if ariaLabel??}aria-label="{ariaLabel}"{/if}
+>
   {#for item in items}
   <div class="pf-v6-c-accordion__item" x-data="{ expanded: {item.expanded ?: false} }" :class="{ 'pf-m-expanded': expanded }">
-  <dt>
-    <button class="pf-v6-c-accordion__toggle" @click="expanded = !expanded" :aria-expanded="expanded.toString()">
-      {#if toggleStart??}
-      <span class="pf-v6-c-accordion__toggle-icon">
-        <svg viewBox="0 0 256 512" fill="currentColor" aria-hidden="true" width="1em" height="1em"><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg>
-      </span>
-      <span class="pf-v6-c-accordion__toggle-text">{item.title}</span>
-      {#else}
-      <span class="pf-v6-c-accordion__toggle-text">{item.title}</span>
-      <span class="pf-v6-c-accordion__toggle-icon">
-        <svg viewBox="0 0 256 512" fill="currentColor" aria-hidden="true" width="1em" height="1em"><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg>
-      </span>
-      {/if}
-    </button>
-  </dt>
-  <dd class="pf-v6-c-accordion__expandable-content{#if fixed??} pf-m-fixed{/if}" :class="{ 'pf-m-expanded': expanded }">
-    <div class="pf-v6-c-accordion__expandable-content-body">{item.content}</div>
-  </dd>
-  </div>
-  {/for}
-</dl>
-{#else}
-<div class="pf-v6-c-accordion{#if bordered??} pf-m-bordered{/if}{#if displayLg??} pf-m-display-lg{/if}{#if toggleStart??} pf-m-toggle-start{/if}" id="{id}">
-  {#for item in items}
-  <div class="pf-v6-c-accordion__item" x-data="{ expanded: {item.expanded ?: false} }" :class="{ 'pf-m-expanded': expanded }">
-    <h3>
-      <button class="pf-v6-c-accordion__toggle" @click="expanded = !expanded" :aria-expanded="expanded.toString()">
+    <dt>
+      <button
+        class="pf-v6-c-accordion__toggle"
+        id="{id}-item-{item_count}-toggle"
+        aria-controls="{id}-item-{item_count}-content"
+        @click="expanded = !expanded"
+        :aria-expanded="expanded.toString()"
+      >
         {#if toggleStart??}
         <span class="pf-v6-c-accordion__toggle-icon">
           <svg viewBox="0 0 256 512" fill="currentColor" aria-hidden="true" width="1em" height="1em"><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg>
@@ -44,11 +29,66 @@
         </span>
         {/if}
       </button>
-    </h3>
-    <div class="pf-v6-c-accordion__expandable-content{#if fixed??} pf-m-fixed{/if}" :class="{ 'pf-m-expanded': expanded }">
+    </dt>
+    <dd
+      class="pf-v6-c-accordion__expandable-content{#if fixed??} pf-m-fixed{/if}"
+      id="{id}-item-{item_count}-content"
+      aria-labelledby="{id}-item-{item_count}-toggle"
+      :class="{ 'pf-m-expanded': expanded }"
+    >
+      {#if isCustomContent??}
+      {item.content.raw}
+      {#else}
       <div class="pf-v6-c-accordion__expandable-content-body">{item.content}</div>
+      {/if}
+    </dd>
+  </div>
+  {/for}
+</dl>
+{#else}
+{#let h=(headingLevel ?: 'h3')}
+<div
+  class="pf-v6-c-accordion{#if bordered??} pf-m-bordered{/if}{#if displayLg??} pf-m-display-lg{/if}{#if toggleStart??} pf-m-toggle-start{/if}"
+  id="{id}"
+  {#if ariaLabel??}aria-label="{ariaLabel}"{/if}
+>
+  {#for item in items}
+  <div class="pf-v6-c-accordion__item" x-data="{ expanded: {item.expanded ?: false} }" :class="{ 'pf-m-expanded': expanded }">
+    <{h}>
+      <button
+        class="pf-v6-c-accordion__toggle"
+        id="{id}-item-{item_count}-toggle"
+        aria-controls="{id}-item-{item_count}-content"
+        @click="expanded = !expanded"
+        :aria-expanded="expanded.toString()"
+      >
+        {#if toggleStart??}
+        <span class="pf-v6-c-accordion__toggle-icon">
+          <svg viewBox="0 0 256 512" fill="currentColor" aria-hidden="true" width="1em" height="1em"><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg>
+        </span>
+        <span class="pf-v6-c-accordion__toggle-text">{item.title}</span>
+        {#else}
+        <span class="pf-v6-c-accordion__toggle-text">{item.title}</span>
+        <span class="pf-v6-c-accordion__toggle-icon">
+          <svg viewBox="0 0 256 512" fill="currentColor" aria-hidden="true" width="1em" height="1em"><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg>
+        </span>
+        {/if}
+      </button>
+    </{h}>
+    <div
+      class="pf-v6-c-accordion__expandable-content{#if fixed??} pf-m-fixed{/if}"
+      id="{id}-item-{item_count}-content"
+      aria-labelledby="{id}-item-{item_count}-toggle"
+      :class="{ 'pf-m-expanded': expanded }"
+    >
+      {#if isCustomContent??}
+      {item.content.raw}
+      {#else}
+      <div class="pf-v6-c-accordion__expandable-content-body">{item.content}</div>
+      {/if}
     </div>
   </div>
   {/for}
 </div>
+{/let}
 {/if}

@@ -1,57 +1,59 @@
-{#include layouts/base}
-{#title}Video player{/title}
-{#head}
-<link rel="stylesheet" href="/web/vendor/videojs/video-js.min.css">
-<link rel="stylesheet" href="/web/css/components/video-player.css">
+{#include layouts/base} {#title}Video player{/title} {#head}
+<link rel="stylesheet" href="/web/vendor/videojs/video-js.min.css" />
+<link rel="stylesheet" href="/web/css/components/video-player.css" />
 <script src="/web/vendor/videojs/video.min.js"></script>
 <script src="/web/js/alpine/components/video-player.js"></script>
-{/head}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+{/head} {#body}
+<div style="padding: 2rem">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block"
+    >&larr; Back to showcase</a
+  >
   <h1>Video player</h1>
-  <p>An embeddable video player powered by <a href="https://videojs.org/" class="pf-v6-c-button pf-m-link pf-m-inline">Video.js</a>. Wraps an HTML5 <code>&lt;video&gt;</code> element with a consistent UI, format fallbacks, and an Alpine.js API for play/pause/seek and event hooks.</p>
+  <p>
+    An embeddable video player powered by
+    <a href="https://videojs.org/" class="pf-v6-c-button pf-m-link pf-m-inline">Video.js</a>. Wraps an HTML5
+    <code>&lt;video&gt;</code> element with a consistent UI, format fallbacks, and an Alpine.js API for play/pause/seek
+    and event hooks.
+  </p>
 
-  <section style="margin-top: 2rem;">
+  <section style="margin-top: 2rem">
     <h2 id="basic-heading">Basic (no source)</h2>
     <p>Minimal player with no <code>src</code> configured. Video.js renders its empty/error state for missing media.</p>
-    <div style="max-width: 700px;">
+    <div style="max-width: 700px">
       {#include components/media/video-player id="vp-basic"}{#content}{/content}{/include}
     </div>
   </section>
 
-  <section style="margin-top: 2rem;">
+  <section style="margin-top: 2rem">
     <h2 id="mp4-heading">MP4 source</h2>
     <p>Standard MP4 playback using the Big Buck Bunny demo clip served from a public CDN.</p>
-    <div style="max-width: 700px;">
+    <div style="max-width: 700px">
       {#include components/media/video-player id="vp-mp4"
-        src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-        type="video/mp4"
-        poster="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg"}{#content}{/content}{/include}
+      src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4"
+      poster="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg"}{#content}{/content}{/include}
     </div>
   </section>
 
-  <section style="margin-top: 2rem;">
+  <section style="margin-top: 2rem">
     <h2 id="rates-heading">Playback rates + muted autoplay</h2>
-    <p>Player configured with selectable playback rates and a muted autoplay loop (required by browsers for unattended playback).</p>
-    <div style="max-width: 700px;">
+    <p>
+      Player configured with selectable playback rates and a muted autoplay loop (required by browsers for unattended
+      playback).
+    </p>
+    <div style="max-width: 700px">
       {#include components/media/video-player id="vp-rates"
-        src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
-        type="video/mp4"
-        autoplay=true
-        muted=true
-        loop=true
-        playbackRates="[0.5, 1, 1.5, 2]"}{#content}{/content}{/include}
+      src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4"
+      autoplay=true muted=true loop=true playbackRates="[0.5, 1, 1.5, 2]"}{#content}{/content}{/include}
     </div>
   </section>
 
-  <section style="margin-top: 2rem;">
+  <section style="margin-top: 2rem">
     <h2 id="toolbar-heading">With Toolbar</h2>
     <p>Player paired with a PatternFly-styled toolbar that calls the Alpine API to control playback.</p>
-    <div style="max-width: 700px;">
+    <div style="max-width: 700px">
       {#include components/media/video-player id="vp-toolbar"
-        src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
-        type="video/mp4"}{#content}
+      src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+      type="video/mp4"}{#content}
       <div class="pha-c-video-player__toolbar">
         <span class="pha-c-video-player__toolbar-title">For Bigger Blazes</span>
         <div class="pha-c-video-player__toolbar-actions">
@@ -70,5 +72,4 @@
     </div>
   </section>
 </div>
-{/body}
-{/include}
+{/body} {/include}

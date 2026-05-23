@@ -1,158 +1,249 @@
-{#include layouts/horizontal-nav}
-{#title}Settings — {applicationName}{/title}
-{#brand}<a href="/demos/dashboard" class="pf-v6-c-masthead__brand" style="font-weight: 700; text-decoration: none; color: inherit;">{applicationName}</a>{/brand}
-{#horizontalNav}
-  <li class="pf-v6-c-nav__item"><a href="/demos/dashboard" class="pf-v6-c-nav__link">Dashboard</a></li>
-  <li class="pf-v6-c-nav__item"><a href="/demos/data-management" class="pf-v6-c-nav__link">Data Management</a></li>
-  <li class="pf-v6-c-nav__item"><a href="/demos/settings" class="pf-v6-c-nav__link pf-m-current" aria-current="page">Settings</a></li>
-  <li class="pf-v6-c-nav__item"><a href="/demos/landing" class="pf-v6-c-nav__link">Landing Page</a></li>
-{/horizontalNav}
-{#mainContent}
+{#include layouts/horizontal-nav} {#title}Settings — {applicationName}{/title} {#brand}<a
+  href="/demos/dashboard"
+  class="pf-v6-c-masthead__brand"
+  style="font-weight: 700; text-decoration: none; color: inherit"
+  >{applicationName}</a
+>{/brand} {#horizontalNav}
+<li class="pf-v6-c-nav__item"><a href="/demos/dashboard" class="pf-v6-c-nav__link">Dashboard</a></li>
+<li class="pf-v6-c-nav__item"><a href="/demos/data-management" class="pf-v6-c-nav__link">Data Management</a></li>
+<li class="pf-v6-c-nav__item">
+  <a href="/demos/settings" class="pf-v6-c-nav__link pf-m-current" aria-current="page">Settings</a>
+</li>
+<li class="pf-v6-c-nav__item"><a href="/demos/landing" class="pf-v6-c-nav__link">Landing Page</a></li>
+{/horizontalNav} {#mainContent}
 
-  <section class="pf-v6-c-page__main-section pf-m-light">
-    <div data-pf-content="true" class="pf-v6-c-content">
-      <h1 id="settings-heading">Settings</h1>
-      <p>Configure application preferences across General, Notifications, and Security tabs.</p>
-    </div>
-  </section>
+<section class="pf-v6-c-page__main-section pf-m-light">
+  <div data-pf-content="true" class="pf-v6-c-content">
+    <h1 id="settings-heading">Settings</h1>
+    <p>Configure application preferences across General, Notifications, and Security tabs.</p>
+  </div>
+</section>
 
-  <section class="pf-v6-c-page__main-section" x-data="{ activeTab: 'general' }">
+<section class="pf-v6-c-page__main-section" x-data="{ activeTab: 'general' }">
+  {! Tab bar !}
+  <div class="pf-v6-c-tabs pf-m-box" id="settings-tabs">
+    <ul class="pf-v6-c-tabs__list" role="tablist">
+      <li class="pf-v6-c-tabs__item" :class="{ 'pf-m-current': activeTab === 'general' }" role="presentation">
+        <button
+          class="pf-v6-c-tabs__link"
+          role="tab"
+          type="button"
+          :aria-selected="(activeTab === 'general').toString()"
+          :tabindex="activeTab === 'general' ? '0' : '-1'"
+          id="tab-general"
+          aria-controls="panel-general"
+          @click="activeTab = 'general'"
+        >
+          <span class="pf-v6-c-tabs__item-text">General</span>
+        </button>
+      </li>
+      <li class="pf-v6-c-tabs__item" :class="{ 'pf-m-current': activeTab === 'notifications' }" role="presentation">
+        <button
+          class="pf-v6-c-tabs__link"
+          role="tab"
+          type="button"
+          :aria-selected="(activeTab === 'notifications').toString()"
+          :tabindex="activeTab === 'notifications' ? '0' : '-1'"
+          id="tab-notifications"
+          aria-controls="panel-notifications"
+          @click="activeTab = 'notifications'"
+        >
+          <span class="pf-v6-c-tabs__item-text">Notifications</span>
+        </button>
+      </li>
+      <li class="pf-v6-c-tabs__item" :class="{ 'pf-m-current': activeTab === 'security' }" role="presentation">
+        <button
+          class="pf-v6-c-tabs__link"
+          role="tab"
+          type="button"
+          :aria-selected="(activeTab === 'security').toString()"
+          :tabindex="activeTab === 'security' ? '0' : '-1'"
+          id="tab-security"
+          aria-controls="panel-security"
+          @click="activeTab = 'security'"
+        >
+          <span class="pf-v6-c-tabs__item-text">Security</span>
+        </button>
+      </li>
+    </ul>
+  </div>
 
-    {! Tab bar !}
-    <div class="pf-v6-c-tabs pf-m-box" id="settings-tabs">
-      <ul class="pf-v6-c-tabs__list" role="tablist">
-        <li class="pf-v6-c-tabs__item" :class="{ 'pf-m-current': activeTab === 'general' }" role="presentation">
-          <button class="pf-v6-c-tabs__link" role="tab" type="button"
-                  :aria-selected="(activeTab === 'general').toString()"
-                  :tabindex="activeTab === 'general' ? '0' : '-1'"
-                  id="tab-general" aria-controls="panel-general"
-                  @click="activeTab = 'general'">
-            <span class="pf-v6-c-tabs__item-text">General</span>
-          </button>
-        </li>
-        <li class="pf-v6-c-tabs__item" :class="{ 'pf-m-current': activeTab === 'notifications' }" role="presentation">
-          <button class="pf-v6-c-tabs__link" role="tab" type="button"
-                  :aria-selected="(activeTab === 'notifications').toString()"
-                  :tabindex="activeTab === 'notifications' ? '0' : '-1'"
-                  id="tab-notifications" aria-controls="panel-notifications"
-                  @click="activeTab = 'notifications'">
-            <span class="pf-v6-c-tabs__item-text">Notifications</span>
-          </button>
-        </li>
-        <li class="pf-v6-c-tabs__item" :class="{ 'pf-m-current': activeTab === 'security' }" role="presentation">
-          <button class="pf-v6-c-tabs__link" role="tab" type="button"
-                  :aria-selected="(activeTab === 'security').toString()"
-                  :tabindex="activeTab === 'security' ? '0' : '-1'"
-                  id="tab-security" aria-controls="panel-security"
-                  @click="activeTab = 'security'">
-            <span class="pf-v6-c-tabs__item-text">Security</span>
-          </button>
-        </li>
-      </ul>
-    </div>
-
-    {! General panel !}
-    <div id="panel-general" role="tabpanel" aria-labelledby="tab-general" x-show="activeTab === 'general'" style="padding-top: 1.5rem;">
-      <form class="pf-v6-c-form">
-        <div class="pf-v6-c-form__group">
-          <div class="pf-v6-c-form__group-label"><label class="pf-v6-c-form__label" for="settings-display-name"><span class="pf-v6-c-form__label-text">Display name</span></label></div>
-          <div class="pf-v6-c-form__group-control"><input class="pf-v6-c-form-control" type="text" id="settings-display-name" value="Admin User"></div>
+  {! General panel !}
+  <div
+    id="panel-general"
+    role="tabpanel"
+    aria-labelledby="tab-general"
+    x-show="activeTab === 'general'"
+    style="padding-top: 1.5rem"
+  >
+    <form class="pf-v6-c-form">
+      <div class="pf-v6-c-form__group">
+        <div class="pf-v6-c-form__group-label">
+          <label class="pf-v6-c-form__label" for="settings-display-name"
+            ><span class="pf-v6-c-form__label-text">Display name</span></label
+          >
         </div>
-        <div class="pf-v6-c-form__group">
-          <div class="pf-v6-c-form__group-label"><label class="pf-v6-c-form__label" for="settings-email"><span class="pf-v6-c-form__label-text">Email</span></label></div>
-          <div class="pf-v6-c-form__group-control"><input class="pf-v6-c-form-control" type="email" id="settings-email" value="admin@example.com"></div>
+        <div class="pf-v6-c-form__group-control">
+          <input class="pf-v6-c-form-control" type="text" id="settings-display-name" value="Admin User" />
         </div>
-        <div class="pf-v6-c-form__group">
-          <div class="pf-v6-c-form__group-label"><label class="pf-v6-c-form__label" for="settings-timezone"><span class="pf-v6-c-form__label-text">Timezone</span></label></div>
-          <div class="pf-v6-c-form__group-control">
-            <select class="pf-v6-c-form-control" id="settings-timezone">
-              <option value="utc" selected>UTC</option>
-              <option value="est">Eastern (US)</option>
-              <option value="pst">Pacific (US)</option>
-              <option value="cet">Central European</option>
-            </select>
+      </div>
+      <div class="pf-v6-c-form__group">
+        <div class="pf-v6-c-form__group-label">
+          <label class="pf-v6-c-form__label" for="settings-email"
+            ><span class="pf-v6-c-form__label-text">Email</span></label
+          >
+        </div>
+        <div class="pf-v6-c-form__group-control">
+          <input class="pf-v6-c-form-control" type="email" id="settings-email" value="admin@example.com" />
+        </div>
+      </div>
+      <div class="pf-v6-c-form__group">
+        <div class="pf-v6-c-form__group-label">
+          <label class="pf-v6-c-form__label" for="settings-timezone"
+            ><span class="pf-v6-c-form__label-text">Timezone</span></label
+          >
+        </div>
+        <div class="pf-v6-c-form__group-control">
+          <select class="pf-v6-c-form-control" id="settings-timezone">
+            <option value="utc" selected>UTC</option>
+            <option value="est">Eastern (US)</option>
+            <option value="pst">Pacific (US)</option>
+            <option value="cet">Central European</option>
+          </select>
+        </div>
+      </div>
+      <div class="pf-v6-c-form__group pf-m-action">
+        <div class="pf-v6-c-form__actions">
+          <button class="pf-v6-c-button pf-m-primary" type="button" id="settings-save-general">Save</button>
+          <button class="pf-v6-c-button pf-m-link" type="button">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  {! Notifications panel !}
+  <div
+    id="panel-notifications"
+    role="tabpanel"
+    aria-labelledby="tab-notifications"
+    x-show="activeTab === 'notifications'"
+    x-cloak
+    style="padding-top: 1.5rem"
+  >
+    <form class="pf-v6-c-form">
+      <div class="pf-v6-c-form__group">
+        <div class="pf-v6-c-form__group-label">
+          <label class="pf-v6-c-form__label"><span class="pf-v6-c-form__label-text">Email notifications</span></label>
+        </div>
+        <div class="pf-v6-c-form__group-control">
+          <label class="pf-v6-c-switch" for="settings-email-notif">
+            <input class="pf-v6-c-switch__input" type="checkbox" id="settings-email-notif" checked />
+            <span class="pf-v6-c-switch__toggle"></span>
+            <span class="pf-v6-c-switch__label">Enabled</span>
+          </label>
+        </div>
+      </div>
+      <div class="pf-v6-c-form__group">
+        <div class="pf-v6-c-form__group-label">
+          <label class="pf-v6-c-form__label"><span class="pf-v6-c-form__label-text">Push notifications</span></label>
+        </div>
+        <div class="pf-v6-c-form__group-control">
+          <label class="pf-v6-c-switch" for="settings-push-notif">
+            <input class="pf-v6-c-switch__input" type="checkbox" id="settings-push-notif" />
+            <span class="pf-v6-c-switch__toggle"></span>
+            <span class="pf-v6-c-switch__label">Disabled</span>
+          </label>
+        </div>
+      </div>
+      <div class="pf-v6-c-form__group">
+        <div class="pf-v6-c-form__group-label">
+          <span class="pf-v6-c-form__label"><span class="pf-v6-c-form__label-text">Alert types</span></span>
+        </div>
+        <div class="pf-v6-c-form__group-control">
+          <div class="pf-v6-c-check">
+            <input class="pf-v6-c-check__input" type="checkbox" id="settings-alert-critical" checked /><label
+              class="pf-v6-c-check__label"
+              for="settings-alert-critical"
+              >Critical</label
+            >
+          </div>
+          <div class="pf-v6-c-check">
+            <input class="pf-v6-c-check__input" type="checkbox" id="settings-alert-warning" checked /><label
+              class="pf-v6-c-check__label"
+              for="settings-alert-warning"
+              >Warning</label
+            >
+          </div>
+          <div class="pf-v6-c-check">
+            <input class="pf-v6-c-check__input" type="checkbox" id="settings-alert-info" /><label
+              class="pf-v6-c-check__label"
+              for="settings-alert-info"
+              >Info</label
+            >
           </div>
         </div>
-        <div class="pf-v6-c-form__group pf-m-action">
-          <div class="pf-v6-c-form__actions">
-            <button class="pf-v6-c-button pf-m-primary" type="button" id="settings-save-general">Save</button>
-            <button class="pf-v6-c-button pf-m-link" type="button">Cancel</button>
-          </div>
+      </div>
+      <div class="pf-v6-c-form__group pf-m-action">
+        <div class="pf-v6-c-form__actions">
+          <button class="pf-v6-c-button pf-m-primary" type="button" id="settings-save-notifications">Save</button>
+          <button class="pf-v6-c-button pf-m-link" type="button">Cancel</button>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
+  </div>
 
-    {! Notifications panel !}
-    <div id="panel-notifications" role="tabpanel" aria-labelledby="tab-notifications" x-show="activeTab === 'notifications'" x-cloak style="padding-top: 1.5rem;">
-      <form class="pf-v6-c-form">
-        <div class="pf-v6-c-form__group">
-          <div class="pf-v6-c-form__group-label"><label class="pf-v6-c-form__label"><span class="pf-v6-c-form__label-text">Email notifications</span></label></div>
-          <div class="pf-v6-c-form__group-control">
-            <label class="pf-v6-c-switch" for="settings-email-notif">
-              <input class="pf-v6-c-switch__input" type="checkbox" id="settings-email-notif" checked>
-              <span class="pf-v6-c-switch__toggle"></span>
-              <span class="pf-v6-c-switch__label">Enabled</span>
-            </label>
-          </div>
+  {! Security panel !}
+  <div
+    id="panel-security"
+    role="tabpanel"
+    aria-labelledby="tab-security"
+    x-show="activeTab === 'security'"
+    x-cloak
+    style="padding-top: 1.5rem"
+  >
+    <form class="pf-v6-c-form">
+      <div class="pf-v6-c-form__group">
+        <div class="pf-v6-c-form__group-label">
+          <label class="pf-v6-c-form__label" for="settings-current-password"
+            ><span class="pf-v6-c-form__label-text">Current password</span></label
+          >
         </div>
-        <div class="pf-v6-c-form__group">
-          <div class="pf-v6-c-form__group-label"><label class="pf-v6-c-form__label"><span class="pf-v6-c-form__label-text">Push notifications</span></label></div>
-          <div class="pf-v6-c-form__group-control">
-            <label class="pf-v6-c-switch" for="settings-push-notif">
-              <input class="pf-v6-c-switch__input" type="checkbox" id="settings-push-notif">
-              <span class="pf-v6-c-switch__toggle"></span>
-              <span class="pf-v6-c-switch__label">Disabled</span>
-            </label>
-          </div>
+        <div class="pf-v6-c-form__group-control">
+          <input class="pf-v6-c-form-control" type="password" id="settings-current-password" />
         </div>
-        <div class="pf-v6-c-form__group">
-          <div class="pf-v6-c-form__group-label"><span class="pf-v6-c-form__label"><span class="pf-v6-c-form__label-text">Alert types</span></span></div>
-          <div class="pf-v6-c-form__group-control">
-            <div class="pf-v6-c-check"><input class="pf-v6-c-check__input" type="checkbox" id="settings-alert-critical" checked><label class="pf-v6-c-check__label" for="settings-alert-critical">Critical</label></div>
-            <div class="pf-v6-c-check"><input class="pf-v6-c-check__input" type="checkbox" id="settings-alert-warning" checked><label class="pf-v6-c-check__label" for="settings-alert-warning">Warning</label></div>
-            <div class="pf-v6-c-check"><input class="pf-v6-c-check__input" type="checkbox" id="settings-alert-info"><label class="pf-v6-c-check__label" for="settings-alert-info">Info</label></div>
-          </div>
+      </div>
+      <div class="pf-v6-c-form__group">
+        <div class="pf-v6-c-form__group-label">
+          <label class="pf-v6-c-form__label" for="settings-new-password"
+            ><span class="pf-v6-c-form__label-text">New password</span></label
+          >
         </div>
-        <div class="pf-v6-c-form__group pf-m-action">
-          <div class="pf-v6-c-form__actions">
-            <button class="pf-v6-c-button pf-m-primary" type="button" id="settings-save-notifications">Save</button>
-            <button class="pf-v6-c-button pf-m-link" type="button">Cancel</button>
-          </div>
+        <div class="pf-v6-c-form__group-control">
+          <input class="pf-v6-c-form-control" type="password" id="settings-new-password" />
         </div>
-      </form>
-    </div>
+      </div>
+      <div class="pf-v6-c-form__group">
+        <div class="pf-v6-c-form__group-label">
+          <label class="pf-v6-c-form__label"
+            ><span class="pf-v6-c-form__label-text">Two-factor authentication</span></label
+          >
+        </div>
+        <div class="pf-v6-c-form__group-control">
+          <label class="pf-v6-c-switch" for="settings-2fa">
+            <input class="pf-v6-c-switch__input" type="checkbox" id="settings-2fa" />
+            <span class="pf-v6-c-switch__toggle"></span>
+            <span class="pf-v6-c-switch__label">Disabled</span>
+          </label>
+        </div>
+      </div>
+      <div class="pf-v6-c-form__group pf-m-action">
+        <div class="pf-v6-c-form__actions">
+          <button class="pf-v6-c-button pf-m-primary" type="button" id="settings-save-security">Save</button>
+          <button class="pf-v6-c-button pf-m-link" type="button">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
 
-    {! Security panel !}
-    <div id="panel-security" role="tabpanel" aria-labelledby="tab-security" x-show="activeTab === 'security'" x-cloak style="padding-top: 1.5rem;">
-      <form class="pf-v6-c-form">
-        <div class="pf-v6-c-form__group">
-          <div class="pf-v6-c-form__group-label"><label class="pf-v6-c-form__label" for="settings-current-password"><span class="pf-v6-c-form__label-text">Current password</span></label></div>
-          <div class="pf-v6-c-form__group-control"><input class="pf-v6-c-form-control" type="password" id="settings-current-password"></div>
-        </div>
-        <div class="pf-v6-c-form__group">
-          <div class="pf-v6-c-form__group-label"><label class="pf-v6-c-form__label" for="settings-new-password"><span class="pf-v6-c-form__label-text">New password</span></label></div>
-          <div class="pf-v6-c-form__group-control"><input class="pf-v6-c-form-control" type="password" id="settings-new-password"></div>
-        </div>
-        <div class="pf-v6-c-form__group">
-          <div class="pf-v6-c-form__group-label"><label class="pf-v6-c-form__label"><span class="pf-v6-c-form__label-text">Two-factor authentication</span></label></div>
-          <div class="pf-v6-c-form__group-control">
-            <label class="pf-v6-c-switch" for="settings-2fa">
-              <input class="pf-v6-c-switch__input" type="checkbox" id="settings-2fa">
-              <span class="pf-v6-c-switch__toggle"></span>
-              <span class="pf-v6-c-switch__label">Disabled</span>
-            </label>
-          </div>
-        </div>
-        <div class="pf-v6-c-form__group pf-m-action">
-          <div class="pf-v6-c-form__actions">
-            <button class="pf-v6-c-button pf-m-primary" type="button" id="settings-save-security">Save</button>
-            <button class="pf-v6-c-button pf-m-link" type="button">Cancel</button>
-          </div>
-        </div>
-      </form>
-    </div>
-
-  </section>
-
-{/mainContent}
-{/include}
+{/mainContent} {/include}

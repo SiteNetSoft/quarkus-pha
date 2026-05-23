@@ -1,5 +1,5 @@
-{! Empty state — PatternFly v6 !}
-{! Parameters: id, titleText, bodyText (optional), iconName (optional, "set:slug"), primaryAction (optional), secondaryAction (optional) !}
+{! Empty state — PatternFly v6 !} {! Parameters: id, titleText, bodyText (optional), iconName (optional, "set:slug"),
+primaryAction (optional), secondaryAction (optional) !}
 <div class="pf-v6-c-empty-state" id="{id}">
   <div class="pf-v6-c-empty-state__content">
     {#if iconName??}
@@ -12,8 +12,7 @@
     <div class="pf-v6-c-empty-state__title-text">{titleText}</div>
     {#if bodyText??}
     <div class="pf-v6-c-empty-state__body">{bodyText}</div>
-    {/if}
-    {#if primaryAction?? || secondaryAction??}
+    {/if} {#if primaryAction?? || secondaryAction??}
     <div class="pf-v6-c-empty-state__footer">
       <div class="pf-v6-c-empty-state__actions">
         {#if primaryAction??}<button class="pf-v6-c-button pf-m-primary" type="button">{primaryAction}</button>{/if}
