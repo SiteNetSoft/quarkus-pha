@@ -98,9 +98,9 @@ phaAlpine("phaTreeView", (config = {}) => ({
     if (e.target.closest(".pf-v6-c-tree-view__action")) return;
 
     let toggleBtn = e.target.closest("button.pf-v6-c-tree-view__node-toggle");
-    let textBtn   = e.target.closest("button.pf-v6-c-tree-view__node-text");
-    let nodeBtn   = e.target.closest("button.pf-v6-c-tree-view__node");
-    let checkbox  = e.target.closest("input[type='checkbox']");
+    let textBtn = e.target.closest("button.pf-v6-c-tree-view__node-text");
+    let nodeBtn = e.target.closest("button.pf-v6-c-tree-view__node");
+    let checkbox = e.target.closest("input[type='checkbox']");
 
     this._setFocusedItem(li);
 
@@ -168,9 +168,7 @@ phaAlpine("phaTreeView", (config = {}) => ({
     if (e.key === "ArrowRight") {
       if (this._childList(currentLi)) {
         if (this._isExpanded(currentLi)) {
-          let firstChild = currentLi.querySelector(
-            ":scope > ul.pf-v6-c-tree-view__list > li[role=treeitem]"
-          );
+          let firstChild = currentLi.querySelector(":scope > ul.pf-v6-c-tree-view__list > li[role=treeitem]");
           if (firstChild) {
             e.preventDefault();
             this._setFocusedItem(firstChild);
@@ -190,9 +188,7 @@ phaAlpine("phaTreeView", (config = {}) => ({
         this._setExpanded(currentLi, false);
         this._syncAllExpanded();
       } else {
-        let parent =
-          currentLi.parentElement &&
-          currentLi.parentElement.closest("li[role=treeitem]");
+        let parent = currentLi.parentElement && currentLi.parentElement.closest("li[role=treeitem]");
         if (parent) {
           e.preventDefault();
           this._setFocusedItem(parent);
@@ -229,22 +225,23 @@ phaAlpine("phaTreeView", (config = {}) => ({
     }
     /* Mark items whose own label matches. */
     items.forEach((li) => {
-      let textEl = li.querySelector(
-        ":scope > .pf-v6-c-tree-view__content .pf-v6-c-tree-view__node-text"
-      );
+      let textEl = li.querySelector(":scope > .pf-v6-c-tree-view__content .pf-v6-c-tree-view__node-text");
       let text = (textEl ? textEl.textContent : "").toLowerCase();
       li.dataset.phaTreeMatch = text.indexOf(query) >= 0 ? "self" : "none";
     });
     /* Propagate up: ancestor matches if any descendant matches. */
-    items.slice().reverse().forEach((li) => {
-      if (li.dataset.phaTreeMatch === "self") return;
-      let kids = this._childList(li);
-      if (!kids) return;
-      let anyMatch = Array.from(
-        kids.querySelectorAll(":scope > li.pf-v6-c-tree-view__list-item")
-      ).some((c) => c.dataset.phaTreeMatch !== "none");
-      if (anyMatch) li.dataset.phaTreeMatch = "ancestor";
-    });
+    items
+      .slice()
+      .reverse()
+      .forEach((li) => {
+        if (li.dataset.phaTreeMatch === "self") return;
+        let kids = this._childList(li);
+        if (!kids) return;
+        let anyMatch = Array.from(kids.querySelectorAll(":scope > li.pf-v6-c-tree-view__list-item")).some(
+          (c) => c.dataset.phaTreeMatch !== "none",
+        );
+        if (anyMatch) li.dataset.phaTreeMatch = "ancestor";
+      });
     /* Apply visibility + auto-expand matches with kids. */
     items.forEach((li) => {
       let state = li.dataset.phaTreeMatch;
@@ -259,9 +256,7 @@ phaAlpine("phaTreeView", (config = {}) => ({
   /* ---- internals ---- */
 
   _items() {
-    return Array.from(
-      this.$root.querySelectorAll("li.pf-v6-c-tree-view__list-item")
-    );
+    return Array.from(this.$root.querySelectorAll("li.pf-v6-c-tree-view__list-item"));
   },
 
   _visibleItems() {
@@ -275,9 +270,7 @@ phaAlpine("phaTreeView", (config = {}) => ({
   },
 
   _nodeWrapper(li) {
-    return li.querySelector(
-      ":scope > .pf-v6-c-tree-view__content > .pf-v6-c-tree-view__node"
-    );
+    return li.querySelector(":scope > .pf-v6-c-tree-view__content > .pf-v6-c-tree-view__node");
   },
 
   _isExpanded(li) {
@@ -296,8 +289,7 @@ phaAlpine("phaTreeView", (config = {}) => ({
 
   _syncAllExpanded() {
     let expandable = this._items().filter((li) => this._childList(li));
-    this.allExpanded =
-      expandable.length > 0 && expandable.every((li) => this._isExpanded(li));
+    this.allExpanded = expandable.length > 0 && expandable.every((li) => this._isExpanded(li));
   },
 
   /* Roving focus — exactly one item is tabindex=0; arrow keys move it. */
@@ -309,9 +301,10 @@ phaAlpine("phaTreeView", (config = {}) => ({
       li.setAttribute("tabindex", "-1");
     });
     /* Pick the currently selected item if any, otherwise the first. */
-    let initial = items.find(function (li) {
-      return li.getAttribute("aria-selected") === "true";
-    }) || items[0];
+    let initial =
+      items.find(function (li) {
+        return li.getAttribute("aria-selected") === "true";
+      }) || items[0];
     initial.setAttribute("tabindex", "0");
   },
 
@@ -334,9 +327,7 @@ phaAlpine("phaTreeView", (config = {}) => ({
   /* Selection — aria-selected on <li>, pf-m-current on the __node wrapper. */
 
   _isMultiSelectable() {
-    let tree = this.$root.querySelector(
-      "ul.pf-v6-c-tree-view__list[role='tree']"
-    );
+    let tree = this.$root.querySelector("ul.pf-v6-c-tree-view__list[role='tree']");
     return !!(tree && tree.getAttribute("aria-multiselectable") === "true");
   },
 
@@ -363,37 +354,27 @@ phaAlpine("phaTreeView", (config = {}) => ({
   /* Checkbox cascade — parent ↔ children, indeterminate for partial. */
 
   _checkboxOf(li) {
-    return li.querySelector(
-      ":scope > .pf-v6-c-tree-view__content input[type='checkbox']"
-    );
+    return li.querySelector(":scope > .pf-v6-c-tree-view__content input[type='checkbox']");
   },
 
   _directChildItems(li) {
     let kids = this._childList(li);
     if (!kids) return [];
-    return Array.from(
-      kids.querySelectorAll(":scope > li.pf-v6-c-tree-view__list-item")
-    );
+    return Array.from(kids.querySelectorAll(":scope > li.pf-v6-c-tree-view__list-item"));
   },
 
   _cascadeCheckbox(li, checked) {
     /* Push state down to every descendant checkbox. */
-    let descendants = li.querySelectorAll(
-      "li.pf-v6-c-tree-view__list-item input[type='checkbox']"
-    );
+    let descendants = li.querySelectorAll("li.pf-v6-c-tree-view__list-item input[type='checkbox']");
     descendants.forEach(function (cb) {
       cb.checked = checked;
       cb.indeterminate = false;
     });
     /* Walk up; ancestors reflect their children's aggregate state. */
-    let parent =
-      li.parentElement &&
-      li.parentElement.closest("li.pf-v6-c-tree-view__list-item");
+    let parent = li.parentElement && li.parentElement.closest("li.pf-v6-c-tree-view__list-item");
     while (parent) {
       this._updateParentCheckbox(parent);
-      parent =
-        parent.parentElement &&
-        parent.parentElement.closest("li.pf-v6-c-tree-view__list-item");
+      parent = parent.parentElement && parent.parentElement.closest("li.pf-v6-c-tree-view__list-item");
     }
   },
 
@@ -404,9 +385,13 @@ phaAlpine("phaTreeView", (config = {}) => ({
     if (!kids.length) return;
     let childCbs = kids
       .map((c) => this._checkboxOf(c))
-      .filter(function (c) { return !!c; });
+      .filter(function (c) {
+        return !!c;
+      });
     if (!childCbs.length) return;
-    let checked = childCbs.filter(function (c) { return c.checked; }).length;
+    let checked = childCbs.filter(function (c) {
+      return c.checked;
+    }).length;
     let indeterminate = childCbs.filter(function (c) {
       return c.indeterminate;
     }).length;
@@ -428,10 +413,13 @@ phaAlpine("phaTreeView", (config = {}) => ({
      * markup (e.g. some children pre-checked) propagates to parent
      * indeterminate / checked correctly.
      */
-    this._items().slice().reverse().forEach((li) => {
-      if (this._directChildItems(li).length) {
-        this._updateParentCheckbox(li);
-      }
-    });
+    this._items()
+      .slice()
+      .reverse()
+      .forEach((li) => {
+        if (this._directChildItems(li).length) {
+          this._updateParentCheckbox(li);
+        }
+      });
   },
 }));

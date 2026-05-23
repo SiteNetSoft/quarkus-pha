@@ -1,12 +1,13 @@
-{! Notification drawer — PatternFly v6 !}
-{! Parameters: id, titleText (optional) !}
-<div class="pf-v6-c-notification-drawer" id="{id}" role="region" aria-label="{#if titleText??}{titleText}{#else}Notifications{/if}">
+{! Notification drawer — PatternFly v6 !} {! Parameters: id, titleText (optional) !}
+<div
+  class="pf-v6-c-notification-drawer"
+  id="{id}"
+  role="region"
+  aria-label="{#if titleText??}{titleText}{#else}Notifications{/if}"
+>
   <div class="pf-v6-c-notification-drawer__header">
     <h1 class="pf-v6-c-notification-drawer__header-title">{#if titleText??}{titleText}{#else}Notifications{/if}</h1>
-    {#insert headerStatus}{/insert}
-    {#insert headerAction}{/insert}
+    {#insert headerStatus}{/insert} {#insert headerAction}{/insert}
   </div>
-  <div class="pf-v6-c-notification-drawer__body">
-    {#insert content}{/insert}
-  </div>
+  <div class="pf-v6-c-notification-drawer__body">{#insert content}{/insert}</div>
 </div>

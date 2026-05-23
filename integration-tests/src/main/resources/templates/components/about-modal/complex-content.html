@@ -1,0 +1,37 @@
+{! noContentContainer=true skips the default __content wrapper so the body can custom-position its own layout. !} {!
+Useful for marketing/launch screens where the standard description-list layout doesn't fit. !}
+<button class="pf-v6-c-button pf-m-primary" type="button" @click="$dispatch('open-about-modal-complex')">
+  About (complex content)
+</button>
+{#include components/feedback/about-modal id="complex" productName="quarkus-pha"
+brandImageSrc="/web/images/PF-IconLogo.svg" brandImageAlt="quarkus-pha logo"
+backgroundImage="/web/images/pf-background.svg" noContentContainer=true} {#content}
+<div class="pf-v6-c-about-modal-box__content">
+  <div class="pf-v6-l-stack pf-m-gutter">
+    <div class="pf-v6-l-stack__item">
+      <h2 class="pf-v6-c-title pf-m-xl">Hand-crafted UI components</h2>
+      <p>
+        A Quarkus extension that delivers ready-to-use HTML components to any Quarkus/Qute application —
+        server-rendered, framework-free, HTMX-driven.
+      </p>
+    </div>
+    <div class="pf-v6-l-stack__item">
+      <div class="pf-v6-l-flex pf-m-space-items-md pf-m-justify-content-space-between">
+        <div>
+          <strong>Server</strong><br />
+          <span>Quarkus 3.35 + Qute</span>
+        </div>
+        <div>
+          <strong>UI</strong><br />
+          <span>PatternFly v6 + Alpine + HTMX</span>
+        </div>
+        <div>
+          <strong>License</strong><br />
+          <span>Apache 2.0</span>
+        </div>
+      </div>
+    </div>
+    <p class="pf-v6-c-about-modal-box__strapline">Copyright &copy; 2026 SiteNetSoft</p>
+  </div>
+</div>
+{/content} {/include}

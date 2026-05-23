@@ -1,6 +1,10 @@
-{! Inline edit — PatternFly v6 !}
-{! Parameters: id, value (optional) !}
-<form class="pf-v6-c-inline-edit" id="{id}" x-data="{ editing: false, val: '{#if value??}{value}{#else}{/if}' }" :class="{ 'pf-m-inline-editable': editing }">
+{! Inline edit — PatternFly v6 !} {! Parameters: id, value (optional) !}
+<form
+  class="pf-v6-c-inline-edit"
+  id="{id}"
+  x-data="{ editing: false, val: '{#if value??}{value}{#else}{/if}' }"
+  :class="{ 'pf-m-inline-editable': editing }"
+>
   <div class="pf-v6-c-inline-edit__group">
     <div class="pf-v6-c-inline-edit__value" x-show="!editing" x-text="val"></div>
     <div class="pf-v6-c-inline-edit__action pf-m-enable-editable" x-show="!editing">
@@ -12,7 +16,7 @@
   <div class="pf-v6-c-inline-edit__group" x-show="editing" x-cloak>
     <div class="pf-v6-c-inline-edit__input">
       <span class="pf-v6-c-form-control">
-        <input type="text" x-model="val" aria-label="Editable text input">
+        <input type="text" x-model="val" aria-label="Editable text input" />
       </span>
     </div>
     <div class="pf-v6-c-inline-edit__group pf-m-action-group pf-m-icon-group">

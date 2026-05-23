@@ -5,70 +5,88 @@ test.describe("Accordion", () => {
     await page.goto("/components/accordion");
   });
 
-  test("page loads with all 6 variant sections", async ({ page }) => {
-    await expect(page.locator("#fluid-heading")).toBeVisible();
-    await expect(page.locator("#fixed-heading")).toBeVisible();
-    await expect(page.locator("#definition-list-heading")).toBeVisible();
-    await expect(page.locator("#bordered-heading")).toBeVisible();
-    await expect(page.locator("#large-bordered-heading")).toBeVisible();
-    await expect(page.locator("#toggle-start-heading")).toBeVisible();
+  test("page loads with all 5 example sections in ToC", async ({ page }) => {
+    await expect(page.locator("#definition-list")).toBeVisible();
+    await expect(page.locator("#single-expand")).toBeVisible();
+    await expect(page.locator("#fixed-multiple")).toBeVisible();
+    await expect(page.locator("#bordered")).toBeVisible();
+    await expect(page.locator("#toggle-start")).toBeVisible();
   });
 
-  test.describe("Fluid variant", () => {
-    test("click toggle expands and collapses content", async ({ page }) => {
-      const accordion = page.locator("#accordion-fluid");
+  test.describe("Definition list variant", () => {
+    test("root element is a dl with 4 dt/dd pairs", async ({ page }) => {
+      const accordion = page.locator("#acc-dl");
+      await expect(accordion).toBeVisible();
+      const tagName = await accordion.evaluate((el) => el.tagName.toLowerCase());
+      expect(tagName).toBe("dl");
+      await expect(accordion.locator("dt")).toHaveCount(4);
+      await expect(accordion.locator("dd")).toHaveCount(4);
+    });
+
+    test("toggle expands content and updates aria-expanded", async ({ page }) => {
+      const accordion = page.locator("#acc-dl");
       const firstToggle = accordion.locator(".pf-v6-c-accordion__toggle").first();
-      const firstItem = accordion.locator(".pf-v6-c-accordion__item").first();
       const firstContent = accordion.locator(".pf-v6-c-accordion__expandable-content").first();
 
-      // Initially collapsed
       await expect(firstContent).toBeHidden();
       await expect(firstToggle).toHaveAttribute("aria-expanded", "false");
 
-      // Click to expand
       await firstToggle.click();
       await expect(firstContent).toBeVisible();
       await expect(firstToggle).toHaveAttribute("aria-expanded", "true");
-      await expect(firstItem).toHaveClass(/pf-m-expanded/);
       await expect(firstContent).toHaveClass(/pf-m-expanded/);
-
-      // Click again to collapse
-      await firstToggle.click();
-      await expect(firstContent).toBeHidden();
-      await expect(firstToggle).toHaveAttribute("aria-expanded", "false");
     });
 
-    test("only clicked item expands, others stay collapsed", async ({ page }) => {
-      const accordion = page.locator("#accordion-fluid");
+    test("toggle ids and content aria-labelledby are linked", async ({ page }) => {
+      const firstToggle = page.locator("#acc-dl-item-1-toggle");
+      const firstContent = page.locator("#acc-dl-item-1-content");
+      await expect(firstToggle).toHaveAttribute("aria-controls", "acc-dl-item-1-content");
+      await expect(firstContent).toHaveAttribute("aria-labelledby", "acc-dl-item-1-toggle");
+    });
+
+    test("multiple items can be open at once (independent state)", async ({ page }) => {
+      const accordion = page.locator("#acc-dl");
       const toggles = accordion.locator(".pf-v6-c-accordion__toggle");
       const contents = accordion.locator(".pf-v6-c-accordion__expandable-content");
 
-      // Expand first item
       await toggles.nth(0).click();
-      await expect(contents.nth(0)).toBeVisible();
-      await expect(contents.nth(1)).toBeHidden();
-      await expect(contents.nth(2)).toBeHidden();
-
-      // Expand second item — first stays open (independent)
       await toggles.nth(1).click();
       await expect(contents.nth(0)).toBeVisible();
       await expect(contents.nth(1)).toBeVisible();
-      await expect(contents.nth(2)).toBeHidden();
+    });
+  });
+
+  test.describe("Single expand variant", () => {
+    test("opening one item collapses the other", async ({ page }) => {
+      const accordion = page.locator("#acc-single");
+      const toggles = accordion.locator(".pf-v6-c-accordion__toggle");
+      const contents = accordion.locator(".pf-v6-c-accordion__expandable-content");
+
+      await toggles.nth(0).click();
+      await expect(contents.nth(0)).toBeVisible();
+      await expect(contents.nth(1)).toBeHidden();
+
+      await toggles.nth(1).click();
+      await expect(contents.nth(0)).toBeHidden();
+      await expect(contents.nth(1)).toBeVisible();
     });
 
-    test("toggle icon SVG is present on each item", async ({ page }) => {
-      const accordion = page.locator("#accordion-fluid");
-      const icons = accordion.locator(".pf-v6-c-accordion__toggle-icon svg");
-      await expect(icons).toHaveCount(4);
+    test("clicking the open item closes it (no item open)", async ({ page }) => {
+      const accordion = page.locator("#acc-single");
+      const firstToggle = accordion.locator(".pf-v6-c-accordion__toggle").first();
+      const firstContent = accordion.locator(".pf-v6-c-accordion__expandable-content").first();
+
+      await firstToggle.click();
+      await expect(firstContent).toBeVisible();
+      await firstToggle.click();
+      await expect(firstContent).toBeHidden();
     });
   });
 
   test.describe("Fixed variant", () => {
-    test("expanded content has pf-m-fixed class", async ({ page }) => {
-      const accordion = page.locator("#accordion-fixed");
+    test("each content panel has pf-m-fixed", async ({ page }) => {
+      const accordion = page.locator("#acc-fixed");
       const contents = accordion.locator(".pf-v6-c-accordion__expandable-content");
-
-      // All expandable content elements should have pf-m-fixed
       const count = await contents.count();
       for (let i = 0; i < count; i++) {
         await expect(contents.nth(i)).toHaveClass(/pf-m-fixed/);
@@ -76,78 +94,42 @@ test.describe("Accordion", () => {
     });
   });
 
-  test.describe("Definition list variant", () => {
-    test("root element is a dl", async ({ page }) => {
-      const accordion = page.locator("#accordion-dl");
-      await expect(accordion).toBeVisible();
-      const tagName = await accordion.evaluate((el) => el.tagName.toLowerCase());
-      expect(tagName).toBe("dl");
-    });
-
-    test("toggle wrapper is dt and content wrapper is dd", async ({ page }) => {
-      const accordion = page.locator("#accordion-dl");
-      const dts = accordion.locator("dt");
-      const dds = accordion.locator("dd");
-      await expect(dts).toHaveCount(4);
-      await expect(dds).toHaveCount(4);
-
-      // dt contains the toggle button
-      const firstToggle = dts.first().locator(".pf-v6-c-accordion__toggle");
-      await expect(firstToggle).toBeVisible();
-
-      // dd has the expandable content class
-      await expect(dds.first()).toHaveClass(/pf-v6-c-accordion__expandable-content/);
-    });
-
-    test("expand and collapse works", async ({ page }) => {
-      const accordion = page.locator("#accordion-dl");
-      const firstToggle = accordion.locator(".pf-v6-c-accordion__toggle").first();
-      const firstContent = accordion.locator("dd.pf-v6-c-accordion__expandable-content").first();
-
-      await expect(firstContent).toBeHidden();
-      await firstToggle.click();
-      await expect(firstContent).toBeVisible();
-      await expect(firstContent).toHaveClass(/pf-m-expanded/);
-    });
-  });
-
   test.describe("Bordered variant", () => {
-    test("root has pf-m-bordered class", async ({ page }) => {
-      const accordion = page.locator("#accordion-bordered");
-      await expect(accordion).toHaveClass(/pf-m-bordered/);
+    test("root has pf-m-bordered", async ({ page }) => {
+      await expect(page.locator("#acc-bordered")).toHaveClass(/pf-m-bordered/);
     });
   });
 
-  test.describe("Large bordered variant", () => {
-    test("root has both pf-m-display-lg and pf-m-bordered", async ({ page }) => {
-      const accordion = page.locator("#accordion-large-bordered");
-      await expect(accordion).toHaveClass(/pf-m-bordered/);
-      await expect(accordion).toHaveClass(/pf-m-display-lg/);
-    });
-  });
-
-  test.describe("Toggle icon at start variant", () => {
-    test("root has pf-m-toggle-start class", async ({ page }) => {
-      const accordion = page.locator("#accordion-toggle-start");
-      await expect(accordion).toHaveClass(/pf-m-toggle-start/);
+  test.describe("Toggle at start variant", () => {
+    test("root has pf-m-toggle-start", async ({ page }) => {
+      await expect(page.locator("#acc-toggle-start")).toHaveClass(/pf-m-toggle-start/);
     });
 
     test("icon span precedes text span in DOM order", async ({ page }) => {
-      const accordion = page.locator("#accordion-toggle-start");
-      const firstToggle = accordion.locator(".pf-v6-c-accordion__toggle").first();
-
-      // Get the order of children — icon should come before text
+      const firstToggle = page.locator("#acc-toggle-start .pf-v6-c-accordion__toggle").first();
       const order = await firstToggle.evaluate((el) => {
         const children = Array.from(el.children);
-        const iconIndex = children.findIndex((c) =>
-          c.classList.contains("pf-v6-c-accordion__toggle-icon")
-        );
-        const textIndex = children.findIndex((c) =>
-          c.classList.contains("pf-v6-c-accordion__toggle-text")
-        );
+        const iconIndex = children.findIndex((c) => c.classList.contains("pf-v6-c-accordion__toggle-icon"));
+        const textIndex = children.findIndex((c) => c.classList.contains("pf-v6-c-accordion__toggle-text"));
         return { iconIndex, textIndex };
       });
       expect(order.iconIndex).toBeLessThan(order.textIndex);
+    });
+  });
+
+  test.describe("Per-example code viewer", () => {
+    test("Toggle Qute opens a Monaco editor with the fragment source", async ({ page }) => {
+      const card = page.locator('[data-source-href="/components/accordion/definition-list"]');
+      const toggle = card.locator('button[aria-label*="Toggle Qute"]');
+      await toggle.click();
+      await expect(card.locator(".monaco-editor").first()).toBeVisible({ timeout: 10000 });
+    });
+
+    test("Open-in-new-window link points to the standalone route", async ({ page }) => {
+      const card = page.locator('[data-source-href="/components/accordion/bordered"]');
+      const link = card.locator('a[aria-label*="Open"]');
+      await expect(link).toHaveAttribute("href", "/components/accordion/bordered");
+      await expect(link).toHaveAttribute("target", "_blank");
     });
   });
 });

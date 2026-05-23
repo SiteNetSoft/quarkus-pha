@@ -1,18 +1,21 @@
 {! About Modal — PatternFly v6 !}
-{! Parameters: productName, brandImageSrc, brandImageAlt, backgroundImage (optional) !}
-{! Blocks: content, strapline !}
+{! Required: id, brandImageSrc, brandImageAlt !}
+{! Optional: productName, ariaLabel (required when productName is absent), backgroundImage, closeButtonAriaLabel, noContentContainer !}
+{! Slots: content, strapline, trademark !}
+{! Open via: $dispatch('open-about-modal-{id}'). Multiple instances on a page get distinct event names via the id suffix. !}
 <div x-data="{ open: false }"
-     @open-about-modal.window="open = true"
+     @open-about-modal-{id}.window="open = true"
      @keydown.escape.window="if (open) open = false"
      x-effect="if (open) PHA.trapFocus($el); else PHA.releaseFocus($el);">
   <div class="pf-v6-c-backdrop"
        x-show="open"
        x-transition.opacity
+       @click.self="open = false"
        style="display: none;">
     <div class="pf-v6-c-about-modal-box"
          role="dialog"
          aria-modal="true"
-         aria-labelledby="about-modal-title"
+         {#if productName??}aria-labelledby="{id}-title"{#else}aria-label="{ariaLabel}"{/if}
          {#if backgroundImage??}style="--pf-v6-c-about-modal-box--BackgroundImage: url({backgroundImage})"{/if}>
       <div class="pf-v6-c-about-modal-box__brand">
         <img class="pf-v6-c-about-modal-box__brand-image"
@@ -22,24 +25,31 @@
       <div class="pf-v6-c-about-modal-box__close">
         <button class="pf-v6-c-button pf-m-plain"
                 type="button"
-                aria-label="Close dialog"
+                aria-label="{closeButtonAriaLabel ?: 'Close dialog'}"
                 @click="open = false">
           <span class="pf-v6-c-button__icon">
             {icons:svg('fa:times').raw}
           </span>
         </button>
       </div>
+      {#if productName??}
       <div class="pf-v6-c-about-modal-box__header">
-        <h1 class="pf-v6-c-title pf-m-4xl" id="about-modal-title">{productName}</h1>
+        <h1 class="pf-v6-c-title pf-m-4xl" id="{id}-title">{productName}</h1>
       </div>
+      {/if}
+      {#if noContentContainer??}
+      {#insert content}{/insert}
+      {#else}
       <div class="pf-v6-c-about-modal-box__content">
         <div class="pf-v6-c-about-modal-box__body">
           {#insert content}{/insert}
         </div>
+        {#insert trademark}{/insert}
         <p class="pf-v6-c-about-modal-box__strapline">
           {#insert strapline}{/insert}
         </p>
       </div>
+      {/if}
     </div>
   </div>
 </div>

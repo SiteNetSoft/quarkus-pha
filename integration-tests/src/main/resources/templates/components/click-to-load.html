@@ -1,20 +1,20 @@
-{#include layouts/base}
-{#title}Click to Load{/title}
-{#head}<link rel="stylesheet" href="/web/css/components/htmx.css">{/head}
-{#body}
-<div style="padding: 2rem;">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block;">&larr; Back to showcase</a>
+{#include layouts/base} {#title}Click to Load{/title} {#head}<link
+  rel="stylesheet"
+  href="/web/css/components/htmx.css"
+/>{/head} {#body}
+<div style="padding: 2rem">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block"
+    >&larr; Back to showcase</a
+  >
 
   <h1>Click to Load</h1>
   <p>HTMX-powered &ldquo;Load more&rdquo; pattern — click the button to fetch the next batch.</p>
 
-  <section style="margin-top: 2rem;">
+  <section style="margin-top: 2rem">
     <h2 id="click-to-load-heading">Manual pagination</h2>
     <p>Click the button to load more items from <code>/api/htmx/load-more</code>.</p>
-    <div class="pf-v6-c-data-list" id="load-list" role="list">
-    </div>
+    <div class="pf-v6-c-data-list" id="load-list" role="list"></div>
     {#include components/htmx/click-to-load id="load-more-btn-0" loadUrl="/api/htmx/load-more?page=0" /}
   </section>
 </div>
-{/body}
-{/include}
+{/body} {/include}

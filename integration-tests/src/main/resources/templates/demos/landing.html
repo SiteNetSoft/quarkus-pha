@@ -1,84 +1,101 @@
-{#include layouts/stacked}
-{#title}Welcome — {applicationName}{/title}
-{#brand}<a href="/demos/landing" class="pf-v6-c-masthead__brand" style="font-weight: 700; text-decoration: none; color: inherit;">{applicationName}</a>{/brand}
-{#primaryNav}
-  <li class="pf-v6-c-nav__item"><a href="/demos/dashboard" class="pf-v6-c-nav__link">Dashboard</a></li>
-  <li class="pf-v6-c-nav__item"><a href="/demos/data-management" class="pf-v6-c-nav__link">Data Management</a></li>
-  <li class="pf-v6-c-nav__item"><a href="/demos/settings" class="pf-v6-c-nav__link">Settings</a></li>
-  <li class="pf-v6-c-nav__item"><a href="/demos/landing" class="pf-v6-c-nav__link pf-m-current" aria-current="page">Landing Page</a></li>
-{/primaryNav}
-{#secondaryNav}
-  <li class="pf-v6-c-nav__item"><a href="#features-heading" class="pf-v6-c-nav__link">Features</a></li>
-  <li class="pf-v6-c-nav__item"><a href="#about-heading" class="pf-v6-c-nav__link">About</a></li>
-  <li class="pf-v6-c-nav__item"><a href="/" class="pf-v6-c-nav__link">Component Showcase</a></li>
-{/secondaryNav}
-{#mainContent}
-
-  {! Hero section !}
-  <section class="pf-v6-c-page__main-section pf-m-light" id="landing-hero" style="text-align: center; padding: 4rem 2rem;">
-    <div data-pf-content="true" class="pf-v6-c-content pf-m-editorial">
-      <h1 class="pf-v6-c-title pf-m-4xl" id="hero-heading">quarkus-pha</h1>
-      <p class="pf-v6-c-title pf-m-xl" style="margin-top: 1rem; color: var(--pf-t--global--text--color--subtle);">
-        Framework-free frontend components for Quarkus — PatternFly, HTMX, and Alpine.js
-      </p>
-      <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
-        <a href="/demos/dashboard" class="pf-v6-c-button pf-m-primary pf-m-display-lg" id="cta-dashboard">View Dashboard</a>
-        <a href="/" class="pf-v6-c-button pf-m-secondary pf-m-display-lg" id="cta-components">Browse Components</a>
-      </div>
+{#include layouts/stacked} {#title}Welcome — {applicationName}{/title} {#brand}<a
+  href="/demos/landing"
+  class="pf-v6-c-masthead__brand"
+  style="font-weight: 700; text-decoration: none; color: inherit"
+  >{applicationName}</a
+>{/brand} {#primaryNav}
+<li class="pf-v6-c-nav__item"><a href="/demos/dashboard" class="pf-v6-c-nav__link">Dashboard</a></li>
+<li class="pf-v6-c-nav__item"><a href="/demos/data-management" class="pf-v6-c-nav__link">Data Management</a></li>
+<li class="pf-v6-c-nav__item"><a href="/demos/settings" class="pf-v6-c-nav__link">Settings</a></li>
+<li class="pf-v6-c-nav__item">
+  <a href="/demos/landing" class="pf-v6-c-nav__link pf-m-current" aria-current="page">Landing Page</a>
+</li>
+{/primaryNav} {#secondaryNav}
+<li class="pf-v6-c-nav__item"><a href="#features-heading" class="pf-v6-c-nav__link">Features</a></li>
+<li class="pf-v6-c-nav__item"><a href="#about-heading" class="pf-v6-c-nav__link">About</a></li>
+<li class="pf-v6-c-nav__item"><a href="/" class="pf-v6-c-nav__link">Component Showcase</a></li>
+{/secondaryNav} {#mainContent} {! Hero section !}
+<section class="pf-v6-c-page__main-section pf-m-light" id="landing-hero" style="text-align: center; padding: 4rem 2rem">
+  <div data-pf-content="true" class="pf-v6-c-content pf-m-editorial">
+    <h1 class="pf-v6-c-title pf-m-4xl" id="hero-heading">quarkus-pha</h1>
+    <p class="pf-v6-c-title pf-m-xl" style="margin-top: 1rem; color: var(--pf-t--global--text--color--subtle)">
+      Framework-free frontend components for Quarkus — PatternFly, HTMX, and Alpine.js
+    </p>
+    <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center">
+      <a href="/demos/dashboard" class="pf-v6-c-button pf-m-primary pf-m-display-lg" id="cta-dashboard"
+        >View Dashboard</a
+      >
+      <a href="/" class="pf-v6-c-button pf-m-secondary pf-m-display-lg" id="cta-components">Browse Components</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  {! Features gallery !}
-  <section class="pf-v6-c-page__main-section" id="landing-features">
-    <div data-pf-content="true" class="pf-v6-c-content" style="text-align: center; margin-bottom: 2rem;">
-      <h2 class="pf-v6-c-title pf-m-2xl" id="features-heading">Features</h2>
-    </div>
-    <div class="pf-v6-l-gallery pf-m-gutter" style="--pf-v6-l-gallery--GridTemplateColumns--min: 300px;">
-      {#for feature in features}
-      <div class="pf-v6-c-card" id="feature-card-{feature_count}">
-        <div class="pf-v6-c-card__header">
-          <div class="pf-v6-c-card__header-main">
-            <div class="pf-v6-c-card__title">
-              <span class="pf-v6-c-card__title-text"><i class="{feature.icon}" aria-hidden="true" style="margin-right: 0.5rem;"></i>{feature.title}</span>
-            </div>
+{! Features gallery !}
+<section class="pf-v6-c-page__main-section" id="landing-features">
+  <div data-pf-content="true" class="pf-v6-c-content" style="text-align: center; margin-bottom: 2rem">
+    <h2 class="pf-v6-c-title pf-m-2xl" id="features-heading">Features</h2>
+  </div>
+  <div class="pf-v6-l-gallery pf-m-gutter" style="--pf-v6-l-gallery--GridTemplateColumns--min: 300px">
+    {#for feature in features}
+    <div class="pf-v6-c-card" id="feature-card-{feature_count}">
+      <div class="pf-v6-c-card__header">
+        <div class="pf-v6-c-card__header-main">
+          <div class="pf-v6-c-card__title">
+            <span class="pf-v6-c-card__title-text"
+              ><i class="{feature.icon}" aria-hidden="true" style="margin-right: 0.5rem"></i>{feature.title}</span
+            >
           </div>
         </div>
-        <div class="pf-v6-c-card__body">
-          <p>{feature.description}</p>
-        </div>
       </div>
-      {/for}
+      <div class="pf-v6-c-card__body">
+        <p>{feature.description}</p>
+      </div>
     </div>
-  </section>
+    {/for}
+  </div>
+</section>
 
-  {! About section !}
-  <section class="pf-v6-c-page__main-section pf-m-light" id="landing-about">
-    <div data-pf-content="true" class="pf-v6-c-content pf-m-editorial" style="max-width: 800px; margin: 0 auto;">
-      <h2 class="pf-v6-c-title pf-m-2xl" id="about-heading">About</h2>
-      <dl class="pf-v6-c-description-list pf-m-horizontal" style="margin-top: 1rem;">
-        <div class="pf-v6-c-description-list__group">
-          <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Design system</span></dt>
-          <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">PatternFly v6 (CSS + tokens only)</div></dd>
-        </div>
-        <div class="pf-v6-c-description-list__group">
-          <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Interactivity</span></dt>
-          <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">Alpine.js + HTMX</div></dd>
-        </div>
-        <div class="pf-v6-c-description-list__group">
-          <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Backend</span></dt>
-          <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">Quarkus + Qute templates</div></dd>
-        </div>
-        <div class="pf-v6-c-description-list__group">
-          <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Components</span></dt>
-          <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">92 PatternFly + 4 HTMX patterns</div></dd>
-        </div>
-        <div class="pf-v6-c-description-list__group">
-          <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">License</span></dt>
-          <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">Apache License 2.0</div></dd>
-        </div>
-      </dl>
-    </div>
-  </section>
+{! About section !}
+<section class="pf-v6-c-page__main-section pf-m-light" id="landing-about">
+  <div data-pf-content="true" class="pf-v6-c-content pf-m-editorial" style="max-width: 800px; margin: 0 auto">
+    <h2 class="pf-v6-c-title pf-m-2xl" id="about-heading">About</h2>
+    <dl class="pf-v6-c-description-list pf-m-horizontal" style="margin-top: 1rem">
+      <div class="pf-v6-c-description-list__group">
+        <dt class="pf-v6-c-description-list__term">
+          <span class="pf-v6-c-description-list__text">Design system</span>
+        </dt>
+        <dd class="pf-v6-c-description-list__description">
+          <div class="pf-v6-c-description-list__text">PatternFly v6 (CSS + tokens only)</div>
+        </dd>
+      </div>
+      <div class="pf-v6-c-description-list__group">
+        <dt class="pf-v6-c-description-list__term">
+          <span class="pf-v6-c-description-list__text">Interactivity</span>
+        </dt>
+        <dd class="pf-v6-c-description-list__description">
+          <div class="pf-v6-c-description-list__text">Alpine.js + HTMX</div>
+        </dd>
+      </div>
+      <div class="pf-v6-c-description-list__group">
+        <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Backend</span></dt>
+        <dd class="pf-v6-c-description-list__description">
+          <div class="pf-v6-c-description-list__text">Quarkus + Qute templates</div>
+        </dd>
+      </div>
+      <div class="pf-v6-c-description-list__group">
+        <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Components</span></dt>
+        <dd class="pf-v6-c-description-list__description">
+          <div class="pf-v6-c-description-list__text">92 PatternFly + 4 HTMX patterns</div>
+        </dd>
+      </div>
+      <div class="pf-v6-c-description-list__group">
+        <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">License</span></dt>
+        <dd class="pf-v6-c-description-list__description">
+          <div class="pf-v6-c-description-list__text">Apache License 2.0</div>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</section>
 
-{/mainContent}
-{/include}
+{/mainContent} {/include}

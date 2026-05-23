@@ -1,56 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-US" x-data="{ sidebarOpen: true }">
-<head>
+  <head>
     {#include layouts/_head /}
     <style>
-      .pf-v6-c-page__sidebar { transition: transform 200ms ease-in-out; }
-      .pf-v6-c-page__sidebar[hidden] { display: block !important; transform: translateX(-100%); position: absolute; }
+      .pf-v6-c-page__sidebar {
+        transition: transform 200ms ease-in-out;
+      }
+      .pf-v6-c-page__sidebar[hidden] {
+        display: block !important;
+        transform: translateX(-100%);
+        position: absolute;
+      }
     </style>
-</head>
-<body>
-{#include components/navigation/theme-selector /}
+  </head>
+  <body>
+    {#include components/navigation/theme-selector /}
 
-<div class="pf-v6-c-page" id="layout-sidebar-page">
+    <div class="pf-v6-c-page" id="layout-sidebar-page">
+      {! Skip to content !}
+      <a href="#main-content" class="pf-v6-c-skip-to-content">Skip to content</a>
 
-  {! Skip to content !}
-  <a href="#main-content" class="pf-v6-c-skip-to-content">Skip to content</a>
+      {! Masthead !}
+      <header class="pf-v6-c-masthead" id="layout-masthead">
+        <div class="pf-v6-c-masthead__main">
+          <span class="pf-v6-c-masthead__toggle">
+            <button
+              class="pf-v6-c-button pf-m-plain"
+              type="button"
+              aria-label="Toggle sidebar"
+              :aria-expanded="sidebarOpen.toString()"
+              @click="sidebarOpen = !sidebarOpen"
+            >
+              {icons:svg('fa:bars').raw}
+            </button>
+          </span>
+          <div class="pf-v6-c-masthead__brand">
+            {#insert brand}<a href="/" class="pf-v6-c-masthead__brand">{applicationName}</a>{/insert}
+          </div>
+        </div>
+        <div class="pf-v6-c-masthead__content">{#insert mastheadContent}{/insert}</div>
+      </header>
 
-  {! Masthead !}
-  <header class="pf-v6-c-masthead" id="layout-masthead">
-    <div class="pf-v6-c-masthead__main">
-      <span class="pf-v6-c-masthead__toggle">
-        <button class="pf-v6-c-button pf-m-plain" type="button"
-                aria-label="Toggle sidebar"
-                :aria-expanded="sidebarOpen.toString()"
-                @click="sidebarOpen = !sidebarOpen">
-          {icons:svg('fa:bars').raw}
-        </button>
-      </span>
-      <div class="pf-v6-c-masthead__brand">
-        {#insert brand}<a href="/" class="pf-v6-c-masthead__brand">{applicationName}</a>{/insert}
+      {! Sidebar !}
+      <div
+        class="pf-v6-c-page__sidebar"
+        :class="{ 'pf-m-expanded': sidebarOpen, 'pf-m-collapsed': !sidebarOpen }"
+        x-show="sidebarOpen"
+      >
+        <div class="pf-v6-c-page__sidebar-body">
+          <nav class="pf-v6-c-nav" aria-label="Sidebar navigation">
+            <ul class="pf-v6-c-nav__list">
+              {#insert sidebarNav}{/insert}
+            </ul>
+          </nav>
+        </div>
       </div>
-    </div>
-    <div class="pf-v6-c-masthead__content">
-      {#insert mastheadContent}{/insert}
-    </div>
-  </header>
 
-  {! Sidebar !}
-  <div class="pf-v6-c-page__sidebar" :class="{ 'pf-m-expanded': sidebarOpen, 'pf-m-collapsed': !sidebarOpen }" x-show="sidebarOpen">
-    <div class="pf-v6-c-page__sidebar-body">
-      <nav class="pf-v6-c-nav" aria-label="Sidebar navigation">
-        <ul class="pf-v6-c-nav__list">
-          {#insert sidebarNav}{/insert}
-        </ul>
-      </nav>
+      {! Main content area !}
+      <main class="pf-v6-c-page__main" id="main-content" tabindex="-1">{#insert mainContent}{/insert}</main>
     </div>
-  </div>
-
-  {! Main content area !}
-  <main class="pf-v6-c-page__main" id="main-content" tabindex="-1">
-    {#insert mainContent}{/insert}
-  </main>
-
-</div>
-</body>
+  </body>
 </html>
