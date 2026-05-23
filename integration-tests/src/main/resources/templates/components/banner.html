@@ -139,26 +139,39 @@
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Basic colors" slug="basic-colors" component="banner"
-                        description="The eight tonal variants — red, orangered, orange, yellow, green, teal, blue,
-                        purple. Use for marketing or content emphasis without implying severity."} {#content}{#include
-                        components/banner/basic-colors /}{/content} {/include} {#include partials/example-card
-                        title="Status" slug="status" component="banner" description="Five semantic states — success,
-                        warning, danger, info, custom. Each (except custom) auto-renders the matching icon. Pair with
-                        &lt;code class=&quot;ws-code&quot;&gt;screenReaderText&lt;/code&gt; for AT context."}
-                        {#content}{#include components/banner/status /}{/content} {/include} {#include
-                        partials/example-card title="With links" slug="with-links" component="banner"
-                        description="Inline anchors inside a banner — pair with the info status for help / docs links."}
-                        {#content}{#include components/banner/with-links /}{/content} {/include} {#include
-                        partials/example-card title="Screen reader text" slug="screen-reader" component="banner"
-                        description="Prepend a visually-hidden prefix that AT announces but sighted users don't see —
-                        e.g. &quot;Info alert:&quot; before the visible message."} {#content}{#include
-                        components/banner/screen-reader /}{/content} {/include} {#include partials/example-card
-                        title="Sticky" slug="sticky" component="banner" description="Add &lt;code
-                        class=&quot;ws-code&quot;&gt;sticky=true&lt;/code&gt; for &lt;code
-                        class=&quot;ws-code&quot;&gt;pf-m-sticky&lt;/code&gt; — the banner pins to the top of its
-                        nearest scroll parent (here a 220px-tall box). Useful for persistent warnings in scrollable
-                        panels."} {#content}{#include components/banner/sticky /}{/content} {/include}
+                        {#include partials/example-card title="Basic colors" slug="basic-colors" component="banner"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          The eight tonal variants — red, orangered, orange, yellow, green, teal, blue, purple. Use for
+                          marketing or content emphasis without implying severity.
+                        </p>
+                        {/description} {#content}{#include components/banner/basic-colors /}{/content} {/include}
+                        {#include partials/example-card title="Status" slug="status" component="banner"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Five semantic states — success, warning, danger, info, custom. Each (except custom)
+                          auto-renders the matching icon. Pair with <code class="ws-code">screenReaderText</code> for AT
+                          context.
+                        </p>
+                        {/description} {#content}{#include components/banner/status /}{/content} {/include} {#include
+                        partials/example-card title="With links" slug="with-links" component="banner"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Inline anchors inside a banner — pair with the info status for help / docs links.
+                        </p>
+                        {/description} {#content}{#include components/banner/with-links /}{/content} {/include}
+                        {#include partials/example-card title="Screen reader text" slug="screen-reader"
+                        component="banner"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Prepend a visually-hidden prefix that AT announces but sighted users don't see — e.g. "Info
+                          alert:" before the visible message.
+                        </p>
+                        {/description} {#content}{#include components/banner/screen-reader /}{/content} {/include}
+                        {#include partials/example-card title="Sticky" slug="sticky" component="banner"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Add <code class="ws-code">sticky=true</code> for <code class="ws-code">pf-m-sticky</code> —
+                          the banner pins to the top of its nearest scroll parent (here a 220px-tall box). Useful for
+                          persistent warnings in scrollable panels.
+                        </p>
+                        {/description} {#content}{#include components/banner/sticky /}{/content} {/include}
 
                         <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                           <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">

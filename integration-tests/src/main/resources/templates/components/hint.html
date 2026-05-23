@@ -108,13 +108,18 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="hint" description="Simple
-                      title + body text — the most common shape."} {#content}{#include components/hint/basic
-                      /}{/content} {/include} {#include partials/example-card title="With content" slug="with-content"
-                      component="hint" description="Drop the &lt;code class=&quot;ws-code&quot;&gt;title&lt;/code&gt; /
-                      &lt;code class=&quot;ws-code&quot;&gt;bodyText&lt;/code&gt; props and use the &lt;code
-                      class=&quot;ws-code&quot;&gt;content&lt;/code&gt; slot for richer markup — body + footer with an
-                      action link."} {#content}{#include components/hint/with-content /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="hint"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Simple title + body text — the most common shape.
+                      </p>
+                      {/description} {#content}{#include components/hint/basic /}{/content} {/include} {#include
+                      partials/example-card title="With content" slug="with-content" component="hint"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Drop the <code class="ws-code">title</code> / <code class="ws-code">bodyText</code> props and
+                        use the <code class="ws-code">content</code> slot for richer markup — body + footer with an
+                        action link.
+                      </p>
+                      {/description} {#content}{#include components/hint/with-content /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

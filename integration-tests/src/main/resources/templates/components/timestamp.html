@@ -119,18 +119,22 @@
                         </div>
                       </div>
 
-                      {#include partials/example-card title="Basic" slug="basic" component="timestamp"
-                      description="Standalone timestamp displaying a human-readable string. The &lt;code
-                      class=&quot;ws-code&quot;&gt;datetime&lt;/code&gt; attribute on the &lt;time&gt; element carries
-                      the machine-readable value."} {#content}{#include components/timestamp/basic /}{/content}
-                      {/include} {#include partials/example-card title="Inline" slug="inline" component="timestamp"
-                      description="&lt;code class=&quot;ws-code&quot;&gt;inline=true&lt;/code&gt; emits &lt;code
-                      class=&quot;ws-code&quot;&gt;pf-m-inline&lt;/code&gt; — the timestamp flows with surrounding text
-                      instead of standing alone."} {#content}{#include components/timestamp/inline /}{/content}
+                      {#include partials/example-card title="Basic" slug="basic" component="timestamp"}
+  {#description}
+  <p class="pf-v6-c-content--p pf-m-editorial ws-p">Standalone timestamp displaying a human-readable string. The <code class="ws-code">datetime</code> attribute on the <time> element carries the machine-readable value.</p>
+  {/description}
+ {#content}{#include components/timestamp/basic /}{/content}
+                      {/include} {#include partials/example-card title="Inline" slug="inline" component="timestamp"}
+  {#description}
+  <p class="pf-v6-c-content--p pf-m-editorial ws-p"><code class="ws-code">inline=true</code> emits <code class="ws-code">pf-m-inline</code> — the timestamp flows with surrounding text instead of standing alone.</p>
+  {/description}
+ {#content}{#include components/timestamp/inline /}{/content}
                       {/include} {#include partials/example-card title="With tooltip" slug="with-tooltip"
-                      component="timestamp" description="Pass &lt;code class=&quot;ws-code&quot;&gt;tooltip&lt;/code&gt;
-                      to attach a browser-native tooltip — typically the full ISO string when the visible text is a
-                      relative time (&amp;quot;2 hours ago&amp;quot;)."} {#content}{#include
+                      component="timestamp"}
+  {#description}
+  <p class="pf-v6-c-content--p pf-m-editorial ws-p">Pass <code class="ws-code">tooltip</code> to attach a browser-native tooltip — typically the full ISO string when the visible text is a relative time (&quot;2 hours ago&quot;).</p>
+  {/description}
+ {#content}{#include
                       components/timestamp/with-tooltip /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">

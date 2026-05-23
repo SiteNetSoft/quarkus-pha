@@ -117,15 +117,20 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="date-picker"
-                      description="Empty input + calendar toggle button. Calendar popup not wired in the example."}
-                      {#content}{#include components/date-picker/basic /}{/content} {/include} {#include
-                      partials/example-card title="With value" slug="with-value" component="date-picker"
-                      description="Pre-filled with an ISO date string."} {#content}{#include
-                      components/date-picker/with-value /}{/content} {/include} {#include partials/example-card
-                      title="Disabled" slug="disabled" component="date-picker" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;disabled=true&lt;/code&gt; — input + toggle disabled."}
-                      {#content}{#include components/date-picker/disabled /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="date-picker"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Empty input + calendar toggle button. Calendar popup not wired in the example.
+                      </p>
+                      {/description} {#content}{#include components/date-picker/basic /}{/content} {/include} {#include
+                      partials/example-card title="With value" slug="with-value" component="date-picker"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Pre-filled with an ISO date string.</p>
+                      {/description} {#content}{#include components/date-picker/with-value /}{/content} {/include}
+                      {#include partials/example-card title="Disabled" slug="disabled" component="date-picker"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">disabled=true</code> — input + toggle disabled.
+                      </p>
+                      {/description} {#content}{#include components/date-picker/disabled /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

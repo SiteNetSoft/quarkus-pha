@@ -107,14 +107,18 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="simple-list"
-                      description="Flat list — four mail folders. Alpine tracks the active item with &lt;code
-                      class=&quot;ws-code&quot;&gt;pf-m-current&lt;/code&gt;."} {#content}{#include
-                      components/simple-list/basic /}{/content} {/include} {#include partials/example-card
-                      title="Grouped" slug="grouped" component="simple-list" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;__section&lt;/code&gt; with a &lt;code
-                      class=&quot;ws-code&quot;&gt;__title&lt;/code&gt; — multiple labelled groups in one list."}
-                      {#content}{#include components/simple-list/grouped /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="simple-list"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Flat list — four mail folders. Alpine tracks the active item with
+                        <code class="ws-code">pf-m-current</code>.
+                      </p>
+                      {/description} {#content}{#include components/simple-list/basic /}{/content} {/include} {#include
+                      partials/example-card title="Grouped" slug="grouped" component="simple-list"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">__section</code> with a <code class="ws-code">__title</code> — multiple
+                        labelled groups in one list.
+                      </p>
+                      {/description} {#content}{#include components/simple-list/grouped /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

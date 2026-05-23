@@ -98,9 +98,11 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="time-picker"
-                      description="Click the clock icon to scroll through 30-minute slots; click a slot to set the input
-                      value."} {#content}{#include components/time-picker/basic /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="time-picker"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Click the clock icon to scroll through 30-minute slots; click a slot to set the input value.
+                      </p>
+                      {/description} {#content}{#include components/time-picker/basic /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

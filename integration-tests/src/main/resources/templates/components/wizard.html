@@ -117,20 +117,28 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="wizard"
-                      description="Four-step cluster-setup flow. Each step swaps the entire wizard via &lt;code
-                      class=&quot;ws-code&quot;&gt;hx-get&lt;/code&gt; — server holds state."} {#content}{#include
-                      components/wizard/basic /}{/content} {/include} {#include partials/example-card title="With
-                      substeps" slug="with-substeps" component="wizard" description="The middle step has nested children
-                      (Compile, Test). Substeps render as an indented &lt;code
-                      class=&quot;ws-code&quot;&gt;&amp;lt;ol&amp;gt;&lt;/code&gt; under their parent and pick up
-                      &lt;code class=&quot;ws-code&quot;&gt;aria-expanded&lt;/code&gt; when active."}
-                      {#content}{#include components/wizard/with-substeps /}{/content} {/include} {#include
-                      partials/example-card title="With review step" slug="with-review" component="wizard"
-                      description="Final step is a read-only summary rendered via &lt;code
-                      class=&quot;ws-code&quot;&gt;pf-v6-c-description-list&lt;/code&gt;. Primary button label becomes
-                      &lt;strong&gt;Finish&lt;/strong&gt; on the last step."} {#content}{#include
-                      components/wizard/with-review /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="wizard"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Four-step cluster-setup flow. Each step swaps the entire wizard via
+                        <code class="ws-code">hx-get</code> — server holds state.
+                      </p>
+                      {/description} {#content}{#include components/wizard/basic /}{/content} {/include} {#include
+                      partials/example-card title="With substeps" slug="with-substeps" component="wizard"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The middle step has nested children (Compile, Test). Substeps render as an indented
+                        <code class="ws-code">&lt;ol&gt;</code> under their parent and pick up
+                        <code class="ws-code">aria-expanded</code> when active.
+                      </p>
+                      {/description} {#content}{#include components/wizard/with-substeps /}{/content} {/include}
+                      {#include partials/example-card title="With review step" slug="with-review" component="wizard"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Final step is a read-only summary rendered via
+                        <code class="ws-code">pf-v6-c-description-list</code>. Primary button label becomes
+                        <strong>Finish</strong> on the last step.
+                      </p>
+                      {/description} {#content}{#include components/wizard/with-review /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

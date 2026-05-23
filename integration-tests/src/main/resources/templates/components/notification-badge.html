@@ -117,14 +117,22 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Read" slug="read" component="notification-badge"
-                      description="No outstanding notifications — muted bell icon."} {#content}{#include
-                      components/notification-badge/read /}{/content} {/include} {#include partials/example-card
-                      title="Unread" slug="unread" component="notification-badge" description="Pending count overlaid on
-                      the bell."} {#content}{#include components/notification-badge/unread /}{/content} {/include}
-                      {#include partials/example-card title="Attention" slug="attention" component="notification-badge"
-                      description="Critical state — red tinted with an exclamation marker."} {#content}{#include
-                      components/notification-badge/attention /}{/content} {/include}
+                      {#include partials/example-card title="Read" slug="read" component="notification-badge"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        No outstanding notifications — muted bell icon.
+                      </p>
+                      {/description} {#content}{#include components/notification-badge/read /}{/content} {/include}
+                      {#include partials/example-card title="Unread" slug="unread" component="notification-badge"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Pending count overlaid on the bell.</p>
+                      {/description} {#content}{#include components/notification-badge/unread /}{/content} {/include}
+                      {#include partials/example-card title="Attention" slug="attention" component="notification-badge"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Critical state — red tinted with an exclamation marker.
+                      </p>
+                      {/description} {#content}{#include components/notification-badge/attention /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

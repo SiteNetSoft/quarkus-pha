@@ -107,14 +107,17 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="modal"
-                      description="Confirmation dialog — click &amp;quot;Open modal&amp;quot; to show it. Esc closes."}
-                      {#content}{#include components/modal/basic /}{/content} {/include} {#include partials/example-card
-                      title="Sizes" slug="sizes" component="modal" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;pf-m-sm&lt;/code&gt; / &lt;code
-                      class=&quot;ws-code&quot;&gt;pf-m-md&lt;/code&gt; / &lt;code
-                      class=&quot;ws-code&quot;&gt;pf-m-lg&lt;/code&gt; — pick by content density."} {#content}{#include
-                      components/modal/sizes /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="modal"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Confirmation dialog — click &quot;Open modal&quot; to show it. Esc closes.
+                      </p>
+                      {/description} {#content}{#include components/modal/basic /}{/content} {/include} {#include
+                      partials/example-card title="Sizes" slug="sizes" component="modal"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-sm</code> / <code class="ws-code">pf-m-md</code> /
+                        <code class="ws-code">pf-m-lg</code> — pick by content density.
+                      </p>
+                      {/description} {#content}{#include components/modal/sizes /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

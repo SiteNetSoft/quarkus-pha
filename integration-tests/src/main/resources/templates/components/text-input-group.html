@@ -117,18 +117,27 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="text-input-group"
-                      description="Default text input group — just the input wrapper, no decoration."}
-                      {#content}{#include components/text-input-group/basic /}{/content} {/include} {#include
-                      partials/example-card title="With icon" slug="with-icon" component="text-input-group"
-                      description="Pass &lt;code class=&quot;ws-code&quot;&gt;iconName&lt;/code&gt; to render a prefix
-                      icon (&lt;code class=&quot;ws-code&quot;&gt;pf-m-icon&lt;/code&gt;)."} {#content}{#include
-                      components/text-input-group/with-icon /}{/content} {/include} {#include partials/example-card
-                      title="Disabled" slug="disabled" component="text-input-group" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;disabled=true&lt;/code&gt; — &lt;code
-                      class=&quot;ws-code&quot;&gt;pf-m-disabled&lt;/code&gt; on the wrapper, &lt;code
-                      class=&quot;ws-code&quot;&gt;disabled&lt;/code&gt; on the input."} {#content}{#include
-                      components/text-input-group/disabled /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="text-input-group"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Default text input group — just the input wrapper, no decoration.
+                      </p>
+                      {/description} {#content}{#include components/text-input-group/basic /}{/content} {/include}
+                      {#include partials/example-card title="With icon" slug="with-icon" component="text-input-group"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Pass <code class="ws-code">iconName</code> to render a prefix icon (<code class="ws-code"
+                          >pf-m-icon</code
+                        >).
+                      </p>
+                      {/description} {#content}{#include components/text-input-group/with-icon /}{/content} {/include}
+                      {#include partials/example-card title="Disabled" slug="disabled" component="text-input-group"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">disabled=true</code> — <code class="ws-code">pf-m-disabled</code> on the
+                        wrapper, <code class="ws-code">disabled</code> on the input.
+                      </p>
+                      {/description} {#content}{#include components/text-input-group/disabled /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

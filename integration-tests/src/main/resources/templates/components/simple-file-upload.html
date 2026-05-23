@@ -107,13 +107,19 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="simple-file-upload"
-                      description="Filename text + Browse + Clear. Visual scaffolding only — the runtime template
-                      doesn't wire a real &lt;input type=&quot;file&quot;&gt; behind the button."} {#content}{#include
-                      components/simple-file-upload/basic /}{/content} {/include} {#include partials/example-card
-                      title="Disabled" slug="disabled" component="simple-file-upload" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;disabled=true&lt;/code&gt; — both buttons disabled."}
-                      {#content}{#include components/simple-file-upload/disabled /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="simple-file-upload"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Filename text + Browse + Clear. Visual scaffolding only — the runtime template doesn't wire a
+                        real <input type="file" /> behind the button.
+                      </p>
+                      {/description} {#content}{#include components/simple-file-upload/basic /}{/content} {/include}
+                      {#include partials/example-card title="Disabled" slug="disabled" component="simple-file-upload"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">disabled=true</code> — both buttons disabled.
+                      </p>
+                      {/description} {#content}{#include components/simple-file-upload/disabled /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

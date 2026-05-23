@@ -118,17 +118,23 @@
                         </div>
                       </div>
 
-                      {#include partials/example-card title="Top" slug="top" component="tooltip" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;position=&quot;top&quot;&lt;/code&gt; — bubble sits above the target
-                      with an arrow pointing down. The default."} {#content}{#include components/tooltip/top
-                      /}{/content} {/include} {#include partials/example-card title="Bottom" slug="bottom"
-                      component="tooltip" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;position=&quot;bottom&quot;&lt;/code&gt; — bubble below the target."}
-                      {#content}{#include components/tooltip/bottom /}{/content} {/include} {#include
-                      partials/example-card title="Left / right" slug="left-right" component="tooltip"
-                      description="&lt;code class=&quot;ws-code&quot;&gt;position=&quot;left&quot;&lt;/code&gt; and
-                      &lt;code class=&quot;ws-code&quot;&gt;position=&quot;right&quot;&lt;/code&gt; — horizontal
-                      placements."} {#content}{#include components/tooltip/left-right /}{/content} {/include}
+                      {#include partials/example-card title="Top" slug="top" component="tooltip"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">position="top"</code> — bubble sits above the target with an arrow
+                        pointing down. The default.
+                      </p>
+                      {/description} {#content}{#include components/tooltip/top /}{/content} {/include} {#include
+                      partials/example-card title="Bottom" slug="bottom" component="tooltip"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">position="bottom"</code> — bubble below the target.
+                      </p>
+                      {/description} {#content}{#include components/tooltip/bottom /}{/content} {/include} {#include
+                      partials/example-card title="Left / right" slug="left-right" component="tooltip"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">position="left"</code> and <code class="ws-code">position="right"</code> —
+                        horizontal placements.
+                      </p>
+                      {/description} {#content}{#include components/tooltip/left-right /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

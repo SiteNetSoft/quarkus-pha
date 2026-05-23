@@ -108,13 +108,18 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="drawer" description="Click
-                      &amp;quot;Open drawer&amp;quot; to slide the panel in from the right. Click the X (or anywhere
-                      else) to close. Alpine tracks the expanded flag."} {#content}{#include components/drawer/basic
-                      /}{/content} {/include} {#include partials/example-card title="Static" slug="static"
-                      component="drawer" description="&lt;code class=&quot;ws-code&quot;&gt;static=true&lt;/code&gt; —
-                      &lt;code class=&quot;ws-code&quot;&gt;pf-m-static&lt;/code&gt; — panel is permanently visible, no
-                      toggle."} {#content}{#include components/drawer/static /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="drawer"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Click &quot;Open drawer&quot; to slide the panel in from the right. Click the X (or anywhere
+                        else) to close. Alpine tracks the expanded flag.
+                      </p>
+                      {/description} {#content}{#include components/drawer/basic /}{/content} {/include} {#include
+                      partials/example-card title="Static" slug="static" component="drawer"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">static=true</code> — <code class="ws-code">pf-m-static</code> — panel is
+                        permanently visible, no toggle.
+                      </p>
+                      {/description} {#content}{#include components/drawer/static /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

@@ -108,12 +108,16 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="code-block"
-                      description="Plain code block — just the content. Multi-line YAML, JSON, shell, etc."}
-                      {#content}{#include components/code-block/basic /}{/content} {/include} {#include
-                      partials/example-card title="With copy" slug="with-copy" component="code-block"
-                      description="Copy-to-clipboard button in the header. Icon swaps to a check for 2 seconds after
-                      copying."} {#content}{#include components/code-block/with-copy /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="code-block"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Plain code block — just the content. Multi-line YAML, JSON, shell, etc.
+                      </p>
+                      {/description} {#content}{#include components/code-block/basic /}{/content} {/include} {#include
+                      partials/example-card title="With copy" slug="with-copy" component="code-block"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Copy-to-clipboard button in the header. Icon swaps to a check for 2 seconds after copying.
+                      </p>
+                      {/description} {#content}{#include components/code-block/with-copy /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

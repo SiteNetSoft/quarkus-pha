@@ -105,11 +105,14 @@
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Basic" slug="basic" component="background-image"
-                        description="A fixed background-image rendered behind overlay content. The component itself is a
-                        positioned div with the image set via CSS variable; the example wraps it in a clipped container
-                        so we can show the background and overlay side-by-side."} {#content}{#include
-                        components/background-image/basic /}{/content} {/include}
+                        {#include partials/example-card title="Basic" slug="basic" component="background-image"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          A fixed background-image rendered behind overlay content. The component itself is a positioned
+                          div with the image set via CSS variable; the example wraps it in a clipped container so we can
+                          show the background and overlay side-by-side.
+                        </p>
+                        {/description} {#content}{#include components/background-image/basic /}{/content} {/include}
 
                         <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                           <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">

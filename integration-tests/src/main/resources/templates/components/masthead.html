@@ -107,14 +107,19 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="masthead" description="Brand
-                      row with nav toggle, app name, and settings/help icons on the right."} {#content}{#include
-                      components/masthead/basic /}{/content} {/include} {#include partials/example-card title="Display
-                      stack" slug="display-stack" component="masthead" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;displayStack=true&lt;/code&gt; — &lt;code
-                      class=&quot;ws-code&quot;&gt;pf-m-display-stack&lt;/code&gt; — brand and content rows stack
-                      vertically instead of side-by-side."} {#content}{#include components/masthead/display-stack
-                      /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="masthead"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Brand row with nav toggle, app name, and settings/help icons on the right.
+                      </p>
+                      {/description} {#content}{#include components/masthead/basic /}{/content} {/include} {#include
+                      partials/example-card title="Display stack" slug="display-stack" component="masthead"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">displayStack=true</code> —
+                        <code class="ws-code">pf-m-display-stack</code> — brand and content rows stack vertically
+                        instead of side-by-side.
+                      </p>
+                      {/description} {#content}{#include components/masthead/display-stack /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

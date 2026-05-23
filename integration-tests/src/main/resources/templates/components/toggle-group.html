@@ -118,16 +118,24 @@
                         </div>
                       </div>
                       {#include partials/example-card title="Single select" slug="single-select"
-                      component="toggle-group" description="Three options, only one can be selected. Alpine tracks the
-                      active item; clicking another swaps."} {#content}{#include components/toggle-group/single-select
-                      /}{/content} {/include} {#include partials/example-card title="Multi select" slug="multi-select"
-                      component="toggle-group" description="Independent toggles — bold / italic / underline. Each
-                      maintains its own pressed state."} {#content}{#include components/toggle-group/multi-select
-                      /}{/content} {/include} {#include partials/example-card title="With icons" slug="with-icons"
-                      component="toggle-group" description="Icon-only buttons via the &lt;code
-                      class=&quot;ws-code&quot;&gt;__icon&lt;/code&gt; subclass. Pair with &lt;code
-                      class=&quot;ws-code&quot;&gt;aria-label&lt;/code&gt; on each button."} {#content}{#include
-                      components/toggle-group/with-icons /}{/content} {/include}
+                      component="toggle-group"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Three options, only one can be selected. Alpine tracks the active item; clicking another swaps.
+                      </p>
+                      {/description} {#content}{#include components/toggle-group/single-select /}{/content} {/include}
+                      {#include partials/example-card title="Multi select" slug="multi-select" component="toggle-group"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Independent toggles — bold / italic / underline. Each maintains its own pressed state.
+                      </p>
+                      {/description} {#content}{#include components/toggle-group/multi-select /}{/content} {/include}
+                      {#include partials/example-card title="With icons" slug="with-icons" component="toggle-group"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Icon-only buttons via the <code class="ws-code">__icon</code> subclass. Pair with
+                        <code class="ws-code">aria-label</code> on each button.
+                      </p>
+                      {/description} {#content}{#include components/toggle-group/with-icons /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

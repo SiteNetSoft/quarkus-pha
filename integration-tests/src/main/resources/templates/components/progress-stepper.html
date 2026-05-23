@@ -116,19 +116,27 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Horizontal" slug="horizontal" component="progress-stepper"
-                      description="Default layout — steps laid out left-to-right with the connector between them.
-                      States: &lt;code class=&quot;ws-code&quot;&gt;pf-m-success&lt;/code&gt;, &lt;code
-                      class=&quot;ws-code&quot;&gt;pf-m-current&lt;/code&gt;, &lt;code
-                      class=&quot;ws-code&quot;&gt;pf-m-pending&lt;/code&gt;."} {#content}{#include
-                      components/progress-stepper/horizontal /}{/content} {/include} {#include partials/example-card
-                      title="Vertical" slug="vertical" component="progress-stepper" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;vertical=true&lt;/code&gt; — stacked top to bottom. Better in narrow
-                      columns."} {#content}{#include components/progress-stepper/vertical /}{/content} {/include}
-                      {#include partials/example-card title="Compact" slug="compact" component="progress-stepper"
-                      description="&lt;code class=&quot;ws-code&quot;&gt;compact=true&lt;/code&gt; — drops descriptions
-                      for a denser stepper, useful in headers."} {#content}{#include components/progress-stepper/compact
-                      /}{/content} {/include}
+                      {#include partials/example-card title="Horizontal" slug="horizontal" component="progress-stepper"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Default layout — steps laid out left-to-right with the connector between them. States:
+                        <code class="ws-code">pf-m-success</code>, <code class="ws-code">pf-m-current</code>,
+                        <code class="ws-code">pf-m-pending</code>.
+                      </p>
+                      {/description} {#content}{#include components/progress-stepper/horizontal /}{/content} {/include}
+                      {#include partials/example-card title="Vertical" slug="vertical" component="progress-stepper"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">vertical=true</code> — stacked top to bottom. Better in narrow columns.
+                      </p>
+                      {/description} {#content}{#include components/progress-stepper/vertical /}{/content} {/include}
+                      {#include partials/example-card title="Compact" slug="compact" component="progress-stepper"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">compact=true</code> — drops descriptions for a denser stepper, useful in
+                        headers.
+                      </p>
+                      {/description} {#content}{#include components/progress-stepper/compact /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

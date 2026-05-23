@@ -98,9 +98,12 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="dual-list-selector"
-                      description="Click an item, then click the right arrow to move it. Alpine tracks both lists'
-                      state."} {#content}{#include components/dual-list-selector/basic /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="dual-list-selector"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Click an item, then click the right arrow to move it. Alpine tracks both lists' state.
+                      </p>
+                      {/description} {#content}{#include components/dual-list-selector/basic /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"
