@@ -116,18 +116,25 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="empty-state"
-                      description="Icon + title + body + primary action — the standard &amp;quot;first-time
-                      experience&amp;quot; pattern."} {#content}{#include components/empty-state/basic /}{/content}
-                      {/include} {#include partials/example-card title="No icon" slug="no-icon" component="empty-state"
-                      description="Omit &lt;code class=&quot;ws-code&quot;&gt;iconName&lt;/code&gt; for a leaner look —
-                      best for &amp;quot;no results&amp;quot; states."} {#content}{#include
-                      components/empty-state/no-icon /}{/content} {/include} {#include partials/example-card title="With
-                      actions" slug="with-actions" component="empty-state" description="Pass both &lt;code
-                      class=&quot;ws-code&quot;&gt;primaryAction&lt;/code&gt; and &lt;code
-                      class=&quot;ws-code&quot;&gt;secondaryAction&lt;/code&gt; for two-choice prompts (e.g.
-                      &amp;quot;Create&amp;quot; / &amp;quot;Import&amp;quot;)."} {#content}{#include
-                      components/empty-state/with-actions /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="empty-state"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Icon + title + body + primary action — the standard &quot;first-time experience&quot; pattern.
+                      </p>
+                      {/description} {#content}{#include components/empty-state/basic /}{/content} {/include} {#include
+                      partials/example-card title="No icon" slug="no-icon" component="empty-state"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Omit <code class="ws-code">iconName</code> for a leaner look — best for &quot;no results&quot;
+                        states.
+                      </p>
+                      {/description} {#content}{#include components/empty-state/no-icon /}{/content} {/include}
+                      {#include partials/example-card title="With actions" slug="with-actions" component="empty-state"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Pass both <code class="ws-code">primaryAction</code> and
+                        <code class="ws-code">secondaryAction</code> for two-choice prompts (e.g. &quot;Create&quot; /
+                        &quot;Import&quot;).
+                      </p>
+                      {/description} {#content}{#include components/empty-state/with-actions /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

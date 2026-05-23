@@ -189,68 +189,81 @@
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Using hr" slug="using-hr" component="divider"
-                        description="The default — render a semantic &lt;code
-                        class=&quot;ws-code&quot;&gt;&amp;lt;hr&amp;gt;&lt;/code&gt; with PF v6 styling. Use anywhere
-                        &lt;code class=&quot;ws-code&quot;&gt;&amp;lt;hr&amp;gt;&lt;/code&gt; is valid HTML."}
-                        {#content}{#include components/divider/using-hr /}{/content} {/include} {#include
-                        partials/example-card title="Using li" slug="using-li" component="divider" description="Pass
-                        &lt;code class=&quot;ws-code&quot;&gt;component=&quot;li&quot;&lt;/code&gt; to render as a list
-                        separator. Use inside &lt;code class=&quot;ws-code&quot;&gt;&amp;lt;ul&amp;gt;&lt;/code&gt; /
-                        &lt;code class=&quot;ws-code&quot;&gt;&amp;lt;ol&amp;gt;&lt;/code&gt; / &lt;code
-                        class=&quot;ws-code&quot;&gt;&amp;lt;menu&amp;gt;&lt;/code&gt; where an &lt;code
-                        class=&quot;ws-code&quot;&gt;&amp;lt;hr&amp;gt;&lt;/code&gt; would be invalid HTML."}
-                        {#content}{#include components/divider/using-li /}{/content} {/include} {#include
-                        partials/example-card title="Using div" slug="using-div" component="divider" description="Pass
-                        &lt;code class=&quot;ws-code&quot;&gt;component=&quot;div&quot;&lt;/code&gt; for hosts where
-                        &lt;code class=&quot;ws-code&quot;&gt;&amp;lt;hr&amp;gt;&lt;/code&gt; is awkward (button groups,
-                        custom flex layouts). Same visual treatment, valid in any block context."} {#content}{#include
-                        components/divider/using-div /}{/content} {/include} {#include partials/example-card
-                        title="Inset medium" slug="inset-medium" component="divider" description="Pass &lt;code
-                        class=&quot;ws-code&quot;&gt;inset=&quot;md&quot;&lt;/code&gt; to pull the divider line in from
-                        the edges by the medium spacer token. Available tokens: &lt;code
-                        class=&quot;ws-code&quot;&gt;none&lt;/code&gt;, &lt;code
-                        class=&quot;ws-code&quot;&gt;xs&lt;/code&gt;, &lt;code
-                        class=&quot;ws-code&quot;&gt;sm&lt;/code&gt;, &lt;code
-                        class=&quot;ws-code&quot;&gt;md&lt;/code&gt;, &lt;code
-                        class=&quot;ws-code&quot;&gt;lg&lt;/code&gt;, &lt;code
-                        class=&quot;ws-code&quot;&gt;xl&lt;/code&gt;, &lt;code
-                        class=&quot;ws-code&quot;&gt;2xl&lt;/code&gt;, &lt;code
-                        class=&quot;ws-code&quot;&gt;3xl&lt;/code&gt;."} {#content}{#include
-                        components/divider/inset-medium /}{/content} {/include} {#include partials/example-card
-                        title="Inset at various breakpoints" slug="inset-at-various-breakpoints" component="divider"
-                        description="Stack the per-breakpoint params (&lt;code
-                        class=&quot;ws-code&quot;&gt;insetOnSm&lt;/code&gt;, &lt;code
-                        class=&quot;ws-code&quot;&gt;insetOnMd&lt;/code&gt;, &lt;code
-                        class=&quot;ws-code&quot;&gt;insetOnLg&lt;/code&gt;, &lt;code
-                        class=&quot;ws-code&quot;&gt;insetOnXl&lt;/code&gt;, &lt;code
-                        class=&quot;ws-code&quot;&gt;insetOn2xl&lt;/code&gt;) to make the inset scale with the viewport
-                        — denser on small screens, breathier on large ones."} {#content}{#include
-                        components/divider/inset-at-various-breakpoints /}{/content} {/include} {#include
-                        partials/example-card title="Vertical in flex layout" slug="vertical-in-flex-layout"
-                        component="divider" description="Set &lt;code
-                        class=&quot;ws-code&quot;&gt;vertical=true&lt;/code&gt; inside a flex container. The divider
-                        switches to a vertical line and stretches to the row height. Implies &lt;code
-                        class=&quot;ws-code&quot;&gt;component=&quot;div&quot;&lt;/code&gt; when component is omitted."}
-                        {#content}{#include components/divider/vertical-in-flex-layout /}{/content} {/include} {#include
-                        partials/example-card title="Vertical, inset small" slug="vertical-in-flex-layout-inset-small"
-                        component="divider" description="Combine &lt;code
-                        class=&quot;ws-code&quot;&gt;vertical=true&lt;/code&gt; with &lt;code
-                        class=&quot;ws-code&quot;&gt;inset=&quot;sm&quot;&lt;/code&gt; to shorten the line so it doesn't
-                        span the full container height — useful inside toolbars."} {#content}{#include
-                        components/divider/vertical-in-flex-layout-inset-small /}{/content} {/include} {#include
-                        partials/example-card title="Vertical, inset at breakpoints"
-                        slug="vertical-in-flex-layout-inset-at-various-breakpoints" component="divider"
-                        description="Vertical divider whose inset grows with the viewport. Compose &lt;code
-                        class=&quot;ws-code&quot;&gt;vertical=true&lt;/code&gt; with the per-breakpoint inset params."}
-                        {#content}{#include components/divider/vertical-in-flex-layout-inset-at-various-breakpoints
-                        /}{/content} {/include} {#include partials/example-card title="Switch orientation at
-                        breakpoints" slug="switch-orientation-at-various-breakpoints" component="divider"
-                        description="Use &lt;code class=&quot;ws-code&quot;&gt;verticalOnMd&lt;/code&gt; / &lt;code
-                        class=&quot;ws-code&quot;&gt;verticalOnLg&lt;/code&gt; etc. to flip from horizontal to vertical
-                        at a breakpoint. Pair with &lt;code class=&quot;ws-code&quot;&gt;horizontalOn{|XX|}&lt;/code&gt;
-                        to flip back. Requires a flex parent."} {#content}{#include
-                        components/divider/switch-orientation-at-various-breakpoints /}{/content} {/include}
+                        {#include partials/example-card title="Using hr" slug="using-hr" component="divider"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          The default — render a semantic <code class="ws-code">&lt;hr&gt;</code> with PF v6 styling.
+                          Use anywhere <code class="ws-code">&lt;hr&gt;</code> is valid HTML.
+                        </p>
+                        {/description} {#content}{#include components/divider/using-hr /}{/content} {/include} {#include
+                        partials/example-card title="Using li" slug="using-li" component="divider"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Pass <code class="ws-code">component="li"</code> to render as a list separator. Use inside
+                          <code class="ws-code">&lt;ul&gt;</code> / <code class="ws-code">&lt;ol&gt;</code> /
+                          <code class="ws-code">&lt;menu&gt;</code> where an
+                          <code class="ws-code">&lt;hr&gt;</code> would be invalid HTML.
+                        </p>
+                        {/description} {#content}{#include components/divider/using-li /}{/content} {/include} {#include
+                        partials/example-card title="Using div" slug="using-div" component="divider"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Pass <code class="ws-code">component="div"</code> for hosts where
+                          <code class="ws-code">&lt;hr&gt;</code> is awkward (button groups, custom flex layouts). Same
+                          visual treatment, valid in any block context.
+                        </p>
+                        {/description} {#content}{#include components/divider/using-div /}{/content} {/include}
+                        {#include partials/example-card title="Inset medium" slug="inset-medium" component="divider"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Pass <code class="ws-code">inset="md"</code> to pull the divider line in from the edges by the
+                          medium spacer token. Available tokens: <code class="ws-code">none</code>,
+                          <code class="ws-code">xs</code>, <code class="ws-code">sm</code>,
+                          <code class="ws-code">md</code>, <code class="ws-code">lg</code>,
+                          <code class="ws-code">xl</code>, <code class="ws-code">2xl</code>,
+                          <code class="ws-code">3xl</code>.
+                        </p>
+                        {/description} {#content}{#include components/divider/inset-medium /}{/content} {/include}
+                        {#include partials/example-card title="Inset at various breakpoints"
+                        slug="inset-at-various-breakpoints" component="divider"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Stack the per-breakpoint params (<code class="ws-code">insetOnSm</code>,
+                          <code class="ws-code">insetOnMd</code>, <code class="ws-code">insetOnLg</code>,
+                          <code class="ws-code">insetOnXl</code>, <code class="ws-code">insetOn2xl</code>) to make the
+                          inset scale with the viewport — denser on small screens, breathier on large ones.
+                        </p>
+                        {/description} {#content}{#include components/divider/inset-at-various-breakpoints /}{/content}
+                        {/include} {#include partials/example-card title="Vertical in flex layout"
+                        slug="vertical-in-flex-layout" component="divider"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Set <code class="ws-code">vertical=true</code> inside a flex container. The divider switches
+                          to a vertical line and stretches to the row height. Implies
+                          <code class="ws-code">component="div"</code> when component is omitted.
+                        </p>
+                        {/description} {#content}{#include components/divider/vertical-in-flex-layout /}{/content}
+                        {/include} {#include partials/example-card title="Vertical, inset small"
+                        slug="vertical-in-flex-layout-inset-small" component="divider"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Combine <code class="ws-code">vertical=true</code> with
+                          <code class="ws-code">inset="sm"</code> to shorten the line so it doesn't span the full
+                          container height — useful inside toolbars.
+                        </p>
+                        {/description} {#content}{#include components/divider/vertical-in-flex-layout-inset-small
+                        /}{/content} {/include} {#include partials/example-card title="Vertical, inset at breakpoints"
+                        slug="vertical-in-flex-layout-inset-at-various-breakpoints" component="divider"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Vertical divider whose inset grows with the viewport. Compose
+                          <code class="ws-code">vertical=true</code> with the per-breakpoint inset params.
+                        </p>
+                        {/description} {#content}{#include
+                        components/divider/vertical-in-flex-layout-inset-at-various-breakpoints /}{/content} {/include}
+                        {#include partials/example-card title="Switch orientation at breakpoints"
+                        slug="switch-orientation-at-various-breakpoints" component="divider"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Use <code class="ws-code">verticalOnMd</code> / <code class="ws-code">verticalOnLg</code> etc.
+                          to flip from horizontal to vertical at a breakpoint. Pair with
+                          <code class="ws-code">horizontalOn{|XX|}</code> to flip back. Requires a flex parent.
+                        </p>
+                        {/description} {#content}{#include components/divider/switch-orientation-at-various-breakpoints
+                        /}{/content} {/include}
 
                         <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                           <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">

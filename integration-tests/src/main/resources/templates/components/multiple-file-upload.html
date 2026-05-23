@@ -110,13 +110,20 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="multiple-file-upload"
-                      description="Drop zone with title, sub-title, and an Upload button. Vertical layout."}
-                      {#content}{#include components/multiple-file-upload/basic /}{/content} {/include} {#include
-                      partials/example-card title="Horizontal" slug="horizontal" component="multiple-file-upload"
-                      description="&lt;code class=&quot;ws-code&quot;&gt;horizontal=true&lt;/code&gt; — &lt;code
-                      class=&quot;ws-code&quot;&gt;pf-m-horizontal&lt;/code&gt; — title and button side-by-side."}
-                      {#content}{#include components/multiple-file-upload/horizontal /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="multiple-file-upload"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Drop zone with title, sub-title, and an Upload button. Vertical layout.
+                      </p>
+                      {/description} {#content}{#include components/multiple-file-upload/basic /}{/content} {/include}
+                      {#include partials/example-card title="Horizontal" slug="horizontal"
+                      component="multiple-file-upload"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">horizontal=true</code> — <code class="ws-code">pf-m-horizontal</code> —
+                        title and button side-by-side.
+                      </p>
+                      {/description} {#content}{#include components/multiple-file-upload/horizontal /}{/content}
+                      {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

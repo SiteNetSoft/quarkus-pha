@@ -108,16 +108,20 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Vertical" slug="vertical" component="navigation"
-                      description="Flat list of links. The active item gets &lt;code
-                      class=&quot;ws-code&quot;&gt;pf-m-current&lt;/code&gt; + &lt;code
-                      class=&quot;ws-code&quot;&gt;aria-current=&quot;page&quot;&lt;/code&gt;."} {#content}{#include
-                      components/navigation/vertical /}{/content} {/include} {#include partials/example-card
-                      title="Grouped" slug="grouped" component="navigation" description="Multiple labelled sections
-                      inside one nav. Each section has its own &lt;code
-                      class=&quot;ws-code&quot;&gt;__section-title&lt;/code&gt; and &lt;code
-                      class=&quot;ws-code&quot;&gt;__list&lt;/code&gt;."} {#content}{#include
-                      components/navigation/grouped /}{/content} {/include}
+                      {#include partials/example-card title="Vertical" slug="vertical" component="navigation"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Flat list of links. The active item gets <code class="ws-code">pf-m-current</code> +
+                        <code class="ws-code">aria-current="page"</code>.
+                      </p>
+                      {/description} {#content}{#include components/navigation/vertical /}{/content} {/include}
+                      {#include partials/example-card title="Grouped" slug="grouped" component="navigation"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Multiple labelled sections inside one nav. Each section has its own
+                        <code class="ws-code">__section-title</code> and <code class="ws-code">__list</code>.
+                      </p>
+                      {/description} {#content}{#include components/navigation/grouped /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

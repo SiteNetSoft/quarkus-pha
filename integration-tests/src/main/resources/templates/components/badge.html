@@ -130,21 +130,31 @@
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Read" slug="read" component="badge" description="Badges
-                        marked as read — already-viewed counts. Visually muted relative to unread."} {#content}{#include
-                        components/badge/read /}{/content} {/include} {#include partials/example-card title="Unread"
-                        slug="unread" component="badge" description="Unread badges — new or unseen items. The visually
-                        prominent state; PF's default."} {#content}{#include components/badge/unread /}{/content}
-                        {/include} {#include partials/example-card title="Disabled" slug="disabled" component="badge"
-                        description="Disabled badges — the count exists but is not actionable (e.g. a filter that would
-                        return zero results)."} {#content}{#include components/badge/disabled /}{/content} {/include}
-                        {#include partials/example-card title="Screen reader text" slug="screen-reader"
-                        component="badge" description="Pass &lt;code
-                        class=&quot;ws-code&quot;&gt;screenReaderText&lt;/code&gt; to append a visually-hidden span that
-                        announces the meaning of the count to assistive tech. The visible text is just &lt;code
-                        class=&quot;ws-code&quot;&gt;3&lt;/code&gt;; AT users hear &lt;code
-                        class=&quot;ws-code&quot;&gt;3 unread notifications&lt;/code&gt;."} {#content}{#include
-                        components/badge/screen-reader /}{/content} {/include}
+                        {#include partials/example-card title="Read" slug="read" component="badge"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Badges marked as read — already-viewed counts. Visually muted relative to unread.
+                        </p>
+                        {/description} {#content}{#include components/badge/read /}{/content} {/include} {#include
+                        partials/example-card title="Unread" slug="unread" component="badge"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Unread badges — new or unseen items. The visually prominent state; PF's default.
+                        </p>
+                        {/description} {#content}{#include components/badge/unread /}{/content} {/include} {#include
+                        partials/example-card title="Disabled" slug="disabled" component="badge"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Disabled badges — the count exists but is not actionable (e.g. a filter that would return zero
+                          results).
+                        </p>
+                        {/description} {#content}{#include components/badge/disabled /}{/content} {/include} {#include
+                        partials/example-card title="Screen reader text" slug="screen-reader" component="badge"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Pass <code class="ws-code">screenReaderText</code> to append a visually-hidden span that
+                          announces the meaning of the count to assistive tech. The visible text is just
+                          <code class="ws-code">3</code>; AT users hear
+                          <code class="ws-code">3 unread notifications</code>.
+                        </p>
+                        {/description} {#content}{#include components/badge/screen-reader /}{/content} {/include}
 
                         <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                           <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">

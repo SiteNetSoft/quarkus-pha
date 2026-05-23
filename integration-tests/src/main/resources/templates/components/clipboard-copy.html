@@ -125,22 +125,34 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="clipboard-copy"
-                      description="Standard input + copy button. Click the button to copy the value via &lt;code
-                      class=&quot;ws-code&quot;&gt;navigator.clipboard&lt;/code&gt;; icon swaps to a check for 2
-                      seconds."} {#content}{#include components/clipboard-copy/basic /}{/content} {/include} {#include
-                      partials/example-card title="Read only" slug="readonly" component="clipboard-copy"
-                      description="&lt;code class=&quot;ws-code&quot;&gt;readonly=true&lt;/code&gt; — input can't be
-                      edited. Use for tokens, API keys, computed identifiers."} {#content}{#include
-                      components/clipboard-copy/readonly /}{/content} {/include} {#include partials/example-card
-                      title="Expandable" slug="expandable" component="clipboard-copy" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;expandable=true&lt;/code&gt; — single-line summary in the input;
-                      click the chevron to reveal &lt;code class=&quot;ws-code&quot;&gt;expandedText&lt;/code&gt;
-                      below."} {#content}{#include components/clipboard-copy/expandable /}{/content} {/include}
-                      {#include partials/example-card title="Inline" slug="inline" component="clipboard-copy"
-                      description="&lt;code class=&quot;ws-code&quot;&gt;inline=true&lt;/code&gt; — compact in-flow
-                      variant. Pair with &lt;code class=&quot;ws-code&quot;&gt;code=true&lt;/code&gt; for monospace
-                      styling."} {#content}{#include components/clipboard-copy/inline /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="clipboard-copy"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Standard input + copy button. Click the button to copy the value via
+                        <code class="ws-code">navigator.clipboard</code>; icon swaps to a check for 2 seconds.
+                      </p>
+                      {/description} {#content}{#include components/clipboard-copy/basic /}{/content} {/include}
+                      {#include partials/example-card title="Read only" slug="readonly" component="clipboard-copy"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">readonly=true</code> — input can't be edited. Use for tokens, API keys,
+                        computed identifiers.
+                      </p>
+                      {/description} {#content}{#include components/clipboard-copy/readonly /}{/content} {/include}
+                      {#include partials/example-card title="Expandable" slug="expandable" component="clipboard-copy"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">expandable=true</code> — single-line summary in the input; click the
+                        chevron to reveal <code class="ws-code">expandedText</code> below.
+                      </p>
+                      {/description} {#content}{#include components/clipboard-copy/expandable /}{/content} {/include}
+                      {#include partials/example-card title="Inline" slug="inline" component="clipboard-copy"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">inline=true</code> — compact in-flow variant. Pair with
+                        <code class="ws-code">code=true</code> for monospace styling.
+                      </p>
+                      {/description} {#content}{#include components/clipboard-copy/inline /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

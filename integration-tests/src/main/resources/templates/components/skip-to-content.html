@@ -108,13 +108,19 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="skip-to-content"
-                      description="The link is visually hidden until focused. Tab into the example to make it appear."}
-                      {#content}{#include components/skip-to-content/basic /}{/content} {/include} {#include
-                      partials/example-card title="Custom text" slug="custom-text" component="skip-to-content"
-                      description="Pass &lt;code class=&quot;ws-code&quot;&gt;text&lt;/code&gt; to override the default
-                      &amp;quot;Skip to content&amp;quot; label."} {#content}{#include
-                      components/skip-to-content/custom-text /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="skip-to-content"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The link is visually hidden until focused. Tab into the example to make it appear.
+                      </p>
+                      {/description} {#content}{#include components/skip-to-content/basic /}{/content} {/include}
+                      {#include partials/example-card title="Custom text" slug="custom-text"
+                      component="skip-to-content"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Pass <code class="ws-code">text</code> to override the default &quot;Skip to content&quot;
+                        label.
+                      </p>
+                      {/description} {#content}{#include components/skip-to-content/custom-text /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

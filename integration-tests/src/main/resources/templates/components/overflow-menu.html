@@ -98,10 +98,13 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="overflow-menu"
-                      description="Two visible action buttons + a kebab toggle. PF v6 ships responsive CSS that hides
-                      items as width shrinks."} {#content}{#include components/overflow-menu/basic /}{/content}
-                      {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="overflow-menu"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Two visible action buttons + a kebab toggle. PF v6 ships responsive CSS that hides items as
+                        width shrinks.
+                      </p>
+                      {/description} {#content}{#include components/overflow-menu/basic /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

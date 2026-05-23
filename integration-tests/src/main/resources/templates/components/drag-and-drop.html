@@ -98,10 +98,13 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="drag-and-drop"
-                      description="Reorder the list by dragging items. Alpine maintains the array order via the
-                      dragstart/dragover/drop event handlers."} {#content}{#include components/drag-and-drop/basic
-                      /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="drag-and-drop"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Reorder the list by dragging items. Alpine maintains the array order via the
+                        dragstart/dragover/drop event handlers.
+                      </p>
+                      {/description} {#content}{#include components/drag-and-drop/basic /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

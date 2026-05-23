@@ -185,39 +185,62 @@
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Single group" slug="single-group" component="action-list"
-                        description="One group with a primary and a secondary button — the canonical Next / Back
-                        pairing."} {#content}{#include components/action-list/single-group /}{/content} {/include}
-                        {#include partials/example-card title="With kebab" slug="with-kebab" component="action-list"
-                        description="Same Next / Back pair with a kebab menu toggle for overflow actions. The kebab
-                        button is a static placeholder; wire it to a real Menu or Dropdown in production."}
-                        {#content}{#include components/action-list/with-kebab /}{/content} {/include} {#include
-                        partials/example-card title="Icons on list" slug="icons-list" component="action-list"
-                        description="Set &lt;code class=&quot;ws-code&quot;&gt;iconList=true&lt;/code&gt; to apply
-                        &lt;code class=&quot;ws-code&quot;&gt;pf-m-icons&lt;/code&gt; on the root — every item gets
-                        tight icon spacing."} {#content}{#include components/action-list/icons-list /}{/content}
-                        {/include} {#include partials/example-card title="Icons on group" slug="icons-group"
-                        component="action-list" description="Set &lt;code class=&quot;ws-code&quot;&gt;iconGroup:
-                        true&lt;/code&gt; on a specific group to apply tight icon spacing only to that group while
-                        sibling groups keep default spacing."} {#content}{#include components/action-list/icons-group
-                        /}{/content} {/include} {#include partials/example-card title="Multiple groups"
-                        slug="multiple-groups" component="action-list" description="Two groups laid out side-by-side. PF
-                        separates groups with a wider column gap than items within a group, signaling a step boundary or
-                        a primary / destructive split."} {#content}{#include components/action-list/multiple-groups
-                        /}{/content} {/include} {#include partials/example-card title="Cancel — form" slug="cancel-form"
-                        component="action-list" description="The standard modal / form footer — primary &lt;code
-                        class=&quot;ws-code&quot;&gt;Save&lt;/code&gt; plus a link-styled &lt;code
-                        class=&quot;ws-code&quot;&gt;Cancel&lt;/code&gt;."} {#content}{#include
-                        components/action-list/cancel-form /}{/content} {/include} {#include partials/example-card
-                        title="Cancel — wizard" slug="cancel-wizard" component="action-list" description="Wizard footer
-                        — Next / Back navigate in one group, with the cancel sitting alone in its own group to keep it
-                        visually distinct from the primary nav."} {#content}{#include
-                        components/action-list/cancel-wizard /}{/content} {/include} {#include partials/example-card
-                        title="Vertical" slug="vertical" component="action-list" description="Divergence from PF —
-                        &lt;code class=&quot;ws-code&quot;&gt;vertical=true&lt;/code&gt; applies &lt;code
-                        class=&quot;ws-code&quot;&gt;pf-m-vertical&lt;/code&gt; to stack actions vertically. Useful in
-                        narrow side panels or as icon menus inside sidebars."} {#content}{#include
-                        components/action-list/vertical /}{/content} {/include}
+                        {#include partials/example-card title="Single group" slug="single-group"
+                        component="action-list"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          One group with a primary and a secondary button — the canonical Next / Back pairing.
+                        </p>
+                        {/description} {#content}{#include components/action-list/single-group /}{/content} {/include}
+                        {#include partials/example-card title="With kebab" slug="with-kebab" component="action-list"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Same Next / Back pair with a kebab menu toggle for overflow actions. The kebab button is a
+                          static placeholder; wire it to a real Menu or Dropdown in production.
+                        </p>
+                        {/description} {#content}{#include components/action-list/with-kebab /}{/content} {/include}
+                        {#include partials/example-card title="Icons on list" slug="icons-list" component="action-list"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Set <code class="ws-code">iconList=true</code> to apply
+                          <code class="ws-code">pf-m-icons</code> on the root — every item gets tight icon spacing.
+                        </p>
+                        {/description} {#content}{#include components/action-list/icons-list /}{/content} {/include}
+                        {#include partials/example-card title="Icons on group" slug="icons-group"
+                        component="action-list"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Set <code class="ws-code">iconGroup: true</code> on a specific group to apply tight icon
+                          spacing only to that group while sibling groups keep default spacing.
+                        </p>
+                        {/description} {#content}{#include components/action-list/icons-group /}{/content} {/include}
+                        {#include partials/example-card title="Multiple groups" slug="multiple-groups"
+                        component="action-list"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Two groups laid out side-by-side. PF separates groups with a wider column gap than items
+                          within a group, signaling a step boundary or a primary / destructive split.
+                        </p>
+                        {/description} {#content}{#include components/action-list/multiple-groups /}{/content}
+                        {/include} {#include partials/example-card title="Cancel — form" slug="cancel-form"
+                        component="action-list"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          The standard modal / form footer — primary <code class="ws-code">Save</code> plus a
+                          link-styled <code class="ws-code">Cancel</code>.
+                        </p>
+                        {/description} {#content}{#include components/action-list/cancel-form /}{/content} {/include}
+                        {#include partials/example-card title="Cancel — wizard" slug="cancel-wizard"
+                        component="action-list"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Wizard footer — Next / Back navigate in one group, with the cancel sitting alone in its own
+                          group to keep it visually distinct from the primary nav.
+                        </p>
+                        {/description} {#content}{#include components/action-list/cancel-wizard /}{/content} {/include}
+                        {#include partials/example-card title="Vertical" slug="vertical" component="action-list"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Divergence from PF — <code class="ws-code">vertical=true</code> applies
+                          <code class="ws-code">pf-m-vertical</code> to stack actions vertically. Useful in narrow side
+                          panels or as icon menus inside sidebars.
+                        </p>
+                        {/description} {#content}{#include components/action-list/vertical /}{/content} {/include}
 
                         <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                           <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">

@@ -104,11 +104,14 @@
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Basic" slug="basic" component="back-to-top"
-                        description="The scroll-triggered button. Scroll past 400px to see it appear in the
-                        bottom-right; click to smooth-scroll back to top. The example fragment includes enough filler
-                        text to make scrolling meaningful."} {#content}{#include components/back-to-top/basic
-                        /}{/content} {/include}
+                        {#include partials/example-card title="Basic" slug="basic" component="back-to-top"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          The scroll-triggered button. Scroll past 400px to see it appear in the bottom-right; click to
+                          smooth-scroll back to top. The example fragment includes enough filler text to make scrolling
+                          meaningful.
+                        </p>
+                        {/description} {#content}{#include components/back-to-top/basic /}{/content} {/include}
 
                         <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                           <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">

@@ -108,13 +108,19 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="search-input"
-                      description="Plain search input with magnifying-glass icon. type=&quot;search&quot; gets
-                      browser-native clear UI in some browsers."} {#content}{#include components/search-input/basic
-                      /}{/content} {/include} {#include partials/example-card title="With clear" slug="with-clear"
-                      component="search-input" description="Alpine-driven clear button — appears only when the input has
-                      a value, clicking empties it."} {#content}{#include components/search-input/with-clear
-                      /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="search-input"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Plain search input with magnifying-glass icon. type="search" gets browser-native clear UI in
+                        some browsers.
+                      </p>
+                      {/description} {#content}{#include components/search-input/basic /}{/content} {/include} {#include
+                      partials/example-card title="With clear" slug="with-clear" component="search-input"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Alpine-driven clear button — appears only when the input has a value, clicking empties it.
+                      </p>
+                      {/description} {#content}{#include components/search-input/with-clear /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

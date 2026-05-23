@@ -117,17 +117,26 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Horizontal" slug="horizontal" component="jump-links"
-                      description="Default — items in a row. Best for short TOCs at the top of a page."}
-                      {#content}{#include components/jump-links/horizontal /}{/content} {/include} {#include
-                      partials/example-card title="Vertical" slug="vertical" component="jump-links"
-                      description="&lt;code class=&quot;ws-code&quot;&gt;vertical=true&lt;/code&gt; — stacked items. The
-                      showcase uses this in the left sidebar of every demo."} {#content}{#include
-                      components/jump-links/vertical /}{/content} {/include} {#include partials/example-card
-                      title="Centered" slug="centered" component="jump-links" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;center=true&lt;/code&gt; — &lt;code
-                      class=&quot;ws-code&quot;&gt;pf-m-center&lt;/code&gt; horizontally centers a horizontal list."}
-                      {#content}{#include components/jump-links/centered /}{/content} {/include}
+                      {#include partials/example-card title="Horizontal" slug="horizontal" component="jump-links"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Default — items in a row. Best for short TOCs at the top of a page.
+                      </p>
+                      {/description} {#content}{#include components/jump-links/horizontal /}{/content} {/include}
+                      {#include partials/example-card title="Vertical" slug="vertical" component="jump-links"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">vertical=true</code> — stacked items. The showcase uses this in the left
+                        sidebar of every demo.
+                      </p>
+                      {/description} {#content}{#include components/jump-links/vertical /}{/content} {/include}
+                      {#include partials/example-card title="Centered" slug="centered" component="jump-links"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">center=true</code> — <code class="ws-code">pf-m-center</code> horizontally
+                        centers a horizontal list.
+                      </p>
+                      {/description} {#content}{#include components/jump-links/centered /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

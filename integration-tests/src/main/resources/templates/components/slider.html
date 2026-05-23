@@ -116,16 +116,22 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="slider" description="0–100
-                      range, initial value 50."} {#content}{#include components/slider/basic /}{/content} {/include}
-                      {#include partials/example-card title="Custom range" slug="custom-range" component="slider"
-                      description="Custom &lt;code class=&quot;ws-code&quot;&gt;min&lt;/code&gt; / &lt;code
-                      class=&quot;ws-code&quot;&gt;max&lt;/code&gt; — temperature (−10 to 40)."} {#content}{#include
-                      components/slider/custom-range /}{/content} {/include} {#include partials/example-card
-                      title="Disabled" slug="disabled" component="slider" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;disabled=true&lt;/code&gt; — &lt;code
-                      class=&quot;ws-code&quot;&gt;pf-m-disabled&lt;/code&gt; on the wrapper, click/drag ignored."}
-                      {#content}{#include components/slider/disabled /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="slider"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">0–100 range, initial value 50.</p>
+                      {/description} {#content}{#include components/slider/basic /}{/content} {/include} {#include
+                      partials/example-card title="Custom range" slug="custom-range" component="slider"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Custom <code class="ws-code">min</code> / <code class="ws-code">max</code> — temperature (−10 to
+                        40).
+                      </p>
+                      {/description} {#content}{#include components/slider/custom-range /}{/content} {/include}
+                      {#include partials/example-card title="Disabled" slug="disabled" component="slider"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">disabled=true</code> — <code class="ws-code">pf-m-disabled</code> on the
+                        wrapper, click/drag ignored.
+                      </p>
+                      {/description} {#content}{#include components/slider/disabled /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

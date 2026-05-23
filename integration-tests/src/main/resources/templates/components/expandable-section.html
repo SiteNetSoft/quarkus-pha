@@ -107,12 +107,18 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Collapsed" slug="collapsed" component="expandable-section"
-                      description="Default state — click the toggle to reveal the content."} {#content}{#include
-                      components/expandable-section/collapsed /}{/content} {/include} {#include partials/example-card
-                      title="Expanded" slug="expanded" component="expandable-section" description="&lt;code
-                      class=&quot;ws-code&quot;&gt;expanded=true&lt;/code&gt; — section starts open."}
-                      {#content}{#include components/expandable-section/expanded /}{/content} {/include}
+                      {#include partials/example-card title="Collapsed" slug="collapsed" component="expandable-section"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Default state — click the toggle to reveal the content.
+                      </p>
+                      {/description} {#content}{#include components/expandable-section/collapsed /}{/content} {/include}
+                      {#include partials/example-card title="Expanded" slug="expanded" component="expandable-section"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">expanded=true</code> — section starts open.
+                      </p>
+                      {/description} {#content}{#include components/expandable-section/expanded /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

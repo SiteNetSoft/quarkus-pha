@@ -135,19 +135,31 @@
                         </div>
                       </div>
 
-                      {#include partials/example-card title="Basic" slug="basic" component="radio" description="Two
-                      radios sharing the same name form a single group."} {#content}{#include components/radio/basic
-                      /}{/content} {/include} {#include partials/example-card title="Disabled" slug="disabled"
-                      component="radio" description="Disabled — both unselected and pre-selected variants."}
-                      {#content}{#include components/radio/disabled /}{/content} {/include} {#include
-                      partials/example-card title="With description" slug="with-description" component="radio"
-                      description="A muted second line under the label."} {#content}{#include
-                      components/radio/with-description /}{/content} {/include} {#include partials/example-card
-                      title="With body" slug="with-body" component="radio" description="The body slot for secondary
-                      content under the option."} {#content}{#include components/radio/with-body /}{/content} {/include}
-                      {#include partials/example-card title="Standalone" slug="standalone" component="radio"
-                      description="&lt;code class=&quot;ws-code&quot;&gt;standalone=true&lt;/code&gt; — no label."}
-                      {#content}{#include components/radio/standalone /}{/content} {/include}
+                      {#include partials/example-card title="Basic" slug="basic" component="radio"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Two radios sharing the same name form a single group.
+                      </p>
+                      {/description} {#content}{#include components/radio/basic /}{/content} {/include} {#include
+                      partials/example-card title="Disabled" slug="disabled" component="radio"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Disabled — both unselected and pre-selected variants.
+                      </p>
+                      {/description} {#content}{#include components/radio/disabled /}{/content} {/include} {#include
+                      partials/example-card title="With description" slug="with-description" component="radio"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">A muted second line under the label.</p>
+                      {/description} {#content}{#include components/radio/with-description /}{/content} {/include}
+                      {#include partials/example-card title="With body" slug="with-body" component="radio"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The body slot for secondary content under the option.
+                      </p>
+                      {/description} {#content}{#include components/radio/with-body /}{/content} {/include} {#include
+                      partials/example-card title="Standalone" slug="standalone" component="radio"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">standalone=true</code> — no label.
+                      </p>
+                      {/description} {#content}{#include components/radio/standalone /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

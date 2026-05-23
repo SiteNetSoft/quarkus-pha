@@ -216,77 +216,98 @@
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Basic" slug="basic" component="icon" description="The
-                        simplest usage — pass a &lt;code class=&quot;ws-code&quot;&gt;name&lt;/code&gt; in &lt;code
-                        class=&quot;ws-code&quot;&gt;set:slug&lt;/code&gt; form. The icon defaults to medium size and is
-                        hidden from screen readers."} {#content}{#include components/icon/basic /}{/content} {/include}
-                        {#include partials/example-card title="Icon sets" slug="sets" component="icon" description="Same
-                        API, four sources: &lt;code class=&quot;ws-code&quot;&gt;fa&lt;/code&gt;, &lt;code
-                        class=&quot;ws-code&quot;&gt;fa-regular&lt;/code&gt;, &lt;code
-                        class=&quot;ws-code&quot;&gt;fa-brands&lt;/code&gt;, and &lt;code
-                        class=&quot;ws-code&quot;&gt;pficon&lt;/code&gt;. The set prefix maps to the vendored directory
-                        under &lt;code class=&quot;ws-code&quot;&gt;web/vendor/icons/&lt;/code&gt;."}
-                        {#content}{#include components/icon/sets /}{/content} {/include} {#include partials/example-card
-                        title="Sizes" slug="sizes" component="icon" description="PF v6 ships six standalone size
-                        modifiers — &lt;code class=&quot;ws-code&quot;&gt;sm&lt;/code&gt;, &lt;code
-                        class=&quot;ws-code&quot;&gt;md&lt;/code&gt;, &lt;code
-                        class=&quot;ws-code&quot;&gt;lg&lt;/code&gt;, &lt;code
-                        class=&quot;ws-code&quot;&gt;xl&lt;/code&gt;, &lt;code
-                        class=&quot;ws-code&quot;&gt;2xl&lt;/code&gt;, &lt;code
-                        class=&quot;ws-code&quot;&gt;3xl&lt;/code&gt; — that resolve to global icon-size tokens."}
-                        {#content}{#include components/icon/sizes /}{/content} {/include} {#include
-                        partials/example-card title="Body sizes" slug="body-sizes" component="icon"
-                        description="Body-relative sizes (&lt;code class=&quot;ws-code&quot;&gt;body-sm&lt;/code&gt;,
-                        &lt;code class=&quot;ws-code&quot;&gt;body-default&lt;/code&gt;, &lt;code
-                        class=&quot;ws-code&quot;&gt;body-lg&lt;/code&gt;) match the surrounding body text's icon-size
-                        token. Use these when an icon sits beside body copy."} {#content}{#include
-                        components/icon/body-sizes /}{/content} {/include} {#include partials/example-card
-                        title="Heading sizes" slug="heading-sizes" component="icon" description="Heading-relative sizes
-                        (&lt;code class=&quot;ws-code&quot;&gt;heading-sm&lt;/code&gt; through &lt;code
-                        class=&quot;ws-code&quot;&gt;heading-3xl&lt;/code&gt;) match the surrounding heading's icon-size
-                        token. Use these when an icon sits beside heading copy."} {#content}{#include
-                        components/icon/heading-sizes /}{/content} {/include} {#include partials/example-card
-                        title="Sizing within container" slug="sizing-within-container" component="icon"
-                        description="Pass &lt;code class=&quot;ws-code&quot;&gt;iconSize&lt;/code&gt; to size the icon
-                        glyph independently of its &lt;code class=&quot;ws-code&quot;&gt;size&lt;/code&gt; container.
-                        &lt;code class=&quot;ws-code&quot;&gt;iconSize&lt;/code&gt; applies &lt;code
-                        class=&quot;ws-code&quot;&gt;{|pf-m-{iconSize}|}&lt;/code&gt; to &lt;code
-                        class=&quot;ws-code&quot;&gt;.pf-v6-c-icon__content&lt;/code&gt; while &lt;code
-                        class=&quot;ws-code&quot;&gt;size&lt;/code&gt; stays on the wrapper."} {#content}{#include
-                        components/icon/sizing-within-container /}{/content} {/include} {#include partials/example-card
-                        title="Inline" slug="inline" component="icon" description="Set &lt;code
-                        class=&quot;ws-code&quot;&gt;inline=true&lt;/code&gt; so the icon inherits the surrounding font
-                        size and color via PF's &lt;code class=&quot;ws-code&quot;&gt;pf-m-inline&lt;/code&gt; modifier.
-                        Useful inside running prose."} {#content}{#include components/icon/inline /}{/content}
-                        {/include} {#include partials/example-card title="Status colors" slug="status-colors"
-                        component="icon" description="Pass &lt;code class=&quot;ws-code&quot;&gt;status&lt;/code&gt; to
-                        color the icon via PF v6 semantic tokens: &lt;code
-                        class=&quot;ws-code&quot;&gt;info&lt;/code&gt;, &lt;code
-                        class=&quot;ws-code&quot;&gt;success&lt;/code&gt;, &lt;code
-                        class=&quot;ws-code&quot;&gt;warning&lt;/code&gt;, &lt;code
-                        class=&quot;ws-code&quot;&gt;danger&lt;/code&gt;, or &lt;code
-                        class=&quot;ws-code&quot;&gt;custom&lt;/code&gt;."} {#content}{#include
-                        components/icon/status-colors /}{/content} {/include} {#include partials/example-card title="In
-                        progress" slug="in-progress" component="icon" description="&lt;code
-                        class=&quot;ws-code&quot;&gt;inProgress=true&lt;/code&gt; adds &lt;code
-                        class=&quot;ws-code&quot;&gt;pf-m-in-progress&lt;/code&gt; on the wrapper and renders a &lt;code
-                        class=&quot;ws-code&quot;&gt;__progress&lt;/code&gt; overlay containing the PF v6 spinner. PF's
-                        CSS hides &lt;code class=&quot;ws-code&quot;&gt;__content&lt;/code&gt; and shows &lt;code
-                        class=&quot;ws-code&quot;&gt;__progress&lt;/code&gt; via opacity — no JS involved."}
-                        {#content}{#include components/icon/in-progress /}{/content} {/include} {#include
+                        {#include partials/example-card title="Basic" slug="basic" component="icon"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          The simplest usage — pass a <code class="ws-code">name</code> in
+                          <code class="ws-code">set:slug</code> form. The icon defaults to medium size and is hidden
+                          from screen readers.
+                        </p>
+                        {/description} {#content}{#include components/icon/basic /}{/content} {/include} {#include
+                        partials/example-card title="Icon sets" slug="sets" component="icon"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Same API, four sources: <code class="ws-code">fa</code>,
+                          <code class="ws-code">fa-regular</code>, <code class="ws-code">fa-brands</code>, and
+                          <code class="ws-code">pficon</code>. The set prefix maps to the vendored directory under
+                          <code class="ws-code">web/vendor/icons/</code>.
+                        </p>
+                        {/description} {#content}{#include components/icon/sets /}{/content} {/include} {#include
+                        partials/example-card title="Sizes" slug="sizes" component="icon"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          PF v6 ships six standalone size modifiers — <code class="ws-code">sm</code>,
+                          <code class="ws-code">md</code>, <code class="ws-code">lg</code>,
+                          <code class="ws-code">xl</code>, <code class="ws-code">2xl</code>,
+                          <code class="ws-code">3xl</code> — that resolve to global icon-size tokens.
+                        </p>
+                        {/description} {#content}{#include components/icon/sizes /}{/content} {/include} {#include
+                        partials/example-card title="Body sizes" slug="body-sizes" component="icon"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Body-relative sizes (<code class="ws-code">body-sm</code>,
+                          <code class="ws-code">body-default</code>, <code class="ws-code">body-lg</code>) match the
+                          surrounding body text's icon-size token. Use these when an icon sits beside body copy.
+                        </p>
+                        {/description} {#content}{#include components/icon/body-sizes /}{/content} {/include} {#include
+                        partials/example-card title="Heading sizes" slug="heading-sizes" component="icon"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Heading-relative sizes (<code class="ws-code">heading-sm</code> through
+                          <code class="ws-code">heading-3xl</code>) match the surrounding heading's icon-size token. Use
+                          these when an icon sits beside heading copy.
+                        </p>
+                        {/description} {#content}{#include components/icon/heading-sizes /}{/content} {/include}
+                        {#include partials/example-card title="Sizing within container" slug="sizing-within-container"
+                        component="icon"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Pass <code class="ws-code">iconSize</code> to size the icon glyph independently of its
+                          <code class="ws-code">size</code> container. <code class="ws-code">iconSize</code> applies
+                          <code class="ws-code">{|pf-m-{iconSize}|}</code> to
+                          <code class="ws-code">.pf-v6-c-icon__content</code> while
+                          <code class="ws-code">size</code> stays on the wrapper.
+                        </p>
+                        {/description} {#content}{#include components/icon/sizing-within-container /}{/content}
+                        {/include} {#include partials/example-card title="Inline" slug="inline" component="icon"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Set <code class="ws-code">inline=true</code> so the icon inherits the surrounding font size
+                          and color via PF's <code class="ws-code">pf-m-inline</code> modifier. Useful inside running
+                          prose.
+                        </p>
+                        {/description} {#content}{#include components/icon/inline /}{/content} {/include} {#include
+                        partials/example-card title="Status colors" slug="status-colors" component="icon"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Pass <code class="ws-code">status</code> to color the icon via PF v6 semantic tokens:
+                          <code class="ws-code">info</code>, <code class="ws-code">success</code>,
+                          <code class="ws-code">warning</code>, <code class="ws-code">danger</code>, or
+                          <code class="ws-code">custom</code>.
+                        </p>
+                        {/description} {#content}{#include components/icon/status-colors /}{/content} {/include}
+                        {#include partials/example-card title="In progress" slug="in-progress" component="icon"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          <code class="ws-code">inProgress=true</code> adds
+                          <code class="ws-code">pf-m-in-progress</code> on the wrapper and renders a
+                          <code class="ws-code">__progress</code> overlay containing the PF v6 spinner. PF's CSS hides
+                          <code class="ws-code">__content</code> and shows <code class="ws-code">__progress</code> via
+                          opacity — no JS involved.
+                        </p>
+                        {/description} {#content}{#include components/icon/in-progress /}{/content} {/include} {#include
                         partials/example-card title="Custom in-progress icon" slug="custom-in-progress-icon"
-                        component="icon" description="Pass &lt;code
-                        class=&quot;ws-code&quot;&gt;progressIcon&lt;/code&gt; to render a Font Awesome / pficon glyph
-                        inside the &lt;code class=&quot;ws-code&quot;&gt;__progress&lt;/code&gt; overlay instead of the
-                        default PF v6 spinner."} {#content}{#include components/icon/custom-in-progress-icon
-                        /}{/content} {/include} {#include partials/example-card title="With accessible label"
-                        slug="with-label" component="icon" description="Pass &lt;code
-                        class=&quot;ws-code&quot;&gt;label&lt;/code&gt; to expose the icon to assistive technology — the
-                        rendered &lt;code class=&quot;ws-code&quot;&gt;&amp;lt;svg&amp;gt;&lt;/code&gt; gets &lt;code
-                        class=&quot;ws-code&quot;&gt;role=&amp;quot;img&amp;quot;&lt;/code&gt; and the matching &lt;code
-                        class=&quot;ws-code&quot;&gt;aria-label&lt;/code&gt;. Without a label, the SVG is marked
-                        &lt;code class=&quot;ws-code&quot;&gt;aria-hidden=&amp;quot;true&amp;quot;&lt;/code&gt;."}
-                        {#content}{#include components/icon/with-label /}{/content} {/include}
+                        component="icon"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Pass <code class="ws-code">progressIcon</code> to render a Font Awesome / pficon glyph inside
+                          the <code class="ws-code">__progress</code> overlay instead of the default PF v6 spinner.
+                        </p>
+                        {/description} {#content}{#include components/icon/custom-in-progress-icon /}{/content}
+                        {/include} {#include partials/example-card title="With accessible label" slug="with-label"
+                        component="icon"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Pass <code class="ws-code">label</code> to expose the icon to assistive technology — the
+                          rendered <code class="ws-code">&lt;svg&gt;</code> gets
+                          <code class="ws-code">role=&quot;img&quot;</code> and the matching
+                          <code class="ws-code">aria-label</code>. Without a label, the SVG is marked
+                          <code class="ws-code">aria-hidden=&quot;true&quot;</code>.
+                        </p>
+                        {/description} {#content}{#include components/icon/with-label /}{/content} {/include}
 
                         <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                           <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">

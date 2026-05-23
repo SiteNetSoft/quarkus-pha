@@ -122,18 +122,26 @@
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Basic" slug="basic" component="backdrop"
-                        description="Click the button to show the backdrop, then click the backdrop to dismiss. Alpine's
-                        x-show handles mount; the backdrop itself just renders the overlay surface."}
-                        {#content}{#include components/backdrop/basic /}{/content} {/include} {#include
-                        partials/example-card title="With content" slug="with-content" component="backdrop"
-                        description="Pass overlay content (spinner, dialog body, custom panel) into the backdrop's
-                        content slot. @click.stop on the inner panel prevents the dismiss bubble."} {#content}{#include
-                        components/backdrop/with-content /}{/content} {/include} {#include partials/example-card
-                        title="Non-dismissible" slug="non-dismissible" component="backdrop" description="Omit the
-                        dismiss handler on the wrapper. Only the explicit close button calls open = false. Use when the
-                        user must complete or cancel an action deliberately."} {#content}{#include
-                        components/backdrop/non-dismissible /}{/content} {/include}
+                        {#include partials/example-card title="Basic" slug="basic" component="backdrop"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Click the button to show the backdrop, then click the backdrop to dismiss. Alpine's x-show
+                          handles mount; the backdrop itself just renders the overlay surface.
+                        </p>
+                        {/description} {#content}{#include components/backdrop/basic /}{/content} {/include} {#include
+                        partials/example-card title="With content" slug="with-content" component="backdrop"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Pass overlay content (spinner, dialog body, custom panel) into the backdrop's content slot.
+                          @click.stop on the inner panel prevents the dismiss bubble.
+                        </p>
+                        {/description} {#content}{#include components/backdrop/with-content /}{/content} {/include}
+                        {#include partials/example-card title="Non-dismissible" slug="non-dismissible"
+                        component="backdrop"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Omit the dismiss handler on the wrapper. Only the explicit close button calls open = false.
+                          Use when the user must complete or cancel an action deliberately.
+                        </p>
+                        {/description} {#content}{#include components/backdrop/non-dismissible /}{/content} {/include}
 
                         <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                           <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">

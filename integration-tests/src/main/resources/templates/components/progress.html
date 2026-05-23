@@ -261,65 +261,118 @@
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Basic" slug="basic" component="progress"
-                        description="Default size, default measure location (top), no status. Percentage measure
-                        rendered above-right of the bar."} {#content}{#include components/progress/basic /}{/content}
-                        {/include} {#include partials/example-card title="Small" slug="small" component="progress"
-                        description="size=&quot;sm&quot; — compact bar height."} {#content}{#include
-                        components/progress/small /}{/content} {/include} {#include partials/example-card title="Large"
-                        slug="large" component="progress" description="size=&quot;lg&quot; — taller bar. Use with
-                        measureLocation=&quot;inside&quot; so the inline label has room to render."} {#content}{#include
-                        components/progress/large /}{/content} {/include} {#include partials/example-card
-                        title="Outside" slug="outside" component="progress"
-                        description="measureLocation=&quot;outside&quot; — the percentage trails to the right of the bar
-                        instead of sitting above it."} {#content}{#include components/progress/outside /}{/content}
-                        {/include} {#include partials/example-card title="Inside" slug="inside" component="progress"
-                        description="measureLocation=&quot;inside&quot; — the percentage renders inside the filled
-                        indicator. Pair with size=&quot;lg&quot; so the label fits."} {#content}{#include
-                        components/progress/inside /}{/content} {/include} {#include partials/example-card title="Single
-                        line" slug="single-line" component="progress" description="singleline=true — compact one-row
-                        layout. Skip title and provide ariaLabel instead."} {#content}{#include
-                        components/progress/single-line /}{/content} {/include} {#include partials/example-card
-                        title="Without measure" slug="without-measure" component="progress"
-                        description="measureLocation=&quot;none&quot; — hides the visible percentage. The bar still
-                        announces its value via aria-valuenow."} {#content}{#include components/progress/without-measure
-                        /}{/content} {/include} {#include partials/example-card title="Finite step" slug="finite-step"
-                        component="progress" description="Step-based progress: min / max / label / valueText replace the
-                        percentage with a step counter."} {#content}{#include components/progress/finite-step
-                        /}{/content} {/include} {#include partials/example-card title="Step instructions"
-                        slug="step-instructions" component="progress" description="Step progress paired with helperText
-                        describing the current / next action. Wire ariaDescribedBy to expose the helper to assistive
-                        tech."} {#content}{#include components/progress/step-instructions /}{/content} {/include}
+                        {#include partials/example-card title="Basic" slug="basic" component="progress"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Default size, default measure location (top), no status. Percentage measure rendered
+                          above-right of the bar.
+                        </p>
+                        {/description} {#content}{#include components/progress/basic /}{/content} {/include} {#include
+                        partials/example-card title="Small" slug="small" component="progress"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">size="sm" — compact bar height.</p>
+                        {/description} {#content}{#include components/progress/small /}{/content} {/include} {#include
+                        partials/example-card title="Large" slug="large" component="progress"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          size="lg" — taller bar. Use with measureLocation="inside" so the inline label has room to
+                          render.
+                        </p>
+                        {/description} {#content}{#include components/progress/large /}{/content} {/include} {#include
+                        partials/example-card title="Outside" slug="outside" component="progress"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          measureLocation="outside" — the percentage trails to the right of the bar instead of sitting
+                          above it.
+                        </p>
+                        {/description} {#content}{#include components/progress/outside /}{/content} {/include} {#include
+                        partials/example-card title="Inside" slug="inside" component="progress"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          measureLocation="inside" — the percentage renders inside the filled indicator. Pair with
+                          size="lg" so the label fits.
+                        </p>
+                        {/description} {#content}{#include components/progress/inside /}{/content} {/include} {#include
+                        partials/example-card title="Single line" slug="single-line" component="progress"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          singleline=true — compact one-row layout. Skip title and provide ariaLabel instead.
+                        </p>
+                        {/description} {#content}{#include components/progress/single-line /}{/content} {/include}
+                        {#include partials/example-card title="Without measure" slug="without-measure"
+                        component="progress"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          measureLocation="none" — hides the visible percentage. The bar still announces its value via
+                          aria-valuenow.
+                        </p>
+                        {/description} {#content}{#include components/progress/without-measure /}{/content} {/include}
+                        {#include partials/example-card title="Finite step" slug="finite-step" component="progress"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Step-based progress: min / max / label / valueText replace the percentage with a step counter.
+                        </p>
+                        {/description} {#content}{#include components/progress/finite-step /}{/content} {/include}
+                        {#include partials/example-card title="Step instructions" slug="step-instructions"
+                        component="progress"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Step progress paired with helperText describing the current / next action. Wire
+                          ariaDescribedBy to expose the helper to assistive tech.
+                        </p>
+                        {/description} {#content}{#include components/progress/step-instructions /}{/content} {/include}
                         {#include partials/example-card title="Truncate title" slug="truncate-title"
-                        component="progress" description="truncateTitle=true ellipses long titles instead of wrapping.
-                        Useful inside narrow containers (sidebars, table cells)."} {#content}{#include
-                        components/progress/truncate-title /}{/content} {/include} {#include partials/example-card
-                        title="Title outside" slug="title-outside" component="progress" description="Combine title with
-                        measureLocation=&quot;outside&quot; to keep the title row clean while pushing the measure to the
-                        right of the bar."} {#content}{#include components/progress/title-outside /}{/content}
-                        {/include} {#include partials/example-card title="Helper text" slug="helper-text"
-                        component="progress" description="Add explanatory copy under the bar with helperText. Wire
-                        ariaDescribedBy (PF requires this when helperText is set)."} {#content}{#include
-                        components/progress/helper-text /}{/content} {/include} {#include partials/example-card
-                        title="Success" slug="success" component="progress" description="status=&quot;success&quot; —
-                        green accent + check icon."} {#content}{#include components/progress/success /}{/content}
-                        {/include} {#include partials/example-card title="Failure" slug="failure" component="progress"
-                        description="status=&quot;danger&quot; — red accent + x-circle icon. Useful with helperText
-                        describing why the run failed."} {#content}{#include components/progress/failure /}{/content}
-                        {/include} {#include partials/example-card title="Warning" slug="warning" component="progress"
-                        description="status=&quot;warning&quot; — amber accent + triangle icon."} {#content}{#include
-                        components/progress/warning /}{/content} {/include} {#include partials/example-card
-                        title="Inside success" slug="inside-success" component="progress" description="Compose status
-                        with measureLocation=&quot;inside&quot; — the percentage sits inside the filled bar at success
-                        completion."} {#content}{#include components/progress/inside-success /}{/content} {/include}
+                        component="progress"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          truncateTitle=true ellipses long titles instead of wrapping. Useful inside narrow containers
+                          (sidebars, table cells).
+                        </p>
+                        {/description} {#content}{#include components/progress/truncate-title /}{/content} {/include}
+                        {#include partials/example-card title="Title outside" slug="title-outside" component="progress"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Combine title with measureLocation="outside" to keep the title row clean while pushing the
+                          measure to the right of the bar.
+                        </p>
+                        {/description} {#content}{#include components/progress/title-outside /}{/content} {/include}
+                        {#include partials/example-card title="Helper text" slug="helper-text" component="progress"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Add explanatory copy under the bar with helperText. Wire ariaDescribedBy (PF requires this
+                          when helperText is set).
+                        </p>
+                        {/description} {#content}{#include components/progress/helper-text /}{/content} {/include}
+                        {#include partials/example-card title="Success" slug="success" component="progress"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          status="success" — green accent + check icon.
+                        </p>
+                        {/description} {#content}{#include components/progress/success /}{/content} {/include} {#include
+                        partials/example-card title="Failure" slug="failure" component="progress"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          status="danger" — red accent + x-circle icon. Useful with helperText describing why the run
+                          failed.
+                        </p>
+                        {/description} {#content}{#include components/progress/failure /}{/content} {/include} {#include
+                        partials/example-card title="Warning" slug="warning" component="progress"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          status="warning" — amber accent + triangle icon.
+                        </p>
+                        {/description} {#content}{#include components/progress/warning /}{/content} {/include} {#include
+                        partials/example-card title="Inside success" slug="inside-success" component="progress"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Compose status with measureLocation="inside" — the percentage sits inside the filled bar at
+                          success completion.
+                        </p>
+                        {/description} {#content}{#include components/progress/inside-success /}{/content} {/include}
                         {#include partials/example-card title="Outside failure" slug="outside-failure"
-                        component="progress" description="status=&quot;danger&quot; +
-                        measureLocation=&quot;outside&quot;. The status icon swaps in for the percentage at the right of
-                        the bar."} {#content}{#include components/progress/outside-failure /}{/content} {/include}
+                        component="progress"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          status="danger" + measureLocation="outside". The status icon swaps in for the percentage at
+                          the right of the bar.
+                        </p>
+                        {/description} {#content}{#include components/progress/outside-failure /}{/content} {/include}
                         {#include partials/example-card title="Failure without measure" slug="failure-without-measure"
-                        component="progress" description="status=&quot;danger&quot; + measureLocation=&quot;none&quot;.
-                        Useful when the partial percentage isn't meaningful for the user (e.g. an indeterminate step
-                        that errored)."} {#content}{#include components/progress/failure-without-measure /}{/content}
+                        component="progress"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          status="danger" + measureLocation="none". Useful when the partial percentage isn't meaningful
+                          for the user (e.g. an indeterminate step that errored).
+                        </p>
+                        {/description} {#content}{#include components/progress/failure-without-measure /}{/content}
                         {/include}
 
                         <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
