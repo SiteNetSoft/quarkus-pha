@@ -8,7 +8,7 @@
     <div class="pf-v6-c-menu__content">
       <ul class="pf-v6-c-menu__list" role="menu">
         <template x-for="opt in ['Apple', 'Banana', 'Cherry', 'Date']" :key="opt">
-          <li class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitemcheckbox" :aria-checked="picked.includes(opt)" @click="picked.includes(opt) ? (picked = picked.filter(x => x !== opt)) : picked.push(opt)">
+          <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitemcheckbox" :aria-checked="picked.includes(opt)" @click="picked.includes(opt) ? (picked = picked.filter(x => x !== opt)) : picked.push(opt)">
             <span class="pf-v6-c-menu__item-main">
               <span class="pf-v6-c-menu__item-check">
                 <input type="checkbox" class="pf-v6-c-check__input" :checked="picked.includes(opt)" tabindex="-1" :aria-label="opt">
