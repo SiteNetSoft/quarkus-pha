@@ -17,8 +17,9 @@
 {!                                isn't a percentage.                               !}
 {!   helperText      (optional) — additional context rendered below the bar.        !}
 {!   size            (optional) — sm | lg (default size is unmodified).             !}
-{!   status          (optional) — success | warning | danger. Renders an icon and   !}
-{!                                applies the matching pf-m-{status} modifier.      !}
+{!   variant         (optional) — success | warning | danger. Renders an icon and   !}
+{!                                applies the matching pf-m-{variant} modifier.     !}
+{!                                Matches PF React's `variant` prop name.           !}
 {!   measureLocation (optional) — top (default) | outside | inside | none.          !}
 {!                                Controls where the measure text renders.          !}
 {!   singleline      (optional) — boolean; pf-m-singleline (compact, no title row). !}
@@ -26,11 +27,11 @@
 {!   ariaLabelledBy  (optional) — aria-labelledby on the bar.                       !}
 {!   ariaDescribedBy (optional) — aria-describedby on the bar. Required when        !}
 {!                                helperText is set.                                !}
-<div class="pf-v6-c-progress{#if size??} pf-m-{size}{/if}{#if status??} pf-m-{status}{/if}{#if measureLocation?? && (measureLocation is 'outside' || measureLocation is 'inside')} pf-m-{measureLocation}{/if}{#if singleline??} pf-m-singleline{/if}" id="{id}">
+<div class="pf-v6-c-progress{#if size??} pf-m-{size}{/if}{#if variant??} pf-m-{variant}{/if}{#if measureLocation?? && (measureLocation is 'outside' || measureLocation is 'inside')} pf-m-{measureLocation}{/if}{#if singleline??} pf-m-singleline{/if}" id="{id}">
   {#if title??}<div class="pf-v6-c-progress__description{#if truncateTitle??} pf-m-truncate{/if}">{title}</div>{/if}
   <div class="pf-v6-c-progress__status">
     {#if !(measureLocation?? && (measureLocation is 'inside' || measureLocation is 'none'))}<span class="pf-v6-c-progress__measure">{#if label??}{label}{#else}{value}%{/if}</span>{/if}
-    {#if status??}<span class="pf-v6-c-progress__status-icon">{#if status is 'success'}{icons:svg('fa:circle-check').raw}{#else if status is 'warning'}{icons:svg('fa:triangle-exclamation').raw}{#else if status is 'danger'}{icons:svg('fa:circle-exclamation').raw}{/if}</span>{/if}
+    {#if variant??}<span class="pf-v6-c-progress__status-icon">{#if variant is 'success'}{icons:svg('fa:circle-check').raw}{#else if variant is 'warning'}{icons:svg('fa:triangle-exclamation').raw}{#else if variant is 'danger'}{icons:svg('fa:circle-exclamation').raw}{/if}</span>{/if}
   </div>
   <div class="pf-v6-c-progress__bar" role="progressbar" aria-valuemin="{#if min??}{min}{#else}0{/if}" aria-valuemax="{#if max??}{max}{#else}100{/if}" aria-valuenow="{value}"{#if valueText??} aria-valuetext="{valueText}"{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if}{#if ariaLabelledBy??} aria-labelledby="{ariaLabelledBy}"{/if}{#if ariaDescribedBy??} aria-describedby="{ariaDescribedBy}"{/if}>
     <div class="pf-v6-c-progress__indicator" style="width: {value}%">
