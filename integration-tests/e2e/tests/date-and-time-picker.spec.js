@@ -6,37 +6,44 @@ test.describe("Date and Time Picker", () => {
   });
 
   test("page loads with correct heading", async ({ page }) => {
-    await expect(page.locator("h1")).toHaveText("Date and Time Picker");
-  });
-
-  test("all section headings are visible", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-  });
-
-  test("basic wrapper exists", async ({ page }) => {
-    await expect(page.locator("#dtp-basic")).toBeVisible();
-  });
-
-  test("has date input with placeholder", async ({ page }) => {
-    const dateInput = page.locator(
-      '#dtp-basic input[placeholder="YYYY-MM-DD"]'
+    await expect(page.locator("h1#ws-page-title")).toHaveText(
+      "Date and time picker"
     );
+  });
+
+  test("page-level anchors are present", async ({ page }) => {
+    await expect(page.locator("#examples")).toBeVisible();
+    await expect(page.locator("#documentation")).toBeVisible();
+    await expect(page.locator("#props-date-and-time-picker")).toBeVisible();
+    await expect(page.locator("#usage")).toBeVisible();
+  });
+
+  test("basic example heading uses slug id", async ({ page }) => {
+    await expect(page.locator("h3#basic")).toHaveText("Basic");
+  });
+
+  test("date picker wrapper exists", async ({ page }) => {
+    await expect(page.locator("#dtp-date")).toBeVisible();
+    await expect(page.locator("#dtp-date")).toHaveClass(/pf-v6-c-date-picker/);
+  });
+
+  test("time picker wrapper exists", async ({ page }) => {
+    await expect(page.locator("#dtp-time")).toBeVisible();
+    await expect(page.locator("#dtp-time")).toHaveClass(/pf-v6-c-time-picker/);
+  });
+
+  test("date picker has its text input with the seeded value", async ({
+    page,
+  }) => {
+    const dateInput = page.locator('#dtp-date input[type="text"]');
     await expect(dateInput).toBeVisible();
+    await expect(dateInput).toHaveValue("2026-05-20");
   });
 
-  test("has time input with type time", async ({ page }) => {
-    const timeInput = page.locator('#dtp-basic input[type="time"]');
+  test("time picker has its text input with placeholder", async ({ page }) => {
+    const timeInput = page.locator(
+      '#dtp-time input[type="text"][placeholder="HH:MM"]'
+    );
     await expect(timeInput).toBeVisible();
-  });
-
-  test("has pf-v6-c-date-picker class", async ({ page }) => {
-    await expect(
-      page.locator("#dtp-basic .pf-v6-c-date-picker")
-    ).toBeVisible();
-  });
-
-  test("has flex layout", async ({ page }) => {
-    const wrapper = page.locator("#dtp-basic");
-    await expect(wrapper).toHaveCSS("display", "flex");
   });
 });

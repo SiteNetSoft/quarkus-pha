@@ -6,30 +6,29 @@ test.describe("Drag and Drop", () => {
   });
 
   test("page loads with correct heading", async ({ page }) => {
-    await expect(page.locator("h1")).toHaveText("Drag and Drop");
+    await expect(page.locator("h1#ws-page-title")).toHaveText("Drag and drop");
   });
 
   test("all section headings are visible", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
+    await expect(page.locator("#examples")).toBeVisible();
+    await expect(page.locator("#basic")).toBeVisible();
+    await expect(page.locator("#documentation")).toBeVisible();
+    await expect(page.locator("#props-drag-and-drop")).toBeVisible();
+    await expect(page.locator("#usage")).toBeVisible();
   });
 
   test("basic wrapper exists", async ({ page }) => {
-    await expect(page.locator("#dnd-basic")).toBeVisible();
+    await expect(page.locator("#dd-basic")).toBeVisible();
   });
 
-  test("has 3 draggable items", async ({ page }) => {
+  test("has 4 draggable items", async ({ page }) => {
     await expect(
-      page.locator("#dnd-basic .pf-v6-c-draggable")
-    ).toHaveCount(3);
-  });
-
-  test("draggable items contain grip icon", async ({ page }) => {
-    const icons = page.locator("#dnd-basic .fas.fa-grip-vertical");
-    await expect(icons).toHaveCount(3);
+      page.locator("#dd-basic .pf-v6-c-data-list__item")
+    ).toHaveCount(4);
   });
 
   test("draggable items have draggable attribute", async ({ page }) => {
-    const items = page.locator("#dnd-basic .pf-v6-c-draggable");
+    const items = page.locator("#dd-basic .pf-v6-c-data-list__item");
     const count = await items.count();
     for (let i = 0; i < count; i++) {
       await expect(items.nth(i)).toHaveAttribute("draggable", "true");
