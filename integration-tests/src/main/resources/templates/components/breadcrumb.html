@@ -213,7 +213,7 @@
                             <code class="ws-code">{|{#include components/navigation/breadcrumb-item ... /}|}</code>.
                           </p>
                           <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Required:</strong> <code class="ws-code">text</code> (the crumb label).
+                            <strong>Required:</strong> the crumb label is the include body (default content slot).
                             <strong>Link target:</strong> <code class="ws-code">href</code> renders an
                             <code class="ws-code">&lt;a&gt;</code>; omit for plain text.
                             <code class="ws-code">target</code> sets the link target (e.g.
@@ -224,8 +224,8 @@
                             <code class="ws-code">&lt;h1&gt;</code>. <strong>Dropdown variant:</strong>
                             <code class="ws-code">isDropdown=true</code> renders a menu toggle instead of a link.
                             Provide the menu markup in the <code class="ws-code">dropdown</code> slot.
-                            <code class="ws-code">dropdownId</code> sets a stable DOM id (defaults to a text-derived
-                            value).
+                            <code class="ws-code">dropdownId</code> is required for the dropdown variant — it
+                            wires <code class="ws-code">aria-controls</code> between the toggle and the menu panel.
                           </p>
                           <p class="pf-v6-c-content--p pf-m-editorial">
                             <strong>Divergence from PF React.</strong> We skip <code class="ws-code">component</code> /

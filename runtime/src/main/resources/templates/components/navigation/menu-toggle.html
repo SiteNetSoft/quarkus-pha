@@ -1,7 +1,9 @@
 {! Menu toggle — PatternFly v6 !}
-{! Parameters: id, text (optional), plain (optional), primary (optional), expanded (optional), disabled (optional), ariaLabel (optional) !}
+{! Required: id !}
+{! Content slot: toggle label (required for non-plain toggles, passed as include body). !}
+{! Optional params: plain, primary, expanded, disabled, ariaLabel !}
 <button class="pf-v6-c-menu-toggle{#if plain??} pf-m-plain{/if}{#if primary??} pf-m-primary{/if}{#if expanded??} pf-m-expanded{/if}" type="button" id="{id}"{#if disabled??} disabled{/if} aria-expanded="{#if expanded??}true{#else}false{/if}"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
-  {#if text??}<span class="pf-v6-c-menu-toggle__text">{text}</span>{/if}
+  <span class="pf-v6-c-menu-toggle__text">{#insert/}</span>
   {#if plain??}{#else}
   <span class="pf-v6-c-menu-toggle__controls">
     <span class="pf-v6-c-menu-toggle__toggle-icon">

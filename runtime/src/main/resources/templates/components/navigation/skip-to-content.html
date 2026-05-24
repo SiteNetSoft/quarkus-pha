@@ -1,2 +1,4 @@
-{! Skip to content — PatternFly v6 !} {! Parameters: id, href, text (optional) !}
-<a href="{href}" class="pf-v6-c-skip-to-content" id="{id}">{#if text??}{text}{#else}Skip to content{/if}</a>
+{! Skip to content — PatternFly v6 !}
+{! Required: id, href !}
+{! Content slot: link text (optional, passed as include body; defaults to "Skip to content"). !}
+<a href="{href}" class="pf-v6-c-skip-to-content" id="{id}">{#insert}Skip to content{/insert}</a>

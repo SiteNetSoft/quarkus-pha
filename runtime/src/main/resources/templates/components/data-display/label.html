@@ -4,7 +4,8 @@
 {!                                                                                  !}
 {! Parameters:                                                                      !}
 {!   id          (required) — DOM id                                                !}
-{!   text        (required) — label text                                            !}
+{!                                                                                  !}
+{! Content slot: label text (required, passed as include body).                     !}
 {!   color       (optional) — blue | teal | green | orange | purple | red |         !}
 {!                            orangered | yellow. Omit for the default grey.        !}
 {!   variant     (optional) — filled (default) | outline | overflow | add           !}
@@ -32,14 +33,14 @@
 <a class="pf-v6-c-label{#if color??} pf-m-{color}{/if}{#if status??} pf-m-{status}{/if}{#if variant??} pf-m-{variant}{#else} pf-m-filled{/if}{#if compact??} pf-m-compact{/if}{#if disabled??} pf-m-disabled{/if}{#if clickable??} pf-m-clickable{/if}{#if editable??} pf-m-editable{/if}" id="{id}" href="{href}">
   <span class="pf-v6-c-label__content">
     {#if iconName??}<span class="pf-v6-c-label__icon">{icons:svg(iconName).raw}</span>{#else if status??}<span class="pf-v6-c-label__icon">{#if status is 'info'}{icons:svg('fa:circle-info').raw}{#else if status is 'success'}{icons:svg('fa:circle-check').raw}{#else if status is 'warning'}{icons:svg('fa:triangle-exclamation').raw}{#else if status is 'danger'}{icons:svg('fa:circle-exclamation').raw}{#else if status is 'custom'}{icons:svg('fa:bell').raw}{/if}</span>{/if}
-    <span class="pf-v6-c-label__text">{text}</span>
+    <span class="pf-v6-c-label__text">{#insert/}</span>
   </span>
 </a>
 {#else}
 <span class="pf-v6-c-label{#if color??} pf-m-{color}{/if}{#if status??} pf-m-{status}{/if}{#if variant??} pf-m-{variant}{#else} pf-m-filled{/if}{#if compact??} pf-m-compact{/if}{#if disabled??} pf-m-disabled{/if}{#if clickable??} pf-m-clickable{/if}{#if editable??} pf-m-editable{/if}" id="{id}">
   <span class="pf-v6-c-label__content"{#if editable??} tabindex="0"{/if}>
     {#if iconName??}<span class="pf-v6-c-label__icon">{icons:svg(iconName).raw}</span>{#else if status??}<span class="pf-v6-c-label__icon">{#if status is 'info'}{icons:svg('fa:circle-info').raw}{#else if status is 'success'}{icons:svg('fa:circle-check').raw}{#else if status is 'warning'}{icons:svg('fa:triangle-exclamation').raw}{#else if status is 'danger'}{icons:svg('fa:circle-exclamation').raw}{#else if status is 'custom'}{icons:svg('fa:bell').raw}{/if}</span>{/if}
-    <span class="pf-v6-c-label__text">{text}</span>
+    <span class="pf-v6-c-label__text">{#insert/}</span>
   </span>
   {#if removable??}<span class="pf-v6-c-label__actions">
     <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="{#if removeAria??}{removeAria}{#else}Remove{/if}">{icons:svg('fa:xmark').raw}</button>
