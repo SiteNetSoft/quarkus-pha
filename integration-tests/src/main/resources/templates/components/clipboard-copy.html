@@ -209,7 +209,10 @@
                               </td>
                               <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">The value shown + copied.</span>
+                                <span class="pf-v6-c-table__text"
+                                  >The value shown + copied. Kept as a String param (not a content slot) — see the
+                                  Divergence note below.</span
+                                >
                               </td>
                             </tr>
                             <tr class="pf-v6-c-table__tr">
@@ -254,6 +257,20 @@
                           <strong>Pick the layout.</strong> Inline for short snippets ("run
                           <code class="ws-code">npm install</code>"). Standard for tokens / URLs. Expandable for long
                           config blocks where the headline alone is meaningful.
+                        </p>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Divergence from PF React (and the rest of our library).</strong> Most of our text-bearing
+                          components migrated their <code class="ws-code">text</code> param to a content slot for parity
+                          with PF's <code class="ws-code">children</code>; clipboard-copy keeps
+                          <code class="ws-code">text</code> as a <em>String</em> param. The default and expandable
+                          variants put the value into <code class="ws-code">{|&lt;input value="…"&gt;|}</code> — an
+                          attribute that requires a primitive string. PF React's <code class="ws-code">children</code>
+                          works there only because React stringifies children when assigned to
+                          <code class="ws-code">value={|{children}|}</code>; Qute has no equivalent
+                          slot-to-string mechanism (no built-in <code class="ws-code">{|{#capture}|}</code> directive).
+                          Keeping <code class="ws-code">text</code> as a String is the only shape that works uniformly
+                          across all three variants. The inline variant <em>could</em> use a slot in isolation, but a
+                          split API (slot in one mode, param in two) is more confusing than a uniform param.
                         </p>
                       </div>
                       <div class="pf-v6-l-stack__item">
