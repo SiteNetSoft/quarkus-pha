@@ -6,8 +6,8 @@ test.describe("Simple List", () => {
   });
 
   test("page loads with all 2 section headings", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#grouped-heading")).toBeVisible();
+    await expect(page.locator("#basic")).toBeVisible();
+    await expect(page.locator("#grouped")).toBeVisible();
   });
 
   test.describe("Basic", () => {

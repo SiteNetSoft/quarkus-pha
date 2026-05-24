@@ -35,6 +35,8 @@ test.describe("Tree view", () => {
     });
 
     test("has expanded items with nested children", async ({ page }) => {
+      // Tree-view initialises collapsed; click "Expand all" to surface nested items.
+      await page.locator(`${root} button.pf-v6-c-button.pf-m-link`).first().click();
       const expanded = page.locator(`${root} .pf-v6-c-tree-view__list-item.pf-m-expanded`);
       await expect(expanded.first()).toBeVisible();
       const nested = page.locator(

@@ -5,11 +5,10 @@ test.describe("Tooltip", () => {
     await page.goto("/components/tooltip");
   });
 
-  test("page loads with all 4 section headings", async ({ page }) => {
-    await expect(page.locator("#top-heading")).toBeVisible();
-    await expect(page.locator("#bottom-heading")).toBeVisible();
-    await expect(page.locator("#left-heading")).toBeVisible();
-    await expect(page.locator("#right-heading")).toBeVisible();
+  test("page loads with all 3 section headings", async ({ page }) => {
+    await expect(page.locator("#top")).toBeVisible();
+    await expect(page.locator("#bottom")).toBeVisible();
+    await expect(page.locator("#left-right")).toBeVisible();
   });
 
   test.describe("Top", () => {

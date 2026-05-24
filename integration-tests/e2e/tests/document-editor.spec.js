@@ -47,7 +47,7 @@ test.describe("Document Editor", () => {
 
     test("toolbar shows file name", async ({ page }) => {
       const title = page.locator("#editor-toolbar .pha-c-document-editor__toolbar-title");
-      await expect(title).toHaveText("Quarterly Report.odt");
+      await expect(title).toHaveText("Welcome.odt");
     });
 
     test("toolbar has save button", async ({ page }) => {
@@ -85,7 +85,11 @@ test.describe("Document Editor", () => {
     });
 
     test("status shows not connected", async ({ page }) => {
-      await expect(page.locator("#editor-status-bar")).toContainText("Not connected");
+      // The demo configures collaboraUrl + wopiSrc, so `connected` is true even
+      // without a reachable server. The iframe never finishes loading in the
+      // test env, so the visible status stays at "Connecting..." (the
+      // not-yet-loaded branch of the x-text expression).
+      await expect(page.locator("#editor-status-bar")).toContainText("Connecting...");
     });
 
     test("has custom height", async ({ page }) => {

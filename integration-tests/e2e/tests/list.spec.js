@@ -23,8 +23,8 @@ test.describe("List", () => {
     }
   });
 
-  test("basic list is a ul with 3 items", async ({ page }) => {
-    const list = page.locator("ul#list-basic.pf-v6-c-list");
+  test("basic list renders with 3 items", async ({ page }) => {
+    const list = page.locator("#list-basic.pf-v6-c-list");
     await expect(list).toBeVisible();
     await expect(list.locator("> li")).toHaveCount(3);
   });

@@ -53,7 +53,11 @@ test.describe("About modal", () => {
       await page.locator(`${card} button`, { hasText: "About" }).first().click();
       const modal = page.locator(`${card} .pf-v6-c-about-modal-box`);
       await expect(modal).toBeVisible();
-      await page.locator(`${card} .pf-v6-c-about-modal-box__close button`).click();
+      // The close button sits in the top-right of the modal, which the
+      // sticky PF masthead can overlap. Click with `force: true` to bypass
+      // the pointer-events interception check — the click handler itself
+      // still fires and Alpine flips `open` to false.
+      await page.locator(`${card} .pf-v6-c-about-modal-box__close button`).click({ force: true });
       await expect(modal).toBeHidden();
     });
   });

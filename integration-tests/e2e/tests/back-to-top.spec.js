@@ -25,12 +25,19 @@ test.describe("Back to top", () => {
   });
 
   test("appears after scrolling past 400px", async ({ page }) => {
+    // Use the standalone route — the demo page wraps everything in the PF page
+    // layout, which scopes scrolling to #ws-page-main and leaves window.scrollY
+    // pinned to 0. The standalone route has no such wrapper, so the document
+    // itself scrolls and the back-to-top Alpine listener (which spies on window)
+    // can react.
+    await page.goto("/components/back-to-top/basic");
     await scrollPastThreshold(page);
     await expect(page.locator("#back-to-top-basic")).toBeVisible();
     await expect(page.locator("#back-to-top-basic")).toHaveClass(/pf-v6-c-back-to-top/);
   });
 
   test("click scrolls back to top", async ({ page }) => {
+    await page.goto("/components/back-to-top/basic");
     await scrollPastThreshold(page);
     await expect(page.locator("#back-to-top-basic")).toBeVisible();
     await page.locator("#back-to-top-basic button").click();
@@ -39,6 +46,7 @@ test.describe("Back to top", () => {
   });
 
   test("button renders title + icon", async ({ page }) => {
+    await page.goto("/components/back-to-top/basic");
     await scrollPastThreshold(page);
     const btn = page.locator("#back-to-top-basic button");
     await expect(btn.locator(".pf-v6-c-button__text")).toHaveText("Back to top");

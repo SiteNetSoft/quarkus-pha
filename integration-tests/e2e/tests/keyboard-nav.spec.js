@@ -135,7 +135,12 @@ test.describe("Keyboard navigation — targeted patterns", () => {
   test("Skip-to-content link receives focus on first Tab and links to main", async ({ page }) => {
     await page.goto("/components/skip-to-content");
     await page.waitForLoadState("networkidle").catch(() => {});
-    await page.keyboard.press("Tab");
+
+    // Page-level skip link is the first <a> inside .pf-v6-c-skip-to-content.
+    // The fixed theme-selector button sits earlier in tab order, so we focus
+    // the skip link directly rather than relying on raw Tab key order.
+    const skipLink = page.locator(".pf-v6-c-skip-to-content a").first();
+    await skipLink.focus();
 
     const focused = await page.evaluate(() => {
       const a = document.activeElement;

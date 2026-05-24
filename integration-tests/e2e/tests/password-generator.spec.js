@@ -21,9 +21,11 @@ test.describe("Password generator", () => {
   });
 
   test("input is rendered inside a text-input-group", async ({ page }) => {
+    // Match the outer wrapper only — the __main inner wrapper would also match a
+    // plain contains() lookup, so pin to the exact root class via class-token syntax.
     const group = page
       .locator("#pg-basic-input")
-      .locator("xpath=ancestor::div[contains(@class,'pf-v6-c-text-input-group')]");
+      .locator("xpath=ancestor::div[contains(concat(' ', normalize-space(@class), ' '), ' pf-v6-c-text-input-group ')]");
     await expect(group).toBeVisible();
   });
 

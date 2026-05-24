@@ -5,9 +5,9 @@ test.describe("Jump Links", () => {
     await page.goto("/components/jump-links");
   });
 
-  test("page loads with all 2 section headings", async ({ page }) => {
-    await expect(page.locator("#vertical-heading")).toBeVisible();
-    await expect(page.locator("#horizontal-heading")).toBeVisible();
+  test("page loads with all example section headings", async ({ page }) => {
+    await expect(page.locator("#vertical")).toBeVisible();
+    await expect(page.locator("#horizontal")).toBeVisible();
   });
 
   test.describe("Vertical", () => {
