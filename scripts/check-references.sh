@@ -21,6 +21,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 WEB_DIR="$PROJECT_ROOT/runtime/src/main/resources/META-INF/resources/web"
 TEMPLATE_DIR="$PROJECT_ROOT/runtime/src/main/resources/templates"
+IT_TEMPLATE_DIR="$PROJECT_ROOT/integration-tests/src/main/resources/templates"
 WEB_PACKAGE_JSON="$WEB_DIR/package.json"
 DOWNLOAD_SCRIPT="$SCRIPT_DIR/download-frontend-deps.sh"
 
@@ -140,15 +141,23 @@ echo "==> Sub-check 3: unused-js"
     web_path="/web/$rel"
     basename_only=$(basename "$file")
 
-    # Search templates AND project JS (excluding the file itself + vendor) for
-    # either the full /web/... path or the bare filename.
-    if grep -rIlF \
+    # Search runtime templates, integration-tests templates, AND project JS
+    # (excluding the file itself + vendor) for either the full /web/... path
+    # or the bare filename. Many helper scripts (code-example.js, back-to-top.js,
+    # breadcrumb-dropdown.js, label-*.js) are only referenced from per-component
+    # demo pages under integration-tests/.../templates, not from the runtime
+    # templates that emit the component itself.
+    #
+    # Count instead of `... | head -1 > /dev/null` because the latter triggers
+    # SIGPIPE upstream under `set -euo pipefail`, falsely marking referenced
+    # files as unused.
+    matches=$(grep -rIlF \
          --include='*.html' --include='*.js' \
          --exclude-dir=vendor --exclude-dir=node_modules \
          -e "$web_path" -e "$basename_only" \
-         "$TEMPLATE_DIR" "$WEB_DIR/js" 2>/dev/null \
-       | grep -vF "$file" \
-       | head -1 > /dev/null; then
+         "$TEMPLATE_DIR" "$IT_TEMPLATE_DIR" "$WEB_DIR/js" 2>/dev/null \
+       | grep -vcF "$file" || true)
+    if [ "${matches:-0}" -gt 0 ]; then
       :
     else
       unused_count=$((unused_count + 1))

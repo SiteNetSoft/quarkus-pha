@@ -61,20 +61,27 @@ EOF
 
     cat > globals.d.ts <<EOF
 // Runtime globals available before project JS executes.
-// Vendored libraries (Alpine, HTMX, ECharts, D3, MapLibre) load via <script>
-// tags; phaAlpine and PHA are project-defined helpers attached to window.
+// Vendored libraries (Alpine, HTMX, ECharts, D3, MapLibre, Quill, Cytoscape,
+// Video.js, Monaco) load via <script> tags; phaAlpine and PHA are
+// project-defined helpers attached to window.
 declare const Alpine: any;
 declare const htmx: any;
 declare const echarts: any;
 declare const d3: any;
 declare const maplibregl: any;
 declare const phaAlpine: any;
+declare const Quill: any;
+declare const cytoscape: any;
+declare const videojs: any;
 
 interface Window {
   Alpine?: any;
   htmx?: any;
   PHA?: any;
   phaAlpine?: any;
+  // Monaco loads its AMD loader onto window.require + window.monaco at runtime.
+  require?: any;
+  monaco?: any;
 }
 EOF
 
