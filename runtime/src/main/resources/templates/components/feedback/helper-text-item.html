@@ -3,26 +3,30 @@
 {!                                                                                !}
 {! Content slot: body text (required, passed as the include body).                !}
 {! Parameters:                                                                    !}
-{!   status           (optional) — indeterminate | warning | success | error      !}
+{!   component        (optional) — 'div' (default) | 'li'. Use 'li' when nested   !}
+{!                     inside a helper-text with component='ul'.                  !}
+{!   variant          (optional) — indeterminate | warning | success | error      !}
 {!   dynamic          (optional) — boolean; applies pf-m-dynamic for transition animations !}
-{!   iconName         (optional) — overrides the default per-status icon          !}
+{!   iconName         (optional) — overrides the default per-variant icon          !}
 {!   screenReaderText (optional) — screen-reader-only suffix announcing the variant !}
 {!                                                                                !}
 {! No id param: Qute include inheritance would leak the outer helper-text id onto !}
 {! every nested item, producing duplicate ids. Hand-code the markup if you need a !}
 {! per-item id (e.g. for aria-describedby).                                       !}
 {!                                                                                !}
-{! Default icons (when status is set but iconName is not):                        !}
+{! Default icons (when variant is set but iconName is not):                       !}
 {!   success       → fa:circle-check                                              !}
 {!   warning       → fa:triangle-exclamation                                      !}
 {!   error         → fa:circle-exclamation                                        !}
 {!   indeterminate → fa:minus                                                     !}
-<div class="pf-v6-c-helper-text__item{#if status??} pf-m-{status}{/if}{#if dynamic??} pf-m-dynamic{/if}">
+{#let c=(component ?: 'div')}
+<{c} class="pf-v6-c-helper-text__item{#if variant??} pf-m-{variant}{/if}{#if dynamic??} pf-m-dynamic{/if}">
   {#if iconName??}
   <span class="pf-v6-c-helper-text__item-icon">{icons:svg(iconName).raw}</span>
-  {#else if status??}
-  <span class="pf-v6-c-helper-text__item-icon">{#if status is 'success'}{icons:svg('fa:circle-check').raw}{#else if status is 'warning'}{icons:svg('fa:triangle-exclamation').raw}{#else if status is 'error'}{icons:svg('fa:circle-exclamation').raw}{#else if status is 'indeterminate'}{icons:svg('fa:minus').raw}{/if}</span>
+  {#else if variant??}
+  <span class="pf-v6-c-helper-text__item-icon">{#if variant is 'success'}{icons:svg('fa:circle-check').raw}{#else if variant is 'warning'}{icons:svg('fa:triangle-exclamation').raw}{#else if variant is 'error'}{icons:svg('fa:circle-exclamation').raw}{#else if variant is 'indeterminate'}{icons:svg('fa:minus').raw}{/if}</span>
   {/if}
   <span class="pf-v6-c-helper-text__item-text">{#insert/}</span>
   {#if screenReaderText??}<span class="pf-v6-screen-reader">{screenReaderText}</span>{/if}
-</div>
+</{c}>
+{/let}
