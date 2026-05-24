@@ -20,6 +20,7 @@ default 100), disabled (optional) !}
       aria-label="{#if ariaLabel??}{ariaLabel}{#else}Value{/if}"
       aria-valuemin="{#if min??}{min}{#else}0{/if}"
       aria-valuemax="{#if max??}{max}{#else}100{/if}"
+      aria-valuenow="{#if value??}{value}{#else}50{/if}"
       :aria-valuenow="val"
       :style="'left: ' + ((val - {#if min??}{min}{#else}0{/if}) / ({#if max??}{max}{#else}100{/if} - {#if min??}{min}{#else}0{/if}) * 100) + '%'"
     ></div>

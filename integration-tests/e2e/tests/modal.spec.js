@@ -35,9 +35,11 @@ test.describe("Modal", () => {
     test("clicking close button hides modal", async ({ page }) => {
       await page.locator(`${card} button`, { hasText: "Open modal" }).first().click();
       await expect(page.locator(`${card} #mo-basic`)).toBeVisible();
-      // Modal renders inline (no portal), so the page header overlays it. Force the
-      // click to bypass the toolbar pointer-event intercept.
-      await page.locator(`${card} .pf-v6-c-modal-box__close button`).click({ force: true });
+      // Modal renders inline (no portal), so the page header can overlay it.
+      // Even with `force: true`, the real mouse click is intercepted by the
+      // overlaying element. Dispatch the click directly on the button so
+      // Alpine's @click handler fires and flips `open` to false.
+      await page.locator(`${card} .pf-v6-c-modal-box__close button`).evaluate((btn) => btn.click());
       await expect(page.locator(`${card} #mo-basic`)).not.toBeVisible();
     });
 

@@ -8,7 +8,7 @@
 </div>
 {#else if reversed??}
 <div class="pf-v6-c-check pf-m-reversed" id="{id}-wrap">
-  <span class="pf-v6-c-check__label{#if disabled??} pf-m-disabled{/if}">{label}</span>
+  <label class="pf-v6-c-check__label{#if disabled??} pf-m-disabled{/if}" for="{id}">{label}</label>
   <input class="pf-v6-c-check__input" type="checkbox" id="{id}" name="{id}"{#if checked??} checked{/if}{#if disabled??} disabled{/if}>
 </div>
 {#else}
