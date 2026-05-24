@@ -6,8 +6,8 @@ test.describe("Skip to Content", () => {
   });
 
   test("page loads with all 1 section headings", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#basic-heading")).toHaveText("Basic");
+    await expect(page.locator("#basic")).toBeVisible();
+    await expect(page.locator("#basic")).toHaveText("Basic");
   });
 
   test.describe("Basic", () => {

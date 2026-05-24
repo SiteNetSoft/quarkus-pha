@@ -36,18 +36,22 @@ test.describe("Content", () => {
   });
 
   test("headings example renders h1..h6 each with the matching pf-v6-c-content--hN class", async ({ page }) => {
-    const card = page.locator('[data-source-href="/components/content/source/headings"]');
+    const preview = page
+      .locator('[data-source-href="/components/content/source/headings"]')
+      .locator(".ws-preview-html");
     for (const level of [1, 2, 3, 4, 5, 6]) {
-      await expect(card.locator(`h${level}.pf-v6-c-content--h${level}`)).toBeVisible();
+      await expect(preview.locator(`h${level}.pf-v6-c-content--h${level}`)).toBeVisible();
     }
   });
 
   test("body example renders p, small, blockquote, pre with matching classes", async ({ page }) => {
-    const card = page.locator('[data-source-href="/components/content/source/body"]');
-    await expect(card.locator("p.pf-v6-c-content--p")).toBeVisible();
-    await expect(card.locator("small.pf-v6-c-content--small")).toBeVisible();
-    await expect(card.locator("blockquote.pf-v6-c-content--blockquote")).toBeVisible();
-    await expect(card.locator("pre.pf-v6-c-content--pre")).toBeVisible();
+    const preview = page
+      .locator('[data-source-href="/components/content/source/body"]')
+      .locator(".ws-preview-html");
+    await expect(preview.locator("p.pf-v6-c-content--p")).toBeVisible();
+    await expect(preview.locator("small.pf-v6-c-content--small")).toBeVisible();
+    await expect(preview.locator("blockquote.pf-v6-c-content--blockquote")).toBeVisible();
+    await expect(preview.locator("pre.pf-v6-c-content--pre")).toBeVisible();
   });
 
   test("unordered list renders a ul.pf-v6-c-content--ul with 3 items", async ({ page }) => {

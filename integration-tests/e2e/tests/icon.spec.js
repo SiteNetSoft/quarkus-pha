@@ -6,9 +6,9 @@ test.describe("Icon", () => {
   });
 
   test("page loads with all 3 section headings", async ({ page }) => {
-    await expect(page.locator("#sizes-heading")).toBeVisible();
-    await expect(page.locator("#inline-heading")).toBeVisible();
-    await expect(page.locator("#status-heading")).toBeVisible();
+    await expect(page.locator("#sizes")).toBeVisible();
+    await expect(page.locator("#inline")).toBeVisible();
+    await expect(page.locator("#status-colors")).toBeVisible();
   });
 
   test("has icons at different sizes", async ({ page }) => {
@@ -19,7 +19,7 @@ test.describe("Icon", () => {
   });
 
   test("has inline icon", async ({ page }) => {
-    await expect(page.locator(".pf-v6-c-icon.pf-m-inline")).toBeVisible();
+    await expect(page.locator(".pf-v6-c-icon.pf-m-inline").first()).toBeVisible();
   });
 
   test("has status color icons", async ({ page }) => {

@@ -6,10 +6,10 @@ test.describe("Menu Toggle", () => {
   });
 
   test("page loads with all 4 section headings", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#primary-heading")).toBeVisible();
-    await expect(page.locator("#plain-heading")).toBeVisible();
-    await expect(page.locator("#expanded-heading")).toBeVisible();
+    await expect(page.locator("#basic")).toBeVisible();
+    await expect(page.locator("#primary")).toBeVisible();
+    await expect(page.locator("#plain")).toBeVisible();
+    await expect(page.locator("#expanded")).toBeVisible();
   });
 
   test.describe("Basic", () => {

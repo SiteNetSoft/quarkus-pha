@@ -6,9 +6,9 @@ test.describe("Date Picker", () => {
   });
 
   test("page loads with all 3 section headings", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#with-value-heading")).toBeVisible();
-    await expect(page.locator("#disabled-heading")).toBeVisible();
+    await expect(page.locator("#basic")).toBeVisible();
+    await expect(page.locator("#with-value")).toBeVisible();
+    await expect(page.locator("#disabled")).toBeVisible();
   });
 
   test.describe("Basic", () => {

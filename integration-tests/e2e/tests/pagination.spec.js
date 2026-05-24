@@ -42,7 +42,11 @@ test.describe("Pagination", () => {
     });
 
     test("basic pagination shows total-items text", async ({ page }) => {
-      await expect(page.locator(`${card} .pf-v6-c-pagination__total-items`)).toBeVisible();
+      // PF v6 hides .pf-v6-c-pagination__total-items at >= 48rem in favour of the
+      // page-select summary; assert the element is present with content rather than visible.
+      const totalItems = page.locator(`${card} .pf-v6-c-pagination__total-items`);
+      await expect(totalItems).toBeAttached();
+      await expect(totalItems).toContainText("of");
     });
   });
 

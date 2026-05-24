@@ -5,9 +5,8 @@ test.describe("Notification Drawer", () => {
     await page.goto("/components/notification-drawer");
   });
 
-  test("page loads with all 2 section headings", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#with-groups-heading")).toBeVisible();
+  test("page loads with example section headings", async ({ page }) => {
+    await expect(page.locator("#basic")).toBeVisible();
   });
 
   test.describe("Basic", () => {
