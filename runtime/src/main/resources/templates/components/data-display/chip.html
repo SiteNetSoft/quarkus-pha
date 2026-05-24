@@ -1,15 +1,17 @@
-{! Chip — PatternFly v6 (DEPRECATED — use Label instead) !} {! Wraps pf-v6-c-label since pf-v6-c-chip was removed in v6.
-!} {! Parameters: id (required), text (required), removable (optional), overflow (optional), !} {! badge (optional —
-badge count text), ariaLabel (optional — for close button) !} {#if overflow??}
+{! Chip — PatternFly v6 (DEPRECATED — use Label instead) !}
+{! Wraps pf-v6-c-label since pf-v6-c-chip was removed in v6. !}
+{! Required: id !}
+{! Content slot: chip text (passed as include body). !}
+{! Optional params: removable, overflow, badge (badge count text), ariaLabel (close button label) !} {#if overflow??}
 <button class="pf-v6-c-label pf-m-overflow" type="button" id="{id}">
   <span class="pf-v6-c-label__content">
-    <span class="pf-v6-c-label__text">{text}</span>
+    <span class="pf-v6-c-label__text">{#insert/}</span>
   </span>
 </button>
 {#else}
 <span class="pf-v6-c-label pf-m-filled" id="{id}">
   <span class="pf-v6-c-label__content">
-    <span class="pf-v6-c-label__text" id="{id}-text">{text}</span>
+    <span class="pf-v6-c-label__text" id="{id}-text">{#insert/}</span>
     {#if badge??}
     <span class="pf-v6-c-badge pf-m-read">{badge}</span>
     {/if}
