@@ -35,7 +35,9 @@ test.describe("Modal", () => {
     test("clicking close button hides modal", async ({ page }) => {
       await page.locator(`${card} button`, { hasText: "Open modal" }).first().click();
       await expect(page.locator(`${card} #mo-basic`)).toBeVisible();
-      await page.locator(`${card} .pf-v6-c-modal-box__close button`).click();
+      // Modal renders inline (no portal), so the page header overlays it. Force the
+      // click to bypass the toolbar pointer-event intercept.
+      await page.locator(`${card} .pf-v6-c-modal-box__close button`).click({ force: true });
       await expect(page.locator(`${card} #mo-basic`)).not.toBeVisible();
     });
 

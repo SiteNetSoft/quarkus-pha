@@ -10,9 +10,9 @@ test.describe("Table", () => {
   });
 
   test("all section headings are visible", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#compact-heading")).toBeVisible();
-    await expect(page.locator("#striped-heading")).toBeVisible();
+    await expect(page.locator("#basic")).toBeVisible();
+    await expect(page.locator("#compact")).toBeVisible();
+    await expect(page.locator("#striped")).toBeVisible();
   });
 
   test.describe("Basic", () => {

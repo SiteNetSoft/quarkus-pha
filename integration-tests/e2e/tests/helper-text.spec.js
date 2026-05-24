@@ -17,7 +17,7 @@ test.describe("Helper text", () => {
   });
 
   test("basic card renders all status variants with auto-icons", async ({ page }) => {
-    await expect(page.locator("#ht-basic-static .pf-v6-c-helper-text__item-text")).toHaveText("Enter your username.");
+    await expect(page.locator("#ht-basic-static .pf-v6-c-helper-text__item-text")).toHaveText("This is default helper text");
     await expect(page.locator("#ht-basic-success .pf-v6-c-helper-text__item")).toHaveClass(/pf-m-success/);
     await expect(page.locator("#ht-basic-warning .pf-v6-c-helper-text__item")).toHaveClass(/pf-m-warning/);
     await expect(page.locator("#ht-basic-error .pf-v6-c-helper-text__item")).toHaveClass(/pf-m-error/);

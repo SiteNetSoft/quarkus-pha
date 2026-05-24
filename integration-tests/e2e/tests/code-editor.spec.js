@@ -6,10 +6,10 @@ test.describe("Code editor", () => {
   });
 
   test("page loads with all 4 section headings", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#readonly-heading")).toBeVisible();
-    await expect(page.locator("#no-actions-heading")).toBeVisible();
-    await expect(page.locator("#minimal-heading")).toBeVisible();
+    await expect(page.locator("#basic")).toBeVisible();
+    await expect(page.locator("#read-only")).toBeVisible();
+    await expect(page.locator("#without-actions")).toBeVisible();
+    await expect(page.locator("#minimal")).toBeVisible();
   });
 
   test.describe("Basic", () => {
@@ -33,7 +33,7 @@ test.describe("Code editor", () => {
     test("has language tab with text", async ({ page }) => {
       const tab = page.locator("#ce-basic .pf-v6-c-code-editor__tab");
       await expect(tab).toBeVisible();
-      await expect(tab.locator(".pf-v6-c-code-editor__tab-text")).toHaveText("HTML");
+      await expect(tab.locator(".pf-v6-c-code-editor__tab-text")).toHaveText("YAML");
     });
 
     test("displays code in pre element", async ({ page }) => {

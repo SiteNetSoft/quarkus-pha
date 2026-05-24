@@ -6,8 +6,8 @@ test.describe("Form Select", () => {
   });
 
   test("page loads with all 2 section headings", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#disabled-heading")).toBeVisible();
+    await expect(page.locator("#basic")).toBeVisible();
+    await expect(page.locator("#disabled")).toBeVisible();
   });
 
   test.describe("Basic", () => {
@@ -17,7 +17,7 @@ test.describe("Form Select", () => {
 
     test("has options", async ({ page }) => {
       const options = page.locator("#fs-basic select option");
-      await expect(options).toHaveCount(4);
+      await expect(options).toHaveCount(5);
     });
   });
 
