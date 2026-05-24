@@ -12,7 +12,7 @@ test.describe("About modal", () => {
   });
 
   test.describe("Basic variant", () => {
-    const card = '[data-source-href="/components/about-modal/basic"]';
+    const card = '[data-rendered-href="/components/about-modal/basic"]';
 
     test("modal hidden by default", async ({ page }) => {
       const modal = page.locator(`${card} .pf-v6-c-about-modal-box`);
@@ -59,7 +59,7 @@ test.describe("About modal", () => {
   });
 
   test.describe("Without product name variant", () => {
-    const card = '[data-source-href="/components/about-modal/without-product-name"]';
+    const card = '[data-rendered-href="/components/about-modal/without-product-name"]';
 
     test("dialog uses aria-label instead of aria-labelledby", async ({ page }) => {
       await page.locator(`${card} button`).first().click();
@@ -75,7 +75,7 @@ test.describe("About modal", () => {
   });
 
   test.describe("Complex content variant", () => {
-    const card = '[data-source-href="/components/about-modal/complex-content"]';
+    const card = '[data-rendered-href="/components/about-modal/complex-content"]';
 
     test("default __content wrapper is skipped (only the example's own wrapper is present)", async ({ page }) => {
       await page.locator(`${card} button`).first().click();
@@ -88,24 +88,24 @@ test.describe("About modal", () => {
   test.describe("Multiple instances coexist", () => {
     test("opening basic does not open complex", async ({ page }) => {
       await page
-        .locator('[data-source-href="/components/about-modal/basic"] button', { hasText: "About" })
+        .locator('[data-rendered-href="/components/about-modal/basic"] button', { hasText: "About" })
         .first()
         .click();
-      await expect(page.locator('[data-source-href="/components/about-modal/basic"] .pf-v6-c-about-modal-box')).toBeVisible();
-      await expect(page.locator('[data-source-href="/components/about-modal/complex-content"] .pf-v6-c-about-modal-box')).toBeHidden();
+      await expect(page.locator('[data-rendered-href="/components/about-modal/basic"] .pf-v6-c-about-modal-box')).toBeVisible();
+      await expect(page.locator('[data-rendered-href="/components/about-modal/complex-content"] .pf-v6-c-about-modal-box')).toBeHidden();
     });
   });
 
   test.describe("Per-example code viewer", () => {
     test("Toggle Qute opens Monaco with the fragment source", async ({ page }) => {
-      const card = page.locator('[data-source-href="/components/about-modal/basic"]');
+      const card = page.locator('[data-rendered-href="/components/about-modal/basic"]');
       const toggle = card.locator('button[aria-label*="Toggle Qute"]');
       await toggle.click();
       await expect(card.locator(".monaco-editor").first()).toBeVisible({ timeout: 10000 });
     });
 
     test("Open-in-new-window link points to the standalone route", async ({ page }) => {
-      const card = page.locator('[data-source-href="/components/about-modal/complex-content"]');
+      const card = page.locator('[data-rendered-href="/components/about-modal/complex-content"]');
       const link = card.locator('a[aria-label*="Open"]');
       await expect(link).toHaveAttribute("href", "/components/about-modal/complex-content");
       await expect(link).toHaveAttribute("target", "_blank");
