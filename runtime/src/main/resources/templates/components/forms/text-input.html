@@ -5,7 +5,7 @@
 {!           validated (success|warning|error — emits pf-m-* + status icon), !}
 {!           iconName (Font Awesome icon name — renders as prefix utility icon) !}
 <span class="pf-v6-c-form-control{#if validated??} pf-m-{validated}{/if}{#if disabled??} pf-m-disabled{/if}{#if readonly??} pf-m-readonly{/if}{#if expanded??} pf-m-expanded{/if}{#if iconName??} pf-m-icon{/if}" id="{id}">
-  <input type="{#if type??}{type}{#else}text{/if}" id="{id}-field" name="{id}"{#if placeholder??} placeholder="{placeholder}"{/if}{#if disabled??} disabled{/if}{#if readonly??} readonly{/if}{#if required??} required{/if}{#if value??} value="{value}"{/if}{#if validated??}{#if validated is 'error'} aria-invalid="true"{/if}{/if}>
+  <input type="{#if type??}{type}{#else}text{/if}" id="{id}-field" name="{id}"{#if placeholder??} placeholder="{placeholder}"{/if}{#if disabled??} disabled{/if}{#if readonly??} readonly{/if}{#if required??} required{/if}{#if value??} value="{value}"{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{#else if placeholder??} aria-label="{placeholder}"{/if}{#if validated??}{#if validated is 'error'} aria-invalid="true"{/if}{/if}>
   {#if iconName??}
   <span class="pf-v6-c-form-control__icon">{icons:svg(iconName).raw}</span>
   {/if}
