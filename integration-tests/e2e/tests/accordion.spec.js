@@ -119,14 +119,14 @@ test.describe("Accordion", () => {
 
   test.describe("Per-example code viewer", () => {
     test("Toggle Qute opens a Monaco editor with the fragment source", async ({ page }) => {
-      const card = page.locator('[data-source-href="/components/accordion/definition-list"]');
+      const card = page.locator('[data-rendered-href="/components/accordion/definition-list"]');
       const toggle = card.locator('button[aria-label*="Toggle Qute"]');
       await toggle.click();
       await expect(card.locator(".monaco-editor").first()).toBeVisible({ timeout: 10000 });
     });
 
     test("Open-in-new-window link points to the standalone route", async ({ page }) => {
-      const card = page.locator('[data-source-href="/components/accordion/bordered"]');
+      const card = page.locator('[data-rendered-href="/components/accordion/bordered"]');
       const link = card.locator('a[aria-label*="Open"]');
       await expect(link).toHaveAttribute("href", "/components/accordion/bordered");
       await expect(link).toHaveAttribute("target", "_blank");
