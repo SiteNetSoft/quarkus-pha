@@ -54,10 +54,12 @@ test.describe("About modal", () => {
       const modal = page.locator(`${card} .pf-v6-c-about-modal-box`);
       await expect(modal).toBeVisible();
       // The close button sits in the top-right of the modal, which the
-      // sticky PF masthead can overlap. Click with `force: true` to bypass
-      // the pointer-events interception check — the click handler itself
-      // still fires and Alpine flips `open` to false.
-      await page.locator(`${card} .pf-v6-c-about-modal-box__close button`).click({ force: true });
+      // sticky PF masthead can overlap. Even with `force: true`, the real
+      // mouse click is intercepted by the overlaying element, so the
+      // button's @click handler never fires. Dispatch the click directly
+      // on the button element via the DOM — Alpine's @click listener
+      // reacts the same way as a user click and flips `open` to false.
+      await page.locator(`${card} .pf-v6-c-about-modal-box__close button`).evaluate((btn) => btn.click());
       await expect(modal).toBeHidden();
     });
   });
