@@ -2,8 +2,9 @@
 {!                                                                                  !}
 {! Renders one <li> inside a breadcrumb container.                                  !}
 {!                                                                                  !}
+{! Content slot: link / label text (passed as include body).                        !}
+{!                                                                                  !}
 {! Parameters:                                                                      !}
-{!   text        (required unless isDropdown — see slot) — link / label text        !}
 {!   href        (optional) — when set, renders an <a>; otherwise plain text        !}
 {!   target      (optional) — link target (e.g. "_blank")                           !}
 {!   current     (optional) — boolean; marks the active crumb with pf-m-current     !}
@@ -14,37 +15,36 @@
 {!                            instead of a plain link. Use the dropdown slot for    !}
 {!                            the menu options. Requires the                       !}
 {!                            phaBreadcrumbDropdown Alpine component on the host.   !}
-{!   dropdownId  (optional) — DOM id for the dropdown panel (used by                !}
-{!                            aria-controls). Defaults to a generated value.        !}
+{!   dropdownId  (required when isDropdown=true) — DOM id for the dropdown panel    !}
+{!                                                 (used by aria-controls).         !}
 {!                                                                                  !}
-{! Slot:                                                                            !}
+{! Slots:                                                                           !}
+{!   default     — the crumb's text (link label or plain text).                     !}
 {!   {#dropdown} — only used when isDropdown=true. Contains the menu markup         !}
-{!                 (typically <ul><li><a>…</a></li>…</ul>). Slot name is            !}
-{!                 "dropdown" not "content" — see container template for the        !}
-{!                 collision rationale.                                             !}
+{!                 (typically <ul><li><a>…</a></li>…</ul>).                         !}
 <li class="pf-v6-c-breadcrumb__item">
   <span class="pf-v6-c-breadcrumb__item-divider" aria-hidden="true">{icons:svg('fa:angle-right').raw}</span>
   {#if isDropdown??}
   <div class="pf-v6-c-breadcrumb__dropdown" x-data="phaBreadcrumbDropdown()">
-    <button type="button" class="pf-v6-c-menu-toggle pf-m-plain pf-m-text" aria-haspopup="true" :aria-expanded="open.toString()" @click="toggle()" @keydown.escape.window="close()" id="{#if dropdownId??}{dropdownId}-toggle{#else}breadcrumb-dropdown-{text}-toggle{/if}">
-      <span class="pf-v6-c-menu-toggle__text">{text}</span>
+    <button type="button" class="pf-v6-c-menu-toggle pf-m-plain pf-m-text" aria-haspopup="true" :aria-expanded="open.toString()" @click="toggle()" @keydown.escape.window="close()" id="{dropdownId}-toggle">
+      <span class="pf-v6-c-menu-toggle__text">{#insert/}</span>
       <span class="pf-v6-c-menu-toggle__controls">
         <span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:angle-down').raw}</span>
       </span>
     </button>
-    <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="close()" id="{#if dropdownId??}{dropdownId}{#else}breadcrumb-dropdown-{text}{/if}" style="position: absolute; z-index: 200; margin-top: 0.25rem">
+    <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="close()" id="{dropdownId}" style="position: absolute; z-index: 200; margin-top: 0.25rem">
       <div class="pf-v6-c-menu__content">
         {#insert dropdown}{/insert}
       </div>
     </div>
   </div>
   {#else if heading??}
-  <h1 class="pf-v6-c-breadcrumb__heading"><a {#if href??}href="{href}"{/if}{#if target??} target="{target}"{/if} class="pf-v6-c-breadcrumb__link pf-m-current" aria-current="page">{text}</a></h1>
+  <h1 class="pf-v6-c-breadcrumb__heading"><a {#if href??}href="{href}"{/if}{#if target??} target="{target}"{/if} class="pf-v6-c-breadcrumb__link pf-m-current" aria-current="page">{#insert/}</a></h1>
   {#else if href??}
-  <a href="{href}"{#if target??} target="{target}"{/if} class="pf-v6-c-breadcrumb__link{#if current??} pf-m-current{/if}"{#if current??} aria-current="page"{/if}>{text}</a>
+  <a href="{href}"{#if target??} target="{target}"{/if} class="pf-v6-c-breadcrumb__link{#if current??} pf-m-current{/if}"{#if current??} aria-current="page"{/if}>{#insert/}</a>
   {#else if current??}
-  <span class="pf-v6-c-breadcrumb__link pf-m-current" aria-current="page">{text}</span>
+  <span class="pf-v6-c-breadcrumb__link pf-m-current" aria-current="page">{#insert/}</span>
   {#else}
-  {text}
+  {#insert/}
   {/if}
 </li>
