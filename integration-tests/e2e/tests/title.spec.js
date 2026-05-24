@@ -5,31 +5,77 @@ test.describe("Title", () => {
     await page.goto("/components/title");
   });
 
-  test("page loads with all 2 section headings", async ({ page }) => {
-    await expect(page.locator("#sizes-heading")).toBeVisible();
-    await expect(page.locator("#heading-levels-heading")).toBeVisible();
+  test("page loads with correct heading", async ({ page }) => {
+    await expect(page.locator("h1#ws-page-title")).toHaveText("Title");
   });
 
-  test("has titles at all size modifiers", async ({ page }) => {
-    await expect(page.locator("#title-4xl")).toHaveClass(/pf-m-4xl/);
-    await expect(page.locator("#title-3xl")).toHaveClass(/pf-m-3xl/);
-    await expect(page.locator("#title-2xl")).toHaveClass(/pf-m-2xl/);
-    await expect(page.locator("#title-xl")).toHaveClass(/pf-m-xl/);
-    await expect(page.locator("#title-lg")).toHaveClass(/pf-m-lg/);
-    await expect(page.locator("#title-md")).toHaveClass(/pf-m-md/);
+  test("page-level anchors are present", async ({ page }) => {
+    await expect(page.locator("#examples")).toBeVisible();
+    await expect(page.locator("#documentation")).toBeVisible();
+    await expect(page.locator("#props-title")).toBeVisible();
+    await expect(page.locator("#usage")).toBeVisible();
   });
 
-  test("titles have pf-v6-c-title class", async ({ page }) => {
-    await expect(page.locator("#title-4xl")).toHaveClass(/pf-v6-c-title/);
+  test("example section headings use slug ids", async ({ page }) => {
+    await expect(page.locator("h3#default-sizes")).toHaveText("Default sizes");
+    await expect(page.locator("h3#custom-sizes")).toHaveText("Custom sizes");
   });
 
-  test("heading levels render correct elements", async ({ page }) => {
-    // h1 is default
-    const h1 = page.locator("h1#title-h1");
-    await expect(h1).toBeVisible();
-    const h2 = page.locator("h2#title-h2");
-    await expect(h2).toBeVisible();
-    const h3 = page.locator("h3#title-h3");
-    await expect(h3).toBeVisible();
+  test("default-sizes example renders h1–h6 with default size modifiers", async ({
+    page,
+  }) => {
+    // Scope to the section under the "Default sizes" example heading; the
+    // example body is the next stack item sibling.
+    const card = page
+      .locator("h3#default-sizes")
+      .locator(
+        "xpath=ancestor::div[contains(@class,'pf-v6-l-stack')][1]"
+      );
+    await expect(card.locator("h1.pf-v6-c-title.pf-m-h1")).toHaveText(
+      "h1 — default"
+    );
+    await expect(card.locator("h2.pf-v6-c-title.pf-m-h2")).toHaveText(
+      "h2 — default"
+    );
+    await expect(card.locator("h3.pf-v6-c-title.pf-m-h3")).toHaveText(
+      "h3 — default"
+    );
+    await expect(card.locator("h4.pf-v6-c-title.pf-m-h4")).toHaveText(
+      "h4 — default"
+    );
+    await expect(card.locator("h5.pf-v6-c-title.pf-m-h5")).toHaveText(
+      "h5 — default"
+    );
+    await expect(card.locator("h6.pf-v6-c-title.pf-m-h6")).toHaveText(
+      "h6 — default"
+    );
+  });
+
+  test("custom-sizes example renders all size modifiers on mismatched heading levels", async ({
+    page,
+  }) => {
+    const card = page
+      .locator("h3#custom-sizes")
+      .locator(
+        "xpath=ancestor::div[contains(@class,'pf-v6-l-stack')][1]"
+      );
+    await expect(card.locator("h1.pf-v6-c-title.pf-m-4xl")).toHaveText(
+      "4xl title"
+    );
+    await expect(card.locator("h2.pf-v6-c-title.pf-m-3xl")).toHaveText(
+      "3xl title"
+    );
+    await expect(card.locator("h3.pf-v6-c-title.pf-m-2xl")).toHaveText(
+      "2xl title"
+    );
+    await expect(card.locator("h4.pf-v6-c-title.pf-m-xl")).toHaveText(
+      "xl title"
+    );
+    await expect(card.locator("h5.pf-v6-c-title.pf-m-lg")).toHaveText(
+      "lg title"
+    );
+    await expect(card.locator("h6.pf-v6-c-title.pf-m-md")).toHaveText(
+      "md title"
+    );
   });
 });

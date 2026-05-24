@@ -5,38 +5,59 @@ test.describe("Toolbar", () => {
     await page.goto("/components/toolbar");
   });
 
-  test("page loads with all 2 section headings", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#basic-heading")).toHaveText("Basic");
-    await expect(page.locator("#with-groups-heading")).toBeVisible();
-    await expect(page.locator("#with-groups-heading")).toHaveText("With groups");
+  test("page loads with the basic example section in ToC", async ({ page }) => {
+    await expect(page.locator("#basic")).toBeVisible();
+    await expect(page.locator("#basic")).toHaveText("Basic");
   });
 
-  test.describe("Basic", () => {
+  test("page-level anchors are present", async ({ page }) => {
+    await expect(page.locator("#examples")).toBeVisible();
+    await expect(page.locator("#documentation")).toBeVisible();
+    await expect(page.locator("#props-toolbar")).toBeVisible();
+    await expect(page.locator("#usage")).toBeVisible();
+  });
+
+  test.describe("Basic variant", () => {
+    const card = '[data-rendered-href="/components/toolbar/basic"]';
+
     test("basic toolbar has pf-v6-c-toolbar class", async ({ page }) => {
-      await expect(page.locator("#tb-basic")).toHaveClass(/pf-v6-c-toolbar/);
+      await expect(page.locator(`${card} #tb-basic`)).toHaveClass(/pf-v6-c-toolbar/);
     });
 
-    test("basic toolbar has toolbar items", async ({ page }) => {
-      await expect(page.locator("#tb-basic .pf-v6-c-toolbar__item")).toHaveCount(2);
+    test("basic toolbar has two toolbar groups (left + right)", async ({ page }) => {
+      await expect(page.locator(`${card} #tb-basic .pf-v6-c-toolbar__group`)).toHaveCount(2);
     });
 
-    test("basic toolbar has an action button", async ({ page }) => {
-      await expect(page.locator("#tb-basic .pf-v6-c-button.pf-m-primary")).toBeVisible();
+    test("right group is aligned to the end", async ({ page }) => {
+      await expect(
+        page.locator(`${card} #tb-basic .pf-v6-c-toolbar__group.pf-m-align-end`)
+      ).toHaveCount(1);
+    });
+
+    test("basic toolbar has four toolbar items across groups", async ({ page }) => {
+      await expect(page.locator(`${card} #tb-basic .pf-v6-c-toolbar__item`)).toHaveCount(4);
+    });
+
+    test("basic toolbar has a primary Create button", async ({ page }) => {
+      await expect(
+        page.locator(`${card} #tb-basic .pf-v6-c-button.pf-m-primary`)
+      ).toBeVisible();
     });
   });
 
-  test.describe("With groups", () => {
-    test("groups toolbar has pf-v6-c-toolbar class", async ({ page }) => {
-      await expect(page.locator("#tb-groups")).toHaveClass(/pf-v6-c-toolbar/);
+  test.describe("Per-example code viewer", () => {
+    test("Toggle Qute opens Monaco with the fragment source", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/toolbar/basic"]');
+      const toggle = card.locator('button[aria-label*="Toggle Qute"]');
+      await toggle.click();
+      await expect(card.locator(".monaco-editor").first()).toBeVisible({ timeout: 10000 });
     });
 
-    test("groups toolbar has toolbar groups", async ({ page }) => {
-      await expect(page.locator("#tb-groups .pf-v6-c-toolbar__group")).toHaveCount(2);
-    });
-
-    test("groups toolbar has toolbar items within groups", async ({ page }) => {
-      await expect(page.locator("#tb-groups .pf-v6-c-toolbar__item")).toHaveCount(4);
+    test("Open-in-new-window link points to the standalone route", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/toolbar/basic"]');
+      const link = card.locator('a[aria-label*="Open"]');
+      await expect(link).toHaveAttribute("href", "/components/toolbar/basic");
+      await expect(link).toHaveAttribute("target", "_blank");
     });
   });
 });
