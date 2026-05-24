@@ -1,44 +1,95 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Tree View", () => {
+test.describe("Tree view", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/components/tree-view");
   });
 
-  test("page loads with all 2 section headings", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#basic-heading")).toHaveText("Basic");
-    await expect(page.locator("#with-guides-heading")).toBeVisible();
-    await expect(page.locator("#with-guides-heading")).toHaveText("With guides");
+  test("page loads with key section headings", async ({ page }) => {
+    await expect(page.locator("#single-selectable")).toBeVisible();
+    await expect(page.locator("#multiselectable")).toBeVisible();
+    await expect(page.locator("#with-search")).toBeVisible();
+    await expect(page.locator("#with-checkboxes")).toBeVisible();
+    await expect(page.locator("#guides")).toBeVisible();
+    await expect(page.locator("#compact")).toBeVisible();
   });
 
-  test.describe("Basic", () => {
-    test("basic tree view has pf-v6-c-tree-view class", async ({ page }) => {
-      await expect(page.locator("#tv-basic")).toHaveClass(/pf-v6-c-tree-view/);
+  test.describe("Single selectable", () => {
+    const root = "#ws-core-c-tree-view-single-selectable";
+
+    test("wrapper exists with phaTreeView Alpine data", async ({ page }) => {
+      const wrapper = page.locator(root);
+      await expect(wrapper).toBeAttached();
+      await expect(wrapper).toHaveAttribute("x-data", "phaTreeView()");
     });
 
-    test("basic tree view has list items", async ({ page }) => {
-      await expect(page.locator("#tv-basic .pf-v6-c-tree-view__list-item")).not.toHaveCount(0);
+    test("renders a single-select tree (aria-multiselectable=false)", async ({ page }) => {
+      await expect(page.locator(`${root} ul[role='tree']`).first()).toHaveAttribute(
+        "aria-multiselectable",
+        "false"
+      );
     });
 
-    test("basic tree view has an expanded item with children", async ({ page }) => {
-      await expect(page.locator("#tv-basic .pf-v6-c-tree-view__list-item.pf-m-expanded")).toHaveCount(1);
+    test("has list items", async ({ page }) => {
+      await expect(page.locator(`${root} .pf-v6-c-tree-view__list-item`)).not.toHaveCount(0);
     });
 
-    test("basic tree view expanded item has nested children", async ({ page }) => {
+    test("has expanded items with nested children", async ({ page }) => {
+      const expanded = page.locator(`${root} .pf-v6-c-tree-view__list-item.pf-m-expanded`);
+      await expect(expanded.first()).toBeVisible();
+      const nested = page.locator(
+        `${root} .pf-v6-c-tree-view__list-item.pf-m-expanded .pf-v6-c-tree-view__list .pf-v6-c-tree-view__list-item`
+      );
+      await expect(nested.first()).toBeAttached();
+    });
+  });
+
+  test.describe("Multiselectable", () => {
+    const root = "#ws-core-c-tree-view-multiselectable";
+
+    test("renders a multi-select tree (aria-multiselectable=true)", async ({ page }) => {
+      await expect(page.locator(`${root} ul[role='tree']`).first()).toHaveAttribute(
+        "aria-multiselectable",
+        "true"
+      );
+    });
+  });
+
+  test.describe("With search", () => {
+    const root = "#ws-core-c-tree-view-with-search";
+
+    test("has a search input", async ({ page }) => {
+      await expect(page.locator(`${root} .pf-v6-c-tree-view__search input`)).toBeVisible();
+    });
+  });
+
+  test.describe("With checkboxes", () => {
+    const root = "#ws-core-c-tree-view-with-checkboxes";
+
+    test("renders node-check spans for checkbox cascade", async ({ page }) => {
       await expect(
-        page.locator("#tv-basic .pf-v6-c-tree-view__list-item.pf-m-expanded .pf-v6-c-tree-view__list .pf-v6-c-tree-view__list-item")
-      ).toHaveCount(2);
+        page.locator(`${root} .pf-v6-c-tree-view__node-check`).first()
+      ).toBeAttached();
     });
   });
 
-  test.describe("With guides", () => {
-    test("tree view with guides has pf-m-guides class", async ({ page }) => {
-      await expect(page.locator("#tv-guides")).toHaveClass(/pf-m-guides/);
+  test.describe("Guides", () => {
+    const root = "#ws-core-c-tree-view-guides";
+
+    test("tree-view container has pf-m-guides modifier", async ({ page }) => {
+      await expect(page.locator(`${root} .pf-v6-c-tree-view`)).toHaveClass(/pf-m-guides/);
     });
 
-    test("tree view with guides has list items", async ({ page }) => {
-      await expect(page.locator("#tv-guides .pf-v6-c-tree-view__list-item")).not.toHaveCount(0);
+    test("has list items", async ({ page }) => {
+      await expect(page.locator(`${root} .pf-v6-c-tree-view__list-item`)).not.toHaveCount(0);
+    });
+  });
+
+  test.describe("Compact", () => {
+    const root = "#ws-core-c-tree-view-compact";
+
+    test("tree-view container has pf-m-compact modifier", async ({ page }) => {
+      await expect(page.locator(`${root} .pf-v6-c-tree-view`)).toHaveClass(/pf-m-compact/);
     });
   });
 });

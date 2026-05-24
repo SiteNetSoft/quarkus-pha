@@ -5,52 +5,46 @@ test.describe("Clipboard copy", () => {
     await page.goto("/components/clipboard-copy");
   });
 
-  test("page loads with all 5 section headings", async ({ page }) => {
-    await expect(page.locator("#readonly-heading")).toBeVisible();
-    await expect(page.locator("#editable-heading")).toBeVisible();
-    await expect(page.locator("#expandable-heading")).toBeVisible();
-    await expect(page.locator("#inline-heading")).toBeVisible();
-    await expect(page.locator("#inline-code-heading")).toBeVisible();
+  test("page loads with all 4 section headings", async ({ page }) => {
+    await expect(page.locator("#basic")).toBeVisible();
+    await expect(page.locator("#readonly")).toBeVisible();
+    await expect(page.locator("#expandable")).toBeVisible();
+    await expect(page.locator("#inline")).toBeVisible();
   });
 
-  test.describe("Read-only", () => {
+  test.describe("Basic", () => {
     test("has clipboard-copy class", async ({ page }) => {
-      await expect(page.locator("#cc-readonly")).toHaveClass(/pf-v6-c-clipboard-copy/);
+      await expect(page.locator("#cc-basic")).toHaveClass(/pf-v6-c-clipboard-copy/);
     });
 
+    test("input has correct value", async ({ page }) => {
+      await expect(page.locator("#cc-basic-input")).toHaveValue(
+        "Copy this string to your clipboard"
+      );
+    });
+
+    test("copy button is visible with correct aria-label", async ({ page }) => {
+      const copyBtn = page.locator("#cc-basic .pf-v6-c-button.pf-m-control").last();
+      await expect(copyBtn).toBeVisible();
+      await expect(copyBtn).toHaveAttribute("aria-label", "Copy to clipboard");
+    });
+  });
+
+  test.describe("Read only", () => {
     test("input is readonly", async ({ page }) => {
       await expect(page.locator("#cc-readonly-input")).toHaveAttribute("readonly", "");
     });
 
     test("input has correct value", async ({ page }) => {
       await expect(page.locator("#cc-readonly-input")).toHaveValue(
-        "curl -O https://example.com/install.sh"
+        "ghp_a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7"
       );
-    });
-
-    test("copy button is visible with correct aria-label", async ({ page }) => {
-      const copyBtn = page.locator("#cc-readonly .pf-v6-c-button.pf-m-control").last();
-      await expect(copyBtn).toBeVisible();
-      await expect(copyBtn).toHaveAttribute("aria-label", "Copy to clipboard");
     });
 
     test("form control has readonly modifier", async ({ page }) => {
       await expect(page.locator("#cc-readonly .pf-v6-c-form-control")).toHaveClass(
         /pf-m-readonly/
       );
-    });
-  });
-
-  test.describe("Editable", () => {
-    test("input is not readonly", async ({ page }) => {
-      const input = page.locator("#cc-editable-input");
-      await expect(input).not.toHaveAttribute("readonly", "");
-    });
-
-    test("input value can be changed", async ({ page }) => {
-      const input = page.locator("#cc-editable-input");
-      await input.fill("New value");
-      await expect(input).toHaveValue("New value");
     });
   });
 
@@ -90,32 +84,18 @@ test.describe("Clipboard copy", () => {
       ).first();
       await toggleBtn.click();
       await expect(page.locator("#cc-expandable-content")).toContainText(
-        "Got a lot of text here"
+        "Full multi-line content"
       );
     });
   });
 
-  test.describe("Inline compact", () => {
+  test.describe("Inline", () => {
     test("has inline modifier", async ({ page }) => {
       await expect(page.locator("#cc-inline")).toHaveClass(/pf-m-inline/);
     });
 
-    test("text element is a span", async ({ page }) => {
-      const text = page.locator("#cc-inline .pf-v6-c-clipboard-copy__text");
-      await expect(text).toBeVisible();
-      const tag = await text.evaluate((el) => el.tagName.toLowerCase());
-      expect(tag).toBe("span");
-    });
-
-    test("copy button uses plain style", async ({ page }) => {
-      const btn = page.locator("#cc-inline .pf-v6-c-button");
-      await expect(btn).toHaveClass(/pf-m-plain/);
-    });
-  });
-
-  test.describe("Inline compact code", () => {
     test("text element is a code tag with code modifier", async ({ page }) => {
-      const text = page.locator("#cc-inline-code .pf-v6-c-clipboard-copy__text");
+      const text = page.locator("#cc-inline .pf-v6-c-clipboard-copy__text");
       const tag = await text.evaluate((el) => el.tagName.toLowerCase());
       expect(tag).toBe("code");
       await expect(text).toHaveClass(/pf-m-code/);
@@ -123,8 +103,13 @@ test.describe("Clipboard copy", () => {
 
     test("displays correct text", async ({ page }) => {
       await expect(
-        page.locator("#cc-inline-code .pf-v6-c-clipboard-copy__text")
-      ).toContainText("npm install @patternfly/react-core");
+        page.locator("#cc-inline .pf-v6-c-clipboard-copy__text")
+      ).toContainText("npm install");
+    });
+
+    test("copy button uses plain style", async ({ page }) => {
+      const btn = page.locator("#cc-inline .pf-v6-c-button");
+      await expect(btn).toHaveClass(/pf-m-plain/);
     });
   });
 });
