@@ -7,7 +7,7 @@
     <span class="pf-v6-c-number-input__icon">{icons:svg('fa:minus').raw}</span>
   </button>
   <span class="pf-v6-c-form-control">
-    <input type="number" x-model.number="val"{#if min??} min="{min}"{/if}{#if max??} max="{max}"{/if}{#if disabled??} disabled{/if}>
+    <input type="number" x-model.number="val"{#if min??} min="{min}"{/if}{#if max??} max="{max}"{/if}{#if disabled??} disabled{/if} aria-label="{#if ariaLabel??}{ariaLabel}{#else if unit??}{unit} count{#else}Number input{/if}">
   </span>
   <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Plus"
           @click="val = Math.min(val + 1, {#if max??}{max}{#else}Infinity{/if})"
