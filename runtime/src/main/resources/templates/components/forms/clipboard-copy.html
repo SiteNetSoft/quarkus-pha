@@ -2,6 +2,14 @@
 {! Parameters: id (required), text (required), readonly (optional), expandable (optional), !}
 {!   expandedText (optional — full text for expandable panel), !}
 {!   inline (optional), code (optional — inline code style), block (optional — inline block) !}
+{!                                                                                          !}
+{! Why text is a String param (not a content slot like title / label / etc.):              !}
+{! Two of the three variants (default + expandable) put the text into an <input value="…"> !}
+{! attribute, which requires a primitive string — slot content can't be coerced into an    !}
+{! HTML attribute value from inside a Qute template. PF React gets away with `children`    !}
+{! only because React stringifies children when assigned to `value={…}`; there is no       !}
+{! equivalent in Qute (no built-in {#capture} to a string). Keeping `text` as a String     !}
+{! is the only shape that works uniformly across all three variants.                       !}
 {#if inline??}
 <div class="pf-v6-c-clipboard-copy pf-m-inline{#if block??} pf-m-block{/if}" id="{id}"
      x-data="{ copied: false }">
