@@ -1,6 +1,6 @@
 <div x-data="{ active: 'v1' }" style="display: flex; gap: 1rem">
   {#include components/navigation/tabs id="tabs-vertical" vertical=true}{#content}
-  <li class="pf-v6-c-tabs__item" :class="active === 'v1' ? 'pf-m-current' : ''">
+  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'v1' ? 'pf-m-current' : ''">
     <button
       class="pf-v6-c-tabs__link"
       type="button"
@@ -12,7 +12,7 @@
       <span class="pf-v6-c-tabs__item-text">General</span>
     </button>
   </li>
-  <li class="pf-v6-c-tabs__item" :class="active === 'v2' ? 'pf-m-current' : ''">
+  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'v2' ? 'pf-m-current' : ''">
     <button
       class="pf-v6-c-tabs__link"
       type="button"
@@ -24,7 +24,7 @@
       <span class="pf-v6-c-tabs__item-text">Security</span>
     </button>
   </li>
-  <li class="pf-v6-c-tabs__item" :class="active === 'v3' ? 'pf-m-current' : ''">
+  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'v3' ? 'pf-m-current' : ''">
     <button
       class="pf-v6-c-tabs__link"
       type="button"

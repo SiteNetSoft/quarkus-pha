@@ -1,7 +1,7 @@
 {! Hand-rendered with Alpine for tab-panel switching. !}
 <div x-data="{ active: 'tab-1' }">
   {#include components/navigation/tabs id="tabs-basic"}{#content}
-  <li class="pf-v6-c-tabs__item" :class="active === 'tab-1' ? 'pf-m-current' : ''">
+  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'tab-1' ? 'pf-m-current' : ''">
     <button
       class="pf-v6-c-tabs__link"
       type="button"
@@ -13,7 +13,7 @@
       <span class="pf-v6-c-tabs__item-text">Overview</span>
     </button>
   </li>
-  <li class="pf-v6-c-tabs__item" :class="active === 'tab-2' ? 'pf-m-current' : ''">
+  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'tab-2' ? 'pf-m-current' : ''">
     <button
       class="pf-v6-c-tabs__link"
       type="button"
@@ -25,7 +25,7 @@
       <span class="pf-v6-c-tabs__item-text">Details</span>
     </button>
   </li>
-  <li class="pf-v6-c-tabs__item" :class="active === 'tab-3' ? 'pf-m-current' : ''">
+  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'tab-3' ? 'pf-m-current' : ''">
     <button
       class="pf-v6-c-tabs__link"
       type="button"

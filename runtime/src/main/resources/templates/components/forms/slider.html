@@ -17,6 +17,7 @@ default 100), disabled (optional) !}
       class="pf-v6-c-slider__thumb"
       role="slider"
       tabindex="0"
+      aria-label="{#if ariaLabel??}{ariaLabel}{#else}Value{/if}"
       aria-valuemin="{#if min??}{min}{#else}0{/if}"
       aria-valuemax="{#if max??}{max}{#else}100{/if}"
       :aria-valuenow="val"
