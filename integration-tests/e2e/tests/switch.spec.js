@@ -5,10 +5,11 @@ test.describe("Switch", () => {
     await page.goto("/components/switch");
   });
 
-  test("page loads with all 3 section headings", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#checked-heading")).toBeVisible();
-    await expect(page.locator("#reversed-heading")).toBeVisible();
+  test("page loads with all 4 example sections in ToC", async ({ page }) => {
+    await expect(page.locator("h3#basic")).toHaveText("Basic");
+    await expect(page.locator("h3#checked")).toHaveText("Checked");
+    await expect(page.locator("h3#disabled")).toHaveText("Disabled");
+    await expect(page.locator("h3#reversed")).toHaveText("Reversed");
   });
 
   test.describe("Basic", () => {
@@ -17,21 +18,27 @@ test.describe("Switch", () => {
     });
 
     test("has label text", async ({ page }) => {
-      await expect(
-        page.locator("#sw-basic .pf-v6-c-switch__label")
-      ).toBeVisible();
+      await expect(page.locator("#sw-basic .pf-v6-c-switch__label")).toHaveText("Enable notifications");
     });
   });
 
   test.describe("Checked", () => {
     test("switch input is checked", async ({ page }) => {
-      await expect(page.locator("#sw-checked input")).toBeChecked();
+      await expect(page.locator("#sw-checked-field")).toBeChecked();
+    });
+  });
+
+  test.describe("Disabled", () => {
+    test("disabled switches are disabled", async ({ page }) => {
+      await expect(page.locator("#sw-dis-off-field")).toBeDisabled();
+      await expect(page.locator("#sw-dis-on-field")).toBeDisabled();
+      await expect(page.locator("#sw-dis-on-field")).toBeChecked();
     });
   });
 
   test.describe("Reversed", () => {
     test("has pf-m-reverse modifier", async ({ page }) => {
-      await expect(page.locator("#sw-reversed")).toHaveClass(/pf-m-reverse/);
+      await expect(page.locator("#sw-rev")).toHaveClass(/pf-m-reverse/);
     });
   });
 });

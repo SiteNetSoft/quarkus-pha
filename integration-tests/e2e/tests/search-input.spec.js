@@ -5,11 +5,9 @@ test.describe("Search Input", () => {
     await page.goto("/components/search-input");
   });
 
-  test("page loads with all 2 section headings", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#basic-heading")).toHaveText("Basic");
-    await expect(page.locator("#with-clear-heading")).toBeVisible();
-    await expect(page.locator("#with-clear-heading")).toHaveText("With clear button");
+  test("page loads with all 2 example sections in ToC", async ({ page }) => {
+    await expect(page.locator("h3#basic")).toHaveText("Basic");
+    await expect(page.locator("h3#with-clear")).toHaveText("With clear");
   });
 
   test.describe("Basic", () => {
@@ -26,16 +24,16 @@ test.describe("Search Input", () => {
     });
 
     test("basic search input has correct placeholder", async ({ page }) => {
-      await expect(page.locator("#si-basic input[type='search']")).toHaveAttribute("placeholder", "Search...");
+      await expect(page.locator("#si-basic input[type='search']")).toHaveAttribute("placeholder", "Search…");
     });
   });
 
-  test.describe("With clear button", () => {
-    test("search input with clear has pf-v6-c-text-input-group class", async ({ page }) => {
+  test.describe("With clear", () => {
+    test("has pf-v6-c-text-input-group class", async ({ page }) => {
       await expect(page.locator("#si-clear")).toHaveClass(/pf-v6-c-text-input-group/);
     });
 
-    test("search input with clear has a clear button", async ({ page }) => {
+    test("has a clear button", async ({ page }) => {
       await expect(page.locator("#si-clear button[aria-label='Clear search']")).toBeVisible();
     });
 
