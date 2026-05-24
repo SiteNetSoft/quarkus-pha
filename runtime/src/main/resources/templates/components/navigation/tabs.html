@@ -1,4 +1,5 @@
-{! Tabs — PatternFly v6 !} {! Parameters: id, box (optional), vertical (optional), filled (optional) !}
+{! Tabs — PatternFly v6 !}
+{! Parameters: id, box (optional), vertical (optional), filled (optional), ariaLabel (optional — labels the tablist) !}
 <div
   class="pf-v6-c-tabs{#if box??} pf-m-box{/if}{#if vertical??} pf-m-vertical{/if}{#if filled??} pf-m-filled{/if}"
   id="{id}"
@@ -16,7 +17,7 @@
   }
 }"
 >
-  <ul class="pf-v6-c-tabs__list" role="tablist" @keydown="handleKeyNav($event)">
+  <ul class="pf-v6-c-tabs__list" role="tablist"{#if ariaLabel??} aria-label="{ariaLabel}"{/if} @keydown="handleKeyNav($event)">
     {#insert content}{/insert}
   </ul>
 </div>
