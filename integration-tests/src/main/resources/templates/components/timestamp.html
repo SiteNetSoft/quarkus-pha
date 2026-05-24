@@ -174,13 +174,14 @@
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">text</code></span
+                                  ><span class="ws-prop-required">*</span> <em>(content slot)</em></span
                                 >
                               </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Slot</span></td>
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  >Pre-formatted, human-readable timestamp ("May 20, 2026", "2h ago", etc.).</span
+                                  >Pre-formatted, human-readable timestamp passed as the include body ("May 20, 2026",
+                                  "2h ago", etc.). Mirrors PF React's <code class="ws-code">children</code> override.</span
                                 >
                               </td>
                             </tr>
@@ -241,8 +242,8 @@
                             >customFormat</code
                           >/<code class="ws-code">locale</code>/<code class="ws-code">is12Hour</code> props. We don't —
                           formatting happens server-side. Pass a Java
-                          <code class="ws-code">DateTimeFormatter</code> result as <code class="ws-code">text</code> and
-                          the ISO string as <code class="ws-code">datetime</code>.
+                          <code class="ws-code">DateTimeFormatter</code> result as the include body and the ISO
+                          string as <code class="ws-code">datetime</code>.
                         </p>
                       </div>
 
