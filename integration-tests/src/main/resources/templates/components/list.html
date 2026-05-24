@@ -172,7 +172,7 @@
                         {/description} {#content}{#include components/list/inline /}{/content} {/include} {#include
                         partials/example-card title="Ordered" slug="ordered" component="list"} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          Set <code class="ws-code">ordered=true</code> to render an
+                          Set <code class="ws-code">component="ol"</code> to render an
                           <code class="ws-code">&lt;ol&gt;</code>. Pair with <code class="ws-code">type</code> (<code
                             class="ws-code"
                             >1</code
@@ -264,16 +264,20 @@
                               </tr>
                               <tr class="pf-v6-c-table__tr">
                                 <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">ordered</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">component</code></span>
                                 </td>
                                 <td class="pf-v6-c-table__td">
                                   <span class="pf-v6-c-table__text"
-                                    >Render <code class="ws-code">&lt;ol&gt;</code> instead of
-                                    <code class="ws-code">&lt;ul&gt;</code>.</span
+                                    ><code class="ws-code">"ul" | "ol"</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">"ul"</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Wrapping element. <code class="ws-code">"ol"</code> renders an ordered list.
+                                    Matches PF React's <code class="ws-code">component</code> prop name.</span
                                   >
                                 </td>
                               </tr>
@@ -295,7 +299,8 @@
                                   <span class="pf-v6-c-table__text"
                                     >Numbering style for ordered lists. Passes through to the HTML
                                     <code class="ws-code">type</code> attr on <code class="ws-code">&lt;ol&gt;</code>.
-                                    Ignored when <code class="ws-code">ordered</code> is falsy.</span
+                                    Ignored when <code class="ws-code">component</code> is not
+                                    <code class="ws-code">"ol"</code>.</span
                                   >
                                 </td>
                               </tr>
