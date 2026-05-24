@@ -5,9 +5,8 @@ test.describe("Overflow Menu", () => {
     await page.goto("/components/overflow-menu");
   });
 
-  test("page loads with all 2 section headings", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#icon-button-group-heading")).toBeVisible();
+  test("page loads with the Basic example section in ToC", async ({ page }) => {
+    await expect(page.locator("h3#basic")).toHaveText("Basic");
   });
 
   test.describe("Basic", () => {
@@ -19,11 +18,9 @@ test.describe("Overflow Menu", () => {
       await expect(page.locator("#om-basic .pf-v6-c-overflow-menu__content")).toBeVisible();
       await expect(page.locator("#om-basic .pf-v6-c-overflow-menu__control")).toBeVisible();
     });
-  });
 
-  test.describe("Icon Button", () => {
-    test("group has class pf-m-icon-button-group", async ({ page }) => {
-      await expect(page.locator("#om-icons .pf-v6-c-overflow-menu__group.pf-m-icon-button-group")).toBeVisible();
+    test("group has pf-m-button-group class", async ({ page }) => {
+      await expect(page.locator("#om-basic .pf-v6-c-overflow-menu__group.pf-m-button-group")).toBeVisible();
     });
   });
 });

@@ -5,13 +5,9 @@ test.describe("Sidebar", () => {
     await page.goto("/components/sidebar");
   });
 
-  test("page loads with all 3 section headings", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#basic-heading")).toHaveText("Basic");
-    await expect(page.locator("#panel-right-heading")).toBeVisible();
-    await expect(page.locator("#panel-right-heading")).toHaveText("Panel right");
-    await expect(page.locator("#with-gutter-heading")).toBeVisible();
-    await expect(page.locator("#with-gutter-heading")).toHaveText("With gutter");
+  test("page loads with all 2 example sections in ToC", async ({ page }) => {
+    await expect(page.locator("h3#basic")).toHaveText("Basic");
+    await expect(page.locator("h3#panel-right")).toHaveText("Panel right");
   });
 
   test.describe("Basic", () => {
@@ -29,14 +25,9 @@ test.describe("Sidebar", () => {
   });
 
   test.describe("Panel right", () => {
-    test("panel right sidebar has pf-m-panel-right class", async ({ page }) => {
+    test("has pf-m-panel-right and pf-m-gutter modifiers", async ({ page }) => {
       await expect(page.locator("#sb-right")).toHaveClass(/pf-m-panel-right/);
-    });
-  });
-
-  test.describe("With gutter", () => {
-    test("gutter sidebar has pf-m-gutter class", async ({ page }) => {
-      await expect(page.locator("#sb-gutter")).toHaveClass(/pf-m-gutter/);
+      await expect(page.locator("#sb-right")).toHaveClass(/pf-m-gutter/);
     });
   });
 });

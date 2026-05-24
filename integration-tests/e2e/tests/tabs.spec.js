@@ -5,13 +5,20 @@ test.describe("Tabs", () => {
     await page.goto("/components/tabs");
   });
 
-  test("page loads with all 3 section headings", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#basic-heading")).toHaveText("Basic");
-    await expect(page.locator("#boxed-heading")).toBeVisible();
-    await expect(page.locator("#boxed-heading")).toHaveText("Boxed");
-    await expect(page.locator("#vertical-heading")).toBeVisible();
-    await expect(page.locator("#vertical-heading")).toHaveText("Vertical");
+  test("page loads with example section headings", async ({ page }) => {
+    await expect(page.locator("#basic")).toBeVisible();
+    await expect(page.locator("#basic")).toHaveText("Basic");
+    await expect(page.locator("#box")).toBeVisible();
+    await expect(page.locator("#box")).toHaveText("Box");
+    await expect(page.locator("#vertical")).toBeVisible();
+    await expect(page.locator("#vertical")).toHaveText("Vertical");
+  });
+
+  test("page anchors are present", async ({ page }) => {
+    await expect(page.locator("#examples")).toBeVisible();
+    await expect(page.locator("#documentation")).toBeVisible();
+    await expect(page.locator("#props-tabs")).toBeVisible();
+    await expect(page.locator("#usage")).toBeVisible();
   });
 
   test.describe("Basic", () => {
@@ -28,13 +35,13 @@ test.describe("Tabs", () => {
     });
   });
 
-  test.describe("Boxed", () => {
-    test("boxed tabs has pf-m-box class", async ({ page }) => {
-      await expect(page.locator("#tabs-boxed")).toHaveClass(/pf-m-box/);
+  test.describe("Box", () => {
+    test("box tabs has pf-m-box class", async ({ page }) => {
+      await expect(page.locator("#tabs-box")).toHaveClass(/pf-m-box/);
     });
 
-    test("boxed tabs has tab items", async ({ page }) => {
-      await expect(page.locator("#tabs-boxed .pf-v6-c-tabs__item")).toHaveCount(3);
+    test("box tabs has tab items", async ({ page }) => {
+      await expect(page.locator("#tabs-box .pf-v6-c-tabs__item")).toHaveCount(2);
     });
   });
 

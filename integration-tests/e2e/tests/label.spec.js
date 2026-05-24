@@ -5,11 +5,10 @@ test.describe("Label", () => {
     await page.goto("/components/label");
   });
 
-  test("page loads with all 4 section headings", async ({ page }) => {
-    await expect(page.locator("#filled-heading")).toBeVisible();
-    await expect(page.locator("#outline-heading")).toBeVisible();
-    await expect(page.locator("#with-icon-heading")).toBeVisible();
-    await expect(page.locator("#removable-heading")).toBeVisible();
+  test("page loads with example sections in ToC", async ({ page }) => {
+    await expect(page.locator("h3#filled-labels")).toHaveText("Filled labels");
+    await expect(page.locator("h3#outlined-labels")).toHaveText("Outlined labels");
+    await expect(page.locator("h3#compact-labels")).toHaveText("Compact labels");
   });
 
   test("filled labels have color modifiers", async ({ page }) => {
@@ -24,15 +23,15 @@ test.describe("Label", () => {
     await expect(page.locator("#lbl-outline-blue")).toHaveClass(/pf-m-outline/);
   });
 
-  test("label with icon has icon element", async ({ page }) => {
-    await expect(page.locator("#lbl-icon .pf-v6-c-label__icon")).toBeVisible();
+  test("outline label with icon renders the icon span", async ({ page }) => {
+    await expect(page.locator("#lbl-outline-icon .pf-v6-c-label__icon")).toBeVisible();
   });
 
   test("removable label has close button", async ({ page }) => {
     await expect(page.locator("#lbl-removable .pf-v6-c-label__actions .pf-v6-c-button")).toBeVisible();
   });
 
-  test("labels have text content", async ({ page }) => {
+  test("label text from the content slot renders inside __text", async ({ page }) => {
     await expect(page.locator("#lbl-blue .pf-v6-c-label__text")).toHaveText("Blue");
   });
 });

@@ -6,11 +6,18 @@ test.describe("Dual List Selector", () => {
   });
 
   test("page loads with correct heading", async ({ page }) => {
-    await expect(page.locator("h1")).toHaveText("Dual List Selector");
+    await expect(page.locator("h1")).toHaveText("Dual list selector");
   });
 
-  test("all section headings are visible", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
+  test("example section heading is visible", async ({ page }) => {
+    await expect(page.locator("#basic")).toBeVisible();
+  });
+
+  test("page anchors are present", async ({ page }) => {
+    await expect(page.locator("#examples")).toBeVisible();
+    await expect(page.locator("#documentation")).toBeVisible();
+    await expect(page.locator("#props-dual-list-selector")).toBeVisible();
+    await expect(page.locator("#usage")).toBeVisible();
   });
 
   test("basic wrapper exists with correct class", async ({ page }) => {
@@ -25,22 +32,22 @@ test.describe("Dual List Selector", () => {
     ).toHaveCount(2);
   });
 
-  test("available pane has 3 items", async ({ page }) => {
+  test("available pane has 5 items", async ({ page }) => {
     const availablePane = page
       .locator("#dls-basic .pf-v6-c-dual-list-selector__pane")
       .first();
     await expect(
       availablePane.locator(".pf-v6-c-dual-list-selector__list-item")
-    ).toHaveCount(3);
+    ).toHaveCount(5);
   });
 
-  test("chosen pane has 1 item", async ({ page }) => {
+  test("chosen pane starts empty", async ({ page }) => {
     const chosenPane = page
       .locator("#dls-basic .pf-v6-c-dual-list-selector__pane")
       .last();
     await expect(
       chosenPane.locator(".pf-v6-c-dual-list-selector__list-item")
-    ).toHaveCount(1);
+    ).toHaveCount(0);
   });
 
   test("control buttons exist", async ({ page }) => {

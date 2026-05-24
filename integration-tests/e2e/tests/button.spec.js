@@ -5,13 +5,20 @@ test.describe("Button", () => {
     await page.goto("/components/button");
   });
 
-  test("page loads with all 6 section headings", async ({ page }) => {
-    await expect(page.locator("#variations-heading")).toBeVisible();
-    await expect(page.locator("#disabled-heading")).toBeVisible();
-    await expect(page.locator("#small-heading")).toBeVisible();
-    await expect(page.locator("#block-heading")).toBeVisible();
-    await expect(page.locator("#links-heading")).toBeVisible();
-    await expect(page.locator("#cta-heading")).toBeVisible();
+  test("page loads with example section headings", async ({ page }) => {
+    await expect(page.locator("#variant-examples")).toBeVisible();
+    await expect(page.locator("#disabled-buttons")).toBeVisible();
+    await expect(page.locator("#small-buttons")).toBeVisible();
+    await expect(page.locator("#block-level")).toBeVisible();
+    await expect(page.locator("#links-as-buttons")).toBeVisible();
+    await expect(page.locator("#call-to-action")).toBeVisible();
+  });
+
+  test("page anchors are present", async ({ page }) => {
+    await expect(page.locator("#examples")).toBeVisible();
+    await expect(page.locator("#documentation")).toBeVisible();
+    await expect(page.locator("#props-button")).toBeVisible();
+    await expect(page.locator("#usage")).toBeVisible();
   });
 
   test.describe("Variations", () => {
@@ -38,9 +45,9 @@ test.describe("Button", () => {
   });
 
   test.describe("Small", () => {
-    test("has pf-m-small modifier", async ({ page }) => {
-      await expect(page.locator("#btn-small-primary")).toHaveClass(/pf-m-small/);
-      await expect(page.locator("#btn-small-secondary")).toHaveClass(/pf-m-small/);
+    test("has pf-m-sm modifier", async ({ page }) => {
+      await expect(page.locator("#btn-sm-primary")).toHaveClass(/pf-m-sm/);
+      await expect(page.locator("#btn-sm-secondary")).toHaveClass(/pf-m-sm/);
     });
   });
 
@@ -52,8 +59,8 @@ test.describe("Button", () => {
 
   test.describe("Links as buttons", () => {
     test("renders as anchor elements with href", async ({ page }) => {
-      const primaryLink = page.locator("#btn-anchor-primary");
-      await expect(primaryLink).toHaveAttribute("href", "#links-heading");
+      const primaryLink = page.locator("#btn-link-primary");
+      await expect(primaryLink).toHaveAttribute("href", "#links-as-buttons");
 
       const tagName = await primaryLink.evaluate((el) => el.tagName.toLowerCase());
       expect(tagName).toBe("a");
@@ -61,10 +68,10 @@ test.describe("Button", () => {
   });
 
   test.describe("Call to action", () => {
-    test("has pf-m-display-lg modifier", async ({ page }) => {
-      await expect(page.locator("#btn-cta-primary")).toHaveClass(/pf-m-display-lg/);
-      await expect(page.locator("#btn-cta-secondary")).toHaveClass(/pf-m-display-lg/);
-      await expect(page.locator("#btn-cta-tertiary")).toHaveClass(/pf-m-display-lg/);
+    test("has pf-m-lg modifier", async ({ page }) => {
+      await expect(page.locator("#btn-cta-primary")).toHaveClass(/pf-m-lg/);
+      await expect(page.locator("#btn-cta-secondary")).toHaveClass(/pf-m-lg/);
+      await expect(page.locator("#btn-cta-tertiary")).toHaveClass(/pf-m-lg/);
     });
   });
 });
