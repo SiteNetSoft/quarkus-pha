@@ -30,10 +30,13 @@ test.describe("Divider", () => {
     await expect(card.locator("hr.pf-v6-c-divider")).toBeVisible();
   });
 
-  test("li mode renders <li class=pf-v6-c-divider role=separator>", async ({ page }) => {
+  test("li mode renders <li class=pf-v6-c-divider> as aria-hidden separator", async ({ page }) => {
     const card = page.locator('[data-source-href="/components/divider/source/using-li"]');
     const items = card.locator("li.pf-v6-c-divider");
-    await expect(items.first()).toHaveAttribute("role", "separator");
+    // Demo uses aria-hidden="true" instead of role="separator" so the surrounding
+    // <ul> doesn't become a mixed-role list (axe rule list/listitem). The visual
+    // divider styling is unchanged.
+    await expect(items.first()).toHaveAttribute("aria-hidden", "true");
     await expect(items).toHaveCount(3);
   });
 
