@@ -8,7 +8,7 @@
     <div class="pf-v6-c-menu__content">
       <ul class="pf-v6-c-menu__list" role="menu">
         <template x-for="opt in ['Newest', 'Oldest', 'Name A→Z', 'Name Z→A']" :key="opt">
-          <li class="pf-v6-c-menu__list-item" :class="choice === opt ? 'pf-m-selected' : ''"><button class="pf-v6-c-menu__item" type="button" role="menuitemradio" :aria-checked="choice === opt" @click="choice = opt; open = false">
+          <li role="none" class="pf-v6-c-menu__list-item" :class="choice === opt ? 'pf-m-selected' : ''"><button class="pf-v6-c-menu__item" type="button" role="menuitemradio" :aria-checked="choice === opt" @click="choice = opt; open = false">
             <span class="pf-v6-c-menu__item-main">
               <span class="pf-v6-c-menu__item-text" x-text="opt"></span>
               <span class="pf-v6-c-menu__item-select-icon" x-show="choice === opt">{icons:svg('fa:check').raw}</span>

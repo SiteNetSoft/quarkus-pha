@@ -13,7 +13,7 @@
   <section style="margin-top: 2rem">
     <h2 id="infinite-scroll-heading">Auto-loading list</h2>
     <p>Scroll down to trigger loading of additional items from <code>/api/htmx/items</code>.</p>
-    <div class="pf-v6-c-data-list" id="scroll-list" role="list" style="max-height: 400px; overflow-y: auto">
+    <div class="pf-v6-c-data-list" id="scroll-list" role="list" tabindex="0" aria-label="Infinitely-loading list" style="max-height: 400px; overflow-y: auto">
       {#include components/htmx/infinite-scroll id="scroll-sentinel-0" loadUrl="/api/htmx/items?page=0" /}
     </div>
   </section>

@@ -3,7 +3,7 @@
 {! Optional: disabled, required, validated (success|warning|error) !}
 {! Slot: options — one or more <option> / <optgroup> elements. !}
 <span class="pf-v6-c-form-control{#if validated??} pf-m-{validated}{/if}{#if disabled??} pf-m-disabled{/if}" id="{id}">
-  <select id="{id}-field" name="{id}"{#if disabled??} disabled{/if}{#if required??} required{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if}{#if validated??}{#if validated is 'error'} aria-invalid="true"{/if}{/if}>
+  <select id="{id}-field" name="{id}"{#if disabled??} disabled{/if}{#if required??} required{/if} aria-label="{#if ariaLabel??}{ariaLabel}{#else}Select{/if}"{#if validated??}{#if validated is 'error'} aria-invalid="true"{/if}{/if}>
     {#insert options}{/insert}
   </select>
   <span class="pf-v6-c-form-control__toggle-icon">{icons:svg('fa:caret-down').raw}</span>

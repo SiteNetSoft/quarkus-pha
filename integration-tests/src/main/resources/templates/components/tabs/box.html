@@ -1,7 +1,7 @@
 {! box=true emits pf-m-box — bordered, paper-card appearance. !}
 <div x-data="{ active: 'b1' }">
   {#include components/navigation/tabs id="tabs-box" box=true}{#content}
-  <li class="pf-v6-c-tabs__item" :class="active === 'b1' ? 'pf-m-current' : ''">
+  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'b1' ? 'pf-m-current' : ''">
     <button
       class="pf-v6-c-tabs__link"
       type="button"
@@ -13,7 +13,7 @@
       <span class="pf-v6-c-tabs__item-text">Tab 1</span>
     </button>
   </li>
-  <li class="pf-v6-c-tabs__item" :class="active === 'b2' ? 'pf-m-current' : ''">
+  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'b2' ? 'pf-m-current' : ''">
     <button
       class="pf-v6-c-tabs__link"
       type="button"
