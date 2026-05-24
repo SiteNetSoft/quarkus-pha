@@ -1,6 +1,5 @@
-{! Shared
-<head>
-  partial — included by all layout templates !}
+{! Shared <head> partial — included by all layout templates. Do not include the !}
+{! opening or closing <head> tags here; layouts/base.html wraps the include. !}
   <meta charset="UTF-8" />
   <title>{#insert title}{#if applicationPageName??}{applicationPageName} | {/if}{applicationName}{/insert}</title>
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
@@ -35,4 +34,3 @@
 
   <script src="/web/vendor/alpine/alpine.min.js" defer></script>
   <script src="/web/vendor/htmx/htmx.min.js"></script>
-</head>
