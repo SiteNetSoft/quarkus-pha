@@ -20,7 +20,7 @@
                     <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Helper text</h1>
                     <p>
                       Inline guidance beneath form fields and other inputs. Each helper-text container holds one or more
-                      items; items pick a default icon based on their <code class="ws-code">status</code> (success,
+                      items; items pick a default icon based on their <code class="ws-code">variant</code> (success,
                       warning, error, indeterminate) or render with a custom icon.
                     </p>
                   </div>
@@ -175,9 +175,12 @@
                           <p class="pf-v6-c-content--p pf-m-editorial">
                             Parameters accepted by
                             <code class="ws-code">{|{#include components/feedback/helper-text ... }...{/include}|}</code>.
-                            The container has two modes — single-item (default; the include body becomes the text of
-                            one wrapped item) or multi-item (pass <code class="ws-code">multi=true</code> and put
-                            <code class="ws-code">helper-text-item</code> includes in the body).
+                            The container has two shapes, discriminated by <code class="ws-code">component</code> —
+                            single-item shortcut (<code class="ws-code">component="div"</code>, default; the include
+                            body becomes the text of one auto-wrapped item) or multi-item list
+                            (<code class="ws-code">component="ul"</code>; the body is passed through verbatim and
+                            should contain <code class="ws-code">helper-text-item</code> includes with
+                            <code class="ws-code">component="li"</code>).
                           </p>
                           <table
                             class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
@@ -214,33 +217,53 @@
                                 <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
                                 <td class="pf-v6-c-table__td">
                                   <span class="pf-v6-c-table__text"
-                                    >Include body. In single-item mode (default), it becomes the text inside one
-                                    wrapped item. In multi-item mode (<code class="ws-code">multi=true</code>), it's
-                                    passed through verbatim — put one or more
-                                    <code class="ws-code">helper-text-item</code> includes here.</span
+                                    >Include body. In single-item shortcut mode (default), it becomes the text inside
+                                    one auto-wrapped item. In multi-item list mode
+                                    (<code class="ws-code">component="ul"</code>), it's passed through verbatim — put
+                                    one or more <code class="ws-code">helper-text-item</code> includes here.</span
                                   >
                                 </td>
                               </tr>
                               <tr class="pf-v6-c-table__tr">
                                 <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">multi</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Boolean</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">component</code></span>
                                 </td>
                                 <td class="pf-v6-c-table__td">
                                   <span class="pf-v6-c-table__text"
-                                    >When true, the container does no per-item wrapping; the content slot is rendered
-                                    as-is. Use when you're including
-                                    <code class="ws-code">helper-text-item</code> children.</span
+                                    ><code class="ws-code">"div" | "ul"</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">"div"</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Wrapping element. <code class="ws-code">"ul"</code> enables list semantics —
+                                    emits <code class="ws-code">role="list"</code> (defends against WebKit dropping
+                                    the implicit role on <code class="ws-code">list-style: none</code>) and switches
+                                    the body to pass-through. Pair with
+                                    <code class="ws-code">helper-text-item component="li"</code> children.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">ariaLabel</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Only emitted when <code class="ws-code">component="ul"</code>; labels the list
+                                    for assistive tech.</span
                                   >
                                 </td>
                               </tr>
                               <tr class="pf-v6-c-table__tr">
                                 <td class="pf-v6-c-table__td">
                                   <span class="pf-v6-c-table__text"
-                                    ><code class="ws-code">status</code> / <code class="ws-code">dynamic</code> /
+                                    ><code class="ws-code">variant</code> /
+                                    <code class="ws-code">dynamic</code> /
                                     <code class="ws-code">iconName</code></span
                                   >
                                 </td>
@@ -250,8 +273,8 @@
                                 <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
                                 <td class="pf-v6-c-table__td">
                                   <span class="pf-v6-c-table__text"
-                                    >Applied to the single item rendered in single-item mode. Ignored when
-                                    <code class="ws-code">multi=true</code> (set them on each
+                                    >Applied to the single item rendered by the single-item shortcut. Ignored when
+                                    <code class="ws-code">component="ul"</code> (set them on each
                                     <code class="ws-code">helper-text-item</code> instead).</span
                                   >
                                 </td>
@@ -300,7 +323,27 @@
                               </tr>
                               <tr class="pf-v6-c-table__tr">
                                 <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">status</code></span>
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">component</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    ><code class="ws-code">"div" | "li"</code></span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">"div"</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Wrapping element. Use <code class="ws-code">"li"</code> when this item is nested
+                                    inside a <code class="ws-code">helper-text</code> with
+                                    <code class="ws-code">component="ul"</code>.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">variant</code></span>
                                 </td>
                                 <td class="pf-v6-c-table__td">
                                   <span class="pf-v6-c-table__text"
@@ -312,7 +355,7 @@
                                 <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
                                 <td class="pf-v6-c-table__td">
                                   <span class="pf-v6-c-table__text"
-                                    >Applies <code class="ws-code">{|pf-m-{status}|}</code> and auto-picks a default
+                                    >Applies <code class="ws-code">{|pf-m-{variant}|}</code> and auto-picks a default
                                     icon (<code class="ws-code">fa:circle-check</code> for success,
                                     <code class="ws-code">fa:triangle-exclamation</code> for warning,
                                     <code class="ws-code">fa:circle-exclamation</code> for error,
@@ -399,16 +442,18 @@
                           <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
                           <p class="pf-v6-c-content--p pf-m-editorial">
                             <strong>Single-item vs. multi-item.</strong> If you only need one helper-text row, pass
-                            the text as the include body — the container wraps it as a single item with the status
+                            the text as the include body — the container wraps it as a single item with the variant
                             and icon you supplied. If you need multiple rows (e.g. a password-requirement checklist),
-                            add <code class="ws-code">multi=true</code> to the container and put one
-                            <code class="ws-code">helper-text-item</code> include per row in the body.
+                            add <code class="ws-code">component="ul"</code> to the container and put one
+                            <code class="ws-code">helper-text-item component="li"</code> include per row in the body.
+                            Matches PF React's <code class="ws-code">{|&lt;HelperText component="ul"&gt;|}</code> with
+                            <code class="ws-code">{|&lt;HelperTextItem component="li"&gt;|}</code> children.
                           </p>
                           <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Default icons.</strong> Setting <code class="ws-code">status</code> on an item
+                            <strong>Default icons.</strong> Setting <code class="ws-code">variant</code> on an item
                             without an <code class="ws-code">iconName</code> auto-renders the matching status icon —
                             success gets a check, warning gets a triangle, error gets an x-circle, indeterminate gets a
-                            dash. Skip both <code class="ws-code">status</code> and
+                            dash. Skip both <code class="ws-code">variant</code> and
                             <code class="ws-code">iconName</code> for plain informational text (no icon, default text
                             color).
                           </p>

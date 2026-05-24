@@ -1,31 +1,36 @@
 {! Helper text container — PatternFly v6 !}
-{! Two modes:                                                                       !}
-{!   Single-item (default): the include body becomes the text inside one __item.    !}
-{!     {#include components/feedback/helper-text id="..." status="..."}text{/include} !}
-{!   Multi-item: pass multi=true and put helper-text-item includes in the body.     !}
-{!     {#include components/feedback/helper-text id="..." multi=true}               !}
-{!       {#include components/feedback/helper-text-item status="success"}t1{/include} !}
-{!       ...                                                                        !}
-{!     {/include}                                                                   !}
+{! Two shapes (discriminated by `component`):                                       !}
+{!   Single-item shortcut (component="div", default): the include body becomes the !}
+{!     text of one auto-wrapped item, styled with the container's variant/icon.    !}
+{!       {#include components/feedback/helper-text id="..." variant="error"}text{/include} !}
+{!   Multi-item list (component="ul"): the body is passed through verbatim — put   !}
+{!     one helper-text-item (component="li") include per row inside.               !}
+{!       {#include components/feedback/helper-text id="..." component="ul"}         !}
+{!         {#include components/feedback/helper-text-item component="li" variant="success"}t1{/include} !}
+{!         ...                                                                     !}
+{!       {/include}                                                                !}
 {!                                                                                  !}
 {! Parameters:                                                                      !}
 {!   id        (optional) — id on the container, useful as aria-describedby         !}
-{!   multi     (optional, single-item by default) — when true, the body is passed   !}
-{!             through verbatim; container does no per-item wrapping                !}
-{!   status    (single-item only) — indeterminate | warning | success | error       !}
-{!   dynamic   (single-item only) — boolean; applies pf-m-dynamic for animations    !}
-{!   iconName  (single-item only) — overrides the default per-status icon           !}
-<div class="pf-v6-c-helper-text"{#if id??} id="{id}"{/if}>
-  {#if multi??}
+{!   component (optional) — 'div' (default) | 'ul'. 'ul' enables list semantics     !}
+{!               (role="list" emitted; pair with helper-text-item component="li"). !}
+{!   ariaLabel (optional) — only emitted when component='ul'; labels the list.     !}
+{!   variant   (single-item shortcut only) — indeterminate | warning | success | error !}
+{!   dynamic   (single-item shortcut only) — boolean; applies pf-m-dynamic for animations !}
+{!   iconName  (single-item shortcut only) — overrides the default per-variant icon !}
+{#let c=(component ?: 'div')}
+<{c} class="pf-v6-c-helper-text"{#if id??} id="{id}"{/if}{#if c is 'ul'} role="list"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}{/if}>
+  {#if c is 'ul'}
   {#insert/}
   {#else}
-  <div class="pf-v6-c-helper-text__item{#if status??} pf-m-{status}{/if}{#if dynamic??} pf-m-dynamic{/if}">
+  <div class="pf-v6-c-helper-text__item{#if variant??} pf-m-{variant}{/if}{#if dynamic??} pf-m-dynamic{/if}">
     {#if iconName??}
     <span class="pf-v6-c-helper-text__item-icon">{icons:svg(iconName).raw}</span>
-    {#else if status??}
-    <span class="pf-v6-c-helper-text__item-icon">{#if status is 'success'}{icons:svg('fa:circle-check').raw}{#else if status is 'warning'}{icons:svg('fa:triangle-exclamation').raw}{#else if status is 'error'}{icons:svg('fa:circle-exclamation').raw}{#else if status is 'indeterminate'}{icons:svg('fa:minus').raw}{/if}</span>
+    {#else if variant??}
+    <span class="pf-v6-c-helper-text__item-icon">{#if variant is 'success'}{icons:svg('fa:circle-check').raw}{#else if variant is 'warning'}{icons:svg('fa:triangle-exclamation').raw}{#else if variant is 'error'}{icons:svg('fa:circle-exclamation').raw}{#else if variant is 'indeterminate'}{icons:svg('fa:minus').raw}{/if}</span>
     {/if}
     <span class="pf-v6-c-helper-text__item-text">{#insert/}</span>
   </div>
   {/if}
-</div>
+</{c}>
+{/let}
