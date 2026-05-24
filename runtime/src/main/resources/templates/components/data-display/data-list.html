@@ -1,4 +1,5 @@
-{! Data list — PatternFly v6 !} {! Parameters: id, compact (optional) !}
-<ul class="pf-v6-c-data-list{#if compact??} pf-m-compact{/if}" role="list" id="{id}">
+{! Data list — PatternFly v6 !}
+{! Parameters: id, compact (optional), ariaLabel (optional — labels the list for AT) !}
+<ul class="pf-v6-c-data-list{#if compact??} pf-m-compact{/if}" role="list" id="{id}"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
   {#insert content}{/insert}
 </ul>

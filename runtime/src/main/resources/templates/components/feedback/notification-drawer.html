@@ -1,9 +1,10 @@
-{! Notification drawer — PatternFly v6 !} {! Parameters: id, titleText (optional) !}
+{! Notification drawer — PatternFly v6 !}
+{! Parameters: id, titleText (optional), ariaLabel (optional — overrides titleText as the region label) !}
 <div
   class="pf-v6-c-notification-drawer"
   id="{id}"
   role="region"
-  aria-label="{#if titleText??}{titleText}{#else}Notifications{/if}"
+  aria-label="{#if ariaLabel??}{ariaLabel}{#else if titleText??}{titleText}{#else}Notifications{/if}"
 >
   <div class="pf-v6-c-notification-drawer__header">
     <h1 class="pf-v6-c-notification-drawer__header-title">{#if titleText??}{titleText}{#else}Notifications{/if}</h1>

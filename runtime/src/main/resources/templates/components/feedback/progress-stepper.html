@@ -1,8 +1,10 @@
-{! Progress stepper — PatternFly v6 !} {! Parameters: id, vertical (optional), compact (optional), center (optional) !}
+{! Progress stepper — PatternFly v6 !}
+{! Parameters: id, vertical (optional), compact (optional), center (optional), ariaLabel (optional — labels the stepper) !}
 <ol
   class="pf-v6-c-progress-stepper{#if vertical??} pf-m-vertical{/if}{#if compact??} pf-m-compact{/if}{#if center??} pf-m-center{/if}"
   id="{id}"
   role="list"
+  {#if ariaLabel??}aria-label="{ariaLabel}"{/if}
 >
   {#insert content}{/insert}
 </ol>
