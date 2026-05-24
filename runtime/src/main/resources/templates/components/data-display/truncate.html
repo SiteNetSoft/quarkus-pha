@@ -1,24 +1,24 @@
 {! Truncate — PatternFly v6 !}
-{! Required: text !}
+{! Required: content !}
 {! Optional: id, position (end | start | middle — default end),
               trailingNumChars (for middle truncation, default 7) !}
 {#if position??}
   {#if position is 'middle'}
-<span class="pf-v6-c-truncate"{#if id??} id="{id}"{/if} title="{text}">
-  <span class="pf-v6-c-truncate__start">{text.substring(0, text.length - (trailingNumChars ?: 7))}</span>
-  <span class="pf-v6-c-truncate__end">{text.substring(text.length - (trailingNumChars ?: 7))}</span>
+<span class="pf-v6-c-truncate"{#if id??} id="{id}"{/if} title="{content}">
+  <span class="pf-v6-c-truncate__start">{content.substring(0, content.length - (trailingNumChars ?: 7))}</span>
+  <span class="pf-v6-c-truncate__end">{content.substring(content.length - (trailingNumChars ?: 7))}</span>
 </span>
   {#else if position is 'start'}
-<span class="pf-v6-c-truncate"{#if id??} id="{id}"{/if} title="{text}">
-  <span class="pf-v6-c-truncate__end">{text}</span>
+<span class="pf-v6-c-truncate"{#if id??} id="{id}"{/if} title="{content}">
+  <span class="pf-v6-c-truncate__end">{content}</span>
 </span>
   {#else}
-<span class="pf-v6-c-truncate"{#if id??} id="{id}"{/if} title="{text}">
-  <span class="pf-v6-c-truncate__start">{text}</span>
+<span class="pf-v6-c-truncate"{#if id??} id="{id}"{/if} title="{content}">
+  <span class="pf-v6-c-truncate__start">{content}</span>
 </span>
   {/if}
 {#else}
-<span class="pf-v6-c-truncate"{#if id??} id="{id}"{/if} title="{text}">
-  <span class="pf-v6-c-truncate__start">{text}</span>
+<span class="pf-v6-c-truncate"{#if id??} id="{id}"{/if} title="{content}">
+  <span class="pf-v6-c-truncate__start">{content}</span>
 </span>
 {/if}

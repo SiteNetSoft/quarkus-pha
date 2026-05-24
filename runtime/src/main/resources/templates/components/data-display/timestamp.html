@@ -1,9 +1,10 @@
 {! Timestamp — PatternFly v6 !}
-{! Required: text (the pre-formatted, human-readable timestamp string) !}
+{! Content slot: pre-formatted, human-readable timestamp string (passed as the include body — !}
+{! mirrors PF React's `children` override of the auto-formatted default). !}
 {! Optional: id, datetime (ISO 8601 — the machine-readable value used for the <time> datetime attribute),
               inline (boolean — pf-m-inline, renders inline with surrounding text),
               tooltip (string — shown via the title attribute on hover) !}
 {! Date / time formatting is a server-side concern — pre-format the string in your route. !}
 <time class="pf-v6-c-timestamp{#if inline??} pf-m-inline{/if}"{#if id??} id="{id}"{/if}{#if datetime??} datetime="{datetime}"{/if}{#if tooltip??} title="{tooltip}"{/if}>
-  <span class="pf-v6-c-timestamp__text">{text}</span>
+  <span class="pf-v6-c-timestamp__text">{#insert/}</span>
 </time>
