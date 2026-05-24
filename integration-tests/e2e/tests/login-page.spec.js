@@ -5,13 +5,12 @@ test.describe("Login Page", () => {
     await page.goto("/components/login-page");
   });
 
-  test("page loads with all 1 section headings", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#basic-heading")).toHaveText("Basic");
+  test("page loads with the basic example section in ToC", async ({ page }) => {
+    await expect(page.locator("#basic")).toBeVisible();
   });
 
   test.describe("Basic", () => {
-    test("login page has pf-v6-c-login class", async ({ page }) => {
+    test("login page wrapper has pf-v6-c-login class", async ({ page }) => {
       await expect(page.locator("#lp-basic")).toHaveClass(/pf-v6-c-login/);
     });
 
@@ -19,14 +18,16 @@ test.describe("Login Page", () => {
       await expect(page.locator("#lp-basic form")).toBeVisible();
     });
 
-    test("login page has a username input", async ({ page }) => {
-      await expect(page.locator("#lp-user")).toBeVisible();
-      await expect(page.locator("#lp-user")).toHaveAttribute("type", "text");
+    test("login page has a text username input", async ({ page }) => {
+      const username = page.locator("#lp-basic-username-field");
+      await expect(username).toBeVisible();
+      await expect(username).toHaveAttribute("type", "text");
     });
 
     test("login page has a password input", async ({ page }) => {
-      await expect(page.locator("#lp-pass")).toBeVisible();
-      await expect(page.locator("#lp-pass")).toHaveAttribute("type", "password");
+      const password = page.locator("#lp-basic-password-field");
+      await expect(password).toBeVisible();
+      await expect(password).toHaveAttribute("type", "password");
     });
 
     test("login page has a submit button", async ({ page }) => {

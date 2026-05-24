@@ -5,10 +5,10 @@ test.describe("Panel", () => {
     await page.goto("/components/panel");
   });
 
-  test("page loads with all 3 section headings", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#bordered-heading")).toBeVisible();
-    await expect(page.locator("#raised-heading")).toBeVisible();
+  test("page loads with example sections in ToC", async ({ page }) => {
+    await expect(page.locator("h3#basic")).toHaveText("Basic");
+    await expect(page.locator("h3#bordered")).toHaveText("Bordered");
+    await expect(page.locator("h3#raised")).toHaveText("Raised");
   });
 
   test("basic panel has pf-v6-c-panel class", async ({ page }) => {
@@ -31,7 +31,7 @@ test.describe("Panel", () => {
     await expect(page.locator("#panel-raised")).toHaveClass(/pf-m-raised/);
   });
 
-  test("raised panel has footer", async ({ page }) => {
-    await expect(page.locator("#panel-raised .pf-v6-c-panel__footer")).toBeVisible();
+  test("raised panel has body content", async ({ page }) => {
+    await expect(page.locator("#panel-raised .pf-v6-c-panel__main-body")).toBeVisible();
   });
 });

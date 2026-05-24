@@ -14,7 +14,7 @@ test.describe("Back to top", () => {
     await page.goto("/components/back-to-top");
   });
 
-  test("page loads with example and documentation TOC anchors", async ({ page }) => {
+  test("page loads with example and documentation anchors", async ({ page }) => {
     for (const id of ["examples", "basic", "documentation", "props-back-to-top", "usage"]) {
       await expect(page.locator(`#${id}`)).toBeAttached();
     }
@@ -45,9 +45,25 @@ test.describe("Back to top", () => {
     await expect(btn.locator(".pf-v6-c-button__icon svg")).toBeVisible();
   });
 
-  test("standalone example route renders", async ({ page }) => {
+  test("standalone example route renders the back-to-top wrapper", async ({ page }) => {
     const res = await page.goto("/components/back-to-top/basic");
     expect(res.status()).toBe(200);
     await expect(page.locator("#back-to-top-basic")).toBeAttached();
+  });
+
+  test.describe("Per-example code viewer", () => {
+    test("Toggle Qute opens Monaco with the fragment source", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/back-to-top/basic"]');
+      const toggle = card.locator('button[aria-label*="Toggle Qute"]');
+      await toggle.click();
+      await expect(card.locator(".monaco-editor").first()).toBeVisible({ timeout: 10000 });
+    });
+
+    test("Open-in-new-window link points to the standalone route", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/back-to-top/basic"]');
+      const link = card.locator('a[aria-label*="Open"]');
+      await expect(link).toHaveAttribute("href", "/components/back-to-top/basic");
+      await expect(link).toHaveAttribute("target", "_blank");
+    });
   });
 });

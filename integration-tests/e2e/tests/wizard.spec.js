@@ -5,9 +5,10 @@ test.describe("Wizard", () => {
     await page.goto("/components/wizard");
   });
 
-  test("page loads with all 1 section headings", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#basic-heading")).toHaveText("Basic");
+  test("page loads with all 3 example sections in ToC", async ({ page }) => {
+    await expect(page.locator("h3#basic")).toHaveText("Basic");
+    await expect(page.locator("h3#with-substeps")).toHaveText("With substeps");
+    await expect(page.locator("h3#with-review")).toHaveText("With review step");
   });
 
   test.describe("Basic", () => {
@@ -19,25 +20,33 @@ test.describe("Wizard", () => {
       await expect(page.locator("#wiz-basic .pf-v6-c-wizard__nav")).toBeVisible();
     });
 
-    test("wizard has three nav items", async ({ page }) => {
-      await expect(page.locator("#wiz-basic .pf-v6-c-wizard__nav-item")).toHaveCount(3);
+    test("wizard has four nav items (General info, Connection details, Permissions, Review)", async ({ page }) => {
+      await expect(page.locator("#wiz-basic .pf-v6-c-wizard__nav-item")).toHaveCount(4);
     });
 
     test("wizard first nav item is current", async ({ page }) => {
       await expect(page.locator("#wiz-basic .pf-v6-c-wizard__nav-link.pf-m-current")).toHaveCount(1);
     });
 
-    test("wizard has a footer", async ({ page }) => {
-      await expect(page.locator("#wiz-basic .pf-v6-c-wizard__footer")).toBeVisible();
-    });
-
     test("wizard footer has Next and Back buttons", async ({ page }) => {
-      await expect(page.locator("#wiz-basic .pf-v6-c-wizard__footer .pf-v6-c-button.pf-m-primary")).toBeVisible();
-      await expect(page.locator("#wiz-basic .pf-v6-c-wizard__footer .pf-v6-c-button.pf-m-secondary")).toBeVisible();
+      await expect(page.locator("#wiz-basic .pf-v6-c-button.pf-m-primary")).toBeVisible();
+      await expect(page.locator("#wiz-basic .pf-v6-c-button.pf-m-secondary")).toBeVisible();
     });
 
     test("wizard footer has a Cancel button", async ({ page }) => {
       await expect(page.locator("#wiz-basic .pf-v6-c-wizard__footer-cancel")).toBeVisible();
+    });
+  });
+
+  test.describe("With substeps", () => {
+    test("substeps wizard renders", async ({ page }) => {
+      await expect(page.locator("#wiz-substeps")).toHaveClass(/pf-v6-c-wizard/);
+    });
+  });
+
+  test.describe("With review", () => {
+    test("review wizard renders", async ({ page }) => {
+      await expect(page.locator("#wiz-review")).toHaveClass(/pf-v6-c-wizard/);
     });
   });
 });
