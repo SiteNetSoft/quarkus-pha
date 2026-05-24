@@ -174,21 +174,11 @@
           {! ── Card gallery ── !}
           <div class="pf-v6-l-gallery pf-m-gutter">
             {#for component in components}
-            <div span="4" x-show="'{component.name}'.toLowerCase().includes(search.toLowerCase())">
+            <div x-show="'{component.name}'.toLowerCase().includes(search.toLowerCase())">
               <a href="{component.href}" style="text-decoration: none; color: inherit">
                 <div id="{component.id}" class="pf-v6-c-card pf-m-clickable">
                   {! Card header !}
                   <div class="pf-v6-c-card__header">
-                    <div class="pf-v6-c-card__actions">
-                      <div class="pf-v6-c-card__selectable-actions">
-                        <button
-                          class="pf-v6-c-card__clickable-action"
-                          id="{component.id}-input"
-                          aria-labelledby="{component.id}"
-                          type="button"
-                        ></button>
-                      </div>
-                    </div>
                     <div class="pf-v6-c-card__header-main">
                       <div class="pf-v6-c-card__title">
                         <div class="pf-v6-c-card__title-text" id="{component.id}-title">{component.name}</div>
