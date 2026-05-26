@@ -1,10 +1,10 @@
 {! Banner — PatternFly v6 !}
-{! Required: id, variant — variant collapses PF's separate `color` and `status` props (mutually exclusive).
-   Status variants (success | warning | danger | info | custom) auto-render an icon;
-   color variants (red | orangered | orange | yellow | green | teal | blue | purple) render plain. !}
-{! Optional: sticky — adds pf-m-sticky for pinned-to-top behavior inside a scroll container.
+{! Optional: id — DOM id on the root; omit unless something else references the banner.
+              variant — collapses PF's separate `color` and `status` props (mutually exclusive).
+              Status variants (success | warning | danger | info | custom) auto-render an icon;
+              color variants (red | orangered | orange | yellow | green | teal | blue | purple) render plain.
+              Omit for the default (no color modifier, no icon).
+              sticky — adds pf-m-sticky for pinned-to-top behavior inside a scroll container.
               screenReaderText — visually-hidden prefix announced by AT (e.g. "Warning:"). !}
-{! Slot: content — the visible banner message. !}
-<div class="pf-v6-c-banner pf-m-{variant}{#if sticky??} pf-m-sticky{/if}" id="{id}">
-  <p>{#if screenReaderText??}<span class="pf-v6-screen-reader">{screenReaderText}</span>{/if}{#if variant is 'success'}<span class="pf-v6-c-banner__icon" aria-hidden="true">{icons:svg('fa:circle-check').raw}</span> {#else if variant is 'warning'}<span class="pf-v6-c-banner__icon" aria-hidden="true">{icons:svg('fa:triangle-exclamation').raw}</span> {#else if variant is 'danger'}<span class="pf-v6-c-banner__icon" aria-hidden="true">{icons:svg('fa:circle-exclamation').raw}</span> {#else if variant is 'info'}<span class="pf-v6-c-banner__icon" aria-hidden="true">{icons:svg('fa:circle-info').raw}</span> {/if}{#insert message}{/insert}</p>
-</div>
+{! Slot: message — the visible banner message. !}
+<div class="pf-v6-c-banner{#if variant??} pf-m-{variant}{/if}{#if sticky??} pf-m-sticky{/if}"{#if id??} id="{id}"{/if}>{#if screenReaderText??}<span class="pf-v6-screen-reader">{screenReaderText}</span>{/if}{#if variant??}{#if variant is 'success'}<span class="pf-v6-c-banner__icon" aria-hidden="true">{icons:svg('fa:circle-check').raw}</span> {#else if variant is 'warning'}<span class="pf-v6-c-banner__icon" aria-hidden="true">{icons:svg('fa:triangle-exclamation').raw}</span> {#else if variant is 'danger'}<span class="pf-v6-c-banner__icon" aria-hidden="true">{icons:svg('fa:circle-exclamation').raw}</span> {#else if variant is 'info'}<span class="pf-v6-c-banner__icon" aria-hidden="true">{icons:svg('fa:circle-info').raw}</span>{/if}{/if}{#insert message}{/insert}</div>
