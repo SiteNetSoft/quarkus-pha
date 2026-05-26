@@ -113,14 +113,14 @@ podman run --rm \
     cp node_modules/@fortawesome/fontawesome-free/svgs/brands/*.svg  /output/icons/fa-brands/
     cp node_modules/@fortawesome/fontawesome-free/LICENSE.txt        /output/icons/fa-LICENSE.txt 2>/dev/null || true
 
-    echo "  Icons (PatternFly v6.4.0 pficons from GitHub source)..."
+    echo "  Icons (PatternFly v6.5.0 pficons from GitHub source)..."
     apk add --no-cache curl tar >/dev/null 2>&1
     mkdir -p /output/icons/pficon /tmp/pf
     cd /tmp/pf
-    curl -fsSL https://github.com/patternfly/patternfly/archive/refs/tags/v6.4.0.tar.gz \
+    curl -fsSL https://github.com/patternfly/patternfly/archive/refs/tags/v6.5.0.tar.gz \
       | tar -xz --strip-components=1 \
-          patternfly-6.4.0/src/icons/definitions/pficons.mjs \
-          patternfly-6.4.0/LICENSE.txt
+          patternfly-6.5.0/src/icons/definitions/pficons.mjs \
+          patternfly-6.5.0/LICENSE.txt
     cp LICENSE.txt /output/icons/pficon-LICENSE.txt 2>/dev/null || true
     cat > /tmp/pf/build-pficons.mjs <<EOF
 import { pfIcons } from "/tmp/pf/src/icons/definitions/pficons.mjs";
@@ -185,7 +185,7 @@ EOF
       const pkg = require(\"/work/node_modules/cytoscape/package.json\");
       console.log(\"  Cytoscape:   \" + pkg.version);
     "
-    echo "  pficon:      patternfly/patternfly@v6.4.0 (GitHub source)"
+    echo "  pficon:      patternfly/patternfly@v6.5.0 (GitHub source)"
   '
 
 echo ""
