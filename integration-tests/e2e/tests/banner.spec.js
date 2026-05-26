@@ -41,8 +41,14 @@ test.describe("Banner", () => {
   });
 
   test.describe("With links", () => {
-    test("renders anchor tags inside the message", async ({ page }) => {
-      await expect(page.locator("#banner-links a")).toHaveCount(2);
+    test("renders anchor tags + a disabled link + an inline link-button inside banner messages", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/banner/with-links"]');
+      // First banner: one plain anchor.
+      // Second banner: one disabled-styled anchor (role=link, aria-disabled=true).
+      // Third banner: blue variant with an inline link-button.
+      await expect(card.locator(".pf-v6-c-banner")).toHaveCount(3);
+      await expect(card.locator(".pf-v6-c-banner a[aria-disabled='true']")).toHaveCount(1);
+      await expect(card.locator(".pf-v6-c-banner button.pf-v6-c-button.pf-m-link")).toHaveCount(1);
     });
   });
 
