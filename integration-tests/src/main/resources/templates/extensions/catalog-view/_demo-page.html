@@ -1,0 +1,94 @@
+{#include layouts/base}
+{! Shared demo page for the 5 catalog-view sub-items. Parameterised by Java route. !}
+{! Data: type (slug), title, intro (HTML) !}
+{#title}{title}{/title} {#head}
+<link rel="stylesheet" href="/web/vendor/patternfly-extensions/catalog-view.css" />
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <p>
+                      <a class="pf-v6-c-button pf-m-link pf-m-inline" href="/"
+                        ><span class="pf-v6-c-button__text">&larr; Components</span></a
+                      >
+                    </p>
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">{title}</h1>
+                    <p>{intro.raw}</p>
+                  </div>
+                </div>
+              </section>
+
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                    <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                      <div>
+                        <h2
+                          id="examples"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Examples
+                        </h2>
+                      </div>
+                    </div>
+
+                    {#if type == 'catalog-item-header'}
+                      {#include partials/example-card title="Basic" slug="basic" component="catalog-view/catalog-item-header" urlPrefix="/extensions" description="Header strip with optional icon, title, and vendor subtitle. Lives at the top of a catalog detail page."}
+                      {#content}{#include extensions/catalog-view/catalog-item-header/basic /}{/content}
+                      {/include}
+                    {/if}
+                    {#if type == 'catalog-tile'}
+                      {#include partials/example-card title="Basic" slug="basic" component="catalog-view/catalog-tile" urlPrefix="/extensions" description="Tile grid for a catalog. Each tile has icon + title + vendor + description; the featured modifier highlights one."}
+                      {#content}{#include extensions/catalog-view/catalog-tile/basic /}{/content}
+                      {/include}
+                    {/if}
+                    {#if type == 'filter-side-panel'}
+                      {#include partials/example-card title="Basic" slug="basic" component="catalog-view/filter-side-panel" urlPrefix="/extensions" description="Left rail with grouped checkbox filters and per-item counts. Two categories: Categories and Vendor."}
+                      {#content}{#include extensions/catalog-view/filter-side-panel/basic /}{/content}
+                      {/include}
+                    {/if}
+                    {#if type == 'properties-side-panel'}
+                      {#include partials/example-card title="Basic" slug="basic" component="catalog-view/properties-side-panel" urlPrefix="/extensions" description="Right rail with label/value rows. Use on a catalog detail page next to the main content."}
+                      {#content}{#include extensions/catalog-view/properties-side-panel/basic /}{/content}
+                      {/include}
+                    {/if}
+                    {#if type == 'vertical-tabs'}
+                      {#include partials/example-card title="Basic" slug="basic" component="catalog-view/vertical-tabs" urlPrefix="/extensions" description="Vertical navigation list with nested children. Active state lights the side bar; child lists indent."}
+                      {#content}{#include extensions/catalog-view/vertical-tabs/basic /}{/content}
+                      {/include}
+                    {/if}
+
+                    <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                      <a
+                        href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/extensions/{type}.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Edit {type}.html on GitHub</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/body} {/include}

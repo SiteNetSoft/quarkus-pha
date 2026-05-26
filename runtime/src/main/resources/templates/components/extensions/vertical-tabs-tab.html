@@ -1,0 +1,11 @@
+{! Vertical tabs — single tab (navigation list item) !}
+{! Required: title !}
+{! Optional: href (when set, renders title as <a>), active (bool — current item marker), id !}
+{! For nested children: hand-render <ul class="vertical-tabs-pf">...</ul> as a child of this li in the consumer fragment. The runtime template avoids slot-name nesting to dodge Qute's slot-recursion bug. !}
+<li class="vertical-tabs-pf-tab{#if active??} active{/if}"{#if id??} id="{id}"{/if}>
+  {#if href??}
+  <a href="{href}"{#if active??} aria-current="page"{/if}>{title}</a>
+  {#else}
+  <span{#if active??} aria-current="page"{/if}>{title}</span>
+  {/if}
+</li>

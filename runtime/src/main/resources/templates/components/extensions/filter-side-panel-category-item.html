@@ -1,0 +1,18 @@
+{! Filter side panel — category-item sub-component (checkbox + label with optional count) !}
+{! Required: id, label !}
+{! Optional: count (numeric badge), checked (bool — initial state), disabled !}
+<li class="filter-panel-pf-category-item">
+  <label class="pf-v6-c-check">
+    <input
+      class="pf-v6-c-check__input"
+      type="checkbox"
+      id="{id}"
+      {#if checked??}checked="checked"{/if}
+      {#if disabled??}disabled{/if}
+    />
+    <span class="pf-v6-c-check__label">{label}</span>
+  </label>
+  {#if count??}
+  <span class="filter-panel-pf-category-item-count">{count}</span>
+  {/if}
+</li>

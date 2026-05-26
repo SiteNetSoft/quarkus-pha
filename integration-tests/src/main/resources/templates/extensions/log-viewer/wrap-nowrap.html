@@ -1,0 +1,11 @@
+{! Wrap-toggle: button in the header flips between wrapped (default) and nowrap (one line per entry, horizontal scroll). !}
+{#include components/extensions/log-viewer id="lv-wrap-nowrap" lines=sampleLinesLong withHeader=true} {#header}
+<div class="pf-v6-l-flex pf-m-justify-content-space-between pf-m-align-items-center">
+  <div class="pf-v6-l-flex__item"><strong>Application log</strong></div>
+  <div class="pf-v6-l-flex__item">
+    <button class="pf-v6-c-button pf-m-secondary" type="button" @click="toggleWrap()">
+      <span class="pf-v6-c-button__text" x-text="wrapped ? 'Disable wrap' : 'Enable wrap'">Disable wrap</span>
+    </button>
+  </div>
+</div>
+{/header} {/include}
