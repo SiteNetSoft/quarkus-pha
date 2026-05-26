@@ -1,20 +1,16 @@
-{! Example card — heading + (optional) description + example body + collapsible Qute/HTML source viewer. !}
-{! Parameters: !}
-{!   title       — h3 text (e.g. "Single selectable") !}
-{!   slug        — id segment used for anchors and the standalone/source URLs (e.g. "single-selectable") !}
-{!   component   — parent component slug (e.g. "tree-view"), used to build the !}
-{!                 /components/{component}/source/{slug} and standalone hrefs !}
-{!   description — (optional, plain text) short explanatory paragraph. Use the {#description} slot below !}
-{!                 for descriptions that need inline HTML (code/em/etc.) — Prettier mangles HTML inside !}
-{!                 the description="..." attribute, so the slot is the safer path for rich content. !}
-{! Slots: !}
-{!   {#content}      — the example markup (the demo body itself, no chrome) !}
-{!   {#description}  — (optional) rich-HTML description block; caller supplies its own wrapper <p>. !}
-{!                     Pick one of description="..." OR {#description}; don't use both. !}
+{! Example card — heading + (optional) description + example body + collapsible Qute/HTML source viewer. !} {!
+Parameters: !} {! title — h3 text (e.g. "Single selectable") !} {! slug — id segment used for anchors and the
+standalone/source URLs (e.g. "single-selectable") !} {! component — parent component slug (e.g. "tree-view"), used to
+build the source/standalone URLs. !} {! urlPrefix — (optional, default /components) overrides the path segment in front
+of {component}. !} {! description — (optional, plain text) short explanatory paragraph. For rich-HTML content use the
+#description slot — Prettier mangles HTML inside the description="..." attribute. !} {! Slots: !} {! #content — the
+example markup (the demo body itself, no chrome). !} {! #description — (optional) rich-HTML description block; caller
+supplies its own wrapping paragraph. !} {! Pick one of description="..." OR #description; don't use both. !} {#let
+prefix=(urlPrefix ?: '/components')}
 <div
   class="pf-v6-l-stack pf-m-gutter"
-  data-source-href="/components/{component}/source/{slug}"
-  data-rendered-href="/components/{component}/{slug}"
+  data-source-href="{prefix}/{component}/source/{slug}"
+  data-rendered-href="{prefix}/{component}/{slug}"
   x-data="phaCodeExample()"
 >
   <div class="pf-v6-l-stack__item">
@@ -25,8 +21,7 @@
     </div>
     {#if description??}
     <p class="pf-v6-c-content--p pf-m-editorial ws-p">{description.raw}</p>
-    {/if}
-    {#insert description}{/insert}
+    {/if} {#insert description}{/insert}
   </div>
   <div class="pf-v6-l-stack__item">{#insert content}{/insert}</div>
   <div class="pf-v6-l-stack__item">
@@ -63,7 +58,7 @@
               <span class="pf-v6-c-button__icon">{icons:svg('fa:copy').raw}</span>
             </button>
             <a
-              href="/components/{component}/{slug}"
+              href="{prefix}/{component}/{slug}"
               target="_blank"
               rel="noopener noreferrer"
               class="pf-v6-c-button pf-m-plain ws-code-editor-control"
@@ -86,3 +81,4 @@
     </div>
   </div>
 </div>
+{/let}

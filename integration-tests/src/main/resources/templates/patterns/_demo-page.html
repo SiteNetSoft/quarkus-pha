@@ -44,51 +44,54 @@
                     </div>
 
                     {#if type == 'card-view'} {#include partials/example-card title="Basic" slug="basic"
-                    component="patterns/card-view" description="Grid of six project cards. No toolbar, no pagination."}
-                    {#content}{#include patterns/card-view/basic /}{/content} {/include} {#include partials/example-card
-                    title="With toolbar" slug="with-toolbar" component="patterns/card-view" description="Toolbar above
-                    the grid with search, sort dropdown and a layout-toggle button."} {#content}{#include
-                    patterns/card-view/with-toolbar /}{/content} {/include} {/if} {#if type == 'dashboard'} {#include
-                    partials/example-card title="Overview" slug="overview" component="patterns/dashboard"
-                    description="Four stat tiles + a chart + a recent-activity table, all inside a gallery layout."}
-                    {#content}{#include patterns/dashboard/overview /}{/content} {/include} {#include
-                    partials/example-card title="Dense" slug="dense" component="patterns/dashboard" description="Same
-                    layout but with twice the stat tiles and a second chart — the tightest you'd reasonably pack."}
-                    {#content}{#include patterns/dashboard/dense /}{/content} {/include} {/if} {#if type == 'filters'}
-                    {#include partials/example-card title="Chip filters" slug="chip-filters"
-                    component="patterns/filters" description="Selected attribute filters rendered as removable chips in
-                    a toolbar group."} {#content}{#include patterns/filters/chip-filters /}{/content} {/include}
-                    {#include partials/example-card title="Advanced" slug="advanced" component="patterns/filters"
+                    component="card-view" urlPrefix="/patterns" description="Grid of six project cards. No toolbar, no
+                    pagination."} {#content}{#include patterns/card-view/basic /}{/content} {/include} {#include
+                    partials/example-card title="With toolbar" slug="with-toolbar" component="card-view"
+                    urlPrefix="/patterns" description="Toolbar above the grid with search, sort dropdown and a
+                    layout-toggle button."} {#content}{#include patterns/card-view/with-toolbar /}{/content} {/include}
+                    {/if} {#if type == 'dashboard'} {#include partials/example-card title="Overview" slug="overview"
+                    component="dashboard" urlPrefix="/patterns" description="Four stat tiles + a chart + a
+                    recent-activity table, all inside a gallery layout."} {#content}{#include
+                    patterns/dashboard/overview /}{/content} {/include} {#include partials/example-card title="Dense"
+                    slug="dense" component="dashboard" urlPrefix="/patterns" description="Same layout but with twice the
+                    stat tiles and a second chart — the tightest you'd reasonably pack."} {#content}{#include
+                    patterns/dashboard/dense /}{/content} {/include} {/if} {#if type == 'filters'} {#include
+                    partials/example-card title="Chip filters" slug="chip-filters" component="filters"
+                    urlPrefix="/patterns" description="Selected attribute filters rendered as removable chips in a
+                    toolbar group."} {#content}{#include patterns/filters/chip-filters /}{/content} {/include} {#include
+                    partials/example-card title="Advanced" slug="advanced" component="filters" urlPrefix="/patterns"
                     description="Single attribute-selector dropdown plus a value input — the typical advanced-filter
                     row."} {#content}{#include patterns/filters/advanced /}{/content} {/include} {/if} {#if type ==
                     'password-generator'} {#include partials/example-card title="In a modal" slug="in-modal"
-                    component="patterns/password-generator" description="&quot;Create user&quot; modal with the
-                    password-generator widget inline."} {#content}{#include patterns/password-generator/in-modal
+                    component="password-generator" urlPrefix="/patterns" description="&quot;Create user&quot; modal with
+                    the password-generator widget inline."} {#content}{#include patterns/password-generator/in-modal
                     /}{/content} {/include} {#include partials/example-card title="With strength" slug="with-strength"
-                    component="patterns/password-generator" description="Generator + a live strength indicator side by
-                    side."} {#content}{#include patterns/password-generator/with-strength /}{/content} {/include} {/if}
-                    {#if type == 'password-strength'} {#include partials/example-card title="Basic" slug="basic"
-                    component="patterns/password-strength" description="Password field with a meter and a four-rule
-                    checklist updating live."} {#content}{#include patterns/password-strength/basic /}{/content}
-                    {/include} {#include partials/example-card title="With tooltip" slug="with-tooltip"
-                    component="patterns/password-strength" description="Meter only, with rule details revealed on hover
-                    via a popover."} {#content}{#include patterns/password-strength/with-tooltip /}{/content} {/include}
-                    {/if} {#if type == 'primary-detail'} {#include partials/example-card title="List + detail"
-                    slug="list-detail" component="patterns/primary-detail" description="Simple-list on the left selects
-                    which item's metadata renders on the right."} {#content}{#include
-                    patterns/primary-detail/list-detail /}{/content} {/include} {#include partials/example-card
-                    title="Data-list + detail" slug="data-list-detail" component="patterns/primary-detail"
-                    description="Data-list on the left, detail panel with a table of related rows on the right."}
-                    {#content}{#include patterns/primary-detail/data-list-detail /}{/content} {/include} {/if} {#if type
-                    == 'right-to-left'} {#include partials/example-card title="Form" slug="form-rtl"
-                    component="patterns/right-to-left" description="A form wrapped in &lt;code
+                    component="password-generator" urlPrefix="/patterns" description="Generator + a live strength
+                    indicator side by side."} {#content}{#include patterns/password-generator/with-strength /}{/content}
+                    {/include} {/if} {#if type == 'password-strength'} {#include partials/example-card title="Basic"
+                    slug="basic" component="password-strength" urlPrefix="/patterns" description="Password field with a
+                    meter and a four-rule checklist updating live."} {#content}{#include
+                    patterns/password-strength/basic /}{/content} {/include} {#include partials/example-card title="With
+                    tooltip" slug="with-tooltip" component="password-strength" urlPrefix="/patterns" description="Meter
+                    only, with rule details revealed on hover via a popover."} {#content}{#include
+                    patterns/password-strength/with-tooltip /}{/content} {/include} {/if} {#if type == 'primary-detail'}
+                    {#include partials/example-card title="List + detail" slug="list-detail" component="primary-detail"
+                    urlPrefix="/patterns" description="Simple-list on the left selects which item's metadata renders on
+                    the right."} {#content}{#include patterns/primary-detail/list-detail /}{/content} {/include}
+                    {#include partials/example-card title="Data-list + detail" slug="data-list-detail"
+                    component="primary-detail" urlPrefix="/patterns" description="Data-list on the left, detail panel
+                    with a table of related rows on the right."} {#content}{#include
+                    patterns/primary-detail/data-list-detail /}{/content} {/include} {/if} {#if type == 'right-to-left'}
+                    {#include partials/example-card title="Form" slug="form-rtl" component="right-to-left"
+                    urlPrefix="/patterns" description="A form wrapped in &lt;code
                     class=&quot;ws-code&quot;&gt;dir=&quot;rtl&quot;&lt;/code&gt; — labels, controls and the
                     &quot;Save&quot; alignment mirror automatically."} {#content}{#include
                     patterns/right-to-left/form-rtl /}{/content} {/include} {#include partials/example-card
-                    title="Dashboard" slug="dashboard-rtl" component="patterns/right-to-left" description="A mini
-                    dashboard wrapped in &lt;code class=&quot;ws-code&quot;&gt;dir=&quot;rtl&quot;&lt;/code&gt; — tiles
-                    and tables flip horizontally."} {#content}{#include patterns/right-to-left/dashboard-rtl
-                    /}{/content} {/include} {/if}
+                    title="Dashboard" slug="dashboard-rtl" component="right-to-left" urlPrefix="/patterns"
+                    description="A mini dashboard wrapped in &lt;code
+                    class=&quot;ws-code&quot;&gt;dir=&quot;rtl&quot;&lt;/code&gt; — tiles and tables flip
+                    horizontally."} {#content}{#include patterns/right-to-left/dashboard-rtl /}{/content} {/include}
+                    {/if}
 
                     <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                       <h2
