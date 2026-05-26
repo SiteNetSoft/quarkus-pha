@@ -1,0 +1,361 @@
+{#include layouts/base} {#title}Log viewer{/title} {#head}
+<script src="/web/js/alpine/components/log-viewer.js"></script>
+<script src="/web/vendor/htmx/ext/sse.js" defer></script>
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <p>
+                      <a class="pf-v6-c-button pf-m-link pf-m-inline" href="/"
+                        ><span class="pf-v6-c-button__text">&larr; Components</span></a
+                      >
+                    </p>
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Log viewer</h1>
+                    <p>
+                      Scrollable log surface with line numbers, search highlighting, wrap/nowrap toggle, and inline ANSI
+                      color rendering. PatternFly extension component — meant for container logs, build output, audit
+                      trails, anything line-oriented.
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-u-h-100">
+                    <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                      <nav
+                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                        aria-label="Table of contents"
+                      >
+                        <div class="pf-v6-c-jump-links__main">
+                          <ul class="pf-v6-c-jump-links__list" role="list">
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#line-numbers" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Line numbers</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#with-toolbar" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">With toolbar</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#wrap-nowrap" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Wrap toggle</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#ansi-colors" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">ANSI colors</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#streaming" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Streaming (SSE)</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-log-viewer" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Log-viewer props</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
+
+                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                          <div>
+                            <h2
+                              id="examples"
+                              tabindex="-1"
+                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                            >
+                              Examples
+                            </h2>
+                          </div>
+                        </div>
+
+                        {#include partials/example-card title="Basic" slug="basic" component="log-viewer" urlPrefix="/extensions"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Just the log lines — no toolbar, no line numbers. The scroll container caps height at
+                          <code class="ws-code">37.5rem</code> by default; pass <code class="ws-code">height</code> to
+                          override.
+                        </p>
+                        {/description} {#content}{#include extensions/log-viewer/basic /}{/content} {/include}
+
+                        {#include partials/example-card title="Line numbers" slug="line-numbers" component="log-viewer" urlPrefix="/extensions"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          <code class="ws-code">lineNumbers=true</code> adds <code class="ws-code">pf-m-line-numbers</code>
+                          and renders a 1-based index in the gutter.
+                        </p>
+                        {/description} {#content}{#include extensions/log-viewer/line-numbers /}{/content} {/include}
+
+                        {#include partials/example-card title="With toolbar" slug="with-toolbar" component="log-viewer" urlPrefix="/extensions"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Header slot with a search input and prev/next navigation. Matches highlight in PF
+                          <code class="ws-code">pf-m-match</code> yellow; the current match scrolls into view and gets
+                          <code class="ws-code">pf-m-current</code> for the active style.
+                        </p>
+                        {/description} {#content}{#include extensions/log-viewer/with-toolbar /}{/content} {/include}
+
+                        {#include partials/example-card title="Wrap toggle" slug="wrap-nowrap" component="log-viewer" urlPrefix="/extensions"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Header slot with a button that flips <code class="ws-code">pf-m-nowrap</code> on the root.
+                          Default is wrapped (break-spaces); nowrap forces single-line entries with horizontal scroll.
+                        </p>
+                        {/description} {#content}{#include extensions/log-viewer/wrap-nowrap /}{/content} {/include}
+
+                        {#include partials/example-card title="ANSI colors" slug="ansi-colors" component="log-viewer" urlPrefix="/extensions"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          <code class="ws-code">ansi=true</code> parses ECMA-48 SGR escape codes (8 standard colors, 8
+                          bright variants, bold, reset) into inline-styled spans. Useful for piping
+                          <code class="ws-code">npm</code>, <code class="ws-code">cargo</code>, CI logs verbatim.
+                        </p>
+                        {/description} {#content}{#include extensions/log-viewer/ansi-colors /}{/content} {/include}
+
+                        {#include partials/example-card title="Streaming (SSE)" slug="streaming" component="log-viewer" urlPrefix="/extensions"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Live tail via Server-Sent Events. The log list subscribes to
+                          <code class="ws-code">/api/htmx/log-stream</code> through the HTMX SSE extension; each event's
+                          HTML is appended to the list and the viewer auto-scrolls to the new bottom. The Quarkus
+                          endpoint returns a <code class="ws-code">Multi&lt;String&gt;</code> reactive stream from
+                          Mutiny. For real apps, replace the demo ticker with your log source (file tail, Kafka topic,
+                          audit log query).
+                        </p>
+                        {/description} {#content}{#include extensions/log-viewer/streaming /}{/content} {/include}
+
+                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                            <div>
+                              <h2
+                                id="documentation"
+                                tabindex="-1"
+                                class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                              >
+                                Documentation
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-log-viewer" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                            Log-viewer props
+                          </h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by
+                            <code class="ws-code">{|{#include components/extensions/log-viewer ... /}|}</code>.
+                            <code class="ws-code">lines</code> is a list of strings, one per log row.
+                          </p>
+                          <table
+                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                            aria-label="Log-viewer props"
+                          >
+                            <caption class="pf-v6-c-table__caption">
+                              <span class="ws-prop-required">*</span>
+                              required
+                            </caption>
+                            <thead>
+                              <tr>
+                                <th scope="col" class="pf-m-width-20">Name</th>
+                                <th scope="col" class="pf-m-width-20">Type</th>
+                                <th scope="col">Default</th>
+                                <th scope="col">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td><span class="ws-prop-required">*</span> <code class="ws-code">id</code></td>
+                                <td>String</td>
+                                <td>—</td>
+                                <td>DOM id on the log-viewer root.</td>
+                              </tr>
+                              <tr>
+                                <td><span class="ws-prop-required">*</span> <code class="ws-code">lines</code></td>
+                                <td>{|List&lt;String&gt;|}</td>
+                                <td>—</td>
+                                <td>One element per log row.</td>
+                              </tr>
+                              <tr>
+                                <td><code class="ws-code">lineNumbers</code></td>
+                                <td>boolean</td>
+                                <td><code class="ws-code">false</code></td>
+                                <td>Show a 1-based index in the gutter.</td>
+                              </tr>
+                              <tr>
+                                <td><code class="ws-code">nowrap</code></td>
+                                <td>boolean</td>
+                                <td><code class="ws-code">false</code></td>
+                                <td>
+                                  Adds <code class="ws-code">pf-m-nowrap</code> — single-line entries with horizontal
+                                  scroll.
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><code class="ws-code">height</code></td>
+                                <td>String (CSS length)</td>
+                                <td><code class="ws-code">37.5rem</code></td>
+                                <td>Override the scroll-container height. Accepts any CSS length.</td>
+                              </tr>
+                              <tr>
+                                <td><code class="ws-code">ansi</code></td>
+                                <td>boolean</td>
+                                <td><code class="ws-code">false</code></td>
+                                <td>Parse ANSI escape codes into colored spans.</td>
+                              </tr>
+                              <tr>
+                                <td><code class="ws-code">ariaLabel</code></td>
+                                <td>String</td>
+                                <td><code class="ws-code">"Log content"</code></td>
+                                <td>Override the list's <code class="ws-code">aria-label</code>.</td>
+                              </tr>
+                              <tr>
+                                <td><code class="ws-code">withHeader</code></td>
+                                <td>boolean</td>
+                                <td><code class="ws-code">false</code></td>
+                                <td>
+                                  Render an <code class="ws-code">__header</code> wrapper around the
+                                  <code class="ws-code">header</code> slot.
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><code class="ws-code">withFooter</code></td>
+                                <td>boolean</td>
+                                <td><code class="ws-code">false</code></td>
+                                <td>
+                                  Render an <code class="ws-code">__footer</code> wrapper around the
+                                  <code class="ws-code">footer</code> slot.
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Search.</strong> The Alpine factory exposes
+                            <code class="ws-code">setQuery(q)</code>, <code class="ws-code">nextMatch()</code>,
+                            <code class="ws-code">prevMatch()</code>, <code class="ws-code">matchCount</code>, and
+                            <code class="ws-code">currentIndex</code>. Wire a search input to
+                            <code class="ws-code">setQuery</code> and bind buttons to the prev/next methods — see the
+                            With toolbar example.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Wrap toggle.</strong> Call <code class="ws-code">toggleWrap()</code> from a button
+                            and read <code class="ws-code">wrapped</code> to label the action — see the Wrap toggle
+                            example.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Scroll-to-bottom.</strong>
+                            <code class="ws-code">scrollToBottom()</code> jumps the container to its bottom. Pair with a
+                            "Tail" toggle button, or call it after an HTMX swap appends new lines, to keep the most
+                            recent content in view.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Streaming.</strong> Server-rendered. To live-update, swap the
+                            <code class="ws-code">__list</code> contents via HTMX (planned: SSE for true tail behavior).
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <br /><a
+                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/extensions/log-viewer.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Edit log-viewer.html on GitHub</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/body} {/include}

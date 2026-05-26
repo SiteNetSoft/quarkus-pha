@@ -1,0 +1,16 @@
+{! Two flat tabs plus one with nested children — the nested branch is hand-rendered (Qute slot-recursion would loop if the runtime template tried to host the nested-tab slot). !}
+<div style="max-width: 280px">
+{#include components/extensions/vertical-tabs id="vt-demo"} {#tabs}
+  {#include components/extensions/vertical-tabs-tab id="vt-overview" title="Overview" href="#" /}
+  <li class="vertical-tabs-pf-tab active" id="vt-databases">
+    <a href="#" aria-current="page">Databases</a>
+    <ul class="vertical-tabs-pf">
+      {#include components/extensions/vertical-tabs-tab id="vt-postgres" title="PostgreSQL" href="#" /}
+      {#include components/extensions/vertical-tabs-tab id="vt-mysql" title="MySQL" href="#" /}
+      {#include components/extensions/vertical-tabs-tab id="vt-mongo" title="MongoDB" href="#" /}
+    </ul>
+  </li>
+  {#include components/extensions/vertical-tabs-tab id="vt-messaging" title="Messaging" href="#" /}
+  {#include components/extensions/vertical-tabs-tab id="vt-observability" title="Observability" href="#" /}
+{/tabs} {/include}
+</div>

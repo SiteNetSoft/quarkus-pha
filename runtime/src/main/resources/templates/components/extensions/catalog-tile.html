@@ -1,0 +1,38 @@
+{! Catalog tile — PatternFly catalog-view extension !}
+{! Required: id, title !}
+{! Optional: href (when set, renders as <a>; otherwise <div role="button">), iconImg (URL), iconAlt, iconClass (CSS class for icon glyph), vendor, description, footer, featured (bool — pf-m-featured), badges (List of CSS class strings rendered as icon spans on the right) !}
+{! Requires: /web/vendor/patternfly-extensions/catalog-view.css !}
+{#if href??}
+<a href="{href}" id="{id}" class="pf-v6-c-card catalog-tile-pf{#if featured??} catalog-tile-pf-featured{/if}">
+{#else}
+<div role="button" tabindex="0" id="{id}" class="pf-v6-c-card catalog-tile-pf{#if featured??} catalog-tile-pf-featured{/if}">
+{/if}
+  <div class="pf-v6-c-card__header catalog-tile-pf-header">
+    {#if iconImg??}
+    <img class="catalog-tile-pf-icon" src="{iconImg}" alt="{iconAlt ?: ''}" />
+    {#else if iconClass??}
+    <span class="catalog-tile-pf-icon {iconClass}" aria-hidden="true"></span>
+    {/if}
+    {#if badges??}
+    <div class="catalog-tile-pf-badge-container">
+      {#for badge in badges}
+      <span class="catalog-tile-pf-badge {badge}" aria-hidden="true"></span>
+      {/for}
+    </div>
+    {/if}
+  </div>
+  <div class="pf-v6-c-card__title">
+    <span class="pf-v6-c-card__title-text catalog-tile-pf-title">{title}</span>
+    {#if vendor??}
+    <p class="catalog-tile-pf-subtitle">{vendor}</p>
+    {/if}
+  </div>
+  {#if description??}
+  <div class="pf-v6-c-card__body catalog-tile-pf-body">
+    <p class="catalog-tile-pf-description"><span>{description}</span></p>
+  </div>
+  {/if}
+  {#if footer??}
+  <div class="pf-v6-c-card__footer catalog-tile-pf-footer">{footer}</div>
+  {/if}
+{#if href??}</a>{#else}</div>{/if}

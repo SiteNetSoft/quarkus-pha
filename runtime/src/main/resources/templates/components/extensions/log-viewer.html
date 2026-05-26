@@ -1,0 +1,39 @@
+{! Log Viewer — PatternFly v6 (extension) !}
+{! Required: id, lines (List of strings — one per log line) !}
+{! Optional: lineNumbers (bool), nowrap (bool), height (CSS length on __scroll-container), ansi (bool — parse ANSI escape codes into colored spans, client-side), linesAreHtml (bool — when true, lines are already-escaped HTML rendered raw; use with server-side ANSI conversion or pre-formatted lines), ariaLabel, withHeader (bool — render __header wrapper around #header slot), withFooter (bool — render __footer wrapper around #footer slot) !}
+{! Slots: header (toolbar/title row, only used when withHeader=true), footer (controls, only used when withFooter=true) !}
+{! Behavior owned by phaLogViewer() — search highlighting, wrap toggle, ANSI rendering, scroll-to-bottom. !}
+{! Requires: /web/js/alpine/components/log-viewer.js loaded before Alpine. !}
+<div
+  class="pf-v6-c-log-viewer{#if lineNumbers??} pf-m-line-numbers{/if}{#if nowrap??} pf-m-nowrap{/if}"
+  id="{id}"
+  {#if ansi??}data-ansi="true"{/if}
+  x-data="phaLogViewer()"
+>
+  {#if withHeader??}
+  <div class="pf-v6-c-log-viewer__header">{#insert header}{/insert}</div>
+  {/if}
+  <div class="pf-v6-c-log-viewer__main">
+    <div
+      class="pf-v6-c-log-viewer__scroll-container"
+      {#if height??}style="--pf-v6-c-log-viewer__scroll-container--Height: {height}"{/if}
+      x-ref="scroll"
+    >
+      <div class="pf-v6-c-log-viewer__list" role="list" aria-label="{ariaLabel ?: 'Log content'}">
+        {#for line in lines}
+        <span class="pf-v6-c-log-viewer__list-item" role="listitem">
+          {#if lineNumbers??}<span class="pf-v6-c-log-viewer__index" aria-hidden="true">{line_count}</span>{/if}
+          {#if linesAreHtml??}
+          <span class="pf-v6-c-log-viewer__text">{line.raw}</span>
+          {#else}
+          <span class="pf-v6-c-log-viewer__text" data-raw="{line}">{line}</span>
+          {/if}
+        </span>
+        {/for}
+      </div>
+    </div>
+  </div>
+  {#if withFooter??}
+  <div class="pf-v6-c-log-viewer__footer">{#insert footer}{/insert}</div>
+  {/if}
+</div>

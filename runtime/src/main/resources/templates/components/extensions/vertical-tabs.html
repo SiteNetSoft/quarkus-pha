@@ -1,0 +1,11 @@
+{! Vertical tabs — PatternFly catalog-view extension !}
+{! Required: id !}
+{! Optional: restrictTabs (bool — restrict to active path), activeTab (bool — direct child active marker; used with restrictTabs), ariaLabel !}
+{! Slots: tabs (use components/extensions/vertical-tabs-tab for each tab) !}
+{! Requires: /web/vendor/patternfly-extensions/catalog-view.css !}
+{! Despite "tabs" in the name, the PF v6 vertical-tabs extension is a navigation list, not a tab/tabpanel widget — items typically link to separate pages or HTMX-swap a sibling region. Aria-tab roles are intentionally NOT used; nav + link is the correct semantic. !}
+<nav id="{id}" aria-label="{ariaLabel ?: 'Vertical navigation'}">
+  <ul class="vertical-tabs-pf{#if restrictTabs??} restrict-tabs{/if}{#if activeTab??} active-tab{/if}">
+    {#insert tabs}{/insert}
+  </ul>
+</nav>

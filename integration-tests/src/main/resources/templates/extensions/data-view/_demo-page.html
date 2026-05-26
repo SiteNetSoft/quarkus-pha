@@ -1,0 +1,109 @@
+{#include layouts/base}
+{! Shared demo page for the 3 data-view sub-items. Parameterised by Java route. !}
+{! Data: type (slug), title, intro (HTML), columnsJson, rowsJson !}
+{#title}{title}{/title} {#head}
+<script src="/web/js/alpine/components/data-view.js"></script>
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <p>
+                      <a class="pf-v6-c-button pf-m-link pf-m-inline" href="/"
+                        ><span class="pf-v6-c-button__text">&larr; Components</span></a
+                      >
+                    </p>
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">{title}</h1>
+                    <p>{intro.raw}</p>
+                  </div>
+                </div>
+              </section>
+
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                    <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                      <div>
+                        <h2
+                          id="examples"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Examples
+                        </h2>
+                      </div>
+                    </div>
+
+                    {#if type == 'overview'}
+                      {#include partials/example-card title="Basic" slug="basic" component="data-view/overview" urlPrefix="/extensions"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Toolbar + table + pagination composed together. The Alpine factory <code class="ws-code">phaDataView()</code>
+                        owns search, sort, and page state; rows are seeded into <code class="ws-code">data-rows</code> as JSON.
+                      </p>
+                      {/description} {#content}{#include extensions/data-view/overview/basic /}{/content}
+                      {/include}
+                    {/if}
+                    {#if type == 'toolbar'}
+                      {#include partials/example-card title="Basic" slug="basic" component="data-view/toolbar" urlPrefix="/extensions" description="Standalone toolbar: search input, filter button, chip list with removable filters, result count. Often paired with a table or card grid below."}
+                      {#content}{#include extensions/data-view/toolbar/basic /}{/content}
+                      {/include}
+                    {/if}
+                    {#if type == 'table'}
+                      {#include partials/example-card title="Basic" slug="basic" component="data-view/table" urlPrefix="/extensions" description="Sortable table with search and pagination. Click any column header to sort; the search input filters across all columns. Sort indicators reflect the current state; pagination tracks the filtered total."}
+                      {#content}{#include extensions/data-view/table/basic /}{/content}
+                      {/include}
+                    {/if}
+
+                    <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                      <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                      <p class="pf-v6-c-content--p pf-m-editorial">
+                        <strong>Client-side vs server-side.</strong> The
+                        <code class="ws-code">phaDataView()</code> factory filters / sorts / paginates client-side —
+                        fine for hundreds of rows but not for tens of thousands. For large datasets, drop the factory
+                        and have the toolbar inputs emit <code class="ws-code">hx-get</code> against an endpoint that
+                        returns the rendered tbody. Pagination links become server-driven links.
+                      </p>
+                      <p class="pf-v6-c-content--p pf-m-editorial">
+                        <strong>Composition over abstraction.</strong> The PatternFly data-view "extension" is really a
+                        state-management contract over the existing Table, Toolbar, and Pagination components. We don't
+                        ship a wrapper component for it; we ship the wiring pattern.
+                      </p>
+                      <p class="pf-v6-c-content--p pf-m-editorial">
+                        <strong>Why no React extension CSS.</strong>
+                        <code class="ws-code">@patternfly/react-data-view</code> doesn't ship any CSS — it composes
+                        existing PF v6 components. So there's nothing to vendor.
+                      </p>
+                    </div>
+
+                    <div class="pf-v6-l-stack__item">
+                      <a
+                        href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/integration-tests/src/main/resources/templates/extensions/data-view/{type}/basic.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Edit data-view/{type} on GitHub</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/body} {/include}

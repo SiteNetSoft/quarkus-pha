@@ -1,0 +1,48 @@
+{! Toolbar header with a search input + match counter + prev/next navigation. !}
+{#include components/extensions/log-viewer id="lv-toolbar" lines=sampleLines lineNumbers=true withHeader=true} {#header}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div class="pf-v6-l-flex__item pf-m-flex-1">
+    <div class="pf-v6-c-text-input-group">
+      <div class="pf-v6-c-text-input-group__main pf-m-icon">
+        <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:search').raw}</span>
+        <span class="pf-v6-c-text-input-group__text">
+          <input
+            class="pf-v6-c-text-input-group__text-input"
+            type="search"
+            aria-label="Search log"
+            placeholder="Search log"
+            x-model="query"
+            @input.debounce.150ms="setQuery(query)"
+            @keydown.enter.prevent="nextMatch()"
+          />
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="pf-v6-l-flex__item">
+    <span class="pf-v6-c-content--small" x-show="query"
+      ><span x-text="matchCount === 0 ? '0 / 0' : (currentIndex + 1) + ' / ' + matchCount">0 / 0</span></span
+    >
+  </div>
+  <div class="pf-v6-l-flex__item">
+    <button
+      class="pf-v6-c-button pf-m-plain"
+      type="button"
+      aria-label="Previous match"
+      @click="prevMatch()"
+      :disabled="matchCount === 0"
+    >
+      <span class="pf-v6-c-button__icon">{icons:svg('fa:chevron-up').raw}</span>
+    </button>
+    <button
+      class="pf-v6-c-button pf-m-plain"
+      type="button"
+      aria-label="Next match"
+      @click="nextMatch()"
+      :disabled="matchCount === 0"
+    >
+      <span class="pf-v6-c-button__icon">{icons:svg('fa:chevron-down').raw}</span>
+    </button>
+  </div>
+</div>
+{/header} {/include}

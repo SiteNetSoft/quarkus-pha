@@ -1,0 +1,112 @@
+{! Sortable table with search + pagination, all client-side via phaDataView. !}
+{! For server-side filtering, drop phaDataView and have the search input emit hx-get against an endpoint that returns the rendered tbody. !}
+<div id="dv-table" x-data="phaDataView()" data-columns="{columnsJson}" data-rows="{rowsJson}" data-per-page="5">
+  <div class="pf-v6-c-toolbar" role="region" aria-label="Data view table toolbar">
+    <div class="pf-v6-c-toolbar__content">
+      <div class="pf-v6-c-toolbar__content-section">
+        <div class="pf-v6-c-toolbar__item">
+          <div class="pf-v6-c-text-input-group">
+            <div class="pf-v6-c-text-input-group__main pf-m-icon">
+              <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:search').raw}</span>
+              <span class="pf-v6-c-text-input-group__text">
+                <input
+                  class="pf-v6-c-text-input-group__text-input"
+                  type="search"
+                  aria-label="Filter table"
+                  placeholder="Search"
+                  x-model="query"
+                  @input.debounce.150ms="setQuery(query)"
+                />
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="pf-v6-c-toolbar__item pf-m-align-right">
+          <span class="pf-v6-c-content--small" x-text="total + (total === 1 ? ' result' : ' results')">0 results</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="pf-v6-c-table pf-m-grid-md" aria-label="Data view table">
+    <thead>
+      <tr>
+        <template x-for="col in columns" :key="col.key">
+          <th scope="col" :aria-sort="sortAria(col.key)">
+            <button type="button" class="pf-v6-c-table__button" @click="toggleSort(col.key)">
+              <span class="pf-v6-c-table__button-content">
+                <span class="pf-v6-c-table__text" x-text="col.label">Name</span>
+                <span class="pf-v6-c-table__sort-indicator">
+                  <i x-show="sortColumn !== col.key" class="fas fa-arrows-alt-v" aria-hidden="true"></i>
+                  <i
+                    x-show="sortColumn === col.key &amp;&amp; sortDir === 'asc'"
+                    class="fas fa-long-arrow-alt-up"
+                    aria-hidden="true"
+                  ></i>
+                  <i
+                    x-show="sortColumn === col.key &amp;&amp; sortDir === 'desc'"
+                    class="fas fa-long-arrow-alt-down"
+                    aria-hidden="true"
+                  ></i>
+                </span>
+              </span>
+            </button>
+          </th>
+        </template>
+      </tr>
+    </thead>
+    <tbody>
+      <template x-for="row in visible" :key="row.name">
+        <tr>
+          <td data-label="Name" x-text="row.name"></td>
+          <td data-label="Vendor" x-text="row.vendor"></td>
+          <td data-label="Version" x-text="row.version"></td>
+          <td data-label="License" x-text="row.license"></td>
+        </tr>
+      </template>
+      <template x-if="total === 0">
+        <tr>
+          <td colspan="4">
+            <div class="pf-v6-c-empty-state pf-m-sm">
+              <div class="pf-v6-c-empty-state__content">
+                <div class="pf-v6-c-empty-state__title">No results found</div>
+                <div class="pf-v6-c-empty-state__body">No items match the search filter.</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </template>
+    </tbody>
+  </table>
+
+  <div class="pf-v6-c-pagination pf-m-bottom" role="region" aria-label="Pagination">
+    <div class="pf-v6-c-pagination__total-items">
+      <span x-text="((page - 1) * perPage + 1) + ' - ' + Math.min(page * perPage, total) + ' of ' + total + ' results'"
+        >0 - 0 of 0 results</span
+      >
+    </div>
+    <div class="pf-v6-c-pagination__nav">
+      <button
+        class="pf-v6-c-button pf-m-plain"
+        type="button"
+        aria-label="Previous page"
+        @click="prevPage()"
+        :disabled="page === 1"
+      >
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:chevron-left').raw}</span>
+      </button>
+      <span class="pf-v6-c-pagination__nav-page-select">
+        Page <span x-text="page">1</span> of <span x-text="pageCount">1</span>
+      </span>
+      <button
+        class="pf-v6-c-button pf-m-plain"
+        type="button"
+        aria-label="Next page"
+        @click="nextPage()"
+        :disabled="page === pageCount"
+      >
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:chevron-right').raw}</span>
+      </button>
+    </div>
+  </div>
+</div>

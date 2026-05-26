@@ -169,7 +169,17 @@ class RoutesSmokeTest {
         "/components/tree-view",
         "/components/truncate",
         "/components/video-player",
-        "/components/wizard"
+        "/components/wizard",
+        "/extensions/log-viewer",
+        "/extensions/user-feedback",
+        "/extensions/catalog-view/catalog-item-header",
+        "/extensions/catalog-view/catalog-tile",
+        "/extensions/catalog-view/filter-side-panel",
+        "/extensions/catalog-view/properties-side-panel",
+        "/extensions/catalog-view/vertical-tabs",
+        "/extensions/data-view/overview",
+        "/extensions/data-view/toolbar",
+        "/extensions/data-view/table"
     })
     void component_demo_renders(String path) {
         given()
@@ -306,7 +316,17 @@ class RoutesSmokeTest {
         "/patterns/password-generator",
         "/patterns/password-strength",
         "/patterns/primary-detail",
-        "/patterns/right-to-left"
+        "/patterns/right-to-left",
+        "/extensions/log-viewer",
+        "/extensions/user-feedback",
+        "/extensions/catalog-view/catalog-item-header",
+        "/extensions/catalog-view/catalog-tile",
+        "/extensions/catalog-view/filter-side-panel",
+        "/extensions/catalog-view/properties-side-panel",
+        "/extensions/catalog-view/vertical-tabs",
+        "/extensions/data-view/overview",
+        "/extensions/data-view/toolbar",
+        "/extensions/data-view/table"
     })
     void route_has_no_missing_icons(String path) {
         given()

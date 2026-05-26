@@ -78,6 +78,22 @@ podman run --rm \
     mkdir -p /output/cytoscape
     cp node_modules/cytoscape/dist/cytoscape.min.js /output/cytoscape/
 
+    # PatternFly extensions — CSS-only vendor (React components ignored)
+    echo "  PatternFly extensions (CSS)..."
+    mkdir -p /output/patternfly-extensions
+    cp node_modules/@patternfly/react-user-feedback/dist/esm/Feedback/Feedback.css \
+       /output/patternfly-extensions/user-feedback.css
+
+    # Catalog view ships SCSS, not CSS. Compile it locally with Dart Sass.
+    node -e "
+      const sass = require(\"sass\");
+      const r = sass.compile(
+        \"node_modules/@patternfly/react-catalog-view-extension/dist/sass/_react-catalog-view-extension.scss\",
+        { loadPaths: [\"node_modules/@patternfly/react-catalog-view-extension/dist/sass\"], style: \"compressed\", silenceDeprecations: [\"import\"] }
+      );
+      require(\"fs\").writeFileSync(\"/output/patternfly-extensions/catalog-view.css\", r.css);
+    "
+
     # Quill (rich text editor)
     echo "  Quill..."
     mkdir -p /output/quill

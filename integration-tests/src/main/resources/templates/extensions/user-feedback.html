@@ -1,0 +1,282 @@
+{#include layouts/base} {#title}User feedback{/title} {#head}
+<link rel="stylesheet" href="/web/vendor/patternfly-extensions/user-feedback.css" />
+<script src="/web/js/alpine/components/user-feedback.js"></script>
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <p>
+                      <a class="pf-v6-c-button pf-m-link pf-m-inline" href="/"
+                        ><span class="pf-v6-c-button__text">&larr; Components</span></a
+                      >
+                    </p>
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">User feedback</h1>
+                    <p>
+                      Multi-page feedback modal: home menu → share / bug-report / research-opt-in forms → success or
+                      error. PatternFly extension. Click the trigger button in any example below to open the modal.
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-u-h-100">
+                    <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                      <nav
+                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                        aria-label="Table of contents"
+                      >
+                        <div class="pf-v6-c-jump-links__main">
+                          <ul class="pf-v6-c-jump-links__list" role="list">
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#full" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Full menu</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#with-prefilled-email" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Pre-filled email</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-user-feedback" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Props</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
+
+                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                          <div>
+                            <h2
+                              id="examples"
+                              tabindex="-1"
+                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                            >
+                              Examples
+                            </h2>
+                          </div>
+                        </div>
+
+                        {#include partials/example-card title="Full menu" slug="full" component="user-feedback" urlPrefix="/extensions"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Default multi-page flow: home menu with three cards (Share feedback, Report a bug, Inform
+                          direction), each leading to its own form.
+                        </p>
+                        {/description} {#content}{#include extensions/user-feedback/full /}{/content} {/include}
+
+                        {#include partials/example-card title="Basic" slug="basic" component="user-feedback" urlPrefix="/extensions"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          <code class="ws-code">basic=true</code> skips the home menu and opens straight to the share
+                          form. Use when the host page only needs the one flow.
+                        </p>
+                        {/description} {#content}{#include extensions/user-feedback/basic /}{/content} {/include}
+
+                        {#include partials/example-card title="Pre-filled email" slug="with-prefilled-email" component="user-feedback" urlPrefix="/extensions"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Pass <code class="ws-code">email="..."</code> to pre-populate the email field. The research
+                          opt-in still requires the user to check the box before the email is used.
+                        </p>
+                        {/description} {#content}{#include extensions/user-feedback/with-prefilled-email /}{/content} {/include}
+
+                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                            <div>
+                              <h2
+                                id="documentation"
+                                tabindex="-1"
+                                class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                              >
+                                Documentation
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3
+                            id="props-user-feedback"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h3 pf-m-editorial ws-heading"
+                          >
+                            Props
+                          </h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by
+                            <code class="ws-code">{|{#include components/extensions/user-feedback ... /}|}</code>.
+                          </p>
+                          <table
+                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                            aria-label="User-feedback props"
+                          >
+                            <caption class="pf-v6-c-table__caption">
+                              <span class="ws-prop-required">*</span>
+                              required
+                            </caption>
+                            <thead>
+                              <tr>
+                                <th scope="col" class="pf-m-width-20">Name</th>
+                                <th scope="col" class="pf-m-width-20">Type</th>
+                                <th scope="col">Default</th>
+                                <th scope="col">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td><span class="ws-prop-required">*</span> <code class="ws-code">id</code></td>
+                                <td>String</td>
+                                <td>—</td>
+                                <td>DOM id; trigger button + modal use derived ids.</td>
+                              </tr>
+                              <tr>
+                                <td><code class="ws-code">basic</code></td>
+                                <td>boolean</td>
+                                <td><code class="ws-code">false</code></td>
+                                <td>
+                                  Skip the home menu, open straight to the share form. The Back button collapses to
+                                  Cancel.
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><code class="ws-code">email</code></td>
+                                <td>String</td>
+                                <td>—</td>
+                                <td>
+                                  Pre-fill the email field. Useful when the host has the user's email from their
+                                  session.
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><code class="ws-code">triggerLabel</code></td>
+                                <td>String</td>
+                                <td><code class="ws-code">"Share your feedback"</code></td>
+                                <td>Trigger button text.</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Wiring submissions.</strong> The component dispatches a
+                            <code class="ws-code">pha:user-feedback-submit</code> CustomEvent (and a
+                            <code class="ws-code">pha:user-feedback-cancel</code> on close). The
+                            <code class="ws-code">detail</code> is
+                            <code class="ws-code">{|{type, payload}|}</code> where <code class="ws-code">type</code> is
+                            one of <code class="ws-code">share</code>, <code class="ws-code">bug</code>,
+                            <code class="ws-code">research</code>. Listen at the document level, POST to your server
+                            with HTMX or fetch, then call <code class="ws-code">markSuccess(title, message)</code> or
+                            <code class="ws-code">markError()</code> on the component via
+                            <code class="ws-code">$refs</code> to update the modal page.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Default behaviour.</strong> When no host listener intervenes, the component
+                            auto-transitions to the success page 250ms after submit. This makes the demo self-contained;
+                            production wiring should preventDefault on the event and drive the page state explicitly.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Accessibility.</strong> The modal is
+                            <code class="ws-code">role="dialog" aria-modal="true"</code> with
+                            <code class="ws-code">aria-labelledby</code> bound to the current page's heading id. Cards
+                            on the home menu are <code class="ws-code">role="button"</code> with full keyboard support
+                            (Enter and Space). Email validation announces errors via the form's helper-text region.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Why not the React extension.</strong>
+                            <code class="ws-code">@patternfly/react-user-feedback</code> is React-only. We vendor its
+                            CSS at <code class="ws-code">/web/vendor/patternfly-extensions/user-feedback.css</code> and
+                            re-implement the behaviour in Alpine.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <br /><a
+                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/extensions/user-feedback.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Edit user-feedback.html on GitHub</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/body} {/include}

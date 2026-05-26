@@ -1,0 +1,8 @@
+{! Filter side panel — category sub-component !}
+{! Required: title !}
+{! Optional: headingLevel (default h3) !}
+{! Slots: items (filter-side-panel-category-item children) !}
+<div class="filter-panel-pf-category">
+  {#let h=(headingLevel ?: 'h3')}<{h} class="filter-panel-pf-category-title">{title}</{h}>{/let}
+  <ul class="filter-panel-pf-category-items">{#insert items}{/insert}</ul>
+</div>
