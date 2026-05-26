@@ -150,10 +150,7 @@
         this.loading = true;
         this.error = null;
         try {
-          let [monaco, source] = await Promise.all([
-            loadMonaco("/web/vendor/monaco/vs"),
-            fetchSource(this, target),
-          ]);
+          let [monaco, source] = await Promise.all([loadMonaco("/web/vendor/monaco/vs"), fetchSource(this, target)]);
           installThemeObserver();
           await this.$nextTick();
           if (!editor) {
