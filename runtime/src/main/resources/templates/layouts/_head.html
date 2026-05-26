@@ -1,36 +1,36 @@
-{! Shared <head> partial — included by all layout templates. Do not include the !}
-{! opening or closing <head> tags here; layouts/base.html wraps the include. !}
-  <meta charset="UTF-8" />
-  <title>{#insert title}{#if applicationPageName??}{applicationPageName} | {/if}{applicationName}{/insert}</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="color-scheme" content="light dark" />
-  <meta name="application-name" content="{applicationName}" />
-  {#if applicationPageDescription??}
-  <meta name="description" content="{applicationPageDescription}" />
-  {/if}
-  <link rel="manifest" href="/assets/manifest.json" />
-  <meta name="mobile-web-app-capable" content="yes" />
+{! Shared head partial — included by all layout templates. Do NOT include the !} {! opening or closing head tags here;
+layouts/base.html wraps the include. !}
+<meta charset="UTF-8" />
+<title>{#insert title}{#if applicationPageName??}{applicationPageName} | {/if}{applicationName}{/insert}</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="color-scheme" content="light dark" />
+<meta name="application-name" content="{applicationName}" />
+{#if applicationPageDescription??}
+<meta name="description" content="{applicationPageDescription}" />
+{/if}
+<link rel="manifest" href="/assets/manifest.json" />
+<meta name="mobile-web-app-capable" content="yes" />
 
-  <script>
-    (function () {
-      let t = localStorage.getItem("pha-theme") || "auto";
-      let dark = t === "dark" || (t === "auto" && window.matchMedia("(prefers-color-scheme: dark)").matches);
-      if (dark) document.documentElement.classList.add("pf-v6-theme-dark");
-      let c = localStorage.getItem("pha-contrast") || "system";
-      let hc = c === "on" || (c === "system" && window.matchMedia("(prefers-contrast: more)").matches);
-      if (hc) document.documentElement.classList.add("pf-v6-theme-high-contrast");
-    })();
-  </script>
+<script>
+  (function () {
+    let t = localStorage.getItem("pha-theme") || "auto";
+    let dark = t === "dark" || (t === "auto" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    if (dark) document.documentElement.classList.add("pf-v6-theme-dark");
+    let c = localStorage.getItem("pha-contrast") || "system";
+    let hc = c === "on" || (c === "system" && window.matchMedia("(prefers-contrast: more)").matches);
+    if (hc) document.documentElement.classList.add("pf-v6-theme-high-contrast");
+  })();
+</script>
 
-  <link rel="stylesheet" href="/web/vendor/patternfly/patternfly.css" />
-  <link rel="stylesheet" href="/web/vendor/patternfly/patternfly-addons.css" />
-  <link rel="stylesheet" href="/web/css/pha.css" />
+<link rel="stylesheet" href="/web/vendor/patternfly/patternfly.css" />
+<link rel="stylesheet" href="/web/vendor/patternfly/patternfly-addons.css" />
+<link rel="stylesheet" href="/web/css/pha.css" />
 
-  <script src="/web/js/utils/focus-trap.js"></script>
-  <script src="/web/js/alpine/register.js"></script>
+<script src="/web/js/utils/focus-trap.js"></script>
+<script src="/web/js/alpine/register.js"></script>
 
-  {#insert head}{/insert}
+{#insert head}{/insert}
 
-  <script src="/web/vendor/alpine/alpine.min.js" defer></script>
-  <script src="/web/vendor/htmx/htmx.min.js"></script>
+<script src="/web/vendor/alpine/alpine.min.js" defer></script>
+<script src="/web/vendor/htmx/htmx.min.js"></script>
