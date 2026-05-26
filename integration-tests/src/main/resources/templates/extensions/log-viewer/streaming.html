@@ -1,0 +1,39 @@
+{! Live tail: HTMX SSE extension subscribes to /api/htmx/log-stream and appends each event's HTML to the log list. !}
+{! The Alpine factory's scrollToBottom() fires on every htmx:sse-message event for auto-scroll. !}
+<div
+  class="pf-v6-c-log-viewer"
+  id="lv-streaming"
+  x-data="phaLogViewer()"
+  hx-ext="sse"
+  sse-connect="/api/htmx/log-stream"
+  @htmx:sse-message.window="scrollToBottom()"
+>
+  <div class="pf-v6-c-log-viewer__header">
+    <div class="pf-v6-l-flex pf-m-justify-content-space-between pf-m-align-items-center">
+      <div class="pf-v6-l-flex__item">
+        <strong>Live tail</strong>
+        <span class="pf-v6-c-content--small" style="margin-inline-start: 0.5rem">streaming via SSE</span>
+      </div>
+      <div class="pf-v6-l-flex__item">
+        <button class="pf-v6-c-button pf-m-secondary" type="button" @click="scrollToBottom()">
+          <span class="pf-v6-c-button__text">Jump to bottom</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="pf-v6-c-log-viewer__main">
+    <div class="pf-v6-c-log-viewer__scroll-container" x-ref="scroll">
+      <div
+        class="pf-v6-c-log-viewer__list"
+        role="list"
+        aria-label="Streaming log"
+        sse-swap="message"
+        hx-swap="beforeend"
+      >
+        <span class="pf-v6-c-log-viewer__list-item" role="listitem">
+          <span class="pf-v6-c-log-viewer__text">Waiting for stream...</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
