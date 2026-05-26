@@ -1,6 +1,6 @@
 {! About Modal — PatternFly v6 !}
 {! Required: id, brandImageSrc, brandImageAlt !}
-{! Optional: productName, ariaLabel (required when productName is absent), backgroundImage, closeButtonAriaLabel, noContentContainer !}
+{! Optional: productName, ariaLabel (required when productName is absent), backgroundImage, closeButtonAriaLabel, noContentContainer, headingLevel (default h1) !}
 {! Slots: content, strapline, trademark !}
 {! Open via: $dispatch('open-about-modal-{id}'). Multiple instances on a page get distinct event names via the id suffix. !}
 <div x-data="{ open: false }"
@@ -34,7 +34,7 @@
       </div>
       {#if productName??}
       <div class="pf-v6-c-about-modal-box__header">
-        <h1 class="pf-v6-c-title pf-m-4xl" id="{id}-title">{productName}</h1>
+        {#let h=(headingLevel ?: 'h1')}<{h} class="pf-v6-c-title pf-m-4xl" id="{id}-title">{productName}</{h}>{/let}
       </div>
       {/if}
       {#if noContentContainer??}

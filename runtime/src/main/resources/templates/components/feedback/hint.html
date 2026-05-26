@@ -1,12 +1,10 @@
 {! Hint — PatternFly v6 !} {! Required: id !} {! Optional: title (rendered in __title), bodyText (rendered in __body) !}
-{! For richer content (footer, action links) hand-render the
-<div class="pf-v6-c-hint">
-  markup directly — we don't expose a slot here to avoid Qute slot-name collisions with example-card. !}
-  <div class="pf-v6-c-hint" id="{id}">
-    {#if title??}
-    <div class="pf-v6-c-hint__title">{title}</div>
-    {/if} {#if bodyText??}
-    <div class="pf-v6-c-hint__body">{bodyText}</div>
-    {/if}
-  </div>
+{! For richer content (footer, action links) hand-render the div.pf-v6-c-hint !} {! markup directly — we don't expose a
+slot here to avoid Qute slot-name collisions with example-card. !}
+<div class="pf-v6-c-hint" id="{id}">
+  {#if title??}
+  <div class="pf-v6-c-hint__title">{title}</div>
+  {/if} {#if bodyText??}
+  <div class="pf-v6-c-hint__body">{bodyText}</div>
+  {/if}
 </div>

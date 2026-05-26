@@ -66,13 +66,13 @@ stop_vnu() {
 }
 
 discover_paths() {
-  # Scrape homepage for component links + add known demo pages
+  # Scrape homepage for component / extension links + add known demo pages
   local html
   html=$(curl -fsS "$QUARKUS_URL/")
 
   {
     echo "/"
-    echo "$html" | grep -oE 'href="/components/[a-z0-9-]+"' \
+    echo "$html" | grep -oE 'href="(/components|/extensions)/[a-z0-9/-]+"' \
       | sed -E 's/^href="(.+)"$/\1/' \
       | sort -u
     echo "/demos/dashboard"
@@ -86,7 +86,13 @@ discover_paths() {
 # (they don't use the `data-` prefix). vnu flags every one as invalid, which
 # would mask real bugs in the noise — so we strip these from the report.
 # Patterns match vnu's `gnu`-format error lines, which use Unicode smart quotes.
-ALPINE_HTMX_ATTR_RE='Attribute .(x-[a-z0-9.:-]+|hx-[a-z0-9-]+|@[a-zA-Z0-9.@-]+|:[a-zA-Z0-9:-]+)'
+ALPINE_HTMX_ATTR_RE='Attribute .(x-[a-z0-9.:-]+|hx-[a-z0-9-]+|sse-[a-z0-9-]+|@[a-zA-Z0-9.@-]+|:[a-zA-Z0-9:-]+)'
+
+# The Collabora document-editor iframe intentionally combines allow-scripts
+# with allow-same-origin: Collabora's WOPI client needs both to function.
+# vnu treats this as an error ("not recommended ... breaks sandboxing") but
+# the iframe origin is fully trusted by us, so the combination is by design.
+COLLABORA_SANDBOX_RE='Setting both .allow-scripts. and .allow-same-origin. is not recommended'
 
 path_to_filename() {
   # /components/about-modal -> components__about-modal
@@ -110,8 +116,11 @@ validate_path() {
         --data-binary @- \
         "${VNU_URL}/?out=gnu&level=error")
 
-  # Drop Alpine/HTMX framework-attribute errors (intentional non-spec choices)
-  filtered=$(printf '%s' "$response" | grep -vE "$ALPINE_HTMX_ATTR_RE" || true)
+  # Drop Alpine/HTMX framework-attribute errors and the intentional
+  # Collabora iframe sandbox warning (both are intentional non-spec choices)
+  filtered=$(printf '%s' "$response" \
+    | grep -vE "$ALPINE_HTMX_ATTR_RE" \
+    | grep -vE "$COLLABORA_SANDBOX_RE" || true)
 
   if [ -z "$filtered" ]; then
     printf '  PASS  %s\n' "$path"

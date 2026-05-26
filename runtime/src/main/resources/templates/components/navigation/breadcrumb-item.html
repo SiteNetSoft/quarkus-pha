@@ -9,8 +9,9 @@
 {!   target      (optional) — link target (e.g. "_blank")                           !}
 {!   current     (optional) — boolean; marks the active crumb with pf-m-current     !}
 {!                            + aria-current="page".                                !}
-{!   heading     (optional) — boolean; wraps the current crumb in <h1> for screen   !}
-{!                            readers (PF v6 "With heading" pattern).               !}
+{!   heading        (optional) — boolean; wraps the current crumb in a heading for !}
+{!                               screen readers (PF v6 "With heading" pattern).    !}
+{!   headingLevel   (optional) — h1..h6 (default h1); only used with heading=true. !}
 {!   isDropdown  (optional) — boolean; renders the breadcrumb dropdown variant      !}
 {!                            instead of a plain link. Use the dropdown slot for    !}
 {!                            the menu options. Requires the                       !}
@@ -39,7 +40,7 @@
     </div>
   </div>
   {#else if heading??}
-  <h1 class="pf-v6-c-breadcrumb__heading"><a {#if href??}href="{href}"{/if}{#if target??} target="{target}"{/if} class="pf-v6-c-breadcrumb__link pf-m-current" aria-current="page">{#insert/}</a></h1>
+  {#let h=(headingLevel ?: 'h1')}<{h} class="pf-v6-c-breadcrumb__heading"><a {#if href??}href="{href}"{/if}{#if target??} target="{target}"{/if} class="pf-v6-c-breadcrumb__link pf-m-current" aria-current="page">{#insert/}</a></{h}>{/let}
   {#else if href??}
   <a href="{href}"{#if target??} target="{target}"{/if} class="pf-v6-c-breadcrumb__link{#if current??} pf-m-current{/if}"{#if current??} aria-current="page"{/if}>{#insert/}</a>
   {#else if current??}

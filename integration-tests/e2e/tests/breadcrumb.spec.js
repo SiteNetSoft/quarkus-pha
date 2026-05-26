@@ -37,8 +37,8 @@ test.describe("Breadcrumb", () => {
     await expect(firstItem.locator(".pf-v6-c-breadcrumb__link")).toHaveCount(0);
   });
 
-  test("with-heading: current crumb is wrapped in h1.pf-v6-c-breadcrumb__heading", async ({ page }) => {
-    const heading = page.locator("#breadcrumb-heading h1.pf-v6-c-breadcrumb__heading");
+  test("with-heading: current crumb is wrapped in a heading.pf-v6-c-breadcrumb__heading", async ({ page }) => {
+    const heading = page.locator("#breadcrumb-heading h2.pf-v6-c-breadcrumb__heading");
     await expect(heading).toBeVisible();
     const link = heading.locator(".pf-v6-c-breadcrumb__link.pf-m-current");
     await expect(link).toHaveAttribute("aria-current", "page");
