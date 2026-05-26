@@ -27,11 +27,21 @@ public class HelloResource {
      * thumbnail PNG is added.
      */
     private static final Set<String> NO_THUMBNAIL = Set.of(
+        "catalog-item-header",
+        "catalog-tile",
         "chart",
+        "data-view-overview",
+        "data-view-toolbar",
+        "data-view-table",
         "document-editor",
+        "filter-side-panel",
+        "log-viewer",
         "map",
+        "properties-side-panel",
         "rectangle-selection",
         "rich-text-editor",
+        "user-feedback",
+        "vertical-tabs",
         "video-player"
     );
 
@@ -139,7 +149,17 @@ public class HelloResource {
         Map.entry("click-to-load",     "/components/click-to-load"),
         Map.entry("lazy-modal",        "/components/lazy-modal"),
         Map.entry("video-player",      "/components/video-player"),
-        Map.entry("rich-text-editor",  "/components/rich-text-editor")
+        Map.entry("rich-text-editor",  "/components/rich-text-editor"),
+        Map.entry("log-viewer",            "/extensions/log-viewer"),
+        Map.entry("user-feedback",         "/extensions/user-feedback"),
+        Map.entry("catalog-item-header",   "/extensions/catalog-view/catalog-item-header"),
+        Map.entry("catalog-tile",          "/extensions/catalog-view/catalog-tile"),
+        Map.entry("filter-side-panel",     "/extensions/catalog-view/filter-side-panel"),
+        Map.entry("properties-side-panel", "/extensions/catalog-view/properties-side-panel"),
+        Map.entry("vertical-tabs",         "/extensions/catalog-view/vertical-tabs"),
+        Map.entry("data-view-overview",    "/extensions/data-view/overview"),
+        Map.entry("data-view-toolbar",     "/extensions/data-view/toolbar"),
+        Map.entry("data-view-table",       "/extensions/data-view/table")
     );
 
     /** Components tagged with a footer label. */
@@ -164,7 +184,17 @@ public class HelloResource {
         Map.entry("click-to-load",     "HTMX"),
         Map.entry("lazy-modal",        "HTMX"),
         Map.entry("video-player",      "Custom"),
-        Map.entry("rich-text-editor",  "Custom")
+        Map.entry("rich-text-editor",  "Custom"),
+        Map.entry("log-viewer",            "Extension"),
+        Map.entry("user-feedback",         "Extension"),
+        Map.entry("catalog-item-header",   "Extension"),
+        Map.entry("catalog-tile",          "Extension"),
+        Map.entry("filter-side-panel",     "Extension"),
+        Map.entry("properties-side-panel", "Extension"),
+        Map.entry("vertical-tabs",         "Extension"),
+        Map.entry("data-view-overview",    "Extension"),
+        Map.entry("data-view-toolbar",     "Extension"),
+        Map.entry("data-view-table",       "Extension")
     );
 
     /** Label text → PF label color modifier. */
@@ -173,7 +203,8 @@ public class HelloResource {
         "Beta",       "pf-m-blue",
         "Deprecated", "",
         "Custom",     "pf-m-teal",
-        "HTMX",       "pf-m-green"
+        "HTMX",       "pf-m-green",
+        "Extension",  "pf-m-orange"
     );
 
     /** Deprecated components also need "Tile". */
@@ -196,6 +227,8 @@ public class HelloResource {
         {"button",               "Button"},
         {"calendar-month",       "Calendar month"},
         {"card",                 "Card"},
+        {"catalog-item-header",  "Catalog item header"},
+        {"catalog-tile",         "Catalog tile"},
         {"chart",                "Chart"},
         {"checkbox",             "Checkbox"},
         {"chip",                 "Chip"},
@@ -207,6 +240,9 @@ public class HelloResource {
         {"context-selector",     "Context selector"},
         {"custom-menus",         "Custom menus"},
         {"data-list",            "Data list"},
+        {"data-view-overview",   "Data view overview"},
+        {"data-view-toolbar",    "Data view toolbar"},
+        {"data-view-table",      "Data view table"},
         {"date-and-time-picker", "Date and time picker"},
         {"date-picker",          "Date picker"},
         {"description-list",     "Description list"},
@@ -218,6 +254,7 @@ public class HelloResource {
         {"dual-list-selector",   "Dual list selector"},
         {"empty-state",          "Empty state"},
         {"expandable-section",   "Expandable section"},
+        {"filter-side-panel",    "Filter side panel"},
         {"form",                 "Form"},
         {"form-control",         "Form control"},
         {"form-select",          "Form select"},
@@ -232,6 +269,7 @@ public class HelloResource {
         {"lazy-modal",           "Lazy modal"},
         {"list",                 "List"},
         {"live-search",          "Live search"},
+        {"log-viewer",           "Log viewer"},
         {"login-page",           "Login page"},
         {"map",                  "Map"},
         {"masthead",             "Masthead"},
@@ -253,6 +291,7 @@ public class HelloResource {
         {"popover",              "Popover"},
         {"progress",             "Progress"},
         {"progress-stepper",     "Progress stepper"},
+        {"properties-side-panel","Properties side panel"},
         {"radio",                "Radio"},
         {"rectangle-selection",  "Rectangle selection"},
         {"rich-text-editor",     "Rich text editor"},
@@ -281,6 +320,8 @@ public class HelloResource {
         {"topology",             "Topology"},
         {"tree-view",            "Tree view"},
         {"truncate",             "Truncate"},
+        {"user-feedback",        "User feedback"},
+        {"vertical-tabs",        "Vertical tabs"},
         {"video-player",         "Video player"},
         {"wizard",               "Wizard"},
     };

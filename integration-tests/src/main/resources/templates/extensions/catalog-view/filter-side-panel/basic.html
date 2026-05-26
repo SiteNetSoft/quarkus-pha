@@ -1,0 +1,15 @@
+<div style="max-width: 320px">
+{#include components/extensions/filter-side-panel id="fsp-demo"} {#categories}
+  {#include components/extensions/filter-side-panel-category title="Categories"} {#items}
+    {#include components/extensions/filter-side-panel-category-item id="fsp-cat-databases" label="Databases" count="42" /}
+    {#include components/extensions/filter-side-panel-category-item id="fsp-cat-messaging" label="Messaging" count="18" /}
+    {#include components/extensions/filter-side-panel-category-item id="fsp-cat-runtimes" label="Runtimes" count="15" checked=true /}
+    {#include components/extensions/filter-side-panel-category-item id="fsp-cat-observability" label="Observability" count="9" /}
+  {/items} {/include}
+  {#include components/extensions/filter-side-panel-category title="Vendor"} {#items}
+    {#include components/extensions/filter-side-panel-category-item id="fsp-vendor-rh" label="Red Hat" count="28" /}
+    {#include components/extensions/filter-side-panel-category-item id="fsp-vendor-apache" label="Apache" count="12" /}
+    {#include components/extensions/filter-side-panel-category-item id="fsp-vendor-community" label="Community" count="44" /}
+  {/items} {/include}
+{/categories} {/include}
+</div>

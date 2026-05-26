@@ -1,0 +1,17 @@
+{! Catalog item header — PatternFly catalog-view extension !}
+{! Required: title !}
+{! Optional: iconImg (URL), iconAlt, iconClass (CSS class for icon glyph — mutually exclusive with iconImg), vendor, id, headingLevel (default h1) !}
+{! Requires: /web/vendor/patternfly-extensions/catalog-view.css !}
+<header class="catalog-item-header-pf"{#if id??} id="{id}"{/if}>
+  {#if iconImg??}
+  <img class="catalog-item-header-pf-icon" src="{iconImg}" alt="{iconAlt ?: ''}" />
+  {#else if iconClass??}
+  <span class="catalog-item-header-pf-icon {iconClass}" aria-hidden="true"></span>
+  {/if}
+  <div class="catalog-item-header-pf-text">
+    {#let h=(headingLevel ?: 'h1')}<{h} class="pf-v6-c-title catalog-item-header-pf-title">{title}</{h}>{/let}
+    {#if vendor??}
+    <p class="pf-v6-c-content--p catalog-item-header-pf-subtitle">{vendor}</p>
+    {/if}
+  </div>
+</header>

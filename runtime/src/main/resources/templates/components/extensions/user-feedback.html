@@ -1,0 +1,204 @@
+{! User feedback — PatternFly extension !}
+{! Required: id !}
+{! Optional: email (pre-fills email field), triggerLabel (default "Share your feedback"), basic (bool — skip the home menu and show the share form directly) !}
+{! Requires: !}
+{!   /web/vendor/patternfly-extensions/user-feedback.css (vendored from @patternfly/react-user-feedback) !}
+{!   /web/js/alpine/components/user-feedback.js !}
+<div
+  id="{id}"
+  x-data="phaUserFeedback()"
+  {#if email??}data-email="{email}"{/if}
+  {#if basic??}data-basic="true"{/if}
+>
+  <button class="pf-v6-c-button pf-m-secondary" type="button" @click="open()">
+    <span class="pf-v6-c-button__text">{triggerLabel ?: 'Share your feedback'}</span>
+  </button>
+
+  <div
+    class="pf-v6-c-backdrop chr-c-feedback-modal"
+    x-show="isOpen"
+    x-cloak
+    x-transition.opacity
+    @keydown.escape.window="close()"
+    @click.self="close()"
+  >
+    <div class="pf-v6-c-bullseye">
+      <div class="pf-v6-c-modal-box pf-m-lg" role="dialog" aria-modal="true" :aria-labelledby="'{id}-title-' + page">
+        <div class="pf-v6-c-modal-box__close">
+          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close feedback" @click="close()">
+            <span class="pf-v6-c-button__icon">{icons:svg('fa:times').raw}</span>
+          </button>
+        </div>
+
+        {! ---- home: menu of feedback flavours ---- !}
+        <div class="chr-c-feedback-content" x-show="page === 'home'" x-cloak>
+          <div class="chr-c-feedback-heading">
+            <h2 class="pf-v6-c-content--h1" id="{id}-title-home">Tell us about your experience</h2>
+            <p>Help us improve our products by sharing your feedback.</p>
+          </div>
+          <div class="chr-c-feedback-cards">
+            <div class="pf-v6-c-card pf-m-compact" tabindex="0" role="button" aria-label="Share feedback" @click="setPage('share')" @keydown.enter.prevent="setPage('share')" @keydown.space.prevent="setPage('share')">
+              <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Share feedback</span></div>
+              <div class="pf-v6-c-card__body">What has your experience been like so far?</div>
+            </div>
+            <div class="pf-v6-c-card pf-m-compact" tabindex="0" role="button" aria-label="Report a bug" @click="setPage('bug')" @keydown.enter.prevent="setPage('bug')" @keydown.space.prevent="setPage('bug')">
+              <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Report a bug</span></div>
+              <div class="pf-v6-c-card__body">Describe the bug you encountered. For urgent issues, open a support case instead.</div>
+            </div>
+            <div class="pf-v6-c-card pf-m-compact" tabindex="0" role="button" aria-label="Inform the direction of products" @click="setPage('research')" @keydown.enter.prevent="setPage('research')" @keydown.space.prevent="setPage('research')">
+              <div class="pf-v6-c-card__title"><span class="pf-v6-c-card__title-text">Inform the direction of products</span></div>
+              <div class="pf-v6-c-card__body">Join our mailing list and learn about user-research opportunities.</div>
+            </div>
+          </div>
+        </div>
+
+        {! ---- share feedback form ---- !}
+        <div class="chr-c-feedback-content" x-show="page === 'share'" x-cloak>
+          <div class="chr-c-feedback-heading">
+            <h2 class="pf-v6-c-content--h1" id="{id}-title-share">Share your feedback</h2>
+            <p>Help us improve our products by sharing your feedback.</p>
+          </div>
+          <form class="pf-v6-c-form chr-c-feedback-content-main" @submit.prevent="submit('share')">
+            <div class="pf-v6-c-form__group">
+              <label class="pf-v6-c-form__label" :for="'{id}-feedback'">
+                <span class="pf-v6-c-form__label-text">Enter your feedback</span>
+              </label>
+              <div class="pf-v6-c-form__group-control">
+                <textarea class="pf-v6-c-form-control chr-c-feedback-text-area" :id="'{id}-feedback'" rows="5" x-model="feedback"></textarea>
+              </div>
+            </div>
+            <div class="pf-v6-c-form__group">
+              <label class="pf-v6-c-check">
+                <input class="pf-v6-c-check__input" type="checkbox" :id="'{id}-research'" x-model="optInResearch" />
+                <span class="pf-v6-c-check__label">Learn about research opportunities</span>
+              </label>
+            </div>
+            <template x-if="optInResearch">
+              <div class="pf-v6-c-form__group">
+                <label class="pf-v6-c-form__label" :for="'{id}-email-share'">
+                  <span class="pf-v6-c-form__label-text">Email</span>
+                </label>
+                <div class="pf-v6-c-form__group-control">
+                  <input class="pf-v6-c-form-control" type="email" :id="'{id}-email-share'" x-model="email" @blur="validateEmail()" />
+                </div>
+                <div class="pf-v6-c-form__helper-text" x-show="emailError" x-cloak>
+                  <span class="pf-v6-c-helper-text__item pf-m-error" x-text="emailError"></span>
+                </div>
+              </div>
+            </template>
+            <ul class="pf-v6-c-action-list chr-c-feedback-footer">
+              <li class="pf-v6-c-action-list__item">
+                <button type="submit" class="pf-v6-c-button pf-m-primary" :disabled="!feedback.trim() || (optInResearch &amp;&amp; emailError)">
+                  <span class="pf-v6-c-button__text">Submit feedback</span>
+                </button>
+              </li>
+              <li class="pf-v6-c-action-list__item">
+                <button type="button" class="pf-v6-c-button pf-m-secondary" @click="back()" x-show="!basic">
+                  <span class="pf-v6-c-button__text">Back</span>
+                </button>
+              </li>
+              <li class="pf-v6-c-action-list__item">
+                <button type="button" class="pf-v6-c-button pf-m-link" @click="close()">
+                  <span class="pf-v6-c-button__text">Cancel</span>
+                </button>
+              </li>
+            </ul>
+          </form>
+        </div>
+
+        {! ---- bug report form ---- !}
+        <div class="chr-c-feedback-content" x-show="page === 'bug'" x-cloak>
+          <div class="chr-c-feedback-heading">
+            <h2 class="pf-v6-c-content--h1" id="{id}-title-bug">Report a bug</h2>
+            <p>Describe the bug you encountered. Include where it is located and what action caused it.</p>
+          </div>
+          <form class="pf-v6-c-form chr-c-feedback-content-main" @submit.prevent="submit('bug')">
+            <div class="pf-v6-c-form__group">
+              <label class="pf-v6-c-form__label" :for="'{id}-bug'">
+                <span class="pf-v6-c-form__label-text">Bug description</span>
+              </label>
+              <div class="pf-v6-c-form__group-control">
+                <textarea class="pf-v6-c-form-control chr-c-feedback-text-area" :id="'{id}-bug'" rows="5" x-model="bug"></textarea>
+              </div>
+            </div>
+            <ul class="pf-v6-c-action-list chr-c-feedback-footer">
+              <li class="pf-v6-c-action-list__item">
+                <button type="submit" class="pf-v6-c-button pf-m-primary" :disabled="!bug.trim()">
+                  <span class="pf-v6-c-button__text">Submit bug report</span>
+                </button>
+              </li>
+              <li class="pf-v6-c-action-list__item">
+                <button type="button" class="pf-v6-c-button pf-m-secondary" @click="back()">
+                  <span class="pf-v6-c-button__text">Back</span>
+                </button>
+              </li>
+              <li class="pf-v6-c-action-list__item">
+                <button type="button" class="pf-v6-c-button pf-m-link" @click="close()">
+                  <span class="pf-v6-c-button__text">Cancel</span>
+                </button>
+              </li>
+            </ul>
+          </form>
+        </div>
+
+        {! ---- research mailing list ---- !}
+        <div class="chr-c-feedback-content" x-show="page === 'research'" x-cloak>
+          <div class="chr-c-feedback-heading">
+            <h2 class="pf-v6-c-content--h1" id="{id}-title-research">Inform the direction of our products</h2>
+            <p>Join our mailing list to learn about future research opportunities.</p>
+          </div>
+          <form class="pf-v6-c-form chr-c-feedback-content-main" @submit.prevent="submit('research')">
+            <div class="pf-v6-c-form__group">
+              <label class="pf-v6-c-form__label" :for="'{id}-email-research'">
+                <span class="pf-v6-c-form__label-text">Email</span>
+              </label>
+              <div class="pf-v6-c-form__group-control">
+                <input class="pf-v6-c-form-control" type="email" :id="'{id}-email-research'" x-model="email" @blur="validateEmail()" />
+              </div>
+              <div class="pf-v6-c-form__helper-text" x-show="emailError" x-cloak>
+                <span class="pf-v6-c-helper-text__item pf-m-error" x-text="emailError"></span>
+              </div>
+            </div>
+            <ul class="pf-v6-c-action-list chr-c-feedback-footer">
+              <li class="pf-v6-c-action-list__item">
+                <button type="submit" class="pf-v6-c-button pf-m-primary" :disabled="!email.trim() || emailError">
+                  <span class="pf-v6-c-button__text">Join mailing list</span>
+                </button>
+              </li>
+              <li class="pf-v6-c-action-list__item">
+                <button type="button" class="pf-v6-c-button pf-m-secondary" @click="back()">
+                  <span class="pf-v6-c-button__text">Back</span>
+                </button>
+              </li>
+              <li class="pf-v6-c-action-list__item">
+                <button type="button" class="pf-v6-c-button pf-m-link" @click="close()">
+                  <span class="pf-v6-c-button__text">Cancel</span>
+                </button>
+              </li>
+            </ul>
+          </form>
+        </div>
+
+        {! ---- success ---- !}
+        <div class="chr-c-feedback-success-content" x-show="page === 'success'" x-cloak>
+          <span class="pf-v6-c-icon" style="color: var(--pf-t--global--icon--color--status--success--default); font-size: 3rem">{icons:svg('fa:check-circle').raw}</span>
+          <h2 class="pf-v6-c-content--h1" id="{id}-title-success" x-text="successTitle">Feedback sent</h2>
+          <p x-text="successMessage">Thank you, we appreciate your feedback.</p>
+          <button class="pf-v6-c-button pf-m-primary" type="button" @click="close()">
+            <span class="pf-v6-c-button__text">Close</span>
+          </button>
+        </div>
+
+        {! ---- error ---- !}
+        <div class="chr-c-feedback-success-content" x-show="page === 'error'" x-cloak>
+          <span class="pf-v6-c-icon" style="color: var(--pf-t--global--icon--color--status--danger--default); font-size: 3rem">{icons:svg('fa:exclamation-circle').raw}</span>
+          <h2 class="pf-v6-c-content--h1" id="{id}-title-error">Something went wrong</h2>
+          <p>There was a problem processing your request. Please try again.</p>
+          <button class="pf-v6-c-button pf-m-primary" type="button" @click="back()">
+            <span class="pf-v6-c-button__text">Back</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,3 @@
+{! ANSI color escape codes converted to colored spans server-side (raw ESC bytes are forbidden in HTML). !}
+{! For runtime ANSI streams (e.g. HTMX-streamed logs) use ansi=true and pass raw escape sequences via JS instead. !}
+{#include components/extensions/log-viewer id="lv-ansi" lines=ansiLines lineNumbers=true linesAreHtml=true /}

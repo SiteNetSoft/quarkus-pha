@@ -1,0 +1,83 @@
+{! Overview: same composition as the table demo, kept compact (fewer rows, no per-column sort indicators). !}
+{! The point is to show the three pieces working together, not the full table-extension surface. !}
+<div id="dv-overview" x-data="phaDataView()" data-columns="{columnsJson}" data-rows="{rowsJson}" data-per-page="3">
+  <div class="pf-v6-c-toolbar" role="region" aria-label="Data view overview toolbar">
+    <div class="pf-v6-c-toolbar__content">
+      <div class="pf-v6-c-toolbar__content-section">
+        <div class="pf-v6-c-toolbar__item">
+          <div class="pf-v6-c-text-input-group">
+            <div class="pf-v6-c-text-input-group__main pf-m-icon">
+              <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:search').raw}</span>
+              <span class="pf-v6-c-text-input-group__text">
+                <input
+                  class="pf-v6-c-text-input-group__text-input"
+                  type="search"
+                  aria-label="Filter overview"
+                  placeholder="Search"
+                  x-model="query"
+                  @input.debounce.150ms="setQuery(query)"
+                />
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="pf-v6-c-toolbar__item pf-m-align-right">
+          <span class="pf-v6-c-content--small" x-text="total + ' results'">0 results</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="pf-v6-c-table pf-m-grid-md" aria-label="Data view overview">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Vendor</th>
+        <th scope="col">Version</th>
+        <th scope="col">License</th>
+      </tr>
+    </thead>
+    <tbody>
+      <template x-for="row in visible" :key="row.name">
+        <tr>
+          <td data-label="Name" x-text="row.name"></td>
+          <td data-label="Vendor" x-text="row.vendor"></td>
+          <td data-label="Version" x-text="row.version"></td>
+          <td data-label="License" x-text="row.license"></td>
+        </tr>
+      </template>
+      <template x-if="total === 0">
+        <tr>
+          <td colspan="4" style="text-align: center; padding: 1rem">No results found.</td>
+        </tr>
+      </template>
+    </tbody>
+  </table>
+
+  <div class="pf-v6-c-pagination pf-m-bottom">
+    <div class="pf-v6-c-pagination__total-items">
+      <span x-text="total + ' total'">0 total</span>
+    </div>
+    <div class="pf-v6-c-pagination__nav">
+      <button
+        class="pf-v6-c-button pf-m-plain"
+        type="button"
+        aria-label="Previous"
+        @click="prevPage()"
+        :disabled="page === 1"
+      >
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:chevron-left').raw}</span>
+      </button>
+      <span>Page <span x-text="page">1</span> / <span x-text="pageCount">1</span></span>
+      <button
+        class="pf-v6-c-button pf-m-plain"
+        type="button"
+        aria-label="Next"
+        @click="nextPage()"
+        :disabled="page === pageCount"
+      >
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:chevron-right').raw}</span>
+      </button>
+    </div>
+  </div>
+</div>
