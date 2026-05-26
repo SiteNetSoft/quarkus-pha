@@ -141,11 +141,26 @@ phaAlpine("phaTreeView", (config = {}) => ({
       this._toggleSelected(li);
       return;
     }
+
     /*
-     * Label wrapper (checkbox pattern, click outside the actual input):
-     * the browser already propagates the click to the input via for="...",
-     * which fires its change → handled by the checkbox branch above.
+     * Checkbox-pattern node wrapper: clicking anywhere inside a
+     * .pf-v6-c-tree-view__node that owns a checkbox should toggle that
+     * checkbox. Replaces the native <label for="..."> click forwarding,
+     * which was dropped because <label> wrapping both a toggle button
+     * and the checkbox input is HTML-invalid (multiple form descendants).
      */
+    let nodeWrapper = e.target.closest(".pf-v6-c-tree-view__node");
+    if (nodeWrapper) {
+      let localCheck = nodeWrapper.querySelector("input[type='checkbox']");
+      if (localCheck) {
+        e.preventDefault();
+        localCheck.checked = !localCheck.checked;
+        let self = this;
+        requestAnimationFrame(function () {
+          self._cascadeCheckbox(li, !!localCheck.checked);
+        });
+      }
+    }
   },
 
   /* ---- keyboard navigation ---- */

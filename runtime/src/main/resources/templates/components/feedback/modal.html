@@ -1,5 +1,5 @@
 {! Modal — PatternFly v6 (modal-box) !} {! Parameters: id, titleText, size (optional: sm|md|lg), variant (optional:
-danger|warning|success|info) !}
+danger|warning|success|info), headingLevel (optional, default h1) !}
 <div
   class="pf-v6-c-backdrop"
   id="{id}-backdrop"
@@ -23,7 +23,7 @@ danger|warning|success|info) !}
         </button>
       </div>
       <header class="pf-v6-c-modal-box__header">
-        <h1 class="pf-v6-c-modal-box__title" id="{id}-title">
+        {#let h=(headingLevel ?: 'h1')}<{h} class="pf-v6-c-modal-box__title" id="{id}-title">
           {#if variant??}<span class="pf-v6-c-modal-box__title-icon"
             ><i
               class="{#if variant is 'danger'}fas fa-exclamation-circle{#else if variant is 'warning'}fas fa-exclamation-triangle{#else if variant is 'success'}fas fa-check-circle{#else}fas fa-info-circle{/if}"
@@ -31,7 +31,7 @@ danger|warning|success|info) !}
             ></i></span
           >{/if}
           <span class="pf-v6-c-modal-box__title-text">{titleText}</span>
-        </h1>
+        </{h}>{/let}
       </header>
       <div class="pf-v6-c-modal-box__body">{#insert body}{/insert}</div>
       <footer class="pf-v6-c-modal-box__footer">{#insert footer}{/insert}</footer>
