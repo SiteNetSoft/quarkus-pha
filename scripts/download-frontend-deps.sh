@@ -42,8 +42,9 @@ podman run --rm \
 
     # HTMX
     echo "  HTMX..."
-    mkdir -p /output/htmx
+    mkdir -p /output/htmx /output/htmx/ext
     cp node_modules/htmx.org/dist/htmx.min.js /output/htmx/
+    cp node_modules/htmx-ext-sse/sse.js /output/htmx/ext/sse.js
 
     # ECharts
     echo "  ECharts..."
