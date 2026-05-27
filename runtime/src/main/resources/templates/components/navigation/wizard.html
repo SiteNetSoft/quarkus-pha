@@ -1,5 +1,6 @@
-{! Wizard — PatternFly v6 !} {! Parameters: id, navLabel (optional) !} {! Slots: navItems, body, footer !}
-<div class="pf-v6-c-wizard" id="{id}">
+{! Wizard — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the wizard.
+                                          navLabel (optional) !} {! Slots: navItems, body, footer !}
+<div class="pf-v6-c-wizard"{#if id??} id="{id}"{/if}>
   <div class="pf-v6-c-wizard__outer-wrap">
     <div class="pf-v6-c-wizard__inner-wrap">
       <nav class="pf-v6-c-wizard__nav" aria-label="{#if navLabel??}{navLabel}{#else}Steps{/if}">

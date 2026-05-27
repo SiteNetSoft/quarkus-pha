@@ -1,9 +1,10 @@
-{! Rectangle selection — PHA custom component !} {! Parameters: id, selector (optional, default: [data-selectable]),
-fadeOut (optional, default: true) !} {! Requires: /web/js/alpine/components/rectangle-selection.js loaded before Alpine
+{! Rectangle selection — PHA custom component !} {! Optional: id — DOM id on the root; omit unless something else references the selector.
+                                                            selector (optional, default: [data-selectable]),
+                                                            fadeOut (optional, default: true) !} {! Requires: /web/js/alpine/components/rectangle-selection.js loaded before Alpine
 !} {! Requires: /web/css/components/rectangle-selection.css !}
 <div
   class="pha-c-rectangle-selection"
-  id="{id}"
+  {#if id??}id="{id}"{/if}
   x-data="rectangleSelection({ selector: '{#if selector??}{selector}{#else}[data-selectable]{/if}', fadeOut: {#if fadeOut??}{fadeOut}{#else}true{/if} })"
 >
   {#insert content}{/insert}

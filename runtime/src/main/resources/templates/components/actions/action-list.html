@@ -1,14 +1,15 @@
 {! Action List — PatternFly v6 !}
-{! Required: id, groups !}
-{! Optional flags (root): iconList — pf-m-icons on the list (was: icons) !}
-{!                        vertical — pf-m-vertical (PHA-only divergence) !}
+{! Required: groups !}
+{! Optional: id — DOM id on the root; omit unless something else references the component.
+              iconList — pf-m-icons on the list (was: icons)
+              vertical — pf-m-vertical (PHA-only divergence) !}
 {! Group: { items: [...], iconGroup?: bool }  — iconGroup adds pf-m-icons on the group !}
 {! Item shape (one of): !}
 {!   { text, variant }                          — text button (variant: primary|secondary|tertiary|link|plain|danger) !}
 {!   { icon: true, iconName, ariaLabel,         — icon-only button (variant defaults to plain) !}
 {!     variant?: <button variant> }             !}
 {!   { raw: <html string> }                     — escape hatch for custom content (kebab, dropdown, etc.) !}
-<div class="pf-v6-c-action-list{#if iconList??} pf-m-icons{/if}{#if vertical??} pf-m-vertical{/if}" id="{id}">
+<div class="pf-v6-c-action-list{#if iconList??} pf-m-icons{/if}{#if vertical??} pf-m-vertical{/if}"{#if id??} id="{id}"{/if}>
   {#for group in groups}
   <div class="pf-v6-c-action-list__group{#if group.iconGroup??} pf-m-icons{/if}">
     {#for item in group.items}

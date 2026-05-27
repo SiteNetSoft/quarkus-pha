@@ -1,11 +1,12 @@
 {! Catalog tile — PatternFly catalog-view extension !}
-{! Required: id, title !}
-{! Optional: href (when set, renders as <a>; otherwise <div role="button">), iconImg (URL), iconAlt, iconClass (CSS class for icon glyph), vendor, description, footer, featured (bool — pf-m-featured), badges (List of CSS class strings rendered as icon spans on the right) !}
+{! Required: title !}
+{! Optional: id — DOM id on the root; omit unless something else references the tile.
+              href (when set, renders as <a>; otherwise <div role="button">), iconImg (URL), iconAlt, iconClass (CSS class for icon glyph), vendor, description, footer, featured (bool — pf-m-featured), badges (List of CSS class strings rendered as icon spans on the right) !}
 {! Requires: /web/vendor/patternfly-extensions/catalog-view.css !}
 {#if href??}
-<a href="{href}" id="{id}" class="pf-v6-c-card catalog-tile-pf{#if featured??} catalog-tile-pf-featured{/if}">
+<a href="{href}"{#if id??} id="{id}"{/if} class="pf-v6-c-card catalog-tile-pf{#if featured??} catalog-tile-pf-featured{/if}">
 {#else}
-<div role="button" tabindex="0" id="{id}" class="pf-v6-c-card catalog-tile-pf{#if featured??} catalog-tile-pf-featured{/if}">
+<div role="button" tabindex="0"{#if id??} id="{id}"{/if} class="pf-v6-c-card catalog-tile-pf{#if featured??} catalog-tile-pf-featured{/if}">
 {/if}
   <div class="pf-v6-c-card__header catalog-tile-pf-header">
     {#if iconImg??}

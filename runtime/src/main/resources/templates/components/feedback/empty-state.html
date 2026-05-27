@@ -1,6 +1,6 @@
-{! Empty state — PatternFly v6 !} {! Parameters: id, titleText, bodyText (optional), iconName (optional, "set:slug"),
-primaryAction (optional), secondaryAction (optional) !}
-<div class="pf-v6-c-empty-state" id="{id}">
+{! Empty state — PatternFly v6 !} {! Required: titleText !} {! Optional: id — DOM id on the root; omit unless something else references the empty state.
+                                                                              bodyText (optional), iconName (optional, "set:slug"), primaryAction (optional), secondaryAction (optional) !}
+<div class="pf-v6-c-empty-state"{#if id??} id="{id}"{/if}>
   <div class="pf-v6-c-empty-state__content">
     {#if iconName??}
     <div class="pf-v6-c-empty-state__icon">

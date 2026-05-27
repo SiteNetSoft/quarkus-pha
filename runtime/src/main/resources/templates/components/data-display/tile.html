@@ -1,6 +1,6 @@
-{! Tile — PatternFly v6 (Deprecated) !} {! Parameters: id, title, iconName (optional, "set:slug"), bodyText (optional),
-selected (optional), disabled (optional) !}
-<div class="pf-v6-c-tile{#if selected??} pf-m-selected{/if}{#if disabled??} pf-m-disabled{/if}" id="{id}" tabindex="0">
+{! Tile — PatternFly v6 (Deprecated) !} {! Required: title !} {! Optional: id — DOM id on the root; omit unless something else references the tile.
+                                                                          iconName (optional, "set:slug"), bodyText (optional), selected (optional), disabled (optional) !}
+<div class="pf-v6-c-tile{#if selected??} pf-m-selected{/if}{#if disabled??} pf-m-disabled{/if}"{#if id??} id="{id}"{/if} tabindex="0">
   <div class="pf-v6-c-tile__header">
     {#if iconName??}
     <div class="pf-v6-c-tile__icon">{icons:svg(iconName).raw}</div>

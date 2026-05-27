@@ -1,7 +1,9 @@
 {! Clipboard copy — PatternFly v6 !}
-{! Parameters: id (required), text (required), readonly (optional), expandable (optional), !}
-{!   expandedText (optional — full text for expandable panel), !}
-{!   inline (optional), code (optional — inline code style), block (optional — inline block) !}
+{! Required: id — derives {id}-input + {id}-content for aria-controls wiring on the expand toggle. !}
+{! Required: text !}
+{! Optional: readonly (optional), expandable (optional),
+              expandedText (optional — full text for expandable panel),
+              inline (optional), code (optional — inline code style), block (optional — inline block) !}
 {!                                                                                          !}
 {! Why text is a String param (not a content slot like title / label / etc.):              !}
 {! Two of the three variants (default + expandable) put the text into an <input value="…"> !}

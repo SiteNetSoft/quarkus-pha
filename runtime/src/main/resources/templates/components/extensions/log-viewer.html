@@ -1,12 +1,13 @@
 {! Log Viewer — PatternFly v6 (extension) !}
-{! Required: id, lines (List of strings — one per log line) !}
-{! Optional: lineNumbers (bool), nowrap (bool), height (CSS length on __scroll-container), ansi (bool — parse ANSI escape codes into colored spans, client-side), linesAreHtml (bool — when true, lines are already-escaped HTML rendered raw; use with server-side ANSI conversion or pre-formatted lines), ariaLabel, withHeader (bool — render __header wrapper around #header slot), withFooter (bool — render __footer wrapper around #footer slot) !}
+{! Required: lines (List of strings — one per log line) !}
+{! Optional: id — DOM id on the root; omit unless something else references the log viewer.
+              lineNumbers (bool), nowrap (bool), height (CSS length on __scroll-container), ansi (bool — parse ANSI escape codes into colored spans, client-side), linesAreHtml (bool — when true, lines are already-escaped HTML rendered raw; use with server-side ANSI conversion or pre-formatted lines), ariaLabel, withHeader (bool — render __header wrapper around #header slot), withFooter (bool — render __footer wrapper around #footer slot) !}
 {! Slots: header (toolbar/title row, only used when withHeader=true), footer (controls, only used when withFooter=true) !}
 {! Behavior owned by phaLogViewer() — search highlighting, wrap toggle, ANSI rendering, scroll-to-bottom. !}
 {! Requires: /web/js/alpine/components/log-viewer.js loaded before Alpine. !}
 <div
   class="pf-v6-c-log-viewer{#if lineNumbers??} pf-m-line-numbers{/if}{#if nowrap??} pf-m-nowrap{/if}"
-  id="{id}"
+  {#if id??}id="{id}"{/if}
   {#if ansi??}data-ansi="true"{/if}
   x-data="phaLogViewer()"
 >

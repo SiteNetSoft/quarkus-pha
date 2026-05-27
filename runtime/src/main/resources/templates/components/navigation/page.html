@@ -1,2 +1,2 @@
-{! Page — PatternFly v6 !} {! Parameters: id !}
-<div class="pf-v6-c-page" id="{id}">{#insert content}{/insert}</div>
+{! Page — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the page. !}
+<div class="pf-v6-c-page"{#if id??} id="{id}"{/if}>{#insert content}{/insert}</div>

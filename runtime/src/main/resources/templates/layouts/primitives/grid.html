@@ -1,9 +1,9 @@
 {! Grid layout — 12-column responsive grid. !}
-{! Required: id !}
-{! Optional: gutter (boolean — adds pf-m-gutter for 1rem column/row gap),
+{! Optional: id (cosmetic — wrapper hook for external linking / fragment scroll),
+              gutter (boolean — adds pf-m-gutter for 1rem column/row gap),
               allCols (1-12 — applies pf-m-all-{N}-col to size every direct child uniformly) !}
 {! Slot: items — grid children. Children should be wrapped in pf-v6-l-grid__item with their own pf-m-{N}-col-on-{bp} classes,
    or use the all-cols shortcut for equal widths. !}
-<div class="pf-v6-l-grid{#if gutter??} pf-m-gutter{/if}{#if allCols??} pf-m-all-{allCols}-col{/if}" id="{id}">
+<div class="pf-v6-l-grid{#if gutter??} pf-m-gutter{/if}{#if allCols??} pf-m-all-{allCols}-col{/if}"{#if id??} id="{id}"{/if}>
   {#insert items}{/insert}
 </div>

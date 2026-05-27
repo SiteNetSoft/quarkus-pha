@@ -1,7 +1,8 @@
-{! Inline edit — PatternFly v6 !} {! Parameters: id, value (optional) !}
+{! Inline edit — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the form.
+                                              value (optional) !}
 <form
   class="pf-v6-c-inline-edit"
-  id="{id}"
+  {#if id??}id="{id}"{/if}
   x-data="{ editing: false, val: '{#if value??}{value}{#else}{/if}' }"
   :class="{ 'pf-m-inline-editable': editing }"
 >
