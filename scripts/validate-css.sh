@@ -27,16 +27,15 @@ mkdir -p "$REPORT_DIR"
 SUMMARY_FILE="$REPORT_DIR/summary.txt"
 : > "$SUMMARY_FILE"
 
-# Build the list of files to validate.
-# pha.css is a generated PatternFly v6 export (see project memory pha_css_origin)
-# — csstree flags ~45 spec-strict warnings on PF's experimental properties
-# (-moz-column-break-inside, grid-template-columns: fit-content max-content,
-# padding-block-start: auto, etc.) that we cannot fix upstream. Skip it the
-# same way we skip vendor/.
+# Build the list of files to validate. patternfly-docs-bundle.css is the
+# hand-edited PF docs-site export — csstree flags ~45 spec-strict warnings on
+# PF's experimental properties (-moz-column-break-inside, padding-block-start:
+# auto, grid-template-columns: fit-content max-content, etc.) that we cannot
+# fix upstream. Skip it the same way we skip vendor/.
 if [ -n "${1:-}" ]; then
   FILES_HOST=("$(realpath "$1")")
 else
-  mapfile -t FILES_HOST < <(find "$CSS_DIR" -type f -name '*.css' -not -path '*/vendor/*' -not -name 'pha.css' | sort)
+  mapfile -t FILES_HOST < <(find "$CSS_DIR" -type f -name '*.css' -not -path '*/vendor/*' -not -name 'patternfly-docs-bundle.css' | sort)
 fi
 
 if [ "${#FILES_HOST[@]}" -eq 0 ]; then
