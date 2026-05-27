@@ -1,8 +1,10 @@
 {! gutter=true adds 1rem row-gap between stack items. !}
-{#include layouts/primitives/stack id="stack-gutter" gutter=true}
-  {#items}
-    <div class="pf-v6-l-stack__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">One</div>
-    <div class="pf-v6-l-stack__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">Two</div>
-    <div class="pf-v6-l-stack__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">Three</div>
-  {/items}
-{/include}
+<div class="ws-core-l-stack">
+  {#include layouts/primitives/stack id="stack-gutter" gutter=true}
+    {#items}
+      <div class="pf-v6-l-stack__item">One</div>
+      <div class="pf-v6-l-stack__item">Two</div>
+      <div class="pf-v6-l-stack__item">Three</div>
+    {/items}
+  {/include}
+</div>

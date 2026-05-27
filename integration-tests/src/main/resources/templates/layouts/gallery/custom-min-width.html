@@ -1,8 +1,10 @@
 {! Wider min item width (350px) — fewer, larger cards per row. !}
-{#include layouts/primitives/gallery id="gallery-min-width" gutter=true minWidth="350px"}
-  {#items}
-    <div style="padding: 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default); text-align: center">Wider card 1</div>
-    <div style="padding: 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default); text-align: center">Wider card 2</div>
-    <div style="padding: 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default); text-align: center">Wider card 3</div>
-  {/items}
-{/include}
+<div class="ws-core-l-gallery">
+  {#include layouts/primitives/gallery id="gallery-min-width" gutter=true minWidth="350px"}
+    {#items}
+      <div>Wider card 1</div>
+      <div>Wider card 2</div>
+      <div>Wider card 3</div>
+    {/items}
+  {/include}
+</div>

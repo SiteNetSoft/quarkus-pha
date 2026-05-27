@@ -1,10 +1,10 @@
 {! pf-m-fill on the body — it stretches to consume remaining height. Requires the container to have a fixed height. !}
-<div style="height: 240px">
+<div class="ws-core-l-stack" style="height: 240px">
   {#include layouts/primitives/stack id="stack-fill" gutter=true}
     {#items}
-      <div class="pf-v6-l-stack__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">Header (fixed)</div>
-      <div class="pf-v6-l-stack__item pf-m-fill" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">Body — fills remaining height</div>
-      <div class="pf-v6-l-stack__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">Footer (fixed)</div>
+      <div class="pf-v6-l-stack__item">Header (fixed)</div>
+      <div class="pf-v6-l-stack__item pf-m-fill">Body — fills remaining height</div>
+      <div class="pf-v6-l-stack__item">Footer (fixed)</div>
     {/items}
   {/include}
 </div>

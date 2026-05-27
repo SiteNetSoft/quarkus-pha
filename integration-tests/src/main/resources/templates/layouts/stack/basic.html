@@ -1,8 +1,10 @@
 {! Default stack — items at natural height. !}
-{#include layouts/primitives/stack id="stack-basic"}
-  {#items}
-    <div class="pf-v6-l-stack__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">Header</div>
-    <div class="pf-v6-l-stack__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">Body</div>
-    <div class="pf-v6-l-stack__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">Footer</div>
-  {/items}
-{/include}
+<div class="ws-core-l-stack">
+  {#include layouts/primitives/stack id="stack-basic"}
+    {#items}
+      <div class="pf-v6-l-stack__item">Header</div>
+      <div class="pf-v6-l-stack__item">Body</div>
+      <div class="pf-v6-l-stack__item">Footer</div>
+    {/items}
+  {/include}
+</div>
