@@ -1,10 +1,11 @@
 {! Chart — PHA custom component wrapping Apache ECharts !}
-{! Parameters: id, height (optional), renderer (optional) !}
+{! Optional: id — DOM id on the root; omit unless something else references the chart.
+              height (optional), renderer (optional) !}
 {! The ECharts option object must be passed via inline x-data or JavaScript !}
 {! Requires: /web/vendor/echarts/echarts.min.js loaded before Alpine !}
 {! Requires: /web/js/alpine/components/chart.js loaded before Alpine !}
 {! Requires: /web/css/components/chart.css !}
-<div class="pha-c-chart" id="{id}">
+<div class="pha-c-chart"{#if id??} id="{id}"{/if}>
   {#insert content}{/insert}
   <div class="pha-c-chart__canvas"{#if height??} style="height: {height}"{/if}></div>
 </div>

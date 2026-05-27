@@ -1,7 +1,8 @@
-{! Hint — PatternFly v6 !} {! Required: id !} {! Optional: title (rendered in __title), bodyText (rendered in __body) !}
+{! Hint — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the hint.
+                                       title (rendered in __title), bodyText (rendered in __body) !}
 {! For richer content (footer, action links) hand-render the div.pf-v6-c-hint !} {! markup directly — we don't expose a
 slot here to avoid Qute slot-name collisions with example-card. !}
-<div class="pf-v6-c-hint" id="{id}">
+<div class="pf-v6-c-hint"{#if id??} id="{id}"{/if}>
   {#if title??}
   <div class="pf-v6-c-hint__title">{title}</div>
   {/if} {#if bodyText??}

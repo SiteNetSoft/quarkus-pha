@@ -1,7 +1,8 @@
 {! Label group — PatternFly v6 !}
 {!                                                                                  !}
 {! Parameters:                                                                      !}
-{!   id              (required) — DOM id on the group container                     !}
+{!   id              (optional) — DOM id on the group container; omit unless        !}
+{!                                something else references the group.              !}
 {!   categoryName    (optional) — category label rendered before the chips.         !}
 {!                                Implies pf-m-category.                            !}
 {!   vertical        (optional) — boolean; pf-m-vertical (stacks labels).           !}
@@ -19,7 +20,7 @@
 {!                                                                                  !}
 {! Slot:                                                                            !}
 {!   {#content}  — label includes. Each label is wrapped in an <li> by the group.  !}
-<div class="pf-v6-c-label-group{#if categoryName??} pf-m-category{/if}{#if vertical??} pf-m-vertical{/if}" id="{id}" role="group"{#if categoryName??} aria-label="{categoryName}"{#else if ariaLabel??} aria-label="{ariaLabel}"{#else} aria-label="Label group category"{/if} x-data="phaLabelGroup({#if numLabels??}{numLabels}{#else}3{/if})">
+<div class="pf-v6-c-label-group{#if categoryName??} pf-m-category{/if}{#if vertical??} pf-m-vertical{/if}"{#if id??} id="{id}"{/if} role="group"{#if categoryName??} aria-label="{categoryName}"{#else if ariaLabel??} aria-label="{ariaLabel}"{#else} aria-label="Label group category"{/if} x-data="phaLabelGroup({#if numLabels??}{numLabels}{#else}3{/if})">
   <div class="pf-v6-c-label-group__main">
     {#if categoryName??}<span class="pf-v6-c-label-group__label" aria-hidden="true">{categoryName}</span>{/if}
     <ul class="pf-v6-c-label-group__list" role="list" x-ref="list">

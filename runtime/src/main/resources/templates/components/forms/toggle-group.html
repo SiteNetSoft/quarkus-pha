@@ -1,5 +1,6 @@
 {! Toggle group — PatternFly v6 !}
-{! Parameters: id, ariaLabel (optional) !}
-<div class="pf-v6-c-toggle-group" id="{id}" role="group"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
+{! Optional: id — DOM id on the root; omit unless something else references the group.
+              ariaLabel (optional) !}
+<div class="pf-v6-c-toggle-group"{#if id??} id="{id}"{/if} role="group"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
   {#insert content}{/insert}
 </div>

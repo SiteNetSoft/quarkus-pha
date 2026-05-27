@@ -5,14 +5,15 @@
 {! interaction via the phaBackToTop component.                                      !}
 {!                                                                                  !}
 {! Parameters:                                                                      !}
-{!   id                 (required) — DOM id on the container.                       !}
+{!   id                 (optional) — DOM id on the container; omit unless something !}
+{!                                   else references it.                            !}
 {!   title              (optional) — button label text (default: "Back to top").    !}
 {!   alwaysVisible      (optional) — boolean; skip the scroll threshold and keep    !}
 {!                                   the button visible.                            !}
 {!   scrollableSelector (optional) — CSS selector for a scrollable element to spy   !}
 {!                                   on instead of window scroll. The button also   !}
 {!                                   scrolls THAT element back to 0 on click.       !}
-<div class="pf-v6-c-back-to-top" id="{id}" x-data="phaBackToTop({#if scrollableSelector??}'{scrollableSelector}'{#else}null{/if}, {#if alwaysVisible??}true{#else}false{/if})" x-show="visible" x-cloak x-transition>
+<div class="pf-v6-c-back-to-top"{#if id??} id="{id}"{/if} x-data="phaBackToTop({#if scrollableSelector??}'{scrollableSelector}'{#else}null{/if}, {#if alwaysVisible??}true{#else}false{/if})" x-show="visible" x-cloak x-transition>
   <button class="pf-v6-c-button pf-m-primary" type="button" @click="scrollToTop()">
     <span class="pf-v6-c-button__text">{#if title??}{title}{#else}Back to top{/if}</span>
     <span class="pf-v6-c-button__icon pf-m-end">{icons:svg('fa:angle-up').raw}</span>

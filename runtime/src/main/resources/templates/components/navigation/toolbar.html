@@ -1,5 +1,5 @@
-{! Toolbar — PatternFly v6 !} {! Parameters: id !}
-<div class="pf-v6-c-toolbar" id="{id}">
+{! Toolbar — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the toolbar. !}
+<div class="pf-v6-c-toolbar"{#if id??} id="{id}"{/if}>
   <div class="pf-v6-c-toolbar__content">
     <div class="pf-v6-c-toolbar__content-section">{#insert content}{/insert}</div>
   </div>

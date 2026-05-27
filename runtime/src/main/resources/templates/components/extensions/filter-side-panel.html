@@ -1,7 +1,7 @@
 {! Filter side panel — PatternFly catalog-view extension !}
-{! Required: id !}
+{! Optional: id — DOM id on the root; omit unless something else references the panel. !}
 {! Slots: categories (filter categories — use components/extensions/filter-side-panel-category for each) !}
 {! Requires: /web/vendor/patternfly-extensions/catalog-view.css !}
-<div class="filter-panel-pf" id="{id}">
+<div class="filter-panel-pf"{#if id??} id="{id}"{/if}>
   {#insert categories}{/insert}
 </div>

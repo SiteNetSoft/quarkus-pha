@@ -1,11 +1,12 @@
 {! Map — PHA custom component wrapping MapLibre GL JS !}
-{! Parameters: id, lat (optional), lng (optional), zoom (optional), style (optional), height (optional), !}
-{!             navigationControl (optional), scaleControl (optional), fullscreenControl (optional) !}
+{! Optional: id — DOM id on the root; omit unless something else references the map.
+              lat (optional), lng (optional), zoom (optional), style (optional), height (optional),
+              navigationControl (optional), scaleControl (optional), fullscreenControl (optional) !}
 {! Requires: /web/vendor/maplibre/maplibre-gl.js loaded before Alpine !}
 {! Requires: /web/vendor/maplibre/maplibre-gl.css !}
 {! Requires: /web/js/alpine/components/map.js loaded before Alpine !}
 {! Requires: /web/css/components/map.css !}
-<div class="pha-c-map" id="{id}"
+<div class="pha-c-map"{#if id??} id="{id}"{/if}
      x-data="phaMap({ center: [{#if lng??}{lng}{#else}-98.5{/if}, {#if lat??}{lat}{#else}39.8{/if}], zoom: {#if zoom??}{zoom}{#else}3{/if}, style: '{#if style??}{style}{#else}osm{/if}', navigationControl: {#if navigationControl??}{navigationControl}{#else}true{/if}, scaleControl: {#if scaleControl??}{scaleControl}{#else}false{/if}, fullscreenControl: {#if fullscreenControl??}{fullscreenControl}{#else}false{/if} })">
   <div class="pha-c-map__container"{#if height??} style="height: {height}"{/if}></div>
   {#insert content}{/insert}

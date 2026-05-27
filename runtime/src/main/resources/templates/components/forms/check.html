@@ -1,7 +1,8 @@
 {! Check (Checkbox) — PatternFly v6 !}
-{! Parameters: id (required), label (optional), checked (optional), disabled (optional), !}
-{!   required (optional), description (optional), body (optional), !}
-{!   standalone (optional), reversed (optional), ariaLabel (optional for standalone) !}
+{! Required: id — used for the input's id + name; derives {id}-wrap, {id}-field, {id}-description for label `for=`, aria-describedby wiring. !}
+{! Optional: label (optional), checked (optional), disabled (optional),
+              required (optional), description (optional), body (optional),
+              standalone (optional), reversed (optional), ariaLabel (optional for standalone) !}
 {#if standalone??}
 <div class="pf-v6-c-check pf-m-standalone" id="{id}-wrap">
   <input class="pf-v6-c-check__input" type="checkbox" id="{id}" name="{id}"{#if checked??} checked{/if}{#if disabled??} disabled{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>

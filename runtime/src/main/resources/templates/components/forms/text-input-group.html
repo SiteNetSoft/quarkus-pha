@@ -1,6 +1,7 @@
 {! Text input group — PatternFly v6 !}
-{! Parameters: id, placeholder (optional), disabled (optional), iconName (optional, "set:slug") !}
-<div class="pf-v6-c-text-input-group{#if disabled??} pf-m-disabled{/if}" id="{id}">
+{! Optional: id — DOM id on the root; omit unless something else references the group.
+              placeholder (optional), disabled (optional), iconName (optional, "set:slug") !}
+<div class="pf-v6-c-text-input-group{#if disabled??} pf-m-disabled{/if}"{#if id??} id="{id}"{/if}>
   <div class="pf-v6-c-text-input-group__main{#if iconName??} pf-m-icon{/if}">
     <span class="pf-v6-c-text-input-group__text">
       {#if iconName??}

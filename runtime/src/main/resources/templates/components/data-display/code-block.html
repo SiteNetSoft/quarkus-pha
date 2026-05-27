@@ -1,7 +1,8 @@
 {! Code block — PatternFly v6 !}
-{! Parameters: id (required), copyButton (optional — show copy-to-clipboard in header) !}
+{! Optional: id — DOM id on the root; omit unless something else references the code block.
+              copyButton (optional — show copy-to-clipboard in header) !}
 {! Content: pass code text via {#content}...{/content} block !}
-<div class="pf-v6-c-code-block" id="{id}"{#if copyButton??} x-data="{ copied: false }"{/if}>
+<div class="pf-v6-c-code-block"{#if id??} id="{id}"{/if}{#if copyButton??} x-data="{ copied: false }"{/if}>
   {#if copyButton??}
   <div class="pf-v6-c-code-block__header">
     <div class="pf-v6-c-code-block__actions">

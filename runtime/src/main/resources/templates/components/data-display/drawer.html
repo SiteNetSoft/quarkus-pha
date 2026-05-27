@@ -1,8 +1,8 @@
-{! Drawer — PatternFly v6 !} {! Parameters: id, inline (optional), panelLeft (optional), panelBottom (optional), static
-(optional) !}
+{! Drawer — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the drawer.
+                                          inline (optional), panelLeft (optional), panelBottom (optional), static (optional) !}
 <div
   class="pf-v6-c-drawer{#if inline??} pf-m-inline{/if}{#if panelLeft??} pf-m-panel-left{/if}{#if panelBottom??} pf-m-panel-bottom{/if}{#if static??} pf-m-static{/if}"
-  id="{id}"
+  {#if id??}id="{id}"{/if}
   x-data="{ expanded: {#if static??}true{#else}false{/if} }"
   :class="{ 'pf-m-expanded': expanded }"
 >

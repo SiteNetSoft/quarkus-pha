@@ -1,6 +1,7 @@
 {! Popover — PatternFly v6 !}
-{! Parameters: id, titleText (optional), position (optional: top|bottom|left|right), variant (optional: danger|warning|success|info), !}
-{!             ariaLabel (optional — required when titleText is absent so the dialog has an accessible name) !}
+{! Required: id — derives {id}-title for aria-labelledby wiring when titleText is set. !}
+{! Optional: titleText (optional), position (optional: top|bottom|left|right), variant (optional: danger|warning|success|info),
+              ariaLabel (optional — required when titleText is absent so the dialog has an accessible name) !}
 <div class="pf-v6-c-popover{#if position??} pf-m-{position}{#else} pf-m-top{/if}{#if variant??} pf-m-{variant}{/if}" id="{id}" role="dialog" aria-modal="true"{#if titleText??} aria-labelledby="{id}-title"{#else if ariaLabel??} aria-label="{ariaLabel}"{/if} x-data="{ popoverOpen: false }" x-effect="if (popoverOpen) PHA.trapFocus($el); else PHA.releaseFocus($el);">
   <div class="pf-v6-c-popover__arrow"></div>
   <div class="pf-v6-c-popover__content">

@@ -1,8 +1,9 @@
 {! Code editor — PatternFly v6 !}
-{! Parameters: id (required), language (optional — tab text), readonly (optional), !}
-{!   copyButton (optional), downloadButton (optional), uploadButton (optional) !}
+{! Optional: id — DOM id on the root; omit unless something else references the editor.
+              language (optional — tab text), readonly (optional),
+              copyButton (optional), downloadButton (optional), uploadButton (optional) !}
 {! Content: pass code text via {#content}...{/content} block !}
-<div class="pf-v6-c-code-editor{#if readonly??} pf-m-read-only{/if}" id="{id}"{#if copyButton??} x-data="{ copied: false }"{/if}>
+<div class="pf-v6-c-code-editor{#if readonly??} pf-m-read-only{/if}"{#if id??} id="{id}"{/if}{#if copyButton??} x-data="{ copied: false }"{/if}>
   <div class="pf-v6-c-code-editor__header">
     {#if copyButton?? || downloadButton?? || uploadButton??}
     <div class="pf-v6-c-code-editor__header-content">

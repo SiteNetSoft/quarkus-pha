@@ -1,8 +1,9 @@
 {! Context selector — PatternFly v6 (MenuToggle + Menu composition) !}
-{! Parameters: id, toggleText !}
+{! Required: toggleText !}
+{! Optional: id — DOM id on the root; omit unless something else references the selector. !}
 {! Content block: &lt;li&gt; menu items !}
 <div
-  id="{id}"
+  {#if id??}id="{id}"{/if}
   x-data="{ open: false, search: '', selected: '{toggleText}' }"
   style="position: relative; display: inline-block"
 >

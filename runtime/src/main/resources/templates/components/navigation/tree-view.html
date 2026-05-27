@@ -1,5 +1,6 @@
 {! Tree view — PatternFly v6 !}
-{! Parameters: id, compact (optional), guides (optional) !}
+{! Optional: id — DOM id on the root; omit unless something else references the tree.
+              compact (optional), guides (optional) !}
 {! Requires: /web/js/alpine/components/tree-view.js loaded before Alpine !}
 {! !}
 {! This template renders the outer wrapper only. Each <li> tree item is the !}
@@ -30,7 +31,7 @@
 {! See integration-tests/.../templates/components/tree-view/{single-selectable, !}
 {! multiselectable, with-separate-selection-and-expansion}.html for working !}
 {! examples of each pattern. !}
-<div class="pf-v6-c-tree-view{#if compact??} pf-m-compact{/if}{#if guides??} pf-m-guides{/if}" id="{id}" x-data="phaTreeView()">
+<div class="pf-v6-c-tree-view{#if compact??} pf-m-compact{/if}{#if guides??} pf-m-guides{/if}"{#if id??} id="{id}"{/if} x-data="phaTreeView()">
   <ul class="pf-v6-c-tree-view__list" role="tree"{#if multi??} aria-multiselectable="true"{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if}
       @keydown="handleKeyNav($event)"
       @click="handleClick($event)">
