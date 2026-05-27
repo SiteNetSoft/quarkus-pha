@@ -60,7 +60,9 @@ public class LayoutsRoutes {
         if (demo == null) {
             throw new NotFoundException("Demo template not found: layouts/" + name);
         }
-        return demo.instance();
+        return demo.instance()
+            .data("name", name)
+            .data("hasDemoCss", hasDemoCss(name));
     }
 
     /** Raw Qute source of an example fragment. */
@@ -94,7 +96,12 @@ public class LayoutsRoutes {
         return standalonePage.instance()
             .data("name", name)
             .data("example", example)
-            .data("content", rendered);
+            .data("content", rendered)
+            .data("hasDemoCss", hasDemoCss(name));
+    }
+
+    private boolean hasDemoCss(String name) {
+        return getClass().getResource("/META-INF/resources/web/css/demos/layouts/" + name + ".css") != null;
     }
 
     private void validate(String name, String example) {

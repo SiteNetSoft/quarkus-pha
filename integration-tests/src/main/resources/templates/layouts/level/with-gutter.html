@@ -1,9 +1,11 @@
 {! gutter=true adds 1rem gap. Useful when items can't pin to edges (e.g. 3+ items). !}
-{#include layouts/primitives/level id="level-gutter" gutter=true}
-  {#items}
-    <div class="pf-v6-l-level__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">A</div>
-    <div class="pf-v6-l-level__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">B</div>
-    <div class="pf-v6-l-level__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">C</div>
-    <div class="pf-v6-l-level__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">D</div>
-  {/items}
-{/include}
+<div class="ws-core-l-level">
+  {#include layouts/primitives/level id="level-gutter" gutter=true}
+    {#items}
+      <div class="pf-v6-l-level__item">A</div>
+      <div class="pf-v6-l-level__item">B</div>
+      <div class="pf-v6-l-level__item">C</div>
+      <div class="pf-v6-l-level__item">D</div>
+    {/items}
+  {/include}
+</div>

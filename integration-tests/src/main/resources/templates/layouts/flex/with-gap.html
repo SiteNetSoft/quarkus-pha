@@ -1,8 +1,10 @@
 {! Gap="2xl" — widest standard gap modifier. !}
-{#include layouts/primitives/flex id="flex-gap" gap="2xl"}
-  {#items}
-    <div class="pf-v6-l-flex__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">Far left</div>
-    <div class="pf-v6-l-flex__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">Mid</div>
-    <div class="pf-v6-l-flex__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">Far right</div>
-  {/items}
-{/include}
+<div class="ws-core-l-flex">
+  {#include layouts/primitives/flex id="flex-gap" gap="2xl"}
+    {#items}
+      <div class="pf-v6-l-flex__item">Far left</div>
+      <div class="pf-v6-l-flex__item">Mid</div>
+      <div class="pf-v6-l-flex__item">Far right</div>
+    {/items}
+  {/include}
+</div>
