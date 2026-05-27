@@ -1,8 +1,10 @@
 {! Stacked vertically via direction="column". !}
-{#include layouts/primitives/flex id="flex-column" direction="column" gap="sm"}
-  {#items}
-    <div class="pf-v6-l-flex__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">Row 1</div>
-    <div class="pf-v6-l-flex__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">Row 2</div>
-    <div class="pf-v6-l-flex__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">Row 3</div>
-  {/items}
-{/include}
+<div class="ws-core-l-flex">
+  {#include layouts/primitives/flex id="flex-column" direction="column" gap="sm"}
+    {#items}
+      <div class="pf-v6-l-flex__item">Row 1</div>
+      <div class="pf-v6-l-flex__item">Row 2</div>
+      <div class="pf-v6-l-flex__item">Row 3</div>
+    {/items}
+  {/include}
+</div>

@@ -1,8 +1,10 @@
 {! Default row direction with gap. !}
-{#include layouts/primitives/flex id="flex-basic" gap="md"}
-  {#items}
-    <div class="pf-v6-l-flex__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">A</div>
-    <div class="pf-v6-l-flex__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">B</div>
-    <div class="pf-v6-l-flex__item" style="padding: 0.5rem 1rem; background: var(--pf-t--global--background--color--secondary--default); border: 1px solid var(--pf-t--global--border--color--default)">C</div>
-  {/items}
-{/include}
+<div class="ws-core-l-flex">
+  {#include layouts/primitives/flex id="flex-basic" gap="md"}
+    {#items}
+      <div class="pf-v6-l-flex__item">A</div>
+      <div class="pf-v6-l-flex__item">B</div>
+      <div class="pf-v6-l-flex__item">C</div>
+    {/items}
+  {/include}
+</div>
