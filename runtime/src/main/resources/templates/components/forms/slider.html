@@ -1,8 +1,8 @@
-{! Slider — PatternFly v6 !} {! Parameters: id, value (optional, default 50), min (optional, default 0), max (optional,
-default 100), disabled (optional) !}
+{! Slider — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the slider.
+                                          value (optional, default 50), min (optional, default 0), max (optional, default 100), disabled (optional) !}
 <div
   class="pf-v6-c-slider{#if disabled??} pf-m-disabled{/if}"
-  id="{id}"
+  {#if id??}id="{id}"{/if}
   x-data="{ val: {#if value??}{value}{#else}50{/if} }"
   :style="'--pf-v6-c-slider--value: ' + val"
 >

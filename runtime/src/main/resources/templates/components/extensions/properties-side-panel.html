@@ -1,7 +1,7 @@
 {! Properties side panel — PatternFly catalog-view extension !}
-{! Required: id !}
+{! Optional: id — DOM id on the root; omit unless something else references the panel. !}
 {! Slots: properties (PropertyItem entries — use components/extensions/property-item for each) !}
 {! Requires: /web/vendor/patternfly-extensions/catalog-view.css !}
-<div class="properties-side-panel-pf" id="{id}">
+<div class="properties-side-panel-pf"{#if id??} id="{id}"{/if}>
   {#insert properties}{/insert}
 </div>

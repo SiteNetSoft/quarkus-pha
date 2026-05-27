@@ -1,5 +1,6 @@
 {! Form control — PatternFly v6 !}
-{! Parameters: id, type (optional: text|password|email|number|tel|url, default text), placeholder (optional), disabled (optional), readonly (optional), required (optional), value (optional) !}
+{! Required: id — used for the input's name; derives {id}-field on the inner <input> for form submission wiring. !}
+{! Optional: type (optional: text|password|email|number|tel|url, default text), placeholder (optional), disabled (optional), readonly (optional), required (optional), value (optional) !}
 <span class="pf-v6-c-form-control" id="{id}">
   <input type="{#if type??}{type}{#else}text{/if}" id="{id}-field" name="{id}"{#if placeholder??} placeholder="{placeholder}"{/if}{#if disabled??} disabled{/if}{#if readonly??} readonly{/if}{#if required??} required{/if}{#if value??} value="{value}"{/if} aria-label="{#if ariaLabel??}{ariaLabel}{#else if placeholder??}{placeholder}{#else if value??}{value}{#else}{id}{/if}">
 </span>

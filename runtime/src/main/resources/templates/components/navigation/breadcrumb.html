@@ -4,7 +4,8 @@
 {! components/navigation/breadcrumb-item inside the items slot.                     !}
 {!                                                                                  !}
 {! Parameters:                                                                      !}
-{!   id        (required) — DOM id on the nav element                               !}
+{!   id        (optional) — DOM id on the nav element; omit unless something else   !}
+{!                          references the breadcrumb.                              !}
 {!   ariaLabel (optional) — accessible label (default: "Breadcrumb")                !}
 {!                                                                                  !}
 {! Slot:                                                                            !}
@@ -13,7 +14,7 @@
 {!              with the example-card partial's "content" slot — Qute resolves      !}
 {!              {#insert name} against the nearest enclosing {#name} in the call    !}
 {!              stack, and reusing "content" recurses infinitely.                   !}
-<nav class="pf-v6-c-breadcrumb" id="{id}" aria-label="{#if ariaLabel??}{ariaLabel}{#else}Breadcrumb{/if}">
+<nav class="pf-v6-c-breadcrumb"{#if id??} id="{id}"{/if} aria-label="{#if ariaLabel??}{ariaLabel}{#else}Breadcrumb{/if}">
   <ol class="pf-v6-c-breadcrumb__list">
     {#insert items}{/insert}
   </ol>

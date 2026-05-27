@@ -1,7 +1,8 @@
 {! Gallery layout — CSS-grid auto-fill of equal-width items. !}
-{! Required: id !}
-{! Optional: gutter (boolean — pf-m-gutter for 1rem gap), minWidth (CSS length — sets --pf-v6-l-gallery--GridTemplateColumns--min) !}
+{! Optional: id (cosmetic — wrapper hook for external linking / fragment scroll),
+              gutter (boolean — pf-m-gutter for 1rem gap),
+              minWidth (CSS length — sets --pf-v6-l-gallery--GridTemplateColumns--min) !}
 {! Slot: items — gallery children. !}
-<div class="pf-v6-l-gallery{#if gutter??} pf-m-gutter{/if}" id="{id}"{#if minWidth??} style="--pf-v6-l-gallery--GridTemplateColumns--min: {minWidth}"{/if}>
+<div class="pf-v6-l-gallery{#if gutter??} pf-m-gutter{/if}"{#if id??} id="{id}"{/if}{#if minWidth??} style="--pf-v6-l-gallery--GridTemplateColumns--min: {minWidth}"{/if}>
   {#insert items}{/insert}
 </div>

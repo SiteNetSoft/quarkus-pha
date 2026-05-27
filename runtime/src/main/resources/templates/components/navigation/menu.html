@@ -1,8 +1,9 @@
 {! Menu — PatternFly v6 !}
-{! Parameters: id, plain (optional), scrollable (optional), ariaLabel (optional — labels the menu) !}
+{! Optional: id — DOM id on the root; omit unless something else references the menu.
+              plain (optional), scrollable (optional), ariaLabel (optional — labels the menu) !}
 <div
   class="pf-v6-c-menu{#if plain??} pf-m-plain{/if}{#if scrollable??} pf-m-scrollable{/if}"
-  id="{id}"
+  {#if id??}id="{id}"{/if}
   x-data="{
   handleKeyNav(e) {
     var items = Array.from($el.querySelectorAll('[role=menuitem]'));

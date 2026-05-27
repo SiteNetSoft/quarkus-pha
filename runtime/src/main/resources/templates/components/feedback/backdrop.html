@@ -5,7 +5,8 @@
 {! it sits behind (consumer-controlled via Alpine / HTMX).                          !}
 {!                                                                                  !}
 {! Parameters:                                                                      !}
-{!   id      (required) — DOM id on the overlay.                                    !}
+{!   id      (optional) — DOM id on the overlay; omit unless something else         !}
+{!                        references the backdrop.                                  !}
 {!                                                                                  !}
 {! Slot:                                                                            !}
 {!   {#overlay} — optional overlay content (spinner, dialog body, custom panel).    !}
@@ -14,6 +15,6 @@
 {!                nested inside a demo card. Qute resolves {#insert} against the    !}
 {!                nearest enclosing slot of the same name in the call stack, so     !}
 {!                reusing "content" would recurse infinitely.                       !}
-<div class="pf-v6-c-backdrop" id="{id}">
+<div class="pf-v6-c-backdrop"{#if id??} id="{id}"{/if}>
   {#insert overlay}{/insert}
 </div>

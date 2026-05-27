@@ -1,4 +1,5 @@
-{! Multiple file upload — PatternFly v6 !} {! Parameters: id, horizontal (optional) !}
-<div class="pf-v6-c-multiple-file-upload{#if horizontal??} pf-m-horizontal{/if}" id="{id}">
+{! Multiple file upload — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the uploader.
+                                                       horizontal (optional) !}
+<div class="pf-v6-c-multiple-file-upload{#if horizontal??} pf-m-horizontal{/if}"{#if id??} id="{id}"{/if}>
   {#insert content}{/insert}
 </div>

@@ -1,8 +1,9 @@
 {! Alert — PatternFly v6 !}
-{! Parameters: id (required), variant (required), title (required) !}
-{! Optional: description, inline, plain, expandable, closable, actionLinks, truncate, customIcon !}
+{! Required: variant, title !}
+{! Optional: id — DOM id on the root; omit unless something else references the alert.
+              description, inline, plain, expandable, closable, actionLinks, truncate, customIcon !}
 <div class="pf-v6-c-alert pf-m-{variant}{#if inline??} pf-m-inline{/if}{#if plain??} pf-m-plain{/if}{#if expandable??} pf-m-expandable{/if}{#if truncate??} pf-m-truncate{/if}"
-     id="{id}"
+     {#if id??}id="{id}"{/if}
      x-data="{ expanded: false, visible: true }"
      x-show="visible"
      :class="{ 'pf-m-expanded': expanded }">

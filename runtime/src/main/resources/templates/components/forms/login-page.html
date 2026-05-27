@@ -1,5 +1,6 @@
-{! Login page — PatternFly v6 (pf-v6-c-login) !} {! Parameters: id, titleText (optional) !}
-<div class="pf-v6-c-login" id="{id}">
+{! Login page — PatternFly v6 (pf-v6-c-login) !} {! Optional: id — DOM id on the root; omit unless something else references the login page.
+                                                              titleText (optional) !}
+<div class="pf-v6-c-login"{#if id??} id="{id}"{/if}>
   <div class="pf-v6-c-login__container">
     <header class="pf-v6-c-login__header">{#insert header}{/insert}</header>
     <main class="pf-v6-c-login__main">

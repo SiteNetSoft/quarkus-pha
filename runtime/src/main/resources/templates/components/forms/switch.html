@@ -1,5 +1,6 @@
 {! Switch — PatternFly v6 !}
-{! Parameters: id, label (optional), checked (optional), disabled (optional), reversed (optional) !}
+{! Required: id — derives {id}-field on the input for label `for=` wiring. !}
+{! Optional: label (optional), checked (optional), disabled (optional), reversed (optional) !}
 <label class="pf-v6-c-switch{#if reversed??} pf-m-reverse{/if}" id="{id}" for="{id}-field">
   <input class="pf-v6-c-switch__input" type="checkbox" id="{id}-field"{#if checked??} checked{/if}{#if disabled??} disabled{/if}>
   <span class="pf-v6-c-switch__toggle">

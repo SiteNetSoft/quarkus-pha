@@ -1,2 +1,3 @@
-{! Form — PatternFly v6 !} {! Parameters: id, horizontal (optional) !}
-<form class="pf-v6-c-form{#if horizontal??} pf-m-horizontal{/if}" id="{id}" novalidate>{#insert content}{/insert}</form>
+{! Form — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the form.
+                                       horizontal (optional) !}
+<form class="pf-v6-c-form{#if horizontal??} pf-m-horizontal{/if}"{#if id??} id="{id}"{/if} novalidate>{#insert content}{/insert}</form>

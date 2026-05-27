@@ -1,6 +1,6 @@
-{! Item row — reusable list row for HTMX-loaded content !} {! Parameters: id, title, description (optional), status
-(optional) !}
-<div class="pf-v6-c-data-list__item" id="{id}">
+{! Item row — reusable list row for HTMX-loaded content !} {! Required: title !} {! Optional: id — DOM id on the row; omit unless something else references it.
+                                                                                                description (optional), status (optional) !}
+<div class="pf-v6-c-data-list__item"{#if id??} id="{id}"{/if}>
   <div class="pf-v6-c-data-list__item-row">
     <div class="pf-v6-c-data-list__item-content">
       <div class="pf-v6-c-data-list__cell pf-m-align-left">

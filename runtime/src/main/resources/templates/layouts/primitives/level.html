@@ -1,7 +1,7 @@
 {! Level layout — distributes children horizontally with equal spacing (justify-content: space-between by default). !}
-{! Required: id !}
-{! Optional: gutter (boolean — pf-m-gutter for 1rem gap) !}
+{! Optional: id (cosmetic — wrapper hook for external linking / fragment scroll),
+              gutter (boolean — pf-m-gutter for 1rem gap) !}
 {! Slot: items — level children. !}
-<div class="pf-v6-l-level{#if gutter??} pf-m-gutter{/if}" id="{id}">
+<div class="pf-v6-l-level{#if gutter??} pf-m-gutter{/if}"{#if id??} id="{id}"{/if}>
   {#insert items}{/insert}
 </div>

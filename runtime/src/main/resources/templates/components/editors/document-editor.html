@@ -1,9 +1,10 @@
 {! Document editor — PHA custom component wrapping Collabora Online !}
-{! Parameters: id, collaboraUrl (optional), wopiSrc (optional), accessToken (optional), !}
-{!             fileName (optional), readOnly (optional), lang (optional), height (optional) !}
+{! Optional: id — DOM id on the root; omit unless something else references the editor.
+              collaboraUrl (optional), wopiSrc (optional), accessToken (optional),
+              fileName (optional), readOnly (optional), lang (optional), height (optional) !}
 {! Requires: /web/js/alpine/components/document-editor.js loaded before Alpine !}
 {! Requires: /web/css/components/document-editor.css !}
-<div class="pha-c-document-editor" id="{id}"
+<div class="pha-c-document-editor"{#if id??} id="{id}"{/if}
      x-data="phaDocumentEditor({ collaboraUrl: '{#if collaboraUrl??}{collaboraUrl}{/if}', wopiSrc: '{#if wopiSrc??}{wopiSrc}{/if}', accessToken: '{#if accessToken??}{accessToken}{/if}', fileName: '{#if fileName??}{fileName}{#else}Untitled{/if}', readOnly: {#if readOnly??}{readOnly}{#else}false{/if}, lang: '{#if lang??}{lang}{/if}' })">
   {#insert content}{/insert}
   <div class="pha-c-document-editor__body"{#if height??} style="min-height: {height}"{/if}>

@@ -1,5 +1,6 @@
-{! Search result item — used in live-search responses !} {! Parameters: id, text, description (optional) !}
-<li class="pf-v6-c-menu__list-item" id="{id}">
+{! Search result item — used in live-search responses !} {! Required: text !} {! Optional: id — DOM id on the row; omit unless something else references it.
+                                                                                              description (optional) !}
+<li class="pf-v6-c-menu__list-item"{#if id??} id="{id}"{/if}>
   <button class="pf-v6-c-menu__item" type="button">
     <span class="pf-v6-c-menu__item-main">
       <span class="pf-v6-c-menu__item-text">{text}</span>

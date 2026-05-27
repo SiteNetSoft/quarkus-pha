@@ -1,12 +1,13 @@
 {! Filter side panel — category-item sub-component (checkbox + label with optional count) !}
-{! Required: id, label !}
-{! Optional: count (numeric badge), checked (bool — initial state), disabled !}
+{! Required: label !}
+{! Optional: id — DOM id on the checkbox input; omit unless a form / external script targets it.
+              count (numeric badge), checked (bool — initial state), disabled !}
 <li class="filter-panel-pf-category-item">
   <label class="pf-v6-c-check">
     <input
       class="pf-v6-c-check__input"
       type="checkbox"
-      id="{id}"
+      {#if id??}id="{id}"{/if}
       {#if checked??}checked="checked"{/if}
       {#if disabled??}disabled{/if}
     />

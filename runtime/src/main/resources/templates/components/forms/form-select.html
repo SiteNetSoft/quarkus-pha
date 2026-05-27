@@ -1,5 +1,5 @@
 {! Form select — PatternFly v6 (form-control wrapper around <select>) !}
-{! Required: id !}
+{! Required: id — used for the select's name; derives {id}-field on the inner <select> for form submission wiring. !}
 {! Optional: disabled, required, validated (success|warning|error) !}
 {! Slot: options — one or more <option> / <optgroup> elements. !}
 <span class="pf-v6-c-form-control{#if validated??} pf-m-{validated}{/if}{#if disabled??} pf-m-disabled{/if}" id="{id}">

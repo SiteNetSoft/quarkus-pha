@@ -1,7 +1,8 @@
-{! Expandable section — PatternFly v6 !} {! Parameters: id, toggleText, expanded (optional) !}
+{! Expandable section — PatternFly v6 !} {! Required: toggleText !} {! Optional: id — DOM id on the root; omit unless something else references the section.
+                                                                                expanded (optional) !}
 <div
   class="pf-v6-c-expandable-section"
-  id="{id}"
+  {#if id??}id="{id}"{/if}
   x-data="{ expanded: {#if expanded??}true{#else}false{/if} }"
   :class="{ 'pf-m-expanded': expanded }"
 >
