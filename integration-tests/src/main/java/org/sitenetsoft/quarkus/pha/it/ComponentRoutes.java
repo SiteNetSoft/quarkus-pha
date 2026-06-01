@@ -166,6 +166,10 @@ public class ComponentRoutes {
     @Inject
     Template spinnerPage;
 
+    @Location("components/ripple")
+    @Inject
+    Template ripplePage;
+
     @Location("components/timestamp")
     @Inject
     Template timestampPage;
@@ -703,6 +707,13 @@ public class ComponentRoutes {
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance spinner() {
         return spinnerPage.instance();
+    }
+
+    @GET
+    @Path("/ripple")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance ripple() {
+        return ripplePage.instance();
     }
 
     @GET

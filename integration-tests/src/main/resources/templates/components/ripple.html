@@ -1,0 +1,283 @@
+{#include layouts/base} {#title}Ripple{/title} {#head}
+<link rel="stylesheet" href="/web/css/components/ripple.css" />
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary">
+          <span class="pf-v6-c-button__text">Skip to content</span>
+        </a>
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Ripple</h1>
+                    <p>
+                      A lightweight, pure-CSS loading indicator — two expanding concentric rings that fade as they grow.
+                      Custom (non-PatternFly) component built on the loading.io
+                      <code class="ws-code">lds-ripple</code> animation. No JavaScript; the ring color is tintable via
+                      the <code class="ws-code">color</code> parameter.
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-u-h-100">
+                    <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                      <nav
+                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                        aria-label="Table of contents"
+                      >
+                        <div class="pf-v6-c-jump-links__main">
+                          <ul class="pf-v6-c-jump-links__list" role="list">
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#custom-color" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Custom color</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#on-dark" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">On dark surface</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-ripple" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Ripple props</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
+
+                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                          <div>
+                            <h2
+                              id="examples"
+                              tabindex="-1"
+                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                            >
+                              Examples
+                            </h2>
+                          </div>
+                        </div>
+
+                        {#include partials/example-card title="Basic" slug="basic" component="ripple"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          The default ripple. A fixed 64px indicator with gray (<code class="ws-code">#ccc</code>) rings
+                          and an accessible label of "Loading".
+                        </p>
+                        {/description} {#content}{#include components/ripple/basic /}{/content} {/include} {#include
+                        partials/example-card title="Custom color" slug="custom-color" component="ripple"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Pass <code class="ws-code">color</code> with any CSS color — a hex value, named color, or a PF
+                          design token like <code class="ws-code">var(--pf-t--global--color--brand--default)</code> — to
+                          tint the rings via <code class="ws-code">--pha-ripple-color</code>.
+                        </p>
+                        {/description} {#content}{#include components/ripple/custom-color /}{/content} {/include}
+                        {#include partials/example-card title="On dark surface" slug="on-dark" component="ripple"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          The original loading.io ripple used white rings. Set
+                          <code class="ws-code">color="#fff"</code> when placing the indicator over a dark background.
+                        </p>
+                        {/description} {#content}{#include components/ripple/on-dark /}{/content} {/include}
+
+                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                            <div>
+                              <h2
+                                id="documentation"
+                                tabindex="-1"
+                                class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                              >
+                                Documentation
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="props-ripple" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                            Ripple props
+                          </h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by
+                            <code class="ws-code">{|{#include components/feedback/ripple ... /}|}</code>. All are passed
+                            as Qute named parameters.
+                          </p>
+                          <table
+                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                            role="grid"
+                            aria-label="Ripple props"
+                          >
+                            <thead class="pf-v6-c-table__thead">
+                              <tr class="pf-v6-c-table__tr">
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                                <th scope="col" class="pf-v6-c-table__th">Default</th>
+                                <th scope="col" class="pf-v6-c-table__th">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >DOM id on the root <code class="ws-code">&lt;div&gt;</code>. Omit unless something
+                                    references the ripple.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">label</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">"Loading"</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Accessible name rendered as <code class="ws-code">aria-label</code> on the
+                                    <code class="ws-code">role="progressbar"</code> root.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">color</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >CSS color (e.g. <code class="ws-code">"#fff"</code>, a token)</span
+                                  >
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">#ccc</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Sets <code class="ws-code">--pha-ripple-color</code> inline to recolor the
+                                    expanding rings.</span
+                                  >
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Stylesheet.</strong> Unlike PatternFly components, the ripple ships its own CSS.
+                            Link <code class="ws-code">/web/css/components/ripple.css</code> once on any page that uses
+                            it (it is not part of the global bundle).
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Fixed size.</strong> The animation's keyframe offsets are absolute pixels, so the
+                            indicator is a fixed 64px square — there is no <code class="ws-code">size</code> parameter.
+                            To scale it, wrap it and apply a CSS <code class="ws-code">transform: scale()</code> on the
+                            wrapper.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Accessibility.</strong> The root carries
+                            <code class="ws-code">role="progressbar"</code> with an
+                            <code class="ws-code">aria-label</code> (default <code class="ws-code">"Loading"</code>).
+                            The two ring <code class="ws-code">&lt;div&gt;</code>s are decorative. Override
+                            <code class="ws-code">label</code> to describe what is loading.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Spinner vs. ripple.</strong> For a PatternFly-native indeterminate indicator with
+                            size tokens and inline mode, prefer the <a href="/components/spinner">Spinner</a> component.
+                            Reach for the ripple when you want its distinctive concentric-ring motion.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <br /><a
+                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/feedback/ripple.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Edit ripple.html on GitHub</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/body} {/include}
