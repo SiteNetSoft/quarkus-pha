@@ -1,0 +1,10 @@
+{! Ripple — animated loading indicator (loading.io "lds-ripple"). !}
+{! Custom component: not a PatternFly element. Requires /web/css/components/ripple.css on the host page. !}
+{! Parameters: !}
+{!   id     (optional) — DOM id on the root element. !}
+{!   label  (optional) — accessible name (aria-label); defaults to "Loading". !}
+{!   color  (optional) — CSS color for the expanding rings; defaults to #ccc. Sets --pha-ripple-color inline. !}
+<div class="lds-ripple"{#if id??} id="{id}"{/if} role="progressbar" aria-label="{#if label??}{label}{#else}Loading{/if}"{#if color??} style="--pha-ripple-color: {color}"{/if}>
+  <div></div>
+  <div></div>
+</div>
