@@ -64,7 +64,7 @@ public class TopologyExamplesRoutes {
     @Inject
     Engine engine;
 
-    @Location("components/topology")
+    @Location("components/topology-demo")
     @Inject
     Template landingPage;
 
