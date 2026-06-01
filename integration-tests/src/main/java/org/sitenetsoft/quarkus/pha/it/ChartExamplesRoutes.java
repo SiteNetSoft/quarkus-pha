@@ -92,7 +92,7 @@ public class ChartExamplesRoutes {
     @Inject
     Engine engine;
 
-    @Location("components/chart")
+    @Location("components/chart-demo")
     @Inject
     Template landingPage;
 

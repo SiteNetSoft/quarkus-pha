@@ -26,67 +26,67 @@ public class ComponentRoutes {
     @ConfigProperty(name = "collabora.access-token")
     String collaboraAccessToken;
 
-    @Location("components/about-modal")
+    @Location("components/about-modal-demo")
     @Inject
     Template aboutModalPage;
 
-    @Location("components/accordion")
+    @Location("components/accordion-demo")
     @Inject
     Template accordionPage;
 
-    @Location("components/action-list")
+    @Location("components/action-list-demo")
     @Inject
     Template actionListPage;
 
-    @Location("components/alert")
+    @Location("components/alert-demo")
     @Inject
     Template alertPage;
 
-    @Location("components/avatar")
+    @Location("components/avatar-demo")
     @Inject
     Template avatarPage;
 
-    @Location("components/back-to-top")
+    @Location("components/back-to-top-demo")
     @Inject
     Template backToTopPage;
 
-    @Location("components/backdrop")
+    @Location("components/backdrop-demo")
     @Inject
     Template backdropPage;
 
-    @Location("components/background-image")
+    @Location("components/background-image-demo")
     @Inject
     Template backgroundImagePage;
 
-    @Location("components/badge")
+    @Location("components/badge-demo")
     @Inject
     Template badgePage;
 
-    @Location("components/banner")
+    @Location("components/banner-demo")
     @Inject
     Template bannerPage;
 
-    @Location("components/brand")
+    @Location("components/brand-demo")
     @Inject
     Template brandPage;
 
-    @Location("components/breadcrumb")
+    @Location("components/breadcrumb-demo")
     @Inject
     Template breadcrumbPage;
 
-    @Location("components/button")
+    @Location("components/button-demo")
     @Inject
     Template buttonPage;
 
-    @Location("components/calendar-month")
+    @Location("components/calendar-month-demo")
     @Inject
     Template calendarMonthPage;
 
-    @Location("components/card")
+    @Location("components/card-demo")
     @Inject
     Template cardPage;
 
-    @Location("components/checkbox")
+    @Location("components/checkbox-demo")
     @Inject
     Template checkboxPage;
 
@@ -94,47 +94,47 @@ public class ComponentRoutes {
     @Inject
     Template chipPage;
 
-    @Location("components/clipboard-copy")
+    @Location("components/clipboard-copy-demo")
     @Inject
     Template clipboardCopyPage;
 
-    @Location("components/code-block")
+    @Location("components/code-block-demo")
     @Inject
     Template codeBlockPage;
 
-    @Location("components/code-editor")
+    @Location("components/code-editor-demo")
     @Inject
     Template codeEditorPage;
 
-    @Location("components/content")
+    @Location("components/content-demo")
     @Inject
     Template contentPage;
 
-    @Location("components/context-selector")
+    @Location("components/context-selector-demo")
     @Inject
     Template contextSelectorPage;
 
-    @Location("components/custom-menus")
+    @Location("components/custom-menus-demo")
     @Inject
     Template customMenusPage;
 
-    @Location("components/divider")
+    @Location("components/divider-demo")
     @Inject
     Template dividerPage;
 
-    @Location("components/empty-state")
+    @Location("components/empty-state-demo")
     @Inject
     Template emptyStatePage;
 
-    @Location("components/expandable-section")
+    @Location("components/expandable-section-demo")
     @Inject
     Template expandableSectionPage;
 
-    @Location("components/helper-text")
+    @Location("components/helper-text-demo")
     @Inject
     Template helperTextPage;
 
-    @Location("components/hint")
+    @Location("components/hint-demo")
     @Inject
     Template hintPage;
 
@@ -142,35 +142,35 @@ public class ComponentRoutes {
     @Inject
     Template iconPage;
 
-    @Location("components/label")
+    @Location("components/label-demo")
     @Inject
     Template labelPage;
 
-    @Location("components/list")
+    @Location("components/list-demo")
     @Inject
     Template listPage;
 
-    @Location("components/panel")
+    @Location("components/panel-demo")
     @Inject
     Template panelPage;
 
-    @Location("components/progress")
+    @Location("components/progress-demo")
     @Inject
     Template progressPage;
 
-    @Location("components/skeleton")
+    @Location("components/skeleton-demo")
     @Inject
     Template skeletonPage;
 
-    @Location("components/spinner")
+    @Location("components/spinner-demo")
     @Inject
     Template spinnerPage;
 
-    @Location("components/ripple")
+    @Location("components/ripple-demo")
     @Inject
     Template ripplePage;
 
-    @Location("components/timestamp")
+    @Location("components/timestamp-demo")
     @Inject
     Template timestampPage;
 
@@ -178,63 +178,63 @@ public class ComponentRoutes {
     @Inject
     Template titlePage;
 
-    @Location("components/truncate")
+    @Location("components/truncate-demo")
     @Inject
     Template truncatePage;
 
-    @Location("components/data-list")
+    @Location("components/data-list-demo")
     @Inject
     Template dataListPage;
 
-    @Location("components/description-list")
+    @Location("components/description-list-demo")
     @Inject
     Template descriptionListPage;
 
-    @Location("components/form")
+    @Location("components/form-demo")
     @Inject
     Template formPage;
 
-    @Location("components/form-control")
+    @Location("components/form-control-demo")
     @Inject
     Template formControlPage;
 
-    @Location("components/form-select")
+    @Location("components/form-select-demo")
     @Inject
     Template formSelectPage;
 
-    @Location("components/number-input")
+    @Location("components/number-input-demo")
     @Inject
     Template numberInputPage;
 
-    @Location("components/radio")
+    @Location("components/radio-demo")
     @Inject
     Template radioPage;
 
-    @Location("components/switch")
+    @Location("components/switch-demo")
     @Inject
     Template switchPage;
 
-    @Location("components/text-area")
+    @Location("components/text-area-demo")
     @Inject
     Template textAreaPage;
 
-    @Location("components/text-input")
+    @Location("components/text-input-demo")
     @Inject
     Template textInputPage;
 
-    @Location("components/text-input-group")
+    @Location("components/text-input-group-demo")
     @Inject
     Template textInputGroupPage;
 
-    @Location("components/toggle-group")
+    @Location("components/toggle-group-demo")
     @Inject
     Template toggleGroupPage;
 
-    @Location("components/simple-list")
+    @Location("components/simple-list-demo")
     @Inject
     Template simpleListPage;
 
-    @Location("components/simple-file-upload")
+    @Location("components/simple-file-upload-demo")
     @Inject
     Template simpleFileUploadPage;
 
@@ -242,19 +242,19 @@ public class ComponentRoutes {
     @Inject
     Template tilePage;
 
-    @Location("components/date-picker")
+    @Location("components/date-picker-demo")
     @Inject
     Template datePickerPage;
 
-    @Location("components/dropdown")
+    @Location("components/dropdown-demo")
     @Inject
     Template dropdownPage;
 
-    @Location("components/drawer")
+    @Location("components/drawer-demo")
     @Inject
     Template drawerPage;
 
-    @Location("components/inline-edit")
+    @Location("components/inline-edit-demo")
     @Inject
     Template inlineEditPage;
 
@@ -262,139 +262,139 @@ public class ComponentRoutes {
     @Inject
     Template inputGroupPage;
 
-    @Location("components/jump-links")
+    @Location("components/jump-links-demo")
     @Inject
     Template jumpLinksPage;
 
-    @Location("components/menu")
+    @Location("components/menu-demo")
     @Inject
     Template menuPage;
 
-    @Location("components/menu-toggle")
+    @Location("components/menu-toggle-demo")
     @Inject
     Template menuTogglePage;
 
-    @Location("components/modal")
+    @Location("components/modal-demo")
     @Inject
     Template modalPage;
 
-    @Location("components/notification-badge")
+    @Location("components/notification-badge-demo")
     @Inject
     Template notificationBadgePage;
 
-    @Location("components/notification-drawer")
+    @Location("components/notification-drawer-demo")
     @Inject
     Template notificationDrawerPage;
 
-    @Location("components/overflow-menu")
+    @Location("components/overflow-menu-demo")
     @Inject
     Template overflowMenuPage;
 
-    @Location("components/popover")
+    @Location("components/popover-demo")
     @Inject
     Template popoverPage;
 
-    @Location("components/tooltip")
+    @Location("components/tooltip-demo")
     @Inject
     Template tooltipPage;
 
-    @Location("components/progress-stepper")
+    @Location("components/progress-stepper-demo")
     @Inject
     Template progressStepperPage;
 
-    @Location("components/login-page")
+    @Location("components/login-page-demo")
     @Inject
     Template loginPagePage;
 
-    @Location("components/masthead")
+    @Location("components/masthead-demo")
     @Inject
     Template mastheadPage;
 
-    @Location("components/navigation")
+    @Location("components/navigation-demo")
     @Inject
     Template navigationPage;
 
-    @Location("components/page")
+    @Location("components/page-demo")
     @Inject
     Template pagePage;
 
-    @Location("components/pagination")
+    @Location("components/pagination-demo")
     @Inject
     Template paginationPage;
 
-    @Location("components/search-input")
+    @Location("components/search-input-demo")
     @Inject
     Template searchInputPage;
 
-    @Location("components/select")
+    @Location("components/select-demo")
     @Inject
     Template selectPage;
 
-    @Location("components/sidebar")
+    @Location("components/sidebar-demo")
     @Inject
     Template sidebarPage;
 
-    @Location("components/skip-to-content")
+    @Location("components/skip-to-content-demo")
     @Inject
     Template skipToContentPage;
 
-    @Location("components/slider")
+    @Location("components/slider-demo")
     @Inject
     Template sliderPage;
 
-    @Location("components/tabs")
+    @Location("components/tabs-demo")
     @Inject
     Template tabsPage;
 
-    @Location("components/toolbar")
+    @Location("components/toolbar-demo")
     @Inject
     Template toolbarPage;
 
-    @Location("components/tree-view")
+    @Location("components/tree-view-demo")
     @Inject
     Template treeViewPage;
 
-    @Location("components/wizard")
+    @Location("components/wizard-demo")
     @Inject
     Template wizardPage;
 
-    @Location("components/application-launcher")
+    @Location("components/application-launcher-demo")
     @Inject
     Template applicationLauncherPage;
 
-    @Location("components/date-and-time-picker")
+    @Location("components/date-and-time-picker-demo")
     @Inject
     Template dateAndTimePickerPage;
 
-    @Location("components/drag-and-drop")
+    @Location("components/drag-and-drop-demo")
     @Inject
     Template dragAndDropPage;
 
-    @Location("components/dual-list-selector")
+    @Location("components/dual-list-selector-demo")
     @Inject
     Template dualListSelectorPage;
 
-    @Location("components/multiple-file-upload")
+    @Location("components/multiple-file-upload-demo")
     @Inject
     Template multipleFileUploadPage;
 
-    @Location("components/options-menu")
+    @Location("components/options-menu-demo")
     @Inject
     Template optionsMenuPage;
 
-    @Location("components/password-generator")
+    @Location("components/password-generator-demo")
     @Inject
     Template passwordGeneratorPage;
 
-    @Location("components/password-strength")
+    @Location("components/password-strength-demo")
     @Inject
     Template passwordStrengthPage;
 
-    @Location("components/table")
+    @Location("components/table-demo")
     @Inject
     Template tablePage;
 
-    @Location("components/time-picker")
+    @Location("components/time-picker-demo")
     @Inject
     Template timePickerPage;
 
