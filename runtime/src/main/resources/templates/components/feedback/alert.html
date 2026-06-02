@@ -5,7 +5,10 @@
               Drives pf-m-{variant} on the root, the auto-icon, the screen-reader
               prefix ("{variant} alert:"), and the close-button aria-label.
               Matches PF React's default of 'custom' when omitted.
-              description, inline, plain, expandable, closable, actionLinks, truncate, customIcon !}
+              description, inline, plain, expandable, closable, truncate, customIcon.
+              hasActionLinks — set true and fill the {#actionLinks} slot to render the action-link footer. !}
+{! Slot: {#actionLinks} — PF's AlertActionLink area. Compose link-variant button components, e.g.
+          {#actionLinks}{#include components/actions/button variant="link" inline=true href="#"}{#content}View{/content}{/include}{/actionLinks} !}
 {#let v=(variant ?: 'custom')}
 <div class="pf-v6-c-alert pf-m-{v}{#if inline??} pf-m-inline{/if}{#if plain??} pf-m-plain{/if}{#if expandable??} pf-m-expandable{/if}{#if truncate??} pf-m-truncate{/if}"
      {#if id??}id="{id}"{/if}
@@ -69,12 +72,8 @@
     <p>{description}</p>
   </div>
   {/if}
-  {#if actionLinks??}
-  <div class="pf-v6-c-alert__action-group" {#if expandable??}x-show="expanded"{/if}>
-    {#for link in actionLinks}
-    <a class="pf-v6-c-button pf-m-link pf-m-inline" href="{link.href ?: '#'}">{link.text}</a>
-    {/for}
-  </div>
+  {#if hasActionLinks??}
+  <div class="pf-v6-c-alert__action-group" {#if expandable??}x-show="expanded"{/if}>{#insert actionLinks}{/insert}</div>
   {/if}
 </div>
 {/let}

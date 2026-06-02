@@ -39,7 +39,7 @@ public class MiscExamplesRoutes {
         m.put("search-input",          Set.of("basic", "with-clear"));
         m.put("jump-links",            Set.of("horizontal", "vertical", "centered"));
         m.put("simple-list",           Set.of("basic", "grouped"));
-        m.put("alert",                 Set.of("variants", "with-description", "closable", "inline"));
+        m.put("alert",                 Set.of("variants", "with-description", "closable", "inline", "with-actions"));
         m.put("clipboard-copy",        Set.of("basic", "readonly", "expandable", "inline"));
         m.put("card",                  Set.of("basic", "compact", "flat"));
         m.put("hint",                  Set.of("basic", "with-content"));
