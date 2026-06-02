@@ -1,27 +1,11 @@
-{! pf-m-icons on the group only — the first group has tight spacing, the second keeps default. Use iconGroup=true on the group object on the runtime include to get this. !}
-<div class="pf-v6-c-action-list" id="action-list-icons-group">
-  <div class="pf-v6-c-action-list__group pf-m-icons">
-    <div class="pf-v6-c-action-list__item">
-      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Edit">
-        <span class="pf-v6-c-button__icon">{icons:svg('fa:pen-to-square').raw}</span>
-      </button>
-    </div>
-    <div class="pf-v6-c-action-list__item">
-      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Clone">
-        <span class="pf-v6-c-button__icon">{icons:svg('fa:copy').raw}</span>
-      </button>
-    </div>
-  </div>
-  <div class="pf-v6-c-action-list__group">
-    <div class="pf-v6-c-action-list__item">
-      <button class="pf-v6-c-button pf-m-primary" type="button">
-        <span class="pf-v6-c-button__text">Save</span>
-      </button>
-    </div>
-    <div class="pf-v6-c-action-list__item">
-      <button class="pf-v6-c-button pf-m-link" type="button">
-        <span class="pf-v6-c-button__text">Cancel</span>
-      </button>
-    </div>
-  </div>
+{! pf-m-icons on the group only — the first group has tight icon spacing, the second keeps default. !}
+{#include components/actions/action-list}{#items}
+<div class="pf-v6-c-action-list__group pf-m-icons">
+  <div class="pf-v6-c-action-list__item">{#include components/actions/button variant="plain" icon="fa:pen-to-square" ariaLabel="Edit" /}</div>
+  <div class="pf-v6-c-action-list__item">{#include components/actions/button variant="plain" icon="fa:copy" ariaLabel="Clone" /}</div>
 </div>
+<div class="pf-v6-c-action-list__group">
+  <div class="pf-v6-c-action-list__item">{#include components/actions/button variant="primary"}{#content}Save{/content}{/include}</div>
+  <div class="pf-v6-c-action-list__item">{#include components/actions/button variant="link"}{#content}Cancel{/content}{/include}</div>
+</div>
+{/items}{/include}

@@ -1,22 +1,10 @@
-{! Wizard pattern — nav buttons in one group, cancel in its own. PF separates them so the cancel sits visually apart from the primary/back navigation. !}
-<div class="pf-v6-c-action-list" id="action-list-cancel-wizard">
-  <div class="pf-v6-c-action-list__group">
-    <div class="pf-v6-c-action-list__item">
-      <button class="pf-v6-c-button pf-m-primary" type="button">
-        <span class="pf-v6-c-button__text">Next</span>
-      </button>
-    </div>
-    <div class="pf-v6-c-action-list__item">
-      <button class="pf-v6-c-button pf-m-secondary" type="button">
-        <span class="pf-v6-c-button__text">Back</span>
-      </button>
-    </div>
-  </div>
-  <div class="pf-v6-c-action-list__group">
-    <div class="pf-v6-c-action-list__item">
-      <button class="pf-v6-c-button pf-m-link" type="button">
-        <span class="pf-v6-c-button__text">Cancel</span>
-      </button>
-    </div>
-  </div>
+{! Wizard pattern — nav buttons in one group, cancel in its own so it sits visually apart. !}
+{#include components/actions/action-list}{#items}
+<div class="pf-v6-c-action-list__group">
+  <div class="pf-v6-c-action-list__item">{#include components/actions/button variant="primary"}{#content}Next{/content}{/include}</div>
+  <div class="pf-v6-c-action-list__item">{#include components/actions/button variant="secondary"}{#content}Back{/content}{/include}</div>
 </div>
+<div class="pf-v6-c-action-list__group">
+  <div class="pf-v6-c-action-list__item">{#include components/actions/button variant="link"}{#content}Cancel{/content}{/include}</div>
+</div>
+{/items}{/include}

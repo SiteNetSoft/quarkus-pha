@@ -1,32 +1,14 @@
 {! Action List — PatternFly v6 !}
-{! Required: groups !}
 {! Optional: id — DOM id on the root; omit unless something else references the component.
-              iconList — pf-m-icons on the list (was: icons)
-              vertical — pf-m-vertical (PHA-only divergence) !}
-{! Group: { items: [...], iconGroup?: bool }  — iconGroup adds pf-m-icons on the group !}
-{! Item shape (one of): !}
-{!   { text, variant }                          — text button (variant: primary|secondary|tertiary|link|plain|danger) !}
-{!   { icon: true, iconName, ariaLabel,         — icon-only button (variant defaults to plain) !}
-{!     variant?: <button variant> }             !}
-{!   { raw: <html string> }                     — escape hatch for custom content (kebab, dropdown, etc.) !}
-<div class="pf-v6-c-action-list{#if iconList??} pf-m-icons{/if}{#if vertical??} pf-m-vertical{/if}"{#if id??} id="{id}"{/if}>
-  {#for group in groups}
-  <div class="pf-v6-c-action-list__group{#if group.iconGroup??} pf-m-icons{/if}">
-    {#for item in group.items}
-    <div class="pf-v6-c-action-list__item">
-      {#if item.raw??}
-      {item.raw.raw}
-      {#else if item.icon??}
-      <button class="pf-v6-c-button pf-m-{#if item.variant??}{item.variant}{#else}plain{/if}" type="button" aria-label="{item.ariaLabel}">
-        <span class="pf-v6-c-button__icon">{icons:svg(item.iconName).raw}</span>
-      </button>
-      {#else}
-      <button class="pf-v6-c-button pf-m-{item.variant}" type="button">
-        <span class="pf-v6-c-button__text">{item.text}</span>
-      </button>
-      {/if}
-    </div>
-    {/for}
-  </div>
-  {/for}
-</div>
+              iconList — pf-m-icons on the list (icon-only actions; tighter spacing).
+              vertical — pf-m-vertical (PHA-only divergence; stacks actions). !}
+{! Slot: {#items} — the list contents. Compose PatternFly's __group / __item wrappers and the
+          button component; the slot takes any markup, so kebab toggles, dropdowns, etc. work too.
+            {#items}
+              <div class="pf-v6-c-action-list__group">
+                <div class="pf-v6-c-action-list__item">
+                  {#include components/actions/button variant="primary"}{#content}Save{/content}{/include}
+                </div>
+              </div>
+            {/items} !}
+<div class="pf-v6-c-action-list{#if iconList??} pf-m-icons{/if}{#if vertical??} pf-m-vertical{/if}"{#if id??} id="{id}"{/if}>{#insert items}{/insert}</div>
