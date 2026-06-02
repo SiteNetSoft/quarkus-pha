@@ -5,11 +5,12 @@ test.describe("Alert", () => {
     await page.goto("/components/alert");
   });
 
-  test("page loads with all 4 example section headings", async ({ page }) => {
+  test("page loads with all 5 example section headings", async ({ page }) => {
     await expect(page.locator("#variants")).toBeVisible();
     await expect(page.locator("#with-description")).toBeVisible();
     await expect(page.locator("#closable")).toBeVisible();
     await expect(page.locator("#inline")).toBeVisible();
+    await expect(page.locator("#with-actions")).toBeVisible();
   });
 
   test.describe("Variants", () => {
@@ -57,6 +58,22 @@ test.describe("Alert", () => {
   test.describe("Inline", () => {
     test("inline alert has pf-m-inline class", async ({ page }) => {
       await expect(page.locator("#al-inline")).toHaveClass(/pf-m-inline/);
+    });
+  });
+
+  test.describe("With action links", () => {
+    test("action-group composes link buttons via the button component", async ({ page }) => {
+      await page.goto("/components/alert/with-actions");
+      const group = page.locator(".pf-v6-c-alert__action-group");
+      await expect(group).toBeVisible();
+      const links = group.locator(".pf-v6-c-button.pf-m-link");
+      await expect(links).toHaveCount(2);
+      await expect(links.first()).toHaveText("View deployment");
+    });
+
+    test("a plain alert renders no empty action-group", async ({ page }) => {
+      await page.goto("/components/alert/closable");
+      await expect(page.locator(".pf-v6-c-alert__action-group")).toHaveCount(0);
     });
   });
 });

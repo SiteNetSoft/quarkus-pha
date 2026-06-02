@@ -1,0 +1,6 @@
+{! Action links — PF's AlertActionLink area. Set hasActionLinks=true and fill the {#actionLinks}
+   slot with link-variant button components instead of the old actionLinks data list. !}
+{#include components/feedback/alert variant="success" title="Deployment complete" description="Your application is live. Review the deployment or roll back if something looks wrong." hasActionLinks=true}{#actionLinks}
+{#include components/actions/button variant="link" inline=true href="#"}{#content}View deployment{/content}{/include}
+{#include components/actions/button variant="link" inline=true href="#"}{#content}Roll back{/content}{/include}
+{/actionLinks}{/include}
