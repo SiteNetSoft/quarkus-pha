@@ -141,24 +141,6 @@
                                 </li>
                                 <li class="pf-v6-c-jump-links__item ws-toc-item">
                                   <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#props-group" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Group fields</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#props-item" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Item fields</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
                                     ><a href="#usage" class="pf-v6-c-button pf-m-link"
                                       ><span class="pf-v6-c-button__text"
                                         ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
@@ -288,31 +270,29 @@
                             <tbody role="rowgroup" class="pf-v6-c-table__tbody">
                               <tr class="pf-v6-c-table__tr">
                                 <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
-                                  >
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">{|{#items}|}</code></span>
                                 </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Slot</span></td>
                                 <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
                                 <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text">DOM id on the action-list container.</span>
+                                  <span class="pf-v6-c-table__text"
+                                    >The list contents. Compose PatternFly's
+                                    <code class="ws-code">pf-v6-c-action-list__group</code> /
+                                    <code class="ws-code">pf-v6-c-action-list__item</code> wrappers around
+                                    <a href="/components/button">Button</a> components. Any markup works, so kebab
+                                    toggles and dropdowns drop straight in.</span
+                                  >
                                 </td>
                               </tr>
                               <tr class="pf-v6-c-table__tr">
                                 <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    ><span class="ws-prop-required">*</span> <code class="ws-code">groups</code></span
-                                  >
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
                                 </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text">List&lt;Group&gt;</span>
-                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
                                 <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
                                 <td class="pf-v6-c-table__td">
                                   <span class="pf-v6-c-table__text"
-                                    >Ordered list of action groups. Each group renders a
-                                    <code class="ws-code">pf-v6-c-action-list__group</code> wrapper around its
-                                    items.</span
+                                    >DOM id on the action-list container; omit unless referenced.</span
                                   >
                                 </td>
                               </tr>
@@ -356,167 +336,6 @@
                             semantic, shorter name. PF React doesn't ship a vertical layout; we add
                             <code class="ws-code">vertical</code> for narrow side-panel use cases.
                           </p>
-                        </div>
-
-                        <div class="pf-v6-l-stack__item">
-                          <h3 id="props-group" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
-                            Group fields
-                          </h3>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            Each entry in <code class="ws-code">groups</code> is a map with these fields.
-                          </p>
-                          <table
-                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
-                            role="grid"
-                            aria-label="Group fields"
-                          >
-                            <caption class="pf-v6-c-table__caption">
-                              <span class="ws-prop-required">*</span>
-                              required
-                            </caption>
-                            <thead class="pf-v6-c-table__thead">
-                              <tr class="pf-v6-c-table__tr">
-                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
-                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
-                                <th scope="col" class="pf-v6-c-table__th">Default</th>
-                                <th scope="col" class="pf-v6-c-table__th">Description</th>
-                              </tr>
-                            </thead>
-                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    ><span class="ws-prop-required">*</span> <code class="ws-code">items</code></span
-                                  >
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text">List&lt;Item&gt;</span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Ordered list of items inside the group. Each item renders a
-                                    <code class="ws-code">pf-v6-c-action-list__item</code> wrapper.</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">iconGroup</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Applies <code class="ws-code">pf-m-icons</code> on this group only — tightens
-                                    spacing for icon-heavy groups. PF's <code class="ws-code">isIconGroup</code>.</span
-                                  >
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-
-                        <div class="pf-v6-l-stack__item">
-                          <h3 id="props-item" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
-                            Item fields
-                          </h3>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            Each entry in a group's <code class="ws-code">items</code> takes one of three shapes — text
-                            button, icon button, or raw HTML escape hatch.
-                          </p>
-                          <table
-                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
-                            role="grid"
-                            aria-label="Item fields"
-                          >
-                            <thead class="pf-v6-c-table__thead">
-                              <tr class="pf-v6-c-table__tr">
-                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
-                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
-                                <th scope="col" class="pf-v6-c-table__th">Description</th>
-                              </tr>
-                            </thead>
-                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">text</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Button label. Pair with <code class="ws-code">variant</code>.</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">variant</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Button variant —
-                                    <code class="ws-code">primary | secondary | tertiary | link | plain | danger</code
-                                    >.</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">icon</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Flag — when present, the item renders as an icon-only button. Pair with
-                                    <code class="ws-code">iconName</code> and
-                                    <code class="ws-code">ariaLabel</code>.</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">iconName</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Icon name passed to the <code class="ws-code">icons:svg(...)</code> Qute extension
-                                    (e.g. <code class="ws-code">fa:pen-to-square</code>).</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">ariaLabel</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Required for icon items — accessible name for the icon-only button.</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">raw</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text">String (HTML)</span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Escape hatch — emit arbitrary HTML inside the item wrapper. Useful for kebab
-                                    toggles, dropdowns, or any non-button control. Bypasses Qute escaping; sanitize
-                                    upstream.</span
-                                  >
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
                         </div>
 
                         <div class="pf-v6-l-stack__item">

@@ -1,27 +1,11 @@
-{! Two side-by-side groups — typical for wizards: nav buttons on the left, submit/cancel on the right. PF widens the gutter between groups vs. between items, so the visual split is automatic. !}
-<div class="pf-v6-c-action-list" id="action-list-multiple-groups">
-  <div class="pf-v6-c-action-list__group">
-    <div class="pf-v6-c-action-list__item">
-      <button class="pf-v6-c-button pf-m-primary" type="button">
-        <span class="pf-v6-c-button__text">Next</span>
-      </button>
-    </div>
-    <div class="pf-v6-c-action-list__item">
-      <button class="pf-v6-c-button pf-m-secondary" type="button">
-        <span class="pf-v6-c-button__text">Back</span>
-      </button>
-    </div>
-  </div>
-  <div class="pf-v6-c-action-list__group">
-    <div class="pf-v6-c-action-list__item">
-      <button class="pf-v6-c-button pf-m-primary" type="button">
-        <span class="pf-v6-c-button__text">Submit</span>
-      </button>
-    </div>
-    <div class="pf-v6-c-action-list__item">
-      <button class="pf-v6-c-button pf-m-link" type="button">
-        <span class="pf-v6-c-button__text">Cancel</span>
-      </button>
-    </div>
-  </div>
+{! Two side-by-side groups — nav on the left, submit/cancel on the right. PF widens the gutter between groups. !}
+{#include components/actions/action-list}{#items}
+<div class="pf-v6-c-action-list__group">
+  <div class="pf-v6-c-action-list__item">{#include components/actions/button variant="primary"}{#content}Next{/content}{/include}</div>
+  <div class="pf-v6-c-action-list__item">{#include components/actions/button variant="secondary"}{#content}Back{/content}{/include}</div>
 </div>
+<div class="pf-v6-c-action-list__group">
+  <div class="pf-v6-c-action-list__item">{#include components/actions/button variant="primary"}{#content}Submit{/content}{/include}</div>
+  <div class="pf-v6-c-action-list__item">{#include components/actions/button variant="link"}{#content}Cancel{/content}{/include}</div>
+</div>
+{/items}{/include}
