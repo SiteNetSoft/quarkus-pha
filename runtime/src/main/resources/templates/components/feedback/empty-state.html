@@ -28,7 +28,9 @@
     <div class="pf-v6-c-empty-state__body">{bodyText}</div>
     {/if}
     {#if hasActions??}
-    <div class="pf-v6-c-empty-state__footer">{#insert actions}{/insert}</div>
+    {! Shadow size/id to null so the empty-state's own layout params don't leak (Qute include-data
+       inheritance) into composed action buttons; an explicit size/id on a button still overrides. !}
+    <div class="pf-v6-c-empty-state__footer">{#let size=null id=null}{#insert actions}{/insert}{/let}</div>
     {/if}
   </div>
 </div>
