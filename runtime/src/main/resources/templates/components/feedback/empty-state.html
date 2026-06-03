@@ -2,17 +2,22 @@
 {! Required: titleText !}
 {! Optional: id — DOM id on the root; omit unless something else references the empty state.
               iconName ("set:slug") — illustrative icon; omit for an icon-less state.
+              customIcon — set true and fill the {#icon} slot to put a component in the icon area
+                           (e.g. a spinner) instead of an icon; overrides iconName.
               bodyText — supporting copy under the title.
               size (xs | sm | lg | xl) — pf-m-{size} on the root.
               status (danger | warning | success | info) — pf-m-{status}; colors the icon.
               hasActions — set true and fill the {#actions} slot to render the footer. !}
-{! Slot: {#actions} — the footer's action area. Provide one OR MORE
+{! Slots: {#icon} — custom icon-area content (requires customIcon), e.g. {#include components/feedback/spinner …}.
+          {#actions} — the footer's action area. Provide one OR MORE
           <div class="pf-v6-c-empty-state__actions"> groups (PF's EmptyStateActions), each composing
           button components. PF commonly uses two: a primary action, then a row of links. !}
 <div class="pf-v6-c-empty-state{#if size??} pf-m-{size}{/if}{#if status??} pf-m-{status}{/if}"{#if id??} id="{id}"{/if}>
   <div class="pf-v6-c-empty-state__content">
     <div class="pf-v6-c-empty-state__header">
-      {#if iconName??}
+      {#if customIcon??}
+      <div class="pf-v6-c-empty-state__icon">{#insert icon}{/insert}</div>
+      {#else if iconName??}
       <div class="pf-v6-c-empty-state__icon">{icons:svg(iconName).raw}</div>
       {/if}
       <div class="pf-v6-c-empty-state__title">

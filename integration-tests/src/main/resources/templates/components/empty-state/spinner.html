@@ -1,0 +1,7 @@
+{! PatternFly "spinner" empty state — a loading indicator in the icon area instead of an icon.
+   customIcon=true swaps the icon SVG for the {#icon} slot, where we compose the spinner component. !}
+{#include components/feedback/empty-state customIcon=true titleText="Loading"}
+{#icon}
+{#include components/feedback/spinner size="xl" label="Loading" /}
+{/icon}
+{/include}
