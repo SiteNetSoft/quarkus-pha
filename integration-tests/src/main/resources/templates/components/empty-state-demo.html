@@ -99,6 +99,24 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#spinner" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Spinner</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#no-match" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">No match found</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#no-icon" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">No icon</span></span
@@ -197,6 +215,21 @@
                         confirming headline.
                       </p>
                       {/description} {#content}{#include components/empty-state/success /}{/content} {/include}
+                      {#include partials/example-card title="Spinner" slug="spinner" component="empty-state"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A loading state — set <code class="ws-code">customIcon=true</code> and fill the
+                        <code class="ws-code">{|{#icon}|}</code> slot with a
+                        <a href="/components/spinner">Spinner</a> instead of an icon. No body or actions.
+                      </p>
+                      {/description} {#content}{#include components/empty-state/spinner /}{/content} {/include}
+                      {#include partials/example-card title="No match found" slug="no-match" component="empty-state"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The classic &quot;no search results&quot; state — a search icon, a no-results headline, and a
+                        single <code class="ws-code">Clear all filters</code> link action.
+                      </p>
+                      {/description} {#content}{#include components/empty-state/no-match /}{/content} {/include}
                       {#include partials/example-card title="No icon" slug="no-icon" component="empty-state"}
                       {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
@@ -285,6 +318,23 @@
                               </td>
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text">Large illustrative icon at the top.</span>
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">customIcon</code> +
+                                  <code class="ws-code">{|{#icon}|}</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean + Slot</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Set <code class="ws-code">customIcon=true</code> and fill the
+                                  <code class="ws-code">{|{#icon}|}</code> slot to put a component in the icon area
+                                  (e.g. a <a href="/components/spinner">Spinner</a> for a loading state) instead of an
+                                  icon. Overrides <code class="ws-code">iconName</code>.</span
+                                >
                               </td>
                             </tr>
                             <tr class="pf-v6-c-table__tr">

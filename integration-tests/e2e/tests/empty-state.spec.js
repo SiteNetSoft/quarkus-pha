@@ -1,7 +1,18 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Empty state", () => {
-  const EXAMPLES = ["basic", "extra-small", "small", "large", "extra-large", "success", "no-icon", "with-actions"];
+  const EXAMPLES = [
+    "basic",
+    "extra-small",
+    "small",
+    "large",
+    "extra-large",
+    "success",
+    "spinner",
+    "no-match",
+    "no-icon",
+    "with-actions",
+  ];
 
   test("page loads with every example section heading", async ({ page }) => {
     await page.goto("/components/empty-state");
@@ -45,6 +56,22 @@ test.describe("Empty state", () => {
       await expect(page.locator(".pf-v6-c-empty-state").first()).toHaveClass(new RegExp(modifier));
     });
   }
+
+  test("spinner example renders a spinner in the icon area, no footer", async ({ page }) => {
+    await page.goto("/components/empty-state/spinner");
+    await expect(page.locator(".pf-v6-c-empty-state__icon .pf-v6-c-spinner")).toBeVisible();
+    await expect(page.locator("h4.pf-v6-c-empty-state__title-text")).toHaveText("Loading");
+    await expect(page.locator(".pf-v6-c-empty-state__footer")).toHaveCount(0);
+  });
+
+  test("no-match example has a search icon, headline, and clear-filters link", async ({ page }) => {
+    await page.goto("/components/empty-state/no-match");
+    await expect(page.locator(".pf-v6-c-empty-state__icon")).toBeVisible();
+    await expect(page.locator("h4.pf-v6-c-empty-state__title-text")).toHaveText("No results found");
+    await expect(page.locator(".pf-v6-c-empty-state__actions .pf-v6-c-button.pf-m-link")).toHaveText(
+      "Clear all filters",
+    );
+  });
 
   test("extra-small uses small link buttons", async ({ page }) => {
     await page.goto("/components/empty-state/extra-small");
