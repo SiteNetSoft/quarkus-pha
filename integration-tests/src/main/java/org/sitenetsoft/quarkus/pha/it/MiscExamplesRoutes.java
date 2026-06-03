@@ -47,7 +47,7 @@ public class MiscExamplesRoutes {
         m.put("number-input",          Set.of("basic", "bounded", "with-unit", "disabled"));
         m.put("description-list",      Set.of("basic", "fill-columns"));
         m.put("skip-to-content",       Set.of("basic", "custom-text"));
-        m.put("empty-state",           Set.of("basic", "no-icon", "with-actions"));
+        m.put("empty-state",           Set.of("basic", "extra-small", "small", "large", "extra-large", "success", "no-icon", "with-actions"));
         m.put("pagination",            Set.of("basic", "compact"));
         m.put("code-block",            Set.of("basic", "with-copy"));
         m.put("progress-stepper",      Set.of("horizontal", "vertical", "compact"));

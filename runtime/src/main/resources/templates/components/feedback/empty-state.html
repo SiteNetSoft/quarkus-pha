@@ -1,16 +1,20 @@
 {! Empty state — PatternFly v6 !}
 {! Required: titleText !}
 {! Optional: id — DOM id on the root; omit unless something else references the empty state.
-              iconName ("set:slug"), bodyText. !}
-{! Slot: {#actions} — EmptyStateActions content. Compose buttons with the button component, e.g.
-          {#actions}{#include components/actions/button variant="primary"}{#content}Create{/content}{/include}{/actions}
-          Any number of buttons / variants. Omit the block for an action-less empty state. !}
-<div class="pf-v6-c-empty-state"{#if id??} id="{id}"{/if}>
+              iconName ("set:slug") — illustrative icon; omit for an icon-less state.
+              bodyText — supporting copy under the title.
+              size (xs | sm | lg | xl) — pf-m-{size} on the root.
+              status (danger | warning | success | info) — pf-m-{status}; colors the icon.
+              hasActions — set true and fill the {#actions} slot to render the footer. !}
+{! Slot: {#actions} — the footer's action area. Provide one OR MORE
+          <div class="pf-v6-c-empty-state__actions"> groups (PF's EmptyStateActions), each composing
+          button components. PF commonly uses two: a primary action, then a row of links. !}
+<div class="pf-v6-c-empty-state{#if size??} pf-m-{size}{/if}{#if status??} pf-m-{status}{/if}"{#if id??} id="{id}"{/if}>
   <div class="pf-v6-c-empty-state__content">
     <div class="pf-v6-c-empty-state__header">
-    {#if iconName??}
+      {#if iconName??}
       <div class="pf-v6-c-empty-state__icon">{icons:svg(iconName).raw}</div>
-    {/if}
+      {/if}
       <div class="pf-v6-c-empty-state__title">
         <h4 class="pf-v6-c-empty-state__title-text">{titleText}</h4>
       </div>
@@ -18,8 +22,8 @@
     {#if bodyText??}
     <div class="pf-v6-c-empty-state__body">{bodyText}</div>
     {/if}
-    <div class="pf-v6-c-empty-state__footer">
-      <div class="pf-v6-c-empty-state__actions">{#insert actions}{/insert}</div>
-    </div>
+    {#if hasActions??}
+    <div class="pf-v6-c-empty-state__footer">{#insert actions}{/insert}</div>
+    {/if}
   </div>
 </div>

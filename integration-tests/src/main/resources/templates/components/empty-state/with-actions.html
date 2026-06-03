@@ -1,6 +1,11 @@
-{#include components/feedback/empty-state iconName="fa:folder-open" titleText="Empty workspace" bodyText="You haven't created any documents yet."}{#actions}
-{#include components/actions/button variant="primary"}{#content}Create document{/content}{/include}
-{#include components/actions/button variant="secondary"}{#content}Import existing{/content}{/include}
-{#include components/actions/button variant="link"}{#content}Browse templates{/content}{/include}
-{#include components/actions/button variant="link"}{#content}Learn more{/content}{/include}
-{/actions}{/include}
+{! A single action group mixing variants — primary, secondary, and two links. !}
+{#include components/feedback/empty-state iconName="fa:folder-open" titleText="Empty workspace" bodyText="You haven't created any documents yet." hasActions=true}
+{#actions}
+<div class="pf-v6-c-empty-state__actions">
+  {#include components/actions/button variant="primary"}{#content}Create document{/content}{/include}
+  {#include components/actions/button variant="secondary"}{#content}Import existing{/content}{/include}
+  {#include components/actions/button variant="link"}{#content}Browse templates{/content}{/include}
+  {#include components/actions/button variant="link"}{#content}Learn more{/content}{/include}
+</div>
+{/actions}
+{/include}
