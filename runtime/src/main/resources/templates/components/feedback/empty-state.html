@@ -7,14 +7,14 @@
           Any number of buttons / variants. Omit the block for an action-less empty state. !}
 <div class="pf-v6-c-empty-state"{#if id??} id="{id}"{/if}>
   <div class="pf-v6-c-empty-state__content">
+    <div class="pf-v6-c-empty-state__header">
     {#if iconName??}
-    <div class="pf-v6-c-empty-state__icon">
-      <div class="pf-v6-c-icon pf-m-lg">
-        <span class="pf-v6-c-icon__content">{icons:svg(iconName).raw}</span>
+      <div class="pf-v6-c-empty-state__icon">{icons:svg(iconName).raw}</div>
+    {/if}
+      <div class="pf-v6-c-empty-state__title">
+        <h4 class="pf-v6-c-empty-state__title-text">{titleText}</h4>
       </div>
     </div>
-    {/if}
-    <div class="pf-v6-c-empty-state__title-text">{titleText}</div>
     {#if bodyText??}
     <div class="pf-v6-c-empty-state__body">{bodyText}</div>
     {/if}
