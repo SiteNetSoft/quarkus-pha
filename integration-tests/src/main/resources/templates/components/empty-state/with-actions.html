@@ -1,1 +1,6 @@
-{#include components/feedback/empty-state id="es-actions" iconName="fa:folder-open" titleText="Empty workspace" bodyText="You haven't created any documents yet." primaryAction="Create document" secondaryAction="Import existing" /}
+{#include components/feedback/empty-state iconName="fa:folder-open" titleText="Empty workspace" bodyText="You haven't created any documents yet."}{#actions}
+{#include components/actions/button variant="primary"}{#content}Create document{/content}{/include}
+{#include components/actions/button variant="secondary"}{#content}Import existing{/content}{/include}
+{#include components/actions/button variant="link"}{#content}Browse templates{/content}{/include}
+{#include components/actions/button variant="link"}{#content}Learn more{/content}{/include}
+{/actions}{/include}
