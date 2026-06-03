@@ -54,6 +54,51 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#extra-small" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Extra small</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#small" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Small</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#large" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Large</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#extra-large" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Extra large</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#success" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Success</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#no-icon" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">No icon</span></span
@@ -121,7 +166,39 @@
                         Icon + title + body + primary action — the standard &quot;first-time experience&quot; pattern.
                       </p>
                       {/description} {#content}{#include components/empty-state/basic /}{/content} {/include} {#include
-                      partials/example-card title="No icon" slug="no-icon" component="empty-state"} {#description}
+                      partials/example-card title="Extra small" slug="extra-small" component="empty-state"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-xs</code> — the most compact size; a single row of small link
+                        actions.
+                      </p>
+                      {/description} {#content}{#include components/empty-state/extra-small /}{/content} {/include}
+                      {#include partials/example-card title="Small" slug="small" component="empty-state"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-sm</code> — a compact empty state with a primary action and a row of
+                        links.
+                      </p>
+                      {/description} {#content}{#include components/empty-state/small /}{/content} {/include} {#include
+                      partials/example-card title="Large" slug="large" component="empty-state"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-lg</code> — a roomier empty state for full-page use.
+                      </p>
+                      {/description} {#content}{#include components/empty-state/large /}{/content} {/include} {#include
+                      partials/example-card title="Extra large" slug="extra-large" component="empty-state"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-xl</code> — the largest size, for dedicated empty-state pages.
+                      </p>
+                      {/description} {#content}{#include components/empty-state/extra-large /}{/content} {/include}
+                      {#include partials/example-card title="Success" slug="success" component="empty-state"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-success</code> — a status empty state: a success icon and a
+                        confirming headline.
+                      </p>
+                      {/description} {#content}{#include components/empty-state/success /}{/content} {/include}
+                      {#include partials/example-card title="No icon" slug="no-icon" component="empty-state"}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Omit <code class="ws-code">iconName</code> for a leaner look — best for &quot;no results&quot;
                         states.
@@ -130,9 +207,12 @@
                       {#include partials/example-card title="With actions" slug="with-actions" component="empty-state"}
                       {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Fill the <code class="ws-code">{|{#actions}|}</code> slot with any number of
-                        <a href="/components/button">Button</a> components — primary, secondary, link — for the action
-                        footer. The empty state does not hardcode buttons; you compose them.
+                        Set <code class="ws-code">hasActions=true</code> and fill the
+                        <code class="ws-code">{|{#actions}|}</code> slot with one or more
+                        <code class="ws-code">pf-v6-c-empty-state__actions</code> groups composing
+                        <a href="/components/button">Button</a> components. (PF's default example uses two: a primary
+                        action, then a row of links — see Basic.) The empty state doesn't hardcode buttons; you compose
+                        them.
                       </p>
                       {/description} {#content}{#include components/empty-state/with-actions /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
@@ -209,14 +289,48 @@
                             </tr>
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">{|{#actions}|}</code></span>
+                                <span class="pf-v6-c-table__text"><code class="ws-code">size</code></span>
                               </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Slot</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">xs | sm | lg | xl</code></span>
+                              </td>
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  >Action footer content (PatternFly's <code class="ws-code">EmptyStateActions</code>).
-                                  Compose <a href="/components/button">Button</a> components inside it — any count or
-                                  variant. Omit for an action-less empty state.</span
+                                  >Emits <code class="ws-code">{|pf-m-{size}|}</code> on the root.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">status</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">danger | warning | success | info</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Emits <code class="ws-code">{|pf-m-{status}|}</code>; colors the icon.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">hasActions</code> +
+                                  <code class="ws-code">{|{#actions}|}</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean + Slot</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Set <code class="ws-code">hasActions=true</code> and fill the
+                                  <code class="ws-code">{|{#actions}|}</code> slot to render the footer. Provide one or
+                                  more <code class="ws-code">pf-v6-c-empty-state__actions</code> groups (PF's
+                                  <code class="ws-code">EmptyStateActions</code>), each composing
+                                  <a href="/components/button">Button</a> components. Omit both for an action-less empty
+                                  state.</span
                                 >
                               </td>
                             </tr>

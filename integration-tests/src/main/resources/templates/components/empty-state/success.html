@@ -1,7 +1,5 @@
-{! PatternFly's default empty-state example: icon + title + body + a footer with two
-   EmptyStateActions groups — the primary action, then a row of link buttons. One {#actions}
-   block holds both __actions groups (Qute allows only one block per insert name). !}
-{#include components/feedback/empty-state iconName="fa:cubes" titleText="Empty state" bodyText="This represents the empty state pattern in PatternFly. Hopefully it's simple enough to use but flexible enough to meet a variety of needs." hasActions=true}
+{! PatternFly success status (pf-m-success) — a check-circle icon and a confirming headline. !}
+{#include components/feedback/empty-state status="success" iconName="fa:circle-check" titleText="You're all set" bodyText="This represents the empty state pattern in PatternFly. Hopefully it's simple enough to use but flexible enough to meet a variety of needs." hasActions=true}
 {#actions}
 <div class="pf-v6-c-empty-state__actions">
   {#include components/actions/button variant="primary"}{#content}Primary action{/content}{/include}
