@@ -130,9 +130,9 @@
                       {#include partials/example-card title="With actions" slug="with-actions" component="empty-state"}
                       {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Pass both <code class="ws-code">primaryAction</code> and
-                        <code class="ws-code">secondaryAction</code> for two-choice prompts (e.g. &quot;Create&quot; /
-                        &quot;Import&quot;).
+                        Fill the <code class="ws-code">{|{#actions}|}</code> slot with any number of
+                        <a href="/components/button">Button</a> components — primary, secondary, link — for the action
+                        footer. The empty state does not hardcode buttons; you compose them.
                       </p>
                       {/description} {#content}{#include components/empty-state/with-actions /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
@@ -171,12 +171,12 @@
                           <tbody role="rowgroup" class="pf-v6-c-table__tbody">
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
-                                >
+                                <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
                               </td>
                               <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">DOM id on the root; omit unless referenced.</span>
+                              </td>
                             </tr>
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
@@ -209,14 +209,15 @@
                             </tr>
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><code class="ws-code">primaryAction</code> /
-                                  <code class="ws-code">secondaryAction</code></span
-                                >
+                                <span class="pf-v6-c-table__text"><code class="ws-code">{|{#actions}|}</code></span>
                               </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Slot</span></td>
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">Button labels in the actions footer.</span>
+                                <span class="pf-v6-c-table__text"
+                                  >Action footer content (PatternFly's <code class="ws-code">EmptyStateActions</code>).
+                                  Compose <a href="/components/button">Button</a> components inside it — any count or
+                                  variant. Omit for an action-less empty state.</span
+                                >
                               </td>
                             </tr>
                           </tbody>
