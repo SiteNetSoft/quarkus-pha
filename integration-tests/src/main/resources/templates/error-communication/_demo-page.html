@@ -1,0 +1,59 @@
+{! Shared demo page for the error-communication bucket. Data: type, title, intro. !}
+{#include layouts/base} {#title}{title}{/title} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+              <div class="pf-v6-c-page__main-body">
+                <div class="pf-v6-c-content pf-m-editorial">
+                  <p>
+                    <a href="/error-communication" class="pf-v6-c-button pf-m-link pf-m-inline"
+                      ><span class="pf-v6-c-button__text">&larr; Error communication</span></a
+                    >
+                  </p>
+                  <h1 class="pf-v6-c-title pf-m-2xl">{title}</h1>
+                  <p>{intro.raw}</p>
+                  <p>
+                    <a href="/error-communication/{type}/standalone" target="_blank" rel="noopener noreferrer"
+                      >Open standalone</a
+                    >
+                    &middot;
+                    <a href="/error-communication/{type}/source" target="_blank" rel="noopener noreferrer">View source</a>
+                  </p>
+                </div>
+              </div>
+            </section>
+            <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+              <div class="pf-v6-c-page__main-body">
+                <div class="ws-preview-html" style="border: 1px dashed var(--pf-t--global--border--color--default); border-radius: 8px; padding: 2rem">
+                  {#if type == 'error-state'}{#include components/error-communication/error-state /}{/if}
+                  {#if type == 'missing-page'}{#include components/error-communication/missing-page /}{/if}
+                  {#if type == 'maintenance'}{#include components/error-communication/maintenance /}{/if}
+                  {#if type == 'unauthorized-access'}{#include components/error-communication/unauthorized-access /}{/if}
+                  {#if type == 'unavailable-content'}{#include components/error-communication/unavailable-content /}{/if}
+                  {#if type == 'warning-modal'}
+                  <button class="pf-v6-c-button pf-m-primary" type="button" @click="$dispatch('open-modal', 'demo-warning-modal')">
+                    <span class="pf-v6-c-button__text">Show warning modal</span>
+                  </button>
+                  {#include components/error-communication/warning-modal id="demo-warning-modal" bodyText="Deleting this project removes all of its data. This action cannot be undone." confirmText="Delete project" confirmVariant="danger" /}
+                  {/if}
+                  {#if type == 'error-boundary'}{#include components/error-communication/error-boundary headerTitle="Application error" errorDetails="TypeError: Cannot read properties of undefined (reading 'id')\n    at renderDashboard (dashboard.js:42)\n    at main (app.js:11)" /}{/if}
+                </div>
+              </div>
+            </section>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/body} {/include}
