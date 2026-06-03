@@ -1,0 +1,16 @@
+{! Unauthorized access (403) — PatternFly error-communication. !}
+{! Optional: titleText (default "You do not have access"), bodyText (default provided),
+              primaryText (default "Go to landing page"), primaryHref (default "/"),
+              returnText (default "Return to previous page"), returnHref (default "#"). !}
+{#let _title=(titleText ?: 'You do not have access') _body=(bodyText ?: 'Contact your system administrator for more information.') _primaryText=(primaryText ?: 'Go to landing page') _primaryHref=(primaryHref ?: '/') _returnText=(returnText ?: 'Return to previous page') _returnHref=(returnHref ?: '#')}
+{#include components/feedback/empty-state size="lg" iconName="fa:lock" titleText=_title bodyText=_body hasActions=true}
+{#actions}
+<div class="pf-v6-c-empty-state__actions">
+  {#include components/actions/button variant="primary" href=_primaryHref}{#content}{_primaryText}{/content}{/include}
+</div>
+<div class="pf-v6-c-empty-state__actions">
+  {#include components/actions/button variant="link" href=_returnHref}{#content}{_returnText}{/content}{/include}
+</div>
+{/actions}
+{/include}
+{/let}

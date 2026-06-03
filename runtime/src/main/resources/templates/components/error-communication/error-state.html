@@ -1,0 +1,12 @@
+{! Error state — PatternFly error-communication. A danger empty-state for unexpected errors. !}
+{! Optional: titleText (default "Something went wrong"), bodyText (default provided),
+              homeText (default "Go to home page"), homeHref (default "/"). !}
+{#let _title=(titleText ?: 'Something went wrong') _body=(bodyText ?: 'An unexpected error occurred. Try reloading the page, or return to the home page.') _homeText=(homeText ?: 'Go to home page') _homeHref=(homeHref ?: '/')}
+{#include components/feedback/empty-state status="danger" size="lg" iconName="fa:circle-exclamation" titleText=_title bodyText=_body hasActions=true}
+{#actions}
+<div class="pf-v6-c-empty-state__actions">
+  {#include components/actions/button variant="primary" href=_homeHref}{#content}{_homeText}{/content}{/include}
+</div>
+{/actions}
+{/include}
+{/let}
