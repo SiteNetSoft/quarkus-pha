@@ -1,5 +1,10 @@
-{! Empty state — PatternFly v6 !} {! Required: titleText !} {! Optional: id — DOM id on the root; omit unless something else references the empty state.
-                                                                              bodyText (optional), iconName (optional, "set:slug"), primaryAction (optional), secondaryAction (optional) !}
+{! Empty state — PatternFly v6 !}
+{! Required: titleText !}
+{! Optional: id — DOM id on the root; omit unless something else references the empty state.
+              iconName ("set:slug"), bodyText. !}
+{! Slot: {#actions} — EmptyStateActions content. Compose buttons with the button component, e.g.
+          {#actions}{#include components/actions/button variant="primary"}{#content}Create{/content}{/include}{/actions}
+          Any number of buttons / variants. Omit the block for an action-less empty state. !}
 <div class="pf-v6-c-empty-state"{#if id??} id="{id}"{/if}>
   <div class="pf-v6-c-empty-state__content">
     {#if iconName??}
@@ -12,13 +17,9 @@
     <div class="pf-v6-c-empty-state__title-text">{titleText}</div>
     {#if bodyText??}
     <div class="pf-v6-c-empty-state__body">{bodyText}</div>
-    {/if} {#if primaryAction?? || secondaryAction??}
-    <div class="pf-v6-c-empty-state__footer">
-      <div class="pf-v6-c-empty-state__actions">
-        {#if primaryAction??}<button class="pf-v6-c-button pf-m-primary" type="button">{primaryAction}</button>{/if}
-        {#if secondaryAction??}<button class="pf-v6-c-button pf-m-link" type="button">{secondaryAction}</button>{/if}
-      </div>
-    </div>
     {/if}
+    <div class="pf-v6-c-empty-state__footer">
+      <div class="pf-v6-c-empty-state__actions">{#insert actions}{/insert}</div>
+    </div>
   </div>
 </div>
