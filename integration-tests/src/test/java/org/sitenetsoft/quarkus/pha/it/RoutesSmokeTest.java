@@ -180,7 +180,15 @@ class RoutesSmokeTest {
         "/extensions/catalog-view/vertical-tabs",
         "/extensions/data-view/overview",
         "/extensions/data-view/toolbar",
-        "/extensions/data-view/table"
+        "/extensions/data-view/table",
+        "/error-communication",
+        "/error-communication/error-state",
+        "/error-communication/missing-page",
+        "/error-communication/maintenance",
+        "/error-communication/unauthorized-access",
+        "/error-communication/unavailable-content",
+        "/error-communication/warning-modal",
+        "/error-communication/error-boundary"
     })
     void component_demo_renders(String path) {
         given()

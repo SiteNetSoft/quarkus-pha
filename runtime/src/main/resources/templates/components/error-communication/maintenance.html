@@ -1,0 +1,12 @@
+{! Maintenance — PatternFly error-communication. Scheduled-maintenance screen. !}
+{! Optional: titleText (default "Maintenance in progress"), bodyText (default provided),
+              statusText (default "For more information, visit our status page."), statusHref (default "#"). !}
+{#let _title=(titleText ?: 'Maintenance in progress') _body=(bodyText ?: 'We are currently undergoing scheduled maintenance. Thank you for your patience — we will be back online shortly.') _statusText=(statusText ?: 'For more information, visit our status page.') _statusHref=(statusHref ?: '#')}
+{#include components/feedback/empty-state size="lg" iconName="fa:screwdriver-wrench" titleText=_title bodyText=_body hasActions=true}
+{#actions}
+<div class="pf-v6-c-empty-state__actions">
+  {#include components/actions/button variant="link" href=_statusHref}{#content}{_statusText}{/content}{/include}
+</div>
+{/actions}
+{/include}
+{/let}

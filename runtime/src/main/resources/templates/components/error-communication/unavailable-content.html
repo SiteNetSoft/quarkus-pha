@@ -1,0 +1,12 @@
+{! Unavailable content — PatternFly error-communication. Temporary unavailability. !}
+{! Optional: titleText (default "This page is temporarily unavailable"), bodyText (default provided),
+              statusText (default "Status page"), statusHref (default "#"). !}
+{#let _title=(titleText ?: 'This page is temporarily unavailable') _body=(bodyText ?: 'Try refreshing the page. If the problem persists, contact your organization administrator or check the status page for known outages.') _statusText=(statusText ?: 'Status page') _statusHref=(statusHref ?: '#')}
+{#include components/feedback/empty-state status="danger" size="lg" iconName="fa:circle-exclamation" titleText=_title bodyText=_body hasActions=true}
+{#actions}
+<div class="pf-v6-c-empty-state__actions">
+  {#include components/actions/button variant="link" href=_statusHref}{#content}{_statusText}{/content}{/include}
+</div>
+{/actions}
+{/include}
+{/let}
