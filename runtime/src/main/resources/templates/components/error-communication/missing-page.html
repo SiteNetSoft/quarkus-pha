@@ -2,7 +2,8 @@
 {! Optional: titleText (default "We lost that page"), bodyText (default provided),
               homeText (default "Return to homepage"), homeHref (default "/"). !}
 {#let _title=(titleText ?: 'We lost that page') _body=(bodyText ?: "Let's find you a new one. Try a new search or return home.") _homeText=(homeText ?: 'Return to homepage') _homeHref=(homeHref ?: '/')}
-{#include components/feedback/empty-state size="lg" titleText=_title bodyText=_body hasActions=true}
+{#include components/feedback/empty-state size="lg" customIcon=true titleText=_title bodyText=_body hasActions=true}
+{#icon}{#include components/error-communication/_illustration-not-found /}{/icon}
 {#actions}
 <div class="pf-v6-c-empty-state__actions">
   {#include components/actions/button variant="link" href=_homeHref}{#content}{_homeText}{/content}{/include}
