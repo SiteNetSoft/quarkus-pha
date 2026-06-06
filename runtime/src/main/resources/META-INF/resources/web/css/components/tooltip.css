@@ -1,0 +1,46 @@
+/* Tooltip — interactive positioning + stacking for PatternFly v6 tooltips.
+   PatternFly styles the bubble itself; this file positions it around the
+   trigger (15px / 0.9375rem away, PF's default distance) and lifts it above
+   page content with a high z-index — the job PF's popper portal normally does. */
+
+[x-cloak] {
+  display: none !important;
+}
+
+.pha-tooltip {
+  position: relative;
+  display: inline-flex;
+}
+
+.pha-tooltip > .pf-v6-c-tooltip {
+  position: absolute;
+  z-index: 9999;
+}
+
+.pha-tooltip > .pf-v6-c-tooltip.pf-m-top {
+  inset-block-end: 100%;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  margin-block-end: 0.9375rem;
+}
+
+.pha-tooltip > .pf-v6-c-tooltip.pf-m-bottom {
+  inset-block-start: 100%;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  margin-block-start: 0.9375rem;
+}
+
+.pha-tooltip > .pf-v6-c-tooltip.pf-m-left {
+  inset-inline-end: 100%;
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+  margin-inline-end: 0.9375rem;
+}
+
+.pha-tooltip > .pf-v6-c-tooltip.pf-m-right {
+  inset-inline-start: 100%;
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+  margin-inline-start: 0.9375rem;
+}
