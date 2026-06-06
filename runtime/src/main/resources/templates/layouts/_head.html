@@ -14,12 +14,15 @@ layouts/base.html wraps the include. !}
 
 <script>
   (function () {
-    let t = localStorage.getItem("pha-theme") || "auto";
-    let dark = t === "dark" || (t === "auto" && window.matchMedia("(prefers-color-scheme: dark)").matches);
-    if (dark) document.documentElement.classList.add("pf-v6-theme-dark");
-    let c = localStorage.getItem("pha-contrast") || "system";
-    let hc = c === "on" || (c === "system" && window.matchMedia("(prefers-contrast: more)").matches);
-    if (hc) document.documentElement.classList.add("pf-v6-theme-high-contrast");
+    var el = document.documentElement;
+    if ((localStorage.getItem("pha-theme-variant") || "default") === "felt") el.classList.add("pf-v6-theme-felt");
+    var cs = localStorage.getItem("pha-color-scheme") || "system";
+    if (cs === "dark" || (cs === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches))
+      el.classList.add("pf-v6-theme-dark");
+    var c = localStorage.getItem("pha-contrast") || "system";
+    if (c === "high" || (c === "system" && window.matchMedia("(prefers-contrast: more)").matches))
+      el.classList.add("pf-v6-theme-high-contrast");
+    if (c === "glass") el.classList.add("pf-v6-theme-glass");
   })();
 </script>
 
@@ -28,9 +31,11 @@ layouts/base.html wraps the include. !}
 <link rel="stylesheet" href="/web/css/patternfly-docs-bundle.css" />
 <link rel="stylesheet" href="/web/css/pha.css" />
 <link rel="stylesheet" href="/web/css/overrides.css" />
+<link rel="stylesheet" href="/web/css/components/theme-selector.css" />
 
 <script src="/web/js/utils/focus-trap.js"></script>
 <script src="/web/js/alpine/register.js"></script>
+<script src="/web/js/alpine/components/theme-selector.js"></script>
 
 {#insert head}{/insert}
 
