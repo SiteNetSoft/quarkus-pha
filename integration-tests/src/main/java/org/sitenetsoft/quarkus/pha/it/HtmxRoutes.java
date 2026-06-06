@@ -1,13 +1,16 @@
 package org.sitenetsoft.quarkus.pha.it;
 
+import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.NotFoundException;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
+import io.quarkus.qute.Engine;
 import io.smallrye.mutiny.Multi;
 import org.jboss.resteasy.reactive.RestStreamElementType;
 
@@ -589,5 +592,47 @@ public class HtmxRoutes {
                      + "<span class=\"pf-v6-c-log-viewer__text\">" + escapeHtml(line) + "</span>"
                      + "</span>";
             });
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    // Progress-button login demo (components/button/progress-login). STUB:
+    // no credentials are checked, no session is created. The short delay just
+    // makes the button's in-progress state visible before the success swap.
+    // ─────────────────────────────────────────────────────────────────────
+
+    @Inject
+    Engine engine;
+
+    @POST
+    @Path("/button/login")
+    @Produces(MediaType.TEXT_HTML)
+    public String login() {
+        try {
+            Thread.sleep(1200); // simulate a round-trip so progress is visible
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        return "<div id=\"login-action\" class=\"pf-v6-l-stack pf-m-gutter\">"
+             + "<div class=\"pf-v6-l-stack__item\">"
+             + "<div class=\"pf-v6-c-helper-text\">"
+             + "<div class=\"pf-v6-c-helper-text__item pf-m-success\">"
+             + "<span class=\"pf-v6-c-helper-text__item-icon\">"
+             + "<svg class=\"pf-v6-svg\" viewBox=\"0 0 448 512\" fill=\"currentColor\" width=\"1em\" height=\"1em\" aria-hidden=\"true\" role=\"img\">"
+             + "<path d=\"M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z\"/>"
+             + "</svg></span>"
+             + "<span class=\"pf-v6-c-helper-text__item-text\">Logged in as <b>redhat</b>. Stub demo &mdash; no real authentication happened.</span>"
+             + "</div></div></div>"
+             + "<div class=\"pf-v6-l-stack__item\">"
+             + "<button class=\"pf-v6-c-button pf-m-secondary\" type=\"button\""
+             + " hx-get=\"/api/htmx/button/login-reset\" hx-target=\"#login-action\" hx-swap=\"outerHTML\">"
+             + "<span class=\"pf-v6-c-button__text\">Reset demo</span></button>"
+             + "</div></div>";
+    }
+
+    @GET
+    @Path("/button/login-reset")
+    @Produces(MediaType.TEXT_HTML)
+    public String loginReset() {
+        return engine.getTemplate("components/button/_login-action").instance().render();
     }
 }

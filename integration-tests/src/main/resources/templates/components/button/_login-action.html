@@ -1,0 +1,23 @@
+{! Action region for the progress-button login demo — the submit button in its
+   idle/in-progress state. Shared by progress-login.html and the reset endpoint
+   (HtmxRoutes#loginReset) so both render the identical button. The pf-m-in-progress
+   treatment is toggled by Alpine (loading) on the enclosing form. !}
+<div id="login-action">
+  <button
+    id="login-btn"
+    type="submit"
+    class="pf-v6-c-button pf-m-primary pf-m-progress pf-m-block"
+    :class="{ 'pf-m-in-progress': loading }"
+    :disabled="loading"
+    :aria-disabled="loading.toString()"
+  >
+    <span class="pf-v6-c-button__progress">
+      {#include components/feedback/spinner size="md" label="Logging in" /}
+    </span>
+    <span
+      class="pf-v6-c-button__text"
+      x-text="loading ? 'Linking account and logging in…' : 'Link account and log in'"
+      >Link account and log in</span
+    >
+  </button>
+</div>

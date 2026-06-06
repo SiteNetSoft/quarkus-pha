@@ -1,0 +1,58 @@
+{! Progress button demo (mirrors PatternFly's Button react-demo). A login form
+   whose submit button visually indicates progress while an HTMX request is in
+   flight, then swaps in a success state. The server endpoint is a STUB — no real
+   authentication happens, and the inputs are read-only (as in PF's demo).
+
+   HTMX drives the request; Alpine toggles PF's pf-m-in-progress on the button
+   while htmx:before-request / htmx:after-request fire (server renders, Alpine
+   reacts, HTMX moves). Needs htmx + alpine on the host page (layouts/base). !}
+<div class="ws-preview-html" style="max-width: 28rem">
+  <form
+    class="pf-v6-c-form"
+    x-data="{ loading: false }"
+    hx-post="/api/htmx/button/login"
+    hx-target="#login-action"
+    hx-swap="outerHTML"
+    @htmx:before-request="loading = true"
+    @htmx:after-request="loading = false"
+    @submit.prevent
+  >
+    <div class="pf-v6-c-form__group">
+      <div class="pf-v6-c-form__group-label">
+        <label class="pf-v6-c-form__label" for="login-username">
+          <span class="pf-v6-c-form__label-text">Username</span>
+          <span class="pf-v6-c-form__label-required" aria-hidden="true">&#42;</span>
+        </label>
+      </div>
+      <div class="pf-v6-c-form__group-control">
+        <span class="pf-v6-c-form-control pf-m-readonly">
+          <input id="login-username" type="text" value="redhat" readonly aria-label="Username (read-only in this demo)" />
+        </span>
+      </div>
+    </div>
+
+    <div class="pf-v6-c-form__group">
+      <div class="pf-v6-c-form__group-label">
+        <label class="pf-v6-c-form__label" for="login-password">
+          <span class="pf-v6-c-form__label-text">Password</span>
+          <span class="pf-v6-c-form__label-required" aria-hidden="true">&#42;</span>
+        </label>
+      </div>
+      <div class="pf-v6-c-form__group-control">
+        <span class="pf-v6-c-form-control pf-m-readonly">
+          <input
+            id="login-password"
+            type="password"
+            value="placeholder"
+            readonly
+            aria-label="Password (read-only in this demo)"
+          />
+        </span>
+      </div>
+    </div>
+
+    <div class="pf-v6-c-form__group">
+      <div class="pf-v6-c-form__group-control">{#include components/button/_login-action /}</div>
+    </div>
+  </form>
+</div>
