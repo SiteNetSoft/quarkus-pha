@@ -1,0 +1,25 @@
+{#include layouts/sidebar}
+    {#title}Dashboard — {applicationName}{/title}
+    {#head}
+        <link rel="stylesheet" href="/web/css/components/chart.css" />
+        <link rel="stylesheet" href="/web/css/components/htmx.css" />
+    {/head}
+    {#brand}<a
+        href="/demos/dashboard"
+        class="pf-v6-c-masthead__brand"
+        style="font-weight: 700; text-decoration: none; color: inherit"
+>{applicationName}</a
+>{/brand}
+    {#sidebarNav}
+        <li class="pf-v6-c-nav__item">
+            <a href="/demos/dashboard" class="pf-v6-c-nav__link pf-m-current" aria-current="page">Dashboard</a>
+        </li>
+        <li class="pf-v6-c-nav__item"><a href="/demos/data-management" class="pf-v6-c-nav__link">Data Management</a></li>
+        <li class="pf-v6-c-nav__item"><a href="/demos/settings" class="pf-v6-c-nav__link">Settings</a></li>
+        <li class="pf-v6-c-nav__item"><a href="/demos/landing" class="pf-v6-c-nav__link">Landing Page</a></li>
+        <li class="pf-v6-c-nav__item pf-m-separator"></li>
+        <li class="pf-v6-c-nav__item"><a href="/" class="pf-v6-c-nav__link">&larr; Component Showcase</a></li>
+    {/sidebarNav}
+    {#mainContent}
+    {/mainContent}
+{/include}
