@@ -54,9 +54,56 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#mixed-content" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Mixed content</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#display-inline" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Display inline</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#display-stack" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">Display stack</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#display-stack-inline-responsive" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Display stack, inline responsive</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#insets" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Insets</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#custom-logo" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Custom logo component</span></span
                                     ></a
                                   ></span
                                 >
@@ -112,7 +159,21 @@
                         Brand row with nav toggle, app name, and settings/help icons on the right.
                       </p>
                       {/description} {#content}{#include components/masthead/basic /}{/content} {/include} {#include
-                      partials/example-card title="Display stack" slug="display-stack" component="masthead"}
+                      partials/example-card title="Mixed content" slug="mixed-content" component="masthead"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Content area as a flex row: leading text and a primary action, with secondary and tertiary
+                        buttons pushed to the trailing edge.
+                      </p>
+                      {/description} {#content}{#include components/masthead/mixed-content /}{/content} {/include}
+                      {#include partials/example-card title="Display inline" slug="display-inline" component="masthead"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">displayInline=true</code> —
+                        <code class="ws-code">pf-m-display-inline</code> — keeps the brand and content side-by-side.
+                      </p>
+                      {/description} {#content}{#include components/masthead/display-inline /}{/content} {/include}
+                      {#include partials/example-card title="Display stack" slug="display-stack" component="masthead"}
                       {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">displayStack=true</code> —
@@ -120,6 +181,28 @@
                         instead of side-by-side.
                       </p>
                       {/description} {#content}{#include components/masthead/display-stack /}{/content} {/include}
+                      {#include partials/example-card title="Display stack, inline responsive"
+                      slug="display-stack-inline-responsive" component="masthead"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-display-stack pf-m-display-inline-on-lg</code> — stacked on small
+                        viewports, switching to inline from the <code class="ws-code">lg</code> breakpoint up.
+                      </p>
+                      {/description} {#content}{#include components/masthead/display-stack-inline-responsive
+                      /}{/content} {/include} {#include partials/example-card title="Insets" slug="insets"
+                      component="masthead"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">inset="sm"</code> (and responsive
+                        <code class="ws-code">pf-m-inset-*-on-*</code> variants) scales the masthead's inner padding up
+                        with the breakpoint.
+                      </p>
+                      {/description} {#content}{#include components/masthead/insets /}{/content} {/include} {#include
+                      partials/example-card title="Custom logo component" slug="custom-logo" component="masthead"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The brand <code class="ws-code">__logo</code> rendered as a custom element — an
+                        <code class="ws-code">&lt;a&gt;</code> wrapping a brand image — for router-link integration.
+                      </p>
+                      {/description} {#content}{#include components/masthead/custom-logo /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"
@@ -175,6 +258,33 @@
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
                                   >Adds <code class="ws-code">pf-m-display-stack</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">displayInline</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Adds <code class="ws-code">pf-m-display-inline</code> (brand and content
+                                  side-by-side).</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">inset</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">none | sm | md | lg | xl | 2xl</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Adds <code class="ws-code">{|pf-m-inset-{inset}|}</code> for inner padding.</span
                                 >
                               </td>
                             </tr>

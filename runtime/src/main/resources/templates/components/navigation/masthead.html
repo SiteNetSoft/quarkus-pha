@@ -1,6 +1,8 @@
 {! Masthead — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the masthead.
-                                           displayStack (optional) !}
-<header class="pf-v6-c-masthead{#if displayStack??} pf-m-display-stack{/if}"{#if id??} id="{id}"{/if}>
+                                           displayStack  (optional) — boolean; pf-m-display-stack (brand row above content).
+                                           displayInline (optional) — boolean; pf-m-display-inline (brand and content side-by-side).
+                                           inset         (optional) — none | sm | md | lg | xl | 2xl; pf-m-inset-{inset}. !}
+<header class="pf-v6-c-masthead{#if displayStack??} pf-m-display-stack{/if}{#if displayInline??} pf-m-display-inline{/if}{#if inset??} pf-m-inset-{inset}{/if}"{#if id??} id="{id}"{/if}>
   <div class="pf-v6-c-masthead__main">
     {#insert toggle}{/insert}
     <div class="pf-v6-c-masthead__brand">{#insert brand}{/insert}</div>

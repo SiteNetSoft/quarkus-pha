@@ -1,0 +1,24 @@
+<header class="pf-v6-c-masthead" id="mh-mixed">
+  <div class="pf-v6-c-masthead__main">
+    <span class="pf-v6-c-masthead__toggle">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Global navigation">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:bars').raw}</span>
+      </button>
+    </span>
+    <div class="pf-v6-c-masthead__brand"><a class="pf-v6-c-masthead__logo" href="#"><strong>PHA Showcase</strong></a></div>
+  </div>
+  <div class="pf-v6-c-masthead__content">
+    <div class="pf-v6-l-flex pf-m-align-items-center pf-m-space-items-md" style="width: 100%">
+      <span class="pf-v6-l-flex__item">Content</span>
+      <div class="pf-v6-l-flex__item">
+        {#include components/actions/button id="mh-mixed-primary" variant="primary"}{#content}Primary{/content}{/include}
+      </div>
+      <div class="pf-v6-l-flex__item" style="margin-inline-start: auto">
+        {#include components/actions/button id="mh-mixed-secondary" variant="secondary"}{#content}Secondary{/content}{/include}
+      </div>
+      <div class="pf-v6-l-flex__item">
+        {#include components/actions/button id="mh-mixed-tertiary" variant="tertiary"}{#content}Tertiary{/content}{/include}
+      </div>
+    </div>
+  </div>
+</header>
