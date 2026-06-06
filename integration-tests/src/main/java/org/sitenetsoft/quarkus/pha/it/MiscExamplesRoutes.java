@@ -53,7 +53,8 @@ public class MiscExamplesRoutes {
         m.put("progress-stepper",      Set.of("horizontal", "vertical", "compact"));
         m.put("tabs",                  Set.of("basic", "box", "vertical"));
         m.put("popover",               Set.of("basic", "danger"));
-        m.put("masthead",              Set.of("basic", "display-stack"));
+        m.put("masthead",              Set.of("basic", "mixed-content", "display-inline", "display-stack",
+                                               "display-stack-inline-responsive", "insets", "custom-logo"));
         m.put("sidebar",               Set.of("basic", "panel-right"));
         m.put("data-list",             Set.of("basic", "compact"));
         m.put("inline-edit",           Set.of("basic"));
