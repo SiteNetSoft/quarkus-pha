@@ -1,43 +1,58 @@
 import { test, expect } from "@playwright/test";
 
+const EXAMPLES = ["basic", "positions", "on-icon", "long-content"];
+
 test.describe("Tooltip", () => {
-  test.beforeEach(async ({ page }) => {
+  test("page loads with all example section headings", async ({ page }) => {
     await page.goto("/components/tooltip");
+    for (const id of EXAMPLES) {
+      await expect(page.locator(`#${id}`)).toBeAttached();
+    }
   });
 
-  test("page loads with all 3 section headings", async ({ page }) => {
-    await expect(page.locator("#top")).toBeVisible();
-    await expect(page.locator("#bottom")).toBeVisible();
-    await expect(page.locator("#left-right")).toBeVisible();
+  test("hidden until hover, shows after the delay, hides on mouse-out", async ({ page }) => {
+    await page.goto("/components/tooltip/basic");
+    const tip = page.locator("#tt-basic");
+    await expect(tip).toBeHidden();
+    await page.getByRole("button", { name: "Hover or focus me" }).hover();
+    await expect(tip).toBeVisible(); // auto-waits past PF's 300ms entry delay
+    await expect(tip).toHaveText("I'm a tooltip");
+    await page.mouse.move(0, 0);
+    await expect(tip).toBeHidden();
   });
 
-  test.describe("Top", () => {
-    test("has pf-v6-c-tooltip and pf-m-top classes", async ({ page }) => {
-      await expect(page.locator("#tt-top")).toHaveClass(/pf-v6-c-tooltip/);
-      await expect(page.locator("#tt-top")).toHaveClass(/pf-m-top/);
-    });
-
-    test("has arrow and content", async ({ page }) => {
-      await expect(page.locator("#tt-top .pf-v6-c-tooltip__arrow")).toBeVisible();
-      await expect(page.locator("#tt-top .pf-v6-c-tooltip__content")).toBeVisible();
-    });
+  test("shows on keyboard focus", async ({ page }) => {
+    await page.goto("/components/tooltip/basic");
+    await page.getByRole("button", { name: "Hover or focus me" }).focus();
+    await expect(page.locator("#tt-basic")).toBeVisible();
   });
 
-  test.describe("Bottom", () => {
-    test("has class pf-m-bottom", async ({ page }) => {
-      await expect(page.locator("#tt-bottom")).toHaveClass(/pf-m-bottom/);
-    });
+  test("trigger references the tip via aria-describedby", async ({ page }) => {
+    await page.goto("/components/tooltip/basic");
+    await expect(page.locator(".pha-tooltip > [aria-describedby='tt-basic']")).toHaveCount(1);
   });
 
-  test.describe("Left", () => {
-    test("has class pf-m-left", async ({ page }) => {
-      await expect(page.locator("#tt-left")).toHaveClass(/pf-m-left/);
-    });
+  test("positions render the right pf-m-{position} class", async ({ page }) => {
+    await page.goto("/components/tooltip/positions");
+    await expect(page.locator("#tt-top")).toHaveClass(/pf-m-top/);
+    await expect(page.locator("#tt-bottom")).toHaveClass(/pf-m-bottom/);
+    await expect(page.locator("#tt-left")).toHaveClass(/pf-m-left/);
+    await expect(page.locator("#tt-right")).toHaveClass(/pf-m-right/);
   });
 
-  test.describe("Right", () => {
-    test("has class pf-m-right", async ({ page }) => {
-      await expect(page.locator("#tt-right")).toHaveClass(/pf-m-right/);
-    });
+  test("on-icon: a plain icon button with an aria-label triggers it", async ({ page }) => {
+    await page.goto("/components/tooltip/on-icon");
+    const iconBtn = page.getByRole("button", { name: "More information" });
+    await expect(iconBtn).toBeVisible();
+    await iconBtn.hover();
+    await expect(page.locator("#tt-icon")).toBeVisible();
+  });
+
+  test("all example standalone routes render", async ({ page }) => {
+    for (const ex of EXAMPLES) {
+      const res = await page.goto(`/components/tooltip/${ex}`);
+      expect(res.status()).toBe(200);
+      await expect(page.locator(".pha-tooltip").first()).toBeAttached();
+    }
   });
 });

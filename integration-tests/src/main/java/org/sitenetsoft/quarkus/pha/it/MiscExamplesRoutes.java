@@ -31,7 +31,7 @@ public class MiscExamplesRoutes {
         Map<String, Set<String>> m = new HashMap<>();
         m.put("timestamp",             Set.of("basic", "inline", "with-tooltip"));
         m.put("truncate",              Set.of("end", "start", "middle"));
-        m.put("tooltip",               Set.of("top", "bottom", "left-right"));
+        m.put("tooltip",               Set.of("basic", "positions", "on-icon", "long-content"));
         m.put("switch",                Set.of("basic", "checked", "disabled", "reversed"));
         m.put("toggle-group",          Set.of("single-select", "multi-select", "with-icons"));
         m.put("slider",                Set.of("basic", "custom-range", "disabled"));

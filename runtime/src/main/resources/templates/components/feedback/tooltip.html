@@ -1,9 +1,15 @@
-{! Tooltip — PatternFly v6 !}
-{! Optional: id — DOM id on the root; omit unless something else references the tooltip (e.g. aria-describedby from the trigger).
-              position (top | bottom | left | right — default top), visible (boolean — show immediately for static demos) !}
-{! Content slot: tip text (passed as the include body — PF React calls this `content`). !}
-{! Static markup — for trigger-driven tooltips wrap a target element with the phaTooltip Alpine component (not bundled by default). !}
-<div class="pf-v6-c-tooltip{#if position??} pf-m-{position}{#else} pf-m-top{/if}{#if visible??} pf-m-visible{/if}"{#if id??} id="{id}"{/if} role="tooltip">
-  <div class="pf-v6-c-tooltip__arrow"></div>
-  <div class="pf-v6-c-tooltip__content">{#insert/}</div>
+{! Tooltip — PatternFly v6. Wraps a trigger and shows the tip on hover / focus
+   (PF's default 300ms delay), positioned 15px from the trigger and lifted above
+   page content. Requires /web/js/alpine/components/tooltip.js and
+   /web/css/components/tooltip.css on the host page. !}
+{! Optional: id — DOM id on the tip; the trigger references it via aria-describedby.
+              position (top | bottom | left | right — default top). !}
+{! Slots: {#trigger} — the hover/focus target (button, icon button, link).
+          {#tip} — the tooltip text. !}
+<div class="pha-tooltip" x-data="phaTooltip()">
+  <span x-ref="trigger" @mouseenter="show()" @mouseleave="hide()" @focusin="show()" @focusout="hide()"{#if id??} aria-describedby="{id}"{/if}>{#insert trigger}{/insert}</span>
+  <div x-ref="tip" x-show="open" x-cloak role="tooltip"{#if id??} id="{id}"{/if} class="pf-v6-c-tooltip pf-m-{#if position??}{position}{#else}top{/if}">
+    <div class="pf-v6-c-tooltip__arrow"></div>
+    <div class="pf-v6-c-tooltip__content">{#insert tip}{/insert}</div>
+  </div>
 </div>
