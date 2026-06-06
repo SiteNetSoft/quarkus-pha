@@ -1,0 +1,15 @@
+/* overrides.css — small, deliberate overrides of vendored (PatternFly / FontAwesome)
+   defaults that aren't in PatternFly itself. Loaded globally from layouts/_head.html,
+   after the vendor stylesheets and pha.css. Keep this file tiny and well-commented;
+   each rule should say what it patches and why. */
+
+/* FontAwesome glyphs are designed against a 0 0 W 512 viewBox, but many decorated /
+   rotated / cornered icons (gears, wine-bottle, the mars-* set, paperclip, …) bleed a
+   few units past that box. An inline <svg> clips to its viewport, so PatternFly's
+   .pf-v6-svg (which sets no overflow) cuts the bleeding edge — most visibly the top.
+   FontAwesome ships its own icons with overflow: visible for exactly this reason; we
+   restore that. Icons that already fit their viewBox are unaffected (nothing to show
+   outside the box), so this can't regress the well-rendering ones. */
+.pf-v6-svg {
+  overflow: visible;
+}
