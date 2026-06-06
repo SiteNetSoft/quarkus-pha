@@ -1,4 +1,6 @@
 {#include layouts/base} {#title}Tooltip{/title} {#head}
+<link rel="stylesheet" href="/web/css/components/tooltip.css" />
+<script src="/web/js/alpine/components/tooltip.js"></script>
 <script src="/web/js/alpine/components/code-example.js"></script>
 {/head} {#body}
 <div id="root">
@@ -19,9 +21,13 @@
                   <div class="pf-v6-c-content pf-m-editorial">
                     <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Tooltip</h1>
                     <p>
-                      The PatternFly tooltip — a positioned bubble with an arrow, shown on hover/focus of a target. The
-                      runtime template renders just the bubble; positioning and trigger logic live with the consumer
-                      (either CSS positioning, browser-native <code class="ws-code">title</code>, or an Alpine wrapper).
+                      The PatternFly tooltip — a positioned bubble with an arrow, shown on
+                      <strong>hover or focus</strong> of a target. Wrap a trigger in the
+                      <code class="ws-code">{|{#trigger}|}</code> slot and put the text in
+                      <code class="ws-code">{|{#tip}|}</code>; a small Alpine component toggles it (PF's 300ms delay)
+                      and CSS positions it 15px from the trigger, above surrounding content. Requires
+                      <code class="ws-code">/web/js/alpine/components/tooltip.js</code> and
+                      <code class="ws-code">/web/css/components/tooltip.css</code>.
                     </p>
                   </div>
                 </div>
@@ -46,27 +52,36 @@
                             <ul class="pf-v6-c-jump-links__list" role="list">
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#top" class="pf-v6-c-button pf-m-link"
+                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Top</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
                                     ></a
                                   ></span
                                 >
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#bottom" class="pf-v6-c-button pf-m-link"
+                                  ><a href="#positions" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Bottom</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text">Positions</span></span
                                     ></a
                                   ></span
                                 >
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#left-right" class="pf-v6-c-button pf-m-link"
+                                  ><a href="#on-icon" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Left / right</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text">On icon</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#long-content" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Long content</span></span
                                     ></a
                                   ></span
                                 >
@@ -118,23 +133,33 @@
                         </div>
                       </div>
 
-                      {#include partials/example-card title="Top" slug="top" component="tooltip"} {#description}
+                      {#include partials/example-card title="Basic" slug="basic" component="tooltip"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">position="top"</code> — bubble sits above the target with an arrow
-                        pointing down. The default.
+                        Wrap a trigger in the <code class="ws-code">{|{#trigger}|}</code> slot and put the text in
+                        <code class="ws-code">{|{#tip}|}</code>. <strong>Hover or focus</strong> the button — the
+                        tooltip appears after PatternFly's 300ms delay and hides again on mouse-out / blur.
                       </p>
-                      {/description} {#content}{#include components/tooltip/top /}{/content} {/include} {#include
-                      partials/example-card title="Bottom" slug="bottom" component="tooltip"} {#description}
+                      {/description} {#content}{#include components/tooltip/basic /}{/content} {/include} {#include
+                      partials/example-card title="Positions" slug="positions" component="tooltip"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">position="bottom"</code> — bubble below the target.
+                        <code class="ws-code">position</code> = <code class="ws-code">top</code> |
+                        <code class="ws-code">bottom</code> | <code class="ws-code">left</code> |
+                        <code class="ws-code">right</code> — the bubble sits on that side, 15px from the trigger, above
+                        surrounding content.
                       </p>
-                      {/description} {#content}{#include components/tooltip/bottom /}{/content} {/include} {#include
-                      partials/example-card title="Left / right" slug="left-right" component="tooltip"} {#description}
+                      {/description} {#content}{#include components/tooltip/positions /}{/content} {/include} {#include
+                      partials/example-card title="On icon" slug="on-icon" component="tooltip"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">position="left"</code> and <code class="ws-code">position="right"</code> —
-                        horizontal placements.
+                        Tooltips commonly hang off a plain icon button. Give the button an
+                        <code class="ws-code">aria-label</code> so assistive tech still announces it.
                       </p>
-                      {/description} {#content}{#include components/tooltip/left-right /}{/content} {/include}
+                      {/description} {#content}{#include components/tooltip/on-icon /}{/content} {/include} {#include
+                      partials/example-card title="Long content" slug="long-content" component="tooltip"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        PatternFly caps the bubble at <code class="ws-code">18.75rem</code> (300px); longer text wraps
+                        onto multiple lines instead of stretching across the page.
+                      </p>
+                      {/description} {#content}{#include components/tooltip/long-content /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
@@ -173,28 +198,29 @@
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+                                  ><span class="ws-prop-required">*</span>
+                                  <code class="ws-code">{|{#trigger}|}</code></span
                                 >
                               </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Slot</span></td>
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  >DOM id — used as the <code class="ws-code">aria-describedby</code> target on the
-                                  trigger.</span
+                                  >The hover / focus target — a button, icon button, or link. Must be focusable for
+                                  keyboard users.</span
                                 >
                               </td>
                             </tr>
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <em>(content slot)</em></span
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">{|{#tip}|}</code></span
                                 >
                               </td>
                               <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Slot</span></td>
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  >Tooltip text, passed as the include body. Keep it short — one line is ideal. Mirrors
-                                  PF React's <code class="ws-code">content</code> prop.</span
+                                  >The tooltip text (PF React's <code class="ws-code">content</code> prop). Wraps at
+                                  18.75rem.</span
                                 >
                               </td>
                             </tr>
@@ -209,31 +235,34 @@
                               </td>
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  >Where the bubble sits relative to its container. Default
+                                  >Side of the trigger the bubble sits on. Default
                                   <code class="ws-code">top</code>.</span
                                 >
                               </td>
                             </tr>
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">visible</code></span>
+                                <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
                               </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  >Adds <code class="ws-code">pf-m-visible</code> — keeps the tooltip shown without a
-                                  trigger. Used in demos.</span
+                                  >DOM id on the tip; the trigger gets
+                                  <code class="ws-code">{|aria-describedby={id}|}</code>. Recommended so assistive tech
+                                  links the two.</span
                                 >
                               </td>
                             </tr>
                           </tbody>
                         </table>
                         <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Divergence from PF React.</strong> PF React's Tooltip wraps a trigger element and
-                          manages show/hide on hover/focus via JS. Our runtime only renders the bubble; positioning is
-                          done with CSS in the demo wrapper and show/hide should be wired by the consumer — either via
-                          the browser's built-in <code class="ws-code">title</code> attribute (simplest, no JS) or a
-                          small Alpine x-data component listening for mouseenter/focusin on the trigger.
+                          <strong>Implementation.</strong> PF React uses Popper.js in a portal. We get the same
+                          behaviour with a tiny <code class="ws-code">phaTooltip()</code> Alpine component (hover/focus
+                          toggling with PF's 300ms delay) plus CSS that positions the bubble 15px from the trigger and
+                          sets a high <code class="ws-code">z-index</code> so it sits above neighbouring content — no
+                          Popper, no portal. Load <code class="ws-code">tooltip.js</code> +
+                          <code class="ws-code">tooltip.css</code>
+                          on the page.
                         </p>
                       </div>
 

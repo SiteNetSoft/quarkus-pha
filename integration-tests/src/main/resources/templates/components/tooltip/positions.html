@@ -1,0 +1,7 @@
+{! position = top | bottom | left | right — the tip sits on that side of the trigger, 15px away. !}
+<div style="display: flex; gap: 3.5rem; flex-wrap: wrap; justify-content: center; padding: 3.5rem">
+  {#include components/feedback/tooltip id="tt-top" position="top"}{#trigger}<button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">Top</span></button>{/trigger}{#tip}Top tooltip{/tip}{/include}
+  {#include components/feedback/tooltip id="tt-right" position="right"}{#trigger}<button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">Right</span></button>{/trigger}{#tip}Right tooltip{/tip}{/include}
+  {#include components/feedback/tooltip id="tt-bottom" position="bottom"}{#trigger}<button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">Bottom</span></button>{/trigger}{#tip}Bottom tooltip{/tip}{/include}
+  {#include components/feedback/tooltip id="tt-left" position="left"}{#trigger}<button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">Left</span></button>{/trigger}{#tip}Left tooltip{/tip}{/include}
+</div>
