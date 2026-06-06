@@ -168,6 +168,35 @@
                                 </li>
                                 <li class="pf-v6-c-jump-links__item ws-toc-item">
                                   <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#circle-buttons" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Circle buttons</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#button-types" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Button types</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#progress-login" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text"
+                                          >Progress button (login)</span
+                                        ></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
                                     ><a href="#favorite" class="pf-v6-c-button pf-m-link"
                                       ><span class="pf-v6-c-button__text"
                                         ><span class="pf-v6-c-jump-links__link-text">Favorite</span></span
@@ -344,7 +373,35 @@
                           icon button that reflects the current state via PF's stateful tokens.
                         </p>
                         {/description} {#content}{#include components/button/stateful /}{/content} {/include} {#include
-                        partials/example-card title="Favorite" slug="favorite" component="button"} {#description}
+                        partials/example-card title="Circle buttons" slug="circle-buttons" component="button"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          <code class="ws-code">circle=true</code> renders a circular icon-only button (<code
+                            class="ws-code"
+                            >pf-m-circle</code
+                          >). Combine it with any variant — including the stateful read / unread / attention states.
+                          Always pass <code class="ws-code">ariaLabel</code>.
+                        </p>
+                        {/description} {#content}{#include components/button/circle-buttons /}{/content} {/include}
+                        {#include partials/example-card title="Button types" slug="button-types" component="button"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          <code class="ws-code">type="submit"</code> / <code class="ws-code">"reset"</code> set the
+                          form-control behaviour of a <code class="ws-code">&lt;button&gt;</code>; the default is
+                          <code class="ws-code">"button"</code> (no implicit form action).
+                        </p>
+                        {/description} {#content}{#include components/button/button-types /}{/content} {/include}
+                        {#include partials/example-card title="Progress button (login demo)" slug="progress-login"
+                        component="button"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          A submit button that indicates progress while an HTMX request is in flight, then swaps in a
+                          success state. The endpoint is a server-side <strong>stub</strong> — credentials aren't
+                          checked and the read-only inputs can't be edited. HTMX makes the request; Alpine toggles
+                          <code class="ws-code">pf-m-in-progress</code> while it runs.
+                        </p>
+                        {/description} {#content}{#include components/button/progress-login /}{/content} {/include}
+                        {#include partials/example-card title="Favorite" slug="favorite" component="button"}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">favorite=true</code> turns the button into a star toggle.
                           <code class="ws-code">favorited=true</code> switches to the filled state — PF v6 cross-fades
@@ -457,6 +514,22 @@
                                     >Compact (<code class="ws-code">sm</code>) or call-to-action (<code class="ws-code"
                                       >lg</code
                                     >) sizing. Omit for the standard size.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">circle</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Renders a circular icon-only button (<code class="ws-code">pf-m-circle</code>).
+                                    Pair with <code class="ws-code">icon</code> +
+                                    <code class="ws-code">ariaLabel</code>.</span
                                   >
                                 </td>
                               </tr>

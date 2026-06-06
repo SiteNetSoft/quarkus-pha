@@ -74,4 +74,41 @@ test.describe("Button", () => {
       await expect(page.locator("#btn-cta-tertiary")).toHaveClass(/pf-m-lg/);
     });
   });
+
+  test.describe("Circle buttons", () => {
+    test("section heading and pf-m-circle modifier render", async ({ page }) => {
+      await expect(page.locator("#circle-buttons")).toBeVisible();
+      await expect(page.locator("#btn-circle-primary")).toHaveClass(/pf-m-circle/);
+      await expect(page.locator("#btn-circle-plain")).toHaveClass(/pf-m-circle/);
+      // icon-only — must carry an accessible name
+      await expect(page.locator("#btn-circle-primary")).toHaveAttribute("aria-label", /circle/);
+    });
+  });
+
+  test.describe("Button types", () => {
+    test("submit / reset / default types render", async ({ page }) => {
+      await expect(page.locator("#button-types")).toBeVisible();
+      await expect(page.locator("#btn-type-submit")).toHaveAttribute("type", "submit");
+      await expect(page.locator("#btn-type-reset")).toHaveAttribute("type", "reset");
+      await expect(page.locator("#btn-type-default")).toHaveAttribute("type", "button");
+    });
+  });
+
+  test.describe("Progress button (login demo)", () => {
+    test("clicking logs in via HTMX stub, then resets", async ({ page }) => {
+      await expect(page.locator("#progress-login")).toBeVisible();
+      const loginBtn = page.locator("#login-btn");
+      await expect(loginBtn).toHaveText(/Link account and log in/);
+
+      await loginBtn.click();
+      // server stub returns the success state (with a Reset button)
+      const reset = page.locator('#login-action button:has-text("Reset demo")');
+      await expect(reset).toBeVisible({ timeout: 5000 });
+      await expect(page.locator("#login-action")).toContainText(/Logged in as/);
+
+      // reset swaps the progress button back in
+      await reset.click();
+      await expect(page.locator("#login-btn")).toBeVisible({ timeout: 5000 });
+    });
+  });
 });
