@@ -1,0 +1,16 @@
+/* theme-selector.css — layout fix for the global theme switcher.
+   PatternFly's toggle group is built for a horizontal toolbar, where it sits in
+   a flex row and sizes to its content. The theme menu instead stacks three
+   toggle groups vertically inside a pf-v6-c-menu, so each group becomes a
+   block-level flex box that STRETCHES to fill the menu. The buttons then share
+   that fixed width via flex-shrink and wrap their labels — most visibly "High
+   contrast" onto two lines.
+
+   PatternFly's menu is width:auto (content-sized), so the cure is to stop the
+   labels from wrapping: with each button's min-content pinned to its full
+   label, the toggle group can no longer collapse, and the menu grows to the
+   widest row — matching patternfly.org, where the dropdown adapts to the
+   buttons. Scoped to .pha-theme-selector so other toggle groups are untouched. */
+.pha-theme-selector .pf-v6-c-toggle-group__button {
+  white-space: nowrap;
+}
