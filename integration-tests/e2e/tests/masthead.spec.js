@@ -5,11 +5,18 @@ test.describe("Masthead", () => {
     await page.goto("/components/masthead");
   });
 
-  test("page loads with all 2 example sections in ToC", async ({ page }) => {
-    await expect(page.locator("#basic")).toBeVisible();
-    await expect(page.locator("#basic")).toHaveText("Basic");
-    await expect(page.locator("#display-stack")).toBeVisible();
-    await expect(page.locator("#display-stack")).toHaveText("Display stack");
+  test("page loads with all 7 example sections in ToC", async ({ page }) => {
+    for (const slug of [
+      "basic",
+      "mixed-content",
+      "display-inline",
+      "display-stack",
+      "display-stack-inline-responsive",
+      "insets",
+      "custom-logo",
+    ]) {
+      await expect(page.locator(`#${slug}`)).toBeVisible();
+    }
   });
 
   test("page-level anchors are present", async ({ page }) => {
@@ -36,9 +43,7 @@ test.describe("Masthead", () => {
     });
 
     test("masthead has settings and help icon buttons", async ({ page }) => {
-      await expect(
-        page.locator(`${card} #mh-basic button[aria-label="Settings"]`)
-      ).toBeVisible();
+      await expect(page.locator(`${card} #mh-basic button[aria-label="Settings"]`)).toBeVisible();
       await expect(page.locator(`${card} #mh-basic button[aria-label="Help"]`)).toBeVisible();
     });
   });
@@ -56,6 +61,46 @@ test.describe("Masthead", () => {
 
     test("display-stack masthead has content row", async ({ page }) => {
       await expect(page.locator(`${card} #mh-stack .pf-v6-c-masthead__content`)).toBeVisible();
+    });
+  });
+
+  test.describe("Mixed content variant", () => {
+    const card = '[data-rendered-href="/components/masthead/mixed-content"]';
+
+    test("content flex row has primary, secondary and tertiary buttons", async ({ page }) => {
+      await expect(page.locator(`${card} #mh-mixed`)).toHaveClass(/pf-v6-c-masthead/);
+      await expect(page.locator(`${card} #mh-mixed-primary`)).toHaveClass(/pf-m-primary/);
+      await expect(page.locator(`${card} #mh-mixed-secondary`)).toHaveClass(/pf-m-secondary/);
+      await expect(page.locator(`${card} #mh-mixed-tertiary`)).toHaveClass(/pf-m-tertiary/);
+    });
+  });
+
+  test.describe("Display variants", () => {
+    test("display-inline has pf-m-display-inline", async ({ page }) => {
+      const card = '[data-rendered-href="/components/masthead/display-inline"]';
+      await expect(page.locator(`${card} #mh-inline`)).toHaveClass(/pf-m-display-inline/);
+    });
+
+    test("stack inline-responsive has both display modifiers", async ({ page }) => {
+      const card = '[data-rendered-href="/components/masthead/display-stack-inline-responsive"]';
+      await expect(page.locator(`${card} #mh-responsive`)).toHaveClass(/pf-m-display-stack/);
+      await expect(page.locator(`${card} #mh-responsive`)).toHaveClass(/pf-m-display-inline-on-lg/);
+    });
+
+    test("insets masthead carries inset modifiers", async ({ page }) => {
+      const card = '[data-rendered-href="/components/masthead/insets"]';
+      await expect(page.locator(`${card} #mh-insets`)).toHaveClass(/pf-m-inset-sm/);
+    });
+  });
+
+  test.describe("Custom logo variant", () => {
+    const card = '[data-rendered-href="/components/masthead/custom-logo"]';
+
+    test("logo is an anchor with an image and accessible name", async ({ page }) => {
+      const logo = page.locator(`${card} #mh-custom-logo a.pf-v6-c-masthead__logo`);
+      await expect(logo).toBeVisible();
+      await expect(logo).toHaveAttribute("aria-label", /PHA/);
+      await expect(logo.locator("svg")).toBeVisible();
     });
   });
 
