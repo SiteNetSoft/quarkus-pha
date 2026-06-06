@@ -23,6 +23,10 @@ public class DemoRoutes {
     @Inject
     Template dataManagementPage;
 
+    @Location("demos/empty-state")
+    @Inject
+    Template emptyStatePage;
+
     @Location("demos/settings")
     @Inject
     Template settingsPage;
@@ -60,6 +64,13 @@ public class DemoRoutes {
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance dataManagement() {
         return dataManagementPage.instance();
+    }
+
+    @GET
+    @Path("/empty-state")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance emptyState() {
+        return emptyStatePage.instance();
     }
 
     @GET
