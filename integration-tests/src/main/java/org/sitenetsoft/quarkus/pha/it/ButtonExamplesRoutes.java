@@ -43,6 +43,9 @@ public class ButtonExamplesRoutes {
         "button-with-count",
         "plain-with-no-padding",
         "stateful",
+        "circle-buttons",
+        "button-types",
+        "progress-login",
         "favorite",
         "settings",
         "hamburger"
