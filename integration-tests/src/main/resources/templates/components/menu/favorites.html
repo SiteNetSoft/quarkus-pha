@@ -1,0 +1,48 @@
+{! Items move between the Favorites group and the main list — Alpine owns the array;
+   the star button is PF's pf-m-favorite / pf-m-favorited button. !}
+<div
+  class="pf-v6-c-menu"
+  id="mn-favorites"
+  style="max-width: 300px"
+  x-data="{ items: [ { name: 'Item 1', desc: 'Description 1', fav: true }, { name: 'Item 2', desc: 'Description 2', fav: false }, { name: 'Item 3', desc: 'Description 3', fav: false } ] }"
+>
+  <div class="pf-v6-c-menu__content">
+    <section class="pf-v6-c-menu__group" x-show="items.some(function (i) { return i.fav; })">
+      <h1 class="pf-v6-c-menu__group-title">Favorites</h1>
+      <ul class="pf-v6-c-menu__list" role="menu">
+        <template x-for="it in items.filter(function (i) { return i.fav; })" :key="'fav-' + it.name">
+          <li role="none" class="pf-v6-c-menu__list-item">
+            <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+              <span class="pf-v6-c-menu__item-main">
+                <span class="pf-v6-c-menu__item-text" x-text="it.name"></span>
+                <span class="pf-v6-c-menu__item-description" x-text="it.desc"></span>
+              </span>
+            </button>
+            <button class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action pf-m-favorite pf-m-favorited" type="button" :aria-label="'Unfavorite ' + it.name" @click="it.fav = false">
+              <span class="pf-v6-c-menu__item-action-icon">{icons:svg('fa:star').raw}</span>
+            </button>
+          </li>
+        </template>
+      </ul>
+    </section>
+    <hr class="pf-v6-c-divider" x-show="items.some(function (i) { return i.fav; })" />
+    <section class="pf-v6-c-menu__group">
+      <h1 class="pf-v6-c-menu__group-title">All items</h1>
+      <ul class="pf-v6-c-menu__list" role="menu">
+        <template x-for="it in items" :key="it.name">
+          <li role="none" class="pf-v6-c-menu__list-item">
+            <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+              <span class="pf-v6-c-menu__item-main">
+                <span class="pf-v6-c-menu__item-text" x-text="it.name"></span>
+                <span class="pf-v6-c-menu__item-description" x-text="it.desc"></span>
+              </span>
+            </button>
+            <button class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action pf-m-favorite" type="button" :class="{ 'pf-m-favorited': it.fav }" :aria-label="(it.fav ? 'Unfavorite ' : 'Favorite ') + it.name" @click="it.fav = !it.fav">
+              <span class="pf-v6-c-menu__item-action-icon">{icons:svg('fa:star').raw}</span>
+            </button>
+          </li>
+        </template>
+      </ul>
+    </section>
+  </div>
+</div>

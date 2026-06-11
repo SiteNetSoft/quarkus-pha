@@ -1,0 +1,36 @@
+<div x-data="{ sticky: true }">
+  <div class="pf-v6-c-check" style="margin-bottom: 0.5rem">
+    <input class="pf-v6-c-check__input" type="checkbox" id="tb-dynamic-sticky-check" x-model="sticky" />
+    <label class="pf-v6-c-check__label" for="tb-dynamic-sticky-check">Toolbar is sticky</label>
+  </div>
+  <div style="height: 220px; overflow-y: auto; border: 1px solid var(--pf-t--global--border--color--default)" tabindex="0">
+    <div class="pf-v6-c-toolbar" id="tb-dynamic-sticky" :class="{ 'pf-m-sticky': sticky }">
+      <div class="pf-v6-c-toolbar__content">
+        <div class="pf-v6-c-toolbar__content-section">
+        <div class="pf-v6-c-toolbar__item">
+          <div class="pf-v6-c-text-input-group">
+            <div class="pf-v6-c-text-input-group__main pf-m-icon">
+              <span class="pf-v6-c-text-input-group__text">
+                <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+                <input class="pf-v6-c-text-input-group__text-input" type="search" placeholder="Search" aria-label="Search" />
+              </span>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <p style="padding: 0.5rem 1rem">Scrollable row 1</p>
+    <p style="padding: 0.5rem 1rem">Scrollable row 2</p>
+    <p style="padding: 0.5rem 1rem">Scrollable row 3</p>
+    <p style="padding: 0.5rem 1rem">Scrollable row 4</p>
+    <p style="padding: 0.5rem 1rem">Scrollable row 5</p>
+    <p style="padding: 0.5rem 1rem">Scrollable row 6</p>
+    <p style="padding: 0.5rem 1rem">Scrollable row 7</p>
+    <p style="padding: 0.5rem 1rem">Scrollable row 8</p>
+    <p style="padding: 0.5rem 1rem">Scrollable row 9</p>
+    <p style="padding: 0.5rem 1rem">Scrollable row 10</p>
+    <p style="padding: 0.5rem 1rem">Scrollable row 11</p>
+    <p style="padding: 0.5rem 1rem">Scrollable row 12</p>
+  </div>
+</div>

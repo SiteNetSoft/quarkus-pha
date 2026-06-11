@@ -1,0 +1,24 @@
+{! Inline (non-toast) dynamic group — buttons append/remove alerts in a live region.
+   Covers PF's dynamic / async / multiple-dynamic group sections, which differ only in
+   what React state triggers the append. !}
+<div x-data="{ alerts: [], counter: 0 }" id="al-dynamic-groups-demo">
+  <div class="pf-v6-l-flex pf-m-space-items-sm" style="margin-bottom: 1rem">
+    <button class="pf-v6-c-button pf-m-secondary" type="button"
+      @click="counter++; alerts.push({ id: counter, title: 'Dynamic alert ' + counter })">
+      <span class="pf-v6-c-button__text">Add alert</span>
+    </button>
+    <button class="pf-v6-c-button pf-m-secondary" type="button" :disabled="alerts.length === 0" @click="alerts = []">
+      <span class="pf-v6-c-button__text">Remove all</span>
+    </button>
+  </div>
+  <ul class="pf-v6-c-alert-group" aria-live="polite" aria-atomic="false">
+    <template x-for="a in alerts" :key="a.id">
+      <li class="pf-v6-c-alert-group__item">
+        <div class="pf-v6-c-alert pf-m-info pf-m-inline">
+          <div class="pf-v6-c-alert__icon">{icons:svg('fa:circle-info').raw}</div>
+          <p class="pf-v6-c-alert__title"><span class="pf-screen-reader">info alert:</span> <span x-text="a.title"></span></p>
+        </div>
+      </li>
+    </template>
+  </ul>
+</div>

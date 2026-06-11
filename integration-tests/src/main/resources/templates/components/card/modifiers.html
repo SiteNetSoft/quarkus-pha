@@ -1,0 +1,31 @@
+<div x-data="{ compact: false, large: false, fullHeight: false, plain: false }" id="cd-modifiers">
+  <div class="pf-v6-l-flex pf-m-space-items-lg" style="margin-bottom: 1rem">
+    <div class="pf-v6-c-check">
+      <input class="pf-v6-c-check__input" type="checkbox" id="cd-mod-compact" x-model="compact" />
+      <label class="pf-v6-c-check__label" for="cd-mod-compact">compact</label>
+    </div>
+    <div class="pf-v6-c-check">
+      <input class="pf-v6-c-check__input" type="checkbox" id="cd-mod-large" x-model="large" />
+      <label class="pf-v6-c-check__label" for="cd-mod-large">display-lg</label>
+    </div>
+    <div class="pf-v6-c-check">
+      <input class="pf-v6-c-check__input" type="checkbox" id="cd-mod-full-height" x-model="fullHeight" />
+      <label class="pf-v6-c-check__label" for="cd-mod-full-height">full-height</label>
+    </div>
+    <div class="pf-v6-c-check">
+      <input class="pf-v6-c-check__input" type="checkbox" id="cd-mod-plain" x-model="plain" />
+      <label class="pf-v6-c-check__label" for="cd-mod-plain">plain</label>
+    </div>
+  </div>
+  <div style="height: 15rem; max-width: 400px">
+    <div
+      class="pf-v6-c-card"
+      id="cd-modifiers-card"
+      :class="{ 'pf-m-compact': compact, 'pf-m-display-lg': large, 'pf-m-full-height': fullHeight, 'pf-m-plain': plain }"
+    >
+      <div class="pf-v6-c-card__title"><h2 class="pf-v6-c-card__title-text">Card title</h2></div>
+      <div class="pf-v6-c-card__body">Toggle the checkboxes to apply the card modifiers.</div>
+      <div class="pf-v6-c-card__footer">Footer</div>
+    </div>
+  </div>
+</div>

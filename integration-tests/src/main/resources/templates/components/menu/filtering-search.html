@@ -1,0 +1,32 @@
+<div class="pf-v6-c-menu" id="mn-filtering-search" style="max-width: 260px" x-data="{ q: '' }">
+  <div class="pf-v6-c-menu__search">
+    <div class="pf-v6-c-text-input-group">
+      <div class="pf-v6-c-text-input-group__main pf-m-icon">
+        <span class="pf-v6-c-text-input-group__text">
+          <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+          <input class="pf-v6-c-text-input-group__text-input" type="text" x-model="q" placeholder="Search" aria-label="Search menu items" />
+        </span>
+      </div>
+    </div>
+  </div>
+  <hr class="pf-v6-c-divider" />
+  <div class="pf-v6-c-menu__content">
+    <ul class="pf-v6-c-menu__list" role="menu">
+      <li role="none" class="pf-v6-c-menu__list-item" x-show="'Action 1'.toLowerCase().indexOf(q.toLowerCase()) !== -1">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Action 1</span></span>
+        </button>
+      </li>
+      <li role="none" class="pf-v6-c-menu__list-item" x-show="'Action 2'.toLowerCase().indexOf(q.toLowerCase()) !== -1">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Action 2</span></span>
+        </button>
+      </li>
+      <li role="none" class="pf-v6-c-menu__list-item" x-show="'Action 3'.toLowerCase().indexOf(q.toLowerCase()) !== -1">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Action 3</span></span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>

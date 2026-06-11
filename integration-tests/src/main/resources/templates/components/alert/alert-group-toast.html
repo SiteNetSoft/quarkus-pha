@@ -1,0 +1,29 @@
+{! Toast alerts stack in a fixed pf-m-toast group. Buttons append; the X removes. !}
+<div x-data="{ alerts: [], counter: 0,
+    add(variant) { this.counter++; this.alerts.push({ id: this.counter, variant: variant, title: variant.charAt(0).toUpperCase() + variant.slice(1) + ' toast ' + this.counter }); } }"
+  id="al-group-toast-demo">
+  <div class="pf-v6-l-flex pf-m-space-items-sm">
+    <button class="pf-v6-c-button pf-m-secondary" type="button" @click="add('success')"><span class="pf-v6-c-button__text">Add success toast</span></button>
+    <button class="pf-v6-c-button pf-m-secondary" type="button" @click="add('info')"><span class="pf-v6-c-button__text">Add info toast</span></button>
+    <button class="pf-v6-c-button pf-m-secondary pf-m-danger" type="button" @click="add('danger')"><span class="pf-v6-c-button__text">Add danger toast</span></button>
+  </div>
+  <ul class="pf-v6-c-alert-group pf-m-toast" aria-live="polite" aria-atomic="false">
+    <template x-for="a in alerts" :key="a.id">
+      <li class="pf-v6-c-alert-group__item">
+        <div class="pf-v6-c-alert" :class="'pf-m-' + a.variant">
+          <div class="pf-v6-c-alert__icon">
+            <span x-show="a.variant === 'success'">{icons:svg('fa:circle-check').raw}</span>
+            <span x-show="a.variant === 'info'" x-cloak>{icons:svg('fa:circle-info').raw}</span>
+            <span x-show="a.variant === 'danger'" x-cloak>{icons:svg('fa:exclamation-circle').raw}</span>
+          </div>
+          <p class="pf-v6-c-alert__title"><span class="pf-screen-reader" x-text="a.variant + ' alert:'"></span> <span x-text="a.title"></span></p>
+          <div class="pf-v6-c-alert__action">
+            <button class="pf-v6-c-button pf-m-plain" type="button" :aria-label="'Close ' + a.title" @click="alerts = alerts.filter(function (x) { return x.id !== a.id; })">
+              <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+            </button>
+          </div>
+        </div>
+      </li>
+    </template>
+  </ul>
+</div>

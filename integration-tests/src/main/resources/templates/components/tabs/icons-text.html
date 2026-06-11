@@ -1,0 +1,28 @@
+<div x-data="{ active: 'it1' }">
+  {#include components/navigation/tabs id="tabs-icons-text" ariaLabel="Tabs with icons and text"}{#content}
+  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'it1' ? 'pf-m-current' : ''">
+    <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'it1'" :tabindex="active === 'it1' ? 0 : -1" @click="active = 'it1'">
+      <span class="pf-v6-c-tabs__item-icon">{icons:svg('fa:users').raw}</span><span class="pf-v6-c-tabs__item-text">Users</span>
+    </button>
+  </li>
+  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'it2' ? 'pf-m-current' : ''">
+    <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'it2'" :tabindex="active === 'it2' ? 0 : -1" @click="active = 'it2'">
+      <span class="pf-v6-c-tabs__item-icon">{icons:svg('fa:cube').raw}</span><span class="pf-v6-c-tabs__item-text">Containers</span>
+    </button>
+  </li>
+  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'it3' ? 'pf-m-current' : ''">
+    <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'it3'" :tabindex="active === 'it3' ? 0 : -1" @click="active = 'it3'">
+      <span class="pf-v6-c-tabs__item-icon">{icons:svg('fa:database').raw}</span><span class="pf-v6-c-tabs__item-text">Database</span>
+    </button>
+  </li>
+  {/content}{/include}
+  <section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === 'it1'" x-cloak>
+    <div class="pf-v6-c-tab-content__body">Users panel content</div>
+  </section>
+  <section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === 'it2'" x-cloak>
+    <div class="pf-v6-c-tab-content__body">Containers panel content</div>
+  </section>
+  <section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === 'it3'" x-cloak>
+    <div class="pf-v6-c-tab-content__body">Database panel content</div>
+  </section>
+</div>

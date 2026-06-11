@@ -1,0 +1,54 @@
+<div x-data="{ active: 'hc1' }">
+  <div class="pf-v6-c-tabs" id="tabs-help-and-close">
+    <ul class="pf-v6-c-tabs__list" role="tablist" aria-label="Tabs with help and close actions">
+      <li role="presentation" class="pf-v6-c-tabs__item pf-m-action" :class="active === 'hc1' ? 'pf-m-current' : ''" x-data="{ help: false }" style="position: relative">
+        <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'hc1'" @click="active = 'hc1'">
+          <span class="pf-v6-c-tabs__item-text">Users</span>
+        </button>
+        <span class="pf-v6-c-tabs__item-action">
+          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="More info for Users" :aria-expanded="help.toString()" @click="help = !help">
+            <span class="pf-v6-c-button__icon"><span class="pf-v6-c-tabs__item-action-icon">{icons:svg('fa:circle-question').raw}</span></span>
+          </button>
+            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close Users">
+              <span class="pf-v6-c-button__icon"><span class="pf-v6-c-tabs__item-action-icon">{icons:svg('fa:xmark').raw}</span></span>
+            </button>
+        </span>
+        <div x-show="help" x-cloak @click.outside="help = false" style="position: absolute; top: 100%; left: 0; z-index: 200; width: 240px">
+          <div class="pf-v6-c-popover pf-m-bottom" role="dialog" aria-label="Users help">
+            <div class="pf-v6-c-popover__arrow"></div>
+            <div class="pf-v6-c-popover__content">
+              <div class="pf-v6-c-popover__body">Helpful information about the Users tab.</div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li role="presentation" class="pf-v6-c-tabs__item pf-m-action" :class="active === 'hc2' ? 'pf-m-current' : ''" x-data="{ help: false }" style="position: relative">
+        <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'hc2'" @click="active = 'hc2'">
+          <span class="pf-v6-c-tabs__item-text">Containers</span>
+        </button>
+        <span class="pf-v6-c-tabs__item-action">
+          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="More info for Containers" :aria-expanded="help.toString()" @click="help = !help">
+            <span class="pf-v6-c-button__icon"><span class="pf-v6-c-tabs__item-action-icon">{icons:svg('fa:circle-question').raw}</span></span>
+          </button>
+            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close Containers">
+              <span class="pf-v6-c-button__icon"><span class="pf-v6-c-tabs__item-action-icon">{icons:svg('fa:xmark').raw}</span></span>
+            </button>
+        </span>
+        <div x-show="help" x-cloak @click.outside="help = false" style="position: absolute; top: 100%; left: 0; z-index: 200; width: 240px">
+          <div class="pf-v6-c-popover pf-m-bottom" role="dialog" aria-label="Containers help">
+            <div class="pf-v6-c-popover__arrow"></div>
+            <div class="pf-v6-c-popover__content">
+              <div class="pf-v6-c-popover__body">Helpful information about the Containers tab.</div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === 'hc1'" x-cloak>
+    <div class="pf-v6-c-tab-content__body">Users panel</div>
+  </section>
+  <section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === 'hc2'" x-cloak>
+    <div class="pf-v6-c-tab-content__body">Containers panel</div>
+  </section>
+</div>

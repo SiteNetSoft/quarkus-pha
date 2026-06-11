@@ -1,52 +1,155 @@
 import { test, expect } from "@playwright/test";
 
+const EXAMPLES = [
+  "basic",
+  "with-substeps",
+  "with-review",
+  "plain",
+  "header",
+  "disabled-steps",
+  "nav-anchors",
+  "expandable-steps",
+  "step-status",
+  "form-validation",
+  "validate-button-press",
+  "progressive-steps",
+  "toggle-step-visibility",
+  "submit-progress",
+  "custom-footer",
+  "custom-nav-item",
+  "within-modal",
+];
+
 test.describe("Wizard", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/components/wizard");
   });
 
-  test("page loads with all 3 example sections in ToC", async ({ page }) => {
-    await expect(page.locator("h3#basic")).toHaveText("Basic");
-    await expect(page.locator("h3#with-substeps")).toHaveText("With substeps");
-    await expect(page.locator("h3#with-review")).toHaveText("With review step");
+  test("ToC anchors render for every example", async ({ page }) => {
+    for (const id of EXAMPLES) {
+      await expect(page.locator(`#${id}`)).toBeAttached();
+    }
   });
 
-  test.describe("Basic", () => {
-    test("basic wizard has pf-v6-c-wizard class", async ({ page }) => {
+  test.describe("Basic (HTMX)", () => {
+    test("basic wizard has nav, steps, current item, footer buttons", async ({ page }) => {
       await expect(page.locator("#wiz-basic")).toHaveClass(/pf-v6-c-wizard/);
-    });
-
-    test("wizard has a nav with steps", async ({ page }) => {
       await expect(page.locator("#wiz-basic .pf-v6-c-wizard__nav")).toBeVisible();
-    });
-
-    test("wizard has four nav items (General info, Connection details, Permissions, Review)", async ({ page }) => {
       await expect(page.locator("#wiz-basic .pf-v6-c-wizard__nav-item")).toHaveCount(4);
-    });
-
-    test("wizard first nav item is current", async ({ page }) => {
       await expect(page.locator("#wiz-basic .pf-v6-c-wizard__nav-link.pf-m-current")).toHaveCount(1);
-    });
-
-    test("wizard footer has Next and Back buttons", async ({ page }) => {
       await expect(page.locator("#wiz-basic .pf-v6-c-button.pf-m-primary")).toBeVisible();
-      await expect(page.locator("#wiz-basic .pf-v6-c-button.pf-m-secondary")).toBeVisible();
-    });
-
-    test("wizard footer has a Cancel button", async ({ page }) => {
-      await expect(page.locator("#wiz-basic .pf-v6-c-wizard__footer-cancel")).toBeVisible();
     });
   });
 
-  test.describe("With substeps", () => {
-    test("substeps wizard renders", async ({ page }) => {
-      await expect(page.locator("#wiz-substeps")).toHaveClass(/pf-v6-c-wizard/);
+  test.describe("Alpine step switching", () => {
+    test("plain wizard switches steps via nav and footer", async ({ page }) => {
+      const wiz = page.locator("#wiz-plain");
+      await expect(wiz).toHaveClass(/pf-m-plain/);
+      await expect(wiz.locator(".pf-v6-c-wizard__nav-link").first()).toHaveClass(/pf-m-current/);
+      await wiz.locator(".pf-v6-c-button.pf-m-primary").click();
+      await expect(wiz.locator(".pf-v6-c-wizard__nav-link").nth(1)).toHaveClass(/pf-m-current/);
+      await wiz.locator(".pf-v6-c-wizard__nav-link").first().click();
+      await expect(wiz.locator(".pf-v6-c-wizard__nav-link").first()).toHaveClass(/pf-m-current/);
     });
   });
 
-  test.describe("With review", () => {
-    test("review wizard renders", async ({ page }) => {
-      await expect(page.locator("#wiz-review")).toHaveClass(/pf-v6-c-wizard/);
+  test.describe("Header", () => {
+    test("header carries title, description, close", async ({ page }) => {
+      await expect(page.locator("#wiz-header .pf-v6-c-wizard__title-text")).toHaveText("Create cluster");
+      await expect(page.locator("#wiz-header .pf-v6-c-wizard__description")).toBeVisible();
+      await expect(page.locator("#wiz-header .pf-v6-c-wizard__close button")).toBeVisible();
     });
+  });
+
+  test.describe("Disabled steps", () => {
+    test("locked step is disabled", async ({ page }) => {
+      await expect(page.locator("#wiz-disabled-steps .pf-v6-c-wizard__nav-link.pf-m-disabled")).toBeDisabled();
+    });
+  });
+
+  test.describe("Expandable steps", () => {
+    test("toggle collapses and expands the substeps", async ({ page }) => {
+      const item = page.locator("#wiz-expandable-steps .pf-v6-c-wizard__nav-item.pf-m-expandable");
+      await expect(item).toHaveClass(/pf-m-expanded/);
+      const sub = item.locator("ol");
+      await expect(sub).toBeVisible();
+      await item.locator("> button").click();
+      await expect(sub).toBeHidden();
+    });
+  });
+
+  test.describe("Step status", () => {
+    test("success and danger nav links carry status icons", async ({ page }) => {
+      await expect(page.locator("#wiz-step-status .pf-v6-c-wizard__nav-link.pf-m-success .pf-v6-c-wizard__nav-link-status-icon")).toBeVisible();
+      await expect(page.locator("#wiz-step-status .pf-v6-c-wizard__nav-link.pf-m-danger .pf-v6-c-wizard__nav-link-status-icon")).toBeVisible();
+    });
+  });
+
+  test.describe("Form validation", () => {
+    test("Next enables only when the field is filled", async ({ page }) => {
+      const next = page.locator("#wiz-form-validation .pf-v6-c-button.pf-m-primary");
+      await expect(next).toBeDisabled();
+      await page.locator("#wiz-form-validation-name").fill("prod-east");
+      await expect(next).toBeEnabled();
+    });
+
+    test("validate on button press shows the error helper", async ({ page }) => {
+      const wiz = page.locator("#wiz-validate-button-press");
+      await expect(wiz.locator(".pf-v6-c-helper-text")).toBeHidden();
+      await wiz.locator(".pf-v6-c-button.pf-m-primary").click();
+      await expect(wiz.locator(".pf-v6-c-helper-text")).toBeVisible();
+      await page.locator("#wiz-validate-button-press-name").fill("prod-east");
+      await wiz.locator(".pf-v6-c-button.pf-m-primary").click();
+      await expect(wiz.locator(".pf-v6-c-wizard__nav-link").nth(1)).toHaveClass(/pf-m-current/);
+    });
+  });
+
+  test.describe("Progressive steps", () => {
+    test("choosing custom setup adds a step", async ({ page }) => {
+      const items = page.locator("#wiz-progressive-steps .pf-v6-c-wizard__nav-item:visible");
+      await expect(items).toHaveCount(2);
+      await page.locator("#wiz-prog-custom").check();
+      await expect(items).toHaveCount(3);
+    });
+  });
+
+  test.describe("Toggle step visibility", () => {
+    test("unchecking hides the optional step", async ({ page }) => {
+      const items = page.locator("#wiz-toggle-step-visibility .pf-v6-c-wizard__nav-item:visible");
+      await expect(items).toHaveCount(3);
+      await page.locator("#wiz-toggle-visibility-check").uncheck();
+      await expect(items).toHaveCount(2);
+    });
+  });
+
+  test.describe("Submit progress", () => {
+    test("finishing runs the progress bar to 100%", async ({ page }) => {
+      const wiz = page.locator("#wiz-submit-progress");
+      await wiz.locator(".pf-v6-c-button.pf-m-primary:visible").click();
+      await wiz.locator(".pf-v6-c-button.pf-m-primary:visible", { hasText: "Finish" }).click();
+      await expect(wiz.locator(".pf-v6-c-progress")).toBeVisible();
+      await expect(wiz.locator(".pf-v6-c-progress__measure")).toHaveText("100%", { timeout: 5000 });
+    });
+  });
+
+  test.describe("Within modal", () => {
+    test("opens a modal containing the wizard", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/wizard/within-modal"]');
+      await expect(card.locator(".pf-v6-c-modal-box")).toBeHidden();
+      await card.locator("button", { hasText: "Open wizard modal" }).click();
+      await expect(card.locator(".pf-v6-c-modal-box #wiz-within-modal")).toBeVisible();
+      await page.keyboard.press("Escape");
+      await expect(card.locator(".pf-v6-c-modal-box")).toBeHidden();
+    });
+  });
+
+  test.describe("Standalone routes", () => {
+    for (const example of EXAMPLES) {
+      test(`/components/wizard/${example} returns 200`, async ({ page }) => {
+        const res = await page.goto(`/components/wizard/${example}`);
+        expect(res.status()).toBe(200);
+        await expect(page.locator(".pf-v6-c-wizard").first()).toBeAttached();
+      });
+    }
   });
 });

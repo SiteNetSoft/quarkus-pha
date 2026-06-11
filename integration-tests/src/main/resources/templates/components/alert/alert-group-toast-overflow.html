@@ -1,0 +1,30 @@
+{! Max 4 toasts shown; the rest collapse behind a "View N more" overflow button. !}
+<div x-data="{ alerts: [], counter: 0,
+    add() { this.counter++; this.alerts.push({ id: this.counter, variant: 'info', title: 'Info toast ' + this.counter }); } }"
+  id="al-group-toast-overflow-demo">
+  <button class="pf-v6-c-button pf-m-secondary" type="button" @click="add()"><span class="pf-v6-c-button__text">Add toast</span></button>
+  <ul class="pf-v6-c-alert-group pf-m-toast" aria-live="polite" aria-atomic="false">
+    <template x-for="a in alerts.slice(0, 4)" :key="a.id">
+      <li class="pf-v6-c-alert-group__item">
+        <div class="pf-v6-c-alert" :class="'pf-m-' + a.variant">
+          <div class="pf-v6-c-alert__icon">
+            <span x-show="a.variant === 'success'">{icons:svg('fa:circle-check').raw}</span>
+            <span x-show="a.variant === 'info'" x-cloak>{icons:svg('fa:circle-info').raw}</span>
+            <span x-show="a.variant === 'danger'" x-cloak>{icons:svg('fa:exclamation-circle').raw}</span>
+          </div>
+          <p class="pf-v6-c-alert__title"><span class="pf-screen-reader" x-text="a.variant + ' alert:'"></span> <span x-text="a.title"></span></p>
+          <div class="pf-v6-c-alert__action">
+            <button class="pf-v6-c-button pf-m-plain" type="button" :aria-label="'Close ' + a.title" @click="alerts = alerts.filter(function (x) { return x.id !== a.id; })">
+              <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+            </button>
+          </div>
+        </div>
+      </li>
+    </template>
+    <li class="pf-v6-c-alert-group__item" x-show="alerts.length > 4" x-cloak>
+      <button class="pf-v6-c-alert-group__overflow-button" type="button" @click="alerts = alerts.slice(alerts.length - 4)">
+        View <span x-text="alerts.length - 4"></span> more
+      </button>
+    </li>
+  </ul>
+</div>

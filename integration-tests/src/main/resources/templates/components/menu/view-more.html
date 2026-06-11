@@ -1,0 +1,33 @@
+<div class="pf-v6-c-menu" id="mn-view-more" style="max-width: 260px" x-data="{ extra: 0 }">
+  <div class="pf-v6-c-menu__content">
+    <ul class="pf-v6-c-menu__list" role="menu">
+      <li role="none" class="pf-v6-c-menu__list-item">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Action 1</span></span>
+        </button>
+      </li>
+      <li role="none" class="pf-v6-c-menu__list-item">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Action 2</span></span>
+        </button>
+      </li>
+      <li role="none" class="pf-v6-c-menu__list-item">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Action 3</span></span>
+        </button>
+      </li>
+      <template x-for="n in extra" :key="n">
+        <li role="none" class="pf-v6-c-menu__list-item">
+          <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+            <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text" x-text="'Loaded action ' + n"></span></span>
+          </button>
+        </li>
+      </template>
+      <li role="none" class="pf-v6-c-menu__list-item pf-m-load" x-show="extra === 0">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="extra = 3">
+          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">View more</span></span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>

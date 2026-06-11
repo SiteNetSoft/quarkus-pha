@@ -1,0 +1,16 @@
+<div x-data="{ alerts: [], counter: 0 }">
+  <button class="pf-v6-c-button pf-m-secondary" type="button"
+    @click="counter++; alerts.push(counter); setTimeout(() => { alerts = alerts.slice(1) }, 8000)">
+    <span class="pf-v6-c-button__text">Add alert (disappears after 8s)</span>
+  </button>
+  <ul class="pf-v6-c-alert-group" id="al-timeout-group" aria-live="polite" aria-atomic="false" style="margin-top: 1rem">
+    <template x-for="a in alerts" :key="a">
+      <li class="pf-v6-c-alert-group__item">
+        <div class="pf-v6-c-alert pf-m-info pf-m-inline">
+          <div class="pf-v6-c-alert__icon">{icons:svg('fa:circle-info').raw}</div>
+          <p class="pf-v6-c-alert__title"><span class="pf-screen-reader">info alert:</span> This alert times out in 8 seconds.</p>
+        </div>
+      </li>
+    </template>
+  </ul>
+</div>

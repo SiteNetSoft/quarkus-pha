@@ -1,0 +1,10 @@
+<div style="display: flex; flex-direction: column; gap: 0.5rem">
+  {#include components/feedback/alert id="al-variation-full" variant="success" title="Success alert with everything" description="A description paragraph adds detail below the title." closable=true hasActionLinks=true}
+  {#actionLinks}
+  <button class="pf-v6-c-button pf-m-link pf-m-inline" type="button"><span class="pf-v6-c-button__text">View details</span></button>
+  <button class="pf-v6-c-button pf-m-link pf-m-inline" type="button"><span class="pf-v6-c-button__text">Ignore</span></button>
+  {/actionLinks}
+  {/include}
+  {#include components/feedback/alert id="al-variation-desc" variant="success" title="Success alert with description" description="Title plus description only." /}
+  {#include components/feedback/alert id="al-variation-plain-title" variant="success" title="Success alert title only" /}
+</div>

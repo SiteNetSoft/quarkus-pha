@@ -1,42 +1,134 @@
 import { test, expect } from "@playwright/test";
 
+const EXAMPLES = [
+  "basic",
+  "expanded",
+  "small",
+  "disabled",
+  "badge",
+  "settings",
+  "custom-icon",
+  "avatar-text",
+  "variant-styles",
+  "plain",
+  "primary",
+  "plain-circle",
+  "plain-text-label",
+  "split-checkbox",
+  "split-checkbox-text",
+  "split-checkbox-toggle-text",
+  "split-action",
+  "full-height",
+  "full-width",
+  "in-form",
+  "typeahead",
+  "status",
+  "placeholder",
+];
+
+const MODIFIERS = {
+  "mt-small": [/pf-m-small/],
+  "mt-settings": [/pf-m-settings/],
+  "mt-variant-primary": [/pf-m-primary/],
+  "mt-variant-secondary": [/pf-m-secondary/],
+  "mt-variant-danger": [/pf-m-danger/],
+  "mt-circle": [/pf-m-plain/, /pf-m-circle/],
+  "mt-plain-text": [/pf-m-plain/, /pf-m-text/],
+  "mt-split-check": [/pf-m-split-button/],
+  "mt-split-check-disabled": [/pf-m-split-button/, /pf-m-disabled/],
+  "mt-full-height": [/pf-m-full-height/],
+  "mt-full-width": [/pf-m-full-width/],
+  "mt-typeahead": [/pf-m-typeahead/],
+  "mt-status-success": [/pf-m-success/],
+  "mt-status-warning": [/pf-m-warning/],
+  "mt-status-danger": [/pf-m-danger/],
+  "mt-placeholder": [/pf-m-placeholder/],
+};
+
 test.describe("Menu Toggle", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/components/menu-toggle");
   });
 
-  test("page loads with all 4 section headings", async ({ page }) => {
-    await expect(page.locator("#basic")).toBeVisible();
-    await expect(page.locator("#primary")).toBeVisible();
-    await expect(page.locator("#plain")).toBeVisible();
-    await expect(page.locator("#expanded")).toBeVisible();
+  test("ToC anchors render for every example", async ({ page }) => {
+    for (const id of EXAMPLES) {
+      await expect(page.locator(`#${id}`)).toBeAttached();
+    }
+  });
+
+  test("modifier classes are applied", async ({ page }) => {
+    for (const [id, patterns] of Object.entries(MODIFIERS)) {
+      for (const pattern of patterns) {
+        await expect(page.locator(`#${id}`)).toHaveClass(pattern);
+      }
+    }
   });
 
   test.describe("Basic", () => {
-    test("has pf-v6-c-menu-toggle class", async ({ page }) => {
+    test("has pf-v6-c-menu-toggle class and text", async ({ page }) => {
       await expect(page.locator("#mt-basic")).toHaveClass(/pf-v6-c-menu-toggle/);
-    });
-
-    test("has toggle text", async ({ page }) => {
       await expect(page.locator("#mt-basic .pf-v6-c-menu-toggle__text")).toBeVisible();
     });
   });
 
-  test.describe("Primary", () => {
-    test("has class pf-m-primary", async ({ page }) => {
-      await expect(page.locator("#mt-primary")).toHaveClass(/pf-m-primary/);
-    });
-  });
-
-  test.describe("Plain", () => {
-    test("has class pf-m-plain", async ({ page }) => {
-      await expect(page.locator("#mt-plain")).toHaveClass(/pf-m-plain/);
-    });
-  });
-
   test.describe("Expanded", () => {
-    test("has class pf-m-expanded", async ({ page }) => {
+    test("has pf-m-expanded and aria-expanded", async ({ page }) => {
       await expect(page.locator("#mt-expanded")).toHaveClass(/pf-m-expanded/);
+      await expect(page.locator("#mt-expanded")).toHaveAttribute("aria-expanded", "true");
     });
+  });
+
+  test.describe("Badge", () => {
+    test("count badge renders inside the toggle", async ({ page }) => {
+      await expect(page.locator("#mt-badge .pf-v6-c-menu-toggle__count .pf-v6-c-badge")).toHaveText("4 selected");
+    });
+  });
+
+  test.describe("Avatar and text", () => {
+    test("avatar image renders in the icon slot", async ({ page }) => {
+      await expect(page.locator("#mt-avatar .pf-v6-c-menu-toggle__icon img.pf-v6-c-avatar")).toBeVisible();
+      await expect(page.locator("#mt-avatar-disabled")).toBeDisabled();
+    });
+  });
+
+  test.describe("Split toggles", () => {
+    test("split checkbox toggle has a check and a caret button", async ({ page }) => {
+      await expect(page.locator("#mt-split-check .pf-v6-c-check__input")).toBeVisible();
+      await expect(page.locator("#mt-split-check .pf-v6-c-menu-toggle__button")).toHaveCount(1);
+      await expect(page.locator("#mt-split-check-disabled .pf-v6-c-check__input")).toBeDisabled();
+    });
+
+    test("split action toggle has action + caret buttons", async ({ page }) => {
+      await expect(page.locator("#mt-split-action .pf-v6-c-menu-toggle__button")).toHaveCount(2);
+    });
+
+    test("labeled checkbox shows its label", async ({ page }) => {
+      await expect(page.locator("#mt-split-check-text .pf-v6-c-check__label")).toHaveText("10 selected");
+    });
+  });
+
+  test.describe("Status", () => {
+    test("status toggles carry a status icon", async ({ page }) => {
+      for (const id of ["mt-status-success", "mt-status-warning", "mt-status-danger"]) {
+        await expect(page.locator(`#${id} .pf-v6-c-menu-toggle__status-icon`)).toBeVisible();
+      }
+    });
+  });
+
+  test.describe("Typeahead", () => {
+    test("contains a plain text-input-group and a caret button", async ({ page }) => {
+      await expect(page.locator("#mt-typeahead .pf-v6-c-text-input-group.pf-m-plain input")).toBeVisible();
+      await expect(page.locator("#mt-typeahead .pf-v6-c-menu-toggle__button")).toBeVisible();
+    });
+  });
+
+  test.describe("Standalone routes", () => {
+    for (const example of EXAMPLES) {
+      test(`/components/menu-toggle/${example} returns 200`, async ({ page }) => {
+        const res = await page.goto(`/components/menu-toggle/${example}`);
+        expect(res.status()).toBe(200);
+        await expect(page.locator(".pf-v6-c-menu-toggle").first()).toBeAttached();
+      });
+    }
   });
 });

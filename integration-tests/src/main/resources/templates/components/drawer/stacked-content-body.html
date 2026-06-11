@@ -1,0 +1,46 @@
+<div
+  class="pf-v6-c-drawer"
+  id="dr-stacked-content-body"
+  x-data="{ expanded: false }"
+  :class="{ 'pf-m-expanded': expanded }"
+  style="min-height: 280px"
+>
+  <div class="pf-v6-c-drawer__main">
+    <div class="pf-v6-c-drawer__content">
+      <div class="pf-v6-c-drawer__body">
+        <button
+          class="pf-v6-c-button pf-m-primary"
+          type="button"
+          :aria-expanded="expanded.toString()"
+          @click="expanded = !expanded; if (expanded) $nextTick(() => $refs.focus.focus())"
+        >
+          <span class="pf-v6-c-button__text">Toggle drawer</span>
+        </button>
+        content-body
+      </div>
+      <div class="pf-v6-c-drawer__body pf-m-padding">content-body with padding</div>
+      <div class="pf-v6-c-drawer__body">content-body</div>
+    </div>
+    <div class="pf-v6-c-drawer__panel" x-show="expanded" x-cloak :aria-hidden="(!expanded).toString()">
+      <div class="pf-v6-c-drawer__head">
+        <h3 class="pf-v6-c-title pf-m-2xl" :tabindex="expanded ? '0' : '-1'" x-ref="focus">
+          Drawer panel header in a Title
+        </h3>
+        <div class="pf-v6-c-drawer__actions">
+          <div class="pf-v6-c-drawer__close">
+            <button
+              class="pf-v6-c-button pf-m-plain"
+              type="button"
+              aria-label="Close drawer panel"
+              @click="expanded = false"
+            >
+              <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="pf-v6-c-drawer__body pf-m-no-padding">Drawer panel body with no padding</div>
+      <div class="pf-v6-c-drawer__body">Drawer panel body</div>
+    </div>
+  </div>
+</div>

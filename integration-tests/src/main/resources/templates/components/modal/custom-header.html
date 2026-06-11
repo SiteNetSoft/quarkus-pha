@@ -1,0 +1,28 @@
+<div x-data="{ open: false }">
+  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = true"><span class="pf-v6-c-button__text">Open custom-header modal</span></button>
+  <div class="pf-v6-c-backdrop" x-show="open" x-cloak @keydown.escape.window="open = false">
+    <div class="pf-v6-c-bullseye">
+      <div class="pf-v6-c-modal-box pf-m-md" id="mo-custom-header" role="dialog" aria-modal="true" aria-label="Custom header modal">
+        <div class="pf-v6-c-modal-box__close">
+          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="open = false">
+            <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+          </button>
+        </div>
+        <header class="pf-v6-c-modal-box__header">
+          <div class="pf-v6-c-modal-box__header-main">
+            <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+              <img class="pf-v6-c-brand" src="/web/images/quarkus-pha-icon.svg" alt="" style="--pf-v6-c-brand--Height: 28px" />
+              <h2 class="pf-v6-c-content--h2" style="margin: 0">Custom header content</h2>
+            </div>
+          </div>
+        </header>
+        <div class="pf-v6-c-modal-box__body">
+          <p>The header is hand-composed instead of using the standard title element.</p>
+        </div>
+        <footer class="pf-v6-c-modal-box__footer">
+          <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = false"><span class="pf-v6-c-button__text">Confirm</span></button>
+        </footer>
+      </div>
+    </div>
+  </div>
+</div>

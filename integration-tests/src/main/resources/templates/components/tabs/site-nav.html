@@ -1,0 +1,24 @@
+<div x-data="{ active: 'sn1' }">
+  {#include components/navigation/tabs id="tabs-site-nav" nav=true pageInsets=true noBorderBottom=true ariaLabel="Site navigation tabs"}{#content}
+  <li class="pf-v6-c-tabs__item" :class="active === 'sn1' ? 'pf-m-current' : ''">
+    <a href="#" class="pf-v6-c-tabs__link" :aria-current="active === 'sn1' ? 'page' : false" @click.prevent="active = 'sn1'">
+      <span class="pf-v6-c-tabs__item-text">Home</span>
+    </a>
+  </li>
+  <li class="pf-v6-c-tabs__item" :class="active === 'sn2' ? 'pf-m-current' : ''">
+    <a href="#" class="pf-v6-c-tabs__link" :aria-current="active === 'sn2' ? 'page' : false" @click.prevent="active = 'sn2'">
+      <span class="pf-v6-c-tabs__item-text">Documentation</span>
+    </a>
+  </li>
+  <li class="pf-v6-c-tabs__item" :class="active === 'sn3' ? 'pf-m-current' : ''">
+    <a href="#" class="pf-v6-c-tabs__link" :aria-current="active === 'sn3' ? 'page' : false" @click.prevent="active = 'sn3'">
+      <span class="pf-v6-c-tabs__item-text">Community</span>
+    </a>
+  </li>
+  <li class="pf-v6-c-tabs__item" :class="active === 'sn4' ? 'pf-m-current' : ''">
+    <a href="#" class="pf-v6-c-tabs__link" :aria-current="active === 'sn4' ? 'page' : false" @click.prevent="active = 'sn4'">
+      <span class="pf-v6-c-tabs__item-text">Support</span>
+    </a>
+  </li>
+  {/content}{/include}
+</div>

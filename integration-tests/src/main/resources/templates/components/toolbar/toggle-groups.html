@@ -1,0 +1,61 @@
+{! The filter group collapses behind the filter-icon toggle below the lg breakpoint
+   (pf-m-show-on-lg); the toggle opens the expandable content row. Covers PF's component-
+   and consumer-managed toggle group sections — the split is a React state question. !}
+<div class="pf-v6-c-toolbar" id="tb-toggle-groups" x-data="{ open: false }">
+  <div class="pf-v6-c-toolbar__content">
+    <div class="pf-v6-c-toolbar__content-section">
+      <div class="pf-v6-c-toolbar__group pf-m-toggle-group pf-m-show-on-lg">
+        <div class="pf-v6-c-toolbar__toggle">
+          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Show filters" :aria-expanded="open.toString()" @click="open = !open">
+            <span class="pf-v6-c-button__icon">{icons:svg('fa:filter').raw}</span>
+          </button>
+        </div>
+        <div class="pf-v6-c-toolbar__item">
+          <div class="pf-v6-c-text-input-group">
+            <div class="pf-v6-c-text-input-group__main pf-m-icon">
+              <span class="pf-v6-c-text-input-group__text">
+                <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+                <input class="pf-v6-c-text-input-group__text-input" type="search" placeholder="Search" aria-label="Search" />
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="pf-v6-c-toolbar__group pf-m-filter-group">
+        <div class="pf-v6-c-toolbar__item">
+          <button class="pf-v6-c-menu-toggle" type="button" aria-expanded="false">
+            <span class="pf-v6-c-menu-toggle__text">Status</span>
+            <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
+          </button>
+        </div>
+        <div class="pf-v6-c-toolbar__item">
+          <button class="pf-v6-c-menu-toggle" type="button" aria-expanded="false">
+            <span class="pf-v6-c-menu-toggle__text">Risk</span>
+            <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
+          </button>
+        </div>
+        </div>
+      </div>
+      <div class="pf-v6-c-toolbar__group pf-m-align-end">
+        <div class="pf-v6-c-toolbar__item">
+          <button class="pf-v6-c-button pf-m-primary" type="button"><span class="pf-v6-c-button__text">Create</span></button>
+        </div>
+      </div>
+    </div>
+    <div class="pf-v6-c-toolbar__expandable-content" :class="{ 'pf-m-expanded': open }">
+      <div class="pf-v6-c-toolbar__group pf-m-filter-group">
+        <div class="pf-v6-c-toolbar__item">
+          <button class="pf-v6-c-menu-toggle" type="button" aria-expanded="false">
+            <span class="pf-v6-c-menu-toggle__text">Status</span>
+            <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
+          </button>
+        </div>
+        <div class="pf-v6-c-toolbar__item">
+          <button class="pf-v6-c-menu-toggle" type="button" aria-expanded="false">
+            <span class="pf-v6-c-menu-toggle__text">Risk</span>
+            <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
