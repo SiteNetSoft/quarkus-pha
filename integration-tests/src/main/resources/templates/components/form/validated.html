@@ -1,0 +1,28 @@
+{! Validates as you type — numeric input flips the control and helper to success. !}
+<form class="pf-v6-c-form" id="form-validated" novalidate style="max-width: 480px" x-data="{ age: '', valid() { return this.age !== '' && !isNaN(this.age) } }">
+  <div class="pf-v6-c-form__group">
+    <div class="pf-v6-c-form__group-label">
+      <label class="pf-v6-c-form__label" for="form-validated-age"><span class="pf-v6-c-form__label-text">Age</span></label>
+    </div>
+    <div class="pf-v6-c-form__group-control">
+      <span class="pf-v6-c-form-control" :class="age === '' ? '' : (valid() ? 'pf-m-success' : 'pf-m-error')">
+        <input type="text" id="form-validated-age" x-model="age" :aria-invalid="(age !== '' && !valid()).toString()" />
+      </span>
+      <div class="pf-v6-c-form__helper-text">
+        <div class="pf-v6-c-helper-text" aria-live="polite">
+          <div class="pf-v6-c-helper-text__item" x-show="age === ''">
+            <span class="pf-v6-c-helper-text__item-text">Enter your age.</span>
+          </div>
+          <div class="pf-v6-c-helper-text__item pf-m-success" x-show="age !== '' && valid()" x-cloak>
+            <span class="pf-v6-c-helper-text__item-icon">{icons:svg('fa:circle-check').raw}</span>
+            <span class="pf-v6-c-helper-text__item-text">Looks good.</span>
+          </div>
+          <div class="pf-v6-c-helper-text__item pf-m-error" x-show="age !== '' && !valid()" x-cloak>
+            <span class="pf-v6-c-helper-text__item-icon">{icons:svg('fa:circle-exclamation').raw}</span>
+            <span class="pf-v6-c-helper-text__item-text">Age must be a number.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
