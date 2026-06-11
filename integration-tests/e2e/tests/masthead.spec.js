@@ -100,7 +100,7 @@ test.describe("Masthead", () => {
       const logo = page.locator(`${card} #mh-custom-logo a.pf-v6-c-masthead__logo`);
       await expect(logo).toBeVisible();
       await expect(logo).toHaveAttribute("aria-label", /PHA/);
-      await expect(logo.locator("svg")).toBeVisible();
+      await expect(logo.locator("img.pf-v6-c-brand")).toBeVisible();
     });
   });
 
