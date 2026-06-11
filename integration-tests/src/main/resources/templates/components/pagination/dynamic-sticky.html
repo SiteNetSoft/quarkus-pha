@@ -1,0 +1,49 @@
+{! Covers PF's dynamic sticky top and bottom sections — toggling applies pf-m-sticky live. !}
+<div x-data="{ sticky: true }">
+  <div class="pf-v6-c-check" style="margin-bottom: 0.5rem">
+    <input class="pf-v6-c-check__input" type="checkbox" id="pg-dynamic-sticky-check" x-model="sticky" />
+    <label class="pf-v6-c-check__label" for="pg-dynamic-sticky-check">Pagination is sticky</label>
+  </div>
+  <div style="height: 220px; overflow-y: auto; border: 1px solid var(--pf-t--global--border--color--default)" tabindex="0">
+    <div class="pf-v6-c-pagination" id="pg-dynamic-sticky" :class="{ 'pf-m-sticky': sticky }">
+      <div class="pf-v6-c-pagination__total-items"><b>1 - 10</b> of <b>523</b></div>
+      <div class="pf-v6-c-pagination__nav" role="navigation" aria-label="Pagination">
+    <div class="pf-v6-c-pagination__nav-control pf-m-first">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to first page">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angles-left').raw}</span>
+      </button>
+    </div>
+    <div class="pf-v6-c-pagination__nav-control pf-m-prev">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to previous page">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-left').raw}</span>
+      </button>
+    </div>
+    <div class="pf-v6-c-pagination__nav-page-select">
+      <span aria-hidden="true">Page <b>1</b> of <b>53</b></span>
+    </div>
+    <div class="pf-v6-c-pagination__nav-control pf-m-next">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to next page">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-right').raw}</span>
+      </button>
+    </div>
+    <div class="pf-v6-c-pagination__nav-control pf-m-last">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to last page">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angles-right').raw}</span>
+      </button>
+    </div>
+  </div>
+    </div>
+  <p style="padding: 0.5rem 1rem">Row 1</p>
+  <p style="padding: 0.5rem 1rem">Row 2</p>
+  <p style="padding: 0.5rem 1rem">Row 3</p>
+  <p style="padding: 0.5rem 1rem">Row 4</p>
+  <p style="padding: 0.5rem 1rem">Row 5</p>
+  <p style="padding: 0.5rem 1rem">Row 6</p>
+  <p style="padding: 0.5rem 1rem">Row 7</p>
+  <p style="padding: 0.5rem 1rem">Row 8</p>
+  <p style="padding: 0.5rem 1rem">Row 9</p>
+  <p style="padding: 0.5rem 1rem">Row 10</p>
+  <p style="padding: 0.5rem 1rem">Row 11</p>
+  <p style="padding: 0.5rem 1rem">Row 12</p>
+  </div>
+</div>
