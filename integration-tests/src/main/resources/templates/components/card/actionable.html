@@ -1,0 +1,29 @@
+<div class="pf-v6-l-gallery pf-m-gutter" id="cd-actionable" x-data="{ clicks: 0 }">
+  <div class="pf-v6-c-card pf-m-clickable" id="cd-actionable-1">
+    <div class="pf-v6-c-card__header">
+      <div class="pf-v6-c-card__selectable-actions">
+        <button class="pf-v6-c-card__clickable-action" type="button" aria-labelledby="cd-actionable-1-title" @click="clicks++"></button>
+      </div>
+      <div class="pf-v6-c-card__title" id="cd-actionable-1-title"><h2 class="pf-v6-c-card__title-text">First card</h2></div>
+    </div>
+    <div class="pf-v6-c-card__body">Performs an action on click — clicked <span x-text="clicks">0</span> times.</div>
+  </div>
+  <div class="pf-v6-c-card pf-m-clickable" id="cd-actionable-2">
+    <div class="pf-v6-c-card__header">
+      <div class="pf-v6-c-card__selectable-actions">
+        <a class="pf-v6-c-card__clickable-action" href="#" aria-labelledby="cd-actionable-2-title"></a>
+      </div>
+      <div class="pf-v6-c-card__title" id="cd-actionable-2-title"><h2 class="pf-v6-c-card__title-text">Second card</h2></div>
+    </div>
+    <div class="pf-v6-c-card__body">This whole card is a link.</div>
+  </div>
+  <div class="pf-v6-c-card pf-m-clickable pf-m-disabled" id="cd-actionable-3">
+    <div class="pf-v6-c-card__header">
+      <div class="pf-v6-c-card__selectable-actions">
+        <button class="pf-v6-c-card__clickable-action" type="button" aria-labelledby="cd-actionable-3-title" disabled></button>
+      </div>
+      <div class="pf-v6-c-card__title" id="cd-actionable-3-title"><h2 class="pf-v6-c-card__title-text">Third card</h2></div>
+    </div>
+    <div class="pf-v6-c-card__body">This clickable card is disabled.</div>
+  </div>
+</div>

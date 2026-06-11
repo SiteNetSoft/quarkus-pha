@@ -1,0 +1,50 @@
+{! PF React's "uncontrolled nav" lets the Page manage the sidebar state internally. Server-side the
+   equivalent is local Alpine state on the page root — nothing outside the component reads or sets it. !}
+<div
+  class="pf-v6-c-page"
+  id="pg-uncontrolled-nav"
+  x-data="{ sidebarOpen: true }"
+  style="min-height: 360px; border: 1px solid var(--pf-t--global--border--color--default)"
+>
+  <header class="pf-v6-c-masthead">
+    <div class="pf-v6-c-masthead__main">
+      <span class="pf-v6-c-masthead__toggle">
+        <button
+          class="pf-v6-c-button pf-m-plain"
+          type="button"
+          aria-label="Global navigation"
+          :aria-expanded="sidebarOpen.toString()"
+          @click="sidebarOpen = !sidebarOpen"
+        >
+          <span class="pf-v6-c-button__icon">{icons:svg('fa:bars').raw}</span>
+        </button>
+      </span>
+      <div class="pf-v6-c-masthead__brand"><strong>Logo</strong></div>
+    </div>
+  </header>
+  <div
+    class="pf-v6-c-page__sidebar"
+    :class="{ 'pf-m-expanded': sidebarOpen, 'pf-m-collapsed': !sidebarOpen }"
+    x-show="sidebarOpen"
+  >
+    <div class="pf-v6-c-page__sidebar-body">
+      <nav class="pf-v6-c-nav" aria-label="Global">
+        <ul class="pf-v6-c-nav__list">
+          <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link pf-m-current" aria-current="page">Nav item 1</a></li>
+          <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link">Nav item 2</a></li>
+          <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link">Nav item 3</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="pf-v6-c-page__main-container">
+    <div class="pf-v6-c-page__main" tabindex="-1">
+      <section class="pf-v6-c-page__main-section">
+        <div class="pf-v6-c-page__main-body">
+          The sidebar state is owned entirely by the page shell (local Alpine state) — no outside component controls
+          it. Click the burger to toggle.
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

@@ -52,6 +52,24 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#show-hide-password" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Show/hide password</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#header-utilities" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With header utilities</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -100,10 +118,29 @@
                       </div>
                       {#include partials/example-card title="Basic" slug="basic" component="login-page"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Username + password form with a forgot-password link. Hand-rendered to avoid the runtime
-                        template's multiple insert slots colliding with example-card.
+                        The full PF login page — brand header, credentials form with an &quot;Invalid login
+                        credentials&quot; helper on empty submit, remember-me, social login links, sign-up/forgot band,
+                        and page footer. Pair with the
+                        <a href="/components/background-image">Background image</a> component for the full-screen
+                        backdrop. Hand-rendered to avoid the runtime template's multiple insert slots colliding with
+                        example-card.
                       </p>
-                      {/description} {#content}{#include components/login-page/basic /}{/content} {/include}
+                      {/description} {#content}{#include components/login-page/basic /}{/content} {/include} {#include
+                      partials/example-card title="Show/hide password" slug="show-hide-password" component="login-page"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The password field sits in an input group with a plain eye-icon button; Alpine flips the input
+                        between <code class="ws-code">type=&quot;password&quot;</code> and
+                        <code class="ws-code">type=&quot;text&quot;</code>.
+                      </p>
+                      {/description} {#content}{#include components/login-page/show-hide-password /}{/content}
+                      {/include} {#include partials/example-card title="With header utilities" slug="header-utilities"
+                      component="login-page"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">__main-header-utilities</code> hosts a language-select dropdown (menu
+                        toggle + menu) in the login card header.
+                      </p>
+                      {/description} {#content}{#include components/login-page/header-utilities /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

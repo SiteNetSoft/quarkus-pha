@@ -1,0 +1,24 @@
+<div class="pf-v6-l-gallery pf-m-gutter" id="cd-single-selectable" x-data="{ chosen: '' }">
+  <div class="pf-v6-c-card pf-m-selectable" id="cd-single-selectable-1" :class="{ 'pf-m-selected': chosen === 'first' }">
+    <div class="pf-v6-c-card__header">
+      <div class="pf-v6-c-card__selectable-actions">
+        <div class="pf-v6-c-radio pf-m-standalone">
+          <input class="pf-v6-c-radio__input" type="radio" name="cd-single-selectable-radio" id="cd-single-selectable-1-radio" aria-labelledby="cd-single-selectable-1-title" value="first" x-model="chosen" />
+        </div>
+      </div>
+      <div class="pf-v6-c-card__title" id="cd-single-selectable-1-title"><h2 class="pf-v6-c-card__title-text">First card</h2></div>
+    </div>
+    <div class="pf-v6-c-card__body">Only one card in this set can be selected.</div>
+  </div>
+  <div class="pf-v6-c-card pf-m-selectable" id="cd-single-selectable-2" :class="{ 'pf-m-selected': chosen === 'second' }">
+    <div class="pf-v6-c-card__header">
+      <div class="pf-v6-c-card__selectable-actions">
+        <div class="pf-v6-c-radio pf-m-standalone">
+          <input class="pf-v6-c-radio__input" type="radio" name="cd-single-selectable-radio" id="cd-single-selectable-2-radio" aria-labelledby="cd-single-selectable-2-title" value="second" x-model="chosen" />
+        </div>
+      </div>
+      <div class="pf-v6-c-card__title" id="cd-single-selectable-2-title"><h2 class="pf-v6-c-card__title-text">Second card</h2></div>
+    </div>
+    <div class="pf-v6-c-card__body">Radios share a name, so selection is exclusive.</div>
+  </div>
+</div>

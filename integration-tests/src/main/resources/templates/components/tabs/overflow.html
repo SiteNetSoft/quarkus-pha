@@ -1,0 +1,80 @@
+{! pf-m-scrollable + functional scroll buttons. Alpine tracks scroll position to
+   enable/disable each button — mirrors PF's horizontal overflow tabs. !}
+<div style="max-width: 480px">
+  <div
+    class="pf-v6-c-tabs pf-m-scrollable"
+    id="tabs-overflow"
+    x-data="{ active: 1, atStart: true, atEnd: false,
+      update() { var l = $refs.list; this.atStart = l.scrollLeft <= 0; this.atEnd = l.scrollLeft + l.clientWidth >= l.scrollWidth - 1; },
+      scroll(dir) { $refs.list.scrollBy({ left: dir * 200, behavior: 'smooth' }) } }"
+    x-init="update()"
+  >
+    <div class="pf-v6-c-tabs__scroll-button">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Scroll left" :disabled="atStart" @click="scroll(-1)">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-left').raw}</span>
+      </button>
+    </div>
+    <ul class="pf-v6-c-tabs__list" role="tablist" aria-label="Overflow tabs" x-ref="list" @scroll.debounce.50ms="update()">
+      <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 1 ? 'pf-m-current' : ''">
+        <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 1" @click="active = 1">
+          <span class="pf-v6-c-tabs__item-text">Tab item 1</span>
+        </button>
+      </li>
+      <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 2 ? 'pf-m-current' : ''">
+        <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 2" @click="active = 2">
+          <span class="pf-v6-c-tabs__item-text">Tab item 2</span>
+        </button>
+      </li>
+      <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 3 ? 'pf-m-current' : ''">
+        <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 3" @click="active = 3">
+          <span class="pf-v6-c-tabs__item-text">Tab item 3</span>
+        </button>
+      </li>
+      <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 4 ? 'pf-m-current' : ''">
+        <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 4" @click="active = 4">
+          <span class="pf-v6-c-tabs__item-text">Tab item 4</span>
+        </button>
+      </li>
+      <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 5 ? 'pf-m-current' : ''">
+        <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 5" @click="active = 5">
+          <span class="pf-v6-c-tabs__item-text">Tab item 5</span>
+        </button>
+      </li>
+      <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 6 ? 'pf-m-current' : ''">
+        <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 6" @click="active = 6">
+          <span class="pf-v6-c-tabs__item-text">Tab item 6</span>
+        </button>
+      </li>
+      <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 7 ? 'pf-m-current' : ''">
+        <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 7" @click="active = 7">
+          <span class="pf-v6-c-tabs__item-text">Tab item 7</span>
+        </button>
+      </li>
+      <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 8 ? 'pf-m-current' : ''">
+        <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 8" @click="active = 8">
+          <span class="pf-v6-c-tabs__item-text">Tab item 8</span>
+        </button>
+      </li>
+      <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 9 ? 'pf-m-current' : ''">
+        <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 9" @click="active = 9">
+          <span class="pf-v6-c-tabs__item-text">Tab item 9</span>
+        </button>
+      </li>
+      <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 10 ? 'pf-m-current' : ''">
+        <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 10" @click="active = 10">
+          <span class="pf-v6-c-tabs__item-text">Tab item 10</span>
+        </button>
+      </li>
+      <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 11 ? 'pf-m-current' : ''">
+        <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 11" @click="active = 11">
+          <span class="pf-v6-c-tabs__item-text">Tab item 11</span>
+        </button>
+      </li>
+    </ul>
+    <div class="pf-v6-c-tabs__scroll-button">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Scroll right" :disabled="atEnd" @click="scroll(1)">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-right').raw}</span>
+      </button>
+    </div>
+  </div>
+</div>

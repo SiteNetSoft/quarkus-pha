@@ -1,0 +1,44 @@
+<div x-data="{ open: false, ddOpen: false, choice: 'Select an option' }">
+  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = true"><span class="pf-v6-c-button__text">Open modal with dropdown</span></button>
+  <div class="pf-v6-c-backdrop" x-show="open" x-cloak @keydown.escape.window="ddOpen ? ddOpen = false : open = false">
+    <div class="pf-v6-c-bullseye">
+      <div class="pf-v6-c-modal-box pf-m-md" id="mo-with-dropdown" role="dialog" aria-modal="true" aria-labelledby="mo-with-dropdown-title">
+        <div class="pf-v6-c-modal-box__close">
+          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="open = false">
+            <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+          </button>
+        </div>
+        <header class="pf-v6-c-modal-box__header">
+          <h2 class="pf-v6-c-modal-box__title" id="mo-with-dropdown-title"><span class="pf-v6-c-modal-box__title-text">With dropdown</span></h2>
+        </header>
+        <div class="pf-v6-c-modal-box__body" style="min-height: 12rem">
+          <div style="position: relative; display: inline-block">
+            <button class="pf-v6-c-menu-toggle" type="button" :class="ddOpen ? 'pf-m-expanded' : ''" :aria-expanded="ddOpen.toString()" @click="ddOpen = !ddOpen">
+              <span class="pf-v6-c-menu-toggle__text" x-text="choice">Select an option</span>
+              <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
+            </button>
+            <div class="pf-v6-c-menu" x-show="ddOpen" x-cloak @click.outside="ddOpen = false" style="position: absolute; top: 100%; left: 0; z-index: 600; min-width: 12rem">
+              <div class="pf-v6-c-menu__content">
+                <ul class="pf-v6-c-menu__list" role="menu">
+                  <li role="none" class="pf-v6-c-menu__list-item">
+                    <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="choice = 'Action 1'; ddOpen = false">
+                      <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Action 1</span></span>
+                    </button>
+                  </li>
+                  <li role="none" class="pf-v6-c-menu__list-item">
+                    <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="choice = 'Action 2'; ddOpen = false">
+                      <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Action 2</span></span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="pf-v6-c-modal-box__footer">
+          <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = false"><span class="pf-v6-c-button__text">Confirm</span></button>
+        </footer>
+      </div>
+    </div>
+  </div>
+</div>

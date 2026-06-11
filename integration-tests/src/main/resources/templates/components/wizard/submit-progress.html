@@ -1,0 +1,55 @@
+<div x-data="{ step: 1, submitting: false, progress: 0 }">
+  <div class="pf-v6-c-wizard" id="wiz-submit-progress">
+    <div class="pf-v6-c-wizard__outer-wrap">
+      <div class="pf-v6-c-wizard__inner-wrap">
+        <nav class="pf-v6-c-wizard__nav" aria-label="Steps">
+          <ol class="pf-v6-c-wizard__nav-list">
+<li class="pf-v6-c-wizard__nav-item">
+  <button type="button" class="pf-v6-c-wizard__nav-link" :class="{ 'pf-m-current': step === 1 }" :aria-current="step === 1 ? 'step' : false" @click="step = 1">
+    <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">Information</span></span>
+  </button>
+</li>
+<li class="pf-v6-c-wizard__nav-item">
+  <button type="button" class="pf-v6-c-wizard__nav-link" :class="{ 'pf-m-current': step === 2 }" :aria-current="step === 2 ? 'step' : false" @click="step = 2">
+    <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">Review</span></span>
+  </button>
+</li>
+          </ol>
+        </nav>
+        <div class="pf-v6-c-wizard__main">
+          <div class="pf-v6-c-wizard__main-body">
+<div x-show="step === 1" x-cloak>
+  <h2 class="pf-v6-c-content--h2">Information</h2>
+  <p>Information content.</p>
+</div>
+<div x-show="step === 2 && !submitting" x-cloak>
+  <h2 class="pf-v6-c-content--h2">Review</h2>
+  <p>Press Finish to submit.</p>
+</div>
+<div x-show="submitting" x-cloak>
+  <div class="pf-v6-c-progress" role="progressbar" :aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100" aria-label="Submission progress">
+    <div class="pf-v6-c-progress__description">Submitting configuration</div>
+    <div class="pf-v6-c-progress__status" aria-hidden="true">
+      <span class="pf-v6-c-progress__measure" x-text="progress + '%'">0%</span>
+    </div>
+    <div class="pf-v6-c-progress__bar"><div class="pf-v6-c-progress__indicator" :style="'width: ' + progress + '%'"></div></div>
+  </div>
+  <p x-show="progress === 100" style="margin-top: 1rem">Configuration submitted successfully.</p>
+</div>
+          </div>
+        </div>
+      </div>
+      <footer class="pf-v6-c-wizard__footer">
+<button type="button" class="pf-v6-c-button pf-m-primary" x-show="step === 1" @click="step = 2">
+  <span class="pf-v6-c-button__text">Next</span>
+</button>
+<button type="button" class="pf-v6-c-button pf-m-primary" x-show="step === 2" x-cloak :disabled="submitting" @click="submitting = true; progress = 0; var d = $data; var t = setInterval(function () { d.progress += 20; if (d.progress >= 100) clearInterval(t); }, 300)">
+  <span class="pf-v6-c-button__text">Finish</span>
+</button>
+<button type="button" class="pf-v6-c-button pf-m-secondary" :disabled="step === 1 || submitting" @click="step = 1">
+  <span class="pf-v6-c-button__text">Back</span>
+</button>
+      </footer>
+    </div>
+  </div>
+</div>

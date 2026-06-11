@@ -39,19 +39,41 @@ public class MiscExamplesRoutes {
         m.put("search-input",          Set.of("basic", "with-clear"));
         m.put("jump-links",            Set.of("horizontal", "vertical", "centered"));
         m.put("simple-list",           Set.of("basic", "grouped"));
-        m.put("alert",                 Set.of("variants", "with-description", "closable", "inline", "with-actions"));
+        m.put("alert",                 Set.of("variants", "variations", "with-description", "closable", "inline",
+                                               "with-actions", "timeout", "expandable", "truncated", "custom-icons",
+                                               "plain-inline", "static-live-region", "alert-group-static",
+                                               "alert-group-toast", "alert-group-toast-overflow", "dynamic-groups"));
         m.put("clipboard-copy",        Set.of("basic", "readonly", "expandable", "inline"));
-        m.put("card",                  Set.of("basic", "compact", "flat"));
+        m.put("card",                  Set.of("basic", "subtitle", "subtitle-actions", "secondary", "compact", "flat",
+                                               "modifiers", "header-images-actions", "title-inline-images-actions",
+                                               "header-without-title", "header-wraps", "heading-element",
+                                               "multiple-body-sections", "body-section-fills", "selectable",
+                                               "single-selectable", "actionable", "actionable-selectable",
+                                               "expandable", "expandable-with-icon", "with-dividers",
+                                               "single-selectable-tiles", "multi-selectable-tiles"));
         m.put("hint",                  Set.of("basic", "with-content"));
         m.put("expandable-section",    Set.of("collapsed", "expanded"));
         m.put("number-input",          Set.of("basic", "bounded", "with-unit", "disabled"));
-        m.put("description-list",      Set.of("basic", "fill-columns"));
+        m.put("description-list",      Set.of("basic", "term-help-text", "default-2-col", "default-3-col-on-lg",
+                                               "horizontal", "horizontal-custom-term-width", "horizontal-2-col",
+                                               "horizontal-3-col-on-lg", "compact", "compact-horizontal",
+                                               "fluid-horizontal", "fill-columns", "large-display-size",
+                                               "default-responsive-columns", "horizontal-responsive-columns",
+                                               "responsive-hori-vert-group", "default-auto-column-width",
+                                               "horizontal-auto-column-width", "default-inline-grid", "with-card",
+                                               "large-display-size-and-card", "display-size-card-3-col-lg",
+                                               "display-size-card-horizontal-term-width", "auto-fit",
+                                               "auto-fit-min-width", "auto-fit-min-width-responsive",
+                                               "icons-on-terms"));
         m.put("skip-to-content",       Set.of("basic", "custom-text"));
         m.put("empty-state",           Set.of("basic", "extra-small", "small", "large", "extra-large", "success", "spinner", "no-match", "no-icon", "with-actions"));
         m.put("pagination",            Set.of("basic", "compact"));
         m.put("code-block",            Set.of("basic", "with-copy"));
         m.put("progress-stepper",      Set.of("horizontal", "vertical", "compact"));
-        m.put("tabs",                  Set.of("basic", "box", "vertical"));
+        m.put("tabs",                  Set.of("basic", "box", "box-secondary", "vertical", "vertical-expandable",
+                                               "overflow", "inset", "page-insets", "icons-text", "subtabs",
+                                               "filled-with-icons", "nav-tabs", "nav-subtabs", "site-nav",
+                                               "content-body-padding", "dynamic", "help", "help-and-close"));
         m.put("popover",               Set.of("basic", "danger"));
         m.put("masthead",              Set.of("basic", "mixed-content", "display-inline", "display-stack",
                                                "display-stack-inline-responsive", "insets", "custom-logo"));
@@ -61,22 +83,46 @@ public class MiscExamplesRoutes {
         m.put("simple-file-upload",    Set.of("basic", "disabled"));
         m.put("overflow-menu",         Set.of("basic"));
         m.put("drag-and-drop",         Set.of("basic"));
-        m.put("login-page",            Set.of("basic"));
+        m.put("login-page",            Set.of("basic", "show-hide-password", "header-utilities"));
         m.put("notification-drawer",   Set.of("basic"));
-        m.put("drawer",                Set.of("basic", "static"));
-        m.put("toolbar",               Set.of("basic"));
-        m.put("modal",                 Set.of("basic", "sizes"));
+        m.put("drawer",                Set.of("basic", "panel-end", "panel-start", "panel-bottom", "basic-inline",
+                                               "inline-panel-end", "inline-panel-start", "stacked-content-body",
+                                               "modified-content-padding", "modified-panel-padding",
+                                               "additional-section", "static", "breakpoint", "resizable-end",
+                                               "resizable-start", "resizable-bottom", "resizable-inline",
+                                               "secondary-background", "focus-trap", "pill", "pill-inline"));
+        m.put("toolbar",               Set.of("basic", "items", "insets", "vertical", "sticky", "dynamic-sticky",
+                                               "groups", "color-variants", "toggle-groups", "with-filters",
+                                               "stacked", "content-wrap", "group-spacers", "item-spacers"));
+        m.put("modal",                 Set.of("basic", "scrollable", "with-description", "top-aligned", "sizes",
+                                               "custom-width", "custom-header", "no-header-footer", "title-icon",
+                                               "custom-title-icon", "with-dropdown", "with-help", "with-form"));
         m.put("multiple-file-upload",  Set.of("basic", "horizontal"));
         m.put("date-picker",           Set.of("basic", "with-value", "disabled"));
-        m.put("menu",                  Set.of("basic", "with-descriptions"));
-        m.put("menu-toggle",           Set.of("basic", "plain", "primary", "expanded", "disabled"));
+        m.put("menu",                  Set.of("basic", "with-icons", "with-actions", "with-links", "with-descriptions",
+                                               "item-checkbox", "footer", "separated-items", "titled-groups",
+                                               "favorites", "filtering-search", "option-single-select",
+                                               "option-multi-select", "scrollable", "scrollable-custom-height",
+                                               "view-more", "with-drilldown"));
+        m.put("menu-toggle",           Set.of("basic", "expanded", "small", "disabled", "badge", "settings",
+                                               "custom-icon", "avatar-text", "variant-styles", "plain", "primary",
+                                               "plain-circle", "plain-text-label", "split-checkbox",
+                                               "split-checkbox-text", "split-checkbox-toggle-text", "split-action",
+                                               "full-height", "full-width", "in-form", "typeahead", "status",
+                                               "placeholder"));
         m.put("notification-badge",    Set.of("read", "unread", "attention"));
-        m.put("page",                  Set.of("basic"));
+        m.put("page",                  Set.of("basic", "vertical-nav", "multiple-sidebar-body", "horizontal-nav",
+                                               "uncontrolled-nav", "filled-sections", "main-section-padding",
+                                               "main-section-variations", "group-section", "centered-section",
+                                               "plain-sections", "dynamic-sticky-section"));
         m.put("context-selector",      Set.of("basic"));
         m.put("dual-list-selector",    Set.of("basic"));
         m.put("calendar-month",        Set.of("basic"));
         m.put("dropdown",              Set.of("basic", "plain-kebab"));
-        m.put("select",                Set.of("single", "checkboxes"));
+        m.put("select",                Set.of("single", "option-variants", "grouped", "validation", "checkboxes",
+                                               "typeahead", "typeahead-creatable", "multi-typeahead",
+                                               "multi-typeahead-creatable", "multi-typeahead-checkbox", "view-more",
+                                               "footer"));
         m.put("application-launcher",  Set.of("basic"));
         m.put("options-menu",          Set.of("basic"));
         m.put("custom-menus",          Set.of("basic"));
@@ -84,7 +130,8 @@ public class MiscExamplesRoutes {
         m.put("password-strength",     Set.of("basic"));
         m.put("date-and-time-picker",  Set.of("basic"));
         m.put("time-picker",           Set.of("basic"));
-        m.put("navigation",            Set.of("vertical", "grouped"));
+        m.put("navigation",            Set.of("vertical", "grouped", "expandable", "expandable-third-level",
+                                               "mixed", "horizontal", "horizontal-subnav", "icons"));
         EXAMPLES = Map.copyOf(m);
     }
 

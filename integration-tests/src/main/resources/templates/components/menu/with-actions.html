@@ -1,0 +1,30 @@
+<div class="pf-v6-c-menu pf-m-plain" id="mn-actions" style="max-width: 260px">
+  <div class="pf-v6-c-menu__content">
+    <ul class="pf-v6-c-menu__list" role="menu">
+      <li role="none" class="pf-v6-c-menu__list-item">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Item 1</span></span>
+        </button>
+        <button class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action pf-m-favorite" type="button" aria-label="Favorite" x-data="{ fav: false }" :class="{ 'pf-m-favorited': fav }" @click="fav = !fav">
+          <span class="pf-v6-c-menu__item-action-icon">{icons:svg('fa:star').raw}</span>
+        </button>
+      </li>
+      <li role="none" class="pf-v6-c-menu__list-item">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Item 2</span></span>
+        </button>
+        <button class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action" type="button" aria-label="Copy">
+          <span class="pf-v6-c-menu__item-action-icon">{icons:svg('fa:clipboard').raw}</span>
+        </button>
+      </li>
+      <li role="none" class="pf-v6-c-menu__list-item">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Item 3</span></span>
+        </button>
+        <button class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action" type="button" aria-label="Notifications">
+          <span class="pf-v6-c-menu__item-action-icon">{icons:svg('fa:bell').raw}</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 {#include layouts/base} {#title}Drawer{/title} {#head}
 <script src="/web/js/alpine/components/code-example.js"></script>
+<script src="/web/js/alpine/components/drawer-resizable.js"></script>
 {/head} {#body}
 <div id="root">
   <div style="outline: none" tabindex="-1" id="ws-router">
@@ -55,9 +56,182 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#panel-end" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Panel at end</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#panel-start" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Panel at start</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#panel-bottom" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Panel on bottom</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#basic-inline" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Basic inline</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#inline-panel-end" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Inline panel at end</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#inline-panel-start" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Inline panel at start</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#stacked-content-body" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Stacked content body elements</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#modified-content-padding" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Modified content padding</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#modified-panel-padding" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Modified panel padding</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#additional-section" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Additional section</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#static" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">Static</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#breakpoint" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Breakpoint</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#resizable-end" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Resizable at end</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#resizable-start" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Resizable at start</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#resizable-bottom" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Resizable on bottom</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#resizable-inline" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Resizable on inline</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#secondary-background" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Secondary background</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#focus-trap" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With focus trap</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#pill" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Pill</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#pill-inline" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Pill inline</span></span
                                     ></a
                                   ></span
                                 >
@@ -114,12 +288,136 @@
                         else) to close. Alpine tracks the expanded flag.
                       </p>
                       {/description} {#content}{#include components/drawer/basic /}{/content} {/include} {#include
-                      partials/example-card title="Static" slug="static" component="drawer"} {#description}
+                      partials/example-card title="Panel at end" slug="panel-end" component="drawer"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The default position. On expand, focus moves to the panel header for keyboard and screen-reader
+                        users — mirrors PF's <code class="ws-code">onExpand</code> focus management.
+                      </p>
+                      {/description} {#content}{#include components/drawer/panel-end /}{/content} {/include} {#include
+                      partials/example-card title="Panel at start" slug="panel-start" component="drawer"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-panel-left</code> — the panel slides in from the start (left) edge.
+                      </p>
+                      {/description} {#content}{#include components/drawer/panel-start /}{/content} {/include} {#include
+                      partials/example-card title="Panel on bottom" slug="panel-bottom" component="drawer"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-panel-bottom</code> — the panel slides up from the bottom. The drawer
+                        needs an explicit height.
+                      </p>
+                      {/description} {#content}{#include components/drawer/panel-bottom /}{/content} {/include}
+                      {#include partials/example-card title="Basic inline" slug="basic-inline" component="drawer"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-inline</code> — the panel takes space from the content instead of
+                        overlapping it.
+                      </p>
+                      {/description} {#content}{#include components/drawer/basic-inline /}{/content} {/include}
+                      {#include partials/example-card title="Inline panel at end" slug="inline-panel-end"
+                      component="drawer"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Inline drawer with the default end position plus focus management on expand.
+                      </p>
+                      {/description} {#content}{#include components/drawer/inline-panel-end /}{/content} {/include}
+                      {#include partials/example-card title="Inline panel at start" slug="inline-panel-start"
+                      component="drawer"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-inline pf-m-panel-left</code> — inline drawer opening from the start
+                        edge.
+                      </p>
+                      {/description} {#content}{#include components/drawer/inline-panel-start /}{/content} {/include}
+                      {#include partials/example-card title="Stacked content body elements" slug="stacked-content-body"
+                      component="drawer"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Both the content and the panel can stack multiple
+                        <code class="ws-code">pf-v6-c-drawer__body</code> elements; padding is opt-in per body (<code
+                          class="ws-code"
+                          >pf-m-padding</code
+                        >
+                        / <code class="ws-code">pf-m-no-padding</code>).
+                      </p>
+                      {/description} {#content}{#include components/drawer/stacked-content-body /}{/content} {/include}
+                      {#include partials/example-card title="Modified content padding" slug="modified-content-padding"
+                      component="drawer"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Content bodies have no padding by default — <code class="ws-code">pf-m-padding</code> adds it.
+                      </p>
+                      {/description} {#content}{#include components/drawer/modified-content-padding /}{/content}
+                      {/include} {#include partials/example-card title="Modified panel padding"
+                      slug="modified-panel-padding" component="drawer"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Panel bodies are padded by default — <code class="ws-code">pf-m-no-padding</code> removes it.
+                      </p>
+                      {/description} {#content}{#include components/drawer/modified-panel-padding /}{/content}
+                      {/include} {#include partials/example-card title="Additional section above drawer content"
+                      slug="additional-section" component="drawer"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A <code class="ws-code">pf-v6-c-drawer__section</code> outside
+                        <code class="ws-code">__main</code> stays full-width — the panel never overlaps it.
+                      </p>
+                      {/description} {#content}{#include components/drawer/additional-section /}{/content} {/include}
+                      {#include partials/example-card title="Static" slug="static" component="drawer"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">static=true</code> — <code class="ws-code">pf-m-static</code> — panel is
                         permanently visible, no toggle.
                       </p>
-                      {/description} {#content}{#include components/drawer/static /}{/content} {/include}
+                      {/description} {#content}{#include components/drawer/static /}{/content} {/include} {#include
+                      partials/example-card title="Breakpoint" slug="breakpoint" component="drawer"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Panel width via <code class="ws-code">pf-m-width-33</code>; all width modifiers accept
+                        <code class="ws-code">-on-lg</code>-style breakpoint suffixes.
+                      </p>
+                      {/description} {#content}{#include components/drawer/breakpoint /}{/content} {/include} {#include
+                      partials/example-card title="Resizable at end" slug="resizable-end" component="drawer"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-resizable</code> + a splitter. Drag (or focus the splitter and press
+                        the arrow keys) to resize; the <code class="ws-code">phaDrawerResizable</code> Alpine factory
+                        updates the panel's flex-basis custom property.
+                      </p>
+                      {/description} {#content}{#include components/drawer/resizable-end /}{/content} {/include}
+                      {#include partials/example-card title="Resizable at start" slug="resizable-start"
+                      component="drawer"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Resizable panel on the start (left) edge.</p>
+                      {/description} {#content}{#include components/drawer/resizable-start /}{/content} {/include}
+                      {#include partials/example-card title="Resizable on bottom" slug="resizable-bottom"
+                      component="drawer"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Bottom panel with a horizontal splitter — resize with drag or the up/down arrow keys.
+                      </p>
+                      {/description} {#content}{#include components/drawer/resizable-bottom /}{/content} {/include}
+                      {#include partials/example-card title="Resizable on inline" slug="resizable-inline"
+                      component="drawer"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Inline + resizable — content reflows while dragging.
+                      </p>
+                      {/description} {#content}{#include components/drawer/resizable-inline /}{/content} {/include}
+                      {#include partials/example-card title="Panel with secondary background"
+                      slug="secondary-background" component="drawer"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-secondary</code> on the panel, content, or section switches that
+                        region to the secondary background color variant.
+                      </p>
+                      {/description} {#content}{#include components/drawer/secondary-background /}{/content} {/include}
+                      {#include partials/example-card title="With focus trap" slug="focus-trap" component="drawer"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        While open, Tab cycles inside the panel only (<code class="ws-code">PHA.trapFocus</code>);
+                        Escape closes it. The panel gets <code class="ws-code">role=&quot;dialog&quot;</code>.
+                      </p>
+                      {/description} {#content}{#include components/drawer/focus-trap /}{/content} {/include} {#include
+                      partials/example-card title="Pill" slug="pill" component="drawer"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-pill</code> — the panel floats over the content as a detached,
+                        rounded pill.
+                      </p>
+                      {/description} {#content}{#include components/drawer/pill /}{/content} {/include} {#include
+                      partials/example-card title="Pill inline" slug="pill-inline" component="drawer"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Pill styling combined with <code class="ws-code">pf-m-inline</code> — the rounded panel shares
+                        space with the content.
+                      </p>
+                      {/description} {#content}{#include components/drawer/pill-inline /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"
@@ -199,6 +497,16 @@
                           Alpine. Dispatch from an outside trigger by setting
                           <code class="ws-code">expanded = true</code> through a shared Alpine store or by re-rendering
                           the drawer with HTMX.
+                        </p>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Resizable panels.</strong> Load
+                          <code class="ws-code">/web/js/alpine/components/drawer-resizable.js</code> and use
+                          <code class="ws-code">x-data=&quot;phaDrawerResizable&quot;</code> with
+                          <code class="ws-code">data-position</code>, <code class="ws-code">data-default-size</code> and
+                          <code class="ws-code">data-min-size</code> on the drawer root. The splitter needs
+                          <code class="ws-code">role=&quot;separator&quot;</code> and wires
+                          <code class="ws-code">@pointerdown=&quot;startResize&quot;</code> /
+                          <code class="ws-code">@keydown=&quot;keyResize&quot;</code>.
                         </p>
                       </div>
                       <div class="pf-v6-l-stack__item">

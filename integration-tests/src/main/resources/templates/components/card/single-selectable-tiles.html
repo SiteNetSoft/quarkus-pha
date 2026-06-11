@@ -1,0 +1,26 @@
+<div class="pf-v6-l-gallery pf-m-gutter" id="cd-single-selectable-tiles" x-data="{ chosen: '' }">
+  <div class="pf-v6-c-card pf-m-selectable" id="cd-tile-1" :class="{ 'pf-m-selected': chosen === 'one' }">
+    <div class="pf-v6-c-card__header">
+      <div class="pf-v6-c-card__selectable-actions"><div class="pf-v6-c-radio pf-m-standalone"><input class="pf-v6-c-radio__input" type="radio" name="cd-tile-radio" id="cd-tile-1-input" aria-labelledby="cd-tile-1-title" value="one" x-model="chosen" /></div></div>
+      <div class="pf-v6-c-card__header-main">{icons:svg('fa:server').raw}</div>
+      <div class="pf-v6-c-card__title" id="cd-tile-1-title"><h2 class="pf-v6-c-card__title-text">Tile one</h2></div>
+    </div>
+    <div class="pf-v6-c-card__body">Pick exactly one tile.</div>
+  </div>
+  <div class="pf-v6-c-card pf-m-selectable" id="cd-tile-2" :class="{ 'pf-m-selected': chosen === 'two' }">
+    <div class="pf-v6-c-card__header">
+      <div class="pf-v6-c-card__selectable-actions"><div class="pf-v6-c-radio pf-m-standalone"><input class="pf-v6-c-radio__input" type="radio" name="cd-tile-radio" id="cd-tile-2-input" aria-labelledby="cd-tile-2-title" value="two" x-model="chosen" /></div></div>
+      <div class="pf-v6-c-card__header-main">{icons:svg('fa:server').raw}</div>
+      <div class="pf-v6-c-card__title" id="cd-tile-2-title"><h2 class="pf-v6-c-card__title-text">Tile two</h2></div>
+    </div>
+    <div class="pf-v6-c-card__body">Radio-backed selectable card.</div>
+  </div>
+  <div class="pf-v6-c-card pf-m-selectable" id="cd-tile-3" :class="{ 'pf-m-selected': chosen === 'three' }">
+    <div class="pf-v6-c-card__header">
+      <div class="pf-v6-c-card__selectable-actions"><div class="pf-v6-c-radio pf-m-standalone"><input class="pf-v6-c-radio__input" type="radio" name="cd-tile-radio" id="cd-tile-3-input" aria-labelledby="cd-tile-3-title" value="three" x-model="chosen" /></div></div>
+      <div class="pf-v6-c-card__header-main">{icons:svg('fa:server').raw}</div>
+      <div class="pf-v6-c-card__title" id="cd-tile-3-title"><h2 class="pf-v6-c-card__title-text">Tile three</h2></div>
+    </div>
+    <div class="pf-v6-c-card__body">Selection swaps to the clicked tile.</div>
+  </div>
+</div>

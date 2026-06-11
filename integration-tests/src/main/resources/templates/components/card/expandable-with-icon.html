@@ -1,0 +1,22 @@
+<div style="max-width: 400px">
+  <div class="pf-v6-c-card" id="cd-expandable-with-icon" x-data="{ expanded: false }" :class="{ 'pf-m-expanded': expanded }">
+    <div class="pf-v6-c-card__header">
+      <div class="pf-v6-c-card__header-toggle">
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Details" :aria-expanded="expanded.toString()" @click="expanded = !expanded">
+          <span class="pf-v6-c-button__icon"><span class="pf-v6-c-card__header-toggle-icon">{icons:svg('fa:angle-right').raw}</span></span>
+        </button>
+      </div>
+      <div class="pf-v6-c-card__actions">
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Card actions"><span class="pf-v6-c-button__icon">{icons:svg('fa:ellipsis-vertical').raw}</span></button>
+        <div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="cd-expandable-with-icon-check" aria-labelledby="cd-expandable-with-icon-title" aria-label="Select card" /></div>
+      </div>
+      <div class="pf-v6-c-card__header-main">
+        <img class="pf-v6-c-brand" src="/web/images/quarkus-pha-icon.svg" alt="Quarkus PHA" style="--pf-v6-c-brand--Height: 32px" />
+      </div>
+    </div>
+    <div class="pf-v6-c-card__expandable-content" x-show="expanded" x-cloak>
+      <div class="pf-v6-c-card__body">A brand image takes the title's place in the header.</div>
+      <div class="pf-v6-c-card__footer">Footer</div>
+    </div>
+  </div>
+</div>

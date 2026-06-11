@@ -1,0 +1,28 @@
+<div x-data="{ active: 'p1' }">
+  {#include components/navigation/tabs id="tabs-page-insets" pageInsets=true ariaLabel="Tabs with page insets"}{#content}
+  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'p1' ? 'pf-m-current' : ''">
+    <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'p1'" :tabindex="active === 'p1' ? 0 : -1" @click="active = 'p1'">
+      <span class="pf-v6-c-tabs__item-text">Users</span>
+    </button>
+  </li>
+  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'p2' ? 'pf-m-current' : ''">
+    <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'p2'" :tabindex="active === 'p2' ? 0 : -1" @click="active = 'p2'">
+      <span class="pf-v6-c-tabs__item-text">Containers</span>
+    </button>
+  </li>
+  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'p3' ? 'pf-m-current' : ''">
+    <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'p3'" :tabindex="active === 'p3' ? 0 : -1" @click="active = 'p3'">
+      <span class="pf-v6-c-tabs__item-text">Database</span>
+    </button>
+  </li>
+  {/content}{/include}
+  <section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === 'p1'" x-cloak>
+    <div class="pf-v6-c-tab-content__body">Users panel content</div>
+  </section>
+  <section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === 'p2'" x-cloak>
+    <div class="pf-v6-c-tab-content__body">Containers panel content</div>
+  </section>
+  <section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === 'p3'" x-cloak>
+    <div class="pf-v6-c-tab-content__body">Database panel content</div>
+  </section>
+</div>

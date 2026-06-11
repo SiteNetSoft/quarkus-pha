@@ -1,0 +1,36 @@
+{! Add/close tabs — Alpine owns the tab array; close buttons sit in __item-action
+   (item gets pf-m-action), the add button in __add. !}
+<div
+  id="tabs-dynamic"
+  x-data="{ counter: 3, active: 1,
+    tabs: [ { id: 1, name: 'Terminal 1' }, { id: 2, name: 'Terminal 2' }, { id: 3, name: 'Terminal 3' } ],
+    add() { this.counter++; this.tabs.push({ id: this.counter, name: 'Terminal ' + this.counter }); this.active = this.counter; },
+    close(id) { var i = this.tabs.findIndex(function (t) { return t.id === id; }); this.tabs.splice(i, 1); if (this.active === id && this.tabs.length) this.active = this.tabs[Math.max(0, i - 1)].id; } }"
+>
+  <div class="pf-v6-c-tabs">
+    <ul class="pf-v6-c-tabs__list" role="tablist" aria-label="Dynamic tabs">
+      <template x-for="t in tabs" :key="t.id">
+        <li role="presentation" class="pf-v6-c-tabs__item pf-m-action" :class="active === t.id ? 'pf-m-current' : ''">
+          <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === t.id" @click="active = t.id">
+            <span class="pf-v6-c-tabs__item-text" x-text="t.name"></span>
+          </button>
+          <span class="pf-v6-c-tabs__item-action">
+            <button class="pf-v6-c-button pf-m-plain" type="button" :aria-label="'Close ' + t.name" @click="close(t.id)">
+              <span class="pf-v6-c-button__icon">
+                <span class="pf-v6-c-tabs__item-action-icon">{icons:svg('fa:xmark').raw}</span>
+              </span>
+            </button>
+          </span>
+        </li>
+      </template>
+    </ul>
+    <span class="pf-v6-c-tabs__add">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Add tab" @click="add()">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:plus').raw}</span>
+      </button>
+    </span>
+  </div>
+  <section class="pf-v6-c-tab-content" role="tabpanel">
+    <div class="pf-v6-c-tab-content__body">Active terminal: <span x-text="active">1</span></div>
+  </section>
+</div>

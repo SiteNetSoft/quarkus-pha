@@ -1,0 +1,57 @@
+<nav class="pf-v6-c-nav" id="nav-expandable-third-level" aria-label="Multi-level navigation" style="max-width: 280px">
+  <ul class="pf-v6-c-nav__list">
+    <li class="pf-v6-c-nav__item" x-data="{ open: true }" :class="{ 'pf-m-expanded': open }">
+      <button
+        class="pf-v6-c-nav__link"
+        id="nav-third-level-toggle-1"
+        aria-expanded="true"
+        :aria-expanded="open.toString()"
+        @click="open = !open"
+      >
+        <span class="pf-v6-c-nav__link-text">Link 1</span>
+        <span class="pf-v6-c-nav__toggle">
+          <span class="pf-v6-c-nav__toggle-icon">{icons:svg('fa:angle-down').raw}</span>
+        </span>
+      </button>
+      <section
+        class="pf-v6-c-nav__subnav"
+        aria-labelledby="nav-third-level-toggle-1"
+        :hidden="!open"
+        :inert="!open"
+      >
+        <ul class="pf-v6-c-nav__list">
+          <li class="pf-v6-c-nav__item">
+            <a href="#" class="pf-v6-c-nav__link pf-m-current" aria-current="page">Second level link 1</a>
+          </li>
+          <li class="pf-v6-c-nav__item" x-data="{ open: false }" :class="{ 'pf-m-expanded': open }">
+            <button
+              class="pf-v6-c-nav__link"
+              id="nav-third-level-toggle-2"
+              aria-expanded="false"
+              :aria-expanded="open.toString()"
+              @click="open = !open"
+            >
+              <span class="pf-v6-c-nav__link-text">Second level link 2</span>
+              <span class="pf-v6-c-nav__toggle">
+                <span class="pf-v6-c-nav__toggle-icon">{icons:svg('fa:angle-down').raw}</span>
+              </span>
+            </button>
+            <section
+              class="pf-v6-c-nav__subnav"
+              aria-labelledby="nav-third-level-toggle-2"
+              hidden
+              inert
+              :hidden="!open"
+              :inert="!open"
+            >
+              <ul class="pf-v6-c-nav__list">
+                <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link">Third level link 1</a></li>
+                <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link">Third level link 2</a></li>
+              </ul>
+            </section>
+          </li>
+        </ul>
+      </section>
+    </li>
+  </ul>
+</nav>

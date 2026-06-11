@@ -62,6 +62,60 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#expandable" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Expandable</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#expandable-third-level" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Expandable third level</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#mixed" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Mixed</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#horizontal" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Horizontal</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#horizontal-subnav" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Horizontal subnav</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#icons" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With item icons</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -121,7 +175,47 @@
                         Multiple labelled sections inside one nav. Each section has its own
                         <code class="ws-code">__section-title</code> and <code class="ws-code">__list</code>.
                       </p>
-                      {/description} {#content}{#include components/navigation/grouped /}{/content} {/include}
+                      {/description} {#content}{#include components/navigation/grouped /}{/content} {/include} {#include
+                      partials/example-card title="Expandable" slug="expandable" component="navigation"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Items with a nested <code class="ws-code">__subnav</code>. The toggle is a
+                        <code class="ws-code">button.pf-v6-c-nav__link</code>; Alpine flips
+                        <code class="ws-code">pf-m-expanded</code> plus the <code class="ws-code">hidden</code> /
+                        <code class="ws-code">inert</code> attributes on the subnav.
+                      </p>
+                      {/description} {#content}{#include components/navigation/expandable /}{/content} {/include}
+                      {#include partials/example-card title="Expandable third level" slug="expandable-third-level"
+                      component="navigation"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Subnavs nest — an expandable item inside another item's subnav gives a third level.
+                      </p>
+                      {/description} {#content}{#include components/navigation/expandable-third-level /}{/content}
+                      {/include} {#include partials/example-card title="Mixed" slug="mixed" component="navigation"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Plain links and expandable items can share one list.
+                      </p>
+                      {/description} {#content}{#include components/navigation/mixed /}{/content} {/include} {#include
+                      partials/example-card title="Horizontal" slug="horizontal" component="navigation"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-horizontal</code> — for the masthead content area; see the Page
+                        component's &quot;Horizontal navigation&quot; example for the full shell.
+                      </p>
+                      {/description} {#content}{#include components/navigation/horizontal /}{/content} {/include}
+                      {#include partials/example-card title="Horizontal subnav" slug="horizontal-subnav"
+                      component="navigation"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-horizontal pf-m-subnav</code> — local (tertiary) navigation under a
+                        page header.
+                      </p>
+                      {/description} {#content}{#include components/navigation/horizontal-subnav /}{/content} {/include}
+                      {#include partials/example-card title="With item icons" slug="icons" component="navigation"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Each link carries a <code class="ws-code">__link-icon</code> before its
+                        <code class="ws-code">__link-text</code>.
+                      </p>
+                      {/description} {#content}{#include components/navigation/icons /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"
@@ -151,6 +245,11 @@
                           <code class="ws-code">pf-m-current</code> +
                           <code class="ws-code">aria-current="page"</code> on the server; no client state needed for the
                           nav rail.
+                        </p>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Flyout and drilldown.</strong> PatternFly's flyout and drilldown nav variants are
+                          built on the Menu component rather than nav markup. For equivalent popup-menu patterns see
+                          <a href="/components/menu">Menu</a> and <a href="/components/custom-menus">Custom menus</a>.
                         </p>
                       </div>
                       <div class="pf-v6-l-stack__item">
