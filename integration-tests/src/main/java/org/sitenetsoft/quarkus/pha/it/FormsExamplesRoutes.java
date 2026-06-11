@@ -34,7 +34,9 @@ import java.util.Set;
 public class FormsExamplesRoutes {
 
     private static final Map<String, Set<String>> EXAMPLES = Map.of(
-        "form",         Set.of("basic", "horizontal", "with-helper", "invalid"),
+        "form",         Set.of("basic", "horizontal", "limit-width", "invalid", "invalid-form-alert", "validated",
+                               "horizontal-stacked", "horizontal-helper-on-top", "group-label-info", "sections",
+                               "grid", "field-groups", "with-helper"),
         "form-control", Set.of("basic", "validated", "disabled-readonly"),
         "checkbox",     Set.of("basic", "checked", "disabled", "reversed",
                                "with-description", "with-body", "required", "standalone"),
