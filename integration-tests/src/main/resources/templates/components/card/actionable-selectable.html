@@ -1,0 +1,15 @@
+<div class="pf-v6-l-gallery pf-m-gutter" id="cd-actionable-selectable" x-data="{ sel1: false, clicks: 0 }">
+  <div class="pf-v6-c-card pf-m-clickable pf-m-selectable" id="cd-actionable-selectable-1" :class="{ 'pf-m-selected': sel1 }">
+    <div class="pf-v6-c-card__header">
+      <div class="pf-v6-c-card__selectable-actions">
+        <div class="pf-v6-c-check pf-m-standalone">
+          <input class="pf-v6-c-check__input" type="checkbox" id="cd-actionable-selectable-1-check" aria-labelledby="cd-actionable-selectable-1-title" x-model="sel1" />
+        </div>
+      </div>
+      <div class="pf-v6-c-card__title" id="cd-actionable-selectable-1-title">
+        <h2 class="pf-v6-c-card__title-text"><button class="pf-v6-c-card__clickable-action" type="button" @click="clicks++" style="all: unset; cursor: pointer">Clickable title</button></h2>
+      </div>
+    </div>
+    <div class="pf-v6-c-card__body">Selectable via the checkbox AND actionable via the title — clicked <span x-text="clicks">0</span> times.</div>
+  </div>
+</div>

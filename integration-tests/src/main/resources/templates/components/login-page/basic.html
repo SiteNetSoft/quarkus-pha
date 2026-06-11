@@ -1,45 +1,134 @@
-{! Hand-rendered to avoid slot collisions across the multiple insert points in login-page runtime. !}
-<div class="pf-v6-c-login" id="lp-basic">
+{! Full PF login page — brand header, helper text on failed submit, remember-me, social login
+   links, sign-up/forgot band, and page footer. Hand-rendered to avoid slot collisions across the
+   multiple insert points in the login-page runtime template. !}
+<div
+  class="pf-v6-c-login"
+  id="lp-basic"
+  x-data="{ username: '', password: '', remember: false, submitted: false }"
+>
   <div class="pf-v6-c-login__container">
-    <div class="pf-v6-c-login__main">
+    <header class="pf-v6-c-login__header">
+      <img
+        class="pf-v6-c-brand"
+        src="/web/images/quarkus-pha-logo.svg"
+        alt="Quarkus PHA"
+        style="--pf-v6-c-brand--Height: 48px"
+      />
+    </header>
+    <main class="pf-v6-c-login__main">
       <header class="pf-v6-c-login__main-header">
         <h1 class="pf-v6-c-title pf-m-3xl">Log in to your account</h1>
-        <p class="pf-v6-c-login__main-header-desc">Enter your credentials below.</p>
+        <p class="pf-v6-c-login__main-header-desc">Enter your single sign-on LDAP credentials.</p>
       </header>
       <div class="pf-v6-c-login__main-body">
-        <form class="pf-v6-c-form" novalidate>
-          <div class="pf-v6-c-form__group">
-            <div class="pf-v6-c-form__group-label">
-              <label class="pf-v6-c-form__label" for="lp-basic-username-field"
-                ><span class="pf-v6-c-form__label-text">Username</span></label
-              >
-            </div>
-            <div class="pf-v6-c-form__group-control">
-              {#include components/forms/text-input id="lp-basic-username" placeholder="Enter your username" /}
+        <form class="pf-v6-c-form" novalidate @submit.prevent="submitted = true">
+          <div class="pf-v6-c-helper-text" x-show="submitted && (!username || !password)" x-cloak aria-live="polite">
+            <div class="pf-v6-c-helper-text__item pf-m-error">
+              <span class="pf-v6-c-helper-text__item-icon">{icons:svg('fa:circle-exclamation').raw}</span>
+              <span class="pf-v6-c-helper-text__item-text">Invalid login credentials.</span>
             </div>
           </div>
           <div class="pf-v6-c-form__group">
             <div class="pf-v6-c-form__group-label">
-              <label class="pf-v6-c-form__label" for="lp-basic-password-field"
-                ><span class="pf-v6-c-form__label-text">Password</span></label
-              >
+              <label class="pf-v6-c-form__label" for="lp-basic-username-field">
+                <span class="pf-v6-c-form__label-text">Username</span>
+                <span class="pf-v6-c-form__label-required" aria-hidden="true">&#42;</span>
+              </label>
             </div>
             <div class="pf-v6-c-form__group-control">
-              {#include components/forms/text-input id="lp-basic-password" type="password" placeholder="Enter your password" /}
+              <span class="pf-v6-c-form-control pf-m-required" :class="{ 'pf-m-error': submitted && !username }">
+                <input
+                  type="text"
+                  id="lp-basic-username-field"
+                  name="lp-basic-username"
+                  required
+                  x-model="username"
+                  :aria-invalid="(submitted && !username).toString()"
+                />
+              </span>
             </div>
           </div>
           <div class="pf-v6-c-form__group">
-            <button type="submit" class="pf-v6-c-button pf-m-primary pf-m-block">
-              <span class="pf-v6-c-button__text">Log in</span>
-            </button>
+            <div class="pf-v6-c-form__group-label">
+              <label class="pf-v6-c-form__label" for="lp-basic-password-field">
+                <span class="pf-v6-c-form__label-text">Password</span>
+                <span class="pf-v6-c-form__label-required" aria-hidden="true">&#42;</span>
+              </label>
+            </div>
+            <div class="pf-v6-c-form__group-control">
+              <span class="pf-v6-c-form-control pf-m-required" :class="{ 'pf-m-error': submitted && !password }">
+                <input
+                  type="password"
+                  id="lp-basic-password-field"
+                  name="lp-basic-password"
+                  required
+                  x-model="password"
+                  :aria-invalid="(submitted && !password).toString()"
+                />
+              </span>
+            </div>
+          </div>
+          <div class="pf-v6-c-form__group">
+            <div class="pf-v6-c-form__group-control">
+              <div class="pf-v6-c-check">
+                <input class="pf-v6-c-check__input" type="checkbox" id="lp-basic-remember" x-model="remember" />
+                <label class="pf-v6-c-check__label" for="lp-basic-remember">Keep me logged in for 30 days.</label>
+              </div>
+            </div>
+          </div>
+          <div class="pf-v6-c-form__group pf-m-action">
+            <div class="pf-v6-c-form__actions">
+              <button type="submit" class="pf-v6-c-button pf-m-primary pf-m-block">
+                <span class="pf-v6-c-button__text">Log in</span>
+              </button>
+            </div>
           </div>
         </form>
       </div>
       <footer class="pf-v6-c-login__main-footer">
-        <a href="#" class="pf-v6-c-button pf-m-link pf-m-inline"
-          ><span class="pf-v6-c-button__text">Forgot password?</span></a
-        >
+        <ul class="pf-v6-c-login__main-footer-links" role="list" aria-label="Log in with social media">
+          <li class="pf-v6-c-login__main-footer-links-item">
+            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Log in with Google">
+              <span class="pf-v6-c-button__icon">{icons:svg('fa-brands:google').raw}</span>
+            </button>
+          </li>
+          <li class="pf-v6-c-login__main-footer-links-item">
+            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Log in with GitHub">
+              <span class="pf-v6-c-button__icon">{icons:svg('fa-brands:github').raw}</span>
+            </button>
+          </li>
+          <li class="pf-v6-c-login__main-footer-links-item">
+            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Log in with Dropbox">
+              <span class="pf-v6-c-button__icon">{icons:svg('fa-brands:dropbox').raw}</span>
+            </button>
+          </li>
+          <li class="pf-v6-c-login__main-footer-links-item">
+            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Log in with Facebook">
+              <span class="pf-v6-c-button__icon">{icons:svg('fa-brands:square-facebook').raw}</span>
+            </button>
+          </li>
+          <li class="pf-v6-c-login__main-footer-links-item">
+            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Log in with GitLab">
+              <span class="pf-v6-c-button__icon">{icons:svg('fa-brands:gitlab').raw}</span>
+            </button>
+          </li>
+        </ul>
+        <div class="pf-v6-c-login__main-footer-band">
+          <p class="pf-v6-c-login__main-footer-band-item">Need an account? <a href="#">Sign up.</a></p>
+          <p class="pf-v6-c-login__main-footer-band-item"><a href="#">Forgot username or password?</a></p>
+        </div>
       </footer>
-    </div>
+    </main>
+    <footer class="pf-v6-c-login__footer">
+      <p>
+        This is placeholder text only. Use this area to place any information or introductory message about your
+        application that may be relevant to users.
+      </p>
+      <ul class="pf-v6-c-list pf-m-inline" role="list">
+        <li><a href="#">Terms of use</a></li>
+        <li><a href="#">Help</a></li>
+        <li><a href="#">Privacy policy</a></li>
+      </ul>
+    </footer>
   </div>
 </div>

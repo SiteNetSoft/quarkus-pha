@@ -32,7 +32,21 @@ public class WizardExamplesRoutes {
     private static final Set<String> EXAMPLES = Set.of(
         "basic",
         "with-substeps",
-        "with-review"
+        "with-review",
+        "plain",
+        "header",
+        "disabled-steps",
+        "nav-anchors",
+        "expandable-steps",
+        "step-status",
+        "form-validation",
+        "validate-button-press",
+        "progressive-steps",
+        "toggle-step-visibility",
+        "submit-progress",
+        "custom-footer",
+        "custom-nav-item",
+        "within-modal"
     );
 
     @Inject

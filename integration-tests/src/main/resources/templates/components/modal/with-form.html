@@ -1,0 +1,37 @@
+<div x-data="{ open: false, name: '', submitted: false }">
+  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = true; submitted = false"><span class="pf-v6-c-button__text">Open form modal</span></button>
+  <div class="pf-v6-c-backdrop" x-show="open" x-cloak @keydown.escape.window="open = false">
+    <div class="pf-v6-c-bullseye">
+      <div class="pf-v6-c-modal-box pf-m-sm" id="mo-with-form" role="dialog" aria-modal="true" aria-labelledby="mo-with-form-title">
+        <div class="pf-v6-c-modal-box__close">
+          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="open = false">
+            <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+          </button>
+        </div>
+        <header class="pf-v6-c-modal-box__header">
+          <h2 class="pf-v6-c-modal-box__title" id="mo-with-form-title"><span class="pf-v6-c-modal-box__title-text">Create connection</span></h2>
+        </header>
+        <div class="pf-v6-c-modal-box__body">
+          <form class="pf-v6-c-form" id="mo-with-form-form" @submit.prevent="submitted = true; open = false">
+            <div class="pf-v6-c-form__group">
+              <div class="pf-v6-c-form__group-label">
+                <label class="pf-v6-c-form__label" for="mo-with-form-name">
+                  <span class="pf-v6-c-form__label-text">Name</span>
+                  <span class="pf-v6-c-form__label-required" aria-hidden="true">&#42;</span>
+                </label>
+              </div>
+              <div class="pf-v6-c-form__group-control">
+                <span class="pf-v6-c-form-control pf-m-required"><input type="text" id="mo-with-form-name" required x-model="name" /></span>
+              </div>
+            </div>
+          </form>
+        </div>
+        <footer class="pf-v6-c-modal-box__footer">
+          <button class="pf-v6-c-button pf-m-primary" type="submit" form="mo-with-form-form" :disabled="name.trim() === ''"><span class="pf-v6-c-button__text">Create</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button" @click="open = false"><span class="pf-v6-c-button__text">Cancel</span></button>
+        </footer>
+      </div>
+    </div>
+  </div>
+  <p x-show="submitted" x-cloak style="margin-top: 0.5rem">Created connection: <strong x-text="name"></strong></p>
+</div>

@@ -1,0 +1,86 @@
+{! Two-level drilldown: pf-m-drilled-in moves to the root + the target submenu;
+   pf-m-current-path marks the drilled item. The content gets a fixed height because PF's
+   JS normally measures the active level. !}
+<div
+  class="pf-v6-c-menu pf-m-drilldown"
+  id="mn-drilldown"
+  style="max-width: 280px; position: relative"
+  x-data="{ drilled: '' }"
+  :class="{ 'pf-m-drilled-in': drilled !== '' }"
+>
+  <div class="pf-v6-c-menu__content" style="height: 180px">
+    <ul class="pf-v6-c-menu__list" role="menu">
+      <li role="none" class="pf-v6-c-menu__list-item" :class="{ 'pf-m-current-path': drilled === 'rollout' }">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem" aria-expanded="false" :aria-expanded="(drilled === 'rollout').toString()" @click="drilled = 'rollout'">
+          <span class="pf-v6-c-menu__item-main">
+            <span class="pf-v6-c-menu__item-text">Start rollout</span>
+            <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+          </span>
+        </button>
+        <div class="pf-v6-c-menu">
+          <div class="pf-v6-c-menu__content">
+            <ul class="pf-v6-c-menu__list" role="menu">
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="drilled = ''">
+                  <span class="pf-v6-c-menu__item-main">
+                    <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-left').raw}</span>
+                    <span class="pf-v6-c-menu__item-text">Start rollout</span>
+                  </span>
+                </button>
+              </li>
+              <li class="pf-v6-c-divider" role="separator"></li>
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Application grouping</span></span>
+                </button>
+              </li>
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Count</span></span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li role="none" class="pf-v6-c-menu__list-item" :class="{ 'pf-m-current-path': drilled === 'pause' }">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem" aria-expanded="false" :aria-expanded="(drilled === 'pause').toString()" @click="drilled = 'pause'">
+          <span class="pf-v6-c-menu__item-main">
+            <span class="pf-v6-c-menu__item-text">Pause rollouts</span>
+            <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+          </span>
+        </button>
+        <div class="pf-v6-c-menu">
+          <div class="pf-v6-c-menu__content">
+            <ul class="pf-v6-c-menu__list" role="menu">
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="drilled = ''">
+                  <span class="pf-v6-c-menu__item-main">
+                    <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-left').raw}</span>
+                    <span class="pf-v6-c-menu__item-text">Pause rollouts</span>
+                  </span>
+                </button>
+              </li>
+              <li class="pf-v6-c-divider" role="separator"></li>
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">For one hour</span></span>
+                </button>
+              </li>
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Until manually resumed</span></span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li role="none" class="pf-v6-c-menu__list-item">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Add storage</span></span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>

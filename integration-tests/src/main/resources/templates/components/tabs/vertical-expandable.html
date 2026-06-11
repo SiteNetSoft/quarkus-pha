@@ -1,0 +1,43 @@
+<div
+  class="pf-v6-c-tabs pf-m-vertical pf-m-expandable"
+  id="tabs-vertical-expandable"
+  x-data="{ open: false, active: 'General' }"
+  :class="{ 'pf-m-expanded': open }"
+>
+  <div class="pf-v6-c-tabs__toggle">
+    <button
+      class="pf-v6-c-button pf-m-plain"
+      type="button"
+      :aria-expanded="open.toString()"
+      aria-label="Tabs toggle"
+      @click="open = !open"
+    >
+      <span class="pf-v6-c-button__icon">
+        <span class="pf-v6-c-tabs__toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+      </span>
+      <span class="pf-v6-c-button__text" x-text="active">General</span>
+    </button>
+  </div>
+  <ul class="pf-v6-c-tabs__list" role="tablist" aria-label="Vertical expandable tabs">
+    <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'General' ? 'pf-m-current' : ''">
+      <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'General'" @click="active = 'General'">
+        <span class="pf-v6-c-tabs__item-text">General</span>
+      </button>
+    </li>
+    <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'Security' ? 'pf-m-current' : ''">
+      <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'Security'" @click="active = 'Security'">
+        <span class="pf-v6-c-tabs__item-text">Security</span>
+      </button>
+    </li>
+    <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'Network' ? 'pf-m-current' : ''">
+      <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'Network'" @click="active = 'Network'">
+        <span class="pf-v6-c-tabs__item-text">Network</span>
+      </button>
+    </li>
+    <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'Storage' ? 'pf-m-current' : ''">
+      <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'Storage'" @click="active = 'Storage'">
+        <span class="pf-v6-c-tabs__item-text">Storage</span>
+      </button>
+    </li>
+  </ul>
+</div>

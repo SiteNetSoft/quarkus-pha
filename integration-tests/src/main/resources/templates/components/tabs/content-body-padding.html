@@ -1,0 +1,22 @@
+<div x-data="{ active: 'cb1' }">
+  {#include components/navigation/tabs id="tabs-content-body-padding" ariaLabel="Tabs with padded content body"}{#content}
+  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'cb1' ? 'pf-m-current' : ''">
+    <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'cb1'" :tabindex="active === 'cb1' ? 0 : -1" @click="active = 'cb1'">
+      <span class="pf-v6-c-tabs__item-text">Users</span>
+    </button>
+  </li>
+  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'cb2' ? 'pf-m-current' : ''">
+    <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'cb2'" :tabindex="active === 'cb2' ? 0 : -1" @click="active = 'cb2'">
+      <span class="pf-v6-c-tabs__item-text">Containers</span>
+    </button>
+  </li>
+  {/content}{/include}
+  <section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === 'cb1'" x-cloak>
+    <div class="pf-v6-c-tab-content__body pf-m-padding">
+      This tab content body carries <code class="ws-code">pf-m-padding</code>.
+    </div>
+  </section>
+  <section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === 'cb2'" x-cloak>
+    <div class="pf-v6-c-tab-content__body pf-m-padding">Containers panel — also padded.</div>
+  </section>
+</div>

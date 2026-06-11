@@ -1,0 +1,71 @@
+{! Terms styled as help triggers (dotted underline). The first term opens a small Alpine popover —
+   PF wires DescriptionListTermHelpTextButton to the Popover component the same way. !}
+<dl class="pf-v6-c-description-list" id="dl-term-help-text" aria-label="Description list with term help text">
+  <div class="pf-v6-c-description-list__group" x-data="{ open: false }">
+    <dt class="pf-v6-c-description-list__term" style="position: relative">
+      <span
+        class="pf-v6-c-description-list__text pf-m-help-text"
+        role="button"
+        tabindex="0"
+        :aria-expanded="open.toString()"
+        @click="open = !open"
+        @keydown.enter.prevent="open = !open"
+        @keydown.escape="open = false"
+        >Name</span
+      >
+      <div
+        x-show="open"
+        x-cloak
+        @click.outside="open = false"
+        style="position: absolute; top: 100%; left: 0; z-index: 200; width: 280px"
+      >
+        <div class="pf-v6-c-popover pf-m-bottom" role="dialog" aria-label="Name help">
+          <div class="pf-v6-c-popover__arrow"></div>
+          <div class="pf-v6-c-popover__content">
+            <div class="pf-v6-c-popover__body">Additional name info: the resource's unique display name.</div>
+          </div>
+        </div>
+      </div>
+    </dt>
+    <dd class="pf-v6-c-description-list__description">
+      <div class="pf-v6-c-description-list__text">Example</div>
+    </dd>
+  </div>
+  <div class="pf-v6-c-description-list__group">
+    <dt class="pf-v6-c-description-list__term">
+      <span class="pf-v6-c-description-list__text pf-m-help-text" role="button" tabindex="0">Namespace</span>
+    </dt>
+    <dd class="pf-v6-c-description-list__description">
+      <div class="pf-v6-c-description-list__text"><a href="#">mary-test</a></div>
+    </dd>
+  </div>
+  <div class="pf-v6-c-description-list__group">
+    <dt class="pf-v6-c-description-list__term">
+      <span class="pf-v6-c-description-list__text pf-m-help-text" role="button" tabindex="0">Labels</span>
+    </dt>
+    <dd class="pf-v6-c-description-list__description">
+      <div class="pf-v6-c-description-list__text">example</div>
+    </dd>
+  </div>
+  <div class="pf-v6-c-description-list__group">
+    <dt class="pf-v6-c-description-list__term">
+      <span class="pf-v6-c-description-list__text pf-m-help-text" role="button" tabindex="0">Pod selector</span>
+    </dt>
+    <dd class="pf-v6-c-description-list__description">
+      <div class="pf-v6-c-description-list__text">
+        <button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">
+          <span class="pf-v6-c-button__icon pf-m-start">{icons:svg('fa:circle-plus').raw}</span>
+          <span class="pf-v6-c-button__text">app=MyApp</span>
+        </button>
+      </div>
+    </dd>
+  </div>
+  <div class="pf-v6-c-description-list__group">
+    <dt class="pf-v6-c-description-list__term">
+      <span class="pf-v6-c-description-list__text pf-m-help-text" role="button" tabindex="0">Annotation</span>
+    </dt>
+    <dd class="pf-v6-c-description-list__description">
+      <div class="pf-v6-c-description-list__text">2 Annotations</div>
+    </dd>
+  </div>
+</dl>

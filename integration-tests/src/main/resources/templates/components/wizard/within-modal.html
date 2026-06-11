@@ -1,0 +1,61 @@
+<div x-data="{ open: false, step: 1 }">
+  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = true; step = 1">
+    <span class="pf-v6-c-button__text">Open wizard modal</span>
+  </button>
+  <div class="pf-v6-c-backdrop" x-show="open" x-cloak style="position: fixed">
+    <div class="pf-v6-l-bullseye">
+      <div class="pf-v6-c-modal-box pf-m-md" role="dialog" aria-modal="true" aria-label="Wizard in modal" @keydown.escape.window="open = false">
+        <div class="pf-v6-c-modal-box__close">
+          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="open = false">
+            <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+          </button>
+        </div>
+        <div class="pf-v6-c-modal-box__body" style="padding: 0">
+          <div class="pf-v6-c-wizard" id="wiz-within-modal">
+            <div class="pf-v6-c-wizard__outer-wrap">
+              <div class="pf-v6-c-wizard__inner-wrap">
+                <nav class="pf-v6-c-wizard__nav" aria-label="Steps">
+                  <ol class="pf-v6-c-wizard__nav-list">
+<li class="pf-v6-c-wizard__nav-item">
+  <button type="button" class="pf-v6-c-wizard__nav-link" :class="{ 'pf-m-current': step === 1 }" :aria-current="step === 1 ? 'step' : false" @click="step = 1">
+    <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">Information</span></span>
+  </button>
+</li>
+<li class="pf-v6-c-wizard__nav-item">
+  <button type="button" class="pf-v6-c-wizard__nav-link" :class="{ 'pf-m-current': step === 2 }" :aria-current="step === 2 ? 'step' : false" @click="step = 2">
+    <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">Review</span></span>
+  </button>
+</li>
+                  </ol>
+                </nav>
+                <div class="pf-v6-c-wizard__main">
+                  <div class="pf-v6-c-wizard__main-body">
+<div x-show="step === 1" x-cloak>
+  <h2 class="pf-v6-c-content--h2">Information</h2>
+  <p>Information content.</p>
+</div>
+<div x-show="step === 2" x-cloak>
+  <h2 class="pf-v6-c-content--h2">Review</h2>
+  <p>Review content.</p>
+</div>
+                  </div>
+                </div>
+              </div>
+              <footer class="pf-v6-c-wizard__footer">
+                <button type="button" class="pf-v6-c-button pf-m-primary" :disabled="step === 2" @click="step = 2">
+                  <span class="pf-v6-c-button__text">Next</span>
+                </button>
+                <button type="button" class="pf-v6-c-button pf-m-secondary" :disabled="step === 1" @click="step = 1">
+                  <span class="pf-v6-c-button__text">Back</span>
+                </button>
+                <button type="button" class="pf-v6-c-button pf-m-link" @click="open = false">
+                  <span class="pf-v6-c-button__text">Cancel</span>
+                </button>
+              </footer>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,7 @@
 {! Slot: {#actionLinks} — PF's AlertActionLink area. Compose link-variant button components, e.g.
           {#actionLinks}{#include components/actions/button variant="link" inline=true href="#"}{#content}View{/content}{/include}{/actionLinks} !}
 {#let v=(variant ?: 'custom')}
-<div class="pf-v6-c-alert pf-m-{v}{#if inline??} pf-m-inline{/if}{#if plain??} pf-m-plain{/if}{#if expandable??} pf-m-expandable{/if}{#if truncate??} pf-m-truncate{/if}"
+<div class="pf-v6-c-alert pf-m-{v}{#if inline??} pf-m-inline{/if}{#if plain??} pf-m-plain{/if}{#if expandable??} pf-m-expandable{/if}"
      {#if id??}id="{id}"{/if}
      x-data="{ expanded: false, visible: true }"
      x-show="visible"
@@ -46,12 +46,12 @@
     {/if}
   </div>
   {#if description??}
-  <h3 class="pf-v6-c-alert__title">
+  <h3 class="pf-v6-c-alert__title{#if truncate??} pf-m-truncate{/if}">
     <span class="pf-screen-reader">{v} alert:</span>
     {title}
   </h3>
   {#else}
-  <p class="pf-v6-c-alert__title">
+  <p class="pf-v6-c-alert__title{#if truncate??} pf-m-truncate{/if}">
     <span class="pf-screen-reader">{v} alert:</span>
     {title}
   </p>
