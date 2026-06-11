@@ -1,6 +1,6 @@
 <div x-data="{ open: false }" style="position: relative; display: inline-block; padding-top: 1rem">
   <button class="pf-v6-c-button pf-m-secondary" type="button" :aria-expanded="open.toString()" @click="open = !open">
-    <span class="pf-v6-c-button__text">Show popover</span>
+    <span class="pf-v6-c-button__text">Show icon-title popover</span>
   </button>
   <div
     x-show="open"
@@ -8,7 +8,7 @@
     @click.outside="open = false"
     style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 320px; z-index: 300"
   >
-    <div class="pf-v6-c-popover pf-m-top" id="po-basic" role="dialog" aria-labelledby="po-basic-title">
+    <div class="pf-v6-c-popover pf-m-top" id="po-icon-in-title" role="dialog" aria-labelledby="po-icon-in-title-title">
       <div class="pf-v6-c-popover__arrow"></div>
       <div class="pf-v6-c-popover__content">
         <div class="pf-v6-c-popover__close">
@@ -18,11 +18,10 @@
         </div>
           <header class="pf-v6-c-popover__header">
             <h1 class="pf-v6-c-popover__title">
-              <span class="pf-v6-c-popover__title-text" id="po-basic-title">Popover header</span>
+              <span class="pf-v6-c-popover__title-icon">{icons:svg('fa:rocket').raw}</span><span class="pf-v6-c-popover__title-text" id="po-icon-in-title-title">Title with icon</span>
             </h1>
           </header>
-        <div class="pf-v6-c-popover__body">Popovers are triggered by click rather than hover. Click the trigger again, the X, or outside to dismiss.</div>
-          <footer class="pf-v6-c-popover__footer">Popover footer</footer>
+        <div class="pf-v6-c-popover__body">The icon sits in the __title-icon slot before the title text.</div>
       </div>
     </div>
   </div>

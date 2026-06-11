@@ -1,0 +1,86 @@
+<div class="pf-v6-l-flex pf-m-space-items-md">
+<div x-data="{ open: false }" style="position: relative; display: inline-block; padding-top: 1rem">
+  <button class="pf-v6-c-button pf-m-secondary" type="button" :aria-expanded="open.toString()" @click="open = !open">
+    <span class="pf-v6-c-button__text">Show info popover</span>
+  </button>
+  <div
+    x-show="open"
+    x-cloak
+    @click.outside="open = false"
+    style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 320px; z-index: 300"
+  >
+    <div class="pf-v6-c-popover pf-m-top pf-m-info" id="po-alert-info" role="dialog" aria-labelledby="po-alert-info-title">
+      <div class="pf-v6-c-popover__arrow"></div>
+      <div class="pf-v6-c-popover__content">
+        <div class="pf-v6-c-popover__close">
+          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="open = false">
+            <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+          </button>
+        </div>
+          <header class="pf-v6-c-popover__header">
+            <h1 class="pf-v6-c-popover__title">
+              <span class="pf-v6-c-popover__title-icon">{icons:svg('fa:circle-info').raw}</span><span class="pf-v6-c-popover__title-text" id="po-alert-info-title">Info popover</span>
+            </h1>
+          </header>
+        <div class="pf-v6-c-popover__body">Severity styling via pf-m-info; the title icon picks up the status color.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div x-data="{ open: false }" style="position: relative; display: inline-block; padding-top: 1rem">
+  <button class="pf-v6-c-button pf-m-secondary" type="button" :aria-expanded="open.toString()" @click="open = !open">
+    <span class="pf-v6-c-button__text">Show success popover</span>
+  </button>
+  <div
+    x-show="open"
+    x-cloak
+    @click.outside="open = false"
+    style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 320px; z-index: 300"
+  >
+    <div class="pf-v6-c-popover pf-m-top pf-m-success" id="po-alert-success" role="dialog" aria-labelledby="po-alert-success-title">
+      <div class="pf-v6-c-popover__arrow"></div>
+      <div class="pf-v6-c-popover__content">
+        <div class="pf-v6-c-popover__close">
+          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="open = false">
+            <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+          </button>
+        </div>
+          <header class="pf-v6-c-popover__header">
+            <h1 class="pf-v6-c-popover__title">
+              <span class="pf-v6-c-popover__title-icon">{icons:svg('fa:circle-check').raw}</span><span class="pf-v6-c-popover__title-text" id="po-alert-success-title">Success popover</span>
+            </h1>
+          </header>
+        <div class="pf-v6-c-popover__body">Severity styling via pf-m-success; the title icon picks up the status color.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div x-data="{ open: false }" style="position: relative; display: inline-block; padding-top: 1rem">
+  <button class="pf-v6-c-button pf-m-secondary" type="button" :aria-expanded="open.toString()" @click="open = !open">
+    <span class="pf-v6-c-button__text">Show warning popover</span>
+  </button>
+  <div
+    x-show="open"
+    x-cloak
+    @click.outside="open = false"
+    style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 320px; z-index: 300"
+  >
+    <div class="pf-v6-c-popover pf-m-top pf-m-warning" id="po-alert-warning" role="dialog" aria-labelledby="po-alert-warning-title">
+      <div class="pf-v6-c-popover__arrow"></div>
+      <div class="pf-v6-c-popover__content">
+        <div class="pf-v6-c-popover__close">
+          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="open = false">
+            <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+          </button>
+        </div>
+          <header class="pf-v6-c-popover__header">
+            <h1 class="pf-v6-c-popover__title">
+              <span class="pf-v6-c-popover__title-icon">{icons:svg('fa:exclamation-triangle').raw}</span><span class="pf-v6-c-popover__title-text" id="po-alert-warning-title">Warning popover</span>
+            </h1>
+          </header>
+        <div class="pf-v6-c-popover__body">Severity styling via pf-m-warning; the title icon picks up the status color.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

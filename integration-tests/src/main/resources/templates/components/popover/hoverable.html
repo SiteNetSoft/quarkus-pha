@@ -1,0 +1,24 @@
+<div x-data="{ open: false }" style="position: relative; display: inline-block; padding-top: 1rem">
+  <button class="pf-v6-c-button pf-m-secondary" type="button" :aria-expanded="open.toString()" @mouseenter="open = true" @mouseleave="open = false" @focus="open = true" @blur="open = false">
+    <span class="pf-v6-c-button__text">Hover or focus me</span>
+  </button>
+  <div
+    x-show="open"
+    x-cloak
+    
+    style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 320px; z-index: 300"
+  >
+    <div class="pf-v6-c-popover pf-m-top" id="po-hoverable" role="dialog" aria-labelledby="po-hoverable-title">
+      <div class="pf-v6-c-popover__arrow"></div>
+      <div class="pf-v6-c-popover__content">
+
+          <header class="pf-v6-c-popover__header">
+            <h1 class="pf-v6-c-popover__title">
+              <span class="pf-v6-c-popover__title-text" id="po-hoverable-title">Hoverable popover</span>
+            </h1>
+          </header>
+        <div class="pf-v6-c-popover__body">This popover opens on hover or keyboard focus and closes when the pointer leaves.</div>
+      </div>
+    </div>
+  </div>
+</div>
