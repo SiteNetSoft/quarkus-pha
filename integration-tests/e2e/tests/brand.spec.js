@@ -18,8 +18,8 @@ test.describe("Brand", () => {
     test("renders as img with brand class + correct attrs", async ({ page }) => {
       const b = page.locator("#brand-basic");
       await expect(b).toHaveClass(/pf-v6-c-brand/);
-      await expect(b).toHaveAttribute("src", /brand-logo\.svg/);
-      await expect(b).toHaveAttribute("alt", "Brand logo");
+      await expect(b).toHaveAttribute("src", /quarkus-pha-logo\.svg/);
+      await expect(b).toHaveAttribute("alt", "Quarkus PHA logo");
       const tag = await b.evaluate((el) => el.tagName);
       expect(tag).toBe("IMG");
     });
@@ -49,7 +49,7 @@ test.describe("Brand", () => {
     test("contains a <source> and a fallback <img>", async ({ page }) => {
       await expect(page.locator("#brand-picture source")).toHaveCount(1);
       await expect(page.locator("#brand-picture source")).toHaveAttribute("media", "(min-width: 768px)");
-      await expect(page.locator("#brand-picture img")).toHaveAttribute("alt", "Brand logo");
+      await expect(page.locator("#brand-picture img")).toHaveAttribute("alt", "Quarkus PHA logo");
     });
   });
 

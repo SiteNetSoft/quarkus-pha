@@ -2,7 +2,10 @@
 > pha = [PatternFly](https://www.patternfly.org/) [HTMX](https://htmx.org/) [Alpine.js](https://alpinejs.dev/)
 
 <p align="center">
-  <img alt="Logo" src="./assets/logo.png" style="width:300px;">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/quarkus-pha-logo-dark.svg">
+    <img alt="Quarkus PHA — PatternFly, HTMX, Alpine.js on Quarkus" src="./assets/quarkus-pha-logo.svg" width="500">
+  </picture>
 </p>
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
