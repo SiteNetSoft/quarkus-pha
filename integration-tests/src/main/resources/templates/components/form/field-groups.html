@@ -1,0 +1,50 @@
+{! Expandable field group — the toggle rotates via pf-m-expanded; Alpine shows the body. !}
+<form class="pf-v6-c-form" id="form-field-groups" novalidate style="max-width: 560px" x-data="{ open: true }">
+  <div class="pf-v6-c-form__field-group pf-m-expandable" :class="{ 'pf-m-expanded': open }">
+    <div class="pf-v6-c-form__field-group-header">
+      <div class="pf-v6-c-form__field-group-toggle">
+        <div class="pf-v6-c-form__field-group-toggle-button">
+          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Toggle field group 1" :aria-expanded="open.toString()" @click="open = !open">
+            <span class="pf-v6-c-button__icon">
+              <span class="pf-v6-c-form__field-group-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+            </span>
+          </button>
+        </div>
+      </div>
+      <div class="pf-v6-c-form__field-group-header-main">
+        <div class="pf-v6-c-form__field-group-header-title">
+          <div class="pf-v6-c-form__field-group-header-title-text">Field group 1</div>
+        </div>
+        <div class="pf-v6-c-form__field-group-header-description">Settings in this group are expandable.</div>
+      </div>
+      <div class="pf-v6-c-form__field-group-header-actions">
+        <button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">Action</span></button>
+      </div>
+    </div>
+    <div class="pf-v6-c-form__field-group-body" x-show="open">
+      <div class="pf-v6-c-form__group">
+        <div class="pf-v6-c-form__group-label">
+          <label class="pf-v6-c-form__label" for="form-fg-1"><span class="pf-v6-c-form__label-text">Group 1 input</span></label>
+        </div>
+        <div class="pf-v6-c-form__group-control"><span class="pf-v6-c-form-control"><input type="text" id="form-fg-1" /></span></div>
+      </div>
+    </div>
+  </div>
+  <div class="pf-v6-c-form__field-group">
+    <div class="pf-v6-c-form__field-group-header">
+      <div class="pf-v6-c-form__field-group-header-main">
+        <div class="pf-v6-c-form__field-group-header-title">
+          <div class="pf-v6-c-form__field-group-header-title-text">Field group 2 (non-expandable)</div>
+        </div>
+      </div>
+    </div>
+    <div class="pf-v6-c-form__field-group-body">
+      <div class="pf-v6-c-form__group">
+        <div class="pf-v6-c-form__group-label">
+          <label class="pf-v6-c-form__label" for="form-fg-2"><span class="pf-v6-c-form__label-text">Group 2 input</span></label>
+        </div>
+        <div class="pf-v6-c-form__group-control"><span class="pf-v6-c-form-control"><input type="text" id="form-fg-2" /></span></div>
+      </div>
+    </div>
+  </div>
+</form>
