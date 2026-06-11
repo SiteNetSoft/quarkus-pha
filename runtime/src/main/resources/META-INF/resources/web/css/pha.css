@@ -114,3 +114,22 @@ tr.pf-v6-c-table__editable-row input:hover {
     background-color: var(--pf-t--global--background--color--status--danger--default);
     white-space: pre-wrap;
 }
+
+/*
+ * Masthead logo theme swap. The light and dark logo variants are both in the
+ * DOM; the pf-v6-theme-dark class on <html> (set by the theme selector, which
+ * also resolves colorScheme=system) decides which one is visible. A
+ * prefers-color-scheme media query would ignore the explicit in-page toggle.
+ */
+.pha-masthead-logo {
+    height: 40px;
+}
+
+.pha-masthead-logo--dark,
+.pf-v6-theme-dark .pha-masthead-logo--light {
+    display: none;
+}
+
+.pf-v6-theme-dark .pha-masthead-logo--dark {
+    display: block;
+}
