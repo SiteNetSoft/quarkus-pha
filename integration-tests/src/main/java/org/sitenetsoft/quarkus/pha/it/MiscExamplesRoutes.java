@@ -74,7 +74,9 @@ public class MiscExamplesRoutes {
                                                "overflow", "inset", "page-insets", "icons-text", "subtabs",
                                                "filled-with-icons", "nav-tabs", "nav-subtabs", "site-nav",
                                                "content-body-padding", "dynamic", "help", "help-and-close"));
-        m.put("popover",               Set.of("basic", "danger"));
+        m.put("popover",               Set.of("basic", "hoverable", "close-from-content", "no-header-footer",
+                                               "width-auto", "advanced", "icon-in-title", "alert-variants",
+                                               "danger"));
         m.put("masthead",              Set.of("basic", "mixed-content", "display-inline", "display-stack",
                                                "display-stack-inline-responsive", "insets", "custom-logo"));
         m.put("sidebar",               Set.of("basic", "panel-right"));

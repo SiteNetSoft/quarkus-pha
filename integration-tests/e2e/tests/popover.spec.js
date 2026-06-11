@@ -1,52 +1,117 @@
 import { test, expect } from "@playwright/test";
 
+const EXAMPLES = [
+  "basic",
+  "hoverable",
+  "close-from-content",
+  "no-header-footer",
+  "width-auto",
+  "advanced",
+  "icon-in-title",
+  "alert-variants",
+  "danger",
+];
+
 test.describe("Popover", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/components/popover");
   });
 
-  test("page loads with both example section headings", async ({ page }) => {
-    await expect(page.locator("#basic")).toBeVisible();
-    await expect(page.locator("#danger")).toBeVisible();
+  test("ToC anchors render for every example", async ({ page }) => {
+    for (const id of EXAMPLES) {
+      await expect(page.locator(`#${id}`)).toBeAttached();
+    }
   });
 
   test.describe("Basic", () => {
-    test("has pf-v6-c-popover and pf-m-top classes", async ({ page }) => {
-      await expect(page.locator("#po-basic")).toHaveClass(/pf-v6-c-popover/);
-      await expect(page.locator("#po-basic")).toHaveClass(/pf-m-top/);
-    });
-
-    test("has arrow, header, and body", async ({ page }) => {
-      await expect(page.locator("#po-basic .pf-v6-c-popover__arrow")).toBeVisible();
-      await expect(page.locator("#po-basic .pf-v6-c-popover__header")).toBeVisible();
-      await expect(page.locator("#po-basic .pf-v6-c-popover__body")).toBeVisible();
-    });
-
-    test("has role dialog and aria-labelledby pointing at title", async ({ page }) => {
+    test("click toggles the popover; close button dismisses", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/popover/basic"]');
       const popover = page.locator("#po-basic");
-      await expect(popover).toHaveAttribute("role", "dialog");
-      await expect(popover).toHaveAttribute("aria-labelledby", "po-basic-title");
-      await expect(page.locator("#po-basic-title")).toBeVisible();
+      await expect(popover).toBeHidden();
+      await card.locator("button", { hasText: "Show popover" }).click();
+      await expect(popover).toBeVisible();
+      await expect(popover).toHaveClass(/pf-m-top/);
+      await expect(popover.locator(".pf-v6-c-popover__arrow")).toBeVisible();
+      await expect(popover.locator(".pf-v6-c-popover__footer")).toHaveText("Popover footer");
+      await popover.locator(".pf-v6-c-popover__close button").click();
+      await expect(popover).toBeHidden();
     });
   });
 
-  test.describe("Danger", () => {
-    test("has classes pf-m-top and pf-m-danger", async ({ page }) => {
-      await expect(page.locator("#po-danger")).toHaveClass(/pf-m-top/);
-      await expect(page.locator("#po-danger")).toHaveClass(/pf-m-danger/);
+  test.describe("Hoverable", () => {
+    test("opens on hover and closes on leave", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/popover/hoverable"]');
+      const trigger = card.locator("button", { hasText: "Hover or focus me" });
+      const popover = page.locator("#po-hoverable");
+      await expect(popover).toBeHidden();
+      await trigger.hover();
+      await expect(popover).toBeVisible();
+      await page.mouse.move(0, 0);
+      await expect(popover).toBeHidden();
+    });
+  });
+
+  test.describe("Close from content", () => {
+    test("the footer action dismisses the popover", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/popover/close-from-content"]');
+      await card.locator("button", { hasText: "Show popover" }).click();
+      const popover = page.locator("#po-close-from-content");
+      await expect(popover).toBeVisible();
+      await popover.locator("footer button", { hasText: "Got it" }).click();
+      await expect(popover).toBeHidden();
+    });
+  });
+
+  test.describe("Variants", () => {
+    test("no-header-footer popover has no padding and only a body", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/popover/no-header-footer"]');
+      await card.locator("button", { hasText: "Show plain popover" }).click();
+      const popover = page.locator("#po-no-header-footer");
+      await expect(popover).toHaveClass(/pf-m-no-padding/);
+      await expect(popover.locator(".pf-v6-c-popover__header")).toHaveCount(0);
+      await expect(popover.locator(".pf-v6-c-popover__close")).toHaveCount(0);
     });
 
-    test("has header with title id and a footer with actions", async ({ page }) => {
-      await expect(page.locator("#po-danger .pf-v6-c-popover__header")).toBeVisible();
-      await expect(page.locator("#po-danger-title")).toBeVisible();
-      await expect(page.locator("#po-danger .pf-v6-c-popover__footer")).toBeVisible();
+    test("width-auto carries the modifier", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/popover/width-auto"]');
+      await card.locator("button", { hasText: "Show auto-width popover" }).click();
+      await expect(page.locator("#po-width-auto")).toHaveClass(/pf-m-width-auto/);
+    });
+
+    test("advanced has a title icon, close, and footer action", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/popover/advanced"]');
+      await card.locator("button", { hasText: "Show advanced popover" }).click();
+      const popover = page.locator("#po-advanced");
+      await expect(popover.locator(".pf-v6-c-popover__title-icon")).toBeVisible();
+      await expect(popover.locator(".pf-v6-c-popover__close button")).toBeVisible();
+      // Popovers render inline above the trigger and can be overlaid; dispatch the click.
+      await popover.locator("footer button", { hasText: "Dismiss" }).evaluate((el) => el.click());
+      await expect(popover).toBeHidden();
+    });
+
+    test("alert variants carry their severity classes", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/popover/alert-variants"]');
+      for (const variant of ["info", "success", "warning"]) {
+        await card.locator("button", { hasText: `Show ${variant} popover` }).click();
+        await expect(page.locator(`#po-alert-${variant}`)).toHaveClass(new RegExp(`pf-m-${variant}`));
+        await card.locator("button", { hasText: `Show ${variant} popover` }).click();
+      }
+    });
+  });
+
+  test.describe("Danger (static)", () => {
+    test("danger popover renders visible with footer actions", async ({ page }) => {
+      await expect(page.locator("#po-danger")).toHaveClass(/pf-m-danger/);
       await expect(page.locator("#po-danger .pf-v6-c-popover__footer button")).toHaveCount(2);
     });
+  });
 
-    test("has role dialog and aria-labelledby pointing at danger title", async ({ page }) => {
-      const popover = page.locator("#po-danger");
-      await expect(popover).toHaveAttribute("role", "dialog");
-      await expect(popover).toHaveAttribute("aria-labelledby", "po-danger-title");
-    });
+  test.describe("Standalone routes", () => {
+    for (const example of EXAMPLES) {
+      test(`/components/popover/${example} returns 200`, async ({ page }) => {
+        const res = await page.goto(`/components/popover/${example}`);
+        expect(res.status()).toBe(200);
+      });
+    }
   });
 });

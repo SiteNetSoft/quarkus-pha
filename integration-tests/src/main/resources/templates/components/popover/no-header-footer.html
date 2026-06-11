@@ -1,0 +1,20 @@
+<div x-data="{ open: false }" style="position: relative; display: inline-block; padding-top: 1rem">
+  <button class="pf-v6-c-button pf-m-secondary" type="button" :aria-expanded="open.toString()" @click="open = !open">
+    <span class="pf-v6-c-button__text">Show plain popover</span>
+  </button>
+  <div
+    x-show="open"
+    x-cloak
+    @click.outside="open = false"
+    style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 320px; z-index: 300"
+  >
+    <div class="pf-v6-c-popover pf-m-top pf-m-no-padding" id="po-no-header-footer" role="dialog" aria-label="Plain popover">
+      <div class="pf-v6-c-popover__arrow"></div>
+      <div class="pf-v6-c-popover__content">
+
+
+        <div class="pf-v6-c-popover__body">Body only — no header, footer, close button, or padding.</div>
+      </div>
+    </div>
+  </div>
+</div>
