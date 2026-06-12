@@ -1,34 +1,24 @@
-{! Drawer — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the drawer.
-                                          inline (optional), panelLeft (optional), panelBottom (optional), static (optional) !}
+{! Drawer — PatternFly v6. Root of the drawer family; compose drawer-section /
+   drawer-main (> drawer-content + drawer-panel) includes in the main block. !}
+{! Optional params:
+     id          — DOM id on the root.
+     inline      — pf-m-inline.
+     static      — pf-m-static (starts expanded).
+     panelLeft   — pf-m-panel-left.   panelBottom — pf-m-panel-bottom.
+     pill        — pf-m-pill (detached rounded panel).
+     startExpanded — start with the panel open (without pf-m-static).
+     resizable   — uses the phaDrawerResizable Alpine factory instead of plain expanded
+                   state; pair with drawer-panel resizable=true for the splitter.
+     defaultSize / minSize — px numbers for the resizable factory (data-* attributes).
+     attrs       — raw attribute passthrough on the root.
+   The root owns the `expanded` Alpine state and the bound pf-m-expanded class —
+   toggles inside the content use @click="expanded = !expanded". !}
 <div
-  class="pf-v6-c-drawer{#if inline??} pf-m-inline{/if}{#if panelLeft??} pf-m-panel-left{/if}{#if panelBottom??} pf-m-panel-bottom{/if}{#if static??} pf-m-static{/if}"
+  class="pf-v6-c-drawer{#if inline??} pf-m-inline{/if}{#if static??} pf-m-static{/if}{#if pill??} pf-m-pill{/if}{#if panelLeft??} pf-m-panel-left{/if}{#if panelBottom??} pf-m-panel-bottom{/if}"
   {#if id??}id="{id}"{/if}
-  x-data="{ expanded: {#if static??}true{#else}false{/if} }"
-  :class="{ 'pf-m-expanded': expanded }"
+  {#if resizable??}x-data="phaDrawerResizable" data-position="{#if panelLeft??}start{#else if panelBottom??}bottom{#else}end{/if}"{#if defaultSize??} data-default-size="{defaultSize}"{/if}{#if minSize??} data-min-size="{minSize}"{/if}{#else}x-data="{ expanded: {#if static?? || startExpanded??}true{#else}false{/if} }"{/if}
+  :class="expanded ? 'pf-m-expanded' : ''"
+  {#if attrs??}{attrs.raw}{/if}
 >
-  <div class="pf-v6-c-drawer__main">
-    <div class="pf-v6-c-drawer__content">
-      <div class="pf-v6-c-drawer__body">{#insert content}{/insert}</div>
-    </div>
-    <div class="pf-v6-c-drawer__panel" x-show="expanded" x-cloak :aria-hidden="(!expanded).toString()">
-      <div class="pf-v6-c-drawer__body">
-        <div class="pf-v6-c-drawer__head">
-          {#insert panelTitle}Panel title{/insert}
-          <div class="pf-v6-c-drawer__actions">
-            <div class="pf-v6-c-drawer__close">
-              <button
-                class="pf-v6-c-button pf-m-plain"
-                type="button"
-                aria-label="Close drawer panel"
-                @click="expanded = false"
-              >
-                {icons:svg('fa:times').raw}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="pf-v6-c-drawer__body">{#insert panelBody}{/insert}</div>
-    </div>
-  </div>
+  {#let drawerId=id id=null attrs=null}{#insert /}{/let}
 </div>

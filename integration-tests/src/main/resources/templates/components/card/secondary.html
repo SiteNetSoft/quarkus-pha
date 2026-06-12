@@ -1,14 +1,14 @@
-<div class="pf-v6-l-gallery pf-m-gutter" id="cd-secondary">
-  <div class="pf-v6-c-card pf-m-secondary">
-    <div class="pf-v6-c-card__title"><h2 class="pf-v6-c-card__title-text">First card</h2></div>
-    <div class="pf-v6-c-card__body"><code>pf-m-secondary</code> uses the secondary background color variant.</div>
-  </div>
-  <div class="pf-v6-c-card pf-m-secondary">
-    <div class="pf-v6-c-card__title"><h2 class="pf-v6-c-card__title-text">Second card</h2></div>
-    <div class="pf-v6-c-card__body">Useful on plain page sections for subtle card surfaces.</div>
-  </div>
-  <div class="pf-v6-c-card pf-m-secondary">
-    <div class="pf-v6-c-card__title"><h2 class="pf-v6-c-card__title-text">Third card</h2></div>
-    <div class="pf-v6-c-card__body">All three cards here are secondary.</div>
-  </div>
+<div class="pf-v6-l-gallery pf-m-gutter" style="--pf-v6-l-gallery--GridTemplateColumns--min: 260px">
+  {#include components/data-display/card id="cd-secondary-1" secondary=true}
+  {#include components/data-display/card-title}First card{/include}
+  {#include components/data-display/card-body}<code>pf-m-secondary</code> uses the secondary background color variant.{/include}
+  {/include}
+  {#include components/data-display/card id="cd-secondary-2" secondary=true}
+  {#include components/data-display/card-title}Second card{/include}
+  {#include components/data-display/card-body}Secondary cards pair well on a primary surface.{/include}
+  {/include}
+  {#include components/data-display/card id="cd-secondary-3" secondary=true}
+  {#include components/data-display/card-title}Third card{/include}
+  {#include components/data-display/card-body}All three share the secondary treatment.{/include}
+  {/include}
 </div>

@@ -1,0 +1,18 @@
+{! Drawer head — title row of the panel; main block is the title content. Renders the close button (wired to the root's
+expanded state) unless noClose is set. !} {! Optional: noClose, closeAriaLabel (default "Close drawer panel"). !}
+<div class="pf-v6-c-drawer__head">
+  {#insert /} {#if !noClose??}
+  <div class="pf-v6-c-drawer__actions">
+    <div class="pf-v6-c-drawer__close">
+      <button
+        class="pf-v6-c-button pf-m-plain"
+        type="button"
+        aria-label="{closeAriaLabel ?: 'Close drawer panel'}"
+        @click="expanded = false"
+      >
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+      </button>
+    </div>
+  </div>
+  {/if}
+</div>

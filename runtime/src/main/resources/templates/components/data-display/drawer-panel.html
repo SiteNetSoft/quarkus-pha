@@ -1,0 +1,34 @@
+{! Drawer panel — slides in/out with the root's `expanded` state. Main-block content
+   (drawer-body / drawer-panel-main includes). !}
+{! Optional params:
+     resizable  — renders the splitter wired to the root's phaDrawerResizable factory
+                  (set resizable=true on the drawer root too); orientation follows the
+                  inherited panelBottom param.
+     secondary  — pf-m-secondary background.
+     panelWidth — extra width classes, e.g. "pf-m-width-33 pf-m-width-50-on-lg".
+     attrs      — raw attribute passthrough on the panel. !}
+<div
+  class="pf-v6-c-drawer__panel{#if resizable??} pf-m-resizable{/if}{#if secondary??} pf-m-secondary{/if}{#if panelWidth??} {panelWidth}{/if}"
+  {#if resizable??}x-ref="panel"{/if}
+  x-show="expanded"
+  x-cloak
+  :aria-hidden="(!expanded).toString()"
+  {#if attrs??}{attrs.raw}{/if}
+>
+  {#if resizable??}
+  <div
+    class="pf-v6-c-drawer__splitter{#if !panelBottom??} pf-m-vertical{/if}"
+    x-ref="splitter"
+    role="separator"
+    tabindex="0"
+    aria-orientation="{#if panelBottom??}horizontal{#else}vertical{/if}"
+    aria-label="Resize drawer panel"
+    aria-valuenow="50"
+    @pointerdown="startResize"
+    @keydown="keyResize"
+  >
+    <div class="pf-v6-c-drawer__splitter-handle" aria-hidden="true"></div>
+  </div>
+  {/if}
+  {#insert /}
+</div>

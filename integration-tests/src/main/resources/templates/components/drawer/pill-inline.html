@@ -1,44 +1,16 @@
-<div
-  class="pf-v6-c-drawer pf-m-pill pf-m-inline"
-  id="dr-pill-inline"
-  x-data="{ expanded: false }"
-  :class="{ 'pf-m-expanded': expanded }"
-  style="min-height: 280px"
->
-  <div class="pf-v6-c-drawer__main">
-    <div class="pf-v6-c-drawer__content">
-      <div class="pf-v6-c-drawer__body pf-m-padding">
-        <button
-          class="pf-v6-c-button pf-m-primary"
-          type="button"
-          :aria-expanded="expanded.toString()"
-          @click="expanded = !expanded; if (expanded) $nextTick(() => $refs.focus.focus())"
-        >
-          <span class="pf-v6-c-button__text">Toggle drawer</span>
-        </button>
-        <p style="margin-top: 1rem">
-          Pill + inline — the rounded panel shares space with the content
-          (<code class="ws-code">pf-m-pill pf-m-inline</code>).
-        </p>
-      </div>
-    </div>
-    <div class="pf-v6-c-drawer__panel" x-show="expanded" x-cloak :aria-hidden="(!expanded).toString()">
-      <div class="pf-v6-c-drawer__head">
-        <span :tabindex="expanded ? '0' : '-1'" x-ref="focus">Drawer panel header</span>
-        <div class="pf-v6-c-drawer__actions">
-          <div class="pf-v6-c-drawer__close">
-            <button
-              class="pf-v6-c-button pf-m-plain"
-              type="button"
-              aria-label="Close drawer panel"
-              @click="expanded = false"
-            >
-              <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="pf-v6-c-drawer__body">Drawer panel body</div>
-    </div>
-  </div>
-</div>
+{#include components/data-display/drawer id="dr-pill-inline" pill=true inline=true attrs='style="min-height: 280px"'}
+{#include components/data-display/drawer-main}
+{#include components/data-display/drawer-content}
+{#include components/data-display/drawer-body padding=true}
+    <button class="pf-v6-c-button pf-m-primary" type="button" :aria-expanded="expanded.toString()" @click="expanded = !expanded; if (expanded) $nextTick(() => $refs.focus.focus())">
+      <span class="pf-v6-c-button__text">Toggle drawer</span>
+    </button>
+    <p style="margin-top: 1rem">Pill panel in an inline drawer — <code class="ws-code">pf-m-pill pf-m-inline</code>.</p>
+{/include}
+{/include}
+{#include components/data-display/drawer-panel}
+{#include components/data-display/drawer-head}<span :tabindex="expanded ? '0' : '-1'" x-ref="focus">Drawer panel header</span>{/include}
+{#include components/data-display/drawer-body}Drawer panel body{/include}
+{/include}
+{/include}
+{/include}

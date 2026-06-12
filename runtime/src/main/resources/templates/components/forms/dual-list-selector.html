@@ -1,2 +1,3 @@
 {! Dual list selector — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the selector. !}
-<div class="pf-v6-c-dual-list-selector"{#if id??} id="{id}"{/if}>{#insert content}{/insert}</div>
+{! Optional: attrs — raw attribute passthrough (Alpine directives etc.), rendered verbatim. !}
+<div class="pf-v6-c-dual-list-selector"{#if id??} id="{id}"{/if}{#if attrs??} {attrs.raw}{/if}>{#insert content}{/insert}</div>

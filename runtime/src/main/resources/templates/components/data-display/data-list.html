@@ -1,6 +1,17 @@
-{! Data list — PatternFly v6 !}
-{! Optional: id — DOM id on the root; omit unless something else references the list.
-              compact (optional), ariaLabel (optional — labels the list for AT) !}
-<ul class="pf-v6-c-data-list{#if compact??} pf-m-compact{/if}" role="list"{#if id??} id="{id}"{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
-  {#insert content}{/insert}
+{! Data list — PatternFly v6. Root of the data-list family; compose data-list-item
+   includes in the main block. !}
+{! Optional params:
+     id        — DOM id on the root.
+     ariaLabel — labels the list for AT.
+     compact   — pf-m-compact.   plain — pf-m-plain.
+     gridBreakpoint — grid modifier suffix, e.g. "sm" renders pf-m-grid-sm.
+     attrs     — raw attribute passthrough on the root. !}
+<ul
+  class="pf-v6-c-data-list{#if compact??} pf-m-compact{/if}{#if plain??} pf-m-plain{/if}{#if gridBreakpoint??} pf-m-grid-{gridBreakpoint}{/if}"
+  role="list"
+  {#if id??}id="{id}"{/if}
+  {#if ariaLabel??}aria-label="{ariaLabel}"{/if}
+  {#if attrs??}{attrs.raw}{/if}
+>
+  {#let dataListId=id id=null attrs=null}{#insert /}{/let}
 </ul>

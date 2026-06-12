@@ -1,40 +1,39 @@
-{! Modal — PatternFly v6 (modal-box) !} {! Parameters: id, titleText, size (optional: sm|md|lg), variant (optional:
-danger|warning|success|info), headingLevel (optional, default h1) !}
+{! Modal — PatternFly v6 (modal-box). Root of the modal family; compose
+   modal-close / modal-header / modal-body / modal-footer includes in the main block. !}
+{! Required: id — modal-box id; the backdrop gets {id}-backdrop and the header derives
+              {id}-title for aria-labelledby. !}
+{! Optional params:
+     size       — sm | md | lg (pf-m-*).
+     variant    — danger | warning | success | info (pf-m-* + colored title icon in modal-header).
+     alignTop   — pf-m-align-top.
+     width      — inline width (e.g. "50%") instead of a size.
+     ariaLabel  — label the dialog directly (use for headerless modals).
+     eventOpen  — self-contained mode: the backdrop owns x-data open state, opens on the
+                  open-modal window event (detail = id), closes on Escape, and traps focus.
+                  Without it the modal expects an outer x-data providing `open`.
+     escapeExpr — override the Escape-key expression (e.g. close an inner dropdown first).
+     attrs      — raw attribute passthrough on the modal-box. !}
 <div
   class="pf-v6-c-backdrop"
   id="{id}-backdrop"
-  x-data="{ open: false }"
+  {#if eventOpen??}x-data="{ open: false }" @open-modal.window="if ($event.detail === '{id}') open = true" x-effect="if (open) PHA.trapFocus($el); else PHA.releaseFocus($el);"{/if}
   x-show="open"
   x-cloak
-  @open-modal.window="if ($event.detail === '{id}') open = true"
-  @keydown.escape.window="if (open) open = false"
-  x-effect="if (open) PHA.trapFocus($el); else PHA.releaseFocus($el);"
+  @keydown.escape.window="{escapeExpr ?: 'if (open) open = false'}"
 >
   <div class="pf-v6-c-bullseye">
     <div
-      class="pf-v6-c-modal-box{#if size??} pf-m-{size}{/if}{#if variant??} pf-m-{variant}{/if}"
+      class="pf-v6-c-modal-box{#if size??} pf-m-{size}{/if}{#if variant??} pf-m-{variant}{/if}{#if alignTop??} pf-m-align-top{/if}"
+      id="{id}"
       role="dialog"
       aria-modal="true"
-      aria-labelledby="{id}-title"
+      {#if ariaLabel??}aria-label="{ariaLabel}"{#else}aria-labelledby="{id}-title"{/if}
+      {#if width??}style="width: {width}"{/if}
+      {#if attrs??}{attrs.raw}{/if}
     >
-      <div class="pf-v6-c-modal-box__close">
-        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="open = false">
-          {icons:svg('fa:times').raw}
-        </button>
-      </div>
-      <header class="pf-v6-c-modal-box__header">
-        {#let h=(headingLevel ?: 'h1')}<{h} class="pf-v6-c-modal-box__title" id="{id}-title">
-          {#if variant??}<span class="pf-v6-c-modal-box__title-icon"
-            ><i
-              class="{#if variant is 'danger'}fas fa-exclamation-circle{#else if variant is 'warning'}fas fa-exclamation-triangle{#else if variant is 'success'}fas fa-check-circle{#else}fas fa-info-circle{/if}"
-              aria-hidden="true"
-            ></i></span
-          >{/if}
-          <span class="pf-v6-c-modal-box__title-text">{titleText}</span>
-        </{h}>{/let}
-      </header>
-      <div class="pf-v6-c-modal-box__body">{#insert body}{/insert}</div>
-      <footer class="pf-v6-c-modal-box__footer">{#insert footer}{/insert}</footer>
+      {! Re-expose id as modalId for the family's internal wiring, then shadow id/attrs so
+         they don't leak into composed includes (Qute include-data inheritance). !}
+      {#let modalId=id id=null attrs=null}{#insert /}{/let}
     </div>
   </div>
 </div>

@@ -1,0 +1,19 @@
+{! Data list item — one row (plus optional expandable content). Main-block content:
+   a data-list-item-row include, then data-list-expandable-content when expandable. !}
+{! Optional params:
+     expandable   — the item owns `open` Alpine state and a bound pf-m-expanded class;
+                    pair with data-list-item-control expandToggle=true and
+                    data-list-expandable-content.
+     startOpen    — expandable items start expanded.
+     clickable    — pf-m-clickable + tabindex=0.
+     selectedExpr — Alpine expression; while truthy the item carries pf-m-selected.
+     attrs        — raw attribute passthrough (e.g. @click for clickable rows). !}
+<li
+  class="pf-v6-c-data-list__item{#if clickable??} pf-m-clickable{/if}"
+  {#if clickable??}tabindex="0"{/if}
+  {#if expandable??}x-data="{ open: {#if startOpen??}true{#else}false{/if} }" :class="open ? 'pf-m-expanded' : ''"{/if}
+  {#if selectedExpr??}:class="({selectedExpr}) ? 'pf-m-selected' : ''"{/if}
+  {#if attrs??}{attrs.raw}{/if}
+>
+  {#let attrs=null}{#insert /}{/let}
+</li>

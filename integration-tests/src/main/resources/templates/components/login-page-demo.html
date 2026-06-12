@@ -122,8 +122,8 @@
                         credentials&quot; helper on empty submit, remember-me, social login links, sign-up/forgot band,
                         and page footer. Pair with the
                         <a href="/components/background-image">Background image</a> component for the full-screen
-                        backdrop. Hand-rendered to avoid the runtime template's multiple insert slots colliding with
-                        example-card.
+                        backdrop. Composed from the runtime template's login-prefixed slots; the Alpine state lives on a
+                        wrapper div.
                       </p>
                       {/description} {#content}{#include components/login-page/basic /}{/content} {/include} {#include
                       partials/example-card title="Show/hide password" slug="show-hide-password" component="login-page"}
@@ -157,9 +157,12 @@
                         <p class="pf-v6-c-content--p pf-m-editorial">
                           Parameters accepted by
                           <code class="ws-code">{|{#include components/forms/login-page ... /}|}</code>. The runtime
-                          template defines five slots — <code class="ws-code">header</code>,
-                          <code class="ws-code">headerDesc</code>, <code class="ws-code">body</code>,
-                          <code class="ws-code">footer</code>, <code class="ws-code">pageFooter</code>.
+                          template defines six login-prefixed slots — <code class="ws-code">loginHeader</code>,
+                          <code class="ws-code">loginHeaderDesc</code>,
+                          <code class="ws-code">loginHeaderUtilities</code>, <code class="ws-code">loginBody</code>,
+                          <code class="ws-code">loginFooter</code>, <code class="ws-code">loginPageFooter</code> —
+                          prefixed so they cannot collide with layout or example-card slot names. Optional regions
+                          render only when their <code class="ws-code">has*</code> guard is set.
                         </p>
                         <table
                           class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
@@ -199,9 +202,15 @@
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  >slots <code class="ws-code">header</code> / <code class="ws-code">headerDesc</code> /
-                                  <code class="ws-code">body</code> / <code class="ws-code">footer</code> /
-                                  <code class="ws-code">pageFooter</code></span
+                                  >slots <code class="ws-code">loginHeader</code> /
+                                  <code class="ws-code">loginHeaderDesc</code> /
+                                  <code class="ws-code">loginHeaderUtilities</code> /
+                                  <code class="ws-code">loginBody</code> / <code class="ws-code">loginFooter</code> /
+                                  <code class="ws-code">loginPageFooter</code> (guards
+                                  <code class="ws-code">hasLoginHeader</code> /
+                                  <code class="ws-code">hasHeaderUtilities</code> /
+                                  <code class="ws-code">hasLoginFooter</code> /
+                                  <code class="ws-code">hasPageFooter</code>)</span
                                 >
                               </td>
                               <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>

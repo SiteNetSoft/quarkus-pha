@@ -1,19 +1,7 @@
 <div x-data="{ open: false }">
   <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = true"><span class="pf-v6-c-button__text">Open header/footer-less modal</span></button>
-  <div class="pf-v6-c-backdrop" x-show="open" x-cloak @keydown.escape.window="open = false">
-    <div class="pf-v6-c-bullseye">
-      <div class="pf-v6-c-modal-box pf-m-md" id="mo-no-header-footer" role="dialog" aria-modal="true" aria-label="Modal without header or footer">
-        <div class="pf-v6-c-modal-box__close">
-          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="open = false">
-            <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
-          </button>
-        </div>
-
-        <div class="pf-v6-c-modal-box__body">
-          <p>Only a body — no header, no footer. The close button still floats in the corner.</p>
-        </div>
-
-      </div>
-    </div>
-  </div>
+  {#include components/feedback/modal id="mo-no-header-footer" size="md" ariaLabel="Modal without header or footer"}
+  {#include components/feedback/modal-close /}
+  {#include components/feedback/modal-body}<p>Only a body — no header, no footer. The close button still floats in the corner.</p>{/include}
+  {/include}
 </div>

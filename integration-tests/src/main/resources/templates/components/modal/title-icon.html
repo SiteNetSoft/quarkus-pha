@@ -1,26 +1,12 @@
 <div x-data="{ open: false }">
   <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = true"><span class="pf-v6-c-button__text">Open warning modal</span></button>
-  <div class="pf-v6-c-backdrop" x-show="open" x-cloak @keydown.escape.window="open = false">
-    <div class="pf-v6-c-bullseye">
-      <div class="pf-v6-c-modal-box pf-m-md pf-m-warning" id="mo-title-icon" role="dialog" aria-modal="true" aria-labelledby="mo-title-icon-title">
-        <div class="pf-v6-c-modal-box__close">
-          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="open = false">
-            <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
-          </button>
-        </div>
-        <header class="pf-v6-c-modal-box__header">
-          <h2 class="pf-v6-c-modal-box__title" id="mo-title-icon-title">
-            <span class="pf-v6-c-modal-box__title-icon">{icons:svg('fa:exclamation-triangle').raw}</span><span class="pf-v6-c-modal-box__title-text">Warning modal</span>
-          </h2>
-        </header>
-        <div class="pf-v6-c-modal-box__body">
-          <p>The <code class="ws-code">pf-m-warning</code> variant colors the title icon.</p>
-        </div>
-        <footer class="pf-v6-c-modal-box__footer">
-          <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = false"><span class="pf-v6-c-button__text">Confirm</span></button>
-          <button class="pf-v6-c-button pf-m-link" type="button" @click="open = false"><span class="pf-v6-c-button__text">Cancel</span></button>
-        </footer>
-      </div>
-    </div>
-  </div>
+  {#include components/feedback/modal id="mo-title-icon" size="md" variant="warning"}
+  {#include components/feedback/modal-close /}
+  {#include components/feedback/modal-header headingLevel="h2"}Warning modal{/include}
+  {#include components/feedback/modal-body}<p>The <code class="ws-code">pf-m-warning</code> variant colors the title icon.</p>{/include}
+  {#include components/feedback/modal-footer}
+  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = false"><span class="pf-v6-c-button__text">Confirm</span></button>
+  <button class="pf-v6-c-button pf-m-link" type="button" @click="open = false"><span class="pf-v6-c-button__text">Cancel</span></button>
+  {/include}
+  {/include}
 </div>

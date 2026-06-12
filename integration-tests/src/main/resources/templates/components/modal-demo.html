@@ -293,9 +293,13 @@
                           Modal props
                         </h3>
                         <p class="pf-v6-c-content--p pf-m-editorial">
-                          Parameters accepted by
-                          <code class="ws-code">{|{#include components/feedback/modal ... /}|}</code>. Examples here are
-                          hand-rendered to avoid slot collisions and to wire the trigger button next to the dialog.
+                          The modal is a template family: <code class="ws-code">modal</code> renders the backdrop +
+                          bullseye + modal-box and the regions come from <code class="ws-code">modal-close</code> /
+                          <code class="ws-code">modal-header</code> / <code class="ws-code">modal-body</code> /
+                          <code class="ws-code">modal-footer</code> includes composed in its main block. The trigger
+                          button lives next to the include inside a shared <code class="ws-code">x-data</code> scope
+                          providing <code class="ws-code">open</code> (or use <code class="ws-code">eventOpen</code>
+                          for the self-contained event-driven mode).
                         </p>
                         <table
                           class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
@@ -322,53 +326,124 @@
                               </td>
                               <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">DOM id on the backdrop element.</span>
+                                <span class="pf-v6-c-table__text"
+                                  >modal-box id; the backdrop gets <code class="ws-code">{|{id}|}-backdrop</code> and the
+                                  header derives <code class="ws-code">{|{id}|}-title</code> for
+                                  <code class="ws-code">aria-labelledby</code>.</span
+                                >
                               </td>
                             </tr>
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">titleText</code></span
+                                  ><code class="ws-code">size / variant / alignTop / width</code></span
                                 >
+                              </td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">String / Boolean</span>
+                              </td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">sm|md|lg</code>;
+                                  <code class="ws-code">danger|warning|success|info</code> (also colors the header
+                                  icon); <code class="ws-code">pf-m-align-top</code>; inline width (e.g. "50%").</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">ariaLabel</code></span>
                               </td>
                               <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  >Header title (wires <code class="ws-code">aria-labelledby</code>).</span
+                                  >Label the dialog directly — use for headerless modals.</span
                                 >
                               </td>
                             </tr>
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">size</code></span>
+                                <span class="pf-v6-c-table__text"><code class="ws-code">eventOpen</code></span>
                               </td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">sm | md | lg</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Modal width.</span></td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">variant</code></span>
-                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Boolean</span></td>
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  ><code class="ws-code">danger | warning | success | info</code></span
+                                  >Self-contained mode: opens on the <code class="ws-code">open-modal</code> window
+                                  event (detail = id), Escape closes, focus is trapped. Without it the modal expects an
+                                  outer <code class="ws-code">x-data</code> providing
+                                  <code class="ws-code">open</code>.</span
                                 >
-                              </td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">Semantic tinting + auto title icon.</span>
                               </td>
                             </tr>
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">escapeExpr</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  >slots <code class="ws-code">body</code> + <code class="ws-code">footer</code></span
+                                  >Override the Escape-key expression (e.g. close an inner dropdown first).</span
                                 >
                               </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">Modal body content + footer action buttons.</span>
+                                <span class="pf-v6-c-table__text"><code class="ws-code">attrs</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String (raw)</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Raw attribute passthrough on the modal-box. Shadowed inside the family&#39;s
+                                  inserts.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">modal-close</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Corner close button wired to <code class="ws-code">open = false</code>;
+                                  <code class="ws-code">ariaLabel</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">modal-header</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Title content is the main block (rich markup welcome);
+                                  <code class="ws-code">headingLevel</code>, <code class="ws-code">iconName</code>,
+                                  <code class="ws-code">descriptionText</code>,
+                                  <code class="ws-code">hasModalHelp</code> +
+                                  <code class="ws-code">modalHelp</code> slot.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">modal-body</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Main-block content; <code class="ws-code">scrollable</code>,
+                                  <code class="ws-code">attrs</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">modal-footer</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">Main-block content (action buttons).</span>
                               </td>
                             </tr>
                           </tbody>

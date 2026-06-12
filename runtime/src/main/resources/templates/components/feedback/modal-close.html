@@ -1,0 +1,6 @@
+{! Modal close button — closes via the family's `open` Alpine state. !} {! Optional: ariaLabel (default "Close"). !}
+<div class="pf-v6-c-modal-box__close">
+  <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="{ariaLabel ?: 'Close'}" @click="open = false">
+    <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+  </button>
+</div>

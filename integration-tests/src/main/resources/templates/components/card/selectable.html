@@ -1,29 +1,29 @@
 <div class="pf-v6-l-gallery pf-m-gutter" id="cd-selectable" x-data="{ sel1: false, sel2: false }">
-  <div class="pf-v6-c-card pf-m-selectable" id="cd-selectable-1" :class="{ 'pf-m-selected': sel1 }">
-    <div class="pf-v6-c-card__header">
-      <div class="pf-v6-c-card__selectable-actions">
-        <div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="cd-selectable-1-check" aria-labelledby="cd-selectable-1-title" x-model="sel1" /></div>
-      </div>
-      <div class="pf-v6-c-card__title" id="cd-selectable-1-title"><h2 class="pf-v6-c-card__title-text">First card</h2></div>
-    </div>
-    <div class="pf-v6-c-card__body">This card is selectable.</div>
-  </div>
-  <div class="pf-v6-c-card pf-m-selectable" id="cd-selectable-2" :class="{ 'pf-m-selected': sel2 }">
-    <div class="pf-v6-c-card__header">
-      <div class="pf-v6-c-card__selectable-actions">
-        <div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="cd-selectable-2-check" aria-labelledby="cd-selectable-2-title" x-model="sel2" /></div>
-      </div>
-      <div class="pf-v6-c-card__title" id="cd-selectable-2-title"><h2 class="pf-v6-c-card__title-text">Second card</h2></div>
-    </div>
-    <div class="pf-v6-c-card__body">This card is selectable.</div>
-  </div>
-  <div class="pf-v6-c-card pf-m-selectable pf-m-disabled" id="cd-selectable-3">
-    <div class="pf-v6-c-card__header">
-      <div class="pf-v6-c-card__selectable-actions">
-        <div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="cd-selectable-3-check" aria-labelledby="cd-selectable-3-title" disabled /></div>
-      </div>
-      <div class="pf-v6-c-card__title" id="cd-selectable-3-title"><h2 class="pf-v6-c-card__title-text">Third card</h2></div>
-    </div>
-    <div class="pf-v6-c-card__body">This card is disabled.</div>
-  </div>
+  {#include components/data-display/card id="cd-selectable-1" selectable=true selectedExpr="sel1"}
+  {#include components/data-display/card-header hasSelectableActions=true}
+  {#cardSelectableActions}
+  <div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="cd-selectable-1-check" aria-labelledby="cd-selectable-1-title" x-model="sel1" /></div>
+  {/cardSelectableActions}
+  {#include components/data-display/card-title id="cd-selectable-1-title"}First card{/include}
+  {/include}
+  {#include components/data-display/card-body}This card is selectable.{/include}
+  {/include}
+  {#include components/data-display/card id="cd-selectable-2" selectable=true selectedExpr="sel2"}
+  {#include components/data-display/card-header hasSelectableActions=true}
+  {#cardSelectableActions}
+  <div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="cd-selectable-2-check" aria-labelledby="cd-selectable-2-title" x-model="sel2" /></div>
+  {/cardSelectableActions}
+  {#include components/data-display/card-title id="cd-selectable-2-title"}Second card{/include}
+  {/include}
+  {#include components/data-display/card-body}This card is selectable.{/include}
+  {/include}
+  {#include components/data-display/card id="cd-selectable-3" selectable=true disabled=true}
+  {#include components/data-display/card-header hasSelectableActions=true}
+  {#cardSelectableActions}
+  <div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="cd-selectable-3-check" aria-labelledby="cd-selectable-3-title" disabled /></div>
+  {/cardSelectableActions}
+  {#include components/data-display/card-title id="cd-selectable-3-title"}Third card{/include}
+  {/include}
+  {#include components/data-display/card-body}This card is disabled.{/include}
+  {/include}
 </div>

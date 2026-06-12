@@ -1,0 +1,20 @@
+<div x-data="{ sel: 1 }">
+{#include components/data-display/data-list id="dl-clickable-rows" ariaLabel="Data list"}
+{#include components/data-display/data-list-item clickable=true selectedExpr="sel === 1" attrs='@click="sel = 1" @keydown.enter="sel = 1"'}
+{#include components/data-display/data-list-item-row}
+{#include components/data-display/data-list-item-content}
+{#include components/data-display/data-list-cell}<strong>First row</strong>{/include}
+{#include components/data-display/data-list-cell}Click or press Enter to select{/include}
+{/include}
+{/include}
+{/include}
+{#include components/data-display/data-list-item clickable=true selectedExpr="sel === 2" attrs='@click="sel = 2" @keydown.enter="sel = 2"'}
+{#include components/data-display/data-list-item-row}
+{#include components/data-display/data-list-item-content}
+{#include components/data-display/data-list-cell}<strong>Second row</strong>{/include}
+{#include components/data-display/data-list-cell}The selected row carries pf-m-selected{/include}
+{/include}
+{/include}
+{/include}
+{/include}
+</div>
