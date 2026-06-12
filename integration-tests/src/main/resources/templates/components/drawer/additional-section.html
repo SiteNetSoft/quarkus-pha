@@ -1,44 +1,19 @@
-<div
-  class="pf-v6-c-drawer"
-  id="dr-additional-section"
-  x-data="{ expanded: false }"
-  :class="{ 'pf-m-expanded': expanded }"
-  style="min-height: 280px"
->
-  <div class="pf-v6-c-drawer__section">drawer-section above the drawer content</div>
-  <div class="pf-v6-c-drawer__main">
-    <div class="pf-v6-c-drawer__content">
-      <div class="pf-v6-c-drawer__body pf-m-padding">
-        <button
-          class="pf-v6-c-button pf-m-primary"
-          type="button"
-          :aria-expanded="expanded.toString()"
-          @click="expanded = !expanded; if (expanded) $nextTick(() => $refs.focus.focus())"
-        >
-          <span class="pf-v6-c-button__text">Toggle drawer</span>
-        </button>
-        <p style="margin-top: 1rem">
-          A <code class="ws-code">pf-v6-c-drawer__section</code> sits outside
-          <code class="ws-code">__main</code> — useful for a heading or toolbar the panel should never overlap.
-        </p>
-      </div>
-    </div>
-    <div class="pf-v6-c-drawer__panel" x-show="expanded" x-cloak :aria-hidden="(!expanded).toString()">
-      <div class="pf-v6-c-drawer__head">
-        <span :tabindex="expanded ? '0' : '-1'" x-ref="focus">Drawer panel header</span>
-        <div class="pf-v6-c-drawer__actions">
-          <div class="pf-v6-c-drawer__close">
-            <button
-              class="pf-v6-c-button pf-m-plain"
-              type="button"
-              aria-label="Close drawer panel"
-              @click="expanded = false"
-            >
-              <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+{#include components/data-display/drawer id="dr-additional-section" attrs='style="min-height: 280px"'}
+{#include components/data-display/drawer-section}drawer-section above the drawer content{/include}
+{#include components/data-display/drawer-main}
+{#include components/data-display/drawer-content}
+{#include components/data-display/drawer-body padding=true}
+    <button class="pf-v6-c-button pf-m-primary" type="button" :aria-expanded="expanded.toString()" @click="expanded = !expanded; if (expanded) $nextTick(() => $refs.focus.focus())">
+      <span class="pf-v6-c-button__text">Toggle drawer</span>
+    </button>
+    <p style="margin-top: 1rem">
+      A <code class="ws-code">pf-v6-c-drawer__section</code> sits outside <code class="ws-code">__main</code> — above
+      the content and panel.
+    </p>
+{/include}
+{/include}
+{#include components/data-display/drawer-panel}
+{#include components/data-display/drawer-head}<span :tabindex="expanded ? '0' : '-1'" x-ref="focus">Drawer panel header</span>{/include}
+{/include}
+{/include}
+{/include}

@@ -432,8 +432,14 @@
                           Drawer props
                         </h3>
                         <p class="pf-v6-c-content--p pf-m-editorial">
-                          Parameters accepted by
-                          <code class="ws-code">{|{#include components/data-display/drawer ... /}|}</code>.
+                          The drawer is a template family: <code class="ws-code">drawer</code> is the root (it owns the
+                          <code class="ws-code">expanded</code> Alpine state and the bound
+                          <code class="ws-code">pf-m-expanded</code> class) and the structure comes from
+                          <code class="ws-code">drawer-section</code> / <code class="ws-code">drawer-main</code> /
+                          <code class="ws-code">drawer-content</code> / <code class="ws-code">drawer-body</code> /
+                          <code class="ws-code">drawer-panel</code> / <code class="ws-code">drawer-panel-main</code> /
+                          <code class="ws-code">drawer-head</code> includes composed in main blocks — no generic slot
+                          names to collide with outer templates.
                         </p>
                         <table
                           class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
@@ -454,37 +460,114 @@
                           <tbody role="rowgroup" class="pf-v6-c-table__tbody">
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
-                                >
+                                <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
                               </td>
                               <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><code class="ws-code">inline</code> / <code class="ws-code">panelLeft</code> /
-                                  <code class="ws-code">panelBottom</code> / <code class="ws-code">static</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Layout modifiers — emit matching <code class="ws-code">pf-m-*</code>.</span
-                                >
+                                <span class="pf-v6-c-table__text">DOM id on the drawer root.</span>
                               </td>
                             </tr>
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  >slots <code class="ws-code">content</code> /
-                                  <code class="ws-code">panelTitle</code> / <code class="ws-code">panelBody</code></span
+                                  ><code class="ws-code">inline / static / pill / panelLeft / panelBottom</code></span
                                 >
                               </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Boolean</span></td>
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">Main body, panel header text, and panel body.</span>
+                                <span class="pf-v6-c-table__text"
+                                  >The matching <code class="ws-code">pf-m-*</code> modifier;
+                                  <code class="ws-code">static</code> also starts expanded.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">startExpanded</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Start with the panel open without <code class="ws-code">pf-m-static</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">resizable + defaultSize / minSize</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Boolean + px</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Uses the <code class="ws-code">phaDrawerResizable</code> Alpine factory; pair with
+                                  <code class="ws-code">drawer-panel resizable=true</code> for the splitter.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">attrs</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String (raw)</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Raw attribute passthrough on the root (styles, Alpine directives). Shadowed inside
+                                  the family&#39;s inserts.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code"
+                                    >drawer-section / drawer-main / drawer-content / drawer-panel-main</code
+                                  ></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">Structural wrappers — main-block content.</span>
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">drawer-body</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Repeatable body section; <code class="ws-code">padding</code> /
+                                  <code class="ws-code">noPadding</code> modifiers.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">drawer-panel</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">resizable</code> (splitter wired to the factory, orientation
+                                  follows <code class="ws-code">panelBottom</code>),
+                                  <code class="ws-code">secondary</code>, <code class="ws-code">panelWidth</code> (e.g.
+                                  "pf-m-width-33"), <code class="ws-code">attrs</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">drawer-head</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Title row; main block is the title content. Renders the close button (wired to
+                                  <code class="ws-code">expanded</code>) unless
+                                  <code class="ws-code">noClose</code>.</span
+                                >
                               </td>
                             </tr>
                           </tbody>

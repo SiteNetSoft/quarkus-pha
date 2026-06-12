@@ -1,0 +1,21 @@
+{! Modal header — title content is the include's main block (rich markup welcome).
+   Inherits modalId from the modal root and derives the {modalId}-title id that the
+   root's aria-labelledby points at. !}
+{! Optional params:
+     headingLevel    — h1…h6 (default h1).
+     variant         — danger | warning | success | info; renders the matching title icon.
+                       (Inherited from the modal root automatically when set there.)
+     iconName        — custom title icon ("set:slug"), overrides the variant icon.
+     descriptionText — __description line under the title.
+     hasModalHelp    — wrap the title in __header-main (pf-m-help) and render the
+                       modalHelp slot beside it (help button / popover). !}
+{#let h=(headingLevel ?: 'h1')}
+<header class="pf-v6-c-modal-box__header{#if hasModalHelp??} pf-m-help{/if}">
+  {#if hasModalHelp??}<div class="pf-v6-c-modal-box__header-main">{/if}
+  <{h} class="pf-v6-c-modal-box__title"{#if modalId??} id="{modalId}-title"{/if}>
+    {#if iconName??}<span class="pf-v6-c-modal-box__title-icon">{icons:svg(iconName).raw}</span>{#else if variant??}<span class="pf-v6-c-modal-box__title-icon">{#if variant is 'danger'}{icons:svg('fa:circle-exclamation').raw}{#else if variant is 'warning'}{icons:svg('fa:exclamation-triangle').raw}{#else if variant is 'success'}{icons:svg('fa:circle-check').raw}{#else}{icons:svg('fa:circle-info').raw}{/if}</span>{/if}<span class="pf-v6-c-modal-box__title-text">{#insert /}</span>
+  </{h}>
+  {#if hasModalHelp??}</div>{#insert modalHelp}{/insert}{/if}
+  {#if descriptionText??}<div class="pf-v6-c-modal-box__description">{descriptionText}</div>{/if}
+</header>
+{/let}

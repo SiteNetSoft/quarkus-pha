@@ -1,70 +1,26 @@
-<div
-  class="pf-v6-c-drawer"
-  id="dr-focus-trap"
-  x-data="{ expanded: false }"
-  :class="{ 'pf-m-expanded': expanded }"
-  x-effect="if (expanded) { $nextTick(() => { PHA.trapFocus($refs.panel); $refs.focus.focus(); }); } else { PHA.releaseFocus($refs.panel); }"
-  @keydown.escape="expanded = false"
-  style="min-height: 240px"
->
-  <div class="pf-v6-c-drawer__main">
-    <div class="pf-v6-c-drawer__content">
-      <div class="pf-v6-c-drawer__body pf-m-padding">
-        <button
-          class="pf-v6-c-button pf-m-primary"
-          type="button"
-          :aria-expanded="expanded.toString()"
-          @click="expanded = !expanded"
-        >
-          <span class="pf-v6-c-button__text">Toggle drawer</span>
-        </button>
-        <p style="margin-top: 1rem">
-          While the panel is open, Tab cycles only through the panel's focusable elements. Press Escape to close the
-          panel and return focus to the page.
-        </p>
-      </div>
-    </div>
-    <div
-      class="pf-v6-c-drawer__panel"
-      x-ref="panel"
-      role="dialog"
-      aria-label="Drawer panel with trapped focus"
-      x-show="expanded"
-      x-cloak
-      :aria-hidden="(!expanded).toString()"
-    >
-      <div class="pf-v6-c-drawer__head">
-        <span :tabindex="expanded ? '0' : '-1'" x-ref="focus">Drawer panel header</span>
-        <div class="pf-v6-c-drawer__actions">
-          <div class="pf-v6-c-drawer__close">
-            <button
-              class="pf-v6-c-button pf-m-plain"
-              type="button"
-              aria-label="Close drawer panel"
-              @click="expanded = false"
-            >
-              <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="pf-v6-c-drawer__body">
-        <form class="pf-v6-c-form" @submit.prevent>
-          <div class="pf-v6-c-form__group">
-            <label class="pf-v6-c-form__label" for="dr-focus-trap-input">
-              <span class="pf-v6-c-form__label-text">A focusable input</span>
-            </label>
-            <span class="pf-v6-c-form-control">
-              <input type="text" id="dr-focus-trap-input" name="dr-focus-trap-input" />
-            </span>
-          </div>
-          <div class="pf-v6-c-form__group">
-            <button class="pf-v6-c-button pf-m-secondary" type="button">
-              <span class="pf-v6-c-button__text">A focusable button</span>
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+{! Tab is trapped inside the open panel (PHA.trapFocus); Escape closes. !}
+{#include components/data-display/drawer id="dr-focus-trap" attrs='x-effect="if (expanded) { $nextTick(() => { PHA.trapFocus($refs.panel); $refs.focus.focus(); }); } else { PHA.releaseFocus($refs.panel); }" @keydown.escape="expanded = false" style="min-height: 240px"'}
+{#include components/data-display/drawer-main}
+{#include components/data-display/drawer-content}
+{#include components/data-display/drawer-body padding=true}
+    <button class="pf-v6-c-button pf-m-primary" type="button" :aria-expanded="expanded.toString()" @click="expanded = !expanded">
+      <span class="pf-v6-c-button__text">Toggle drawer</span>
+    </button>
+    <p style="margin-top: 1rem">
+      While the panel is open, Tab cycles only through the panel's focusable elements; Escape closes it.
+    </p>
+{/include}
+{/include}
+{#include components/data-display/drawer-panel attrs='x-ref="panel"'}
+{#include components/data-display/drawer-head}<span :tabindex="expanded ? '0' : '-1'" x-ref="focus">Drawer panel header</span>{/include}
+{#include components/data-display/drawer-body}
+  <div class="pf-v6-l-flex pf-m-space-items-sm" style="padding: 0 1rem 1rem">
+    <span class="pf-v6-c-form-control"><input type="text" aria-label="Sample input" placeholder="Sample input" /></span>
+    <button class="pf-v6-c-button pf-m-secondary" type="button">
+      <span class="pf-v6-c-button__text">Action</span>
+    </button>
   </div>
-</div>
+{/include}
+{/include}
+{/include}
+{/include}

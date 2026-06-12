@@ -1,0 +1,84 @@
+{! Items carry descriptions; double arrows move everything at once.
+   PF's tree and draggable variants are covered by the Tree view and Drag and drop components. !}
+<div x-data="{
+    available: [ { name: 'Apple', desc: 'Crisp and sweet' }, { name: 'Banana', desc: 'High in potassium' }, { name: 'Cherry', desc: 'Small and tart' } ],
+    chosen: [],
+    focusAvail: null, focusChosen: null,
+    moveRight() { if (this.focusAvail !== null) { this.chosen.push(this.focusAvail); this.available = this.available.filter((x) => x.name !== this.focusAvail.name); this.focusAvail = null; } },
+    moveLeft() { if (this.focusChosen !== null) { this.available.push(this.focusChosen); this.chosen = this.chosen.filter((x) => x.name !== this.focusChosen.name); this.focusChosen = null; } },
+    moveAllRight() { this.chosen = this.chosen.concat(this.available); this.available = []; this.focusAvail = null; },
+    moveAllLeft() { this.available = this.available.concat(this.chosen); this.chosen = []; this.focusChosen = null; }
+  }">
+  {#include components/forms/dual-list-selector id="dls-complex"}{#content}
+  <div class="pf-v6-c-dual-list-selector__pane pf-m-available">
+    <div class="pf-v6-c-dual-list-selector__header">
+      <div class="pf-v6-c-dual-list-selector__title-text">Available options</div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__status">
+      <div class="pf-v6-c-dual-list-selector__status-text" x-text="available.length + ' options'"></div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__menu">
+      <ul class="pf-v6-c-dual-list-selector__list" role="listbox" aria-label="Available options">
+        <template x-for="item in available" :key="item.name">
+          <li class="pf-v6-c-dual-list-selector__list-item" role="option" :aria-selected="(focusAvail && focusAvail.name === item.name).toString()" @click="focusAvail = (focusAvail && focusAvail.name === item.name ? null : item)">
+            <div class="pf-v6-c-dual-list-selector__list-item-row" :class="{ 'pf-m-selected': focusAvail && focusAvail.name === item.name }">
+              <span class="pf-v6-c-dual-list-selector__item">
+                <span class="pf-v6-c-dual-list-selector__item-main">
+                  <span class="pf-v6-c-dual-list-selector__item-text" x-text="item.name"></span>
+                <span class="pf-v6-c-dual-list-selector__item-text pf-v6-u-color-200" style="display: block; font-size: var(--pf-t--global--font--size--xs)" x-text="item.desc"></span>
+                </span>
+              </span>
+            </div>
+          </li>
+        </template>
+      </ul>
+    </div>
+  </div>
+  <div class="pf-v6-c-dual-list-selector__controls">
+    <div class="pf-v6-c-dual-list-selector__controls-item">
+      <button class="pf-v6-c-button pf-m-plain" type="button" :disabled="focusAvail === null" @click="moveRight()" aria-label="Move right">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-right').raw}</span>
+      </button>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__controls-item">
+      <button class="pf-v6-c-button pf-m-plain" type="button" :disabled="available.length === 0" @click="moveAllRight()" aria-label="Move all right">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angles-right').raw}</span>
+      </button>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__controls-item">
+      <button class="pf-v6-c-button pf-m-plain" type="button" :disabled="chosen.length === 0" @click="moveAllLeft()" aria-label="Move all left">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angles-left').raw}</span>
+      </button>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__controls-item">
+      <button class="pf-v6-c-button pf-m-plain" type="button" :disabled="focusChosen === null" @click="moveLeft()" aria-label="Move left">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-left').raw}</span>
+      </button>
+    </div>
+  </div>
+  <div class="pf-v6-c-dual-list-selector__pane pf-m-chosen">
+    <div class="pf-v6-c-dual-list-selector__header">
+      <div class="pf-v6-c-dual-list-selector__title-text">Chosen options</div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__status">
+      <div class="pf-v6-c-dual-list-selector__status-text" x-text="chosen.length + ' options'"></div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__menu">
+      <ul class="pf-v6-c-dual-list-selector__list" role="listbox" aria-label="Chosen options">
+        <template x-for="item in chosen" :key="item.name">
+          <li class="pf-v6-c-dual-list-selector__list-item" role="option" :aria-selected="(focusChosen && focusChosen.name === item.name).toString()" @click="focusChosen = (focusChosen && focusChosen.name === item.name ? null : item)">
+            <div class="pf-v6-c-dual-list-selector__list-item-row" :class="{ 'pf-m-selected': focusChosen && focusChosen.name === item.name }">
+              <span class="pf-v6-c-dual-list-selector__item">
+                <span class="pf-v6-c-dual-list-selector__item-main">
+                  <span class="pf-v6-c-dual-list-selector__item-text" x-text="item.name"></span>
+                <span class="pf-v6-c-dual-list-selector__item-text pf-v6-u-color-200" style="display: block; font-size: var(--pf-t--global--font--size--xs)" x-text="item.desc"></span>
+                </span>
+              </span>
+            </div>
+          </li>
+        </template>
+      </ul>
+    </div>
+  </div>
+  {/content}{/include}
+</div>

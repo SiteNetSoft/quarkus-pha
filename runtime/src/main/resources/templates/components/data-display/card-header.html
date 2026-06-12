@@ -1,0 +1,33 @@
+{! Card header — PatternFly v6. Slots are card-prefixed so they cannot collide with outer templates' slot names through
+nested-include resolution. !} {! Optional params: wrap — pf-m-wrap (long titles wrap under the actions). expandable —
+renders the expand toggle, wired to the root card's `expanded` Alpine state (set expandable=true on the card include).
+toggleAriaLabel — aria-label on the expand toggle (default "Details"). hasCardActions — render the __actions region with
+the cardActions slot. hasSelectableActions — render __selectable-actions with the cardSelectableActions slot.
+hasHeaderMain — render __header-main with the cardHeaderMain slot (brand image and/or card-title include). Main block:
+rendered bare after the regions — the usual spot for a direct card-title include when no header-main wrapper is wanted.
+!}
+<div class="pf-v6-c-card__header{#if wrap??} pf-m-wrap{/if}">
+  {#if expandable??}
+  <div class="pf-v6-c-card__header-toggle">
+    <button
+      class="pf-v6-c-button pf-m-plain"
+      type="button"
+      aria-label="{toggleAriaLabel ?: 'Details'}"
+      :aria-expanded="expanded.toString()"
+      @click="expanded = !expanded"
+    >
+      <span class="pf-v6-c-button__icon"
+        ><span class="pf-v6-c-card__header-toggle-icon">{icons:svg('fa:angle-right').raw}</span></span
+      >
+    </button>
+  </div>
+  {/if} {#if hasCardActions??}
+  <div class="pf-v6-c-card__actions">{#let id=null attrs=null}{#insert cardActions}{/insert}{/let}</div>
+  {/if} {#if hasSelectableActions??}
+  <div class="pf-v6-c-card__selectable-actions">
+    {#let id=null attrs=null}{#insert cardSelectableActions}{/insert}{/let}
+  </div>
+  {/if} {#if hasHeaderMain??}
+  <div class="pf-v6-c-card__header-main">{#let id=null attrs=null}{#insert cardHeaderMain}{/insert}{/let}</div>
+  {/if} {#let attrs=null}{#insert /}{/let}
+</div>

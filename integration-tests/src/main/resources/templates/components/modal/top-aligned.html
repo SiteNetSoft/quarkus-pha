@@ -1,26 +1,12 @@
 <div x-data="{ open: false }">
   <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = true"><span class="pf-v6-c-button__text">Open top-aligned modal</span></button>
-  <div class="pf-v6-c-backdrop" x-show="open" x-cloak @keydown.escape.window="open = false">
-    <div class="pf-v6-c-bullseye">
-      <div class="pf-v6-c-modal-box pf-m-md pf-m-align-top" id="mo-top-aligned" role="dialog" aria-modal="true" aria-labelledby="mo-top-aligned-title">
-        <div class="pf-v6-c-modal-box__close">
-          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="open = false">
-            <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
-          </button>
-        </div>
-        <header class="pf-v6-c-modal-box__header">
-          <h2 class="pf-v6-c-modal-box__title" id="mo-top-aligned-title">
-            <span class="pf-v6-c-modal-box__title-text">Top aligned modal</span>
-          </h2>
-        </header>
-        <div class="pf-v6-c-modal-box__body">
-          <p><code class="ws-code">pf-m-align-top</code> pins the dialog to the top of the viewport.</p>
-        </div>
-        <footer class="pf-v6-c-modal-box__footer">
-          <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = false"><span class="pf-v6-c-button__text">Confirm</span></button>
-          <button class="pf-v6-c-button pf-m-link" type="button" @click="open = false"><span class="pf-v6-c-button__text">Cancel</span></button>
-        </footer>
-      </div>
-    </div>
-  </div>
+  {#include components/feedback/modal id="mo-top-aligned" size="md" alignTop=true}
+  {#include components/feedback/modal-close /}
+  {#include components/feedback/modal-header headingLevel="h2"}Top aligned{/include}
+  {#include components/feedback/modal-body}<p><code class="ws-code">pf-m-align-top</code> pins the dialog to the top of the viewport.</p>{/include}
+  {#include components/feedback/modal-footer}
+  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = false"><span class="pf-v6-c-button__text">Confirm</span></button>
+  <button class="pf-v6-c-button pf-m-link" type="button" @click="open = false"><span class="pf-v6-c-button__text">Cancel</span></button>
+  {/include}
+  {/include}
 </div>

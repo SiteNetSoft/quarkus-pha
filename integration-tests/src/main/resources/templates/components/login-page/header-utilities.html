@@ -1,100 +1,93 @@
-<div class="pf-v6-c-login" id="lp-header-utilities">
-  <div class="pf-v6-c-login__container">
-    <main class="pf-v6-c-login__main">
-      <header class="pf-v6-c-login__main-header">
-        <h1 class="pf-v6-c-title pf-m-3xl">Log in to your account</h1>
-        <p class="pf-v6-c-login__main-header-desc">Enter your single sign-on LDAP credentials.</p>
-        <div
-          class="pf-v6-c-login__main-header-utilities"
-          x-data="{ open: false, lang: 'English' }"
-          style="position: relative"
-        >
-          <button
-            class="pf-v6-c-menu-toggle"
-            type="button"
-            id="lp-header-utilities-lang-toggle"
-            :class="open ? 'pf-m-expanded' : ''"
-            aria-expanded="false"
-            :aria-expanded="open.toString()"
-            @click="open = !open"
-          >
-            <span class="pf-v6-c-menu-toggle__icon">{icons:svg('fa:globe').raw}</span>
-            <span class="pf-v6-c-menu-toggle__text" x-text="lang">English</span>
-            <span class="pf-v6-c-menu-toggle__controls">
-              <span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span>
-            </span>
+{#include components/forms/login-page id="lp-header-utilities" titleText="Log in to your account" hasHeaderUtilities=true}
+{#loginHeaderDesc}
+<p class="pf-v6-c-login__main-header-desc">Enter your single sign-on LDAP credentials.</p>
+{/loginHeaderDesc}
+{#loginHeaderUtilities}
+<div x-data="{ open: false, lang: 'English' }" style="position: relative">
+  <button
+    class="pf-v6-c-menu-toggle"
+    type="button"
+    id="lp-header-utilities-lang-toggle"
+    :class="open ? 'pf-m-expanded' : ''"
+    aria-expanded="false"
+    :aria-expanded="open.toString()"
+    @click="open = !open"
+  >
+    <span class="pf-v6-c-menu-toggle__icon">{icons:svg('fa:globe').raw}</span>
+    <span class="pf-v6-c-menu-toggle__text" x-text="lang">English</span>
+    <span class="pf-v6-c-menu-toggle__controls">
+      <span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span>
+    </span>
+  </button>
+  <div
+    class="pf-v6-c-menu"
+    x-show="open"
+    x-cloak
+    @click.outside="open = false"
+    style="position: absolute; top: 100%; right: 0; z-index: 200; min-width: 10rem"
+  >
+    <div class="pf-v6-c-menu__content">
+      <ul class="pf-v6-c-menu__list" role="menu">
+        <li role="none" class="pf-v6-c-menu__list-item">
+          <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="lang = 'English'; open = false">
+            <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">English</span></span>
           </button>
-          <div
-            class="pf-v6-c-menu"
-            x-show="open"
-            x-cloak
-            @click.outside="open = false"
-            style="position: absolute; top: 100%; right: 0; z-index: 200; min-width: 10rem"
-          >
-            <div class="pf-v6-c-menu__content">
-              <ul class="pf-v6-c-menu__list" role="menu">
-                <li role="none" class="pf-v6-c-menu__list-item">
-                  <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="lang = 'English'; open = false">
-                    <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">English</span></span>
-                  </button>
-                </li>
-                <li role="none" class="pf-v6-c-menu__list-item">
-                  <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="lang = 'Español'; open = false">
-                    <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Español</span></span>
-                  </button>
-                </li>
-                <li role="none" class="pf-v6-c-menu__list-item">
-                  <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="lang = 'Français'; open = false">
-                    <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Français</span></span>
-                  </button>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </header>
-      <div class="pf-v6-c-login__main-body">
-        <form class="pf-v6-c-form" novalidate @submit.prevent>
-          <div class="pf-v6-c-form__group">
-            <div class="pf-v6-c-form__group-label">
-              <label class="pf-v6-c-form__label" for="lp-header-utilities-username-field">
-                <span class="pf-v6-c-form__label-text">Username</span>
-                <span class="pf-v6-c-form__label-required" aria-hidden="true">&#42;</span>
-              </label>
-            </div>
-            <div class="pf-v6-c-form__group-control">
-              <span class="pf-v6-c-form-control pf-m-required">
-                <input type="text" id="lp-header-utilities-username-field" name="lp-header-utilities-username" required />
-              </span>
-            </div>
-          </div>
-          <div class="pf-v6-c-form__group">
-            <div class="pf-v6-c-form__group-label">
-              <label class="pf-v6-c-form__label" for="lp-header-utilities-password-field">
-                <span class="pf-v6-c-form__label-text">Password</span>
-                <span class="pf-v6-c-form__label-required" aria-hidden="true">&#42;</span>
-              </label>
-            </div>
-            <div class="pf-v6-c-form__group-control">
-              <span class="pf-v6-c-form-control pf-m-required">
-                <input
-                  type="password"
-                  id="lp-header-utilities-password-field"
-                  name="lp-header-utilities-password"
-                  required
-                />
-              </span>
-            </div>
-          </div>
-          <div class="pf-v6-c-form__group pf-m-action">
-            <div class="pf-v6-c-form__actions">
-              <button type="submit" class="pf-v6-c-button pf-m-primary pf-m-block">
-                <span class="pf-v6-c-button__text">Log in</span>
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </main>
+        </li>
+        <li role="none" class="pf-v6-c-menu__list-item">
+          <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="lang = 'Español'; open = false">
+            <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Español</span></span>
+          </button>
+        </li>
+        <li role="none" class="pf-v6-c-menu__list-item">
+          <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="lang = 'Français'; open = false">
+            <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Français</span></span>
+          </button>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
+{/loginHeaderUtilities}
+{#loginBody}
+<form class="pf-v6-c-form" novalidate @submit.prevent>
+  <div class="pf-v6-c-form__group">
+    <div class="pf-v6-c-form__group-label">
+      <label class="pf-v6-c-form__label" for="lp-header-utilities-username-field">
+        <span class="pf-v6-c-form__label-text">Username</span>
+        <span class="pf-v6-c-form__label-required" aria-hidden="true">&#42;</span>
+      </label>
+    </div>
+    <div class="pf-v6-c-form__group-control">
+      <span class="pf-v6-c-form-control pf-m-required">
+        <input type="text" id="lp-header-utilities-username-field" name="lp-header-utilities-username" required />
+      </span>
+    </div>
+  </div>
+  <div class="pf-v6-c-form__group">
+    <div class="pf-v6-c-form__group-label">
+      <label class="pf-v6-c-form__label" for="lp-header-utilities-password-field">
+        <span class="pf-v6-c-form__label-text">Password</span>
+        <span class="pf-v6-c-form__label-required" aria-hidden="true">&#42;</span>
+      </label>
+    </div>
+    <div class="pf-v6-c-form__group-control">
+      <span class="pf-v6-c-form-control pf-m-required">
+        <input
+          type="password"
+          id="lp-header-utilities-password-field"
+          name="lp-header-utilities-password"
+          required
+        />
+      </span>
+    </div>
+  </div>
+  <div class="pf-v6-c-form__group pf-m-action">
+    <div class="pf-v6-c-form__actions">
+      <button type="submit" class="pf-v6-c-button pf-m-primary pf-m-block">
+        <span class="pf-v6-c-button__text">Log in</span>
+      </button>
+    </div>
+  </div>
+</form>
+{/loginBody}
+{/include}

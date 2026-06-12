@@ -1,0 +1,24 @@
+{! Data list item control — leading area for the expand toggle or a checkbox. !} {! Optional: expandToggle — render the
+toggle wired to the item's `open` state. toggleAriaLabel — aria-label on the toggle (default "Toggle details"). Main
+block: rendered after the toggle — e.g. a __check checkbox. !}
+<div class="pf-v6-c-data-list__item-control">
+  {#if expandToggle??}
+  <div class="pf-v6-c-data-list__toggle">
+    <button
+      class="pf-v6-c-button pf-m-plain"
+      type="button"
+      aria-label="{toggleAriaLabel ?: 'Toggle details'}"
+      :aria-expanded="open.toString()"
+      @click="open = !open"
+    >
+      <span class="pf-v6-c-button__icon"
+        ><span class="pf-v6-c-data-list__toggle-icon">{icons:svg('fa:angle-right').raw}</span></span
+      >
+    </button>
+  </div>
+  {/if}
+  {! The main block (e.g. a __check checkbox) is only evaluated when expandToggle is absent —
+     an unguarded unnamed {#insert} in a self-closing include resolves OUTWARD to the enclosing
+     block and recurses (StackOverflowError). Toggle and custom content are mutually exclusive. !}
+  {#if !expandToggle??}{#insert /}{/if}
+</div>

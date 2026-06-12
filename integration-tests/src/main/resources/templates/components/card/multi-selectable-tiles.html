@@ -1,26 +1,38 @@
 <div class="pf-v6-l-gallery pf-m-gutter" id="cd-multi-selectable-tiles" x-data="{ t1: false, t2: false, t3: false }">
-  <div class="pf-v6-c-card pf-m-selectable" id="cd-mtile-1" :class="{ 'pf-m-selected': t1 }">
-    <div class="pf-v6-c-card__header">
-      <div class="pf-v6-c-card__selectable-actions"><div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="cd-mtile-1-input" aria-labelledby="cd-mtile-1-title" x-model="t1" /></div></div>
-      <div class="pf-v6-c-card__header-main">{icons:svg('fa:server').raw}</div>
-      <div class="pf-v6-c-card__title" id="cd-mtile-1-title"><h2 class="pf-v6-c-card__title-text">Tile one</h2></div>
-    </div>
-    <div class="pf-v6-c-card__body">Pick any number of tiles.</div>
-  </div>
-  <div class="pf-v6-c-card pf-m-selectable" id="cd-mtile-2" :class="{ 'pf-m-selected': t2 }">
-    <div class="pf-v6-c-card__header">
-      <div class="pf-v6-c-card__selectable-actions"><div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="cd-mtile-2-input" aria-labelledby="cd-mtile-2-title" x-model="t2" /></div></div>
-      <div class="pf-v6-c-card__header-main">{icons:svg('fa:server').raw}</div>
-      <div class="pf-v6-c-card__title" id="cd-mtile-2-title"><h2 class="pf-v6-c-card__title-text">Tile two</h2></div>
-    </div>
-    <div class="pf-v6-c-card__body">Checkbox-backed selectable card.</div>
-  </div>
-  <div class="pf-v6-c-card pf-m-selectable" id="cd-mtile-3" :class="{ 'pf-m-selected': t3 }">
-    <div class="pf-v6-c-card__header">
-      <div class="pf-v6-c-card__selectable-actions"><div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="cd-mtile-3-input" aria-labelledby="cd-mtile-3-title" x-model="t3" /></div></div>
-      <div class="pf-v6-c-card__header-main">{icons:svg('fa:server').raw}</div>
-      <div class="pf-v6-c-card__title" id="cd-mtile-3-title"><h2 class="pf-v6-c-card__title-text">Tile three</h2></div>
-    </div>
-    <div class="pf-v6-c-card__body">Each tile toggles independently.</div>
-  </div>
+  {#include components/data-display/card id="cd-mtile-1" selectable=true selectedExpr="t1"}
+  {#include components/data-display/card-header hasSelectableActions=true hasHeaderMain=true}
+  {#cardSelectableActions}
+  <div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="cd-mtile-1-input" aria-labelledby="cd-mtile-1-title" x-model="t1" /></div>
+  {/cardSelectableActions}
+  {#cardHeaderMain}
+  {icons:svg('fa:server').raw}
+  {/cardHeaderMain}
+  {#include components/data-display/card-title id="cd-mtile-1-title"}Tile one{/include}
+  {/include}
+  {#include components/data-display/card-body}Pick any number of tiles.{/include}
+  {/include}
+  {#include components/data-display/card id="cd-mtile-2" selectable=true selectedExpr="t2"}
+  {#include components/data-display/card-header hasSelectableActions=true hasHeaderMain=true}
+  {#cardSelectableActions}
+  <div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="cd-mtile-2-input" aria-labelledby="cd-mtile-2-title" x-model="t2" /></div>
+  {/cardSelectableActions}
+  {#cardHeaderMain}
+  {icons:svg('fa:server').raw}
+  {/cardHeaderMain}
+  {#include components/data-display/card-title id="cd-mtile-2-title"}Tile two{/include}
+  {/include}
+  {#include components/data-display/card-body}Checkbox-backed multi selection.{/include}
+  {/include}
+  {#include components/data-display/card id="cd-mtile-3" selectable=true selectedExpr="t3"}
+  {#include components/data-display/card-header hasSelectableActions=true hasHeaderMain=true}
+  {#cardSelectableActions}
+  <div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="cd-mtile-3-input" aria-labelledby="cd-mtile-3-title" x-model="t3" /></div>
+  {/cardSelectableActions}
+  {#cardHeaderMain}
+  {icons:svg('fa:server').raw}
+  {/cardHeaderMain}
+  {#include components/data-display/card-title id="cd-mtile-3-title"}Tile three{/include}
+  {/include}
+  {#include components/data-display/card-body}Toggle freely.{/include}
+  {/include}
 </div>

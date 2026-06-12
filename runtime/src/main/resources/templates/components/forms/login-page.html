@@ -1,17 +1,40 @@
-{! Login page — PatternFly v6 (pf-v6-c-login) !} {! Optional: id — DOM id on the root; omit unless something else references the login page.
-                                                              titleText (optional) !}
-<div class="pf-v6-c-login"{#if id??} id="{id}"{/if}>
+{! Login page — PatternFly v6 (pf-v6-c-login) !}
+{! Optional params:
+     id        — DOM id on the root.
+     titleText — h1 in the login card header.
+     attrs     — raw attribute passthrough on the root (Alpine directives etc.).
+   Region guards (set true to render the wrapper + slot):
+     hasLoginHeader, hasHeaderUtilities, hasLoginFooter, hasPageFooter
+   Slots (login-prefixed so they can't collide with layouts/base or example-card
+   slot names through nested-include resolution — see feedback_qute_slot_name_collision):
+     loginHeader          — brand area above the card.
+     loginHeaderDesc      — description under the title in the card header.
+     loginHeaderUtilities — e.g. a language selector in the card header.
+     loginBody            — the form.
+     loginFooter          — social links / sign-up band under the form.
+     loginPageFooter      — page-level footer. !}
+<div class="pf-v6-c-login"{#if id??} id="{id}"{/if}{#if attrs??} {attrs.raw}{/if}>
   <div class="pf-v6-c-login__container">
-    <header class="pf-v6-c-login__header">{#insert header}{/insert}</header>
+    {#if hasLoginHeader??}
+    <header class="pf-v6-c-login__header">{#insert loginHeader}{/insert}</header>
+    {/if}
     <main class="pf-v6-c-login__main">
       <header class="pf-v6-c-login__main-header">
         {#if titleText??}
         <h1 class="pf-v6-c-title pf-m-3xl">{titleText}</h1>
-        {/if} {#insert headerDesc}{/insert}
+        {/if}
+        {#insert loginHeaderDesc}{/insert}
+        {#if hasHeaderUtilities??}
+        <div class="pf-v6-c-login__main-header-utilities">{#insert loginHeaderUtilities}{/insert}</div>
+        {/if}
       </header>
-      <div class="pf-v6-c-login__main-body">{#insert body}{/insert}</div>
-      <footer class="pf-v6-c-login__main-footer">{#insert footer}{/insert}</footer>
+      <div class="pf-v6-c-login__main-body">{#insert loginBody}{/insert}</div>
+      {#if hasLoginFooter??}
+      <footer class="pf-v6-c-login__main-footer">{#insert loginFooter}{/insert}</footer>
+      {/if}
     </main>
-    <footer class="pf-v6-c-login__footer">{#insert pageFooter}{/insert}</footer>
+    {#if hasPageFooter??}
+    <footer class="pf-v6-c-login__footer">{#insert loginPageFooter}{/insert}</footer>
+    {/if}
   </div>
 </div>

@@ -464,9 +464,18 @@
                           Card props
                         </h3>
                         <p class="pf-v6-c-content--p pf-m-editorial">
-                          Parameters accepted by
-                          <code class="ws-code">{|{#include components/data-display/card ... /}|}</code>. Inner
-                          structure (title / body / footer) is hand-rendered in the slot using PF subclasses.
+                          The card is a template family: <code class="ws-code">card</code> is the root and the sections
+                          are their own includes — <code class="ws-code">card-header</code>,
+                          <code class="ws-code">card-title</code>, <code class="ws-code">card-subtitle</code>,
+                          <code class="ws-code">card-body</code>, <code class="ws-code">card-footer</code>,
+                          <code class="ws-code">card-expandable-content</code> — composed inside the card include&#39;s
+                          main block. Section content is each include&#39;s own main block (rich markup welcome), so no
+                          generic slot names exist to collide with outer templates;
+                          <code class="ws-code">card-header</code>&#39;s named slots are card-prefixed (<code
+                            class="ws-code"
+                            >cardActions</code
+                          >, <code class="ws-code">cardSelectableActions</code>,
+                          <code class="ws-code">cardHeaderMain</code>) for the same reason.
                         </p>
                         <table
                           class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
@@ -487,38 +496,137 @@
                           <tbody role="rowgroup" class="pf-v6-c-table__tbody">
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
-                                >
+                                <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
                               </td>
                               <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><code class="ws-code">compact</code> / <code class="ws-code">displayLg</code> /
-                                  <code class="ws-code">plain</code> / <code class="ws-code">flat</code> /
-                                  <code class="ws-code">rounded</code> / <code class="ws-code">fullHeight</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Layout modifiers — emit matching <code class="ws-code">pf-m-*</code> classes.</span
-                                >
+                                <span class="pf-v6-c-table__text">DOM id on the card root.</span>
                               </td>
                             </tr>
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">slot <code class="ws-code">content</code></span>
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code"
+                                    >compact / displayLg / plain / flat / rounded / fullHeight / secondary</code
+                                  ></span
+                                >
                               </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Boolean</span></td>
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  >Inner structure — typically <code class="ws-code">.pf-v6-c-card__title</code> +
-                                  <code class="ws-code">.pf-v6-c-card__body</code> +
-                                  <code class="ws-code">.pf-v6-c-card__footer</code>.</span
+                                  >The matching <code class="ws-code">pf-m-*</code> modifier.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">selectable / clickable / selected / disabled</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Selection-related modifiers; pair with
+                                  <code class="ws-code">card-header hasSelectableActions</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">expandable</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Wires the expand contract: Alpine <code class="ws-code">expanded</code> state on the
+                                  root + bound <code class="ws-code">pf-m-expanded</code>. Pair with
+                                  <code class="ws-code">card-header expandable=true</code> and
+                                  <code class="ws-code">card-expandable-content</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">selectedExpr</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Alpine expression; while truthy the card carries
+                                  <code class="ws-code">pf-m-selected</code>. E.g.
+                                  <code class="ws-code">selectedExpr="chosen === &#39;one&#39;"</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">attrs</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String (raw)</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Raw attribute passthrough on the root for Alpine directives. Shadowed inside the
+                                  family&#39;s slots so it cannot leak into composed includes.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">card-header</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">wrap</code>, <code class="ws-code">expandable</code>,
+                                  <code class="ws-code">toggleAriaLabel</code>; guarded slots
+                                  <code class="ws-code">cardActions</code> /
+                                  <code class="ws-code">cardSelectableActions</code> /
+                                  <code class="ws-code">cardHeaderMain</code> via
+                                  <code class="ws-code">has*</code> params; main block renders bare (direct title
+                                  spot).</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">card-title</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">headingLevel</code> (default h2),
+                                  <code class="ws-code">id</code> for
+                                  <code class="ws-code">aria-labelledby</code> wiring; title content is the main block —
+                                  links, icons, buttons all fine.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">card-subtitle / card-body / card-footer</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Main-block content; <code class="ws-code">card-body</code> takes
+                                  <code class="ws-code">noFill</code> and can repeat for multiple sections.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">card-expandable-content</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >The region the toggle reveals (<code class="ws-code">x-show="expanded"</code>); put
+                                  body/footer includes inside.</span
                                 >
                               </td>
                             </tr>

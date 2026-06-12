@@ -1,0 +1,11 @@
+{! Card title — PatternFly v6. Content is the include's main block, so titles can
+   carry any markup (links, icons, Alpine bindings), not just text. !}
+{! Optional params:
+     id           — id on the __title div; reference it from selectable inputs /
+                    clickable actions via aria-labelledby.
+     headingLevel — h1…h6 (default h2). Styling comes from the class, not the tag. !}
+{#let h=(headingLevel ?: 'h2')}
+<div class="pf-v6-c-card__title"{#if id??} id="{id}"{/if}>
+  <{h} class="pf-v6-c-card__title-text">{#insert /}</{h}>
+</div>
+{/let}

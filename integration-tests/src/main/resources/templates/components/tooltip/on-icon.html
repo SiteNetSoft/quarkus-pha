@@ -1,7 +1,7 @@
 {! Tooltips commonly hang off a plain icon button — give it an aria-label for AT users. !}
 <div style="padding: 3.5rem; text-align: center">
   {#include components/feedback/tooltip id="tt-icon" position="top"}
-  {#trigger}<button class="pf-v6-c-button pf-m-plain" type="button" aria-label="More information"><span class="pf-v6-c-button__icon">{icons:svg('fa:circle-info').raw}</span></button>{/trigger}
+  {#trigger}{#include components/actions/button variant="plain" ariaLabel="More information" icon="fa:circle-info" /}{/trigger}
   {#tip}More information about this field{/tip}
   {/include}
 </div>

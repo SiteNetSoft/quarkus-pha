@@ -1,19 +1,21 @@
 {! Warning modal — PatternFly error-communication. A confirm dialog for risky / destructive actions.
-   Composes the modal component (warning variant). The footer Confirm/Cancel buttons carry Alpine
-   wiring (Cancel closes; Confirm dispatches confirm-{id} then closes) — like the modal's own close
-   button, so they're hand-written rather than composed. Open it by dispatching open-modal with the id. !}
+   Composes the modal family (warning variant, self-contained eventOpen mode). The footer
+   Confirm/Cancel buttons carry Alpine wiring (Cancel closes; Confirm dispatches confirm-{id}
+   then closes). Open it by dispatching open-modal with the id. !}
 {! Required: id. Optional: titleText (default "Confirm"), bodyText (default provided),
               confirmText ("Confirm"), cancelText ("Cancel"), confirmVariant ("primary"). !}
 {#let _title=(titleText ?: 'Confirm') _confirm=(confirmText ?: 'Confirm') _cancel=(cancelText ?: 'Cancel') _cv=(confirmVariant ?: 'primary')}
-{#include components/feedback/modal id=id variant="warning" titleText=_title}
-{#body}{#if bodyText??}{bodyText}{#else}This action cannot be undone. Are you sure you want to continue?{/if}{/body}
-{#footer}
-<button class="pf-v6-c-button pf-m-{_cv}" type="button" id="{id}-confirm" @click="$dispatch('confirm-{id}'); open = false">
+{#include components/feedback/modal id=id variant="warning" eventOpen=true}
+{#include components/feedback/modal-close /}
+{#include components/feedback/modal-header}{_title}{/include}
+{#include components/feedback/modal-body}{#if bodyText??}{bodyText}{#else}This action cannot be undone. Are you sure you want to continue?{/if}{/include}
+{#include components/feedback/modal-footer}
+<button class="pf-v6-c-button pf-m-{_cv}" type="button" id="{modalId}-confirm" @click="$dispatch('confirm-' + '{modalId}'); open = false">
   <span class="pf-v6-c-button__text">{_confirm}</span>
 </button>
-<button class="pf-v6-c-button pf-m-link" type="button" id="{id}-cancel" @click="open = false">
+<button class="pf-v6-c-button pf-m-link" type="button" id="{modalId}-cancel" @click="open = false">
   <span class="pf-v6-c-button__text">{_cancel}</span>
 </button>
-{/footer}
+{/include}
 {/include}
 {/let}
