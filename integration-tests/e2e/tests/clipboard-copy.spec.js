@@ -5,11 +5,65 @@ test.describe("Clipboard copy", () => {
     await page.goto("/components/clipboard-copy");
   });
 
-  test("page loads with all 4 section headings", async ({ page }) => {
-    await expect(page.locator("#basic")).toBeVisible();
-    await expect(page.locator("#readonly")).toBeVisible();
-    await expect(page.locator("#expandable")).toBeVisible();
-    await expect(page.locator("#inline")).toBeVisible();
+  const EXAMPLES = [
+    "basic",
+    "readonly",
+    "expandable",
+    "read-only-expanded",
+    "read-only-expanded-by-default",
+    "expanded-with-array",
+    "json-pre",
+    "inline-compact",
+    "inline",
+    "inline-compact-with-additional-action",
+    "inline-compact-truncation",
+  ];
+
+  test("ToC anchors render for every example", async ({ page }) => {
+    for (const id of EXAMPLES) {
+      await expect(page.locator(`#${id}`)).toBeAttached();
+    }
+  });
+
+  test.describe("New variants", () => {
+    test("read-only expanded combines both modifiers", async ({ page }) => {
+      await expect(page.locator("#cc-ro-expanded .pf-v6-c-form-control")).toHaveClass(/pf-m-readonly/);
+      await expect(page.locator("#cc-ro-expanded .pf-v6-c-clipboard-copy__toggle-icon")).toBeAttached();
+    });
+
+    test("expanded-by-default opens its panel on load", async ({ page }) => {
+      await expect(page.locator("#cc-ro-expanded-default")).toHaveClass(/pf-m-expanded/);
+      await expect(page.locator("#cc-ro-expanded-default .pf-v6-c-clipboard-copy__expandable-content")).toBeVisible();
+    });
+
+    test("array panel holds multiple lines and json panel wraps a pre", async ({ page }) => {
+      await expect(page.locator("#cc-expanded-array .pf-v6-c-clipboard-copy__expandable-content")).toContainText(
+        "key-three",
+      );
+      await expect(page.locator("#cc-json-pre .pf-v6-c-clipboard-copy__expandable-content pre")).toBeVisible();
+    });
+
+    test("inline compact renders plain text with a copy action", async ({ page }) => {
+      await expect(page.locator("#cc-inline-compact .pf-v6-c-clipboard-copy__text")).toHaveText("2.3.4-2-redhat");
+    });
+
+    test("additional action button renders after the copy action", async ({ page }) => {
+      await expect(page.locator("#cc-inline-action .pf-v6-c-clipboard-copy__actions-item button")).toHaveCount(2);
+    });
+
+    test("truncated value still exposes the full text for copying", async ({ page }) => {
+      const text = page.locator("#cc-inline-truncate .pf-v6-c-clipboard-copy__text");
+      await expect(text).toContainText("3f9c2a17");
+    });
+  });
+
+  test.describe("Standalone routes", () => {
+    for (const example of EXAMPLES) {
+      test(`/components/clipboard-copy/${example} returns 200`, async ({ page }) => {
+        const res = await page.goto(`/components/clipboard-copy/${example}`);
+        expect(res.status()).toBe(200);
+      });
+    }
   });
 
   test.describe("Basic", () => {

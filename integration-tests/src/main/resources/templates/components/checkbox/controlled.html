@@ -1,0 +1,12 @@
+{! A working pair — Alpine reports the checked set (covers PF's controlled/uncontrolled). !}
+<div x-data="{ picked: [] }">
+  <div class="pf-v6-c-check" id="cb-controlled-1">
+    <input class="pf-v6-c-check__input" type="checkbox" id="cb-controlled-1-field" value="alpha" x-model="picked" />
+    <label class="pf-v6-c-check__label" for="cb-controlled-1-field">Alpha</label>
+  </div>
+  <div class="pf-v6-c-check" id="cb-controlled-2">
+    <input class="pf-v6-c-check__input" type="checkbox" id="cb-controlled-2-field" value="beta" x-model="picked" />
+    <label class="pf-v6-c-check__label" for="cb-controlled-2-field">Beta</label>
+  </div>
+  <p style="margin-top: 0.5rem">Checked: <strong x-text="picked.length ? picked.join(', ') : 'none'">none</strong></p>
+</div>

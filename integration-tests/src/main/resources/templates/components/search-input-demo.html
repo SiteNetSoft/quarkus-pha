@@ -57,7 +57,54 @@
                                 <span class="pf-v6-c-jump-links__link"
                                   ><a href="#with-clear" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With clear</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text">With clear button</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#result-count" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Match with result count</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#navigable-options" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Match with navigable options</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-submit" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With submit button</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#expandable" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With expandable button</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#advanced" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Advanced</span></span
                                     ></a
                                   ></span
                                 >
@@ -110,17 +157,38 @@
                       </div>
                       {#include partials/example-card title="Basic" slug="basic" component="search-input"}
                       {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Plain search input with magnifying-glass icon. type="search" gets browser-native clear UI in
-                        some browsers.
-                      </p>
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Magnifier icon + search input.</p>
                       {/description} {#content}{#include components/search-input/basic /}{/content} {/include} {#include
-                      partials/example-card title="With clear" slug="with-clear" component="search-input"}
+                      partials/example-card title="With clear button" slug="with-clear" component="search-input"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">The X appears once a value is present.</p>
+                      {/description} {#content}{#include components/search-input/with-clear /}{/content} {/include}
+                      {#include partials/example-card title="Match with result count" slug="result-count"
+                      component="search-input"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">A badge counts matches in the utilities.</p>
+                      {/description} {#content}{#include components/search-input/result-count /}{/content} {/include}
+                      {#include partials/example-card title="Match with navigable options" slug="navigable-options"
+                      component="search-input"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Previous/next arrows step through matches.</p>
+                      {/description} {#content}{#include components/search-input/navigable-options /}{/content}
+                      {/include} {#include partials/example-card title="With submit button" slug="with-submit"
+                      component="search-input"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A Search control button submits the query. PF\u2019s "focus via ref" section is a React-ism.
+                      </p>
+                      {/description} {#content}{#include components/search-input/with-submit /}{/content} {/include}
+                      {#include partials/example-card title="With expandable button" slug="expandable"
+                      component="search-input"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A magnifier button expands into the input and focuses it.
+                      </p>
+                      {/description} {#content}{#include components/search-input/expandable /}{/content} {/include}
+                      {#include partials/example-card title="Advanced" slug="advanced" component="search-input"}
                       {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Alpine-driven clear button — appears only when the input has a value, clicking empties it.
+                        A caret opens an attribute form that composes the query string.
                       </p>
-                      {/description} {#content}{#include components/search-input/with-clear /}{/content} {/include}
+                      {/description} {#content}{#include components/search-input/advanced /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

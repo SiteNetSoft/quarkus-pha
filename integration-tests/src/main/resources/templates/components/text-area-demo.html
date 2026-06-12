@@ -54,15 +54,6 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#resize-vertical" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Resize vertical</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#invalid" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">Invalid</span></span
@@ -72,9 +63,74 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#validated" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Validated</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#resize-vertical" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Vertically resizable</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#horizontal-resizable" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Horizontally resizable</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#not-resizable" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Not resizable</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#disabled" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Disabled</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#read-only" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Read only</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#disabled-readonly" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Disabled / read only</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Disabled and read-only together</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#auto-resizing" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Auto resizing</span></span
                                     ></a
                                   ></span
                                 >
@@ -125,30 +181,51 @@
                           </h2>
                         </div>
                       </div>
-
                       {#include partials/example-card title="Basic" slug="basic" component="text-area"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Plain text area, 4 visible rows.</p>
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Form-control wrapper around a textarea.</p>
                       {/description} {#content}{#include components/text-area/basic /}{/content} {/include} {#include
-                      partials/example-card title="Resize vertical" slug="resize-vertical" component="text-area"}
-                      {#description}
+                      partials/example-card title="Invalid" slug="invalid" component="text-area"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Error styling with status icon.</p>
+                      {/description} {#content}{#include components/text-area/invalid /}{/content} {/include} {#include
+                      partials/example-card title="Validated" slug="validated" component="text-area"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Flips between error and success as you type.</p>
+                      {/description} {#content}{#include components/text-area/validated /}{/content} {/include}
+                      {#include partials/example-card title="Vertically resizable" slug="resize-vertical"
+                      component="text-area"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">resize="vertical"</code> lets users drag the corner to grow height.
-                        Available values: <code class="ws-code">vertical | horizontal | both</code>.
+                        <code class="ws-code">pf-m-resize-vertical</code>.
                       </p>
                       {/description} {#content}{#include components/text-area/resize-vertical /}{/content} {/include}
-                      {#include partials/example-card title="Invalid" slug="invalid" component="text-area"}
-                      {#description}
+                      {#include partials/example-card title="Horizontally resizable" slug="horizontal-resizable"
+                      component="text-area"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">validated="error"</code> plus the status icon. Same enum as text-input.
+                        <code class="ws-code">pf-m-resize-horizontal</code>.
                       </p>
-                      {/description} {#content}{#include components/text-area/invalid /}{/content} {/include} {#include
-                      partials/example-card title="Disabled / read only" slug="disabled-readonly" component="text-area"}
-                      {#description}
+                      {/description} {#content}{#include components/text-area/horizontal-resizable /}{/content}
+                      {/include} {#include partials/example-card title="Not resizable" slug="not-resizable"
+                      component="text-area"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Two forms of non-editable — <code class="ws-code">disabled=true</code> and
-                        <code class="ws-code">readonly=true</code>.
+                        No resize handle (<code class="ws-code">resize: none</code>). PF\u2019s "Uncontrolled" section
+                        is a React state demo.
                       </p>
+                      {/description} {#content}{#include components/text-area/not-resizable /}{/content} {/include}
+                      {#include partials/example-card title="Disabled" slug="disabled" component="text-area"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Native disabled state.</p>
+                      {/description} {#content}{#include components/text-area/disabled /}{/content} {/include} {#include
+                      partials/example-card title="Read only" slug="read-only" component="text-area"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Selectable but not editable.</p>
+                      {/description} {#content}{#include components/text-area/read-only /}{/content} {/include}
+                      {#include partials/example-card title="Disabled and read-only together" slug="disabled-readonly"
+                      component="text-area"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Both states side by side.</p>
                       {/description} {#content}{#include components/text-area/disabled-readonly /}{/content} {/include}
+                      {#include partials/example-card title="Auto resizing" slug="auto-resizing" component="text-area"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Grows with its content — Alpine tracks scrollHeight on input.
+                      </p>
+                      {/description} {#content}{#include components/text-area/auto-resizing /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

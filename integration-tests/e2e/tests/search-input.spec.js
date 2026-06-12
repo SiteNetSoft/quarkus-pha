@@ -1,45 +1,84 @@
 import { test, expect } from "@playwright/test";
 
+const EXAMPLES = [
+  "basic",
+  "with-clear",
+  "result-count",
+  "navigable-options",
+  "with-submit",
+  "expandable",
+  "advanced",
+];
+
 test.describe("Search Input", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/components/search-input");
   });
 
-  test("page loads with all 2 example sections in ToC", async ({ page }) => {
-    await expect(page.locator("h3#basic")).toHaveText("Basic");
-    await expect(page.locator("h3#with-clear")).toHaveText("With clear");
+  test("ToC anchors render for every example", async ({ page }) => {
+    for (const id of EXAMPLES) {
+      await expect(page.locator(`#${id}`)).toBeAttached();
+    }
   });
 
-  test.describe("Basic", () => {
-    test("basic search input has pf-v6-c-text-input-group class", async ({ page }) => {
-      await expect(page.locator("#si-basic")).toHaveClass(/pf-v6-c-text-input-group/);
-    });
-
-    test("basic search input has a search icon", async ({ page }) => {
-      await expect(page.locator("#si-basic .pf-v6-c-text-input-group__icon")).toBeVisible();
-    });
-
-    test("basic search input has a search input field", async ({ page }) => {
-      await expect(page.locator("#si-basic input[type='search']")).toBeVisible();
-    });
-
-    test("basic search input has correct placeholder", async ({ page }) => {
-      await expect(page.locator("#si-basic input[type='search']")).toHaveAttribute("placeholder", "Search…");
-    });
+  test("basic and clear behave", async ({ page }) => {
+    await expect(page.locator("#si-basic")).toHaveClass(/pf-v6-c-text-input-group/);
+    const clear = page.locator("#si-clear .pf-v6-c-text-input-group__utilities button");
+    await expect(clear).toBeVisible();
+    await clear.click();
+    await expect(page.locator("#si-clear input")).toHaveValue("");
   });
 
-  test.describe("With clear", () => {
-    test("has pf-v6-c-text-input-group class", async ({ page }) => {
-      await expect(page.locator("#si-clear")).toHaveClass(/pf-v6-c-text-input-group/);
-    });
+  test("result count badge shows while a value is present", async ({ page }) => {
+    await expect(page.locator("#si-result-count .pf-v6-c-badge")).toHaveText("3");
+    await page.locator("#si-result-count button[aria-label='Clear search']").click();
+    await expect(page.locator("#si-result-count .pf-v6-c-badge")).toBeHidden();
+  });
 
-    test("has a clear button", async ({ page }) => {
-      await expect(page.locator("#si-clear button[aria-label='Clear search']")).toBeVisible();
-    });
+  test("navigable options step through matches", async ({ page }) => {
+    const root = page.locator("#si-navigable");
+    const prev = root.locator("button[aria-label='Previous match']");
+    const next = root.locator("button[aria-label='Next match']");
+    await expect(prev).toBeDisabled();
+    await next.click();
+    await next.click();
+    await expect(root.locator(".pf-v6-c-badge")).toContainText("3 / 3");
+    await expect(next).toBeDisabled();
+    await expect(prev).toBeEnabled();
+  });
 
-    test("clicking clear button empties the input", async ({ page }) => {
-      await page.locator("#si-clear button[aria-label='Clear search']").click();
-      await expect(page.locator("#si-clear input[type='search']")).toHaveValue("");
-    });
+  test("submit button reports the query", async ({ page }) => {
+    await page.locator("#si-submit-input").fill("quarkus");
+    await page.locator("#si-submit button[aria-label='Search']").click();
+    await expect(page.locator("#si-submit p strong")).toHaveText("quarkus");
+  });
+
+  test("expandable opens into a focused input and closes again", async ({ page }) => {
+    const root = page.locator("#si-expandable");
+    await expect(root.locator("input")).toBeHidden();
+    await root.locator("button[aria-label='Open search']").click();
+    await expect(root.locator("input")).toBeVisible();
+    await expect(root.locator("input")).toBeFocused();
+    await root.locator("button[aria-label='Close search']").click();
+    await expect(root.locator("input")).toBeHidden();
+  });
+
+  test("advanced form composes the query", async ({ page }) => {
+    const root = page.locator("#si-advanced");
+    await root.locator("button[aria-label='Advanced search']").click();
+    await expect(root.locator(".pf-v6-c-panel")).toBeVisible();
+    await page.locator("#si-advanced-username").fill("ned");
+    await root.locator("button[type='submit']").click();
+    await expect(root.locator("#si-advanced-input")).toHaveValue("username:ned ");
+    await expect(root.locator(".pf-v6-c-panel")).toBeHidden();
+  });
+
+  test.describe("Standalone routes", () => {
+    for (const example of EXAMPLES) {
+      test(`/components/search-input/${example} returns 200`, async ({ page }) => {
+        const res = await page.goto(`/components/search-input/${example}`);
+        expect(res.status()).toBe(200);
+      });
+    }
   });
 });

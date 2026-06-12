@@ -1,39 +1,77 @@
 import { test, expect } from "@playwright/test";
 
+const EXAMPLES = [
+  "collapsed",
+  "expanded",
+  "dynamic-toggle-text",
+  "detached",
+  "disclosure",
+  "indented",
+  "custom-toggle",
+  "heading-semantics",
+  "truncate-expansion",
+];
+
 test.describe("Expandable section", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/components/expandable-section");
   });
 
-  test("page loads with example section headings", async ({ page }) => {
-    await expect(page.locator("#collapsed")).toBeVisible();
-    await expect(page.locator("#expanded")).toBeVisible();
+  test("ToC anchors render for every example", async ({ page }) => {
+    for (const id of EXAMPLES) {
+      await expect(page.locator(`#${id}`)).toBeAttached();
+    }
   });
 
-  test("page anchors are present", async ({ page }) => {
-    await expect(page.locator("#examples")).toBeVisible();
-    await expect(page.locator("#documentation")).toBeVisible();
-    await expect(page.locator("#props-expandable-section")).toBeVisible();
-    await expect(page.locator("#usage")).toBeVisible();
-  });
-
-  test("collapsed section is collapsed by default", async ({ page }) => {
+  test("collapsed toggles open; expanded starts open", async ({ page }) => {
     await expect(page.locator("#es-collapsed")).not.toHaveClass(/pf-m-expanded/);
-    await expect(page.locator("#es-collapsed .pf-v6-c-expandable-section__content")).not.toBeVisible();
-  });
-
-  test("clicking toggle expands collapsed section", async ({ page }) => {
     await page.locator("#es-collapsed .pf-v6-c-expandable-section__toggle").click();
     await expect(page.locator("#es-collapsed")).toHaveClass(/pf-m-expanded/);
-    await expect(page.locator("#es-collapsed .pf-v6-c-expandable-section__content")).toBeVisible();
-  });
-
-  test("expanded section starts open", async ({ page }) => {
     await expect(page.locator("#es-expanded")).toHaveClass(/pf-m-expanded/);
-    await expect(page.locator("#es-expanded .pf-v6-c-expandable-section__content")).toBeVisible();
   });
 
-  test("toggle text is visible", async ({ page }) => {
-    await expect(page.locator("#es-collapsed .pf-v6-c-expandable-section__toggle-text")).toHaveText("Show advanced settings");
+  test("dynamic toggle text flips with the state", async ({ page }) => {
+    const toggle = page.locator("#es-dynamic-toggle-text .pf-v6-c-expandable-section__toggle");
+    await expect(toggle.locator(".pf-v6-c-expandable-section__toggle-text")).toHaveText("Show more");
+    await toggle.click();
+    await expect(toggle.locator(".pf-v6-c-expandable-section__toggle-text")).toHaveText("Show less");
+  });
+
+  test("modifier variants carry their classes", async ({ page }) => {
+    await expect(page.locator("#es-detached")).toHaveClass(/pf-m-expand-top/);
+    await expect(page.locator("#es-disclosure")).toHaveClass(/pf-m-display-lg/);
+    await expect(page.locator("#es-disclosure")).toHaveClass(/pf-m-limit-width/);
+    await expect(page.locator("#es-indented")).toHaveClass(/pf-m-indented/);
+    await expect(page.locator("#es-truncate-expansion")).toHaveClass(/pf-m-truncate/);
+  });
+
+  test("custom toggle composes an icon and a badge", async ({ page }) => {
+    const toggle = page.locator("#es-custom-toggle .pf-v6-c-expandable-section__toggle");
+    await expect(toggle.locator(".pf-v6-c-icon")).toBeVisible();
+    await expect(toggle.locator(".pf-v6-c-badge")).toHaveText("4");
+  });
+
+  test("heading semantics nests the toggle inside an h2", async ({ page }) => {
+    await expect(page.locator("#es-heading-semantics h2 > .pf-v6-c-expandable-section__toggle")).toBeAttached();
+  });
+
+  test("truncate expansion keeps content visible and toggles the clamp", async ({ page }) => {
+    const section = page.locator("#es-truncate-expansion");
+    await expect(section.locator(".pf-v6-c-expandable-section__content")).toBeVisible();
+    const toggleText = section.locator(".pf-v6-c-expandable-section__toggle-text");
+    await expect(toggleText).toHaveText("Show more");
+    await section.locator(".pf-v6-c-expandable-section__toggle").click();
+    await expect(section).toHaveClass(/pf-m-expanded/);
+    await expect(toggleText).toHaveText("Show less");
+  });
+
+  test.describe("Standalone routes", () => {
+    for (const example of EXAMPLES) {
+      test(`/components/expandable-section/${example} returns 200`, async ({ page }) => {
+        const res = await page.goto(`/components/expandable-section/${example}`);
+        expect(res.status()).toBe(200);
+        await expect(page.locator(".pf-v6-c-expandable-section").first()).toBeAttached();
+      });
+    }
   });
 });

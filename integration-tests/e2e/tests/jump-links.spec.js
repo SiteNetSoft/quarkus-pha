@@ -30,4 +30,34 @@ test.describe("Jump Links", () => {
       await expect(page.locator("#jl-horizontal")).not.toHaveClass(/pf-m-vertical/);
     });
   });
+
+  test.describe("Parity additions", () => {
+    test("labels render and the expandable rail collapses", async ({ page }) => {
+      await expect(page.locator("#jl-with-label .pf-v6-c-jump-links__label")).toHaveText("Jump to section");
+      const exp = page.locator("#jl-expandable");
+      await expect(exp).toHaveClass(/pf-m-expanded/);
+      await exp.locator(".pf-v6-c-jump-links__toggle").click();
+      await expect(exp).not.toHaveClass(/pf-m-expanded/);
+      await expect(exp.locator(".pf-v6-c-jump-links__main")).toBeHidden();
+    });
+
+    test("subsection nests a second list", async ({ page }) => {
+      await expect(page.locator("#jl-expandable .pf-v6-c-jump-links__list .pf-v6-c-jump-links__list li")).toHaveCount(2);
+    });
+
+    test("/components/jump-links/with-label returns 200", async ({ page }) => {
+      const res = await page.goto("/components/jump-links/with-label");
+      expect(res.status()).toBe(200);
+    });
+
+    test("/components/jump-links/vertical-with-label returns 200", async ({ page }) => {
+      const res = await page.goto("/components/jump-links/vertical-with-label");
+      expect(res.status()).toBe(200);
+    });
+
+    test("/components/jump-links/expandable-vertical-subsection returns 200", async ({ page }) => {
+      const res = await page.goto("/components/jump-links/expandable-vertical-subsection");
+      expect(res.status()).toBe(200);
+    });
+  });
 });

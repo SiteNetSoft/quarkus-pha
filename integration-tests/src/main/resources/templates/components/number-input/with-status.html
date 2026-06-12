@@ -1,0 +1,12 @@
+{! Status follows the value — negative is error, zero warning, positive success. !}
+<div class="pf-v6-c-number-input" id="ni-status" x-data="{ val: 1 }">
+  <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Minus"  @click="val = val - 1">
+    <span class="pf-v6-c-number-input__icon">{icons:svg('fa:minus').raw}</span>
+  </button>
+  <span class="pf-v6-c-form-control" :class="val < 0 ? 'pf-m-error' : (val === 0 ? 'pf-m-warning' : 'pf-m-success')">
+    <input type="number" x-model.number="val" aria-label="Number input" :aria-invalid="(val < 0).toString()" />
+  </span>
+  <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Plus"  @click="val = val + 1">
+    <span class="pf-v6-c-number-input__icon">{icons:svg('fa:plus').raw}</span>
+  </button>
+</div>

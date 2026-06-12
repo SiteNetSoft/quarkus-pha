@@ -1,43 +1,58 @@
 import { test, expect } from "@playwright/test";
 
+const EXAMPLES = [
+  "basic",
+  "controlled",
+  "reversed",
+  "label-wraps",
+  "disabled",
+  "with-description",
+  "with-body",
+  "description-and-body",
+  "standalone",
+];
+
 test.describe("Radio", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/components/radio");
   });
 
-  test("page loads with all section headings", async ({ page }) => {
-    await expect(page.locator("#examples")).toBeVisible();
-    await expect(page.locator("#basic")).toBeVisible();
-    await expect(page.locator("#disabled")).toBeVisible();
-    await expect(page.locator("#with-description")).toBeVisible();
-    await expect(page.locator("#with-body")).toBeVisible();
-    await expect(page.locator("#standalone")).toBeVisible();
-    await expect(page.locator("#documentation")).toBeVisible();
-    await expect(page.locator("#props-radio")).toBeVisible();
-    await expect(page.locator("#usage")).toBeVisible();
+  test("ToC anchors render for every example", async ({ page }) => {
+    for (const id of EXAMPLES) {
+      await expect(page.locator(`#${id}`)).toBeAttached();
+    }
   });
 
-  test.describe("Basic", () => {
-    test("has pf-v6-c-radio class", async ({ page }) => {
-      await expect(page.locator("#r-basic-one")).toHaveClass(/pf-v6-c-radio/);
-    });
-
-    test("first radio is checked", async ({ page }) => {
-      await expect(page.locator("#r-basic-one-field")).toBeChecked();
-    });
+  test("controlled group reports the selection", async ({ page }) => {
+    const card = page.locator('[data-rendered-href="/components/radio/controlled"]');
+    await expect(card.locator("p strong")).toHaveText("one");
+    await page.locator("#rd-controlled-2-field").check();
+    await expect(card.locator("p strong")).toHaveText("two");
+    await expect(page.locator("#rd-controlled-1-field")).not.toBeChecked();
   });
 
-  test.describe("With description", () => {
-    test("has description element", async ({ page }) => {
-      await expect(
-        page.locator("#r-desc-one .pf-v6-c-radio__description")
-      ).toBeVisible();
-    });
+  test("reversed puts the label before the input", async ({ page }) => {
+    const first = page.locator("#rd-reversed > *").first();
+    await expect(first).toHaveClass(/pf-v6-c-radio__label/);
   });
 
-  test.describe("Disabled", () => {
-    test("radio has disabled attribute", async ({ page }) => {
-      await expect(page.locator("#r-dis-one-field")).toBeDisabled();
-    });
+  test("description and body render together", async ({ page }) => {
+    await expect(page.locator("#rd-desc-body .pf-v6-c-radio__description")).toBeVisible();
+    await expect(page.locator("#rd-desc-body .pf-v6-c-radio__body")).toBeVisible();
+  });
+
+  test("disabled and standalone states", async ({ page }) => {
+    await expect(page.locator("#r-dis-one input")).toBeDisabled();
+    await expect(page.locator("#r-standalone")).toHaveClass(/pf-m-standalone/);
+  });
+
+  test.describe("Standalone routes", () => {
+    for (const example of EXAMPLES) {
+      test(`/components/radio/${example} returns 200`, async ({ page }) => {
+        const res = await page.goto(`/components/radio/${example}`);
+        expect(res.status()).toBe(200);
+        await expect(page.locator(".pf-v6-c-radio").first()).toBeAttached();
+      });
+    }
   });
 });

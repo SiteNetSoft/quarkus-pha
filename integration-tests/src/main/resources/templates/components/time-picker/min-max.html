@@ -1,0 +1,42 @@
+{! Only times between 09:00 and 17:00 are offered; typed values outside the window error. !}
+<div
+  class="pf-v6-c-time-picker"
+  id="tp-min-max"
+  x-data="{ open: false, value: '',
+    bad() { if (this.value === '') return false; if (!/^\d\d:\d\d$/.test(this.value)) return true; var t = parseInt(this.value.slice(0, 2), 10) * 60 + parseInt(this.value.slice(3), 10); return t < 540 || t > 1020 } }"
+  style="position: relative; display: inline-block; min-width: 14rem"
+>
+  <div class="pf-v6-c-input-group">
+    <div class="pf-v6-c-input-group__item pf-m-fill">
+      <span class="pf-v6-c-form-control" :class="{ 'pf-m-error': bad() }">
+        <input type="text" id="tp-min-max-field" x-model="value" placeholder="HH:MM (09:00 - 17:00)" aria-label="Time picker with min and max" :aria-invalid="bad().toString()" />
+      </span>
+    </div>
+    <div class="pf-v6-c-input-group__item">
+      <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Toggle time picker" @click="open = !open">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:clock').raw}</span>
+      </button>
+    </div>
+  </div>
+  <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; left: 0; z-index: 200; max-height: 200px; overflow-y: auto; min-width: 100%">
+    <div class="pf-v6-c-menu__content">
+      <ul class="pf-v6-c-menu__list" role="menu">
+        <template x-for="h in [9, 10, 11, 12, 13, 14, 15, 16, 17]" :key="h">
+          <template x-for="m in (h === 17 ? ['00'] : ['00', '30'])" :key="h + '-' + m">
+            <li role="none" class="pf-v6-c-menu__list-item">
+              <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="value = h.toString().padStart(2, '0') + ':' + m; open = false">
+                <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text" x-text="h.toString().padStart(2, '0') + ':' + m"></span></span>
+              </button>
+            </li>
+          </template>
+        </template>
+      </ul>
+    </div>
+  </div>
+  <div class="pf-v6-c-helper-text" aria-live="polite" x-show="bad()" x-cloak>
+    <div class="pf-v6-c-helper-text__item pf-m-error">
+      <span class="pf-v6-c-helper-text__item-icon">{icons:svg('fa:circle-exclamation').raw}</span>
+      <span class="pf-v6-c-helper-text__item-text">Pick a time between 09:00 and 17:00.</span>
+    </div>
+  </div>
+</div>

@@ -59,4 +59,36 @@ test.describe("Slider", () => {
       await expect(link).toHaveAttribute("target", "_blank");
     });
   });
+
+  test.describe("Parity additions", () => {
+    test("value input stays in sync with the slider", async ({ page }) => {
+      const input = page.locator("#sl-value-input-wrap input[type='number']");
+      await expect(input).toHaveValue("30");
+      await input.fill("70");
+      await expect(page.locator("#sl-value-input .pf-v6-c-slider__thumb")).toHaveAttribute("aria-valuenow", "70");
+    });
+
+    test("action buttons step the value", async ({ page }) => {
+      const wrap = page.locator("#sl-actions-wrap");
+      await wrap.locator("button[aria-label='Increase']").click();
+      await expect(wrap.locator(".pf-v6-c-slider__thumb")).toHaveAttribute("aria-valuenow", "51");
+      await wrap.locator("button[aria-label='Decrease']").click();
+      await expect(wrap.locator(".pf-v6-c-slider__thumb")).toHaveAttribute("aria-valuenow", "50");
+    });
+
+    test("/components/slider/continuous returns 200", async ({ page }) => {
+      const res = await page.goto("/components/slider/continuous");
+      expect(res.status()).toBe(200);
+    });
+
+    test("/components/slider/value-input returns 200", async ({ page }) => {
+      const res = await page.goto("/components/slider/value-input");
+      expect(res.status()).toBe(200);
+    });
+
+    test("/components/slider/actions returns 200", async ({ page }) => {
+      const res = await page.goto("/components/slider/actions");
+      expect(res.status()).toBe(200);
+    });
+  });
 });

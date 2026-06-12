@@ -1,0 +1,30 @@
+{! Expandable vertical jump links with a nested subsection. !}
+<nav class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable" id="jl-expandable" aria-label="Jump to section" x-data="{ open: true }" :class="{ 'pf-m-expanded': open }" style="max-width: 240px">
+  <div class="pf-v6-c-jump-links__header">
+    <button class="pf-v6-c-jump-links__toggle pf-v6-c-button pf-m-plain" type="button" :aria-expanded="open.toString()" @click="open = !open">
+      <span class="pf-v6-c-jump-links__toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+      <span class="pf-v6-c-jump-links__toggle-text">Jump to section</span>
+    </button>
+  </div>
+  <div class="pf-v6-c-jump-links__main" x-show="open">
+    <ul class="pf-v6-c-jump-links__list" role="list">
+  <li class="pf-v6-c-jump-links__item pf-m-current">
+    <span class="pf-v6-c-jump-links__link"><a href="#" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Inferno</span></span></a></span>
+  </li>
+      <li class="pf-v6-c-jump-links__item">
+        <span class="pf-v6-c-jump-links__link"><a href="#" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Purgatorio</span></span></a></span>
+        <ul class="pf-v6-c-jump-links__list" role="list">
+  <li class="pf-v6-c-jump-links__item">
+    <span class="pf-v6-c-jump-links__link"><a href="#" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Ante-Purgatory</span></span></a></span>
+  </li>
+  <li class="pf-v6-c-jump-links__item">
+    <span class="pf-v6-c-jump-links__link"><a href="#" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">The Terraces</span></span></a></span>
+  </li>
+        </ul>
+      </li>
+  <li class="pf-v6-c-jump-links__item">
+    <span class="pf-v6-c-jump-links__link"><a href="#" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Paradiso</span></span></a></span>
+  </li>
+    </ul>
+  </div>
+</nav>

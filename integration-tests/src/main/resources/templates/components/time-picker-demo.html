@@ -47,7 +47,54 @@
                                 <span class="pf-v6-c-jump-links__link"
                                   ><a href="#basic" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text">Basic 24 hour</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#twelve-hour" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Basic 12 hour</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#custom-delimiter" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Custom delimiter</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#min-max" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Minimum/maximum times</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-seconds" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With seconds</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#twenty-four-with-seconds" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Basic 24 hours with seconds</span
+                                      ></span
                                     ></a
                                   ></span
                                 >
@@ -98,11 +145,33 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="time-picker"} {#description}
+                      {#include partials/example-card title="Basic 24 hour" slug="basic" component="time-picker"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">HH:MM slots in 30-minute steps.</p>
+                      {/description} {#content}{#include components/time-picker/basic /}{/content} {/include} {#include
+                      partials/example-card title="Basic 12 hour" slug="twelve-hour" component="time-picker"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">12-hour clock with AM/PM labels.</p>
+                      {/description} {#content}{#include components/time-picker/twelve-hour /}{/content} {/include}
+                      {#include partials/example-card title="Custom delimiter" slug="custom-delimiter"
+                      component="time-picker"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">A period instead of the colon.</p>
+                      {/description} {#content}{#include components/time-picker/custom-delimiter /}{/content} {/include}
+                      {#include partials/example-card title="Minimum/maximum times" slug="min-max"
+                      component="time-picker"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Click the clock icon to scroll through 30-minute slots; click a slot to set the input value.
+                        Only 09:00\u201317:00 offered; typed values outside the window error.
                       </p>
-                      {/description} {#content}{#include components/time-picker/basic /}{/content} {/include}
+                      {/description} {#content}{#include components/time-picker/min-max /}{/content} {/include}
+                      {#include partials/example-card title="With seconds" slug="with-seconds" component="time-picker"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">12-hour slots including seconds.</p>
+                      {/description} {#content}{#include components/time-picker/with-seconds /}{/content} {/include}
+                      {#include partials/example-card title="Basic 24 hours with seconds"
+                      slug="twenty-four-with-seconds" component="time-picker"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">HH:MM:SS.</p>
+                      {/description} {#content}{#include components/time-picker/twenty-four-with-seconds /}{/content}
+                      {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

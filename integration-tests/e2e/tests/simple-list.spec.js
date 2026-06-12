@@ -38,4 +38,28 @@ test.describe("Simple List", () => {
       ).toBeVisible();
     });
   });
+
+  test.describe("Parity additions", () => {
+    test("links variant renders anchors with a current item", async ({ page }) => {
+      await expect(page.locator("#slist-links a.pf-v6-c-simple-list__item-link")).toHaveCount(3);
+      await expect(page.locator("#slist-links .pf-m-current")).toHaveCount(1);
+    });
+
+    test("selectable moves pf-m-current on click", async ({ page }) => {
+      const items = page.locator("#slist-selectable .pf-v6-c-simple-list__item-link");
+      await items.nth(2).click();
+      await expect(items.nth(2)).toHaveClass(/pf-m-current/);
+      await expect(items.nth(0)).not.toHaveClass(/pf-m-current/);
+    });
+
+    test("/components/simple-list/links returns 200", async ({ page }) => {
+      const res = await page.goto("/components/simple-list/links");
+      expect(res.status()).toBe(200);
+    });
+
+    test("/components/simple-list/selectable returns 200", async ({ page }) => {
+      const res = await page.goto("/components/simple-list/selectable");
+      expect(res.status()).toBe(200);
+    });
+  });
 });

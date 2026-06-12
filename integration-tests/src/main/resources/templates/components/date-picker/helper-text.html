@@ -1,0 +1,23 @@
+<div x-data="{ v: '' }" style="max-width: 300px">
+  <div class="pf-v6-c-date-picker" id="dp-helper-text">
+    <div class="pf-v6-c-date-picker__input">
+      <div class="pf-v6-c-input-group">
+        <div class="pf-v6-c-input-group__item pf-m-fill">
+          <span class="pf-v6-c-form-control">
+            <input type="text" id="dp-helper-text-field" x-model="v" placeholder="YYYY-MM-DD" aria-label="Date with helper text" />
+          </span>
+        </div>
+        <div class="pf-v6-c-input-group__item">
+          <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Toggle date picker">{icons:svg('fa:calendar-alt').raw}</button>
+        </div>
+      </div>
+    </div>
+    <div class="pf-v6-c-date-picker__helper-text">
+      <div class="pf-v6-c-helper-text" aria-live="polite">
+        <div class="pf-v6-c-helper-text__item">
+          <span class="pf-v6-c-helper-text__item-text" x-text="v === '' ? 'Select a date.' : 'Selected: ' + v">Select a date.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

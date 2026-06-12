@@ -48,7 +48,16 @@
                                 <span class="pf-v6-c-jump-links__link"
                                   ><a href="#end" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">End (default)</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text">Default</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#middle" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Middle</span></span
                                     ></a
                                   ></span
                                 >
@@ -64,9 +73,29 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#middle" class="pf-v6-c-button pf-m-link"
+                                  ><a href="#custom-tooltip-position" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Middle</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >With custom tooltip position</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#max-chars" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Based on max characters</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-links" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With links</span></span
                                     ></a
                                   ></span
                                 >
@@ -117,26 +146,32 @@
                           </h2>
                         </div>
                       </div>
-
-                      {#include partials/example-card title="End (default)" slug="end" component="truncate"}
-                      {#description}
+                      {#include partials/example-card title="Default" slug="end" component="truncate"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Default behavior — ellipsis at the end. The container width determines the cutoff point.
+                        Truncates at the end; container width decides.
                       </p>
                       {/description} {#content}{#include components/truncate/end /}{/content} {/include} {#include
-                      partials/example-card title="Start" slug="start" component="truncate"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">position="start"</code> — ellipsis at the start. Useful for file paths
-                        where the tail (filename) matters most.
-                      </p>
-                      {/description} {#content}{#include components/truncate/start /}{/content} {/include} {#include
                       partials/example-card title="Middle" slug="middle" component="truncate"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Keeps both ends visible.</p>
+                      {/description} {#content}{#include components/truncate/middle /}{/content} {/include} {#include
+                      partials/example-card title="Start" slug="start" component="truncate"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Keeps the tail visible.</p>
+                      {/description} {#content}{#include components/truncate/start /}{/content} {/include} {#include
+                      partials/example-card title="With custom tooltip position" slug="custom-tooltip-position"
+                      component="truncate"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">position="middle"</code> — splits at
-                        <code class="ws-code">trailingNumChars</code> (default 7). The last N chars stay visible; the
-                        rest gets the ellipsis.
+                        Hover shows the full text in a bottom-positioned tooltip.
                       </p>
-                      {/description} {#content}{#include components/truncate/middle /}{/content} {/include}
+                      {/description} {#content}{#include components/truncate/custom-tooltip-position /}{/content}
+                      {/include} {#include partials/example-card title="Based on max characters" slug="max-chars"
+                      component="truncate"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Clamped to a 20-character budget instead of the container.
+                      </p>
+                      {/description} {#content}{#include components/truncate/max-chars /}{/content} {/include} {#include
+                      partials/example-card title="With links" slug="with-links" component="truncate"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">The anchor itself truncates.</p>
+                      {/description} {#content}{#include components/truncate/with-links /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

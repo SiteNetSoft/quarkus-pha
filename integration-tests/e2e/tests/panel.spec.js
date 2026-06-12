@@ -34,4 +34,21 @@ test.describe("Panel", () => {
   test("raised panel has body content", async ({ page }) => {
     await expect(page.locator("#panel-raised .pf-v6-c-panel__main-body")).toBeVisible();
   });
+
+  test.describe("Parity additions", () => {
+    test("pill and scrollable-auto-height carry their modifiers", async ({ page }) => {
+      await expect(page.locator("#pn-pill")).toHaveClass(/pf-m-pill/);
+      await expect(page.locator("#pn-scroll-auto")).toHaveClass(/pf-m-scrollable-auto-height/);
+    });
+
+    test("/components/panel/pill returns 200", async ({ page }) => {
+      const res = await page.goto("/components/panel/pill");
+      expect(res.status()).toBe(200);
+    });
+
+    test("/components/panel/scrollable-auto-height returns 200", async ({ page }) => {
+      const res = await page.goto("/components/panel/scrollable-auto-height");
+      expect(res.status()).toBe(200);
+    });
+  });
 });

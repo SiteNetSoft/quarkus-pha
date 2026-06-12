@@ -1,0 +1,8 @@
+{! Covers PF's three "uncontrolled" sections — the toggle text tracks the state. !}
+<div class="pf-v6-c-expandable-section" id="es-dynamic-toggle-text" x-data="{ expanded: false }" :class="{ 'pf-m-expanded': expanded }">
+  <button class="pf-v6-c-expandable-section__toggle" type="button" :aria-expanded="expanded" @click="expanded = !expanded">
+    <span class="pf-v6-c-expandable-section__toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+    <span class="pf-v6-c-expandable-section__toggle-text" x-text="expanded ? 'Show less' : 'Show more'">Show more</span>
+  </button>
+  <div class="pf-v6-c-expandable-section__content" x-show="expanded" x-cloak><p>This content is revealed by the toggle, whose label flips between Show more and Show less.</p></div>
+</div>

@@ -48,7 +48,25 @@
                                 <span class="pf-v6-c-jump-links__link"
                                   ><a href="#horizontal" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Horizontal</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#centered" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With centered list</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-label" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With label</span></span
                                     ></a
                                   ></span
                                 >
@@ -64,9 +82,20 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#centered" class="pf-v6-c-button pf-m-link"
+                                  ><a href="#vertical-with-label" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Centered</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text">Vertical with label</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#expandable-vertical-subsection" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Expandable vertical with subsection</span
+                                      ></span
                                     ></a
                                   ></span
                                 >
@@ -117,26 +146,33 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Horizontal" slug="horizontal" component="jump-links"}
+                      {#include partials/example-card title="Basic" slug="horizontal" component="jump-links"}
                       {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Default — items in a row. Best for short TOCs at the top of a page.
-                      </p>
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Horizontal list of in-page links.</p>
                       {/description} {#content}{#include components/jump-links/horizontal /}{/content} {/include}
+                      {#include partials/example-card title="With centered list" slug="centered" component="jump-links"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p"><code class="ws-code">pf-m-center</code>.</p>
+                      {/description} {#content}{#include components/jump-links/centered /}{/content} {/include}
+                      {#include partials/example-card title="With label" slug="with-label" component="jump-links"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">A label leads the list.</p>
+                      {/description} {#content}{#include components/jump-links/with-label /}{/content} {/include}
                       {#include partials/example-card title="Vertical" slug="vertical" component="jump-links"}
                       {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">vertical=true</code> — stacked items. The showcase uses this in the left
-                        sidebar of every demo.
-                      </p>
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p"><code class="ws-code">pf-m-vertical</code>.</p>
                       {/description} {#content}{#include components/jump-links/vertical /}{/content} {/include}
-                      {#include partials/example-card title="Centered" slug="centered" component="jump-links"}
-                      {#description}
+                      {#include partials/example-card title="Vertical with label" slug="vertical-with-label"
+                      component="jump-links"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Vertical plus the leading label.</p>
+                      {/description} {#content}{#include components/jump-links/vertical-with-label /}{/content}
+                      {/include} {#include partials/example-card title="Expandable vertical with subsection"
+                      slug="expandable-vertical-subsection" component="jump-links"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">center=true</code> — <code class="ws-code">pf-m-center</code> horizontally
-                        centers a horizontal list.
+                        Collapsible rail with a nested subsection list.
                       </p>
-                      {/description} {#content}{#include components/jump-links/centered /}{/content} {/include}
+                      {/description} {#content}{#include components/jump-links/expandable-vertical-subsection
+                      /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

@@ -1,0 +1,11 @@
+<div class="pf-v6-c-number-input" id="ni-custom-step" x-data="{ val: 90 }">
+  <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Minus"  @click="val = val - 3">
+    <span class="pf-v6-c-number-input__icon">{icons:svg('fa:minus').raw}</span>
+  </button>
+  <span class="pf-v6-c-form-control">
+    <input type="number" x-model.number="val" aria-label="Number input" />
+  </span>
+  <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Plus"  @click="val = val + 3">
+    <span class="pf-v6-c-number-input__icon">{icons:svg('fa:plus').raw}</span>
+  </button>
+</div>

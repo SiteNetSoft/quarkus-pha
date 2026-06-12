@@ -1,7 +1,7 @@
 {! Clipboard copy — PatternFly v6 !}
 {! Required: id — derives {id}-input + {id}-content for aria-controls wiring on the expand toggle. !}
 {! Required: text !}
-{! Optional: readonly (optional), expandable (optional),
+{! Optional: readonly (optional), expandable (optional), expanded (optional — start expanded),
               expandedText (optional — full text for expandable panel),
               inline (optional), code (optional — inline code style), block (optional — inline block) !}
 {!                                                                                          !}
@@ -30,7 +30,7 @@
 </div>
 {#else if expandable??}
 <div class="pf-v6-c-clipboard-copy" id="{id}"
-     x-data="{ copied: false, expanded: false }"
+     x-data="{ copied: false, expanded: {#if expanded??}true{#else}false{/if} }"
      :class="expanded && 'pf-m-expanded'">
   <div class="pf-v6-c-clipboard-copy__group">
     <button class="pf-v6-c-button pf-m-control" type="button"

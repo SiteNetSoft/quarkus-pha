@@ -1,0 +1,55 @@
+{! Expandable groups — each toggle shows its unread count. !}
+<div class="pf-v6-c-notification-drawer" id="nd-groups" role="region" aria-label="Grouped notifications" x-data="{ g1: true, g2: false }" style="max-width: 480px; border: 1px solid var(--pf-t--global--border--color--default)">
+  <div class="pf-v6-c-notification-drawer__header">
+    <h1 class="pf-v6-c-notification-drawer__header-title">Notifications</h1>
+    <span class="pf-v6-c-notification-drawer__header-status">3 unread</span>
+  </div>
+  <div class="pf-v6-c-notification-drawer__body">
+      <section class="pf-v6-c-notification-drawer__group" :class="{ 'pf-m-expanded': g1 }">
+        <button class="pf-v6-c-notification-drawer__group-toggle" type="button" :aria-expanded="g1.toString()" @click="g1 = !g1">
+          <div class="pf-v6-c-notification-drawer__group-toggle-title">Production alerts</div>
+          <div class="pf-v6-c-notification-drawer__group-toggle-count"><span class="pf-v6-c-badge pf-m-unread">2</span></div>
+          <div class="pf-v6-c-notification-drawer__group-toggle-icon">{icons:svg('fa:angle-right').raw}</div>
+        </button>
+        <div class="pf-v6-c-notification-drawer__group-list" x-show="g1" x-cloak>
+          <ul class="pf-v6-c-notification-drawer__list" role="list">
+            <li class="pf-v6-c-notification-drawer__list-item pf-m-unread pf-m-warning">
+              <div class="pf-v6-c-notification-drawer__list-item-header">
+                <span class="pf-v6-c-notification-drawer__list-item-header-icon">{icons:svg('fa:exclamation-triangle').raw}</span>
+                <h2 class="pf-v6-c-notification-drawer__list-item-header-title">Memory threshold exceeded</h2>
+              </div>
+              <p class="pf-v6-c-notification-drawer__list-item-description">Node prod-3 is at 92% memory usage.</p>
+              <small class="pf-v6-c-notification-drawer__list-item-timestamp">5 minutes ago</small>
+            </li>
+            <li class="pf-v6-c-notification-drawer__list-item pf-m-unread pf-m-info">
+              <div class="pf-v6-c-notification-drawer__list-item-header">
+                <span class="pf-v6-c-notification-drawer__list-item-header-icon">{icons:svg('fa:circle-info').raw}</span>
+                <h2 class="pf-v6-c-notification-drawer__list-item-header-title">Pod restarted</h2>
+              </div>
+              <p class="pf-v6-c-notification-drawer__list-item-description">api-7d9f restarted twice in 10 minutes.</p>
+              <small class="pf-v6-c-notification-drawer__list-item-timestamp">12 minutes ago</small>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="pf-v6-c-notification-drawer__group" :class="{ 'pf-m-expanded': g2 }">
+        <button class="pf-v6-c-notification-drawer__group-toggle" type="button" :aria-expanded="g2.toString()" @click="g2 = !g2">
+          <div class="pf-v6-c-notification-drawer__group-toggle-title">Staging alerts</div>
+          <div class="pf-v6-c-notification-drawer__group-toggle-count"><span class="pf-v6-c-badge pf-m-unread">1</span></div>
+          <div class="pf-v6-c-notification-drawer__group-toggle-icon">{icons:svg('fa:angle-right').raw}</div>
+        </button>
+        <div class="pf-v6-c-notification-drawer__group-list" x-show="g2" x-cloak>
+          <ul class="pf-v6-c-notification-drawer__list" role="list">
+            <li class="pf-v6-c-notification-drawer__list-item pf-m-read pf-m-success">
+              <div class="pf-v6-c-notification-drawer__list-item-header">
+                <span class="pf-v6-c-notification-drawer__list-item-header-icon">{icons:svg('fa:circle-check').raw}</span>
+                <h2 class="pf-v6-c-notification-drawer__list-item-header-title">Deploy succeeded</h2>
+              </div>
+              <p class="pf-v6-c-notification-drawer__list-item-description">v2.18.3 rolled out to staging.</p>
+              <small class="pf-v6-c-notification-drawer__list-item-timestamp">1 hour ago</small>
+            </li>
+          </ul>
+        </div>
+      </section>
+  </div>
+</div>

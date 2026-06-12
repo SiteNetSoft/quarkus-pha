@@ -1,0 +1,27 @@
+<div x-data="{ v: '', touched: false }" style="max-width: 300px">
+  <div class="pf-v6-c-date-picker" id="dp-required">
+    <div class="pf-v6-c-date-picker__input">
+      <div class="pf-v6-c-input-group">
+        <div class="pf-v6-c-input-group__item pf-m-fill">
+          <span class="pf-v6-c-form-control" :class="{ 'pf-m-error': touched && v === '' }">
+            <input type="text" id="dp-required-field" x-model="v" @blur="touched = true" placeholder="YYYY-MM-DD" required aria-label="Required date" :aria-invalid="(touched && v === '').toString()" />
+          </span>
+        </div>
+        <div class="pf-v6-c-input-group__item">
+          <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Toggle date picker">{icons:svg('fa:calendar-alt').raw}</button>
+        </div>
+      </div>
+    </div>
+    <div class="pf-v6-c-date-picker__helper-text">
+      <div class="pf-v6-c-helper-text" aria-live="polite">
+        <div class="pf-v6-c-helper-text__item" x-show="!(touched && v === '')">
+          <span class="pf-v6-c-helper-text__item-text">Date is required.</span>
+        </div>
+        <div class="pf-v6-c-helper-text__item pf-m-error" x-show="touched && v === ''" x-cloak>
+          <span class="pf-v6-c-helper-text__item-icon">{icons:svg('fa:circle-exclamation').raw}</span>
+          <span class="pf-v6-c-helper-text__item-text">A date must be provided.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
