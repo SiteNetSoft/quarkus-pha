@@ -238,7 +238,7 @@ public class ComponentRoutes {
     @Inject
     Template simpleFileUploadPage;
 
-    @Location("components/tile")
+    @Location("components/tile-demo")
     @Inject
     Template tilePage;
 

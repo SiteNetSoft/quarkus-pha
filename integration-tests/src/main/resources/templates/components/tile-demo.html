@@ -1,0 +1,376 @@
+{#include layouts/base} {#title}Tile{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Tile</h1>
+                    <p>A selectable card-like option for choosing between a small set of alternatives.</p>
+                    <div class="pf-v6-c-banner pf-m-gold" style="margin-top: 1rem">
+                      {icons:svg('fa:exclamation-triangle').raw} Deprecated upstream — PatternFly recommends
+                      <a href="/components/card">Card</a> with the selectable modifier instead. The CSS still ships in
+                      v6, so the component remains usable.
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                    <nav
+                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                      aria-label="Table of contents"
+                    >
+                      <div class="pf-v6-c-jump-links__main">
+                        <ul class="pf-v6-c-jump-links__list" role="list">
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Basic tile</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-subtext" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With subtext</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-icon" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With icon</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#stacked-icon" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With stacked icon</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#large-icons" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With large icons</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#long-subtext" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With long subtext</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#single-selection" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Tiles with single selection</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#multiple-selection" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Tiles with multiple selection</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="pf-v6-c-jump-links__item ws-toc-item">
+                            <span class="pf-v6-c-jump-links__link"
+                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                ><span class="pf-v6-c-button__text"
+                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                ></a
+                              ></span
+                            >
+                            <ul class="pf-v6-c-jump-links__list" role="list">
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#props-tile" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Tile props</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
+                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                        <div>
+                          <h2
+                            id="examples"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                          >
+                            Examples
+                          </h2>
+                        </div>
+                      </div>
+                      {#include partials/example-card title="Basic tile" slug="basic" component="tile"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Default, selected, and disabled tiles side by side.
+                      </p>
+                      {/description} {#content}{#include components/tile/basic /}{/content} {/include} {#include
+                      partials/example-card title="With subtext" slug="with-subtext" component="tile"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Supporting text under the title.</p>
+                      {/description} {#content}{#include components/tile/with-subtext /}{/content} {/include} {#include
+                      partials/example-card title="With icon" slug="with-icon" component="tile"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">An icon beside the title.</p>
+                      {/description} {#content}{#include components/tile/with-icon /}{/content} {/include} {#include
+                      partials/example-card title="With stacked icon" slug="stacked-icon" component="tile"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">stacked=true</code> puts the icon above the title (<code class="ws-code"
+                          >pf-m-stacked</code
+                        >
+                        on the header).
+                      </p>
+                      {/description} {#content}{#include components/tile/stacked-icon /}{/content} {/include} {#include
+                      partials/example-card title="With large icons" slug="large-icons" component="tile"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">displayLg=true</code> adds
+                        <code class="ws-code">pf-m-display-lg</code> for a bigger stacked icon.
+                      </p>
+                      {/description} {#content}{#include components/tile/large-icons /}{/content} {/include} {#include
+                      partials/example-card title="With long subtext" slug="long-subtext" component="tile"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Long body text wraps inside the tile instead of widening it.
+                      </p>
+                      {/description} {#content}{#include components/tile/long-subtext /}{/content} {/include} {#include
+                      partials/example-card title="Tiles with single selection" slug="single-selection"
+                      component="tile"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Click or press Enter — exactly one tile stays selected (Alpine, radio semantics).
+                      </p>
+                      {/description} {#content}{#include components/tile/single-selection /}{/content} {/include}
+                      {#include partials/example-card title="Tiles with multiple selection" slug="multiple-selection"
+                      component="tile"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Tiles toggle independently (checkbox semantics).
+                      </p>
+                      {/description} {#content}{#include components/tile/multiple-selection /}{/content} {/include}
+
+                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                        <h2
+                          id="documentation"
+                          tabindex="-1"
+                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                        >
+                          Documentation
+                        </h2>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="props-tile" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                          Tile props
+                        </h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          Parameters accepted by
+                          <code class="ws-code">{|{#include components/data-display/tile ... /}|}</code>.
+                        </p>
+                        <table
+                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                          role="grid"
+                          aria-label="Tile props"
+                        >
+                          <caption class="pf-v6-c-table__caption">
+                            <span class="ws-prop-required">*</span>
+                            required
+                          </caption>
+                          <thead class="pf-v6-c-table__thead">
+                            <tr class="pf-v6-c-table__tr">
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                              <th scope="col" class="pf-v6-c-table__th">Description</th>
+                            </tr>
+                          </thead>
+                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><span class="ws-prop-required">*</span> <code class="ws-code">title</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Tile title.</span></td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >DOM id on the root; omit unless something else references the tile.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">iconName</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Icon as <code class="ws-code">set:slug</code>, e.g.
+                                  <code class="ws-code">fa:plus</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">bodyText</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">Supporting text under the header.</span>
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">selected</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">pf-m-selected</code>.</span>
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">disabled</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">pf-m-disabled</code>.</span>
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">stacked</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Icon above the title (<code class="ws-code">pf-m-stacked</code> on the header).</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">displayLg</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Larger stacked icon (<code class="ws-code">pf-m-display-lg</code>).</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">attrs</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String (raw)</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Raw attribute passthrough on the root — Alpine directives etc. Inherits through
+                                  nested includes; shadow with <code class="ws-code">attrs=null</code> when
+                                  composing.</span
+                                >
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Prefer Card.</strong> PatternFly deprecated Tile in favor of
+                          <a href="/components/card">Card</a> with <code class="ws-code">selectable</code> /
+                          <code class="ws-code">clickable</code> modifiers, which cover the same single- and
+                          multi-select patterns with richer content. Reach for Tile only when matching existing markup.
+                          Selection is runtime state — drive <code class="ws-code">pf-m-selected</code> from Alpine
+                          rather than hardcoding it.
+                        </p>
+                      </div>
+                      <div class="pf-v6-l-stack__item">
+                        <br /><a
+                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/tile.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Edit tile.html on GitHub</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/body} {/include}
