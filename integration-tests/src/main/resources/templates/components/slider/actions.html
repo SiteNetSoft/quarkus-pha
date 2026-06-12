@@ -1,0 +1,18 @@
+{! Minus/plus actions flank the slider. !}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center" x-data="{ val: 50 }" id="sl-actions-wrap">
+  <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Decrease" @click="val = Math.max(0, val - 1)">
+    <span class="pf-v6-c-button__icon">{icons:svg('fa:minus').raw}</span>
+  </button>
+  <div class="pf-v6-c-slider" id="sl-actions" style="flex: 1; min-width: 240px" :style="'--pf-v6-c-slider--value: ' + val">
+    <div class="pf-v6-c-slider__main">
+      <div class="pf-v6-c-slider__rail" @click="const rect = $el.getBoundingClientRect(); val = Math.round((($event.clientX - rect.left) / rect.width) * 100)">
+        <div class="pf-v6-c-slider__rail-track"></div>
+      </div>
+      <div class="pf-v6-c-slider__thumb" role="slider" tabindex="0" aria-label="Value" aria-valuemin="0" aria-valuemax="100" :aria-valuenow="val" :style="'left: ' + val + '%'" @keydown.arrow-left.prevent="val = Math.max(0, val - 1)" @keydown.arrow-right.prevent="val = Math.min(100, val + 1)"></div>
+      <div class="pf-v6-c-slider__value pf-m-floating" x-text="val"></div>
+    </div>
+  </div>
+  <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Increase" @click="val = Math.min(100, val + 1)">
+    <span class="pf-v6-c-button__icon">{icons:svg('fa:plus').raw}</span>
+  </button>
+</div>

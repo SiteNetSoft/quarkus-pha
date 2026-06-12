@@ -39,7 +39,9 @@ public class PanelExamplesRoutes {
         "bordered",
         "secondary-variant",
         "scrollable",
-        "scrollable-with-header-and-footer"
+        "scrollable-with-header-and-footer",
+        "pill",
+        "scrollable-auto-height"
     );
 
     @Inject

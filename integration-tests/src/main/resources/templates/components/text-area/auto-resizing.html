@@ -1,0 +1,12 @@
+{! Grows with its content — Alpine sets the height to scrollHeight on input. !}
+<span class="pf-v6-c-form-control pf-m-textarea" id="ta-auto-resizing" style="max-width: 480px">
+  <textarea
+    id="ta-auto-resizing-field"
+    name="ta-auto-resizing"
+    rows="3"
+    placeholder="Type multiple lines — the area grows with the content"
+    aria-label="Auto-resizing text area"
+    style="overflow: hidden; resize: none"
+    @input="$el.style.height = 'auto'; $el.style.height = $el.scrollHeight + 'px'"
+  ></textarea>
+</span>

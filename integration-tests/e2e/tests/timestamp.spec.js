@@ -17,9 +17,9 @@ test.describe("Timestamp", () => {
   });
 
   test("all 3 example section headings use slug ids", async ({ page }) => {
-    await expect(page.locator("h3#basic")).toHaveText("Basic");
+    await expect(page.locator("h3#basic")).toHaveText("Default");
     await expect(page.locator("h3#inline")).toHaveText("Inline");
-    await expect(page.locator("h3#with-tooltip")).toHaveText("With tooltip");
+    await expect(page.locator("h3#with-tooltip")).toHaveText("Default tooltip");
   });
 
   test("basic timestamp renders human-readable text", async ({ page }) => {
@@ -45,5 +45,32 @@ test.describe("Timestamp", () => {
       "title",
       "2026-05-20 14:30:00 UTC"
     );
+  });
+
+  test.describe("Parity additions", () => {
+    test("formats render four variants of one instant", async ({ page }) => {
+      await expect(page.locator("#ts-formats time")).toHaveCount(4);
+    });
+
+    test("custom content keeps the machine-readable datetime", async ({ page }) => {
+      const t = page.locator("#ts-custom-content");
+      await expect(t).toHaveText("3 weeks ago");
+      await expect(t).toHaveAttribute("datetime", "2026-05-20T14:30:00Z");
+    });
+
+    test("/components/timestamp/basic-formats returns 200", async ({ page }) => {
+      const res = await page.goto("/components/timestamp/basic-formats");
+      expect(res.status()).toBe(200);
+    });
+
+    test("/components/timestamp/custom-format returns 200", async ({ page }) => {
+      const res = await page.goto("/components/timestamp/custom-format");
+      expect(res.status()).toBe(200);
+    });
+
+    test("/components/timestamp/custom-content returns 200", async ({ page }) => {
+      const res = await page.goto("/components/timestamp/custom-content");
+      expect(res.status()).toBe(200);
+    });
   });
 });

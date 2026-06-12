@@ -53,6 +53,15 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#date-range" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Date range</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -106,6 +115,12 @@
                         wants a structured weeks array.
                       </p>
                       {/description} {#content}{#include components/calendar-month/basic /}{/content} {/include}
+                      {#include partials/example-card title="Date range" slug="date-range" component="calendar-month"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The 12th\u201320th carry start-range / in-range / end-range cells.
+                      </p>
+                      {/description} {#content}{#include components/calendar-month/date-range /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

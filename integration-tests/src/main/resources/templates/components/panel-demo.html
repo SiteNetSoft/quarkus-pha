@@ -140,6 +140,26 @@
                                     ></span
                                   >
                                 </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#pill" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Pill</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#scrollable-auto-height" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text"
+                                          >Scrollable with auto height</span
+                                        ></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
                               </ul>
                             </li>
                             <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -261,8 +281,20 @@
                           title / actions row.
                         </p>
                         {/description} {#content}{#include components/panel/scrollable-with-header-and-footer
-                        /}{/content} {/include}
-
+                        /}{/content} {/include} {#include partials/example-card title="Pill" slug="pill"
+                        component="panel"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          <code class="ws-code">pf-m-pill</code> rounded styling.
+                        </p>
+                        {/description} {#content}{#include components/panel/pill /}{/content} {/include} {#include
+                        partials/example-card title="Scrollable with auto height" slug="scrollable-auto-height"
+                        component="panel"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          <code class="ws-code">pf-m-scrollable-auto-height</code> fills its container and scrolls
+                          inside it.
+                        </p>
+                        {/description} {#content}{#include components/panel/scrollable-auto-height /}{/content}
+                        {/include}
                         <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                           <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
                             <div>

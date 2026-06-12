@@ -55,9 +55,81 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#stack" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Stack</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#panel-right" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">Panel right</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#panel-right-gutter" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Panel right with gutter</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#sticky-panel" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Sticky panel</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#static-panel" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Static panel</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#responsive-panel" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Responsive panel width</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#border" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Border</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#padding-panel" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Padding on panel</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#padding-content" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Padding on content</span></span
                                     ></a
                                   ></span
                                 >
@@ -109,16 +181,59 @@
                         </div>
                       </div>
                       {#include partials/example-card title="Basic" slug="basic" component="sidebar"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Panel on the left, content on the right — the default for filter rails.
-                      </p>
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Panel beside content.</p>
                       {/description} {#content}{#include components/sidebar/basic /}{/content} {/include} {#include
+                      partials/example-card title="Stack" slug="stack" component="sidebar"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-stack</code> — the panel sits above the content.
+                      </p>
+                      {/description} {#content}{#include components/sidebar/stack /}{/content} {/include} {#include
                       partials/example-card title="Panel right" slug="panel-right" component="sidebar"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">panelRight=true</code> — panel switches to the right. Pair with
-                        <code class="ws-code">gutter=true</code> for a small gap.
+                        <code class="ws-code">pf-m-panel-right</code> moves the panel to the end.
                       </p>
                       {/description} {#content}{#include components/sidebar/panel-right /}{/content} {/include}
+                      {#include partials/example-card title="Panel right with gutter" slug="panel-right-gutter"
+                      component="sidebar"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-panel-right pf-m-gutter</code>.
+                      </p>
+                      {/description} {#content}{#include components/sidebar/panel-right-gutter /}{/content} {/include}
+                      {#include partials/example-card title="Sticky panel" slug="sticky-panel" component="sidebar"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-sticky</code> pins the panel while the content scrolls.
+                      </p>
+                      {/description} {#content}{#include components/sidebar/sticky-panel /}{/content} {/include}
+                      {#include partials/example-card title="Static panel" slug="static-panel" component="sidebar"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-static</code> — the panel scrolls away with the content.
+                      </p>
+                      {/description} {#content}{#include components/sidebar/static-panel /}{/content} {/include}
+                      {#include partials/example-card title="Responsive panel width" slug="responsive-panel"
+                      component="sidebar"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-width-25 / -33-on-lg / -50-on-xl</code>.
+                      </p>
+                      {/description} {#content}{#include components/sidebar/responsive-panel /}{/content} {/include}
+                      {#include partials/example-card title="Border" slug="border" component="sidebar"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-split</code> draws a divider between the regions.
+                      </p>
+                      {/description} {#content}{#include components/sidebar/border /}{/content} {/include} {#include
+                      partials/example-card title="Padding on panel" slug="padding-panel" component="sidebar"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Only the panel carries <code class="ws-code">pf-m-padding</code>.
+                      </p>
+                      {/description} {#content}{#include components/sidebar/padding-panel /}{/content} {/include}
+                      {#include partials/example-card title="Padding on content" slug="padding-content"
+                      component="sidebar"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Only the content carries <code class="ws-code">pf-m-padding</code>.
+                      </p>
+                      {/description} {#content}{#include components/sidebar/padding-content /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

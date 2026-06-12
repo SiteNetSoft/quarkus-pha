@@ -31,4 +31,25 @@ test.describe("Text Input", () => {
       await expect(input).toHaveAttribute("readonly", "");
     });
   });
+
+  test.describe("Parity additions", () => {
+    test("start-truncated keeps the tail visible via rtl direction", async ({ page }) => {
+      await expect(page.locator("#ti-start-truncated-field")).toHaveCSS("direction", "rtl");
+    });
+
+    test("icon-invalid combines a custom icon with error status", async ({ page }) => {
+      await expect(page.locator("#ti-icon-invalid")).toHaveClass(/pf-m-error/);
+      await expect(page.locator("#ti-icon-invalid .pf-v6-c-form-control__icon")).toHaveCount(2);
+    });
+
+    test("/components/text-input/start-truncated returns 200", async ({ page }) => {
+      const res = await page.goto("/components/text-input/start-truncated");
+      expect(res.status()).toBe(200);
+    });
+
+    test("/components/text-input/icon-invalid returns 200", async ({ page }) => {
+      const res = await page.goto("/components/text-input/icon-invalid");
+      expect(res.status()).toBe(200);
+    });
+  });
 });

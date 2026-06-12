@@ -98,6 +98,24 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#start-truncated" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Start truncated</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#icon-invalid" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Custom icon with error</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -182,8 +200,17 @@
                         Common type variants — email, password, number, date. Type maps directly to the HTML
                         <code class="ws-code">type</code> attribute.
                       </p>
-                      {/description} {#content}{#include components/text-input/types /}{/content} {/include}
-
+                      {/description} {#content}{#include components/text-input/types /}{/content} {/include} {#include
+                      partials/example-card title="Start truncated" slug="start-truncated" component="text-input"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Long values keep their tail visible.</p>
+                      {/description} {#content}{#include components/text-input/start-truncated /}{/content} {/include}
+                      {#include partials/example-card title="Custom icon with error" slug="icon-invalid"
+                      component="text-input"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A custom icon combined with the error status icon.
+                      </p>
+                      {/description} {#content}{#include components/text-input/icon-invalid /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

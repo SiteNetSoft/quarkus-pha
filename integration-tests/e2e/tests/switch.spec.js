@@ -41,4 +41,20 @@ test.describe("Switch", () => {
       await expect(page.locator("#sw-rev")).toHaveClass(/pf-m-reverse/);
     });
   });
+
+  test.describe("Parity additions", () => {
+    test("without-label switch is aria-labelled and toggles", async ({ page }) => {
+      const input = page.locator("#sw-without-label-field");
+      await expect(input).toHaveAttribute("aria-label", "Enable feature");
+      await expect(input).toBeChecked();
+      // The native input is visually hidden under the toggle — click the label.
+      await page.locator("#sw-without-label").click();
+      await expect(input).not.toBeChecked();
+    });
+
+    test("/components/switch/without-label returns 200", async ({ page }) => {
+      const res = await page.goto("/components/switch/without-label");
+      expect(res.status()).toBe(200);
+    });
+  });
 });

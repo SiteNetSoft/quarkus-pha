@@ -48,7 +48,7 @@
                                 <span class="pf-v6-c-jump-links__link"
                                   ><a href="#basic" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text">Basic dropdowns</span></span
                                     ></a
                                   ></span
                                 >
@@ -57,7 +57,36 @@
                                 <span class="pf-v6-c-jump-links__link"
                                   ><a href="#plain-kebab" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Plain kebab</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text">With kebab toggle</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-groups" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With groups of items</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-descriptions" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With item descriptions</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#split-checkbox" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Split toggle with checkbox</span
+                                      ></span
                                     ></a
                                   ></span
                                 >
@@ -108,16 +137,28 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="dropdown"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Labelled toggle with caret. Edit / Duplicate / Delete actions inside the menu.
-                      </p>
+                      {#include partials/example-card title="Basic dropdowns" slug="basic" component="dropdown"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Menu toggle + menu with a danger action.</p>
                       {/description} {#content}{#include components/dropdown/basic /}{/content} {/include} {#include
-                      partials/example-card title="Plain kebab" slug="plain-kebab" component="dropdown"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Compact icon toggle — used in row actions and toolbars.
-                      </p>
+                      partials/example-card title="With kebab toggle" slug="plain-kebab" component="dropdown"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Plain icon toggle.</p>
                       {/description} {#content}{#include components/dropdown/plain-kebab /}{/content} {/include}
+                      {#include partials/example-card title="With groups of items" slug="with-groups"
+                      component="dropdown"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Titled menu groups.</p>
+                      {/description} {#content}{#include components/dropdown/with-groups /}{/content} {/include}
+                      {#include partials/example-card title="With item descriptions" slug="with-descriptions"
+                      component="dropdown"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">A second description line per item.</p>
+                      {/description} {#content}{#include components/dropdown/with-descriptions /}{/content} {/include}
+                      {#include partials/example-card title="Split toggle with checkbox" slug="split-checkbox"
+                      component="dropdown"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The checkbox selects; the caret opens select-all/none actions.
+                      </p>
+                      {/description} {#content}{#include components/dropdown/split-checkbox /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

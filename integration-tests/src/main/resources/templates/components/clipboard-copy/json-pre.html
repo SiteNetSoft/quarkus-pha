@@ -1,0 +1,17 @@
+{! JSON object — the expandable content wraps the code in a pre. !}
+<div class="pf-v6-c-clipboard-copy" id="cc-json-pre" x-data="{ copied: false, expanded: true }" :class="expanded && 'pf-m-expanded'">
+  <div class="pf-v6-c-clipboard-copy__group">
+    <button class="pf-v6-c-button pf-m-control" type="button" :aria-expanded="expanded.toString()" aria-label="Toggle content" aria-controls="cc-json-pre-content" @click="expanded = !expanded">
+      <span class="pf-v6-c-button__icon"><span class="pf-v6-c-clipboard-copy__toggle-icon">{icons:svg('fa:angle-right').raw}</span></span>
+    </button>
+    <span class="pf-v6-c-form-control">
+      <input type="text" value='{ "kind": "ConfigMap", ... }' id="cc-json-pre-input" aria-label="Copyable input" readonly />
+    </span>
+    <button class="pf-v6-c-button pf-m-control" type="button" :aria-label="copied ? 'Successfully copied to clipboard!' : 'Copy to clipboard'" @click="navigator.clipboard.writeText($refs.body.innerText); copied = true; setTimeout(() => copied = false, 2000)">
+      <span class="pf-v6-c-button__icon"><span x-show="!copied">{icons:svg('fa:copy').raw}</span><span x-show="copied" x-cloak>{icons:svg('fa:check').raw}</span></span>
+    </button>
+  </div>
+  <div class="pf-v6-c-clipboard-copy__expandable-content" id="cc-json-pre-content" x-show="expanded" x-ref="body">
+    <pre>{ "kind": "ConfigMap", "metadata": { "name": "app-config" }, "data": { "LOG_LEVEL": "info" } }</pre>
+  </div>
+</div>

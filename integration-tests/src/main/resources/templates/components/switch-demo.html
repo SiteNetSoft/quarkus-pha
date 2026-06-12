@@ -80,6 +80,15 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#without-label" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Without label</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -144,7 +153,11 @@
                           >pf-m-reverse</code
                         >).
                       </p>
-                      {/description} {#content}{#include components/switch/reversed /}{/content} {/include}
+                      {/description} {#content}{#include components/switch/reversed /}{/content} {/include} {#include
+                      partials/example-card title="Without label" slug="without-label" component="switch"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Aria-labelled toggle with no visible text.</p>
+                      {/description} {#content}{#include components/switch/without-label /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

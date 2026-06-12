@@ -65,7 +65,56 @@
                                 <span class="pf-v6-c-jump-links__link"
                                   ><a href="#expandable" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Expandable</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text">Expanded</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#read-only-expanded" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Read only expanded</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#read-only-expanded-by-default" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Read only expanded by default</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#expanded-with-array" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Expanded with array</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#json-pre" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >JSON object (wrap code with pre)</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#inline-compact" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Inline compact</span></span
                                     ></a
                                   ></span
                                 >
@@ -74,7 +123,31 @@
                                 <span class="pf-v6-c-jump-links__link"
                                   ><a href="#inline" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Inline</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Inline compact code in sentence</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#inline-compact-with-additional-action" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Inline compact with additional action</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#inline-compact-truncation" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Inline compact with truncation</span
+                                      ></span
                                     ></a
                                   ></span
                                 >
@@ -128,31 +201,64 @@
                       {#include partials/example-card title="Basic" slug="basic" component="clipboard-copy"}
                       {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Standard input + copy button. Click the button to copy the value via
-                        <code class="ws-code">navigator.clipboard</code>; icon swaps to a check for 2 seconds.
+                        Input + copy button; the icon flips to a check on copy.
                       </p>
                       {/description} {#content}{#include components/clipboard-copy/basic /}{/content} {/include}
                       {#include partials/example-card title="Read only" slug="readonly" component="clipboard-copy"}
                       {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">readonly=true</code> — input can't be edited. Use for tokens, API keys,
-                        computed identifiers.
-                      </p>
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">The input cannot be edited.</p>
                       {/description} {#content}{#include components/clipboard-copy/readonly /}{/content} {/include}
-                      {#include partials/example-card title="Expandable" slug="expandable" component="clipboard-copy"}
+                      {#include partials/example-card title="Expanded" slug="expandable" component="clipboard-copy"}
                       {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">expandable=true</code> — single-line summary in the input; click the
-                        chevron to reveal <code class="ws-code">expandedText</code> below.
-                      </p>
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">A toggle reveals the expandable panel.</p>
                       {/description} {#content}{#include components/clipboard-copy/expandable /}{/content} {/include}
-                      {#include partials/example-card title="Inline" slug="inline" component="clipboard-copy"}
-                      {#description}
+                      {#include partials/example-card title="Read only expanded" slug="read-only-expanded"
+                      component="clipboard-copy"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">inline=true</code> — compact in-flow variant. Pair with
-                        <code class="ws-code">code=true</code> for monospace styling.
+                        Read-only combined with the expandable panel.
+                      </p>
+                      {/description} {#content}{#include components/clipboard-copy/read-only-expanded /}{/content}
+                      {/include} {#include partials/example-card title="Read only expanded by default"
+                      slug="read-only-expanded-by-default" component="clipboard-copy"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">expanded=true</code> opens the panel on load.
+                      </p>
+                      {/description} {#content}{#include components/clipboard-copy/read-only-expanded-by-default
+                      /}{/content} {/include} {#include partials/example-card title="Expanded with array"
+                      slug="expanded-with-array" component="clipboard-copy"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Multiple lines in the panel; copy grabs all of them.
+                      </p>
+                      {/description} {#content}{#include components/clipboard-copy/expanded-with-array /}{/content}
+                      {/include} {#include partials/example-card title="JSON object (wrap code with pre)"
+                      slug="json-pre" component="clipboard-copy"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The panel wraps JSON in a <code class="ws-code">&lt;pre&gt;</code>.
+                      </p>
+                      {/description} {#content}{#include components/clipboard-copy/json-pre /}{/content} {/include}
+                      {#include partials/example-card title="Inline compact" slug="inline-compact"
+                      component="clipboard-copy"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Plain inline text + copy action.</p>
+                      {/description} {#content}{#include components/clipboard-copy/inline-compact /}{/content}
+                      {/include} {#include partials/example-card title="Inline compact code in sentence" slug="inline"
+                      component="clipboard-copy"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Code-styled inline copy embedded in a sentence.
                       </p>
                       {/description} {#content}{#include components/clipboard-copy/inline /}{/content} {/include}
+                      {#include partials/example-card title="Inline compact with additional action"
+                      slug="inline-compact-with-additional-action" component="clipboard-copy"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A second action button follows the copy action.
+                      </p>
+                      {/description} {#content}{#include components/clipboard-copy/inline-compact-with-additional-action
+                      /}{/content} {/include} {#include partials/example-card title="Inline compact with truncation"
+                      slug="inline-compact-truncation" component="clipboard-copy"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The displayed value truncates; the full text is copied.
+                      </p>
+                      {/description} {#content}{#include components/clipboard-copy/inline-compact-truncation
+                      /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

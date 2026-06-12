@@ -52,6 +52,35 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-tooltips" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Basic with tooltips</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-search" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Basic with search</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#complex-actions" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Using more complex options with actions</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -101,9 +130,27 @@
                       {#include partials/example-card title="Basic" slug="basic" component="dual-list-selector"}
                       {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Click an item, then click the right arrow to move it. Alpine tracks both lists' state.
+                        Click an item, then the arrow, to move it between panes.
                       </p>
                       {/description} {#content}{#include components/dual-list-selector/basic /}{/content} {/include}
+                      {#include partials/example-card title="Basic with tooltips" slug="with-tooltips"
+                      component="dual-list-selector"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The move controls explain themselves on hover/focus.
+                      </p>
+                      {/description} {#content}{#include components/dual-list-selector/with-tooltips /}{/content}
+                      {/include} {#include partials/example-card title="Basic with search" slug="with-search"
+                      component="dual-list-selector"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Each pane filters with its own search input.</p>
+                      {/description} {#content}{#include components/dual-list-selector/with-search /}{/content}
+                      {/include} {#include partials/example-card title="Using more complex options with actions"
+                      slug="complex-actions" component="dual-list-selector"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Items carry descriptions; double arrows move everything at once. PF\u2019s tree and draggable
+                        variants are covered by Tree view and Drag and drop.
+                      </p>
+                      {/description} {#content}{#include components/dual-list-selector/complex-actions /}{/content}
+                      {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

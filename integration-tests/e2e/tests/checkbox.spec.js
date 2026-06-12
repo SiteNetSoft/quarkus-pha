@@ -95,4 +95,34 @@ test.describe("Checkbox", () => {
       await expect(asterisk).toHaveText("*");
     });
   });
+
+  test.describe("Parity additions", () => {
+    test("controlled pair reports the checked set", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/checkbox/controlled"]');
+      await expect(card.locator("p strong")).toHaveText("none");
+      await page.locator("#cb-controlled-1-field").check();
+      await page.locator("#cb-controlled-2-field").check();
+      await expect(card.locator("p strong")).toHaveText("alpha, beta");
+    });
+
+    test("description and body render together", async ({ page }) => {
+      await expect(page.locator("#cb-desc-body .pf-v6-c-check__description")).toBeVisible();
+      await expect(page.locator("#cb-desc-body .pf-v6-c-check__body")).toBeVisible();
+    });
+
+    test("/components/checkbox/controlled returns 200", async ({ page }) => {
+      const res = await page.goto("/components/checkbox/controlled");
+      expect(res.status()).toBe(200);
+    });
+
+    test("/components/checkbox/label-wraps returns 200", async ({ page }) => {
+      const res = await page.goto("/components/checkbox/label-wraps");
+      expect(res.status()).toBe(200);
+    });
+
+    test("/components/checkbox/description-and-body returns 200", async ({ page }) => {
+      const res = await page.goto("/components/checkbox/description-and-body");
+      expect(res.status()).toBe(200);
+    });
+  });
 });

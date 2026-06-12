@@ -1,0 +1,29 @@
+<div class="pf-v6-c-time-picker" id="tp-seconds" x-data="{ open: false, value: '' }" style="position: relative; display: inline-block; min-width: 12rem">
+  <div class="pf-v6-c-input-group">
+    <div class="pf-v6-c-input-group__item pf-m-fill">
+      <span class="pf-v6-c-form-control">
+        <input type="text" id="tp-seconds-field" x-model="value" placeholder="HH:MM:SS AM/PM" aria-label="Time picker" />
+      </span>
+    </div>
+    <div class="pf-v6-c-input-group__item">
+      <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Toggle time picker" @click="open = !open">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:clock').raw}</span>
+      </button>
+    </div>
+  </div>
+  <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; left: 0; z-index: 200; max-height: 200px; overflow-y: auto; min-width: 100%">
+    <div class="pf-v6-c-menu__content">
+      <ul class="pf-v6-c-menu__list" role="menu">
+        <template x-for="h in 24" :key="h">
+          <template x-for="m in ['00', '30']" :key="h + '-' + m">
+            <li role="none" class="pf-v6-c-menu__list-item">
+              <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="value = (((h - 1) % 12) || 12) + ':' + m + ':00' + ((h - 1) < 12 ? ' AM' : ' PM'); open = false">
+                <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text" x-text="(((h - 1) % 12) || 12) + ':' + m + ':00' + ((h - 1) < 12 ? ' AM' : ' PM')"></span></span>
+              </button>
+            </li>
+          </template>
+        </template>
+      </ul>
+    </div>
+  </div>
+</div>

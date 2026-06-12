@@ -42,4 +42,35 @@ test.describe("Dropdown", () => {
       await expect(page.locator(`${card} .pf-v6-c-menu-toggle`)).toHaveClass(/pf-m-plain/);
     });
   });
+
+  test.describe("Parity additions", () => {
+    test("groups and descriptions render in their menus", async ({ page }) => {
+      await page.locator("#dd-groups .pf-v6-c-menu-toggle").evaluate((el) => el.click());
+      await expect(page.locator("#dd-groups .pf-v6-c-menu__group-title")).toHaveText("Group 1");
+      await page.locator("#dd-descriptions .pf-v6-c-menu-toggle").evaluate((el) => el.click());
+      await expect(page.locator("#dd-descriptions .pf-v6-c-menu__item-description").first()).toBeVisible();
+    });
+
+    test("split checkbox toggle selects via menu actions", async ({ page }) => {
+      const root = page.locator("#dd-split-checkbox");
+      await root.locator(".pf-v6-c-menu-toggle__button").click();
+      await root.locator(".pf-v6-c-menu__item", { hasText: "Select all" }).click();
+      await expect(page.locator("#dd-split-checkbox-check")).toBeChecked();
+    });
+
+    test("/components/dropdown/with-groups returns 200", async ({ page }) => {
+      const res = await page.goto("/components/dropdown/with-groups");
+      expect(res.status()).toBe(200);
+    });
+
+    test("/components/dropdown/with-descriptions returns 200", async ({ page }) => {
+      const res = await page.goto("/components/dropdown/with-descriptions");
+      expect(res.status()).toBe(200);
+    });
+
+    test("/components/dropdown/split-checkbox returns 200", async ({ page }) => {
+      const res = await page.goto("/components/dropdown/split-checkbox");
+      expect(res.status()).toBe(200);
+    });
+  });
 });

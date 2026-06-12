@@ -1,0 +1,8 @@
+{! Working selection — clicking moves pf-m-current (PF's "uncontrolled" section). !}
+<div class="pf-v6-c-simple-list" id="slist-selectable" x-data="{ sel: 1 }">
+  <ul class="pf-v6-c-simple-list__list" role="list">
+    <li class="pf-v6-c-simple-list__list-item"><button class="pf-v6-c-simple-list__item-link" type="button" :class="{ 'pf-m-current': sel === 1 }" @click="sel = 1">Item 1</button></li>
+    <li class="pf-v6-c-simple-list__list-item"><button class="pf-v6-c-simple-list__item-link" type="button" :class="{ 'pf-m-current': sel === 2 }" @click="sel = 2">Item 2</button></li>
+    <li class="pf-v6-c-simple-list__list-item"><button class="pf-v6-c-simple-list__item-link" type="button" :class="{ 'pf-m-current': sel === 3 }" @click="sel = 3">Item 3</button></li>
+  </ul>
+</div>
