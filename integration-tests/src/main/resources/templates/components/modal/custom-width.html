@@ -1,26 +1,11 @@
 <div x-data="{ open: false }">
-  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = true"><span class="pf-v6-c-button__text">Open custom-width modal</span></button>
-  <div class="pf-v6-c-backdrop" x-show="open" x-cloak @keydown.escape.window="open = false">
-    <div class="pf-v6-c-bullseye">
-      <div class="pf-v6-c-modal-box " id="mo-custom-width" role="dialog" aria-modal="true" aria-labelledby="mo-custom-width-title" style="width: 50%">
-        <div class="pf-v6-c-modal-box__close">
-          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="open = false">
-            <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
-          </button>
-        </div>
-        <header class="pf-v6-c-modal-box__header">
-          <h2 class="pf-v6-c-modal-box__title" id="mo-custom-width-title">
-            <span class="pf-v6-c-modal-box__title-text">Custom width modal</span>
-          </h2>
-        </header>
-        <div class="pf-v6-c-modal-box__body">
-          <p>An inline width (50%) overrides the size modifiers.</p>
-        </div>
-        <footer class="pf-v6-c-modal-box__footer">
-          <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = false"><span class="pf-v6-c-button__text">Confirm</span></button>
-          <button class="pf-v6-c-button pf-m-link" type="button" @click="open = false"><span class="pf-v6-c-button__text">Cancel</span></button>
-        </footer>
-      </div>
-    </div>
-  </div>
+  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = true"><span class="pf-v6-c-button__text">Open 50%-width modal</span></button>
+  {#include components/feedback/modal id="mo-custom-width" width="50%"}
+  {#include components/feedback/modal-close /}
+  {#include components/feedback/modal-header headingLevel="h2"}Custom width{/include}
+  {#include components/feedback/modal-body}<p>An inline width (here 50%) replaces the size modifier.</p>{/include}
+  {#include components/feedback/modal-footer}
+  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = false"><span class="pf-v6-c-button__text">Confirm</span></button>
+  {/include}
+  {/include}
 </div>

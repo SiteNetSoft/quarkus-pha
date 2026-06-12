@@ -1,38 +1,27 @@
 <div x-data="{ open: false, help: false }">
   <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = true"><span class="pf-v6-c-button__text">Open modal with help</span></button>
-  <div class="pf-v6-c-backdrop" x-show="open" x-cloak @keydown.escape.window="open = false">
-    <div class="pf-v6-c-bullseye">
-      <div class="pf-v6-c-modal-box pf-m-md" id="mo-with-help" role="dialog" aria-modal="true" aria-labelledby="mo-with-help-title">
-        <div class="pf-v6-c-modal-box__close">
-          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="open = false">
-            <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
-          </button>
+  {#include components/feedback/modal id="mo-with-help" size="md"}
+  {#include components/feedback/modal-close /}
+  {#include components/feedback/modal-header headingLevel="h2" hasModalHelp=true}With help
+  {#modalHelp}
+  <div style="position: relative">
+    <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Help" :aria-expanded="help.toString()" @click="help = !help">
+      <span class="pf-v6-c-button__icon">{icons:svg('fa:circle-question').raw}</span>
+    </button>
+    <div x-show="help" x-cloak @click.outside="help = false" style="position: absolute; top: 100%; right: 0; z-index: 600; width: 260px">
+      <div class="pf-v6-c-popover pf-m-bottom" role="dialog" aria-label="Modal help">
+        <div class="pf-v6-c-popover__arrow"></div>
+        <div class="pf-v6-c-popover__content">
+          <div class="pf-v6-c-popover__body">Contextual help for this dialog.</div>
         </div>
-        <header class="pf-v6-c-modal-box__header pf-m-help">
-          <div class="pf-v6-c-modal-box__header-main">
-            <h2 class="pf-v6-c-modal-box__title" id="mo-with-help-title"><span class="pf-v6-c-modal-box__title-text">With help</span></h2>
-          </div>
-          <div style="position: relative">
-            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Help" :aria-expanded="help.toString()" @click="help = !help">
-              <span class="pf-v6-c-button__icon">{icons:svg('fa:circle-question').raw}</span>
-            </button>
-            <div x-show="help" x-cloak @click.outside="help = false" style="position: absolute; top: 100%; right: 0; z-index: 600; width: 260px">
-              <div class="pf-v6-c-popover pf-m-bottom" role="dialog" aria-label="Modal help">
-                <div class="pf-v6-c-popover__arrow"></div>
-                <div class="pf-v6-c-popover__content">
-                  <div class="pf-v6-c-popover__body">Contextual help for this dialog.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </header>
-        <div class="pf-v6-c-modal-box__body">
-          <p>The header hosts a help button that opens a popover.</p>
-        </div>
-        <footer class="pf-v6-c-modal-box__footer">
-          <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = false"><span class="pf-v6-c-button__text">Confirm</span></button>
-        </footer>
       </div>
     </div>
   </div>
+  {/modalHelp}
+  {/include}
+  {#include components/feedback/modal-body}<p>The header hosts a help button that opens a popover.</p>{/include}
+  {#include components/feedback/modal-footer}
+  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = false"><span class="pf-v6-c-button__text">Confirm</span></button>
+  {/include}
+  {/include}
 </div>

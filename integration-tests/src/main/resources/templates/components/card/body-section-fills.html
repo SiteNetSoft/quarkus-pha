@@ -1,9 +1,9 @@
 <div style="max-width: 400px; height: 24rem">
-  <div class="pf-v6-c-card pf-m-full-height" id="cd-body-section-fills">
-    <div class="pf-v6-c-card__title"><h2 class="pf-v6-c-card__title-text">Card title</h2></div>
-    <div class="pf-v6-c-card__body pf-m-no-fill">Body section with <code>pf-m-no-fill</code></div>
-    <div class="pf-v6-c-card__body pf-m-no-fill">Another no-fill body section</div>
-    <div class="pf-v6-c-card__body">This default body section fills the remaining card height.</div>
-    <div class="pf-v6-c-card__footer">Footer</div>
-  </div>
+  {#include components/data-display/card id="cd-body-section-fills" fullHeight=true}
+  {#include components/data-display/card-title}Card title{/include}
+  {#include components/data-display/card-body noFill=true}Body section with <code>pf-m-no-fill</code>{/include}
+  {#include components/data-display/card-body noFill=true}Another no-fill body section{/include}
+  {#include components/data-display/card-body}This default body section fills the remaining card height.{/include}
+  {#include components/data-display/card-footer}Footer{/include}
+  {/include}
 </div>

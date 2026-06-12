@@ -1,8 +1,29 @@
-{! Card — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the card.
-                                       compact, displayLg, plain, flat, rounded, fullHeight !} {! Block: content (required — use card__title, card__body, card__footer divs) !}
+{! Card — PatternFly v6. Root of the card family; compose sections with
+   card-header / card-title / card-subtitle / card-body / card-footer includes
+   (or hr.pf-v6-c-divider between sections). Content is the include's MAIN BLOCK —
+   no named slot, so nothing to collide with outer templates' slots. !}
+{! Optional params:
+     id           — DOM id on the root.
+     compact, displayLg, plain, flat, rounded, fullHeight, secondary — pf-m-* modifiers.
+     selectable   — pf-m-selectable (pair with card-header hasSelectableActions).
+     clickable    — pf-m-clickable.
+     selected     — static pf-m-selected.
+     disabled     — pf-m-disabled.
+     expandable   — wires the expand contract: x-data="{ expanded: false }" on the root
+                    and a bound pf-m-expanded class. Pair with card-header expandable=true
+                    and card-expandable-content for the collapsing region.
+     selectedExpr — Alpine expression (e.g. "chosen === 'one'"); when truthy the card
+                    gets pf-m-selected. Use for selection driven by outer x-data state.
+     attrs        — raw attribute passthrough (Alpine directives etc.). Inherits through
+                    nested includes; shadowed inside the card family's slots. !}
 <div
-  class="pf-v6-c-card{#if compact??} pf-m-compact{/if}{#if displayLg??} pf-m-display-lg{/if}{#if plain??} pf-m-plain{/if}{#if flat??} pf-m-flat{/if}{#if rounded??} pf-m-rounded{/if}{#if fullHeight??} pf-m-full-height{/if}"
+  class="pf-v6-c-card{#if compact??} pf-m-compact{/if}{#if displayLg??} pf-m-display-lg{/if}{#if plain??} pf-m-plain{/if}{#if flat??} pf-m-flat{/if}{#if rounded??} pf-m-rounded{/if}{#if fullHeight??} pf-m-full-height{/if}{#if secondary??} pf-m-secondary{/if}{#if selectable??} pf-m-selectable{/if}{#if clickable??} pf-m-clickable{/if}{#if selected??} pf-m-selected{/if}{#if disabled??} pf-m-disabled{/if}"
   {#if id??}id="{id}"{/if}
+  {#if expandable??}x-data="{ expanded: false }" :class="expanded ? 'pf-m-expanded' : ''"{/if}
+  {#if selectedExpr??}:class="({selectedExpr}) ? 'pf-m-selected' : ''"{/if}
+  {#if attrs??}{attrs.raw}{/if}
 >
-  {#insert content}{/insert}
+  {! Shadow id/attrs so they don't leak into composed section includes (Qute include-data
+     inheritance) — an explicit id on card-title etc. still overrides. !}
+  {#let id=null attrs=null}{#insert /}{/let}
 </div>

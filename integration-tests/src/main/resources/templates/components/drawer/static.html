@@ -1,14 +1,12 @@
-<div class="pf-v6-c-drawer pf-m-static pf-m-expanded" id="dr-static" style="min-height: 240px">
-  <div class="pf-v6-c-drawer__main">
-    <div class="pf-v6-c-drawer__content">
-      <div class="pf-v6-c-drawer__body" style="padding: 1rem">
-        <p>pf-m-static — the panel is always shown, no toggle. Useful for split-pane layouts.</p>
-      </div>
-    </div>
-    <div class="pf-v6-c-drawer__panel" style="background: var(--pf-t--global--background--color--secondary--default)">
-      <div class="pf-v6-c-drawer__body" style="padding: 1rem">
-        <p>Static panel — always visible.</p>
-      </div>
-    </div>
-  </div>
-</div>
+{#include components/data-display/drawer id="dr-static" static=true attrs='style="min-height: 240px"'}
+{#include components/data-display/drawer-main}
+{#include components/data-display/drawer-content}
+{#include components/data-display/drawer-body padding=true}
+    <p>pf-m-static — the panel is always shown, no toggle. Useful for split-pane layouts.</p>
+{/include}
+{/include}
+{#include components/data-display/drawer-panel secondary=true}
+{#include components/data-display/drawer-body padding=true}<p>Static panel — always visible.</p>{/include}
+{/include}
+{/include}
+{/include}

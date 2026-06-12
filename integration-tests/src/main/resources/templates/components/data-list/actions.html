@@ -1,0 +1,42 @@
+{#include components/data-display/data-list id="dl-actions" ariaLabel="Data list"}
+{#include components/data-display/data-list-item}
+{#include components/data-display/data-list-item-row}
+{#include components/data-display/data-list-item-content}
+{#include components/data-display/data-list-cell}<strong>Single action row</strong>{/include}
+{#include components/data-display/data-list-cell}A lone action button{/include}
+{/include}
+{#include components/data-display/data-list-item-action}
+<button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">Action</span></button>
+{/include}
+{/include}
+{/include}
+{#include components/data-display/data-list-item}
+{#include components/data-display/data-list-item-row}
+{#include components/data-display/data-list-item-content}
+{#include components/data-display/data-list-cell}<strong>Multiple actions row</strong>{/include}
+{#include components/data-display/data-list-cell}A kebab menu of actions{/include}
+{/include}
+{#include components/data-display/data-list-item-action attrs='x-data="{ open: false }" style="position: relative"'}
+<button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Row actions" :aria-expanded="open.toString()" @click="open = !open">
+  <span class="pf-v6-c-button__icon">{icons:svg('fa:ellipsis-vertical').raw}</span>
+</button>
+<div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; right: 0; z-index: 200; min-width: 10rem">
+  <div class="pf-v6-c-menu__content">
+    <ul class="pf-v6-c-menu__list" role="menu">
+      <li role="none" class="pf-v6-c-menu__list-item">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false">
+          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Edit</span></span>
+        </button>
+      </li>
+      <li role="none" class="pf-v6-c-menu__list-item pf-m-danger">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false">
+          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Delete</span></span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+{/include}
+{/include}
+{/include}
+{/include}

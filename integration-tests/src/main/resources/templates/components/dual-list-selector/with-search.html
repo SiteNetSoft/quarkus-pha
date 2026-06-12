@@ -1,0 +1,95 @@
+<div x-data="{
+    available: ['Apple', 'Banana', 'Cherry', 'Date', 'Fig'],
+    chosen: [],
+    qa: '', qc: '',
+    focusAvail: null, focusChosen: null,
+    fa() { return this.available.filter((x) => x.toLowerCase().indexOf(this.qa.toLowerCase()) !== -1) },
+    fc() { return this.chosen.filter((x) => x.toLowerCase().indexOf(this.qc.toLowerCase()) !== -1) },
+    moveRight() { if (this.focusAvail !== null) { this.chosen.push(this.focusAvail); this.available = this.available.filter((x) => x !== this.focusAvail); this.focusAvail = null; } },
+    moveLeft() { if (this.focusChosen !== null) { this.available.push(this.focusChosen); this.chosen = this.chosen.filter((x) => x !== this.focusChosen); this.focusChosen = null; } }
+  }">
+  {#include components/forms/dual-list-selector id="dls-search"}{#content}
+  <div class="pf-v6-c-dual-list-selector__pane pf-m-available">
+    <div class="pf-v6-c-dual-list-selector__header">
+      <div class="pf-v6-c-dual-list-selector__title-text">Available options</div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__tools">
+      <div class="pf-v6-c-dual-list-selector__tools-filter">
+        <div class="pf-v6-c-text-input-group">
+          <div class="pf-v6-c-text-input-group__main pf-m-icon">
+            <span class="pf-v6-c-text-input-group__text">
+              <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+              <input class="pf-v6-c-text-input-group__text-input" type="search" placeholder="Filter options" aria-label="Filter available options" x-model="qa" />
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__status">
+      <div class="pf-v6-c-dual-list-selector__status-text" x-text="fa().length + ' of ' + available.length + ' options shown'"></div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__menu">
+      <ul class="pf-v6-c-dual-list-selector__list" role="listbox" aria-label="Available options">
+        <template x-for="item in fa()" :key="item">
+          <li class="pf-v6-c-dual-list-selector__list-item" role="option" :aria-selected="(focusAvail === item).toString()" @click="focusAvail = (focusAvail === item ? null : item)">
+            <div class="pf-v6-c-dual-list-selector__list-item-row" :class="{ 'pf-m-selected': focusAvail === item }">
+              <span class="pf-v6-c-dual-list-selector__item">
+                <span class="pf-v6-c-dual-list-selector__item-main">
+                  <span class="pf-v6-c-dual-list-selector__item-text" x-text="item"></span>
+                </span>
+              </span>
+            </div>
+          </li>
+        </template>
+      </ul>
+    </div>
+  </div>
+  <div class="pf-v6-c-dual-list-selector__controls">
+    <div class="pf-v6-c-dual-list-selector__controls-item">
+      <button class="pf-v6-c-button pf-m-plain" type="button" :disabled="focusAvail === null" @click="moveRight()" aria-label="Move selected to chosen">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-right').raw}</span>
+      </button>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__controls-item">
+      <button class="pf-v6-c-button pf-m-plain" type="button" :disabled="focusChosen === null" @click="moveLeft()" aria-label="Move selected to available">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-left').raw}</span>
+      </button>
+    </div>
+  </div>
+  <div class="pf-v6-c-dual-list-selector__pane pf-m-chosen">
+    <div class="pf-v6-c-dual-list-selector__header">
+      <div class="pf-v6-c-dual-list-selector__title-text">Chosen options</div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__tools">
+      <div class="pf-v6-c-dual-list-selector__tools-filter">
+        <div class="pf-v6-c-text-input-group">
+          <div class="pf-v6-c-text-input-group__main pf-m-icon">
+            <span class="pf-v6-c-text-input-group__text">
+              <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+              <input class="pf-v6-c-text-input-group__text-input" type="search" placeholder="Filter options" aria-label="Filter chosen options" x-model="qc" />
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__status">
+      <div class="pf-v6-c-dual-list-selector__status-text" x-text="fc().length + ' of ' + chosen.length + ' options shown'"></div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__menu">
+      <ul class="pf-v6-c-dual-list-selector__list" role="listbox" aria-label="Chosen options">
+        <template x-for="item in fc()" :key="item">
+          <li class="pf-v6-c-dual-list-selector__list-item" role="option" :aria-selected="(focusChosen === item).toString()" @click="focusChosen = (focusChosen === item ? null : item)">
+            <div class="pf-v6-c-dual-list-selector__list-item-row" :class="{ 'pf-m-selected': focusChosen === item }">
+              <span class="pf-v6-c-dual-list-selector__item">
+                <span class="pf-v6-c-dual-list-selector__item-main">
+                  <span class="pf-v6-c-dual-list-selector__item-text" x-text="item"></span>
+                </span>
+              </span>
+            </div>
+          </li>
+        </template>
+      </ul>
+    </div>
+  </div>
+  {/content}{/include}
+</div>

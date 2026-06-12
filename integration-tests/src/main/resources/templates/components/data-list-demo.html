@@ -62,6 +62,91 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#plain" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Plain</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#checkboxes-actions" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Checkboxes, actions and additional cells</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#actions" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Actions: single and multiple</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#expandable" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Expandable</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#mixed-expandable" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Mixed expandable</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#width-modifiers" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Width modifiers</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#clickable-rows" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Clickable rows</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#controlling-text" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Controlling text</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#sm-grid-breakpoint" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Small grid breakpoint</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -109,15 +194,67 @@
                         </div>
                       </div>
                       {#include partials/example-card title="Basic" slug="basic" component="data-list"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Default row spacing — three project entries with name + status + last-updated cells.
-                      </p>
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Rows of cells inside item-content.</p>
                       {/description} {#content}{#include components/data-list/basic /}{/content} {/include} {#include
                       partials/example-card title="Compact" slug="compact" component="data-list"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">compact=true</code> — tighter padding for dense lists.
+                        <code class="ws-code">pf-m-compact</code> — tighter rows.
                       </p>
-                      {/description} {#content}{#include components/data-list/compact /}{/content} {/include}
+                      {/description} {#content}{#include components/data-list/compact /}{/content} {/include} {#include
+                      partials/example-card title="Plain" slug="plain" component="data-list"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-plain</code> removes row backgrounds and borders.
+                      </p>
+                      {/description} {#content}{#include components/data-list/plain /}{/content} {/include} {#include
+                      partials/example-card title="Checkboxes, actions and additional cells" slug="checkboxes-actions"
+                      component="data-list"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">__item-control</code> checks plus
+                        <code class="ws-code">__item-action</code> buttons.
+                      </p>
+                      {/description} {#content}{#include components/data-list/checkboxes-actions /}{/content} {/include}
+                      {#include partials/example-card title="Actions: single and multiple" slug="actions"
+                      component="data-list"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A lone action button and a kebab menu of actions.
+                      </p>
+                      {/description} {#content}{#include components/data-list/actions /}{/content} {/include} {#include
+                      partials/example-card title="Expandable" slug="expandable" component="data-list"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A toggle in the item control reveals <code class="ws-code">__expandable-content</code>.
+                      </p>
+                      {/description} {#content}{#include components/data-list/expandable /}{/content} {/include}
+                      {#include partials/example-card title="Mixed expandable" slug="mixed-expandable"
+                      component="data-list"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Expandable and plain rows share one list.</p>
+                      {/description} {#content}{#include components/data-list/mixed-expandable /}{/content} {/include}
+                      {#include partials/example-card title="Width modifiers" slug="width-modifiers"
+                      component="data-list"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-flex-2/3</code> and <code class="ws-code">pf-m-no-fill</code> size
+                        individual cells.
+                      </p>
+                      {/description} {#content}{#include components/data-list/width-modifiers /}{/content} {/include}
+                      {#include partials/example-card title="Clickable rows" slug="clickable-rows"
+                      component="data-list"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-clickable</code> rows; the active one carries
+                        <code class="ws-code">pf-m-selected</code>. PF\u2019s draggable sections are covered by the Drag
+                        and drop component.
+                      </p>
+                      {/description} {#content}{#include components/data-list/clickable-rows /}{/content} {/include}
+                      {#include partials/example-card title="Controlling text" slug="controlling-text"
+                      component="data-list"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-break-word / pf-m-truncate / pf-m-nowrap</code>.
+                      </p>
+                      {/description} {#content}{#include components/data-list/controlling-text /}{/content} {/include}
+                      {#include partials/example-card title="Small grid breakpoint" slug="sm-grid-breakpoint"
+                      component="data-list"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-grid-sm</code> stacks cells below the sm breakpoint.
+                      </p>
+                      {/description} {#content}{#include components/data-list/sm-grid-breakpoint /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"
@@ -132,9 +269,15 @@
                           Data list props
                         </h3>
                         <p class="pf-v6-c-content--p pf-m-editorial">
-                          Parameters accepted by
-                          <code class="ws-code">{|{#include components/data-display/data-list ... /}|}</code>. Items
-                          live in the slot using PF subclasses (__item, __item-row, __item-content, __cell).
+                          The data list is a template family: <code class="ws-code">data-list</code> is the root and
+                          rows compose from <code class="ws-code">data-list-item</code> &gt;
+                          <code class="ws-code">data-list-item-row</code> &gt;
+                          <code class="ws-code">data-list-item-control</code> /
+                          <code class="ws-code">data-list-item-content</code> (&gt;
+                          <code class="ws-code">data-list-cell</code>) /
+                          <code class="ws-code">data-list-item-action</code>, plus
+                          <code class="ws-code">data-list-expandable-content</code> — all main-block includes, no
+                          generic slot names.
                         </p>
                         <table
                           class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
@@ -155,32 +298,117 @@
                           <tbody role="rowgroup" class="pf-v6-c-table__tbody">
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
-                                >
+                                <span class="pf-v6-c-table__text"><code class="ws-code">id / ariaLabel</code></span>
                               </td>
                               <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">DOM id on the &lt;ul&gt;.</span>
+                                <span class="pf-v6-c-table__text">DOM id; AT label for the list.</span>
                               </td>
                             </tr>
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">compact</code></span>
+                                <span class="pf-v6-c-table__text"><code class="ws-code">compact / plain</code></span>
                               </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">Adds <code class="ws-code">pf-m-compact</code>.</span>
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">slot <code class="ws-code">content</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Boolean</span></td>
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  >&lt;li class="pf-v6-c-data-list__item"&gt; entries.</span
+                                  >The matching <code class="ws-code">pf-m-*</code> modifier.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">gridBreakpoint</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Grid modifier suffix — "sm" renders <code class="ws-code">pf-m-grid-sm</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">data-list-item</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">expandable</code> (owns the
+                                  <code class="ws-code">open</code> state + bound
+                                  <code class="ws-code">pf-m-expanded</code>), <code class="ws-code">startOpen</code>,
+                                  <code class="ws-code">clickable</code>,
+                                  <code class="ws-code">selectedExpr</code> (Alpine expression &rarr;
+                                  <code class="ws-code">pf-m-selected</code>), <code class="ws-code">attrs</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">data-list-item-control</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">expandToggle</code> renders the toggle wired to
+                                  <code class="ws-code">open</code> (+ <code class="ws-code">toggleAriaLabel</code>);
+                                  otherwise the main block holds e.g. a <code class="ws-code">__check</code> checkbox —
+                                  toggle and custom content are mutually exclusive.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">data-list-cell</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Repeat per column; <code class="ws-code">id</code>,
+                                  <code class="ws-code">modifiers</code> (e.g. "pf-m-flex-2", "pf-m-truncate",
+                                  "pf-m-no-fill").</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">data-list-item-action</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Trailing actions; <code class="ws-code">attrs</code> for kebab
+                                  positioning/state.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">data-list-expandable-content</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >The region <code class="ws-code">open</code> reveals; content lands inside the body
+                                  wrapper.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">attrs</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String (raw)</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Raw attribute passthrough (root and most members). Shadowed inside the family&#39;s
+                                  inserts.</span
                                 >
                               </td>
                             </tr>

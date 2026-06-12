@@ -1,48 +1,31 @@
-<div x-data="{ panelSecondary: true, contentSecondary: false, sectionSecondary: false }">
+{! The cls() helper keeps the bound pf-m-secondary classes quote-free for the attrs params. !}
+<div x-data="{ panelSecondary: true, contentSecondary: false, sectionSecondary: false, cls(b) { return b ? 'pf-m-secondary' : '' } }">
   <div class="pf-v6-l-flex pf-m-space-items-lg" style="margin-bottom: 1rem">
     <div class="pf-v6-c-check">
-      <input
-        class="pf-v6-c-check__input"
-        type="checkbox"
-        id="dr-secondary-panel-check"
-        x-model="panelSecondary"
-      />
+      <input class="pf-v6-c-check__input" type="checkbox" id="dr-secondary-panel-check" x-model="panelSecondary" />
       <label class="pf-v6-c-check__label" for="dr-secondary-panel-check">Panel secondary</label>
     </div>
     <div class="pf-v6-c-check">
-      <input
-        class="pf-v6-c-check__input"
-        type="checkbox"
-        id="dr-secondary-content-check"
-        x-model="contentSecondary"
-      />
+      <input class="pf-v6-c-check__input" type="checkbox" id="dr-secondary-content-check" x-model="contentSecondary" />
       <label class="pf-v6-c-check__label" for="dr-secondary-content-check">Content secondary</label>
     </div>
     <div class="pf-v6-c-check">
-      <input
-        class="pf-v6-c-check__input"
-        type="checkbox"
-        id="dr-secondary-section-check"
-        x-model="sectionSecondary"
-      />
+      <input class="pf-v6-c-check__input" type="checkbox" id="dr-secondary-section-check" x-model="sectionSecondary" />
       <label class="pf-v6-c-check__label" for="dr-secondary-section-check">Section secondary</label>
     </div>
   </div>
-  <div class="pf-v6-c-drawer pf-m-inline pf-m-expanded" id="dr-secondary-background" style="min-height: 240px">
-    <div class="pf-v6-c-drawer__section" :class="{ 'pf-m-secondary': sectionSecondary }">drawer-section</div>
-    <div class="pf-v6-c-drawer__main">
-      <div class="pf-v6-c-drawer__content" :class="{ 'pf-m-secondary': contentSecondary }">
-        <div class="pf-v6-c-drawer__body pf-m-padding">
-          Toggle the checkboxes to switch the panel, content, and section between the default and
-          secondary background color variants.
-        </div>
-      </div>
-      <div class="pf-v6-c-drawer__panel" :class="{ 'pf-m-secondary': panelSecondary }">
-        <div class="pf-v6-c-drawer__head">
-          <span>Drawer panel header</span>
-        </div>
-        <div class="pf-v6-c-drawer__body">Drawer panel body</div>
-      </div>
-    </div>
+  {#include components/data-display/drawer id="dr-secondary-background" inline=true startExpanded=true attrs='style="min-height: 240px"'}
+  <div class="pf-v6-c-drawer__section" :class="cls(sectionSecondary)">drawer-section</div>
+  {#include components/data-display/drawer-main}
+  <div class="pf-v6-c-drawer__content" :class="cls(contentSecondary)">
+    {#include components/data-display/drawer-body padding=true}
+    <p>Toggle the checkboxes to flip each region between default and secondary background.</p>
+    {/include}
   </div>
+  {#include components/data-display/drawer-panel attrs=':class="cls(panelSecondary)"'}
+  {#include components/data-display/drawer-head}Drawer panel header{/include}
+  {#include components/data-display/drawer-body}Drawer panel body{/include}
+  {/include}
+  {/include}
+  {/include}
 </div>
