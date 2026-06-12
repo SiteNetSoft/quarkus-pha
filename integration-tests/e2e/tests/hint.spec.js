@@ -37,4 +37,16 @@ test.describe("Hint", () => {
       page.locator("#ht-content .pf-v6-c-hint__footer")
     ).toBeVisible();
   });
+
+  test.describe("Parity additions", () => {
+    test("without-title hint has only a body", async ({ page }) => {
+      await expect(page.locator("#ht-without-title .pf-v6-c-hint__body")).toBeVisible();
+      await expect(page.locator("#ht-without-title .pf-v6-c-hint__title")).toHaveCount(0);
+    });
+
+    test("/components/hint/without-title returns 200", async ({ page }) => {
+      const res = await page.goto("/components/hint/without-title");
+      expect(res.status()).toBe(200);
+    });
+  });
 });

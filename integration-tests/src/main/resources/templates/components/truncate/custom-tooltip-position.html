@@ -1,0 +1,10 @@
+{! The full text shows in a tooltip positioned below the truncation. !}
+<div style="max-width: 280px" x-data="{ tip: false }">
+  <div style="position: relative; display: inline-block; max-width: 100%">
+    <span class="pf-v6-c-truncate" id="trunc-tooltip" tabindex="0" @mouseenter="tip = true" @mouseleave="tip = false" @focus="tip = true" @blur="tip = false" style="display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">Vestibulum interdum risus et enim faucibus, sit amet molestie est accumsan. redhat_logo_black_and_white_reversed_simple_with_fedora_container.zip</span>
+    <div class="pf-v6-c-tooltip pf-m-bottom" role="tooltip" x-show="tip" x-cloak style="position: absolute; top: 100%; left: 0; z-index: 300; width: max-content; max-width: 18.75rem">
+      <div class="pf-v6-c-tooltip__arrow"></div>
+      <div class="pf-v6-c-tooltip__content">Vestibulum interdum risus et enim faucibus, sit amet molestie est accumsan. redhat_logo_black_and_white_reversed_simple_with_fedora_container.zip</div>
+    </div>
+  </div>
+</div>

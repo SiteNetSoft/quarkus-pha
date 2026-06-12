@@ -1,0 +1,19 @@
+{! Split toggle — the checkbox selects, the caret opens the action menu. !}
+<div x-data="{ open: false, checked: false }" id="dd-split-checkbox" style="position: relative; display: inline-block">
+  <div class="pf-v6-c-menu-toggle pf-m-split-button" :class="open ? 'pf-m-expanded' : ''">
+    <label class="pf-v6-c-check pf-m-standalone">
+      <input class="pf-v6-c-check__input" type="checkbox" id="dd-split-checkbox-check" aria-label="Select all" x-model="checked" />
+    </label>
+    <button class="pf-v6-c-menu-toggle__button" type="button" :aria-expanded="open" aria-label="Menu toggle" @click="open = !open">
+      <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
+    </button>
+  </div>
+  <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 12rem">
+    <div class="pf-v6-c-menu__content">
+      <ul class="pf-v6-c-menu__list" role="menu">
+        <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="checked = true; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Select all</span></span></button></li>
+        <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="checked = false; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Select none</span></span></button></li>
+      </ul>
+    </div>
+  </div>
+</div>

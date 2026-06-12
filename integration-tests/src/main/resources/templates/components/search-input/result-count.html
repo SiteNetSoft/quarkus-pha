@@ -1,0 +1,15 @@
+{! Match count appears in the utilities while a value is present. !}
+<div class="pf-v6-c-text-input-group" id="si-result-count" x-data="{ value: 'orange' }" style="max-width: 360px">
+  <div class="pf-v6-c-text-input-group__main pf-m-icon">
+    <span class="pf-v6-c-text-input-group__text">
+      <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+      <input class="pf-v6-c-text-input-group__text-input" type="search" id="si-result-count-input" placeholder="Search…" aria-label="Search" x-model="value" />
+    </span>
+  </div>
+  <div class="pf-v6-c-text-input-group__utilities" x-show="value !== ''">
+    <span class="pf-v6-c-badge pf-m-read" style="align-self: center">3</span>
+    <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Clear search" @click="value = ''">
+      <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+    </button>
+  </div>
+</div>

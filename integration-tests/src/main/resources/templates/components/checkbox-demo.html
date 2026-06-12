@@ -116,6 +116,35 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#controlled" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Controlled</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#label-wraps" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Label wraps</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#description-and-body" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >With description and body</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -204,7 +233,23 @@
                         <code class="ws-code">ariaLabel</code>.
                       </p>
                       {/description} {#content}{#include components/checkbox/standalone /}{/content} {/include}
-
+                      {#include partials/example-card title="Controlled" slug="controlled" component="checkbox"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Alpine reports the checked set (covers controlled/uncontrolled).
+                      </p>
+                      {/description} {#content}{#include components/checkbox/controlled /}{/content} {/include}
+                      {#include partials/example-card title="Label wraps" slug="label-wraps" component="checkbox"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Long labels wrap with the input on the first line.
+                      </p>
+                      {/description} {#content}{#include components/checkbox/label-wraps /}{/content} {/include}
+                      {#include partials/example-card title="With description and body" slug="description-and-body"
+                      component="checkbox"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Both together.</p>
+                      {/description} {#content}{#include components/checkbox/description-and-body /}{/content}
+                      {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

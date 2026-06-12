@@ -48,16 +48,7 @@
                                 <span class="pf-v6-c-jump-links__link"
                                   ><a href="#basic" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#bounded" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Bounded</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text">Default</span></span
                                     ></a
                                   ></span
                                 >
@@ -73,9 +64,58 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#bounded" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With unit and thresholds</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#disabled" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">Disabled</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-status" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With status</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#varying-sizes" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Varying sizes</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#custom-step" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Custom increment/decrement</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#custom-step-threshold" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Custom increment/decrement and thresholds</span
+                                      ></span
                                     ></a
                                   ></span
                                 >
@@ -126,28 +166,42 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="number-input"}
+                      {#include partials/example-card title="Default" slug="basic" component="number-input"}
                       {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Unbounded — increment / decrement freely.</p>
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Minus / input / plus.</p>
                       {/description} {#content}{#include components/number-input/basic /}{/content} {/include} {#include
-                      partials/example-card title="Bounded" slug="bounded" component="number-input"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">min=0</code> / <code class="ws-code">max=10</code> — the +/− buttons
-                        disable at the bounds.
-                      </p>
-                      {/description} {#content}{#include components/number-input/bounded /}{/content} {/include}
-                      {#include partials/example-card title="With unit" slug="with-unit" component="number-input"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Pass <code class="ws-code">unit</code> for a trailing unit label (hours, pixels, %).
-                      </p>
+                      partials/example-card title="With unit" slug="with-unit" component="number-input"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">A unit label after the controls.</p>
                       {/description} {#content}{#include components/number-input/with-unit /}{/content} {/include}
+                      {#include partials/example-card title="With unit and thresholds" slug="bounded"
+                      component="number-input"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Buttons disable at the min/max bounds.</p>
+                      {/description} {#content}{#include components/number-input/bounded /}{/content} {/include}
                       {#include partials/example-card title="Disabled" slug="disabled" component="number-input"}
                       {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">disabled=true</code> — input + both buttons disabled.
-                      </p>
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">All controls disabled.</p>
                       {/description} {#content}{#include components/number-input/disabled /}{/content} {/include}
+                      {#include partials/example-card title="With status" slug="with-status" component="number-input"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Negative errors, zero warns, positive succeeds — live.
+                      </p>
+                      {/description} {#content}{#include components/number-input/with-status /}{/content} {/include}
+                      {#include partials/example-card title="Varying sizes" slug="varying-sizes"
+                      component="number-input"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Input widths sized to the expected value length.
+                      </p>
+                      {/description} {#content}{#include components/number-input/varying-sizes /}{/content} {/include}
+                      {#include partials/example-card title="Custom increment/decrement" slug="custom-step"
+                      component="number-input"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Steps of 3.</p>
+                      {/description} {#content}{#include components/number-input/custom-step /}{/content} {/include}
+                      {#include partials/example-card title="Custom increment/decrement and thresholds"
+                      slug="custom-step-threshold" component="number-input"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Steps of 3 clamped to 0\u201312.</p>
+                      {/description} {#content}{#include components/number-input/custom-step-threshold /}{/content}
+                      {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

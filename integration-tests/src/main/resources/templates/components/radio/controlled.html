@@ -1,0 +1,13 @@
+{! A working radio group — Alpine reports the selection (covers PF's controlled and
+   uncontrolled sections, which differ only in React state ownership). !}
+<div x-data="{ choice: 'one' }">
+  <div class="pf-v6-c-radio" id="rd-controlled-1">
+    <input class="pf-v6-c-radio__input" type="radio" id="rd-controlled-1-field" name="rd-controlled" value="one" x-model="choice" />
+    <label class="pf-v6-c-radio__label" for="rd-controlled-1-field">Option one</label>
+  </div>
+  <div class="pf-v6-c-radio" id="rd-controlled-2">
+    <input class="pf-v6-c-radio__input" type="radio" id="rd-controlled-2-field" name="rd-controlled" value="two" x-model="choice" />
+    <label class="pf-v6-c-radio__label" for="rd-controlled-2-field">Option two</label>
+  </div>
+  <p style="margin-top: 0.5rem">Selected: <strong x-text="choice">one</strong></p>
+</div>

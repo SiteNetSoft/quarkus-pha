@@ -1,0 +1,13 @@
+{! Inline compact with a truncated value — the full text is still what gets copied. !}
+<div style="max-width: 240px">
+  <div class="pf-v6-c-clipboard-copy pf-m-inline pf-m-block" id="cc-inline-truncate" x-data="{ copied: false }">
+    <span class="pf-v6-c-clipboard-copy__text" x-ref="text" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block; max-width: 170px; vertical-align: bottom">https://app.example.com/api/v2/deployments/3f9c2a17-55de-4d1b-9d6f</span>
+    <span class="pf-v6-c-clipboard-copy__actions">
+      <span class="pf-v6-c-clipboard-copy__actions-item">
+        <button class="pf-v6-c-button pf-m-plain pf-m-no-padding" type="button" :aria-label="copied ? 'Successfully copied to clipboard!' : 'Copy to clipboard'" @click="navigator.clipboard.writeText($refs.text.textContent.trim()); copied = true; setTimeout(() => copied = false, 2000)">
+          <span class="pf-v6-c-button__icon"><span x-show="!copied">{icons:svg('fa:copy').raw}</span><span x-show="copied" x-cloak>{icons:svg('fa:check').raw}</span></span>
+        </button>
+      </span>
+    </span>
+  </div>
+</div>

@@ -71,6 +71,24 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#filters" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Filters</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-status" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With status</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -138,6 +156,18 @@
                         wrapper, <code class="ws-code">disabled</code> on the input.
                       </p>
                       {/description} {#content}{#include components/text-input-group/disabled /}{/content} {/include}
+                      {#include partials/example-card title="Filters" slug="filters" component="text-input-group"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Applied filters as removable labels inside the group; Enter adds the typed one.
+                      </p>
+                      {/description} {#content}{#include components/text-input-group/filters /}{/content} {/include}
+                      {#include partials/example-card title="With status" slug="with-status"
+                      component="text-input-group"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Success and error variants with status icons.
+                      </p>
+                      {/description} {#content}{#include components/text-input-group/with-status /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

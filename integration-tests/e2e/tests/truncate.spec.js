@@ -34,4 +34,37 @@ test.describe("Truncate", () => {
     await expect(page.locator("#trunc-middle .pf-v6-c-truncate__start")).toBeVisible();
     await expect(page.locator("#trunc-middle .pf-v6-c-truncate__end")).toBeVisible();
   });
+
+  test.describe("Parity additions", () => {
+    test("tooltip variant reveals full text on hover", async ({ page }) => {
+      const wrap = page.locator('[data-rendered-href="/components/truncate/custom-tooltip-position"]');
+      await expect(wrap.locator(".pf-v6-c-tooltip")).toBeHidden();
+      await page.locator("#trunc-tooltip").hover();
+      await expect(wrap.locator(".pf-v6-c-tooltip")).toBeVisible();
+    });
+
+    test("max-chars clamps to 20 characters plus ellipsis", async ({ page }) => {
+      const text = await page.locator("#trunc-max-chars .pf-v6-c-truncate__start").textContent();
+      expect(text.length).toBe(21);
+    });
+
+    test("link variant truncates the anchor", async ({ page }) => {
+      await expect(page.locator("#trunc-link")).toHaveCSS("text-overflow", "ellipsis");
+    });
+
+    test("/components/truncate/custom-tooltip-position returns 200", async ({ page }) => {
+      const res = await page.goto("/components/truncate/custom-tooltip-position");
+      expect(res.status()).toBe(200);
+    });
+
+    test("/components/truncate/max-chars returns 200", async ({ page }) => {
+      const res = await page.goto("/components/truncate/max-chars");
+      expect(res.status()).toBe(200);
+    });
+
+    test("/components/truncate/with-links returns 200", async ({ page }) => {
+      const res = await page.goto("/components/truncate/with-links");
+      expect(res.status()).toBe(200);
+    });
+  });
 });

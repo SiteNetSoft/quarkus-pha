@@ -1,0 +1,22 @@
+{! The kebab control is always visible and opens a working menu of the overflowed actions. !}
+<div class="pf-v6-c-overflow-menu" id="om-persistent">
+  <div class="pf-v6-c-overflow-menu__content">
+    <div class="pf-v6-c-overflow-menu__group pf-m-button-group">
+      <div class="pf-v6-c-overflow-menu__item"><button class="pf-v6-c-button pf-m-primary" type="button"><span class="pf-v6-c-button__text">Primary action</span></button></div>
+    </div>
+  </div>
+  <div class="pf-v6-c-overflow-menu__control" x-data="{ open: false }" style="position: relative">
+    <button class="pf-v6-c-menu-toggle pf-m-plain" type="button" aria-label="More actions" :aria-expanded="open.toString()" @click="open = !open">
+      <span class="pf-v6-c-menu-toggle__icon">{icons:svg('fa:ellipsis-vertical').raw}</span>
+    </button>
+    <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; right: 0; z-index: 200; min-width: 10rem">
+      <div class="pf-v6-c-menu__content">
+        <ul class="pf-v6-c-menu__list" role="menu">
+          <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Edit</span></span></button></li>
+          <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Duplicate</span></span></button></li>
+          <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Archive</span></span></button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

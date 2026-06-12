@@ -45,4 +45,17 @@ test.describe("Calendar month", () => {
       await expect(adjacentCells).toHaveCount(11);
     });
   });
+
+  test.describe("Parity additions", () => {
+    test("date range marks start, in-range, and end cells", async ({ page }) => {
+      await expect(page.locator("#cm-range .pf-m-start-range")).toHaveCount(1);
+      await expect(page.locator("#cm-range .pf-m-in-range")).toHaveCount(7);
+      await expect(page.locator("#cm-range .pf-m-end-range")).toHaveCount(1);
+    });
+
+    test("/components/calendar-month/date-range returns 200", async ({ page }) => {
+      const res = await page.goto("/components/calendar-month/date-range");
+      expect(res.status()).toBe(200);
+    });
+  });
 });

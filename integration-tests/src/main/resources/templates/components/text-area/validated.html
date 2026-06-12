@@ -1,0 +1,18 @@
+{! Validates as you type — fewer than 10 characters is an error, 10+ flips to success. !}
+<div x-data="{ v: '' }" style="max-width: 480px">
+  <span class="pf-v6-c-form-control pf-m-textarea" :class="v === '' ? '' : (v.length >= 10 ? 'pf-m-success' : 'pf-m-error')" id="ta-validated">
+    <textarea id="ta-validated-field" name="ta-validated" rows="3" x-model="v" placeholder="Type at least 10 characters" aria-label="Validated text area" :aria-invalid="(v !== '' && v.length < 10).toString()"></textarea>
+    <span class="pf-v6-c-form-control__utilities" x-show="v !== ''" x-cloak>
+      <span class="pf-v6-c-form-control__icon pf-m-status">
+        <span x-show="v.length >= 10">{icons:svg('fa:circle-check').raw}</span>
+        <span x-show="v.length < 10">{icons:svg('fa:circle-exclamation').raw}</span>
+      </span>
+    </span>
+  </span>
+  <div class="pf-v6-c-helper-text" aria-live="polite" x-show="v !== '' && v.length < 10" x-cloak>
+    <div class="pf-v6-c-helper-text__item pf-m-error">
+      <span class="pf-v6-c-helper-text__item-icon">{icons:svg('fa:circle-exclamation').raw}</span>
+      <span class="pf-v6-c-helper-text__item-text">Enter at least 10 characters.</span>
+    </div>
+  </div>
+</div>

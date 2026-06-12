@@ -1,0 +1,12 @@
+{! Slider synced with a number input beside it. !}
+<div class="pf-v6-l-flex pf-m-space-items-md pf-m-align-items-center" x-data="{ val: 30 }" id="sl-value-input-wrap">
+  <div class="pf-v6-c-slider" id="sl-value-input" style="flex: 1; min-width: 240px" :style="'--pf-v6-c-slider--value: ' + val">
+    <div class="pf-v6-c-slider__main">
+      <div class="pf-v6-c-slider__rail" @click="const rect = $el.getBoundingClientRect(); val = Math.round((($event.clientX - rect.left) / rect.width) * 100)">
+        <div class="pf-v6-c-slider__rail-track"></div>
+      </div>
+      <div class="pf-v6-c-slider__thumb" role="slider" tabindex="0" aria-label="Value" aria-valuemin="0" aria-valuemax="100" :aria-valuenow="val" :style="'left: ' + val + '%'"></div>
+    </div>
+  </div>
+  <span class="pf-v6-c-form-control" style="width: 6ch"><input type="number" aria-label="Slider value" x-model.number="val" min="0" max="100" /></span>
+</div>

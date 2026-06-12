@@ -38,12 +38,15 @@ public class FormsExamplesRoutes {
                                "horizontal-stacked", "horizontal-helper-on-top", "group-label-info", "sections",
                                "grid", "field-groups", "with-helper"),
         "form-control", Set.of("basic", "validated", "disabled-readonly"),
-        "checkbox",     Set.of("basic", "checked", "disabled", "reversed",
-                               "with-description", "with-body", "required", "standalone"),
+        "checkbox",     Set.of("basic", "controlled", "checked", "disabled", "reversed", "label-wraps",
+                               "with-description", "with-body", "description-and-body", "required", "standalone"),
         "form-select",  Set.of("basic", "grouped", "validated", "disabled"),
-        "radio",        Set.of("basic", "disabled", "with-description", "with-body", "standalone"),
-        "text-area",    Set.of("basic", "resize-vertical", "invalid", "disabled-readonly"),
-        "text-input",   Set.of("basic", "disabled", "readonly", "invalid", "with-icon", "types")
+        "radio",        Set.of("basic", "controlled", "reversed", "label-wraps", "disabled", "with-description",
+                               "with-body", "description-and-body", "standalone"),
+        "text-area",    Set.of("basic", "invalid", "validated", "resize-vertical", "horizontal-resizable",
+                               "not-resizable", "disabled", "read-only", "disabled-readonly", "auto-resizing"),
+        "text-input",   Set.of("basic", "disabled", "readonly", "invalid", "with-icon", "icon-invalid",
+                               "start-truncated", "types")
     );
 
     @Inject

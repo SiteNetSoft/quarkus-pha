@@ -1,0 +1,16 @@
+{! Inline compact plus an extra action button after the copy action. !}
+<div class="pf-v6-c-clipboard-copy pf-m-inline" id="cc-inline-action" x-data="{ copied: false }">
+  <code class="pf-v6-c-clipboard-copy__text pf-m-code" x-ref="text">oc new-app httpd-example</code>
+  <span class="pf-v6-c-clipboard-copy__actions">
+    <span class="pf-v6-c-clipboard-copy__actions-item">
+      <button class="pf-v6-c-button pf-m-plain pf-m-no-padding" type="button" :aria-label="copied ? 'Successfully copied to clipboard!' : 'Copy to clipboard'" @click="navigator.clipboard.writeText($refs.text.textContent.trim()); copied = true; setTimeout(() => copied = false, 2000)">
+        <span class="pf-v6-c-button__icon"><span x-show="!copied">{icons:svg('fa:copy').raw}</span><span x-show="copied" x-cloak>{icons:svg('fa:check').raw}</span></span>
+      </button>
+    </span>
+    <span class="pf-v6-c-clipboard-copy__actions-item">
+      <button class="pf-v6-c-button pf-m-plain pf-m-no-padding" type="button" aria-label="Run in terminal">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:play').raw}</span>
+      </button>
+    </span>
+  </span>
+</div>

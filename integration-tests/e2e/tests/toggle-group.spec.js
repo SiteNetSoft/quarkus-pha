@@ -53,4 +53,33 @@ test.describe("Toggle Group", () => {
       await expect(buttons.first()).toBeVisible();
     });
   });
+
+  test.describe("Parity additions", () => {
+    test("text-and-icons buttons carry both; compact and fill modifiers apply", async ({ page }) => {
+      await expect(page.locator("#tg-text-icons .pf-v6-c-toggle-group__icon")).toHaveCount(3);
+      await expect(page.locator("#tg-compact")).toHaveClass(/pf-m-compact/);
+      await expect(page.locator("#tg-full-width")).toHaveClass(/pf-m-fill/);
+    });
+
+    test("selection still works in the new variants", async ({ page }) => {
+      const second = page.locator("#tg-compact .pf-v6-c-toggle-group__button").nth(1);
+      await second.click();
+      await expect(second).toHaveClass(/pf-m-selected/);
+    });
+
+    test("/components/toggle-group/text-and-icons returns 200", async ({ page }) => {
+      const res = await page.goto("/components/toggle-group/text-and-icons");
+      expect(res.status()).toBe(200);
+    });
+
+    test("/components/toggle-group/compact returns 200", async ({ page }) => {
+      const res = await page.goto("/components/toggle-group/compact");
+      expect(res.status()).toBe(200);
+    });
+
+    test("/components/toggle-group/full-width returns 200", async ({ page }) => {
+      const res = await page.goto("/components/toggle-group/full-width");
+      expect(res.status()).toBe(200);
+    });
+  });
 });

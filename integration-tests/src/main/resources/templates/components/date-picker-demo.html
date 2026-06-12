@@ -55,6 +55,51 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#required" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Required</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#american-format" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">American format</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#helper-text" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Helper text</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#min-max" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Min and max date</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#french" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">French</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#with-value" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">With value</span></span
@@ -118,18 +163,39 @@
                         </div>
                       </div>
                       {#include partials/example-card title="Basic" slug="basic" component="date-picker"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Empty input + calendar toggle button. Calendar popup not wired in the example.
-                      </p>
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Input group with the calendar toggle.</p>
                       {/description} {#content}{#include components/date-picker/basic /}{/content} {/include} {#include
+                      partials/example-card title="Required" slug="required" component="date-picker"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Blur with an empty value shows the error helper.
+                      </p>
+                      {/description} {#content}{#include components/date-picker/required /}{/content} {/include}
+                      {#include partials/example-card title="American format" slug="american-format"
+                      component="date-picker"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">MM/DD/YYYY.</p>
+                      {/description} {#content}{#include components/date-picker/american-format /}{/content} {/include}
+                      {#include partials/example-card title="Helper text" slug="helper-text" component="date-picker"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">The helper echoes the selected date.</p>
+                      {/description} {#content}{#include components/date-picker/helper-text /}{/content} {/include}
+                      {#include partials/example-card title="Min and max date" slug="min-max" component="date-picker"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Dates outside 2026 flip the control and helper to error.
+                      </p>
+                      {/description} {#content}{#include components/date-picker/min-max /}{/content} {/include}
+                      {#include partials/example-card title="French" slug="french" component="date-picker"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        JJ/MM/AAAA with French labels; PF\u2019s controlled sections are React state demos.
+                      </p>
+                      {/description} {#content}{#include components/date-picker/french /}{/content} {/include} {#include
                       partials/example-card title="With value" slug="with-value" component="date-picker"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Pre-filled with an ISO date string.</p>
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Pre-filled input.</p>
                       {/description} {#content}{#include components/date-picker/with-value /}{/content} {/include}
                       {#include partials/example-card title="Disabled" slug="disabled" component="date-picker"}
                       {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">disabled=true</code> — input + toggle disabled.
-                      </p>
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Input and toggle disabled.</p>
                       {/description} {#content}{#include components/date-picker/disabled /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

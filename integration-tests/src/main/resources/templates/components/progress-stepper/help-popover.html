@@ -1,0 +1,35 @@
+{! The step title doubles as a help trigger (pf-m-help-text) opening a popover. !}
+<ol class="pf-v6-c-progress-stepper" id="ps-help-popover" role="list" aria-label="Progress steps">
+<li class="pf-v6-c-progress-stepper__step pf-m-success">
+  <div class="pf-v6-c-progress-stepper__step-connector">
+    <span class="pf-v6-c-progress-stepper__step-icon">{icons:svg('fa:circle-check').raw}</span>
+  </div>
+  <div class="pf-v6-c-progress-stepper__step-main">
+    <div class="pf-v6-c-progress-stepper__step-title">First step</div>
+  </div>
+</li>
+<li class="pf-v6-c-progress-stepper__step pf-m-current" aria-current="step" x-data="{ open: false }">
+  <div class="pf-v6-c-progress-stepper__step-connector">
+    <span class="pf-v6-c-progress-stepper__step-icon"><span class="pf-v6-c-progress-stepper__step-icon-inner"></span></span>
+  </div>
+  <div class="pf-v6-c-progress-stepper__step-main" style="position: relative">
+    <div class="pf-v6-c-progress-stepper__step-title pf-m-help-text" role="button" tabindex="0" :aria-expanded="open.toString()" @click="open = !open" @keydown.enter.prevent="open = !open" @keydown.escape="open = false">Second step</div>
+    <div x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; left: 0; z-index: 200; width: 240px">
+      <div class="pf-v6-c-popover pf-m-bottom" role="dialog" aria-label="Step help">
+        <div class="pf-v6-c-popover__arrow"></div>
+        <div class="pf-v6-c-popover__content">
+          <div class="pf-v6-c-popover__body">Details about what happens during the second step.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+<li class="pf-v6-c-progress-stepper__step">
+  <div class="pf-v6-c-progress-stepper__step-connector">
+    <span class="pf-v6-c-progress-stepper__step-icon"></span>
+  </div>
+  <div class="pf-v6-c-progress-stepper__step-main">
+    <div class="pf-v6-c-progress-stepper__step-title">Third step</div>
+  </div>
+</li>
+</ol>

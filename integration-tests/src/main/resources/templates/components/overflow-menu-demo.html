@@ -47,7 +47,65 @@
                                 <span class="pf-v6-c-jump-links__link"
                                   ><a href="#basic" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text">Simple</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#vertical" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Vertical</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#group-types" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Group types</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#multiple-groups" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Multiple groups</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#persistent" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Persistent</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#breakpoint-container-width" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Breakpoint on container width</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#breakpoint-container-height" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Breakpoint on container height</span
+                                      ></span
                                     ></a
                                   ></span
                                 >
@@ -98,13 +156,46 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="overflow-menu"}
+                      {#include partials/example-card title="Simple" slug="basic" component="overflow-menu"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Visible button group plus the kebab control.</p>
+                      {/description} {#content}{#include components/overflow-menu/basic /}{/content} {/include}
+                      {#include partials/example-card title="Vertical" slug="vertical" component="overflow-menu"}
                       {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Two visible action buttons + a kebab toggle. PF v6 ships responsive CSS that hides items as
-                        width shrinks.
+                        <code class="ws-code">pf-m-vertical</code> stacks the actions.
                       </p>
-                      {/description} {#content}{#include components/overflow-menu/basic /}{/content} {/include}
+                      {/description} {#content}{#include components/overflow-menu/vertical /}{/content} {/include}
+                      {#include partials/example-card title="Group types" slug="group-types" component="overflow-menu"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A button group and an icon-button group side by side.
+                      </p>
+                      {/description} {#content}{#include components/overflow-menu/group-types /}{/content} {/include}
+                      {#include partials/example-card title="Multiple groups" slug="multiple-groups"
+                      component="overflow-menu"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Several groups share the content area.</p>
+                      {/description} {#content}{#include components/overflow-menu/multiple-groups /}{/content}
+                      {/include} {#include partials/example-card title="Persistent" slug="persistent"
+                      component="overflow-menu"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The kebab is always visible and opens a working menu of the overflowed actions.
+                      </p>
+                      {/description} {#content}{#include components/overflow-menu/persistent /}{/content} {/include}
+                      {#include partials/example-card title="Breakpoint on container width"
+                      slug="breakpoint-container-width" component="overflow-menu"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Drag the resize handle — below 440px the buttons collapse into the kebab (Alpine +
+                        ResizeObserver).
+                      </p>
+                      {/description} {#content}{#include components/overflow-menu/breakpoint-container-width
+                      /}{/content} {/include} {#include partials/example-card title="Breakpoint on container height"
+                      slug="breakpoint-container-height" component="overflow-menu"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Vertical variant collapsing below 220px of height.
+                      </p>
+                      {/description} {#content}{#include components/overflow-menu/breakpoint-container-height
+                      /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"
