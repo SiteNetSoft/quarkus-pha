@@ -1,12 +1,12 @@
-<div class="pf-v6-c-toolbar pf-m-inset-md pf-m-inset-xl-on-lg" id="tb-insets">
-  <div class="pf-v6-c-toolbar__content">
-    <div class="pf-v6-c-toolbar__content-section">
-        <div class="pf-v6-c-toolbar__item">
+{#include components/navigation/toolbar id="tb-insets" modifiers="pf-m-inset-md pf-m-inset-xl-on-lg"}
+  {#include components/navigation/toolbar-content}
+    {#include components/navigation/toolbar-content-section}
+        {#include components/navigation/toolbar-item}
           <button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">Inset md</span></button>
-        </div>
-        <div class="pf-v6-c-toolbar__item">
+        {/include}
+        {#include components/navigation/toolbar-item}
           <button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">Action 2</span></button>
-        </div>
-    </div>
-  </div>
-</div>
+        {/include}
+    {/include}
+  {/include}
+{/include}

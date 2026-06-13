@@ -1,39 +1,39 @@
-<div class="pf-v6-c-toolbar" id="tb-groups">
-  <div class="pf-v6-c-toolbar__content">
-    <div class="pf-v6-c-toolbar__content-section">
-      <div class="pf-v6-c-toolbar__group pf-m-filter-group">
-        <div class="pf-v6-c-toolbar__item">
+{#include components/navigation/toolbar id="tb-groups"}
+  {#include components/navigation/toolbar-content}
+    {#include components/navigation/toolbar-content-section}
+      {#include components/navigation/toolbar-group variant="filter"}
+        {#include components/navigation/toolbar-item}
           <button class="pf-v6-c-menu-toggle" type="button" aria-expanded="false">
             <span class="pf-v6-c-menu-toggle__text">Status</span>
             <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
           </button>
-        </div>
-        <div class="pf-v6-c-toolbar__item">
+        {/include}
+        {#include components/navigation/toolbar-item}
           <button class="pf-v6-c-menu-toggle" type="button" aria-expanded="false">
             <span class="pf-v6-c-menu-toggle__text">Risk</span>
             <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
           </button>
-        </div>
-      </div>
-      <div class="pf-v6-c-toolbar__group">
-        <div class="pf-v6-c-toolbar__item">
+        {/include}
+      {/include}
+      {#include components/navigation/toolbar-group}
+        {#include components/navigation/toolbar-item}
           <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Clone"><span class="pf-v6-c-button__icon">{icons:svg('fa:clone').raw}</span></button>
-        </div>
-        <div class="pf-v6-c-toolbar__item">
+        {/include}
+        {#include components/navigation/toolbar-item}
           <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Sync"><span class="pf-v6-c-button__icon">{icons:svg('fa:arrows-rotate').raw}</span></button>
-        </div>
-        <div class="pf-v6-c-toolbar__item">
+        {/include}
+        {#include components/navigation/toolbar-item}
           <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Edit"><span class="pf-v6-c-button__icon">{icons:svg('fa:pen-to-square').raw}</span></button>
-        </div>
-      </div>
-      <div class="pf-v6-c-toolbar__group pf-m-align-end">
-        <div class="pf-v6-c-toolbar__item">
+        {/include}
+      {/include}
+      {#include components/navigation/toolbar-group alignEnd=true}
+        {#include components/navigation/toolbar-item}
           <button class="pf-v6-c-button pf-m-primary" type="button"><span class="pf-v6-c-button__text">Create</span></button>
-        </div>
-        <div class="pf-v6-c-toolbar__item">
+        {/include}
+        {#include components/navigation/toolbar-item}
           <button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">Secondary</span></button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+        {/include}
+      {/include}
+    {/include}
+  {/include}
+{/include}

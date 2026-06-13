@@ -1,25 +1,26 @@
-<div x-data="{ sticky: true }">
+{! The cls() helper keeps the bound pf-m-sticky class quote-free for the attrs param. !}
+<div x-data="{ sticky: true, cls() { return this.sticky ? 'pf-m-sticky' : '' } }">
   <div class="pf-v6-c-check" style="margin-bottom: 0.5rem">
     <input class="pf-v6-c-check__input" type="checkbox" id="tb-dynamic-sticky-check" x-model="sticky" />
     <label class="pf-v6-c-check__label" for="tb-dynamic-sticky-check">Toolbar is sticky</label>
   </div>
   <div style="height: 220px; overflow-y: auto; border: 1px solid var(--pf-t--global--border--color--default)" tabindex="0">
-    <div class="pf-v6-c-toolbar" id="tb-dynamic-sticky" :class="{ 'pf-m-sticky': sticky }">
-      <div class="pf-v6-c-toolbar__content">
-        <div class="pf-v6-c-toolbar__content-section">
-        <div class="pf-v6-c-toolbar__item">
-          <div class="pf-v6-c-text-input-group">
-            <div class="pf-v6-c-text-input-group__main pf-m-icon">
-              <span class="pf-v6-c-text-input-group__text">
-                <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
-                <input class="pf-v6-c-text-input-group__text-input" type="search" placeholder="Search" aria-label="Search" />
-              </span>
-            </div>
-          </div>
-        </div>
+    {#include components/navigation/toolbar id="tb-dynamic-sticky" attrs=':class="cls()"'}
+    {#include components/navigation/toolbar-content}
+    {#include components/navigation/toolbar-content-section}
+    {#include components/navigation/toolbar-item}
+      <div class="pf-v6-c-text-input-group">
+        <div class="pf-v6-c-text-input-group__main pf-m-icon">
+          <span class="pf-v6-c-text-input-group__text">
+            <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+            <input class="pf-v6-c-text-input-group__text-input" type="search" placeholder="Search" aria-label="Search" />
+          </span>
         </div>
       </div>
-    </div>
+    {/include}
+    {/include}
+    {/include}
+    {/include}
     <p style="padding: 0.5rem 1rem">Scrollable row 1</p>
     <p style="padding: 0.5rem 1rem">Scrollable row 2</p>
     <p style="padding: 0.5rem 1rem">Scrollable row 3</p>

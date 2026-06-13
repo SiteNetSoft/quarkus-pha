@@ -1,0 +1,7 @@
+{! Toolbar item — one control (button, input, menu toggle, label group). Main-block content. !}
+{! Optional params:
+     variant — "label" -> pf-m-label (for the applied-filters label row).
+     gap     — gap token suffix, e.g. "none", "xl", "4xl" -> pf-m-gap-*.
+     alignEnd — pf-m-align-end.
+     attrs   — raw passthrough. !}
+<div class="pf-v6-c-toolbar__item{#if variant??} pf-m-{variant}{/if}{#if gap??} pf-m-gap-{gap}{/if}{#if alignEnd??} pf-m-align-end{/if}{#if modifiers??} {modifiers}{/if}"{#if attrs??} {attrs.raw}{/if}>{#let attrs=null}{#insert /}{/let}</div>
