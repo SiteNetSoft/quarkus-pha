@@ -1,0 +1,6 @@
+{! Input group item — one segment of an input group. Main-block content. !}
+{! Optional: fill (pf-m-fill — stretches), box (pf-m-box — bordered, for __text addons),
+             plain (pf-m-plain), disabled (pf-m-disabled), attrs (raw passthrough). !}
+<div class="pf-v6-c-input-group__item{#if fill??} pf-m-fill{/if}{#if box??} pf-m-box{/if}{#if plain??} pf-m-plain{/if}{#if disabled??} pf-m-disabled{/if}"{#if disabled??} aria-disabled="true"{/if}{#if attrs??} {attrs.raw}{/if}>
+  {#let attrs=null}{#insert /}{/let}
+</div>

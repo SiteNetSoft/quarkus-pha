@@ -1,2 +1,5 @@
-{! Input group — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the group. !}
-<div class="pf-v6-c-input-group"{#if id??} id="{id}"{/if}>{#insert content}{/insert}</div>
+{! Input group — PatternFly v6. Compose input-group-item includes in the main block. !}
+{! Optional: id, attrs (raw passthrough). !}
+<div class="pf-v6-c-input-group"{#if id??} id="{id}"{/if}{#if attrs??} {attrs.raw}{/if}>
+  {#let inputGroupId=id id=null attrs=null}{#insert /}{/let}
+</div>
