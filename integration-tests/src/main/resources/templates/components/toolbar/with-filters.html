@@ -1,50 +1,49 @@
-{! Applied filters as removable labels; clearing the last filter hides the labels row. !}
-<div
-  class="pf-v6-c-toolbar"
-  id="tb-with-filters"
-  x-data="{ filters: ['Open', 'Low risk', 'us-east-1'] }"
->
-  <div class="pf-v6-c-toolbar__content">
-    <div class="pf-v6-c-toolbar__content-section">
-      <div class="pf-v6-c-toolbar__group pf-m-filter-group">
-        <div class="pf-v6-c-toolbar__item">
-          <button class="pf-v6-c-menu-toggle" type="button" aria-expanded="false">
-            <span class="pf-v6-c-menu-toggle__text">Status</span>
-            <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
-          </button>
-        </div>
-      </div>
-        <div class="pf-v6-c-toolbar__item">
-          <button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">Add filter</span></button>
-        </div>
-    </div>
-    <div class="pf-v6-c-toolbar__content-section" x-show="filters.length > 0">
-      <div class="pf-v6-c-toolbar__item pf-m-label">
-        <div class="pf-v6-c-label-group pf-m-category">
-          <div class="pf-v6-c-label-group__main">
-            <span class="pf-v6-c-label-group__label" aria-hidden="true">Filters</span>
-            <ul class="pf-v6-c-label-group__list" role="list" aria-label="Applied filters">
-              <template x-for="f in filters" :key="f">
-                <li class="pf-v6-c-label-group__list-item">
-                  <span class="pf-v6-c-label pf-m-outline">
-                    <span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text" x-text="f"></span></span>
-                    <span class="pf-v6-c-label__actions">
-                      <button class="pf-v6-c-button pf-m-plain" type="button" :aria-label="'Remove ' + f" @click="filters = filters.filter((x) => x !== f)">
-                        <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
-                      </button>
-                    </span>
-                  </span>
-                </li>
-              </template>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="pf-v6-c-toolbar__item">
-        <button class="pf-v6-c-button pf-m-link pf-m-inline" type="button" @click="filters = []">
-          <span class="pf-v6-c-button__text">Clear all filters</span>
-        </button>
+{! Applied filters as removable labels; clearing the last filter hides the labels row.
+   The root x-data uses single quotes, so it lives on a wrapper div rather than attrs. !}
+<div x-data="{ filters: ['Open', 'Low risk', 'us-east-1'] }">
+  {#include components/navigation/toolbar id="tb-with-filters"}
+  {#include components/navigation/toolbar-content}
+  {#include components/navigation/toolbar-content-section}
+  {#include components/navigation/toolbar-group variant="filter"}
+  {#include components/navigation/toolbar-item}
+    <button class="pf-v6-c-menu-toggle" type="button" aria-expanded="false">
+      <span class="pf-v6-c-menu-toggle__text">Status</span>
+      <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
+    </button>
+  {/include}
+  {/include}
+  {#include components/navigation/toolbar-item}
+    <button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">Add filter</span></button>
+  {/include}
+  {/include}
+  {#include components/navigation/toolbar-content-section attrs='x-show="filters.length > 0"'}
+  {#include components/navigation/toolbar-item variant="label"}
+    <div class="pf-v6-c-label-group pf-m-category">
+      <div class="pf-v6-c-label-group__main">
+        <span class="pf-v6-c-label-group__label" aria-hidden="true">Filters</span>
+        <ul class="pf-v6-c-label-group__list" role="list" aria-label="Applied filters">
+          <template x-for="f in filters" :key="f">
+            <li class="pf-v6-c-label-group__list-item">
+              <span class="pf-v6-c-label pf-m-outline">
+                <span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text" x-text="f"></span></span>
+                <span class="pf-v6-c-label__actions">
+                  <button class="pf-v6-c-button pf-m-plain" type="button" :aria-label="'Remove ' + f" @click="filters = filters.filter((x) => x !== f)">
+                    <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+                  </button>
+                </span>
+              </span>
+            </li>
+          </template>
+        </ul>
       </div>
     </div>
-  </div>
+  {/include}
+  {#include components/navigation/toolbar-item}
+    <button class="pf-v6-c-button pf-m-link pf-m-inline" type="button" @click="filters = []">
+      <span class="pf-v6-c-button__text">Clear all filters</span>
+    </button>
+  {/include}
+  {/include}
+  {/include}
+  {/include}
 </div>

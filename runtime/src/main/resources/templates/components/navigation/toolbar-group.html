@@ -1,0 +1,7 @@
+{! Toolbar group — a cluster of related items. Main-block content. !}
+{! Optional params:
+     variant   — filter | toggle (pf-m-filter-group / pf-m-toggle-group).
+     alignEnd  — pf-m-align-end (pushes the group to the row end).
+     columnGap — gap token suffix, e.g. "none", "2xl" -> pf-m-column-gap-*.
+     attrs     — raw passthrough. !}
+<div class="pf-v6-c-toolbar__group{#if variant??} pf-m-{variant}-group{/if}{#if alignEnd??} pf-m-align-end{/if}{#if columnGap??} pf-m-column-gap-{columnGap}{/if}{#if modifiers??} {modifiers}{/if}"{#if attrs??} {attrs.raw}{/if}>{#let attrs=null}{#insert /}{/let}</div>

@@ -316,10 +316,11 @@
                           Toolbar props
                         </h3>
                         <p class="pf-v6-c-content--p pf-m-editorial">
-                          Parameters accepted by
-                          <code class="ws-code">{|{#include components/navigation/toolbar ... /}|}</code>. Items live in
-                          the slot — typically <code class="ws-code">pf-v6-c-toolbar__group</code> +
-                          <code class="ws-code">pf-v6-c-toolbar__item</code>.
+                          The toolbar is a template family: <code class="ws-code">toolbar</code> is the root and the
+                          structure composes from <code class="ws-code">toolbar-content</code> &gt;
+                          <code class="ws-code">toolbar-content-section</code> &gt;
+                          <code class="ws-code">toolbar-group</code> / <code class="ws-code">toolbar-item</code>
+                          includes in main blocks — no generic slot names.
                         </p>
                         <table
                           class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
@@ -340,20 +341,98 @@
                           <tbody role="rowgroup" class="pf-v6-c-table__tbody">
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
-                                >
+                                <span class="pf-v6-c-table__text"><code class="ws-code">id / attrs</code></span>
                               </td>
                               <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">Root id / raw passthrough.</span>
+                              </td>
                             </tr>
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">slot <code class="ws-code">content</code></span>
+                                <span class="pf-v6-c-table__text"><code class="ws-code">variant</code></span>
                               </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">Toolbar items + groups.</span>
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">primary</code> |
+                                  <code class="ws-code">secondary</code> background.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">noBackground / sticky / vertical</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >The matching <code class="ws-code">pf-m-*</code> modifier.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">modifiers</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Extra <code class="ws-code">pf-m-*</code> classes (e.g.
+                                  <code class="ws-code">pf-m-inset-md</code>) — available on every family member.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">toolbar-content</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >One content row; <code class="ws-code">attrs</code> for x-show etc.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">toolbar-content-section</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Holds groups/items; <code class="ws-code">attrs</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">toolbar-group</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">variant</code> (filter|toggle),
+                                  <code class="ws-code">alignEnd</code>, <code class="ws-code">columnGap</code>,
+                                  <code class="ws-code">modifiers</code>, <code class="ws-code">attrs</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">toolbar-item</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">variant="label"</code>, <code class="ws-code">gap</code>,
+                                  <code class="ws-code">alignEnd</code>, <code class="ws-code">modifiers</code>,
+                                  <code class="ws-code">attrs</code>; content is the main block.</span
+                                >
                               </td>
                             </tr>
                           </tbody>

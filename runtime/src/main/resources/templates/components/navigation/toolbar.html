@@ -1,6 +1,11 @@
-{! Toolbar — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the toolbar. !}
-<div class="pf-v6-c-toolbar"{#if id??} id="{id}"{/if}>
-  <div class="pf-v6-c-toolbar__content">
-    <div class="pf-v6-c-toolbar__content-section">{#insert content}{/insert}</div>
-  </div>
+{! Toolbar — PatternFly v6. Root of the toolbar family; compose toolbar-content
+   (> toolbar-content-section > toolbar-group / toolbar-item) in the main block. !}
+{! Optional params:
+     id, attrs       — root id / raw passthrough.
+     variant         — primary | secondary (pf-m-*).
+     noBackground    — pf-m-no-background.
+     sticky          — pf-m-sticky.
+     vertical        — pf-m-vertical. !}
+<div class="pf-v6-c-toolbar{#if variant??} pf-m-{variant}{/if}{#if noBackground??} pf-m-no-background{/if}{#if sticky??} pf-m-sticky{/if}{#if vertical??} pf-m-vertical{/if}{#if modifiers??} {modifiers}{/if}"{#if id??} id="{id}"{/if}{#if attrs??} {attrs.raw}{/if}>
+  {#let toolbarId=id id=null attrs=null}{#insert /}{/let}
 </div>
