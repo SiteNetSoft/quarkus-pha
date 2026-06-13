@@ -1,38 +1,38 @@
 <div style="display: flex; flex-direction: column; gap: 0.5rem">
-<div class="pf-v6-c-toolbar" id="tb-color-default">
-  <div class="pf-v6-c-toolbar__content">
-    <div class="pf-v6-c-toolbar__content-section">
-        <div class="pf-v6-c-toolbar__item">
+{#include components/navigation/toolbar id="tb-color-default"}
+  {#include components/navigation/toolbar-content}
+    {#include components/navigation/toolbar-content-section}
+        {#include components/navigation/toolbar-item}
           <button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">Default background</span></button>
-        </div>
-    </div>
-  </div>
-</div>
-<div class="pf-v6-c-toolbar pf-m-primary" id="tb-color-primary">
-  <div class="pf-v6-c-toolbar__content">
-    <div class="pf-v6-c-toolbar__content-section">
-        <div class="pf-v6-c-toolbar__item">
+        {/include}
+    {/include}
+  {/include}
+{/include}
+{#include components/navigation/toolbar id="tb-color-primary" variant="primary"}
+  {#include components/navigation/toolbar-content}
+    {#include components/navigation/toolbar-content-section}
+        {#include components/navigation/toolbar-item}
           <button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">Primary background</span></button>
-        </div>
-    </div>
-  </div>
-</div>
-<div class="pf-v6-c-toolbar pf-m-secondary" id="tb-color-secondary">
-  <div class="pf-v6-c-toolbar__content">
-    <div class="pf-v6-c-toolbar__content-section">
-        <div class="pf-v6-c-toolbar__item">
+        {/include}
+    {/include}
+  {/include}
+{/include}
+{#include components/navigation/toolbar id="tb-color-secondary" variant="secondary"}
+  {#include components/navigation/toolbar-content}
+    {#include components/navigation/toolbar-content-section}
+        {#include components/navigation/toolbar-item}
           <button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">Secondary background</span></button>
-        </div>
-    </div>
-  </div>
-</div>
-<div class="pf-v6-c-toolbar pf-m-no-background" id="tb-color-none">
-  <div class="pf-v6-c-toolbar__content">
-    <div class="pf-v6-c-toolbar__content-section">
-        <div class="pf-v6-c-toolbar__item">
+        {/include}
+    {/include}
+  {/include}
+{/include}
+{#include components/navigation/toolbar id="tb-color-none" noBackground=true}
+  {#include components/navigation/toolbar-content}
+    {#include components/navigation/toolbar-content-section}
+        {#include components/navigation/toolbar-item}
           <button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">No background</span></button>
-        </div>
-    </div>
-  </div>
-</div>
+        {/include}
+    {/include}
+  {/include}
+{/include}
 </div>

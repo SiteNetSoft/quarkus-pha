@@ -1,22 +1,22 @@
-<div class="pf-v6-c-toolbar" id="tb-group-spacers">
-  <div class="pf-v6-c-toolbar__content">
-    <div class="pf-v6-c-toolbar__content-section">
-      <div class="pf-v6-c-toolbar__group pf-m-column-gap-none" style="outline: 1px dashed var(--pf-t--global--border--color--default)">
-        <div class="pf-v6-c-toolbar__item">
+{#include components/navigation/toolbar id="tb-group-spacers"}
+  {#include components/navigation/toolbar-content}
+    {#include components/navigation/toolbar-content-section}
+      {#include components/navigation/toolbar-group columnGap="none" attrs='style="outline: 1px dashed var(--pf-t--global--border--color--default)"'}
+        {#include components/navigation/toolbar-item}
           <button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">gap-none 1</span></button>
-        </div>
-        <div class="pf-v6-c-toolbar__item">
+        {/include}
+        {#include components/navigation/toolbar-item}
           <button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">gap-none 2</span></button>
-        </div>
-      </div>
-      <div class="pf-v6-c-toolbar__group pf-m-column-gap-2xl" style="outline: 1px dashed var(--pf-t--global--border--color--default)">
-        <div class="pf-v6-c-toolbar__item">
+        {/include}
+      {/include}
+      {#include components/navigation/toolbar-group columnGap="2xl" attrs='style="outline: 1px dashed var(--pf-t--global--border--color--default)"'}
+        {#include components/navigation/toolbar-item}
           <button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">gap-2xl 1</span></button>
-        </div>
-        <div class="pf-v6-c-toolbar__item">
+        {/include}
+        {#include components/navigation/toolbar-item}
           <button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">gap-2xl 2</span></button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+        {/include}
+      {/include}
+    {/include}
+  {/include}
+{/include}
