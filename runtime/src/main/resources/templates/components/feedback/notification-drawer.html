@@ -1,14 +1,23 @@
-{! Notification drawer — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the drawer.
-                                                       titleText (optional), ariaLabel (optional — overrides titleText as the region label) !}
+{! Notification drawer — PatternFly v6. Root of the family; compose
+   notification-drawer-list / notification-drawer-group includes in the main block. !}
+{! Optional params:
+     id, attrs    — root id / raw passthrough.
+     ariaLabel    — region label (defaults to titleText, then "Notifications").
+     hasHeader    — render the header (omit for the lightweight variant).
+     titleText    — header title (default "Notifications").
+     headerStatus — text for the __header-status line (e.g. "3 unread"). !}
 <div
   class="pf-v6-c-notification-drawer"
   {#if id??}id="{id}"{/if}
   role="region"
   aria-label="{#if ariaLabel??}{ariaLabel}{#else if titleText??}{titleText}{#else}Notifications{/if}"
+  {#if attrs??}{attrs.raw}{/if}
 >
+  {#if hasHeader??}
   <div class="pf-v6-c-notification-drawer__header">
     <h1 class="pf-v6-c-notification-drawer__header-title">{#if titleText??}{titleText}{#else}Notifications{/if}</h1>
-    {#insert headerStatus}{/insert} {#insert headerAction}{/insert}
+    {#if headerStatus??}<span class="pf-v6-c-notification-drawer__header-status">{headerStatus}</span>{/if}
   </div>
-  <div class="pf-v6-c-notification-drawer__body">{#insert content}{/insert}</div>
+  {/if}
+  <div class="pf-v6-c-notification-drawer__body">{#let id=null attrs=null}{#insert /}{/let}</div>
 </div>

@@ -156,8 +156,12 @@
                           Notification drawer props
                         </h3>
                         <p class="pf-v6-c-content--p pf-m-editorial">
-                          Parameters accepted by
-                          <code class="ws-code">{|{#include components/feedback/notification-drawer ... /}|}</code>.
+                          The notification drawer is a template family:
+                          <code class="ws-code">notification-drawer</code> is the root and the body composes from
+                          <code class="ws-code">notification-drawer-list</code> &gt;
+                          <code class="ws-code">notification-drawer-list-item</code>, with
+                          <code class="ws-code">notification-drawer-group</code> for expandable groups — all main-block
+                          includes.
                         </p>
                         <table
                           class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
@@ -178,36 +182,79 @@
                           <tbody role="rowgroup" class="pf-v6-c-table__tbody">
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">titleText</code></span>
+                                <span class="pf-v6-c-table__text"><code class="ws-code">id / attrs</code></span>
                               </td>
                               <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  >Title shown in the header. Default
-                                  <code class="ws-code">"Notifications"</code>.</span
+                                  >Root id / raw passthrough (e.g. the groups x-data).</span
                                 >
                               </td>
                             </tr>
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  >slots <code class="ws-code">headerStatus</code> /
-                                  <code class="ws-code">headerAction</code> / <code class="ws-code">content</code></span
+                                  ><code class="ws-code">hasHeader / titleText / headerStatus</code></span
                                 >
                               </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">Boolean / String</span>
+                              </td>
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  >Header status text, header actions (mark-all-read), and the notifications list.</span
+                                  >Render the header with a title and status line; omit hasHeader for the lightweight
+                                  variant.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">ariaLabel</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">Region label (defaults to titleText).</span>
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">notification-drawer-list</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">The list wrapper; holds list-item includes.</span>
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">notification-drawer-list-item</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >One notification: <code class="ws-code">variant</code> (info|warning|success|danger),
+                                  <code class="ws-code">read</code>, <code class="ws-code">iconName</code>,
+                                  <code class="ws-code">title</code>, <code class="ws-code">description</code>,
+                                  <code class="ws-code">timestamp</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">notification-drawer-group</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Expandable group: <code class="ws-code">title</code>,
+                                  <code class="ws-code">openVar</code> (x-data boolean name),
+                                  <code class="ws-code">count</code>, <code class="ws-code">countRead</code>.</span
                                 >
                               </td>
                             </tr>

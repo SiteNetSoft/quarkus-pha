@@ -1,0 +1,20 @@
+{! Notification drawer list item — one notification. !} {! Optional params: variant — info | warning | success | danger
+| default (pf-m-*; colors the icon). read — boolean; pf-m-read (default is pf-m-unread). iconName — status icon
+("set:slug"); defaults to the variant's icon. title — notification title. description — body text. timestamp —
+relative/absolute time string. !}
+<li
+  class="pf-v6-c-notification-drawer__list-item{#if read??} pf-m-read{#else} pf-m-unread{/if}{#if variant??} pf-m-{variant}{/if}"
+>
+  <div class="pf-v6-c-notification-drawer__list-item-header">
+    <span class="pf-v6-c-notification-drawer__list-item-header-icon"
+      >{#if iconName??}{icons:svg(iconName).raw}{#else if variant is
+      'warning'}{icons:svg('fa:exclamation-triangle').raw}{#else if variant is
+      'success'}{icons:svg('fa:circle-check').raw}{#else if variant is
+      'danger'}{icons:svg('fa:circle-exclamation').raw}{#else}{icons:svg('fa:circle-info').raw}{/if}</span
+    >
+    <h2 class="pf-v6-c-notification-drawer__list-item-header-title">{title}</h2>
+  </div>
+  {#if description??}
+  <p class="pf-v6-c-notification-drawer__list-item-description">{description}</p>
+  {/if} {#if timestamp??}<small class="pf-v6-c-notification-drawer__list-item-timestamp">{timestamp}</small>{/if}
+</li>
