@@ -242,6 +242,14 @@ public class ComponentRoutes {
     @Inject
     Template tilePage;
 
+    @Location("components/hero-demo")
+    @Inject
+    Template heroPage;
+
+    @Location("components/compass-demo")
+    @Inject
+    Template compassPage;
+
     @Location("components/date-picker-demo")
     @Inject
     Template datePickerPage;
@@ -258,7 +266,7 @@ public class ComponentRoutes {
     @Inject
     Template inlineEditPage;
 
-    @Location("components/input-group")
+    @Location("components/input-group-demo")
     @Inject
     Template inputGroupPage;
 
@@ -843,6 +851,27 @@ public class ComponentRoutes {
     }
 
     @GET
+    @Path("/hero")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance hero() {
+        return heroPage.instance();
+    }
+
+    @GET
+    @Path("/input-group")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance inputGroup() {
+        return inputGroupPage.instance();
+    }
+
+    @GET
+    @Path("/compass")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance compass() {
+        return compassPage.instance();
+    }
+
+    @GET
     @Path("/date-picker")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance datePicker() {
@@ -868,13 +897,6 @@ public class ComponentRoutes {
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance inlineEdit() {
         return inlineEditPage.instance();
-    }
-
-    @GET
-    @Path("/input-group")
-    @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance inputGroup() {
-        return inputGroupPage.instance();
     }
 
     @GET

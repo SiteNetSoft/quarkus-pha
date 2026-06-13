@@ -27,6 +27,8 @@ public class HelloResource {
      * thumbnail PNG is added.
      */
     private static final Set<String> NO_THUMBNAIL = Set.of(
+        "hero",
+        "compass",
         "catalog-item-header",
         "catalog-tile",
         "chart",
@@ -102,6 +104,8 @@ public class HelloResource {
         Map.entry("simple-list",      "/components/simple-list"),
         Map.entry("simple-file-upload", "/components/simple-file-upload"),
         Map.entry("tile",             "/components/tile"),
+        Map.entry("hero",             "/components/hero"),
+        Map.entry("compass",          "/components/compass"),
         Map.entry("date-picker",      "/components/date-picker"),
         Map.entry("dropdown",         "/components/dropdown"),
         Map.entry("drawer",           "/components/drawer"),
@@ -315,6 +319,8 @@ public class HelloResource {
         {"text-input",           "Text input"},
         {"text-input-group",     "Text input group"},
         {"tile",                 "Tile"},
+        {"hero",                 "Hero"},
+        {"compass",              "Compass"},
         {"time-picker",          "Time picker"},
         {"timestamp",            "Timestamp"},
         {"title",                "Title"},

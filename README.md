@@ -8,9 +8,58 @@
   </picture>
 </p>
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+A Quarkus extension that delivers a framework-free frontend component library —
+PatternFly v6 components rendered server-side as Qute templates, made interactive
+with Alpine.js, and driven by the server through HTMX. No React, no virtual DOM,
+no build step for consumers.
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+**The contract:** the server renders the DOM, Alpine reacts, HTMX moves. JSON
+never reaches the browser to be templated there — Quarkus is the backend-for-frontend
+and every UI transition is a server-rendered fragment swap.
+
+| Layer | Technology |
+|---|---|
+| Design system | PatternFly v6 (CSS + tokens only) |
+| Interactivity | Alpine.js |
+| Server-driven UI | HTMX |
+| Data viz / maps | Apache ECharts, D3.js, MapLibre |
+| Templates | Qute (Quarkus-native) |
+
+## Using components
+
+Components are Qute includes. Simple ones take parameters:
+
+```html
+{#include components/feedback/alert variant="success" titleText="Saved" /}
+```
+
+Composite components (card, drawer, modal, data-list) are **template families** —
+a thin root plus per-section sub-templates composed in the root include's main
+block, mirroring how PatternFly's own React subcomponents compose:
+
+```html
+{#include components/data-display/card id="my-card" compact=true}
+{#include components/data-display/card-title}Project Apollo{/include}
+{#include components/data-display/card-body}Ship the dashboard by Q3.{/include}
+{#include components/data-display/card-footer}Updated 2 hours ago{/include}
+{/include}
+```
+
+Family conventions:
+
+- **Content is each include's main block** — not a named slot — so titles, bodies,
+  and footers can hold any markup, and nothing can collide with slot names in
+  the templates that wrap yours.
+- Multi-region templates (e.g. `card-header`) use **component-prefixed slots**
+  (`cardActions`, `cardSelectableActions`) behind `has*` guard params.
+- Roots own the standard Alpine contracts — `expandable=true` wires expand state,
+  `selectedExpr="..."` binds selection — and accept an `attrs` raw passthrough
+  for custom Alpine directives.
+- Includes shadow inherited `id`/`attrs` so they never leak into nested includes.
+
+Every component has a demo page with examples matching the patternfly.org docs,
+a Qute-source viewer, and a props table: run the showcase (below) and browse
+`http://localhost:9090/`.
 
 ## Testing
 
@@ -27,15 +76,16 @@ Reports land under `.reports/` (gitignored). See [TESTING.md](TESTING.md) for
 the full breakdown of what each layer catches, how to run each one
 standalone, and how to add a new test layer.
 
-## Running the application in dev mode
+## Running the showcase in dev mode
 
-You can run your application in dev mode that enables live coding using:
+The component showcase lives in the `integration-tests` module and runs on port 9090:
 
 ```shell script
-./gradlew quarkusDev
+JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64 \
+  ./gradlew :quarkus-pha-integration-tests:quarkusDev
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+Then browse <http://localhost:9090/> for the component index.
 
 ## Packaging and running the application
 
@@ -75,14 +125,6 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 You can then execute your native executable with: `./build/quarkus-pha-1.0.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult <https://quarkus.io/guides/gradle-tooling>.
-
-## Provided Code
-
-### REST
-
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
 
 ## Units
 - [components](runtime/src/main/resources/templates/components)
@@ -214,6 +256,9 @@ inlining `style="…"` on each fragment.
   - [x] Time picker (https://www.patternfly.org/components/date-and-time/time-picker)
 - [x] Data list (https://www.patternfly.org/components/data-list)
 - [x] Dual list selector (https://www.patternfly.org/components/dual-list-selector)
+- [ ] Compass (https://www.patternfly.org/components/compass)
+- [ ] Hero (https://www.patternfly.org/components/hero)
+- [ ] Input group (https://www.patternfly.org/components/input-group)
 - [x] Topology
   - [x] Custom nodes (https://www.patternfly.org/topology/custom-nodes)
   - [x] Custom edges (https://www.patternfly.org/topology/custom-edges)

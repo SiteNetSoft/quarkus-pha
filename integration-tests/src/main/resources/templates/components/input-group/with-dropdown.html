@@ -1,0 +1,21 @@
+<div x-data="{ open: false, unit: 'GB' }">
+  {#include components/forms/input-group id="ig-dropdown"}
+  {#include components/forms/input-group-item attrs='style="position: relative"'}
+  <button class="pf-v6-c-menu-toggle" type="button" :class="open ? 'pf-m-expanded' : ''" aria-expanded="false" :aria-expanded="open.toString()" @click="open = !open">
+    <span class="pf-v6-c-menu-toggle__text" x-text="unit">GB</span>
+    <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
+  </button>
+  <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 6rem">
+    <div class="pf-v6-c-menu__content">
+      <ul class="pf-v6-c-menu__list" role="menu">
+        <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="unit = 'MB'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">MB</span></span></button></li>
+        <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="unit = 'GB'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">GB</span></span></button></li>
+      </ul>
+    </div>
+  </div>
+  {/include}
+  {#include components/forms/input-group-item fill=true}
+  <span class="pf-v6-c-form-control"><input type="number" id="ig-dropdown-amount" aria-label="Amount" value="256" /></span>
+  {/include}
+  {/include}
+</div>
