@@ -6,7 +6,7 @@
   <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 14rem">
     <div class="pf-v6-c-menu__content">
       <section class="pf-v6-c-menu__group">
-        <h1 class="pf-v6-c-menu__group-title">Compute</h1>
+        <h4 class="pf-v6-c-menu__group-title">Compute</h4>
         <ul class="pf-v6-c-menu__list" role="listbox">
           <template x-for="opt in ['Pods', 'Deployments']" :key="opt">
             <li role="none" class="pf-v6-c-menu__list-item" :class="selected === opt ? 'pf-m-selected' : ''">
@@ -19,7 +19,7 @@
       </section>
       <hr class="pf-v6-c-divider" />
       <section class="pf-v6-c-menu__group">
-        <h1 class="pf-v6-c-menu__group-title">Network</h1>
+        <h4 class="pf-v6-c-menu__group-title">Network</h4>
         <ul class="pf-v6-c-menu__list" role="listbox">
           <template x-for="opt in ['Services', 'Routes']" :key="opt">
             <li role="none" class="pf-v6-c-menu__list-item" :class="selected === opt ? 'pf-m-selected' : ''">

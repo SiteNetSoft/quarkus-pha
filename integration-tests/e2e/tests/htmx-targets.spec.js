@@ -65,7 +65,7 @@ const COMPONENT_PATHS = [
   "/components/skip-to-content", "/components/slider", "/components/spinner",
   "/components/switch", "/components/table", "/components/tabs",
   "/components/text-area", "/components/text-input", "/components/text-input-group",
-  "/components/tile", "/components/time-picker", "/components/timestamp",
+  "/components/tile", "/components/hero", "/components/compass", "/components/time-picker", "/components/timestamp",
   "/components/title", "/components/toggle-group", "/components/toolbar",
   "/components/tooltip", "/components/tree-view", "/components/truncate",
   "/components/wizard"

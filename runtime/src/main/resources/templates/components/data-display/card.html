@@ -18,6 +18,7 @@
                     nested includes; shadowed inside the card family's slots. !}
 <div
   class="pf-v6-c-card{#if compact??} pf-m-compact{/if}{#if displayLg??} pf-m-display-lg{/if}{#if plain??} pf-m-plain{/if}{#if flat??} pf-m-flat{/if}{#if rounded??} pf-m-rounded{/if}{#if fullHeight??} pf-m-full-height{/if}{#if secondary??} pf-m-secondary{/if}{#if selectable??} pf-m-selectable{/if}{#if clickable??} pf-m-clickable{/if}{#if selected??} pf-m-selected{/if}{#if disabled??} pf-m-disabled{/if}"
+  {#if disabled??}aria-disabled="true"{/if}
   {#if id??}id="{id}"{/if}
   {#if expandable??}x-data="{ expanded: false }" :class="expanded ? 'pf-m-expanded' : ''"{/if}
   {#if selectedExpr??}:class="({selectedExpr}) ? 'pf-m-selected' : ''"{/if}

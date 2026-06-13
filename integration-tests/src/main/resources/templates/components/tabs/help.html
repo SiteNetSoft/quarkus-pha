@@ -1,8 +1,11 @@
+{! Plain-list markup (no ARIA tablist): close/help action buttons are not valid
+   tablist children, so these examples use list semantics with aria-current —
+   the same trade-off as the nav variant. !}
 <div x-data="{ active: 'h1' }">
   <div class="pf-v6-c-tabs" id="tabs-help">
-    <ul class="pf-v6-c-tabs__list" role="tablist" aria-label="Tabs with help action">
-      <li role="presentation" class="pf-v6-c-tabs__item pf-m-action" :class="active === 'h1' ? 'pf-m-current' : ''" x-data="{ help: false }" style="position: relative">
-        <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'h1'" @click="active = 'h1'">
+    <ul class="pf-v6-c-tabs__list" aria-label="Tabs with help action">
+      <li class="pf-v6-c-tabs__item pf-m-action" :class="active === 'h1' ? 'pf-m-current' : ''" x-data="{ help: false }" style="position: relative">
+        <button class="pf-v6-c-tabs__link" type="button" :aria-current="active === 'h1'" @click="active = 'h1'">
           <span class="pf-v6-c-tabs__item-text">Users</span>
         </button>
         <span class="pf-v6-c-tabs__item-action">
@@ -19,8 +22,8 @@
           </div>
         </div>
       </li>
-      <li role="presentation" class="pf-v6-c-tabs__item pf-m-action" :class="active === 'h2' ? 'pf-m-current' : ''" x-data="{ help: false }" style="position: relative">
-        <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'h2'" @click="active = 'h2'">
+      <li class="pf-v6-c-tabs__item pf-m-action" :class="active === 'h2' ? 'pf-m-current' : ''" x-data="{ help: false }" style="position: relative">
+        <button class="pf-v6-c-tabs__link" type="button" :aria-current="active === 'h2'" @click="active = 'h2'">
           <span class="pf-v6-c-tabs__item-text">Containers</span>
         </button>
         <span class="pf-v6-c-tabs__item-action">
@@ -37,8 +40,8 @@
           </div>
         </div>
       </li>
-      <li role="presentation" class="pf-v6-c-tabs__item pf-m-action" :class="active === 'h3' ? 'pf-m-current' : ''" x-data="{ help: false }" style="position: relative">
-        <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'h3'" @click="active = 'h3'">
+      <li class="pf-v6-c-tabs__item pf-m-action" :class="active === 'h3' ? 'pf-m-current' : ''" x-data="{ help: false }" style="position: relative">
+        <button class="pf-v6-c-tabs__link" type="button" :aria-current="active === 'h3'" @click="active = 'h3'">
           <span class="pf-v6-c-tabs__item-text">Database</span>
         </button>
         <span class="pf-v6-c-tabs__item-action">

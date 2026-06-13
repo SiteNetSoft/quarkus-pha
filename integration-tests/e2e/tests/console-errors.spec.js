@@ -122,7 +122,7 @@ const COMPONENT_PATHS = [
   "/components/text-area",
   "/components/text-input",
   "/components/text-input-group",
-  "/components/tile",
+  "/components/tile", "/components/hero", "/components/compass",
   "/components/time-picker",
   "/components/timestamp",
   "/components/title",
