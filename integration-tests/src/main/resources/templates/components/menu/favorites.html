@@ -8,11 +8,11 @@
 >
   <div class="pf-v6-c-menu__content">
     <section class="pf-v6-c-menu__group" x-show="items.some(function (i) { return i.fav; })">
-      <h1 class="pf-v6-c-menu__group-title">Favorites</h1>
-      <ul class="pf-v6-c-menu__list" role="menu">
+      <h4 class="pf-v6-c-menu__group-title">Favorites</h4>
+      <ul class="pf-v6-c-menu__list">
         <template x-for="it in items.filter(function (i) { return i.fav; })" :key="'fav-' + it.name">
-          <li role="none" class="pf-v6-c-menu__list-item">
-            <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+          <li class="pf-v6-c-menu__list-item">
+            <button class="pf-v6-c-menu__item" type="button">
               <span class="pf-v6-c-menu__item-main">
                 <span class="pf-v6-c-menu__item-text" x-text="it.name"></span>
                 <span class="pf-v6-c-menu__item-description" x-text="it.desc"></span>
@@ -27,11 +27,11 @@
     </section>
     <hr class="pf-v6-c-divider" x-show="items.some(function (i) { return i.fav; })" />
     <section class="pf-v6-c-menu__group">
-      <h1 class="pf-v6-c-menu__group-title">All items</h1>
-      <ul class="pf-v6-c-menu__list" role="menu">
+      <h4 class="pf-v6-c-menu__group-title">All items</h4>
+      <ul class="pf-v6-c-menu__list">
         <template x-for="it in items" :key="it.name">
-          <li role="none" class="pf-v6-c-menu__list-item">
-            <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+          <li class="pf-v6-c-menu__list-item">
+            <button class="pf-v6-c-menu__item" type="button">
               <span class="pf-v6-c-menu__item-main">
                 <span class="pf-v6-c-menu__item-text" x-text="it.name"></span>
                 <span class="pf-v6-c-menu__item-description" x-text="it.desc"></span>

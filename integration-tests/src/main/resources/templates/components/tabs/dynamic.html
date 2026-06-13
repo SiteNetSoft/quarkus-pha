@@ -1,5 +1,6 @@
-{! Add/close tabs — Alpine owns the tab array; close buttons sit in __item-action
-   (item gets pf-m-action), the add button in __add. !}
+{! Plain-list markup (no ARIA tablist): close/help action buttons are not valid
+   tablist children, so these examples use list semantics with aria-current —
+   the same trade-off as the nav variant. !}
 <div
   id="tabs-dynamic"
   x-data="{ counter: 3, active: 1,
@@ -8,10 +9,10 @@
     close(id) { var i = this.tabs.findIndex(function (t) { return t.id === id; }); this.tabs.splice(i, 1); if (this.active === id && this.tabs.length) this.active = this.tabs[Math.max(0, i - 1)].id; } }"
 >
   <div class="pf-v6-c-tabs">
-    <ul class="pf-v6-c-tabs__list" role="tablist" aria-label="Dynamic tabs">
+    <ul class="pf-v6-c-tabs__list" aria-label="Dynamic tabs">
       <template x-for="t in tabs" :key="t.id">
-        <li role="presentation" class="pf-v6-c-tabs__item pf-m-action" :class="active === t.id ? 'pf-m-current' : ''">
-          <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === t.id" @click="active = t.id">
+        <li class="pf-v6-c-tabs__item pf-m-action" :class="active === t.id ? 'pf-m-current' : ''">
+          <button class="pf-v6-c-tabs__link" type="button" :aria-current="active === t.id" @click="active = t.id">
             <span class="pf-v6-c-tabs__item-text" x-text="t.name"></span>
           </button>
           <span class="pf-v6-c-tabs__item-action">

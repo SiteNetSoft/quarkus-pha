@@ -1,7 +1,7 @@
 {! Full PF login page composed from the runtime template — the Alpine state lives on a
    wrapper div, the regions land in the template's login-prefixed slots. !}
 <div x-data="{ username: '', password: '', remember: false, submitted: false }">
-  {#include components/forms/login-page id="lp-basic" titleText="Log in to your account" hasLoginHeader=true hasLoginFooter=true hasPageFooter=true}
+  {#include components/forms/login-page id="lp-basic" titleText="Log in to your account" titleHeadingLevel="h4" hasLoginHeader=true hasLoginFooter=true hasPageFooter=true}
   {#loginHeader}
   <img
     class="pf-v6-c-brand"
