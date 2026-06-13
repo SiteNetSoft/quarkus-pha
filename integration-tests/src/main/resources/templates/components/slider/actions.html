@@ -8,7 +8,7 @@
       <div class="pf-v6-c-slider__rail" @click="const rect = $el.getBoundingClientRect(); val = Math.round((($event.clientX - rect.left) / rect.width) * 100)">
         <div class="pf-v6-c-slider__rail-track"></div>
       </div>
-      <div class="pf-v6-c-slider__thumb" role="slider" tabindex="0" aria-label="Value" aria-valuemin="0" aria-valuemax="100" :aria-valuenow="val" :style="'left: ' + val + '%'" @keydown.arrow-left.prevent="val = Math.max(0, val - 1)" @keydown.arrow-right.prevent="val = Math.min(100, val + 1)"></div>
+      <div class="pf-v6-c-slider__thumb" role="slider" tabindex="0" aria-label="Value" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" :aria-valuenow="val" :style="'left: ' + val + '%'" @keydown.arrow-left.prevent="val = Math.max(0, val - 1)" @keydown.arrow-right.prevent="val = Math.min(100, val + 1)"></div>
       <div class="pf-v6-c-slider__value pf-m-floating" x-text="val"></div>
     </div>
   </div>

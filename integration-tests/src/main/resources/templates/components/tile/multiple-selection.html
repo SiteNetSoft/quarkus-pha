@@ -1,12 +1,12 @@
 {! Tiles toggle independently. !}
 <div class="pf-v6-l-flex pf-m-space-items-md" id="tile-multi" x-data="{ t1: false, t2: false, t3: false }">
-  <div class="pf-v6-c-tile" :class="{ 'pf-m-selected': t1 }" tabindex="0" role="checkbox" :aria-checked="t1.toString()" @click="t1 = !t1" @keydown.enter="t1 = !t1">
+  <div class="pf-v6-c-tile" :class="{ 'pf-m-selected': t1 }" tabindex="0" role="checkbox" aria-checked="false" :aria-checked="t1.toString()" @click="t1 = !t1" @keydown.enter="t1 = !t1">
     <div class="pf-v6-c-tile__header"><div class="pf-v6-c-tile__title">Tile one</div></div>
   </div>
-  <div class="pf-v6-c-tile" :class="{ 'pf-m-selected': t2 }" tabindex="0" role="checkbox" :aria-checked="t2.toString()" @click="t2 = !t2" @keydown.enter="t2 = !t2">
+  <div class="pf-v6-c-tile" :class="{ 'pf-m-selected': t2 }" tabindex="0" role="checkbox" aria-checked="false" :aria-checked="t2.toString()" @click="t2 = !t2" @keydown.enter="t2 = !t2">
     <div class="pf-v6-c-tile__header"><div class="pf-v6-c-tile__title">Tile two</div></div>
   </div>
-  <div class="pf-v6-c-tile" :class="{ 'pf-m-selected': t3 }" tabindex="0" role="checkbox" :aria-checked="t3.toString()" @click="t3 = !t3" @keydown.enter="t3 = !t3">
+  <div class="pf-v6-c-tile" :class="{ 'pf-m-selected': t3 }" tabindex="0" role="checkbox" aria-checked="false" :aria-checked="t3.toString()" @click="t3 = !t3" @keydown.enter="t3 = !t3">
     <div class="pf-v6-c-tile__header"><div class="pf-v6-c-tile__title">Tile three</div></div>
   </div>
 </div>

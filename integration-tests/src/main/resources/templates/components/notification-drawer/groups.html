@@ -7,9 +7,9 @@
   <div class="pf-v6-c-notification-drawer__body">
       <section class="pf-v6-c-notification-drawer__group" :class="{ 'pf-m-expanded': g1 }">
         <button class="pf-v6-c-notification-drawer__group-toggle" type="button" :aria-expanded="g1.toString()" @click="g1 = !g1">
-          <div class="pf-v6-c-notification-drawer__group-toggle-title">Production alerts</div>
-          <div class="pf-v6-c-notification-drawer__group-toggle-count"><span class="pf-v6-c-badge pf-m-unread">2</span></div>
-          <div class="pf-v6-c-notification-drawer__group-toggle-icon">{icons:svg('fa:angle-right').raw}</div>
+          <span class="pf-v6-c-notification-drawer__group-toggle-title">Production alerts</span>
+          <span class="pf-v6-c-notification-drawer__group-toggle-count"><span class="pf-v6-c-badge pf-m-unread">2</span></span>
+          <span class="pf-v6-c-notification-drawer__group-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
         </button>
         <div class="pf-v6-c-notification-drawer__group-list" x-show="g1" x-cloak>
           <ul class="pf-v6-c-notification-drawer__list" role="list">
@@ -34,9 +34,9 @@
       </section>
       <section class="pf-v6-c-notification-drawer__group" :class="{ 'pf-m-expanded': g2 }">
         <button class="pf-v6-c-notification-drawer__group-toggle" type="button" :aria-expanded="g2.toString()" @click="g2 = !g2">
-          <div class="pf-v6-c-notification-drawer__group-toggle-title">Staging alerts</div>
-          <div class="pf-v6-c-notification-drawer__group-toggle-count"><span class="pf-v6-c-badge pf-m-unread">1</span></div>
-          <div class="pf-v6-c-notification-drawer__group-toggle-icon">{icons:svg('fa:angle-right').raw}</div>
+          <span class="pf-v6-c-notification-drawer__group-toggle-title">Staging alerts</span>
+          <span class="pf-v6-c-notification-drawer__group-toggle-count"><span class="pf-v6-c-badge pf-m-unread">1</span></span>
+          <span class="pf-v6-c-notification-drawer__group-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
         </button>
         <div class="pf-v6-c-notification-drawer__group-list" x-show="g2" x-cloak>
           <ul class="pf-v6-c-notification-drawer__list" role="list">

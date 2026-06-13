@@ -5,7 +5,7 @@
               disabled (optional), stacked (optional — icon above the title),
               displayLg (optional — larger stacked icon), attrs (optional — raw
               attribute passthrough for Alpine directives etc.) !}
-<div class="pf-v6-c-tile{#if selected??} pf-m-selected{/if}{#if disabled??} pf-m-disabled{/if}{#if displayLg??} pf-m-display-lg{/if}"{#if id??} id="{id}"{/if} tabindex="0"{#if attrs??} {attrs.raw}{/if}>
+<div class="pf-v6-c-tile{#if selected??} pf-m-selected{/if}{#if disabled??} pf-m-disabled{/if}{#if displayLg??} pf-m-display-lg{/if}"{#if id??} id="{id}"{/if}{#if disabled??} aria-disabled="true"{/if} tabindex="0"{#if attrs??} {attrs.raw}{/if}>
   <div class="pf-v6-c-tile__header{#if stacked??} pf-m-stacked{/if}">
     {#if iconName??}
     <div class="pf-v6-c-tile__icon">{icons:svg(iconName).raw}</div>

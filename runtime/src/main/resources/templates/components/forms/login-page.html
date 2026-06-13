@@ -1,7 +1,7 @@
 {! Login page — PatternFly v6 (pf-v6-c-login) !}
 {! Optional params:
      id        — DOM id on the root.
-     titleText — h1 in the login card header.
+     titleText — heading in the card header (titleHeadingLevel, default h1).
      attrs     — raw attribute passthrough on the root (Alpine directives etc.).
    Region guards (set true to render the wrapper + slot):
      hasLoginHeader, hasHeaderUtilities, hasLoginFooter, hasPageFooter
@@ -18,10 +18,12 @@
     {#if hasLoginHeader??}
     <header class="pf-v6-c-login__header">{#insert loginHeader}{/insert}</header>
     {/if}
-    <main class="pf-v6-c-login__main">
+    <div class="pf-v6-c-login__main">
       <header class="pf-v6-c-login__main-header">
         {#if titleText??}
-        <h1 class="pf-v6-c-title pf-m-3xl">{titleText}</h1>
+        {#let h=(titleHeadingLevel ?: 'h1')}
+        <{h} class="pf-v6-c-title pf-m-3xl">{titleText}</{h}>
+        {/let}
         {/if}
         {#insert loginHeaderDesc}{/insert}
         {#if hasHeaderUtilities??}
@@ -32,7 +34,7 @@
       {#if hasLoginFooter??}
       <footer class="pf-v6-c-login__main-footer">{#insert loginFooter}{/insert}</footer>
       {/if}
-    </main>
+    </div>
     {#if hasPageFooter??}
     <footer class="pf-v6-c-login__footer">{#insert loginPageFooter}{/insert}</footer>
     {/if}

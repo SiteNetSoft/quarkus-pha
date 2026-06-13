@@ -1,8 +1,10 @@
+{! Plain-list markup (no ARIA tablist): help/close action buttons are not valid
+   tablist children — list semantics with aria-current, like the nav variant. !}
 <div x-data="{ active: 'hc1' }">
   <div class="pf-v6-c-tabs" id="tabs-help-and-close">
-    <ul class="pf-v6-c-tabs__list" role="tablist" aria-label="Tabs with help and close actions">
-      <li role="presentation" class="pf-v6-c-tabs__item pf-m-action" :class="active === 'hc1' ? 'pf-m-current' : ''" x-data="{ help: false }" style="position: relative">
-        <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'hc1'" @click="active = 'hc1'">
+    <ul class="pf-v6-c-tabs__list" aria-label="Tabs with help and close actions">
+      <li class="pf-v6-c-tabs__item pf-m-action" :class="active === 'hc1' ? 'pf-m-current' : ''" x-data="{ help: false }" style="position: relative">
+        <button class="pf-v6-c-tabs__link" type="button" :aria-current="active === 'hc1'" @click="active = 'hc1'">
           <span class="pf-v6-c-tabs__item-text">Users</span>
         </button>
         <span class="pf-v6-c-tabs__item-action">
@@ -22,8 +24,8 @@
           </div>
         </div>
       </li>
-      <li role="presentation" class="pf-v6-c-tabs__item pf-m-action" :class="active === 'hc2' ? 'pf-m-current' : ''" x-data="{ help: false }" style="position: relative">
-        <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'hc2'" @click="active = 'hc2'">
+      <li class="pf-v6-c-tabs__item pf-m-action" :class="active === 'hc2' ? 'pf-m-current' : ''" x-data="{ help: false }" style="position: relative">
+        <button class="pf-v6-c-tabs__link" type="button" :aria-current="active === 'hc2'" @click="active = 'hc2'">
           <span class="pf-v6-c-tabs__item-text">Containers</span>
         </button>
         <span class="pf-v6-c-tabs__item-action">
