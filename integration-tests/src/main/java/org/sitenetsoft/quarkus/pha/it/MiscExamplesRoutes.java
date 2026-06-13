@@ -30,6 +30,10 @@ public class MiscExamplesRoutes {
     static {
         Map<String, Set<String>> m = new HashMap<>();
         m.put("timestamp",             Set.of("basic", "basic-formats", "custom-format", "custom-content", "inline", "with-tooltip"));
+        m.put("hero",                  Set.of("basic", "glass"));
+        m.put("input-group",           Set.of("basic", "with-textarea", "with-dropdown", "with-popover",
+                                               "multiple-siblings"));
+        m.put("compass",               Set.of("basic", "alternate-footer", "docked-nav", "main-header-structure"));
         m.put("tile",                  Set.of("basic", "with-subtext", "with-icon", "stacked-icon",
                                                "large-icons", "long-subtext", "single-selection",
                                                "multiple-selection"));
@@ -167,7 +171,7 @@ public class MiscExamplesRoutes {
         "notification-drawer|drawer|toolbar|modal|multiple-file-upload|date-picker|menu|menu-toggle|" +
         "notification-badge|page|context-selector|dual-list-selector|calendar-month|dropdown|select|" +
         "application-launcher|options-menu|custom-menus|password-generator|password-strength|" +
-        "date-and-time-picker|time-picker|navigation|tile";
+        "date-and-time-picker|time-picker|navigation|tile|hero|input-group|compass";
 
     @Inject
     Engine engine;

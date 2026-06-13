@@ -1,0 +1,6 @@
+{! Hero — PatternFly v6. A prominent page-level banner region; content is the
+   include's main block inside the hero body. !}
+{! Optional: id, glass (pf-m-glass translucent backdrop), attrs (raw passthrough). !}
+<section class="pf-v6-c-hero{#if glass??} pf-m-glass{/if}"{#if id??} id="{id}"{/if}{#if attrs??} {attrs.raw}{/if}>
+  <div class="pf-v6-c-hero__body">{#let id=null attrs=null}{#insert /}{/let}</div>
+</section>

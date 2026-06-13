@@ -1,0 +1,16 @@
+<div x-data="{ tip: false }">
+  {#include components/forms/input-group id="ig-popover"}
+  {#include components/forms/input-group-item fill=true}
+  <span class="pf-v6-c-form-control"><input type="text" id="ig-popover-field" aria-label="Username" placeholder="Username" /></span>
+  {/include}
+  {#include components/forms/input-group-item attrs='style="position: relative"'}
+  {#include components/actions/button variant="control" ariaLabel="Username help" attrs='@click="tip = !tip" :aria-expanded="tip.toString()"'}{#content}{icons:svg('fa:circle-question').raw}{/content}{/include}
+  <div x-show="tip" x-cloak @click.outside="tip = false" style="position: absolute; top: 100%; right: 0; z-index: 300; width: 240px">
+    <div class="pf-v6-c-popover pf-m-bottom" role="dialog" aria-label="Username help">
+      <div class="pf-v6-c-popover__arrow"></div>
+      <div class="pf-v6-c-popover__content"><div class="pf-v6-c-popover__body">Usernames are 3-20 lowercase characters.</div></div>
+    </div>
+  </div>
+  {/include}
+  {/include}
+</div>

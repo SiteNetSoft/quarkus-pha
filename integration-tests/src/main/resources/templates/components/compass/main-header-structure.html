@@ -1,0 +1,15 @@
+{! The main header composes __main-header-content (title) and a trailing toolbar. !}
+{#include components/navigation/compass id="cmp-header-structure" hasCompassHeader=true headerExpanded=true attrs='style="height: 320px; border: 1px dashed var(--pf-t--global--border--color--default)"'}
+{#compassHeader}
+<div class="pf-v6-c-compass__main-header-content" style="padding: 0.5rem 1rem; display: flex; align-items: center; gap: 1rem; justify-content: space-between">
+  <h2 class="pf-v6-c-compass__main-header-title">Main header structure</h2>
+  <div class="pf-v6-l-flex pf-m-space-items-sm">
+    {#include components/actions/button variant="secondary"}{#content}Share{/content}{/include}
+    {#include components/actions/button variant="plain" ariaLabel="More options" icon="fa:ellipsis-vertical" /}
+  </div>
+</div>
+{/compassHeader}
+  <div class="pf-v6-c-compass__content" style="padding: 1rem">
+    <p>Title in __main-header-content with a toolbar aligned to the end.</p>
+  </div>
+{/include}
