@@ -1,22 +1,9 @@
-<div class="pf-v6-c-menu" id="mn-desc" style="max-width: 280px">
-  <div class="pf-v6-c-menu__content">
-    <ul class="pf-v6-c-menu__list" role="menu">
-      <li role="none" class="pf-v6-c-menu__list-item">
-        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
-          <span class="pf-v6-c-menu__item-main">
-            <span class="pf-v6-c-menu__item-text">Edit</span>
-            <span class="pf-v6-c-menu__item-description">Change the name or labels.</span>
-          </span>
-        </button>
-      </li>
-      <li role="none" class="pf-v6-c-menu__list-item">
-        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
-          <span class="pf-v6-c-menu__item-main">
-            <span class="pf-v6-c-menu__item-text">Duplicate</span>
-            <span class="pf-v6-c-menu__item-description">Create a copy with the same settings.</span>
-          </span>
-        </button>
-      </li>
-    </ul>
-  </div>
-</div>
+{#include components/navigation/menu id="mn-descriptions" attrs='style="max-width: 280px"'}
+{#include components/navigation/menu-content}
+{#include components/navigation/menu-list}
+{#include components/navigation/menu-item text="Edit" description="Change the name or labels." /}
+{#include components/navigation/menu-item text="Duplicate" description="Create a copy in this project." /}
+{#include components/navigation/menu-item text="Delete" description="Permanently remove the resource." danger=true /}
+{/include}
+{/include}
+{/include}

@@ -1,22 +1,11 @@
-<div class="pf-v6-c-menu" id="mn-separated" style="max-width: 260px">
-  <div class="pf-v6-c-menu__content">
-    <ul class="pf-v6-c-menu__list" role="menu">
-      <li role="none" class="pf-v6-c-menu__list-item">
-        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
-          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Action 1</span></span>
-        </button>
-      </li>
-      <li role="none" class="pf-v6-c-menu__list-item">
-        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
-          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Action 2</span></span>
-        </button>
-      </li>
-      <li class="pf-v6-c-divider" role="separator"></li>
-      <li role="none" class="pf-v6-c-menu__list-item">
-        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
-          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Action 3</span></span>
-        </button>
-      </li>
-    </ul>
-  </div>
-</div>
+{#include components/navigation/menu id="mn-separated-items" attrs='style="max-width: 220px"'}
+{#include components/navigation/menu-content}
+{#include components/navigation/menu-list}
+{#include components/navigation/menu-item text="Action 1" /}
+<li class="pf-v6-c-divider" role="separator"></li>
+{#include components/navigation/menu-item text="Action 2" /}
+<li class="pf-v6-c-divider" role="separator"></li>
+{#include components/navigation/menu-item text="Action 3" /}
+{/include}
+{/include}
+{/include}
