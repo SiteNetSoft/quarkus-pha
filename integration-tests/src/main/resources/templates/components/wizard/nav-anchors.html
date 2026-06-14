@@ -1,9 +1,6 @@
 <div x-data="{ step: 1 }">
-  <div class="pf-v6-c-wizard" id="wiz-nav-anchors">
-    <div class="pf-v6-c-wizard__outer-wrap">
-      <div class="pf-v6-c-wizard__inner-wrap">
-        <nav class="pf-v6-c-wizard__nav" aria-label="Steps">
-          <ol class="pf-v6-c-wizard__nav-list">
+{#include components/navigation/wizard id="wiz-nav-anchors"}
+{#navItems}
 <li class="pf-v6-c-wizard__nav-item">
   <a href="#" class="pf-v6-c-wizard__nav-link" :class="{ 'pf-m-current': step === 1 }" :aria-current="step === 1 ? 'step' : false" @click.prevent="step = 1">
     <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">Information</span></span>
@@ -19,10 +16,8 @@
     <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">Review</span></span>
   </a>
 </li>
-          </ol>
-        </nav>
-        <div class="pf-v6-c-wizard__main">
-          <div class="pf-v6-c-wizard__main-body">
+{/navItems}
+{#body}
 <div x-show="step === 1" x-cloak>
   <h2 class="pf-v6-c-content--h2">Information</h2>
   <p>Information content.</p>
@@ -35,10 +30,8 @@
   <h2 class="pf-v6-c-content--h2">Review</h2>
   <p>Review content.</p>
 </div>
-          </div>
-        </div>
-      </div>
-      <footer class="pf-v6-c-wizard__footer">
+{/body}
+{#footer}
 <button type="button" class="pf-v6-c-button pf-m-primary" :disabled="step === 3" @click="step = Math.min(3, step + 1)">
   <span class="pf-v6-c-button__text">Next</span>
 </button>
@@ -48,7 +41,6 @@
 <button type="button" class="pf-v6-c-button pf-m-link">
   <span class="pf-v6-c-button__text">Cancel</span>
 </button>
-      </footer>
-    </div>
-  </div>
+{/footer}
+{/include}
 </div>
