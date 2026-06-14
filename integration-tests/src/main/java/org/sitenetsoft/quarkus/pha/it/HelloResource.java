@@ -27,6 +27,7 @@ public class HelloResource {
      * thumbnail PNG is added.
      */
     private static final Set<String> NO_THUMBNAIL = Set.of(
+        "form-validation",
         "hero",
         "compass",
         "catalog-item-header",
@@ -150,6 +151,7 @@ public class HelloResource {
         Map.entry("document-editor",   "/components/document-editor"),
         Map.entry("chart",             "/components/chart"),
         Map.entry("topology",          "/components/topology"),
+        Map.entry("form-validation",   "/components/form-validation"),
         Map.entry("live-search",       "/components/live-search"),
         Map.entry("infinite-scroll",   "/components/infinite-scroll"),
         Map.entry("click-to-load",     "/components/click-to-load"),
@@ -185,6 +187,7 @@ public class HelloResource {
         Map.entry("document-editor",   "Custom"),
         Map.entry("chart",             "Custom"),
         Map.entry("topology",          "Custom"),
+        Map.entry("form-validation",   "HTMX"),
         Map.entry("live-search",       "HTMX"),
         Map.entry("infinite-scroll",   "HTMX"),
         Map.entry("click-to-load",     "HTMX"),
@@ -275,6 +278,7 @@ public class HelloResource {
         {"label",                "Label"},
         {"lazy-modal",           "Lazy modal"},
         {"list",                 "List"},
+        {"form-validation",      "Form validation"},
         {"live-search",          "Live search"},
         {"log-viewer",           "Log viewer"},
         {"login-page",           "Login page"},

@@ -1,0 +1,85 @@
+{! Server-validated signup form — rendered initially by the demo page and re-rendered
+   by POST /api/htmx/form-validate after each submit. The form posts to itself and
+   swaps its own outerHTML, so PF error states + helper text come back from the server.
+   Params: username, email (submitted values); errUsername, errEmail (error messages,
+   absent when valid); success (boolean — all fields valid). !}
+<form
+  class="pf-v6-c-form"
+  id="htmx-signup-form"
+  hx-post="/api/htmx/form-validate"
+  hx-target="this"
+  hx-swap="outerHTML"
+  novalidate
+>
+  {#if success??}
+  <div class="pf-v6-c-alert pf-m-success pf-m-inline" aria-label="Success alert" role="alert">
+    <div class="pf-v6-c-alert__icon">{icons:svg('fa:circle-check').raw}</div>
+    <p class="pf-v6-c-alert__title">
+      <span class="pf-v6-c-alert__screen-reader">Success alert:</span> Account created for {username}.
+    </p>
+  </div>
+  {/if}
+  <div class="pf-v6-c-form__group">
+    <div class="pf-v6-c-form__group-label">
+      <label class="pf-v6-c-form__label" for="htmx-signup-username">
+        <span class="pf-v6-c-form__label-text">Username</span>
+        <span class="pf-v6-c-form__label-required" aria-hidden="true">&#42;</span>
+      </label>
+    </div>
+    <div class="pf-v6-c-form__group-control">
+      <span class="pf-v6-c-form-control pf-m-required{#if errUsername??} pf-m-error{#else if success??} pf-m-success{/if}">
+        <input
+          type="text"
+          id="htmx-signup-username"
+          name="username"
+          value="{username ?: ''}"
+          required
+          {#if errUsername??}aria-invalid="true"{/if}
+        />
+      </span>
+      {#if errUsername??}
+      <div class="pf-v6-c-helper-text">
+        <div class="pf-v6-c-helper-text__item pf-m-error">
+          <span class="pf-v6-c-helper-text__item-icon">{icons:svg('fa:circle-exclamation').raw}</span>
+          <span class="pf-v6-c-helper-text__item-text">{errUsername}</span>
+        </div>
+      </div>
+      {/if}
+    </div>
+  </div>
+  <div class="pf-v6-c-form__group">
+    <div class="pf-v6-c-form__group-label">
+      <label class="pf-v6-c-form__label" for="htmx-signup-email">
+        <span class="pf-v6-c-form__label-text">Email</span>
+        <span class="pf-v6-c-form__label-required" aria-hidden="true">&#42;</span>
+      </label>
+    </div>
+    <div class="pf-v6-c-form__group-control">
+      <span class="pf-v6-c-form-control pf-m-required{#if errEmail??} pf-m-error{#else if success??} pf-m-success{/if}">
+        <input
+          type="email"
+          id="htmx-signup-email"
+          name="email"
+          value="{email ?: ''}"
+          required
+          {#if errEmail??}aria-invalid="true"{/if}
+        />
+      </span>
+      {#if errEmail??}
+      <div class="pf-v6-c-helper-text">
+        <div class="pf-v6-c-helper-text__item pf-m-error">
+          <span class="pf-v6-c-helper-text__item-icon">{icons:svg('fa:circle-exclamation').raw}</span>
+          <span class="pf-v6-c-helper-text__item-text">{errEmail}</span>
+        </div>
+      </div>
+      {/if}
+    </div>
+  </div>
+  <div class="pf-v6-c-form__group pf-m-action">
+    <div class="pf-v6-c-form__actions">
+      <button type="submit" class="pf-v6-c-button pf-m-primary">
+        <span class="pf-v6-c-button__text">Create account</span>
+      </button>
+    </div>
+  </div>
+</form>

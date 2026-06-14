@@ -3,6 +3,8 @@ package org.sitenetsoft.quarkus.pha.it;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.NotFoundException;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -83,6 +85,43 @@ public class HtmxRoutes {
         }
 
         return html.toString();
+    }
+
+    @POST
+    @Path("/form-validate")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.TEXT_HTML)
+    public String formValidate(@FormParam("username") String username, @FormParam("email") String email) {
+        String u = username == null ? "" : username.trim();
+        String e = email == null ? "" : email.trim();
+        String errUsername = null;
+        String errEmail = null;
+
+        if (u.isEmpty()) {
+            errUsername = "Username is required.";
+        } else if (u.length() < 3 || u.length() > 20) {
+            errUsername = "Username must be 3-20 characters.";
+        } else if (!u.matches("[a-zA-Z0-9_]+")) {
+            errUsername = "Use letters, numbers, and underscores only.";
+        } else if (u.equalsIgnoreCase("admin") || u.equalsIgnoreCase("root")) {
+            errUsername = "That username is already taken.";
+        }
+
+        if (e.isEmpty()) {
+            errEmail = "Email is required.";
+        } else if (!e.matches("[^@\\s]+@[^@\\s]+\\.[^@\\s]+")) {
+            errEmail = "Enter a valid email address.";
+        }
+
+        boolean ok = errUsername == null && errEmail == null;
+        var tpl = engine.getTemplate("partials/htmx/signup-form").instance();
+        if (ok) {
+            tpl.data("username", u).data("email", "").data("success", true);
+        } else {
+            tpl.data("username", u).data("email", e)
+               .data("errUsername", errUsername).data("errEmail", errEmail);
+        }
+        return tpl.render();
     }
 
     @GET
