@@ -15,7 +15,7 @@ test.describe("Smoke tests", () => {
   test("gallery shows component cards", async ({ page }) => {
     await page.goto("/");
     const cards = page.locator(".pf-v6-l-gallery .pf-v6-c-card");
-    await expect(cards).toHaveCount(120);
+    await expect(cards).toHaveCount(121);
   });
 
   test("implemented components link to demo pages", async ({ page }) => {

@@ -418,6 +418,10 @@ public class ComponentRoutes {
     @Inject
     Template documentEditorPage;
 
+    @Location("components/form-validation")
+    @Inject
+    Template formValidationPage;
+
     @Location("components/live-search")
     @Inject
     Template liveSearchPage;
@@ -1183,6 +1187,13 @@ public class ComponentRoutes {
 
         return alertPage
             .data("sampleActionLinks", sampleActionLinks);
+    }
+
+    @GET
+    @Path("/form-validation")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance formValidation() {
+        return formValidationPage.instance();
     }
 
     @GET
