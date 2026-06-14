@@ -28,6 +28,7 @@ public class HelloResource {
      */
     private static final Set<String> NO_THUMBNAIL = Set.of(
         "form-validation",
+        "click-to-edit",
         "sortable-table",
         "hero",
         "compass",
@@ -154,6 +155,7 @@ public class HelloResource {
         Map.entry("topology",          "/components/topology"),
         Map.entry("form-validation",   "/components/form-validation"),
         Map.entry("sortable-table",    "/components/sortable-table"),
+        Map.entry("click-to-edit",     "/components/click-to-edit"),
         Map.entry("live-search",       "/components/live-search"),
         Map.entry("infinite-scroll",   "/components/infinite-scroll"),
         Map.entry("click-to-load",     "/components/click-to-load"),
@@ -191,6 +193,7 @@ public class HelloResource {
         Map.entry("topology",          "Custom"),
         Map.entry("form-validation",   "HTMX"),
         Map.entry("sortable-table",    "HTMX"),
+        Map.entry("click-to-edit",     "HTMX"),
         Map.entry("live-search",       "HTMX"),
         Map.entry("infinite-scroll",   "HTMX"),
         Map.entry("click-to-load",     "HTMX"),
@@ -283,6 +286,7 @@ public class HelloResource {
         {"list",                 "List"},
         {"form-validation",      "Form validation"},
         {"sortable-table",       "Sortable table"},
+        {"click-to-edit",        "Click to edit"},
         {"live-search",          "Live search"},
         {"log-viewer",           "Log viewer"},
         {"login-page",           "Login page"},

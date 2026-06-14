@@ -426,6 +426,10 @@ public class ComponentRoutes {
     @Inject
     Template sortableTablePage;
 
+    @Location("components/click-to-edit")
+    @Inject
+    Template clickToEditPage;
+
     @Location("components/live-search")
     @Inject
     Template liveSearchPage;
@@ -1205,6 +1209,13 @@ public class ComponentRoutes {
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance sortableTable() {
         return sortableTablePage.instance();
+    }
+
+    @GET
+    @Path("/click-to-edit")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance clickToEdit() {
+        return clickToEditPage.instance();
     }
 
     @GET
