@@ -290,6 +290,69 @@ public class HtmxRoutes {
         return html.toString();
     }
 
+    // ---------- Inline edit (click-to-edit, server-driven) ----------
+
+    private static String ceName = "Jane Smith";
+    private static String ceTitle = "Senior Engineer";
+
+    private String clickToEditView() {
+        return "<div id=\"htmx-click-to-edit\">"
+             + "<dl class=\"pf-v6-c-description-list pf-m-horizontal\">"
+             + "<div class=\"pf-v6-c-description-list__group\">"
+             + "<dt class=\"pf-v6-c-description-list__term\"><span class=\"pf-v6-c-description-list__text\">Name</span></dt>"
+             + "<dd class=\"pf-v6-c-description-list__description\"><div class=\"pf-v6-c-description-list__text\">" + escapeHtml(ceName) + "</div></dd>"
+             + "</div>"
+             + "<div class=\"pf-v6-c-description-list__group\">"
+             + "<dt class=\"pf-v6-c-description-list__term\"><span class=\"pf-v6-c-description-list__text\">Title</span></dt>"
+             + "<dd class=\"pf-v6-c-description-list__description\"><div class=\"pf-v6-c-description-list__text\">" + escapeHtml(ceTitle) + "</div></dd>"
+             + "</div>"
+             + "</dl>"
+             + "<button class=\"pf-v6-c-button pf-m-secondary\" type=\"button\" hx-get=\"/api/htmx/click-to-edit/form\" hx-target=\"#htmx-click-to-edit\" hx-swap=\"outerHTML\">"
+             + "<span class=\"pf-v6-c-button__text\">Edit</span></button>"
+             + "</div>";
+    }
+
+    private String clickToEditForm() {
+        return "<form id=\"htmx-click-to-edit\" class=\"pf-v6-c-form\" hx-post=\"/api/htmx/click-to-edit\" hx-target=\"#htmx-click-to-edit\" hx-swap=\"outerHTML\">"
+             + "<div class=\"pf-v6-c-form__group\">"
+             + "<div class=\"pf-v6-c-form__group-label\"><label class=\"pf-v6-c-form__label\" for=\"ce-name\"><span class=\"pf-v6-c-form__label-text\">Name</span></label></div>"
+             + "<div class=\"pf-v6-c-form__group-control\"><span class=\"pf-v6-c-form-control\"><input type=\"text\" id=\"ce-name\" name=\"name\" value=\"" + escapeHtml(ceName) + "\" /></span></div>"
+             + "</div>"
+             + "<div class=\"pf-v6-c-form__group\">"
+             + "<div class=\"pf-v6-c-form__group-label\"><label class=\"pf-v6-c-form__label\" for=\"ce-title\"><span class=\"pf-v6-c-form__label-text\">Title</span></label></div>"
+             + "<div class=\"pf-v6-c-form__group-control\"><span class=\"pf-v6-c-form-control\"><input type=\"text\" id=\"ce-title\" name=\"title\" value=\"" + escapeHtml(ceTitle) + "\" /></span></div>"
+             + "</div>"
+             + "<div class=\"pf-v6-c-form__group pf-m-action\"><div class=\"pf-v6-c-form__actions\">"
+             + "<button type=\"submit\" class=\"pf-v6-c-button pf-m-primary\"><span class=\"pf-v6-c-button__text\">Save</span></button>"
+             + "<button type=\"button\" class=\"pf-v6-c-button pf-m-link\" hx-get=\"/api/htmx/click-to-edit\" hx-target=\"#htmx-click-to-edit\" hx-swap=\"outerHTML\"><span class=\"pf-v6-c-button__text\">Cancel</span></button>"
+             + "</div></div>"
+             + "</form>";
+    }
+
+    @GET
+    @Path("/click-to-edit")
+    @Produces(MediaType.TEXT_HTML)
+    public String clickToEdit() {
+        return clickToEditView();
+    }
+
+    @GET
+    @Path("/click-to-edit/form")
+    @Produces(MediaType.TEXT_HTML)
+    public String clickToEditEdit() {
+        return clickToEditForm();
+    }
+
+    @POST
+    @Path("/click-to-edit")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.TEXT_HTML)
+    public String clickToEditSave(@FormParam("name") String name, @FormParam("title") String title) {
+        if (name != null && !name.trim().isEmpty()) ceName = name.trim();
+        if (title != null && !title.trim().isEmpty()) ceTitle = title.trim();
+        return clickToEditView();
+    }
+
     // ---------- Sortable / filterable / paginated data table ----------
 
     private static final List<String[]> DT_ROWS = List.of(

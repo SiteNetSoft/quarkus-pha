@@ -1,0 +1,25 @@
+{#include layouts/base} {#title}Click to Edit{/title} {#head}<link
+  rel="stylesheet"
+  href="/web/css/components/htmx.css"
+/>{/head} {#body}
+<div style="padding: 2rem">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block"
+    >&larr; Back to showcase</a
+  >
+
+  <h1>Click to Edit</h1>
+  <p>
+    Server-driven inline editing. The display view swaps to an edit form on demand; saving PUTs the values back to
+    Quarkus, which persists them and returns the refreshed display fragment. The browser holds no edit state &mdash;
+    every step is an HTMX fragment from <code>/api/htmx/click-to-edit</code>.
+  </p>
+
+  <section style="margin-top: 2rem">
+    <h2 id="click-to-edit-heading">Edit a profile inline</h2>
+    <p>Click <strong>Edit</strong> to swap the read-only view for a form; Save persists, Cancel discards.</p>
+    <div style="max-width: 460px; margin-top: 1rem" hx-get="/api/htmx/click-to-edit" hx-trigger="load" hx-swap="innerHTML">
+      <p class="pf-v6-c-content--small">Loading…</p>
+    </div>
+  </section>
+</div>
+{/body} {/include}
