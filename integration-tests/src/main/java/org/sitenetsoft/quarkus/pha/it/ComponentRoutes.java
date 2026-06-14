@@ -430,6 +430,10 @@ public class ComponentRoutes {
     @Inject
     Template clickToEditPage;
 
+    @Location("components/toast-confirm")
+    @Inject
+    Template toastConfirmPage;
+
     @Location("components/live-search")
     @Inject
     Template liveSearchPage;
@@ -1216,6 +1220,13 @@ public class ComponentRoutes {
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance clickToEdit() {
         return clickToEditPage.instance();
+    }
+
+    @GET
+    @Path("/toast-confirm")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance toastConfirm() {
+        return toastConfirmPage.instance();
     }
 
     @GET

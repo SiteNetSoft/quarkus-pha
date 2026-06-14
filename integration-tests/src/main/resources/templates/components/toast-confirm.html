@@ -1,0 +1,59 @@
+{#include layouts/base} {#title}Toast & Confirm{/title} {#head}
+<link rel="stylesheet" href="/web/css/components/htmx.css" />
+<script src="/web/js/htmx/toast.js"></script>
+{/head} {#body}
+<div style="padding: 2rem">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block"
+    >&larr; Back to showcase</a
+  >
+
+  <h1>Toast &amp; Confirm</h1>
+  <p>
+    Server-signalled toasts and a confirm dialog. Successful actions return an <code>HX-Trigger</code> response
+    header; a small client listener renders a PatternFly toast alert and auto-dismisses it. Destructive actions
+    intercept <code>htmx:confirm</code> and open the modal instead of the browser's <code>confirm()</code>.
+  </p>
+
+  <section style="margin-top: 2rem">
+    <h2 id="toast-confirm-heading">Toasts from the server</h2>
+    <p>Each button posts to Quarkus; the server replies with only an <code>HX-Trigger</code> header.</p>
+    <div class="pf-v6-l-flex pf-m-space-items-md" style="margin-top: 1rem">
+      <button
+        class="pf-v6-c-button pf-m-primary"
+        type="button"
+        hx-post="/api/htmx/toast/save"
+        hx-swap="none"
+        id="toast-save-btn"
+      >
+        <span class="pf-v6-c-button__text">Save (success toast)</span>
+      </button>
+      <button
+        class="pf-v6-c-button pf-m-danger"
+        type="button"
+        hx-post="/api/htmx/toast/delete"
+        hx-swap="none"
+        hx-confirm="Delete this item? This cannot be undone."
+        data-pha-confirm
+        id="toast-delete-btn"
+      >
+        <span class="pf-v6-c-button__text">Delete (confirm + toast)</span>
+      </button>
+    </div>
+  </section>
+
+  {! Confirm modal — opened by the htmx:confirm interceptor in toast.js. !}
+  {#include components/feedback/modal id="pha-confirm-modal" size="sm" variant="warning" eventOpen=true}
+  {#include components/feedback/modal-close /}
+  {#include components/feedback/modal-header headingLevel="h2"}Confirm action{/include}
+  {#include components/feedback/modal-body}<p id="pha-confirm-text">Are you sure?</p>{/include}
+  {#include components/feedback/modal-footer}
+  <button id="pha-confirm-yes" class="pf-v6-c-button pf-m-danger" type="button" @click="open = false">
+    <span class="pf-v6-c-button__text">Confirm</span>
+  </button>
+  <button class="pf-v6-c-button pf-m-link" type="button" @click="open = false">
+    <span class="pf-v6-c-button__text">Cancel</span>
+  </button>
+  {/include}
+  {/include}
+</div>
+{/body} {/include}
