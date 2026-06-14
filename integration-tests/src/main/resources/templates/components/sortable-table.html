@@ -1,0 +1,57 @@
+{#include layouts/base} {#title}Sortable Table{/title} {#head}<link
+  rel="stylesheet"
+  href="/web/css/components/htmx.css"
+/>{/head} {#body}
+<div style="padding: 2rem">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block"
+    >&larr; Back to showcase</a
+  >
+
+  <h1>Sortable Table</h1>
+  <p>
+    A fully server-driven data table: column-header sorting, text filtering, and pagination all run on the server
+    and swap the results region via HTMX. The browser holds no table state &mdash; every interaction is a fragment
+    request to <code>/api/htmx/data-table</code>.
+  </p>
+
+  <section style="margin-top: 2rem">
+    <h2 id="sortable-table-heading">Sort, filter, and paginate</h2>
+    <p>
+      Type to filter across all columns, click a header to sort (toggle ascending/descending), and page through
+      the results. The search box stays put while the results below it swap.
+    </p>
+    <div style="max-width: 640px; margin-top: 1rem">
+      <div class="pf-v6-c-toolbar" style="margin-bottom: 0.5rem">
+        <div class="pf-v6-c-toolbar__content">
+          <div class="pf-v6-c-toolbar__content-section">
+            <div class="pf-v6-c-toolbar__item">
+              <div class="pf-v6-c-text-input-group">
+                <div class="pf-v6-c-text-input-group__main pf-m-icon">
+                  <span class="pf-v6-c-text-input-group__text">
+                    <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+                    <input
+                      type="search"
+                      class="pf-v6-c-text-input-group__text-input"
+                      id="htmx-dt-search"
+                      name="q"
+                      placeholder="Filter users..."
+                      aria-label="Filter users"
+                      hx-get="/api/htmx/data-table"
+                      hx-trigger="keyup changed delay:300ms, search"
+                      hx-target="#htmx-dt-results"
+                      hx-swap="outerHTML"
+                    />
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="htmx-dt-results" hx-get="/api/htmx/data-table" hx-trigger="load" hx-swap="outerHTML">
+        <p class="pf-v6-c-content--small">Loading users…</p>
+      </div>
+    </div>
+  </section>
+</div>
+{/body} {/include}

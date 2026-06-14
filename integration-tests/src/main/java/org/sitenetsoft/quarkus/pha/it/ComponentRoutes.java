@@ -422,6 +422,10 @@ public class ComponentRoutes {
     @Inject
     Template formValidationPage;
 
+    @Location("components/sortable-table")
+    @Inject
+    Template sortableTablePage;
+
     @Location("components/live-search")
     @Inject
     Template liveSearchPage;
@@ -1194,6 +1198,13 @@ public class ComponentRoutes {
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance formValidation() {
         return formValidationPage.instance();
+    }
+
+    @GET
+    @Path("/sortable-table")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance sortableTable() {
+        return sortableTablePage.instance();
     }
 
     @GET

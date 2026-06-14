@@ -290,6 +290,129 @@ public class HtmxRoutes {
         return html.toString();
     }
 
+    // ---------- Sortable / filterable / paginated data table ----------
+
+    private static final List<String[]> DT_ROWS = List.of(
+        new String[]{"Alice Chen",      "Admin",  "us-east-1",      "Active"},
+        new String[]{"Bob Johnson",     "Viewer", "eu-west-1",      "Active"},
+        new String[]{"Carla Mendez",    "Editor", "us-west-2",      "Suspended"},
+        new String[]{"Diego Ramos",     "Viewer", "ap-southeast-1", "Active"},
+        new String[]{"Ewa Kowalski",    "Admin",  "eu-central-1",   "Active"},
+        new String[]{"Fatima Noor",     "Editor", "me-south-1",     "Pending"},
+        new String[]{"Grace Park",      "Viewer", "ap-northeast-1", "Active"},
+        new String[]{"Hassan Ali",      "Admin",  "af-south-1",     "Suspended"},
+        new String[]{"Ingrid Olsen",    "Editor", "eu-north-1",     "Active"},
+        new String[]{"Jamal Wright",    "Viewer", "us-east-2",      "Pending"},
+        new String[]{"Keiko Tanaka",    "Admin",  "ap-northeast-1", "Active"},
+        new String[]{"Liam Murphy",     "Editor", "eu-west-2",      "Active"},
+        new String[]{"Maria Silva",     "Viewer", "sa-east-1",      "Suspended"}
+    );
+
+    private static final List<String[]> DT_COLUMNS = List.of(
+        new String[]{"name",   "Name"},
+        new String[]{"role",   "Role"},
+        new String[]{"region", "Region"},
+        new String[]{"status", "Status"}
+    );
+
+    private static final int DT_PAGE_SIZE = 5;
+
+    @GET
+    @Path("/data-table")
+    @Produces(MediaType.TEXT_HTML)
+    public String dataTable(@QueryParam("q") String q, @QueryParam("col") String col,
+                            @QueryParam("dir") String dir, @QueryParam("page") Integer page) {
+        String query = q == null ? "" : q.trim().toLowerCase();
+        int colIdx = 0;
+        for (int i = 0; i < DT_COLUMNS.size(); i++) {
+            if (DT_COLUMNS.get(i)[0].equals(col)) { colIdx = i; break; }
+        }
+        boolean ascending = !"desc".equalsIgnoreCase(dir);
+
+        List<String[]> rows = new ArrayList<>();
+        for (String[] r : DT_ROWS) {
+            boolean match = query.isEmpty();
+            for (String cell : r) {
+                if (cell.toLowerCase().contains(query)) { match = true; break; }
+            }
+            if (match) rows.add(r);
+        }
+        final int sortIdx = colIdx;
+        Comparator<String[]> cmp = Comparator.comparing(r -> r[sortIdx], String.CASE_INSENSITIVE_ORDER);
+        if (!ascending) cmp = cmp.reversed();
+        rows.sort(cmp);
+
+        int total = rows.size();
+        int totalPages = Math.max(1, (int) Math.ceil(total / (double) DT_PAGE_SIZE));
+        int p = page == null ? 1 : Math.min(Math.max(1, page), totalPages);
+        int from = (p - 1) * DT_PAGE_SIZE;
+        int to = Math.min(from + DT_PAGE_SIZE, total);
+        List<String[]> pageRows = rows.subList(from, to);
+
+        String curCol = DT_COLUMNS.get(colIdx)[0];
+        String curDir = ascending ? "asc" : "desc";
+        String qEnc = escapeHtml(query);
+
+        StringBuilder html = new StringBuilder();
+        html.append("<div id=\"htmx-dt-results\">");
+        html.append("<p class=\"pf-v6-c-content--small\" style=\"margin-bottom: 0.5rem\" aria-live=\"polite\">");
+        if (total == 0) {
+            html.append("No matching users.");
+        } else {
+            html.append("Showing ").append(from + 1).append("–").append(to).append(" of ").append(total).append(" users");
+        }
+        html.append("</p>");
+
+        html.append("<table class=\"pf-v6-c-table\" role=\"grid\" aria-label=\"Users\">");
+        html.append("<thead><tr>");
+        for (int i = 0; i < DT_COLUMNS.size(); i++) {
+            String key = DT_COLUMNS.get(i)[0];
+            String label = DT_COLUMNS.get(i)[1];
+            boolean active = i == colIdx;
+            String ariaSort = active ? (ascending ? "ascending" : "descending") : "none";
+            String nextDir = active && ascending ? "desc" : "asc";
+            String icon = active ? (ascending ? "fas fa-long-arrow-alt-up" : "fas fa-long-arrow-alt-down") : "fas fa-arrows-alt-v";
+            html.append("<th scope=\"col\" class=\"pf-v6-c-table__sort").append(active ? " pf-m-selected" : "").append("\" aria-sort=\"").append(ariaSort).append("\">");
+            html.append("<button type=\"button\" class=\"pf-v6-c-table__button\"");
+            html.append(" hx-get=\"/api/htmx/data-table?col=").append(key).append("&amp;dir=").append(nextDir)
+                .append("&amp;q=").append(qEnc).append("&amp;page=").append(p).append("\"");
+            html.append(" hx-target=\"#htmx-dt-results\" hx-swap=\"outerHTML\">");
+            html.append("<div class=\"pf-v6-c-table__button-content\">");
+            html.append("<span class=\"pf-v6-c-table__text\">").append(escapeHtml(label)).append("</span>");
+            html.append("<span class=\"pf-v6-c-table__sort-indicator\"><i class=\"").append(icon).append("\" aria-hidden=\"true\"></i></span>");
+            html.append("</div></button></th>");
+        }
+        html.append("</tr></thead><tbody>");
+        if (pageRows.isEmpty()) {
+            html.append("<tr><td colspan=\"").append(DT_COLUMNS.size()).append("\" style=\"text-align: center; padding: 1.5rem\">No matching users.</td></tr>");
+        }
+        for (String[] row : pageRows) {
+            html.append("<tr>");
+            for (String cell : row) html.append("<td>").append(escapeHtml(cell)).append("</td>");
+            html.append("</tr>");
+        }
+        html.append("</tbody></table>");
+
+        if (totalPages > 1) {
+            html.append("<nav class=\"pf-v6-c-pagination pf-m-bottom\" aria-label=\"Table pagination\" style=\"margin-top: 0.5rem\">");
+            html.append("<div class=\"pf-v6-c-pagination__total-items\"><b>").append(from + 1).append("–").append(to).append("</b> of <b>").append(total).append("</b></div>");
+            html.append("<div class=\"pf-v6-c-pagination__nav\" aria-label=\"Pagination\">");
+            html.append("<div class=\"pf-v6-c-pagination__nav-control pf-m-prev\">");
+            html.append("<button class=\"pf-v6-c-button pf-m-plain\" type=\"button\" aria-label=\"Go to previous page\"").append(p <= 1 ? " disabled" : "");
+            if (p > 1) html.append(" hx-get=\"/api/htmx/data-table?col=").append(curCol).append("&amp;dir=").append(curDir).append("&amp;q=").append(qEnc).append("&amp;page=").append(p - 1).append("\" hx-target=\"#htmx-dt-results\" hx-swap=\"outerHTML\"");
+            html.append("><span class=\"pf-v6-c-button__icon\"><i class=\"fas fa-angle-left\" aria-hidden=\"true\"></i></span></button></div>");
+            html.append("<div class=\"pf-v6-c-pagination__nav-page-select\">Page <b>").append(p).append("</b> of <b>").append(totalPages).append("</b></div>");
+            html.append("<div class=\"pf-v6-c-pagination__nav-control pf-m-next\">");
+            html.append("<button class=\"pf-v6-c-button pf-m-plain\" type=\"button\" aria-label=\"Go to next page\"").append(p >= totalPages ? " disabled" : "");
+            if (p < totalPages) html.append(" hx-get=\"/api/htmx/data-table?col=").append(curCol).append("&amp;dir=").append(curDir).append("&amp;q=").append(qEnc).append("&amp;page=").append(p + 1).append("\" hx-target=\"#htmx-dt-results\" hx-swap=\"outerHTML\"");
+            html.append("><span class=\"pf-v6-c-button__icon\"><i class=\"fas fa-angle-right\" aria-hidden=\"true\"></i></span></button></div>");
+            html.append("</div></nav>");
+        }
+
+        html.append("</div>");
+        return html.toString();
+    }
+
     // ---------- Wizard step rendering ----------
 
     private static final Map<String, Integer> WIZARD_TOTAL_STEPS = Map.of(
