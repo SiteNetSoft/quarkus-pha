@@ -1,0 +1,26 @@
+{! Menu item — the common menu entry. Renders <a> when href is set, else <button>.
+   For interactive variants (checkbox / radio with select-icon / item-action /
+   drilldown) hand-write the <li> inside menu-list instead. !}
+{! Required: text.
+   Optional params:
+     href        — link target (renders <a>); without it renders a <button>.
+     external    — adds the external-link icon and target=_blank rel=noopener.
+     icon        — leading icon ("set:slug") in __item-icon.
+     description — secondary line under the text (__item-description).
+     disabled    — disables the button.
+     danger      — pf-m-danger on the list-item.
+     itemId      — id on the __item element. !}
+<li role="none" class="pf-v6-c-menu__list-item{#if danger??} pf-m-danger{/if}">
+  {#if href??}
+  <a class="pf-v6-c-menu__item" href="{href}" role="menuitem"{#if itemId??} id="{itemId}"{/if}{#if external??} target="_blank" rel="noopener noreferrer"{/if}>
+  {#else}
+  <button class="pf-v6-c-menu__item" type="button" role="menuitem"{#if itemId??} id="{itemId}"{/if}{#if disabled??} disabled{/if}>
+  {/if}
+    <span class="pf-v6-c-menu__item-main">
+      {#if icon??}<span class="pf-v6-c-menu__item-icon">{icons:svg(icon).raw}</span>{/if}
+      <span class="pf-v6-c-menu__item-text">{text}</span>
+      {#if external??}<span class="pf-v6-c-menu__item-external-icon">{icons:svg('fa:arrow-up-right-from-square').raw}</span>{/if}
+      {#if description??}<span class="pf-v6-c-menu__item-description">{description}</span>{/if}
+    </span>
+  {#if href??}</a>{#else}</button>{/if}
+</li>

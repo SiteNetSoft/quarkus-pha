@@ -360,9 +360,12 @@
                           Menu props
                         </h3>
                         <p class="pf-v6-c-content--p pf-m-editorial">
-                          Parameters accepted by
-                          <code class="ws-code">{|{#include components/navigation/menu ... /}|}</code>. Items live in
-                          the slot using PF subclasses.
+                          The menu is a template family: <code class="ws-code">menu</code> is the root (it owns
+                          roving-focus keyboard nav) and the structure composes from
+                          <code class="ws-code">menu-content</code> &gt; <code class="ws-code">menu-list</code> /
+                          <code class="ws-code">menu-group</code> &gt; <code class="ws-code">menu-item</code> includes.
+                          Interactive variants (checkbox, radio, item-action, drilldown) hand-write their
+                          <code class="ws-code">&lt;li&gt;</code> inside a <code class="ws-code">menu-list</code>.
                         </p>
                         <table
                           class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
@@ -383,32 +386,84 @@
                           <tbody role="rowgroup" class="pf-v6-c-table__tbody">
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
-                                >
+                                <span class="pf-v6-c-table__text"><code class="ws-code">id / attrs</code></span>
                               </td>
                               <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">Root id / raw passthrough.</span>
+                              </td>
                             </tr>
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">plain / scrollable</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Boolean</span></td>
+                              <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  ><code class="ws-code">plain</code> / <code class="ws-code">scrollable</code></span
+                                  >The matching <code class="ws-code">pf-m-*</code> modifier.</span
                                 >
                               </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">Modifier flags.</span>
+                                <span class="pf-v6-c-table__text"><code class="ws-code">modifiers</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Extra <code class="ws-code">pf-m-*</code> classes.</span
+                                >
                               </td>
                             </tr>
                             <tr class="pf-v6-c-table__tr">
                               <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">slot <code class="ws-code">content</code></span>
+                                <span class="pf-v6-c-table__text"><code class="ws-code">menu-content</code></span>
                               </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  >&lt;li class="pf-v6-c-menu__list-item"&gt; entries.</span
+                                  >Wraps the list(s); <code class="ws-code">attrs</code> for a custom max-height
+                                  var.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">menu-list</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >The role=menu ul; <code class="ws-code">ariaLabel</code>,
+                                  <code class="ws-code">noRole</code> (omit role=menu when items are not menuitems),
+                                  <code class="ws-code">attrs</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">menu-group</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Titled section: <code class="ws-code">titleText</code>,
+                                  <code class="ws-code">attrs</code>.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">menu-item</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Common item: <code class="ws-code">text</code>,
+                                  <code class="ws-code">href</code> (renders &lt;a&gt;),
+                                  <code class="ws-code">external</code>, <code class="ws-code">icon</code>,
+                                  <code class="ws-code">description</code>, <code class="ws-code">disabled</code>,
+                                  <code class="ws-code">danger</code>, <code class="ws-code">itemId</code>.</span
                                 >
                               </td>
                             </tr>
