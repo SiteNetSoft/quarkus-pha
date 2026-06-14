@@ -350,9 +350,12 @@
                           Wizard props
                         </h3>
                         <p class="pf-v6-c-content--p pf-m-editorial">
-                          Parameters accepted by
-                          <code class="ws-code">{|{#include components/navigation/wizard ... /}|}</code>. The runtime
-                          template is a thin PF v6 shell; per-step content lives in the three named slots.
+                          The wizard is a template family: <code class="ws-code">wizard</code> renders the nav / main /
+                          footer scaffold (fill the <code class="ws-code">navItems</code>,
+                          <code class="ws-code">body</code>, and <code class="ws-code">footer</code> slots), and each
+                          step in the nav is a <code class="ws-code">wizard-nav-item</code> include. The Alpine step
+                          machine lives on a wrapper div; <code class="ws-code">currentExpr</code> binds the active
+                          step. Heavily custom variants (within-modal, header, expandable substeps) stay hand-rendered.
                         </p>
                         <table
                           class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
@@ -405,6 +408,36 @@
                                 <span class="pf-v6-c-table__text"
                                   >&lt;li class="pf-v6-c-wizard__nav-item"&gt; entries — flat or nested with an inner
                                   &lt;ol&gt; for substeps.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">attrs / plain / hasHeader</code></span
+                                >
+                              </td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text">String / Boolean</span>
+                              </td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Root x-data passthrough; pf-m-plain; render the wizardHeader slot.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">wizard-nav-item</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >One step: <code class="ws-code">label</code>, <code class="ws-code">current</code> /
+                                  <code class="ws-code">currentExpr</code>, <code class="ws-code">disabled</code>,
+                                  <code class="ws-code">status</code> (success|error),
+                                  <code class="ws-code">stepNum</code>, <code class="ws-code">attrs</code> (@click /
+                                  hx-*).</span
                                 >
                               </td>
                             </tr>

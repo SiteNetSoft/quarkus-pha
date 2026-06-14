@@ -1,17 +1,26 @@
-{! Wizard — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the wizard.
-                                          navLabel (optional) !} {! Slots: navItems, body, footer !}
-<div class="pf-v6-c-wizard"{#if id??} id="{id}"{/if}>
+{! Wizard — PatternFly v6. The root renders the nav / main / footer scaffold;
+   fill the navItems (wizard-nav-item includes), body, and footer slots. !}
+{! Optional params:
+     id, attrs — root id / raw passthrough (e.g. an Alpine step machine).
+     navLabel  — aria-label on the step nav (default "Steps").
+     plain     — pf-m-plain (no nav border / chrome).
+     hasHeader — render the __header region with the wizardHeader slot. !}
+{! Slots: wizardHeader (optional), navItems, body, footer. !}
+<div class="pf-v6-c-wizard{#if plain??} pf-m-plain{/if}"{#if id??} id="{id}"{/if}{#if attrs??} {attrs.raw}{/if}>
+  {#if hasHeader??}
+  <div class="pf-v6-c-wizard__header">{#let id=null attrs=null}{#insert wizardHeader}{/insert}{/let}</div>
+  {/if}
   <div class="pf-v6-c-wizard__outer-wrap">
     <div class="pf-v6-c-wizard__inner-wrap">
       <nav class="pf-v6-c-wizard__nav" aria-label="{#if navLabel??}{navLabel}{#else}Steps{/if}">
         <ol class="pf-v6-c-wizard__nav-list">
-          {#insert navItems}{/insert}
+          {#let id=null attrs=null}{#insert navItems}{/insert}{/let}
         </ol>
       </nav>
       <div class="pf-v6-c-wizard__main">
-        <div class="pf-v6-c-wizard__main-body">{#insert body}{/insert}</div>
+        <div class="pf-v6-c-wizard__main-body">{#let id=null attrs=null}{#insert body}{/insert}{/let}</div>
       </div>
     </div>
-    <footer class="pf-v6-c-wizard__footer">{#insert footer}{/insert}</footer>
+    <footer class="pf-v6-c-wizard__footer">{#let id=null attrs=null}{#insert footer}{/insert}{/let}</footer>
   </div>
 </div>
