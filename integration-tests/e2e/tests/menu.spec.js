@@ -77,7 +77,7 @@ test.describe("Menu", () => {
     });
 
     test("separated items include a divider", async ({ page }) => {
-      await expect(page.locator("#mn-separated .pf-v6-c-divider")).toBeAttached();
+      await expect(page.locator("#mn-separated .pf-v6-c-divider").first()).toBeAttached();
     });
   });
 
