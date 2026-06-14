@@ -256,9 +256,9 @@ inlining `style="…"` on each fragment.
   - [x] Time picker (https://www.patternfly.org/components/date-and-time/time-picker)
 - [x] Data list (https://www.patternfly.org/components/data-list)
 - [x] Dual list selector (https://www.patternfly.org/components/dual-list-selector)
-- [ ] Compass (https://www.patternfly.org/components/compass)
-- [ ] Hero (https://www.patternfly.org/components/hero)
-- [ ] Input group (https://www.patternfly.org/components/input-group)
+- [x] Compass (https://www.patternfly.org/components/compass)
+- [x] Hero (https://www.patternfly.org/components/hero)
+- [x] Input group (https://www.patternfly.org/components/input-group)
 - [x] Topology
   - [x] Custom nodes (https://www.patternfly.org/topology/custom-nodes)
   - [x] Custom edges (https://www.patternfly.org/topology/custom-edges)
