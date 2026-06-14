@@ -1,18 +1,19 @@
-<div x-data="{ step: 1, mode: 'quick' }">
+<div x-data="{ step: 1, mode: 'quick', custom: false }">
 {#include components/navigation/wizard id="wiz-progressive-steps"}
 {#navItems}
 {#include components/navigation/wizard-nav-item label="Setup mode" currentExpr="step === 1" attrs='@click="step = 1"' /}
+{#include components/navigation/wizard-nav-item label="Custom configuration" currentExpr="step === 2" liAttrs='x-show="custom"' attrs='@click="step = 2"' /}
 {#include components/navigation/wizard-nav-item label="Review" currentExpr="step === 3" attrs='@click="step = 3"' /}
 {/navItems}
 {#body}
 <div x-show="step === 1">
   <h2 class="pf-v6-c-content--h2">Setup mode</h2>
   <div class="pf-v6-c-radio">
-    <input class="pf-v6-c-radio__input" type="radio" id="wiz-prog-quick" name="wiz-prog-mode" value="quick" x-model="mode" />
+    <input class="pf-v6-c-radio__input" type="radio" id="wiz-prog-quick" name="wiz-prog-mode" value="quick" x-model="mode" @change="custom = false" />
     <label class="pf-v6-c-radio__label" for="wiz-prog-quick">Quick setup</label>
   </div>
   <div class="pf-v6-c-radio">
-    <input class="pf-v6-c-radio__input" type="radio" id="wiz-prog-custom" name="wiz-prog-mode" value="custom" x-model="mode" />
+    <input class="pf-v6-c-radio__input" type="radio" id="wiz-prog-custom" name="wiz-prog-mode" value="custom" x-model="mode" @change="custom = true" />
     <label class="pf-v6-c-radio__label" for="wiz-prog-custom">Custom setup (adds a step)</label>
   </div>
 </div>
