@@ -1,21 +1,9 @@
-<div class="pf-v6-c-menu" id="mn-links" style="max-width: 260px">
-  <div class="pf-v6-c-menu__content">
-    <ul class="pf-v6-c-menu__list" role="menu">
-      <li role="none" class="pf-v6-c-menu__list-item">
-        <a class="pf-v6-c-menu__item" href="#" role="menuitem" target="_blank" rel="noopener noreferrer">
-          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Link 1</span><span class="pf-v6-c-menu__item-external-icon">{icons:svg('fa:arrow-up-right-from-square').raw}</span></span>
-        </a>
-      </li>
-      <li role="none" class="pf-v6-c-menu__list-item">
-        <a class="pf-v6-c-menu__item" href="#" role="menuitem" target="_blank" rel="noopener noreferrer">
-          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Link 2</span><span class="pf-v6-c-menu__item-external-icon">{icons:svg('fa:arrow-up-right-from-square').raw}</span></span>
-        </a>
-      </li>
-      <li role="none" class="pf-v6-c-menu__list-item pf-m-aria-disabled">
-        <a class="pf-v6-c-menu__item pf-m-disabled" href="#" role="menuitem" aria-disabled="true" tabindex="-1">
-          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Link 3</span></span>
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+{#include components/navigation/menu id="mn-links" attrs='style="max-width: 220px"'}
+{#include components/navigation/menu-content}
+{#include components/navigation/menu-list}
+{#include components/navigation/menu-item text="Link 1" href="#" external=true /}
+{#include components/navigation/menu-item text="Link 2" href="#" external=true /}
+{#include components/navigation/menu-item text="Link 3" href="#" external=true /}
+{/include}
+{/include}
+{/include}

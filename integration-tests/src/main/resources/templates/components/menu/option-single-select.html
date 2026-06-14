@@ -1,32 +1,32 @@
 <div x-data="{ selected: 'opt1' }">
-<div class="pf-v6-c-menu" id="mn-option-single-select" style="max-width: 260px">
-  <div class="pf-v6-c-menu__content">
-    <ul class="pf-v6-c-menu__list" role="menu">
-      <li role="none" class="pf-v6-c-menu__list-item">
-        <button class="pf-v6-c-menu__item" type="button" role="menuitemradio" :class="{ 'pf-m-selected': selected === 'opt1' }" aria-checked="false" :aria-checked="(selected === 'opt1').toString()" @click="selected = 'opt1'">
-          <span class="pf-v6-c-menu__item-main">
-            <span class="pf-v6-c-menu__item-text">Option 1</span>
-            <span class="pf-v6-c-menu__item-select-icon" x-show="selected === 'opt1'">{icons:svg('fa:check').raw}</span>
-          </span>
-        </button>
-      </li>
-      <li role="none" class="pf-v6-c-menu__list-item">
-        <button class="pf-v6-c-menu__item" type="button" role="menuitemradio" :class="{ 'pf-m-selected': selected === 'opt2' }" aria-checked="false" :aria-checked="(selected === 'opt2').toString()" @click="selected = 'opt2'">
-          <span class="pf-v6-c-menu__item-main">
-            <span class="pf-v6-c-menu__item-text">Option 2</span>
-            <span class="pf-v6-c-menu__item-select-icon" x-show="selected === 'opt2'">{icons:svg('fa:check').raw}</span>
-          </span>
-        </button>
-      </li>
-      <li role="none" class="pf-v6-c-menu__list-item">
-        <button class="pf-v6-c-menu__item" type="button" role="menuitemradio" :class="{ 'pf-m-selected': selected === 'opt3' }" aria-checked="false" :aria-checked="(selected === 'opt3').toString()" @click="selected = 'opt3'">
-          <span class="pf-v6-c-menu__item-main">
-            <span class="pf-v6-c-menu__item-text">Option 3</span>
-            <span class="pf-v6-c-menu__item-select-icon" x-show="selected === 'opt3'">{icons:svg('fa:check').raw}</span>
-          </span>
-        </button>
-      </li>
-    </ul>
-  </div>
-</div>
+{#include components/navigation/menu id="mn-option-single-select" attrs='style="max-width: 260px"'}
+{#include components/navigation/menu-content}
+{#include components/navigation/menu-list}
+<li role="none" class="pf-v6-c-menu__list-item">
+  <button class="pf-v6-c-menu__item" type="button" role="menuitemradio" :class="{ 'pf-m-selected': selected === 'opt1' }" aria-checked="false" :aria-checked="(selected === 'opt1').toString()" @click="selected = 'opt1'">
+    <span class="pf-v6-c-menu__item-main">
+      <span class="pf-v6-c-menu__item-text">Option 1</span>
+      <span class="pf-v6-c-menu__item-select-icon" x-show="selected === 'opt1'">{icons:svg('fa:check').raw}</span>
+    </span>
+  </button>
+</li>
+<li role="none" class="pf-v6-c-menu__list-item">
+  <button class="pf-v6-c-menu__item" type="button" role="menuitemradio" :class="{ 'pf-m-selected': selected === 'opt2' }" aria-checked="false" :aria-checked="(selected === 'opt2').toString()" @click="selected = 'opt2'">
+    <span class="pf-v6-c-menu__item-main">
+      <span class="pf-v6-c-menu__item-text">Option 2</span>
+      <span class="pf-v6-c-menu__item-select-icon" x-show="selected === 'opt2'">{icons:svg('fa:check').raw}</span>
+    </span>
+  </button>
+</li>
+<li role="none" class="pf-v6-c-menu__list-item">
+  <button class="pf-v6-c-menu__item" type="button" role="menuitemradio" :class="{ 'pf-m-selected': selected === 'opt3' }" aria-checked="false" :aria-checked="(selected === 'opt3').toString()" @click="selected = 'opt3'">
+    <span class="pf-v6-c-menu__item-main">
+      <span class="pf-v6-c-menu__item-text">Option 3</span>
+      <span class="pf-v6-c-menu__item-select-icon" x-show="selected === 'opt3'">{icons:svg('fa:check').raw}</span>
+    </span>
+  </button>
+</li>
+{/include}
+{/include}
+{/include}
 </div>

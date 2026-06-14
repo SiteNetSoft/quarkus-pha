@@ -1,0 +1,7 @@
+{! Menu group — a titled section grouping a menu-list. Main-block content (a menu-list). !} {! Optional: titleText —
+rendered in __group-title. !}
+<section class="pf-v6-c-menu__group"{#if attrs??} {attrs.raw}{/if}>
+  {#if titleText??}
+  <h4 class="pf-v6-c-menu__group-title">{titleText}</h4>
+  {/if} {#insert /}
+</section>

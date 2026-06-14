@@ -1,32 +1,32 @@
-<div x-data="{ selected: ['opt1'] }">
-<div class="pf-v6-c-menu" id="mn-option-multi-select" style="max-width: 260px">
-  <div class="pf-v6-c-menu__content">
-    <ul class="pf-v6-c-menu__list" role="menu">
-      <li role="none" class="pf-v6-c-menu__list-item">
-        <button class="pf-v6-c-menu__item" type="button" role="menuitemcheckbox" :class="{ 'pf-m-selected': selected.indexOf('opt1') !== -1 }" aria-checked="false" :aria-checked="(selected.indexOf('opt1') !== -1).toString()" @click="selected.indexOf('opt1') !== -1 ? selected = selected.filter(function (v) { return v !== 'opt1'; }) : selected.push('opt1')">
-          <span class="pf-v6-c-menu__item-main">
-            <span class="pf-v6-c-menu__item-text">Option 1</span>
-            <span class="pf-v6-c-menu__item-select-icon" x-show="selected.indexOf('opt1') !== -1">{icons:svg('fa:check').raw}</span>
-          </span>
-        </button>
-      </li>
-      <li role="none" class="pf-v6-c-menu__list-item">
-        <button class="pf-v6-c-menu__item" type="button" role="menuitemcheckbox" :class="{ 'pf-m-selected': selected.indexOf('opt2') !== -1 }" aria-checked="false" :aria-checked="(selected.indexOf('opt2') !== -1).toString()" @click="selected.indexOf('opt2') !== -1 ? selected = selected.filter(function (v) { return v !== 'opt2'; }) : selected.push('opt2')">
-          <span class="pf-v6-c-menu__item-main">
-            <span class="pf-v6-c-menu__item-text">Option 2</span>
-            <span class="pf-v6-c-menu__item-select-icon" x-show="selected.indexOf('opt2') !== -1">{icons:svg('fa:check').raw}</span>
-          </span>
-        </button>
-      </li>
-      <li role="none" class="pf-v6-c-menu__list-item">
-        <button class="pf-v6-c-menu__item" type="button" role="menuitemcheckbox" :class="{ 'pf-m-selected': selected.indexOf('opt3') !== -1 }" aria-checked="false" :aria-checked="(selected.indexOf('opt3') !== -1).toString()" @click="selected.indexOf('opt3') !== -1 ? selected = selected.filter(function (v) { return v !== 'opt3'; }) : selected.push('opt3')">
-          <span class="pf-v6-c-menu__item-main">
-            <span class="pf-v6-c-menu__item-text">Option 3</span>
-            <span class="pf-v6-c-menu__item-select-icon" x-show="selected.indexOf('opt3') !== -1">{icons:svg('fa:check').raw}</span>
-          </span>
-        </button>
-      </li>
-    </ul>
-  </div>
-</div>
+<div x-data="{ sel: ['opt1'] }">
+{#include components/navigation/menu id="mn-option-multi-select" attrs='style="max-width: 260px"'}
+{#include components/navigation/menu-content}
+{#include components/navigation/menu-list}
+<li role="none" class="pf-v6-c-menu__list-item">
+  <button class="pf-v6-c-menu__item" type="button" role="menuitemcheckbox" :class="{ 'pf-m-selected': sel.includes('opt1') }" aria-checked="false" :aria-checked="(sel.includes('opt1')).toString()" @click="sel.includes('opt1') ? sel = sel.filter(x => x !== 'opt1') : sel.push('opt1')">
+    <span class="pf-v6-c-menu__item-main">
+      <span class="pf-v6-c-menu__item-text">Option 1</span>
+      <span class="pf-v6-c-menu__item-select-icon" x-show="sel.includes('opt1')">{icons:svg('fa:check').raw}</span>
+    </span>
+  </button>
+</li>
+<li role="none" class="pf-v6-c-menu__list-item">
+  <button class="pf-v6-c-menu__item" type="button" role="menuitemcheckbox" :class="{ 'pf-m-selected': sel.includes('opt2') }" aria-checked="false" :aria-checked="(sel.includes('opt2')).toString()" @click="sel.includes('opt2') ? sel = sel.filter(x => x !== 'opt2') : sel.push('opt2')">
+    <span class="pf-v6-c-menu__item-main">
+      <span class="pf-v6-c-menu__item-text">Option 2</span>
+      <span class="pf-v6-c-menu__item-select-icon" x-show="sel.includes('opt2')">{icons:svg('fa:check').raw}</span>
+    </span>
+  </button>
+</li>
+<li role="none" class="pf-v6-c-menu__list-item">
+  <button class="pf-v6-c-menu__item" type="button" role="menuitemcheckbox" :class="{ 'pf-m-selected': sel.includes('opt3') }" aria-checked="false" :aria-checked="(sel.includes('opt3')).toString()" @click="sel.includes('opt3') ? sel = sel.filter(x => x !== 'opt3') : sel.push('opt3')">
+    <span class="pf-v6-c-menu__item-main">
+      <span class="pf-v6-c-menu__item-text">Option 3</span>
+      <span class="pf-v6-c-menu__item-select-icon" x-show="sel.includes('opt3')">{icons:svg('fa:check').raw}</span>
+    </span>
+  </button>
+</li>
+{/include}
+{/include}
+{/include}
 </div>

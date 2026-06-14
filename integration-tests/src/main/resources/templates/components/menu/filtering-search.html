@@ -1,4 +1,7 @@
-<div class="pf-v6-c-menu" id="mn-filtering-search" style="max-width: 260px" x-data="{ q: '' }">
+{! Live filter — the search input is a __search region (no family sub-template); items
+   x-show on the query. Root x-data is single-quoted, so it lives on a wrapper div. !}
+<div x-data="{ q: '' }">
+  {#include components/navigation/menu id="mn-filtering-search" attrs='style="max-width: 260px"'}
   <div class="pf-v6-c-menu__search">
     <div class="pf-v6-c-text-input-group">
       <div class="pf-v6-c-text-input-group__main pf-m-icon">
@@ -10,23 +13,24 @@
     </div>
   </div>
   <hr class="pf-v6-c-divider" />
-  <div class="pf-v6-c-menu__content">
-    <ul class="pf-v6-c-menu__list" role="menu">
-      <li role="none" class="pf-v6-c-menu__list-item" x-show="'Action 1'.toLowerCase().indexOf(q.toLowerCase()) !== -1">
-        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
-          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Action 1</span></span>
-        </button>
-      </li>
-      <li role="none" class="pf-v6-c-menu__list-item" x-show="'Action 2'.toLowerCase().indexOf(q.toLowerCase()) !== -1">
-        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
-          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Action 2</span></span>
-        </button>
-      </li>
-      <li role="none" class="pf-v6-c-menu__list-item" x-show="'Action 3'.toLowerCase().indexOf(q.toLowerCase()) !== -1">
-        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
-          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Action 3</span></span>
-        </button>
-      </li>
-    </ul>
-  </div>
+  {#include components/navigation/menu-content}
+  {#include components/navigation/menu-list}
+    <li role="none" class="pf-v6-c-menu__list-item" x-show="'Action 1'.toLowerCase().indexOf(q.toLowerCase()) !== -1">
+      <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+        <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Action 1</span></span>
+      </button>
+    </li>
+    <li role="none" class="pf-v6-c-menu__list-item" x-show="'Action 2'.toLowerCase().indexOf(q.toLowerCase()) !== -1">
+      <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+        <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Action 2</span></span>
+      </button>
+    </li>
+    <li role="none" class="pf-v6-c-menu__list-item" x-show="'Action 3'.toLowerCase().indexOf(q.toLowerCase()) !== -1">
+      <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+        <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Action 3</span></span>
+      </button>
+    </li>
+  {/include}
+  {/include}
+  {/include}
 </div>
