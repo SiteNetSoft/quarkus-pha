@@ -6,11 +6,12 @@
      disabled     — boolean; disables the step button.
      status       — success | error; renders the status icon.
      stepNum      — number badge (toggle-num) shown before the label.
+     liAttrs      — raw passthrough on the <li> (e.g. x-show for conditional steps).
      attrs        — raw passthrough on the button (e.g. @click="step = 2" or hx-get=...). !}
-<li class="pf-v6-c-wizard__nav-item">
+<li class="pf-v6-c-wizard__nav-item"{#if liAttrs??} {liAttrs.raw}{/if}>
   <button
     type="button"
-    class="pf-v6-c-wizard__nav-link{#if current??} pf-m-current{/if}{#if status??} pf-m-{status}{/if}"
+    class="pf-v6-c-wizard__nav-link{#if current??} pf-m-current{/if}{#if status??} pf-m-{status}{/if}{#if disabled??} pf-m-disabled{/if}"
     {#if current??}aria-current="step"{/if}
     {#if currentExpr??}:class="{ 'pf-m-current': {currentExpr} }" :aria-current="({currentExpr}) ? 'step' : false"{/if}
     {#if disabled??}disabled{/if}
