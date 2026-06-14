@@ -11,6 +11,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 import io.quarkus.qute.Engine;
 import io.smallrye.mutiny.Multi;
@@ -288,6 +289,26 @@ public class HtmxRoutes {
         }
         html.append("</tbody></table>");
         return html.toString();
+    }
+
+    // ---------- Toasts (HX-Trigger) + confirm ----------
+
+    @POST
+    @Path("/toast/save")
+    @Produces(MediaType.TEXT_HTML)
+    public Response toastSave() {
+        return Response.ok("")
+            .header("HX-Trigger", "{\"pha:toast\": {\"variant\": \"success\", \"title\": \"Changes saved successfully.\"}}")
+            .build();
+    }
+
+    @POST
+    @Path("/toast/delete")
+    @Produces(MediaType.TEXT_HTML)
+    public Response toastDelete() {
+        return Response.ok("")
+            .header("HX-Trigger", "{\"pha:toast\": {\"variant\": \"danger\", \"title\": \"Item deleted.\"}}")
+            .build();
     }
 
     // ---------- Inline edit (click-to-edit, server-driven) ----------
