@@ -61,7 +61,7 @@ const COMPONENT_PATHS = [
   "/components/hint", "/components/icon", "/components/infinite-scroll",
   "/components/inline-edit", "/components/input-group", "/components/jump-links",
   "/components/label", "/components/lazy-modal", "/components/list",
-  "/components/form-validation", "/components/sortable-table", "/components/live-search", "/components/login-page", "/components/map",
+  "/components/form-validation", "/components/sortable-table", "/components/click-to-edit", "/components/live-search", "/components/login-page", "/components/map",
   "/components/masthead", "/components/menu", "/components/menu-toggle",
   "/components/modal", "/components/multiple-file-upload", "/components/navigation",
   "/components/notification-badge", "/components/notification-drawer", "/components/number-input",
