@@ -1,0 +1,25 @@
+{! Wizard nav step — one entry in the step nav. !}
+{! Required: label.
+   Optional params:
+     current      — boolean; static pf-m-current + aria-current=step.
+     currentExpr  — Alpine expression for the current step (binds pf-m-current + aria-current).
+     disabled     — boolean; disables the step button.
+     status       — success | error; renders the status icon.
+     stepNum      — number badge (toggle-num) shown before the label.
+     attrs        — raw passthrough on the button (e.g. @click="step = 2" or hx-get=...). !}
+<li class="pf-v6-c-wizard__nav-item">
+  <button
+    type="button"
+    class="pf-v6-c-wizard__nav-link{#if current??} pf-m-current{/if}{#if status??} pf-m-{status}{/if}"
+    {#if current??}aria-current="step"{/if}
+    {#if currentExpr??}:class="{ 'pf-m-current': {currentExpr} }" :aria-current="({currentExpr}) ? 'step' : false"{/if}
+    {#if disabled??}disabled{/if}
+    {#if attrs??}{attrs.raw}{/if}
+  >
+    <span class="pf-v6-c-wizard__nav-link-main">
+      {#if stepNum??}<span class="pf-v6-c-wizard__toggle-num">{stepNum}</span>{/if}
+      <span class="pf-v6-c-wizard__nav-link-text">{label}</span>
+      {#if status??}<span class="pf-v6-c-wizard__nav-link-status-icon">{#if status is 'success'}{icons:svg('fa:circle-check').raw}{#else}{icons:svg('fa:circle-exclamation').raw}{/if}</span>{/if}
+    </span>
+  </button>
+</li>

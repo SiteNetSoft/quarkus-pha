@@ -1,28 +1,11 @@
 <div x-data="{ step: 1 }">
-  <div class="pf-v6-c-wizard" id="wiz-custom-nav-item">
-    <div class="pf-v6-c-wizard__outer-wrap">
-      <div class="pf-v6-c-wizard__inner-wrap">
-        <nav class="pf-v6-c-wizard__nav" aria-label="Steps">
-          <ol class="pf-v6-c-wizard__nav-list">
-<li class="pf-v6-c-wizard__nav-item">
-  <button type="button" class="pf-v6-c-wizard__nav-link" :class="{ 'pf-m-current': step === 1 }" :aria-current="step === 1 ? 'step' : false" @click="step = 1">
-    <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__toggle-num">1</span> <span class="pf-v6-c-wizard__nav-link-text">Information</span></span>
-  </button>
-</li>
-<li class="pf-v6-c-wizard__nav-item">
-  <button type="button" class="pf-v6-c-wizard__nav-link" :class="{ 'pf-m-current': step === 2 }" :aria-current="step === 2 ? 'step' : false" @click="step = 2">
-    <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__toggle-num">2</span> <span class="pf-v6-c-wizard__nav-link-text">Configuration</span></span>
-  </button>
-</li>
-<li class="pf-v6-c-wizard__nav-item">
-  <button type="button" class="pf-v6-c-wizard__nav-link" :class="{ 'pf-m-current': step === 3 }" :aria-current="step === 3 ? 'step' : false" @click="step = 3">
-    <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__toggle-num">3</span> <span class="pf-v6-c-wizard__nav-link-text">Review</span></span>
-  </button>
-</li>
-          </ol>
-        </nav>
-        <div class="pf-v6-c-wizard__main">
-          <div class="pf-v6-c-wizard__main-body">
+{#include components/navigation/wizard id="wiz-custom-nav-item"}
+{#navItems}
+{#include components/navigation/wizard-nav-item label="Information" currentExpr="step === 1" stepNum="1" attrs='@click="step = 1"' /}
+{#include components/navigation/wizard-nav-item label="Configuration" currentExpr="step === 2" stepNum="2" attrs='@click="step = 2"' /}
+{#include components/navigation/wizard-nav-item label="Review" currentExpr="step === 3" stepNum="3" attrs='@click="step = 3"' /}
+{/navItems}
+{#body}
 <div x-show="step === 1" x-cloak>
   <h2 class="pf-v6-c-content--h2">Information</h2>
   <p>Information content.</p>
@@ -35,10 +18,8 @@
   <h2 class="pf-v6-c-content--h2">Review</h2>
   <p>Review content.</p>
 </div>
-          </div>
-        </div>
-      </div>
-      <footer class="pf-v6-c-wizard__footer">
+{/body}
+{#footer}
 <button type="button" class="pf-v6-c-button pf-m-primary" :disabled="step === 3" @click="step = Math.min(3, step + 1)">
   <span class="pf-v6-c-button__text">Next</span>
 </button>
@@ -48,7 +29,6 @@
 <button type="button" class="pf-v6-c-button pf-m-link">
   <span class="pf-v6-c-button__text">Cancel</span>
 </button>
-      </footer>
-    </div>
-  </div>
+{/footer}
+{/include}
 </div>
