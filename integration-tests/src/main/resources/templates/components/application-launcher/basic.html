@@ -3,7 +3,7 @@
   <button class="pf-v6-c-menu-toggle pf-m-plain" type="button" :class="open ? 'pf-m-expanded' : ''" :aria-expanded="open" @click="open = !open" aria-label="Application launcher" id="al-basic-toggle">
     <span class="pf-v6-c-menu-toggle__icon">{icons:svg('fa:table-cells-large').raw}</span>
   </button>
-  <div class="pf-v6-c-menu pf-m-plain" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; right: 0; z-index: 200; padding: 1rem; min-width: 18rem">
+  <div class="pf-v6-c-menu pf-m-plain" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; left: 0; z-index: 200; padding: 1rem; min-width: 18rem">
     <div class="pf-v6-c-menu__content">
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem">
         <a href="#" class="pf-v6-c-menu__item" style="text-align: center; padding: 1rem 0.5rem; text-decoration: none">

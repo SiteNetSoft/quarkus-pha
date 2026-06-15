@@ -52,6 +52,42 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-sections" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With sections</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#text-items" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Text items</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-external" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With external links</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#align-right" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Aligned right</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -106,6 +142,34 @@
                         Waffle-icon toggle reveals a 3×2 grid of app shortcuts.
                       </p>
                       {/description} {#content}{#include components/application-launcher/basic /}{/content} {/include}
+                      {#include partials/example-card title="With sections" slug="with-sections"
+                      component="application-launcher"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Group the grid into labelled sections (e.g. Favorites and All applications) separated by a
+                        divider.
+                      </p>
+                      {/description} {#content}{#include components/application-launcher/with-sections /}{/content}
+                      {/include} {#include partials/example-card title="Text items" slug="text-items"
+                      component="application-launcher"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The simple variant: a vertical list of text items with leading icons instead of an icon grid.
+                      </p>
+                      {/description} {#content}{#include components/application-launcher/text-items /}{/content}
+                      {/include} {#include partials/example-card title="With external links" slug="with-external"
+                      component="application-launcher"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Items that open external apps in a new tab, marked with an external-link icon and a
+                        screen-reader hint.
+                      </p>
+                      {/description} {#content}{#include components/application-launcher/with-external /}{/content}
+                      {/include} {#include partials/example-card title="Aligned right" slug="align-right"
+                      component="application-launcher"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Masthead placement: the toggle sits at the far right, so the menu anchors right and opens back
+                        into view.
+                      </p>
+                      {/description} {#content}{#include components/application-launcher/align-right /}{/content}
+                      {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"
