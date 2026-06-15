@@ -84,6 +84,15 @@
                                     ></span
                                   >
                                 </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#auto-generated" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Auto-generated</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
                               </ul>
                             </li>
                             <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -169,6 +178,16 @@
                           menu. Useful when a level has many sibling pages users might want to jump between.
                         </p>
                         {/description} {#content}{#include components/breadcrumb/with-dropdown /}{/content} {/include}
+                        {#include partials/example-card title="Auto-generated" slug="auto-generated"
+                        component="breadcrumb"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Pass a <code class="ws-code">crumbs</code> list instead of writing items by hand. The route
+                          builds the trail server-side from the request path with
+                          <code class="ws-code">BreadcrumbTrail.fromPath("/components/breadcrumb")</code> — a "Home"
+                          root, a link per ancestor segment, and the last segment marked current. Unmapped segments are
+                          humanized; pass a label map for custom names.
+                        </p>
+                        {/description} {#content}{#include components/breadcrumb/auto-generated /}{/content} {/include}
 
                         <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                           <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
@@ -198,9 +217,13 @@
                           </p>
                           <p class="pf-v6-c-content--p pf-m-editorial">
                             <strong>Required:</strong> <code class="ws-code">id</code>. <strong>Optional:</strong>
-                            <code class="ws-code">ariaLabel</code> (default <code class="ws-code">"Breadcrumb"</code>).
-                            <strong>Slot:</strong> <code class="ws-code">items</code> — one or more
-                            <code class="ws-code">breadcrumb-item</code> includes.
+                            <code class="ws-code">ariaLabel</code> (default <code class="ws-code">"Breadcrumb"</code>),
+                            <code class="ws-code">crumbs</code> (a server-built list for auto mode — each entry has
+                            <code class="ws-code">text</code>, optional <code class="ws-code">href</code>, and
+                            <code class="ws-code">current=true</code> on the active crumb only). When
+                            <code class="ws-code">crumbs</code> is set the <code class="ws-code">items</code> slot is
+                            ignored. <strong>Slot:</strong> <code class="ws-code">items</code> — one or more
+                            <code class="ws-code">breadcrumb-item</code> includes (manual mode).
                           </p>
                         </div>
 
