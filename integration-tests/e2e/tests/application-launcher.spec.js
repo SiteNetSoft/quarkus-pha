@@ -16,8 +16,10 @@ test.describe("Application Launcher", () => {
     await expect(page.locator("#usage")).toBeVisible();
   });
 
-  test("basic example section heading is visible", async ({ page }) => {
-    await expect(page.locator("#basic")).toBeVisible();
+  test("all example section anchors are present", async ({ page }) => {
+    for (const id of ["basic", "with-sections", "text-items", "with-external", "align-right"]) {
+      await expect(page.locator(`#${id}`)).toBeVisible();
+    }
   });
 
   test.describe("Basic variant", () => {
@@ -44,6 +46,56 @@ test.describe("Application Launcher", () => {
       await page.locator(`${card} #al-basic-toggle`).click();
       await expect(page.locator(`${card} .pf-v6-c-menu__item`)).toHaveCount(6);
     });
+
+    test("opened menu is within the viewport (regression: was anchored off-screen)", async ({ page }) => {
+      await page.setViewportSize({ width: 1200, height: 900 });
+      await page.locator(`${card} #al-basic-toggle`).click();
+      const menu = page.locator(`${card} .pf-v6-c-menu`);
+      await expect(menu).toBeVisible();
+      const box = await menu.boundingBox();
+      expect(box.x).toBeGreaterThanOrEqual(0);
+      expect(box.x + box.width).toBeLessThanOrEqual(1200);
+    });
+  });
+
+  test.describe("Additional variants", () => {
+    const toggles = {
+      "with-sections": "#al-sections-toggle",
+      "text-items": "#al-text-toggle",
+      "with-external": "#al-external-toggle",
+      "align-right": "#al-right-toggle",
+    };
+
+    for (const [slug, toggle] of Object.entries(toggles)) {
+      test(`${slug}: toggle opens its menu`, async ({ page }) => {
+        const card = `[data-rendered-href="/components/application-launcher/${slug}"]`;
+        await expect(page.locator(`${card} ${toggle}`)).toBeVisible();
+        await expect(page.locator(`${card} .pf-v6-c-menu`)).not.toBeVisible();
+        await page.locator(`${card} ${toggle}`).click();
+        await expect(page.locator(`${card} .pf-v6-c-menu`)).toBeVisible();
+      });
+    }
+
+    test("with-sections has two group titles (Favorites + All applications)", async ({ page }) => {
+      const card = '[data-rendered-href="/components/application-launcher/with-sections"]';
+      await page.locator(`${card} #al-sections-toggle`).click();
+      await expect(page.locator(`${card} .pf-v6-c-menu__group-title`)).toHaveCount(2);
+    });
+
+    test("with-external items open in a new tab", async ({ page }) => {
+      const card = '[data-rendered-href="/components/application-launcher/with-external"]';
+      await page.locator(`${card} #al-external-toggle`).click();
+      const links = page.locator(`${card} .pf-v6-c-menu__item`);
+      await expect(links.first()).toHaveAttribute("target", "_blank");
+    });
+  });
+
+  test("all standalone example routes return 200", async ({ page }) => {
+    for (const slug of ["basic", "with-sections", "text-items", "with-external", "align-right"]) {
+      const res = await page.goto(`/components/application-launcher/${slug}`);
+      expect(res.status()).toBe(200);
+      await expect(page.locator(".pf-v6-c-menu-toggle").first()).toBeVisible();
+    }
   });
 
   test.describe("Per-example code viewer", () => {
