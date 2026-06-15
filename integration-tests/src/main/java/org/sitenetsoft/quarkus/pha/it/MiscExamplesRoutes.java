@@ -151,6 +151,7 @@ public class MiscExamplesRoutes {
                                                "multi-typeahead-creatable", "multi-typeahead-checkbox", "view-more",
                                                "footer"));
         m.put("application-launcher",  Set.of("basic", "with-sections", "text-items", "with-external", "align-right"));
+        m.put("infinite-scroll",       Set.of("basic"));
         m.put("options-menu",          Set.of("basic"));
         m.put("custom-menus",          Set.of("basic"));
         m.put("password-generator",    Set.of("basic"));
@@ -170,7 +171,7 @@ public class MiscExamplesRoutes {
         "masthead|sidebar|data-list|inline-edit|simple-file-upload|overflow-menu|drag-and-drop|login-page|" +
         "notification-drawer|drawer|toolbar|modal|multiple-file-upload|date-picker|menu|menu-toggle|" +
         "notification-badge|page|context-selector|dual-list-selector|calendar-month|dropdown|select|" +
-        "application-launcher|options-menu|custom-menus|password-generator|password-strength|" +
+        "application-launcher|infinite-scroll|options-menu|custom-menus|password-generator|password-strength|" +
         "date-and-time-picker|time-picker|navigation|tile|hero|input-group|compass";
 
     @Inject

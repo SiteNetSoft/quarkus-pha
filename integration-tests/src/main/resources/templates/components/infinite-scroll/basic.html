@@ -1,0 +1,13 @@
+{! Infinite scroll — HTMX auto-loads the next page when the sentinel scrolls into view. !}
+{! Backend contract: GET {loadUrl} returns the next batch of rows followed by the next sentinel !}
+{! (pointing at the following page), or an empty body once the list is exhausted. !}
+<div
+  class="pf-v6-c-data-list"
+  id="scroll-list"
+  tabindex="0"
+  role="region"
+  aria-label="Infinitely-loading list"
+  style="max-height: 400px; overflow-y: auto"
+>
+  {#include components/htmx/infinite-scroll id="scroll-sentinel-0" loadUrl="/api/htmx/items?page=0" root="#scroll-list" /}
+</div>

@@ -149,12 +149,16 @@ public class HtmxRoutes {
             html.append("</div></div></div>\n");
         }
 
-        // Append next sentinel if more items exist
+        // Append next sentinel if more items exist. Trigger is scoped to the demo's scroll
+        // container (#scroll-list) via IntersectionObserver — "revealed" keys off window
+        // scroll and never fires for a sentinel inside a bounded overflow:auto container.
+        // This endpoint exclusively backs that container, so the selector is hardcoded here;
+        // it must match root="#scroll-list" on the initial sentinel (components/infinite-scroll/basic).
         int nextPage = page + 1;
         if (nextPage * PAGE_SIZE < ITEMS.size()) {
             html.append("<div class=\"pha-c-htmx-sentinel\" id=\"scroll-sentinel-").append(nextPage).append("\"");
             html.append(" hx-get=\"/api/htmx/items?page=").append(nextPage).append("\"");
-            html.append(" hx-trigger=\"revealed\" hx-swap=\"afterend\"></div>\n");
+            html.append(" hx-trigger=\"intersect once root:#scroll-list\" hx-swap=\"afterend\"></div>\n");
         }
 
         return html.toString();
