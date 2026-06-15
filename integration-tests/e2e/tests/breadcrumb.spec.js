@@ -12,6 +12,7 @@ test.describe("Breadcrumb", () => {
       "without-home-link",
       "with-heading",
       "with-dropdown",
+      "auto-generated",
       "documentation",
       "props-breadcrumb",
       "props-item",
@@ -60,8 +61,25 @@ test.describe("Breadcrumb", () => {
     await expect(toggle).toHaveAttribute("aria-expanded", "false");
   });
 
+  test("auto-generated: trail is built server-side from the route path", async ({ page }) => {
+    const nav = page.locator("#breadcrumb-auto");
+    await expect(nav).toHaveAttribute("aria-label", "Auto-generated breadcrumb");
+    // /components/breadcrumb → Home, Components, Breadcrumb
+    const items = nav.locator(".pf-v6-c-breadcrumb__item");
+    await expect(items).toHaveCount(3);
+    await expect(items.nth(0)).toContainText("Home");
+    await expect(items.nth(1)).toContainText("Components");
+    await expect(items.nth(2)).toContainText("Breadcrumb");
+    // Ancestors are links; the last crumb is current and not a link.
+    await expect(nav.locator("a.pf-v6-c-breadcrumb__link")).toHaveCount(2);
+    const current = nav.locator(".pf-v6-c-breadcrumb__link.pf-m-current");
+    await expect(current).toHaveCount(1);
+    await expect(current).toHaveText("Breadcrumb");
+    await expect(current).toHaveAttribute("aria-current", "page");
+  });
+
   test("standalone example routes render", async ({ page }) => {
-    for (const slug of ["basic", "without-home-link", "with-heading", "with-dropdown"]) {
+    for (const slug of ["basic", "without-home-link", "with-heading", "with-dropdown", "auto-generated"]) {
       const res = await page.goto(`/components/breadcrumb/${slug}`);
       expect(res.status()).toBe(200);
       await expect(page.locator(".pf-v6-c-breadcrumb")).toBeVisible();

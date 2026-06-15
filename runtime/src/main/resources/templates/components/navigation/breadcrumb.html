@@ -7,15 +7,25 @@
 {!   id        (optional) — DOM id on the nav element; omit unless something else   !}
 {!                          references the breadcrumb.                              !}
 {!   ariaLabel (optional) — accessible label (default: "Breadcrumb")                !}
+{!   crumbs    (optional) — a list for AUTO mode. Each entry exposes:               !}
+{!                          .text     — the crumb label (required)                  !}
+{!                          .href     — link target; omit/null for a plain crumb    !}
+{!                          .current  — true ONLY on the active crumb; null on the  !}
+{!                                      rest (a non-null false would still mark it;  !}
+{!                                      Qute maps are strict, so keep the key with   !}
+{!                                      a null value rather than omitting it).       !}
+{!                          When crumbs is set the items slot is ignored — build    !}
+{!                          the list server-side, e.g. from a route hierarchy.      !}
 {!                                                                                  !}
 {! Slot:                                                                            !}
-{!   {#items}  — one or more {#include components/navigation/breadcrumb-item ... /} !}
-{!              calls. Slot name is "items" (not "content") to avoid colliding      !}
-{!              with the example-card partial's "content" slot — Qute resolves      !}
-{!              {#insert name} against the nearest enclosing {#name} in the call    !}
-{!              stack, and reusing "content" recurses infinitely.                   !}
+{!   {#items}  — manual mode: one or more                                          !}
+{!              {#include components/navigation/breadcrumb-item ... /} calls. Slot  !}
+{!              name is "items" (not "content") to avoid colliding with the         !}
+{!              example-card partial's "content" slot — Qute resolves {#insert      !}
+{!              name} against the nearest enclosing {#name} in the call stack, and  !}
+{!              reusing "content" recurses infinitely.                              !}
 <nav class="pf-v6-c-breadcrumb"{#if id??} id="{id}"{/if} aria-label="{#if ariaLabel??}{ariaLabel}{#else}Breadcrumb{/if}">
   <ol class="pf-v6-c-breadcrumb__list">
-    {#insert items}{/insert}
+    {#if crumbs??}{#for c in crumbs}{#include components/navigation/breadcrumb-item href=c.href current=c.current}{c.text}{/include}{/for}{#else}{#insert items}{/insert}{/if}
   </ol>
 </nav>

@@ -33,7 +33,8 @@ public class BreadcrumbExamplesRoutes {
         "basic",
         "without-home-link",
         "with-heading",
-        "with-dropdown"
+        "with-dropdown",
+        "auto-generated"
     );
 
     @Inject
@@ -72,7 +73,11 @@ public class BreadcrumbExamplesRoutes {
         if (inner == null) {
             throw new NotFoundException("Template not found for: " + example);
         }
-        String rendered = inner.instance().render();
+        var innerInstance = inner.instance();
+        if ("auto-generated".equals(example)) {
+            innerInstance.data("autoTrail", BreadcrumbTrail.fromPath("/components/breadcrumb"));
+        }
+        String rendered = innerInstance.render();
         return standalonePage.instance()
             .data("example", example)
             .data("content", rendered);

@@ -533,7 +533,8 @@ public class ComponentRoutes {
     @Path("/breadcrumb")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance breadcrumb() {
-        return breadcrumbPage.instance();
+        return breadcrumbPage.instance()
+            .data("autoTrail", BreadcrumbTrail.fromPath("/components/breadcrumb"));
     }
 
     @GET
