@@ -3,15 +3,18 @@ package org.sitenetsoft.quarkus.pha.it;
 import io.quarkus.qute.Location;
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
+import io.quarkus.qute.i18n.MessageBundles;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 @Path("/components")
@@ -437,6 +440,10 @@ public class ComponentRoutes {
     @Location("components/skeleton-loading")
     @Inject
     Template skeletonLoadingPage;
+
+    @Location("components/i18n-demo")
+    @Inject
+    Template i18nPage;
 
     @Location("components/live-search")
     @Inject
@@ -1228,6 +1235,19 @@ public class ComponentRoutes {
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance skeletonLoading() {
         return skeletonLoadingPage.instance();
+    }
+
+    @GET
+    @Path("/i18n")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance i18n(@QueryParam("lang") String lang) {
+        // The Qute message bundle resolves {msg:key} against the locale set on the
+        // instance; a real app would derive it from the user, a cookie, or Accept-Language.
+        TemplateInstance instance = i18nPage.instance();
+        if (lang != null && !lang.isBlank()) {
+            instance.setAttribute(MessageBundles.ATTRIBUTE_LOCALE, Locale.forLanguageTag(lang));
+        }
+        return instance;
     }
 
     @GET

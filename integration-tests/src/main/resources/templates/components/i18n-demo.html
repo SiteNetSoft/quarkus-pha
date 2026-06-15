@@ -1,0 +1,46 @@
+{#include layouts/base} {#title}{msg:i18n_title}{/title} {#body}
+<a href="#i18n-main" class="pf-v6-c-skip-to-content pf-v6-c-button pf-m-primary" id="i18n-skip"
+  >{msg:skip_to_content}</a
+>
+<div style="padding: 2rem" id="i18n-main">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block"
+    >&larr; Back to showcase</a
+  >
+
+  <h1>{msg:i18n_title}</h1>
+  <p>{msg:i18n_intro}</p>
+
+  {! Language switcher — each link re-requests the page with a ?lang param that QueryLocaleResolver reads to pick the
+  message bundle. !}
+  <div class="pf-v6-c-toggle-group" role="group" aria-label="{msg:i18n_language_label}" style="margin-top: 1rem">
+    <div class="pf-v6-c-toggle-group__item">
+      <a href="?lang=en" class="pf-v6-c-toggle-group__button" id="i18n-lang-en">
+        <span class="pf-v6-c-toggle-group__text">{msg:i18n_lang_english}</span>
+      </a>
+    </div>
+    <div class="pf-v6-c-toggle-group__item">
+      <a href="?lang=fr" class="pf-v6-c-toggle-group__button" id="i18n-lang-fr">
+        <span class="pf-v6-c-toggle-group__text">{msg:i18n_lang_french}</span>
+      </a>
+    </div>
+  </div>
+
+  <p style="margin-top: 1rem" id="i18n-current">{msg:i18n_current_language}</p>
+
+  <section style="margin-top: 2rem">
+    <div class="pf-v6-c-card" style="max-width: 28rem">
+      <div class="pf-v6-c-card__title">
+        <h2 class="pf-v6-c-card__title-text" id="i18n-greeting-heading">{msg:i18n_profile_heading}</h2>
+      </div>
+      <div class="pf-v6-c-card__body" id="i18n-greeting">{msg:i18n_greeting}</div>
+      <div class="pf-v6-c-card__footer">
+        <div class="pf-v6-l-flex pf-m-space-items-sm">
+          {#include components/actions/button variant="primary"
+          id="i18n-save"}{#content}{msg:i18n_save}{/content}{/include} {#include components/actions/button
+          variant="link" id="i18n-cancel"}{#content}{msg:i18n_cancel}{/content}{/include}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{/body} {/include}
