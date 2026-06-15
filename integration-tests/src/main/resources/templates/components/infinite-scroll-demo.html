@@ -1,0 +1,250 @@
+{#include layouts/base} {#title}Infinite scroll{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js"></script>
+<link rel="stylesheet" href="/web/css/components/htmx.css" />
+{/head} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary">
+          <span class="pf-v6-c-button__text">Skip to content</span>
+        </a>
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            <div class="pf-v6-c-page__main-group">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-c-content pf-m-editorial">
+                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Infinite scroll</h1>
+                    <p>
+                      HTMX-powered auto-loading. A zero-height <code class="ws-code">sentinel</code> sits at the end of
+                      the list with <code class="ws-code">hx-trigger="revealed"</code>; when the user scrolls it into
+                      view, HTMX fetches the next page from the server and swaps the rows in ahead of it. No JavaScript,
+                      no client-side paging state — the server hands back the next batch plus the next sentinel each
+                      time.
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+                <div class="pf-v6-c-page__main-body">
+                  <div class="pf-v6-u-h-100">
+                    <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                      <nav
+                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
+                        aria-label="Table of contents"
+                      >
+                        <div class="pf-v6-c-jump-links__main">
+                          <ul class="pf-v6-c-jump-links__list" role="list">
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="pf-v6-c-jump-links__item ws-toc-item">
+                              <span class="pf-v6-c-jump-links__link"
+                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
+                                  ><span class="pf-v6-c-button__text"
+                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
+                                  ></a
+                                ></span
+                              >
+                              <ul class="pf-v6-c-jump-links__list" role="list">
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#props-infinite-scroll" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Sentinel props</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </nav>
+
+                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
+                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                          <div>
+                            <h2
+                              id="examples"
+                              tabindex="-1"
+                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                            >
+                              Examples
+                            </h2>
+                          </div>
+                        </div>
+
+                        {#include partials/example-card title="Basic" slug="basic" component="infinite-scroll"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          A fixed-height, scrollable <code class="ws-code">data-list</code>. The sentinel fires once on
+                          load to fetch the first page, then again each time it is scrolled back into view — appending
+                          rows from <code class="ws-code">/api/htmx/items</code> until the list is exhausted.
+                        </p>
+                        {/description} {#content}{#include components/infinite-scroll/basic /}{/content} {/include}
+
+                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+                            <div>
+                              <h2
+                                id="documentation"
+                                tabindex="-1"
+                                class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+                              >
+                                Documentation
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3
+                            id="props-infinite-scroll"
+                            tabindex="-1"
+                            class="pf-v6-c-content--h3 pf-m-editorial ws-heading"
+                          >
+                            Sentinel props
+                          </h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            Parameters accepted by
+                            <code class="ws-code">{|{#include components/htmx/infinite-scroll loadUrl="..." /}|}</code>.
+                          </p>
+                          <table
+                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+                            role="grid"
+                            aria-label="Infinite scroll sentinel props"
+                          >
+                            <thead class="pf-v6-c-table__thead">
+                              <tr class="pf-v6-c-table__tr">
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+                                <th scope="col" class="pf-v6-c-table__th">Default</th>
+                                <th scope="col" class="pf-v6-c-table__th">Description</th>
+                              </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">loadUrl</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String (URL)</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text">— (required)</span>
+                                </td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >Endpoint HTMX <code class="ws-code">hx-get</code>s when the sentinel is revealed.
+                                    The response must contain the next batch of markup followed by a fresh sentinel
+                                    pointing at the page after it, or an empty body once there is nothing left to
+                                    load.</span
+                                  >
+                                </td>
+                              </tr>
+                              <tr class="pf-v6-c-table__tr">
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
+                                </td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+                                <td class="pf-v6-c-table__td">
+                                  <span class="pf-v6-c-table__text"
+                                    >DOM id on the sentinel element. Optional — set it only when something else needs to
+                                    reference the sentinel (tests, scripting).</span
+                                  >
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            The sentinel ships <code class="ws-code">hx-trigger="revealed"</code> and
+                            <code class="ws-code">hx-swap="afterend"</code> baked in, so loaded rows land before the
+                            sentinel and the sentinel moves down with them. A
+                            <code class="ws-code">htmx-indicator</code>
+                            spinner inside the sentinel shows while the request is in flight.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>The server owns the paging.</strong> Each response carries the next sentinel with
+                            the incremented page baked into its <code class="ws-code">loadUrl</code>. The client keeps
+                            no page counter — it just reveals sentinels and swaps in whatever the server returns. End
+                            the chain by returning an empty body (or markup without a trailing sentinel) when the data
+                            runs out.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Reveal, not scroll-position math.</strong>
+                            <code class="ws-code">hx-trigger="revealed"</code> fires when the sentinel enters the
+                            viewport, so it works the same whether the list lives in a fixed-height scroll container (as
+                            here) or flows down the whole page. For a scroll container, give it an explicit
+                            <code class="ws-code">max-height</code> and <code class="ws-code">overflow-y: auto</code>.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Accessibility.</strong> Wrap the list in a labelled
+                            <code class="ws-code">role="region"</code> with <code class="ws-code">tabindex="0"</code> so
+                            keyboard users can scroll it, and give the in-flight spinner an
+                            <code class="ws-code">aria-label</code> (e.g. "Loading more items"). Consider a "Load more"
+                            button fallback (see <a href="/components/click-to-load">click to load</a>) for users who
+                            can't trigger reveal-on-scroll.
+                          </p>
+                          <p class="pf-v6-c-content--p pf-m-editorial">
+                            <strong>Not a PatternFly component.</strong> This is an HTMX interaction pattern, not a PF
+                            element — it composes a plain <code class="ws-code">data-list</code> with a server-driven
+                            sentinel. PatternFly has no infinite-scroll primitive of its own.
+                          </p>
+                        </div>
+
+                        <div class="pf-v6-l-stack__item">
+                          <br /><a
+                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/htmx/infinite-scroll.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Edit infinite-scroll.html on GitHub</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/body} {/include}

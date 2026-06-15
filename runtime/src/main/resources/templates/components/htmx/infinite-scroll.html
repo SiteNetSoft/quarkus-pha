@@ -1,5 +1,5 @@
-{! Infinite Scroll — HTMX sentinel-based auto-loading !} {! Required: loadUrl !} {! Optional: id — DOM id on the sentinel; omit unless something else references it. !}
-<div class="pha-c-htmx-sentinel"{#if id??} id="{id}"{/if} hx-get="{loadUrl}" hx-trigger="revealed" hx-swap="afterend">
+{! Infinite Scroll — HTMX sentinel-based auto-loading !} {! Required: loadUrl !} {! Optional: id — DOM id on the sentinel; omit unless something else references it. !} {! Optional: root — CSS selector of the scroll container. When set, the sentinel triggers via an IntersectionObserver scoped to that container (intersect once root:{root}) — the reliable trigger for a bounded overflow:auto list. Omit for page/window scroll, which uses hx-trigger="revealed". !}
+<div class="pha-c-htmx-sentinel"{#if id??} id="{id}"{/if} hx-get="{loadUrl}" hx-trigger="{#if root??}intersect once root:{root}{#else}revealed{/if}" hx-swap="afterend">
   <span class="htmx-indicator" aria-hidden="true">
     <span class="pf-v6-c-spinner pf-m-md" role="progressbar" aria-label="Loading more items">
       <span class="pf-v6-c-spinner__clipper"></span>
