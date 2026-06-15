@@ -1,2 +1,7 @@
-{! Fixed: each expanded body is capped at 9.375rem with overflow scroll. Multiple items expand independently. !}
-{#include components/data-display/accordion id="acc-fixed" fixed=true items=sampleItems /}
+{! Fixed: each expanded body is capped at 9.375rem with overflow scroll. Multiple items expand independently. Composed from accordion-item. !}
+{#include components/data-display/accordion id="acc-fixed"}{#items}
+{#include components/data-display/accordion-item itemId="acc-fixed-item-1" title="Item one" fixed=true}This is the expandable content for item one. It provides details and additional information.{/include}
+{#include components/data-display/accordion-item itemId="acc-fixed-item-2" title="Item two" fixed=true}This is the expandable content for item two. It provides details and additional information.{/include}
+{#include components/data-display/accordion-item itemId="acc-fixed-item-3" title="Item three" fixed=true}This is the expandable content for item three. It provides details and additional information.{/include}
+{#include components/data-display/accordion-item itemId="acc-fixed-item-4" title="Item four" fixed=true}This is the expandable content for item four. It provides details and additional information.{/include}
+{/items}{/include}

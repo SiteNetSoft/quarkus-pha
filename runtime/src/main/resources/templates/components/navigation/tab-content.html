@@ -1,0 +1,13 @@
+{! Tab content panel — PatternFly v6 !}
+{!                                                                                  !}
+{! The panel paired with a tab. Shown when the host x-data's `active` equals this   !}
+{! panel's tabKey. The body is the include's main block.                           !}
+{!                                                                                  !}
+{! Parameters:                                                                      !}
+{!   tabKey  (required) — matches the paired tab; compared against `active`.        !}
+{!   padding (optional) — add pf-m-padding to the content body.                     !}
+{!   cloak   (optional) — add x-cloak (use on non-default panels to avoid a flash   !}
+{!                        of the hidden panel before Alpine initializes).          !}
+<section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === '{tabKey}'"{#if cloak??} x-cloak{/if}>
+  <div class="pf-v6-c-tab-content__body{#if padding??} pf-m-padding{/if}">{#insert/}</div>
+</section>

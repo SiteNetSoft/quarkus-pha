@@ -469,19 +469,8 @@ public class ComponentRoutes {
     @Path("/accordion")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance accordion() {
-        List<Map<String, Object>> sampleItems = List.of(
-            Map.of("title", "Item one",
-                   "content", "This is the expandable content for item one. It provides details and additional information."),
-            Map.of("title", "Item two",
-                   "content", "This is the expandable content for item two. It provides details and additional information."),
-            Map.of("title", "Item three",
-                   "content", "This is the expandable content for item three. It provides details and additional information."),
-            Map.of("title", "Item four",
-                   "content", "This is the expandable content for item four. It provides details and additional information.")
-        );
-
-        return accordionPage
-            .data("sampleItems", sampleItems);
+        // Examples now compose accordion-item includes directly — no server data needed.
+        return accordionPage.instance();
     }
 
     @GET

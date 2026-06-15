@@ -15,8 +15,6 @@ import jakarta.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 @Path("/components")
@@ -28,17 +26,6 @@ public class AccordionExamplesRoutes {
         "fixed-multiple",
         "bordered",
         "toggle-start"
-    );
-
-    static final List<Map<String, Object>> SAMPLE_ITEMS = List.of(
-        Map.of("title", "Item one",
-               "content", "This is the expandable content for item one. It provides details and additional information."),
-        Map.of("title", "Item two",
-               "content", "This is the expandable content for item two. It provides details and additional information."),
-        Map.of("title", "Item three",
-               "content", "This is the expandable content for item three. It provides details and additional information."),
-        Map.of("title", "Item four",
-               "content", "This is the expandable content for item four. It provides details and additional information.")
     );
 
     @Inject
@@ -77,9 +64,7 @@ public class AccordionExamplesRoutes {
         if (inner == null) {
             throw new NotFoundException("Template not found for: " + example);
         }
-        String rendered = inner.instance()
-            .data("sampleItems", SAMPLE_ITEMS)
-            .render();
+        String rendered = inner.instance().render();
         return standalonePage.instance()
             .data("example", example)
             .data("content", rendered);
