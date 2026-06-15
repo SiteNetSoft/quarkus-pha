@@ -449,7 +449,7 @@ public class ComponentRoutes {
     @Inject
     Template liveSearchPage;
 
-    @Location("components/infinite-scroll")
+    @Location("components/infinite-scroll-demo")
     @Inject
     Template infiniteScrollPage;
 
