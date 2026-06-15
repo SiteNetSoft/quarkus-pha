@@ -83,7 +83,7 @@ const COMPONENT_PATHS = [
   "/components/label",
   "/components/lazy-modal",
   "/components/list",
-  "/components/form-validation", "/components/sortable-table", "/components/click-to-edit", "/components/toast-confirm", "/components/skeleton-loading", "/components/live-search",
+  "/components/form-validation", "/components/sortable-table", "/components/click-to-edit", "/components/toast-confirm", "/components/skeleton-loading", "/components/i18n", "/components/live-search",
   "/components/login-page",
   "/components/map",
   "/components/masthead",
