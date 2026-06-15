@@ -220,6 +220,27 @@ public class HtmxRoutes {
              + "</div>";
     }
 
+    // ---------- Skeleton loading (HTMX swap placeholder) ----------
+
+    @GET
+    @Path("/skeleton-content")
+    @Produces(MediaType.TEXT_HTML)
+    public String skeletonContent() {
+        try {
+            Thread.sleep(700); // simulate a slow upstream so the skeleton is visible
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        return "<div id=\"skeleton-loaded\">"
+             + "<h3 class=\"pf-v6-c-content--h3\" style=\"margin: 0\">Ada Lovelace</h3>"
+             + "<p class=\"pf-v6-c-content--small\">Staff engineer &middot; Platform team</p>"
+             + "<dl class=\"pf-v6-c-description-list pf-m-horizontal\" style=\"margin-top: 1rem\">"
+             + dlRow("Location", "Cambridge, UK")
+             + dlRow("Joined", "2019")
+             + dlRow("Status", "Active")
+             + "</dl></div>";
+    }
+
     private static final List<String[]> TABLE_ROWS = List.of(
         new String[]{"Alice Chen",   "Admin",  "us-east-1"},
         new String[]{"Bob Johnson",  "Viewer", "eu-west-1"},

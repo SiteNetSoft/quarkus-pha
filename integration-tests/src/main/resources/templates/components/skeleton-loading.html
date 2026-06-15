@@ -1,0 +1,55 @@
+{#include layouts/base} {#title}Skeleton loading{/title} {#head}
+<link rel="stylesheet" href="/web/css/components/htmx.css" />
+{/head} {#body}
+<div style="padding: 2rem">
+  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block"
+    >&larr; Back to showcase</a
+  >
+
+  <h1>Skeleton loading</h1>
+  <p>
+    A server-driven loading state. While an HTMX request is in flight, a skeleton placeholder is shown via
+    <code>hx-indicator</code> — its shape mirrors the real content so there is no spinner and no layout shift when the
+    response swaps in. The skeleton lives entirely in server-rendered markup; HTMX only toggles a class.
+  </p>
+
+  <section style="margin-top: 2rem">
+    <h2 id="skeleton-loading-heading">On-demand profile</h2>
+    <p>
+      Click to fetch a profile card. The server is artificially slow (~700&nbsp;ms) so the skeleton is visible before
+      the real content replaces it.
+    </p>
+
+    <div class="pf-v6-c-card" style="max-width: 28rem; margin-top: 1rem">
+      <div class="pf-v6-c-card__body">
+        {! Skeleton placeholder — display:none until HTMX adds .htmx-request via hx-indicator. !}
+        <div id="skeleton-placeholder" class="pha-c-skeleton-loading">
+          {#include components/feedback/skeleton width="50" fontSize="2xl" screenreaderText="Loading profile" /}
+          <div style="margin-top: 0.75rem">{#include components/feedback/skeleton width="33" fontSize="sm" /}</div>
+          <div style="margin-top: 1.25rem">{#include components/feedback/skeleton fontSize="sm" /}</div>
+          <div style="margin-top: 0.5rem">{#include components/feedback/skeleton width="75" fontSize="sm" /}</div>
+          <div style="margin-top: 0.5rem">{#include components/feedback/skeleton width="66" fontSize="sm" /}</div>
+        </div>
+
+        {! Swap target — replaced with the server-rendered profile. !}
+        <div id="skeleton-result">
+          <p class="pf-v6-c-content--small">No profile loaded yet.</p>
+        </div>
+      </div>
+    </div>
+
+    <button
+      class="pf-v6-c-button pf-m-primary"
+      type="button"
+      id="skeleton-load-btn"
+      hx-get="/api/htmx/skeleton-content"
+      hx-target="#skeleton-result"
+      hx-swap="innerHTML"
+      hx-indicator="#skeleton-placeholder"
+      style="margin-top: 1rem"
+    >
+      <span class="pf-v6-c-button__text">Load profile</span>
+    </button>
+  </section>
+</div>
+{/body} {/include}
