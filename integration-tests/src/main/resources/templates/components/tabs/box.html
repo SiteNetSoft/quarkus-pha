@@ -1,31 +1,9 @@
-{! box=true emits pf-m-box — bordered, paper-card appearance. !}
+{! box=true emits pf-m-box — bordered, paper-card appearance. Composed from tab + tab-content. !}
 <div x-data="{ active: 'b1' }">
   {#include components/navigation/tabs id="tabs-box" box=true}{#content}
-  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'b1' ? 'pf-m-current' : ''">
-    <button
-      class="pf-v6-c-tabs__link"
-      type="button"
-      role="tab"
-      :aria-selected="active === 'b1'"
-      :tabindex="active === 'b1' ? 0 : -1"
-      @click="active = 'b1'"
-    >
-      <span class="pf-v6-c-tabs__item-text">Tab 1</span>
-    </button>
-  </li>
-  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'b2' ? 'pf-m-current' : ''">
-    <button
-      class="pf-v6-c-tabs__link"
-      type="button"
-      role="tab"
-      :aria-selected="active === 'b2'"
-      :tabindex="active === 'b2' ? 0 : -1"
-      @click="active = 'b2'"
-    >
-      <span class="pf-v6-c-tabs__item-text">Tab 2</span>
-    </button>
-  </li>
+  {#include components/navigation/tab tabKey="b1" text="Tab 1" /}
+  {#include components/navigation/tab tabKey="b2" text="Tab 2" /}
   {/content}{/include}
-  <div role="tabpanel" x-show="active === 'b1'" style="padding: 1rem">Box variant — content one.</div>
-  <div role="tabpanel" x-show="active === 'b2'" x-cloak style="padding: 1rem">Box variant — content two.</div>
+  {#include components/navigation/tab-content tabKey="b1" padding=true}Box variant — content one.{/include}
+  {#include components/navigation/tab-content tabKey="b2" padding=true cloak=true}Box variant — content two.{/include}
 </div>

@@ -1,28 +1,11 @@
+{! Box + secondary nested tabs. Composed from tab + tab-content. !}
 <div x-data="{ active: 's1' }">
   {#include components/navigation/tabs id="tabs-box-secondary" box=true secondary=true ariaLabel="Box secondary tabs"}{#content}
-  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 's1' ? 'pf-m-current' : ''">
-    <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 's1'" :tabindex="active === 's1' ? 0 : -1" @click="active = 's1'">
-      <span class="pf-v6-c-tabs__item-text">Users</span>
-    </button>
-  </li>
-  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 's2' ? 'pf-m-current' : ''">
-    <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 's2'" :tabindex="active === 's2' ? 0 : -1" @click="active = 's2'">
-      <span class="pf-v6-c-tabs__item-text">Containers</span>
-    </button>
-  </li>
-  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 's3' ? 'pf-m-current' : ''">
-    <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 's3'" :tabindex="active === 's3' ? 0 : -1" @click="active = 's3'">
-      <span class="pf-v6-c-tabs__item-text">Database</span>
-    </button>
-  </li>
+  {#include components/navigation/tab tabKey="s1" text="Users" /}
+  {#include components/navigation/tab tabKey="s2" text="Containers" /}
+  {#include components/navigation/tab tabKey="s3" text="Database" /}
   {/content}{/include}
-  <section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === 's1'" x-cloak>
-    <div class="pf-v6-c-tab-content__body">Users panel content</div>
-  </section>
-  <section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === 's2'" x-cloak>
-    <div class="pf-v6-c-tab-content__body">Containers panel content</div>
-  </section>
-  <section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === 's3'" x-cloak>
-    <div class="pf-v6-c-tab-content__body">Database panel content</div>
-  </section>
+  {#include components/navigation/tab-content tabKey="s1"}Users panel content{/include}
+  {#include components/navigation/tab-content tabKey="s2" cloak=true}Containers panel content{/include}
+  {#include components/navigation/tab-content tabKey="s3" cloak=true}Database panel content{/include}
 </div>
