@@ -1,28 +1,11 @@
+{! Adjusted inset — pf-m-inset-lg. Composed from tab + tab-content. !}
 <div x-data="{ active: 'i1' }">
   {#include components/navigation/tabs id="tabs-inset" inset="lg" ariaLabel="Tabs with adjusted inset"}{#content}
-  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'i1' ? 'pf-m-current' : ''">
-    <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'i1'" :tabindex="active === 'i1' ? 0 : -1" @click="active = 'i1'">
-      <span class="pf-v6-c-tabs__item-text">Users</span>
-    </button>
-  </li>
-  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'i2' ? 'pf-m-current' : ''">
-    <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'i2'" :tabindex="active === 'i2' ? 0 : -1" @click="active = 'i2'">
-      <span class="pf-v6-c-tabs__item-text">Containers</span>
-    </button>
-  </li>
-  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'i3' ? 'pf-m-current' : ''">
-    <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'i3'" :tabindex="active === 'i3' ? 0 : -1" @click="active = 'i3'">
-      <span class="pf-v6-c-tabs__item-text">Database</span>
-    </button>
-  </li>
+  {#include components/navigation/tab tabKey="i1" text="Users" /}
+  {#include components/navigation/tab tabKey="i2" text="Containers" /}
+  {#include components/navigation/tab tabKey="i3" text="Database" /}
   {/content}{/include}
-  <section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === 'i1'" x-cloak>
-    <div class="pf-v6-c-tab-content__body">Users panel content</div>
-  </section>
-  <section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === 'i2'" x-cloak>
-    <div class="pf-v6-c-tab-content__body">Containers panel content</div>
-  </section>
-  <section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === 'i3'" x-cloak>
-    <div class="pf-v6-c-tab-content__body">Database panel content</div>
-  </section>
+  {#include components/navigation/tab-content tabKey="i1"}Users panel content{/include}
+  {#include components/navigation/tab-content tabKey="i2" cloak=true}Containers panel content{/include}
+  {#include components/navigation/tab-content tabKey="i3" cloak=true}Database panel content{/include}
 </div>

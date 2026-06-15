@@ -1,2 +1,7 @@
-{! Default PF shape: renders as dl/dt/dd. Multiple items may be expanded simultaneously (each item self-states). !}
-{#include components/data-display/accordion id="acc-dl" definitionList=true items=sampleItems /}
+{! Default PF shape: renders as dl/dt/dd. Multiple items may be expanded simultaneously (each item self-states). Composed from accordion-item. !}
+{#include components/data-display/accordion id="acc-dl" definitionList=true}{#items}
+{#include components/data-display/accordion-item definitionList=true itemId="acc-dl-item-1" title="Item one"}This is the expandable content for item one. It provides details and additional information.{/include}
+{#include components/data-display/accordion-item definitionList=true itemId="acc-dl-item-2" title="Item two"}This is the expandable content for item two. It provides details and additional information.{/include}
+{#include components/data-display/accordion-item definitionList=true itemId="acc-dl-item-3" title="Item three"}This is the expandable content for item three. It provides details and additional information.{/include}
+{#include components/data-display/accordion-item definitionList=true itemId="acc-dl-item-4" title="Item four"}This is the expandable content for item four. It provides details and additional information.{/include}
+{/items}{/include}

@@ -1,0 +1,55 @@
+{! Accordion item — PatternFly v6 !}
+{!                                                                                  !}
+{! One item in an accordion. Owns its own Alpine "expanded" state (independent,    !}
+{! multi-expand by default) — single-expand needs shared state and stays raw.      !}
+{!                                                                                  !}
+{! Parameters:                                                                      !}
+{!   itemId        (required) — derives the toggle/content ids ({itemId}-toggle /   !}
+{!                              {itemId}-content) for aria-controls + labelledby.   !}
+{!   title         (required) — toggle text.                                        !}
+{!   expanded      (optional) — start open (default false).                         !}
+{!   toggleStart   (optional) — render the icon before the text (PF "start").       !}
+{!   fixed         (optional) — cap the content height with overflow scroll.        !}
+{!   headingLevel  (optional) — h1..h6 wrapping the toggle (default h3); ignored    !}
+{!                              in definitionList mode (uses dt).                    !}
+{!   definitionList (optional) — render dt/dd for use inside a dl accordion root.   !}
+{!   isCustomContent (optional) — skip the __expandable-content-body wrapper.       !}
+{!                                                                                  !}
+{! Main block: the item's body content.                                            !}
+{#if definitionList??}
+<div class="pf-v6-c-accordion__item" x-data="{ expanded: {expanded ?: false} }" :class="{ 'pf-m-expanded': expanded }">
+  <dt>
+    <button class="pf-v6-c-accordion__toggle" id="{itemId}-toggle" aria-controls="{itemId}-content" @click="expanded = !expanded" :aria-expanded="expanded.toString()">
+      {#if toggleStart??}
+      <span class="pf-v6-c-accordion__toggle-icon"><svg viewBox="0 0 256 512" fill="currentColor" aria-hidden="true" width="1em" height="1em"><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg></span>
+      <span class="pf-v6-c-accordion__toggle-text">{title}</span>
+      {#else}
+      <span class="pf-v6-c-accordion__toggle-text">{title}</span>
+      <span class="pf-v6-c-accordion__toggle-icon"><svg viewBox="0 0 256 512" fill="currentColor" aria-hidden="true" width="1em" height="1em"><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg></span>
+      {/if}
+    </button>
+  </dt>
+  <dd class="pf-v6-c-accordion__expandable-content{#if fixed??} pf-m-fixed{/if}" id="{itemId}-content" aria-labelledby="{itemId}-toggle" :class="{ 'pf-m-expanded': expanded }">
+    {#if isCustomContent??}{#insert/}{#else}<div class="pf-v6-c-accordion__expandable-content-body">{#insert/}</div>{/if}
+  </dd>
+</div>
+{#else}
+{#let h=(headingLevel ?: 'h3')}
+<div class="pf-v6-c-accordion__item" x-data="{ expanded: {expanded ?: false} }" :class="{ 'pf-m-expanded': expanded }">
+  <{h}>
+    <button class="pf-v6-c-accordion__toggle" id="{itemId}-toggle" aria-controls="{itemId}-content" @click="expanded = !expanded" :aria-expanded="expanded.toString()">
+      {#if toggleStart??}
+      <span class="pf-v6-c-accordion__toggle-icon"><svg viewBox="0 0 256 512" fill="currentColor" aria-hidden="true" width="1em" height="1em"><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg></span>
+      <span class="pf-v6-c-accordion__toggle-text">{title}</span>
+      {#else}
+      <span class="pf-v6-c-accordion__toggle-text">{title}</span>
+      <span class="pf-v6-c-accordion__toggle-icon"><svg viewBox="0 0 256 512" fill="currentColor" aria-hidden="true" width="1em" height="1em"><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg></span>
+      {/if}
+    </button>
+  </{h}>
+  <div class="pf-v6-c-accordion__expandable-content{#if fixed??} pf-m-fixed{/if}" id="{itemId}-content" role="region" aria-labelledby="{itemId}-toggle" :class="{ 'pf-m-expanded': expanded }">
+    {#if isCustomContent??}{#insert/}{#else}<div class="pf-v6-c-accordion__expandable-content-body">{#insert/}</div>{/if}
+  </div>
+</div>
+{/let}
+{/if}

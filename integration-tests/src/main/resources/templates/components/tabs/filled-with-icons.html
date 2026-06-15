@@ -1,28 +1,11 @@
+{! Filled tabs (pf-m-fill) with leading icons. Composed from tab + tab-content. !}
 <div x-data="{ active: 'f1' }">
   {#include components/navigation/tabs id="tabs-filled-with-icons" filled=true ariaLabel="Filled tabs with icons"}{#content}
-  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'f1' ? 'pf-m-current' : ''">
-    <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'f1'" :tabindex="active === 'f1' ? 0 : -1" @click="active = 'f1'">
-      <span class="pf-v6-c-tabs__item-icon">{icons:svg('fa:users').raw}</span><span class="pf-v6-c-tabs__item-text">Users</span>
-    </button>
-  </li>
-  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'f2' ? 'pf-m-current' : ''">
-    <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'f2'" :tabindex="active === 'f2' ? 0 : -1" @click="active = 'f2'">
-      <span class="pf-v6-c-tabs__item-icon">{icons:svg('fa:cube').raw}</span><span class="pf-v6-c-tabs__item-text">Containers</span>
-    </button>
-  </li>
-  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'f3' ? 'pf-m-current' : ''">
-    <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 'f3'" :tabindex="active === 'f3' ? 0 : -1" @click="active = 'f3'">
-      <span class="pf-v6-c-tabs__item-icon">{icons:svg('fa:database').raw}</span><span class="pf-v6-c-tabs__item-text">Database</span>
-    </button>
-  </li>
+  {#include components/navigation/tab tabKey="f1" text="Users" icon="fa:users" /}
+  {#include components/navigation/tab tabKey="f2" text="Containers" icon="fa:cube" /}
+  {#include components/navigation/tab tabKey="f3" text="Database" icon="fa:database" /}
   {/content}{/include}
-  <section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === 'f1'" x-cloak>
-    <div class="pf-v6-c-tab-content__body">Users panel content</div>
-  </section>
-  <section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === 'f2'" x-cloak>
-    <div class="pf-v6-c-tab-content__body">Containers panel content</div>
-  </section>
-  <section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === 'f3'" x-cloak>
-    <div class="pf-v6-c-tab-content__body">Database panel content</div>
-  </section>
+  {#include components/navigation/tab-content tabKey="f1"}Users panel content{/include}
+  {#include components/navigation/tab-content tabKey="f2" cloak=true}Containers panel content{/include}
+  {#include components/navigation/tab-content tabKey="f3" cloak=true}Database panel content{/include}
 </div>

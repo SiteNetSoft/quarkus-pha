@@ -1,2 +1,7 @@
-{! Bordered: items separated by bottom borders, root has no rounded corners. !}
-{#include components/data-display/accordion id="acc-bordered" bordered=true items=sampleItems /}
+{! Bordered: items separated by bottom borders, root has no rounded corners. Composed from accordion-item. !}
+{#include components/data-display/accordion id="acc-bordered" bordered=true}{#items}
+{#include components/data-display/accordion-item itemId="acc-bordered-item-1" title="Item one"}This is the expandable content for item one. It provides details and additional information.{/include}
+{#include components/data-display/accordion-item itemId="acc-bordered-item-2" title="Item two"}This is the expandable content for item two. It provides details and additional information.{/include}
+{#include components/data-display/accordion-item itemId="acc-bordered-item-3" title="Item three"}This is the expandable content for item three. It provides details and additional information.{/include}
+{#include components/data-display/accordion-item itemId="acc-bordered-item-4" title="Item four"}This is the expandable content for item four. It provides details and additional information.{/include}
+{/items}{/include}

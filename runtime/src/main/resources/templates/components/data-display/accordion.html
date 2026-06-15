@@ -1,96 +1,26 @@
-{! Accordion — PatternFly v6 !}
-{! Required: id — derives per-item ids ({id}-item-N-toggle / -content) for aria-controls + aria-labelledby wiring.
-              items (list of {title, content, expanded?}) !}
-{! Optional: bordered, displayLg, toggleStart, fixed, definitionList, headingLevel (default h3), ariaLabel, isCustomContent !}
+{! Accordion (root) — PatternFly v6 !}
+{!                                                                                  !}
+{! Compose-by-include: render one components/data-display/accordion-item per item   !}
+{! in the {#items} slot. Each item owns its own Alpine expanded state, so multiple  !}
+{! items expand independently. Single-expand (shared state) is hand-rolled.         !}
+{!                                                                                  !}
+{! Required: id.                                                                    !}
+{! Optional: bordered, displayLg, toggleStart (root modifier — also pass            !}
+{!           toggleStart to each item so the markup reorders icon/text),            !}
+{!           definitionList (renders a <dl>; pass definitionList to each item too), !}
+{!           ariaLabel.                                                             !}
+{!                                                                                  !}
+{! Slot:                                                                            !}
+{!   {#items} — one or more accordion-item includes. Named "items" (not "content")  !}
+{!             to avoid colliding with the example-card partial's "content" slot.   !}
+{!             The root id is shadowed to null around the insert so it can't leak   !}
+{!             onto the composed items (which carry their own itemId).              !}
 {#if definitionList??}
-<dl
-  class="pf-v6-c-accordion{#if bordered??} pf-m-bordered{/if}{#if displayLg??} pf-m-display-lg{/if}{#if toggleStart??} pf-m-toggle-start{/if}"
-  id="{id}"
-  {#if ariaLabel??}aria-label="{ariaLabel}"{/if}
->
-  {#for item in items}
-  <div class="pf-v6-c-accordion__item" x-data="{ expanded: {item.expanded ?: false} }" :class="{ 'pf-m-expanded': expanded }">
-    <dt>
-      <button
-        class="pf-v6-c-accordion__toggle"
-        id="{id}-item-{item_count}-toggle"
-        aria-controls="{id}-item-{item_count}-content"
-        @click="expanded = !expanded"
-        :aria-expanded="expanded.toString()"
-      >
-        {#if toggleStart??}
-        <span class="pf-v6-c-accordion__toggle-icon">
-          <svg viewBox="0 0 256 512" fill="currentColor" aria-hidden="true" width="1em" height="1em"><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg>
-        </span>
-        <span class="pf-v6-c-accordion__toggle-text">{item.title}</span>
-        {#else}
-        <span class="pf-v6-c-accordion__toggle-text">{item.title}</span>
-        <span class="pf-v6-c-accordion__toggle-icon">
-          <svg viewBox="0 0 256 512" fill="currentColor" aria-hidden="true" width="1em" height="1em"><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg>
-        </span>
-        {/if}
-      </button>
-    </dt>
-    <dd
-      class="pf-v6-c-accordion__expandable-content{#if fixed??} pf-m-fixed{/if}"
-      id="{id}-item-{item_count}-content"
-      aria-labelledby="{id}-item-{item_count}-toggle"
-      :class="{ 'pf-m-expanded': expanded }"
-    >
-      {#if isCustomContent??}
-      {item.content.raw}
-      {#else}
-      <div class="pf-v6-c-accordion__expandable-content-body">{item.content}</div>
-      {/if}
-    </dd>
-  </div>
-  {/for}
+<dl class="pf-v6-c-accordion{#if bordered??} pf-m-bordered{/if}{#if displayLg??} pf-m-display-lg{/if}{#if toggleStart??} pf-m-toggle-start{/if}" id="{id}"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
+  {#let id=null}{#insert items}{/insert}{/let}
 </dl>
 {#else}
-{#let h=(headingLevel ?: 'h3')}
-<div
-  class="pf-v6-c-accordion{#if bordered??} pf-m-bordered{/if}{#if displayLg??} pf-m-display-lg{/if}{#if toggleStart??} pf-m-toggle-start{/if}"
-  id="{id}"
-  {#if ariaLabel??}aria-label="{ariaLabel}"{/if}
->
-  {#for item in items}
-  <div class="pf-v6-c-accordion__item" x-data="{ expanded: {item.expanded ?: false} }" :class="{ 'pf-m-expanded': expanded }">
-    <{h}>
-      <button
-        class="pf-v6-c-accordion__toggle"
-        id="{id}-item-{item_count}-toggle"
-        aria-controls="{id}-item-{item_count}-content"
-        @click="expanded = !expanded"
-        :aria-expanded="expanded.toString()"
-      >
-        {#if toggleStart??}
-        <span class="pf-v6-c-accordion__toggle-icon">
-          <svg viewBox="0 0 256 512" fill="currentColor" aria-hidden="true" width="1em" height="1em"><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg>
-        </span>
-        <span class="pf-v6-c-accordion__toggle-text">{item.title}</span>
-        {#else}
-        <span class="pf-v6-c-accordion__toggle-text">{item.title}</span>
-        <span class="pf-v6-c-accordion__toggle-icon">
-          <svg viewBox="0 0 256 512" fill="currentColor" aria-hidden="true" width="1em" height="1em"><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg>
-        </span>
-        {/if}
-      </button>
-    </{h}>
-    <div
-      class="pf-v6-c-accordion__expandable-content{#if fixed??} pf-m-fixed{/if}"
-      id="{id}-item-{item_count}-content"
-      role="region"
-      aria-labelledby="{id}-item-{item_count}-toggle"
-      :class="{ 'pf-m-expanded': expanded }"
-    >
-      {#if isCustomContent??}
-      {item.content.raw}
-      {#else}
-      <div class="pf-v6-c-accordion__expandable-content-body">{item.content}</div>
-      {/if}
-    </div>
-  </div>
-  {/for}
+<div class="pf-v6-c-accordion{#if bordered??} pf-m-bordered{/if}{#if displayLg??} pf-m-display-lg{/if}{#if toggleStart??} pf-m-toggle-start{/if}" id="{id}"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
+  {#let id=null}{#insert items}{/insert}{/let}
 </div>
-{/let}
 {/if}

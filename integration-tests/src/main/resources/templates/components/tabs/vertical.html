@@ -1,45 +1,13 @@
+{! Vertical tabs — pf-m-vertical. Composed from tab + tab-content. !}
 <div x-data="{ active: 'v1' }" style="display: flex; gap: 1rem">
   {#include components/navigation/tabs id="tabs-vertical" vertical=true}{#content}
-  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'v1' ? 'pf-m-current' : ''">
-    <button
-      class="pf-v6-c-tabs__link"
-      type="button"
-      role="tab"
-      :aria-selected="active === 'v1'"
-      :tabindex="active === 'v1' ? 0 : -1"
-      @click="active = 'v1'"
-    >
-      <span class="pf-v6-c-tabs__item-text">General</span>
-    </button>
-  </li>
-  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'v2' ? 'pf-m-current' : ''">
-    <button
-      class="pf-v6-c-tabs__link"
-      type="button"
-      role="tab"
-      :aria-selected="active === 'v2'"
-      :tabindex="active === 'v2' ? 0 : -1"
-      @click="active = 'v2'"
-    >
-      <span class="pf-v6-c-tabs__item-text">Security</span>
-    </button>
-  </li>
-  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 'v3' ? 'pf-m-current' : ''">
-    <button
-      class="pf-v6-c-tabs__link"
-      type="button"
-      role="tab"
-      :aria-selected="active === 'v3'"
-      :tabindex="active === 'v3' ? 0 : -1"
-      @click="active = 'v3'"
-    >
-      <span class="pf-v6-c-tabs__item-text">Notifications</span>
-    </button>
-  </li>
+  {#include components/navigation/tab tabKey="v1" text="General" /}
+  {#include components/navigation/tab tabKey="v2" text="Security" /}
+  {#include components/navigation/tab tabKey="v3" text="Notifications" /}
   {/content}{/include}
   <div style="flex: 1">
-    <div role="tabpanel" x-show="active === 'v1'" style="padding: 1rem">General settings.</div>
-    <div role="tabpanel" x-show="active === 'v2'" x-cloak style="padding: 1rem">Security settings.</div>
-    <div role="tabpanel" x-show="active === 'v3'" x-cloak style="padding: 1rem">Notification preferences.</div>
+    {#include components/navigation/tab-content tabKey="v1" padding=true}General settings.{/include}
+    {#include components/navigation/tab-content tabKey="v2" padding=true cloak=true}Security settings.{/include}
+    {#include components/navigation/tab-content tabKey="v3" padding=true cloak=true}Notification preferences.{/include}
   </div>
 </div>
