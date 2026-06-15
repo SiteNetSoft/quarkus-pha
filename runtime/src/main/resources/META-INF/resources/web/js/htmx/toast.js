@@ -20,8 +20,7 @@
       r.id = "pha-toast-region";
       r.className = "pf-v6-c-alert-group pf-m-toast";
       r.setAttribute("role", "list");
-      r.style.cssText =
-        "position: fixed; top: 1rem; right: 1rem; z-index: 9999; max-width: 28rem;";
+      r.style.cssText = "position: fixed; top: 1rem; right: 1rem; z-index: 9999; max-width: 28rem;";
       document.body.appendChild(r);
     }
     return r;
@@ -40,10 +39,17 @@
     var li = document.createElement("li");
     li.className = "pf-v6-c-alert-group__item";
     li.innerHTML =
-      '<div class="pf-v6-c-alert pf-m-' + variant + '" role="alert">' +
-      '<div class="pf-v6-c-alert__icon"><i class="' + (ICONS[variant] || ICONS.info) + '" aria-hidden="true"></i></div>' +
-      '<p class="pf-v6-c-alert__title"><span class="pf-v6-c-alert__screen-reader">' + variant + " alert:</span> " +
-      title + "</p>" +
+      '<div class="pf-v6-c-alert pf-m-' +
+      variant +
+      '" role="alert">' +
+      '<div class="pf-v6-c-alert__icon"><i class="' +
+      (ICONS[variant] || ICONS.info) +
+      '" aria-hidden="true"></i></div>' +
+      '<p class="pf-v6-c-alert__title"><span class="pf-v6-c-alert__screen-reader">' +
+      variant +
+      " alert:</span> " +
+      title +
+      "</p>" +
       '<div class="pf-v6-c-alert__action">' +
       '<button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close alert">' +
       '<span class="pf-v6-c-button__icon"><i class="fas fa-xmark" aria-hidden="true"></i></span></button></div></div>';
@@ -56,18 +62,19 @@
   }
 
   document.addEventListener("pha:toast", function (e) {
-    showToast(e.detail);
+    showToast(/** @type {CustomEvent} */ (e).detail);
   });
 
   // Replace window.confirm with the PF modal for opted-in elements.
   var pending = null;
   document.addEventListener("htmx:confirm", function (e) {
-    var el = e.detail.elt;
+    var detail = /** @type {CustomEvent} */ (e).detail;
+    var el = detail.elt;
     if (!el || !el.hasAttribute("data-pha-confirm")) return; // default behaviour
     e.preventDefault();
-    pending = e.detail;
+    pending = detail;
     var body = document.getElementById("pha-confirm-text");
-    if (body) body.textContent = e.detail.question || "Are you sure?";
+    if (body) body.textContent = detail.question || "Are you sure?";
     window.dispatchEvent(new CustomEvent("open-modal", { detail: "pha-confirm-modal" }));
   });
 
