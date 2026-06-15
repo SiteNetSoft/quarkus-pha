@@ -1,0 +1,45 @@
+{! Grouped launcher: a "Favorites" section and an "All applications" section, separated by a divider. !}
+<div x-data="{ open: false }" style="position: relative; display: inline-block">
+  <button class="pf-v6-c-menu-toggle pf-m-plain" type="button" :class="open ? 'pf-m-expanded' : ''" :aria-expanded="open" @click="open = !open" aria-label="Application launcher with sections" id="al-sections-toggle">
+    <span class="pf-v6-c-menu-toggle__icon">{icons:svg('fa:table-cells-large').raw}</span>
+  </button>
+  <div class="pf-v6-c-menu pf-m-plain" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; left: 0; z-index: 200; padding: 1rem; min-width: 18rem">
+    <div class="pf-v6-c-menu__content">
+      <section class="pf-v6-c-menu__group">
+        <h2 class="pf-v6-c-menu__group-title" style="padding: 0 0 0.5rem">Favorites</h2>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem">
+          <a href="#" class="pf-v6-c-menu__item" style="text-align: center; padding: 1rem 0.5rem; text-decoration: none">
+            <div style="font-size: 1.5rem">{icons:svg('fa:chart-line').raw}</div>
+            <div class="pf-v6-c-menu__item-text" style="margin-top: 0.5rem">Analytics</div>
+          </a>
+          <a href="#" class="pf-v6-c-menu__item" style="text-align: center; padding: 1rem 0.5rem; text-decoration: none">
+            <div style="font-size: 1.5rem">{icons:svg('fa:envelope').raw}</div>
+            <div class="pf-v6-c-menu__item-text" style="margin-top: 0.5rem">Mail</div>
+          </a>
+        </div>
+      </section>
+      <hr class="pf-v6-c-divider" style="margin: 0.75rem 0" />
+      <section class="pf-v6-c-menu__group">
+        <h2 class="pf-v6-c-menu__group-title" style="padding: 0 0 0.5rem">All applications</h2>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem">
+          <a href="#" class="pf-v6-c-menu__item" style="text-align: center; padding: 1rem 0.5rem; text-decoration: none">
+            <div style="font-size: 1.5rem">{icons:svg('fa:folder').raw}</div>
+            <div class="pf-v6-c-menu__item-text" style="margin-top: 0.5rem">Files</div>
+          </a>
+          <a href="#" class="pf-v6-c-menu__item" style="text-align: center; padding: 1rem 0.5rem; text-decoration: none">
+            <div style="font-size: 1.5rem">{icons:svg('fa:calendar').raw}</div>
+            <div class="pf-v6-c-menu__item-text" style="margin-top: 0.5rem">Calendar</div>
+          </a>
+          <a href="#" class="pf-v6-c-menu__item" style="text-align: center; padding: 1rem 0.5rem; text-decoration: none">
+            <div style="font-size: 1.5rem">{icons:svg('fa:users').raw}</div>
+            <div class="pf-v6-c-menu__item-text" style="margin-top: 0.5rem">People</div>
+          </a>
+          <a href="#" class="pf-v6-c-menu__item" style="text-align: center; padding: 1rem 0.5rem; text-decoration: none">
+            <div style="font-size: 1.5rem">{icons:svg('fa:gear').raw}</div>
+            <div class="pf-v6-c-menu__item-text" style="margin-top: 0.5rem">Settings</div>
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

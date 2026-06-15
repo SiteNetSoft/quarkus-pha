@@ -150,7 +150,7 @@ public class MiscExamplesRoutes {
                                                "typeahead", "typeahead-creatable", "multi-typeahead",
                                                "multi-typeahead-creatable", "multi-typeahead-checkbox", "view-more",
                                                "footer"));
-        m.put("application-launcher",  Set.of("basic"));
+        m.put("application-launcher",  Set.of("basic", "with-sections", "text-items", "with-external", "align-right"));
         m.put("options-menu",          Set.of("basic"));
         m.put("custom-menus",          Set.of("basic"));
         m.put("password-generator",    Set.of("basic"));

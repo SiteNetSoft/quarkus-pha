@@ -1,0 +1,42 @@
+{! Launcher whose items open external apps in a new tab, marked with an external-link icon. !}
+<div x-data="{ open: false }" style="position: relative; display: inline-block">
+  <button class="pf-v6-c-menu-toggle pf-m-plain" type="button" :class="open ? 'pf-m-expanded' : ''" :aria-expanded="open" @click="open = !open" aria-label="Application launcher with external links" id="al-external-toggle">
+    <span class="pf-v6-c-menu-toggle__icon">{icons:svg('fa:table-cells-large').raw}</span>
+  </button>
+  <div class="pf-v6-c-menu pf-m-plain" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 16rem">
+    <div class="pf-v6-c-menu__content">
+      <ul class="pf-v6-c-menu__list">
+        <li class="pf-v6-c-menu__list-item">
+          <a href="https://patternfly.org" target="_blank" rel="noopener noreferrer" class="pf-v6-c-menu__item">
+            <span class="pf-v6-c-menu__item-main">
+              <span class="pf-v6-c-menu__item-icon">{icons:svg('fa:palette').raw}</span>
+              <span class="pf-v6-c-menu__item-text">Design system</span>
+              <span class="pf-v6-c-menu__item-external-icon">{icons:svg('fa:arrow-up-right-from-square').raw}</span>
+              <span class="pf-v6-screen-reader">(opens in a new tab)</span>
+            </span>
+          </a>
+        </li>
+        <li class="pf-v6-c-menu__list-item">
+          <a href="https://quarkus.io" target="_blank" rel="noopener noreferrer" class="pf-v6-c-menu__item">
+            <span class="pf-v6-c-menu__item-main">
+              <span class="pf-v6-c-menu__item-icon">{icons:svg('fa:bolt').raw}</span>
+              <span class="pf-v6-c-menu__item-text">Quarkus docs</span>
+              <span class="pf-v6-c-menu__item-external-icon">{icons:svg('fa:arrow-up-right-from-square').raw}</span>
+              <span class="pf-v6-screen-reader">(opens in a new tab)</span>
+            </span>
+          </a>
+        </li>
+        <li class="pf-v6-c-menu__list-item">
+          <a href="https://github.com/SiteNetSoft/quarkus-pha" target="_blank" rel="noopener noreferrer" class="pf-v6-c-menu__item">
+            <span class="pf-v6-c-menu__item-main">
+              <span class="pf-v6-c-menu__item-icon">{icons:svg('fa:code-branch').raw}</span>
+              <span class="pf-v6-c-menu__item-text">Source repository</span>
+              <span class="pf-v6-c-menu__item-external-icon">{icons:svg('fa:arrow-up-right-from-square').raw}</span>
+              <span class="pf-v6-screen-reader">(opens in a new tab)</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
