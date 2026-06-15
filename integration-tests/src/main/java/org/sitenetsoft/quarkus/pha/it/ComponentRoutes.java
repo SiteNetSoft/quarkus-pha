@@ -434,6 +434,10 @@ public class ComponentRoutes {
     @Inject
     Template toastConfirmPage;
 
+    @Location("components/skeleton-loading")
+    @Inject
+    Template skeletonLoadingPage;
+
     @Location("components/live-search")
     @Inject
     Template liveSearchPage;
@@ -1217,6 +1221,13 @@ public class ComponentRoutes {
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance toastConfirm() {
         return toastConfirmPage.instance();
+    }
+
+    @GET
+    @Path("/skeleton-loading")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance skeletonLoading() {
+        return skeletonLoadingPage.instance();
     }
 
     @GET
