@@ -821,6 +821,40 @@ public class HtmxRoutes {
     }
 
     // ─────────────────────────────────────────────────────────────────────
+    // Drag-and-drop persist (components/drag-and-drop/data-list). The Alpine
+    // phaDragDrop factory POSTs the new order (zone + comma-joined ids) on
+    // every reorder. The server is the source of truth for the sequence and
+    // echoes the resolved labels back for the #dd-persist-status swap.
+    // In-memory only — fine for a demo.
+    // ─────────────────────────────────────────────────────────────────────
+
+    private static final Map<String, String> DD_LABELS = Map.of(
+        "primary", "Primary nav",
+        "masthead", "Masthead",
+        "sidebar", "Sidebar",
+        "footer", "Footer"
+    );
+
+    private volatile String dragDropOrder = "Primary nav, Masthead, Sidebar, Footer";
+
+    @POST
+    @Path("/drag-drop-reorder")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.TEXT_HTML)
+    public String dragDropReorder(@FormParam("zone") String zone, @FormParam("order") String order) {
+        String ord = order == null ? "" : order.trim();
+        StringBuilder labels = new StringBuilder();
+        for (String id : ord.split(",")) {
+            String key = id.trim();
+            if (key.isEmpty()) continue;
+            if (labels.length() > 0) labels.append(", ");
+            labels.append(DD_LABELS.getOrDefault(key, key));
+        }
+        dragDropOrder = labels.length() == 0 ? "(empty)" : labels.toString();
+        return escapeHtml(dragDropOrder);
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
     // SSE: live log stream for the log-viewer/streaming demo.
     //
     // Quarkus REST emits each Multi<String> item as a separate SSE

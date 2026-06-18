@@ -1,0 +1,107 @@
+{! Drag-enabled dual list selector — reuses the PF v6 dual-list-selector markup but is powered by
+   phaDragDrop with two zones ("available" / "chosen"). Drag an option to move it across panes or
+   reorder within a pane; the arrow buttons move the selected option (the keyboard-accessible path).
+   Does not modify the standalone dual-list-selector component. !}
+<div
+  id="dd-dual-list"
+  x-data="phaDragDrop()"
+  data-lists='{"available":[{"id":"apple","label":"Apple"},{"id":"banana","label":"Banana"},{"id":"cherry","label":"Cherry"},{"id":"date","label":"Date"},{"id":"fig","label":"Fig"}],"chosen":[]}'
+>
+  {#include components/forms/dual-list-selector id="dls-drag"}{#content}
+  <div class="pf-v6-c-dual-list-selector__pane pf-m-available">
+    <div class="pf-v6-c-dual-list-selector__header">
+      <div class="pf-v6-c-dual-list-selector__title-text">Available options</div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__status">
+      <div
+        class="pf-v6-c-dual-list-selector__status-text"
+        x-text="(selected.available ? '1' : '0') + ' of ' + lists.available.length + ' options selected'"
+      ></div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__menu pha-dd-zone" data-dd-zone="available">
+      <ul class="pf-v6-c-dual-list-selector__list" role="listbox" aria-label="Available options">
+        <template x-for="(item, i) in lists.available" :key="item.id">
+          <li
+            class="pf-v6-c-dual-list-selector__list-item pha-dd-row"
+            role="option"
+            data-dd-item
+            data-zone="available"
+            :data-flip-id="item.id"
+            :aria-selected="isSelected('available', item.id).toString()"
+            @click="select('available', item.id)"
+            @pointerdown="onPointerDown('available', i, $event)"
+          >
+            <div class="pf-v6-c-dual-list-selector__list-item-row" :class="{ 'pf-m-selected': isSelected('available', item.id) }">
+              <span class="pf-v6-c-dual-list-selector__item">
+                <span class="pf-v6-c-dual-list-selector__item-main">
+                  <span class="pf-v6-c-dual-list-selector__item-text" x-text="item.label"></span>
+                </span>
+              </span>
+            </div>
+          </li>
+        </template>
+      </ul>
+    </div>
+  </div>
+  <div class="pf-v6-c-dual-list-selector__controls">
+    <div class="pf-v6-c-dual-list-selector__controls-item">
+      <button
+        class="pf-v6-c-button pf-m-plain"
+        type="button"
+        :disabled="selected.available == null"
+        @click="moveSelected('available', 'chosen')"
+        aria-label="Move selected to chosen"
+      >
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-right').raw}</span>
+      </button>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__controls-item">
+      <button
+        class="pf-v6-c-button pf-m-plain"
+        type="button"
+        :disabled="selected.chosen == null"
+        @click="moveSelected('chosen', 'available')"
+        aria-label="Move selected to available"
+      >
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-left').raw}</span>
+      </button>
+    </div>
+  </div>
+  <div class="pf-v6-c-dual-list-selector__pane pf-m-chosen">
+    <div class="pf-v6-c-dual-list-selector__header">
+      <div class="pf-v6-c-dual-list-selector__title-text">Chosen options</div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__status">
+      <div
+        class="pf-v6-c-dual-list-selector__status-text"
+        x-text="(selected.chosen ? '1' : '0') + ' of ' + lists.chosen.length + ' options selected'"
+      ></div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__menu pha-dd-zone" data-dd-zone="chosen">
+      <ul class="pf-v6-c-dual-list-selector__list" role="listbox" aria-label="Chosen options">
+        <template x-for="(item, i) in lists.chosen" :key="item.id">
+          <li
+            class="pf-v6-c-dual-list-selector__list-item pha-dd-row"
+            role="option"
+            data-dd-item
+            data-zone="chosen"
+            :data-flip-id="item.id"
+            :aria-selected="isSelected('chosen', item.id).toString()"
+            @click="select('chosen', item.id)"
+            @pointerdown="onPointerDown('chosen', i, $event)"
+          >
+            <div class="pf-v6-c-dual-list-selector__list-item-row" :class="{ 'pf-m-selected': isSelected('chosen', item.id) }">
+              <span class="pf-v6-c-dual-list-selector__item">
+                <span class="pf-v6-c-dual-list-selector__item-main">
+                  <span class="pf-v6-c-dual-list-selector__item-text" x-text="item.label"></span>
+                </span>
+              </span>
+            </div>
+          </li>
+        </template>
+      </ul>
+    </div>
+  </div>
+  {/content}{/include}
+  <div class="pf-v6-screen-reader" aria-live="polite" x-text="announce"></div>
+</div>

@@ -108,7 +108,7 @@ public class MiscExamplesRoutes {
                                                "disabled"));
         m.put("overflow-menu",         Set.of("basic", "vertical", "group-types", "multiple-groups", "persistent",
                                                "breakpoint-container-width", "breakpoint-container-height"));
-        m.put("drag-and-drop",         Set.of("basic"));
+        m.put("drag-and-drop",         Set.of("basic", "multiple-zones", "data-list", "dual-list"));
         m.put("login-page",            Set.of("basic", "show-hide-password", "header-utilities"));
         m.put("notification-drawer",   Set.of("basic", "groups", "lightweight"));
         m.put("drawer",                Set.of("basic", "panel-end", "panel-start", "panel-bottom", "basic-inline",
