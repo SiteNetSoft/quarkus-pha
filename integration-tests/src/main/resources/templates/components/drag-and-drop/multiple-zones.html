@@ -1,0 +1,62 @@
+{! Multiple drop zones — PF v6 default variant, two zones stacked vertically. Like PF, the whole row
+   is draggable (no grip) and plain text. Pointer-drag items between zones or reorder within one (the
+   held row glides via the overlay clone, the rest reflow); keyboard: focus a row and use Arrow keys
+   to reorder within its zone. One factory instance owns both zones. !}
+<div
+  id="dd-multiple-zones"
+  class="pha-dd-zones"
+  x-data="phaDragDrop()"
+  data-lists='{"a":[{"id":"alpha","label":"Alpha"},{"id":"beta","label":"Beta"},{"id":"gamma","label":"Gamma"}],"b":[{"id":"delta","label":"Delta"},{"id":"epsilon","label":"Epsilon"}]}'
+>
+  {! Zone A !}
+  <div class="pha-dd-zone">
+    <div class="pha-dd-zone-title" id="dd-zone-a-title">Backlog</div>
+    <div class="pf-v6-c-droppable pha-dd-zone-list" data-dd-zone="a" role="list" aria-labelledby="dd-zone-a-title">
+      <template x-for="(item, i) in lists.a" :key="item.id">
+        <div
+          class="pf-v6-c-draggable pha-dd-draggable"
+          role="listitem"
+          tabindex="0"
+          data-dd-item
+          data-dd-handle
+          data-zone="a"
+          :data-id="item.id"
+          :data-flip-id="item.id"
+          :aria-label="'Reorder ' + item.label + ' in Backlog. Use the up and down arrow keys.'"
+          @pointerdown="onPointerDown('a', i, $event)"
+          @keydown.arrow-up.prevent="moveUp('a', i)"
+          @keydown.arrow-down.prevent="moveDown('a', i)"
+        >
+          <span class="pha-dd-grip" aria-hidden="true">{icons:svg('fa:grip-vertical').raw}</span>
+          <span class="pha-dd-label" x-text="item.label"></span>
+        </div>
+      </template>
+    </div>
+  </div>
+  {! Zone B !}
+  <div class="pha-dd-zone">
+    <div class="pha-dd-zone-title" id="dd-zone-b-title">In progress</div>
+    <div class="pf-v6-c-droppable pha-dd-zone-list" data-dd-zone="b" role="list" aria-labelledby="dd-zone-b-title">
+      <template x-for="(item, i) in lists.b" :key="item.id">
+        <div
+          class="pf-v6-c-draggable pha-dd-draggable"
+          role="listitem"
+          tabindex="0"
+          data-dd-item
+          data-dd-handle
+          data-zone="b"
+          :data-id="item.id"
+          :data-flip-id="item.id"
+          :aria-label="'Reorder ' + item.label + ' in In progress. Use the up and down arrow keys.'"
+          @pointerdown="onPointerDown('b', i, $event)"
+          @keydown.arrow-up.prevent="moveUp('b', i)"
+          @keydown.arrow-down.prevent="moveDown('b', i)"
+        >
+          <span class="pha-dd-grip" aria-hidden="true">{icons:svg('fa:grip-vertical').raw}</span>
+          <span class="pha-dd-label" x-text="item.label"></span>
+        </div>
+      </template>
+    </div>
+  </div>
+  <div class="pf-v6-screen-reader" aria-live="polite" x-text="announce"></div>
+</div>

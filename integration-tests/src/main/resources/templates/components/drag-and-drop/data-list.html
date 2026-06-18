@@ -1,0 +1,50 @@
+{! Sortable DataList with server persistence — PF v6 DataList draggable variant. Each item uses PF's
+   native draggable control column (__item-control > __item-draggable-button > __item-draggable-icon),
+   and the lifted row gets PF's pf-m-ghost-row placeholder overlay. Each reorder (drag or keyboard)
+   POSTs the new order to /api/htmx/drag-drop-reorder via htmx.ajax; the server owns the sequence and
+   echoes it back into #dd-persist-status — the BFF "persist on drop" contract, no client source of truth. !}
+<div
+  id="dd-data-list"
+  x-data="phaDragDrop()"
+  data-persist-url="/api/htmx/drag-drop-reorder"
+  data-lists='{"main":[{"id":"primary","label":"Primary nav","desc":"Top-level navigation region"},{"id":"masthead","label":"Masthead","desc":"Global header and branding"},{"id":"sidebar","label":"Sidebar","desc":"Contextual side navigation"},{"id":"footer","label":"Footer","desc":"Legal links and metadata"}]}'
+>
+  <ul class="pf-v6-c-data-list" data-dd-zone="main" role="list" aria-label="Page regions">
+    <template x-for="(item, i) in lists.main" :key="item.id">
+      <li
+        class="pf-v6-c-data-list__item"
+        data-dd-item
+        data-zone="main"
+        :data-flip-id="item.id"
+        @pointerdown="onPointerDown('main', i, $event)"
+      >
+        <div class="pf-v6-c-data-list__item-row">
+          <div class="pf-v6-c-data-list__item-control">
+            <button
+              type="button"
+              class="pf-v6-c-data-list__item-draggable-button"
+              data-dd-handle
+              data-zone="main"
+              :data-id="item.id"
+              :aria-label="'Reorder ' + item.label + '. Use the up and down arrow keys to move.'"
+              @keydown.arrow-up.prevent="moveUp('main', i)"
+              @keydown.arrow-down.prevent="moveDown('main', i)"
+            >
+              <span class="pf-v6-c-data-list__item-draggable-icon">{icons:svg('fa:grip-vertical').raw}</span>
+            </button>
+          </div>
+          <div class="pf-v6-c-data-list__item-content">
+            <div class="pf-v6-c-data-list__cell pf-m-align-left">
+              <span class="pf-v6-c-data-list__cell-text" x-text="item.label"></span>
+              <small class="pf-v6-u-color-200" x-text="item.desc"></small>
+            </div>
+          </div>
+        </div>
+      </li>
+    </template>
+  </ul>
+  <p class="pf-v6-c-content--p pf-v6-u-mt-sm" aria-live="polite">
+    <span class="pf-v6-screen-reader" x-text="announce"></span>
+    Saved order: <span id="dd-persist-status">Primary nav, Masthead, Sidebar, Footer</span>
+  </p>
+</div>

@@ -1,5 +1,7 @@
 {#include layouts/base} {#title}Drag and drop{/title} {#head}
+<link rel="stylesheet" href="/web/css/components/drag-and-drop.css" />
 <script src="/web/js/alpine/components/code-example.js"></script>
+<script src="/web/js/alpine/components/drag-and-drop.js"></script>
 {/head} {#body}
 <div id="root">
   <div style="outline: none" tabindex="-1" id="ws-router">
@@ -19,8 +21,10 @@
                   <div class="pf-v6-c-content pf-m-editorial">
                     <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Drag and drop</h1>
                     <p>
-                      Reorder list items by dragging them. Built with HTML5 drag events + Alpine.js — no library. Wire
-                      the new order to the server via HTMX on drop.
+                      Reposition, rearrange, and group items by dragging them — or with the keyboard. Built with pointer
+                      events + Alpine.js (the reusable <code class="ws-code">phaDragDrop</code> factory), no library:
+                      the held row glides under the pointer and the rest slide via a FLIP transition, like PatternFly's
+                      DragDropSort. Reorders can persist to the server via HTMX on drop.
                     </p>
                   </div>
                 </div>
@@ -48,6 +52,33 @@
                                   ><a href="#basic" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#multiple-zones" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Multiple drop zones</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#data-list" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Sortable data list</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#dual-list" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Dual list selector</span></span
                                     ></a
                                   ></span
                                 >
@@ -101,10 +132,31 @@
                       {#include partials/example-card title="Basic" slug="basic" component="drag-and-drop"}
                       {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Reorder the list by dragging items. Alpine maintains the array order via the
-                        dragstart/dragover/drop event handlers.
+                        Reorder a single list by dragging rows, or focus a row's grip handle and press the up / down
+                        arrow keys. The reusable <code class="ws-code">phaDragDrop</code> factory keeps the order.
                       </p>
                       {/description} {#content}{#include components/drag-and-drop/basic /}{/content} {/include}
+                      {#include partials/example-card title="Multiple drop zones" slug="multiple-zones"
+                      component="drag-and-drop"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Drag items between two lists and reorder within each. Dropping on a row inserts before it;
+                        dropping on a zone's empty space appends. One factory instance owns both zones.
+                      </p>
+                      {/description} {#content}{#include components/drag-and-drop/multiple-zones /}{/content} {/include}
+                      {#include partials/example-card title="Sortable data list" slug="data-list"
+                      component="drag-and-drop"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A richer PF DataList with a draggable control column. Every reorder POSTs the new order to the
+                        server via HTMX, which echoes the saved sequence back — the BFF "persist on drop" contract.
+                      </p>
+                      {/description} {#content}{#include components/drag-and-drop/data-list /}{/content} {/include}
+                      {#include partials/example-card title="Dual list selector" slug="dual-list"
+                      component="drag-and-drop"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The PF dual list selector, drag-enabled: drag options across panes or reorder within a pane. The
+                        arrow buttons move the selected option as the keyboard-accessible path.
+                      </p>
+                      {/description} {#content}{#include components/drag-and-drop/dual-list /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"
@@ -123,26 +175,43 @@
                           Drag and drop pattern
                         </h3>
                         <p class="pf-v6-c-content--p pf-m-editorial">
-                          There's no runtime template — drag-and-drop is a <em>pattern</em>, not a component. The
-                          example shows the canonical shape using PF's Data list + Alpine.
+                          There's no runtime template — drag-and-drop is a <em>pattern</em>, not a component. A single
+                          reusable Alpine factory, <code class="ws-code">phaDragDrop</code> (<code class="ws-code"
+                            >web/js/alpine/components/drag-and-drop.js</code
+                          >), drives every example on top of PF's Data list / Dual list selector markup.
                         </p>
                         <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>The contract:</strong> each draggable element sets
-                          <code class="ws-code">draggable="true"</code> + handles
-                          <code class="ws-code">@dragstart</code> (record source),
-                          <code class="ws-code">@dragover.prevent</code> (allow drop), and
-                          <code class="ws-code">@drop</code> (splice the array).
+                          <strong>The contract:</strong> the root carries
+                          <code class="ws-code">x-data="phaDragDrop()"</code> and a
+                          <code class="ws-code">data-lists</code> JSON of
+                          <code class="ws-code">{|{ "zone": [{ id, label }] }|}</code>. Each draggable row carries
+                          <code class="ws-code">data-dd-item</code>, <code class="ws-code">data-zone</code>,
+                          <code class="ws-code">:data-flip-id="item.id"</code> and wires
+                          <code class="ws-code">@pointerdown="onPointerDown(zone, i, $event)"</code>; its zone container
+                          carries <code class="ws-code">data-dd-zone</code>. Multiple zones just add more keys.
+                        </p>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          <strong>Why pointer events, not native drag.</strong> Like PF's DragDropSort, the held row
+                          glides under the pointer (a transform) while the displaced rows slide via a FLIP transition —
+                          native HTML5 drag can't do that (it shows a browser drag-image and offers no reorder preview).
+                          The factory hit-tests with <code class="ws-code">document.elementFromPoint</code> and commits
+                          the order on release.
                         </p>
                       </div>
                       <div class="pf-v6-l-stack__item">
                         <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
                         <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Persist on drop.</strong> Add an <code class="ws-code">hx-post="/reorder"</code> +
-                          body containing the new order to the @drop handler — the server stores the new sequence.
+                          <strong>Persist on drop.</strong> Set <code class="ws-code">data-persist-url</code> on the
+                          root and the factory POSTs <code class="ws-code">zone</code> + the comma-joined ids to it via
+                          <code class="ws-code">htmx.ajax</code> after every change. The Sortable data list example
+                          wires this to <code class="ws-code">/api/htmx/drag-drop-reorder</code>, which echoes the saved
+                          order into <code class="ws-code">#dd-persist-status</code> — the server owns the sequence.
                         </p>
                         <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Accessibility.</strong> Drag-and-drop needs a keyboard alternative — up/down arrow
-                          shortcuts when an item is focused. PF v6 itself doesn't ship this; layer it on top.
+                          <strong>Accessibility.</strong> Every row has a grip-handle button; focus it and use the up /
+                          down arrow keys to reorder without a mouse. Moves are announced through an
+                          <code class="ws-code">aria-live</code> region. This is the keyboard alternative the WAI-ARIA
+                          drag-and-drop guidance (and PF's own DragDropSort) calls for.
                         </p>
                       </div>
                       <div class="pf-v6-l-stack__item">
