@@ -1,0 +1,98 @@
+/* Drag and drop — affordances layered on PF v6 drag-and-drop markup for the phaDragDrop factory.
+   PatternFly draggable items are borderless at rest: the only in-flight visual is PF's own
+   pf-m-dragging on .pf-v6-c-draggable (box-shadow + brand-blue outline) and pf-m-ghost-row on
+   data-list / dual-list rows. The smooth slide of the other items as you drag is a FLIP animation
+   the factory applies inline (transform transition) — PF animates the same way, via JS not CSS.
+   This file only adds the grab cursor, row padding/spacing, and the vertical multi-zone layout. */
+
+/* Default variant (basic / multiple-zones): a plain, borderless text row (no grip — like PF, the
+   whole row is the drag handle). No border/background/radius at rest; the drag visual is the overlay
+   clone (.pha-dd-grabbed) + the placeholder border. Thin like PF (no button forcing the height). */
+.pha-dd-draggable {
+  display: flex;
+  align-items: center;
+  gap: var(--pf-t--global--spacer--sm);
+  padding-block: var(--pf-t--global--spacer--sm);
+  padding-inline: var(--pf-t--global--spacer--md);
+  cursor: grab;
+}
+.pha-dd-draggable:active {
+  cursor: grabbing;
+}
+.pha-dd-draggable:focus-visible {
+  outline: var(--pf-t--global--border--width--regular) solid var(--pf-t--global--border--color--brand--default);
+  outline-offset: -1px;
+}
+
+/* Decorative grip (the six dots) on the left of default-variant rows — a draggability affordance,
+   not a button, so it does not inflate the row height. The whole row is the actual drag handle. */
+.pha-dd-grip {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--pf-t--global--icon--color--subtle);
+}
+
+/* Dual-list rows are draggable too */
+.pha-dd-row {
+  cursor: grab;
+}
+
+/* Every pointer-draggable row: grab cursor + suppress touch scrolling so a touch drag reorders
+   instead of panning the page */
+[data-dd-item] {
+  cursor: grab;
+  touch-action: none;
+}
+
+/* The lifted row as it glides under the pointer (it stays in the list; the factory sets
+   position:relative + z-index inline so it renders above its siblings, and a translateY to follow
+   the cursor). Works for every variant since data-list / dual-list rows are not .pf-v6-c-draggable.
+   Mirrors PF's pf-m-dragging: opaque background, elevation shadow, brand outline. */
+.pha-dd-grabbed {
+  cursor: grabbing;
+  background-color: var(--pf-t--global--background--color--primary--default);
+  box-shadow: var(--pf-t--global--box-shadow--md);
+  border-radius: var(--pf-t--global--border--radius--small);
+  outline: var(--pf-t--global--border--width--regular) solid var(--pf-t--global--border--color--brand--default);
+  outline-offset: -1px;
+}
+
+/* The original row left in the list while the overlay clone is dragged — dnd-kit's placeholder:
+   greyed content + a brand-blue outline marking where the row will land (PF's droppable.pf-m-dragging).
+   Content is faded via the children so the ::after border stays crisp. */
+.pha-dd-placeholder {
+  position: relative;
+}
+.pha-dd-placeholder > * {
+  opacity: 0.35;
+}
+.pha-dd-placeholder::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: var(--pf-t--global--border--width--regular) solid var(--pf-t--global--border--color--brand--default);
+  border-radius: var(--pf-t--global--border--radius--small);
+  pointer-events: none;
+}
+
+/* While any drag is in flight: grabbing cursor everywhere, no accidental text selection */
+body.pha-dd-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+/* Multiple-zones: the two labelled drop zones stack vertically (PF separates them with a line
+   break), not side by side */
+.pha-dd-zones {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pf-t--global--spacer--lg);
+}
+.pha-dd-zone-title {
+  font-weight: var(--pf-t--global--font--weight--body--bold);
+  margin-block-end: var(--pf-t--global--spacer--sm);
+}
+/* The droppable list within a zone keeps a min-height so an emptied zone still accepts drops */
+.pha-dd-zone-list {
+  min-height: 3rem;
+}

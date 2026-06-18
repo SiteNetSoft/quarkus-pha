@@ -1,38 +1,32 @@
-{! Alpine-driven drag-and-drop list. Use HTML5 draggable + native dragover/drop events. !}
-<ul
-  class="pf-v6-c-data-list"
-  id="dd-basic"
-  role="list"
-  x-data="{
-      items: ['Plan release', 'Cut branch', 'Run tests', 'Tag and push'],
-      dragIdx: null,
-      onStart(i) { this.dragIdx = i; },
-      onOver(e, i) { e.preventDefault(); },
-      onDrop(i) {
-        if (this.dragIdx === null || this.dragIdx === i) return;
-        const item = this.items.splice(this.dragIdx, 1)[0];
-        this.items.splice(i, 0, item);
-        this.dragIdx = null;
-      }
-    }"
+{! Basic sortable list — single zone, PF v6 default drag-and-drop variant (droppable > draggable).
+   Like PF, the WHOLE row is draggable (no grip handle) and is plain text. Pointer-drag a row to
+   reorder, or focus it and use Arrow up / down (the row is the keyboard handle). Order lives in the
+   phaDragDrop lists.main array. x-data sits on the wrapper (not the role="list" droppable) so the
+   aria-live region stays in scope without a non-listitem child inside the list. !}
+<div
+  x-data="phaDragDrop()"
+  data-lists='{"main":[{"id":"plan","label":"Plan release"},{"id":"branch","label":"Cut branch"},{"id":"tests","label":"Run tests"},{"id":"tag","label":"Tag and push"}]}'
 >
-  <template x-for="(item, i) in items" :key="i">
-    <li
-      class="pf-v6-c-data-list__item"
-      draggable="true"
-      @dragstart="onStart(i)"
-      @dragover="onOver($event, i)"
-      @drop="onDrop(i)"
-      style="cursor: move"
-    >
-      <div class="pf-v6-c-data-list__item-row">
-        <div class="pf-v6-c-data-list__item-content">
-          <div class="pf-v6-c-data-list__cell">
-            <span style="margin-right: 0.5rem; color: var(--pf-t--global--color--brand--default)">⋮⋮</span
-            ><span x-text="item"></span>
-          </div>
-        </div>
+  <div class="pf-v6-c-droppable" id="dd-basic" data-dd-zone="main" role="list" aria-label="Release steps">
+    <template x-for="(item, i) in lists.main" :key="item.id">
+      <div
+        class="pf-v6-c-draggable pha-dd-draggable"
+        role="listitem"
+        tabindex="0"
+        data-dd-item
+        data-dd-handle
+        data-zone="main"
+        :data-id="item.id"
+        :data-flip-id="item.id"
+        :aria-label="'Reorder ' + item.label + '. Use the up and down arrow keys to move.'"
+        @pointerdown="onPointerDown('main', i, $event)"
+        @keydown.arrow-up.prevent="moveUp('main', i)"
+        @keydown.arrow-down.prevent="moveDown('main', i)"
+      >
+        <span class="pha-dd-grip" aria-hidden="true">{icons:svg('fa:grip-vertical').raw}</span>
+        <span class="pha-dd-label" x-text="item.label"></span>
       </div>
-    </li>
-  </template>
-</ul>
+    </template>
+  </div>
+  <div class="pf-v6-screen-reader" aria-live="polite" x-text="announce"></div>
+</div>

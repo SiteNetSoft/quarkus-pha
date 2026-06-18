@@ -12,26 +12,82 @@ test.describe("Drag and Drop", () => {
   test("all section headings are visible", async ({ page }) => {
     await expect(page.locator("#examples")).toBeVisible();
     await expect(page.locator("#basic")).toBeVisible();
+    await expect(page.locator("#multiple-zones")).toBeVisible();
+    await expect(page.locator("#data-list")).toBeVisible();
+    await expect(page.locator("#dual-list")).toBeVisible();
     await expect(page.locator("#documentation")).toBeVisible();
     await expect(page.locator("#props-drag-and-drop")).toBeVisible();
     await expect(page.locator("#usage")).toBeVisible();
   });
 
-  test("basic wrapper exists", async ({ page }) => {
+  test("basic wrapper exists with 4 draggable items + handles", async ({ page }) => {
     await expect(page.locator("#dd-basic")).toBeVisible();
+    const items = page.locator("#dd-basic .pf-v6-c-draggable");
+    await expect(items).toHaveCount(4);
+    // pointer-draggable rows carry data-dd-item (native HTML5 draggable was removed)
+    await expect(page.locator("#dd-basic [data-dd-item]")).toHaveCount(4);
+    await expect(page.locator("#dd-basic [data-dd-handle]")).toHaveCount(4);
   });
 
-  test("has 4 draggable items", async ({ page }) => {
-    await expect(
-      page.locator("#dd-basic .pf-v6-c-data-list__item")
-    ).toHaveCount(4);
+  test("basic: keyboard ArrowDown reorders the focused item", async ({ page }) => {
+    const items = page.locator("#dd-basic .pf-v6-c-draggable");
+    await expect(items.first()).toContainText("Plan release");
+
+    await page.locator("#dd-basic [data-dd-handle]").first().focus();
+    await page.keyboard.press("ArrowDown");
+
+    // "Plan release" should now be in the second slot, "Cut branch" first.
+    await expect(items.nth(0)).toContainText("Cut branch");
+    await expect(items.nth(1)).toContainText("Plan release");
   });
 
-  test("draggable items have draggable attribute", async ({ page }) => {
-    const items = page.locator("#dd-basic .pf-v6-c-data-list__item");
-    const count = await items.count();
-    for (let i = 0; i < count; i++) {
-      await expect(items.nth(i)).toHaveAttribute("draggable", "true");
-    }
+  test("basic: pointer drag moves the first item to the bottom", async ({ page }) => {
+    const items = page.locator("#dd-basic .pf-v6-c-draggable");
+    await expect(items.nth(0)).toContainText("Plan release");
+
+    const first = await items.nth(0).boundingBox();
+    const last = await items.nth(3).boundingBox();
+    // grab the first row and drag it past the midpoint of the last row (pointer events, in steps
+    // so the 4px drag threshold is crossed and elementFromPoint resolves intermediate rows)
+    await page.mouse.move(first.x + 20, first.y + first.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(first.x + 20, first.y + first.height / 2 + 6, { steps: 3 });
+    await page.mouse.move(last.x + 20, last.y + last.height * 0.75, { steps: 12 });
+    await page.mouse.up();
+
+    await expect(items.nth(0)).toContainText("Cut branch");
+    await expect(items.nth(3)).toContainText("Plan release");
+  });
+
+  test("multiple zones: two lists with the expected item counts", async ({ page }) => {
+    await expect(page.locator("#dd-multiple-zones")).toBeVisible();
+    await expect(page.locator('#dd-multiple-zones .pf-v6-c-draggable[data-zone="a"]')).toHaveCount(3);
+    await expect(page.locator('#dd-multiple-zones .pf-v6-c-draggable[data-zone="b"]')).toHaveCount(2);
+  });
+
+  test("data list: reorder persists via HTMX and updates the status", async ({ page }) => {
+    await expect(page.locator("#dd-data-list")).toBeVisible();
+    const status = page.locator("#dd-persist-status");
+    await expect(status).toHaveText("Primary nav, Masthead, Sidebar, Footer");
+
+    await page.locator("#dd-data-list [data-dd-handle]").first().focus();
+    await page.keyboard.press("ArrowDown");
+
+    // The server echoes the saved order back into the status node.
+    await expect(status).toHaveText("Masthead, Primary nav, Sidebar, Footer");
+  });
+
+  test("dual list: move-right button moves the selected option across panes", async ({ page }) => {
+    await expect(page.locator("#dd-dual-list")).toBeVisible();
+    const available = page.locator("#dd-dual-list .pf-m-available .pf-v6-c-dual-list-selector__list-item");
+    const chosen = page.locator("#dd-dual-list .pf-m-chosen .pf-v6-c-dual-list-selector__list-item");
+    await expect(available).toHaveCount(5);
+    await expect(chosen).toHaveCount(0);
+
+    await available.first().click(); // select
+    await page.locator('#dd-dual-list button[aria-label="Move selected to chosen"]').click();
+
+    await expect(available).toHaveCount(4);
+    await expect(chosen).toHaveCount(1);
   });
 });
