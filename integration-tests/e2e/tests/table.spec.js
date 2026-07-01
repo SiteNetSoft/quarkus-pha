@@ -108,4 +108,56 @@ test.describe("Table", () => {
       await expect(t.locator("thead th.pf-v6-c-table__subhead")).toHaveCount(4);
     });
   });
+
+  test.describe("Editable rows", () => {
+    test("Edit reveals inputs; Save commits the draft", async ({ page }) => {
+      const row = page.locator("#tbl-editable tbody tr").first();
+      const nameInput = row.locator('input[aria-label="Name"]');
+      await expect(nameInput).toBeHidden();
+      await row.getByRole("button", { name: "Edit" }).click();
+      await expect(nameInput).toBeVisible();
+      await nameInput.fill("Johnny Doe");
+      await row.getByRole("button", { name: "Save edits" }).click();
+      await expect(row).toContainText("Johnny Doe");
+    });
+  });
+
+  test.describe("Compound expandable", () => {
+    test("clicking a cell toggle expands its detail row", async ({ page }) => {
+      const detail = page.locator("#tbl-compound .pf-v6-c-table__expandable-row");
+      await expect(detail).toBeHidden();
+      await page.locator("#tbl-compound .pf-v6-c-table__compound-expansion-toggle button").first().click();
+      await expect(detail).toBeVisible();
+      await expect(detail).toContainText("branches");
+    });
+  });
+
+  test.describe("Sticky", () => {
+    test("has a sticky header table with a sticky first column", async ({ page }) => {
+      const t = page.locator("table.pf-m-sticky-header");
+      await expect(t).toBeVisible();
+      await expect(t.locator("thead th.pf-v6-c-table__sticky-cell.pf-m-left")).toHaveCount(1);
+      await expect(t.locator("tbody th.pf-v6-c-table__sticky-cell.pf-m-left").first()).toBeVisible();
+    });
+  });
+
+  test.describe("Tree table", () => {
+    test("is a treegrid; toggling a parent reveals its children", async ({ page }) => {
+      const t = page.locator("table.pf-m-tree-view");
+      await expect(t).toHaveAttribute("role", "treegrid");
+      const child = t.locator('tbody tr[aria-level="2"]', { hasText: "db-primary" });
+      await expect(child).toBeHidden();
+      await t.locator('tbody tr[aria-level="1"]', { hasText: "Databases" }).locator("button").click();
+      await expect(child).toBeVisible();
+    });
+  });
+
+  test.describe("Draggable rows", () => {
+    test("rows are draggable with a grip cell", async ({ page }) => {
+      const rows = page.locator("#tbl-draggable tbody tr");
+      await expect(rows).toHaveCount(3);
+      await expect(rows.first()).toHaveAttribute("draggable", "true");
+      await expect(page.locator("#tbl-draggable tbody td.pf-v6-c-table__draggable")).toHaveCount(3);
+    });
+  });
 });

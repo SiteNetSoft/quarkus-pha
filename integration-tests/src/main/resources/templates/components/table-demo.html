@@ -172,6 +172,51 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#editable-rows" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Editable rows</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#compound-expandable" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Compound expandable</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#sticky" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Sticky header and column</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#tree-table" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Tree table</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#draggable-rows" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Draggable rows</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -308,6 +353,44 @@
                         >) under a shared parent header via rowspan/colspan.
                       </p>
                       {/description} {#content}{#include components/table/nested-column-headers /}{/content} {/include}
+                      {#include partials/example-card title="Editable rows" slug="editable-rows" component="table"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Each row toggles between a read view and inline inputs; Save commits the draft, Cancel discards
+                        it (Alpine). The action cell uses
+                        <code class="ws-code">pf-v6-c-table__inline-edit-action</code>.
+                      </p>
+                      {/description} {#content}{#include components/table/editable-rows /}{/content} {/include}
+                      {#include partials/example-card title="Compound expandable" slug="compound-expandable"
+                      component="table"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Each cell is its own toggle (<code class="ws-code"
+                          >pf-v6-c-table__compound-expansion-toggle</code
+                        >); opening one expands a detail row scoped to that cell, one per row at a time.
+                      </p>
+                      {/description} {#content}{#include components/table/compound-expandable /}{/content} {/include}
+                      {#include partials/example-card title="Sticky header and column" slug="sticky" component="table"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        In a scroll wrapper, <code class="ws-code">pf-m-sticky-header</code> pins the header and
+                        <code class="ws-code">pf-v6-c-table__sticky-cell pf-m-left</code> pins the first column — scroll
+                        the table to see both.
+                      </p>
+                      {/description} {#content}{#include components/table/sticky /}{/content} {/include} {#include
+                      partials/example-card title="Tree table" slug="tree-table" component="table"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-tree-view</code> with <code class="ws-code">role="treegrid"</code>;
+                        parent rows toggle their children, indented automatically by
+                        <code class="ws-code">aria-level</code>.
+                      </p>
+                      {/description} {#content}{#include components/table/tree-table /}{/content} {/include} {#include
+                      partials/example-card title="Draggable rows" slug="draggable-rows" component="table"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Drag a row by its grip to reorder; the dragged row shows
+                        <code class="ws-code">pf-m-ghost-row</code> and drops into place by the pointer's midpoint.
+                      </p>
+                      {/description} {#content}{#include components/table/draggable-rows /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

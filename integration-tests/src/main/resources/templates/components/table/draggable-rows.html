@@ -1,0 +1,61 @@
+{! Draggable rows — reorder rows by dragging. Native HTML5 drag moves the <tr> nodes directly
+   (insertBefore, chosen by the drop row's vertical midpoint); the dragged row shows pf-m-ghost-row. A
+   leading pf-v6-c-table__draggable grip cell signals the affordance. Handlers are single expressions
+   (no { } blocks) so Qute leaves them untouched. !}
+{#include components/data-display/table id="tbl-draggable" ariaLabel="Draggable rows table"} {#content}
+<thead>
+  <tr>
+    <td class="pf-v6-c-table__draggable" aria-hidden="true"></td>
+    <th scope="col">Name</th>
+    <th scope="col">Status</th>
+    <th scope="col">Role</th>
+  </tr>
+</thead>
+<tbody x-data="{ dragEl: null }">
+  <tr
+    class="pf-v6-c-table__tr"
+    draggable="true"
+    @dragstart="dragEl = $event.currentTarget; $event.dataTransfer.effectAllowed = 'move'; $event.dataTransfer.setData('text/plain', ''); $event.currentTarget.classList.add('pf-m-ghost-row')"
+    @dragend="$event.currentTarget.classList.remove('pf-m-ghost-row'); dragEl = null"
+    @dragover.prevent
+    @drop.prevent="dragEl && dragEl !== $event.currentTarget && $event.currentTarget.parentNode.insertBefore(dragEl, $event.clientY > $event.currentTarget.getBoundingClientRect().top + $event.currentTarget.getBoundingClientRect().height / 2 ? $event.currentTarget.nextSibling : $event.currentTarget)"
+  >
+    <td class="pf-v6-c-table__draggable">
+      <span class="pf-v6-c-table__toggle-icon" style="cursor: grab" aria-hidden="true">{icons:svg('fa:grip-vertical').raw}</span>
+    </td>
+    <td>John Doe</td>
+    <td>Active</td>
+    <td>Admin</td>
+  </tr>
+  <tr
+    class="pf-v6-c-table__tr"
+    draggable="true"
+    @dragstart="dragEl = $event.currentTarget; $event.dataTransfer.effectAllowed = 'move'; $event.dataTransfer.setData('text/plain', ''); $event.currentTarget.classList.add('pf-m-ghost-row')"
+    @dragend="$event.currentTarget.classList.remove('pf-m-ghost-row'); dragEl = null"
+    @dragover.prevent
+    @drop.prevent="dragEl && dragEl !== $event.currentTarget && $event.currentTarget.parentNode.insertBefore(dragEl, $event.clientY > $event.currentTarget.getBoundingClientRect().top + $event.currentTarget.getBoundingClientRect().height / 2 ? $event.currentTarget.nextSibling : $event.currentTarget)"
+  >
+    <td class="pf-v6-c-table__draggable">
+      <span class="pf-v6-c-table__toggle-icon" style="cursor: grab" aria-hidden="true">{icons:svg('fa:grip-vertical').raw}</span>
+    </td>
+    <td>Jane Smith</td>
+    <td>Inactive</td>
+    <td>Editor</td>
+  </tr>
+  <tr
+    class="pf-v6-c-table__tr"
+    draggable="true"
+    @dragstart="dragEl = $event.currentTarget; $event.dataTransfer.effectAllowed = 'move'; $event.dataTransfer.setData('text/plain', ''); $event.currentTarget.classList.add('pf-m-ghost-row')"
+    @dragend="$event.currentTarget.classList.remove('pf-m-ghost-row'); dragEl = null"
+    @dragover.prevent
+    @drop.prevent="dragEl && dragEl !== $event.currentTarget && $event.currentTarget.parentNode.insertBefore(dragEl, $event.clientY > $event.currentTarget.getBoundingClientRect().top + $event.currentTarget.getBoundingClientRect().height / 2 ? $event.currentTarget.nextSibling : $event.currentTarget)"
+  >
+    <td class="pf-v6-c-table__draggable">
+      <span class="pf-v6-c-table__toggle-icon" style="cursor: grab" aria-hidden="true">{icons:svg('fa:grip-vertical').raw}</span>
+    </td>
+    <td>Bob Johnson</td>
+    <td>Active</td>
+    <td>Viewer</td>
+  </tr>
+</tbody>
+{/content} {/include}
