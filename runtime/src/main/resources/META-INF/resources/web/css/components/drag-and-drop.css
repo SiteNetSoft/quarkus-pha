@@ -34,14 +34,15 @@
   aspect-ratio: 1; /* ...height derived from it → a square hover target */
   flex-shrink: 0;
   border-radius: var(--pf-t--global--border--radius--small);
-  color: var(--pf-t--global--icon--color--subtle);
+  /* the dots inherit the plain-button text colour like PF's DragButton (dark in light theme, WHITE
+     in dark theme) — a constant colour that does NOT change on hover/press; only the bg greys */
+  color: var(--pf-t--global--text--color--regular);
   cursor: grab;
   touch-action: none;
 }
 .pha-dd-grip:hover,
 .pha-dd-grip:active {
   background-color: var(--pf-t--global--background--color--action--plain--hover);
-  color: var(--pf-t--global--icon--color--regular);
 }
 .pha-dd-grip:active {
   cursor: grabbing;
@@ -93,7 +94,6 @@
 }
 .pha-dd-placeholder .pha-dd-grip {
   background-color: var(--pf-t--global--background--color--action--plain--hover);
-  color: var(--pf-t--global--icon--color--regular);
 }
 
 /* While any drag is in flight: grabbing cursor everywhere, no accidental text selection */
