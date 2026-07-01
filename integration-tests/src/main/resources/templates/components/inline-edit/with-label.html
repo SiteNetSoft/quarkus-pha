@@ -1,0 +1,37 @@
+{! Inline edit with a bold field label — a single value with a label; the pencil switches to an input
+   with save/cancel (icon action group). Alpine holds editing state + the value. !}
+<form
+  class="pf-v6-c-inline-edit"
+  id="ie-label"
+  style="max-width: 28rem"
+  x-data="{ editing: false, val: 'Senior Engineer' }"
+  :class="{ 'pf-m-inline-editable': editing }"
+>
+  <div class="pf-v6-c-inline-edit__group">
+    <span class="pf-v6-c-inline-edit__label pf-m-bold">Title</span>
+    <div class="pf-v6-c-inline-edit__value" x-show="!editing" x-text="val"></div>
+    <div class="pf-v6-c-inline-edit__action pf-m-enable-editable" x-show="!editing">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Edit title" @click="editing = true">
+        {icons:svg('fa:pencil-alt').raw}
+      </button>
+    </div>
+  </div>
+  <div class="pf-v6-c-inline-edit__group" x-show="editing" x-cloak>
+    <span class="pf-v6-c-inline-edit__label pf-m-bold">Title</span>
+    <div class="pf-v6-c-inline-edit__input">
+      <span class="pf-v6-c-form-control"><input type="text" x-model="val" aria-label="Edit title" /></span>
+    </div>
+    <div class="pf-v6-c-inline-edit__group pf-m-action-group pf-m-icon-group">
+      <div class="pf-v6-c-inline-edit__action pf-m-valid">
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Save" @click="editing = false">
+          {icons:svg('fa:check').raw}
+        </button>
+      </div>
+      <div class="pf-v6-c-inline-edit__action">
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Cancel" @click="editing = false">
+          {icons:svg('fa:times').raw}
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

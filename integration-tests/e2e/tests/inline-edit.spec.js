@@ -19,15 +19,53 @@ test.describe("Inline Edit", () => {
     });
 
     test("clicking edit button shows input with pf-m-inline-editable class", async ({ page }) => {
-      await page.locator("#ie-basic button[aria-label*='edit'], #ie-basic .pf-v6-c-inline-edit__action button").first().click();
+      await page
+        .locator("#ie-basic button[aria-label*='edit'], #ie-basic .pf-v6-c-inline-edit__action button")
+        .first()
+        .click();
       await expect(page.locator("#ie-basic")).toHaveClass(/pf-m-inline-editable/);
       await expect(page.locator("#ie-basic input")).toBeVisible();
     });
 
     test("clicking save button returns to view mode", async ({ page }) => {
-      await page.locator("#ie-basic button[aria-label*='edit'], #ie-basic .pf-v6-c-inline-edit__action button").first().click();
-      await page.locator("#ie-basic button[aria-label*='save'], #ie-basic .pf-v6-c-inline-edit__action button").last().click();
+      await page
+        .locator("#ie-basic button[aria-label*='edit'], #ie-basic .pf-v6-c-inline-edit__action button")
+        .first()
+        .click();
+      await page
+        .locator("#ie-basic button[aria-label*='save'], #ie-basic .pf-v6-c-inline-edit__action button")
+        .last()
+        .click();
       await expect(page.locator("#ie-basic")).not.toHaveClass(/pf-m-inline-editable/);
+    });
+  });
+
+  test.describe("With label", () => {
+    test("has a bold label and edits like basic", async ({ page }) => {
+      await expect(page.locator("#ie-label .pf-v6-c-inline-edit__label.pf-m-bold").first()).toBeVisible();
+      await page.locator('#ie-label button[aria-label="Edit title"]').click();
+      await expect(page.locator("#ie-label")).toHaveClass(/pf-m-inline-editable/);
+      await expect(page.locator("#ie-label input")).toBeVisible();
+    });
+  });
+
+  test.describe("Multiple (free form)", () => {
+    test("one Edit toggle reveals all field inputs and a footer", async ({ page }) => {
+      await page.locator('#ie-multiple button[aria-label="Edit all fields"]').click();
+      await expect(page.locator("#ie-multiple input")).toHaveCount(3);
+      await expect(page.locator("#ie-multiple .pf-v6-c-inline-edit__group.pf-m-footer")).toBeVisible();
+    });
+  });
+
+  test.describe("Validated", () => {
+    test("empty is invalid (Save disabled); typing makes it valid", async ({ page }) => {
+      const control = page.locator("#ie-validated .pf-v6-c-form-control");
+      const save = page.locator('#ie-validated button[aria-label="Save"]');
+      await expect(control).toHaveClass(/pf-m-error/);
+      await expect(save).toBeDisabled();
+      await page.locator("#ie-validated input").fill("Ada Lovelace");
+      await expect(control).toHaveClass(/pf-m-success/);
+      await expect(save).toBeEnabled();
     });
   });
 });
