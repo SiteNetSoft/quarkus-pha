@@ -45,13 +45,12 @@ test.describe("Drag and Drop", () => {
     const items = page.locator("#dd-basic .pf-v6-c-draggable");
     await expect(items.nth(0)).toContainText("Plan release");
 
-    const first = await items.nth(0).boundingBox();
+    const grip = await page.locator("#dd-basic .pha-dd-grip").first().boundingBox();
     const last = await items.nth(3).boundingBox();
-    // grab the first row and drag it past the midpoint of the last row (pointer events, in steps
-    // so the 4px drag threshold is crossed and elementFromPoint resolves intermediate rows)
-    await page.mouse.move(first.x + 20, first.y + first.height / 2);
+    // grab the GRIP (drag only starts from the grip handle) and drag it past the last row's midpoint
+    await page.mouse.move(grip.x + grip.width / 2, grip.y + grip.height / 2);
     await page.mouse.down();
-    await page.mouse.move(first.x + 20, first.y + first.height / 2 + 6, { steps: 3 });
+    await page.mouse.move(grip.x + grip.width / 2, grip.y + grip.height / 2 + 6, { steps: 3 });
     await page.mouse.move(last.x + 20, last.y + last.height * 0.75, { steps: 12 });
     await page.mouse.up();
 
