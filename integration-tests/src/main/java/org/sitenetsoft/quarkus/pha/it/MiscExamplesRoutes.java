@@ -102,7 +102,7 @@ public class MiscExamplesRoutes {
         m.put("data-list",             Set.of("basic", "compact", "plain", "checkboxes-actions", "actions",
                                                "expandable", "mixed-expandable", "width-modifiers", "clickable-rows",
                                                "controlling-text", "sm-grid-breakpoint"));
-        m.put("inline-edit",           Set.of("basic"));
+        m.put("inline-edit",           Set.of("basic", "with-label", "multiple", "validated"));
         m.put("simple-file-upload",    Set.of("basic", "simple-text-file", "with-helper-text", "text-with-edits",
                                                "text-with-restrictions", "custom-file-preview", "custom-upload",
                                                "disabled"));

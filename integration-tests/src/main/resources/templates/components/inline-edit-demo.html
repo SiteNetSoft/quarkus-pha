@@ -53,6 +53,33 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-label" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With label</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#multiple" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Multiple (free form)</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#validated" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Validated</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -104,7 +131,29 @@
                         Click the pencil to enter edit mode. Alpine tracks the <code class="ws-code">editing</code> flag
                         + the live value.
                       </p>
-                      {/description} {#content}{#include components/inline-edit/basic /}{/content} {/include}
+                      {/description} {#content}{#include components/inline-edit/basic /}{/content} {/include} {#include
+                      partials/example-card title="With label" slug="with-label" component="inline-edit"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A single value with a bold <code class="ws-code">pf-v6-c-inline-edit__label</code>; the pencil
+                        switches to an input with an icon save/cancel group.
+                      </p>
+                      {/description} {#content}{#include components/inline-edit/with-label /}{/content} {/include}
+                      {#include partials/example-card title="Multiple (free form)" slug="multiple"
+                      component="inline-edit"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        One Edit toggle switches every field to an input at once, with a
+                        <code class="ws-code">pf-m-footer</code> action group (Save / Cancel) — the whole-row edit
+                        pattern.
+                      </p>
+                      {/description} {#content}{#include components/inline-edit/multiple /}{/content} {/include}
+                      {#include partials/example-card title="Validated" slug="validated" component="inline-edit"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The input reflects validity as you type — empty shows
+                        <code class="ws-code">pf-m-error</code> + an error helper and disables Save; non-empty shows
+                        <code class="ws-code">pf-m-success</code>.
+                      </p>
+                      {/description} {#content}{#include components/inline-edit/validated /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"
