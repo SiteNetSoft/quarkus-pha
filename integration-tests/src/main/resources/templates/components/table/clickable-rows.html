@@ -1,0 +1,57 @@
+{! Clickable (selectable) rows — clicking a row selects it (pf-m-selected). PF's row-selection
+   highlight is defined for the grid variant, so the table is pf-m-grid-md; Alpine tracks the selected
+   row id. Rows are focusable and Enter/Space select them for keyboard users. !}
+{#include components/data-display/table id="tbl-clickable" gridMd=true ariaLabel="Table with selectable rows"}
+{#content}
+<thead>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Status</th>
+    <th scope="col">Role</th>
+  </tr>
+</thead>
+<tbody x-data="{ selected: 'jane' }">
+  <tr
+    class="pf-v6-c-table__tr"
+    :class="selected === 'john' ? 'pf-m-selected' : ''"
+    :aria-selected="selected === 'john'"
+    tabindex="0"
+    style="cursor: pointer"
+    @click="selected = 'john'"
+    @keydown.enter.prevent="selected = 'john'"
+    @keydown.space.prevent="selected = 'john'"
+  >
+    <td data-label="Name">John Doe</td>
+    <td data-label="Status">Active</td>
+    <td data-label="Role">Admin</td>
+  </tr>
+  <tr
+    class="pf-v6-c-table__tr"
+    :class="selected === 'jane' ? 'pf-m-selected' : ''"
+    :aria-selected="selected === 'jane'"
+    tabindex="0"
+    style="cursor: pointer"
+    @click="selected = 'jane'"
+    @keydown.enter.prevent="selected = 'jane'"
+    @keydown.space.prevent="selected = 'jane'"
+  >
+    <td data-label="Name">Jane Smith</td>
+    <td data-label="Status">Inactive</td>
+    <td data-label="Role">Editor</td>
+  </tr>
+  <tr
+    class="pf-v6-c-table__tr"
+    :class="selected === 'bob' ? 'pf-m-selected' : ''"
+    :aria-selected="selected === 'bob'"
+    tabindex="0"
+    style="cursor: pointer"
+    @click="selected = 'bob'"
+    @keydown.enter.prevent="selected = 'bob'"
+    @keydown.space.prevent="selected = 'bob'"
+  >
+    <td data-label="Name">Bob Johnson</td>
+    <td data-label="Status">Active</td>
+    <td data-label="Role">Viewer</td>
+  </tr>
+</tbody>
+{/content} {/include}
