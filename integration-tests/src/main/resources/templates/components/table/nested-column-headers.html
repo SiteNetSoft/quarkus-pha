@@ -1,0 +1,42 @@
+{! Nested column headers — pf-m-nested-column-header groups sub-columns under a shared parent header.
+   The first header row carries the leading column (rowspan=2) and the group parents (colspan=2); the
+   second row carries the sub-columns marked pf-v6-c-table__subhead. Hand-written table because this
+   modifier isn't on the data-display/table runtime component. !}
+<table class="pf-v6-c-table pf-m-nested-column-header" role="grid" aria-label="Table with nested column headers">
+  <thead>
+    <tr>
+      <th scope="col" rowspan="2">Name</th>
+      <th scope="col" colspan="2">Contact</th>
+      <th scope="col" colspan="2">Employment</th>
+    </tr>
+    <tr>
+      <th scope="col" class="pf-v6-c-table__subhead">Email</th>
+      <th scope="col" class="pf-v6-c-table__subhead">Phone</th>
+      <th scope="col" class="pf-v6-c-table__subhead">Role</th>
+      <th scope="col" class="pf-v6-c-table__subhead">Level</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>John Doe</td>
+      <td>john@example.com</td>
+      <td>555-0100</td>
+      <td>Admin</td>
+      <td>Senior</td>
+    </tr>
+    <tr>
+      <td>Jane Smith</td>
+      <td>jane@example.com</td>
+      <td>555-0101</td>
+      <td>Editor</td>
+      <td>Mid</td>
+    </tr>
+    <tr>
+      <td>Bob Johnson</td>
+      <td>bob@example.com</td>
+      <td>555-0102</td>
+      <td>Viewer</td>
+      <td>Junior</td>
+    </tr>
+  </tbody>
+</table>

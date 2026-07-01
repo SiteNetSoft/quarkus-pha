@@ -1,0 +1,66 @@
+{! Favoritable table — a leading pf-v6-c-table__favorite cell with a plain star button per row. The
+   pf-m-favorited modifier colours the star; Alpine toggles it (selection would persist server-side in
+   an app). The header favorite cell is empty. !}
+{#include components/data-display/table id="tbl-favorite" ariaLabel="Favoritable table"} {#content}
+<thead>
+  <tr>
+    <td class="pf-v6-c-table__favorite" aria-hidden="true"></td>
+    <th scope="col">Name</th>
+    <th scope="col">Status</th>
+    <th scope="col">Role</th>
+  </tr>
+</thead>
+<tbody>
+  <tr x-data="{ fav: true }">
+    <td class="pf-v6-c-table__favorite">
+      <button
+        type="button"
+        class="pf-v6-c-button pf-m-plain"
+        :class="fav ? 'pf-m-favorited' : ''"
+        :aria-label="fav ? 'Unfavorite John Doe' : 'Favorite John Doe'"
+        :aria-pressed="fav"
+        @click="fav = !fav"
+      >
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:star').raw}</span>
+      </button>
+    </td>
+    <td>John Doe</td>
+    <td>Active</td>
+    <td>Admin</td>
+  </tr>
+  <tr x-data="{ fav: false }">
+    <td class="pf-v6-c-table__favorite">
+      <button
+        type="button"
+        class="pf-v6-c-button pf-m-plain"
+        :class="fav ? 'pf-m-favorited' : ''"
+        :aria-label="fav ? 'Unfavorite Jane Smith' : 'Favorite Jane Smith'"
+        :aria-pressed="fav"
+        @click="fav = !fav"
+      >
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:star').raw}</span>
+      </button>
+    </td>
+    <td>Jane Smith</td>
+    <td>Inactive</td>
+    <td>Editor</td>
+  </tr>
+  <tr x-data="{ fav: false }">
+    <td class="pf-v6-c-table__favorite">
+      <button
+        type="button"
+        class="pf-v6-c-button pf-m-plain"
+        :class="fav ? 'pf-m-favorited' : ''"
+        :aria-label="fav ? 'Unfavorite Bob Johnson' : 'Favorite Bob Johnson'"
+        :aria-pressed="fav"
+        @click="fav = !fav"
+      >
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:star').raw}</span>
+      </button>
+    </td>
+    <td>Bob Johnson</td>
+    <td>Active</td>
+    <td>Viewer</td>
+  </tr>
+</tbody>
+{/content} {/include}

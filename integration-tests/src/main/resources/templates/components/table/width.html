@@ -1,0 +1,27 @@
+{! Column width & text modifiers — pf-m-width-{pct} pins a column's share of the table width, and the
+   text modifiers control cell overflow: pf-m-truncate (ellipsis), pf-m-fit-content (shrink to content),
+   pf-m-nowrap (no wrapping), pf-m-wrap (force wrapping). Applied on the <th>. !}
+{#include components/data-display/table id="tbl-width" ariaLabel="Table with column width and text modifiers"} {#content}
+<thead>
+  <tr>
+    <th scope="col" class="pf-m-width-20">Name (20%)</th>
+    <th scope="col" class="pf-m-width-30 pf-m-truncate">Description (30%, truncate)</th>
+    <th scope="col" class="pf-m-fit-content">Role (fit)</th>
+    <th scope="col" class="pf-m-nowrap">Created (nowrap)</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>John Doe</td>
+    <td class="pf-m-truncate">A very long description that will be truncated with an ellipsis when it exceeds the column width</td>
+    <td>Administrator</td>
+    <td class="pf-m-nowrap">Jan 1, 2026</td>
+  </tr>
+  <tr>
+    <td>Jane Smith</td>
+    <td class="pf-m-truncate">Another lengthy piece of descriptive text that demonstrates the truncation behaviour of the cell</td>
+    <td>Editor</td>
+    <td class="pf-m-nowrap">Feb 14, 2026</td>
+  </tr>
+</tbody>
+{/content} {/include}

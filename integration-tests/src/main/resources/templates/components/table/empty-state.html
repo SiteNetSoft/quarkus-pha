@@ -1,0 +1,19 @@
+{! Empty state in a table — one full-width body cell (colspan = column count) holding the reusable
+   feedback/empty-state component. PF's "no results" pattern for a data table with no rows. !}
+{#include components/data-display/table id="tbl-empty" ariaLabel="Table with no results"} {#content}
+<thead>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Status</th>
+    <th scope="col">Role</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td colspan="3">
+      {#include components/feedback/empty-state titleText="No results found" iconName="fa:magnifying-glass" size="sm"
+      bodyText="No results match the filter criteria. Clear all filters and try again." /}
+    </td>
+  </tr>
+</tbody>
+{/content} {/include}
