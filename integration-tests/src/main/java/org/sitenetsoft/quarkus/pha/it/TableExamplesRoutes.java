@@ -43,7 +43,12 @@ public class TableExamplesRoutes {
         "width",
         "favoritable",
         "clickable-rows",
-        "nested-column-headers"
+        "nested-column-headers",
+        "editable-rows",
+        "compound-expandable",
+        "sticky",
+        "tree-table",
+        "draggable-rows"
     );
 
     @Inject

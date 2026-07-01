@@ -1,0 +1,57 @@
+{! Compound expandable — each cell in a row is its own toggle (pf-v6-c-table__compound-expansion-toggle);
+   opening one expands a detail row scoped to THAT cell, and only one cell per row is open at a time.
+   Alpine tracks which cell key is expanded and swaps the detail content. !}
+{#include components/data-display/table id="tbl-compound" expandable=true ariaLabel="Compound expandable table"}
+{#content}
+<thead>
+  <tr>
+    <th scope="col">Repository</th>
+    <th scope="col">Branches</th>
+    <th scope="col">Pull requests</th>
+    <th scope="col">Workspaces</th>
+  </tr>
+</thead>
+<tbody
+  x-data="{ exp: null, details: { branches: '10 branches across 3 teams; default is main.', prs: '5 open pull requests, 2 awaiting review.', ws: '3 active workspaces, 1 archived.' } }"
+  :class="exp ? 'pf-m-expanded' : ''"
+>
+  <tr>
+    <td>node-1</td>
+    <th scope="row" class="pf-v6-c-table__compound-expansion-toggle" :class="exp === 'branches' ? 'pf-m-expanded' : ''">
+      <button
+        type="button"
+        class="pf-v6-c-table__button"
+        :aria-expanded="exp === 'branches'"
+        @click="exp = exp === 'branches' ? null : 'branches'"
+      >
+        <span class="pf-v6-c-table__button-content"><span class="pf-v6-c-table__text">10 branches</span></span>
+      </button>
+    </th>
+    <th scope="row" class="pf-v6-c-table__compound-expansion-toggle" :class="exp === 'prs' ? 'pf-m-expanded' : ''">
+      <button
+        type="button"
+        class="pf-v6-c-table__button"
+        :aria-expanded="exp === 'prs'"
+        @click="exp = exp === 'prs' ? null : 'prs'"
+      >
+        <span class="pf-v6-c-table__button-content"><span class="pf-v6-c-table__text">5 pull requests</span></span>
+      </button>
+    </th>
+    <th scope="row" class="pf-v6-c-table__compound-expansion-toggle" :class="exp === 'ws' ? 'pf-m-expanded' : ''">
+      <button
+        type="button"
+        class="pf-v6-c-table__button"
+        :aria-expanded="exp === 'ws'"
+        @click="exp = exp === 'ws' ? null : 'ws'"
+      >
+        <span class="pf-v6-c-table__button-content"><span class="pf-v6-c-table__text">3 workspaces</span></span>
+      </button>
+    </th>
+  </tr>
+  <tr class="pf-v6-c-table__expandable-row" :class="exp ? 'pf-m-expanded' : ''" x-show="exp" x-cloak>
+    <td colspan="4">
+      <div class="pf-v6-c-table__expandable-row-content"><span x-text="exp ? details[exp] : ''"></span></div>
+    </td>
+  </tr>
+</tbody>
+{/content} {/include}

@@ -1,0 +1,75 @@
+{! Tree table — pf-m-tree-view with role="treegrid". Parent rows carry a toggle in the
+   pf-v6-c-table__tree-view-title-cell; children are indented automatically by their aria-level. Alpine
+   state on the tbody drives expand/collapse. aria-setsize / aria-posinset describe the tree to AT. !}
+<table class="pf-v6-c-table pf-m-tree-view" role="treegrid" aria-label="Tree table of servers">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Type</th>
+      <th scope="col">Detail</th>
+    </tr>
+  </thead>
+  <tbody x-data="{ g1: true, g2: false }">
+    {! Group 1 !}
+    <tr class="pf-v6-c-table__tr" aria-level="1" aria-setsize="2" aria-posinset="1" :aria-expanded="g1">
+      <td class="pf-v6-c-table__tree-view-title-cell">
+        <div class="pf-v6-c-table__tree-view-main">
+          <button type="button" class="pf-v6-c-table__button" :aria-expanded="g1" @click="g1 = !g1">
+            <div class="pf-v6-c-table__button-content">
+              <span class="pf-v6-c-table__toggle-icon"
+                ><i class="fas fa-angle-right" :class="g1 ? 'pf-m-rotate' : ''" aria-hidden="true"></i
+              ></span>
+              <span class="pf-v6-c-table__tree-view-text">Application servers</span>
+            </div>
+          </button>
+        </div>
+      </td>
+      <td>Group</td>
+      <td>2 nodes</td>
+    </tr>
+    <tr class="pf-v6-c-table__tr" aria-level="2" aria-setsize="2" aria-posinset="1" x-show="g1" x-cloak>
+      <td class="pf-v6-c-table__tree-view-title-cell">
+        <div class="pf-v6-c-table__tree-view-main">
+          <span class="pf-v6-c-table__tree-view-text">web-1</span>
+        </div>
+      </td>
+      <td>Server</td>
+      <td>2 vCPU · us-east-1</td>
+    </tr>
+    <tr class="pf-v6-c-table__tr" aria-level="2" aria-setsize="2" aria-posinset="2" x-show="g1" x-cloak>
+      <td class="pf-v6-c-table__tree-view-title-cell">
+        <div class="pf-v6-c-table__tree-view-main">
+          <span class="pf-v6-c-table__tree-view-text">web-2</span>
+        </div>
+      </td>
+      <td>Server</td>
+      <td>2 vCPU · us-east-1</td>
+    </tr>
+    {! Group 2 !}
+    <tr class="pf-v6-c-table__tr" aria-level="1" aria-setsize="2" aria-posinset="2" :aria-expanded="g2">
+      <td class="pf-v6-c-table__tree-view-title-cell">
+        <div class="pf-v6-c-table__tree-view-main">
+          <button type="button" class="pf-v6-c-table__button" :aria-expanded="g2" @click="g2 = !g2">
+            <div class="pf-v6-c-table__button-content">
+              <span class="pf-v6-c-table__toggle-icon"
+                ><i class="fas fa-angle-right" :class="g2 ? 'pf-m-rotate' : ''" aria-hidden="true"></i
+              ></span>
+              <span class="pf-v6-c-table__tree-view-text">Databases</span>
+            </div>
+          </button>
+        </div>
+      </td>
+      <td>Group</td>
+      <td>1 node</td>
+    </tr>
+    <tr class="pf-v6-c-table__tr" aria-level="2" aria-setsize="1" aria-posinset="1" x-show="g2" x-cloak>
+      <td class="pf-v6-c-table__tree-view-title-cell">
+        <div class="pf-v6-c-table__tree-view-main">
+          <span class="pf-v6-c-table__tree-view-text">db-primary</span>
+        </div>
+      </td>
+      <td>Server</td>
+      <td>8 vCPU · eu-west-1</td>
+    </tr>
+  </tbody>
+</table>

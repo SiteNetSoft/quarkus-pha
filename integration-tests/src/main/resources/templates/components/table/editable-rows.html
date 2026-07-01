@@ -1,0 +1,80 @@
+{! Editable rows — each row toggles between a read view and inline inputs. Alpine holds the committed
+   value plus a draft; Save commits the draft, Cancel discards it. The trailing action cell uses PF's
+   pf-v6-c-table__inline-edit-action. In an app the draft would POST to the server on Save. !}
+{#include components/data-display/table id="tbl-editable" ariaLabel="Editable table"} {#content}
+<thead>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Role</th>
+    <th scope="col" class="pf-v6-c-table__inline-edit-action">Edit</th>
+  </tr>
+</thead>
+<tbody>
+  <tr x-data="{ editing: false, name: 'John Doe', role: 'Admin', dName: '', dRole: '' }">
+    <td>
+      <span x-show="!editing" x-text="name"></span>
+      <span class="pf-v6-c-form-control" x-show="editing" x-cloak><input type="text" aria-label="Name" x-model="dName" /></span>
+    </td>
+    <td>
+      <span x-show="!editing" x-text="role"></span>
+      <span class="pf-v6-c-form-control" x-show="editing" x-cloak><input type="text" aria-label="Role" x-model="dRole" /></span>
+    </td>
+    <td class="pf-v6-c-table__inline-edit-action">
+      <button
+        type="button"
+        class="pf-v6-c-button pf-m-secondary"
+        x-show="!editing"
+        @click="dName = name; dRole = role; editing = true"
+      >
+        <span class="pf-v6-c-button__text">Edit</span>
+      </button>
+      <span class="pf-v6-l-flex pf-m-space-items-sm" x-show="editing" x-cloak>
+        <button
+          type="button"
+          class="pf-v6-c-button pf-m-plain"
+          aria-label="Save edits"
+          @click="name = dName; role = dRole; editing = false"
+        >
+          <span class="pf-v6-c-button__icon">{icons:svg('fa:check').raw}</span>
+        </button>
+        <button type="button" class="pf-v6-c-button pf-m-plain" aria-label="Cancel edits" @click="editing = false">
+          <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+        </button>
+      </span>
+    </td>
+  </tr>
+  <tr x-data="{ editing: false, name: 'Jane Smith', role: 'Editor', dName: '', dRole: '' }">
+    <td>
+      <span x-show="!editing" x-text="name"></span>
+      <span class="pf-v6-c-form-control" x-show="editing" x-cloak><input type="text" aria-label="Name" x-model="dName" /></span>
+    </td>
+    <td>
+      <span x-show="!editing" x-text="role"></span>
+      <span class="pf-v6-c-form-control" x-show="editing" x-cloak><input type="text" aria-label="Role" x-model="dRole" /></span>
+    </td>
+    <td class="pf-v6-c-table__inline-edit-action">
+      <button
+        type="button"
+        class="pf-v6-c-button pf-m-secondary"
+        x-show="!editing"
+        @click="dName = name; dRole = role; editing = true"
+      >
+        <span class="pf-v6-c-button__text">Edit</span>
+      </button>
+      <span class="pf-v6-l-flex pf-m-space-items-sm" x-show="editing" x-cloak>
+        <button
+          type="button"
+          class="pf-v6-c-button pf-m-plain"
+          aria-label="Save edits"
+          @click="name = dName; role = dRole; editing = false"
+        >
+          <span class="pf-v6-c-button__icon">{icons:svg('fa:check').raw}</span>
+        </button>
+        <button type="button" class="pf-v6-c-button pf-m-plain" aria-label="Cancel edits" @click="editing = false">
+          <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+        </button>
+      </span>
+    </td>
+  </tr>
+</tbody>
+{/content} {/include}
