@@ -5,31 +5,50 @@
    the factory applies inline (transform transition) — PF animates the same way, via JS not CSS.
    This file only adds the grab cursor, row padding/spacing, and the vertical multi-zone layout. */
 
-/* Default variant (basic / multiple-zones): a plain, borderless text row (no grip — like PF, the
-   whole row is the drag handle). No border/background/radius at rest; the drag visual is the overlay
-   clone (.pha-dd-grabbed) + the placeholder border. Thin like PF (no button forcing the height). */
+/* Default variant (basic / multiple-zones): a plain, borderless text row. The grip is a full-height
+   handle flush to the left edge (no row padding around it); the label carries the row's spacing. */
 .pha-dd-draggable {
   display: flex;
   align-items: center;
-  gap: var(--pf-t--global--spacer--sm);
+  border-radius: var(--pf-t--global--border--radius--small);
+}
+.pha-dd-label {
+  display: flex;
+  align-items: center;
   padding-block: var(--pf-t--global--spacer--sm);
-  padding-inline: var(--pf-t--global--spacer--md);
-  cursor: grab;
-}
-.pha-dd-draggable:active {
-  cursor: grabbing;
-}
-.pha-dd-draggable:focus-visible {
-  outline: var(--pf-t--global--border--width--regular) solid var(--pf-t--global--border--color--brand--default);
-  outline-offset: -1px;
+  padding-inline-end: var(--pf-t--global--spacer--md);
+  /* pin the body text colour so the label can't inherit a light/white colour from any context
+     (the overlay clone + the in-list placeholder must keep normal dark text while dragging) */
+  color: var(--pf-t--global--text--color--regular);
 }
 
-/* Decorative grip (the six dots) on the left of default-variant rows — a draggability affordance,
-   not a button, so it does not inflate the row height. The whole row is the actual drag handle. */
+/* The grip (six dots) IS the drag handle — like PF's DragButton, dragging only starts here, not
+   from the whole row. Plain-button affordance: subtle icon, PF's plain-action grey on hover/press.
+   Full-height + flush left (align-self stretch, no row padding) so the grey fills the row edge to
+   edge with no gap — its only padding is inline, to give the dots breathing room. */
 .pha-dd-grip {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 2.25rem; /* width is the source of truth... */
+  aspect-ratio: 1; /* ...height derived from it → a square hover target */
   flex-shrink: 0;
+  border-radius: var(--pf-t--global--border--radius--small);
   color: var(--pf-t--global--icon--color--subtle);
+  cursor: grab;
+  touch-action: none;
+}
+.pha-dd-grip:hover,
+.pha-dd-grip:active {
+  background-color: var(--pf-t--global--background--color--action--plain--hover);
+  color: var(--pf-t--global--icon--color--regular);
+}
+.pha-dd-grip:active {
+  cursor: grabbing;
+}
+.pha-dd-grip:focus-visible {
+  outline: var(--pf-t--global--border--width--regular) solid var(--pf-t--global--border--color--brand--default);
+  outline-offset: -1px;
 }
 
 /* Dual-list rows are draggable too */
@@ -37,10 +56,9 @@
   cursor: grab;
 }
 
-/* Every pointer-draggable row: grab cursor + suppress touch scrolling so a touch drag reorders
-   instead of panning the page */
+/* Every draggable row suppresses touch scrolling so a touch drag reorders instead of panning the
+   page (the grab cursor lives on the actual handle — the grip, or the whole row for dual-list) */
 [data-dd-item] {
-  cursor: grab;
   touch-action: none;
 }
 
@@ -57,14 +75,13 @@
   outline-offset: -1px;
 }
 
-/* The original row left in the list while the overlay clone is dragged — dnd-kit's placeholder:
-   greyed content + a brand-blue outline marking where the row will land (PF's droppable.pf-m-dragging).
-   Content is faded via the children so the ::after border stays crisp. */
+/* The original row left in the list while the overlay clone is dragged — the placeholder. Matching
+   PF's captured DOM (pf-v6-c-droppable.pf-m-dragging): the row's background and text do NOT change;
+   its only marks are a 1px brand-blue outline via ::after (PF's --droppable--m-dragging--after tokens:
+   regular width, brand colour, small radius; before--Opacity is 0 so there is NO background tint) and
+   the grip staying pressed-grey (same grey as hover — PF sets its drag button aria-pressed="true"). */
 .pha-dd-placeholder {
   position: relative;
-}
-.pha-dd-placeholder > * {
-  opacity: 0.35;
 }
 .pha-dd-placeholder::after {
   content: "";
@@ -73,6 +90,10 @@
   border: var(--pf-t--global--border--width--regular) solid var(--pf-t--global--border--color--brand--default);
   border-radius: var(--pf-t--global--border--radius--small);
   pointer-events: none;
+}
+.pha-dd-placeholder .pha-dd-grip {
+  background-color: var(--pf-t--global--background--color--action--plain--hover);
+  color: var(--pf-t--global--icon--color--regular);
 }
 
 /* While any drag is in flight: grabbing cursor everywhere, no accidental text selection */

@@ -9,21 +9,20 @@
 >
   <div class="pf-v6-c-droppable" id="dd-basic" data-dd-zone="main" role="list" aria-label="Release steps">
     <template x-for="(item, i) in lists.main" :key="item.id">
-      <div
-        class="pf-v6-c-draggable pha-dd-draggable"
-        role="listitem"
-        tabindex="0"
-        data-dd-item
-        data-dd-handle
-        data-zone="main"
-        :data-id="item.id"
-        :data-flip-id="item.id"
-        :aria-label="'Reorder ' + item.label + '. Use the up and down arrow keys to move.'"
-        @pointerdown="onPointerDown('main', i, $event)"
-        @keydown.arrow-up.prevent="moveUp('main', i)"
-        @keydown.arrow-down.prevent="moveDown('main', i)"
-      >
-        <span class="pha-dd-grip" aria-hidden="true">{icons:svg('fa:grip-vertical').raw}</span>
+      <div class="pf-v6-c-draggable pha-dd-draggable" role="listitem" data-dd-item data-zone="main" :data-flip-id="item.id">
+        <span
+          class="pha-dd-grip"
+          role="button"
+          tabindex="0"
+          data-dd-handle
+          data-zone="main"
+          :data-id="item.id"
+          :aria-label="'Reorder ' + item.label + '. Use the up and down arrow keys to move.'"
+          @pointerdown="onPointerDown('main', i, $event)"
+          @keydown.arrow-up.prevent="moveUp('main', i)"
+          @keydown.arrow-down.prevent="moveDown('main', i)"
+          >{icons:svg('fa:grip-vertical').raw}</span
+        >
         <span class="pha-dd-label" x-text="item.label"></span>
       </div>
     </template>
