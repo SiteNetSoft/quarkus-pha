@@ -35,7 +35,15 @@ public class TableExamplesRoutes {
         "striped",
         "borderless",
         "sortable",
-        "expandable"
+        "expandable",
+        "selectable-checkbox",
+        "selectable-radio",
+        "actions",
+        "empty-state",
+        "width",
+        "favoritable",
+        "clickable-rows",
+        "nested-column-headers"
     );
 
     @Inject

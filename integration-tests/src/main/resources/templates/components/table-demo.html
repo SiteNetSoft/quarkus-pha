@@ -98,6 +98,80 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#selectable-checkbox" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Selectable with checkboxes</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#selectable-radio" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Selectable with radio</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#actions" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Actions</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#empty-state" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Empty state</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#width" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Width and text modifiers</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#favoritable" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Favoritable</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#clickable-rows" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Clickable rows</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#nested-column-headers" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Nested column headers</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -178,7 +252,62 @@
                         Per-row toggle reveals a detail row beneath; state lives in
                         <code class="ws-code">x-data</code> on the &lt;tbody&gt;.
                       </p>
-                      {/description} {#content}{#include components/table/expandable /}{/content} {/include}
+                      {/description} {#content}{#include components/table/expandable /}{/content} {/include} {#include
+                      partials/example-card title="Selectable with checkboxes" slug="selectable-checkbox"
+                      component="table"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A leading <code class="ws-code">pf-v6-c-table__check</code> control column with per-row
+                        checkboxes and a select-all in the header.
+                      </p>
+                      {/description} {#content}{#include components/table/selectable-checkbox /}{/content} {/include}
+                      {#include partials/example-card title="Selectable with radio" slug="selectable-radio"
+                      component="table"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Single-row selection — radio inputs sharing one name in the
+                        <code class="ws-code">pf-v6-c-table__check</code> column, no select-all.
+                      </p>
+                      {/description} {#content}{#include components/table/selectable-radio /}{/content} {/include}
+                      {#include partials/example-card title="Actions" slug="actions" component="table"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A trailing <code class="ws-code">pf-v6-c-table__action</code> cell with a kebab overflow menu
+                        (Alpine); the last row shows the inline-action alternative.
+                      </p>
+                      {/description} {#content}{#include components/table/actions /}{/content} {/include} {#include
+                      partials/example-card title="Empty state" slug="empty-state" component="table"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A single full-width body cell (<code class="ws-code">colspan</code>) holding the empty-state
+                        component for a table with no rows.
+                      </p>
+                      {/description} {#content}{#include components/table/empty-state /}{/content} {/include} {#include
+                      partials/example-card title="Width and text modifiers" slug="width" component="table"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-width-{|{pct}|}</code> pins a column's width;
+                        <code class="ws-code">pf-m-truncate</code>, <code class="ws-code">pf-m-fit-content</code> and
+                        <code class="ws-code">pf-m-nowrap</code> control cell text overflow.
+                      </p>
+                      {/description} {#content}{#include components/table/width /}{/content} {/include} {#include
+                      partials/example-card title="Favoritable" slug="favoritable" component="table"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A leading <code class="ws-code">pf-v6-c-table__favorite</code> star column;
+                        <code class="ws-code">pf-m-favorited</code> colours the star (Alpine toggles it).
+                      </p>
+                      {/description} {#content}{#include components/table/favoritable /}{/content} {/include} {#include
+                      partials/example-card title="Clickable rows" slug="clickable-rows" component="table"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Clicking (or Enter/Space on) a row selects it — <code class="ws-code">pf-m-selected</code> on
+                        the grid-variant table highlights the current row.
+                      </p>
+                      {/description} {#content}{#include components/table/clickable-rows /}{/content} {/include}
+                      {#include partials/example-card title="Nested column headers" slug="nested-column-headers"
+                      component="table"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-nested-column-header</code> groups sub-columns (<code class="ws-code"
+                          >pf-v6-c-table__subhead</code
+                        >) under a shared parent header via rowspan/colspan.
+                      </p>
+                      {/description} {#content}{#include components/table/nested-column-headers /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

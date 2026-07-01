@@ -45,4 +45,67 @@ test.describe("Table", () => {
       await expect(page.locator("#tbl-striped")).toHaveClass(/pf-m-striped/);
     });
   });
+
+  test.describe("Selectable (checkbox)", () => {
+    test("has a check column with select-all and per-row checkboxes", async ({ page }) => {
+      await expect(page.locator('#tbl-select-check thead input[type="checkbox"]')).toHaveCount(1);
+      await expect(page.locator('#tbl-select-check tbody .pf-v6-c-table__check input[type="checkbox"]')).toHaveCount(3);
+    });
+  });
+
+  test.describe("Selectable (radio)", () => {
+    test("has one radio group across the rows", async ({ page }) => {
+      await expect(page.locator('#tbl-select-radio tbody input[type="radio"]')).toHaveCount(3);
+    });
+  });
+
+  test.describe("Actions", () => {
+    test("has an action cell with a kebab that opens a menu", async ({ page }) => {
+      const kebab = page.locator("#tbl-actions .pf-v6-c-table__action .pf-v6-c-menu-toggle").first();
+      await expect(kebab).toBeVisible();
+      await kebab.click();
+      await expect(page.locator("#tbl-actions .pf-v6-c-menu").first()).toBeVisible();
+    });
+  });
+
+  test.describe("Empty state", () => {
+    test("renders an empty state in a spanning cell", async ({ page }) => {
+      await expect(page.locator("#tbl-empty tbody .pf-v6-c-empty-state")).toBeVisible();
+      await expect(page.locator("#tbl-empty tbody td[colspan]")).toHaveCount(1);
+    });
+  });
+
+  test.describe("Width modifiers", () => {
+    test("applies width and text modifiers on headers", async ({ page }) => {
+      await expect(page.locator("#tbl-width thead th.pf-m-width-20")).toHaveCount(1);
+      await expect(page.locator("#tbl-width thead th.pf-m-truncate")).toHaveCount(1);
+    });
+  });
+
+  test.describe("Favoritable", () => {
+    test("clicking a star toggles pf-m-favorited", async ({ page }) => {
+      const star = page.locator("#tbl-favorite tbody tr").nth(1).locator(".pf-v6-c-table__favorite button");
+      await expect(star).not.toHaveClass(/pf-m-favorited/);
+      await star.click();
+      await expect(star).toHaveClass(/pf-m-favorited/);
+    });
+  });
+
+  test.describe("Clickable rows", () => {
+    test("clicking a row selects it", async ({ page }) => {
+      const row = page.locator("#tbl-clickable tbody tr").first();
+      await expect(row).not.toHaveClass(/pf-m-selected/);
+      await row.click();
+      await expect(row).toHaveClass(/pf-m-selected/);
+    });
+  });
+
+  test.describe("Nested column headers", () => {
+    test("uses pf-m-nested-column-header with subhead cells", async ({ page }) => {
+      await expect(page.locator("#tbl-clickable")).toBeVisible();
+      const t = page.locator("table.pf-m-nested-column-header");
+      await expect(t).toBeVisible();
+      await expect(t.locator("thead th.pf-v6-c-table__subhead")).toHaveCount(4);
+    });
+  });
 });
