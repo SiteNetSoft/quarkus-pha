@@ -233,7 +233,7 @@ phaAlpine("phaDragDrop", () => ({
     if (!g) return;
     const target = el.getBoundingClientRect();
     const gr = g.getBoundingClientRect();
-    g.style.transition = "transform 150ms ease";
+    g.style.transition = "transform 200ms ease";
     g.style.transform = "translate(" + (target.left - gr.left) + "px, " + (target.top - gr.top) + "px)";
     const done = () => {
       if (g.parentNode) g.parentNode.removeChild(g);
@@ -280,7 +280,7 @@ phaAlpine("phaDragDrop", () => ({
         el.style.transform = "translate(" + dx + "px, " + dy + "px)";
         el.getBoundingClientRect();
         requestAnimationFrame(() => {
-          el.style.transition = "transform 150ms ease";
+          el.style.transition = "transform 200ms ease";
           el.style.transform = "";
         });
       });
