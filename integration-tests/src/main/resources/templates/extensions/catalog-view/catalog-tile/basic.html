@@ -1,5 +1,31 @@
+{! Catalog tile grid — one tile per entry. Shows the template's variants: icon + title + vendor +
+   description, a featured tile, a link tile (href → renders as <a>), a tile with a footer, and a tile
+   with multiple icon badges (hand-rendered, since a Qute include can't take an inline badge list). !}
 <div class="pf-v6-l-gallery pf-m-gutter" style="--pf-v6-l-gallery--GridTemplateColumns--min: 240px">
   {#include components/extensions/catalog-tile id="ct-quarkus" title="Quarkus" vendor="Red Hat" description="Supersonic, subatomic Java framework — Kubernetes-native, GraalVM-friendly, built for the cloud era." iconClass="pf-v6-c-icon fas fa-bolt" /}
   {#include components/extensions/catalog-tile id="ct-htmx" title="HTMX" vendor="Big Sky Software" description="High-power tools for HTML — modern UX with minimal JavaScript. Adds AJAX, CSS Transitions, WebSockets and SSE directly to HTML, using attributes." iconClass="pf-v6-c-icon fas fa-arrow-right-arrow-left" featured=true /}
   {#include components/extensions/catalog-tile id="ct-alpine" title="Alpine.js" vendor="Caleb Porzio" description="Your new, lightweight JavaScript framework — Tailwind for JavaScript. 15kB and reactive." iconClass="pf-v6-c-icon fas fa-mountain" /}
+  {! Link variant — href makes the whole tile an anchor !}
+  {#include components/extensions/catalog-tile id="ct-openshift" href="#" title="OpenShift" vendor="Red Hat" description="Enterprise Kubernetes platform — click this tile to open the catalog entry." iconClass="pf-v6-c-icon fas fa-dharmachakra" /}
+  {! With a footer !}
+  {#include components/extensions/catalog-tile id="ct-kubernetes" title="Kubernetes" vendor="CNCF" description="Production-grade container orchestration." iconClass="pf-v6-c-icon fas fa-network-wired" footer="Available in the Operator catalog" /}
+  {! With multiple icon badges (hand-rendered) !}
+  <div role="button" tabindex="0" id="ct-istio" class="pf-v6-c-card catalog-tile-pf">
+    <div class="pf-v6-c-card__header catalog-tile-pf-header">
+      <span class="catalog-tile-pf-icon pf-v6-c-icon fas fa-diagram-project" aria-hidden="true"></span>
+      <div class="catalog-tile-pf-badge-container">
+        <span class="catalog-tile-pf-badge pf-v6-c-icon fas fa-certificate" aria-hidden="true"></span>
+        <span class="catalog-tile-pf-badge pf-v6-c-icon fas fa-star" aria-hidden="true"></span>
+      </div>
+    </div>
+    <div class="pf-v6-c-card__title">
+      <span class="pf-v6-c-card__title-text catalog-tile-pf-title">Istio</span>
+      <p class="catalog-tile-pf-subtitle">CNCF</p>
+    </div>
+    <div class="pf-v6-c-card__body catalog-tile-pf-body">
+      <p class="catalog-tile-pf-description">
+        <span>Service mesh for microservices — traffic management, security, and observability.</span>
+      </p>
+    </div>
+  </div>
 </div>
