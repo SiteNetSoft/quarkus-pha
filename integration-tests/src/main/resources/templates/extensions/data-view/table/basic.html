@@ -21,6 +21,9 @@
             </div>
           </div>
         </div>
+        <div class="pf-v6-c-toolbar__item" x-show="selectedCount > 0" x-cloak>
+          <span class="pf-v6-c-content--small" x-text="selectedCount + ' selected'">0 selected</span>
+        </div>
         <div class="pf-v6-c-toolbar__item pf-m-align-right">
           <span class="pf-v6-c-content--small" x-text="total + (total === 1 ? ' result' : ' results')">0 results</span>
         </div>
@@ -31,6 +34,9 @@
   <table class="pf-v6-c-table pf-m-grid-md" aria-label="Data view table">
     <thead>
       <tr>
+        <td class="pf-v6-c-table__check">
+          <input type="checkbox" aria-label="Select all rows on this page" :checked="allVisibleSelected" @change="toggleAll()" />
+        </td>
         <template x-for="col in columns" :key="col.key">
           <th scope="col" :aria-sort="sortAria(col.key)">
             <button type="button" class="pf-v6-c-table__button" @click="toggleSort(col.key)">
@@ -57,7 +63,15 @@
     </thead>
     <tbody>
       <template x-for="row in visible" :key="row.name">
-        <tr>
+        <tr :class="isSelected(row.name) ? 'pf-m-selected' : ''">
+          <td class="pf-v6-c-table__check">
+            <input
+              type="checkbox"
+              :aria-label="'Select ' + row.name"
+              :checked="isSelected(row.name)"
+              @change="toggleRow(row.name)"
+            />
+          </td>
           <td data-label="Name" x-text="row.name"></td>
           <td data-label="Vendor" x-text="row.vendor"></td>
           <td data-label="Version" x-text="row.version"></td>
@@ -66,7 +80,7 @@
       </template>
       <template x-if="total === 0">
         <tr>
-          <td colspan="4">
+          <td colspan="5">
             <div class="pf-v6-c-empty-state pf-m-sm">
               <div class="pf-v6-c-empty-state__content">
                 <div class="pf-v6-c-empty-state__title">No results found</div>

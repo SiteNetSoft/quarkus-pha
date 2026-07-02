@@ -77,7 +77,7 @@ public class ExtensionsRoutes {
     private static final Map<String, String> DATA_VIEW_INTROS = Map.ofEntries(
         Map.entry("overview", "Composition pattern — toolbar + table + pagination wired with shared client-side state. The Alpine factory <code class=\"ws-code\">phaDataView()</code> owns search, sort, and page; the page passes rows in via <code class=\"ws-code\">data-rows</code>."),
         Map.entry("toolbar",  "Toolbar with search input, filter trigger, removable filter chips, and a result count. Pair with a table or card grid below."),
-        Map.entry("table",    "Sortable table with search and pagination. The heaviest of the three demos; everything happens in Alpine state.")
+        Map.entry("table",    "Sortable table with search, pagination, and selectable rows (per-row checkboxes + select-all with a selection count). The heaviest of the three demos; everything happens in Alpine state.")
     );
 
     /** Sample rows used by the overview + table data-view demos. Real data would come from a service / repository. */
