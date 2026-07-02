@@ -52,6 +52,24 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-search" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With search</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#flyout" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Flyout</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -103,7 +121,21 @@
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Menu with a header ("Recent projects"), items with descriptions, and a footer link.
                       </p>
-                      {/description} {#content}{#include components/custom-menus/basic /}{/content} {/include}
+                      {/description} {#content}{#include components/custom-menus/basic /}{/content} {/include} {#include
+                      partials/example-card title="With search" slug="with-search" component="custom-menus"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A <code class="ws-code">pf-v6-c-menu__search</code> slot filters the list live (Alpine) — the
+                        toggle + search + list + footer composition (a project picker).
+                      </p>
+                      {/description} {#content}{#include components/custom-menus/with-search /}{/content} {/include}
+                      {#include partials/example-card title="Flyout" slug="flyout" component="custom-menus"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A <code class="ws-code">pf-m-flyout</code> item whose nested menu flies out to the side on
+                        hover/click (nested Alpine scope).
+                      </p>
+                      {/description} {#content}{#include components/custom-menus/flyout /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

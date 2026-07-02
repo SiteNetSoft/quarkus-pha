@@ -1,0 +1,79 @@
+{! Flyout menu — a pf-m-flyout list item whose nested pf-v6-c-menu flies out to the side on
+   hover/click. Nested Alpine scope tracks the submenu open state. !}
+<div x-data="{ open: false }" style="position: relative; display: inline-block">
+  <button
+    class="pf-v6-c-menu-toggle"
+    type="button"
+    :class="open ? 'pf-m-expanded' : ''"
+    :aria-expanded="open"
+    @click="open = !open"
+    id="cm-flyout-toggle"
+  >
+    <span class="pf-v6-c-menu-toggle__text">Actions</span>
+    <span class="pf-v6-c-menu-toggle__controls"
+      ><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span
+    >
+  </button>
+  <div
+    class="pf-v6-c-menu"
+    x-show="open"
+    x-cloak
+    @click.outside="open = false"
+    style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 14rem"
+  >
+    <div class="pf-v6-c-menu__content">
+      <ul class="pf-v6-c-menu__list" role="menu">
+        <li role="none" class="pf-v6-c-menu__list-item">
+          <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+            <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Edit</span></span>
+          </button>
+        </li>
+        <li
+          role="none"
+          class="pf-v6-c-menu__list-item pf-m-flyout"
+          style="position: relative"
+          x-data="{ sub: false }"
+          @mouseenter="sub = true"
+          @mouseleave="sub = false"
+        >
+          <button
+            class="pf-v6-c-menu__item"
+            type="button"
+            role="menuitem"
+            :aria-expanded="sub"
+            @click="sub = !sub"
+          >
+            <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Share</span></span>
+            <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+          </button>
+          <div
+            class="pf-v6-c-menu"
+            x-show="sub"
+            x-cloak
+            style="position: absolute; top: 0; left: 100%; z-index: 210; min-width: 12rem"
+          >
+            <div class="pf-v6-c-menu__content">
+              <ul class="pf-v6-c-menu__list" role="menu">
+                <li role="none" class="pf-v6-c-menu__list-item">
+                  <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                    <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Email</span></span>
+                  </button>
+                </li>
+                <li role="none" class="pf-v6-c-menu__list-item">
+                  <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                    <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Copy link</span></span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li role="none" class="pf-v6-c-menu__list-item">
+          <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+            <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Delete</span></span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
