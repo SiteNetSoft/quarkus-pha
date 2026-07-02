@@ -1,0 +1,76 @@
+{! Custom menu with a search slot — a toggle opens a dropdown whose pf-v6-c-menu__search filters the
+   list live (Alpine), with a footer action. The composition pattern: toggle + search + list + footer. !}
+<div x-data="{ open: false, q: '' }" style="position: relative; display: inline-block">
+  <button
+    class="pf-v6-c-menu-toggle"
+    type="button"
+    :class="open ? 'pf-m-expanded' : ''"
+    :aria-expanded="open"
+    @click="open = !open"
+    id="cm-search-toggle"
+  >
+    <span class="pf-v6-c-menu-toggle__text">Project</span>
+    <span class="pf-v6-c-menu-toggle__controls"
+      ><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span
+    >
+  </button>
+  <div
+    class="pf-v6-c-menu"
+    x-show="open"
+    x-cloak
+    @click.outside="open = false"
+    style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 20rem"
+  >
+    <div class="pf-v6-c-menu__search">
+      <div class="pf-v6-c-text-input-group">
+        <div class="pf-v6-c-text-input-group__main pf-m-icon">
+          <span class="pf-v6-c-text-input-group__text">
+            <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+            <input
+              class="pf-v6-c-text-input-group__text-input"
+              type="text"
+              x-model="q"
+              placeholder="Find a project"
+              aria-label="Find a project"
+            />
+          </span>
+        </div>
+      </div>
+    </div>
+    <hr class="pf-v6-c-divider" />
+    <div class="pf-v6-c-menu__content">
+      <ul class="pf-v6-c-menu__list" role="menu">
+        <li role="none" class="pf-v6-c-menu__list-item" x-show="'Apollo'.toLowerCase().indexOf(q.toLowerCase()) !== -1">
+          <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+            <span class="pf-v6-c-menu__item-main"
+              ><span class="pf-v6-c-menu__item-text">Apollo</span
+              ><span class="pf-v6-c-menu__item-description">Backend service</span></span
+            >
+          </button>
+        </li>
+        <li role="none" class="pf-v6-c-menu__list-item" x-show="'Mercury'.toLowerCase().indexOf(q.toLowerCase()) !== -1">
+          <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+            <span class="pf-v6-c-menu__item-main"
+              ><span class="pf-v6-c-menu__item-text">Mercury</span
+              ><span class="pf-v6-c-menu__item-description">Web frontend</span></span
+            >
+          </button>
+        </li>
+        <li role="none" class="pf-v6-c-menu__list-item" x-show="'Gemini'.toLowerCase().indexOf(q.toLowerCase()) !== -1">
+          <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+            <span class="pf-v6-c-menu__item-main"
+              ><span class="pf-v6-c-menu__item-text">Gemini</span
+              ><span class="pf-v6-c-menu__item-description">Data pipeline</span></span
+            >
+          </button>
+        </li>
+      </ul>
+    </div>
+    <footer
+      class="pf-v6-c-menu__footer"
+      style="padding: 0.5rem 1rem; border-top: 1px solid var(--pf-t--global--border--color--default)"
+    >
+      <a href="#" class="pf-v6-c-button pf-m-link pf-m-inline"><span class="pf-v6-c-button__text">Browse all projects</span></a>
+    </footer>
+  </div>
+</div>

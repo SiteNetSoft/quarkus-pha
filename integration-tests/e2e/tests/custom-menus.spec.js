@@ -9,9 +9,7 @@ test.describe("Custom menus", () => {
     await expect(page.locator("h1#ws-page-title")).toHaveText("Custom menus");
   });
 
-  test("Examples and Documentation section headings are visible", async ({
-    page,
-  }) => {
+  test("Examples and Documentation section headings are visible", async ({ page }) => {
     await expect(page.locator("h2#examples")).toBeVisible();
     await expect(page.locator("h2#documentation")).toBeVisible();
   });
@@ -30,29 +28,20 @@ test.describe("Custom menus", () => {
     test("toggle is visible with default text 'Project'", async ({ page }) => {
       const toggle = page.locator("#cm-basic-toggle");
       await expect(toggle).toBeVisible();
-      await expect(toggle.locator(".pf-v6-c-menu-toggle__text")).toHaveText(
-        "Project"
-      );
+      await expect(toggle.locator(".pf-v6-c-menu-toggle__text")).toHaveText("Project");
     });
 
     test("menu is hidden by default", async ({ page }) => {
-      const menu = page
-        .locator("#cm-basic-toggle")
-        .locator("..")
-        .locator(".pf-v6-c-menu");
+      const menu = page.locator("#cm-basic-toggle").locator("..").locator(".pf-v6-c-menu");
       await expect(menu).not.toBeVisible();
     });
 
-    test("clicking toggle opens menu with header, items, and footer", async ({
-      page,
-    }) => {
+    test("clicking toggle opens menu with header, items, and footer", async ({ page }) => {
       await page.locator("#cm-basic-toggle").click();
       const wrapper = page.locator("#cm-basic-toggle").locator("..");
       await expect(wrapper.locator(".pf-v6-c-menu")).toBeVisible();
       await expect(wrapper.locator(".pf-v6-c-menu__header")).toBeVisible();
-      await expect(wrapper.locator(".pf-v6-c-menu__header strong")).toHaveText(
-        "Recent projects"
-      );
+      await expect(wrapper.locator(".pf-v6-c-menu__header strong")).toHaveText("Recent projects");
       await expect(wrapper.locator(".pf-v6-c-menu__list-item")).toHaveCount(2);
       await expect(wrapper.locator(".pf-v6-c-menu__footer")).toBeVisible();
     });
@@ -75,9 +64,31 @@ test.describe("Custom menus", () => {
     test("footer contains 'Browse all projects' link", async ({ page }) => {
       await page.locator("#cm-basic-toggle").click();
       const wrapper = page.locator("#cm-basic-toggle").locator("..");
-      await expect(
-        wrapper.locator(".pf-v6-c-menu__footer .pf-v6-c-button__text")
-      ).toHaveText("Browse all projects");
+      await expect(wrapper.locator(".pf-v6-c-menu__footer .pf-v6-c-button__text")).toHaveText("Browse all projects");
+    });
+  });
+
+  test.describe("With search", () => {
+    test("typing in the search slot filters the list", async ({ page }) => {
+      await page.locator("#cm-search-toggle").click();
+      const wrapper = page.locator("#cm-search-toggle").locator("..");
+      const items = wrapper.locator(".pf-v6-c-menu__list-item");
+      await expect(items.filter({ hasText: "Apollo" })).toBeVisible();
+      await wrapper.locator(".pf-v6-c-menu__search input").fill("mer");
+      await expect(items.filter({ hasText: "Mercury" })).toBeVisible();
+      await expect(items.filter({ hasText: "Apollo" })).toBeHidden();
+    });
+  });
+
+  test.describe("Flyout", () => {
+    test("hovering the flyout item reveals its submenu", async ({ page }) => {
+      await page.locator("#cm-flyout-toggle").click();
+      const flyout = page.locator("#cm-flyout-toggle").locator("..").locator(".pf-m-flyout");
+      const submenu = flyout.locator(".pf-v6-c-menu");
+      await expect(submenu).toBeHidden();
+      await flyout.hover();
+      await expect(submenu).toBeVisible();
+      await expect(submenu).toContainText("Email");
     });
   });
 });
