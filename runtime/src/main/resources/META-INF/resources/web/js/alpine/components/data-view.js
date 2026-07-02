@@ -22,6 +22,7 @@ phaAlpine("phaDataView", () => ({
   sortDir: "asc",
   page: 1,
   perPage: 5,
+  selected: [], // row keys (row.name) selected across pages
 
   init() {
     let rawRows = this.$root.dataset.rows;
@@ -117,5 +118,37 @@ phaAlpine("phaDataView", () => ({
   sortAria(colKey) {
     if (this.sortColumn !== colKey) return "none";
     return this.sortDir === "asc" ? "ascending" : "descending";
+  },
+
+  // --- row selection (optional; used by the selectable table example) ------
+  isSelected(key) {
+    return this.selected.includes(key);
+  },
+
+  toggleRow(key) {
+    let i = this.selected.indexOf(key);
+    if (i === -1) this.selected.push(key);
+    else this.selected.splice(i, 1);
+  },
+
+  // select-all acts on the rows currently visible on the page
+  get allVisibleSelected() {
+    let vis = this.visible;
+    return vis.length > 0 && vis.every((r) => this.selected.includes(r.name));
+  },
+
+  toggleAll() {
+    let vis = this.visible.map((r) => r.name);
+    if (this.allVisibleSelected) {
+      this.selected = this.selected.filter((k) => !vis.includes(k));
+    } else {
+      vis.forEach((k) => {
+        if (!this.selected.includes(k)) this.selected.push(k);
+      });
+    }
+  },
+
+  get selectedCount() {
+    return this.selected.length;
   },
 }));
