@@ -71,7 +71,7 @@ phaAlpine("phaDragDrop", () => ({
       active: false,
     };
     this._move = (ev) => this.onPointerMove(ev);
-    this._up = (ev) => this.onPointerUp(ev);
+    this._up = () => this.onPointerUp();
     window.addEventListener("pointermove", this._move);
     window.addEventListener("pointerup", this._up);
     window.addEventListener("pointercancel", this._up);
