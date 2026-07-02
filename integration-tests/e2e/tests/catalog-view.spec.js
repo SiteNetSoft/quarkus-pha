@@ -12,12 +12,26 @@ test.describe("Catalog view extensions", () => {
   });
 
   test.describe("Catalog tile", () => {
-    test("renders 3 tiles with titles and descriptions", async ({ page }) => {
+    test.beforeEach(async ({ page }) => {
       await page.goto("/extensions/catalog-view/catalog-tile");
-      const tiles = page.locator(".catalog-tile-pf");
-      await expect(tiles).toHaveCount(3);
+    });
+
+    test("renders a tile grid with titles and a featured tile", async ({ page }) => {
+      await expect(page.locator(".catalog-tile-pf")).toHaveCount(6);
       await expect(page.locator("#ct-quarkus .catalog-tile-pf-title")).toContainText("Quarkus");
       await expect(page.locator("#ct-htmx")).toHaveClass(/catalog-tile-pf-featured/);
+    });
+
+    test("link variant renders as an anchor", async ({ page }) => {
+      await expect(page.locator("a#ct-openshift.catalog-tile-pf")).toHaveAttribute("href", "#");
+    });
+
+    test("footer variant renders a card footer", async ({ page }) => {
+      await expect(page.locator("#ct-kubernetes .catalog-tile-pf-footer")).toContainText("Operator catalog");
+    });
+
+    test("badges variant renders multiple icon badges", async ({ page }) => {
+      await expect(page.locator("#ct-istio .catalog-tile-pf-badge-container .catalog-tile-pf-badge")).toHaveCount(2);
     });
   });
 
