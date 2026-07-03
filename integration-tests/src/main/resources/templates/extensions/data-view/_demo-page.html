@@ -3,6 +3,7 @@
 {! Data: type (slug), title, intro (HTML), columnsJson, rowsJson !}
 {#title}{title}{/title} {#head}
 <script src="/web/js/alpine/components/data-view.js"></script>
+<script src="/web/js/alpine/components/column-resize.js"></script>
 <script src="/web/js/alpine/components/code-example.js"></script>
 {/head} {#body}
 <div id="root">
@@ -65,6 +66,30 @@
                       {#include partials/example-card title="Basic" slug="basic" component="data-view/table" urlPrefix="/extensions" description="Sortable table with search and pagination. Click any column header to sort; the search input filters across all columns. Sort indicators reflect the current state; pagination tracks the filtered total."}
                       {#content}{#include extensions/data-view/table/basic /}{/content}
                       {/include}
+
+                      {#include partials/example-card title="Expandable rows" slug="expandable" component="data-view/table" urlPrefix="/extensions" description="Each row expands to a detail panel via a toggle. Expansion state lives in the phaDataView factory, so a row stays open while you sort but collapses when it pages out of view."}
+                      {#content}{#include extensions/data-view/table/expandable /}{/content}
+                      {/include}
+
+                      {#include partials/example-card title="Sticky header + first column" slug="sticky" component="data-view/table" urlPrefix="/extensions" description="All rows render in one scroll box: the header pins on vertical scroll and the first column pins on horizontal scroll. Search and column sort still work; pagination is dropped since every row is on a single page."}
+                      {#content}{#include extensions/data-view/table/sticky /}{/content}
+                      {/include}
+
+                      {#include partials/example-card title="Tree table" slug="tree-table" component="data-view/table" urlPrefix="/extensions" description="A treegrid grouping the libraries by license family. The flat data-view seed doesn't fit the filter/sort/paginate model, so this is a hierarchy with expand/collapse per group; aria-level, aria-setsize, and aria-posinset describe the tree to assistive tech."}
+                      {#content}{#include extensions/data-view/table/tree-table /}{/content}
+                      {/include}
+
+                      {#include partials/example-card title="Resizable columns" slug="resizable" component="data-view/table" urlPrefix="/extensions" description="Drag the grip on a header cell's trailing edge to resize that column (min 80px). A small phaColumnResize Alpine factory tracks the pointer at the document level; the table uses table-layout: fixed so widths hold."}
+                      {#content}{#include extensions/data-view/table/resizable /}{/content}
+                      {/include}
+
+                      {#include partials/example-card title="Loading state" slug="loading" component="data-view/table" urlPrefix="/extensions" description="Skeleton rows stand in while data is fetched. In an HTMX flow this is the placeholder tbody returned before the real rows swap in; the toolbar and column headers stay in place so the layout doesn't jump when data arrives."}
+                      {#content}{#include extensions/data-view/table/loading /}{/content}
+                      {/include}
+
+                      {#include partials/example-card title="Error state" slug="error" component="data-view/table" urlPrefix="/extensions" description="When the fetch fails, a danger empty-state with a retry action fills the table body. The toolbar and column headers remain so the user keeps their bearings and can retry in place."}
+                      {#content}{#include extensions/data-view/table/error /}{/content}
+                      {/include}
                     {/if}
 
                     <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
@@ -90,7 +115,7 @@
 
                     <div class="pf-v6-l-stack__item">
                       <a
-                        href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/integration-tests/src/main/resources/templates/extensions/data-view/{type}/basic.html"
+                        href="https://github.com/SiteNetSoft/quarkus-pha/tree/develop/integration-tests/src/main/resources/templates/extensions/data-view/{type}"
                         target="_blank"
                         rel="noopener noreferrer"
                         >Edit data-view/{type} on GitHub</a

@@ -1,0 +1,136 @@
+{! Expandable rows — phaDataView owns search / sort / pagination; each visible row is its own
+   <tbody> with a toggle that reveals a detail row. Expansion state (expanded[]) lives in the factory,
+   so a row stays open as you sort but collapses when it pages out of view. !}
+<div
+  id="dv-table-expandable"
+  x-data="phaDataView()"
+  data-columns="{columnsJson}"
+  data-rows="{rowsJson}"
+  data-per-page="5"
+>
+  <div class="pf-v6-c-toolbar" role="region" aria-label="Data view table toolbar">
+    <div class="pf-v6-c-toolbar__content">
+      <div class="pf-v6-c-toolbar__content-section">
+        <div class="pf-v6-c-toolbar__item">
+          <div class="pf-v6-c-text-input-group">
+            <div class="pf-v6-c-text-input-group__main pf-m-icon">
+              <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:search').raw}</span>
+              <span class="pf-v6-c-text-input-group__text">
+                <input
+                  class="pf-v6-c-text-input-group__text-input"
+                  type="search"
+                  aria-label="Filter table"
+                  placeholder="Search"
+                  x-model="query"
+                  @input.debounce.150ms="setQuery(query)"
+                />
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="pf-v6-c-toolbar__item pf-m-align-right">
+          <span class="pf-v6-c-content--small" x-text="total + (total === 1 ? ' result' : ' results')">0 results</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="pf-v6-c-table" aria-label="Data view table with expandable rows">
+    <thead>
+      <tr>
+        <td></td>
+        <template x-for="col in columns" :key="col.key">
+          <th scope="col" :aria-sort="sortAria(col.key)">
+            <button type="button" class="pf-v6-c-table__button" @click="toggleSort(col.key)">
+              <span class="pf-v6-c-table__button-content">
+                <span class="pf-v6-c-table__text" x-text="col.label">Name</span>
+                <span class="pf-v6-c-table__sort-indicator">
+                  <i x-show="sortColumn !== col.key" class="fas fa-arrows-alt-v" aria-hidden="true"></i>
+                  <i
+                    x-show="sortColumn === col.key &amp;&amp; sortDir === 'asc'"
+                    class="fas fa-long-arrow-alt-up"
+                    aria-hidden="true"
+                  ></i>
+                  <i
+                    x-show="sortColumn === col.key &amp;&amp; sortDir === 'desc'"
+                    class="fas fa-long-arrow-alt-down"
+                    aria-hidden="true"
+                  ></i>
+                </span>
+              </span>
+            </button>
+          </th>
+        </template>
+      </tr>
+    </thead>
+    <template x-for="row in visible" :key="row.name">
+      <tbody :class="isExpanded(row.name) ? 'pf-m-expanded' : ''">
+        <tr>
+          <td class="pf-v6-c-table__toggle">
+            <button
+              type="button"
+              class="pf-v6-c-button pf-m-plain"
+              :aria-expanded="isExpanded(row.name)"
+              :aria-label="(isExpanded(row.name) ? 'Collapse' : 'Expand') + ' details for ' + row.name"
+              @click="toggleExpand(row.name)"
+            >
+              <span class="pf-v6-c-table__toggle-icon">
+                <i class="fas fa-angle-right" :class="isExpanded(row.name) ? 'pf-m-rotate' : ''" aria-hidden="true"></i>
+              </span>
+            </button>
+          </td>
+          <td data-label="Name" x-text="row.name"></td>
+          <td data-label="Vendor" x-text="row.vendor"></td>
+          <td data-label="Version" x-text="row.version"></td>
+          <td data-label="License" x-text="row.license"></td>
+        </tr>
+        <tr
+          class="pf-v6-c-table__expandable-row"
+          :class="isExpanded(row.name) ? 'pf-m-expanded' : ''"
+          x-show="isExpanded(row.name)"
+          x-cloak
+        >
+          <td></td>
+          <td colspan="4">
+            <div class="pf-v6-c-table__expandable-row-content">
+              <p
+                x-text="'Provided by ' + row.vendor + '. Version ' + row.version + ', licensed under ' + row.license + '.'"
+              ></p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </template>
+  </table>
+
+  <div class="pf-v6-c-pagination pf-m-bottom" role="region" aria-label="Pagination">
+    <div class="pf-v6-c-pagination__total-items">
+      <span x-text="((page - 1) * perPage + 1) + ' - ' + Math.min(page * perPage, total) + ' of ' + total + ' results'"
+        >0 - 0 of 0 results</span
+      >
+    </div>
+    <div class="pf-v6-c-pagination__nav">
+      <button
+        class="pf-v6-c-button pf-m-plain"
+        type="button"
+        aria-label="Previous page"
+        @click="prevPage()"
+        :disabled="page === 1"
+      >
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:chevron-left').raw}</span>
+      </button>
+      <span class="pf-v6-c-pagination__nav-page-select">
+        Page <span x-text="page">1</span> of <span x-text="pageCount">1</span>
+      </span>
+      <button
+        class="pf-v6-c-button pf-m-plain"
+        type="button"
+        aria-label="Next page"
+        @click="nextPage()"
+        :disabled="page === pageCount"
+      >
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:chevron-right').raw}</span>
+      </button>
+    </div>
+  </div>
+</div>

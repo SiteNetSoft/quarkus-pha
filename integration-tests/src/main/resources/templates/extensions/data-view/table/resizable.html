@@ -1,0 +1,80 @@
+{! Resizable columns — there's no PF-CSS-only path for this, so a small phaColumnResize Alpine factory
+   drives it: the table is table-layout: fixed, each resizable <th> is position: relative with a grip on
+   its trailing edge, and dragging the grip sets that column's inline width (min 80px). Static rows keep
+   the focus on the resize behaviour; compose with phaDataView for search/sort/paginate on top. !}
+<div>
+  <table
+    class="pf-v6-c-table"
+    x-data="phaColumnResize()"
+    style="table-layout: fixed; inline-size: 100%"
+    aria-label="Data view table with resizable columns"
+  >
+    <thead>
+      <tr>
+        <th scope="col" style="position: relative; width: 30%">
+          Name
+          <span
+            @pointerdown="start($event, $event.target.closest('th'))"
+            style="position: absolute; inset-block: 0; inset-inline-end: 0; inline-size: 0.75rem; cursor: col-resize; touch-action: none; user-select: none; border-inline-end: 2px solid var(--pf-t--global--border--color--default)"
+            aria-hidden="true"
+          ></span>
+        </th>
+        <th scope="col" style="position: relative; width: 28%">
+          Vendor
+          <span
+            @pointerdown="start($event, $event.target.closest('th'))"
+            style="position: absolute; inset-block: 0; inset-inline-end: 0; inline-size: 0.75rem; cursor: col-resize; touch-action: none; user-select: none; border-inline-end: 2px solid var(--pf-t--global--border--color--default)"
+            aria-hidden="true"
+          ></span>
+        </th>
+        <th scope="col" style="position: relative; width: 20%">
+          Version
+          <span
+            @pointerdown="start($event, $event.target.closest('th'))"
+            style="position: absolute; inset-block: 0; inset-inline-end: 0; inline-size: 0.75rem; cursor: col-resize; touch-action: none; user-select: none; border-inline-end: 2px solid var(--pf-t--global--border--color--default)"
+            aria-hidden="true"
+          ></span>
+        </th>
+        <th scope="col" style="width: 22%">License</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label="Name">Quarkus</td>
+        <td data-label="Vendor">Red Hat</td>
+        <td data-label="Version">3.35.4</td>
+        <td data-label="License">Apache 2.0</td>
+      </tr>
+      <tr>
+        <td data-label="Name">HTMX</td>
+        <td data-label="Vendor">Big Sky Software</td>
+        <td data-label="Version">2.0.10</td>
+        <td data-label="License">BSD 2-Clause</td>
+      </tr>
+      <tr>
+        <td data-label="Name">Alpine.js</td>
+        <td data-label="Vendor">Caleb Porzio</td>
+        <td data-label="Version">3.15.12</td>
+        <td data-label="License">MIT</td>
+      </tr>
+      <tr>
+        <td data-label="Name">PatternFly</td>
+        <td data-label="Vendor">Red Hat</td>
+        <td data-label="Version">6.4.0</td>
+        <td data-label="License">MIT</td>
+      </tr>
+      <tr>
+        <td data-label="Name">ECharts</td>
+        <td data-label="Vendor">Apache</td>
+        <td data-label="Version">6.1.0</td>
+        <td data-label="License">Apache 2.0</td>
+      </tr>
+      <tr>
+        <td data-label="Name">MapLibre GL</td>
+        <td data-label="Vendor">MapLibre</td>
+        <td data-label="Version">5.24.0</td>
+        <td data-label="License">BSD 3-Clause</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
