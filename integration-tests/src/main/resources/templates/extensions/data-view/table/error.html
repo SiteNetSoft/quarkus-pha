@@ -1,0 +1,46 @@
+{! Error state — the fetch failed. A danger empty-state with a retry action fills the table body,
+   so the toolbar and column headers stay put while the error occupies the data region. !}
+<div>
+  <div class="pf-v6-c-toolbar" role="region" aria-label="Data view table toolbar">
+    <div class="pf-v6-c-toolbar__content">
+      <div class="pf-v6-c-toolbar__content-section">
+        <div class="pf-v6-c-toolbar__item">
+          <div class="pf-v6-c-text-input-group">
+            <div class="pf-v6-c-text-input-group__main pf-m-icon">
+              <span class="pf-v6-c-text-input-group__text">
+                <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:search').raw}</span>
+                <input class="pf-v6-c-text-input-group__text-input" type="search" aria-label="Filter table" placeholder="Search" disabled />
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="pf-v6-c-table pf-m-grid-md" aria-label="Data view table, error">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Vendor</th>
+        <th scope="col">Version</th>
+        <th scope="col">License</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="4">
+          {#include components/feedback/empty-state titleText="Unable to load data" iconName="fa:exclamation-circle" status="danger" bodyText="The data view could not be loaded. Check your connection and try again." hasActions=true}
+          {#actions}
+          <div class="pf-v6-c-empty-state__actions">
+            <button class="pf-v6-c-button pf-m-primary" type="button">
+              <span class="pf-v6-c-button__text">Retry</span>
+            </button>
+          </div>
+          {/actions}
+          {/include}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

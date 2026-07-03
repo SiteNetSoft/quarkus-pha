@@ -23,6 +23,7 @@ phaAlpine("phaDataView", () => ({
   page: 1,
   perPage: 5,
   selected: [], // row keys (row.name) selected across pages
+  expanded: [], // row keys (row.name) whose detail row is open (expandable example)
 
   init() {
     let rawRows = this.$root.dataset.rows;
@@ -150,5 +151,16 @@ phaAlpine("phaDataView", () => ({
 
   get selectedCount() {
     return this.selected.length;
+  },
+
+  // --- row expansion (optional; used by the expandable table example) -------
+  isExpanded(key) {
+    return this.expanded.includes(key);
+  },
+
+  toggleExpand(key) {
+    let i = this.expanded.indexOf(key);
+    if (i === -1) this.expanded.push(key);
+    else this.expanded.splice(i, 1);
   },
 }));

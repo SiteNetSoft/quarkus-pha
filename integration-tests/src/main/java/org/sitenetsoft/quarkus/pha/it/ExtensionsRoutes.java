@@ -80,6 +80,20 @@ public class ExtensionsRoutes {
         Map.entry("table",    "Sortable table with search, pagination, and selectable rows (per-row checkboxes + select-all with a selection count). The heaviest of the three demos; everything happens in Alpine state.")
     );
 
+    /** Example fragments served per data-view item. Each maps to a template at
+        templates/extensions/data-view/{name}/{example}.html and a card on the demo page.
+        Items not listed here fall back to a single "basic" example. */
+    private static final Map<String, Set<String>> DATA_VIEW_EXAMPLES = Map.ofEntries(
+        Map.entry("overview", Set.of("basic")),
+        Map.entry("toolbar",  Set.of("basic")),
+        Map.entry("table",    Set.of("basic", "expandable", "sticky", "tree-table", "resizable", "loading", "error"))
+    );
+
+    /** Examples for a data-view item, defaulting to just "basic" when none are declared. */
+    private static Set<String> dataViewExamples(String name) {
+        return DATA_VIEW_EXAMPLES.getOrDefault(name, Set.of("basic"));
+    }
+
     /** Sample rows used by the overview + table data-view demos. Real data would come from a service / repository. */
     static final String DATA_VIEW_ROWS_JSON =
         "[" +
@@ -417,7 +431,7 @@ public class ExtensionsRoutes {
     @Path("/data-view/{name}/source/{example}")
     @Produces(MediaType.TEXT_PLAIN)
     public String dataViewSource(@PathParam("name") String name, @PathParam("example") String example) {
-        if (!DATA_VIEW_TITLES.containsKey(name) || !"basic".equals(example)) {
+        if (!DATA_VIEW_TITLES.containsKey(name) || !dataViewExamples(name).contains(example)) {
             throw new NotFoundException("Unknown data-view example: " + name + "/" + example);
         }
         String resourcePath = "/templates/extensions/data-view/" + name + "/" + example + ".html";
@@ -435,7 +449,7 @@ public class ExtensionsRoutes {
     @Path("/data-view/{name}/{example}")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance dataViewStandalone(@PathParam("name") String name, @PathParam("example") String example) {
-        if (!DATA_VIEW_TITLES.containsKey(name) || !"basic".equals(example)) {
+        if (!DATA_VIEW_TITLES.containsKey(name) || !dataViewExamples(name).contains(example)) {
             throw new NotFoundException("Unknown data-view example: " + name + "/" + example);
         }
         Template inner = engine.getTemplate("extensions/data-view/" + name + "/" + example);

@@ -1,0 +1,66 @@
+{! Loading state — skeleton rows stand in while data is fetched. In an HTMX flow this is the
+   placeholder tbody returned before the real rows swap in; with phaDataView, show it until rows load. !}
+<div>
+  <div class="pf-v6-c-toolbar" role="region" aria-label="Data view table toolbar">
+    <div class="pf-v6-c-toolbar__content">
+      <div class="pf-v6-c-toolbar__content-section">
+        <div class="pf-v6-c-toolbar__item">
+          <div class="pf-v6-c-text-input-group">
+            <div class="pf-v6-c-text-input-group__main pf-m-icon">
+              <span class="pf-v6-c-text-input-group__text">
+                <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:search').raw}</span>
+                <input class="pf-v6-c-text-input-group__text-input" type="search" aria-label="Filter table" placeholder="Search" disabled />
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="pf-v6-c-toolbar__item pf-m-align-right">
+          <span class="pf-v6-c-content--small">Loading…</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="pf-v6-c-table pf-m-grid-md" aria-label="Data view table, loading">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Vendor</th>
+        <th scope="col">Version</th>
+        <th scope="col">License</th>
+      </tr>
+    </thead>
+    <tbody aria-busy="true">
+      <tr>
+        <td data-label="Name"><span class="pf-v6-c-skeleton" style="width: 70%" aria-label="Loading">&nbsp;</span></td>
+        <td data-label="Vendor"><span class="pf-v6-c-skeleton" style="width: 55%" aria-hidden="true">&nbsp;</span></td>
+        <td data-label="Version"><span class="pf-v6-c-skeleton" style="width: 40%" aria-hidden="true">&nbsp;</span></td>
+        <td data-label="License"><span class="pf-v6-c-skeleton" style="width: 50%" aria-hidden="true">&nbsp;</span></td>
+      </tr>
+      <tr>
+        <td data-label="Name"><span class="pf-v6-c-skeleton" style="width: 60%" aria-hidden="true">&nbsp;</span></td>
+        <td data-label="Vendor"><span class="pf-v6-c-skeleton" style="width: 65%" aria-hidden="true">&nbsp;</span></td>
+        <td data-label="Version"><span class="pf-v6-c-skeleton" style="width: 35%" aria-hidden="true">&nbsp;</span></td>
+        <td data-label="License"><span class="pf-v6-c-skeleton" style="width: 45%" aria-hidden="true">&nbsp;</span></td>
+      </tr>
+      <tr>
+        <td data-label="Name"><span class="pf-v6-c-skeleton" style="width: 75%" aria-hidden="true">&nbsp;</span></td>
+        <td data-label="Vendor"><span class="pf-v6-c-skeleton" style="width: 50%" aria-hidden="true">&nbsp;</span></td>
+        <td data-label="Version"><span class="pf-v6-c-skeleton" style="width: 40%" aria-hidden="true">&nbsp;</span></td>
+        <td data-label="License"><span class="pf-v6-c-skeleton" style="width: 55%" aria-hidden="true">&nbsp;</span></td>
+      </tr>
+      <tr>
+        <td data-label="Name"><span class="pf-v6-c-skeleton" style="width: 65%" aria-hidden="true">&nbsp;</span></td>
+        <td data-label="Vendor"><span class="pf-v6-c-skeleton" style="width: 60%" aria-hidden="true">&nbsp;</span></td>
+        <td data-label="Version"><span class="pf-v6-c-skeleton" style="width: 30%" aria-hidden="true">&nbsp;</span></td>
+        <td data-label="License"><span class="pf-v6-c-skeleton" style="width: 50%" aria-hidden="true">&nbsp;</span></td>
+      </tr>
+      <tr>
+        <td data-label="Name"><span class="pf-v6-c-skeleton" style="width: 55%" aria-hidden="true">&nbsp;</span></td>
+        <td data-label="Vendor"><span class="pf-v6-c-skeleton" style="width: 55%" aria-hidden="true">&nbsp;</span></td>
+        <td data-label="Version"><span class="pf-v6-c-skeleton" style="width: 45%" aria-hidden="true">&nbsp;</span></td>
+        <td data-label="License"><span class="pf-v6-c-skeleton" style="width: 40%" aria-hidden="true">&nbsp;</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

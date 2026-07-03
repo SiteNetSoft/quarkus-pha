@@ -92,5 +92,86 @@ test.describe("Data view extensions", () => {
       await root.locator("thead .pf-v6-c-table__check input").check();
       await expect(root.locator(".pf-v6-c-toolbar")).toContainText("5 selected");
     });
+
+    test("demo page renders every table example card", async ({ page }) => {
+      for (const slug of ["basic", "expandable", "sticky", "tree-table", "resizable", "loading", "error"]) {
+        await expect(page.locator(`#${slug}`)).toBeVisible();
+      }
+    });
+  });
+
+  test.describe("Table variants", () => {
+    test("expandable rows toggle a detail panel and survive sorting", async ({ page }) => {
+      await page.goto("/extensions/data-view/table/expandable");
+      const root = page.locator("#dv-table-expandable");
+      const firstBody = root.locator("tbody").first();
+      const detail = firstBody.locator("tr.pf-v6-c-table__expandable-row");
+      // Detail row starts collapsed.
+      await expect(detail).toBeHidden();
+      await firstBody.getByRole("button", { name: /^Expand details for/ }).click();
+      await expect(detail).toBeVisible();
+      await expect(detail).toContainText("licensed under");
+      // Collapse again.
+      await firstBody.getByRole("button", { name: /^Collapse details for/ }).click();
+      await expect(detail).toBeHidden();
+    });
+
+    test("sticky variant renders one page of rows with a pinned header + first column", async ({ page }) => {
+      await page.goto("/extensions/data-view/table/sticky");
+      const root = page.locator("#dv-table-sticky");
+      await expect(root.locator("table.pf-m-sticky-header")).toBeVisible();
+      await expect(root.locator("thead th").first()).toHaveClass(/pf-v6-c-table__sticky-cell/);
+      // per-page=12 → all seeded rows on a single page.
+      await expect(root.locator("tbody tr")).toHaveCount(12);
+      await expect(root.locator("tbody th[scope='row']").first()).toHaveClass(/pf-v6-c-table__sticky-cell/);
+    });
+
+    test("tree table expands and collapses each license group", async ({ page }) => {
+      await page.goto("/extensions/data-view/table/tree-table");
+      const table = page.locator("table.pf-m-tree-view");
+      await expect(table).toBeVisible();
+      const alpineRow = table.locator("tr", { hasText: "Alpine.js" });
+      const quarkusRow = table.locator("tr", { hasText: "Quarkus" });
+      // Group 1 (Apache 2.0) starts open, group 2 (MIT) starts closed.
+      await expect(quarkusRow).toBeVisible();
+      await expect(alpineRow).toBeHidden();
+      await table.getByRole("button", { name: "MIT" }).click();
+      await expect(alpineRow).toBeVisible();
+      await table.getByRole("button", { name: "MIT" }).click();
+      await expect(alpineRow).toBeHidden();
+    });
+
+    test("resizable columns widen when the header grip is dragged", async ({ page }) => {
+      await page.goto("/extensions/data-view/table/resizable");
+      const firstTh = page.locator("table thead th").first();
+      const widthOf = () => firstTh.evaluate((el) => el.getBoundingClientRect().width);
+      const before = await widthOf();
+      const grip = firstTh.locator("span[aria-hidden='true']");
+      const box = await grip.boundingBox();
+      await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+      await page.mouse.down();
+      await page.mouse.move(box.x + box.width / 2 + 120, box.y + box.height / 2, { steps: 6 });
+      await page.mouse.up();
+      const after = await widthOf();
+      expect(after).toBeGreaterThan(before + 60);
+    });
+  });
+
+  test.describe("Table states", () => {
+    test("loading state shows skeleton rows in place of data", async ({ page }) => {
+      await page.goto("/extensions/data-view/table/loading");
+      const table = page.locator("table.pf-v6-c-table");
+      await expect(table).toBeVisible();
+      await expect(table.locator("tbody[aria-busy='true']")).toBeVisible();
+      await expect(table.locator("tbody .pf-v6-c-skeleton")).toHaveCount(20);
+    });
+
+    test("error state shows a danger empty-state with a retry action", async ({ page }) => {
+      await page.goto("/extensions/data-view/table/error");
+      const emptyState = page.locator(".pf-v6-c-empty-state.pf-m-danger");
+      await expect(emptyState).toBeVisible();
+      await expect(emptyState).toContainText("Unable to load data");
+      await expect(emptyState.getByRole("button", { name: "Retry" })).toBeVisible();
+    });
   });
 });

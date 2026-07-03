@@ -1,0 +1,150 @@
+{! Tree table — pf-m-tree-view with role="treegrid". The flat data-view seed doesn't fit phaDataView's
+   filter/sort/paginate model, so a tree groups the libraries by license family instead: parent rows
+   carry a toggle in the pf-v6-c-table__tree-view-title-cell and children indent by aria-level. Local
+   Alpine state on the tbody drives expand/collapse; aria-setsize / aria-posinset describe the tree to AT. !}
+<table class="pf-v6-c-table pf-m-tree-view" role="treegrid" aria-label="Tree table of libraries grouped by license">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Vendor</th>
+      <th scope="col">Version</th>
+    </tr>
+  </thead>
+  <tbody x-data="{ g1: true, g2: false, g3: false }">
+    {! Group 1 — Apache 2.0 !}
+    <tr class="pf-v6-c-table__tr" aria-level="1" aria-setsize="3" aria-posinset="1" :aria-expanded="g1">
+      <td class="pf-v6-c-table__tree-view-title-cell">
+        <div class="pf-v6-c-table__tree-view-main">
+          <button type="button" class="pf-v6-c-table__button" :aria-expanded="g1" @click="g1 = !g1">
+            <div class="pf-v6-c-table__button-content">
+              <span class="pf-v6-c-table__toggle-icon"
+                ><i class="fas fa-angle-right" :class="g1 ? 'pf-m-rotate' : ''" aria-hidden="true"></i
+              ></span>
+              <span class="pf-v6-c-table__tree-view-text">Apache 2.0</span>
+            </div>
+          </button>
+        </div>
+      </td>
+      <td>License group</td>
+      <td>3 libraries</td>
+    </tr>
+    <tr class="pf-v6-c-table__tr" aria-level="2" aria-setsize="3" aria-posinset="1" x-show="g1" x-cloak>
+      <td class="pf-v6-c-table__tree-view-title-cell">
+        <div class="pf-v6-c-table__tree-view-main"><span class="pf-v6-c-table__tree-view-text">Quarkus</span></div>
+      </td>
+      <td>Red Hat</td>
+      <td>3.35.4</td>
+    </tr>
+    <tr class="pf-v6-c-table__tr" aria-level="2" aria-setsize="3" aria-posinset="2" x-show="g1" x-cloak>
+      <td class="pf-v6-c-table__tree-view-title-cell">
+        <div class="pf-v6-c-table__tree-view-main"><span class="pf-v6-c-table__tree-view-text">ECharts</span></div>
+      </td>
+      <td>Apache</td>
+      <td>6.1.0</td>
+    </tr>
+    <tr class="pf-v6-c-table__tr" aria-level="2" aria-setsize="3" aria-posinset="3" x-show="g1" x-cloak>
+      <td class="pf-v6-c-table__tree-view-title-cell">
+        <div class="pf-v6-c-table__tree-view-main"><span class="pf-v6-c-table__tree-view-text">video.js</span></div>
+      </td>
+      <td>Video.js</td>
+      <td>8.23.7</td>
+    </tr>
+    {! Group 2 — MIT !}
+    <tr class="pf-v6-c-table__tr" aria-level="1" aria-setsize="3" aria-posinset="2" :aria-expanded="g2">
+      <td class="pf-v6-c-table__tree-view-title-cell">
+        <div class="pf-v6-c-table__tree-view-main">
+          <button type="button" class="pf-v6-c-table__button" :aria-expanded="g2" @click="g2 = !g2">
+            <div class="pf-v6-c-table__button-content">
+              <span class="pf-v6-c-table__toggle-icon"
+                ><i class="fas fa-angle-right" :class="g2 ? 'pf-m-rotate' : ''" aria-hidden="true"></i
+              ></span>
+              <span class="pf-v6-c-table__tree-view-text">MIT</span>
+            </div>
+          </button>
+        </div>
+      </td>
+      <td>License group</td>
+      <td>4 libraries</td>
+    </tr>
+    <tr class="pf-v6-c-table__tr" aria-level="2" aria-setsize="4" aria-posinset="1" x-show="g2" x-cloak>
+      <td class="pf-v6-c-table__tree-view-title-cell">
+        <div class="pf-v6-c-table__tree-view-main"><span class="pf-v6-c-table__tree-view-text">Alpine.js</span></div>
+      </td>
+      <td>Caleb Porzio</td>
+      <td>3.15.12</td>
+    </tr>
+    <tr class="pf-v6-c-table__tr" aria-level="2" aria-setsize="4" aria-posinset="2" x-show="g2" x-cloak>
+      <td class="pf-v6-c-table__tree-view-title-cell">
+        <div class="pf-v6-c-table__tree-view-main"><span class="pf-v6-c-table__tree-view-text">PatternFly</span></div>
+      </td>
+      <td>Red Hat</td>
+      <td>6.4.0</td>
+    </tr>
+    <tr class="pf-v6-c-table__tr" aria-level="2" aria-setsize="4" aria-posinset="3" x-show="g2" x-cloak>
+      <td class="pf-v6-c-table__tree-view-title-cell">
+        <div class="pf-v6-c-table__tree-view-main"><span class="pf-v6-c-table__tree-view-text">Monaco Editor</span></div>
+      </td>
+      <td>Microsoft</td>
+      <td>0.55.1</td>
+    </tr>
+    <tr class="pf-v6-c-table__tr" aria-level="2" aria-setsize="4" aria-posinset="4" x-show="g2" x-cloak>
+      <td class="pf-v6-c-table__tree-view-title-cell">
+        <div class="pf-v6-c-table__tree-view-main"><span class="pf-v6-c-table__tree-view-text">Cytoscape</span></div>
+      </td>
+      <td>Cytoscape Consortium</td>
+      <td>3.33.4</td>
+    </tr>
+    {! Group 3 — BSD & other !}
+    <tr class="pf-v6-c-table__tr" aria-level="1" aria-setsize="3" aria-posinset="3" :aria-expanded="g3">
+      <td class="pf-v6-c-table__tree-view-title-cell">
+        <div class="pf-v6-c-table__tree-view-main">
+          <button type="button" class="pf-v6-c-table__button" :aria-expanded="g3" @click="g3 = !g3">
+            <div class="pf-v6-c-table__button-content">
+              <span class="pf-v6-c-table__toggle-icon"
+                ><i class="fas fa-angle-right" :class="g3 ? 'pf-m-rotate' : ''" aria-hidden="true"></i
+              ></span>
+              <span class="pf-v6-c-table__tree-view-text">BSD &amp; other</span>
+            </div>
+          </button>
+        </div>
+      </td>
+      <td>License group</td>
+      <td>5 libraries</td>
+    </tr>
+    <tr class="pf-v6-c-table__tr" aria-level="2" aria-setsize="5" aria-posinset="1" x-show="g3" x-cloak>
+      <td class="pf-v6-c-table__tree-view-title-cell">
+        <div class="pf-v6-c-table__tree-view-main"><span class="pf-v6-c-table__tree-view-text">HTMX</span></div>
+      </td>
+      <td>Big Sky Software</td>
+      <td>2.0.10</td>
+    </tr>
+    <tr class="pf-v6-c-table__tr" aria-level="2" aria-setsize="5" aria-posinset="2" x-show="g3" x-cloak>
+      <td class="pf-v6-c-table__tree-view-title-cell">
+        <div class="pf-v6-c-table__tree-view-main"><span class="pf-v6-c-table__tree-view-text">D3.js</span></div>
+      </td>
+      <td>Mike Bostock</td>
+      <td>7.9.0</td>
+    </tr>
+    <tr class="pf-v6-c-table__tr" aria-level="2" aria-setsize="5" aria-posinset="3" x-show="g3" x-cloak>
+      <td class="pf-v6-c-table__tree-view-title-cell">
+        <div class="pf-v6-c-table__tree-view-main"><span class="pf-v6-c-table__tree-view-text">MapLibre GL</span></div>
+      </td>
+      <td>MapLibre</td>
+      <td>5.24.0</td>
+    </tr>
+    <tr class="pf-v6-c-table__tr" aria-level="2" aria-setsize="5" aria-posinset="4" x-show="g3" x-cloak>
+      <td class="pf-v6-c-table__tree-view-title-cell">
+        <div class="pf-v6-c-table__tree-view-main"><span class="pf-v6-c-table__tree-view-text">Quill</span></div>
+      </td>
+      <td>Slab</td>
+      <td>2.0.3</td>
+    </tr>
+    <tr class="pf-v6-c-table__tr" aria-level="2" aria-setsize="5" aria-posinset="5" x-show="g3" x-cloak>
+      <td class="pf-v6-c-table__tree-view-title-cell">
+        <div class="pf-v6-c-table__tree-view-main"><span class="pf-v6-c-table__tree-view-text">Font Awesome Free</span></div>
+      </td>
+      <td>Fonticons</td>
+      <td>7.2.0</td>
+    </tr>
+  </tbody>
+</table>
