@@ -1,0 +1,91 @@
+{! Sticky header + sticky first column — phaDataView still owns search and sort, but perPage is set to
+   the full row count so everything renders in one scroll box: pf-m-sticky-header pins the header on
+   vertical scroll, and the pf-v6-c-table__sticky-cell pf-m-left first column pins on horizontal scroll.
+   Pagination is dropped here since all rows are on a single page. !}
+<div
+  id="dv-table-sticky"
+  x-data="phaDataView()"
+  data-columns="{columnsJson}"
+  data-rows="{rowsJson}"
+  data-per-page="12"
+>
+  <div class="pf-v6-c-toolbar" role="region" aria-label="Data view table toolbar">
+    <div class="pf-v6-c-toolbar__content">
+      <div class="pf-v6-c-toolbar__content-section">
+        <div class="pf-v6-c-toolbar__item">
+          <div class="pf-v6-c-text-input-group">
+            <div class="pf-v6-c-text-input-group__main pf-m-icon">
+              <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:search').raw}</span>
+              <span class="pf-v6-c-text-input-group__text">
+                <input
+                  class="pf-v6-c-text-input-group__text-input"
+                  type="search"
+                  aria-label="Filter table"
+                  placeholder="Search"
+                  x-model="query"
+                  @input.debounce.150ms="setQuery(query)"
+                />
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="pf-v6-c-toolbar__item pf-m-align-right">
+          <span class="pf-v6-c-content--small" x-text="total + (total === 1 ? ' result' : ' results')">0 results</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pf-v6-c-scroll-outer-wrapper">
+    <div class="pf-v6-c-scroll-inner-wrapper" style="max-block-size: 15rem; overflow: auto">
+      <table class="pf-v6-c-table pf-m-sticky-header" role="grid" aria-label="Data view table with sticky header and first column">
+        <thead>
+          <tr>
+            <template x-for="(col, i) in columns" :key="col.key">
+              <th
+                scope="col"
+                :aria-sort="sortAria(col.key)"
+                :class="i === 0 ? 'pf-v6-c-table__sticky-cell pf-m-left' : 'pf-m-nowrap'"
+                :style="i === 0 ? '--pf-v6-c-table__sticky-cell--MinWidth: 12rem; --pf-v6-c-table__sticky-cell--m-left--InsetInlineStart: 0' : ''"
+              >
+                <button type="button" class="pf-v6-c-table__button" @click="toggleSort(col.key)">
+                  <span class="pf-v6-c-table__button-content">
+                    <span class="pf-v6-c-table__text" x-text="col.label">Name</span>
+                    <span class="pf-v6-c-table__sort-indicator">
+                      <i x-show="sortColumn !== col.key" class="fas fa-arrows-alt-v" aria-hidden="true"></i>
+                      <i
+                        x-show="sortColumn === col.key &amp;&amp; sortDir === 'asc'"
+                        class="fas fa-long-arrow-alt-up"
+                        aria-hidden="true"
+                      ></i>
+                      <i
+                        x-show="sortColumn === col.key &amp;&amp; sortDir === 'desc'"
+                        class="fas fa-long-arrow-alt-down"
+                        aria-hidden="true"
+                      ></i>
+                    </span>
+                  </span>
+                </button>
+              </th>
+            </template>
+          </tr>
+        </thead>
+        <tbody>
+          <template x-for="row in visible" :key="row.name">
+            <tr>
+              <th
+                scope="row"
+                class="pf-v6-c-table__sticky-cell pf-m-left"
+                style="--pf-v6-c-table__sticky-cell--MinWidth: 12rem; --pf-v6-c-table__sticky-cell--m-left--InsetInlineStart: 0"
+                x-text="row.name"
+              ></th>
+              <td class="pf-m-nowrap" data-label="Vendor" x-text="row.vendor"></td>
+              <td class="pf-m-nowrap" data-label="Version" x-text="row.version"></td>
+              <td class="pf-m-nowrap" data-label="License" x-text="row.license"></td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
