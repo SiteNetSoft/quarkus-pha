@@ -28,7 +28,8 @@ public class AvatarExamplesRoutes {
         "bordered",
         "sizes",
         "bordered-sizes",
-        "initials"
+        "initials",
+        "colors"
     );
 
     @Inject

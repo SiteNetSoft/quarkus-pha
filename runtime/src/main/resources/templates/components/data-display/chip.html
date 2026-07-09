@@ -1,6 +1,7 @@
 {! Chip — PatternFly v6 (DEPRECATED — use Label instead) !} {! Wraps pf-v6-c-label since pf-v6-c-chip was removed in v6.
-!} {! Required: id — derives {id}-text + {id}-remove for the close button's aria-labelledby wiring. !} {! Content slot: chip text (passed as include body). !} {! Optional params: removable, overflow,
-badge (badge count text), ariaLabel (close button label) !} {#if overflow??}
+!} {! Required: id — derives {id}-text + {id}-remove for the close button's aria-labelledby wiring. !} {! Content slot:
+chip text (passed as include body). !} {! Optional params: removable, overflow, badge (badge count text), ariaLabel
+(close button label) !} {#if overflow??}
 <button class="pf-v6-c-label pf-m-overflow" type="button" id="{id}">
   <span class="pf-v6-c-label__content">
     <span class="pf-v6-c-label__text">{#insert/}</span>

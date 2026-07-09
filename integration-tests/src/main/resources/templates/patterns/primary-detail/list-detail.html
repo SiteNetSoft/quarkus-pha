@@ -20,7 +20,7 @@
     aria-label="Projects"
   >
     <template x-for="i in items" :key="i.id">
-      <li class="pf-v6-c-simple-list__list-item">
+      <li class="pf-v6-c-simple-list__item">
         <button
           type="button"
           class="pf-v6-c-simple-list__item-link"
@@ -57,7 +57,7 @@
         <dd class="pf-v6-c-description-list__description">
           <span
             class="pf-v6-c-label pf-m-compact"
-            :class="selected.status === 'Active' ? 'pf-m-green' : (selected.status === 'Paused' ? 'pf-m-gold' : 'pf-m-red')"
+            :class="selected.status === 'Active' ? 'pf-m-green' : (selected.status === 'Paused' ? 'pf-m-yellow' : 'pf-m-red')"
             ><span class="pf-v6-c-label__content"
               ><span class="pf-v6-c-label__text" x-text="selected.status"></span></span
           ></span>

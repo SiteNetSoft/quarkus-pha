@@ -14,12 +14,13 @@
       <button
         type="button"
         class="pf-v6-c-button pf-m-plain"
+        :class="open ? 'pf-m-expanded' : ''"
         :aria-expanded="open"
         aria-label="Toggle row details for api-gateway"
         @click="open = !open"
       >
         <span class="pf-v6-c-table__toggle-icon"
-          ><i class="fas fa-angle-right" :class="open ? 'pf-m-rotate' : ''" aria-hidden="true"></i
+          ><i class="fas fa-angle-down" aria-hidden="true"></i
         ></span>
       </button>
     </td>
@@ -42,12 +43,13 @@
       <button
         type="button"
         class="pf-v6-c-button pf-m-plain"
+        :class="open ? 'pf-m-expanded' : ''"
         :aria-expanded="open"
         aria-label="Toggle row details for payments"
         @click="open = !open"
       >
         <span class="pf-v6-c-table__toggle-icon"
-          ><i class="fas fa-angle-right" :class="open ? 'pf-m-rotate' : ''" aria-hidden="true"></i
+          ><i class="fas fa-angle-down" aria-hidden="true"></i
         ></span>
       </button>
     </td>
@@ -70,12 +72,13 @@
       <button
         type="button"
         class="pf-v6-c-button pf-m-plain"
+        :class="open ? 'pf-m-expanded' : ''"
         :aria-expanded="open"
         aria-label="Toggle row details for search"
         @click="open = !open"
       >
         <span class="pf-v6-c-table__toggle-icon"
-          ><i class="fas fa-angle-right" :class="open ? 'pf-m-rotate' : ''" aria-hidden="true"></i
+          ><i class="fas fa-angle-down" aria-hidden="true"></i
         ></span>
       </button>
     </td>

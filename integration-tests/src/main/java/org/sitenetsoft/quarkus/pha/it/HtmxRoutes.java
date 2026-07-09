@@ -586,15 +586,10 @@ public class HtmxRoutes {
     private static String footerButtons(String id, String flavor, int step, int total, boolean finishLabel) {
         StringBuilder sb = new StringBuilder();
         String primaryLabel = finishLabel && step == total ? "Finish" : "Next";
-        if (step < total) {
-            sb.append("<button type=\"button\" class=\"pf-v6-c-button pf-m-primary\"")
-              .append(" hx-get=\"/api/htmx/wizard/").append(flavor).append("/step/").append(step + 1).append("\"")
-              .append(" hx-target=\"#").append(id).append("\" hx-swap=\"outerHTML\">")
-              .append("<span class=\"pf-v6-c-button__text\">").append(primaryLabel).append("</span></button>");
-        } else {
-            sb.append("<button type=\"button\" class=\"pf-v6-c-button pf-m-primary\">")
-              .append("<span class=\"pf-v6-c-button__text\">Finish</span></button>");
-        }
+        // PF v6 wizard footer: action-list with Back/Next in one group, Cancel in its own
+        sb.append("<div class=\"pf-v6-c-action-list\">")
+          .append("<div class=\"pf-v6-c-action-list__group\">")
+          .append("<div class=\"pf-v6-c-action-list__item\">");
         if (step > 1) {
             sb.append("<button type=\"button\" class=\"pf-v6-c-button pf-m-secondary\"")
               .append(" hx-get=\"/api/htmx/wizard/").append(flavor).append("/step/").append(step - 1).append("\"")
@@ -604,9 +599,22 @@ public class HtmxRoutes {
             sb.append("<button type=\"button\" class=\"pf-v6-c-button pf-m-secondary\" disabled>")
               .append("<span class=\"pf-v6-c-button__text\">Back</span></button>");
         }
-        sb.append("<div class=\"pf-v6-c-wizard__footer-cancel\">")
+        sb.append("</div><div class=\"pf-v6-c-action-list__item\">");
+        if (step < total) {
+            sb.append("<button type=\"button\" class=\"pf-v6-c-button pf-m-primary\"")
+              .append(" hx-get=\"/api/htmx/wizard/").append(flavor).append("/step/").append(step + 1).append("\"")
+              .append(" hx-target=\"#").append(id).append("\" hx-swap=\"outerHTML\">")
+              .append("<span class=\"pf-v6-c-button__text\">").append(primaryLabel).append("</span></button>");
+        } else {
+            sb.append("<button type=\"button\" class=\"pf-v6-c-button pf-m-primary\">")
+              .append("<span class=\"pf-v6-c-button__text\">Finish</span></button>");
+        }
+        sb.append("</div></div>")
+          .append("<div class=\"pf-v6-c-action-list__group\">")
+          .append("<div class=\"pf-v6-c-action-list__item\">")
           .append("<button type=\"button\" class=\"pf-v6-c-button pf-m-link\">")
-          .append("<span class=\"pf-v6-c-button__text\">Cancel</span></button></div>");
+          .append("<span class=\"pf-v6-c-button__text\">Cancel</span></button>")
+          .append("</div></div></div>");
         return sb.toString();
     }
 

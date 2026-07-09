@@ -66,9 +66,12 @@ test.describe("Forms — runtime class assertions", () => {
     await expect(page.locator("#cb-standalone")).toHaveAttribute("aria-label", "Select all rows");
   });
 
-  test("checkbox/reversed carries pf-m-reversed", async ({ page }) => {
+  test("checkbox/reversed renders the label before the input", async ({ page }) => {
     await page.goto("/components/checkbox/reversed");
-    await expect(page.locator("#cb-reversed-wrap")).toHaveClass(/pf-m-reversed/);
+    const wrap = page.locator("#cb-reversed-wrap");
+    await expect(wrap).toHaveClass(/pf-v6-c-check/);
+    const firstChild = await wrap.evaluate((el) => el.firstElementChild.tagName);
+    expect(firstChild).toBe("LABEL");
   });
 
   test("radio/basic groups two radios by name", async ({ page }) => {

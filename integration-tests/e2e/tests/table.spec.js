@@ -160,4 +160,13 @@ test.describe("Table", () => {
       await expect(page.locator("#tbl-draggable tbody td.pf-v6-c-table__draggable")).toHaveCount(3);
     });
   });
+
+  test.describe("Footer", () => {
+    test("tfoot carries the PF class and summarises the body", async ({ page }) => {
+      const tfoot = page.locator("#tbl-footer tfoot.pf-v6-c-table__tfoot");
+      await expect(tfoot).toBeAttached();
+      await expect(tfoot.locator('th[scope="row"]')).toContainText("Total users");
+      await expect(tfoot.locator('td[colspan="2"]')).toContainText("3");
+    });
+  });
 });

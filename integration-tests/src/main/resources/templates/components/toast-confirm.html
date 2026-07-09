@@ -9,9 +9,9 @@
 
   <h1>Toast &amp; Confirm</h1>
   <p>
-    Server-signalled toasts and a confirm dialog. Successful actions return an <code>HX-Trigger</code> response
-    header; a small client listener renders a PatternFly toast alert and auto-dismisses it. Destructive actions
-    intercept <code>htmx:confirm</code> and open the modal instead of the browser's <code>confirm()</code>.
+    Server-signalled toasts and a confirm dialog. Successful actions return an <code>HX-Trigger</code> response header;
+    a small client listener renders a PatternFly toast alert and auto-dismisses it. Destructive actions intercept
+    <code>htmx:confirm</code> and open the modal instead of the browser's <code>confirm()</code>.
   </p>
 
   <section style="margin-top: 2rem">
@@ -41,19 +41,18 @@
     </div>
   </section>
 
-  {! Confirm modal — opened by the htmx:confirm interceptor in toast.js. !}
-  {#include components/feedback/modal id="pha-confirm-modal" size="sm" variant="warning" eventOpen=true}
-  {#include components/feedback/modal-close /}
-  {#include components/feedback/modal-header headingLevel="h2"}Confirm action{/include}
-  {#include components/feedback/modal-body}<p id="pha-confirm-text">Are you sure?</p>{/include}
-  {#include components/feedback/modal-footer}
+  {! Confirm modal — opened by the htmx:confirm interceptor in toast.js. !} {#include components/feedback/modal
+  id="pha-confirm-modal" size="sm" variant="warning" eventOpen=true} {#include components/feedback/modal-close /}
+  {#include components/feedback/modal-header headingLevel="h2"}Confirm action{/include} {#include
+  components/feedback/modal-body}
+  <p id="pha-confirm-text">Are you sure?</p>
+  {/include} {#include components/feedback/modal-footer}
   <button id="pha-confirm-yes" class="pf-v6-c-button pf-m-danger" type="button" @click="open = false">
     <span class="pf-v6-c-button__text">Confirm</span>
   </button>
   <button class="pf-v6-c-button pf-m-link" type="button" @click="open = false">
     <span class="pf-v6-c-button__text">Cancel</span>
   </button>
-  {/include}
-  {/include}
+  {/include} {/include}
 </div>
 {/body} {/include}
