@@ -16,6 +16,8 @@
 {!   editable    (optional) — boolean; pf-m-editable. Pair with the Alpine.js       !}
 {!                            phaLabelEditable component for inline editing.        !}
 {!   removable   (optional) — boolean; renders a close button in __actions.         !}
+{!   removeClick (optional) — Alpine @click expression for the close button, e.g.   !}
+{!                            "$el.closest('li').remove()" inside a label group.    !}
 {!   removeAria  (optional) — aria-label for the close button (default "Remove").   !}
 {!   href        (optional) — when set, renders <a> instead of <span>.              !}
 {!                                                                                  !}
@@ -44,7 +46,9 @@
     <span class="pf-v6-c-label__text">{#insert/}</span>
   </span>
   {#if removable??}<span class="pf-v6-c-label__actions">
-    <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="{#if removeAria??}{removeAria}{#else}Remove{/if}">{icons:svg('fa:xmark').raw}</button>
+    {! pf-m-no-padding matches PF's label close button — without it the plain button's padding
+       inflates the label height from 26px to 36px !}
+    <button class="pf-v6-c-button pf-m-plain pf-m-no-padding" type="button"{#if removeClick??} @click="{removeClick}"{/if} aria-label="{#if removeAria??}{removeAria}{#else}Remove{/if}"><span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span></button>
   </span>{/if}
 </span>
 {/if}

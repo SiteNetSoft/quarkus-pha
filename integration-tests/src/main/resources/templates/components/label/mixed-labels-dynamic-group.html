@@ -1,0 +1,25 @@
+{! Mixed labels — static (removable) and editable labels in one dynamic group. !}
+<div class="ws-preview-html" x-data>
+  {#include components/data-display/label-group id="lbg-mixed" ariaLabel="Mixed labels, dynamic label group"}
+  {#content}
+  <li class="pf-v6-c-label-group__list-item">
+    {#include components/data-display/label id="lbg-mx-1" color="blue" removable=true removeClick="$el.closest('li').remove()"}Static label{/include}
+  </li>
+  <li class="pf-v6-c-label-group__list-item">
+    <span
+      class="pf-v6-c-label pf-m-blue pf-m-editable"
+      id="lbg-mx-2"
+      x-data="phaLabelEditable()"
+      @click="start()"
+      @keydown="onKey($event)"
+    >
+      <span class="pf-v6-c-label__content" tabindex="0">
+        <span class="pf-v6-c-label__text" x-ref="text" @blur="commit()" @keydown="onKey($event)">Editable label</span>
+      </span>
+    </span>
+  </li>
+  <li class="pf-v6-c-label-group__list-item">
+    {#include components/data-display/label id="lbg-mx-3" color="blue" removable=true removeClick="$el.closest('li').remove()"}Another static label{/include}
+  </li>
+  {/content} {/include}
+</div>
