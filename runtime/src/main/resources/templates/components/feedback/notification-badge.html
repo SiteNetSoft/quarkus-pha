@@ -1,7 +1,11 @@
-{! Notification badge — PatternFly v6 !}
+{! Notification badge — PatternFly v6. PF v6 has no standalone notification-badge component;
+   it is a stateful icon Button (pf-m-stateful + read/unread/attention state class) whose count
+   renders as a badge inside pf-v6-c-button__count. !}
 {! Optional: id — DOM id on the root; omit unless something else references the badge.
               variant (read | unread | attention — default read), count (visible number), ariaLabel !}
-<button class="pf-v6-c-notification-badge pf-m-{#if variant??}{variant}{#else}read{/if}" type="button"{#if id??} id="{id}"{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
-  <span class="pf-v6-c-notification-badge__icon">{icons:svg('fa:bell').raw}</span>
-  {#if count??}<span class="pf-v6-c-notification-badge__count">{count}</span>{/if}
+{#let v=(variant ?: 'read')}
+<button class="pf-v6-c-button pf-m-stateful pf-m-{v}" type="button"{#if id??} id="{id}"{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
+  <span class="pf-v6-c-button__icon">{icons:svg('fa:bell').raw}</span>
+  {#if count??}<span class="pf-v6-c-button__count"><span class="pf-v6-c-badge {#if v is 'read'}pf-m-read{#else}pf-m-unread{/if}">{count}</span></span>{/if}
 </button>
+{/let}

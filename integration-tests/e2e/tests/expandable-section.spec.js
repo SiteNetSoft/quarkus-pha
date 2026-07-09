@@ -32,9 +32,9 @@ test.describe("Expandable section", () => {
 
   test("dynamic toggle text flips with the state", async ({ page }) => {
     const toggle = page.locator("#es-dynamic-toggle-text .pf-v6-c-expandable-section__toggle");
-    await expect(toggle.locator(".pf-v6-c-expandable-section__toggle-text")).toHaveText("Show more");
+    await expect(toggle.locator("span[x-text]")).toHaveText("Show more");
     await toggle.click();
-    await expect(toggle.locator(".pf-v6-c-expandable-section__toggle-text")).toHaveText("Show less");
+    await expect(toggle.locator("span[x-text]")).toHaveText("Show less");
   });
 
   test("modifier variants carry their classes", async ({ page }) => {
@@ -58,7 +58,7 @@ test.describe("Expandable section", () => {
   test("truncate expansion keeps content visible and toggles the clamp", async ({ page }) => {
     const section = page.locator("#es-truncate-expansion");
     await expect(section.locator(".pf-v6-c-expandable-section__content")).toBeVisible();
-    const toggleText = section.locator(".pf-v6-c-expandable-section__toggle-text");
+    const toggleText = section.locator(".pf-v6-c-expandable-section__toggle span[x-text]");
     await expect(toggleText).toHaveText("Show more");
     await section.locator(".pf-v6-c-expandable-section__toggle").click();
     await expect(section).toHaveClass(/pf-m-expanded/);

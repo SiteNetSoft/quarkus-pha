@@ -70,12 +70,13 @@
             <button
               type="button"
               class="pf-v6-c-button pf-m-plain"
+              :class="isExpanded(row.name) ? 'pf-m-expanded' : ''"
               :aria-expanded="isExpanded(row.name)"
               :aria-label="(isExpanded(row.name) ? 'Collapse' : 'Expand') + ' details for ' + row.name"
               @click="toggleExpand(row.name)"
             >
               <span class="pf-v6-c-table__toggle-icon">
-                <i class="fas fa-angle-right" :class="isExpanded(row.name) ? 'pf-m-rotate' : ''" aria-hidden="true"></i>
+                <i class="fas fa-angle-down" aria-hidden="true"></i>
               </span>
             </button>
           </td>

@@ -17,14 +17,16 @@
                   ><span class="pf-v6-c-label__text"
                     ><strong x-text="f.attr + ': '"></strong><span x-text="f.value"></span></span
                 ></span>
-                <button
-                  type="button"
-                  class="pf-v6-c-label__action"
-                  :aria-label="'Remove ' + f.attr + ' filter'"
-                  @click="filters.splice(i, 1)"
+                <span class="pf-v6-c-label__actions"
+                  ><button
+                    type="button"
+                    class="pf-v6-c-button pf-m-plain pf-m-no-padding"
+                    :aria-label="'Remove ' + f.attr + ' filter'"
+                    @click="filters.splice(i, 1)"
+                  >
+                    <span class="pf-v6-c-button__icon"><span aria-hidden="true">×</span></span>
+                  </button></span
                 >
-                  <span class="pf-v6-c-label__action-icon">×</span>
-                </button>
               </span>
             </div>
           </template>

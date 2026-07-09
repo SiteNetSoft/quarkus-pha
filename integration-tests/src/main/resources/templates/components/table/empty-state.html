@@ -11,7 +11,9 @@
 <tbody>
   <tr>
     <td colspan="3">
-      {#include components/feedback/empty-state titleText="No results found" iconName="fa:magnifying-glass" size="sm"
+      {! _isolated stops the outer table's id="tbl-empty" leaking into the empty-state markup !}
+      {#include components/feedback/empty-state _isolated=true titleText="No results found"
+      iconName="fa:magnifying-glass" size="sm"
       bodyText="No results match the filter criteria. Clear all filters and try again." /}
     </td>
   </tr>

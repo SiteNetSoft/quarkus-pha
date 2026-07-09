@@ -48,7 +48,8 @@ public class TableExamplesRoutes {
         "compound-expandable",
         "sticky",
         "tree-table",
-        "draggable-rows"
+        "draggable-rows",
+        "footer"
     );
 
     @Inject

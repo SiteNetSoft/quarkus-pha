@@ -59,21 +59,31 @@
   </div>
 </form>
 {/body} {#footer}
-<button
-  type="button"
-  class="pf-v6-c-button pf-m-primary"
-  hx-get="/api/htmx/wizard/substeps/step/2"
+<div class="pf-v6-c-action-list">
+  <div class="pf-v6-c-action-list__group">
+    <div class="pf-v6-c-action-list__item">
+      <button type="button" class="pf-v6-c-button pf-m-secondary" disabled>
+        <span class="pf-v6-c-button__text">Back</span>
+      </button>
+    </div>
+    <div class="pf-v6-c-action-list__item">
+      <button
+        type="button"
+        class="pf-v6-c-button pf-m-primary"
+        hx-get="/api/htmx/wizard/substeps/step/2"
   hx-target="#wiz-substeps"
   hx-swap="outerHTML"
->
-  <span class="pf-v6-c-button__text">Next</span>
-</button>
-<button type="button" class="pf-v6-c-button pf-m-secondary" disabled>
-  <span class="pf-v6-c-button__text">Back</span>
-</button>
-<div class="pf-v6-c-wizard__footer-cancel">
-  <button type="button" class="pf-v6-c-button pf-m-link">
-    <span class="pf-v6-c-button__text">Cancel</span>
-  </button>
+      >
+        <span class="pf-v6-c-button__text">Next</span>
+      </button>
+    </div>
+  </div>
+  <div class="pf-v6-c-action-list__group">
+    <div class="pf-v6-c-action-list__item">
+      <button type="button" class="pf-v6-c-button pf-m-link">
+        <span class="pf-v6-c-button__text">Cancel</span>
+      </button>
+    </div>
+  </div>
 </div>
 {/footer} {/include}

@@ -23,7 +23,7 @@ test.describe("Tile", () => {
   });
 
   test("deprecation banner points to Card", async ({ page }) => {
-    const banner = page.locator(".pf-v6-c-banner.pf-m-gold");
+    const banner = page.locator(".pf-v6-c-banner.pf-m-yellow");
     await expect(banner).toBeVisible();
     await expect(banner).toContainText("Deprecated");
     await expect(banner.locator("a[href='/components/card']")).toBeVisible();

@@ -9,7 +9,7 @@
   @open-modal.window="if ($event.detail === '{id}') open = true"
   @keydown.escape.window="if (open) open = false"
 >
-  <div class="pf-v6-c-bullseye">
+  <div class="pf-v6-l-bullseye">
     <div
       class="pf-v6-c-modal-box{#if size??} pf-m-{size}{/if}"
       role="dialog"
@@ -34,11 +34,9 @@
         hx-indicator="#{id}-spinner"
       >
         <div class="htmx-indicator" id="{id}-spinner" style="text-align: center; padding: 2rem">
-          <span class="pf-v6-c-spinner pf-m-lg" role="progressbar" aria-label="Loading content">
-            <span class="pf-v6-c-spinner__clipper"></span>
-            <span class="pf-v6-c-spinner__lead-ball"></span>
-            <span class="pf-v6-c-spinner__tail-ball"></span>
-          </span>
+          <svg class="pf-v6-c-spinner pf-m-lg" role="progressbar" viewBox="0 0 100 100" aria-label="Loading content">
+            <circle class="pf-v6-c-spinner__path" cx="50" cy="50" r="45" fill="none"></circle>
+          </svg>
         </div>
       </div>
       <footer class="pf-v6-c-modal-box__footer">

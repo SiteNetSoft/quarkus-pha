@@ -31,12 +31,12 @@ test.describe("Banner", () => {
 
     test("non-custom status banners include an icon", async ({ page }) => {
       for (const s of ["success", "warning", "danger", "info"]) {
-        await expect(page.locator(`#banner-${s} .pf-v6-c-banner__icon svg`)).toBeVisible();
+        await expect(page.locator(`#banner-${s} span[aria-hidden="true"] svg`)).toBeVisible();
       }
     });
 
     test("custom variant has no auto icon", async ({ page }) => {
-      await expect(page.locator("#banner-custom .pf-v6-c-banner__icon")).toHaveCount(0);
+      await expect(page.locator('#banner-custom span[aria-hidden="true"]')).toHaveCount(0);
     });
   });
 

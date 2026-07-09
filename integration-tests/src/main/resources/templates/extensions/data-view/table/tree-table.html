@@ -15,14 +15,23 @@
     <tr class="pf-v6-c-table__tr" aria-level="1" aria-setsize="3" aria-posinset="1" :aria-expanded="g1">
       <td class="pf-v6-c-table__tree-view-title-cell">
         <div class="pf-v6-c-table__tree-view-main">
-          <button type="button" class="pf-v6-c-table__button" :aria-expanded="g1" @click="g1 = !g1">
-            <div class="pf-v6-c-table__button-content">
-              <span class="pf-v6-c-table__toggle-icon"
-                ><i class="fas fa-angle-right" :class="g1 ? 'pf-m-rotate' : ''" aria-hidden="true"></i
-              ></span>
-              <span class="pf-v6-c-table__tree-view-text">Apache 2.0</span>
-            </div>
-          </button>
+          <span class="pf-v6-c-table__td pf-v6-c-table__toggle">
+            <button
+              type="button"
+              class="pf-v6-c-button pf-m-plain"
+              :class="g1 ? 'pf-m-expanded' : ''"
+              :aria-expanded="g1"
+              @click="g1 = !g1"
+              aria-label="Toggle Apache 2.0"
+            >
+              <span class="pf-v6-c-button__icon">
+                <span class="pf-v6-c-table__toggle-icon"
+                  ><i class="fas fa-angle-down" aria-hidden="true"></i
+                ></span>
+              </span>
+            </button>
+          </span>
+          <span class="pf-v6-c-table__tree-view-text">Apache 2.0</span>
         </div>
       </td>
       <td>License group</td>
@@ -53,14 +62,23 @@
     <tr class="pf-v6-c-table__tr" aria-level="1" aria-setsize="3" aria-posinset="2" :aria-expanded="g2">
       <td class="pf-v6-c-table__tree-view-title-cell">
         <div class="pf-v6-c-table__tree-view-main">
-          <button type="button" class="pf-v6-c-table__button" :aria-expanded="g2" @click="g2 = !g2">
-            <div class="pf-v6-c-table__button-content">
-              <span class="pf-v6-c-table__toggle-icon"
-                ><i class="fas fa-angle-right" :class="g2 ? 'pf-m-rotate' : ''" aria-hidden="true"></i
-              ></span>
-              <span class="pf-v6-c-table__tree-view-text">MIT</span>
-            </div>
-          </button>
+          <span class="pf-v6-c-table__td pf-v6-c-table__toggle">
+            <button
+              type="button"
+              class="pf-v6-c-button pf-m-plain"
+              :class="g2 ? 'pf-m-expanded' : ''"
+              :aria-expanded="g2"
+              @click="g2 = !g2"
+              aria-label="Toggle MIT"
+            >
+              <span class="pf-v6-c-button__icon">
+                <span class="pf-v6-c-table__toggle-icon"
+                  ><i class="fas fa-angle-down" aria-hidden="true"></i
+                ></span>
+              </span>
+            </button>
+          </span>
+          <span class="pf-v6-c-table__tree-view-text">MIT</span>
         </div>
       </td>
       <td>License group</td>
@@ -98,14 +116,23 @@
     <tr class="pf-v6-c-table__tr" aria-level="1" aria-setsize="3" aria-posinset="3" :aria-expanded="g3">
       <td class="pf-v6-c-table__tree-view-title-cell">
         <div class="pf-v6-c-table__tree-view-main">
-          <button type="button" class="pf-v6-c-table__button" :aria-expanded="g3" @click="g3 = !g3">
-            <div class="pf-v6-c-table__button-content">
-              <span class="pf-v6-c-table__toggle-icon"
-                ><i class="fas fa-angle-right" :class="g3 ? 'pf-m-rotate' : ''" aria-hidden="true"></i
-              ></span>
-              <span class="pf-v6-c-table__tree-view-text">BSD &amp; other</span>
-            </div>
-          </button>
+          <span class="pf-v6-c-table__td pf-v6-c-table__toggle">
+            <button
+              type="button"
+              class="pf-v6-c-button pf-m-plain"
+              :class="g3 ? 'pf-m-expanded' : ''"
+              :aria-expanded="g3"
+              @click="g3 = !g3"
+              aria-label="Toggle BSD &amp; other"
+            >
+              <span class="pf-v6-c-button__icon">
+                <span class="pf-v6-c-table__toggle-icon"
+                  ><i class="fas fa-angle-down" aria-hidden="true"></i
+                ></span>
+              </span>
+            </button>
+          </span>
+          <span class="pf-v6-c-table__tree-view-text">BSD &amp; other</span>
         </div>
       </td>
       <td>License group</td>

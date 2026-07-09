@@ -16,9 +16,7 @@ block: rendered after the toggle — e.g. a __check checkbox. !}
       >
     </button>
   </div>
-  {/if}
-  {! The main block (e.g. a __check checkbox) is only evaluated when expandToggle is absent —
-     an unguarded unnamed {#insert} in a self-closing include resolves OUTWARD to the enclosing
-     block and recurses (StackOverflowError). Toggle and custom content are mutually exclusive. !}
-  {#if !expandToggle??}{#insert /}{/if}
+  {/if} {! The main block (e.g. a __check checkbox) is only evaluated when expandToggle is absent — an unguarded unnamed
+  {#insert} in a self-closing include resolves OUTWARD to the enclosing block and recurses (StackOverflowError). Toggle
+  and custom content are mutually exclusive. !} {#if !expandToggle??}{#insert /}{/if}
 </div>
