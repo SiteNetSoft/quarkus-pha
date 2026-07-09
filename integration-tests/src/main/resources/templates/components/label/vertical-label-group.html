@@ -2,13 +2,13 @@
   {#include components/data-display/label-group id="lbg-vertical" categoryName="Filters applied" vertical=true}
   {#content}
   <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-v-1" color="green" removable=true}Status: Active{/include}
+    {#include components/data-display/label id="lbg-v-1" color="green" removable=true removeClick="$el.closest('li').remove()"}Status: Active{/include}
   </li>
   <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-v-2" color="blue" removable=true}Region: us-east-1{/include}
+    {#include components/data-display/label id="lbg-v-2" color="blue" removable=true removeClick="$el.closest('li').remove()"}Region: us-east-1{/include}
   </li>
   <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-v-3" color="purple" removable=true}Owner: jn@yaloub.com{/include}
+    {#include components/data-display/label id="lbg-v-3" color="purple" removable=true removeClick="$el.closest('li').remove()"}Owner: jn@yaloub.com{/include}
   </li>
   {/content} {/include}
 </div>

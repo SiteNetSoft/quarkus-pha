@@ -41,7 +41,20 @@ public class LabelExamplesRoutes {
         "label-group-with-removable-categories",
         "vertical-label-group",
         "editable-label-group",
-        "editable-label-group-with-add-button"
+        "editable-label-group-with-add-button",
+        "overflow-label",
+        "add-label",
+        "label-group-with-overflow-expanded",
+        "vertical-label-group-with-overflow",
+        "vertical-label-group-with-overflow-expanded",
+        "vertical-label-group-with-category",
+        "vertical-label-group-with-removable-category",
+        "static-labels-dynamic-group",
+        "mixed-labels-dynamic-group",
+        "label-group-with-compact-labels",
+        "label-group-with-compact-labels-and-overflow",
+        "vertical-label-group-with-compact-labels",
+        "labels-with-truncation"
     );
 
     @Inject

@@ -22,9 +22,9 @@
  *
  * License: Apache 2.0
  */
-phaAlpine("phaLabelGroup", (numLabels = 3) => ({
+phaAlpine("phaLabelGroup", (numLabels = 3, startExpanded = false) => ({
   numLabels: numLabels,
-  expanded: false,
+  expanded: startExpanded,
   hiddenCount: 0,
   collapsedTextTemplate: "REMAINING_PLACEHOLDER more",
   expandedText: "Show less",
@@ -45,19 +45,20 @@ phaAlpine("phaLabelGroup", (numLabels = 3) => ({
   },
 
   applyOverflow() {
+    // PF sets display:inline-flex on __list-item, which outranks the UA [hidden] rule —
+    // an inline display:none is required for the collapse to actually hide items.
+    const hide = (li, hidden) => {
+      li.hidden = hidden;
+      li.style.display = hidden ? "none" : "";
+    };
     const items = this.items;
-    if (items.length <= this.numLabels) {
+    if (items.length <= this.numLabels || this.expanded) {
       this.hiddenCount = 0;
-      items.forEach((li) => (li.hidden = false));
+      items.forEach((li) => hide(li, false));
       return;
     }
-    if (this.expanded) {
-      this.hiddenCount = 0;
-      items.forEach((li) => (li.hidden = false));
-    } else {
-      this.hiddenCount = items.length - this.numLabels;
-      items.forEach((li, i) => (li.hidden = i >= this.numLabels));
-    }
+    this.hiddenCount = items.length - this.numLabels;
+    items.forEach((li, i) => hide(li, i >= this.numLabels));
   },
 
   toggle() {
