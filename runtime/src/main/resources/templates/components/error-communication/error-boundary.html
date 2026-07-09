@@ -5,7 +5,7 @@
 {! Optional: headerTitle, errorTitle (default "Something went wrong"), errorBody (default provided),
               errorDetails (stack / diagnostic text), errorToggleText (default "Show error details"). !}
 {#let _et=(errorTitle ?: 'Something went wrong') _eb=(errorBody ?: 'The application ran into a problem and could not finish your request. Try again, or return to the home page.') _toggle=(errorToggleText ?: 'Show error details')}
-<div class="pf-v6-c-page__main-section pf-m-light">
+<div class="pf-v6-c-page__main-section">
   {#if headerTitle??}
   <div class="pf-v6-c-content pf-m-editorial"><h1 class="pf-v6-c-title pf-m-2xl">{headerTitle}</h1></div>
   {/if}

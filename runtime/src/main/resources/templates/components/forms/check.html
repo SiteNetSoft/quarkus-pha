@@ -8,7 +8,8 @@
   <input class="pf-v6-c-check__input" type="checkbox" id="{id}" name="{id}"{#if checked??} checked{/if}{#if disabled??} disabled{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
 </div>
 {#else if reversed??}
-<div class="pf-v6-c-check pf-m-reversed" id="{id}-wrap">
+{! reversed = label before input via DOM order alone — PF v6 has no pf-m-reversed class !}
+<div class="pf-v6-c-check" id="{id}-wrap">
   <label class="pf-v6-c-check__label{#if disabled??} pf-m-disabled{/if}" for="{id}">{label}</label>
   <input class="pf-v6-c-check__input" type="checkbox" id="{id}" name="{id}"{#if checked??} checked{/if}{#if disabled??} disabled{/if}>
 </div>

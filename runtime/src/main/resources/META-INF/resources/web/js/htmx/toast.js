@@ -45,7 +45,7 @@
       '<div class="pf-v6-c-alert__icon"><i class="' +
       (ICONS[variant] || ICONS.info) +
       '" aria-hidden="true"></i></div>' +
-      '<p class="pf-v6-c-alert__title"><span class="pf-v6-c-alert__screen-reader">' +
+      '<p class="pf-v6-c-alert__title"><span class="pf-v6-screen-reader">' +
       variant +
       " alert:</span> " +
       title +

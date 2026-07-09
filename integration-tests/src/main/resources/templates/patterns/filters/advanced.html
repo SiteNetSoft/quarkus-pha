@@ -41,14 +41,16 @@
         <span class="pf-v6-c-label__content"
           ><span class="pf-v6-c-label__text" x-text="f.attr + ' = ' + f.value"></span
         ></span>
-        <button
-          type="button"
-          class="pf-v6-c-label__action"
-          :aria-label="'Remove ' + f.attr + ' filter'"
-          @click="applied.splice(i, 1)"
+        <span class="pf-v6-c-label__actions"
+          ><button
+            type="button"
+            class="pf-v6-c-button pf-m-plain pf-m-no-padding"
+            :aria-label="'Remove ' + f.attr + ' filter'"
+            @click="applied.splice(i, 1)"
+          >
+            <span class="pf-v6-c-button__icon"><span aria-hidden="true">×</span></span>
+          </button></span
         >
-          <span class="pf-v6-c-label__action-icon">×</span>
-        </button>
       </span>
     </template>
   </div>

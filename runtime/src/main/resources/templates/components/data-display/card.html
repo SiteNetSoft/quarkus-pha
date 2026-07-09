@@ -4,7 +4,8 @@
    no named slot, so nothing to collide with outer templates' slots. !}
 {! Optional params:
      id           — DOM id on the root.
-     compact, displayLg, plain, flat, rounded, fullHeight, secondary — pf-m-* modifiers.
+     compact, displayLg, plain, fullHeight, secondary — pf-m-* modifiers.
+     flat, rounded — accepted for back-compat but emit nothing (PF v6 removed both modifiers).
      selectable   — pf-m-selectable (pair with card-header hasSelectableActions).
      clickable    — pf-m-clickable.
      selected     — static pf-m-selected.
@@ -17,7 +18,7 @@
      attrs        — raw attribute passthrough (Alpine directives etc.). Inherits through
                     nested includes; shadowed inside the card family's slots. !}
 <div
-  class="pf-v6-c-card{#if compact??} pf-m-compact{/if}{#if displayLg??} pf-m-display-lg{/if}{#if plain??} pf-m-plain{/if}{#if flat??} pf-m-flat{/if}{#if rounded??} pf-m-rounded{/if}{#if fullHeight??} pf-m-full-height{/if}{#if secondary??} pf-m-secondary{/if}{#if selectable??} pf-m-selectable{/if}{#if clickable??} pf-m-clickable{/if}{#if selected??} pf-m-selected{/if}{#if disabled??} pf-m-disabled{/if}"
+  class="pf-v6-c-card{#if compact??} pf-m-compact{/if}{#if displayLg??} pf-m-display-lg{/if}{#if plain??} pf-m-plain{/if}{#if fullHeight??} pf-m-full-height{/if}{#if secondary??} pf-m-secondary{/if}{#if selectable??} pf-m-selectable{/if}{#if clickable??} pf-m-clickable{/if}{#if selected??} pf-m-selected{/if}{#if disabled??} pf-m-disabled{/if}"
   {#if disabled??}aria-disabled="true"{/if}
   {#if id??}id="{id}"{/if}
   {#if expandable??}x-data="{ expanded: false }" :class="expanded ? 'pf-m-expanded' : ''"{/if}

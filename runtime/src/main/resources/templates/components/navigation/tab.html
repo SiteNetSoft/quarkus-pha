@@ -12,6 +12,6 @@
 {!   disabled (optional) — render the tab disabled.                                !}
 <li role="presentation" class="pf-v6-c-tabs__item" :class="active === '{tabKey}' ? 'pf-m-current' : ''">
   <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === '{tabKey}'" :tabindex="active === '{tabKey}' ? 0 : -1" @click="active = '{tabKey}'"{#if disabled??} disabled aria-disabled="true"{/if}>
-    {#if icon??}<span class="pf-v6-c-tabs__item-icon">{icons:svg(icon).raw}</span>{/if}<span class="pf-v6-c-tabs__item-text">{text}</span>{#if count??}<span class="pf-v6-c-tabs__item-count"><span class="pf-v6-c-badge pf-m-read">{count}</span></span>{/if}
+    {#if icon??}<span class="pf-v6-c-tabs__item-icon">{icons:svg(icon).raw}</span>{/if}<span class="pf-v6-c-tabs__item-text">{text}{#if count??} <span class="pf-v6-c-badge pf-m-read">{count}</span>{/if}</span>
   </button>
 </li>

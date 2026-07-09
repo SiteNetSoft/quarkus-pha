@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-const EXAMPLES = ["basic", "bordered", "sizes", "bordered-sizes", "initials"];
+const EXAMPLES = ["basic", "bordered", "sizes", "bordered-sizes", "initials", "colors"];
 
 test.describe("Avatar", () => {
   test.beforeEach(async ({ page }) => {
@@ -57,14 +57,35 @@ test.describe("Avatar", () => {
     });
   });
 
-  test("every avatar is an <img> with src", async ({ page }) => {
+  test.describe("Colors", () => {
+    test("renders all nine colorful div avatars with role=img", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/avatar/colors"]');
+      await expect(card.locator(".pf-v6-c-avatar.pf-m-colorful")).toHaveCount(9);
+      for (const color of ["red", "orangered", "orange", "yellow", "green", "teal", "blue", "purple", "gray"]) {
+        const a = card.locator(`.pf-v6-c-avatar.pf-m-${color}`);
+        await expect(a).toHaveAttribute("role", "img");
+        await expect(a).toHaveAttribute("aria-label", /avatar/);
+        const tag = await a.evaluate((el) => el.tagName);
+        expect(tag).toBe("DIV");
+      }
+    });
+  });
+
+  test("every avatar is an <img> with src, or a colorful <div> with role=img", async ({ page }) => {
     const avatars = page.locator(".pf-v6-c-avatar");
     const count = await avatars.count();
     expect(count).toBeGreaterThan(0);
     for (let i = 0; i < count; i++) {
-      await expect(avatars.nth(i)).toHaveAttribute("src");
-      const tag = await avatars.nth(i).evaluate((el) => el.tagName);
-      expect(tag).toBe("IMG");
+      const a = avatars.nth(i);
+      const colorful = await a.evaluate((el) => el.classList.contains("pf-m-colorful"));
+      const tag = await a.evaluate((el) => el.tagName);
+      if (colorful) {
+        expect(tag).toBe("DIV");
+        await expect(a).toHaveAttribute("role", "img");
+      } else {
+        expect(tag).toBe("IMG");
+        await expect(a).toHaveAttribute("src");
+      }
     }
   });
 

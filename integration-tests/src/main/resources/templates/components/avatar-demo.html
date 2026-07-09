@@ -3,7 +3,7 @@
 {/head} {#body}
 <div id="root">
   <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer pf-m-breakpoint-lg pf-m-height-breakpoint-lg">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
       <div class="pf-v6-c-skip-to-content">
         <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary">
           <span class="pf-v6-c-button__text">Skip to content</span>
@@ -14,23 +14,25 @@
         <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
           <main style="outline: none" tabindex="-1" id="ws-page-content-router">
             <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width pf-m-light">
+              <section class="pf-v6-c-page__main-section pf-m-limit-width">
                 <div class="pf-v6-c-page__main-body">
                   <div class="pf-v6-c-content pf-m-editorial">
                     <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Avatar</h1>
                     <p>
                       A small image representing a user. Renders a single <code class="ws-code">&lt;img&gt;</code> with
                       PatternFly's avatar classes — sizing, optional border, accessible
-                      <code class="ws-code">alt</code>. No JavaScript required; pure CSS.
+                      <code class="ws-code">alt</code>. PatternFly 6.6 adds a colorful
+                      <code class="ws-code">&lt;div&gt;</code> flavour for icon or initials content. No JavaScript
+                      required; pure CSS.
                     </p>
                   </div>
                 </div>
               </section>
 
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill pf-m-light-100">
+              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
                 <div class="pf-v6-c-page__main-body">
                   <div class="pf-v6-u-h-100">
-                    <div class="pf-v6-l-flex pf-v6-m-column pf-m-nowrap-on-2xl">
+                    <div class="pf-v6-l-flex pf-m-column pf-m-nowrap-on-2xl">
                       <nav
                         class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
                         aria-label="Table of contents"
@@ -87,6 +89,15 @@
                                     ><a href="#initials" class="pf-v6-c-button pf-m-link"
                                       ><span class="pf-v6-c-button__text"
                                         ><span class="pf-v6-c-jump-links__link-text">Initials</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#colors" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Colors</span></span
                                       ></a
                                     ></span
                                   >
@@ -172,7 +183,15 @@
                           unchanged; the trick is generating a small SVG of the user's initials on a colored circle and
                           serving it as the <code class="ws-code">src</code>.
                         </p>
-                        {/description} {#content}{#include components/avatar/initials /}{/content} {/include}
+                        {/description} {#content}{#include components/avatar/initials /}{/content} {/include} {#include
+                        partials/example-card title="Colors" slug="colors" component="avatar"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Color modifiers (PatternFly 6.6+): <code class="ws-code">pf-m-colorful</code> plus one of nine
+                          color classes, on a <code class="ws-code">&lt;div role="img"&gt;</code> holding an icon or
+                          initials — the border comes automatically. Hand-rendered markup; the runtime template stays
+                          the plain <code class="ws-code">&lt;img&gt;</code> flavour.
+                        </p>
+                        {/description} {#content}{#include components/avatar/colors /}{/content} {/include}
 
                         <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                           <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">

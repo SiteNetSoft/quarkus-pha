@@ -1,10 +1,8 @@
 <div class="pf-v6-c-expandable-section" id="es-custom-toggle" x-data="{ expanded: false }" :class="{ 'pf-m-expanded': expanded }">
   <button class="pf-v6-c-expandable-section__toggle" type="button" :aria-expanded="expanded" @click="expanded = !expanded">
     <span class="pf-v6-c-expandable-section__toggle-icon">{icons:svg('fa:angle-right').raw}</span>
-    <span class="pf-v6-c-expandable-section__toggle-text">
-      <span class="pf-v6-c-icon pf-m-inline" style="margin-inline-end: 0.25rem"><span class="pf-v6-c-icon__content">{icons:svg('fa:gear').raw}</span></span>
-      Configuration <span class="pf-v6-c-badge pf-m-read" style="margin-inline-start: 0.5rem">4</span>
-    </span>
+    <span class="pf-v6-c-icon pf-m-inline" style="margin-inline-end: 0.25rem"><span class="pf-v6-c-icon__content">{icons:svg('fa:gear').raw}</span></span>
+    Configuration <span class="pf-v6-c-badge pf-m-read" style="margin-inline-start: 0.5rem">4</span>
   </button>
   <div class="pf-v6-c-expandable-section__content" x-show="expanded" x-cloak><p>The toggle composes an icon and a badge alongside the text.</p></div>
 </div>
