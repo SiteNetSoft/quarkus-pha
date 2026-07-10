@@ -54,7 +54,8 @@ integration-tests/e2e/.cache/
 # Local-only test/validation reports (never committed)
 .reports/
 
-# Claude Code — local/personal state only.
-# Shared config (.claude/settings.json, commands/, agents/) can still be committed.
-.claude/settings.local.json
-.claude/scheduled_tasks.lock
+# Claude Code — local/personal state, never committed
+.claude/
+
+# Logs (JVM hs_err/replay crash logs, tool output, etc.)
+*.log
