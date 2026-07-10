@@ -33,6 +33,18 @@ class RoutesSmokeTest {
                 .body(containsString("</html>"));
     }
 
+    @Test
+    void manifest_renders_application_identity() {
+        given()
+            .when().get("/manifest.json")
+            .then()
+                .statusCode(200)
+                .contentType(containsString("application/manifest+json"))
+                .body("name", org.hamcrest.Matchers.equalTo("quarkus-pha"))
+                .body("icons.size()", org.hamcrest.Matchers.equalTo(3))
+                .body(not(containsString("{applicationName}")));
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {
         "/components/about-modal",
