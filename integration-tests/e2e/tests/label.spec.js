@@ -86,7 +86,7 @@ test.describe("Label", () => {
     await expect(btn).toHaveText("3 more");
     await btn.click();
     expect(await visible()).toBe(6);
-    await expect(btn).toHaveText("Show less");
+    await expect(btn).toHaveText("Show Less");
     await btn.click();
     expect(await visible()).toBe(3);
     await expect(btn).toHaveText("3 more");
@@ -95,7 +95,7 @@ test.describe("Label", () => {
   test("expanded overflow variants start expanded and collapse live", async ({ page }) => {
     for (const id of ["lbg-overflow-expanded", "lbg-vertical-overflow-expanded"]) {
       const btn = page.locator(`#${id} .pha-label-group__overflow button`);
-      await expect(btn).toHaveText("Show less");
+      await expect(btn).toHaveText("Show Less");
       await btn.click();
       await expect(btn).toHaveText("3 more");
     }

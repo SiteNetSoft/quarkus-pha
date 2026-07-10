@@ -1,18 +1,23 @@
-<div class="ws-preview-html" style="display: flex; flex-direction: column; gap: 0.75rem">
-  {#include components/data-display/label-group id="lbg-rm-1" categoryName="Region" closable=true closeBtnAria="Clear region filter"} {#content}
+{! Removable category: the group itself carries the close button; three labels show and the
+   rest collapse behind the overflow toggle, matching patternfly.org. !}
+<div class="ws-preview-html">
+  {#include components/data-display/label-group id="lbg-rm-cat" categoryName="Group label" closable=true
+  closeBtnAria="Remove category" numLabels=3}
+  {#content}
   <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-rm-1-a" color="blue" removable=true removeClick="$el.closest('li').remove()"}us-east-1{/include}
+    {#include components/data-display/label id="lbg-rm-1" iconName="fa:circle-info"}Label 1{/include}
   </li>
   <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-rm-1-b" color="blue" removable=true removeClick="$el.closest('li').remove()"}eu-west-1{/include}
-  </li>
-  {/content} {/include}
-{#include components/data-display/label-group id="lbg-rm-2" categoryName="Status" closable=true closeBtnAria="Clear status filter"} {#content}
-  <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-rm-2-a" color="green" removable=true removeClick="$el.closest('li').remove()"}Running{/include}
+    {#include components/data-display/label id="lbg-rm-2" color="blue" iconName="fa:circle-info"}Label 2{/include}
   </li>
   <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-rm-2-b" color="red" removable=true removeClick="$el.closest('li').remove()"}Failed{/include}
+    {#include components/data-display/label id="lbg-rm-3" color="green" iconName="fa:circle-info"}Label 3{/include}
+  </li>
+  <li class="pf-v6-c-label-group__list-item">
+    {#include components/data-display/label id="lbg-rm-4" color="orange" iconName="fa:circle-info"}Label 4{/include}
+  </li>
+  <li class="pf-v6-c-label-group__list-item">
+    {#include components/data-display/label id="lbg-rm-5" color="red" iconName="fa:circle-info"}Label 5{/include}
   </li>
   {/content} {/include}
 </div>
