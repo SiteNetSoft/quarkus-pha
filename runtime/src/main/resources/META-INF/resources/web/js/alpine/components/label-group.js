@@ -27,7 +27,7 @@ phaAlpine("phaLabelGroup", (numLabels = 3, startExpanded = false) => ({
   expanded: startExpanded,
   hiddenCount: 0,
   collapsedTextTemplate: "REMAINING_PLACEHOLDER more",
-  expandedText: "Show less",
+  expandedText: "Show Less",
 
   init() {
     this.collapsedTextTemplate = this.$el.dataset.collapsedText || this.collapsedTextTemplate;

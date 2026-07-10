@@ -32,6 +32,7 @@
 {!   warning  → pf-m-warning  + fa:triangle-exclamation                            !}
 {!   danger   → pf-m-danger   + fa:circle-exclamation                              !}
 {!   custom   → pf-m-custom   + fa:bell                                            !}
+{#let vv=(variant ?: '')}
 {#if href??}
 <a class="pf-v6-c-label{#if color??} pf-m-{color}{/if}{#if status??} pf-m-{status}{/if}{#if variant??} pf-m-{variant}{#else} pf-m-filled{/if}{#if compact??} pf-m-compact{/if}{#if disabled??} pf-m-disabled{/if}{#if clickable??} pf-m-clickable{/if}{#if editable??} pf-m-editable{/if}"{#if id??} id="{id}"{/if} href="{href}">
   <span class="pf-v6-c-label__content">
@@ -39,6 +40,13 @@
     <span class="pf-v6-c-label__text">{#insert/}</span>
   </span>
 </a>
+{#else if vv is 'overflow' || vv is 'add'}
+{! PF renders overflow/add labels as buttons — they are interactive affordances !}
+<button type="button" class="pf-v6-c-label pf-m-{variant}{#if compact??} pf-m-compact{/if}{#if disabled??} pf-m-disabled{/if}"{#if id??} id="{id}"{/if}{#if disabled??} disabled{/if}>
+  <span class="pf-v6-c-label__content">
+    <span class="pf-v6-c-label__text">{#insert/}</span>
+  </span>
+</button>
 {#else}
 <span class="pf-v6-c-label{#if color??} pf-m-{color}{/if}{#if status??} pf-m-{status}{/if}{#if variant??} pf-m-{variant}{#else} pf-m-filled{/if}{#if compact??} pf-m-compact{/if}{#if disabled??} pf-m-disabled{/if}{#if clickable??} pf-m-clickable{/if}{#if editable??} pf-m-editable{/if}"{#if id??} id="{id}"{/if}>
   <span class="pf-v6-c-label__content"{#if editable??} tabindex="0"{/if}>
@@ -52,3 +60,4 @@
   </span>{/if}
 </span>
 {/if}
+{/let}
