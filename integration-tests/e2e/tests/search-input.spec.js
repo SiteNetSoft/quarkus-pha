@@ -3,11 +3,15 @@ import { test, expect } from "@playwright/test";
 const EXAMPLES = [
   "basic",
   "with-clear",
+  "no-match",
   "result-count",
   "navigable-options",
+  "autocomplete",
+  "autocomplete-hint",
   "with-submit",
   "expandable",
   "advanced",
+  "advanced-expanded",
 ];
 
 test.describe("Search Input", () => {
@@ -70,6 +74,38 @@ test.describe("Search Input", () => {
     await page.locator("#si-advanced-username").fill("ned");
     await root.locator("button[type='submit']").click();
     await expect(root.locator("#si-advanced-input")).toHaveValue("username:ned ");
+    await expect(root.locator(".pf-v6-c-panel")).toBeHidden();
+  });
+
+  test("no-match shows only the clear utility", async ({ page }) => {
+    const root = page.locator("#si-no-match");
+    await expect(root.locator(".pf-v6-c-badge")).toHaveCount(0);
+    await root.locator(".pf-v6-c-text-input-group__utilities button").click();
+    await expect(root.locator("input")).toHaveValue("");
+  });
+
+  test("autocomplete menu filters and fills the input", async ({ page }) => {
+    const root = page.locator("#si-autocomplete");
+    const items = root.locator(".pf-v6-c-menu__list-item");
+    await expect(items).toHaveCount(3);
+    await root.locator("input:not(.pf-m-hint)").fill("apples");
+    await expect(items).toHaveCount(1);
+    await items.first().locator("button").click();
+    await expect(root.locator("input:not(.pf-m-hint)")).toHaveValue("appleseed");
+    await expect(root.locator(".pf-v6-c-menu")).toBeHidden();
+  });
+
+  test("autocomplete hint ghost previews and Tab accepts it", async ({ page }) => {
+    const root = page.locator("#si-autocomplete-hint");
+    await expect(root.locator("input.pf-m-hint")).toHaveValue("appleseed");
+    await root.locator("input:not(.pf-m-hint)").press("Tab");
+    await expect(root.locator("input:not(.pf-m-hint)")).toHaveValue("appleseed");
+  });
+
+  test("advanced expanded starts open and still toggles", async ({ page }) => {
+    const root = page.locator("#si-advanced-expanded");
+    await expect(root.locator(".pf-v6-c-panel")).toBeVisible();
+    await root.locator("button[aria-label='Advanced search']").click();
     await expect(root.locator(".pf-v6-c-panel")).toBeHidden();
   });
 
