@@ -1,13 +1,19 @@
 {! Text input group — PatternFly v6 !}
 {! Optional: id — DOM id on the root; omit unless something else references the group.
-              placeholder (optional), disabled (optional), iconName (optional, "set:slug") !}
-<div class="pf-v6-c-text-input-group{#if disabled??} pf-m-disabled{/if}"{#if id??} id="{id}"{/if}>
+              placeholder (optional), disabled (optional), iconName (optional, "set:slug"),
+              plain (optional — pf-m-plain; use only inside an ancestor with its own border/background),
+              value (optional — prefilled text), ariaLabel (optional),
+              hintText (optional — autocomplete ghost rendered as PF's disabled pf-m-hint input) !}
+<div class="pf-v6-c-text-input-group{#if disabled??} pf-m-disabled{/if}{#if plain??} pf-m-plain{/if}"{#if id??} id="{id}"{/if}>
   <div class="pf-v6-c-text-input-group__main{#if iconName??} pf-m-icon{/if}">
     <span class="pf-v6-c-text-input-group__text">
       {#if iconName??}
       <span class="pf-v6-c-text-input-group__icon">{icons:svg(iconName).raw}</span>
       {/if}
-      <input class="pf-v6-c-text-input-group__text-input" type="text"{#if placeholder??} placeholder="{placeholder}"{/if}{#if disabled??} disabled{/if}>
+      {#if hintText??}
+      <input class="pf-v6-c-text-input-group__text-input pf-m-hint" type="text" value="{hintText}" disabled aria-hidden="true">
+      {/if}
+      <input class="pf-v6-c-text-input-group__text-input" type="text"{#if value??} value="{value}"{/if}{#if placeholder??} placeholder="{placeholder}"{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if}{#if disabled??} disabled{/if}>
     </span>
   </div>
 </div>

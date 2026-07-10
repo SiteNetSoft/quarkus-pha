@@ -1,1 +1,14 @@
-{#include components/forms/text-input-group id="tig-icon" placeholder="Search…" iconName="fa:magnifying-glass" /}
+{! Icon + placeholder + utilities: the clear button appears once there is text, and clears it. !}
+<div class="pf-v6-c-text-input-group" id="tig-icon" x-data="{ q: '' }" style="max-width: 360px">
+  <div class="pf-v6-c-text-input-group__main pf-m-icon">
+    <span class="pf-v6-c-text-input-group__text">
+      <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+      <input class="pf-v6-c-text-input-group__text-input" type="text" x-model="q" placeholder="Search…" aria-label="Search input" />
+    </span>
+  </div>
+  <div class="pf-v6-c-text-input-group__utilities" x-show="q !== ''" x-cloak>
+    <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Clear input" @click="q = ''">
+      <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+    </button>
+  </div>
+</div>
