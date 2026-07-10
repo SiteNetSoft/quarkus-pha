@@ -16,7 +16,10 @@ PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 QUARKUS_URL="http://localhost:9090"
 VNU_CONTAINER="quarkus-pha-vnu"
-VNU_IMAGE="ghcr.io/validator/validator:latest"
+# Pinned by digest (the image publishes no version tags) so validation results
+# can't drift without a repo change. To bump: podman pull ghcr.io/validator/validator:latest
+# && podman inspect ghcr.io/validator/validator:latest --format '{{.Digest}}'
+VNU_IMAGE="ghcr.io/validator/validator@sha256:9381e2d1dd3f09b3bfb01b2e0392f89c220ea00aed2fd79e11347c24f2ae7bfc"
 VNU_PORT="8888"
 VNU_URL="http://localhost:${VNU_PORT}"
 
