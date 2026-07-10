@@ -64,6 +64,24 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#plain" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Plain</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#autocomplete-hint" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Autocomplete hint</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#disabled" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">Disabled</span></span
@@ -76,6 +94,15 @@
                                   ><a href="#filters" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">Filters</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#filters-expanded" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Filters expanded</span></span
                                     ></a
                                   ></span
                                 >
@@ -141,16 +168,30 @@
                         Default text input group — just the input wrapper, no decoration.
                       </p>
                       {/description} {#content}{#include components/text-input-group/basic /}{/content} {/include}
-                      {#include partials/example-card title="With icon" slug="with-icon" component="text-input-group"}
-                      {#description}
+                      {#include partials/example-card title="With icon and utilities" slug="with-icon"
+                      component="text-input-group"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Pass <code class="ws-code">iconName</code> to render a prefix icon (<code class="ws-code"
                           >pf-m-icon</code
                         >).
                       </p>
                       {/description} {#content}{#include components/text-input-group/with-icon /}{/content} {/include}
-                      {#include partials/example-card title="Disabled" slug="disabled" component="text-input-group"}
+                      {#include partials/example-card title="Plain" slug="plain" component="text-input-group"}
                       {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">plain=true</code> drops the border/background — only for ancestors that
+                        provide their own; the dashed wrapper shows the extent.
+                      </p>
+                      {/description} {#content}{#include components/text-input-group/plain /}{/content} {/include}
+                      {#include partials/example-card title="Autocomplete hint" slug="autocomplete-hint"
+                      component="text-input-group"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        PF renders the suggestion as a disabled <code class="ws-code">pf-m-hint</code> ghost input
+                        behind the real one — "apples" completes to "appleseed".
+                      </p>
+                      {/description} {#content}{#include components/text-input-group/autocomplete-hint /}{/content}
+                      {/include} {#include partials/example-card title="Disabled" slug="disabled"
+                      component="text-input-group"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">disabled=true</code> — <code class="ws-code">pf-m-disabled</code> on the
                         wrapper, <code class="ws-code">disabled</code> on the input.
@@ -162,7 +203,13 @@
                         Applied filters as removable labels inside the group; Enter adds the typed one.
                       </p>
                       {/description} {#content}{#include components/text-input-group/filters /}{/content} {/include}
-                      {#include partials/example-card title="With status" slug="with-status"
+                      {#include partials/example-card title="Filters expanded" slug="filters-expanded"
+                      component="text-input-group"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The filters group with a long chip list wrapping onto multiple rows; Clear all empties it.
+                      </p>
+                      {/description} {#content}{#include components/text-input-group/filters-expanded /}{/content}
+                      {/include} {#include partials/example-card title="With status" slug="with-status"
                       component="text-input-group"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Success and error variants with status icons.
