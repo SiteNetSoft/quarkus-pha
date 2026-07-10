@@ -1,0 +1,14 @@
+{! No-match state — a searched value with no results shows only the clear utility (no count badge). !}
+<div class="pf-v6-c-text-input-group" id="si-no-match" x-data="{ value: 'Joh' }" style="max-width: 360px">
+  <div class="pf-v6-c-text-input-group__main pf-m-icon">
+    <span class="pf-v6-c-text-input-group__text">
+      <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+      <input class="pf-v6-c-text-input-group__text-input" type="search" placeholder="Find by name" aria-label="Search with no match" x-model="value" />
+    </span>
+  </div>
+  <div class="pf-v6-c-text-input-group__utilities" x-show="value !== ''">
+    <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Clear search" @click="value = ''">
+      <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+    </button>
+  </div>
+</div>
