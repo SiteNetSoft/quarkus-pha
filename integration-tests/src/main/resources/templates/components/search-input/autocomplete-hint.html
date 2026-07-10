@@ -1,0 +1,38 @@
+{! Autocomplete with last-option hint — the ghost pf-m-hint input previews the only remaining
+   completion while the menu shows it. !}
+<div
+  id="si-autocomplete-hint"
+  x-data="{ value: 'app', open: true, options: ['appleseed'],
+            get matches() { return this.options.filter((o) => this.value !== '' && o.startsWith(this.value) && o !== this.value) },
+            get hint() { return this.matches.length === 1 ? this.matches[0] : '' } }"
+  style="position: relative; max-width: 360px"
+  @click.outside="open = false"
+>
+  <div class="pf-v6-c-text-input-group">
+    <div class="pf-v6-c-text-input-group__main pf-m-icon">
+      <span class="pf-v6-c-text-input-group__text">
+        <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+        <input class="pf-v6-c-text-input-group__text-input pf-m-hint" type="search" :value="hint" disabled aria-hidden="true" />
+        <input class="pf-v6-c-text-input-group__text-input" type="search" aria-label="Search with autocomplete hint" x-model="value" @focus="open = true" @input="open = true" @keydown.tab.prevent="if (hint !== '') { value = hint; open = false }" />
+      </span>
+    </div>
+    <div class="pf-v6-c-text-input-group__utilities" x-show="value !== ''">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Clear search" @click="value = ''">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+      </button>
+    </div>
+  </div>
+  <div class="pf-v6-c-menu" x-show="open && matches.length > 0" x-cloak style="position: absolute; top: 100%; left: 0; right: 0; z-index: 200">
+    <div class="pf-v6-c-menu__content">
+      <ul class="pf-v6-c-menu__list" role="menu">
+        <template x-for="m in matches" :key="m">
+          <li class="pf-v6-c-menu__list-item" role="none">
+            <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="value = m; open = false">
+              <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text" x-text="m"></span></span>
+            </button>
+          </li>
+        </template>
+      </ul>
+    </div>
+  </div>
+</div>

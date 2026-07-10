@@ -64,6 +64,15 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#no-match" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">No match</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#result-count" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">Match with result count</span></span
@@ -78,6 +87,24 @@
                                       ><span class="pf-v6-c-jump-links__link-text"
                                         >Match with navigable options</span
                                       ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#autocomplete" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Autocomplete</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#autocomplete-hint" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Autocomplete hint</span></span
                                     ></a
                                   ></span
                                 >
@@ -105,6 +132,15 @@
                                   ><a href="#advanced" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">Advanced</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#advanced-expanded" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Advanced expanded</span></span
                                     ></a
                                   ></span
                                 >
@@ -163,6 +199,12 @@
                       {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">The X appears once a value is present.</p>
                       {/description} {#content}{#include components/search-input/with-clear /}{/content} {/include}
+                      {#include partials/example-card title="No match" slug="no-match" component="search-input"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The searched value found nothing — only the clear utility shows, no count badge.
+                      </p>
+                      {/description} {#content}{#include components/search-input/no-match /}{/content} {/include}
                       {#include partials/example-card title="Match with result count" slug="result-count"
                       component="search-input"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">A badge counts matches in the utilities.</p>
@@ -171,6 +213,20 @@
                       component="search-input"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">Previous/next arrows step through matches.</p>
                       {/description} {#content}{#include components/search-input/navigable-options /}{/content}
+                      {/include} {#include partials/example-card title="Autocomplete" slug="autocomplete"
+                      component="search-input"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A <code class="ws-code">pf-v6-c-menu</code> of matching options opens under the input; clicking
+                        one fills it.
+                      </p>
+                      {/description} {#content}{#include components/search-input/autocomplete /}{/content} {/include}
+                      {#include partials/example-card title="Autocomplete hint" slug="autocomplete-hint"
+                      component="search-input"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        When one option remains, a disabled <code class="ws-code">pf-m-hint</code> ghost input previews
+                        it — Tab accepts the completion.
+                      </p>
+                      {/description} {#content}{#include components/search-input/autocomplete-hint /}{/content}
                       {/include} {#include partials/example-card title="With submit button" slug="with-submit"
                       component="search-input"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
@@ -189,6 +245,13 @@
                         A caret opens an attribute form that composes the query string.
                       </p>
                       {/description} {#content}{#include components/search-input/advanced /}{/content} {/include}
+                      {#include partials/example-card title="Advanced expanded" slug="advanced-expanded"
+                      component="search-input"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The advanced attribute panel rendered already open; the caret still toggles it live.
+                      </p>
+                      {/description} {#content}{#include components/search-input/advanced-expanded /}{/content}
+                      {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
