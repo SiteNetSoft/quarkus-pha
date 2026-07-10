@@ -1,0 +1,33 @@
+{! Web app manifest — rendered by Qute so consumers get their app's identity for free.
+   applicationName is expected as a @TemplateGlobal (or passed as data). Every other
+   param is optional: shortName, description, startUrl, display, themeColor,
+   backgroundColor. Icons point at the extension's static assets under /web/images. !}
+{
+  "name": "{applicationName}",
+  "short_name": "{shortName ?: applicationName}",
+  "description": "{description ?: 'PatternFly + HTMX + Alpine.js component library for Quarkus'}",
+  "dir": "auto",
+  "lang": "en-US",
+  "display": "{display ?: 'standalone'}",
+  "orientation": "any",
+  "start_url": "{startUrl ?: '/'}",
+  "background_color": "{backgroundColor ?: '#F2F6FA'}",
+  "theme_color": "{themeColor ?: '#0D1C2C'}",
+  "icons": [
+    {
+      "src": "/web/images/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/web/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/web/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
