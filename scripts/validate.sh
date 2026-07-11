@@ -44,9 +44,13 @@ start_vnu() {
   podman rm -f "$VNU_CONTAINER" 2>/dev/null || true
 
   echo "==> Starting vnu validator in Podman..."
+  # Raise vnu's message cap (default 1000): Alpine attributes produce thousands of
+  # messages on example-heavy pages; they are filtered below, but vnu aborts with
+  # "fatal: Too many messages" before we get to filter them.
   podman run --rm -d \
     --name "$VNU_CONTAINER" \
     --network=host \
+    -e JAVA_TOOL_OPTIONS='-Dnu.validator.messages.limit=9999' \
     "$VNU_IMAGE" > /dev/null
 
   echo "==> Waiting for vnu to start..."
