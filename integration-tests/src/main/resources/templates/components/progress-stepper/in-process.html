@@ -1,13 +1,12 @@
-{! Compact — pf-m-compact with descriptions and an animated in-process current step,
-   matching PF core's Compact example. !}
-{#include components/feedback/progress-stepper id="ps-compact" compact=true}{#content}
+{! Basic in process — the current step's icon is an animated spinner (core's
+   IsInProgressAnimate). !}
+{#include components/feedback/progress-stepper id="ps-in-process"}{#content}
 <li class="pf-v6-c-progress-stepper__step pf-m-success">
   <div class="pf-v6-c-progress-stepper__step-connector">
     <span class="pf-v6-c-progress-stepper__step-icon">{icons:svg('fa:circle-check').raw}</span>
   </div>
   <div class="pf-v6-c-progress-stepper__step-main">
-    <div class="pf-v6-c-progress-stepper__step-title">First step</div>
-    <div class="pf-v6-c-progress-stepper__step-description">Completed</div>
+    <div class="pf-v6-c-progress-stepper__step-title">Successful completion</div>
   </div>
 </li>
 <li class="pf-v6-c-progress-stepper__step pf-m-current" aria-current="step">
@@ -17,17 +16,15 @@
     </span>
   </div>
   <div class="pf-v6-c-progress-stepper__step-main">
-    <div class="pf-v6-c-progress-stepper__step-title">Second step</div>
-    <div class="pf-v6-c-progress-stepper__step-description">In process</div>
+    <div class="pf-v6-c-progress-stepper__step-title">In process</div>
   </div>
 </li>
-<li class="pf-v6-c-progress-stepper__step pf-m-pending">
+<li class="pf-v6-c-progress-stepper__step">
   <div class="pf-v6-c-progress-stepper__step-connector">
     <span class="pf-v6-c-progress-stepper__step-icon"></span>
   </div>
   <div class="pf-v6-c-progress-stepper__step-main">
-    <div class="pf-v6-c-progress-stepper__step-title">Third step</div>
-    <div class="pf-v6-c-progress-stepper__step-description">Pending</div>
+    <div class="pf-v6-c-progress-stepper__step-title">Pending</div>
   </div>
 </li>
 {/content}{/include}
