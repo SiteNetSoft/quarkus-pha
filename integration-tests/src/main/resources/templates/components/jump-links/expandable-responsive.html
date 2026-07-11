@@ -1,0 +1,36 @@
+{! Expandable (responsive) — expandable only between lg and xl
+   (pf-m-non-expandable-on-md pf-m-expandable-on-lg pf-m-non-expandable-on-xl), with a
+   label. The toggle drives pf-m-expanded via Alpine; visibility of __main at
+   non-expandable breakpoints stays with PF CSS (no x-show, which would pin an inline
+   display the breakpoint rules couldn't override). !}
+<nav
+  class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-md pf-m-expandable-on-lg pf-m-non-expandable-on-xl"
+  id="jl-expandable-responsive"
+  aria-label="Expandable responsive"
+  x-data="{ open: false }"
+  :class="{ 'pf-m-expanded': open }"
+  style="max-width: 240px"
+>
+  <div class="pf-v6-c-jump-links__header">
+    <div class="pf-v6-c-jump-links__toggle">
+      <button class="pf-v6-c-button pf-m-plain" type="button" :aria-expanded="open.toString()" @click="open = !open">
+        <span class="pf-v6-c-button__icon"><span class="pf-v6-c-jump-links__toggle-icon">{icons:svg('fa:angle-right').raw}</span></span>
+        <span class="pf-v6-c-button__text">Jump to section</span>
+      </button>
+    </div>
+    <div class="pf-v6-c-jump-links__label">Jump to section</div>
+  </div>
+  <div class="pf-v6-c-jump-links__main">
+    <ul class="pf-v6-c-jump-links__list" role="list">
+      <li class="pf-v6-c-jump-links__item pf-m-current" aria-current="location">
+        <span class="pf-v6-c-jump-links__link"><a href="#" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Inferno</span></span></a></span>
+      </li>
+      <li class="pf-v6-c-jump-links__item">
+        <span class="pf-v6-c-jump-links__link"><a href="#" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Purgatorio</span></span></a></span>
+      </li>
+      <li class="pf-v6-c-jump-links__item">
+        <span class="pf-v6-c-jump-links__link"><a href="#" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Paradiso</span></span></a></span>
+      </li>
+    </ul>
+  </div>
+</nav>
