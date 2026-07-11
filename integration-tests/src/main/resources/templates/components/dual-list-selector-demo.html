@@ -81,6 +81,35 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#tree-view" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Tree view</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#tree-view-disabled" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Tree view with chosen and disabled options</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#draggable" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Draggable</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -150,7 +179,30 @@
                         variants are covered by Tree view and Drag and drop.
                       </p>
                       {/description} {#content}{#include components/dual-list-selector/complex-actions /}{/content}
+                      {/include} {#include partials/example-card title="Tree view" slug="tree-view"
+                      component="dual-list-selector"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Live tree options — groups expand and collapse, group checks cascade to their leaves, counts and
+                        status update, and checked leaves transfer as a flat chosen list.
+                      </p>
+                      {/description} {#content}{#include components/dual-list-selector/tree-view /}{/content} {/include}
+                      {#include partials/example-card title="Tree view with chosen and disabled options"
+                      slug="tree-view-disabled" component="dual-list-selector"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-disabled</code> options with disabled checks in both panes.
+                      </p>
+                      {/description} {#content}{#include components/dual-list-selector/tree-view-disabled /}{/content}
                       {/include}
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="draggable" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                          Draggable
+                        </h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Reorderable options — including multiple drop zones — live in the
+                          <a href="/components/drag-and-drop">Drag and drop</a> demo, whose dual-list variant reorders
+                          this same markup with the phaDragDrop pointer model.
+                        </p>
+                      </div>
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

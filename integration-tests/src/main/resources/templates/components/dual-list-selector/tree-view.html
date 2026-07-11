@@ -1,0 +1,170 @@
+{! Tree view — live version of core's frozen tree examples: groups expand/collapse
+   (pf-m-animate-expand covers the "Tree view animated" example), group checkboxes
+   cascade to their available leaves, counts and status update live, and checked leaves
+   transfer to the chosen pane as a flat list (and back). !}
+<div x-data="{
+    openColors: true, openGreen: true,
+    colors: ['Red', 'Orange', 'Yellow'],
+    greens: ['Light green', 'Dark green'],
+    checked: [], chosenChecked: [], moved: [],
+    isAvail(n) { return !this.moved.includes(n) },
+    availOf(list) { return list.filter((n) => this.isAvail(n)) },
+    toggle(n) { this.checked = this.checked.includes(n) ? this.checked.filter((x) => x !== n) : this.checked.concat([n]) },
+    toggleChosen(n) { this.chosenChecked = this.chosenChecked.includes(n) ? this.chosenChecked.filter((x) => x !== n) : this.chosenChecked.concat([n]) },
+    groupAll(list) { var a = this.availOf(list); return a.length > 0 && a.every((n) => this.checked.includes(n)) },
+    toggleGroup(list) { var a = this.availOf(list); var all = this.groupAll(list); this.checked = this.checked.filter((n) => !a.includes(n)); if (!all) { this.checked = this.checked.concat(a); } },
+    allLeaves() { return this.colors.concat(this.greens) },
+    moveRight() { this.moved = this.moved.concat(this.checked); this.checked = [] },
+    moveLeft() { this.moved = this.moved.filter((n) => !this.chosenChecked.includes(n)); this.chosenChecked = [] }
+  }">
+  {#include components/forms/dual-list-selector id="dls-tree" modifiers="pf-m-animate-expand"}{#content}
+  <div class="pf-v6-c-dual-list-selector__pane pf-m-available">
+    <div class="pf-v6-c-dual-list-selector__header">
+      <div class="pf-v6-c-dual-list-selector__title-text">Available options</div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__status">
+      <div
+        class="pf-v6-c-dual-list-selector__status-text"
+        id="dls-tree-available-status-text"
+        x-text="checked.length + ' of ' + (allLeaves().length - moved.length) + ' options selected'"
+      ></div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__menu">
+      <ul class="pf-v6-c-dual-list-selector__list" role="tree" aria-labelledby="dls-tree-available-status-text" aria-multiselectable="true">
+        <li
+          class="pf-v6-c-dual-list-selector__list-item pf-m-expandable"
+          role="treeitem"
+          x-show="availOf(colors).length > 0 || availOf(greens).length > 0"
+          :class="{ 'pf-m-expanded': openColors }"
+          :aria-expanded="openColors.toString()"
+        >
+          <div class="pf-v6-c-dual-list-selector__list-item-row pf-m-check">
+            <div class="pf-v6-c-dual-list-selector__item" tabindex="0">
+              <span class="pf-v6-c-dual-list-selector__item-main">
+                <span class="pf-v6-c-dual-list-selector__item-toggle" @click.stop="openColors = !openColors">
+                  <span class="pf-v6-c-dual-list-selector__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+                </span>
+                <span class="pf-v6-c-dual-list-selector__item-check">
+                  <span class="pf-v6-c-check pf-m-standalone">
+                    <input class="pf-v6-c-check__input" type="checkbox" aria-label="Select all colors" :checked="groupAll(colors.concat(greens))" @change="toggleGroup(colors.concat(greens))" />
+                  </span>
+                </span>
+                <span class="pf-v6-c-dual-list-selector__item-text">Colors</span>
+              </span>
+              <span class="pf-v6-c-dual-list-selector__item-count">
+                <span class="pf-v6-c-badge pf-m-read" x-text="availOf(colors).length + availOf(greens).length"></span>
+              </span>
+            </div>
+          </div>
+          <ul class="pf-v6-c-dual-list-selector__list" role="group" x-show="openColors">
+            <template x-for="c in colors" :key="c">
+              <li class="pf-v6-c-dual-list-selector__list-item" role="treeitem" x-show="isAvail(c)">
+                <div class="pf-v6-c-dual-list-selector__list-item-row pf-m-check" :class="{ 'pf-m-selected': checked.includes(c) }">
+                  <div class="pf-v6-c-dual-list-selector__item" tabindex="0">
+                    <span class="pf-v6-c-dual-list-selector__item-main">
+                      <span class="pf-v6-c-dual-list-selector__item-check">
+                        <span class="pf-v6-c-check pf-m-standalone">
+                          <input class="pf-v6-c-check__input" type="checkbox" :aria-label="'Select ' + c" :checked="checked.includes(c)" @change="toggle(c)" />
+                        </span>
+                      </span>
+                      <span class="pf-v6-c-dual-list-selector__item-text" x-text="c"></span>
+                    </span>
+                  </div>
+                </div>
+              </li>
+            </template>
+            <li
+              class="pf-v6-c-dual-list-selector__list-item pf-m-expandable"
+              role="treeitem"
+              x-show="availOf(greens).length > 0"
+              :class="{ 'pf-m-expanded': openGreen }"
+              :aria-expanded="openGreen.toString()"
+            >
+              <div class="pf-v6-c-dual-list-selector__list-item-row pf-m-check">
+                <div class="pf-v6-c-dual-list-selector__item" tabindex="0">
+                  <span class="pf-v6-c-dual-list-selector__item-main">
+                    <span class="pf-v6-c-dual-list-selector__item-toggle" @click.stop="openGreen = !openGreen">
+                      <span class="pf-v6-c-dual-list-selector__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+                    </span>
+                    <span class="pf-v6-c-dual-list-selector__item-check">
+                      <span class="pf-v6-c-check pf-m-standalone">
+                        <input class="pf-v6-c-check__input" type="checkbox" aria-label="Select all greens" :checked="groupAll(greens)" @change="toggleGroup(greens)" />
+                      </span>
+                    </span>
+                    <span class="pf-v6-c-dual-list-selector__item-text">Green</span>
+                  </span>
+                  <span class="pf-v6-c-dual-list-selector__item-count">
+                    <span class="pf-v6-c-badge pf-m-read" x-text="availOf(greens).length"></span>
+                  </span>
+                </div>
+              </div>
+              <ul class="pf-v6-c-dual-list-selector__list" role="group" x-show="openGreen">
+                <template x-for="g in greens" :key="g">
+                  <li class="pf-v6-c-dual-list-selector__list-item" role="treeitem" x-show="isAvail(g)">
+                    <div class="pf-v6-c-dual-list-selector__list-item-row pf-m-check" :class="{ 'pf-m-selected': checked.includes(g) }">
+                      <div class="pf-v6-c-dual-list-selector__item" tabindex="0">
+                        <span class="pf-v6-c-dual-list-selector__item-main">
+                          <span class="pf-v6-c-dual-list-selector__item-check">
+                            <span class="pf-v6-c-check pf-m-standalone">
+                              <input class="pf-v6-c-check__input" type="checkbox" :aria-label="'Select ' + g" :checked="checked.includes(g)" @change="toggle(g)" />
+                            </span>
+                          </span>
+                          <span class="pf-v6-c-dual-list-selector__item-text" x-text="g"></span>
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+                </template>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="pf-v6-c-dual-list-selector__controls">
+    <div class="pf-v6-c-dual-list-selector__controls-item">
+      <button class="pf-v6-c-button pf-m-plain" type="button" :disabled="checked.length === 0" @click="moveRight()" aria-label="Move checked to chosen">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-right').raw}</span>
+      </button>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__controls-item">
+      <button class="pf-v6-c-button pf-m-plain" type="button" :disabled="chosenChecked.length === 0" @click="moveLeft()" aria-label="Move checked to available">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-left').raw}</span>
+      </button>
+    </div>
+  </div>
+  <div class="pf-v6-c-dual-list-selector__pane pf-m-chosen">
+    <div class="pf-v6-c-dual-list-selector__header">
+      <div class="pf-v6-c-dual-list-selector__title-text">Chosen options</div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__status">
+      <div
+        class="pf-v6-c-dual-list-selector__status-text"
+        id="dls-tree-chosen-status-text"
+        x-text="chosenChecked.length + ' of ' + moved.length + ' options selected'"
+      ></div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__menu">
+      <ul class="pf-v6-c-dual-list-selector__list" role="listbox" aria-labelledby="dls-tree-chosen-status-text" aria-multiselectable="true">
+        <template x-for="m in moved" :key="m">
+          <li class="pf-v6-c-dual-list-selector__list-item" role="option" :aria-selected="chosenChecked.includes(m).toString()">
+            <div class="pf-v6-c-dual-list-selector__list-item-row pf-m-check" :class="{ 'pf-m-selected': chosenChecked.includes(m) }">
+              <div class="pf-v6-c-dual-list-selector__item" tabindex="0">
+                <span class="pf-v6-c-dual-list-selector__item-main">
+                  <span class="pf-v6-c-dual-list-selector__item-check">
+                    <span class="pf-v6-c-check pf-m-standalone">
+                      <input class="pf-v6-c-check__input" type="checkbox" :aria-label="'Select ' + m" :checked="chosenChecked.includes(m)" @change="toggleChosen(m)" />
+                    </span>
+                  </span>
+                  <span class="pf-v6-c-dual-list-selector__item-text" x-text="m"></span>
+                </span>
+              </div>
+            </div>
+          </li>
+        </template>
+      </ul>
+    </div>
+  </div>
+  {/content}{/include}
+</div>

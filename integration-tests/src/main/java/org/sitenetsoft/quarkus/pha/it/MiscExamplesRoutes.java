@@ -167,7 +167,8 @@ public class MiscExamplesRoutes {
                                                "main-section-variations", "group-section", "centered-section",
                                                "plain-sections", "dynamic-sticky-section"));
         m.put("context-selector",      Set.of("basic"));
-        m.put("dual-list-selector",    Set.of("basic", "with-tooltips", "with-search", "complex-actions"));
+        m.put("dual-list-selector",    Set.of("basic", "with-tooltips", "with-search", "complex-actions",
+                                               "tree-view", "tree-view-disabled"));
         m.put("calendar-month",        Set.of("basic", "date-range"));
         m.put("dropdown",              Set.of("basic", "plain-kebab", "with-groups", "with-descriptions", "split-checkbox"));
         m.put("select",                Set.of("single", "option-variants", "grouped", "validation", "checkboxes",
