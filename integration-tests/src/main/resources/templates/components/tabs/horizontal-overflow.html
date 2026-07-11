@@ -1,0 +1,51 @@
+{! Horizontal overflow — a pf-m-overflow "More" tab opens a menu of the remaining tabs.
+   Live version of PF core's default / expanded / selected snapshots: picking a menu item
+   marks the overflow tab current and swaps its label to the selection. Plain-list markup
+   (no ARIA tablist): the menu toggle is not a valid tablist child. !}
+<div id="tabs-horizontal-overflow" x-data="{ active: 'Tab 1', open: false, extra: ['Tab 4', 'Tab 5', 'Tab 6', 'Tab 7'] }">
+  <div class="pf-v6-c-tabs">
+    <ul class="pf-v6-c-tabs__list" aria-label="Horizontal overflow tabs">
+      <li class="pf-v6-c-tabs__item" :class="active === 'Tab 1' ? 'pf-m-current' : ''">
+        <button class="pf-v6-c-tabs__link" type="button" :aria-current="active === 'Tab 1'" @click="active = 'Tab 1'">
+          <span class="pf-v6-c-tabs__item-text">Tab 1</span>
+        </button>
+      </li>
+      <li class="pf-v6-c-tabs__item" :class="active === 'Tab 2' ? 'pf-m-current' : ''">
+        <button class="pf-v6-c-tabs__link" type="button" :aria-current="active === 'Tab 2'" @click="active = 'Tab 2'">
+          <span class="pf-v6-c-tabs__item-text">Tab 2</span>
+        </button>
+      </li>
+      <li class="pf-v6-c-tabs__item" :class="active === 'Tab 3' ? 'pf-m-current' : ''">
+        <button class="pf-v6-c-tabs__link" type="button" :aria-current="active === 'Tab 3'" @click="active = 'Tab 3'">
+          <span class="pf-v6-c-tabs__item-text">Tab 3</span>
+        </button>
+      </li>
+      <li class="pf-v6-c-tabs__item pf-m-overflow" :class="extra.indexOf(active) !== -1 ? 'pf-m-current' : ''" style="position: relative">
+        <button class="pf-v6-c-tabs__link" :class="open ? 'pf-m-expanded' : ''" type="button" :aria-expanded="open.toString()" @click="open = !open">
+          <span class="pf-v6-c-tabs__item-text" x-text="extra.indexOf(active) !== -1 ? active : 'More'">More</span>
+          <span class="pf-v6-c-tabs__link-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+        </button>
+        <div x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; left: 0; z-index: 200">
+          <div class="pf-v6-c-menu">
+            <div class="pf-v6-c-menu__content">
+              <ul class="pf-v6-c-menu__list" role="menu">
+                <template x-for="t in extra" :key="t">
+                  <li class="pf-v6-c-menu__list-item" :class="active === t ? 'pf-m-selected' : ''" role="none">
+                    <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="active = t; open = false">
+                      <span class="pf-v6-c-menu__item-main">
+                        <span class="pf-v6-c-menu__item-text" x-text="t"></span>
+                      </span>
+                    </button>
+                  </li>
+                </template>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <section class="pf-v6-c-tab-content" role="tabpanel">
+    <div class="pf-v6-c-tab-content__body">Current tab: <span x-text="active">Tab 1</span></div>
+  </section>
+</div>

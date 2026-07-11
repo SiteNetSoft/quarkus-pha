@@ -1,0 +1,7 @@
+{! Tab content panels on their own — the pf-v6-c-tab-content component without a tablist.
+   The first panel is active; the rest stay hidden until `active` changes. !}
+<div x-data="{ active: 'tc1' }">
+  {#include components/navigation/tab-content tabKey="tc1"}Panel 1{/include}
+  {#include components/navigation/tab-content tabKey="tc2" cloak=true}Panel 2{/include}
+  {#include components/navigation/tab-content tabKey="tc3" cloak=true}Panel 3{/include}
+</div>

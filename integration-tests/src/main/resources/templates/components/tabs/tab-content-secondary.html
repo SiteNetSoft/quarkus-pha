@@ -1,0 +1,6 @@
+{! Secondary tab content — pf-m-secondary on the panel, paired with subtab rows. !}
+<div x-data="{ active: 'tcs1' }">
+  {#include components/navigation/tab-content tabKey="tcs1" secondary=true}Panel 1{/include}
+  {#include components/navigation/tab-content tabKey="tcs2" secondary=true cloak=true}Panel 2{/include}
+  {#include components/navigation/tab-content tabKey="tcs3" secondary=true cloak=true}Panel 3{/include}
+</div>

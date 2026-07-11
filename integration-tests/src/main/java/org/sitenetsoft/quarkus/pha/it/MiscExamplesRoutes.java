@@ -88,10 +88,17 @@ public class MiscExamplesRoutes {
         m.put("code-block",            Set.of("basic", "with-copy"));
         m.put("progress-stepper",      Set.of("horizontal", "vertical", "compact", "with-alignment", "with-issue",
                                                "with-failure", "custom-icons", "help-popover"));
-        m.put("tabs",                  Set.of("basic", "box", "box-secondary", "vertical", "vertical-expandable",
-                                               "overflow", "inset", "page-insets", "icons-text", "subtabs",
-                                               "filled-with-icons", "nav-tabs", "nav-subtabs", "site-nav",
-                                               "content-body-padding", "dynamic", "help", "help-and-close"));
+        m.put("tabs",                  Set.of("basic", "box", "box-secondary", "box-vertical", "vertical",
+                                               "vertical-expandable", "vertical-expandable-responsive",
+                                               "overflow", "horizontal-overflow", "box-overflow",
+                                               "inset", "box-inset", "page-insets", "icons-text",
+                                               "subtabs", "box-subtabs", "filled", "filled-with-icons",
+                                               "filled-box", "filled-box-with-icons",
+                                               "nav-tabs", "nav-subtabs", "site-nav",
+                                               "content-body-padding", "tab-content", "tab-content-secondary",
+                                               "dynamic", "help", "close", "help-and-close",
+                                               "animate-default", "animate-subtabs", "animate-filled",
+                                               "animate-vertical"));
         m.put("popover",               Set.of("basic", "hoverable", "close-from-content", "no-header-footer",
                                                "width-auto", "advanced", "icon-in-title", "alert-variants",
                                                "danger"));
