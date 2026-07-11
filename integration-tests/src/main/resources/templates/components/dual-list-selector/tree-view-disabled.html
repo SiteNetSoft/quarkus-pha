@@ -1,0 +1,168 @@
+{! Tree view with chosen and disabled options — the available tree has a pf-m-disabled
+   option (disabled checkbox), the chosen pane holds its own tree; expansion and enabled
+   checkboxes are live, transfer is out of scope for this frozen-layout example so the
+   controls are disabled. !}
+<div x-data="{ openA: true, openC: true, checkedA: [], toggleA(n) { this.checkedA = this.checkedA.includes(n) ? this.checkedA.filter((x) => x !== n) : this.checkedA.concat([n]) } }">
+  {#include components/forms/dual-list-selector id="dls-tree-disabled"}{#content}
+  <div class="pf-v6-c-dual-list-selector__pane pf-m-available">
+    <div class="pf-v6-c-dual-list-selector__header">
+      <div class="pf-v6-c-dual-list-selector__title-text">Available options</div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__status">
+      <div
+        class="pf-v6-c-dual-list-selector__status-text"
+        id="dls-tree-disabled-available-status-text"
+        x-text="checkedA.length + ' of 2 options selected'"
+      ></div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__menu">
+      <ul class="pf-v6-c-dual-list-selector__list" role="tree" aria-labelledby="dls-tree-disabled-available-status-text" aria-multiselectable="true">
+        <li
+          class="pf-v6-c-dual-list-selector__list-item pf-m-expandable"
+          role="treeitem"
+          :class="{ 'pf-m-expanded': openA }"
+          :aria-expanded="openA.toString()"
+        >
+          <div class="pf-v6-c-dual-list-selector__list-item-row pf-m-check">
+            <div class="pf-v6-c-dual-list-selector__item" tabindex="0">
+              <span class="pf-v6-c-dual-list-selector__item-main">
+                <span class="pf-v6-c-dual-list-selector__item-toggle" @click.stop="openA = !openA">
+                  <span class="pf-v6-c-dual-list-selector__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+                </span>
+                <span class="pf-v6-c-dual-list-selector__item-check">
+                  <span class="pf-v6-c-check pf-m-standalone">
+                    <input class="pf-v6-c-check__input" type="checkbox" aria-label="Select all colors" disabled />
+                  </span>
+                </span>
+                <span class="pf-v6-c-dual-list-selector__item-text">Colors</span>
+              </span>
+              <span class="pf-v6-c-dual-list-selector__item-count"><span class="pf-v6-c-badge pf-m-read">3</span></span>
+            </div>
+          </div>
+          <ul class="pf-v6-c-dual-list-selector__list" role="group" x-show="openA">
+            <li class="pf-v6-c-dual-list-selector__list-item pf-m-disabled" role="treeitem" aria-disabled="true">
+              <div class="pf-v6-c-dual-list-selector__list-item-row pf-m-check">
+                <div class="pf-v6-c-dual-list-selector__item">
+                  <span class="pf-v6-c-dual-list-selector__item-main">
+                    <span class="pf-v6-c-dual-list-selector__item-check">
+                      <span class="pf-v6-c-check pf-m-standalone">
+                        <input class="pf-v6-c-check__input" type="checkbox" aria-label="Select Red (disabled)" disabled />
+                      </span>
+                    </span>
+                    <span class="pf-v6-c-dual-list-selector__item-text">Red (disabled)</span>
+                  </span>
+                </div>
+              </div>
+            </li>
+            <li class="pf-v6-c-dual-list-selector__list-item" role="treeitem">
+              <div class="pf-v6-c-dual-list-selector__list-item-row pf-m-check" :class="{ 'pf-m-selected': checkedA.includes('Orange') }">
+                <div class="pf-v6-c-dual-list-selector__item" tabindex="0">
+                  <span class="pf-v6-c-dual-list-selector__item-main">
+                    <span class="pf-v6-c-dual-list-selector__item-check">
+                      <span class="pf-v6-c-check pf-m-standalone">
+                        <input class="pf-v6-c-check__input" type="checkbox" aria-label="Select Orange" :checked="checkedA.includes('Orange')" @change="toggleA('Orange')" />
+                      </span>
+                    </span>
+                    <span class="pf-v6-c-dual-list-selector__item-text">Orange</span>
+                  </span>
+                </div>
+              </div>
+            </li>
+            <li class="pf-v6-c-dual-list-selector__list-item" role="treeitem">
+              <div class="pf-v6-c-dual-list-selector__list-item-row pf-m-check" :class="{ 'pf-m-selected': checkedA.includes('Yellow') }">
+                <div class="pf-v6-c-dual-list-selector__item" tabindex="0">
+                  <span class="pf-v6-c-dual-list-selector__item-main">
+                    <span class="pf-v6-c-dual-list-selector__item-check">
+                      <span class="pf-v6-c-check pf-m-standalone">
+                        <input class="pf-v6-c-check__input" type="checkbox" aria-label="Select Yellow" :checked="checkedA.includes('Yellow')" @change="toggleA('Yellow')" />
+                      </span>
+                    </span>
+                    <span class="pf-v6-c-dual-list-selector__item-text">Yellow</span>
+                  </span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="pf-v6-c-dual-list-selector__controls">
+    <div class="pf-v6-c-dual-list-selector__controls-item">
+      <button class="pf-v6-c-button pf-m-plain" type="button" disabled aria-label="Move checked to chosen">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-right').raw}</span>
+      </button>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__controls-item">
+      <button class="pf-v6-c-button pf-m-plain" type="button" disabled aria-label="Move checked to available">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-left').raw}</span>
+      </button>
+    </div>
+  </div>
+  <div class="pf-v6-c-dual-list-selector__pane pf-m-chosen">
+    <div class="pf-v6-c-dual-list-selector__header">
+      <div class="pf-v6-c-dual-list-selector__title-text">Chosen options</div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__status">
+      <div class="pf-v6-c-dual-list-selector__status-text" id="dls-tree-disabled-chosen-status-text">0 of 2 options selected</div>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__menu">
+      <ul class="pf-v6-c-dual-list-selector__list" role="tree" aria-labelledby="dls-tree-disabled-chosen-status-text" aria-multiselectable="true">
+        <li
+          class="pf-v6-c-dual-list-selector__list-item pf-m-expandable"
+          role="treeitem"
+          :class="{ 'pf-m-expanded': openC }"
+          :aria-expanded="openC.toString()"
+        >
+          <div class="pf-v6-c-dual-list-selector__list-item-row pf-m-check">
+            <div class="pf-v6-c-dual-list-selector__item" tabindex="0">
+              <span class="pf-v6-c-dual-list-selector__item-main">
+                <span class="pf-v6-c-dual-list-selector__item-toggle" @click.stop="openC = !openC">
+                  <span class="pf-v6-c-dual-list-selector__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+                </span>
+                <span class="pf-v6-c-dual-list-selector__item-check">
+                  <span class="pf-v6-c-check pf-m-standalone">
+                    <input class="pf-v6-c-check__input" type="checkbox" aria-label="Select all numbers" disabled />
+                  </span>
+                </span>
+                <span class="pf-v6-c-dual-list-selector__item-text">Numbers</span>
+              </span>
+              <span class="pf-v6-c-dual-list-selector__item-count"><span class="pf-v6-c-badge pf-m-read">2</span></span>
+            </div>
+          </div>
+          <ul class="pf-v6-c-dual-list-selector__list" role="group" x-show="openC">
+            <li class="pf-v6-c-dual-list-selector__list-item" role="treeitem">
+              <div class="pf-v6-c-dual-list-selector__list-item-row pf-m-check">
+                <div class="pf-v6-c-dual-list-selector__item" tabindex="0">
+                  <span class="pf-v6-c-dual-list-selector__item-main">
+                    <span class="pf-v6-c-dual-list-selector__item-check">
+                      <span class="pf-v6-c-check pf-m-standalone">
+                        <input class="pf-v6-c-check__input" type="checkbox" aria-label="Select One" />
+                      </span>
+                    </span>
+                    <span class="pf-v6-c-dual-list-selector__item-text">One</span>
+                  </span>
+                </div>
+              </div>
+            </li>
+            <li class="pf-v6-c-dual-list-selector__list-item pf-m-disabled" role="treeitem" aria-disabled="true">
+              <div class="pf-v6-c-dual-list-selector__list-item-row pf-m-check">
+                <div class="pf-v6-c-dual-list-selector__item">
+                  <span class="pf-v6-c-dual-list-selector__item-main">
+                    <span class="pf-v6-c-dual-list-selector__item-check">
+                      <span class="pf-v6-c-check pf-m-standalone">
+                        <input class="pf-v6-c-check__input" type="checkbox" aria-label="Select Two (disabled)" disabled />
+                      </span>
+                    </span>
+                    <span class="pf-v6-c-dual-list-selector__item-text">Two (disabled)</span>
+                  </span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  {/content}{/include}
+</div>

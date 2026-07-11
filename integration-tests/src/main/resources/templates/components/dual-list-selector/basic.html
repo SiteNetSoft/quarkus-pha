@@ -33,12 +33,22 @@
   </div>
   <div class="pf-v6-c-dual-list-selector__controls">
     <div class="pf-v6-c-dual-list-selector__controls-item">
-      <button class="pf-v6-c-button pf-m-plain" type="button" :disabled="focusAvail === null" @click="moveRight()" aria-label="Move selected to chosen">
+      <button class="pf-v6-c-button pf-m-plain" type="button" :disabled="focusAvail === null" @click="moveRight()" aria-label="Add selected">
         <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-right').raw}</span>
       </button>
     </div>
     <div class="pf-v6-c-dual-list-selector__controls-item">
-      <button class="pf-v6-c-button pf-m-plain" type="button" :disabled="focusChosen === null" @click="moveLeft()" aria-label="Move selected to available">
+      <button class="pf-v6-c-button pf-m-plain" type="button" :disabled="available.length === 0" @click="chosen = chosen.concat(available); available = []; focusAvail = null" aria-label="Add all">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angles-right').raw}</span>
+      </button>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__controls-item">
+      <button class="pf-v6-c-button pf-m-plain" type="button" :disabled="chosen.length === 0" @click="available = available.concat(chosen); chosen = []; focusChosen = null" aria-label="Remove all">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angles-left').raw}</span>
+      </button>
+    </div>
+    <div class="pf-v6-c-dual-list-selector__controls-item">
+      <button class="pf-v6-c-button pf-m-plain" type="button" :disabled="focusChosen === null" @click="moveLeft()" aria-label="Remove selected">
         <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-left').raw}</span>
       </button>
     </div>
