@@ -34,6 +34,8 @@ test.describe("Jump Links", () => {
   test.describe("Parity additions", () => {
     test("labels render and the expandable rail collapses", async ({ page }) => {
       await expect(page.locator("#jl-with-label .pf-v6-c-jump-links__label")).toHaveText("Jump to section");
+      await expect(page.locator("#jl-with-label-center")).toHaveClass(/pf-m-center/);
+      await expect(page.locator("#jl-with-label-center .pf-v6-c-jump-links__label")).toBeVisible();
       const exp = page.locator("#jl-expandable");
       await expect(exp).toHaveClass(/pf-m-expanded/);
       await exp.locator(".pf-v6-c-jump-links__toggle").click();
@@ -42,7 +44,37 @@ test.describe("Jump Links", () => {
     });
 
     test("subsection nests a second list", async ({ page }) => {
-      await expect(page.locator("#jl-expandable .pf-v6-c-jump-links__list .pf-v6-c-jump-links__list li")).toHaveCount(2);
+      await expect(page.locator("#jl-expandable .pf-v6-c-jump-links__list .pf-v6-c-jump-links__list li")).toHaveCount(
+        2,
+      );
+    });
+
+    test("inactive and active subsection variants place pf-m-current correctly", async ({ page }) => {
+      const inactive = page.locator("#jl-subsections-inactive");
+      await expect(inactive.locator("> .pf-v6-c-jump-links__list > .pf-m-current")).toHaveCount(1);
+      await expect(inactive.locator(".pf-v6-c-jump-links__list .pf-v6-c-jump-links__list .pf-m-current")).toHaveCount(
+        0,
+      );
+      const active = page.locator("#jl-subsections-active");
+      await expect(active.locator(".pf-v6-c-jump-links__list .pf-v6-c-jump-links__list .pf-m-current")).toHaveCount(1);
+      await expect(active.locator(".pf-m-current").first()).toHaveAttribute("aria-current", "location");
+    });
+
+    test("responsive expandable variants carry breakpoint modifiers and toggle", async ({ page }) => {
+      const resp = page.locator("#jl-expandable-responsive");
+      await expect(resp).toHaveClass(/pf-m-non-expandable-on-md/);
+      await expect(resp).toHaveClass(/pf-m-expandable-on-lg/);
+      await expect(resp).toHaveClass(/pf-m-non-expandable-on-xl/);
+      await expect(resp.locator(".pf-v6-c-jump-links__label")).toHaveText("Jump to section");
+      // The default 1280px viewport sits in the non-expandable-on-xl range (toggle
+      // hidden by CSS); drop into the expandable lg range to exercise the toggle.
+      await page.setViewportSize({ width: 1100, height: 800 });
+      await expect(resp).not.toHaveClass(/pf-m-expanded/);
+      await resp.locator(".pf-v6-c-jump-links__toggle button").click();
+      await expect(resp).toHaveClass(/pf-m-expanded/);
+      const noLabel = page.locator("#jl-expandable-responsive-no-label");
+      await expect(noLabel.locator(".pf-v6-c-jump-links__label")).toHaveCount(0);
+      await expect(noLabel.locator(".pf-v6-c-jump-links__toggle button")).toBeVisible();
     });
 
     test("/components/jump-links/with-label returns 200", async ({ page }) => {
@@ -59,5 +91,23 @@ test.describe("Jump Links", () => {
       const res = await page.goto("/components/jump-links/expandable-vertical-subsection");
       expect(res.status()).toBe(200);
     });
+  });
+
+  test.describe("Standalone routes", () => {
+    for (const example of [
+      "horizontal",
+      "vertical",
+      "centered",
+      "subsections-inactive",
+      "subsections-active",
+      "expandable-responsive",
+      "expandable-responsive-no-label",
+    ]) {
+      test(`/components/jump-links/${example} returns 200`, async ({ page }) => {
+        const res = await page.goto(`/components/jump-links/${example}`);
+        expect(res.status()).toBe(200);
+        await expect(page.locator(".pf-v6-c-jump-links").first()).toBeAttached();
+      });
+    }
   });
 });
