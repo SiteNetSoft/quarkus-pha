@@ -107,9 +107,11 @@ public class MiscExamplesRoutes {
         m.put("sidebar",               Set.of("basic", "stack", "panel-right", "panel-right-gutter",
                                                "sticky-panel", "static-panel", "responsive-panel", "border",
                                                "padding-panel", "padding-content"));
-        m.put("data-list",             Set.of("basic", "compact", "plain", "checkboxes-actions", "actions",
-                                               "expandable", "mixed-expandable", "width-modifiers", "clickable-rows",
-                                               "controlling-text", "sm-grid-breakpoint"));
+        m.put("data-list",             Set.of("basic", "with-headings", "compact", "plain", "checkboxes-actions",
+                                               "actions", "expandable", "compact-expandable", "nested-expandable",
+                                               "mixed-expandable", "width-modifiers", "clickable-rows",
+                                               "clickable-expandable-rows", "controlling-text", "as-grid",
+                                               "sm-grid-breakpoint", "no-grid"));
         m.put("inline-edit",           Set.of("basic", "with-label", "multiple", "validated"));
         m.put("simple-file-upload",    Set.of("basic", "simple-text-file", "with-helper-text", "text-with-edits",
                                                "text-with-restrictions", "custom-file-preview", "custom-upload",
