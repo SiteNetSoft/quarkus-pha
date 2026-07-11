@@ -91,10 +91,52 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#subsections-inactive" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Vertical with inactive subsections</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#subsections-active" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Vertical with active subsections</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#expandable-vertical-subsection" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text"
                                         >Expandable vertical with subsection</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#expandable-responsive" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Expandable (responsive)</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#expandable-responsive-no-label" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Expandable (responsive) with no label</span
                                       ></span
                                     ></a
                                   ></span
@@ -166,12 +208,39 @@
                       component="jump-links"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">Vertical plus the leading label.</p>
                       {/description} {#content}{#include components/jump-links/vertical-with-label /}{/content}
+                      {/include} {#include partials/example-card title="Vertical with inactive subsections"
+                      slug="subsections-inactive" component="jump-links"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A nested subsection list whose items carry no current state.
+                      </p>
+                      {/description} {#content}{#include components/jump-links/subsections-inactive /}{/content}
+                      {/include} {#include partials/example-card title="Vertical with active subsections"
+                      slug="subsections-active" component="jump-links"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A nested subsection list with a <code class="ws-code">pf-m-current</code> subsection item.
+                      </p>
+                      {/description} {#content}{#include components/jump-links/subsections-active /}{/content}
                       {/include} {#include partials/example-card title="Expandable vertical with subsection"
                       slug="expandable-vertical-subsection" component="jump-links"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Collapsible rail with a nested subsection list.
                       </p>
                       {/description} {#content}{#include components/jump-links/expandable-vertical-subsection
+                      /}{/content} {/include} {#include partials/example-card title="Expandable (responsive)"
+                      slug="expandable-responsive" component="jump-links"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Expandable only where the breakpoints allow it —
+                        <code class="ws-code"
+                          >pf-m-non-expandable-on-md pf-m-expandable-on-lg pf-m-non-expandable-on-xl</code
+                        >.
+                      </p>
+                      {/description} {#content}{#include components/jump-links/expandable-responsive /}{/content}
+                      {/include} {#include partials/example-card title="Expandable (responsive) with no label"
+                      slug="expandable-responsive-no-label" component="jump-links"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The responsive expandable rail without the header label.
+                      </p>
+                      {/description} {#content}{#include components/jump-links/expandable-responsive-no-label
                       /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">

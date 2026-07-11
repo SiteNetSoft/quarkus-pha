@@ -1,0 +1,21 @@
+{! Vertical with inactive subsections — a nested __list whose items carry no current
+   state; the top-level first item is current. !}
+{#include components/navigation/jump-links id="jl-subsections-inactive" vertical=true ariaLabel="Vertical with inactive subsections"}{#content}
+  <li class="pf-v6-c-jump-links__item pf-m-current" aria-current="location">
+    <span class="pf-v6-c-jump-links__link"><a href="#" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Inferno</span></span></a></span>
+  </li>
+  <li class="pf-v6-c-jump-links__item">
+    <span class="pf-v6-c-jump-links__link"><a href="#" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Purgatorio</span></span></a></span>
+    <ul class="pf-v6-c-jump-links__list" role="list" aria-label="Purgatorio subsections">
+      <li class="pf-v6-c-jump-links__item">
+        <span class="pf-v6-c-jump-links__link"><a href="#" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Ante-Purgatory</span></span></a></span>
+      </li>
+      <li class="pf-v6-c-jump-links__item">
+        <span class="pf-v6-c-jump-links__link"><a href="#" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">The Terraces</span></span></a></span>
+      </li>
+    </ul>
+  </li>
+  <li class="pf-v6-c-jump-links__item">
+    <span class="pf-v6-c-jump-links__link"><a href="#" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Paradiso</span></span></a></span>
+  </li>
+{/content}{/include}
