@@ -9,7 +9,7 @@ block: rendered after the toggle — e.g. a __check checkbox. !}
       type="button"
       aria-label="{toggleAriaLabel ?: 'Toggle details'}"
       :aria-expanded="open.toString()"
-      @click="open = !open"
+      @click.stop="open = !open"
     >
       <span class="pf-v6-c-button__icon"
         ><span class="pf-v6-c-data-list__toggle-icon">{icons:svg('fa:angle-right').raw}</span></span
