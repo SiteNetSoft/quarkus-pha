@@ -1,0 +1,23 @@
+{! Compact expandable — pf-m-compact on the root plus live expandable rows. !}
+{#include components/data-display/data-list id="dl-compact-expandable" ariaLabel="Compact expandable data list" compact=true}
+{#include components/data-display/data-list-item expandable=true startOpen=true}
+{#include components/data-display/data-list-item-row}
+{#include components/data-display/data-list-item-control expandToggle=true toggleAriaLabel="Toggle details for Compact row 1" /}
+{#include components/data-display/data-list-item-content}
+{#include components/data-display/data-list-cell}<strong>Compact row 1</strong>{/include}
+{#include components/data-display/data-list-cell}Starts expanded{/include}
+{/include}
+{/include}
+{#include components/data-display/data-list-expandable-content}Expanded details for Compact row 1.{/include}
+{/include}
+{#include components/data-display/data-list-item expandable=true}
+{#include components/data-display/data-list-item-row}
+{#include components/data-display/data-list-item-control expandToggle=true toggleAriaLabel="Toggle details for Compact row 2" /}
+{#include components/data-display/data-list-item-content}
+{#include components/data-display/data-list-cell}<strong>Compact row 2</strong>{/include}
+{#include components/data-display/data-list-cell}Collapsed by default{/include}
+{/include}
+{/include}
+{#include components/data-display/data-list-expandable-content}Expanded details for Compact row 2.{/include}
+{/include}
+{/include}

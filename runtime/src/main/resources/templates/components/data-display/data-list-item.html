@@ -11,9 +11,12 @@
 <li
   class="pf-v6-c-data-list__item{#if clickable??} pf-m-clickable{/if}"
   {#if clickable??}tabindex="0"{/if}
-  {#if expandable??}x-data="{ open: {#if startOpen??}true{#else}false{/if} }" :class="open ? 'pf-m-expanded' : ''"{/if}
-  {#if selectedExpr??}:class="({selectedExpr}) ? 'pf-m-selected' : ''"{/if}
+  {#if expandable??}x-data="{ open: {#if startOpen??}true{#else}false{/if} }"{/if}
+  {! One merged :class — two bindings would be a duplicate attribute (vnu error; Alpine keeps only one). !}
+  {#if expandable?? && selectedExpr??}:class="(open ? 'pf-m-expanded ' : '') + (({selectedExpr}) ? 'pf-m-selected' : '')"{#else if expandable??}:class="open ? 'pf-m-expanded' : ''"{#else if selectedExpr??}:class="({selectedExpr}) ? 'pf-m-selected' : ''"{/if}
   {#if attrs??}{attrs.raw}{/if}
 >
-  {#let attrs=null}{#insert /}{/let}
+  {! Null the item params so nested data-list-item includes (nested expandable lists)
+     don't inherit them — Qute includes inherit ALL parent data. !}
+  {#let attrs=null expandable=null startOpen=null clickable=null selectedExpr=null}{#insert /}{/let}
 </li>

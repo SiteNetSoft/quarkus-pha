@@ -5,9 +5,10 @@
      ariaLabel — labels the list for AT.
      compact   — pf-m-compact.   plain — pf-m-plain.
      gridBreakpoint — grid modifier suffix, e.g. "sm" renders pf-m-grid-sm.
+     modifiers — extra pf-m-* classes (e.g. pf-m-grid / pf-m-grid-none).
      attrs     — raw attribute passthrough on the root. !}
 <ul
-  class="pf-v6-c-data-list{#if compact??} pf-m-compact{/if}{#if plain??} pf-m-plain{/if}{#if gridBreakpoint??} pf-m-grid-{gridBreakpoint}{/if}"
+  class="pf-v6-c-data-list{#if compact??} pf-m-compact{/if}{#if plain??} pf-m-plain{/if}{#if gridBreakpoint??} pf-m-grid-{gridBreakpoint}{/if}{#if modifiers??} {modifiers}{/if}"
   role="list"
   {#if id??}id="{id}"{/if}
   {#if ariaLabel??}aria-label="{ariaLabel}"{/if}

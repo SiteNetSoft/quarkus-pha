@@ -1,0 +1,58 @@
+{! Nested expandable — the first row's expandable content holds a nested data-list with
+   its own live toggles (inner `open` Alpine state shadows the outer, so levels expand
+   independently). The outer icon cell uses pf-m-icon, matching PF core. !}
+{#include components/data-display/data-list id="dl-nested-expandable" ariaLabel="Nested expandable data list"}
+{#include components/data-display/data-list-item expandable=true startOpen=true}
+{#include components/data-display/data-list-item-row}
+{#include components/data-display/data-list-item-control expandToggle=true toggleAriaLabel="Toggle details for Outer row 1" /}
+{#include components/data-display/data-list-item-content}
+{#include components/data-display/data-list-cell modifiers="pf-m-icon"}{icons:svg('fa:code-branch').raw}{/include}
+{#include components/data-display/data-list-cell}<strong>Outer row 1</strong>
+  <div class="pf-v6-u-color-200">Contains a nested data list</div>{/include}
+{#include components/data-display/data-list-cell}Secondary content{/include}
+{/include}
+{/include}
+{#include components/data-display/data-list-expandable-content}
+{#include components/data-display/data-list id="dl-nested-expandable-inner" ariaLabel="Nested data list"}
+{#include components/data-display/data-list-item expandable=true startOpen=true}
+{#include components/data-display/data-list-item-row}
+{#include components/data-display/data-list-item-control expandToggle=true toggleAriaLabel="Toggle details for Nested row 1" /}
+{#include components/data-display/data-list-item-content}
+{#include components/data-display/data-list-cell}Nested row 1{/include}
+{/include}
+{/include}
+{#include components/data-display/data-list-expandable-content}Nested row 1 expanded content.{/include}
+{/include}
+{#include components/data-display/data-list-item expandable=true}
+{#include components/data-display/data-list-item-row}
+{#include components/data-display/data-list-item-control expandToggle=true toggleAriaLabel="Toggle details for Nested row 2" /}
+{#include components/data-display/data-list-item-content}
+{#include components/data-display/data-list-cell}Nested row 2{/include}
+{/include}
+{/include}
+{#include components/data-display/data-list-expandable-content}Nested row 2 expanded content.{/include}
+{/include}
+{#include components/data-display/data-list-item expandable=true}
+{#include components/data-display/data-list-item-row}
+{#include components/data-display/data-list-item-control expandToggle=true toggleAriaLabel="Toggle details for Nested row 3" /}
+{#include components/data-display/data-list-item-content}
+{#include components/data-display/data-list-cell}Nested row 3{/include}
+{/include}
+{/include}
+{#include components/data-display/data-list-expandable-content}Nested row 3 expanded content.{/include}
+{/include}
+{/include}
+{/include}
+{/include}
+{#include components/data-display/data-list-item expandable=true}
+{#include components/data-display/data-list-item-row}
+{#include components/data-display/data-list-item-control expandToggle=true toggleAriaLabel="Toggle details for Outer row 2" /}
+{#include components/data-display/data-list-item-content}
+{#include components/data-display/data-list-cell modifiers="pf-m-icon"}{icons:svg('fa:code-branch').raw}{/include}
+{#include components/data-display/data-list-cell}<strong>Outer row 2</strong>{/include}
+{#include components/data-display/data-list-cell}Plain expandable details{/include}
+{/include}
+{/include}
+{#include components/data-display/data-list-expandable-content}Outer row 2 expanded content.{/include}
+{/include}
+{/include}
