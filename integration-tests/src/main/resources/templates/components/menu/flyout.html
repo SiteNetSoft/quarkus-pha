@@ -1,0 +1,120 @@
+{! Live flyout — pf-m-flyout on the root menu; PF CSS positions each nested
+   pf-v6-c-menu absolutely against its list item (inline position: relative, as PF's
+   own JS-positioned wrapper normally provides the containing block). Hover or focus
+   opens a submenu; the hidden attribute drives visibility like PF core. !}
+<div class="pf-v6-c-menu pf-m-flyout" id="mn-flyout" style="max-width: 250px" x-data="{ open: '' }">
+  <div class="pf-v6-c-menu__content">
+    <ul class="pf-v6-c-menu__list" role="menu">
+      <li role="none" class="pf-v6-c-menu__list-item">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Start rollout</span></span>
+        </button>
+      </li>
+      <li role="none" class="pf-v6-c-menu__list-item">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Pause rollouts</span></span>
+        </button>
+      </li>
+      <li
+        role="none"
+        class="pf-v6-c-menu__list-item"
+        style="position: relative"
+        @mouseenter="open = 'storage'"
+        @mouseleave="open = ''"
+      >
+        <button
+          class="pf-v6-c-menu__item"
+          type="button"
+          role="menuitem"
+          aria-expanded="false"
+          :aria-expanded="(open === 'storage').toString()"
+          @focus="open = 'storage'"
+        >
+          <span class="pf-v6-c-menu__item-main">
+            <span class="pf-v6-c-menu__item-text">Add storage</span>
+            <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+          </span>
+        </button>
+        <div class="pf-v6-c-menu" hidden :hidden="open !== 'storage'">
+          <div class="pf-v6-c-menu__content">
+            <ul class="pf-v6-c-menu__list" role="menu">
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Application grouping</span></span>
+                </button>
+              </li>
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Count</span></span>
+                </button>
+              </li>
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Labels</span></span>
+                </button>
+              </li>
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Annotations</span></span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li
+        role="none"
+        class="pf-v6-c-menu__list-item"
+        style="position: relative"
+        @mouseenter="open = 'edit'"
+        @mouseleave="open = ''"
+      >
+        <button
+          class="pf-v6-c-menu__item"
+          type="button"
+          role="menuitem"
+          aria-expanded="false"
+          :aria-expanded="(open === 'edit').toString()"
+          @focus="open = 'edit'"
+        >
+          <span class="pf-v6-c-menu__item-main">
+            <span class="pf-v6-c-menu__item-text">Edit</span>
+            <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+          </span>
+          <span class="pf-v6-c-menu__item-description">Description</span>
+        </button>
+        <div class="pf-v6-c-menu" hidden :hidden="open !== 'edit'">
+          <div class="pf-v6-c-menu__content">
+            <ul class="pf-v6-c-menu__list" role="menu">
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Application grouping</span></span>
+                </button>
+              </li>
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Count</span></span>
+                </button>
+              </li>
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Labels</span></span>
+                </button>
+              </li>
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Annotations</span></span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li role="none" class="pf-v6-c-menu__list-item">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Delete deployment config</span></span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>

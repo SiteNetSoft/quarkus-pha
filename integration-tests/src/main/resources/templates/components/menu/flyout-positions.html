@@ -1,0 +1,120 @@
+{! Flyout position modifiers — one live flyout menu whose three submenus use PF's
+   position modifiers: pf-m-top, pf-m-left, and pf-m-left pf-m-top on the nested menu.
+   The root is inset from the card edge so left-opening submenus stay visible. !}
+<div class="pf-v6-c-menu pf-m-flyout" id="mn-flyout-positions" style="max-width: 250px; margin-inline-start: 230px" x-data="{ open: '' }">
+  <div class="pf-v6-c-menu__content">
+    <ul class="pf-v6-c-menu__list" role="menu">
+      <li
+        role="none"
+        class="pf-v6-c-menu__list-item"
+        style="position: relative"
+        @mouseenter="open = 'top'"
+        @mouseleave="open = ''"
+      >
+        <button
+          class="pf-v6-c-menu__item"
+          type="button"
+          role="menuitem"
+          aria-expanded="false"
+          :aria-expanded="(open === 'top').toString()"
+          @focus="open = 'top'"
+        >
+          <span class="pf-v6-c-menu__item-main">
+            <span class="pf-v6-c-menu__item-text">Flyout menu top</span>
+            <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+          </span>
+        </button>
+        <div class="pf-v6-c-menu pf-m-top" hidden :hidden="open !== 'top'">
+          <div class="pf-v6-c-menu__content">
+            <ul class="pf-v6-c-menu__list" role="menu">
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Application grouping</span></span>
+                </button>
+              </li>
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Count</span></span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li
+        role="none"
+        class="pf-v6-c-menu__list-item"
+        style="position: relative"
+        @mouseenter="open = 'left'"
+        @mouseleave="open = ''"
+      >
+        <button
+          class="pf-v6-c-menu__item"
+          type="button"
+          role="menuitem"
+          aria-expanded="false"
+          :aria-expanded="(open === 'left').toString()"
+          @focus="open = 'left'"
+        >
+          <span class="pf-v6-c-menu__item-main">
+            <span class="pf-v6-c-menu__item-text">Flyout menu left</span>
+            <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+          </span>
+        </button>
+        <div class="pf-v6-c-menu pf-m-left" hidden :hidden="open !== 'left'">
+          <div class="pf-v6-c-menu__content">
+            <ul class="pf-v6-c-menu__list" role="menu">
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Application grouping</span></span>
+                </button>
+              </li>
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Count</span></span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li
+        role="none"
+        class="pf-v6-c-menu__list-item"
+        style="position: relative"
+        @mouseenter="open = 'left-top'"
+        @mouseleave="open = ''"
+      >
+        <button
+          class="pf-v6-c-menu__item"
+          type="button"
+          role="menuitem"
+          aria-expanded="false"
+          :aria-expanded="(open === 'left-top').toString()"
+          @focus="open = 'left-top'"
+        >
+          <span class="pf-v6-c-menu__item-main">
+            <span class="pf-v6-c-menu__item-text">Flyout menu left top</span>
+            <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+          </span>
+        </button>
+        <div class="pf-v6-c-menu pf-m-left pf-m-top" hidden :hidden="open !== 'left-top'">
+          <div class="pf-v6-c-menu__content">
+            <ul class="pf-v6-c-menu__list" role="menu">
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Application grouping</span></span>
+                </button>
+              </li>
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Count</span></span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

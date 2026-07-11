@@ -14,7 +14,9 @@ const EXAMPLES = [
   "primary",
   "plain-circle",
   "plain-text-label",
+  "split",
   "split-checkbox",
+  "split-checkbox-icon-text",
   "split-checkbox-text",
   "split-checkbox-toggle-text",
   "split-action",
@@ -104,6 +106,22 @@ test.describe("Menu Toggle", () => {
 
     test("labeled checkbox shows its label", async ({ page }) => {
       await expect(page.locator("#mt-split-check-text .pf-v6-c-check__label")).toHaveText("10 selected");
+    });
+
+    test("plain split toggle has action + caret buttons in three stylings", async ({ page }) => {
+      await expect(page.locator("#mt-split .pf-v6-c-menu-toggle__button")).toHaveCount(2);
+      await expect(page.locator("#mt-split-primary")).toHaveClass(/pf-m-primary/);
+      await expect(page.locator("#mt-split-secondary")).toHaveClass(/pf-m-secondary/);
+    });
+
+    test("checkbox-icon-text toggle carries icon, text, and caret inside a pf-m-text button", async ({ page }) => {
+      const toggle = page.locator("#mt-split-check-icon-text");
+      await expect(toggle.locator(".pf-v6-c-check__input")).toBeVisible();
+      const button = toggle.locator(".pf-v6-c-menu-toggle__button");
+      await expect(button).toHaveClass(/pf-m-text/);
+      await expect(button.locator(".pf-v6-c-menu-toggle__icon")).toBeVisible();
+      await expect(button.locator(".pf-v6-c-menu-toggle__text")).toHaveText("Icon");
+      await expect(button.locator(".pf-v6-c-menu-toggle__toggle-icon")).toBeVisible();
     });
   });
 

@@ -136,15 +136,21 @@ public class MiscExamplesRoutes {
         m.put("multiple-file-upload",  Set.of("basic", "horizontal"));
         m.put("date-picker",           Set.of("basic", "required", "american-format", "helper-text", "min-max",
                                                "french", "with-value", "disabled"));
-        m.put("menu",                  Set.of("basic", "with-icons", "with-actions", "with-links", "with-descriptions",
-                                               "item-checkbox", "footer", "separated-items", "titled-groups",
-                                               "favorites", "filtering-search", "option-single-select",
+        m.put("menu",                  Set.of("basic", "danger-item", "with-icons", "with-actions", "with-links",
+                                               "with-descriptions", "item-checkbox", "footer", "separated-items",
+                                               "titled-groups", "favorites", "filtering-search", "option-single-select",
                                                "option-multi-select", "scrollable", "scrollable-custom-height",
-                                               "view-more", "with-drilldown"));
+                                               "view-more", "with-drilldown", "flyout", "flyout-positions",
+                                               "scrollable-drilldown", "width-modified-drilldown",
+                                               "drilldown-initial-state", "drilldown-breadcrumbs",
+                                               "drilldown-inline-filter", "header-footer", "search-footer",
+                                               "loading", "plain", "plain-search-footer",
+                                               "plain-scrollable-search-footer"));
         m.put("menu-toggle",           Set.of("basic", "expanded", "small", "disabled", "badge", "settings",
                                                "custom-icon", "avatar-text", "variant-styles", "plain", "primary",
-                                               "plain-circle", "plain-text-label", "split-checkbox",
-                                               "split-checkbox-text", "split-checkbox-toggle-text", "split-action",
+                                               "plain-circle", "plain-text-label", "split", "split-checkbox",
+                                               "split-checkbox-text", "split-checkbox-toggle-text",
+                                               "split-checkbox-icon-text", "split-action",
                                                "full-height", "full-width", "in-form", "typeahead", "status",
                                                "placeholder"));
         m.put("notification-badge",    Set.of("read", "unread", "attention"));

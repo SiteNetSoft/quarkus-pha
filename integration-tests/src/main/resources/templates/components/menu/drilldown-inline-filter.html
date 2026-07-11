@@ -1,0 +1,77 @@
+{! Drilldown with inline filter — drilling into "Start rollout" reveals a submenu whose
+   __search input live-filters its items (PF React "With drilldown and inline filter").
+   The filter resets when drilling back up. !}
+<div
+  class="pf-v6-c-menu pf-m-drilldown"
+  id="mn-drilldown-filter"
+  style="max-width: 280px; position: relative"
+  x-data="{ drilled: '', q: '' }"
+  :class="{ 'pf-m-drilled-in': drilled !== '' }"
+>
+  <div class="pf-v6-c-menu__content" style="height: 230px">
+    <ul class="pf-v6-c-menu__list" role="menu">
+      <li role="none" class="pf-v6-c-menu__list-item" :class="{ 'pf-m-current-path': drilled === 'rollout' }">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem" aria-expanded="false" :aria-expanded="(drilled === 'rollout').toString()" @click="drilled = 'rollout'">
+          <span class="pf-v6-c-menu__item-main">
+            <span class="pf-v6-c-menu__item-text">Start rollout</span>
+            <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+          </span>
+        </button>
+        <div class="pf-v6-c-menu">
+          <div class="pf-v6-c-menu__content">
+            <ul class="pf-v6-c-menu__list" role="menu">
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="drilled = ''; q = ''">
+                  <span class="pf-v6-c-menu__item-main">
+                    <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-left').raw}</span>
+                    <span class="pf-v6-c-menu__item-text">Start rollout</span>
+                  </span>
+                </button>
+              </li>
+              <li class="pf-v6-c-divider" role="separator"></li>
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <div class="pf-v6-c-menu__search">
+                  <div class="pf-v6-c-menu__search-input">
+                    <div class="pf-v6-c-text-input-group">
+                      <div class="pf-v6-c-text-input-group__main pf-m-icon">
+                        <span class="pf-v6-c-text-input-group__text">
+                          <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+                          <input class="pf-v6-c-text-input-group__text-input" type="text" x-model="q" placeholder="Filter" aria-label="Filter submenu items" />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li role="none" class="pf-v6-c-menu__list-item" x-show="'Application grouping'.toLowerCase().indexOf(q.toLowerCase()) !== -1">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Application grouping</span></span>
+                </button>
+              </li>
+              <li role="none" class="pf-v6-c-menu__list-item" x-show="'Count'.toLowerCase().indexOf(q.toLowerCase()) !== -1">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Count</span></span>
+                </button>
+              </li>
+              <li role="none" class="pf-v6-c-menu__list-item" x-show="'Labels'.toLowerCase().indexOf(q.toLowerCase()) !== -1">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Labels</span></span>
+                </button>
+              </li>
+              <li role="none" class="pf-v6-c-menu__list-item" x-show="'Annotations'.toLowerCase().indexOf(q.toLowerCase()) !== -1">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Annotations</span></span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li role="none" class="pf-v6-c-menu__list-item">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Pause rollouts</span></span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
