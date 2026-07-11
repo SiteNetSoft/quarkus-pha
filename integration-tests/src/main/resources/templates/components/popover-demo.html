@@ -55,6 +55,15 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#positions" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Position variants</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#hoverable" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">Hoverable</span></span
@@ -80,6 +89,15 @@
                                       ><span class="pf-v6-c-jump-links__link-text"
                                         >Without header/footer/close and no padding</span
                                       ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#no-padding" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">No padding</span></span
                                     ></a
                                   ></span
                                 >
@@ -182,6 +200,16 @@
                         Click-triggered popover with header, body, footer, and close.
                       </p>
                       {/description} {#content}{#include components/popover/basic /}{/content} {/include} {#include
+                      partials/example-card title="Position variants" slug="positions" component="popover"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        One live popover per PF position modifier —
+                        <code class="ws-code">pf-m-top/right/bottom/left</code> plus the corner variants (<code
+                          class="ws-code"
+                          >pf-m-left-top</code
+                        >, <code class="ws-code">pf-m-bottom-right</code>, …).
+                      </p>
+                      {/description} {#content}{#include components/popover/positions /}{/content} {/include} {#include
                       partials/example-card title="Hoverable" slug="hoverable" component="popover"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Opens on hover or keyboard focus, closes on leave.
@@ -199,8 +227,13 @@
                         Body only with <code class="ws-code">pf-m-no-padding</code>.
                       </p>
                       {/description} {#content}{#include components/popover/no-header-footer /}{/content} {/include}
-                      {#include partials/example-card title="Width auto" slug="width-auto" component="popover"}
+                      {#include partials/example-card title="No padding" slug="no-padding" component="popover"}
                       {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-no-padding</code> for content that brings its own padding.
+                      </p>
+                      {/description} {#content}{#include components/popover/no-padding /}{/content} {/include} {#include
+                      partials/example-card title="Width auto" slug="width-auto" component="popover"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-width-auto</code> sizes to content.
                       </p>

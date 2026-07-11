@@ -1,0 +1,22 @@
+{! No padding — pf-m-no-padding (combined with pf-m-right, matching core) for content
+   that brings its own padding; body only, no header/footer/close. !}
+<div x-data="{ open: false }" style="position: relative; display: inline-block">
+  <button class="pf-v6-c-button pf-m-secondary" type="button" :aria-expanded="open.toString()" @click="open = !open">
+    <span class="pf-v6-c-button__text">Show no-padding popover</span>
+  </button>
+  <div
+    x-show="open"
+    x-cloak
+    @click.outside="open = false"
+    style="position: absolute; left: 100%; top: 50%; transform: translateY(-50%); width: 320px; z-index: 300"
+  >
+    <div class="pf-v6-c-popover pf-m-right pf-m-no-padding" id="po-no-padding" role="dialog" aria-label="Popover with no padding" aria-describedby="po-no-padding-body">
+      <div class="pf-v6-c-popover__arrow"></div>
+      <div class="pf-v6-c-popover__content">
+        <div class="pf-v6-c-popover__body" id="po-no-padding-body">
+          This popover has no padding itself. It is intended for content that has its own padding and would otherwise sit too far from the popover edges.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,9 +2,11 @@ import { test, expect } from "@playwright/test";
 
 const EXAMPLES = [
   "basic",
+  "positions",
   "hoverable",
   "close-from-content",
   "no-header-footer",
+  "no-padding",
   "width-auto",
   "advanced",
   "icon-in-title",
@@ -63,13 +65,35 @@ test.describe("Popover", () => {
   });
 
   test.describe("Variants", () => {
-    test("no-header-footer popover has no padding and only a body", async ({ page }) => {
+    test("no-header-footer popover has only a body", async ({ page }) => {
       const card = page.locator('[data-rendered-href="/components/popover/no-header-footer"]');
       await card.locator("button", { hasText: "Show plain popover" }).click();
       const popover = page.locator("#po-no-header-footer");
-      await expect(popover).toHaveClass(/pf-m-no-padding/);
+      await expect(popover.locator(".pf-v6-c-popover__body")).toBeVisible();
       await expect(popover.locator(".pf-v6-c-popover__header")).toHaveCount(0);
       await expect(popover.locator(".pf-v6-c-popover__close")).toHaveCount(0);
+    });
+
+    test("no-padding popover carries the modifier and only a body", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/popover/no-padding"]');
+      await card.locator("button", { hasText: "Show no-padding popover" }).click();
+      const popover = page.locator("#po-no-padding");
+      await expect(popover).toHaveClass(/pf-m-no-padding/);
+      await expect(popover).toHaveClass(/pf-m-right/);
+      await expect(popover.locator(".pf-v6-c-popover__header")).toHaveCount(0);
+    });
+
+    test("position variants render one live popover per modifier", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/popover/positions"]');
+      await expect(card.locator(".pf-v6-c-popover")).toHaveCount(8);
+      await card.locator("button", { hasText: "Left top" }).click();
+      const popover = page.locator("#po-pos-left-top");
+      await expect(popover).toBeVisible();
+      await expect(popover).toHaveClass(/pf-m-left-top/);
+      await popover.locator(".pf-v6-c-popover__close button").click();
+      await expect(popover).toBeHidden();
+      await card.locator("button", { hasText: "Bottom right" }).click();
+      await expect(page.locator("#po-pos-bottom-right")).toHaveClass(/pf-m-bottom-right/);
     });
 
     test("width-auto carries the modifier", async ({ page }) => {
@@ -91,7 +115,7 @@ test.describe("Popover", () => {
 
     test("alert variants carry their severity classes", async ({ page }) => {
       const card = page.locator('[data-rendered-href="/components/popover/alert-variants"]');
-      for (const variant of ["info", "success", "warning"]) {
+      for (const variant of ["custom", "info", "success", "warning"]) {
         await card.locator("button", { hasText: `Show ${variant} popover` }).click();
         await expect(page.locator(`#po-alert-${variant}`)).toHaveClass(new RegExp(`pf-m-${variant}`));
         await card.locator("button", { hasText: `Show ${variant} popover` }).click();
