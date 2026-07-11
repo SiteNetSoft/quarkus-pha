@@ -99,9 +99,9 @@ public class MiscExamplesRoutes {
                                                "dynamic", "help", "close", "help-and-close",
                                                "animate-default", "animate-subtabs", "animate-filled",
                                                "animate-vertical"));
-        m.put("popover",               Set.of("basic", "hoverable", "close-from-content", "no-header-footer",
-                                               "width-auto", "advanced", "icon-in-title", "alert-variants",
-                                               "danger"));
+        m.put("popover",               Set.of("basic", "positions", "hoverable", "close-from-content",
+                                               "no-header-footer", "no-padding", "width-auto", "advanced",
+                                               "icon-in-title", "alert-variants", "danger"));
         m.put("masthead",              Set.of("basic", "mixed-content", "display-inline", "display-stack",
                                                "display-stack-inline-responsive", "insets", "custom-logo"));
         m.put("sidebar",               Set.of("basic", "stack", "panel-right", "panel-right-gutter",
