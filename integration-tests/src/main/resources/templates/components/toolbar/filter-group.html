@@ -1,0 +1,39 @@
+{! The two PF filter-group shapes: menu-toggle filters, and a search input paired with a filter. !}
+<div style="display: flex; flex-direction: column; gap: 1rem">
+  {#include components/navigation/toolbar id="tb-filter-group"}
+    {#include components/navigation/toolbar-content}
+      {#include components/navigation/toolbar-content-section}
+        {#include components/navigation/toolbar-group variant="filter"}
+          {#include components/navigation/toolbar-item}
+            <button class="pf-v6-c-menu-toggle" type="button" aria-expanded="false"><span class="pf-v6-c-menu-toggle__text">Status</span><span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span></button>
+          {/include}
+          {#include components/navigation/toolbar-item}
+            <button class="pf-v6-c-menu-toggle" type="button" aria-expanded="false"><span class="pf-v6-c-menu-toggle__text">Risk</span><span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span></button>
+          {/include}
+        {/include}
+      {/include}
+    {/include}
+  {/include}
+  <hr class="pf-v6-c-divider" />
+  {#include components/navigation/toolbar id="tb-filter-group-input"}
+    {#include components/navigation/toolbar-content}
+      {#include components/navigation/toolbar-content-section}
+        {#include components/navigation/toolbar-group}
+          {#include components/navigation/toolbar-item}
+            <div class="pf-v6-c-text-input-group">
+              <div class="pf-v6-c-text-input-group__main pf-m-icon">
+                <span class="pf-v6-c-text-input-group__text">
+                  <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+                  <input class="pf-v6-c-text-input-group__text-input" type="search" placeholder="Filter by name" aria-label="Filter by name" />
+                </span>
+              </div>
+            </div>
+          {/include}
+          {#include components/navigation/toolbar-item}
+            <button class="pf-v6-c-menu-toggle" type="button" aria-expanded="false"><span class="pf-v6-c-menu-toggle__text">Status</span><span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span></button>
+          {/include}
+        {/include}
+      {/include}
+    {/include}
+  {/include}
+</div>

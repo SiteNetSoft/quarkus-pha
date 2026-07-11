@@ -1,0 +1,16 @@
+{! pf-m-action-group-inline — text plus inline link actions, PF's filter-summary row. !}
+{#include components/navigation/toolbar id="tb-action-group-inline"}
+  {#include components/navigation/toolbar-content}
+    {#include components/navigation/toolbar-content-section}
+      {#include components/navigation/toolbar-group modifiers="pf-m-action-group-inline"}
+        {#include components/navigation/toolbar-item}6 filters applied{/include}
+        {#include components/navigation/toolbar-item}
+          <button class="pf-v6-c-button pf-m-link pf-m-inline" type="button"><span class="pf-v6-c-button__text">Clear all filters</span></button>
+        {/include}
+        {#include components/navigation/toolbar-item}
+          <button class="pf-v6-c-button pf-m-link pf-m-inline" type="button"><span class="pf-v6-c-button__text">Save all filters</span></button>
+        {/include}
+      {/include}
+    {/include}
+  {/include}
+{/include}

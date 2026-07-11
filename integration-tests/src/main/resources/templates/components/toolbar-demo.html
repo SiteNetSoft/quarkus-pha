@@ -1,5 +1,6 @@
 {#include layouts/base} {#title}Toolbar{/title} {#head}
 <script src="/web/js/alpine/components/code-example.js"></script>
+<script src="/web/js/alpine/components/label-group.js"></script>
 {/head} {#body}
 <div id="root">
   <div style="outline: none" tabindex="-1" id="ws-router">
@@ -72,6 +73,24 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#no-padding" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">No padding</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#width-control" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Width control</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#vertical" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">Vertical toolbar</span></span
@@ -108,6 +127,42 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#filter-group" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Filter group</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#action-group" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Action group</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#action-group-plain" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Action group plain</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#action-group-inline" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Action group inline</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#color-variants" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text"
@@ -131,6 +186,26 @@
                                   ><a href="#with-filters" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">With filters</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#label-group" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Label group</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#custom-label-group-content" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Custom label group content</span
+                                      ></span
                                     ></a
                                   ></span
                                 >
@@ -233,7 +308,21 @@
                         <code class="ws-code">pf-m-inset-md pf-m-inset-xl-on-lg</code>.
                       </p>
                       {/description} {#content}{#include components/toolbar/insets /}{/content} {/include} {#include
-                      partials/example-card title="Vertical toolbar" slug="vertical" component="toolbar"} {#description}
+                      partials/example-card title="No padding" slug="no-padding" component="toolbar"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-no-padding</code> removes the toolbar's own padding for use inside
+                        already-padded containers.
+                      </p>
+                      {/description} {#content}{#include components/toolbar/no-padding /}{/content} {/include} {#include
+                      partials/example-card title="Width control" slug="width-control" component="toolbar"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Set per-breakpoint item widths with
+                        <code class="ws-code">--pf-v6-c-toolbar__item--Width</code> custom properties.
+                      </p>
+                      {/description} {#content}{#include components/toolbar/width-control /}{/content} {/include}
+                      {#include partials/example-card title="Vertical toolbar" slug="vertical" component="toolbar"}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-vertical</code> — icon rail beside content.
                       </p>
@@ -256,8 +345,34 @@
                         group.
                       </p>
                       {/description} {#content}{#include components/toolbar/groups /}{/content} {/include} {#include
-                      partials/example-card title="Background color variants" slug="color-variants" component="toolbar"}
+                      partials/example-card title="Filter group" slug="filter-group" component="toolbar"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The two PF filter shapes: <code class="ws-code">pf-m-filter-group</code> menu toggles, and a
+                        search input paired with a filter.
+                      </p>
+                      {/description} {#content}{#include components/toolbar/filter-group /}{/content} {/include}
+                      {#include partials/example-card title="Action group" slug="action-group" component="toolbar"}
                       {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-action-group</code> spacing for primary/secondary/tertiary action
+                        buttons.
+                      </p>
+                      {/description} {#content}{#include components/toolbar/action-group /}{/content} {/include}
+                      {#include partials/example-card title="Action group plain" slug="action-group-plain"
+                      component="toolbar"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-action-group-plain</code> — tighter spacing for icon-only plain
+                        buttons.
+                      </p>
+                      {/description} {#content}{#include components/toolbar/action-group-plain /}{/content} {/include}
+                      {#include partials/example-card title="Action group inline" slug="action-group-inline"
+                      component="toolbar"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-action-group-inline</code> — summary text with inline link actions.
+                      </p>
+                      {/description} {#content}{#include components/toolbar/action-group-inline /}{/content} {/include}
+                      {#include partials/example-card title="Background color variants" slug="color-variants"
+                      component="toolbar"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Default, <code class="ws-code">pf-m-primary</code>, <code class="ws-code">pf-m-secondary</code>,
                         and <code class="ws-code">pf-m-no-background</code>.
@@ -278,8 +393,21 @@
                         Applied filters as removable labels in a category label-group, plus Clear all.
                       </p>
                       {/description} {#content}{#include components/toolbar/with-filters /}{/content} {/include}
-                      {#include partials/example-card title="Stacked example" slug="stacked" component="toolbar"}
+                      {#include partials/example-card title="Label group" slug="label-group" component="toolbar"}
                       {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Applied-filter chip groups per category inside
+                        <code class="ws-code">pf-m-label-group-container</code>, with live removal.
+                      </p>
+                      {/description} {#content}{#include components/toolbar/label-group /}{/content} {/include}
+                      {#include partials/example-card title="Custom label group content"
+                      slug="custom-label-group-content" component="toolbar"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Chip groups combined with custom inline content — a live filter count and Clear all.
+                      </p>
+                      {/description} {#content}{#include components/toolbar/custom-label-group-content /}{/content}
+                      {/include} {#include partials/example-card title="Stacked example" slug="stacked"
+                      component="toolbar"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">Two stacked toolbars — the second secondary.</p>
                       {/description} {#content}{#include components/toolbar/stacked /}{/content} {/include} {#include
                       partials/example-card title="Toolbar content wrapping" slug="content-wrap" component="toolbar"}

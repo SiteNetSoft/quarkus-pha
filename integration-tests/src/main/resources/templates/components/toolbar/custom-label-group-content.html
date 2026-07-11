@@ -1,0 +1,40 @@
+{! Label groups combined with custom inline content — a filter summary and link actions. !}
+<div x-data="{ status: ['New', 'Pending'], risk: ['High'] }">
+  {#include components/navigation/toolbar id="tb-custom-label-group"}
+    {#include components/navigation/toolbar-content}
+      {#include components/navigation/toolbar-content-section}
+        {#include components/navigation/toolbar-group modifiers="pf-m-label-group-container"}
+          {#include components/navigation/toolbar-group modifiers="pf-m-grow"}
+            {#include components/navigation/toolbar-item variant="label"}
+              {#include components/data-display/label-group id="tb-clg-status" categoryName="Status"}
+              {#content}
+              <template x-for="f in status" :key="f">
+                <li class="pf-v6-c-label-group__list-item">
+                  <span class="pf-v6-c-label pf-m-outline">
+                    <span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text" x-text="f"></span></span>
+                    <span class="pf-v6-c-label__actions">
+                      <button class="pf-v6-c-button pf-m-plain pf-m-no-padding" type="button" :aria-label="'Remove ' + f" @click="status = status.filter((x) => x !== f)">
+                        <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+                      </button>
+                    </span>
+                  </span>
+                </li>
+              </template>
+              {/content} {/include}
+            {/include}
+          {/include}
+          {#include components/navigation/toolbar-group modifiers="pf-m-action-group-inline"}
+            {#include components/navigation/toolbar-item}
+              <span x-text="(status.length + risk.length) + ' filters applied'"></span>
+            {/include}
+            {#include components/navigation/toolbar-item}
+              <button class="pf-v6-c-button pf-m-link pf-m-inline" type="button" @click="status = []; risk = []">
+                <span class="pf-v6-c-button__text">Clear all filters</span>
+              </button>
+            {/include}
+          {/include}
+        {/include}
+      {/include}
+    {/include}
+  {/include}
+</div>
