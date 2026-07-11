@@ -6,8 +6,9 @@
 {! Parameters:                                                                      !}
 {!   tabKey  (required) — matches the paired tab; compared against `active`.        !}
 {!   padding (optional) — add pf-m-padding to the content body.                     !}
+{!   secondary (optional) — add pf-m-secondary to the panel.                        !}
 {!   cloak   (optional) — add x-cloak (use on non-default panels to avoid a flash   !}
 {!                        of the hidden panel before Alpine initializes).          !}
-<section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === '{tabKey}'"{#if cloak??} x-cloak{/if}>
+<section class="pf-v6-c-tab-content{#if secondary??} pf-m-secondary{/if}" role="tabpanel" x-show="active === '{tabKey}'"{#if cloak??} x-cloak{/if}>
   <div class="pf-v6-c-tab-content__body{#if padding??} pf-m-padding{/if}">{#insert/}</div>
 </section>

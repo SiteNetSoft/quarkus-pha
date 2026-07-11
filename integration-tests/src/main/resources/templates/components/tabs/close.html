@@ -1,0 +1,15 @@
+{! Close action across PF core's flavor spread (default / box / box secondary / icons /
+   filled / subtab pair) — closing hides the tab and moves the selection. All flavors
+   except filled are scrollable, as in core's __tabs-all. !}
+{#include components/tabs/_action-tabs idPrefix="tabs-close" ariaLabel="Tabs with close action" scrollable=true close=true /}
+<br /><br />
+{#include components/tabs/_action-tabs idPrefix="tabs-close-box" ariaLabel="Box tabs with close action" modifier="pf-m-box" scrollable=true close=true /}
+<br /><br />
+{#include components/tabs/_action-tabs idPrefix="tabs-close-box-secondary" ariaLabel="Box secondary tabs with close action" modifier="pf-m-box pf-m-secondary" scrollable=true close=true /}
+<br /><br />
+{#include components/tabs/_action-tabs idPrefix="tabs-close-icons" ariaLabel="Tabs with icons and close action" icons=true scrollable=true close=true /}
+<br /><br />
+{#include components/tabs/_action-tabs idPrefix="tabs-close-filled" ariaLabel="Filled tabs with close action" modifier="pf-m-fill" close=true /}
+<br /><br />
+{#include components/tabs/_action-tabs idPrefix="tabs-close-subtabs" ariaLabel="Tabs with close action, primary" scrollable=true close=true /}
+{#include components/tabs/_action-tabs idPrefix="tabs-close-subtabs-secondary" ariaLabel="Tabs with close action, secondary" modifier="pf-m-subtab" scrollable=true close=true /}

@@ -1,6 +1,7 @@
-{! Adjusted inset — pf-m-inset-lg. Composed from tab + tab-content. !}
+{! Responsive insets — pf-m-inset-*-on-* breakpoint modifiers, mirroring PF core's
+   "Default tab insets" example. Single-value insets use the inset= param instead. !}
 <div x-data="{ active: 'i1' }">
-  {#include components/navigation/tabs id="tabs-inset" inset="lg" ariaLabel="Tabs with adjusted inset"}{#content}
+  {#include components/navigation/tabs id="tabs-inset" modifiers="pf-m-inset-sm-on-md pf-m-inset-lg-on-lg pf-m-inset-2xl-on-xl" ariaLabel="Tabs with adjusted inset"}{#content}
   {#include components/navigation/tab tabKey="i1" text="Users" /}
   {#include components/navigation/tab tabKey="i2" text="Containers" /}
   {#include components/navigation/tab tabKey="i3" text="Database" /}
