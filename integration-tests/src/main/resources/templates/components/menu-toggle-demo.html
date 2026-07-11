@@ -164,6 +164,15 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#split" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Split toggle</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#split-checkbox" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text"
@@ -190,6 +199,17 @@
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text"
                                         >Split toggle with checkbox and toggle text</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#split-checkbox-icon-text" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Split toggle with checkbox, icon, and toggle text</span
                                       ></span
                                     ></a
                                   ></span
@@ -379,7 +399,14 @@
                         <code class="ws-code">pf-m-plain pf-m-text</code>.
                       </p>
                       {/description} {#content}{#include components/menu-toggle/plain-text-label /}{/content} {/include}
-                      {#include partials/example-card title="Split toggle with checkbox" slug="split-checkbox"
+                      {#include partials/example-card title="Split toggle" slug="split" component="menu-toggle"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A plain <code class="ws-code">pf-m-split-button</code> — an action button plus a caret-only
+                        toggle button; default/primary/secondary.
+                      </p>
+                      {/description} {#content}{#include components/menu-toggle/split /}{/content} {/include} {#include
+                      partials/example-card title="Split toggle with checkbox" slug="split-checkbox"
                       component="menu-toggle"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-split-button</code> — a standalone check plus a caret-only toggle
@@ -396,6 +423,13 @@
                         Toggle text sits between the check and the caret button.
                       </p>
                       {/description} {#content}{#include components/menu-toggle/split-checkbox-toggle-text /}{/content}
+                      {/include} {#include partials/example-card title="Split toggle with checkbox, icon, and toggle
+                      text" slug="split-checkbox-icon-text" component="menu-toggle"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The toggle button is <code class="ws-code">pf-m-text</code> and carries an icon, label text, and
+                        the caret, so clicking any of them triggers the toggle.
+                      </p>
+                      {/description} {#content}{#include components/menu-toggle/split-checkbox-icon-text /}{/content}
                       {/include} {#include partials/example-card title="Split toggle with action" slug="split-action"
                       component="menu-toggle"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">

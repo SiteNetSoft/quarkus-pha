@@ -1,0 +1,124 @@
+{! Drilldown with breadcrumbs — live version of PF core's four frozen levels. The
+   __breadcrumb region appears once drilled and rebuilds the path (All / Edit /
+   Deployment / Labels) as you go; breadcrumb links drill back up, so submenus carry no
+   drill-up items (matching core's breadcrumbs flavor). Nested menus toggle their own
+   pf-m-drilled-in as the path deepens. !}
+<div
+  class="pf-v6-c-menu pf-m-drilldown"
+  id="mn-drilldown-breadcrumbs"
+  style="max-width: 280px; position: relative"
+  x-data="{ drilled: '' }"
+  :class="{ 'pf-m-drilled-in': drilled !== '' }"
+>
+  <div class="pf-v6-c-menu__breadcrumb" x-show="drilled !== ''" x-cloak>
+    <nav class="pf-v6-c-breadcrumb" aria-label="Drilldown breadcrumb">
+      <ol class="pf-v6-c-breadcrumb__list">
+        <li class="pf-v6-c-breadcrumb__item">
+          <button type="button" class="pf-v6-c-breadcrumb__link" @click="drilled = ''">All</button>
+        </li>
+        <li class="pf-v6-c-breadcrumb__item" x-show="drilled === 'edit'">
+          <span class="pf-v6-c-breadcrumb__item-divider" aria-hidden="true">{icons:svg('fa:angle-right').raw}</span>
+          <span class="pf-v6-c-breadcrumb__link pf-m-current" aria-current="page">Edit</span>
+        </li>
+        <li class="pf-v6-c-breadcrumb__item" x-show="drilled === 'deployment' || drilled === 'labels'">
+          <span class="pf-v6-c-breadcrumb__item-divider" aria-hidden="true">{icons:svg('fa:angle-right').raw}</span>
+          <button type="button" class="pf-v6-c-breadcrumb__link" @click="drilled = 'edit'">Edit</button>
+        </li>
+        <li class="pf-v6-c-breadcrumb__item" x-show="drilled === 'deployment'">
+          <span class="pf-v6-c-breadcrumb__item-divider" aria-hidden="true">{icons:svg('fa:angle-right').raw}</span>
+          <span class="pf-v6-c-breadcrumb__link pf-m-current" aria-current="page">Deployment</span>
+        </li>
+        <li class="pf-v6-c-breadcrumb__item" x-show="drilled === 'labels'">
+          <span class="pf-v6-c-breadcrumb__item-divider" aria-hidden="true">{icons:svg('fa:angle-right').raw}</span>
+          <button type="button" class="pf-v6-c-breadcrumb__link" @click="drilled = 'deployment'">Deployment</button>
+        </li>
+        <li class="pf-v6-c-breadcrumb__item" x-show="drilled === 'labels'">
+          <span class="pf-v6-c-breadcrumb__item-divider" aria-hidden="true">{icons:svg('fa:angle-right').raw}</span>
+          <span class="pf-v6-c-breadcrumb__link pf-m-current" aria-current="page">Labels</span>
+        </li>
+      </ol>
+    </nav>
+  </div>
+  <hr class="pf-v6-c-divider" x-show="drilled !== ''" x-cloak />
+  <div class="pf-v6-c-menu__content" style="height: 180px">
+    <ul class="pf-v6-c-menu__list" role="menu">
+      <li role="none" class="pf-v6-c-menu__list-item" :class="{ 'pf-m-current-path': drilled !== '' }">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem" aria-expanded="false" :aria-expanded="(drilled !== '').toString()" @click="drilled = 'edit'">
+          <span class="pf-v6-c-menu__item-main">
+            <span class="pf-v6-c-menu__item-text">Edit</span>
+            <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+          </span>
+        </button>
+        <div class="pf-v6-c-menu" :class="{ 'pf-m-drilled-in': drilled === 'deployment' || drilled === 'labels' }">
+          <div class="pf-v6-c-menu__content">
+            <ul class="pf-v6-c-menu__list" role="menu">
+              <li role="none" class="pf-v6-c-menu__list-item" :class="{ 'pf-m-current-path': drilled === 'deployment' || drilled === 'labels' }">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem" aria-expanded="false" :aria-expanded="(drilled === 'deployment' || drilled === 'labels').toString()" @click="drilled = 'deployment'">
+                  <span class="pf-v6-c-menu__item-main">
+                    <span class="pf-v6-c-menu__item-text">Deployment</span>
+                    <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+                  </span>
+                </button>
+                <div class="pf-v6-c-menu" :class="{ 'pf-m-drilled-in': drilled === 'labels' }">
+                  <div class="pf-v6-c-menu__content">
+                    <ul class="pf-v6-c-menu__list" role="menu">
+                      <li role="none" class="pf-v6-c-menu__list-item" :class="{ 'pf-m-current-path': drilled === 'labels' }">
+                        <button class="pf-v6-c-menu__item" type="button" role="menuitem" aria-expanded="false" :aria-expanded="(drilled === 'labels').toString()" @click="drilled = 'labels'">
+                          <span class="pf-v6-c-menu__item-main">
+                            <span class="pf-v6-c-menu__item-text">Labels</span>
+                            <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+                          </span>
+                        </button>
+                        <div class="pf-v6-c-menu">
+                          <div class="pf-v6-c-menu__content">
+                            <ul class="pf-v6-c-menu__list" role="menu">
+                              <li role="none" class="pf-v6-c-menu__list-item">
+                                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Label 1</span></span>
+                                </button>
+                              </li>
+                              <li role="none" class="pf-v6-c-menu__list-item">
+                                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Label 2</span></span>
+                                </button>
+                              </li>
+                              <li role="none" class="pf-v6-c-menu__list-item">
+                                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Label 3</span></span>
+                                </button>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </li>
+                      <li role="none" class="pf-v6-c-menu__list-item">
+                        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">URLs</span></span>
+                        </button>
+                      </li>
+                      <li role="none" class="pf-v6-c-menu__list-item">
+                        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">APIs</span></span>
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Config</span></span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li role="none" class="pf-v6-c-menu__list-item">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Start rollout</span></span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
