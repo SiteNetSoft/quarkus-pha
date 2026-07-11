@@ -1,0 +1,20 @@
+{! Animated accent on vertical tabs — pf-m-animate-current + pf-m-vertical; the accent
+   tracks offsetTop/height instead of left/width. !}
+<div
+  x-data="{ active: 'av1',
+    accent(root) { root.querySelectorAll('.pf-v6-c-tabs').forEach(function (t) { var list = t.querySelector('.pf-v6-c-tabs__list'); var cur = t.querySelector('.pf-v6-c-tabs__item.pf-m-current .pf-v6-c-tabs__link'); if (!list || !cur) return; var lr = list.getBoundingClientRect(); var cr = cur.getBoundingClientRect(); var vertical = t.classList.contains('pf-m-vertical'); t.style.setProperty('--pf-v6-c-tabs--link-accent--start', Math.round(vertical ? cr.top - lr.top : cr.left - lr.left) + 'px'); t.style.setProperty('--pf-v6-c-tabs--link-accent--length', Math.round(vertical ? cr.height : cr.width) + 'px'); }); } }"
+  x-effect="active; $nextTick(function () { accent($root) })"
+  @resize.window.debounce.100ms="accent($root)"
+  style="display: flex; gap: 1rem"
+>
+  {#include components/navigation/tabs id="tabs-animate-vertical" vertical=true modifiers="pf-m-animate-current" ariaLabel="Animated vertical tabs"}{#content}
+  {#include components/navigation/tab tabKey="av1" text="General" /}
+  {#include components/navigation/tab tabKey="av2" text="Security" /}
+  {#include components/navigation/tab tabKey="av3" text="Notifications" /}
+  {/content}{/include}
+  <div style="flex: 1">
+    {#include components/navigation/tab-content tabKey="av1" padding=true}General settings.{/include}
+    {#include components/navigation/tab-content tabKey="av2" padding=true cloak=true}Security settings.{/include}
+    {#include components/navigation/tab-content tabKey="av3" padding=true cloak=true}Notification preferences.{/include}
+  </div>
+</div>

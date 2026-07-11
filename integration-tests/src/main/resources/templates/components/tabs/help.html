@@ -1,72 +1,15 @@
-{! Plain-list markup (no ARIA tablist): close/help action buttons are not valid
-   tablist children, so these examples use list semantics with aria-current —
-   the same trade-off as the nav variant. !}
-<div x-data="{ active: 'h1' }">
-  <div class="pf-v6-c-tabs" id="tabs-help">
-    <ul class="pf-v6-c-tabs__list" aria-label="Tabs with help action">
-      <li class="pf-v6-c-tabs__item pf-m-action" :class="active === 'h1' ? 'pf-m-current' : ''" x-data="{ help: false }" style="position: relative">
-        <button class="pf-v6-c-tabs__link" type="button" :aria-current="active === 'h1'" @click="active = 'h1'">
-          <span class="pf-v6-c-tabs__item-text">Users</span>
-        </button>
-        <span class="pf-v6-c-tabs__item-action">
-          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="More info for Users" :aria-expanded="help.toString()" @click="help = !help">
-            <span class="pf-v6-c-button__icon"><span class="pf-v6-c-tabs__item-action-icon">{icons:svg('fa:circle-question').raw}</span></span>
-          </button>
-        </span>
-        <div x-show="help" x-cloak @click.outside="help = false" style="position: absolute; top: 100%; left: 0; z-index: 200; width: 240px">
-          <div class="pf-v6-c-popover pf-m-bottom" role="dialog" aria-label="Users help">
-            <div class="pf-v6-c-popover__arrow"></div>
-            <div class="pf-v6-c-popover__content">
-              <div class="pf-v6-c-popover__body">Helpful information about the Users tab.</div>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="pf-v6-c-tabs__item pf-m-action" :class="active === 'h2' ? 'pf-m-current' : ''" x-data="{ help: false }" style="position: relative">
-        <button class="pf-v6-c-tabs__link" type="button" :aria-current="active === 'h2'" @click="active = 'h2'">
-          <span class="pf-v6-c-tabs__item-text">Containers</span>
-        </button>
-        <span class="pf-v6-c-tabs__item-action">
-          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="More info for Containers" :aria-expanded="help.toString()" @click="help = !help">
-            <span class="pf-v6-c-button__icon"><span class="pf-v6-c-tabs__item-action-icon">{icons:svg('fa:circle-question').raw}</span></span>
-          </button>
-        </span>
-        <div x-show="help" x-cloak @click.outside="help = false" style="position: absolute; top: 100%; left: 0; z-index: 200; width: 240px">
-          <div class="pf-v6-c-popover pf-m-bottom" role="dialog" aria-label="Containers help">
-            <div class="pf-v6-c-popover__arrow"></div>
-            <div class="pf-v6-c-popover__content">
-              <div class="pf-v6-c-popover__body">Helpful information about the Containers tab.</div>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="pf-v6-c-tabs__item pf-m-action" :class="active === 'h3' ? 'pf-m-current' : ''" x-data="{ help: false }" style="position: relative">
-        <button class="pf-v6-c-tabs__link" type="button" :aria-current="active === 'h3'" @click="active = 'h3'">
-          <span class="pf-v6-c-tabs__item-text">Database</span>
-        </button>
-        <span class="pf-v6-c-tabs__item-action">
-          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="More info for Database" :aria-expanded="help.toString()" @click="help = !help">
-            <span class="pf-v6-c-button__icon"><span class="pf-v6-c-tabs__item-action-icon">{icons:svg('fa:circle-question').raw}</span></span>
-          </button>
-        </span>
-        <div x-show="help" x-cloak @click.outside="help = false" style="position: absolute; top: 100%; left: 0; z-index: 200; width: 240px">
-          <div class="pf-v6-c-popover pf-m-bottom" role="dialog" aria-label="Database help">
-            <div class="pf-v6-c-popover__arrow"></div>
-            <div class="pf-v6-c-popover__content">
-              <div class="pf-v6-c-popover__body">Helpful information about the Database tab.</div>
-            </div>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === 'h1'" x-cloak>
-    <div class="pf-v6-c-tab-content__body">Users panel</div>
-  </section>
-  <section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === 'h2'" x-cloak>
-    <div class="pf-v6-c-tab-content__body">Containers panel</div>
-  </section>
-  <section class="pf-v6-c-tab-content" role="tabpanel" x-show="active === 'h3'" x-cloak>
-    <div class="pf-v6-c-tab-content__body">Database panel</div>
-  </section>
-</div>
+{! Help action across PF core's flavor spread (default / box / box secondary / icons /
+   filled / subtab pair) — each help button opens a per-tab popover. All flavors except
+   filled are scrollable, as in core's __tabs-all. !}
+{#include components/tabs/_action-tabs idPrefix="tabs-help" ariaLabel="Tabs with help action" scrollable=true help=true /}
+<br /><br />
+{#include components/tabs/_action-tabs idPrefix="tabs-help-box" ariaLabel="Box tabs with help action" modifier="pf-m-box" scrollable=true help=true /}
+<br /><br />
+{#include components/tabs/_action-tabs idPrefix="tabs-help-box-secondary" ariaLabel="Box secondary tabs with help action" modifier="pf-m-box pf-m-secondary" scrollable=true help=true /}
+<br /><br />
+{#include components/tabs/_action-tabs idPrefix="tabs-help-icons" ariaLabel="Tabs with icons and help action" icons=true scrollable=true help=true /}
+<br /><br />
+{#include components/tabs/_action-tabs idPrefix="tabs-help-filled" ariaLabel="Filled tabs with help action" modifier="pf-m-fill" help=true /}
+<br /><br />
+{#include components/tabs/_action-tabs idPrefix="tabs-help-subtabs" ariaLabel="Tabs with help action, primary" scrollable=true help=true /}
+{#include components/tabs/_action-tabs idPrefix="tabs-help-subtabs-secondary" ariaLabel="Tabs with help action, secondary" modifier="pf-m-subtab" scrollable=true help=true /}

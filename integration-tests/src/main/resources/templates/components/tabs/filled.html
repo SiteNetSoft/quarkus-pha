@@ -1,0 +1,11 @@
+{! Filled tabs — pf-m-fill stretches tabs across the full width. Composed from tab + tab-content. !}
+<div x-data="{ active: 'fl1' }">
+  {#include components/navigation/tabs id="tabs-filled" filled=true ariaLabel="Filled tabs"}{#content}
+  {#include components/navigation/tab tabKey="fl1" text="Users" /}
+  {#include components/navigation/tab tabKey="fl2" text="Containers" /}
+  {#include components/navigation/tab tabKey="fl3" text="Database" /}
+  {/content}{/include}
+  {#include components/navigation/tab-content tabKey="fl1"}Users panel content{/include}
+  {#include components/navigation/tab-content tabKey="fl2" cloak=true}Containers panel content{/include}
+  {#include components/navigation/tab-content tabKey="fl3" cloak=true}Database panel content{/include}
+</div>

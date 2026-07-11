@@ -1,0 +1,12 @@
+{! Box tabs with responsive insets — pf-m-box + pf-m-inset-*-on-* breakpoint modifiers,
+   mirroring PF core's "Box tab insets" example. Composed from tab + tab-content. !}
+<div x-data="{ active: 'bi1' }">
+  {#include components/navigation/tabs id="tabs-box-inset" box=true modifiers="pf-m-inset-sm-on-md pf-m-inset-lg-on-lg pf-m-inset-2xl-on-xl" ariaLabel="Box tabs with adjusted insets"}{#content}
+  {#include components/navigation/tab tabKey="bi1" text="Users" /}
+  {#include components/navigation/tab tabKey="bi2" text="Containers" /}
+  {#include components/navigation/tab tabKey="bi3" text="Database" /}
+  {/content}{/include}
+  {#include components/navigation/tab-content tabKey="bi1"}Users panel content{/include}
+  {#include components/navigation/tab-content tabKey="bi2" cloak=true}Containers panel content{/include}
+  {#include components/navigation/tab-content tabKey="bi3" cloak=true}Database panel content{/include}
+</div>

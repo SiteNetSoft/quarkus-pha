@@ -2,9 +2,10 @@
 {! Optional: id — DOM id on the root; omit unless something else references the tabs.
               box, vertical, filled (pf-m-fill), secondary (pair with box), subtab, pageInsets,
               noBorderBottom, nav (pf-m-nav — tab links are anchors), inset (sm|md|lg|xl|2xl|none),
+              modifiers (extra pf-m-* classes verbatim, e.g. responsive insets or pf-m-animate-current),
               ariaLabel (optional — labels the tablist) !}
 <div
-  class="pf-v6-c-tabs{#if box??} pf-m-box{/if}{#if vertical??} pf-m-vertical{/if}{#if filled??} pf-m-fill{/if}{#if secondary??} pf-m-secondary{/if}{#if subtab??} pf-m-subtab{/if}{#if pageInsets??} pf-m-page-insets{/if}{#if noBorderBottom??} pf-m-no-border-bottom{/if}{#if nav??} pf-m-nav{/if}{#if inset??} pf-m-inset-{inset}{/if}"
+  class="pf-v6-c-tabs{#if box??} pf-m-box{/if}{#if vertical??} pf-m-vertical{/if}{#if filled??} pf-m-fill{/if}{#if secondary??} pf-m-secondary{/if}{#if subtab??} pf-m-subtab{/if}{#if pageInsets??} pf-m-page-insets{/if}{#if noBorderBottom??} pf-m-no-border-bottom{/if}{#if nav??} pf-m-nav{/if}{#if inset??} pf-m-inset-{inset}{/if}{#if modifiers??} {modifiers}{/if}"
   {#if id??}id="{id}"{/if}
   x-data="{
   handleKeyNav(e) {

@@ -1,0 +1,17 @@
+{! Animated accent on filled tabs — pf-m-animate-current + pf-m-fill; Alpine keeps the
+   --link-accent-- variables in sync with the current tab. !}
+<div
+  x-data="{ active: 'af1',
+    accent(root) { root.querySelectorAll('.pf-v6-c-tabs').forEach(function (t) { var list = t.querySelector('.pf-v6-c-tabs__list'); var cur = t.querySelector('.pf-v6-c-tabs__item.pf-m-current .pf-v6-c-tabs__link'); if (!list || !cur) return; var lr = list.getBoundingClientRect(); var cr = cur.getBoundingClientRect(); var vertical = t.classList.contains('pf-m-vertical'); t.style.setProperty('--pf-v6-c-tabs--link-accent--start', Math.round(vertical ? cr.top - lr.top : cr.left - lr.left) + 'px'); t.style.setProperty('--pf-v6-c-tabs--link-accent--length', Math.round(vertical ? cr.height : cr.width) + 'px'); }); } }"
+  x-effect="active; $nextTick(function () { accent($root) })"
+  @resize.window.debounce.100ms="accent($root)"
+>
+  {#include components/navigation/tabs id="tabs-animate-filled" filled=true modifiers="pf-m-animate-current" ariaLabel="Animated filled tabs"}{#content}
+  {#include components/navigation/tab tabKey="af1" text="Users" /}
+  {#include components/navigation/tab tabKey="af2" text="Containers" /}
+  {#include components/navigation/tab tabKey="af3" text="Database" /}
+  {/content}{/include}
+  {#include components/navigation/tab-content tabKey="af1"}Users panel content{/include}
+  {#include components/navigation/tab-content tabKey="af2" cloak=true}Containers panel content{/include}
+  {#include components/navigation/tab-content tabKey="af3" cloak=true}Database panel content{/include}
+</div>
