@@ -66,7 +66,7 @@
                                 <span class="pf-v6-c-jump-links__link"
                                   ><a href="#multiple" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Multiple (free form)</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text">Multiple fields</span></span
                                     ></a
                                   ></span
                                 >
@@ -76,6 +76,24 @@
                                   ><a href="#validated" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">Validated</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#free-form" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Free form edit</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#table-row" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Inline edit table row</span></span
                                     ></a
                                   ></span
                                 >
@@ -138,8 +156,8 @@
                         switches to an input with an icon save/cancel group.
                       </p>
                       {/description} {#content}{#include components/inline-edit/with-label /}{/content} {/include}
-                      {#include partials/example-card title="Multiple (free form)" slug="multiple"
-                      component="inline-edit"} {#description}
+                      {#include partials/example-card title="Multiple fields" slug="multiple" component="inline-edit"}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         One Edit toggle switches every field to an input at once, with a
                         <code class="ws-code">pf-m-footer</code> action group (Save / Cancel) — the whole-row edit
@@ -154,6 +172,23 @@
                         <code class="ws-code">pf-m-success</code>.
                       </p>
                       {/description} {#content}{#include components/inline-edit/validated /}{/content} {/include}
+                      {#include partials/example-card title="Free form edit" slug="free-form" component="inline-edit"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A bare <code class="ws-code">__editable-text</code> block — core renders it inert; ours is
+                        contenteditable.
+                      </p>
+                      {/description} {#content}{#include components/inline-edit/free-form /}{/content} {/include}
+                      <div class="pf-v6-l-stack__item">
+                        <h3 id="table-row" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+                          Inline edit table row
+                        </h3>
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Row-level inline editing in a table lives in the
+                          <a href="/components/table#editable-rows">Table editable rows</a> example, which drives
+                          <code class="ws-code">pf-v6-c-table__inline-edit-action</code> with live Alpine state.
+                        </p>
+                      </div>
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

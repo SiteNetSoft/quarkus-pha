@@ -49,7 +49,7 @@ test.describe("Inline Edit", () => {
     });
   });
 
-  test.describe("Multiple (free form)", () => {
+  test.describe("Multiple fields", () => {
     test("one Edit toggle reveals all field inputs and a footer", async ({ page }) => {
       await page.locator('#ie-multiple button[aria-label="Edit all fields"]').click();
       await expect(page.locator("#ie-multiple input")).toHaveCount(3);
@@ -67,5 +67,31 @@ test.describe("Inline Edit", () => {
       await expect(control).toHaveClass(/pf-m-success/);
       await expect(save).toBeEnabled();
     });
+  });
+
+  test.describe("Free form edit", () => {
+    test("the editable-text block is contenteditable and accepts typing", async ({ page }) => {
+      const text = page.locator("#ie-free-form-text");
+      await expect(text).toHaveAttribute("contenteditable", "true");
+      await text.click();
+      await page.keyboard.press("End");
+      await page.keyboard.type(" Edited.");
+      await expect(text).toContainText("Edited.");
+    });
+
+    test("the table-row cross-link points at the table editable-rows example", async ({ page }) => {
+      await expect(page.locator("#table-row")).toBeAttached();
+      await expect(page.locator('a[href="/components/table#editable-rows"]')).toBeAttached();
+    });
+  });
+
+  test.describe("Standalone routes", () => {
+    for (const example of ["basic", "with-label", "multiple", "validated", "free-form"]) {
+      test(`/components/inline-edit/${example} returns 200`, async ({ page }) => {
+        const res = await page.goto(`/components/inline-edit/${example}`);
+        expect(res.status()).toBe(200);
+        await expect(page.locator(".pf-v6-c-inline-edit").first()).toBeAttached();
+      });
+    }
   });
 });
