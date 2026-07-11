@@ -119,8 +119,10 @@ public class MiscExamplesRoutes {
                                                "resizable-start", "resizable-bottom", "resizable-inline",
                                                "secondary-background", "focus-trap", "pill", "pill-inline"));
         m.put("toolbar",               Set.of("basic", "items", "insets", "vertical", "sticky", "dynamic-sticky",
-                                               "groups", "color-variants", "toggle-groups", "with-filters",
-                                               "stacked", "content-wrap", "group-spacers", "item-spacers"));
+                                               "groups", "color-variants", "toggle-groups", "with-filters", "stacked",
+                                               "content-wrap", "group-spacers", "item-spacers", "no-padding",
+                                               "width-control", "filter-group", "action-group", "action-group-plain",
+                                               "action-group-inline", "label-group", "custom-label-group-content"));
         m.put("modal",                 Set.of("basic", "scrollable", "with-description", "top-aligned", "sizes",
                                                "custom-width", "custom-header", "no-header-footer", "title-icon",
                                                "custom-title-icon", "with-dropdown", "with-help", "with-form"));

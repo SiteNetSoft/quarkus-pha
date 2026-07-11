@@ -4,13 +4,21 @@ const EXAMPLES = [
   "basic",
   "items",
   "insets",
+  "no-padding",
+  "width-control",
   "vertical",
   "sticky",
   "dynamic-sticky",
   "groups",
+  "filter-group",
+  "action-group",
+  "action-group-plain",
+  "action-group-inline",
   "color-variants",
   "toggle-groups",
   "with-filters",
+  "label-group",
+  "custom-label-group-content",
   "stacked",
   "content-wrap",
   "group-spacers",
@@ -120,6 +128,52 @@ test.describe("Toolbar", () => {
         await expect(page.locator(".pf-v6-c-toolbar").first()).toBeAttached();
       });
     }
+  });
+
+  test.describe("Parity additions", () => {
+    test("no-padding and width-control carry their modifiers", async ({ page }) => {
+      await expect(page.locator("#tb-no-padding")).toHaveClass(/pf-m-no-padding/);
+      const w = await page
+        .locator("#tb-width-control .pf-v6-c-toolbar__item")
+        .first()
+        .evaluate((el) => getComputedStyle(el).getPropertyValue("--pf-v6-c-toolbar__item--Width").trim());
+      expect(w).toBe("80px");
+    });
+
+    test("action group variants carry their group modifiers", async ({ page }) => {
+      await expect(page.locator("#tb-action-group .pf-v6-c-toolbar__group.pf-m-action-group")).toBeVisible();
+      await expect(
+        page.locator("#tb-action-group-plain .pf-v6-c-toolbar__group.pf-m-action-group-plain"),
+      ).toBeVisible();
+      await expect(
+        page.locator("#tb-action-group-inline .pf-v6-c-toolbar__group.pf-m-action-group-inline"),
+      ).toBeVisible();
+    });
+
+    test("label group chips remove live", async ({ page }) => {
+      const root = page.locator("#tb-label-group");
+      const chips = root.locator(".pf-v6-c-label-group__list-item:not(.pha-label-group__overflow)");
+      await expect(chips).toHaveCount(3);
+      await chips.first().locator(".pf-v6-c-label__actions button").click();
+      await expect(chips).toHaveCount(2);
+    });
+
+    test("custom label group content keeps a live filter count", async ({ page }) => {
+      const root = page.locator("#tb-custom-label-group");
+      const count = root.locator('span[x-text*="filters applied"]');
+      await expect(count).toHaveText("3 filters applied");
+      await root.locator("button", { hasText: "Clear all filters" }).click();
+      await expect(count).toHaveText("0 filters applied");
+      await expect(root.locator(".pf-v6-c-label-group__list-item:not(.pha-label-group__overflow)")).toHaveCount(0);
+    });
+
+    test("stacked includes bulk select, overflow menu and pagination", async ({ page }) => {
+      await expect(
+        page.locator("#tb-stacked .pf-v6-c-toolbar__item.pf-m-bulk-select input[type=checkbox]"),
+      ).toBeVisible();
+      await expect(page.locator("#tb-stacked .pf-v6-c-overflow-menu")).toBeVisible();
+      await expect(page.locator("#tb-stacked .pf-v6-c-pagination.pf-m-compact")).toBeVisible();
+    });
   });
 
   test.describe("Per-example code viewer", () => {
