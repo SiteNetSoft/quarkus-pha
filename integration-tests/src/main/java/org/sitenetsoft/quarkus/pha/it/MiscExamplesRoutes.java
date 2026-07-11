@@ -86,8 +86,11 @@ public class MiscExamplesRoutes {
                                                "no-items", "one-page", "offset", "inset", "sticky",
                                                "dynamic-sticky"));
         m.put("code-block",            Set.of("basic", "with-copy"));
-        m.put("progress-stepper",      Set.of("horizontal", "vertical", "compact", "with-alignment", "with-issue",
-                                               "with-failure", "custom-icons", "help-popover"));
+        m.put("progress-stepper",      Set.of("horizontal", "vertical", "vertical-responsive", "compact",
+                                               "compact-vertical", "compact-vertical-responsive",
+                                               "compact-vertical-center", "compact-center", "with-alignment",
+                                               "center-vertical", "with-issue", "with-failure", "in-process",
+                                               "custom-icons", "help-popover"));
         m.put("tabs",                  Set.of("basic", "box", "box-secondary", "box-vertical", "vertical",
                                                "vertical-expandable", "vertical-expandable-responsive",
                                                "overflow", "horizontal-overflow", "box-overflow",

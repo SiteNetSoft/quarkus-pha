@@ -3,10 +3,17 @@ import { test, expect } from "@playwright/test";
 const EXAMPLES = [
   "horizontal",
   "vertical",
+  "vertical-responsive",
   "compact",
+  "compact-vertical",
+  "compact-vertical-responsive",
+  "compact-vertical-center",
+  "compact-center",
   "with-alignment",
+  "center-vertical",
   "with-issue",
   "with-failure",
+  "in-process",
   "custom-icons",
   "help-popover",
 ];
@@ -27,6 +34,32 @@ test.describe("Progress Stepper", () => {
     await expect(page.locator("#ps-vertical")).toHaveClass(/pf-m-vertical/);
     await expect(page.locator("#ps-compact")).toHaveClass(/pf-m-compact/);
     await expect(page.locator("#ps-alignment")).toHaveClass(/pf-m-center/);
+  });
+
+  test("with-alignment and compact carry descriptions", async ({ page }) => {
+    await expect(page.locator("#ps-alignment .pf-v6-c-progress-stepper__step-description")).toHaveCount(3);
+    await expect(page.locator("#ps-compact .pf-v6-c-progress-stepper__step-description")).toHaveCount(3);
+  });
+
+  test("permutation variants carry their modifier combinations", async ({ page }) => {
+    await expect(page.locator("#ps-vertical-responsive")).toHaveClass(/pf-m-vertical-on-lg/);
+    await expect(page.locator("#ps-vertical-responsive")).toHaveClass(/pf-m-horizontal-on-2xl/);
+    await expect(page.locator("#ps-center-vertical")).toHaveClass(/pf-m-center/);
+    await expect(page.locator("#ps-center-vertical")).toHaveClass(/pf-m-vertical/);
+    await expect(page.locator("#ps-compact-vertical")).toHaveClass(/pf-m-compact/);
+    await expect(page.locator("#ps-compact-vertical")).toHaveClass(/pf-m-vertical/);
+    await expect(page.locator("#ps-compact-vertical-responsive")).toHaveClass(/pf-m-vertical-on-lg/);
+    await expect(page.locator("#ps-compact-vertical-responsive")).toHaveClass(/pf-m-horizontal-on-xl/);
+    const cvc = page.locator("#ps-compact-vertical-center");
+    await expect(cvc).toHaveClass(/pf-m-compact/);
+    await expect(cvc).toHaveClass(/pf-m-vertical/);
+    await expect(cvc).toHaveClass(/pf-m-center/);
+    await expect(page.locator("#ps-compact-center")).toHaveClass(/pf-m-center/);
+  });
+
+  test("in-process steppers show a spinner on the current step", async ({ page }) => {
+    await expect(page.locator("#ps-in-process .pf-m-current .pf-v6-c-spinner")).toBeVisible();
+    await expect(page.locator("#ps-compact .pf-m-current .pf-v6-c-spinner")).toBeVisible();
   });
 
   test("issue and failure steps carry status classes", async ({ page }) => {
