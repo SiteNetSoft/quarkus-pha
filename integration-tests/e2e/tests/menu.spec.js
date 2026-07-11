@@ -18,6 +18,20 @@ const EXAMPLES = [
   "scrollable-custom-height",
   "view-more",
   "with-drilldown",
+  "danger-item",
+  "flyout",
+  "flyout-positions",
+  "scrollable-drilldown",
+  "width-modified-drilldown",
+  "drilldown-initial-state",
+  "drilldown-breadcrumbs",
+  "drilldown-inline-filter",
+  "header-footer",
+  "search-footer",
+  "loading",
+  "plain",
+  "plain-search-footer",
+  "plain-scrollable-search-footer",
 ];
 
 test.describe("Menu", () => {
@@ -147,6 +161,100 @@ test.describe("Menu", () => {
       await expect(nested).toBeVisible();
       await menu.locator(".pf-v6-c-menu button", { hasText: "Start rollout" }).first().click();
       await expect(menu).not.toHaveClass(/pf-m-drilled-in/);
+    });
+  });
+
+  test.describe("Danger item", () => {
+    test("the delete item carries pf-m-danger and a screen-reader prefix", async ({ page }) => {
+      const item = page.locator("#mn-danger-item .pf-v6-c-menu__list-item.pf-m-danger");
+      await expect(item).toBeAttached();
+      await expect(item.locator(".pf-v6-screen-reader")).toHaveText("Danger item:");
+    });
+  });
+
+  test.describe("Flyout", () => {
+    test("hovering an expandable item reveals its flyout submenu", async ({ page }) => {
+      const menu = page.locator("#mn-flyout");
+      await expect(menu.locator(".pf-v6-c-menu[hidden]")).toHaveCount(2);
+      await menu.locator(".pf-v6-c-menu__list-item", { hasText: "Add storage" }).first().hover();
+      await expect(menu.locator(".pf-v6-c-menu[hidden]")).toHaveCount(1);
+      await expect(
+        menu.locator(".pf-v6-c-menu .pf-v6-c-menu__item", { hasText: "Application grouping" }).first(),
+      ).toBeVisible();
+    });
+
+    test("position modifiers land on the nested menus", async ({ page }) => {
+      await expect(page.locator("#mn-flyout-positions .pf-v6-c-menu.pf-m-top:not(.pf-m-left)")).toHaveCount(1);
+      await expect(page.locator("#mn-flyout-positions .pf-v6-c-menu.pf-m-left:not(.pf-m-top)")).toHaveCount(1);
+      await expect(page.locator("#mn-flyout-positions .pf-v6-c-menu.pf-m-left.pf-m-top")).toHaveCount(1);
+    });
+  });
+
+  test.describe("Drilldown variants", () => {
+    test("scrollable and width-modified drilldowns carry their modifiers", async ({ page }) => {
+      await expect(page.locator("#mn-drilldown-scrollable")).toHaveClass(/pf-m-scrollable/);
+      await expect(page.locator("#mn-drilldown-scrollable")).toHaveClass(/pf-m-drilldown/);
+      await expect(page.locator("#mn-drilldown-width")).toHaveAttribute("style", /--pf-v6-c-menu--Width:\s*350px/);
+    });
+
+    test("initial-state drilldown starts drilled in and can drill out", async ({ page }) => {
+      const menu = page.locator("#mn-drilldown-initial");
+      await expect(menu).toHaveClass(/pf-m-drilled-in/);
+      await menu.locator(".pf-v6-c-menu button", { hasText: "Start rollout" }).first().click();
+      await expect(menu).not.toHaveClass(/pf-m-drilled-in/);
+    });
+
+    test("breadcrumbs drilldown updates the breadcrumb as you drill", async ({ page }) => {
+      const menu = page.locator("#mn-drilldown-breadcrumbs");
+      const breadcrumb = menu.locator(".pf-v6-c-menu__breadcrumb");
+      await expect(breadcrumb).toBeHidden();
+      await menu.locator(".pf-v6-c-menu__content button", { hasText: "Edit" }).first().click();
+      await expect(breadcrumb).toBeVisible();
+      await expect(breadcrumb.locator(".pf-m-current:visible")).toHaveText("Edit");
+      await menu.locator(".pf-v6-c-menu button", { hasText: "Deployment" }).first().click();
+      await expect(breadcrumb.locator(".pf-m-current:visible")).toHaveText("Deployment");
+      await breadcrumb.locator("button", { hasText: "All" }).click();
+      await expect(menu).not.toHaveClass(/pf-m-drilled-in/);
+      await expect(breadcrumb).toBeHidden();
+    });
+
+    test("inline filter narrows the drilled submenu", async ({ page }) => {
+      const menu = page.locator("#mn-drilldown-filter");
+      await menu.locator("button", { hasText: "Start rollout" }).first().click();
+      await expect(menu).toHaveClass(/pf-m-drilled-in/);
+      await menu.locator("input").fill("count");
+      await expect(menu.locator(".pf-v6-c-menu__item", { hasText: "Annotations" })).toBeHidden();
+      await expect(menu.locator(".pf-v6-c-menu .pf-v6-c-menu__item", { hasText: "Count" }).first()).toBeVisible();
+    });
+  });
+
+  test.describe("Header / search / footer regions", () => {
+    test("header-footer frames a scrollable list", async ({ page }) => {
+      const menu = page.locator("#mn-header-footer");
+      await expect(menu).toHaveClass(/pf-m-scrollable/);
+      await expect(menu.locator(".pf-v6-c-menu__header")).toHaveText("Header");
+      await expect(menu.locator(".pf-v6-c-menu__footer .pf-v6-c-button")).toBeVisible();
+    });
+
+    test("search-footer search input filters the list", async ({ page }) => {
+      const menu = page.locator("#mn-search-footer");
+      await menu.locator(".pf-v6-c-menu__search-input input").fill("Action 12");
+      await expect(menu.locator(".pf-v6-c-menu__list-item:visible")).toHaveCount(1);
+      await expect(menu.locator(".pf-v6-c-menu__footer")).toBeAttached();
+    });
+
+    test("plain flavors carry pf-m-plain", async ({ page }) => {
+      await expect(page.locator("#mn-plain")).toHaveClass(/pf-m-plain/);
+      await expect(page.locator("#mn-plain-search-footer")).toHaveClass(/pf-m-plain/);
+      const both = page.locator("#mn-plain-scrollable-search-footer");
+      await expect(both).toHaveClass(/pf-m-plain/);
+      await expect(both).toHaveClass(/pf-m-scrollable/);
+    });
+  });
+
+  test.describe("Loading", () => {
+    test("the loading item shows a spinner", async ({ page }) => {
+      await expect(page.locator("#mn-loading .pf-m-loading .pf-v6-c-spinner")).toBeVisible();
     });
   });
 
