@@ -1,0 +1,17 @@
+{#include components/data-display/code-editor id="ce-custom-control" copyButton=true downloadButton=true extraControls=true}
+{#extraControlsSlot}
+<button
+  class="pf-v6-c-button pf-m-plain"
+  type="button"
+  x-data="{ ran: false }"
+  :aria-label="ran ? 'Code executed' : 'Execute code'"
+  aria-label="Execute code"
+  @click="ran = true; setTimeout(() => ran = false, 2000)"
+>
+  <span class="pf-v6-c-button__icon">
+    <span x-show="!ran">{icons:svg('fa:play').raw}</span><span x-show="ran" x-cloak>{icons:svg('fa:check').raw}</span>
+  </span>
+</button>
+{/extraControlsSlot}
+{#content}console.log('Hello world');{/content}
+{/include}

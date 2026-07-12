@@ -1,0 +1,11 @@
+<div style="height: 300px">
+  {#include components/data-display/code-editor id="ce-full-height" language="HTML" copyButton=true downloadButton=true uploadButton=true headerMain="Header main content" shortcuts=true modifiers="pf-m-full-height"}
+  {#shortcutsSlot}
+  <button class="pf-v6-c-button pf-m-link" type="button">
+    <span class="pf-v6-c-button__icon pf-m-start">{icons:svg('fa:circle-question').raw}</span>
+    <span class="pf-v6-c-button__text">View shortcuts</span>
+  </button>
+  {/shortcutsSlot}
+  {#content}code goes here{/content}
+  {/include}
+</div>
