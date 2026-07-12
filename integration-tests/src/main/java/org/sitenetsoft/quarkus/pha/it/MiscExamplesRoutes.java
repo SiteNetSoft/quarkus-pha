@@ -85,9 +85,11 @@ public class MiscExamplesRoutes {
                                                "icons-on-terms"));
         m.put("skip-to-content",       Set.of("basic", "custom-text"));
         m.put("empty-state",           Set.of("basic", "extra-small", "small", "large", "extra-large", "success", "spinner", "no-match", "no-icon", "with-actions"));
-        m.put("pagination",            Set.of("basic", "top", "bottom", "compact", "indeterminate", "disabled",
-                                               "no-items", "one-page", "offset", "inset", "sticky",
-                                               "dynamic-sticky"));
+        m.put("pagination",            Set.of("top", "sticky", "indeterminate", "bottom", "bottom-plain",
+                                               "bottom-sticky", "sticky-base-stuck", "bottom-sticky-base-stuck",
+                                               "bottom-static", "disabled", "compact", "display-summary",
+                                               "display-full", "display-responsive", "compact-display-full",
+                                               "inset", "no-items", "one-page", "offset", "dynamic-sticky"));
         m.put("code-block",            Set.of("basic", "with-copy"));
         m.put("progress-stepper",      Set.of("horizontal", "vertical", "vertical-responsive", "compact",
                                                "compact-vertical", "compact-vertical-responsive",
