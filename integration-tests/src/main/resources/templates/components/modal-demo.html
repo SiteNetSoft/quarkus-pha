@@ -162,6 +162,89 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#custom-focus" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Custom focus</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#without-title" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Without title</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#generic-container" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Generic container</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#custom-alert" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Custom alert</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#info-alert" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Info alert</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#success-alert" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Success alert</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#warning-alert" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Warning alert</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#danger-alert" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Danger alert</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#danger-alert-title" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Danger alert with title modifier</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -278,7 +361,51 @@
                         <code class="ws-code">form</code> attribute and stays disabled until valid. For wizards in
                         modals see the Wizard page.
                       </p>
-                      {/description} {#content}{#include components/modal/with-form /}{/content} {/include}
+                      {/description} {#content}{#include components/modal/with-form /}{/content} {/include} {#include
+                      partials/example-card title="Custom focus" slug="custom-focus" component="modal"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Opening the modal focuses the Confirm button instead of the first focusable element.
+                      </p>
+                      {/description} {#content}{#include components/modal/custom-focus /}{/content} {/include} {#include
+                      partials/example-card title="Without title" slug="without-title" component="modal"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        No title element — the modal box carries <code class="ws-code">aria-label</code> instead.
+                      </p>
+                      {/description} {#content}{#include components/modal/without-title /}{/content} {/include}
+                      {#include partials/example-card title="Generic container" slug="generic-container"
+                      component="modal"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A bare modal box with no children — a padding-free container (wizard-in-a-modal use case).
+                        Escape closes it.
+                      </p>
+                      {/description} {#content}{#include components/modal/generic-container /}{/content} {/include}
+                      {#include partials/example-card title="Custom alert" slug="custom-alert" component="modal"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">pf-m-custom</code> — the neutral alert state with a bell title icon and a
+                        screen-reader alert prefix.
+                      </p>
+                      {/description} {#content}{#include components/modal/custom-alert /}{/content} {/include} {#include
+                      partials/example-card title="Info alert" slug="info-alert" component="modal"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p"><code class="ws-code">pf-m-info</code>.</p>
+                      {/description} {#content}{#include components/modal/info-alert /}{/content} {/include} {#include
+                      partials/example-card title="Success alert" slug="success-alert" component="modal"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p"><code class="ws-code">pf-m-success</code>.</p>
+                      {/description} {#content}{#include components/modal/success-alert /}{/content} {/include}
+                      {#include partials/example-card title="Warning alert" slug="warning-alert" component="modal"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p"><code class="ws-code">pf-m-warning</code>.</p>
+                      {/description} {#content}{#include components/modal/warning-alert /}{/content} {/include}
+                      {#include partials/example-card title="Danger alert" slug="danger-alert" component="modal"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p"><code class="ws-code">pf-m-danger</code>.</p>
+                      {/description} {#content}{#include components/modal/danger-alert /}{/content} {/include} {#include
+                      partials/example-card title="Danger alert with title modifier" slug="danger-alert-title"
+                      component="modal"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The status class sits on the title element instead of the modal box.
+                      </p>
+                      {/description} {#content}{#include components/modal/danger-alert-title /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

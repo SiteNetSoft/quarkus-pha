@@ -142,7 +142,10 @@ public class MiscExamplesRoutes {
                                                "action-group-inline", "label-group", "custom-label-group-content"));
         m.put("modal",                 Set.of("basic", "scrollable", "with-description", "top-aligned", "sizes",
                                                "custom-width", "custom-header", "no-header-footer", "title-icon",
-                                               "custom-title-icon", "with-dropdown", "with-help", "with-form"));
+                                               "custom-title-icon", "with-dropdown", "with-help", "with-form",
+                                               "without-title", "generic-container", "custom-alert", "info-alert",
+                                               "success-alert", "warning-alert", "danger-alert",
+                                               "danger-alert-title", "custom-focus"));
         m.put("multiple-file-upload",  Set.of("basic", "horizontal", "status", "status-expanded",
                                                "horizontal-status-expanded"));
         m.put("date-picker",           Set.of("basic", "required", "american-format", "helper-text", "min-max",

@@ -1,0 +1,22 @@
+{! Opening the modal moves initial focus to a chosen element — the Confirm button here
+   (PF React's elementToFocus). !}
+<div x-data="{ open: false }" x-effect="if (open) $nextTick(() => $refs.confirmBtn?.focus())">
+  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = true">
+    <span class="pf-v6-c-button__text">Open custom-focus modal</span>
+  </button>
+  {#include components/feedback/modal id="mo-custom-focus" size="md"}
+  {#include components/feedback/modal-close /}
+  {#include components/feedback/modal-header headingLevel="h2"}Custom focus{/include}
+  {#include components/feedback/modal-body}<p>
+    When this modal opens, focus lands on the Confirm button instead of the first focusable element.
+  </p>{/include}
+  {#include components/feedback/modal-footer}
+  <button class="pf-v6-c-button pf-m-primary" type="button" x-ref="confirmBtn" @click="open = false">
+    <span class="pf-v6-c-button__text">Confirm</span>
+  </button>
+  <button class="pf-v6-c-button pf-m-link" type="button" @click="open = false">
+    <span class="pf-v6-c-button__text">Cancel</span>
+  </button>
+  {/include}
+  {/include}
+</div>

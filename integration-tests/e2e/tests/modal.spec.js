@@ -14,6 +14,15 @@ const EXAMPLES = [
   "with-dropdown",
   "with-help",
   "with-form",
+  "custom-focus",
+  "without-title",
+  "generic-container",
+  "custom-alert",
+  "info-alert",
+  "success-alert",
+  "warning-alert",
+  "danger-alert",
+  "danger-alert-title",
 ];
 
 // Modals render inline (no portal), so the sticky page header can overlay
@@ -82,7 +91,7 @@ test.describe("Modal", () => {
     test("custom width modal has an inline width", async ({ page }) => {
       const card = page.locator('[data-rendered-href="/components/modal/custom-width"]');
       await card.locator("button").first().click();
-      await expect(page.locator("#mo-custom-width")).toHaveAttribute("style", /width:\s*50%/);
+      await expect(page.locator("#mo-custom-width")).toHaveAttribute("style", /--pf-v6-c-modal-box--Width:\s*50%/);
     });
 
     test("no-header-footer modal has only a body and close", async ({ page }) => {
@@ -100,6 +109,71 @@ test.describe("Modal", () => {
       const modal = page.locator("#mo-title-icon");
       await expect(modal).toHaveClass(/pf-m-warning/);
       await expect(modal.locator(".pf-v6-c-modal-box__title-icon")).toBeVisible();
+    });
+  });
+
+  test.describe("Custom focus", () => {
+    test("opening the modal focuses the Confirm button", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/modal/custom-focus"]');
+      await card.locator("button").first().click();
+      const modal = page.locator("#mo-custom-focus");
+      await expect(modal).toBeVisible();
+      await expect(modal.locator("footer button", { hasText: "Confirm" })).toBeFocused();
+    });
+  });
+
+  test.describe("Without title / generic container", () => {
+    test("without-title modal is labelled via aria-label and keeps a footer", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/modal/without-title"]');
+      await card.locator("button").first().click();
+      const modal = page.locator("#mo-without-title");
+      await expect(modal).toBeVisible();
+      await expect(modal).toHaveAttribute("aria-label", "Example of a modal without a title");
+      await expect(modal.locator(".pf-v6-c-modal-box__header")).toHaveCount(0);
+      await expect(modal.locator(".pf-v6-c-modal-box__footer")).toBeVisible();
+    });
+
+    test("generic container is a bare modal box that Escape closes", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/modal/generic-container"]');
+      await card.locator("button").first().click();
+      const modal = page.locator("#mo-generic-container");
+      await expect(modal).toBeVisible();
+      await expect(modal).toHaveAttribute("aria-label", "Generic modal container");
+      for (const part of ["__header", "__body", "__footer", "__close"]) {
+        await expect(modal.locator(`.pf-v6-c-modal-box${part}`)).toHaveCount(0);
+      }
+      await page.keyboard.press("Escape");
+      await expect(modal).not.toBeVisible();
+    });
+  });
+
+  test.describe("Alert variants", () => {
+    for (const [slug, cls, srPrefix] of [
+      ["custom-alert", "pf-m-custom", "Default alert:"],
+      ["info-alert", "pf-m-info", "Info alert:"],
+      ["success-alert", "pf-m-success", "Success alert:"],
+      ["warning-alert", "pf-m-warning", "Warning alert:"],
+      ["danger-alert", "pf-m-danger", "Danger alert:"],
+    ]) {
+      test(`${slug} carries ${cls}, an icon title, and a screen-reader prefix`, async ({ page }) => {
+        const card = page.locator(`[data-rendered-href="/components/modal/${slug}"]`);
+        await card.locator("button").first().click();
+        const modal = page.locator(`#mo-${slug}`);
+        await expect(modal).toHaveClass(new RegExp(cls));
+        const title = modal.locator(".pf-v6-c-modal-box__title");
+        await expect(title).toHaveClass(/pf-m-icon/);
+        await expect(title.locator(".pf-v6-c-modal-box__title-icon")).toBeVisible();
+        await expect(title.locator(".pf-v6-screen-reader")).toHaveText(srPrefix);
+      });
+    }
+
+    test("danger-alert-title puts the status class on the title, not the box", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/modal/danger-alert-title"]');
+      await card.locator("button").first().click();
+      const modal = page.locator("#mo-danger-status-title");
+      await expect(modal).toBeVisible();
+      await expect(modal).not.toHaveClass(/pf-m-danger/);
+      await expect(modal.locator(".pf-v6-c-modal-box__title")).toHaveClass(/pf-m-danger/);
     });
   });
 
