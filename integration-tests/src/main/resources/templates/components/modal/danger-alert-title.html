@@ -1,0 +1,22 @@
+{! Status modifier on the TITLE element instead of the modal box (core's HasStatusTitle). !}
+<div x-data="{ open: false }">
+  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = true">
+    <span class="pf-v6-c-button__text">Open danger alert modal (title modifier)</span>
+  </button>
+  {#include components/feedback/modal id="mo-danger-status-title" size="md" variant="danger" statusTitle=true}
+  {#include components/feedback/modal-close /}
+  {#include components/feedback/modal-header headingLevel="h2" alert=true}danger alert modal{/include}
+  {#include components/feedback/modal-body}<p>
+    Here <code class="ws-code">pf-m-danger</code> sits on the title element instead of the modal box — the box carries
+    no status class.
+  </p>{/include}
+  {#include components/feedback/modal-footer}
+  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = false">
+    <span class="pf-v6-c-button__text">Confirm</span>
+  </button>
+  <button class="pf-v6-c-button pf-m-link" type="button" @click="open = false">
+    <span class="pf-v6-c-button__text">Cancel</span>
+  </button>
+  {/include}
+  {/include}
+</div>

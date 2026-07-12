@@ -4,9 +4,12 @@
               {id}-title for aria-labelledby. !}
 {! Optional params:
      size       — sm | md | lg (pf-m-*).
-     variant    — danger | warning | success | info (pf-m-* + colored title icon in modal-header).
+     variant    — danger | warning | success | info | custom (pf-m-* + colored title icon
+                  in modal-header; "custom" renders PF's bell icon).
+     statusTitle — boolean; moves the variant's status class from the modal box to the
+                  title element (core's HasStatusTitle).
      alignTop   — pf-m-align-top.
-     width      — inline width (e.g. "50%") instead of a size.
+     width      — custom width (e.g. "50%") via PF's --pf-v6-c-modal-box--Width var.
      ariaLabel  — label the dialog directly (use for headerless modals).
      eventOpen  — self-contained mode: the backdrop owns x-data open state, opens on the
                   open-modal window event (detail = id), closes on Escape, and traps focus.
@@ -23,12 +26,12 @@
 >
   <div class="pf-v6-l-bullseye">
     <div
-      class="pf-v6-c-modal-box{#if size??} pf-m-{size}{/if}{#if variant??} pf-m-{variant}{/if}{#if alignTop??} pf-m-align-top{/if}"
+      class="pf-v6-c-modal-box{#if size??} pf-m-{size}{/if}{#if variant?? && !statusTitle??} pf-m-{variant}{/if}{#if alignTop??} pf-m-align-top{/if}"
       id="{id}"
       role="dialog"
       aria-modal="true"
       {#if ariaLabel??}aria-label="{ariaLabel}"{#else}aria-labelledby="{id}-title"{/if}
-      {#if width??}style="width: {width}"{/if}
+      {#if width??}style="--pf-v6-c-modal-box--Width: {width}"{/if}
       {#if attrs??}{attrs.raw}{/if}
     >
       {! Re-expose id as modalId for the family's internal wiring, then shadow id/attrs so

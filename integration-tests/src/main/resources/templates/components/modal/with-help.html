@@ -4,7 +4,7 @@
   {#include components/feedback/modal-close /}
   {#include components/feedback/modal-header headingLevel="h2" hasModalHelp=true}With help
   {#modalHelp}
-  <div style="position: relative">
+  <div class="pf-v6-c-modal-box__header-help" style="position: relative">
     <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Help" :aria-expanded="help.toString()" @click="help = !help">
       <span class="pf-v6-c-button__icon">{icons:svg('fa:circle-question').raw}</span>
     </button>
