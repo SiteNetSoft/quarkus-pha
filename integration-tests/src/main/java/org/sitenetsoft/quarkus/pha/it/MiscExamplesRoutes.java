@@ -38,7 +38,8 @@ public class MiscExamplesRoutes {
                                                "large-icons", "long-subtext", "single-selection",
                                                "multiple-selection"));
         m.put("truncate",              Set.of("end", "start", "middle", "custom-tooltip-position", "max-chars", "with-links"));
-        m.put("tooltip",               Set.of("basic", "positions", "on-icon", "long-content"));
+        m.put("tooltip",               Set.of("basic", "positions", "diagonal-positions", "on-icon",
+                                              "long-content", "left-aligned", "dynamic-content"));
         m.put("switch",                Set.of("basic", "checked", "disabled", "reversed", "without-label"));
         m.put("toggle-group",          Set.of("single-select", "multi-select", "with-icons", "text-and-icons", "compact", "full-width"));
         m.put("slider",                Set.of("basic", "continuous", "value-input", "actions", "custom-range", "disabled"));

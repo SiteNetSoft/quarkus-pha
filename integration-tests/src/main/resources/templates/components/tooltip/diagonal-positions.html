@@ -1,0 +1,12 @@
+{! The 8 diagonal modifiers — the bubble's edge aligns with the trigger's matching edge
+   (popper's -start/-end) and PF moves the arrow to the matching corner. !}
+<div style="display: flex; gap: 3.5rem; flex-wrap: wrap; justify-content: center; padding: 5.5rem 3.5rem">
+  {#include components/feedback/tooltip id="tt-top-left" position="top-left"}{#trigger}{#include components/actions/button variant="secondary"}{#content}Top left{/content}{/include}{/trigger}{#tip}Top left tooltip{/tip}{/include}
+  {#include components/feedback/tooltip id="tt-top-right" position="top-right"}{#trigger}{#include components/actions/button variant="secondary"}{#content}Top right{/content}{/include}{/trigger}{#tip}Top right tooltip{/tip}{/include}
+  {#include components/feedback/tooltip id="tt-bottom-left" position="bottom-left"}{#trigger}{#include components/actions/button variant="secondary"}{#content}Bottom left{/content}{/include}{/trigger}{#tip}Bottom left tooltip{/tip}{/include}
+  {#include components/feedback/tooltip id="tt-bottom-right" position="bottom-right"}{#trigger}{#include components/actions/button variant="secondary"}{#content}Bottom right{/content}{/include}{/trigger}{#tip}Bottom right tooltip{/tip}{/include}
+  {#include components/feedback/tooltip id="tt-left-top" position="left-top"}{#trigger}{#include components/actions/button variant="secondary"}{#content}Left top{/content}{/include}{/trigger}{#tip}Left top tooltip{/tip}{/include}
+  {#include components/feedback/tooltip id="tt-left-bottom" position="left-bottom"}{#trigger}{#include components/actions/button variant="secondary"}{#content}Left bottom{/content}{/include}{/trigger}{#tip}Left bottom tooltip{/tip}{/include}
+  {#include components/feedback/tooltip id="tt-right-top" position="right-top"}{#trigger}{#include components/actions/button variant="secondary"}{#content}Right top{/content}{/include}{/trigger}{#tip}Right top tooltip{/tip}{/include}
+  {#include components/feedback/tooltip id="tt-right-bottom" position="right-bottom"}{#trigger}{#include components/actions/button variant="secondary"}{#content}Right bottom{/content}{/include}{/trigger}{#tip}Right bottom tooltip{/tip}{/include}
+</div>

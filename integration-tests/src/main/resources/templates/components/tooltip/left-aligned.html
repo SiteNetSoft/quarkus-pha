@@ -1,0 +1,8 @@
+{! textAlignLeft=true adds pf-m-text-align-left to the content — PF centers tooltip text
+   by default, which reads poorly once it wraps onto several lines. !}
+<div style="padding: 5.5rem 3.5rem; text-align: center">
+  {#include components/feedback/tooltip id="tt-left-aligned" position="top" textAlignLeft=true}
+  {#trigger}{#include components/actions/button variant="secondary"}{#content}Left aligned text{/content}{/include}{/trigger}
+  {#tip}This tooltip wraps onto several lines because it carries a lot of text, and pf-m-text-align-left keeps every line ragged-right instead of centered.{/tip}
+  {/include}
+</div>

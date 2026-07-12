@@ -3,14 +3,20 @@
    page content. Requires /web/js/alpine/components/tooltip.js and
    /web/css/components/tooltip.css on the host page. !}
 {! Optional: id — DOM id on the tip; the trigger references it via aria-describedby.
-              position (top | bottom | left | right — default top). !}
+              position (top | bottom | left | right — default top; also the 8 diagonal
+                        variants top-left, top-right, bottom-left, bottom-right,
+                        left-top, left-bottom, right-top, right-bottom — the bubble's
+                        edge aligns with the trigger's matching edge).
+              textAlignLeft — pf-m-text-align-left on the content (multi-line tips).
+              ariaLive (off | polite) — aria-live on the tip; use polite when the tip's
+                        content changes while open (dynamic-content pattern). !}
 {! Slots: {#trigger} — the hover/focus target (button, icon button, link).
           {#tip} — the tooltip text. !}
 <div class="pha-tooltip" x-data="phaTooltip()">
   <span x-ref="trigger" @mouseenter="show()" @mouseleave="hide()" @focusin="show()" @focusout="hide()"{#if id??} aria-describedby="{id}"{/if}>{! Shadow id/attrs so they don't leak into composed
       buttons via Qute include-data inheritance — explicit values on the button still win. !}{#let id=null attrs=null}{#insert trigger}{/insert}{/let}</span>
-  <div x-ref="tip" x-show="open" x-cloak role="tooltip"{#if id??} id="{id}"{/if} class="pf-v6-c-tooltip pf-m-{#if position??}{position}{#else}top{/if}">
+  <div x-ref="tip" x-show="open" x-cloak role="tooltip"{#if id??} id="{id}"{/if}{#if ariaLive??} aria-live="{ariaLive}"{/if} class="pf-v6-c-tooltip pf-m-{#if position??}{position}{#else}top{/if}">
     <div class="pf-v6-c-tooltip__arrow"></div>
-    <div class="pf-v6-c-tooltip__content">{#insert tip}{/insert}</div>
+    <div class="pf-v6-c-tooltip__content{#if textAlignLeft??} pf-m-text-align-left{/if}">{#insert tip}{/insert}</div>
   </div>
 </div>
