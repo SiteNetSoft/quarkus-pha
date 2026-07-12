@@ -1,0 +1,19 @@
+{! React's "On icon with dynamic content": the tip text swaps while the tooltip is open
+   and aria-live="polite" announces the change to AT. The copied flag lives on a wrapper
+   x-data so both the trigger button and the tip content can reach it (Alpine scope chain
+   crosses the phaTooltip component). !}
+<div style="padding: 3.5rem; text-align: center" x-data="{ copied: false }">
+  {#include components/feedback/tooltip id="tt-dynamic" position="top" ariaLive="polite"}
+  {#trigger}
+  <button
+    class="pf-v6-c-button pf-m-plain"
+    type="button"
+    aria-label="Copy to clipboard"
+    @click="navigator.clipboard.writeText('PatternFly').catch(() => {}); copied = true; setTimeout(() => copied = false, 2000)"
+  >
+    <span class="pf-v6-c-button__icon">{icons:svg('fa:copy').raw}</span>
+  </button>
+  {/trigger}
+  {#tip}<span x-show="!copied">Copy to clipboard</span><span x-show="copied" x-cloak>Successfully copied to clipboard!</span>{/tip}
+  {/include}
+</div>

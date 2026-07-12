@@ -70,6 +70,15 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#diagonal-positions" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Diagonal positions</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#on-icon" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">On icon</span></span
@@ -82,6 +91,24 @@
                                   ><a href="#long-content" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">Long content</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#left-aligned" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Left aligned text</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#dynamic-content" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Dynamic content</span></span
                                     ></a
                                   ></span
                                 >
@@ -148,7 +175,16 @@
                         surrounding content.
                       </p>
                       {/description} {#content}{#include components/tooltip/positions /}{/content} {/include} {#include
-                      partials/example-card title="On icon" slug="on-icon" component="tooltip"} {#description}
+                      partials/example-card title="Diagonal positions" slug="diagonal-positions" component="tooltip"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The eight diagonal modifiers — <code class="ws-code">top-left</code>,
+                        <code class="ws-code">bottom-right</code>, <code class="ws-code">left-top</code>, etc. The
+                        bubble's edge aligns with the trigger's matching edge instead of centering on it, and PatternFly
+                        moves the arrow to the matching corner.
+                      </p>
+                      {/description} {#content}{#include components/tooltip/diagonal-positions /}{/content} {/include}
+                      {#include partials/example-card title="On icon" slug="on-icon" component="tooltip"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Tooltips commonly hang off a plain icon button. Give the button an
                         <code class="ws-code">aria-label</code> so assistive tech still announces it.
@@ -160,6 +196,22 @@
                         onto multiple lines instead of stretching across the page.
                       </p>
                       {/description} {#content}{#include components/tooltip/long-content /}{/content} {/include}
+                      {#include partials/example-card title="Left aligned text" slug="left-aligned" component="tooltip"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">textAlignLeft=true</code> adds
+                        <code class="ws-code">pf-m-text-align-left</code> to the content — PatternFly centers tooltip
+                        text by default, which reads poorly once it wraps onto several lines.
+                      </p>
+                      {/description} {#content}{#include components/tooltip/left-aligned /}{/content} {/include}
+                      {#include partials/example-card title="Dynamic content" slug="dynamic-content"
+                      component="tooltip"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Click the copy button while the tooltip is open — the tip text swaps to a success message for
+                        2s. <code class="ws-code">ariaLive="polite"</code> makes assistive tech announce the change
+                        (PatternFly React's "on icon with dynamic content" pattern).
+                      </p>
+                      {/description} {#content}{#include components/tooltip/dynamic-content /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
@@ -230,13 +282,42 @@
                               </td>
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  ><code class="ws-code">top | bottom | left | right</code></span
+                                  ><code class="ws-code">top | bottom | left | right</code> + 8 diagonals</span
                                 >
                               </td>
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
-                                  >Side of the trigger the bubble sits on. Default
-                                  <code class="ws-code">top</code>.</span
+                                  >Side of the trigger the bubble sits on. Default <code class="ws-code">top</code>.
+                                  Diagonal variants (<code class="ws-code">top-left</code>,
+                                  <code class="ws-code">left-top</code>, …) align the bubble's edge with the trigger's
+                                  matching edge instead of centering.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">textAlignLeft</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Adds <code class="ws-code">pf-m-text-align-left</code> to the content — use for
+                                  multi-line tips.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">ariaLive</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">off | polite</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  ><code class="ws-code">aria-live</code> on the tip. Use
+                                  <code class="ws-code">polite</code> when the tip's content changes while open, so
+                                  assistive tech announces the change.</span
                                 >
                               </td>
                             </tr>
