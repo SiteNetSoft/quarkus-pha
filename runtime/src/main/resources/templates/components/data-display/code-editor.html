@@ -1,12 +1,36 @@
 {! Code editor — PatternFly v6 !}
 {! Optional: id — DOM id on the root; omit unless something else references the editor.
               language (optional — tab text), readonly (optional),
-              copyButton (optional), downloadButton (optional), uploadButton (optional) !}
-{! Content: pass code text via {#content}...{/content} block !}
-<div class="pf-v6-c-code-editor{#if readonly??} pf-m-read-only{/if}"{#if id??} id="{id}"{/if}{#if copyButton??} x-data="{ copied: false }"{/if}>
+              modifiers (optional — extra classes on the root, e.g. pf-m-full-height),
+              copyButton (optional), downloadButton (optional), uploadButton (optional),
+              headerMain (optional — text rendered in __header-main),
+              shortcuts (optional — set true and fill the {#shortcutsSlot} slot to render
+                         the __keyboard-shortcuts area, e.g. a "View shortcuts" link button),
+              extraControls (optional — set true and fill the {#extraControlsSlot} slot to
+                             append custom control buttons after the built-in ones),
+              container (optional — wraps header+main in __container, the role="presentation"
+                         wrapper PatternFly React uses to scope upload/empty-state events),
+              upload (optional — the content slot renders inside an __upload border instead
+                      of the __code/__code-pre viewer; pair with an empty state),
+              dragDrop (optional — live drag-and-drop wiring: dragging a file over the editor
+                        applies pf-m-drag-hover to __main; dropping a file (or picking one via
+                        an element that sets the Alpine `code`/`loaded` state, e.g. the demo's
+                        Browse input) swaps the __upload area for a live __code view) !}
+{! Content: pass code text via {#content}...{/content} block (with upload=true it holds the
+   empty state instead) !}
+<div class="pf-v6-c-code-editor{#if readonly??} pf-m-read-only{/if}{#if modifiers??} {modifiers}{/if}"{#if id??} id="{id}"{/if}{#if dragDrop??}
+     x-data="{ copied: false, dragHover: false, loaded: false, code: '' }"
+     @dragenter.prevent="dragHover = true"
+     @dragover.prevent="dragHover = true"
+     @dragleave="if (!$el.contains($event.relatedTarget)) dragHover = false"
+     @drop.prevent="dragHover = false; $event.dataTransfer && $event.dataTransfer.files[0] && $event.dataTransfer.files[0].text().then((t) => { code = t; loaded = true })"{#else if copyButton??} x-data="{ copied: false }"{/if}>
+  {#if container??}
+  <div role="presentation" tabindex="0" class="pf-v6-c-code-editor__container">
+  {/if}
   <div class="pf-v6-c-code-editor__header">
-    {#if copyButton?? || downloadButton?? || uploadButton??}
+    {#if copyButton?? || downloadButton?? || uploadButton?? || extraControls?? || headerMain?? || shortcuts??}
     <div class="pf-v6-c-code-editor__header-content">
+      {#if copyButton?? || downloadButton?? || uploadButton?? || extraControls??}
       <div class="pf-v6-c-code-editor__controls">
         {#if copyButton??}
         <button class="pf-v6-c-button pf-m-plain" type="button"
@@ -31,8 +55,13 @@
           </span>
         </button>
         {/if}
+        {#if extraControls??}{#insert extraControlsSlot}{/insert}{/if}
       </div>
-      <div class="pf-v6-c-code-editor__header-main"></div>
+      {/if}
+      <div class="pf-v6-c-code-editor__header-main">{#if headerMain??}{headerMain}{/if}</div>
+      {#if shortcuts??}
+      <div class="pf-v6-c-code-editor__keyboard-shortcuts">{#insert shortcutsSlot}{/insert}</div>
+      {/if}
     </div>
     {/if}
     {#if language??}
@@ -44,9 +73,23 @@
     </div>
     {/if}
   </div>
-  <div class="pf-v6-c-code-editor__main">
+  <div class="pf-v6-c-code-editor__main"{#if dragDrop??} :class="dragHover ? 'pf-m-drag-hover' : ''"{/if}>
+    {#if upload??}
+    <div class="pf-v6-c-code-editor__upload"{#if dragDrop??} x-show="!loaded"{/if}>
+      {#insert content}{/insert}
+    </div>
+    {#if dragDrop??}
+    <div dir="ltr" class="pf-v6-c-code-editor__code" x-show="loaded" x-cloak>
+      <pre class="pf-v6-c-code-editor__code-pre" x-text="code"></pre>
+    </div>
+    {/if}
+    {#else}
     <div dir="ltr" class="pf-v6-c-code-editor__code">
       <pre class="pf-v6-c-code-editor__code-pre">{#insert content}{/insert}</pre>
     </div>
+    {/if}
   </div>
+  {#if container??}
+  </div>
+  {/if}
 </div>

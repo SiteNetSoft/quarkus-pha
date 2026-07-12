@@ -1,0 +1,24 @@
+{! Shared upload empty state (core "Without actions" / "With optional code editor container"
+   body) — composes feedback/empty-state with a LIVE Browse button (hidden file input) and
+   Start-from-scratch link. Both write the code-editor's dragDrop Alpine state (code/loaded),
+   so picking or dropping a file swaps the empty state for the code view. !}
+{#include components/feedback/empty-state _isolated=true iconName="fa:code" titleText="Start editing" bodyText="Drag a file here or browse to upload." hasActions=true}
+{#actions}
+<div class="pf-v6-c-empty-state__actions">
+  <button class="pf-v6-c-button pf-m-primary" type="button" @click="$refs.ceBrowse.click()">
+    <span class="pf-v6-c-button__text">Browse</span>
+  </button>
+</div>
+<div class="pf-v6-c-empty-state__actions">
+  <button class="pf-v6-c-button pf-m-link" type="button" @click="loaded = true">
+    <span class="pf-v6-c-button__text">Start from scratch</span>
+  </button>
+</div>
+<input
+  type="file"
+  hidden
+  x-ref="ceBrowse"
+  @change="$event.target.files[0] && $event.target.files[0].text().then((t) => { code = t; loaded = true })"
+/>
+{/actions}
+{/include}

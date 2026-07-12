@@ -76,7 +76,54 @@
                                 <span class="pf-v6-c-jump-links__link"
                                   ><a href="#minimal" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Minimal</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text">Without language tab</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#upload" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Upload</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#header-content" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Header content and shortcuts</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#container" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Container</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#full-height" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Full height</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#custom-control" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Custom control</span></span
                                     ></a
                                   ></span
                                 >
@@ -142,17 +189,64 @@
                       {#include partials/example-card title="Without actions" slug="without-actions"
                       component="code-editor"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Language tab only — no header controls. Use when the code is purely illustrative.
+                        Language tab only — no header controls. Use when the code is purely illustrative. (PF core's
+                        "Without actions" doc example pairs this header with an upload empty state — that body is
+                        covered by the Upload example below.)
                       </p>
                       {/description} {#content}{#include components/code-editor/without-actions /}{/content} {/include}
-                      {#include partials/example-card title="Minimal" slug="minimal" component="code-editor"}
-                      {#description}
+                      {#include partials/example-card title="Without language tab" slug="minimal"
+                      component="code-editor"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         No header, no language tab. The wrapper falls back to a bare
                         <code class="ws-code">pf-v6-c-code-editor</code> with just the
                         <code class="ws-code">&lt;pre&gt;</code> inside.
                       </p>
                       {/description} {#content}{#include components/code-editor/minimal /}{/content} {/include}
+                      {#include partials/example-card title="Upload" slug="upload" component="code-editor"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">upload=true</code> renders the content slot inside an
+                        <code class="ws-code">__upload</code> border — pair it with an empty state.
+                        <code class="ws-code">dragDrop=true</code> makes it live: drag a file over the editor to see
+                        <code class="ws-code">pf-m-drag-hover</code> (PF's "Drag file and hover" example), then drop it
+                        — or Browse, or start from scratch — to swap in a code view with the file's text.
+                      </p>
+                      {/description} {#content}{#include components/code-editor/upload /}{/content} {/include} {#include
+                      partials/example-card title="Header content and shortcuts" slug="header-content"
+                      component="code-editor"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">headerMain</code> puts text in the
+                        <code class="ws-code">__header-main</code> area and the
+                        <code class="ws-code">shortcutsSlot</code> slot fills
+                        <code class="ws-code">__keyboard-shortcuts</code> — here a "View shortcuts" link button. Wire
+                        its <code class="ws-code">@click</code> to your own shortcuts dialog.
+                      </p>
+                      {/description} {#content}{#include components/code-editor/header-content /}{/content} {/include}
+                      {#include partials/example-card title="Container" slug="container" component="code-editor"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">container=true</code> wraps the header and main areas in
+                        <code class="ws-code">__container</code> (<code class="ws-code">role="presentation"</code>,
+                        <code class="ws-code">tabindex="0"</code>) — the wrapper PatternFly React uses to scope
+                        upload/empty-state events. Same live upload behavior as above.
+                      </p>
+                      {/description} {#content}{#include components/code-editor/container /}{/content} {/include}
+                      {#include partials/example-card title="Full height" slug="full-height" component="code-editor"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">modifiers="pf-m-full-height"</code> makes the editor fill its parent —
+                        here a 300px-tall wrapper div.
+                      </p>
+                      {/description} {#content}{#include components/code-editor/full-height /}{/content} {/include}
+                      {#include partials/example-card title="Custom control" slug="custom-control"
+                      component="code-editor"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        <code class="ws-code">extraControls=true</code> +
+                        <code class="ws-code">extraControlsSlot</code> append custom control buttons after the built-in
+                        ones — here an Execute button whose icon flips to a check for 2s on click (Alpine-managed, like
+                        Copy).
+                      </p>
+                      {/description} {#content}{#include components/code-editor/custom-control /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
@@ -257,6 +351,100 @@
                               <td class="pf-v6-c-table__td">
                                 <span class="pf-v6-c-table__text"
                                   >Show upload button. Same caveat as download — bring your own handler.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">modifiers</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Extra classes on the root, e.g. <code class="ws-code">pf-m-full-height</code> (needs
+                                  a sized parent).</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">headerMain</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Text rendered in the <code class="ws-code">__header-main</code> area between the
+                                  controls and the language tab.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">shortcuts</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Set true and fill the <code class="ws-code">shortcutsSlot</code> slot to render the
+                                  <code class="ws-code">__keyboard-shortcuts</code> area (e.g. a "View shortcuts" link
+                                  button).</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">extraControls</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Set true and fill the <code class="ws-code">extraControlsSlot</code> slot to append
+                                  custom control buttons after the built-in ones.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">container</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Wraps header + main in <code class="ws-code">__container</code> (<code
+                                    class="ws-code"
+                                    >role="presentation"</code
+                                  >, <code class="ws-code">tabindex="0"</code>) — PatternFly React's event-scoping
+                                  wrapper for upload/empty-state editors.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">upload</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Renders the <code class="ws-code">content</code> slot inside an
+                                  <code class="ws-code">__upload</code> border instead of the code viewer — pair with an
+                                  empty state.</span
+                                >
+                              </td>
+                            </tr>
+                            <tr class="pf-v6-c-table__tr">
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"><code class="ws-code">dragDrop</code></span>
+                              </td>
+                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+                              <td class="pf-v6-c-table__td">
+                                <span class="pf-v6-c-table__text"
+                                  >Live drag-and-drop wiring: dragging a file over applies
+                                  <code class="ws-code">pf-m-drag-hover</code> to <code class="ws-code">__main</code>;
+                                  dropping a file (or setting the Alpine <code class="ws-code">code</code>/<code
+                                    class="ws-code"
+                                    >loaded</code
+                                  >
+                                  state) swaps the upload area for a live code view.</span
                                 >
                               </td>
                             </tr>

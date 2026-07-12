@@ -29,7 +29,12 @@ public class CodeEditorExamplesRoutes {
         "basic",
         "read-only",
         "without-actions",
-        "minimal"
+        "minimal",
+        "upload",
+        "header-content",
+        "container",
+        "full-height",
+        "custom-control"
     );
 
     @Inject
