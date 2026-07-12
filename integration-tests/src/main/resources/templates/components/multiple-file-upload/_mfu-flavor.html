@@ -1,0 +1,107 @@
+{! Shared multiple-file-upload flavor — canonical PF v6 structure (title + upload + info,
+   optional expandable status list), fully live: pf-m-drag-over applies while a file is
+   dragged over the area, the status section expands/collapses, and close buttons remove
+   status items (the "N files" count follows). Params:
+     id             (required) root DOM id; inner ids derive from it
+     horizontal     pf-m-horizontal
+     status         render the status section with three in-flight uploads
+     startExpanded  status section starts expanded
+   PF core nests DIVs inside the expandable toggle button — invalid HTML (button content
+   must be phrasing); per the tree-table precedent the status-progress bits render as
+   SPANs with the same classes. !}
+<div
+  class="pf-v6-c-multiple-file-upload{#if horizontal??} pf-m-horizontal{/if}"
+  id="{id}"
+  x-data="{
+    dragging: false,
+    open: {#if startExpanded??}true{#else}false{/if},
+    files: [
+      { key: 'png', name: 'filename.png', size: '40 mb', value: 35 },
+      { key: 'doc', name: 'filename.doc', size: '30 mb', value: 70 },
+      { key: 'pdf', name: 'filename.pdf', size: '25 mb', value: 50 }
+    ]
+  }"
+  :class="dragging ? 'pf-m-drag-over' : ''"
+  @dragenter.prevent="dragging = true"
+  @dragover.prevent="dragging = true"
+  @dragleave="if (!$el.contains($event.relatedTarget)) dragging = false"
+  @drop.prevent="dragging = false"
+>
+  <div class="pf-v6-c-multiple-file-upload__main">
+    <div class="pf-v6-c-multiple-file-upload__title">
+      <div class="pf-v6-c-multiple-file-upload__title-icon">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:upload').raw}</span>
+      </div>
+      <div class="pf-v6-c-multiple-file-upload__title-text">Drag and drop files here</div>
+      <div class="pf-v6-c-multiple-file-upload__title-text-separator">or</div>
+    </div>
+    <div class="pf-v6-c-multiple-file-upload__upload">
+      <button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">Upload</span></button>
+    </div>
+    <div class="pf-v6-c-multiple-file-upload__info">Accepted file types: JPEG, Doc, PDF, PNG</div>
+  </div>
+  {#if status??}
+  <div class="pf-v6-c-multiple-file-upload__status">
+    <div class="pf-v6-c-expandable-section" :class="open ? 'pf-m-expanded' : ''">
+      <button
+        class="pf-v6-c-expandable-section__toggle"
+        type="button"
+        :aria-expanded="open"
+        @click="open = !open"
+      >
+        <span class="pf-v6-c-expandable-section__toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+        <span class="pf-v6-c-multiple-file-upload__status-progress">
+          <span class="pf-v6-c-multiple-file-upload__status-progress-icon">{icons:svg('fa:spinner').raw}</span>
+          <span
+            class="pf-v6-c-multiple-file-upload__status-progress-text"
+            x-text="'0 of ' + files.length + ' files uploaded'"
+            >0 of 3 files uploaded</span
+          >
+        </span>
+      </button>
+      <div class="pf-v6-c-expandable-section__content" x-show="open" x-cloak>
+        <ul class="pf-v6-c-multiple-file-upload__status-list" role="list">
+          <template x-for="file in files" :key="file.key">
+            <li class="pf-v6-c-multiple-file-upload__status-item">
+              <div class="pf-v6-c-multiple-file-upload__status-item-icon">{icons:svg('fa:file').raw}</div>
+              <div class="pf-v6-c-multiple-file-upload__status-item-main">
+                <div class="pf-v6-c-progress">
+                  <div class="pf-v6-c-progress__description" :id="'{id}-progress-' + file.key + '-description'">
+                    <span class="pf-v6-c-multiple-file-upload__status-item-progress">
+                      <span class="pf-v6-c-multiple-file-upload__status-item-progress-text" x-text="file.name"></span>
+                      <span class="pf-v6-c-multiple-file-upload__status-item-progress-size" x-text="file.size"></span>
+                    </span>
+                  </div>
+                  <div class="pf-v6-c-progress__status">
+                    <span class="pf-v6-c-progress__measure" x-text="file.value + '%'"></span>
+                  </div>
+                  <div
+                    class="pf-v6-c-progress__bar"
+                    role="progressbar"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    :aria-valuenow="file.value"
+                    :aria-labelledby="'{id}-progress-' + file.key + '-description'"
+                  >
+                    <div class="pf-v6-c-progress__indicator" :style="'width: ' + file.value + '%'"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="pf-v6-c-multiple-file-upload__status-item-close">
+                <button
+                  class="pf-v6-c-button pf-m-plain"
+                  type="button"
+                  aria-label="Remove from list"
+                  @click="files = files.filter(f => f.key !== file.key)"
+                >
+                  <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+                </button>
+              </div>
+            </li>
+          </template>
+        </ul>
+      </div>
+    </div>
+  </div>
+  {/if}
+</div>

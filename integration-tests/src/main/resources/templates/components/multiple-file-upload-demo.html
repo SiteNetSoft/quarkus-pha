@@ -19,9 +19,10 @@
                   <div class="pf-v6-c-content pf-m-editorial">
                     <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Multiple file upload</h1>
                     <p>
-                      A drop zone for batch uploads. Visual scaffolding only — wire a hidden
-                      <code class="ws-code">&lt;input type="file" multiple&gt;</code> and HTML5 drop events to make it
-                      functional.
+                      A drop zone for batch uploads. Dragging a file over any example applies
+                      <code class="ws-code">pf-m-drag-over</code> live, and the status variants expand, collapse, and
+                      remove items with Alpine. Wire a hidden
+                      <code class="ws-code">&lt;input type="file" multiple&gt;</code> to make uploads real.
                     </p>
                   </div>
                 </div>
@@ -58,6 +59,37 @@
                                   ><a href="#horizontal" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">Horizontal</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#status" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">File upload status</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#status-expanded" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >File upload status expanded</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#horizontal-status-expanded" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Horizontal file upload status expanded</span
+                                      ></span
                                     ></a
                                   ></span
                                 >
@@ -113,17 +145,38 @@
                       {#include partials/example-card title="Basic" slug="basic" component="multiple-file-upload"}
                       {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Drop zone with title, sub-title, and an Upload button. Vertical layout.
+                        Drop zone with title, separator, Upload button, and accepted-types info. Drag a file over it —
+                        <code class="ws-code">pf-m-drag-over</code> applies live (covers PF's frozen Drag over
+                        snapshot).
                       </p>
                       {/description} {#content}{#include components/multiple-file-upload/basic /}{/content} {/include}
                       {#include partials/example-card title="Horizontal" slug="horizontal"
                       component="multiple-file-upload"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">horizontal=true</code> — <code class="ws-code">pf-m-horizontal</code> —
-                        title and button side-by-side.
+                        <code class="ws-code">pf-m-horizontal</code> — title and button side-by-side; live drag-over
+                        covers PF's frozen Horizontal drag over snapshot.
                       </p>
                       {/description} {#content}{#include components/multiple-file-upload/horizontal /}{/content}
-                      {/include}
+                      {/include} {#include partials/example-card title="File upload status" slug="status"
+                      component="multiple-file-upload"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Three in-flight uploads behind a collapsed expandable toggle — expand it, and close buttons
+                        remove items with the count following.
+                      </p>
+                      {/description} {#content}{#include components/multiple-file-upload/status /}{/content} {/include}
+                      {#include partials/example-card title="File upload status expanded" slug="status-expanded"
+                      component="multiple-file-upload"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The status section starting expanded — progress bars and removable items visible.
+                      </p>
+                      {/description} {#content}{#include components/multiple-file-upload/status-expanded /}{/content}
+                      {/include} {#include partials/example-card title="Horizontal file upload status expanded"
+                      slug="horizontal-status-expanded" component="multiple-file-upload"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The horizontal variant with the status section starting expanded.
+                      </p>
+                      {/description} {#content}{#include components/multiple-file-upload/horizontal-status-expanded
+                      /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"
