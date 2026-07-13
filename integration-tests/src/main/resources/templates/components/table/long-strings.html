@@ -1,0 +1,30 @@
+{! Long strings in content — no modifiers on purpose: a long string shrinks adjacent columns,
+   which is the failure mode the width and text-control modifiers exist to fix. !}
+{#include components/data-display/table id="tbl-long-strings" ariaLabel="Table with long strings in the content"}
+{#content}
+<thead>
+  <tr>
+    <th scope="col">Repository</th>
+    <th scope="col">Branches</th>
+    <th scope="col">Pull requests</th>
+    <th scope="col">Workspaces</th>
+    <th scope="col">Last commit</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td data-label="Repository">Long lines of text will shrink adjacent column widths.</td>
+    <td data-label="Branches">10</td>
+    <td data-label="Pull requests">25</td>
+    <td data-label="Workspaces">5</td>
+    <td data-label="Last commit">2 days ago</td>
+  </tr>
+  <tr>
+    <td data-label="Repository">This example is not responsive. Adjacent tbody cells will shrink because this text is a longer string while adjacent text is short. Truncation can be overridden on th cells with pf-m-wrap, pf-m-nowrap or pf-m-fit-content.</td>
+    <td data-label="Branches">10</td>
+    <td data-label="Pull requests">25</td>
+    <td data-label="Workspaces">5</td>
+    <td data-label="Last commit">2 days ago</td>
+  </tr>
+</tbody>
+{/content} {/include}

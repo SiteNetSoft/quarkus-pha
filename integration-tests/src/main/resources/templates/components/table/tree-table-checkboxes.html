@@ -1,7 +1,22 @@
-{! Tree table — pf-m-tree-view with role="treegrid". Parent rows carry a toggle in the
-   pf-v6-c-table__tree-view-title-cell; children are indented automatically by their aria-level. Alpine
-   state on the tbody drives expand/collapse. aria-setsize / aria-posinset describe the tree to AT. !}
-<table class="pf-v6-c-table pf-m-tree-view" role="treegrid" id="tbl-tree" aria-label="Tree table of servers">
+{! Tree table with checkboxes — each tree row carries a checkbox in its title cell. Parent
+   checkboxes cascade to children and show indeterminate when only some children are selected
+   (x-effect drives the DOM-only indeterminate property). pf-m-tree-view-grid-lg switches to the
+   grid layout below lg. Note: core's pf-m-tree-view-checkboxes class is not emitted by PF's own
+   examples (param-name bug) and has no CSS in the dist bundle, so it is deliberately absent. !}
+<table
+  class="pf-v6-c-table pf-m-tree-view pf-m-tree-view-grid-lg"
+  role="treegrid"
+  id="tbl-tree-checkboxes"
+  aria-label="Tree table with checkboxes"
+  x-data="{
+    g1: true,
+    g2: false,
+    sel: { web1: false, web2: false, db1: false },
+    setGroup1(on) { this.sel.web1 = on; this.sel.web2 = on; },
+    get g1All() { return this.sel.web1 && this.sel.web2 },
+    get g1Some() { return this.sel.web1 || this.sel.web2 }
+  }"
+>
   <thead>
     <tr>
       <th scope="col">Name</th>
@@ -9,8 +24,7 @@
       <th scope="col">Detail</th>
     </tr>
   </thead>
-  <tbody x-data="{ g1: true, g2: false }">
-    {! Group 1 !}
+  <tbody>
     <tr class="pf-v6-c-table__tr" aria-level="1" aria-setsize="2" aria-posinset="1" :aria-expanded="g1">
       <td class="pf-v6-c-table__tree-view-title-cell">
         <div class="pf-v6-c-table__tree-view-main">
@@ -30,6 +44,15 @@
               </span>
             </button>
           </span>
+          <span class="pf-v6-c-table__td pf-v6-c-table__check">
+            <input
+              type="checkbox"
+              aria-label="Select Application servers and all children"
+              :checked="g1All"
+              x-effect="$el.indeterminate = g1Some && !g1All"
+              @change="setGroup1(!g1All)"
+            />
+          </span>
           <span class="pf-v6-c-table__tree-view-text">Application servers</span>
         </div>
       </td>
@@ -39,6 +62,9 @@
     <tr class="pf-v6-c-table__tr" aria-level="2" aria-setsize="2" aria-posinset="1" x-show="g1" x-cloak>
       <td class="pf-v6-c-table__tree-view-title-cell">
         <div class="pf-v6-c-table__tree-view-main">
+          <span class="pf-v6-c-table__td pf-v6-c-table__check">
+            <input type="checkbox" aria-label="Select web-1" x-model="sel.web1" />
+          </span>
           <span class="pf-v6-c-table__tree-view-text">web-1</span>
         </div>
       </td>
@@ -48,13 +74,15 @@
     <tr class="pf-v6-c-table__tr" aria-level="2" aria-setsize="2" aria-posinset="2" x-show="g1" x-cloak>
       <td class="pf-v6-c-table__tree-view-title-cell">
         <div class="pf-v6-c-table__tree-view-main">
+          <span class="pf-v6-c-table__td pf-v6-c-table__check">
+            <input type="checkbox" aria-label="Select web-2" x-model="sel.web2" />
+          </span>
           <span class="pf-v6-c-table__tree-view-text">web-2</span>
         </div>
       </td>
       <td>Server</td>
       <td>2 vCPU · us-east-1</td>
     </tr>
-    {! Group 2 !}
     <tr class="pf-v6-c-table__tr" aria-level="1" aria-setsize="2" aria-posinset="2" :aria-expanded="g2">
       <td class="pf-v6-c-table__tree-view-title-cell">
         <div class="pf-v6-c-table__tree-view-main">
@@ -74,6 +102,14 @@
               </span>
             </button>
           </span>
+          <span class="pf-v6-c-table__td pf-v6-c-table__check">
+            <input
+              type="checkbox"
+              aria-label="Select Databases and all children"
+              :checked="sel.db1"
+              @change="sel.db1 = !sel.db1"
+            />
+          </span>
           <span class="pf-v6-c-table__tree-view-text">Databases</span>
         </div>
       </td>
@@ -83,6 +119,9 @@
     <tr class="pf-v6-c-table__tr" aria-level="2" aria-setsize="1" aria-posinset="1" x-show="g2" x-cloak>
       <td class="pf-v6-c-table__tree-view-title-cell">
         <div class="pf-v6-c-table__tree-view-main">
+          <span class="pf-v6-c-table__td pf-v6-c-table__check">
+            <input type="checkbox" aria-label="Select db-primary" x-model="sel.db1" />
+          </span>
           <span class="pf-v6-c-table__tree-view-text">db-primary</span>
         </div>
       </td>
