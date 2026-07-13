@@ -101,6 +101,11 @@ ALPINE_HTMX_ATTR_RE='Attribute .(x-[a-z0-9.:-]+|hx-[a-z0-9-]+|sse-[a-z0-9-]+|@[a
 # the iframe origin is fully trusted by us, so the combination is by design.
 COLLABORA_SANDBOX_RE='Setting both .allow-scripts. and .allow-same-origin. is not recommended'
 
+# vnu's bundled CSS checker predates CSS container queries, so it rejects the
+# standard `container-type` / `container-name` properties (Baseline since 2023;
+# PatternFly's own table demos set them inline). Strip only those two.
+VNU_CONTAINER_QUERY_RE='CSS: .container-(type|name).: Property .container-(type|name). doesn.t exist'
+
 path_to_filename() {
   # /components/about-modal -> components__about-modal
   # /                       -> index
@@ -127,7 +132,8 @@ validate_path() {
   # Collabora iframe sandbox warning (both are intentional non-spec choices)
   filtered=$(printf '%s' "$response" \
     | grep -vE "$ALPINE_HTMX_ATTR_RE" \
-    | grep -vE "$COLLABORA_SANDBOX_RE" || true)
+    | grep -vE "$COLLABORA_SANDBOX_RE" \
+    | grep -vE "$VNU_CONTAINER_QUERY_RE" || true)
 
   if [ -z "$filtered" ]; then
     printf '  PASS  %s\n' "$path"
