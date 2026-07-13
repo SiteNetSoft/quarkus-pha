@@ -67,6 +67,16 @@ public class ExtensionsRoutes {
         Map.entry("vertical-tabs",         "Vertical navigation list with nested children. Active state highlights the side bar; child lists indent.")
     );
 
+    /** Example fragments served per catalog-view item. Each maps to a template at
+        templates/extensions/catalog-view/{name}/{example}.html and a card on the demo page.
+        Items not listed here fall back to a single "basic" example. */
+    private static final Map<String, Set<String>> CATALOG_VIEW_EXAMPLES = Map.of();
+
+    /** Examples for a catalog-view item, defaulting to just "basic" when none are declared. */
+    private static Set<String> catalogViewExamples(String name) {
+        return CATALOG_VIEW_EXAMPLES.getOrDefault(name, Set.of("basic"));
+    }
+
     /** The 3 data-view sub-items. */
     private static final Map<String, String> DATA_VIEW_TITLES = Map.ofEntries(
         Map.entry("overview", "Data view overview"),
@@ -380,7 +390,7 @@ public class ExtensionsRoutes {
     @Path("/catalog-view/{name}/source/{example}")
     @Produces(MediaType.TEXT_PLAIN)
     public String catalogViewSource(@PathParam("name") String name, @PathParam("example") String example) {
-        if (!CATALOG_VIEW_TITLES.containsKey(name) || !"basic".equals(example)) {
+        if (!CATALOG_VIEW_TITLES.containsKey(name) || !catalogViewExamples(name).contains(example)) {
             throw new NotFoundException("Unknown catalog-view example: " + name + "/" + example);
         }
         String resourcePath = "/templates/extensions/catalog-view/" + name + "/" + example + ".html";
@@ -398,7 +408,7 @@ public class ExtensionsRoutes {
     @Path("/catalog-view/{name}/{example}")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance catalogViewStandalone(@PathParam("name") String name, @PathParam("example") String example) {
-        if (!CATALOG_VIEW_TITLES.containsKey(name) || !"basic".equals(example)) {
+        if (!CATALOG_VIEW_TITLES.containsKey(name) || !catalogViewExamples(name).contains(example)) {
             throw new NotFoundException("Unknown catalog-view example: " + name + "/" + example);
         }
         Template inner = engine.getTemplate("extensions/catalog-view/" + name + "/" + example);
