@@ -33,11 +33,11 @@ public class LayoutsRoutes {
     /** Allowlist of valid example slugs per layout. */
     private static final Map<String, Set<String>> EXAMPLES = Map.of(
         "bullseye", Set.of("basic", "with-content"),
-        "flex",     Set.of("basic", "direction-column", "with-gap", "justify-content"),
-        "gallery",  Set.of("basic", "with-gutter", "custom-min-width"),
-        "grid",     Set.of("basic", "with-gutter", "spans", "responsive-spans"),
-        "level",    Set.of("basic", "with-gutter"),
-        "split",    Set.of("basic", "with-fill", "with-gutter"),
+        "flex", Set.of("basic", "direction-column", "with-gap", "justify-content", "nested", "nested-with-items", "spacing-parent", "spacing-children", "spacing-parent-children", "row-gap", "column-gap", "default-layout", "inline-flex", "grow", "grow-1", "grow-1-4", "nested-columns", "responsive-direction", "align-right", "align-right-single", "align-right-groups", "align-self-flex-end", "align-self-center", "align-self-baseline", "align-self-stretch", "justify-content-flex-end", "justify-content-space-between", "justify-content-flex-start", "ordering", "ordering-first-last", "ordering-first-last-responsive", "ordering-responsive"),
+        "gallery", Set.of("basic", "with-gutter", "custom-min-width", "max-width", "min-width-responsive", "max-width-responsive", "min-max-width-responsive", "as-list"),
+        "grid", Set.of("basic", "with-gutter", "spans", "responsive-spans", "smart", "smart-overrides", "nested", "offsets", "row-spans", "as-list", "ordering", "ordering-responsive", "ordering-grouped", "ordering-grouped-responsive"),
+        "level", Set.of("basic", "with-gutter", "three-items"),
+        "split", Set.of("basic", "with-fill", "with-gutter", "wrappable"),
         "stack",    Set.of("basic", "with-fill", "with-gutter")
     );
 
