@@ -51,6 +51,8 @@ const EXAMPLES = [
   "tree-table-flat",
   "draggable-rows",
   "footer",
+  "cell-with-image-alignment",
+  "container-query-with-drawer",
 ];
 
 const bg = (locator) => locator.evaluate((el) => getComputedStyle(el).backgroundColor);
@@ -613,6 +615,72 @@ test.describe("Table", () => {
       await expect(t).toHaveAttribute("role", "grid");
       await expect(t.locator(".pf-v6-c-table__toggle")).toHaveCount(0);
       await expect(t.locator("tbody tr")).toHaveCount(4);
+    });
+  });
+
+  test.describe("Cell with image alignment", () => {
+    test("first cell top-aligns a 36px brand icon beside the text block", async ({ page }) => {
+      const t = page.locator("#tbl-image-alignment");
+      await expect(t).toHaveClass(/pf-m-grid-lg/);
+      const icons = t.locator(".table-demo-icon");
+      await expect(icons).toHaveCount(3);
+      const firstFlex = t.locator("tbody tr").first().locator(".pf-v6-l-flex.pf-m-align-self-flex-start");
+      await expect(firstFlex).toBeAttached();
+      const width = await icons.first().evaluate((el) => el.getBoundingClientRect().width);
+      expect(Math.round(width)).toBe(36);
+    });
+
+    test("sort header reorders rows live and flips aria-sort", async ({ page }) => {
+      const t = page.locator("#tbl-image-alignment");
+      const firstTitle = t.locator("tbody tr").first().locator(".pf-v6-c-title");
+      await expect(firstTitle).toHaveText("Repository 1");
+      const repoTh = t.locator("thead th").first();
+      await expect(repoTh).toHaveAttribute("aria-sort", "ascending");
+      await repoTh.locator("button").click();
+      await expect(repoTh).toHaveAttribute("aria-sort", "descending");
+      await expect(t.locator("tbody tr").first().locator(".pf-v6-c-title")).toHaveText("Repository 3");
+    });
+
+    test("column-help button opens and closes its popover", async ({ page }) => {
+      const t = page.locator("#tbl-image-alignment");
+      const help = t.locator(".pf-v6-c-table__column-help-action").first();
+      const popover = help.locator(".pf-v6-c-popover");
+      await expect(popover).toBeHidden();
+      await help.locator("button").click();
+      await expect(popover).toBeVisible();
+      await page.locator("#tbl-image-alignment tbody").click();
+      await expect(popover).toBeHidden();
+    });
+  });
+
+  test.describe("Container query with drawer", () => {
+    test("panel declares the pf-v6-contain-table container and holds a grid-md table", async ({ page }) => {
+      const drawer = page.locator("#tbl-cq-drawer");
+      await expect(drawer).toHaveClass(/pf-m-expanded/);
+      const panel = drawer.locator(".pf-v6-c-drawer__panel");
+      await expect(panel).toHaveAttribute("style", /container-name: pf-v6-contain-table/);
+      await expect(panel.locator("#tbl-cq-panel")).toHaveClass(/pf-m-grid-md/);
+      await expect(drawer.locator("#tbl-cq-main")).toHaveClass(/pf-m-grid-lg/);
+    });
+
+    test("toggle drawer button closes and reopens the panel", async ({ page }) => {
+      const drawer = page.locator("#tbl-cq-drawer");
+      const panel = drawer.locator(".pf-v6-c-drawer__panel");
+      await expect(panel).toBeVisible();
+      await panel.locator(".pf-v6-c-drawer__close button").click();
+      await expect(panel).toBeHidden();
+      await drawer.getByRole("button", { name: "Toggle drawer" }).click();
+      await expect(panel).toBeVisible();
+    });
+
+    test("both sides render the same three repositories with live checkboxes", async ({ page }) => {
+      const drawer = page.locator("#tbl-cq-drawer");
+      for (const id of ["#tbl-cq-main", "#tbl-cq-panel"]) {
+        await expect(drawer.locator(`${id} tbody tr`)).toHaveCount(3);
+        const check = drawer.locator(`${id} tbody .pf-v6-c-table__check input`).first();
+        await check.check();
+        await expect(check).toBeChecked();
+      }
     });
   });
 

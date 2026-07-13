@@ -79,7 +79,9 @@ public class TableExamplesRoutes {
         "tree-table-icons",
         "tree-table-flat",
         "draggable-rows",
-        "footer"
+        "footer",
+        "cell-with-image-alignment",
+        "container-query-with-drawer"
     );
 
     @Inject

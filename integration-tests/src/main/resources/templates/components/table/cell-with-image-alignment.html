@@ -1,0 +1,202 @@
+{! Cell with image alignment — PF table demo. Default cell alignment is baseline, which drifts
+   with images; the first cell aligns a 36px brand icon to the top of the text block with
+   pf-m-align-self-flex-start + pf-v6-u-mt-sm inside a nowrap flex. Sort headers are live
+   (Alpine reorders rows by column text); the column-help buttons open small popovers instead
+   of PF's static snapshot. Icon box sized inline (icons render at 1em). !}
+<table
+  class="pf-v6-c-table pf-m-grid-lg"
+  role="grid"
+  id="tbl-image-alignment"
+  aria-label="This is an example of how to control image and text alignment in table cells."
+  x-data="{
+    sortCol: 0,
+    sortDir: 'ascending',
+    sortBy(col) {
+      this.sortDir = this.sortCol === col && this.sortDir === 'ascending' ? 'descending' : 'ascending';
+      this.sortCol = col;
+      const rows = Array.from(this.$refs.body.children);
+      rows.sort((a, b) =>
+        a.children[col].innerText.trim().localeCompare(b.children[col].innerText.trim(), undefined, { numeric: true })
+      );
+      if (this.sortDir === 'descending') rows.reverse();
+      rows.forEach((r) => this.$refs.body.appendChild(r));
+    }
+  }"
+>
+  <thead class="pf-v6-c-table__thead">
+    <tr class="pf-v6-c-table__tr">
+      <th
+        scope="col"
+        class="pf-v6-c-table__th pf-v6-c-table__sort pf-m-nowrap pf-m-fit-content"
+        :class="sortCol === 0 ? 'pf-m-selected' : ''"
+        :aria-sort="sortCol === 0 ? sortDir : 'none'"
+      >
+        <button type="button" class="pf-v6-c-table__button" @click="sortBy(0)">
+          <span class="pf-v6-c-table__button-content">
+            <span class="pf-v6-c-table__text">Repositories</span>
+            <span class="pf-v6-c-table__sort-indicator">
+              <i
+                class="fas"
+                :class="sortCol === 0 ? (sortDir === 'descending' ? 'fa-long-arrow-alt-down' : 'fa-long-arrow-alt-up') : 'fa-arrows-alt-v'"
+                aria-hidden="true"
+              ></i>
+            </span>
+          </span>
+        </button>
+      </th>
+      <th
+        scope="col"
+        class="pf-v6-c-table__th pf-v6-c-table__sort pf-m-help"
+        :class="sortCol === 1 ? 'pf-m-selected' : ''"
+        :aria-sort="sortCol === 1 ? sortDir : 'none'"
+      >
+        <div class="pf-v6-c-table__column-help">
+          <button type="button" class="pf-v6-c-table__button" @click="sortBy(1)">
+            <span class="pf-v6-c-table__button-content">
+              <span class="pf-v6-c-table__text">Branches</span>
+              <span class="pf-v6-c-table__sort-indicator">
+                <i
+                  class="fas"
+                  :class="sortCol === 1 ? (sortDir === 'descending' ? 'fa-long-arrow-alt-down' : 'fa-long-arrow-alt-up') : 'fa-arrows-alt-v'"
+                  aria-hidden="true"
+                ></i>
+              </span>
+            </span>
+          </button>
+          <div class="pf-v6-c-table__column-help-action" x-data="{ help: false }" style="position: relative">
+            <button
+              class="pf-v6-c-button pf-m-plain pf-m-no-padding"
+              type="button"
+              aria-label="More info for Branches"
+              :aria-expanded="help"
+              @click="help = !help"
+            >
+              <span class="pf-v6-c-button__icon">{icons:svg('fa-regular:circle-question').raw}</span>
+            </button>
+            <div
+              class="pf-v6-c-popover"
+              role="dialog"
+              aria-label="Branches column info"
+              x-show="help"
+              x-cloak
+              @click.outside="help = false"
+              style="position: absolute; top: 100%; inset-inline-start: 0; z-index: 200; min-width: 16rem"
+            >
+              <div class="pf-v6-c-popover__content">
+                <div class="pf-v6-c-popover__body">Branch count across all remotes.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </th>
+      <th
+        scope="col"
+        class="pf-v6-c-table__th pf-v6-c-table__sort"
+        :class="sortCol === 2 ? 'pf-m-selected' : ''"
+        :aria-sort="sortCol === 2 ? sortDir : 'none'"
+      >
+        <button type="button" class="pf-v6-c-table__button" @click="sortBy(2)">
+          <span class="pf-v6-c-table__button-content">
+            <span class="pf-v6-c-table__text">Pull requests</span>
+            <span class="pf-v6-c-table__sort-indicator">
+              <i
+                class="fas"
+                :class="sortCol === 2 ? (sortDir === 'descending' ? 'fa-long-arrow-alt-down' : 'fa-long-arrow-alt-up') : 'fa-arrows-alt-v'"
+                aria-hidden="true"
+              ></i>
+            </span>
+          </span>
+        </button>
+      </th>
+      <th scope="col" class="pf-v6-c-table__th">Workspaces</th>
+      <th scope="col" class="pf-v6-c-table__th pf-m-help">
+        <div class="pf-v6-c-table__column-help">
+          <span class="pf-v6-c-table__text">Last commit</span>
+          <div class="pf-v6-c-table__column-help-action" x-data="{ help: false }" style="position: relative">
+            <button
+              class="pf-v6-c-button pf-m-plain pf-m-no-padding"
+              type="button"
+              aria-label="More info for Last commit"
+              :aria-expanded="help"
+              @click="help = !help"
+            >
+              <span class="pf-v6-c-button__icon">{icons:svg('fa-regular:circle-question').raw}</span>
+            </button>
+            <div
+              class="pf-v6-c-popover"
+              role="dialog"
+              aria-label="Last commit column info"
+              x-show="help"
+              x-cloak
+              @click.outside="help = false"
+              style="position: absolute; top: 100%; inset-inline-end: 0; z-index: 200; min-width: 16rem"
+            >
+              <div class="pf-v6-c-popover__content">
+                <div class="pf-v6-c-popover__body">Time since the default branch last changed.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody class="pf-v6-c-table__tbody" x-ref="body">
+    <tr class="pf-v6-c-table__tr">
+      <td class="pf-v6-c-table__td" data-label="Repository name">
+        <div class="pf-v6-l-flex pf-m-nowrap">
+          <div class="pf-v6-l-flex pf-m-align-self-flex-start pf-v6-u-mt-sm">
+            <div class="table-demo-icon" style="width: 36px; font-size: 36px">
+              {icons:svg('fa-brands:redhat').raw}
+            </div>
+          </div>
+          <div class="pf-v6-l-flex pf-m-column pf-m-space-items-none">
+            <h4 class="pf-v6-c-title pf-m-xl">Repository 1</h4>
+            <span class="pf-v6-u-font-size-sm">2.6.6 provided by Red Hat Inc</span>
+          </div>
+        </div>
+      </td>
+      <td class="pf-v6-c-table__td" data-label="Branches">10</td>
+      <td class="pf-v6-c-table__td" data-label="Pull requests">25</td>
+      <td class="pf-v6-c-table__td" data-label="Workspaces">5</td>
+      <td class="pf-v6-c-table__td" data-label="Last commit">2 days ago</td>
+    </tr>
+    <tr class="pf-v6-c-table__tr">
+      <td class="pf-v6-c-table__td" data-label="Repository name">
+        <div class="pf-v6-l-flex pf-m-nowrap">
+          <div class="pf-v6-l-flex pf-m-align-self-flex-start pf-v6-u-mt-sm">
+            <div class="table-demo-icon" style="width: 36px; font-size: 36px">
+              {icons:svg('fa-brands:github').raw}
+            </div>
+          </div>
+          <div class="pf-v6-l-flex pf-m-column pf-m-space-items-none">
+            <h4 class="pf-v6-c-title pf-m-xl">Repository 2</h4>
+            <span class="pf-v6-u-font-size-sm">2.6.6 provided by Github</span>
+          </div>
+        </div>
+      </td>
+      <td class="pf-v6-c-table__td" data-label="Branches">10</td>
+      <td class="pf-v6-c-table__td" data-label="Pull requests">25</td>
+      <td class="pf-v6-c-table__td" data-label="Workspaces">5</td>
+      <td class="pf-v6-c-table__td" data-label="Last commit">2 days ago</td>
+    </tr>
+    <tr class="pf-v6-c-table__tr">
+      <td class="pf-v6-c-table__td" data-label="Repository name">
+        <div class="pf-v6-l-flex pf-m-nowrap">
+          <div class="pf-v6-l-flex pf-m-align-self-flex-start pf-v6-u-mt-sm">
+            <div class="table-demo-icon" style="width: 36px; font-size: 36px">
+              {icons:svg('fa-brands:google').raw}
+            </div>
+          </div>
+          <div class="pf-v6-l-flex pf-m-column pf-m-space-items-none">
+            <h4 class="pf-v6-c-title pf-m-xl">Repository 3</h4>
+            <span class="pf-v6-u-font-size-sm">1.2.3 provided by Google</span>
+          </div>
+        </div>
+      </td>
+      <td class="pf-v6-c-table__td" data-label="Branches">10</td>
+      <td class="pf-v6-c-table__td" data-label="Pull requests">25</td>
+      <td class="pf-v6-c-table__td" data-label="Workspaces">5</td>
+      <td class="pf-v6-c-table__td" data-label="Last commit">2 days ago</td>
+    </tr>
+  </tbody>
+</table>

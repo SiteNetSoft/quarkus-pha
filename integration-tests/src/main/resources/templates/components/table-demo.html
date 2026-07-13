@@ -520,6 +520,28 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#cell-with-image-alignment" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Cell with image alignment</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#container-query-with-drawer" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Container query with drawer</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -904,7 +926,27 @@
                         <code class="ws-code">th</code> uses <code class="ws-code">scope="row"</code> so assistive tech
                         announces the total's label.
                       </p>
-                      {/description} {#content}{#include components/table/footer /}{/content} {/include}
+                      {/description} {#content}{#include components/table/footer /}{/content} {/include} {#include
+                      partials/example-card title="Cell with image alignment" slug="cell-with-image-alignment"
+                      component="table"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Cell alignment defaults to baseline, which drifts next to images — the first cell tops-aligns a
+                        36px brand icon against the text block with
+                        <code class="ws-code">pf-m-align-self-flex-start</code> inside a nowrap flex. Sort headers
+                        reorder the rows live; the <code class="ws-code">?</code> buttons open column-help popovers.
+                      </p>
+                      {/description} {#content}{#include components/table/cell-with-image-alignment /}{/content}
+                      {/include} {#include partials/example-card title="Container query with drawer"
+                      slug="container-query-with-drawer" component="table"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The drawer panel declares <code class="ws-code">container-type: inline-size</code> with
+                        <code class="ws-code">container-name: pf-v6-contain-table</code>, so its
+                        <code class="ws-code">pf-m-grid-md</code> table switches between stacked and grid layout from
+                        the <em>panel's</em> width; the main table (<code class="ws-code">pf-m-grid-lg</code>) responds
+                        to the viewport. Close and re-open the panel with the toolbar's Toggle drawer button.
+                      </p>
+                      {/description} {#content}{#include components/table/container-query-with-drawer /}{/content}
+                      {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
