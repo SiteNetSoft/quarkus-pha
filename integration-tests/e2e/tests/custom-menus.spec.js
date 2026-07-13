@@ -91,4 +91,79 @@ test.describe("Custom menus", () => {
       await expect(submenu).toContainText("Email");
     });
   });
+
+  test.describe("Tree view menu", () => {
+    test("toggle opens a raised panel with the Status tree and flips its label", async ({ page }) => {
+      const toggle = page.locator("#cm-tree-toggle");
+      await expect(toggle.locator(".pf-v6-c-menu-toggle__text")).toHaveText("Collapsed");
+      const panel = toggle.locator("..").locator(".pf-v6-c-panel");
+      await expect(panel).toBeHidden();
+      await toggle.click();
+      await expect(panel).toBeVisible();
+      await expect(toggle.locator(".pf-v6-c-menu-toggle__text")).toHaveText("Expanded");
+      await expect(panel.locator(".pf-v6-c-title")).toHaveText("Status");
+      await expect(panel.locator(".pf-v6-c-tree-view__list-item")).toHaveCount(5);
+      await expect(panel.locator(".pf-v6-c-tree-view__node-count .pf-v6-c-badge")).toHaveCount(5);
+    });
+
+    test("expanding a parent reveals children; parent checkbox cascades", async ({ page }) => {
+      await page.locator("#cm-tree-toggle").click();
+      const panel = page.locator("#cm-tree-toggle").locator("..").locator(".pf-v6-c-panel");
+      const ready = panel.locator(".pf-v6-c-tree-view__list > .pf-v6-c-tree-view__list-item").first();
+      await ready.locator(".pf-v6-c-tree-view__node-toggle").click();
+      await expect(ready).toHaveClass(/pf-m-expanded/);
+      await expect(ready.locator('[role="group"] .pf-v6-c-tree-view__list-item')).toHaveCount(2);
+      await ready.locator("#cm-tree-check-ready").check();
+      await expect(ready.locator("#cm-tree-check-server")).toBeChecked();
+      await expect(ready.locator("#cm-tree-check-worker")).toBeChecked();
+    });
+  });
+
+  test.describe("Date select", () => {
+    test("toggle opens a panel hosting the calendar month", async ({ page }) => {
+      const toggle = page.locator("#cm-date-toggle");
+      await expect(toggle.locator(".pf-v6-c-timestamp__text")).toHaveText("(May 20, 2026)");
+      const panel = toggle.locator("..").locator(".pf-v6-c-panel");
+      await expect(panel).toBeHidden();
+      await toggle.click();
+      await expect(panel).toBeVisible();
+      await expect(panel.locator(".pf-v6-c-calendar-month")).toBeAttached();
+    });
+
+    test("picking a day moves the selection, updates the toggle, and closes", async ({ page }) => {
+      const toggle = page.locator("#cm-date-toggle");
+      await toggle.click();
+      const panel = toggle.locator("..").locator(".pf-v6-c-panel");
+      await panel
+        .locator(".pf-v6-c-calendar-month__dates-cell:not(.pf-m-adjacent-month) .pf-v6-c-calendar-month__date", {
+          hasText: /^27$/,
+        })
+        .click();
+      await expect(panel).toBeHidden();
+      await expect(toggle.locator(".pf-v6-c-timestamp__text")).toHaveText("(May 27, 2026)");
+      await toggle.click();
+      const selected = panel.locator(".pf-v6-c-calendar-month__dates-cell.pf-m-selected");
+      await expect(selected).toHaveCount(1);
+      await expect(selected.locator(".pf-v6-c-calendar-month__date")).toHaveText("27");
+    });
+
+    test("adjacent-month days are ignored", async ({ page }) => {
+      const toggle = page.locator("#cm-date-toggle");
+      await toggle.click();
+      const panel = toggle.locator("..").locator(".pf-v6-c-panel");
+      await panel.locator(".pf-m-adjacent-month .pf-v6-c-calendar-month__date").first().click();
+      await expect(panel).toBeVisible();
+      await expect(toggle.locator(".pf-v6-c-timestamp__text")).toHaveText("(May 20, 2026)");
+    });
+  });
+
+  test.describe("Standalone routes", () => {
+    for (const example of ["basic", "with-search", "flyout", "tree-view-menu", "date-select"]) {
+      test(`/components/custom-menus/${example} returns 200`, async ({ page }) => {
+        const res = await page.goto(`/components/custom-menus/${example}`);
+        expect(res.status()).toBe(200);
+        await expect(page.locator(".pf-v6-c-menu-toggle").first()).toBeAttached();
+      });
+    }
+  });
 });
