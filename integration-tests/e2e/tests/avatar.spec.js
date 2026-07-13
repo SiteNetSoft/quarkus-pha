@@ -23,18 +23,49 @@ test.describe("Avatar", () => {
       const tag = await avatar.evaluate((el) => el.tagName);
       expect(tag).toBe("IMG");
     });
+
+    test("custom-content twin is a div with role=img holding an svg", async ({ page }) => {
+      const avatar = page.locator("#avatar-basic-custom");
+      await expect(avatar).toHaveClass(/pf-v6-c-avatar/);
+      await expect(avatar).toHaveAttribute("role", "img");
+      await expect(avatar).toHaveAttribute("aria-label", /custom content/);
+      await expect(avatar.locator("svg")).toBeAttached();
+      const tag = await avatar.evaluate((el) => el.tagName);
+      expect(tag).toBe("DIV");
+    });
   });
 
   test.describe("Bordered", () => {
-    test("carries pf-m-bordered", async ({ page }) => {
-      await expect(page.locator("#avatar-bordered")).toHaveClass(/pf-m-bordered/);
+    test("is a bordered div avatar holding the chatbot icon", async ({ page }) => {
+      const avatar = page.locator("#avatar-bordered");
+      await expect(avatar).toHaveClass(/pf-m-bordered/);
+      await expect(avatar).toHaveAttribute("role", "img");
+      await expect(avatar).toHaveAttribute("aria-label", /chatbot icon/);
+      await expect(avatar.locator("svg.pf-v6-svg")).toBeAttached();
+      const tag = await avatar.evaluate((el) => el.tagName);
+      expect(tag).toBe("DIV");
     });
   });
 
   test.describe("Sizes", () => {
-    test("renders all four size modifiers", async ({ page }) => {
+    test("renders all four sizes as colorful red avatars with initial C", async ({ page }) => {
       for (const size of ["sm", "md", "lg", "xl"]) {
-        await expect(page.locator(`#avatar-${size}`)).toHaveClass(new RegExp(`pf-m-${size}`));
+        const a = page.locator(`#avatar-${size}`);
+        await expect(a).toHaveClass(new RegExp(`pf-m-${size}`));
+        await expect(a).toHaveClass(/pf-m-colorful/);
+        await expect(a).toHaveClass(/pf-m-red/);
+        await expect(a).toHaveAttribute("role", "img");
+        await expect(a).toHaveAttribute("aria-label", /avatar with initial C/);
+        await expect(a.locator(".pf-v6-c-avatar__initials")).toHaveText("C");
+      }
+    });
+
+    test("sizes render at increasing pixel widths", async ({ page }) => {
+      let prev = 0;
+      for (const size of ["sm", "md", "lg", "xl"]) {
+        const width = await page.locator(`#avatar-${size}`).evaluate((el) => el.getBoundingClientRect().width);
+        expect(width).toBeGreaterThan(prev);
+        prev = width;
       }
     });
   });
@@ -50,10 +81,19 @@ test.describe("Avatar", () => {
   });
 
   test.describe("Initials", () => {
-    test("renders as a regular avatar with alt containing the name", async ({ page }) => {
+    test("bordered avatar renders initial C in an __initials span", async ({ page }) => {
       const a = page.locator("#avatar-initials");
-      await expect(a).toHaveClass(/pf-v6-c-avatar/);
-      await expect(a).toHaveAttribute("alt", /\w+/);
+      await expect(a).toHaveClass(/pf-m-bordered/);
+      await expect(a).toHaveAttribute("role", "img");
+      await expect(a).toHaveAttribute("aria-label", /initial C/);
+      await expect(a.locator(".pf-v6-c-avatar__initials")).toHaveText("C");
+    });
+
+    test("all nine colorful initials avatars render", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/avatar/initials"]');
+      const colorful = card.locator(".pf-v6-c-avatar.pf-m-colorful");
+      await expect(colorful).toHaveCount(9);
+      await expect(card.locator(".pf-v6-c-avatar__initials")).toHaveCount(10);
     });
   });
 
@@ -71,20 +111,20 @@ test.describe("Avatar", () => {
     });
   });
 
-  test("every avatar is an <img> with src, or a colorful <div> with role=img", async ({ page }) => {
+  test("every avatar is an <img> with src+alt, or a <div> with role=img + aria-label", async ({ page }) => {
     const avatars = page.locator(".pf-v6-c-avatar");
     const count = await avatars.count();
     expect(count).toBeGreaterThan(0);
     for (let i = 0; i < count; i++) {
       const a = avatars.nth(i);
-      const colorful = await a.evaluate((el) => el.classList.contains("pf-m-colorful"));
       const tag = await a.evaluate((el) => el.tagName);
-      if (colorful) {
+      if (tag === "IMG") {
+        await expect(a).toHaveAttribute("src");
+        await expect(a).toHaveAttribute("alt");
+      } else {
         expect(tag).toBe("DIV");
         await expect(a).toHaveAttribute("role", "img");
-      } else {
-        expect(tag).toBe("IMG");
-        await expect(a).toHaveAttribute("src");
+        await expect(a).toHaveAttribute("aria-label", /\w+/);
       }
     }
   });
