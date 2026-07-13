@@ -15,7 +15,7 @@
   x-data="{ exp: null, details: { branches: '10 branches across 3 teams; default is main.', prs: '5 open pull requests, 2 awaiting review.', ws: '3 active workspaces, 1 archived.' } }"
   :class="exp ? 'pf-m-expanded' : ''"
 >
-  <tr>
+  <tr class="pf-v6-c-table__tr pf-v6-c-table__control-row" :class="exp ? 'pf-m-expanded' : ''">
     <td>node-1</td>
     <th scope="row" class="pf-v6-c-table__compound-expansion-toggle" :class="exp === 'branches' ? 'pf-m-expanded' : ''">
       <button

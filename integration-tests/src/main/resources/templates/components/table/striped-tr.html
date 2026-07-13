@@ -1,0 +1,42 @@
+{! Striped tr — pf-m-striped applied to individual rows (with the required pf-v6-c-table__tr
+   class) for full manual control over which rows are shaded. !}
+{#include components/data-display/table id="tbl-striped-tr" gridMd=true ariaLabel="Striped table with manually striped rows"}
+{#content}
+<caption class="pf-v6-c-table__caption">
+  Rows striped one by one
+</caption>
+<thead>
+  <tr>
+    <th scope="col">Repository</th>
+    <th scope="col">Branches</th>
+    <th scope="col">Pull requests</th>
+    <th scope="col">Workspaces</th>
+  </tr>
+</thead>
+<tbody class="pf-v6-c-table__tbody">
+  <tr class="pf-v6-c-table__tr pf-m-striped">
+    <td data-label="Repository">apollo</td>
+    <td data-label="Branches">12</td>
+    <td data-label="Pull requests">3</td>
+    <td data-label="Workspaces">5</td>
+  </tr>
+  <tr class="pf-v6-c-table__tr">
+    <td data-label="Repository">mercury</td>
+    <td data-label="Branches">4</td>
+    <td data-label="Pull requests">0</td>
+    <td data-label="Workspaces">1</td>
+  </tr>
+  <tr class="pf-v6-c-table__tr pf-m-striped">
+    <td data-label="Repository">gemini</td>
+    <td data-label="Branches">8</td>
+    <td data-label="Pull requests">2</td>
+    <td data-label="Workspaces">2</td>
+  </tr>
+  <tr class="pf-v6-c-table__tr">
+    <td data-label="Repository">orion</td>
+    <td data-label="Branches">21</td>
+    <td data-label="Pull requests">5</td>
+    <td data-label="Workspaces">9</td>
+  </tr>
+</tbody>
+{/content} {/include}
