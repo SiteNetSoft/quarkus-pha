@@ -1,0 +1,54 @@
+{! Multiple sticky columns — the first two columns pin while scrolling right. The second sticky
+   cell offsets its inset by the first column's min-width and carries pf-m-border-right to mark
+   the sticky boundary, per PF's scrollable-table recipe. !}
+<div class="pf-v6-c-scroll-inner-wrapper" id="tbl-multiple-sticky-wrapper">
+  <table class="pf-v6-c-table" role="grid" id="tbl-multiple-sticky" aria-label="Table with multiple sticky columns">
+    <thead>
+      <tr>
+        <th
+          scope="col"
+          class="pf-v6-c-table__sticky-cell pf-m-left pf-m-nowrap"
+          style="--pf-v6-c-table__sticky-cell--MinWidth: 100px"
+        >
+          Node
+        </th>
+        <th
+          scope="col"
+          class="pf-v6-c-table__sticky-cell pf-m-left pf-m-border-right pf-m-nowrap"
+          style="--pf-v6-c-table__sticky-cell--MinWidth: 80px; --pf-v6-c-table__sticky-cell--InsetInlineStart: 100px"
+        >
+          Status
+        </th>
+        <th scope="col" class="pf-m-nowrap">Zone</th>
+        <th scope="col" class="pf-m-nowrap">Kubernetes version</th>
+        <th scope="col" class="pf-m-nowrap">CPU allocatable</th>
+        <th scope="col" class="pf-m-nowrap">Memory allocatable</th>
+        <th scope="col" class="pf-m-nowrap">Pods running</th>
+        <th scope="col" class="pf-m-nowrap">Created</th>
+        <th scope="col" class="pf-m-nowrap">Kernel</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row" class="pf-v6-c-table__sticky-cell pf-m-left pf-m-nowrap" style="--pf-v6-c-table__sticky-cell--MinWidth: 100px">node-a1</th>
+        <th scope="row" class="pf-v6-c-table__sticky-cell pf-m-left pf-m-border-right pf-m-nowrap" style="--pf-v6-c-table__sticky-cell--MinWidth: 80px; --pf-v6-c-table__sticky-cell--InsetInlineStart: 100px">Ready</th>
+        <td class="pf-m-nowrap">us-east-1a</td><td class="pf-m-nowrap">v1.31.2</td><td class="pf-m-nowrap">7.5 cores</td><td class="pf-m-nowrap">28 GiB</td><td class="pf-m-nowrap">42</td><td class="pf-m-nowrap">86 days ago</td><td class="pf-m-nowrap">6.1.0-18</td>
+      </tr>
+      <tr>
+        <th scope="row" class="pf-v6-c-table__sticky-cell pf-m-left pf-m-nowrap" style="--pf-v6-c-table__sticky-cell--MinWidth: 100px">node-a2</th>
+        <th scope="row" class="pf-v6-c-table__sticky-cell pf-m-left pf-m-border-right pf-m-nowrap" style="--pf-v6-c-table__sticky-cell--MinWidth: 80px; --pf-v6-c-table__sticky-cell--InsetInlineStart: 100px">Ready</th>
+        <td class="pf-m-nowrap">us-east-1b</td><td class="pf-m-nowrap">v1.31.2</td><td class="pf-m-nowrap">7.5 cores</td><td class="pf-m-nowrap">28 GiB</td><td class="pf-m-nowrap">38</td><td class="pf-m-nowrap">86 days ago</td><td class="pf-m-nowrap">6.1.0-18</td>
+      </tr>
+      <tr>
+        <th scope="row" class="pf-v6-c-table__sticky-cell pf-m-left pf-m-nowrap" style="--pf-v6-c-table__sticky-cell--MinWidth: 100px">node-b1</th>
+        <th scope="row" class="pf-v6-c-table__sticky-cell pf-m-left pf-m-border-right pf-m-nowrap" style="--pf-v6-c-table__sticky-cell--MinWidth: 80px; --pf-v6-c-table__sticky-cell--InsetInlineStart: 100px">NotReady</th>
+        <td class="pf-m-nowrap">us-east-1c</td><td class="pf-m-nowrap">v1.30.6</td><td class="pf-m-nowrap">15 cores</td><td class="pf-m-nowrap">60 GiB</td><td class="pf-m-nowrap">0</td><td class="pf-m-nowrap">12 days ago</td><td class="pf-m-nowrap">6.1.0-17</td>
+      </tr>
+      <tr>
+        <th scope="row" class="pf-v6-c-table__sticky-cell pf-m-left pf-m-nowrap" style="--pf-v6-c-table__sticky-cell--MinWidth: 100px">node-b2</th>
+        <th scope="row" class="pf-v6-c-table__sticky-cell pf-m-left pf-m-border-right pf-m-nowrap" style="--pf-v6-c-table__sticky-cell--MinWidth: 80px; --pf-v6-c-table__sticky-cell--InsetInlineStart: 100px">Ready</th>
+        <td class="pf-m-nowrap">us-east-1a</td><td class="pf-m-nowrap">v1.31.2</td><td class="pf-m-nowrap">15 cores</td><td class="pf-m-nowrap">60 GiB</td><td class="pf-m-nowrap">61</td><td class="pf-m-nowrap">12 days ago</td><td class="pf-m-nowrap">6.1.0-18</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

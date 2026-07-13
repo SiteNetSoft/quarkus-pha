@@ -1,0 +1,25 @@
+{! Text control — per-cell text behavior: pf-m-truncate, pf-m-break-word, pf-m-wrap (th default
+   is truncate), pf-m-fit-content and pf-m-nowrap. pf-m-grid-lg keeps the grid fallback graceful. !}
+{#include components/data-display/table id="tbl-text-control" modifiers="pf-m-grid-lg" ariaLabel="Text control modifiers example"}
+{#content}
+<thead>
+  <tr>
+    <th scope="col" class="pf-m-width-20">Truncate (width 20%)</th>
+    <th scope="col">Break word</th>
+    <th scope="col" class="pf-m-wrap">Wrapping table header text. This th text will wrap instead of truncate.</th>
+    <th scope="col" class="pf-m-fit-content">Fit content</th>
+    <th scope="col">No wrap</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="pf-m-truncate" data-label="Truncating text">This text will truncate instead of wrap in table layout and wrap gracefully in grid layout.</td>
+    <td class="pf-m-break-word" data-label="Break word">
+      <a href="#">http://thisisaverylongurlthatneedstobreakusethebreakwordmodifier.org</a>
+    </td>
+    <td data-label="Wrapping">By default, thead cells will truncate and tbody cells will wrap. Use pf-m-wrap on a th to change its behavior.</td>
+    <td data-label="Fit content">This cell's content will adjust itself to the parent th width. This modifier only affects table layouts.</td>
+    <td class="pf-m-nowrap" data-label="No wrap"><a href="#">No wrap</a></td>
+  </tr>
+</tbody>
+{/content} {/include}
