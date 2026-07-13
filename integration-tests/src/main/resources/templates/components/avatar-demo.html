@@ -19,10 +19,10 @@
                   <div class="pf-v6-c-content pf-m-editorial">
                     <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Avatar</h1>
                     <p>
-                      A small image representing a user. Renders a single <code class="ws-code">&lt;img&gt;</code> with
-                      PatternFly's avatar classes — sizing, optional border, accessible
-                      <code class="ws-code">alt</code>. PatternFly 6.6 adds a colorful
-                      <code class="ws-code">&lt;div&gt;</code> flavour for icon or initials content. No JavaScript
+                      A small image representing a user. Two flavours: an <code class="ws-code">&lt;img&gt;</code> with
+                      an image source (the runtime template), and a
+                      <code class="ws-code">&lt;div role="img"&gt;</code> holding custom content, initials, or an icon —
+                      optionally colorful (PatternFly 6.6+). Sizing, optional border, accessible naming. No JavaScript
                       required; pure CSS.
                     </p>
                   </div>
@@ -152,36 +152,43 @@
 
                         {#include partials/example-card title="Basic" slug="basic" component="avatar"} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          Default medium avatar — circle image with no extra modifiers. The src here is an inline SVG
-                          silhouette; in production point it at a real user-image URL.
+                          Both PF flavours: an <code class="ws-code">&lt;img&gt;</code> with an image source (here an
+                          inline SVG silhouette; in production point it at a real user-image URL), and a
+                          <code class="ws-code">&lt;div role="img"&gt;</code> holding custom content — any inline SVG or
+                          icon.
                         </p>
                         {/description} {#content}{#include components/avatar/basic /}{/content} {/include} {#include
                         partials/example-card title="Bordered" slug="bordered" component="avatar"} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          Add <code class="ws-code">pf-m-bordered</code> for a hairline ring around the image. Useful to
-                          distinguish stacked or overlapping avatars.
+                          Add <code class="ws-code">pf-m-bordered</code> for a hairline ring on non-colorful avatars
+                          (colorful ones include their own border) — useful to distinguish stacked or overlapping
+                          avatars. Shown PF-6.6-style on a div avatar with an icon; the same modifier on the
+                          <code class="ws-code">&lt;img&gt;</code> flavour appears in
+                          <a href="#bordered-sizes">Bordered sizes</a>.
                         </p>
                         {/description} {#content}{#include components/avatar/bordered /}{/content} {/include} {#include
                         partials/example-card title="Sizes" slug="sizes" component="avatar"} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          All four size modifiers: <code class="ws-code">pf-m-sm</code> (1.5rem),
-                          <code class="ws-code">pf-m-md</code> (default 2.25rem),
-                          <code class="ws-code">pf-m-lg</code> (4.5rem), <code class="ws-code">pf-m-xl</code> (8rem).
+                          All four size modifiers — <code class="ws-code">pf-m-sm</code>,
+                          <code class="ws-code">pf-m-md</code> (default), <code class="ws-code">pf-m-lg</code>,
+                          <code class="ws-code">pf-m-xl</code> — shown PF-6.6-style on colorful red avatars with the
+                          initial "C". The same modifiers apply to the <code class="ws-code">&lt;img&gt;</code> flavour;
+                          see <a href="#bordered-sizes">Bordered sizes</a>.
                         </p>
                         {/description} {#content}{#include components/avatar/sizes /}{/content} {/include} {#include
                         partials/example-card title="Bordered sizes" slug="bordered-sizes" component="avatar"}
                         {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          The same four sizes with <code class="ws-code">pf-m-bordered</code> — the border thickness
-                          scales subtly with size.
+                          The four sizes on the <code class="ws-code">&lt;img&gt;</code> flavour with
+                          <code class="ws-code">pf-m-bordered</code> — the border thickness scales subtly with size.
                         </p>
                         {/description} {#content}{#include components/avatar/bordered-sizes /}{/content} {/include}
                         {#include partials/example-card title="Initials" slug="initials" component="avatar"}
                         {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          A common fallback pattern for users without a profile photo — the avatar element itself is
-                          unchanged; the trick is generating a small SVG of the user's initials on a colored circle and
-                          serving it as the <code class="ws-code">src</code>.
+                          The common fallback for users without a profile photo — a div avatar with the initials in a
+                          <code class="ws-code">__initials</code> span. Pass a single initial so the text fits. Works
+                          bordered or with any of the nine <a href="#colors">color modifiers</a>.
                         </p>
                         {/description} {#content}{#include components/avatar/initials /}{/content} {/include} {#include
                         partials/example-card title="Colors" slug="colors" component="avatar"} {#description}
@@ -330,16 +337,17 @@
                             dedicated profile pages.
                           </p>
                           <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Always set <code class="ws-code">alt</code>.</strong> The avatar is interactive
-                            content if wrapped in a button or link, and decorative otherwise. Either way the
-                            <code class="ws-code">alt</code> attribute is required — use the person's name when known,
-                            or an empty string for purely decorative cases.
+                            <strong>Always name the avatar.</strong> Image avatars require
+                            <code class="ws-code">alt</code>; div avatars require
+                            <code class="ws-code">role="img"</code> plus <code class="ws-code">aria-label</code> (mark
+                            inner content <code class="ws-code">aria-hidden="true"</code>). Use the person's name when
+                            known, or an empty <code class="ws-code">alt</code> for purely decorative image cases.
                           </p>
                           <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Initials fallback.</strong> Avatar is just an
-                            <code class="ws-code">&lt;img&gt;</code>; to render initials, generate an inline SVG with
-                            the initials over a colored circle and pass it as a data URI in
-                            <code class="ws-code">src</code>. See the <a href="#initials">Initials</a> example.
+                            <strong>Initials fallback.</strong> For users without a photo, render the div flavour with
+                            an <code class="ws-code">__initials</code> span — bordered or colorful. The runtime template
+                            is the <code class="ws-code">&lt;img&gt;</code> flavour only, so initials avatars are
+                            hand-written markup; see the <a href="#initials">Initials</a> example.
                           </p>
                           <p class="pf-v6-c-content--p pf-m-editorial">
                             <strong>Failed-load fallback.</strong> PatternFly's CSS has no built-in placeholder for

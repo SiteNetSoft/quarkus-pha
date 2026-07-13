@@ -1,7 +1,35 @@
-{! Initials-based avatar — common pattern for users without a profile photo. The avatar element itself is unchanged; the trick is to swap the src for a small SVG containing the initials over a colored background. !}
-<img
-  class="pf-v6-c-avatar pf-m-lg"
-  id="avatar-initials"
-  src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2036%2036'%3E%3Ccircle%20cx='18'%20cy='18'%20r='18'%20fill='%230066cc'/%3E%3Ctext%20x='18'%20y='23'%20text-anchor='middle'%20fill='%23fff'%20font-size='16'%20font-family='sans-serif'%3EJD%3C/text%3E%3C/svg%3E"
-  alt="John Doe"
-/>
+{! With initials — PF 6.6 pattern: a div avatar with the initials in an __initials span
+   (single initial recommended). First a bordered default avatar, then the nine colorful
+   variants, all with initial "C" — mirrors PF core's "With initials" example. !}
+<div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap">
+  <div class="pf-v6-c-avatar pf-m-bordered" id="avatar-initials" role="img" aria-label="Avatar with initial C">
+    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
+  </div>
+  <div class="pf-v6-c-avatar pf-m-colorful pf-m-red" role="img" aria-label="Red avatar with initial C">
+    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
+  </div>
+  <div class="pf-v6-c-avatar pf-m-colorful pf-m-orangered" role="img" aria-label="Orange-red avatar with initial C">
+    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
+  </div>
+  <div class="pf-v6-c-avatar pf-m-colorful pf-m-orange" role="img" aria-label="Orange avatar with initial C">
+    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
+  </div>
+  <div class="pf-v6-c-avatar pf-m-colorful pf-m-yellow" role="img" aria-label="Yellow avatar with initial C">
+    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
+  </div>
+  <div class="pf-v6-c-avatar pf-m-colorful pf-m-green" role="img" aria-label="Green avatar with initial C">
+    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
+  </div>
+  <div class="pf-v6-c-avatar pf-m-colorful pf-m-teal" role="img" aria-label="Teal avatar with initial C">
+    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
+  </div>
+  <div class="pf-v6-c-avatar pf-m-colorful pf-m-blue" role="img" aria-label="Blue avatar with initial C">
+    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
+  </div>
+  <div class="pf-v6-c-avatar pf-m-colorful pf-m-purple" role="img" aria-label="Purple avatar with initial C">
+    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
+  </div>
+  <div class="pf-v6-c-avatar pf-m-colorful pf-m-gray" role="img" aria-label="Gray avatar with initial C">
+    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
+  </div>
+</div>
