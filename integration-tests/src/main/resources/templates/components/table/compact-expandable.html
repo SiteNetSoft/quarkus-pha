@@ -1,0 +1,94 @@
+{! Compact expandable — pf-m-compact and per-row expansion combined; toggle state lives in x-data
+   on each tbody, same pattern as the Expandable example. !}
+{#include components/data-display/table id="tbl-compact-expandable" compact=true expandable=true gridMd=true ariaLabel="Compact expandable table example"}
+{#content}
+<thead>
+  <tr>
+    <td></td>
+    <th scope="col">Pipeline</th>
+    <th scope="col">Last run</th>
+    <th scope="col">Duration</th>
+  </tr>
+</thead>
+<tbody x-data="{ open: false }" :class="open ? 'pf-m-expanded' : ''">
+  <tr>
+    <td class="pf-v6-c-table__toggle">
+      <button
+        type="button"
+        class="pf-v6-c-button pf-m-plain"
+        :class="open ? 'pf-m-expanded' : ''"
+        :aria-expanded="open"
+        aria-label="Toggle details for build-frontend"
+        @click="open = !open"
+      >
+        <span class="pf-v6-c-table__toggle-icon"
+          ><i class="fas fa-angle-down" aria-hidden="true"></i
+        ></span>
+      </button>
+    </td>
+    <td data-label="Pipeline">build-frontend</td>
+    <td data-label="Last run">Passed</td>
+    <td data-label="Duration">4m 12s</td>
+  </tr>
+  <tr class="pf-v6-c-table__expandable-row" :class="open ? 'pf-m-expanded' : ''" x-show="open" x-cloak>
+    <td></td>
+    <td colspan="3">
+      <div class="pf-v6-c-table__expandable-row-content">312 tests, 0 failures. Artifacts published to the snapshot repository.</div>
+    </td>
+  </tr>
+</tbody>
+<tbody x-data="{ open: false }" :class="open ? 'pf-m-expanded' : ''">
+  <tr>
+    <td class="pf-v6-c-table__toggle">
+      <button
+        type="button"
+        class="pf-v6-c-button pf-m-plain"
+        :class="open ? 'pf-m-expanded' : ''"
+        :aria-expanded="open"
+        aria-label="Toggle details for build-backend"
+        @click="open = !open"
+      >
+        <span class="pf-v6-c-table__toggle-icon"
+          ><i class="fas fa-angle-down" aria-hidden="true"></i
+        ></span>
+      </button>
+    </td>
+    <td data-label="Pipeline">build-backend</td>
+    <td data-label="Last run">Failed</td>
+    <td data-label="Duration">7m 45s</td>
+  </tr>
+  <tr class="pf-v6-c-table__expandable-row" :class="open ? 'pf-m-expanded' : ''" x-show="open" x-cloak>
+    <td></td>
+    <td colspan="3">
+      <div class="pf-v6-c-table__expandable-row-content">2 integration tests failed in the persistence module; see run #482 for logs.</div>
+    </td>
+  </tr>
+</tbody>
+<tbody x-data="{ open: false }" :class="open ? 'pf-m-expanded' : ''">
+  <tr>
+    <td class="pf-v6-c-table__toggle">
+      <button
+        type="button"
+        class="pf-v6-c-button pf-m-plain"
+        :class="open ? 'pf-m-expanded' : ''"
+        :aria-expanded="open"
+        aria-label="Toggle details for nightly-e2e"
+        @click="open = !open"
+      >
+        <span class="pf-v6-c-table__toggle-icon"
+          ><i class="fas fa-angle-down" aria-hidden="true"></i
+        ></span>
+      </button>
+    </td>
+    <td data-label="Pipeline">nightly-e2e</td>
+    <td data-label="Last run">Passed</td>
+    <td data-label="Duration">28m 03s</td>
+  </tr>
+  <tr class="pf-v6-c-table__expandable-row" :class="open ? 'pf-m-expanded' : ''" x-show="open" x-cloak>
+    <td></td>
+    <td colspan="3">
+      <div class="pf-v6-c-table__expandable-row-content">Full browser matrix green. Flake rate 0.4% over the last 30 runs.</div>
+    </td>
+  </tr>
+</tbody>
+{/content} {/include}

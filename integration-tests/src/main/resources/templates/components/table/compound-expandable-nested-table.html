@@ -1,0 +1,159 @@
+{! Compound expandable with nested table — each toggle cell opens its own detail row; the
+   Branches cell reveals a compact, borderless inner table (hand-written to avoid Qute slot
+   recursion). One cell per row open at a time, tracked by exp on the tbody. !}
+{#include components/data-display/table id="tbl-compound-nested" expandable=true gridMd=true ariaLabel="Compound expandable table with nested table"}
+{#content}
+<thead>
+  <tr>
+    <th scope="col">Repository</th>
+    <th scope="col">Branches</th>
+    <th scope="col">Pull requests</th>
+    <th scope="col">Workspaces</th>
+  </tr>
+</thead>
+<tbody x-data="{ exp: 'branches' }" :class="exp ? 'pf-m-expanded' : ''">
+  <tr class="pf-v6-c-table__tr pf-v6-c-table__control-row" :class="exp ? 'pf-m-expanded' : ''">
+    <th scope="row" data-label="Repository">pha-runtime</th>
+    <td
+      data-label="Branches"
+      class="pf-v6-c-table__compound-expansion-toggle"
+      :class="exp === 'branches' ? 'pf-m-expanded' : ''"
+    >
+      <button
+        type="button"
+        class="pf-v6-c-table__button"
+        :aria-expanded="exp === 'branches'"
+        @click="exp = exp === 'branches' ? null : 'branches'"
+      >
+        <span class="pf-v6-c-table__button-content"><span class="pf-v6-c-table__text">4 branches</span></span>
+      </button>
+    </td>
+    <td
+      data-label="Pull requests"
+      class="pf-v6-c-table__compound-expansion-toggle"
+      :class="exp === 'prs' ? 'pf-m-expanded' : ''"
+    >
+      <button
+        type="button"
+        class="pf-v6-c-table__button"
+        :aria-expanded="exp === 'prs'"
+        @click="exp = exp === 'prs' ? null : 'prs'"
+      >
+        <span class="pf-v6-c-table__button-content"><span class="pf-v6-c-table__text">2 pull requests</span></span>
+      </button>
+    </td>
+    <td data-label="Workspaces">3 workspaces</td>
+  </tr>
+  <tr class="pf-v6-c-table__expandable-row" :class="exp === 'branches' ? 'pf-m-expanded' : ''" x-show="exp === 'branches'" x-cloak>
+    <td colspan="4" class="pf-m-no-padding">
+      <div class="pf-v6-c-table__expandable-row-content pf-m-no-background">
+        <table
+          class="pf-v6-c-table pf-m-compact pf-m-no-border-rows"
+          role="grid"
+          aria-label="Branches of pha-runtime"
+        >
+          <thead>
+            <tr>
+              <th scope="col">Branch</th>
+              <th scope="col">Last commit</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Branch">main</td>
+              <td data-label="Last commit">2 hours ago</td>
+              <td data-label="Status">Passing</td>
+            </tr>
+            <tr>
+              <td data-label="Branch">develop</td>
+              <td data-label="Last commit">20 minutes ago</td>
+              <td data-label="Status">Passing</td>
+            </tr>
+            <tr>
+              <td data-label="Branch">feature/icons</td>
+              <td data-label="Last commit">3 days ago</td>
+              <td data-label="Status">Failing</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </td>
+  </tr>
+  <tr class="pf-v6-c-table__expandable-row" :class="exp === 'prs' ? 'pf-m-expanded' : ''" x-show="exp === 'prs'" x-cloak>
+    <td colspan="4" class="pf-m-no-padding">
+      <div class="pf-v6-c-table__expandable-row-content pf-m-no-background">2 pull requests currently under review.</div>
+    </td>
+  </tr>
+</tbody>
+<tbody x-data="{ exp: null }" :class="exp ? 'pf-m-expanded' : ''">
+  <tr class="pf-v6-c-table__tr pf-v6-c-table__control-row" :class="exp ? 'pf-m-expanded' : ''">
+    <th scope="row" data-label="Repository">pha-deployment</th>
+    <td
+      data-label="Branches"
+      class="pf-v6-c-table__compound-expansion-toggle"
+      :class="exp === 'branches' ? 'pf-m-expanded' : ''"
+    >
+      <button
+        type="button"
+        class="pf-v6-c-table__button"
+        :aria-expanded="exp === 'branches'"
+        @click="exp = exp === 'branches' ? null : 'branches'"
+      >
+        <span class="pf-v6-c-table__button-content"><span class="pf-v6-c-table__text">2 branches</span></span>
+      </button>
+    </td>
+    <td
+      data-label="Pull requests"
+      class="pf-v6-c-table__compound-expansion-toggle"
+      :class="exp === 'prs' ? 'pf-m-expanded' : ''"
+    >
+      <button
+        type="button"
+        class="pf-v6-c-table__button"
+        :aria-expanded="exp === 'prs'"
+        @click="exp = exp === 'prs' ? null : 'prs'"
+      >
+        <span class="pf-v6-c-table__button-content"><span class="pf-v6-c-table__text">1 pull request</span></span>
+      </button>
+    </td>
+    <td data-label="Workspaces">1 workspace</td>
+  </tr>
+  <tr class="pf-v6-c-table__expandable-row" :class="exp === 'branches' ? 'pf-m-expanded' : ''" x-show="exp === 'branches'" x-cloak>
+    <td colspan="4" class="pf-m-no-padding">
+      <div class="pf-v6-c-table__expandable-row-content pf-m-no-background">
+        <table
+          class="pf-v6-c-table pf-m-compact pf-m-no-border-rows"
+          role="grid"
+          aria-label="Branches of pha-deployment"
+        >
+          <thead>
+            <tr>
+              <th scope="col">Branch</th>
+              <th scope="col">Last commit</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Branch">main</td>
+              <td data-label="Last commit">1 day ago</td>
+              <td data-label="Status">Passing</td>
+            </tr>
+            <tr>
+              <td data-label="Branch">develop</td>
+              <td data-label="Last commit">4 hours ago</td>
+              <td data-label="Status">Passing</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </td>
+  </tr>
+  <tr class="pf-v6-c-table__expandable-row" :class="exp === 'prs' ? 'pf-m-expanded' : ''" x-show="exp === 'prs'" x-cloak>
+    <td colspan="4" class="pf-m-no-padding">
+      <div class="pf-v6-c-table__expandable-row-content pf-m-no-background">1 pull request currently under review.</div>
+    </td>
+  </tr>
+</tbody>
+{/content} {/include}
