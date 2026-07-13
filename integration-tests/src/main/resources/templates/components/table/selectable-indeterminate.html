@@ -1,0 +1,58 @@
+{! Selectable with indeterminate state — a live tri-state select-all: checked when every row is
+   selected, indeterminate when only some are (x-effect drives the DOM-only property), and it
+   toggles all rows on change. !}
+<table
+  class="pf-v6-c-table"
+  role="grid"
+  id="tbl-select-indeterminate"
+  aria-label="Selectable table with indeterminate select-all"
+  x-data="{
+    sel: { john: false, jane: true, bob: false },
+    get allOn() { return Object.values(this.sel).every(Boolean) },
+    get someOn() { return Object.values(this.sel).some(Boolean) },
+    toggleAll() { const on = !this.allOn; Object.keys(this.sel).forEach((k) => { this.sel[k] = on }) }
+  }"
+>
+  <thead>
+    <tr>
+      <td class="pf-v6-c-table__check">
+        <input
+          type="checkbox"
+          aria-label="Select all rows"
+          :checked="allOn"
+          x-effect="$el.indeterminate = someOn && !allOn"
+          @change="toggleAll()"
+        />
+      </td>
+      <th scope="col">Name</th>
+      <th scope="col">Status</th>
+      <th scope="col">Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="pf-v6-c-table__check">
+        <input type="checkbox" aria-label="Select John Doe" x-model="sel.john" />
+      </td>
+      <td>John Doe</td>
+      <td>Active</td>
+      <td>Admin</td>
+    </tr>
+    <tr>
+      <td class="pf-v6-c-table__check">
+        <input type="checkbox" aria-label="Select Jane Smith" x-model="sel.jane" />
+      </td>
+      <td>Jane Smith</td>
+      <td>Inactive</td>
+      <td>Editor</td>
+    </tr>
+    <tr>
+      <td class="pf-v6-c-table__check">
+        <input type="checkbox" aria-label="Select Bob Johnson" x-model="sel.bob" />
+      </td>
+      <td>Bob Johnson</td>
+      <td>Active</td>
+      <td>Viewer</td>
+    </tr>
+  </tbody>
+</table>

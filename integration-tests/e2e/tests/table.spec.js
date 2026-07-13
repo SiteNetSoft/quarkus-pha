@@ -19,20 +19,36 @@ const EXAMPLES = [
   "expandable-set-width",
   "expandable-nested-table",
   "selectable-checkbox",
+  "selectable-indeterminate",
   "selectable-radio",
   "actions",
+  "overflow-menu",
   "empty-state",
   "width",
+  "text-control",
+  "table-text",
+  "long-strings",
+  "width-constrained",
+  "breakpoint-modifiers",
   "favoritable",
+  "favorites-sortable",
   "clickable-rows",
   "clickable-expandable",
   "nested-column-headers",
+  "nested-expandable",
+  "nested-sticky-header",
   "editable-rows",
   "compound-expandable",
   "compound-expandable-nested-table",
   "animated-compound-expandable",
   "sticky",
+  "sticky-footer",
+  "multiple-sticky-columns",
+  "sticky-right-column",
   "tree-table",
+  "tree-table-checkboxes",
+  "tree-table-icons",
+  "tree-table-flat",
   "draggable-rows",
   "footer",
 ];
@@ -320,7 +336,7 @@ test.describe("Table", () => {
 
   test.describe("Nested column headers", () => {
     test("uses pf-m-nested-column-header with subhead cells", async ({ page }) => {
-      const t = page.locator("table.pf-m-nested-column-header");
+      const t = page.locator("#tbl-nested");
       await expect(t).toBeVisible();
       await expect(t.locator("thead th.pf-v6-c-table__subhead")).toHaveCount(4);
     });
@@ -385,7 +401,7 @@ test.describe("Table", () => {
 
   test.describe("Sticky", () => {
     test("has a sticky header table with a sticky first column", async ({ page }) => {
-      const t = page.locator("table.pf-m-sticky-header");
+      const t = page.locator("#tbl-sticky");
       await expect(t).toBeVisible();
       await expect(t.locator("thead th.pf-v6-c-table__sticky-cell.pf-m-left")).toHaveCount(1);
       await expect(t.locator("tbody th.pf-v6-c-table__sticky-cell.pf-m-left").first()).toBeVisible();
@@ -394,7 +410,7 @@ test.describe("Table", () => {
 
   test.describe("Tree table", () => {
     test("is a treegrid; toggling a parent reveals its children", async ({ page }) => {
-      const t = page.locator("table.pf-m-tree-view");
+      const t = page.locator("#tbl-tree");
       await expect(t).toHaveAttribute("role", "treegrid");
       const child = t.locator('tbody tr[aria-level="2"]', { hasText: "db-primary" });
       await expect(child).toBeHidden();
@@ -418,6 +434,185 @@ test.describe("Table", () => {
       await expect(tfoot).toBeAttached();
       await expect(tfoot.locator('th[scope="row"]')).toContainText("Total users");
       await expect(tfoot.locator('td[colspan="2"]')).toContainText("3");
+    });
+  });
+
+  test.describe("Selectable indeterminate", () => {
+    test("select-all is indeterminate with a partial selection and checks all on change", async ({ page }) => {
+      const t = page.locator("#tbl-select-indeterminate");
+      const all = t.locator("thead input[type='checkbox']");
+      await expect(all).toHaveJSProperty("indeterminate", true);
+      await all.click();
+      await expect(all).toHaveJSProperty("indeterminate", false);
+      for (const box of await t.locator("tbody input[type='checkbox']").all()) {
+        await expect(box).toBeChecked();
+      }
+    });
+  });
+
+  test.describe("Overflow menu", () => {
+    test("shows the button group on large screens", async ({ page }) => {
+      const cell = page.locator("#tbl-overflow-menu .pf-v6-c-overflow-menu").first();
+      await expect(cell.locator(".pf-v6-c-overflow-menu__group button")).toHaveCount(2);
+      await expect(cell.locator(".pf-v6-c-overflow-menu__content")).toBeVisible();
+      await expect(cell.locator(".pf-v6-c-overflow-menu__control")).toBeHidden();
+    });
+
+    test("collapses to a working kebab below lg", async ({ page }) => {
+      await page.setViewportSize({ width: 800, height: 800 });
+      const cell = page.locator("#tbl-overflow-menu .pf-v6-c-overflow-menu").first();
+      await expect(cell.locator(".pf-v6-c-overflow-menu__content")).toBeHidden();
+      const kebab = cell.locator(".pf-v6-c-overflow-menu__control .pf-v6-c-menu-toggle");
+      await expect(kebab).toBeVisible();
+      await kebab.click();
+      await expect(cell.locator(".pf-v6-c-menu__item").first()).toBeVisible();
+    });
+  });
+
+  test.describe("Text control", () => {
+    test("applies the text behavior modifiers per cell", async ({ page }) => {
+      const t = page.locator("#tbl-text-control");
+      await expect(t.locator("thead th.pf-m-wrap")).toHaveCount(1);
+      await expect(t.locator("thead th.pf-m-fit-content")).toHaveCount(1);
+      await expect(t.locator("tbody td.pf-m-truncate")).toHaveCount(1);
+      await expect(t.locator("tbody td.pf-m-break-word")).toHaveCount(1);
+      await expect(t.locator("tbody td.pf-m-nowrap")).toHaveCount(1);
+    });
+  });
+
+  test.describe("Table text element", () => {
+    test("wraps cell content in pf-v6-c-table__text, including a truncated link", async ({ page }) => {
+      const t = page.locator("#tbl-table-text");
+      await expect(t.locator(".pf-v6-c-table__text").first()).toBeVisible();
+      await expect(t.locator("a.pf-v6-c-table__text.pf-m-truncate")).toHaveCount(1);
+      await expect(t.locator(".pf-v6-l-stack .pf-v6-c-table__text")).toHaveCount(2);
+    });
+  });
+
+  test.describe("Long strings", () => {
+    test("renders the unmodified comparison rows", async ({ page }) => {
+      await expect(page.locator("#tbl-long-strings tbody tr")).toHaveCount(2);
+    });
+  });
+
+  test.describe("Width constrained", () => {
+    test("caps the long column and truncates the second body", async ({ page }) => {
+      const t = page.locator("#tbl-width-constrained");
+      await expect(t.locator("thead th.pf-m-width-40")).toHaveCount(1);
+      await expect(t.locator("tbody td.pf-m-truncate")).toHaveCount(1);
+    });
+  });
+
+  test.describe("Breakpoint modifiers", () => {
+    test("xl viewport shows lg-visible columns and hides the md-only column", async ({ page }) => {
+      const t = page.locator("#tbl-breakpoints");
+      await expect(t.locator("thead th", { hasText: "Pull requests" })).toBeVisible();
+      await expect(t.locator("thead th", { hasText: "Repository" })).toBeHidden();
+    });
+
+    test("between md and lg the columns swap", async ({ page }) => {
+      await page.setViewportSize({ width: 900, height: 800 });
+      const t = page.locator("#tbl-breakpoints");
+      await expect(t.locator("thead th", { hasText: "Repository" })).toBeVisible();
+      await expect(t.locator("thead th", { hasText: "Pull requests" })).toBeHidden();
+    });
+  });
+
+  test.describe("Favorites sortable", () => {
+    test("sorting reorders rows by current favorite state", async ({ page }) => {
+      const t = page.locator("#tbl-favorites-sortable");
+      const sortHeader = t.locator("thead th.pf-v6-c-table__sort");
+      const rows = t.locator("tbody tr");
+      await t.locator("tbody tr", { hasText: "Bob Johnson" }).locator(".pf-v6-c-table__favorite button").click();
+      await sortHeader.locator("button").click();
+      await expect(sortHeader).toHaveAttribute("aria-sort", "descending");
+      await expect(rows.nth(0)).toContainText("John Doe");
+      await expect(rows.nth(1)).toContainText("Bob Johnson");
+      await expect(rows.nth(2)).toContainText("Jane Smith");
+      await sortHeader.locator("button").click();
+      await expect(sortHeader).toHaveAttribute("aria-sort", "ascending");
+      await expect(rows.nth(0)).toContainText("Jane Smith");
+    });
+  });
+
+  test.describe("Nested headers and expandable rows", () => {
+    test("control columns span both header rows and rows expand", async ({ page }) => {
+      const t = page.locator("#tbl-nested-expandable");
+      await expect(t).toHaveClass(/pf-m-nested-column-header/);
+      await expect(t.locator("thead th.pf-v6-c-table__subhead")).toHaveCount(2);
+      await expect(t.locator("thead td[rowspan='2']")).toHaveCount(2);
+      const detail = t.locator(".pf-v6-c-table__expandable-row").first();
+      await expect(detail).toBeHidden();
+      await t.locator(".pf-v6-c-table__toggle button").first().click();
+      await expect(detail).toBeVisible();
+    });
+  });
+
+  test.describe("Nested sticky header", () => {
+    test("combines nested headers with a sticky header", async ({ page }) => {
+      const t = page.locator("#tbl-nested-sticky");
+      await expect(t).toHaveClass(/pf-m-nested-column-header/);
+      await expect(t).toHaveClass(/pf-m-sticky-header/);
+      await expect(t.locator("thead th.pf-v6-c-table__subhead")).toHaveCount(4);
+    });
+  });
+
+  test.describe("Sticky footer", () => {
+    test("tfoot is pinned via pf-m-sticky-footer", async ({ page }) => {
+      const t = page.locator("#tbl-sticky-footer");
+      await expect(t).toHaveClass(/pf-m-sticky-footer/);
+      await expect(t.locator("tfoot.pf-v6-c-table__tfoot th")).toContainText("Total");
+    });
+  });
+
+  test.describe("Multiple sticky columns", () => {
+    test("two left columns are sticky with a boundary border", async ({ page }) => {
+      const head = page.locator("#tbl-multiple-sticky thead tr").first();
+      await expect(head.locator("th.pf-v6-c-table__sticky-cell.pf-m-left")).toHaveCount(2);
+      await expect(head.locator("th.pf-m-border-right")).toHaveCount(1);
+    });
+  });
+
+  test.describe("Sticky right column", () => {
+    test("the trailing column is sticky right", async ({ page }) => {
+      const t = page.locator("#tbl-sticky-right");
+      await expect(t.locator(".pf-v6-c-table__sticky-cell.pf-m-right")).toHaveCount(5);
+      await expect(t.locator("thead th.pf-m-border-left")).toHaveCount(1);
+    });
+  });
+
+  test.describe("Tree table with checkboxes", () => {
+    test("parent checkbox cascades and shows indeterminate for partial selection", async ({ page }) => {
+      const t = page.locator("#tbl-tree-checkboxes");
+      const parent = t.locator("tbody tr").nth(0).locator("input[type='checkbox']");
+      const web1 = t.locator("tbody tr").nth(1).locator("input[type='checkbox']");
+      const web2 = t.locator("tbody tr").nth(2).locator("input[type='checkbox']");
+      await web1.click();
+      await expect(parent).toHaveJSProperty("indeterminate", true);
+      await parent.click();
+      await expect(web1).toBeChecked();
+      await expect(web2).toBeChecked();
+      await expect(parent).toHaveJSProperty("indeterminate", false);
+    });
+  });
+
+  test.describe("Tree table with icons", () => {
+    test("parents show an open folder while expanded, children show leaves", async ({ page }) => {
+      const t = page.locator("#tbl-tree-icons");
+      await expect(t.locator(".pf-v6-c-table__tree-view-icon .fa-folder-open")).toHaveCount(1);
+      await expect(t.locator(".pf-v6-c-table__tree-view-icon .fa-leaf")).toHaveCount(2);
+      await t.locator(".pf-v6-c-table__toggle button").click();
+      await expect(t.locator(".pf-v6-c-table__tree-view-icon .fa-folder")).toHaveCount(1);
+    });
+  });
+
+  test.describe("Tree table flat", () => {
+    test("has no inset, no toggles and stays role=grid", async ({ page }) => {
+      const t = page.locator("#tbl-tree-flat");
+      await expect(t).toHaveClass(/pf-m-no-inset/);
+      await expect(t).toHaveAttribute("role", "grid");
+      await expect(t.locator(".pf-v6-c-table__toggle")).toHaveCount(0);
+      await expect(t.locator("tbody tr")).toHaveCount(4);
     });
   });
 

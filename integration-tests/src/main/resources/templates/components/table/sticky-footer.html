@@ -1,0 +1,31 @@
+{! Sticky footer — pf-m-sticky-footer pins the tfoot to the bottom of the scroll container while
+   the body scrolls (bounded here by the inner wrapper's max-block-size). !}
+<div class="pf-v6-c-scroll-outer-wrapper">
+  <div class="pf-v6-c-scroll-inner-wrapper" style="max-block-size: 13rem; overflow: auto">
+    <table class="pf-v6-c-table pf-m-sticky-footer" role="grid" id="tbl-sticky-footer" aria-label="Table with a sticky footer">
+      <thead>
+        <tr>
+          <th scope="col">Invoice</th>
+          <th scope="col">Customer</th>
+          <th scope="col">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>INV-1041</td><td>Acme Corp</td><td>$1,200</td></tr>
+        <tr><td>INV-1042</td><td>Globex</td><td>$860</td></tr>
+        <tr><td>INV-1043</td><td>Initech</td><td>$2,430</td></tr>
+        <tr><td>INV-1044</td><td>Umbrella</td><td>$540</td></tr>
+        <tr><td>INV-1045</td><td>Stark Industries</td><td>$3,100</td></tr>
+        <tr><td>INV-1046</td><td>Wayne Enterprises</td><td>$1,780</td></tr>
+        <tr><td>INV-1047</td><td>Hooli</td><td>$920</td></tr>
+        <tr><td>INV-1048</td><td>Vandelay</td><td>$610</td></tr>
+      </tbody>
+      <tfoot class="pf-v6-c-table__tfoot">
+        <tr>
+          <th scope="row" colspan="2">Total</th>
+          <td>$11,440</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

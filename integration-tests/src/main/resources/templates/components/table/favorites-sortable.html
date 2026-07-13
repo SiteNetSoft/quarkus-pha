@@ -1,0 +1,97 @@
+{! Favorites sortable — the favorite column header is a live sort control: clicking it reorders
+   the rows by favorited state (asc/desc), re-appending the existing server-rendered rows.
+   Star state is shared table-level Alpine state so sorting always reflects current favorites. !}
+<table
+  class="pf-v6-c-table"
+  role="grid"
+  id="tbl-favorites-sortable"
+  aria-label="Favoritable table sortable by favorites"
+  x-data="{
+    fav: { john: true, jane: false, bob: false },
+    dir: null,
+    sortFavs() {
+      this.dir = this.dir === 'desc' ? 'asc' : 'desc';
+      const rows = Array.from(this.$refs.body.children);
+      rows.sort((a, b) => {
+        const d = (this.fav[b.dataset.key] ? 1 : 0) - (this.fav[a.dataset.key] ? 1 : 0);
+        return this.dir === 'desc' ? d : -d;
+      });
+      rows.forEach((r) => this.$refs.body.appendChild(r));
+    }
+  }"
+>
+  <thead>
+    <tr>
+      <th
+        scope="col"
+        class="pf-v6-c-table__favorite pf-v6-c-table__sort"
+        :class="dir ? 'pf-m-selected' : ''"
+        :aria-sort="dir === 'desc' ? 'descending' : (dir === 'asc' ? 'ascending' : 'none')"
+      >
+        <button type="button" class="pf-v6-c-table__button" @click="sortFavs()" aria-label="Sort by favorites">
+          <span class="pf-v6-c-table__button-content">
+            <span class="pf-v6-c-table__sort-indicator">
+              <i class="fas" :class="dir ? (dir === 'desc' ? 'fa-long-arrow-alt-down' : 'fa-long-arrow-alt-up') : 'fa-arrows-alt-v'" aria-hidden="true"></i>
+            </span>
+          </span>
+        </button>
+      </th>
+      <th scope="col">Name</th>
+      <th scope="col">Status</th>
+      <th scope="col">Role</th>
+    </tr>
+  </thead>
+  <tbody x-ref="body">
+    <tr data-key="john">
+      <td class="pf-v6-c-table__favorite">
+        <button
+          type="button"
+          class="pf-v6-c-button pf-m-plain"
+          :class="fav.john ? 'pf-m-favorited' : ''"
+          :aria-label="fav.john ? 'Unfavorite John Doe' : 'Favorite John Doe'"
+          :aria-pressed="fav.john"
+          @click="fav.john = !fav.john"
+        >
+          <span class="pf-v6-c-button__icon">{icons:svg('fa:star').raw}</span>
+        </button>
+      </td>
+      <td>John Doe</td>
+      <td>Active</td>
+      <td>Admin</td>
+    </tr>
+    <tr data-key="jane">
+      <td class="pf-v6-c-table__favorite">
+        <button
+          type="button"
+          class="pf-v6-c-button pf-m-plain"
+          :class="fav.jane ? 'pf-m-favorited' : ''"
+          :aria-label="fav.jane ? 'Unfavorite Jane Smith' : 'Favorite Jane Smith'"
+          :aria-pressed="fav.jane"
+          @click="fav.jane = !fav.jane"
+        >
+          <span class="pf-v6-c-button__icon">{icons:svg('fa:star').raw}</span>
+        </button>
+      </td>
+      <td>Jane Smith</td>
+      <td>Inactive</td>
+      <td>Editor</td>
+    </tr>
+    <tr data-key="bob">
+      <td class="pf-v6-c-table__favorite">
+        <button
+          type="button"
+          class="pf-v6-c-button pf-m-plain"
+          :class="fav.bob ? 'pf-m-favorited' : ''"
+          :aria-label="fav.bob ? 'Unfavorite Bob Johnson' : 'Favorite Bob Johnson'"
+          :aria-pressed="fav.bob"
+          @click="fav.bob = !fav.bob"
+        >
+          <span class="pf-v6-c-button__icon">{icons:svg('fa:star').raw}</span>
+        </button>
+      </td>
+      <td>Bob Johnson</td>
+      <td>Active</td>
+      <td>Viewer</td>
+    </tr>
+  </tbody>
+</table>
