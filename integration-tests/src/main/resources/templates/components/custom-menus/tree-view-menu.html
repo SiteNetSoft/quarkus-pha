@@ -1,0 +1,171 @@
+{! Tree view menu — PF custom-menus demo: a menu toggle opening a raised panel that hosts a
+   checkbox tree view (Status filter). The tree reuses the phaTreeView() factory (roving
+   focus, checkbox cascade); the toggle label reflects the open state like PF's example. !}
+<div x-data="{ open: false }" style="position: relative; display: inline-block">
+  <button
+    class="pf-v6-c-menu-toggle"
+    type="button"
+    :class="open ? 'pf-m-expanded' : ''"
+    :aria-expanded="open"
+    @click="open = !open"
+    id="cm-tree-toggle"
+  >
+    <span class="pf-v6-c-menu-toggle__text" x-text="open ? 'Expanded' : 'Collapsed'">Collapsed</span>
+    <span class="pf-v6-c-menu-toggle__controls">
+      <span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span>
+    </span>
+  </button>
+  <div
+    class="pf-v6-c-panel pf-m-raised"
+    x-show="open"
+    x-cloak
+    @click.outside="open = false"
+    style="position: absolute; top: 100%; left: 0; z-index: 200; width: 300px"
+  >
+    <div class="pf-v6-c-panel__main">
+      <section>
+        <div class="pf-v6-c-panel__main-body" style="padding-bottom: 0">
+          <h4 class="pf-v6-c-title pf-m-md">Status</h4>
+        </div>
+        <div class="pf-v6-c-panel__main-body" style="padding: 0">
+          <div class="pf-v6-c-tree-view" x-data="phaTreeView()">
+            <ul
+              class="pf-v6-c-tree-view__list"
+              role="tree"
+              aria-multiselectable="false"
+              aria-label="Status tree menu"
+              @keydown="handleKeyNav($event)"
+              @click="handleClick($event)"
+            >
+              <li class="pf-v6-c-tree-view__list-item" role="treeitem" aria-checked="false" aria-expanded="false" tabindex="0">
+                <div class="pf-v6-c-tree-view__content">
+                  <div class="pf-v6-c-tree-view__node">
+                    <span class="pf-v6-c-tree-view__node-container">
+                      <button
+                        class="pf-v6-c-tree-view__node-toggle"
+                        id="cm-tree-toggle-ready"
+                        aria-label="Toggle"
+                        aria-labelledby="cm-tree-toggle-ready cm-tree-text-ready"
+                      >
+                        <span class="pf-v6-c-tree-view__node-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+                      </button>
+                      <span class="pf-v6-c-tree-view__node-check">
+                        <span class="pf-v6-c-check pf-m-standalone">
+                          <input
+                            class="pf-v6-c-check__input"
+                            type="checkbox"
+                            id="cm-tree-check-ready"
+                            aria-label="Select"
+                            aria-labelledby="cm-tree-check-ready cm-tree-text-ready"
+                          />
+                        </span>
+                      </span>
+                      <span class="pf-v6-c-tree-view__node-text" id="cm-tree-text-ready">Ready</span>
+                      <span class="pf-v6-c-tree-view__node-count"><span class="pf-v6-c-badge pf-m-read">2</span></span>
+                    </span>
+                  </div>
+                </div>
+                <ul class="pf-v6-c-tree-view__list" role="group">
+                  <li class="pf-v6-c-tree-view__list-item" role="treeitem" aria-checked="false" tabindex="-1">
+                    <div class="pf-v6-c-tree-view__content">
+                      <div class="pf-v6-c-tree-view__node">
+                        <span class="pf-v6-c-tree-view__node-container">
+                          <span class="pf-v6-c-tree-view__node-check">
+                            <span class="pf-v6-c-check pf-m-standalone">
+                              <input
+                                class="pf-v6-c-check__input"
+                                type="checkbox"
+                                id="cm-tree-check-server"
+                                aria-label="Select"
+                                aria-labelledby="cm-tree-check-server cm-tree-text-server"
+                              />
+                            </span>
+                          </span>
+                          <span class="pf-v6-c-tree-view__node-text" id="cm-tree-text-server">Server</span>
+                          <span class="pf-v6-c-tree-view__node-count"><span class="pf-v6-c-badge pf-m-read">1</span></span>
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="pf-v6-c-tree-view__list-item" role="treeitem" aria-checked="false" tabindex="-1">
+                    <div class="pf-v6-c-tree-view__content">
+                      <div class="pf-v6-c-tree-view__node">
+                        <span class="pf-v6-c-tree-view__node-container">
+                          <span class="pf-v6-c-tree-view__node-check">
+                            <span class="pf-v6-c-check pf-m-standalone">
+                              <input
+                                class="pf-v6-c-check__input"
+                                type="checkbox"
+                                id="cm-tree-check-worker"
+                                aria-label="Select"
+                                aria-labelledby="cm-tree-check-worker cm-tree-text-worker"
+                              />
+                            </span>
+                          </span>
+                          <span class="pf-v6-c-tree-view__node-text" id="cm-tree-text-worker">Worker</span>
+                          <span class="pf-v6-c-tree-view__node-count"><span class="pf-v6-c-badge pf-m-read">1</span></span>
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li class="pf-v6-c-tree-view__list-item" role="treeitem" aria-checked="false" aria-expanded="false" tabindex="-1">
+                <div class="pf-v6-c-tree-view__content">
+                  <div class="pf-v6-c-tree-view__node">
+                    <span class="pf-v6-c-tree-view__node-container">
+                      <button
+                        class="pf-v6-c-tree-view__node-toggle"
+                        id="cm-tree-toggle-notready"
+                        aria-label="Toggle"
+                        aria-labelledby="cm-tree-toggle-notready cm-tree-text-notready"
+                      >
+                        <span class="pf-v6-c-tree-view__node-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+                      </button>
+                      <span class="pf-v6-c-tree-view__node-check">
+                        <span class="pf-v6-c-check pf-m-standalone">
+                          <input
+                            class="pf-v6-c-check__input"
+                            type="checkbox"
+                            id="cm-tree-check-notready"
+                            aria-label="Select"
+                            aria-labelledby="cm-tree-check-notready cm-tree-text-notready"
+                          />
+                        </span>
+                      </span>
+                      <span class="pf-v6-c-tree-view__node-text" id="cm-tree-text-notready">Not ready</span>
+                      <span class="pf-v6-c-tree-view__node-count"><span class="pf-v6-c-badge pf-m-read">1</span></span>
+                    </span>
+                  </div>
+                </div>
+                <ul class="pf-v6-c-tree-view__list" role="group">
+                  <li class="pf-v6-c-tree-view__list-item" role="treeitem" aria-checked="false" tabindex="-1">
+                    <div class="pf-v6-c-tree-view__content">
+                      <div class="pf-v6-c-tree-view__node">
+                        <span class="pf-v6-c-tree-view__node-container">
+                          <span class="pf-v6-c-tree-view__node-check">
+                            <span class="pf-v6-c-check pf-m-standalone">
+                              <input
+                                class="pf-v6-c-check__input"
+                                type="checkbox"
+                                id="cm-tree-check-updating"
+                                aria-label="Select"
+                                aria-labelledby="cm-tree-check-updating cm-tree-text-updating"
+                              />
+                            </span>
+                          </span>
+                          <span class="pf-v6-c-tree-view__node-text" id="cm-tree-text-updating">Updating</span>
+                          <span class="pf-v6-c-tree-view__node-count"><span class="pf-v6-c-badge pf-m-read">1</span></span>
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
