@@ -1,0 +1,61 @@
+{! Date select menu — PF custom-menus demo: a menu toggle opening a raised panel hosting the
+   calendar-month component (the shared May 2026 grid from the calendar-month demo, included
+   as-is). Date clicks are handled by delegation on the wrapper: picking a day moves the
+   pf-m-selected cell, updates the toggle's timestamp, and closes the panel. !}
+<div
+  x-data="{
+    open: false,
+    day: 20,
+    pick(e) {
+      const btn = e.target.closest('.pf-v6-c-calendar-month__date');
+      if (!btn) return;
+      const cell = btn.closest('.pf-v6-c-calendar-month__dates-cell');
+      if (!cell || cell.classList.contains('pf-m-adjacent-month')) return;
+      this.$root.querySelectorAll('.pf-v6-c-calendar-month__dates-cell.pf-m-selected').forEach((c) => {
+        c.classList.remove('pf-m-selected');
+      });
+      cell.classList.add('pf-m-selected');
+      this.day = btn.textContent.trim();
+      this.open = false;
+    }
+  }"
+  style="position: relative; display: inline-block"
+>
+  <button
+    class="pf-v6-c-menu-toggle"
+    type="button"
+    :class="open ? 'pf-m-expanded' : ''"
+    :aria-expanded="open"
+    @click="open = !open"
+    id="cm-date-toggle"
+    style="min-width: 250px"
+  >
+    <span class="pf-v6-c-menu-toggle__text">
+      <span style="vertical-align: middle; margin-right: 8px">Selected</span>
+      <span class="pf-v6-c-timestamp"
+        ><time
+          class="pf-v6-c-timestamp__text"
+          datetime="2026-05-20"
+          :datetime="'2026-05-' + String(day).padStart(2, '0')"
+          x-text="'(May ' + day + ', 2026)'"
+          >(May 20, 2026)</time
+        ></span
+      >
+    </span>
+    <span class="pf-v6-c-menu-toggle__controls">
+      <span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span>
+    </span>
+  </button>
+  <div
+    class="pf-v6-c-panel pf-m-raised"
+    x-show="open"
+    x-cloak
+    @click.outside="open = false"
+    @click="pick($event)"
+    style="position: absolute; top: 100%; left: 0; z-index: 200"
+  >
+    <div class="pf-v6-c-panel__main">
+      <div class="pf-v6-c-panel__main-body">{#include components/calendar-month/basic /}</div>
+    </div>
+  </div>
+</div>
