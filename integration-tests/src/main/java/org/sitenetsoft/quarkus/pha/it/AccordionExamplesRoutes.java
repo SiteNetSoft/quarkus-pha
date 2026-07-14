@@ -25,6 +25,7 @@ public class AccordionExamplesRoutes {
         "single-expand",
         "fixed-multiple",
         "bordered",
+        "large-bordered",
         "toggle-start"
     );
 
