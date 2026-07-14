@@ -86,6 +86,15 @@
                                 </li>
                                 <li class="pf-v6-c-jump-links__item ws-toc-item">
                                   <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#large-bordered" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Large bordered</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
                                     ><a href="#toggle-start" class="pf-v6-c-button pf-m-link"
                                       ><span class="pf-v6-c-button__text"
                                         ><span class="pf-v6-c-jump-links__link-text">Toggle at start</span></span
@@ -172,6 +181,14 @@
                           items are separated by bottom borders and the container has no rounded corners.
                         </p>
                         {/description} {#content}{#include components/accordion/bordered /}{/content} {/include}
+                        {#include partials/example-card title="Large bordered" slug="large-bordered"
+                        component="accordion"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          <code class="ws-code">displayLg=true</code> with <code class="ws-code">bordered=true</code> —
+                          PF.org's "Display size large": bigger toggle type and inset, here with an inline
+                          call-to-action link in the last item's body.
+                        </p>
+                        {/description} {#content}{#include components/accordion/large-bordered /}{/content} {/include}
                         {#include partials/example-card title="Toggle at start" slug="toggle-start"
                         component="accordion"} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
