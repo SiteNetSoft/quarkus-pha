@@ -5,12 +5,46 @@ test.describe("Accordion", () => {
     await page.goto("/components/accordion");
   });
 
-  test("page loads with all 5 example sections in ToC", async ({ page }) => {
+  test("page loads with all 6 example sections in ToC", async ({ page }) => {
     await expect(page.locator("#definition-list")).toBeVisible();
     await expect(page.locator("#single-expand")).toBeVisible();
     await expect(page.locator("#fixed-multiple")).toBeVisible();
     await expect(page.locator("#bordered")).toBeVisible();
+    await expect(page.locator("#large-bordered")).toBeVisible();
     await expect(page.locator("#toggle-start")).toBeVisible();
+  });
+
+  test("toggle icon is angle-down (points up when expanded, not left)", async ({ page }) => {
+    const item = page.locator("#acc-bordered .pf-v6-c-accordion__toggle").first();
+    // angle-down glyph (points down at rest); PF CSS rotates the icon -180deg when expanded
+    await expect(item.locator(".pf-v6-c-accordion__toggle-icon svg")).toHaveAttribute("viewBox", "0 0 384 512");
+    const transformWhen = () =>
+      item.locator(".pf-v6-c-accordion__toggle-icon").evaluate((el) => getComputedStyle(el).transform);
+    const before = await transformWhen();
+    await item.click();
+    await expect.poll(transformWhen).not.toBe(before);
+  });
+
+  test.describe("Large bordered variant", () => {
+    test("carries pf-m-display-lg + pf-m-bordered and a call-to-action link", async ({ page }) => {
+      const acc = page.locator("#acc-large-bordered");
+      await expect(acc).toHaveClass(/pf-m-display-lg/);
+      await expect(acc).toHaveClass(/pf-m-bordered/);
+      await acc.locator(".pf-v6-c-accordion__toggle", { hasText: "Item three" }).click();
+      const cta = acc.locator("a.pf-v6-c-button.pf-m-link.pf-m-inline");
+      await expect(cta).toBeVisible();
+      await expect(cta).toHaveText("Call to action");
+    });
+  });
+
+  test("fixed variant overflows and scrolls inside the expanded body", async ({ page }) => {
+    // 1280px default viewport is PF xl — the demo column gets so wide the prose
+    // stays under the 9.375rem cap; measure at a typical content width instead.
+    await page.setViewportSize({ width: 760, height: 900 });
+    const acc = page.locator("#acc-fixed");
+    await acc.locator(".pf-v6-c-accordion__toggle", { hasText: "Item one" }).click();
+    const body = acc.locator(".pf-v6-c-accordion__expandable-content.pf-m-fixed").first();
+    await expect.poll(() => body.evaluate((el) => el.scrollHeight - el.clientHeight)).toBeGreaterThan(0);
   });
 
   test.describe("Definition list variant", () => {
