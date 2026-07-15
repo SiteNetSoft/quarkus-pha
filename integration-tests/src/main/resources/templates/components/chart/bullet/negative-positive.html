@@ -1,0 +1,27 @@
+<div
+  class="pha-c-chart"
+  id="ch-bullet-negative-positive"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'axis' },
+      grid: { left: 120, right: 30, top: 20, bottom: 30 },
+      xAxis: { type: 'value', min: -60, max: 100 },
+      yAxis: { type: 'category', data: ['Net new ARR', 'Churn impact', 'Expansion'] },
+      series: [
+        { name: 'Negative', type: 'bar', stack: 'range', itemStyle: { color: '#f2f2f2' }, barWidth: 30, data: [-60, -60, -60] },
+        { name: 'Critical', type: 'bar', stack: 'range', itemStyle: { color: '#f2f2f2' }, barWidth: 30, data: [50, 40, 30] },
+        { name: 'Warning',  type: 'bar', stack: 'range', itemStyle: { color: '#e0e0e0' }, barWidth: 30, data: [25, 30, 30] },
+        { name: 'Good',     type: 'bar', stack: 'range', itemStyle: { color: '#c7c7c7' }, barWidth: 30, data: [25, 30, 40] },
+        /* barGap -66.7% = -(30+10)/(2*30): centers the 10px measure on the 30px range band */
+        { name: 'Actual',   type: 'bar', barGap: '-66.7%', itemStyle: { color: '#06c' }, barWidth: 10, z: 10, data: [65, -35, 40] },
+        {
+          name: 'Target', type: 'scatter', symbol: 'rect', symbolSize: [3, 26], symbolOffset: [0, 0],
+          itemStyle: { color: '#151515' }, z: 20,
+          data: [[80, 'Net new ARR'], [-20, 'Churn impact'], [55, 'Expansion']]
+        }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>

@@ -1,0 +1,43 @@
+<div
+  class="pha-c-chart"
+  id="ch-box-plot-labels"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'item' },
+      legend: { bottom: 0, data: ['Latency'] },
+      grid: { bottom: 60 },
+      xAxis: { type: 'category', data: ['api', 'auth', 'payments', 'search', 'storage'], boundaryGap: true },
+      yAxis: { type: 'value', name: 'Latency (ms)' },
+      series: [
+        {
+          name: 'Latency',
+          type: 'boxplot',
+          data: [
+            [40, 55, 70, 95, 140],
+            [30, 45, 60, 80, 120],
+            [55, 75, 100, 145, 220],
+            [25, 35, 45, 60, 110],
+            [60, 80, 110, 160, 240]
+          ]
+        },
+        {
+          /* Boxplot has no label support — an invisible scatter carries the max-value labels. */
+          name: 'Max',
+          type: 'scatter',
+          symbolSize: 1,
+          itemStyle: { color: 'rgba(0, 0, 0, 0)' },
+          silent: true,
+          label: {
+            show: true,
+            position: 'top',
+            color: '#151515',
+            formatter: function (p) { return p.value[1]; }
+          },
+          data: [['api', 140], ['auth', 120], ['payments', 220], ['search', 110], ['storage', 240]]
+        }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>

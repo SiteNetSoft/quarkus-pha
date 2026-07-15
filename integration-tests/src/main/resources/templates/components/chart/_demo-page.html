@@ -44,19 +44,11 @@
                         </h2>
                       </div>
                     </div>
-                    {#include partials/example-card title="Basic" slug="basic" component="chart/{type}"
-                    description="Default rendering via &lt;code class=&quot;ws-code&quot;&gt;phaChart&lt;/code&gt; with
-                    the PatternFly theme."} {#content} {#if type == 'area'}{#include components/chart/area/basic /}{/if}
-                    {#if type == 'bar'}{#include components/chart/bar/basic /}{/if} {#if type == 'box-plot'}{#include
-                    components/chart/box-plot/basic /}{/if} {#if type == 'bullet'}{#include
-                    components/chart/bullet/basic /}{/if} {#if type == 'donut'}{#include components/chart/donut/basic
-                    /}{/if} {#if type == 'donut-utilization'}{#include components/chart/donut-utilization/basic /}{/if}
-                    {#if type == 'line'}{#include components/chart/line/basic /}{/if} {#if type == 'pie'}{#include
-                    components/chart/pie/basic /}{/if} {#if type == 'sankey'}{#include components/chart/sankey/basic
-                    /}{/if} {#if type == 'scatter'}{#include components/chart/scatter/basic /}{/if} {#if type ==
-                    'sparkline'}{#include components/chart/sparkline/basic /}{/if} {#if type == 'stack'}{#include
-                    components/chart/stack/basic /}{/if} {#if type == 'threshold'}{#include
-                    components/chart/threshold/basic /}{/if} {/content} {/include}
+                    {! Example fragments are rendered by ChartExamplesRoutes (Qute includes must be static). !}
+                    {#for ex in examples} {#include partials/example-card title=ex.title slug=ex.slug
+                    component=('chart/' + type)} {#description}
+                    <p class="pf-v6-c-content--p pf-m-editorial ws-p">{ex.description.raw}</p>
+                    {/description} {#content}{ex.html.raw}{/content} {/include} {/for}
 
                     <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                       <h2

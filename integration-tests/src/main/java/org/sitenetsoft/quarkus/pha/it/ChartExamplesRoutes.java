@@ -15,13 +15,13 @@ import jakarta.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Routing for the 13 chart-type demo pages.
  *
- *   GET /components/chart/{type}                  → shared demo page with Basic example
+ *   GET /components/chart/{type}                  → shared demo page with the type's example list
  *   GET /components/chart/{type}/{example}        → standalone wrapper around the example fragment
  *   GET /components/chart/{type}/source/{example} → raw Qute source as text/plain
  *
@@ -87,7 +87,77 @@ public class ChartExamplesRoutes {
         Map.entry("tooltips",        "Tooltip <code class=\"ws-code\">trigger</code> modes (item vs. axis) and the gotcha with ECharts placeholder tokens inside Qute templates.")
     );
 
-    private static final Set<String> EXAMPLES = Set.of("basic");
+    /** One example card on a chart-type page. Description is HTML. */
+    record Example(String slug, String title, String description) {}
+
+    private static final Example BASIC = new Example("basic", "Basic",
+        "Default rendering via <code class=\"ws-code\">phaChart</code> with the PatternFly theme.");
+
+    /**
+     * Slug → ordered example list. Types not listed here have just the Basic example.
+     * Every slug must have a matching templates/components/chart/{type}/{slug}.html fragment.
+     */
+    private static final Map<String, List<Example>> CHART_EXAMPLES = Map.ofEntries(
+        Map.entry("area", List.of(
+            BASIC,
+            new Example("teal-with-axis-label", "Teal with axis label",
+                "Single-hue teal scale via a per-chart <code class=\"ws-code\">color</code> array, "
+                + "a named y-axis, and a bottom-aligned legend.")
+        )),
+        Map.entry("bar", List.of(
+            BASIC,
+            new Example("alerts-timeline", "Alerts timeline",
+                "Horizontal severity-stacked alert counts per day. PF v6 status tokens override the palette: "
+                + "danger, warning, info.")
+        )),
+        Map.entry("box-plot", List.of(
+            BASIC,
+            new Example("labels", "With labels and bottom legend",
+                "Permanent max-value labels above each box and a bottom-aligned legend. ECharts boxplot "
+                + "has no label support, so an invisible companion scatter series carries the labels.")
+        )),
+        Map.entry("bullet", List.of(
+            BASIC,
+            new Example("segmented-measure", "Segmented primary measure",
+                "The primary measure is split into stacked segments (committed vs. projected) on a "
+                + "<code class=\"ws-code\">measure</code> stack overlaid on the range band via "
+                + "<code class=\"ws-code\">barGap: '-100%'</code>."),
+            new Example("measure-dot", "Primary measure dot",
+                "A dot (scatter symbol) marks the current value instead of a bar — useful when the measure "
+                + "is a point-in-time reading rather than an accumulation."),
+            new Example("error-measure-custom-ticks", "Error measure and custom ticks",
+                "Grey whiskers mark the error bounds around each measure; the value axis uses a fixed "
+                + "<code class=\"ws-code\">interval</code> and a percent-sign label formatter."),
+            new Example("negative-positive", "Negative and positive measures",
+                "The value axis crosses zero: negative range band and measures stack below zero on the "
+                + "same <code class=\"ws-code\">stack</code>, so both signs share one row."),
+            new Example("reversed", "Reversed",
+                "Direction flipped with <code class=\"ws-code\">xAxis.inverse</code>; category labels move "
+                + "to the right so the chart reads right-to-left."),
+            new Example("vertical-segmented", "Vertical with segmented measure",
+                "Axis-swapped orientation — categories on the x-axis, values on the y-axis — with the "
+                + "segmented measure overlay.")
+        )),
+        Map.entry("scatter", List.of(
+            BASIC,
+            new Example("line-combo", "Scatter with line",
+                "Sampled points overlaid on a smoothed trend line sharing the same axes; the axis-trigger "
+                + "tooltip snaps to both series at once.")
+        )),
+        Map.entry("stack", List.of(
+            BASIC,
+            new Example("horizontal", "Horizontal",
+                "Orientation swap: categories on the y-axis, values on the x-axis. Everything else matches "
+                + "the basic stack."),
+            new Example("monthly-data", "Monthly data",
+                "A year of bandwidth by device class. The tooltip uses "
+                + "<code class=\"ws-code\">valueFormatter</code> to append units to every series row.")
+        ))
+    );
+
+    private static List<Example> examplesFor(String type) {
+        return CHART_EXAMPLES.getOrDefault(type, List.of(BASIC));
+    }
 
     @Inject
     Engine engine;
@@ -135,10 +205,24 @@ public class ChartExamplesRoutes {
         if (title == null) {
             throw new NotFoundException("Unknown chart type: " + type);
         }
+        List<Map<String, String>> examples = examplesFor(type).stream()
+            .map(ex -> {
+                Template fragment = engine.getTemplate("components/chart/" + type + "/" + ex.slug());
+                if (fragment == null) {
+                    throw new NotFoundException("Missing example fragment: " + type + "/" + ex.slug());
+                }
+                return Map.of(
+                    "slug", ex.slug(),
+                    "title", ex.title(),
+                    "description", ex.description(),
+                    "html", fragment.instance().render());
+            })
+            .toList();
         return demoPage.instance()
             .data("type", type)
             .data("title", title)
-            .data("intro", INTROS.get(type));
+            .data("intro", INTROS.get(type))
+            .data("examples", examples);
     }
 
     @GET
@@ -177,7 +261,7 @@ public class ChartExamplesRoutes {
         if (!TITLES.containsKey(type)) {
             throw new NotFoundException("Unknown chart type: " + type);
         }
-        if (!EXAMPLES.contains(example)) {
+        if (examplesFor(type).stream().noneMatch(ex -> ex.slug().equals(example))) {
             throw new NotFoundException("Unknown example: " + example);
         }
     }

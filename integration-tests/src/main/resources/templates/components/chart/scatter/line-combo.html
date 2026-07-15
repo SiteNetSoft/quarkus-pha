@@ -1,0 +1,23 @@
+<div
+  class="pha-c-chart"
+  id="ch-scatter-line-combo"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'axis' },
+      legend: { data: ['Trend', 'Samples'] },
+      xAxis: { type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] },
+      yAxis: { type: 'value', name: 'Requests (K)' },
+      series: [
+        { name: 'Trend',   type: 'line', smooth: true, data: [120, 132, 101, 134, 90, 230, 210] },
+        {
+          name: 'Samples',
+          type: 'scatter',
+          symbolSize: 10,
+          data: [112, 140, 95, 128, 102, 218, 222]
+        }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
