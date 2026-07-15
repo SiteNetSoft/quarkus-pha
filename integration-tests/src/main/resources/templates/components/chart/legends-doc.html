@@ -64,3 +64,117 @@
   <code class="ws-code">legend</code> block from the option. See <a href="/components/chart/sparkline">Sparkline</a> for
   an example.
 </p>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">Interactive legend</h2>
+<p>
+  Set <code class="ws-code">{|emphasis: { focus: 'series' }|}</code> on each series and hovering a legend item lights
+  up that series while fading the rest — no JavaScript, ECharts links legend hover to series emphasis by default.
+</p>
+<div
+  class="pha-c-chart"
+  id="ch-legend-interactive"
+  x-data="phaChart({
+    option: {
+      legend: { top: 'top' },
+      tooltip: { trigger: 'axis' },
+      xAxis: { type: 'category', data: ['Mon','Tue','Wed','Thu','Fri'] },
+      yAxis: { type: 'value' },
+      series: [
+        { name: 'web',    type: 'line', smooth: true, emphasis: { focus: 'series' }, data: [12, 18, 14, 22, 26] },
+        { name: 'api',    type: 'line', smooth: true, emphasis: { focus: 'series' }, data: [ 9, 12, 11, 17, 20] },
+        { name: 'auth',   type: 'line', smooth: true, emphasis: { focus: 'series' }, data: [ 4,  6,  5,  9, 11] },
+        { name: 'orders', type: 'line', smooth: true, emphasis: { focus: 'series' }, data: [ 7, 10,  8, 13, 16] }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">Legend tooltips</h2>
+<p>
+  Long series names get truncated in the legend row. Turn on
+  <code class="ws-code">{|legend: { tooltip: { show: true } }|}</code> and hovering a legend label shows the full name in a
+  tooltip.
+</p>
+<div
+  class="pha-c-chart"
+  id="ch-legend-tooltips"
+  x-data="phaChart({
+    option: {
+      legend: {
+        top: 'top',
+        tooltip: { show: true },
+        formatter: function (name) { return name.length > 12 ? name.slice(0, 12) + '…' : name; }
+      },
+      tooltip: { trigger: 'axis' },
+      xAxis: { type: 'category', data: ['Q1','Q2','Q3','Q4'] },
+      yAxis: { type: 'value' },
+      series: [
+        { name: 'North America region', type: 'bar', data: [320, 410, 390, 480] },
+        { name: 'EMEA region',          type: 'bar', data: [280, 360, 350, 420] },
+        { name: 'APAC region',          type: 'bar', data: [190, 250, 300, 360] }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">Reacting to legend toggles</h2>
+<p>
+  <code class="ws-code">phaChart</code> forwards every legend toggle as a
+  <code class="ws-code">chart-legend-select</code> DOM event (<code class="ws-code">{|{ name, selected }|}</code> in
+  <code class="ws-code">$event.detail</code>). Listen on a wrapper element to drive a filter, a URL, or — here — a
+  status line. Click any legend item:
+</p>
+<div x-data="{ msg: 'Toggle a legend item to see the event.' }">
+  <p class="pf-v6-c-content--p pf-m-editorial" aria-live="polite" style="font-weight: 600">
+    <span x-text="msg"></span>
+  </p>
+  <div
+    class="pha-c-chart"
+    id="ch-legend-links"
+    @chart-legend-select="msg = $event.detail.name + ' is now ' + ($event.detail.selected[$event.detail.name] ? 'shown' : 'hidden')"
+    x-data="phaChart({
+      option: {
+        legend: { top: 'top' },
+        tooltip: { trigger: 'axis' },
+        xAxis: { type: 'category', data: ['Mon','Tue','Wed','Thu','Fri'] },
+        yAxis: { type: 'value' },
+        series: [
+          { name: 'web', type: 'bar', data: [12, 18, 14, 22, 26] },
+          { name: 'api', type: 'bar', data: [ 9, 12, 11, 17, 20] },
+          { name: 'auth', type: 'bar', data: [ 4, 6, 5, 9, 11] }
+        ]
+      }
+    })"
+  >
+    <div class="pha-c-chart__canvas"></div>
+  </div>
+</div>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">Standalone legend</h2>
+<p>
+  When several charts on a dashboard share one colour mapping, render a single legend once — as plain PatternFly markup
+  — instead of repeating it per chart. It carries no chart wiring; the swatch colours are the PF chart palette in
+  series order.
+</p>
+<div class="pf-v6-l-flex pf-m-gap-lg pf-m-wrap" role="list" aria-label="Shared chart legend" style="margin: 1rem 0">
+  <span role="listitem" class="pf-v6-l-flex pf-m-gap-sm pf-m-align-items-center">
+    <span style="width: 14px; height: 14px; border-radius: 3px; background: #0066cc; display: inline-block"></span>
+    <span class="pf-v6-c-content--p pf-m-editorial">Compute</span>
+  </span>
+  <span role="listitem" class="pf-v6-l-flex pf-m-gap-sm pf-m-align-items-center">
+    <span style="width: 14px; height: 14px; border-radius: 3px; background: #63993d; display: inline-block"></span>
+    <span class="pf-v6-c-content--p pf-m-editorial">Storage</span>
+  </span>
+  <span role="listitem" class="pf-v6-l-flex pf-m-gap-sm pf-m-align-items-center">
+    <span style="width: 14px; height: 14px; border-radius: 3px; background: #37a3a3; display: inline-block"></span>
+    <span class="pf-v6-c-content--p pf-m-editorial">Network</span>
+  </span>
+  <span role="listitem" class="pf-v6-l-flex pf-m-gap-sm pf-m-align-items-center">
+    <span style="width: 14px; height: 14px; border-radius: 3px; background: #dca614; display: inline-block"></span>
+    <span class="pf-v6-c-content--p pf-m-editorial">Database</span>
+  </span>
+</div>
