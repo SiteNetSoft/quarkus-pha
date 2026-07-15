@@ -17,8 +17,9 @@
  *   loading   — show loading animation initially (default: false)
  *
  * Events dispatched:
- *   chart-ready  — { chart: ECharts instance } after initialization
- *   chart-click  — { params: ECharts event params } on chart element click
+ *   chart-ready          — { chart: ECharts instance } after initialization
+ *   chart-click          — { params: ECharts event params } on chart element click
+ *   chart-legend-select  — { name, selected } when a legend item is toggled
  *
  * License: Apache 2.0
  */
@@ -176,6 +177,14 @@ phaAlpine("phaChart", (config = {}) => ({
     /* Forward chart click events */
     this._chart.on("click", function (params) {
       self.$dispatch("chart-click", { params: params });
+    });
+
+    /* Forward legend toggles so consumers can react (filter, navigate, count) */
+    this._chart.on("legendselectchanged", function (params) {
+      self.$dispatch("chart-legend-select", {
+        name: params.name,
+        selected: params.selected,
+      });
     });
 
     this.$dispatch("chart-ready", { chart: this._chart });

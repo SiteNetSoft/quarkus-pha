@@ -69,7 +69,143 @@
   for the full pattern.
 </p>
 
-<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading">Escaping in Qute templates</h2>
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">Crosshair pointer</h2>
+<p>
+  <code class="ws-code">{|axisPointer: { type: 'cross' }|}</code> draws both a vertical and a horizontal guide line to the axes,
+  with the value read-out on each axis — useful when the exact y matters as much as the series.
+</p>
+<div
+  class="pha-c-chart"
+  id="ch-tooltip-crosshair"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'axis', axisPointer: { type: 'cross' } },
+      xAxis: { type: 'category', boundaryGap: false, data: ['Mon','Tue','Wed','Thu','Fri'] },
+      yAxis: { type: 'value' },
+      series: [
+        { name: 'latency', type: 'line', smooth: true, data: [42, 55, 48, 63, 71] }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">HTML tooltip content</h2>
+<p>
+  A function <code class="ws-code">formatter</code> can return an HTML string — use it to lay out multi-series rows,
+  bold the totals, or add units. Build it with string concatenation (JS template literals collide with Qute).
+</p>
+<div
+  class="pha-c-chart"
+  id="ch-tooltip-html"
+  x-data="phaChart({
+    option: {
+      tooltip: {
+        trigger: 'axis',
+        formatter: function (params) {
+          var head = '<strong>' + params[0].axisValue + '</strong>';
+          var rows = params
+            .map(function (s) {
+              return s.marker + ' ' + s.seriesName + ': <b>' + s.value + ' ms</b>';
+            })
+            .join('<br/>');
+          return head + '<br/>' + rows;
+        }
+      },
+      legend: { top: 'top' },
+      xAxis: { type: 'category', data: ['Q1','Q2','Q3','Q4'] },
+      yAxis: { type: 'value' },
+      series: [
+        { name: 'p50', type: 'bar', data: [42, 48, 45, 52] },
+        { name: 'p99', type: 'bar', data: [120, 140, 130, 165] }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">Permanent data labels</h2>
+<p>
+  Sometimes you want the numbers on the chart, not behind a hover. Turn on
+  <code class="ws-code">{|label: { show: true }|}</code> per series and drop the tooltip
+  (<code class="ws-code">{|tooltip: { show: false }|}</code>) — every point is annotated up front.
+</p>
+<div
+  class="pha-c-chart"
+  id="ch-tooltip-data-label"
+  x-data="phaChart({
+    option: {
+      tooltip: { show: false },
+      xAxis: { type: 'category', data: ['Mon','Tue','Wed','Thu','Fri'] },
+      yAxis: { type: 'value' },
+      series: [{
+        type: 'bar',
+        data: [12, 18, 14, 22, 26],
+        label: { show: true, position: 'top', color: '#151515' }
+      }]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">Fixed tooltip position</h2>
+<p>
+  By default the tooltip follows the cursor. Pin it to a corner with a fixed
+  <code class="ws-code">{|tooltip: { position: [x, y] }|}</code> so it never covers the data the user is pointing at.
+</p>
+<div
+  class="pha-c-chart"
+  id="ch-tooltip-fixed"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'axis', position: [12, 12] },
+      xAxis: { type: 'category', boundaryGap: false, data: ['Mon','Tue','Wed','Thu','Fri'] },
+      yAxis: { type: 'value' },
+      series: [
+        { name: 'web', type: 'line', smooth: true, data: [12, 18, 14, 22, 26] },
+        { name: 'api', type: 'line', smooth: true, data: [ 9, 12, 11, 17, 20] }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">Tooltips inside a clipped card</h2>
+<p>
+  A chart in a card with <code class="ws-code">overflow: hidden</code> (or a scroll box) clips a tooltip that spills
+  past the edge. <code class="ws-code">{|tooltip: { confine: true }|}</code> keeps it inside the chart's own box; for
+  full freedom use <code class="ws-code">{|appendTo: 'body'|}</code> to render it at the document root. This chart sits
+  in a deliberately tight <code class="ws-code">overflow: hidden</code> box with <code class="ws-code">confine</code>
+  on — hover near the top edge and the tooltip stays visible.
+</p>
+<div
+  style="max-width: 320px; height: 200px; overflow: hidden; border: 1px solid #d2d2d2; border-radius: 6px; padding: 8px"
+>
+  <div
+    class="pha-c-chart"
+    id="ch-tooltip-confine"
+    x-data="phaChart({
+      option: {
+        tooltip: { trigger: 'axis', confine: true },
+        grid: { left: 40, right: 12, top: 12, bottom: 24 },
+        xAxis: { type: 'category', boundaryGap: false, data: ['Mon','Tue','Wed','Thu','Fri'] },
+        yAxis: { type: 'value' },
+        series: [
+          { name: 'web', type: 'line', smooth: true, data: [12, 18, 14, 22, 26] },
+          { name: 'api', type: 'line', smooth: true, data: [ 9, 12, 11, 17, 20] }
+        ]
+      }
+    })"
+  >
+    <div class="pha-c-chart__canvas" style="height: 180px"></div>
+  </div>
+</div>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">Escaping in Qute templates</h2>
 <p>
   ECharts placeholder tokens — <code class="ws-code">\{b}</code>, <code class="ws-code">\{c}</code>,
   <code class="ws-code">\{d}</code> — collide with Qute's expression syntax. Backslash-escape each one inside the

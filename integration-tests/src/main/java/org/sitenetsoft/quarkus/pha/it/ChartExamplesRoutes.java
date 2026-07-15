@@ -165,6 +165,12 @@ public class ChartExamplesRoutes {
                 "The ECharts toolbox adds save-as-image, restore, and a read-only data view — PatternFly's "
                 + "sankey is ECharts-based, so this is directly portable.")
         )),
+        Map.entry("line", List.of(
+            BASIC,
+            new Example("brush-zoom", "Brush and zoom",
+                "Two coupled <code class=\"ws-code\">dataZoom</code> controls — scroll or drag inside the "
+                + "plot, or drag the slider beneath it — to focus a slice of a long time series.")
+        )),
         Map.entry("scatter", List.of(
             BASIC,
             new Example("line-combo", "Scatter with line",
