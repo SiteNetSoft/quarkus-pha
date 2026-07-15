@@ -1,6 +1,9 @@
 import { defineConfig } from "@playwright/test";
 
 const isCI = !!process.env.CI;
+const workerOverride = process.env.PW_WORKERS
+  ? Number(process.env.PW_WORKERS)
+  : undefined;
 
 export default defineConfig({
   testDir: "./tests",
@@ -9,7 +12,7 @@ export default defineConfig({
   fullyParallel: !isCI,
   forbidOnly: isCI,
   retries: isCI ? 2 : 0,
-  workers: isCI ? 1 : undefined,
+  workers: workerOverride ?? (isCI ? 1 : undefined),
   reporter: [
     ["html", { open: "never" }],
     ["list"]
