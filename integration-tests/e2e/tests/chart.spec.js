@@ -28,6 +28,7 @@ const CHART_EXAMPLES = {
   donut: ["right-legend", "small", "small-bottom-subtitle"],
   "donut-utilization": ["inverted", "static-thresholds"],
   sankey: ["toolbox"],
+  line: ["brush-zoom"],
   bullet: [
     "segmented-measure",
     "measure-dot",
@@ -122,5 +123,49 @@ test.describe("Multi-example chart pages", () => {
     const source = await page.request.get("/components/chart/bullet/source/reversed");
     expect(source.ok()).toBeTruthy();
     expect(await source.text()).toContain("phaChart");
+  });
+});
+
+test.describe("Chart interactivity (docs)", () => {
+  test("legends doc page renders the interactive + tooltip legend charts", async ({ page }) => {
+    const pageErrors = [];
+    page.on("pageerror", (err) => pageErrors.push(err.message));
+    await page.goto("/components/chart/legends");
+    for (const id of ["ch-legend-interactive", "ch-legend-tooltips", "ch-legend-links"]) {
+      await expect(page.locator(`#${id} canvas`).first()).toBeVisible({ timeout: 10000 });
+    }
+    expect(pageErrors).toEqual([]);
+  });
+
+  test("phaChart forwards legend toggles as a chart-legend-select event", async ({ page }) => {
+    await page.goto("/components/chart/legends");
+    await expect(page.locator("#ch-legend-links canvas").first()).toBeVisible({ timeout: 10000 });
+
+    const status = page.locator("#ch-legend-links").locator("xpath=preceding-sibling::p[1]");
+    await expect(status).toHaveText(/Toggle a legend item/);
+
+    // Drive the ECharts legend toggle programmatically — deterministic, unlike
+    // clicking legend glyphs painted on the canvas.
+    await page.evaluate(() => {
+      const el = document.getElementById("ch-legend-links");
+      window.Alpine.$data(el).getChart().dispatchAction({ type: "legendToggleSelect", name: "api" });
+    });
+    await expect(status).toHaveText("api is now hidden");
+  });
+
+  test("tooltips doc page renders all tooltip variants without errors", async ({ page }) => {
+    const pageErrors = [];
+    page.on("pageerror", (err) => pageErrors.push(err.message));
+    await page.goto("/components/chart/tooltips");
+    for (const id of [
+      "ch-tooltip-crosshair",
+      "ch-tooltip-html",
+      "ch-tooltip-data-label",
+      "ch-tooltip-fixed",
+      "ch-tooltip-confine",
+    ]) {
+      await expect(page.locator(`#${id} canvas`).first()).toBeVisible({ timeout: 10000 });
+    }
+    expect(pageErrors).toEqual([]);
   });
 });
