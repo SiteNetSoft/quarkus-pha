@@ -1,0 +1,26 @@
+<div
+  class="pha-c-chart"
+  id="ch-stack-monthly-data"
+  x-data="phaChart({
+    option: {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: { type: 'shadow' },
+        valueFormatter: function (value) { return value + ' GB'; }
+      },
+      legend: { data: ['Desktop', 'Mobile', 'Tablet'] },
+      xAxis: {
+        type: 'category',
+        data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      },
+      yAxis: { type: 'value', name: 'Bandwidth (GB)' },
+      series: [
+        { name: 'Desktop', type: 'bar', stack: 'bandwidth', data: [210, 195, 240, 260, 250, 230, 220, 215, 270, 290, 310, 330] },
+        { name: 'Mobile',  type: 'bar', stack: 'bandwidth', data: [140, 150, 170, 180, 200, 210, 230, 240, 220, 210, 230, 250] },
+        { name: 'Tablet',  type: 'bar', stack: 'bandwidth', data: [45, 40, 50, 55, 60, 58, 62, 65, 55, 50, 60, 70] }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>

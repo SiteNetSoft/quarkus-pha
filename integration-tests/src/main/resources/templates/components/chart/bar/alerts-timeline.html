@@ -1,0 +1,24 @@
+<div
+  class="pha-c-chart"
+  id="ch-bar-alerts-timeline"
+  x-data="phaChart({
+    option: {
+      color: ['#b1380b', '#ffcc17', '#5e40be'],
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+      legend: { data: ['Critical', 'Warning', 'Info'] },
+      grid: { left: 90, right: 30 },
+      xAxis: { type: 'value', name: 'Alerts' },
+      yAxis: {
+        type: 'category',
+        data: ['Jul 7', 'Jul 8', 'Jul 9', 'Jul 10', 'Jul 11', 'Jul 12', 'Jul 13']
+      },
+      series: [
+        { name: 'Critical', type: 'bar', stack: 'alerts', data: [2, 0, 1, 4, 0, 3, 1] },
+        { name: 'Warning',  type: 'bar', stack: 'alerts', data: [5, 3, 6, 9, 2, 7, 4] },
+        { name: 'Info',     type: 'bar', stack: 'alerts', data: [12, 8, 10, 15, 6, 11, 9] }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
