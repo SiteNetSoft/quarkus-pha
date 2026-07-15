@@ -44,7 +44,7 @@
                         </h2>
                       </div>
                     </div>
-                    {#include partials/example-card title="Basic" slug="basic" component="topology/{type}"
+                    {#include partials/example-card title="Basic" slug="basic" component=('topology/' + type)
                     description="Cytoscape graph wrapped by &lt;code
                     class=&quot;ws-code&quot;&gt;phaTopology&lt;/code&gt;."} {#content} {#if type ==
                     'custom-nodes'}{#include components/topology/custom-nodes/basic /}{/if} {#if type ==
