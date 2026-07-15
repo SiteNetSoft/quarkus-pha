@@ -25,6 +25,9 @@ const CHART_EXAMPLES = {
   area: ["teal-with-axis-label"],
   bar: ["alerts-timeline"],
   "box-plot": ["labels"],
+  donut: ["right-legend", "small", "small-bottom-subtitle"],
+  "donut-utilization": ["inverted", "static-thresholds"],
+  sankey: ["toolbox"],
   bullet: [
     "segmented-measure",
     "measure-dot",
