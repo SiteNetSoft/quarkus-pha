@@ -42,3 +42,184 @@
   cycle, matched to the series colour cycle. Each series gets a different pattern without per-series config — this is
   the lowest-friction win.
 </p>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">Patterns on a pie</h2>
+<p>
+  The same <code class="ws-code">aria.decal.show</code> flag decals a pie's slices — each slice becomes distinguishable
+  by fill as well as colour, which matters most on a pie where slices touch.
+</p>
+<div
+  class="pha-c-chart"
+  id="ch-patterns-pie"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'item' },
+      legend: { orient: 'vertical', left: 'left' },
+      aria: { enabled: true, decal: { show: true } },
+      series: [{
+        type: 'pie',
+        radius: ['40%', '70%'],
+        center: ['62%', '50%'],
+        data: [
+          { value: 1048, name: 'Compute' },
+          { value:  735, name: 'Storage' },
+          { value:  580, name: 'Network' },
+          { value:  484, name: 'Database' }
+        ]
+      }]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">Patterns on grouped bars</h2>
+<p>Decals also carry through side-by-side (non-stacked) bars, so year-over-year comparisons stay readable in print.</p>
+<div
+  class="pha-c-chart"
+  id="ch-patterns-bar"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'axis' },
+      legend: { },
+      aria: { enabled: true, decal: { show: true } },
+      xAxis: { type: 'category', data: ['Q1','Q2','Q3','Q4'] },
+      yAxis: { type: 'value' },
+      series: [
+        { name: '2024', type: 'bar', data: [320, 410, 390, 480] },
+        { name: '2025', type: 'bar', data: [380, 450, 470, 520] }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">Per-series control</h2>
+<p>
+  Global <code class="ws-code">aria.decal</code> patterns every series. To pattern only <em>some</em> series — say, to
+  flag the projected columns while measured ones stay solid — set <code class="ws-code">itemStyle.decal</code> per
+  series and leave <code class="ws-code">aria.decal</code> off. Here "Projected" is hatched, "Actual" is solid.
+</p>
+<div
+  class="pha-c-chart"
+  id="ch-patterns-visibility"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'axis' },
+      legend: { },
+      xAxis: { type: 'category', data: ['Q1','Q2','Q3','Q4'] },
+      yAxis: { type: 'value' },
+      series: [
+        { name: 'Actual', type: 'bar', data: [320, 410, 390, 0] },
+        {
+          name: 'Projected', type: 'bar',
+          itemStyle: { decal: { symbol: 'rect', dashArrayX: [1, 0], dashArrayY: [3, 4], rotation: Math.PI / 4, color: 'rgba(255,255,255,0.5)' } },
+          data: [0, 0, 0, 520]
+        }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">Custom decal shapes</h2>
+<p>
+  A decal is fully configurable — <code class="ws-code">symbol</code> (rect / circle / triangle or an SVG path),
+  <code class="ws-code">dashArrayX</code> / <code class="ws-code">dashArrayY</code> for the dash rhythm, and
+  <code class="ws-code">rotation</code>. Three hand-built decals:
+</p>
+<div
+  class="pha-c-chart"
+  id="ch-patterns-custom"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'axis' },
+      legend: { },
+      xAxis: { type: 'category', data: ['Mon','Tue','Wed','Thu','Fri'] },
+      yAxis: { type: 'value' },
+      series: [
+        {
+          name: 'diagonal', type: 'bar', stack: 't',
+          itemStyle: { decal: { symbol: 'rect', dashArrayX: [1, 0], dashArrayY: [2, 5], rotation: -Math.PI / 4, color: 'rgba(0,0,0,0.25)' } },
+          data: [120, 132, 101, 134, 90]
+        },
+        {
+          name: 'dots', type: 'bar', stack: 't',
+          itemStyle: { decal: { symbol: 'circle', symbolSize: 0.4, dashArrayX: [[4, 4]], dashArrayY: [4, 4], color: 'rgba(0,0,0,0.25)' } },
+          data: [80, 92, 71, 94, 60]
+        },
+        {
+          name: 'grid', type: 'bar', stack: 't',
+          itemStyle: { decal: { symbol: 'rect', dashArrayX: [4, 4], dashArrayY: [4, 4], color: 'rgba(0,0,0,0.25)' } },
+          data: [40, 52, 41, 54, 30]
+        }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">The default decal cycle</h2>
+<p>
+  With <code class="ws-code">aria.decal.show</code> on and no per-series overrides, ECharts walks a built-in cycle of
+  patterns. This eight-series chart shows the full rotation — handy as a reference for which pattern maps to which
+  series index.
+</p>
+<div
+  class="pha-c-chart"
+  id="ch-patterns-all"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'axis' },
+      legend: { },
+      aria: { enabled: true, decal: { show: true } },
+      xAxis: { type: 'category', data: ['A','B','C','D'] },
+      yAxis: { type: 'value' },
+      series: [
+        { name: 's1', type: 'bar', stack: 'g', data: [12, 18, 14, 22] },
+        { name: 's2', type: 'bar', stack: 'g', data: [ 9, 12, 11, 17] },
+        { name: 's3', type: 'bar', stack: 'g', data: [ 4,  6,  5,  9] },
+        { name: 's4', type: 'bar', stack: 'g', data: [ 7, 10,  8, 13] },
+        { name: 's5', type: 'bar', stack: 'g', data: [ 3,  5,  4,  6] },
+        { name: 's6', type: 'bar', stack: 'g', data: [ 6,  8,  7, 11] },
+        { name: 's7', type: 'bar', stack: 'g', data: [ 2,  4,  3,  5] },
+        { name: 's8', type: 'bar', stack: 'g', data: [ 5,  7,  6,  8] }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
+
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">Threshold bands</h2>
+<p>
+  On a utilization donut the threshold bands carry meaning (OK / warning / danger), so they are the most important place
+  to add a non-colour cue. Decal the band ring and the state reads without relying on the red/orange/green alone.
+</p>
+<div
+  class="pha-c-chart"
+  id="ch-patterns-threshold"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'item' },
+      aria: { enabled: true, decal: { show: true } },
+      series: [{
+        type: 'pie',
+        radius: ['60%', '82%'],
+        startAngle: 90,
+        avoidLabelOverlap: false,
+        label: { show: false },
+        data: [
+          { value: 60, name: 'OK',       itemStyle: { color: '#afdc8f' } },
+          { value: 30, name: 'Warning',  itemStyle: { color: '#f8ae54' } },
+          { value: 10, name: 'Danger',   itemStyle: { color: '#f9a8a8' } }
+        ]
+      }]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>

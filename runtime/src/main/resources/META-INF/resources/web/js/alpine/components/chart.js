@@ -13,7 +13,7 @@
  *   option    — ECharts option object (required)
  *   theme     — ECharts theme name or object (default: null, uses built-in PF theme)
  *   renderer  — 'canvas' or 'svg' (default: 'canvas')
- *   autoResize — automatically resize on window resize (default: true)
+ *   autoResize — keep the chart sized to its container via ResizeObserver (default: true)
  *   loading   — show loading animation initially (default: false)
  *
  * Events dispatched:
@@ -131,14 +131,41 @@ let PF_THEME = {
   },
 };
 
-/* Register theme globally so all charts can use it */
+/*
+ * Skeleton theme — an all-gray palette for loading placeholders. Render a
+ * representative shape with theme: "skeleton" and silent series (no tooltip /
+ * legend / interaction) to stand in for a chart while its data is fetched.
+ */
+let SKELETON_THEME = {
+  color: ["#e0e0e0", "#ededed", "#d2d2d2", "#f0f0f0"],
+  backgroundColor: "transparent",
+  textStyle: { color: "#e0e0e0" },
+  title: { textStyle: { color: "#e0e0e0" }, subtextStyle: { color: "#ededed" } },
+  categoryAxis: {
+    axisLine: { lineStyle: { color: "#e0e0e0" } },
+    axisTick: { show: false },
+    axisLabel: { show: false },
+    splitLine: { show: false },
+  },
+  valueAxis: {
+    axisLine: { lineStyle: { color: "#e0e0e0" } },
+    axisTick: { show: false },
+    axisLabel: { show: false },
+    splitLine: { lineStyle: { color: "#f5f5f5" } },
+  },
+};
+
+/* Register themes globally so all charts can use them */
 if (typeof echarts !== "undefined") {
   echarts.registerTheme("patternfly", PF_THEME);
+  echarts.registerTheme("skeleton", SKELETON_THEME);
 }
 
 phaAlpine("phaChart", (config = {}) => ({
   _chart: null,
+  _resizeObserver: null,
   _resizeHandler: null,
+  _resizeFrame: null,
 
   init() {
     let container = this.$el.querySelector(".pha-c-chart__canvas") || this.$el;
@@ -164,14 +191,36 @@ phaAlpine("phaChart", (config = {}) => ({
 
     let self = this;
 
-    /* Auto-resize on window resize */
+    /*
+     * Auto-resize. A ResizeObserver on the container catches BOTH viewport
+     * resizes and container-only reflows (a drawer opening, a grid cell
+     * growing, an HTMX swap) that a window "resize" listener misses. The
+     * callback is debounced to one resize per animation frame so the
+     * observer firing mid-render (our own resize() changes the box) can't
+     * loop. Falls back to the window listener where ResizeObserver is absent.
+     */
     if (config.autoResize !== false) {
-      this._resizeHandler = function () {
-        if (self._chart && !self._chart.isDisposed()) {
-          self._chart.resize();
-        }
-      };
-      window.addEventListener("resize", this._resizeHandler);
+      if (typeof ResizeObserver !== "undefined") {
+        this._resizeObserver = new ResizeObserver(function () {
+          if (self._resizeFrame) {
+            return;
+          }
+          self._resizeFrame = requestAnimationFrame(function () {
+            self._resizeFrame = null;
+            if (self._chart && !self._chart.isDisposed()) {
+              self._chart.resize();
+            }
+          });
+        });
+        this._resizeObserver.observe(container);
+      } else {
+        this._resizeHandler = function () {
+          if (self._chart && !self._chart.isDisposed()) {
+            self._chart.resize();
+          }
+        };
+        window.addEventListener("resize", this._resizeHandler);
+      }
     }
 
     /* Forward chart click events */
@@ -191,6 +240,12 @@ phaAlpine("phaChart", (config = {}) => ({
   },
 
   destroy() {
+    if (this._resizeObserver) {
+      this._resizeObserver.disconnect();
+    }
+    if (this._resizeFrame) {
+      cancelAnimationFrame(this._resizeFrame);
+    }
     if (this._resizeHandler) {
       window.removeEventListener("resize", this._resizeHandler);
     }

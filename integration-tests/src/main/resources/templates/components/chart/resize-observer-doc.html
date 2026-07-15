@@ -7,55 +7,67 @@
 
 <h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading">What <code class="ws-code">phaChart</code> does</h2>
 <p>
-  On <code class="ws-code">init()</code>, the Alpine factory registers a single
-  <code class="ws-code">resize</code> handler on <code class="ws-code">window</code> that calls
-  <code class="ws-code">chart.resize()</code>. On <code class="ws-code">destroy()</code> it removes the handler and
-  disposes the ECharts instance so there's no leak.
+  On <code class="ws-code">init()</code>, the Alpine factory attaches a
+  <code class="ws-code">ResizeObserver</code> to the chart container and calls
+  <code class="ws-code">chart.resize()</code> whenever the container's box changes — whether that's the viewport
+  resizing or the <em>container alone</em> reflowing (a drawer opening, a grid cell growing, an HTMX swap resizing the
+  parent). The callback is debounced to one resize per animation frame, so the observer firing during ECharts' own
+  re-layout can't loop. On <code class="ws-code">destroy()</code> it disconnects the observer and disposes the ECharts
+  instance, so there's no leak.
 </p>
-
 <p>
-  This covers the common viewport-resize case. To opt out, pass
+  Where <code class="ws-code">ResizeObserver</code> isn't available the factory falls back to a
+  <code class="ws-code">window</code> resize listener. To opt out of resizing entirely pass
   <code class="ws-code">{|phaChart({ option, autoResize: false })|}</code>; you keep
-  <code class="ws-code">getChart().resize()</code> as a public method you can call manually from elsewhere in the page.
+  <code class="ws-code">getChart().resize()</code> as a public method to call manually.
 </p>
 
-<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading">When the parent re-flows without a window resize</h2>
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">Container-driven resize</h2>
 <p>
-  A window listener won't catch <em>container</em>-only resizes — e.g. a CSS-grid cell that grows because a sibling tile
-  collapses, or an HTMX swap that resizes the parent flexbox. For those, attach a
-  <code class="ws-code">ResizeObserver</code> to the wrapper:
+  Because the observer watches the container and not the window, a chart re-lays-out even when the viewport never
+  changes. Drag the resize grip in the bottom-right corner of the box below — the chart tracks it, and the legend wraps
+  as the width narrows. No extra wiring on the page; this is the default behaviour.
 </p>
-
-<div class="pf-v6-c-code-editor" style="margin: 1rem 0">
-  <div class="pf-v6-c-code-editor__header">
-    <div class="pf-v6-c-code-editor__tab">
-      <span class="pf-v6-c-code-editor__tab-text">JavaScript</span>
-    </div>
-  </div>
-  <div class="pf-v6-c-code-editor__main">
-    <div class="pf-v6-c-code-editor__code">
-      <pre class="pf-v6-c-code-editor__code-pre">
-document.addEventListener('alpine:init', () =&gt; {
-  Alpine.directive('chart-resize', (el, { expression }, { evaluateLater }) =&gt; {
-    let target = el.querySelector('.pha-c-chart');
-    if (!target || !target.__phaChart) return;
-    let ro = new ResizeObserver(() =&gt; target.__phaChart.resize());
-    ro.observe(el);
-  });
-});</pre
-      >
-    </div>
+<div
+  style="
+    resize: both;
+    overflow: auto;
+    width: 520px;
+    max-width: 100%;
+    height: 300px;
+    min-width: 220px;
+    min-height: 180px;
+    border: 1px dashed #b8bbbe;
+    border-radius: 6px;
+    padding: 8px;
+  "
+>
+  <div
+    class="pha-c-chart"
+    id="ch-resize-observer"
+    x-data="phaChart({
+      option: {
+        tooltip: { trigger: 'axis' },
+        legend: { top: 0 },
+        grid: { top: 40 },
+        xAxis: { type: 'category', boundaryGap: false, data: ['Mon','Tue','Wed','Thu','Fri'] },
+        yAxis: { type: 'value' },
+        series: [
+          { name: 'web',    type: 'line', smooth: true, data: [12, 18, 14, 22, 26] },
+          { name: 'api',    type: 'line', smooth: true, data: [ 9, 12, 11, 17, 20] },
+          { name: 'auth',   type: 'line', smooth: true, data: [ 4,  6,  5,  9, 11] }
+        ]
+      }
+    })"
+  >
+    <div class="pha-c-chart__canvas" style="height: 100%"></div>
   </div>
 </div>
 
-<p>
-  Then add <code class="ws-code">x-chart-resize</code> to the parent container — any dimension change on the parent
-  triggers a chart re-layout.
-</p>
-
-<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading">HTMX swaps clean up cleanly</h2>
+<h2 class="pf-v6-c-content--h2 pf-m-editorial ws-heading" style="margin-top: 2rem">HTMX swaps clean up cleanly</h2>
 <p>
   When HTMX replaces a wrapper via <code class="ws-code">outerHTML</code>, Alpine's
-  <code class="ws-code">destroy()</code> runs on the old node — which disposes the old ECharts instance — and the new
-  node's <code class="ws-code">init()</code> creates a fresh one. There's nothing to wire up.
+  <code class="ws-code">destroy()</code> runs on the old node — disconnecting its observer and disposing the old ECharts
+  instance — and the new node's <code class="ws-code">init()</code> creates a fresh one with its own observer. There's
+  nothing to wire up.
 </p>
