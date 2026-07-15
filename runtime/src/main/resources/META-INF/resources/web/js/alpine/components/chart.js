@@ -23,20 +23,83 @@
  * License: Apache 2.0
  */
 /*
- * PatternFly-aligned color palette.
- * Uses PF v6 chart color sequence for consistent look.
+ * PatternFly v6 chart palettes, resolved from the @patternfly/patternfly
+ * charts tokens (--pf-t--chart--theme--colorscales--*, light theme).
+ *
+ * PF_COLORS = multi-colored (ordered): cycles blue/green/teal/yellow/orange
+ * through 300 → 100/500 → 200/400 shades. Default for every chart via the
+ * registered "patternfly" theme.
  */
 let PF_COLORS = [
-  "#06c" /* blue-400    */,
-  "#4cb140" /* green-400   */,
-  "#009596" /* cyan-400    */,
-  "#f4c145" /* gold-400    */,
-  "#ec7a08" /* orange-400  */,
-  "#7d1007" /* red-700     */,
-  "#6753ac" /* purple-400  */,
-  "#c9190b" /* red-400     */,
-  "#8bc1f7" /* blue-200    */,
-  "#bde2b9" /* green-200   */,
+  "#0066cc" /* blue-300   */,
+  "#63993d" /* green-300  */,
+  "#37a3a3" /* teal-300   */,
+  "#dca614" /* yellow-300 */,
+  "#ca6c0f" /* orange-300 */,
+  "#92c5f9" /* blue-100   */,
+  "#204d00" /* green-500  */,
+  "#9ad8d8" /* teal-100   */,
+  "#96640f" /* yellow-500 */,
+  "#f8ae54" /* orange-100 */,
+  "#003366" /* blue-500   */,
+  "#afdc8f" /* green-100  */,
+  "#004d4d" /* teal-500   */,
+  "#ffe072" /* yellow-100 */,
+  "#732e00" /* orange-500 */,
+  "#4394e5" /* blue-200   */,
+  "#3d7317" /* green-400  */,
+  "#63bdbd" /* teal-200   */,
+  "#b98412" /* yellow-400 */,
+  "#f5921b" /* orange-200 */,
+  "#004d99" /* blue-400   */,
+  "#87bb62" /* green-200  */,
+  "#147878" /* teal-400   */,
+  "#ffcc17" /* yellow-200 */,
+  "#9e4a06" /* orange-400 */,
+];
+
+/*
+ * PF_COLORS_UNORDERED = multi-colored (unordered): adds purple + gray and
+ * interleaves hue families so ADJACENT series contrast strongly — PF
+ * recommends it when series have no inherent order (area & line charts).
+ * Opt in per chart: x-data="phaChart({ option: { color: PF_COLORS_UNORDERED, ... } })".
+ */
+let PF_COLORS_UNORDERED = [
+  "#0066cc" /* blue-300   */,
+  "#dca614" /* yellow-300 */,
+  "#63993d" /* green-300  */,
+  "#5e40be" /* purple-300 */,
+  "#ca6c0f" /* orange-300 */,
+  "#37a3a3" /* teal-300   */,
+  "#c7c7c7" /* black-300  */,
+  "#92c5f9" /* blue-100   */,
+  "#96640f" /* yellow-500 */,
+  "#afdc8f" /* green-100  */,
+  "#21134d" /* purple-500 */,
+  "#f8ae54" /* orange-100 */,
+  "#004d4d" /* teal-500   */,
+  "#f2f2f2" /* black-100  */,
+  "#003366" /* blue-500   */,
+  "#ffe072" /* yellow-100 */,
+  "#204d00" /* green-500  */,
+  "#b6a6e9" /* purple-100 */,
+  "#732e00" /* orange-500 */,
+  "#9ad8d8" /* teal-100   */,
+  "#707070" /* black-500  */,
+  "#4394e5" /* blue-200   */,
+  "#b98412" /* yellow-400 */,
+  "#87bb62" /* green-200  */,
+  "#3d2785" /* purple-400 */,
+  "#f5921b" /* orange-200 */,
+  "#147878" /* teal-400   */,
+  "#e0e0e0" /* black-200  */,
+  "#004d99" /* blue-400   */,
+  "#ffcc17" /* yellow-200 */,
+  "#3d7317" /* green-400  */,
+  "#876fd4" /* purple-200 */,
+  "#9e4a06" /* orange-400 */,
+  "#63bdbd" /* teal-200   */,
+  "#a3a3a3" /* black-400  */,
 ];
 
 let PF_THEME = {

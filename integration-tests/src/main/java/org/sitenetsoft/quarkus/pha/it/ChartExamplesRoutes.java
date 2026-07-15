@@ -138,6 +138,33 @@ public class ChartExamplesRoutes {
                 "Axis-swapped orientation — categories on the x-axis, values on the y-axis — with the "
                 + "segmented measure overlay.")
         )),
+        Map.entry("donut", List.of(
+            BASIC,
+            new Example("right-legend", "Right-aligned legend",
+                "The canonical PatternFly donut: vertical legend on the right, total in the centre via a "
+                + "rich-text label, no per-slice callouts."),
+            new Example("small", "Small",
+                "Dashboard-card size — the canvas is capped at 180px via inline style; the centre label "
+                + "scales down to match."),
+            new Example("small-bottom-subtitle", "Small with bottom subtitle",
+                "The subtitle moves below the ring using a bottom-anchored "
+                + "<code class=\"ws-code\">title</code>, leaving only the value in the centre.")
+        )),
+        Map.entry("donut-utilization", List.of(
+            BASIC,
+            new Example("inverted", "Inverted",
+                "Lower-is-better semantics: the metric is what remains, so thresholds run downward and a "
+                + "low value gets the warning colour."),
+            new Example("static-thresholds", "Static thresholds",
+                "A faint outer ring marks the 60% / 90% threshold bands in gray steps; the utilization arc "
+                + "takes the colour of the band its value falls in, and the legend names both thresholds.")
+        )),
+        Map.entry("sankey", List.of(
+            BASIC,
+            new Example("toolbox", "With toolbox",
+                "The ECharts toolbox adds save-as-image, restore, and a read-only data view — PatternFly's "
+                + "sankey is ECharts-based, so this is directly portable.")
+        )),
         Map.entry("scatter", List.of(
             BASIC,
             new Example("line-combo", "Scatter with line",
