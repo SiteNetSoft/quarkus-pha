@@ -147,6 +147,7 @@ cmd_test() {
     --network=host \
     --ipc=host \
     -e CI="${CI:-}" \
+    -e PW_WORKERS="${PW_WORKERS:-}" \
     -e JS_REPORT_DIR=/reports/js \
     -e A11Y_REPORT_DIR=/reports/a11y \
     -e HTMX_TARGETS_REPORT_DIR=/reports/htmx-targets \
