@@ -169,3 +169,54 @@ test.describe("Chart interactivity (docs)", () => {
     expect(pageErrors).toEqual([]);
   });
 });
+
+test.describe("Chart patterns, skeletons, resize (docs)", () => {
+  test("patterns doc page renders every decal example", async ({ page }) => {
+    const pageErrors = [];
+    page.on("pageerror", (err) => pageErrors.push(err.message));
+    await page.goto("/components/chart/patterns");
+    for (const id of [
+      "ch-patterns-demo",
+      "ch-patterns-pie",
+      "ch-patterns-bar",
+      "ch-patterns-visibility",
+      "ch-patterns-custom",
+      "ch-patterns-all",
+      "ch-patterns-threshold",
+    ]) {
+      await expect(page.locator(`#${id} canvas`).first()).toBeVisible({ timeout: 10000 });
+    }
+    expect(pageErrors).toEqual([]);
+  });
+
+  test("skeletons doc page renders the four grayscale skeletons", async ({ page }) => {
+    const pageErrors = [];
+    page.on("pageerror", (err) => pageErrors.push(err.message));
+    await page.goto("/components/chart/skeletons");
+    for (const id of ["ch-skeleton-area", "ch-skeleton-bar", "ch-skeleton-donut", "ch-skeleton-donut-threshold"]) {
+      await expect(page.locator(`#${id} canvas`).first()).toBeVisible({ timeout: 10000 });
+    }
+    expect(pageErrors).toEqual([]);
+  });
+
+  test("phaChart resizes with its container (ResizeObserver), not just the window", async ({ page }) => {
+    await page.goto("/components/chart/resize-observer");
+    const canvas = page.locator("#ch-resize-observer canvas").first();
+    await expect(canvas).toBeVisible({ timeout: 10000 });
+
+    const box = page.locator("#ch-resize-observer").locator("xpath=ancestor::div[contains(@style,'resize')][1]");
+
+    const wide = (await canvas.boundingBox()).width;
+    // Shrink the CONTAINER only — the viewport never changes.
+    await box.evaluate((el) => {
+      el.style.width = "280px";
+    });
+    await expect.poll(async () => Math.round((await canvas.boundingBox()).width)).toBeLessThan(Math.round(wide) - 100);
+
+    // And grows back.
+    await box.evaluate((el) => {
+      el.style.width = "600px";
+    });
+    await expect.poll(async () => Math.round((await canvas.boundingBox()).width)).toBeGreaterThan(400);
+  });
+});
