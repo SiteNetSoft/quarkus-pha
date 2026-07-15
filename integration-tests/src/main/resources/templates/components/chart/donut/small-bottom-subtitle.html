@@ -1,0 +1,35 @@
+<div
+  class="pha-c-chart"
+  id="ch-donut-small-bottom-subtitle"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'item' },
+      /* title-at-bottom carries the subtitle so the ring centre keeps just the value */
+      title: {
+        text: 'Storage capacity',
+        left: 'center',
+        bottom: 0,
+        textStyle: { fontSize: 12, fontWeight: 400, color: '#6a6e73' }
+      },
+      series: [{
+        name: 'Storage',
+        type: 'pie',
+        radius: ['58%', '82%'],
+        center: ['50%', '46%'],
+        avoidLabelOverlap: false,
+        label: {
+          show: true, position: 'center',
+          formatter: '{|{value|68%}|}',
+          rich: { value: { fontSize: 22, fontWeight: 700, color: '#151515' } }
+        },
+        labelLine: { show: false },
+        data: [
+          { value: 68, name: 'Used' },
+          { value: 32, name: 'Free', itemStyle: { color: '#f2f2f2' } }
+        ]
+      }]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas" style="height: 200px; max-width: 200px; margin: 0 auto"></div>
+</div>

@@ -1,6 +1,6 @@
 <div
   class="pha-c-chart"
-  id="ch-donut-utilization-basic"
+  id="ch-donut-utilization-inverted"
   x-data="phaChart({
     option: {
       tooltip: { trigger: 'item' },
@@ -13,16 +13,18 @@
         itemStyle: { borderRadius: 0 },
         label: {
           show: true, position: 'center',
-          formatter: '{|{value|72%}\n{label|Disk used}|}',
+          formatter: '{|{value|22%}\n{label|Capacity remaining}|}',
           rich: {
             value: { fontSize: 36, fontWeight: 700, color: '#151515' },
             label: { fontSize: 13, color: '#6a6e73', padding: [6, 0, 0, 0] }
           }
         },
         labelLine: { show: false },
+        /* Inverted semantics: the metric is what's LEFT, so a LOW value is the
+           alarming one — thresholds run downward (warning below 40, danger below 20). */
         data: [
-          { value: 72, name: 'Used',  itemStyle: { color: '#ca6c0f' } },
-          { value: 28, name: 'Free',  itemStyle: { color: '#f2f2f2' } }
+          { value: 22, name: 'Remaining', itemStyle: { color: '#ca6c0f' } },
+          { value: 78, name: 'Used', itemStyle: { color: '#f2f2f2' } }
         ]
       }]
     }

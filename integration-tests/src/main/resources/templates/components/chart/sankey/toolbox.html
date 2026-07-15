@@ -1,0 +1,43 @@
+<div
+  class="pha-c-chart"
+  id="ch-sankey-toolbox"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'item', triggerOn: 'mousemove' },
+      toolbox: {
+        right: 8,
+        feature: {
+          saveAsImage: { title: 'Save as image' },
+          restore: { title: 'Restore' },
+          dataView: { title: 'Data view', readOnly: true, lang: ['Data view', 'Close', 'Refresh'] }
+        }
+      },
+      series: [{
+        type: 'sankey',
+        emphasis: { focus: 'adjacency' },
+        data: [
+          { name: 'Search' },
+          { name: 'Social' },
+          { name: 'Direct' },
+          { name: 'Landing' },
+          { name: 'Product' },
+          { name: 'Signup' },
+          { name: 'Trial' },
+          { name: 'Paid' }
+        ],
+        links: [
+          { source: 'Search',  target: 'Landing', value: 580 },
+          { source: 'Social',  target: 'Landing', value: 240 },
+          { source: 'Direct',  target: 'Landing', value: 180 },
+          { source: 'Landing', target: 'Product', value: 750 },
+          { source: 'Landing', target: 'Signup',  value: 250 },
+          { source: 'Product', target: 'Trial',   value: 460 },
+          { source: 'Signup',  target: 'Trial',   value: 220 },
+          { source: 'Trial',   target: 'Paid',    value: 240 }
+        ]
+      }]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>

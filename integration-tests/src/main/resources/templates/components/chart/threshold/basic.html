@@ -11,25 +11,27 @@
       yAxis: { type: 'value', name: 'CPU (%)', max: 100 },
       visualMap: {
         top: 8, right: 10, pieces: [
-          { gt: 80,         color: '#c9190b', label: 'Critical' },
-          { gt: 60, lte: 80, color: '#ec7a08', label: 'Warning' },
-          { lte: 60,        color: '#4cb140', label: 'OK' }
+          { gt: 80,         color: '#b1380b', label: 'Critical' },
+          { gt: 60, lte: 80, color: '#ca6c0f', label: 'Warning' },
+          { lte: 60,        color: '#63993d', label: 'OK' }
         ],
         outOfRange: { color: '#999' }
       },
       series: [{
         type: 'line',
         smooth: true,
-        data: [42, 38, 52, 64, 78, 88, 92, 76, 64, 58, 54, 46, 41]
-      }],
-      markLine: {
-        silent: true,
-        symbol: ['none', 'none'],
-        data: [
-          { yAxis: 60, lineStyle: { color: '#ec7a08', type: 'dashed' } },
-          { yAxis: 80, lineStyle: { color: '#c9190b', type: 'dashed' } }
-        ]
-      }
+        data: [42, 38, 56, 78, 92, 64, 46],
+        /* markLine only renders inside a series — dashed threshold rules at the band edges. */
+        markLine: {
+          silent: true,
+          symbol: ['none', 'none'],
+          label: { show: false },
+          data: [
+            { yAxis: 60, lineStyle: { color: '#ca6c0f', type: 'dashed' } },
+            { yAxis: 80, lineStyle: { color: '#b1380b', type: 'dashed' } }
+          ]
+        }
+      }]
     }
   })"
 >

@@ -1,0 +1,36 @@
+<div
+  class="pha-c-chart"
+  id="ch-donut-right-legend"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'item' },
+      legend: { orient: 'vertical', right: 24, top: 'middle' },
+      series: [{
+        name: 'Resources',
+        type: 'pie',
+        radius: ['45%', '70%'],
+        center: ['40%', '50%'],
+        avoidLabelOverlap: false,
+        itemStyle: { borderRadius: 6, borderColor: '#fff', borderWidth: 2 },
+        label: {
+          show: true, position: 'center',
+          formatter: '{|{value|3,147}\n{label|Requests}|}',
+          rich: {
+            value: { fontSize: 32, fontWeight: 700, color: '#151515' },
+            label: { fontSize: 13, color: '#6a6e73', padding: [6, 0, 0, 0] }
+          }
+        },
+        labelLine: { show: false },
+        data: [
+          { value: 1048, name: 'Compute' },
+          { value: 735, name: 'Storage' },
+          { value: 580, name: 'Network' },
+          { value: 484, name: 'Database' },
+          { value: 300, name: 'Other' }
+        ]
+      }]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
