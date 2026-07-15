@@ -1,0 +1,21 @@
+<div
+  class="pha-c-chart"
+  id="ch-area-teal-with-axis-label"
+  x-data="phaChart({
+    option: {
+      color: ['#37a3a3', '#63bdbd', '#9ad8d8'],
+      tooltip: { trigger: 'axis' },
+      legend: { bottom: 0, data: ['Cats', 'Dogs', 'Birds'] },
+      grid: { bottom: 60 },
+      xAxis: { type: 'category', boundaryGap: false, data: ['2015', '2016', '2017', '2018'] },
+      yAxis: { type: 'value', name: 'Pets adopted' },
+      series: [
+        { name: 'Cats',  type: 'line', stack: 'total', areaStyle: {}, data: [1, 2, 5, 3] },
+        { name: 'Dogs',  type: 'line', stack: 'total', areaStyle: {}, data: [2, 1, 7, 4] },
+        { name: 'Birds', type: 'line', stack: 'total', areaStyle: {}, data: [3, 4, 9, 5] }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>

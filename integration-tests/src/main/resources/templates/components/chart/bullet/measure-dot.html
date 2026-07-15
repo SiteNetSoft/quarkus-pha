@@ -1,0 +1,29 @@
+<div
+  class="pha-c-chart"
+  id="ch-bullet-measure-dot"
+  x-data="phaChart({
+    option: {
+      tooltip: { trigger: 'axis' },
+      grid: { left: 110, right: 30, top: 20, bottom: 30 },
+      xAxis: { type: 'value', max: 100 },
+      yAxis: { type: 'category', data: ['Sales', 'Signups', 'NPS'] },
+      series: [
+        { name: 'Critical', type: 'bar', stack: 'range', itemStyle: { color: '#f2f2f2' }, barWidth: 30, data: [50, 40, 30] },
+        { name: 'Warning',  type: 'bar', stack: 'range', itemStyle: { color: '#e0e0e0' }, barWidth: 30, data: [25, 30, 30] },
+        { name: 'Good',     type: 'bar', stack: 'range', itemStyle: { color: '#c7c7c7' }, barWidth: 30, data: [25, 30, 40] },
+        {
+          name: 'Actual', type: 'scatter', symbolSize: 14,
+          itemStyle: { color: '#06c' }, z: 10,
+          data: [[78, 'Sales'], [62, 'Signups'], [84, 'NPS']]
+        },
+        {
+          name: 'Target', type: 'scatter', symbol: 'rect', symbolSize: [3, 26], symbolOffset: [0, 0],
+          itemStyle: { color: '#151515' }, z: 20,
+          data: [[80, 'Sales'], [75, 'Signups'], [70, 'NPS']]
+        }
+      ]
+    }
+  })"
+>
+  <div class="pha-c-chart__canvas"></div>
+</div>
