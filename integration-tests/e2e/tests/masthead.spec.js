@@ -46,6 +46,29 @@ test.describe("Masthead", () => {
       await expect(page.locator(`${card} #mh-basic button[aria-label="Settings"]`)).toBeVisible();
       await expect(page.locator(`${card} #mh-basic button[aria-label="Help"]`)).toBeVisible();
     });
+
+    // PF sizes the masthead's first grid track by min-content at xl, so a brand without
+    // pf-v6-c-masthead__logo has no width to size against: it overflows __main and lands
+    // on top of the toolbar icons. Pin the viewport rather than lean on Playwright's
+    // 1280 default, which is xl only by coincidence.
+    test("brand fits __main and does not overlap the toolbar icons at xl", async ({ page }) => {
+      await page.setViewportSize({ width: 1280, height: 900 });
+      await page.reload();
+
+      const m = await page.locator(`${card} #mh-basic`).evaluate((mh) => {
+        const main = mh.querySelector(".pf-v6-c-masthead__main");
+        const brandText = mh.querySelector(".pf-v6-c-masthead__brand strong");
+        const settings = mh.querySelector('button[aria-label="Settings"]');
+        return {
+          overflow: main.scrollWidth - main.clientWidth,
+          brandRight: brandText.getBoundingClientRect().right,
+          settingsLeft: settings.getBoundingClientRect().left,
+        };
+      });
+
+      expect(m.overflow).toBeLessThanOrEqual(0);
+      expect(m.brandRight).toBeLessThanOrEqual(m.settingsLeft);
+    });
   });
 
   test.describe("Display stack variant", () => {
@@ -100,7 +123,10 @@ test.describe("Masthead", () => {
       const logo = page.locator(`${card} #mh-custom-logo a.pf-v6-c-masthead__logo`);
       await expect(logo).toBeVisible();
       await expect(logo).toHaveAttribute("aria-label", /PHA/);
-      await expect(logo.locator("img.pf-v6-c-brand")).toBeVisible();
+      // Both logo variants ship; pha.css shows only the one matching the active theme.
+      const brands = logo.locator("img.pf-v6-c-brand");
+      await expect(brands).toHaveCount(2);
+      await expect(brands.filter({ visible: true })).toHaveCount(1);
     });
   });
 

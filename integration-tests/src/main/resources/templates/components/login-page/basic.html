@@ -3,9 +3,18 @@
 <div x-data="{ username: '', password: '', remember: false, submitted: false }">
   {#include components/forms/login-page id="lp-basic" titleText="Log in to your account" titleHeadingLevel="h4" hasLoginHeader=true hasLoginFooter=true hasPageFooter=true}
   {#loginHeader}
+  {! Both variants are rendered; pha.css hides the one that doesn't match pf-v6-theme-dark. Only the
+     --light/--dark modifiers are used: the pha-masthead-logo base class hard-sets height:40px and would
+     override this example's 48px. !}
   <img
-    class="pf-v6-c-brand"
+    class="pf-v6-c-brand pha-masthead-logo--light"
     src="/web/images/quarkus-pha-logo.svg"
+    alt="Quarkus PHA"
+    style="--pf-v6-c-brand--Height: 48px"
+  />
+  <img
+    class="pf-v6-c-brand pha-masthead-logo--dark"
+    src="/web/images/quarkus-pha-logo-dark.svg"
     alt="Quarkus PHA"
     style="--pf-v6-c-brand--Height: 48px"
   />
