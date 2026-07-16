@@ -26,11 +26,10 @@
 
   <section style="margin-top: 2rem">
     <h2 id="mp4-heading">MP4 source</h2>
-    <p>Standard MP4 playback using the Big Buck Bunny demo clip served from a public CDN.</p>
+    <p>Standard MP4 playback with a poster image, using a locally vendored sample clip.</p>
     <div style="max-width: 700px">
-      {#include components/media/video-player id="vp-mp4"
-      src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4"
-      poster="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg"}{#content}{/content}{/include}
+      {#include components/media/video-player id="vp-mp4" src="/web/vendor/media/sample-pattern.mp4" type="video/mp4"
+      poster="/web/vendor/media/sample-pattern.jpg"}{#content}{/content}{/include}
     </div>
   </section>
 
@@ -41,8 +40,7 @@
       playback).
     </p>
     <div style="max-width: 700px">
-      {#include components/media/video-player id="vp-rates"
-      src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4"
+      {#include components/media/video-player id="vp-rates" src="/web/vendor/media/sample-bars.mp4" type="video/mp4"
       autoplay=true muted=true loop=true playbackRates="[0.5, 1, 1.5, 2]"}{#content}{/content}{/include}
     </div>
   </section>
@@ -51,11 +49,10 @@
     <h2 id="toolbar-heading">With Toolbar</h2>
     <p>Player paired with a PatternFly-styled toolbar that calls the Alpine API to control playback.</p>
     <div style="max-width: 700px">
-      {#include components/media/video-player id="vp-toolbar"
-      src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+      {#include components/media/video-player id="vp-toolbar" src="/web/vendor/media/sample-counter.mp4"
       type="video/mp4"}{#content}
       <div class="pha-c-video-player__toolbar">
-        <span class="pha-c-video-player__toolbar-title">For Bigger Blazes</span>
+        <span class="pha-c-video-player__toolbar-title">Sample counter clip</span>
         <div class="pha-c-video-player__toolbar-actions">
           <button class="pf-v6-c-button pf-m-secondary" type="button" x-on:click="toggle()" :disabled="!ready">
             <span class="pf-v6-c-button__text" x-text="playing ? 'Pause' : 'Play'"></span>
