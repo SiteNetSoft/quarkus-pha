@@ -1,4 +1,6 @@
-<header class="pf-v6-c-masthead pf-m-display-inline">
+{! Stack the brand and toolbar onto separate rows on phones (inline needs ~466px: brand ~242 + toolbar ~176);
+inline-on-sm (>=576px) keeps tablet/desktop unchanged. Fixes horizontal page overflow at mobile widths. !}
+<header class="pf-v6-c-masthead pf-m-display-stack pf-m-display-inline-on-sm">
   <div class="pf-v6-c-masthead__main">
     <span class="pf-v6-c-masthead__toggle"
       ><button
