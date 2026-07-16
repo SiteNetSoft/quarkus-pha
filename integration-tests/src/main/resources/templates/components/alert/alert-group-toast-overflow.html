@@ -12,7 +12,7 @@
             <span x-show="a.variant === 'info'" x-cloak>{icons:svg('fa:circle-info').raw}</span>
             <span x-show="a.variant === 'danger'" x-cloak>{icons:svg('fa:exclamation-circle').raw}</span>
           </div>
-          <p class="pf-v6-c-alert__title"><span class="pf-screen-reader" x-text="a.variant + ' alert:'"></span> <span x-text="a.title"></span></p>
+          <p class="pf-v6-c-alert__title"><span class="pf-v6-screen-reader" x-text="a.variant + ' alert:'"></span> <span x-text="a.title"></span></p>
           <div class="pf-v6-c-alert__action">
             <button class="pf-v6-c-button pf-m-plain" type="button" :aria-label="'Close ' + a.title" @click="alerts = alerts.filter(function (x) { return x.id !== a.id; })">
               <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
