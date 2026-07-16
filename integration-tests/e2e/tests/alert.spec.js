@@ -40,6 +40,33 @@ test.describe("Alert", () => {
     });
   });
 
+  test.describe("Screen-reader prefix", () => {
+    const VARIANTS = [
+      ["#al-custom", "custom alert:"],
+      ["#al-info", "info alert:"],
+      ["#al-success", "success alert:"],
+      ["#al-warning", "warning alert:"],
+      ["#al-danger", "danger alert:"],
+    ];
+
+    for (const [selector, prefix] of VARIANTS) {
+      test(`${selector} carries the "${prefix}" prefix`, async ({ page }) => {
+        await expect(
+          page.locator(`${selector} .pf-v6-c-alert__title .pf-v6-screen-reader`)
+        ).toHaveText(prefix);
+      });
+    }
+
+    // A class that matches no CSS rule still passes markup and a11y checks, so
+    // assert the computed clip rather than the element's presence or text.
+    test("the prefix is clipped rather than visibly rendered", async ({ page }) => {
+      const clipPath = await page
+        .locator("#al-info .pf-v6-c-alert__title .pf-v6-screen-reader")
+        .evaluate((el) => getComputedStyle(el).clipPath);
+      expect(clipPath).not.toBe("none");
+    });
+  });
+
   test.describe("Variations", () => {
     test("full variation has description, action links, and close", async ({ page }) => {
       const alert = page.locator("#al-variation-full");
