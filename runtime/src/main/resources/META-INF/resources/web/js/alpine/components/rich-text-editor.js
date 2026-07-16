@@ -51,6 +51,7 @@ phaAlpine("phaRichTextEditor", (config = {}) => ({
   length: 0,
   _editor: null,
   _changeHandler: null,
+  _settings: null,
 
   init() {
     if (typeof Quill === "undefined") {
@@ -61,15 +62,27 @@ phaAlpine("phaRichTextEditor", (config = {}) => ({
     let surface = this.$el.querySelector(".pha-c-rich-text-editor__surface");
     if (!surface) return;
 
-    let toolbarKey = config.toolbar || "full";
+    // The Qute template supplies config as data-* on the root; an explicit config
+    // argument still wins so direct JS callers keep working.
+    let ds = this.$root.dataset;
+    let settings = {
+      theme: config.theme ?? ds.theme,
+      placeholder: config.placeholder ?? ds.placeholder,
+      readOnly: config.readOnly ?? ds.readOnly === "true",
+      toolbar: config.toolbar ?? ds.toolbar,
+      name: config.name ?? ds.name,
+    };
+    this._settings = settings;
+
+    let toolbarKey = settings.toolbar || "full";
     let toolbar = PHA_QUILL_TOOLBARS[toolbarKey] || PHA_QUILL_TOOLBARS.full;
 
     let modules = { toolbar: toolbar };
 
     this._editor = new Quill(surface, {
-      theme: config.theme === "bubble" ? "bubble" : "snow",
-      placeholder: config.placeholder || "",
-      readOnly: !!config.readOnly,
+      theme: settings.theme === "bubble" ? "bubble" : "snow",
+      placeholder: settings.placeholder || "",
+      readOnly: !!settings.readOnly,
       modules: modules,
     });
 
@@ -99,7 +112,7 @@ phaAlpine("phaRichTextEditor", (config = {}) => ({
   },
 
   _syncHidden() {
-    if (config.name && this.$refs && this.$refs.hidden) {
+    if (this._settings && this._settings.name && this.$refs && this.$refs.hidden) {
       this.$refs.hidden.value = this.getHTML();
     }
   },
