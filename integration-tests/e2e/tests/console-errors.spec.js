@@ -31,6 +31,17 @@ function writeReport(testPath, errors) {
 // crashes, etc. — things ESLint cannot see because they only happen in a
 // real browser executing the page.
 
+// These lists must cover EVERY card on the showcase index (`/`). A page that
+// exists in the showcase but is missing here gets NO JS-error checking, and
+// the suite still reports green — that blind spot once hid /components/video-player
+// throwing 3 errors for weeks. The "coverage matches showcase" test at the
+// bottom scrapes the live index and hard-fails if these lists drift out of sync,
+// so a forgotten page turns the suite RED instead of silently un-checked.
+//
+// Source of truth = the URL map in HelloResource.java (/components/, /extensions/)
+// plus the demo cards in templates/hello.html (/demos/). We can't parse those
+// files at runtime — e2e.sh mounts only integration-tests/e2e into the Playwright
+// container — so the lists are maintained by hand and the drift guard enforces them.
 const COMPONENT_PATHS = [
   "/components/about-modal",
   "/components/accordion",
@@ -51,10 +62,12 @@ const COMPONENT_PATHS = [
   "/components/chart",
   "/components/checkbox",
   "/components/chip",
+  "/components/click-to-edit",
   "/components/click-to-load",
   "/components/clipboard-copy",
   "/components/code-block",
   "/components/code-editor",
+  "/components/compass",
   "/components/content",
   "/components/context-selector",
   "/components/custom-menus",
@@ -73,8 +86,11 @@ const COMPONENT_PATHS = [
   "/components/form",
   "/components/form-control",
   "/components/form-select",
+  "/components/form-validation",
   "/components/helper-text",
+  "/components/hero",
   "/components/hint",
+  "/components/i18n",
   "/components/icon",
   "/components/infinite-scroll",
   "/components/inline-edit",
@@ -83,7 +99,7 @@ const COMPONENT_PATHS = [
   "/components/label",
   "/components/lazy-modal",
   "/components/list",
-  "/components/form-validation", "/components/sortable-table", "/components/click-to-edit", "/components/toast-confirm", "/components/skeleton-loading", "/components/i18n", "/components/live-search",
+  "/components/live-search",
   "/components/login-page",
   "/components/map",
   "/components/masthead",
@@ -107,14 +123,18 @@ const COMPONENT_PATHS = [
   "/components/progress-stepper",
   "/components/radio",
   "/components/rectangle-selection",
+  "/components/rich-text-editor",
+  "/components/ripple",
   "/components/search-input",
   "/components/select",
   "/components/sidebar",
   "/components/simple-file-upload",
   "/components/simple-list",
   "/components/skeleton",
+  "/components/skeleton-loading",
   "/components/skip-to-content",
   "/components/slider",
+  "/components/sortable-table",
   "/components/spinner",
   "/components/switch",
   "/components/table",
@@ -122,26 +142,42 @@ const COMPONENT_PATHS = [
   "/components/text-area",
   "/components/text-input",
   "/components/text-input-group",
-  "/components/tile", "/components/hero", "/components/compass",
+  "/components/tile",
   "/components/time-picker",
   "/components/timestamp",
   "/components/title",
+  "/components/toast-confirm",
   "/components/toggle-group",
   "/components/toolbar",
   "/components/tooltip",
+  "/components/topology",
   "/components/tree-view",
   "/components/truncate",
-  "/components/wizard"
+  "/components/video-player",
+  "/components/wizard",
 ];
 
-const DEMO_PATHS = [
-  "/demos/dashboard",
-  "/demos/data-management",
-  "/demos/settings",
-  "/demos/landing"
+const EXTENSION_PATHS = [
+  "/extensions/log-viewer",
+  "/extensions/user-feedback",
+  "/extensions/catalog-view/catalog-item-header",
+  "/extensions/catalog-view/catalog-tile",
+  "/extensions/catalog-view/filter-side-panel",
+  "/extensions/catalog-view/properties-side-panel",
+  "/extensions/catalog-view/vertical-tabs",
+  "/extensions/data-view/overview",
+  "/extensions/data-view/toolbar",
+  "/extensions/data-view/table",
 ];
 
-const ALL_PATHS = ["/", ...COMPONENT_PATHS, ...DEMO_PATHS];
+const DEMO_PATHS = ["/demos/dashboard", "/demos/data-management", "/demos/settings", "/demos/landing"];
+
+// Every showcase card, minus the index itself. The drift guard compares the
+// live index against this exact set.
+const SHOWCASE_PATHS = [...COMPONENT_PATHS, ...EXTENSION_PATHS, ...DEMO_PATHS];
+
+// "/" is the home/landing page, "/components" the grid, "/licenses" the attributions page.
+const ALL_PATHS = ["/", "/components", "/licenses", ...SHOWCASE_PATHS];
 
 // Known-noise filters per path. Entries here are tracked outside the test
 // suite — typically server-side template or asset gaps that have their own
@@ -151,19 +187,19 @@ const ALL_PATHS = ["/", ...COMPONENT_PATHS, ...DEMO_PATHS];
 // Each entry is a regex tested against the full error string
 // (e.g. "HTTP 404: ..." or "pageerror: mode is not defined").
 const KNOWN_NOISE = {
-  "/": [
-    // Topology has no homepage thumbnail PNG yet; HelloResource.NO_THUMBNAIL
-    // omission triggers a 404 + matching console.error.
+  "/components": [
+    // Topology has no grid thumbnail PNG yet; HelloResource.NO_THUMBNAIL
+    // omission triggers a 404 + matching console.error on the /components grid.
     /HTTP 404:.*\/web\/images\/components\/topology\.png/,
-    /console\.error: Failed to load resource:.*404/
+    /console\.error: Failed to load resource:.*404/,
   ],
   "/components/hint": [
     // Example-card x-data evaluates `mode`/`error` bindings before Alpine
     // wires the phaCodeExample factory on this specific page. Tracked
     // separately; filter here so the spec catches new regressions.
     /pageerror: mode is not defined/,
-    /pageerror: error is not defined/
-  ]
+    /pageerror: error is not defined/,
+  ],
 };
 
 function filterErrors(testPath, errors) {
@@ -200,11 +236,31 @@ test.describe("Console errors", () => {
       writeReport(path, filtered);
 
       if (filtered.length > 0) {
-        throw new Error(
-          `${filtered.length} JS error(s) on ${path}:\n  - ${filtered.join("\n  - ")}`
-        );
+        throw new Error(`${filtered.length} JS error(s) on ${path}:\n  - ${filtered.join("\n  - ")}`);
       }
       expect(filtered).toEqual([]);
     });
   }
+
+  // Drift guard: the per-path checks above only cover pages we remembered to
+  // list. This test derives the authoritative page set from the live showcase
+  // and fails loudly if SHOWCASE_PATHS is missing (or has stale) entries — so a
+  // newly added component can never sit silently un-checked again.
+  test("console-error coverage matches the live showcase", async ({ page }) => {
+    await page.goto("/components");
+
+    const hrefs = await page.$$eval(".pf-v6-l-gallery a[href]", (links) => links.map((a) => a.getAttribute("href")));
+    const live = [...new Set(hrefs.filter((h) => /^\/(components|extensions|demos)\//.test(h)))].sort();
+    const expected = [...SHOWCASE_PATHS].sort();
+
+    const missing = live.filter((p) => !expected.includes(p)); // on showcase, not checked
+    const stale = expected.filter((p) => !live.includes(p)); // checked, not on showcase
+
+    expect(
+      { missing, stale },
+      `console-errors.spec.js is out of sync with the showcase.\n` +
+        `  Add to SHOWCASE_PATHS (on index, not JS-checked): ${missing.join(", ") || "none"}\n` +
+        `  Remove from SHOWCASE_PATHS (checked, not on index): ${stale.join(", ") || "none"}`,
+    ).toEqual({ missing: [], stale: [] });
+  });
 });
