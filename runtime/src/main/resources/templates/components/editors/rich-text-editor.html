@@ -7,8 +7,16 @@
 {! Requires: /web/vendor/quill/quill.snow.css and/or quill.bubble.css !}
 {! Requires: /web/js/alpine/components/rich-text-editor.js loaded before Alpine !}
 {! Requires: /web/css/components/rich-text-editor.css !}
+{! Config travels as data-* and is read in init(): interpolating a Qute value into a JS string literal
+    inside x-data breaks on any newline or apostrophe in the text (a wrapped include arg is enough), and
+    Alpine reports it only as an init-time SyntaxError. !}
 <div class="pha-c-rich-text-editor" id="{id}"
-     x-data="phaRichTextEditor({ theme: '{#if theme??}{theme}{#else}snow{/if}', placeholder: '{#if placeholder??}{placeholder}{/if}', readOnly: {#if readOnly??}{readOnly}{#else}false{/if}, toolbar: '{#if toolbar??}{toolbar}{#else}full{/if}', name: '{#if name??}{name}{/if}' })">
+     data-theme="{#if theme??}{theme}{#else}snow{/if}"
+     {#if placeholder??}data-placeholder="{placeholder}"{/if}
+     data-read-only="{#if readOnly??}{readOnly}{#else}false{/if}"
+     data-toolbar="{#if toolbar??}{toolbar}{#else}full{/if}"
+     {#if name??}data-name="{name}"{/if}
+     x-data="phaRichTextEditor()">
   {#insert toolbar}{/insert}
   <div class="pha-c-rich-text-editor__surface"
        id="{id}-field"
