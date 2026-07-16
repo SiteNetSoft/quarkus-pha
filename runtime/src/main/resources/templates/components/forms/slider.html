@@ -17,6 +17,10 @@
       class="pf-v6-c-slider__thumb"
       role="slider"
       tabindex="0"
+      {! WAI-ARIA slider keyboard: a focusable role=slider must respond to arrows/Home/End. Kept on one line
+         (multi-line attributes with embedded Qute break Prettier). Declaration-free &&-guard chain (Alpine
+         compiles handlers as `__self.result = <expr>`, so no var/let/const). !}
+      @keydown="!$el.closest('.pf-m-disabled') && ((($event.key === 'ArrowRight' || $event.key === 'ArrowUp') && ($event.preventDefault(), val = Math.min({#if max??}{max}{#else}100{/if}, val + 1))), (($event.key === 'ArrowLeft' || $event.key === 'ArrowDown') && ($event.preventDefault(), val = Math.max({#if min??}{min}{#else}0{/if}, val - 1))), ($event.key === 'Home' && ($event.preventDefault(), val = {#if min??}{min}{#else}0{/if})), ($event.key === 'End' && ($event.preventDefault(), val = {#if max??}{max}{#else}100{/if})), ($event.key === 'PageUp' && ($event.preventDefault(), val = Math.min({#if max??}{max}{#else}100{/if}, val + 10))), ($event.key === 'PageDown' && ($event.preventDefault(), val = Math.max({#if min??}{min}{#else}0{/if}, val - 10))))"
       aria-label="{#if ariaLabel??}{ariaLabel}{#else}Value{/if}"
       aria-valuemin="{#if min??}{min}{#else}0{/if}"
       aria-valuemax="{#if max??}{max}{#else}100{/if}"
