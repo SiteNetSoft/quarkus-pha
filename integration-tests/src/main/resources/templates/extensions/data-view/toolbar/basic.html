@@ -35,21 +35,30 @@
       </div>
       <div class="pf-v6-c-toolbar__expandable-content pf-m-expanded" x-show="filters.length > 0">
         <div class="pf-v6-c-toolbar__group" role="group" aria-label="Active filters">
-          <template x-for="f in filters" :key="f.key">
-            <span class="pf-v6-c-label pf-m-blue">
-              <span class="pf-v6-c-label__content">
-                <span class="pf-v6-c-label__text" x-text="f.label"></span>
-                <button
-                  class="pf-v6-c-button pf-m-plain"
-                  type="button"
-                  aria-label="Remove filter"
-                  @click="removeFilter(f.key)"
-                >
-                  <span class="pf-v6-c-button__icon">{icons:svg('fa:times').raw}</span>
-                </button>
-              </span>
-            </span>
-          </template>
+          {! Chips must sit in a label-group__list; bare labels in a toolbar__group stretch full-width. !}
+          <div class="pf-v6-c-label-group">
+            <div class="pf-v6-c-label-group__main">
+              <ul class="pf-v6-c-label-group__list" role="list" aria-label="Applied filters">
+                <template x-for="f in filters" :key="f.key">
+                  <li class="pf-v6-c-label-group__list-item">
+                    <span class="pf-v6-c-label pf-m-blue">
+                      <span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text" x-text="f.label"></span></span>
+                      <span class="pf-v6-c-label__actions">
+                        <button
+                          class="pf-v6-c-button pf-m-plain"
+                          type="button"
+                          aria-label="Remove filter"
+                          @click="removeFilter(f.key)"
+                        >
+                          <span class="pf-v6-c-button__icon">{icons:svg('fa:times').raw}</span>
+                        </button>
+                      </span>
+                    </span>
+                  </li>
+                </template>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
