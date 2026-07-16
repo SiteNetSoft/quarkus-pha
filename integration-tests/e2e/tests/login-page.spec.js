@@ -18,8 +18,12 @@ test.describe("Login Page", () => {
       await expect(page.locator("#lp-basic")).toHaveClass(/pf-v6-c-login/);
     });
 
-    test("brand header renders the logo", async ({ page }) => {
-      await expect(page.locator("#lp-basic .pf-v6-c-login__header img.pf-v6-c-brand")).toBeVisible();
+    // Both logo variants ship; pha.css shows only the one matching the active theme. Asserting
+    // "exactly one visible" holds in either theme, and catches a light-only logo regressing back in.
+    test("brand header renders exactly one theme-appropriate logo", async ({ page }) => {
+      const brands = page.locator("#lp-basic .pf-v6-c-login__header img.pf-v6-c-brand");
+      await expect(brands).toHaveCount(2);
+      await expect(brands.filter({ visible: true })).toHaveCount(1);
     });
 
     test("login page has a form element", async ({ page }) => {
