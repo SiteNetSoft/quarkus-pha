@@ -1,25 +1,38 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Smoke tests", () => {
-  test("homepage loads with correct title", async ({ page }) => {
+  test("home page loads with hero and browse CTA", async ({ page }) => {
     await page.goto("/");
+    await expect(page.locator("h1")).toContainText("Framework-free frontend components");
+    await expect(page.locator('a[href="/components"]').first()).toBeVisible();
+  });
+
+  test("home page links to licenses page", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.locator('a[href="/licenses"]')).toBeVisible();
+    await page.goto("/licenses");
+    await expect(page.locator("h1")).toContainText("Licenses");
+  });
+
+  test("components index loads with correct title", async ({ page }) => {
+    await page.goto("/components");
     await expect(page).toHaveTitle("Component Showcase");
   });
 
   test("homepage displays All components heading", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/components");
     const heading = page.locator("h1");
     await expect(heading).toHaveText("All components");
   });
 
   test("gallery shows component cards", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/components");
     const cards = page.locator(".pf-v6-l-gallery .pf-v6-c-card");
     await expect(cards).toHaveCount(126);
   });
 
   test("implemented components link to demo pages", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/components");
     const aboutModalLink = page.locator('a[href="/components/about-modal"]');
     await expect(aboutModalLink).toBeVisible();
 
@@ -322,7 +335,7 @@ test.describe("Smoke tests", () => {
   });
 
   test("demo page links are visible on index", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/components");
     await expect(page.locator('#demo-dashboard')).toBeVisible();
     await expect(page.locator('#demo-data-management')).toBeVisible();
     await expect(page.locator('#demo-settings')).toBeVisible();
@@ -330,7 +343,7 @@ test.describe("Smoke tests", () => {
   });
 
   test("search input filters component cards", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/components");
     const searchInput = page.locator('input[placeholder="Search components by name"]');
     await expect(searchInput).toBeVisible();
 

@@ -29,6 +29,18 @@ public class ComponentRoutes {
     @ConfigProperty(name = "collabora.access-token")
     String collaboraAccessToken;
 
+    @Location("hello")
+    @Inject
+    Template hello;
+
+    /** The /components grid — the component showcase index (card data built by HelloResource). */
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance index() {
+        List<Map<String, String>> components = HelloResource.buildComponentList();
+        return hello.data("components", components).data("componentCount", components.size());
+    }
+
     @Location("components/about-modal-demo")
     @Inject
     Template aboutModalPage;
