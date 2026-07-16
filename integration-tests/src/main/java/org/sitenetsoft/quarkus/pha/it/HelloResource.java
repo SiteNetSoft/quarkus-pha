@@ -18,7 +18,10 @@ import java.util.Set;
 public class HelloResource {
 
     @Inject
-    Template hello;
+    Template home;
+
+    @Inject
+    Template licenses;
 
     /**
      * Components without a homepage thumbnail in /web/images/components/.
@@ -363,6 +366,18 @@ public class HelloResource {
     @GET
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance index() {
+        return home.instance();
+    }
+
+    @GET
+    @Path("/licenses")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance licensesPage() {
+        return licenses.instance();
+    }
+
+    /** Shared component-card data for the /components grid (served by ComponentRoutes). */
+    public static List<Map<String, String>> buildComponentList() {
         List<Map<String, String>> components = new ArrayList<>();
 
         for (String[] entry : COMPONENT_DATA) {
@@ -387,8 +402,6 @@ public class HelloResource {
             components.add(comp);
         }
 
-        return hello
-                     .data("components", components)
-                     .data("componentCount", components.size());
+        return components;
     }
 }

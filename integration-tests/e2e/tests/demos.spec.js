@@ -192,12 +192,12 @@ test.describe("Demo Pages", () => {
 
   test.describe("Index page demos section", () => {
     test("demos heading is visible", async ({ page }) => {
-      await page.goto("/");
+      await page.goto("/components");
       await expect(page.locator("#demos-heading")).toBeVisible();
     });
 
     test("all 4 demo cards are present", async ({ page }) => {
-      await page.goto("/");
+      await page.goto("/components");
       await expect(page.locator("#demo-dashboard")).toBeVisible();
       await expect(page.locator("#demo-data-management")).toBeVisible();
       await expect(page.locator("#demo-settings")).toBeVisible();
@@ -205,7 +205,7 @@ test.describe("Demo Pages", () => {
     });
 
     test("demo cards link to correct pages", async ({ page }) => {
-      await page.goto("/");
+      await page.goto("/components");
       await expect(page.locator("#demo-dashboard")).toHaveAttribute("href", "/demos/dashboard");
       await expect(page.locator("#demo-data-management")).toHaveAttribute("href", "/demos/data-management");
       await expect(page.locator("#demo-settings")).toHaveAttribute("href", "/demos/settings");
