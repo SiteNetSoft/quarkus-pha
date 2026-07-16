@@ -32,23 +32,19 @@
     font-size: var(--pf-t--global--font--size--body--sm, 0.75rem);
     padding: var(--pf-t--global--spacer--xs, 0.25rem) 0;
   }
-  .product-card--color-1 {
-    background-color: #e7f1ff;
-  }
-  .product-card--color-2 {
-    background-color: #f2e7ff;
-  }
-  .product-card--color-3 {
-    background-color: #e7fff0;
-  }
-  .product-card--color-4 {
-    background-color: #fff5e7;
-  }
-  .product-card--color-5 {
-    background-color: #ffe7e7;
-  }
+  /* Tile fills use a theme-aware surface token. These were 6 hardcoded light
+     pastels with no dark variant — the biggest dark-theme luminance outlier in
+     the component sweep. The demo is about rectangle selection, not the swatch
+     colours, so all tiles now share one neutral surface that reads correctly in
+     both light and dark. The 6 --color-N classes are kept so the markup is
+     unchanged; they simply resolve to the same token. */
+  .product-card--color-1,
+  .product-card--color-2,
+  .product-card--color-3,
+  .product-card--color-4,
+  .product-card--color-5,
   .product-card--color-6 {
-    background-color: #e7fbff;
+    background-color: var(--pf-t--global--background--color--secondary--default, #f5f5f5);
   }
   .selection-count {
     padding: var(--pf-t--global--spacer--sm, 0.5rem) var(--pf-t--global--spacer--md, 1rem);
