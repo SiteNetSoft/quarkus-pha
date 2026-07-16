@@ -74,6 +74,31 @@ podman run --rm \
     cp node_modules/video.js/dist/video-js.min.css /output/videojs/
     cp -r node_modules/video.js/dist/font /output/videojs/
 
+    # Sample media for the video-player demo — GENERATED, never fetched.
+    # The demo used to source clips from commondatastorage.googleapis.com, which
+    # now returns 403. Synthetic clips keep the demo self-contained: no CDN to rot,
+    # no third-party traffic when someone views the page, works offline.
+    echo "  Sample media (ffmpeg)..."
+    apk add --no-cache ffmpeg >/dev/null 2>&1
+    mkdir -p /output/media
+    ffmpeg -y -loglevel error \
+      -f lavfi -i testsrc2=duration=10:size=640x360:rate=30 \
+      -f lavfi -i sine=frequency=440:duration=10 \
+      -c:v libx264 -preset veryfast -pix_fmt yuv420p -movflags +faststart \
+      -c:a aac -b:a 64k -shortest /output/media/sample-pattern.mp4
+    ffmpeg -y -loglevel error \
+      -f lavfi -i smptebars=duration=10:size=640x360:rate=30 \
+      -f lavfi -i sine=frequency=523:duration=10 \
+      -c:v libx264 -preset veryfast -pix_fmt yuv420p -movflags +faststart \
+      -c:a aac -b:a 64k -shortest /output/media/sample-bars.mp4
+    ffmpeg -y -loglevel error \
+      -f lavfi -i testsrc=duration=10:size=640x360:rate=30 \
+      -f lavfi -i sine=frequency=349:duration=10 \
+      -c:v libx264 -preset veryfast -pix_fmt yuv420p -movflags +faststart \
+      -c:a aac -b:a 64k -shortest /output/media/sample-counter.mp4
+    ffmpeg -y -loglevel error -i /output/media/sample-pattern.mp4 \
+      -vframes 1 -q:v 3 /output/media/sample-pattern.jpg
+
     # Cytoscape.js (graph visualization for the topology bucket)
     echo "  Cytoscape.js..."
     mkdir -p /output/cytoscape
