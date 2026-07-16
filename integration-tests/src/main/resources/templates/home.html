@@ -1,0 +1,249 @@
+{#include layouts/base} {#title}quarkus-pha — framework-free frontend components for Quarkus{/title} {#body}
+<div id="root">
+  <div style="outline: none" tabindex="-1" id="ws-router">
+    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
+      <div class="pf-v6-c-skip-to-content">
+        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
+          ><span class="pf-v6-c-button__text">Skip to content</span></a
+        >
+      </div>
+      {#include structure/header /}
+      <div class="pf-v6-c-page__main-container">
+        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
+          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+            {! ── Hero ── !}
+            <section class="pf-v6-c-page__main-section pf-m-limit-width" id="home-hero">
+              <div class="pf-v6-c-page__main-body">
+                <div
+                  class="pf-v6-l-flex pf-m-column pf-m-align-items-center pf-m-space-items-lg"
+                  style="text-align: center; padding: 2rem 0 1rem"
+                >
+                  <img
+                    class="pha-masthead-logo pha-masthead-logo--light"
+                    src="/web/images/quarkus-pha-logo.svg"
+                    alt="quarkus-pha"
+                    style="height: 72px; max-width: 100%"
+                  />
+                  <img
+                    class="pha-masthead-logo pha-masthead-logo--dark"
+                    src="/web/images/quarkus-pha-logo-dark.svg"
+                    alt="quarkus-pha"
+                    style="height: 72px; max-width: 100%"
+                  />
+                  <div class="pf-v6-c-content pf-m-editorial" style="max-width: 44rem">
+                    <h1 class="pf-v6-c-title pf-m-4xl" style="margin-top: 1rem">
+                      Framework-free frontend components for Quarkus
+                    </h1>
+                    <p class="pf-v6-c-title pf-m-lg" style="color: var(--pf-t--global--text--color--subtle)">
+                      A Quarkus extension delivering ready-to-use, server-rendered HTML components built on PatternFly,
+                      HTMX, and Alpine.js — no React, no build step, no JS framework.
+                    </p>
+                  </div>
+                  <div class="pf-v6-l-flex pf-m-space-items-md" style="justify-content: center; flex-wrap: wrap">
+                    <a href="/components" class="pf-v6-c-button pf-m-primary pf-m-display-lg"
+                      ><span class="pf-v6-c-button__text">Browse components</span></a
+                    >
+                    <a href="//github.com/SiteNetSoft/quarkus-pha" class="pf-v6-c-button pf-m-secondary pf-m-display-lg"
+                      ><span class="pf-v6-c-button__icon"
+                        ><span style="margin-right: 0.4rem">{icons:svg('fa-brands:github').raw}</span></span
+                      ><span class="pf-v6-c-button__text">GitHub</span></a
+                    >
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {! ── The stack ── !}
+            <section class="pf-v6-c-page__main-section pf-m-limit-width" id="home-stack">
+              <div class="pf-v6-c-page__main-body">
+                <div class="pf-v6-c-content pf-m-editorial" style="margin-bottom: 1rem">
+                  <h2 class="pf-v6-c-title pf-m-2xl">The stack</h2>
+                  <p>
+                    Pure HTML fragments rendered server-side with Qute, styled by PatternFly's design tokens, made
+                    interactive with Alpine.js, and moved around the page with HTMX. Data visualisation uses Apache
+                    ECharts and D3; maps use MapLibre.
+                  </p>
+                </div>
+                <div class="pf-v6-l-gallery pf-m-gutter" style="--pf-v6-l-gallery--GridTemplateColumns--min: 220px">
+                  <div class="pf-v6-c-card">
+                    <div class="pf-v6-c-card__title">
+                      <span class="pf-v6-c-card__title-text"
+                        ><span style="margin-right: 0.5rem; color: var(--pf-t--global--icon--color--brand--default)"
+                          >{icons:svg('fa:palette').raw}</span
+                        >PatternFly</span
+                      >
+                    </div>
+                    <div class="pf-v6-c-card__body">Design system — CSS + tokens only</div>
+                  </div>
+                  <div class="pf-v6-c-card">
+                    <div class="pf-v6-c-card__title">
+                      <span class="pf-v6-c-card__title-text"
+                        ><span style="margin-right: 0.5rem; color: var(--pf-t--global--icon--color--brand--default)"
+                          >{icons:svg('fa:bolt').raw}</span
+                        >Alpine.js</span
+                      >
+                    </div>
+                    <div class="pf-v6-c-card__body">Lightweight reactivity via HTML attributes</div>
+                  </div>
+                  <div class="pf-v6-c-card">
+                    <div class="pf-v6-c-card__title">
+                      <span class="pf-v6-c-card__title-text"
+                        ><span style="margin-right: 0.5rem; color: var(--pf-t--global--icon--color--brand--default)"
+                          >{icons:svg('fa:arrows-rotate').raw}</span
+                        >HTMX</span
+                      >
+                    </div>
+                    <div class="pf-v6-c-card__body">Ajax, partial swaps, server-driven UI</div>
+                  </div>
+                  <div class="pf-v6-c-card">
+                    <div class="pf-v6-c-card__title">
+                      <span class="pf-v6-c-card__title-text"
+                        ><span style="margin-right: 0.5rem; color: var(--pf-t--global--icon--color--brand--default)"
+                          >{icons:svg('fa:code').raw}</span
+                        >Qute</span
+                      >
+                    </div>
+                    <div class="pf-v6-c-card__body">Quarkus-native server templating</div>
+                  </div>
+                  <div class="pf-v6-c-card">
+                    <div class="pf-v6-c-card__title">
+                      <span class="pf-v6-c-card__title-text"
+                        ><span style="margin-right: 0.5rem; color: var(--pf-t--global--icon--color--brand--default)"
+                          >{icons:svg('fa:chart-line').raw}</span
+                        >ECharts + D3</span
+                      >
+                    </div>
+                    <div class="pf-v6-c-card__body">Dashboards and data visualisation</div>
+                  </div>
+                  <div class="pf-v6-c-card">
+                    <div class="pf-v6-c-card__title">
+                      <span class="pf-v6-c-card__title-text"
+                        ><span style="margin-right: 0.5rem; color: var(--pf-t--global--icon--color--brand--default)"
+                          >{icons:svg('fa:map-location-dot').raw}</span
+                        >MapLibre</span
+                      >
+                    </div>
+                    <div class="pf-v6-c-card__body">Interactive maps, no API key</div>
+                  </div>
+                </div>
+                <div class="pf-v6-c-content pf-m-editorial" style="margin-top: 1rem">
+                  <p style="color: var(--pf-t--global--text--color--subtle)">
+                    <strong>What this is not:</strong> no React, no Angular, no Vue, no PatternFly React components, no
+                    JS framework of any kind.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {! ── How components work ── !}
+            <section class="pf-v6-c-page__main-section pf-m-limit-width" id="home-how">
+              <div class="pf-v6-c-page__main-body">
+                <div class="pf-v6-c-content pf-m-editorial" style="margin-bottom: 1rem">
+                  <h2 class="pf-v6-c-title pf-m-2xl">How it works</h2>
+                  <p>
+                    The server renders the DOM, Alpine reacts to it, and HTMX moves it. JSON becomes HTML server-side —
+                    never in the browser. Add the extension, then include a component in any Qute template:
+                  </p>
+                </div>
+                <div class="pf-v6-c-code-block" aria-label="Usage example">
+                  <div class="pf-v6-c-code-block__content">
+                    <pre
+                      class="pf-v6-c-code-block__pre"
+                    ><code class="pf-v6-c-code-block__code">{|{#include components/feedback/alert variant="success" title="Saved" /}|}</code></pre>
+                  </div>
+                </div>
+                <div class="pf-v6-c-content pf-m-editorial" style="margin-top: 1rem">
+                  <p style="color: var(--pf-t--global--text--color--subtle)">
+                    Components carry their own Alpine behaviour inline via <code>x-data</code> and their HTMX wiring via
+                    <code>hx-*</code> attributes. Any Quarkus backend can consume them by adding this extension as a
+                    dependency.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {! ── Featured / quick links ── !}
+            <section class="pf-v6-c-page__main-section pf-m-limit-width" id="home-featured">
+              <div class="pf-v6-c-page__main-body">
+                <div class="pf-v6-c-content pf-m-editorial" style="margin-bottom: 1rem">
+                  <h2 class="pf-v6-c-title pf-m-2xl">Explore</h2>
+                </div>
+                <div class="pf-v6-l-gallery pf-m-gutter" style="--pf-v6-l-gallery--GridTemplateColumns--min: 240px">
+                  <a
+                    href="/components"
+                    class="pf-v6-c-card pf-m-clickable"
+                    style="text-decoration: none; color: inherit"
+                  >
+                    <div class="pf-v6-c-card__title">
+                      <span class="pf-v6-c-card__title-text"
+                        ><span style="margin-right: 0.5rem">{icons:svg('fa:table-cells-large').raw}</span>All
+                        components</span
+                      >
+                    </div>
+                    <div class="pf-v6-c-card__body">Browse the full library with live search</div>
+                  </a>
+                  <a
+                    href="/components/chart"
+                    class="pf-v6-c-card pf-m-clickable"
+                    style="text-decoration: none; color: inherit"
+                  >
+                    <div class="pf-v6-c-card__title">
+                      <span class="pf-v6-c-card__title-text"
+                        ><span style="margin-right: 0.5rem">{icons:svg('fa:chart-pie').raw}</span>Charts</span
+                      >
+                    </div>
+                    <div class="pf-v6-c-card__body">ECharts-powered dashboards</div>
+                  </a>
+                  <a
+                    href="/components/table"
+                    class="pf-v6-c-card pf-m-clickable"
+                    style="text-decoration: none; color: inherit"
+                  >
+                    <div class="pf-v6-c-card__title">
+                      <span class="pf-v6-c-card__title-text"
+                        ><span style="margin-right: 0.5rem">{icons:svg('fa:table').raw}</span>Tables</span
+                      >
+                    </div>
+                    <div class="pf-v6-c-card__body">Sortable, expandable, selectable</div>
+                  </a>
+                  <a
+                    href="/demos/dashboard"
+                    class="pf-v6-c-card pf-m-clickable"
+                    style="text-decoration: none; color: inherit"
+                  >
+                    <div class="pf-v6-c-card__title">
+                      <span class="pf-v6-c-card__title-text"
+                        ><span style="margin-right: 0.5rem">{icons:svg('fa:gauge-high').raw}</span>Demos</span
+                      >
+                    </div>
+                    <div class="pf-v6-c-card__body">Full-page layouts composed end to end</div>
+                  </a>
+                </div>
+              </div>
+            </section>
+
+            {! ── Footer note ── !}
+            <section class="pf-v6-c-page__main-section pf-m-limit-width" id="home-footer-note">
+              <div class="pf-v6-c-page__main-body">
+                <div
+                  class="pf-v6-c-content pf-m-editorial"
+                  style="
+                    border-top: 1px solid var(--pf-t--global--border--color--default);
+                    padding-top: 1rem;
+                    color: var(--pf-t--global--text--color--subtle);
+                  "
+                >
+                  <p>
+                    &copy; 2026 SiteNetSoft — released under the Apache License 2.0. Built with open-source libraries;
+                    see <a href="/licenses">licenses &amp; attributions</a>.
+                  </p>
+                </div>
+              </div>
+            </section>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/body} {/include}
