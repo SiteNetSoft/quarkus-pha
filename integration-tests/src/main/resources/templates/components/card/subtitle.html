@@ -1,7 +1,11 @@
 <div style="max-width: 400px">
   {#include components/data-display/card id="cd-subtitle"}
+  {#include components/data-display/card-header hasHeaderMain=true}
+  {#cardHeaderMain}
   {#include components/data-display/card-title}Card title{/include}
   {#include components/data-display/card-subtitle}Card subtitle{/include}
+  {/cardHeaderMain}
+  {/include}
   {#include components/data-display/card-body}The subtitle sits in its own <code>pf-v6-c-card__subtitle</code> element below the title.{/include}
   {#include components/data-display/card-footer}Footer{/include}
   {/include}

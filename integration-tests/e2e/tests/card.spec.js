@@ -58,6 +58,23 @@ test.describe("Card", () => {
     test("renders a subtitle element below the title", async ({ page }) => {
       await expect(page.locator("#cd-subtitle .pf-v6-c-card__subtitle")).toHaveText("Card subtitle");
     });
+
+    // PF pads __header/__title/__body/__footer but not __subtitle, so a subtitle placed as a
+    // direct card child renders 24px outdented. The text assertion above passed throughout that
+    // bug — only geometry catches it.
+    for (const id of ["#cd-subtitle", "#cd-subtitle-actions"]) {
+      test(`${id} subtitle aligns with its title`, async ({ page }) => {
+        const offsets = await page.locator(id).evaluate((card) => {
+          const inlineStart = (el) =>
+            el.getBoundingClientRect().left + parseFloat(getComputedStyle(el).paddingInlineStart);
+          return {
+            title: inlineStart(card.querySelector(".pf-v6-c-card__title")),
+            subtitle: inlineStart(card.querySelector(".pf-v6-c-card__subtitle")),
+          };
+        });
+        expect(offsets.subtitle).toBeCloseTo(offsets.title, 0);
+      });
+    }
   });
 
   test.describe("Secondary", () => {
