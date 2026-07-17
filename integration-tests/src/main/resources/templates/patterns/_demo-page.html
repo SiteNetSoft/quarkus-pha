@@ -61,7 +61,10 @@
                     toolbar group."} {#content}{#include patterns/filters/chip-filters /}{/content} {/include} {#include
                     partials/example-card title="Advanced" slug="advanced" component="filters" urlPrefix="/patterns"
                     description="Single attribute-selector dropdown plus a value input — the typical advanced-filter
-                    row."} {#content}{#include patterns/filters/advanced /}{/content} {/include} {/if} {#if type ==
+                    row."} {#content}{#include patterns/filters/advanced /}{/content} {/include} {#include
+                    partials/example-card title="Faceted" slug="faceted" component="filters" urlPrefix="/patterns"
+                    description="A checkbox facet per attribute with live counts; the result list narrows as facets are
+                    ticked."} {#content}{#include patterns/filters/faceted /}{/content} {/include} {/if} {#if type ==
                     'password-generator'} {#include partials/example-card title="In a modal" slug="in-modal"
                     component="password-generator" urlPrefix="/patterns" description="&quot;Create user&quot; modal with
                     the password-generator widget inline."} {#content}{#include patterns/password-generator/in-modal
@@ -81,7 +84,11 @@
                     {#include partials/example-card title="Data-list + detail" slug="data-list-detail"
                     component="primary-detail" urlPrefix="/patterns" description="Data-list on the left, detail panel
                     with a table of related rows on the right."} {#content}{#include
-                    patterns/primary-detail/data-list-detail /}{/content} {/include} {/if} {#if type == 'right-to-left'}
+                    patterns/primary-detail/data-list-detail /}{/content} {/include} {#include partials/example-card
+                    title="Drawer detail" slug="drawer-detail" component="primary-detail" urlPrefix="/patterns"
+                    description="The list stays full-width; clicking an item slides the detail in from the right as an
+                    inline drawer panel."} {#content}{#include patterns/primary-detail/drawer-detail /}{/content}
+                    {/include} {/if} {#if type == 'right-to-left'}
                     {#include partials/example-card title="Form" slug="form-rtl" component="right-to-left"
                     urlPrefix="/patterns" description="A form wrapped in &lt;code
                     class=&quot;ws-code&quot;&gt;dir=&quot;rtl&quot;&lt;/code&gt; — labels, controls and the

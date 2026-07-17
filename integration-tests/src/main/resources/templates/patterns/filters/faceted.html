@@ -1,0 +1,115 @@
+{! Faceted filtering: a checkbox facet per attribute (status / region / owner) with per-value counts on the left; the
+result list on the right narrows live. Within a facet the selected values are OR-ed; across facets they are AND-ed —
+standard faceted-search semantics. In a real app each toggle would fire an HTMX hx-get that re-queries the server and
+swaps the list; here Alpine does it client-side. !}
+<div
+  x-data="{
+    items: [
+      { name: 'Apollo',  status: 'Active',  region: 'us-east-1',      owner: 'platform' },
+      { name: 'Mercury', status: 'Active',  region: 'eu-west-1',      owner: 'search' },
+      { name: 'Gemini',  status: 'Paused',  region: 'us-west-2',      owner: 'orders' },
+      { name: 'Orion',   status: 'Active',  region: 'ap-southeast-1', owner: 'platform' },
+      { name: 'Artemis', status: 'Blocked', region: 'eu-west-1',      owner: 'auth' },
+      { name: 'Vega',    status: 'Active',  region: 'us-east-1',      owner: 'search' },
+      { name: 'Lyra',    status: 'Paused',  region: 'eu-west-1',      owner: 'orders' },
+      { name: 'Draco',   status: 'Active',  region: 'us-west-2',      owner: 'platform' }
+    ],
+    facetDefs: [
+      { key: 'status', label: 'Status', values: ['Active', 'Paused', 'Blocked'] },
+      { key: 'region', label: 'Region', values: ['us-east-1', 'eu-west-1', 'us-west-2', 'ap-southeast-1'] },
+      { key: 'owner',  label: 'Owner',  values: ['platform', 'search', 'orders', 'auth'] }
+    ],
+    facets: { status: [], region: [], owner: [] },
+    toggle(cat, val) { let a = this.facets[cat]; let i = a.indexOf(val); i === -1 ? a.push(val) : a.splice(i, 1); },
+    count(cat, val) { return this.items.filter((it) =&gt; it[cat] === val).length; },
+    matches(it, cat) { return this.facets[cat].length === 0 || this.facets[cat].includes(it[cat]); },
+    get filtered() { return this.items.filter((it) =&gt; this.matches(it, 'status') &amp;&amp; this.matches(it, 'region') &amp;&amp; this.matches(it, 'owner')); },
+    get activeCount() { return this.facets.status.length + this.facets.region.length + this.facets.owner.length; },
+    clearAll() { this.facets = { status: [], region: [], owner: [] }; }
+  }"
+  class="pf-v6-l-flex pf-m-gap-lg pf-m-align-items-flex-start"
+>
+  {! ── Facet sidebar ── !}
+  <div
+    class="pf-v6-l-flex__item"
+    style="
+      flex: 0 0 200px;
+      border: 1px solid var(--pf-t--global--border--color--default);
+      border-radius: 4px;
+      padding: 1rem;
+    "
+  >
+    <template x-for="g in facetDefs" :key="g.key">
+      <div style="margin-bottom: 1rem">
+        <h3 class="pf-v6-c-content--h6" style="margin-bottom: 0.5rem" x-text="g.label"></h3>
+        <template x-for="v in g.values" :key="g.key + ':' + v">
+          <div class="pf-v6-c-check" style="margin-bottom: 0.25rem">
+            <input
+              class="pf-v6-c-check__input"
+              type="checkbox"
+              :id="'facet-' + g.key + '-' + v"
+              :checked="facets[g.key].includes(v)"
+              @change="toggle(g.key, v)"
+            />
+            <label class="pf-v6-c-check__label" :for="'facet-' + g.key + '-' + v">
+              <span x-text="v"></span>
+              <span
+                class="pf-v6-c-badge pf-m-read"
+                style="margin-inline-start: 0.25rem"
+                x-text="count(g.key, v)"
+              ></span>
+            </label>
+          </div>
+        </template>
+      </div>
+    </template>
+  </div>
+
+  {! ── Results ── !}
+  <div class="pf-v6-l-flex__item pf-m-flex-1" style="min-width: 0">
+    <div class="pf-v6-c-toolbar" role="region" aria-label="Active facets">
+      <div class="pf-v6-c-toolbar__content">
+        <div class="pf-v6-c-toolbar__content-section">
+          <div class="pf-v6-c-toolbar__item">
+            <strong x-text="filtered.length"></strong>
+            <span>&nbsp;of&nbsp;</span>
+            <span x-text="items.length"></span>
+            <span>&nbsp;projects</span>
+          </div>
+          <div class="pf-v6-c-toolbar__item" x-show="activeCount > 0">
+            <button type="button" class="pf-v6-c-button pf-m-link pf-m-inline" @click="clearAll()">
+              <span class="pf-v6-c-button__text">Clear all filters</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="pf-v6-c-data-list" role="list" aria-label="Filtered projects">
+      <template x-for="it in filtered" :key="it.name">
+        <li class="pf-v6-c-data-list__item">
+          <div class="pf-v6-c-data-list__item-row">
+            <div class="pf-v6-c-data-list__item-content">
+              <div class="pf-v6-c-data-list__cell pf-m-no-fill">
+                <span style="font-weight: bold" x-text="it.name"></span>
+              </div>
+              <div class="pf-v6-c-data-list__cell" x-text="it.owner"></div>
+              <div class="pf-v6-c-data-list__cell" x-text="it.region"></div>
+              <div class="pf-v6-c-data-list__cell pf-m-no-fill pf-m-align-right">
+                <span
+                  class="pf-v6-c-label pf-m-compact"
+                  :class="it.status === 'Active' ? 'pf-m-green' : (it.status === 'Paused' ? 'pf-m-yellow' : 'pf-m-red')"
+                  ><span class="pf-v6-c-label__content"
+                    ><span class="pf-v6-c-label__text" x-text="it.status"></span></span
+                ></span>
+              </div>
+            </div>
+          </div>
+        </li>
+      </template>
+    </ul>
+    <div class="pf-v6-c-content" style="padding: 1rem 0" x-show="filtered.length === 0">
+      <p class="pf-v6-u-color-200">No projects match the selected facets.</p>
+    </div>
+  </div>
+</div>
