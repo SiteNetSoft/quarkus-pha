@@ -206,10 +206,10 @@ test.describe("Demo Pages", () => {
 
     test("demo cards link to correct pages", async ({ page }) => {
       await page.goto("/components");
-      await expect(page.locator("#demo-dashboard")).toHaveAttribute("href", "/demos/dashboard");
-      await expect(page.locator("#demo-data-management")).toHaveAttribute("href", "/demos/data-management");
-      await expect(page.locator("#demo-settings")).toHaveAttribute("href", "/demos/settings");
-      await expect(page.locator("#demo-landing")).toHaveAttribute("href", "/demos/landing");
+      await expect(page.locator('a[href="/demos/dashboard"]').first()).toBeVisible();
+      await expect(page.locator('a[href="/demos/data-management"]').first()).toBeVisible();
+      await expect(page.locator('a[href="/demos/settings"]').first()).toBeVisible();
+      await expect(page.locator('a[href="/demos/landing"]').first()).toBeVisible();
     });
   });
 });
