@@ -10,12 +10,14 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.sse.OutboundSseEvent;
+import jakarta.ws.rs.sse.Sse;
 
 import io.quarkus.qute.Engine;
 import io.smallrye.mutiny.Multi;
-import org.jboss.resteasy.reactive.RestStreamElementType;
 
 import java.time.Duration;
 import java.time.LocalTime;
@@ -865,14 +867,17 @@ public class HtmxRoutes {
     // ─────────────────────────────────────────────────────────────────────
     // SSE: live log stream for the log-viewer/streaming demo.
     //
-    // Quarkus REST emits each Multi<String> item as a separate SSE
-    // `data:` block, so the value here is the fully-rendered HTML chunk
-    // that HTMX's sse-swap should append to the target. We don't include
-    // event: lines; the HTMX sse-swap="message" default catches the
-    // unnamed events that RestStreamElementType produces.
+    // Each tick becomes a named `message` SSE event whose data is the
+    // fully-rendered HTML chunk that HTMX's sse-swap="message" appends to
+    // the target.
     //
     // Bounded duration (15 ticks at 1.2s = ~18s) so an idle browser tab
-    // doesn't leak a server-side timer indefinitely.
+    // doesn't leak a server-side timer indefinitely. When the bounded
+    // stream ends we emit one final `close` event: the client's
+    // sse-close="close" tears the EventSource down cleanly. Without it, the
+    // browser treats the server-side close as an error — logging
+    // `console.error([object Event])` and reconnecting forever, restarting
+    // the whole 18s cycle on a loop.
     // ─────────────────────────────────────────────────────────────────────
 
     private static final String[] LOG_LEVELS = { "INFO", "DEBUG", "DEBUG", "INFO", "WARN", "DEBUG", "INFO", "DEBUG" };
@@ -890,8 +895,7 @@ public class HtmxRoutes {
     @GET
     @Path("/log-stream")
     @Produces(MediaType.SERVER_SENT_EVENTS)
-    @RestStreamElementType(MediaType.TEXT_HTML)
-    public Multi<String> logStream() {
+    public Multi<OutboundSseEvent> logStream(@Context Sse sse) {
         return Multi.createFrom().ticks().every(Duration.ofMillis(1200))
             .select().first(15)
             .map(tick -> {
@@ -901,10 +905,14 @@ public class HtmxRoutes {
                 String body = LOG_MESSAGES[i];
                 String line = ts + " " + level + "  " + body;
                 // Pre-rendered span; HTMX sse-swap appends it to the __list.
-                return "<span class=\"pf-v6-c-log-viewer__list-item\" role=\"listitem\">"
-                     + "<span class=\"pf-v6-c-log-viewer__text\">" + escapeHtml(line) + "</span>"
-                     + "</span>";
-            });
+                String html = "<span class=\"pf-v6-c-log-viewer__list-item\" role=\"listitem\">"
+                            + "<span class=\"pf-v6-c-log-viewer__text\">" + escapeHtml(line) + "</span>"
+                            + "</span>";
+                return sse.newEventBuilder().name("message").mediaType(MediaType.TEXT_HTML_TYPE).data(html).build();
+            })
+            // Terminal event: sse-close="close" on the client closes the
+            // EventSource cleanly instead of erroring + reconnecting.
+            .onCompletion().continueWith(sse.newEventBuilder().name("close").data("").build());
     }
 
     // ─────────────────────────────────────────────────────────────────────
