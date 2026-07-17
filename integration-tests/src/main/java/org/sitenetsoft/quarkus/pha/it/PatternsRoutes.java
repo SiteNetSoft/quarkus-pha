@@ -42,10 +42,10 @@ public class PatternsRoutes {
     private static final Map<String, String> INTROS = Map.ofEntries(
         Map.entry("card-view",          "Browseable card grid — projects, catalogue items, content tiles — usually with a toolbar above for search / sort / layout-toggle."),
         Map.entry("dashboard",          "Stat tiles on top, a chart in the middle, an activity table beneath. The shape every \"overview\" page tends to converge on."),
-        Map.entry("filters",            "Attribute filtering in a toolbar. Two flavours — chip filters (visible selections, click ×  to remove) and an advanced builder (attribute + value pair, apply on click)."),
+        Map.entry("filters",            "Attribute filtering in a toolbar. Three flavours — chip filters (visible selections, click ×  to remove), an advanced builder (attribute + value pair, apply on click) and faceted checkboxes (a facet per attribute with live counts)."),
         Map.entry("password-generator", "How to drop the password-generator widget into a real flow — inside a \"create user\" modal, or side-by-side with a live strength meter."),
         Map.entry("password-strength",  "Score + criteria checklist next to a password input. Score in five bands; criteria flip green as the user types."),
-        Map.entry("primary-detail",     "Master-detail. A list on the left selects what shows on the right — projects → metadata, services → endpoints table, anything."),
+        Map.entry("primary-detail",     "Master-detail. A list on the left selects what shows on the right — projects → metadata, services → endpoints table, anything. Either inline, or in a drawer that slides the detail in over the list."),
         Map.entry("right-to-left",      "PatternFly's CSS handles RTL out of the box: set <code class=\"ws-code\">dir=\"rtl\"</code> on the root and the components mirror automatically. The trick is keeping <em>data</em> (URLs, IDs, codes) LTR with nested <code class=\"ws-code\">dir=\"ltr\"</code>.")
     );
 
@@ -63,10 +63,10 @@ public class PatternsRoutes {
     private static final Map<String, List<String>> EXAMPLES = Map.ofEntries(
         Map.entry("card-view",          List.of("basic", "with-toolbar")),
         Map.entry("dashboard",          List.of("overview", "dense")),
-        Map.entry("filters",            List.of("chip-filters", "advanced")),
+        Map.entry("filters",            List.of("chip-filters", "advanced", "faceted")),
         Map.entry("password-generator", List.of("in-modal", "with-strength")),
         Map.entry("password-strength",  List.of("basic", "with-tooltip")),
-        Map.entry("primary-detail",     List.of("list-detail", "data-list-detail")),
+        Map.entry("primary-detail",     List.of("list-detail", "data-list-detail", "drawer-detail")),
         Map.entry("right-to-left",      List.of("form-rtl", "dashboard-rtl"))
     );
 
