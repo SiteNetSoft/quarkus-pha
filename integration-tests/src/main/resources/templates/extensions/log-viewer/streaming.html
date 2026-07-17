@@ -6,6 +6,7 @@
   x-data="phaLogViewer()"
   hx-ext="sse"
   sse-connect="/api/htmx/log-stream"
+  sse-close="close"
   @htmx:sse-message.window="scrollToBottom()"
 >
   <div class="pf-v6-c-log-viewer__header">
