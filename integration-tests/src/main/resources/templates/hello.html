@@ -12,19 +12,6 @@
         <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
           <main style="outline: none" tabindex="-1" id="ws-page-content-router">
             <div class="pf-v6-c-page__main-group">
-              {! ── Header section ── !}
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div data-pf-content="true" class="pf-v6-c-content pf-m-editorial">
-                    <div class="pf-v6-l-flex pf-m-align-items-center">
-                      <div>
-                        <h1 class="pf-v6-c-title pf-m-4xl">All components</h1>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
               {! ── Demo pages section ── !}
               <section class="pf-v6-c-page__main-section pf-m-limit-width" id="demos-section">
                 <div class="pf-v6-c-page__main-body">
@@ -37,108 +24,46 @@
                     style="--pf-v6-l-gallery--GridTemplateColumns--min: 200px"
                     id="demos-gallery"
                   >
-                    <a
-                      href="/demos/dashboard"
-                      class="pf-v6-c-card pf-m-clickable"
-                      id="demo-dashboard"
-                      style="text-decoration: none; color: inherit"
-                    >
-                      <div class="pf-v6-c-card__header">
-                        <div class="pf-v6-c-card__header-main">
-                          <div class="pf-v6-c-card__title">
-                            <span class="pf-v6-c-card__title-text"
-                              ><span style="margin-right: 0.5rem">{icons:svg('fa:tachometer-alt').raw}</span
-                              >Dashboard</span
-                            >
-                          </div>
-                        </div>
-                      </div>
-                      <div class="pf-v6-c-card__body">
-                        <p>Sidebar layout with stat cards, charts, and activity table.</p>
-                      </div>
-                      <div class="pf-v6-c-card__footer">
-                        <span class="pf-v6-c-label pf-m-green pf-m-filled pf-m-compact"
-                          ><span class="pf-v6-c-label__content"
-                            ><span class="pf-v6-c-label__text">Sidebar</span></span
-                          ></span
-                        >
-                      </div>
-                    </a>
-                    <a
-                      href="/demos/data-management"
-                      class="pf-v6-c-card pf-m-clickable"
-                      id="demo-data-management"
-                      style="text-decoration: none; color: inherit"
-                    >
-                      <div class="pf-v6-c-card__header">
-                        <div class="pf-v6-c-card__header-main">
-                          <div class="pf-v6-c-card__title">
-                            <span class="pf-v6-c-card__title-text"
-                              ><span style="margin-right: 0.5rem">{icons:svg('fa:database').raw}</span>Data
-                              Management</span
-                            >
-                          </div>
-                        </div>
-                      </div>
-                      <div class="pf-v6-c-card__body"><p>HTMX live search and click-to-load pagination.</p></div>
-                      <div class="pf-v6-c-card__footer">
-                        <span class="pf-v6-c-label pf-m-green pf-m-filled pf-m-compact"
-                          ><span class="pf-v6-c-label__content"
-                            ><span class="pf-v6-c-label__text">Sidebar</span></span
-                          ></span
-                        >
-                      </div>
-                    </a>
-                    <a
-                      href="/demos/settings"
-                      class="pf-v6-c-card pf-m-clickable"
-                      id="demo-settings"
-                      style="text-decoration: none; color: inherit"
-                    >
-                      <div class="pf-v6-c-card__header">
-                        <div class="pf-v6-c-card__header-main">
-                          <div class="pf-v6-c-card__title">
-                            <span class="pf-v6-c-card__title-text"
-                              ><span style="margin-right: 0.5rem">{icons:svg('fa:cog').raw}</span>Settings</span
-                            >
-                          </div>
-                        </div>
-                      </div>
-                      <div class="pf-v6-c-card__body"><p>Horizontal nav layout with tabbed forms.</p></div>
-                      <div class="pf-v6-c-card__footer">
-                        <span class="pf-v6-c-label pf-m-blue pf-m-filled pf-m-compact"
-                          ><span class="pf-v6-c-label__content"
-                            ><span class="pf-v6-c-label__text">Horizontal</span></span
-                          ></span
-                        >
-                      </div>
-                    </a>
-                    <a
-                      href="/demos/landing"
-                      class="pf-v6-c-card pf-m-clickable"
-                      id="demo-landing"
-                      style="text-decoration: none; color: inherit"
-                    >
-                      <div class="pf-v6-c-card__header">
-                        <div class="pf-v6-c-card__header-main">
-                          <div class="pf-v6-c-card__title">
-                            <span class="pf-v6-c-card__title-text"
-                              ><span style="margin-right: 0.5rem">{icons:svg('fa:rocket').raw}</span>Landing Page</span
-                            >
-                          </div>
-                        </div>
-                      </div>
-                      <div class="pf-v6-c-card__body">
-                        <p>Stacked layout with hero, feature cards, and about section.</p>
-                      </div>
-                      <div class="pf-v6-c-card__footer">
-                        <span class="pf-v6-c-label pf-m-purple pf-m-filled pf-m-compact"
-                          ><span class="pf-v6-c-label__content"
-                            ><span class="pf-v6-c-label__text">Stacked</span></span
-                          ></span
-                        >
-                      </div>
-                    </a>
+                    {#include components/data-display/card id="demo-dashboard" clickable=true fullHeight=true}
+                    {#include components/data-display/card-header hasSelectableActions=true}
+                    {#cardSelectableActions}
+                    <a class="pf-v6-c-card__clickable-action" href="/demos/dashboard" aria-labelledby="demo-dashboard-title"></a>
+                    {/cardSelectableActions}
+                    {#include components/data-display/card-title id="demo-dashboard-title"}<span style="margin-right: 0.5rem">{icons:svg('fa:tachometer-alt').raw}</span>Dashboard{/include}
+                    {/include}
+                    {#include components/data-display/card-body}<p>Sidebar layout with stat cards, charts, and activity table.</p>{/include}
+                    {#include components/data-display/card-footer}<span class="pf-v6-c-label pf-m-green pf-m-filled pf-m-compact"><span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text">Sidebar</span></span></span>{/include}
+                    {/include}
+                    {#include components/data-display/card id="demo-data-management" clickable=true fullHeight=true}
+                    {#include components/data-display/card-header hasSelectableActions=true}
+                    {#cardSelectableActions}
+                    <a class="pf-v6-c-card__clickable-action" href="/demos/data-management" aria-labelledby="demo-data-management-title"></a>
+                    {/cardSelectableActions}
+                    {#include components/data-display/card-title id="demo-data-management-title"}<span style="margin-right: 0.5rem">{icons:svg('fa:database').raw}</span>Data Management{/include}
+                    {/include}
+                    {#include components/data-display/card-body}<p>HTMX live search and click-to-load pagination.</p>{/include}
+                    {#include components/data-display/card-footer}<span class="pf-v6-c-label pf-m-green pf-m-filled pf-m-compact"><span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text">Sidebar</span></span></span>{/include}
+                    {/include}
+                    {#include components/data-display/card id="demo-settings" clickable=true fullHeight=true}
+                    {#include components/data-display/card-header hasSelectableActions=true}
+                    {#cardSelectableActions}
+                    <a class="pf-v6-c-card__clickable-action" href="/demos/settings" aria-labelledby="demo-settings-title"></a>
+                    {/cardSelectableActions}
+                    {#include components/data-display/card-title id="demo-settings-title"}<span style="margin-right: 0.5rem">{icons:svg('fa:cog').raw}</span>Settings{/include}
+                    {/include}
+                    {#include components/data-display/card-body}<p>Horizontal nav layout with tabbed forms.</p>{/include}
+                    {#include components/data-display/card-footer}<span class="pf-v6-c-label pf-m-blue pf-m-filled pf-m-compact"><span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text">Horizontal</span></span></span>{/include}
+                    {/include}
+                    {#include components/data-display/card id="demo-landing" clickable=true fullHeight=true}
+                    {#include components/data-display/card-header hasSelectableActions=true}
+                    {#cardSelectableActions}
+                    <a class="pf-v6-c-card__clickable-action" href="/demos/landing" aria-labelledby="demo-landing-title"></a>
+                    {/cardSelectableActions}
+                    {#include components/data-display/card-title id="demo-landing-title"}<span style="margin-right: 0.5rem">{icons:svg('fa:rocket').raw}</span>Landing Page{/include}
+                    {/include}
+                    {#include components/data-display/card-body}<p>Stacked layout with hero, feature cards, and about section.</p>{/include}
+                    {#include components/data-display/card-footer}<span class="pf-v6-c-label pf-m-purple pf-m-filled pf-m-compact"><span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text">Stacked</span></span></span>{/include}
+                    {/include}
                   </div>
                 </div>
               </section>
@@ -146,8 +71,11 @@
               {! ── Gallery section ── !}
               <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
                 <div class="pf-v6-c-page__main-body">
+                  <div data-pf-content="true" class="pf-v6-c-content pf-m-editorial" style="margin-bottom: 1rem">
+                    <h1 class="pf-v6-c-title pf-m-4xl" id="explore-components-heading">Explore components</h1>
+                  </div>
                   <div class="pf-v6-l-stack pf-m-gutter">
-                    <div class="ws-section-gallery ws-section-gallery-full-width" x-data="{ search: '' }">
+                    <div class="ws-section-gallery ws-section-gallery-full-width" x-data="{ search: '', view: 'grid' }">
                       {! ── Toolbar with search ── !}
                       <div class="pf-v6-c-toolbar pf-m-sticky">
                         <div class="pf-v6-c-toolbar__content">
@@ -175,8 +103,8 @@
                                     <input
                                       type="text"
                                       class="pf-v6-c-text-input-group__text-input"
-                                      aria-label="Search input"
-                                      placeholder="Search components by name"
+                                      aria-label="Search by name"
+                                      placeholder="Search by name"
                                       x-model="search"
                                     />
                                   </span>
@@ -184,7 +112,39 @@
                               </div>
                             </div>
 
-                            {! Item count !}
+                            {! Grid / list view toggle (hand-rendered toggle-group per the project convention) !}
+                            <div class="pf-v6-c-toolbar__group">
+                              <div class="pf-v6-c-toolbar__item">
+                                <div class="pf-v6-c-toggle-group" role="group" aria-label="Component view">
+                                  <div class="pf-v6-c-toggle-group__item">
+                                    <button
+                                      type="button"
+                                      class="pf-v6-c-toggle-group__button"
+                                      :class="view === 'grid' ? 'pf-m-selected' : ''"
+                                      :aria-pressed="view === 'grid'"
+                                      aria-label="Grid view"
+                                      @click="view = 'grid'"
+                                    >
+                                      <span class="pf-v6-c-toggle-group__icon"><svg class="pf-v6-svg" fill="currentColor" aria-hidden="true" role="img" width="1em" height="1em"><svg viewBox="0 0 512 512" class="pf-v6-icon-default"><path d="M149.333 56v80c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V56c0-13.255 10.745-24 24-24h101.333c13.255 0 24 10.745 24 24zm181.334 240v-80c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.256 0 24.001-10.745 24.001-24zm32-240v80c0 13.255 10.745 24 24 24H488c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24zm-32 80V56c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.256 0 24.001-10.745 24.001-24zm-205.334 56H24c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24zM0 376v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H24c-13.255 0-24 10.745-24 24zm386.667-56H488c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24zm0 160H488c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24zM181.333 376v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24z"></path></svg><svg viewBox="0 0 32 32" class="pf-v6-icon-rh-ui"><path d="M8.75 2h-5.5C2.561 2 2 2.561 2 3.25v5.5C2 9.439 2.561 10 3.25 10h5.5C9.439 10 10 9.439 10 8.75v-5.5C10 2.561 9.439 2 8.75 2ZM8 8H4V4h4v4Zm10.75-6h-5.5C12.561 2 12 2.561 12 3.25v5.5c0 .689.561 1.25 1.25 1.25h5.5c.689 0 1.25-.561 1.25-1.25v-5.5C20 2.561 19.439 2 18.75 2ZM18 8h-4V4h4v4Zm10.75-6h-5.5C22.561 2 22 2.561 22 3.25v5.5c0 .689.561 1.25 1.25 1.25h5.5c.689 0 1.25-.561 1.25-1.25v-5.5C30 2.561 29.439 2 28.75 2ZM28 8h-4V4h4v4ZM8.75 12h-5.5C2.561 12 2 12.561 2 13.25v5.5c0 .689.561 1.25 1.25 1.25h5.5c.689 0 1.25-.561 1.25-1.25v-5.5c0-.689-.561-1.25-1.25-1.25ZM8 18H4v-4h4v4Zm10.75-6h-5.5c-.689 0-1.25.561-1.25 1.25v5.5c0 .689.561 1.25 1.25 1.25h5.5c.689 0 1.25-.561 1.25-1.25v-5.5c0-.689-.561-1.25-1.25-1.25ZM18 18h-4v-4h4v4Zm10.75-6h-5.5c-.689 0-1.25.561-1.25 1.25v5.5c0 .689.561 1.25 1.25 1.25h5.5c.689 0 1.25-.561 1.25-1.25v-5.5c0-.689-.561-1.25-1.25-1.25ZM28 18h-4v-4h4v4ZM8.75 22h-5.5C2.561 22 2 22.561 2 23.25v5.5c0 .689.561 1.25 1.25 1.25h5.5c.689 0 1.25-.561 1.25-1.25v-5.5c0-.689-.561-1.25-1.25-1.25ZM8 28H4v-4h4v4Zm10.75-6h-5.5c-.689 0-1.25.561-1.25 1.25v5.5c0 .689.561 1.25 1.25 1.25h5.5c.689 0 1.25-.561 1.25-1.25v-5.5c0-.689-.561-1.25-1.25-1.25ZM18 28h-4v-4h4v4Zm10.75-6h-5.5c-.689 0-1.25.561-1.25 1.25v5.5c0 .689.561 1.25 1.25 1.25h5.5c.689 0 1.25-.561 1.25-1.25v-5.5c0-.689-.561-1.25-1.25-1.25ZM28 28h-4v-4h4v4Z"></path></svg></svg></span>
+                                    </button>
+                                  </div>
+                                  <div class="pf-v6-c-toggle-group__item">
+                                    <button
+                                      type="button"
+                                      class="pf-v6-c-toggle-group__button"
+                                      :class="view === 'list' ? 'pf-m-selected' : ''"
+                                      :aria-pressed="view === 'list'"
+                                      aria-label="List view"
+                                      @click="view = 'list'"
+                                    >
+                                      <span class="pf-v6-c-toggle-group__icon"><svg class="pf-v6-svg" fill="currentColor" aria-hidden="true" role="img" width="1em" height="1em"><svg viewBox="0 0 512 512" class="pf-v6-icon-default"><path d="M80 368H16a16 16 0 0 0-16 16v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16v-64a16 16 0 0 0-16-16zm0-320H16A16 16 0 0 0 0 64v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16V64a16 16 0 0 0-16-16zm0 160H16a16 16 0 0 0-16 16v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16v-64a16 16 0 0 0-16-16zm416 176H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16z"></path></svg><svg viewBox="0 0 32 32" class="pf-v6-icon-rh-ui"><path d="M31 16a1 1 0 0 1-1 1H9a1 1 0 0 1 0-2h21a1 1 0 0 1 1 1Zm-1 9H9a1 1 0 0 0 0 2h21a1 1 0 0 0 0-2ZM9 7h21a1 1 0 0 0 0-2H9a1 1 0 0 0 0 2ZM2 4.51a1.5 1.5 0 1 0 .001 3.001A1.5 1.5 0 0 0 2 4.51Zm0 10a1.5 1.5 0 1 0 .001 3.001A1.5 1.5 0 0 0 2 14.51Zm0 10a1.5 1.5 0 1 0 .001 3.001A1.5 1.5 0 0 0 2 24.51Z"></path></svg></svg></span>
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            {! Item count — pf-m-pagination pushes it to the far right, matching PF's overview !}
                             <div
                               class="pf-v6-c-toolbar__item pf-m-pagination pf-m-gap-none pf-m-align-self-center"
                               style="--pf-v6-c-toolbar__item--MinWidth: max-content"
@@ -197,51 +157,89 @@
                         </div>
                       </div>
 
-                      {! ── Card gallery ── !}
-                      <div class="pf-v6-l-gallery pf-m-gutter">
+                      {! ── GRID view — PF v6 clickable cards ── !}
+                      <div class="pf-v6-l-gallery pf-m-gutter" x-show="view === 'grid'">
                         {#for component in components}
                         <div x-show="'{component.name}'.toLowerCase().includes(search.toLowerCase())">
-                          <a href="{component.href}" style="text-decoration: none; color: inherit">
-                            <div id="{component.id}" class="pf-v6-c-card pf-m-clickable">
-                              {! Card header !}
-                              <div class="pf-v6-c-card__header">
-                                <div class="pf-v6-c-card__header-main">
-                                  <div class="pf-v6-c-card__title">
-                                    <div class="pf-v6-c-card__title-text" id="{component.id}-title">
-                                      {component.name}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
-                              {! Card body with illustration !}
-                              <div class="pf-v6-c-card__body">
-                                {#if component.image??}
-                                <img src="{component.image}" alt="{component.name} illustration" />
-                                {#else}
-                                <div
-                                  class="pf-v6-u-display-flex pf-v6-u-align-items-center pf-v6-u-justify-content-center pf-v6-u-color-200"
-                                  style="aspect-ratio: 2 / 1; min-height: 8rem; font-size: 0.875rem"
-                                >
-                                  No preview yet
-                                </div>
-                                {/if}
-                              </div>
-
-                              {! Card footer with optional label !} {#if component.label != ''}
-                              <div class="pf-v6-c-card__footer">
-                                <span class="pf-v6-c-label {component.labelColor} pf-m-filled pf-m-compact">
-                                  <span class="pf-v6-c-label__content">
-                                    <span class="pf-v6-c-label__text">{component.label}</span>
-                                  </span>
-                                </span>
-                              </div>
-                              {/if}
-                            </div>
-                          </a>
+                          {! PF clickable card: pf-m-clickable + a __clickable-action overlay anchor
+                             (this is what gives the border + hover elevation; a plain <a> wrapper does not). !}
+                          {#include components/data-display/card id=component.id clickable=true fullHeight=true}
+                          {#include components/data-display/card-header hasSelectableActions=true}
+                          {#cardSelectableActions}
+                          <a
+                            class="pf-v6-c-card__clickable-action"
+                            href="{component.href}"
+                            aria-labelledby="{component.id}-title"
+                          ></a>
+                          {/cardSelectableActions}
+                          {#include components/data-display/card-title id="{component.id}-title"}{component.name}{/include}
+                          {/include}
+                          {#include components/data-display/card-body}
+                          {#if component.image??}
+                          <img src="{component.image}" alt="{component.name} illustration" style="max-width: 100%" />
+                          {#else}
+                          <div
+                            class="pf-v6-u-display-flex pf-v6-u-align-items-center pf-v6-u-justify-content-center pf-v6-u-color-200"
+                            style="aspect-ratio: 2 / 1; min-height: 8rem; font-size: 0.875rem"
+                          >
+                            No preview yet
+                          </div>
+                          {/if}
+                          {/include}
+                          {#if component.label != ''}
+                          {#include components/data-display/card-footer}
+                          <span class="pf-v6-c-label {component.labelColor} pf-m-filled pf-m-compact"
+                            ><span class="pf-v6-c-label__content"
+                              ><span class="pf-v6-c-label__text">{component.label}</span></span
+                            ></span
+                          >
+                          {/include}
+                          {/if}
+                          {/include}
                         </div>
                         {/for}
                       </div>
+
+                      {! ── LIST view — PF v6 data list (image + title + optional label) ── !}
+                      <ul class="pf-v6-c-data-list pf-m-grid-md" role="list" x-show="view === 'list'" x-cloak>
+                        {#for component in components}
+                        <a
+                          class="pha-components-list-item"
+                          href="{component.href}"
+                          style="text-decoration: none; color: inherit; display: block"
+                          x-show="'{component.name}'.toLowerCase().includes(search.toLowerCase())"
+                        >
+                          <li class="pf-v6-c-data-list__item pf-m-clickable" tabindex="0">
+                            <div class="pf-v6-c-data-list__item-row">
+                              <div class="pf-v6-c-data-list__item-content">
+                                <div class="pf-v6-c-data-list__cell" style="flex: 0 0 200px; max-width: 200px">
+                                  {#if component.image??}
+                                  <img src="{component.image}" alt="{component.name} illustration" style="width: 100%; height: auto; display: block; border-radius: 4px" />
+                                  {#else}
+                                  <div class="pf-v6-u-display-flex pf-v6-u-align-items-center pf-v6-u-justify-content-center pf-v6-u-color-200" style="aspect-ratio: 2 / 1; font-size: 0.75rem">No preview yet</div>
+                                  {/if}
+                                </div>
+                                <div class="pf-v6-c-data-list__cell pf-m-flex-5">
+                                  <div class="pf-v6-l-split">
+                                    <div class="pf-v6-l-split__item pf-m-fill">
+                                      <div class="pf-v6-c-content pf-m-editorial"><h2 class="pf-v6-c-content--h2"><span>{component.name}</span></h2></div>
+                                    </div>
+                                    {#if component.label != ''}
+                                    <div class="pf-v6-l-split__item">
+                                      <span class="pf-v6-c-label {component.labelColor} pf-m-filled pf-m-compact"><span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text">{component.label}</span></span></span>
+                                    </div>
+                                    {/if}
+                                  </div>
+                                  {#if component.description != ''}
+                                  <div class="pf-v6-c-content pf-m-editorial"><p class="pf-v6-c-content--p">{component.description}</p></div>
+                                  {/if}
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        </a>
+                        {/for}
+                      </ul>
                     </div>
                   </div>
                 </div>
