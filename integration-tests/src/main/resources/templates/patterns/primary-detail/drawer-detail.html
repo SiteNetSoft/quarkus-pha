@@ -1,0 +1,74 @@
+{! Primary-detail via a drawer: the list stays full-width; clicking an item slides the detail in from the right as an
+inline drawer panel. The outer x-data owns the selection (selectedId + items + the `selected` getter); the drawer
+component owns `expanded`, and Alpine merges the two scopes so a list button sets both. !}
+<div
+  x-data="{
+    items: [
+      { id: 'apollo',  name: 'Apollo',  owner: 'platform', region: 'us-east-1', status: 'Active' },
+      { id: 'mercury', name: 'Mercury', owner: 'search',   region: 'eu-west-1', status: 'Active' },
+      { id: 'gemini',  name: 'Gemini',  owner: 'orders',   region: 'us-west-2', status: 'Paused' },
+      { id: 'orion',   name: 'Orion',   owner: 'platform', region: 'ap-southeast-1', status: 'Active' },
+      { id: 'artemis', name: 'Artemis', owner: 'auth',     region: 'eu-west-1', status: 'Blocked' }
+    ],
+    selectedId: 'apollo',
+    get selected() { return this.items.find(i =&gt; i.id === this.selectedId); }
+  }"
+  style="border: 1px solid var(--pf-t--global--border--color--default); border-radius: 4px; min-height: 320px"
+>
+  {#include components/data-display/drawer id="pd-drawer-detail" inline=true} {#include
+  components/data-display/drawer-main} {#include
+  components/data-display/drawer-content} {#include components/data-display/drawer-body padding=true}
+  <ul
+    class="pf-v6-c-simple-list pf-v6-c-simple-list__list"
+    style="margin: 0; padding: 0; list-style: none"
+    role="listbox"
+    aria-label="Projects"
+  >
+    <template x-for="i in items" :key="i.id">
+      <li class="pf-v6-c-simple-list__item">
+        <button
+          type="button"
+          class="pf-v6-c-simple-list__item-link"
+          :class="expanded && selectedId === i.id ? 'pf-m-current' : ''"
+          :aria-current="expanded && selectedId === i.id ? 'true' : 'false'"
+          @click="selectedId = i.id; expanded = true"
+          style="
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 0;
+          "
+        >
+          <span x-text="i.name"></span>
+        </button>
+      </li>
+    </template>
+  </ul>
+  {/include} {/include} {#include components/data-display/drawer-panel panelWidth="pf-m-width-50"} {#include
+  components/data-display/drawer-head closeAriaLabel="Close detail panel"}
+  <h3 class="pf-v6-c-title pf-m-2xl" x-text="selected.name"></h3>
+  {/include} {#include components/data-display/drawer-body padding=true}
+  <dl class="pf-v6-c-description-list">
+    <div class="pf-v6-c-description-list__group">
+      <dt class="pf-v6-c-description-list__term">Owner</dt>
+      <dd class="pf-v6-c-description-list__description" x-text="selected.owner"></dd>
+    </div>
+    <div class="pf-v6-c-description-list__group">
+      <dt class="pf-v6-c-description-list__term">Region</dt>
+      <dd class="pf-v6-c-description-list__description" x-text="selected.region"></dd>
+    </div>
+    <div class="pf-v6-c-description-list__group">
+      <dt class="pf-v6-c-description-list__term">Status</dt>
+      <dd class="pf-v6-c-description-list__description">
+        <span
+          class="pf-v6-c-label pf-m-compact"
+          :class="selected.status === 'Active' ? 'pf-m-green' : (selected.status === 'Paused' ? 'pf-m-yellow' : 'pf-m-red')"
+          ><span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text" x-text="selected.status"></span></span
+        ></span>
+      </dd>
+    </div>
+  </dl>
+  {/include} {/include} {/include} {/include}
+</div>
