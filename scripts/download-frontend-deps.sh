@@ -30,8 +30,11 @@ podman run --rm \
     # PatternFly (CSS + assets only)
     echo "  PatternFly..."
     mkdir -p /output/patternfly/assets
-    cp node_modules/@patternfly/patternfly/patternfly.css /output/patternfly/
-    cp node_modules/@patternfly/patternfly/patternfly-addons.css /output/patternfly/
+    # Ship minified CSS: patternfly.min.css comes from the package; the package
+    # has no patternfly-addons.min.css, so minify it ourselves with esbuild.
+    cp node_modules/@patternfly/patternfly/patternfly.min.css /output/patternfly/
+    npx --yes esbuild node_modules/@patternfly/patternfly/patternfly-addons.css \
+        --minify --outfile=/output/patternfly/patternfly-addons.min.css
     cp -r node_modules/@patternfly/patternfly/assets/fonts /output/patternfly/assets/
     cp -r node_modules/@patternfly/patternfly/assets/pficon /output/patternfly/assets/
 

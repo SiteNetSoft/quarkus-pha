@@ -35,7 +35,7 @@ SUMMARY_FILE="$REPORT_DIR/summary.txt"
 if [ -n "${1:-}" ]; then
   FILES_HOST=("$(realpath "$1")")
 else
-  mapfile -t FILES_HOST < <(find "$CSS_DIR" -type f -name '*.css' -not -path '*/vendor/*' -not -name 'patternfly-docs-bundle.css' | sort)
+  mapfile -t FILES_HOST < <(find "$CSS_DIR" -type f -name '*.css' -not -path '*/vendor/*' -not -name 'patternfly-docs-bundle.css' -not -name '*.min.css' | sort)
 fi
 
 if [ "${#FILES_HOST[@]}" -eq 0 ]; then
