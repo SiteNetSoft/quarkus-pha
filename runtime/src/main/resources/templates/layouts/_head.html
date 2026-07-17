@@ -29,18 +29,20 @@ layouts/base.html wraps the include. !}
   })();
 </script>
 
-<link rel="stylesheet" href="/web/vendor/patternfly/patternfly.css" />
-<link rel="stylesheet" href="/web/vendor/patternfly/patternfly-addons.css" />
-<link rel="stylesheet" href="/web/css/patternfly-docs-bundle.css" />
-<link rel="stylesheet" href="/web/css/pha.css" />
-<link rel="stylesheet" href="/web/css/overrides.css" />
-<link rel="stylesheet" href="/web/css/components/theme-selector.css" />
+{! Asset URLs carry ?v={pha:assetVersion} — the extension version, resolved by the deployment build step
+into the pha.asset-version system property — so consumer browser caches turn over on extension upgrade. !}
+<link rel="stylesheet" href="/web/vendor/patternfly/patternfly.min.css?v={pha:assetVersion}" />
+<link rel="stylesheet" href="/web/vendor/patternfly/patternfly-addons.min.css?v={pha:assetVersion}" />
+<link rel="stylesheet" href="/web/css/patternfly-docs-bundle.min.css?v={pha:assetVersion}" />
+<link rel="stylesheet" href="/web/css/pha.css?v={pha:assetVersion}" />
+<link rel="stylesheet" href="/web/css/overrides.css?v={pha:assetVersion}" />
+<link rel="stylesheet" href="/web/css/components/theme-selector.css?v={pha:assetVersion}" />
 
-<script src="/web/js/utils/focus-trap.js"></script>
-<script src="/web/js/alpine/register.js"></script>
-<script src="/web/js/alpine/components/theme-selector.js"></script>
+<script src="/web/js/utils/focus-trap.js?v={pha:assetVersion}"></script>
+<script src="/web/js/alpine/register.js?v={pha:assetVersion}"></script>
+<script src="/web/js/alpine/components/theme-selector.js?v={pha:assetVersion}"></script>
 
 {#insert head}{/insert}
 
-<script src="/web/vendor/alpine/alpine.min.js" defer></script>
-<script src="/web/vendor/htmx/htmx.min.js"></script>
+<script src="/web/vendor/alpine/alpine.min.js?v={pha:assetVersion}" defer></script>
+<script src="/web/vendor/htmx/htmx.min.js?v={pha:assetVersion}"></script>
