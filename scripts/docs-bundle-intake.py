@@ -7,12 +7,17 @@ Steps (from the documented regen procedure):
   2. Remap @font-face src URLs: the export emits hashed root-relative URLs
      like url(/dfe0e172.woff2) that don't exist here. Map by font-family +
      font-style (hash-independent) to the vendored font paths.
-  3. Write the result over runtime/.../web/css/patternfly-docs-bundle.css.
+  3. Write the result over runtime/.../web/css/patternfly-docs-bundle.css,
+     then minify it (esbuild via Podman — nothing node touches the host) into
+     patternfly-docs-bundle.min.css, which is what layouts/_head.html serves.
+     Both files are committed: the readable source stays diffable for the
+     docs-CSS comparison workflow; the .min is the shipped artifact.
   4. Verify no unmapped root-hash font URLs remain.
 
 Usage: python3 docs-bundle-intake.py <export.css> <repo-root>
 """
 import re
+import subprocess
 import sys
 
 FONT_MAP = {
@@ -64,10 +69,21 @@ def main(export_path, repo_root):
         sys.exit(f"FATAL: @font-face families with no mapping: {unmatched}")
 
     # 3. write
-    out = f"{repo_root}/runtime/src/main/resources/META-INF/resources/web/css/patternfly-docs-bundle.css"
+    css_dir = f"{repo_root}/runtime/src/main/resources/META-INF/resources/web/css"
+    out = f"{css_dir}/patternfly-docs-bundle.css"
     with open(out, "w", encoding="utf-8") as f:
         f.write(text if text.endswith("\n") else text + "\n")
     print(f"wrote {out}")
+
+    # 3b. minify (esbuild in a Podman container; node never runs on the host)
+    subprocess.run(
+        ["podman", "run", "--rm", "-v", f"{css_dir}:/css:Z",
+         "docker.io/library/node:22-alpine", "sh", "-c",
+         "npx --yes esbuild /css/patternfly-docs-bundle.css --minify"
+         " --outfile=/css/patternfly-docs-bundle.min.css"],
+        check=True,
+    )
+    print(f"wrote {css_dir}/patternfly-docs-bundle.min.css")
 
     # 4. verify
     leftovers = HASH_URL_RE.findall(text)
