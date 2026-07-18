@@ -9,6 +9,18 @@ test.describe("Catalog view extensions", () => {
       await expect(header.locator(".catalog-item-header-pf-title")).toContainText("Quarkus pha");
       await expect(header.locator(".catalog-item-header-pf-subtitle")).toContainText("SiteNetSoft");
     });
+
+    test("vendor-description variant links the provider in the subtitle", async ({ page }) => {
+      await page.goto("/extensions/catalog-view/catalog-item-header");
+      await expect(page.locator("#cih-vendor .catalog-item-header-pf-subtitle a")).toContainText("SiteNetSoft");
+    });
+
+    test("standalone example routes return 200", async ({ page }) => {
+      for (const example of ["basic", "vendor-description"]) {
+        const resp = await page.goto(`/extensions/catalog-view/catalog-item-header/${example}`);
+        expect(resp.status()).toBe(200);
+      }
+    });
   });
 
   test.describe("Catalog tile", () => {
@@ -16,10 +28,11 @@ test.describe("Catalog view extensions", () => {
       await page.goto("/extensions/catalog-view/catalog-tile");
     });
 
-    test("renders a tile grid with titles and a featured tile", async ({ page }) => {
-      await expect(page.locator(".catalog-tile-pf")).toHaveCount(6);
+    test("basic example renders a tile grid with a badged featured tile", async ({ page }) => {
+      await expect(page.locator(".catalog-tile-pf")).toHaveCount(8);
       await expect(page.locator("#ct-quarkus .catalog-tile-pf-title")).toContainText("Quarkus");
       await expect(page.locator("#ct-htmx")).toHaveClass(/catalog-tile-pf-featured/);
+      await expect(page.locator("#ct-htmx .catalog-tile-pf-badge")).toHaveCount(1);
     });
 
     test("link variant renders as an anchor", async ({ page }) => {
@@ -32,6 +45,23 @@ test.describe("Catalog view extensions", () => {
 
     test("badges variant renders multiple icon badges", async ({ page }) => {
       await expect(page.locator("#ct-istio .catalog-tile-pf-badge-container .catalog-tile-pf-badge")).toHaveCount(2);
+    });
+
+    test("text-badge variant renders a plain-text badge", async ({ page }) => {
+      await expect(page.locator("#ct-community .catalog-tile-pf-badge")).toContainText("Community");
+    });
+
+    test("children variant has an unclamped body instead of a description", async ({ page }) => {
+      const body = page.locator("#ct-children .catalog-tile-pf-body");
+      await expect(body).toContainText("not truncated");
+      await expect(body.locator(".catalog-tile-pf-description")).toHaveCount(0);
+    });
+
+    test("standalone example routes return 200", async ({ page }) => {
+      for (const example of ["basic", "footer", "link", "icon-badges", "text-badge", "children"]) {
+        const resp = await page.goto(`/extensions/catalog-view/catalog-tile/${example}`);
+        expect(resp.status()).toBe(200);
+      }
     });
   });
 
