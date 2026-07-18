@@ -25,6 +25,11 @@ class PhaProcessor {
      * because Quarkus merges workspace-module resources into the app archive
      * straight from the source tree, which would bypass any processResources
      * filtering for every in-workspace build.
+     *
+     * <p>A SNAPSHOT (or unresolved) version gets the build time appended:
+     * static resources are served with {@code Cache-Control: immutable,
+     * max-age=86400}, so a {@code ?v=} value that repeats across builds pins
+     * browsers to stale assets for up to a day after the bytes change.
      */
     @BuildStep
     SystemPropertyBuildItem assetVersion(CurateOutcomeBuildItem curateOutcome) {
@@ -33,6 +38,9 @@ class PhaProcessor {
             .map(d -> d.getVersion())
             .findFirst()
             .orElse("unknown");
+        if (version.endsWith("-SNAPSHOT") || "unknown".equals(version)) {
+            version += "." + System.currentTimeMillis();
+        }
         return new SystemPropertyBuildItem("pha.asset-version", version);
     }
 }
