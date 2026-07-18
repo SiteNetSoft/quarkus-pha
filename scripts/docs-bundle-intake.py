@@ -7,6 +7,13 @@ Steps (from the documented regen procedure):
   2. Remap @font-face src URLs: the export emits hashed root-relative URLs
      like url(/dfe0e172.woff2) that don't exist here. Map by font-family +
      font-style (hash-independent) to the vendored font paths.
+  2b. Remap glass-theme background SVGs the same way: the export's copy of
+     the :root:where(.pf-v6-theme-glass...) token blocks points
+     --pf-t--global--background--image--default at hashed URLs like
+     url(/863225ba.svg). Map by the dark/felt classes in the enclosing
+     selector to the vendored {PF,Felt}-Bkg-Generic-{Light,Dark}.svg.
+     Without this the bundle (loading after vendor) wins the token with a
+     404 URL and the glass contrast theme renders over no background.
   3. Dedupe against the vendor PatternFly CSS (docs-bundle-dedupe.py, run as
      a subprocess): harvest class co-occurrence from the project templates,
      then drop every bundle declaration the vendor files already provide,
@@ -45,6 +52,31 @@ FONT_MAP = {
 }
 
 HASH_URL_RE = re.compile(r"url\(/[0-9a-f]{8}\.woff2?\)")
+
+GLASS_BKG = {  # (dark, felt) -> vendored theme background
+    (False, False): "/web/vendor/patternfly/assets/images/PF-Bkg-Generic-Light.svg",
+    (True, False): "/web/vendor/patternfly/assets/images/PF-Bkg-Generic-Dark.svg",
+    (False, True): "/web/vendor/patternfly/assets/images/Felt-Bkg-Generic-Light.svg",
+    (True, True): "/web/vendor/patternfly/assets/images/Felt-Bkg-Generic-Dark.svg",
+}
+HASH_SVG_RE = re.compile(r"url\(/[0-9a-f]{8}\.svg\)")
+
+
+def remap_glass_backgrounds(text):
+    """Replace hashed background SVG urls by theme variant of the enclosing rule."""
+    unmatched = []
+
+    def fix(m):
+        css = m.string
+        start = css.rfind("}", 0, m.start()) + 1
+        sel = css[start:css.find("{", start)]
+        if "pf-v6-theme-glass" not in sel:
+            unmatched.append(sel.strip()[:80])
+            return m.group(0)
+        return f"url({GLASS_BKG[('pf-v6-theme-dark' in sel, 'pf-v6-theme-felt' in sel)]})"
+
+    text, n = HASH_SVG_RE.subn(fix, text)
+    return text, n, unmatched
 
 
 def harvest_cooccur(repo_root):
@@ -121,6 +153,12 @@ def main(export_path, repo_root, skip_dedupe=False):
     if unmatched:
         sys.exit(f"FATAL: @font-face families with no mapping: {unmatched}")
 
+    # 2b. remap glass-theme background SVGs
+    text, n_svg, svg_unmatched = remap_glass_backgrounds(text)
+    print(f"remapped {n_svg} glass background SVG URLs")
+    if svg_unmatched:
+        sys.exit(f"FATAL: hashed SVG urls outside glass token blocks: {svg_unmatched}")
+
     # 3. dedupe against vendor PatternFly CSS
     if skip_dedupe:
         print("dedupe: SKIPPED (--skip-dedupe)")
@@ -147,10 +185,10 @@ def main(export_path, repo_root, skip_dedupe=False):
     print(f"wrote {css_dir}/patternfly-docs-bundle.min.css")
 
     # 5. verify
-    leftovers = HASH_URL_RE.findall(text)
+    leftovers = HASH_URL_RE.findall(text) + HASH_SVG_RE.findall(text)
     if leftovers:
-        sys.exit(f"FATAL: unmapped hashed font URLs remain: {sorted(set(leftovers))}")
-    print("verify: no hashed root font URLs remain — OK")
+        sys.exit(f"FATAL: unmapped hashed asset URLs remain: {sorted(set(leftovers))}")
+    print("verify: no hashed root asset URLs remain — OK")
 
     print("\nNEXT (mandatory): snapshot-verify render-neutrality with"
           " integration-tests/e2e/_snapsweep.mjs (old vs new bundle bytes"
