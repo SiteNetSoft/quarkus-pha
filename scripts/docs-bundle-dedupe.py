@@ -26,6 +26,9 @@ Usage:
   python3 scripts/docs-bundle-dedupe.py [--cooccur <classes.txt>] \\
       <bundle.css> <out.css> <vendor.css>...
 
+docs-bundle-intake.py runs this automatically on every intake (harvesting
+the co-occurrence sets itself); this CLI remains for standalone runs.
+
 --cooccur: file with one space-separated class-set per line (the class=""
 attributes found in the project's templates). Rules whose selectors share no
 simple selector can still fight over one element when the markup stacks their
