@@ -37,6 +37,14 @@ podman run --rm \
         --minify --outfile=/output/patternfly/patternfly-addons.min.css
     cp -r node_modules/@patternfly/patternfly/assets/fonts /output/patternfly/assets/
     cp -r node_modules/@patternfly/patternfly/assets/pficon /output/patternfly/assets/
+    # Theme background images: the glass contrast theme sets
+    # url("./assets/images/{PF,Felt}-Bkg-Generic-{Light,Dark}.svg") on <html>
+    # — without these the glass surfaces are translucent over nothing and the
+    # theme looks inert. Only these four are referenced by the CSS; the rest
+    # of the package images dir is 8.8M of docs/demo art we do not ship.
+    # (No apostrophes in this heredoc — it is a single-quoted sh -c script.)
+    mkdir -p /output/patternfly/assets/images
+    cp node_modules/@patternfly/patternfly/assets/images/*Bkg-Generic-*.svg /output/patternfly/assets/images/
 
     # Alpine.js
     echo "  Alpine.js..."
