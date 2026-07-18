@@ -52,6 +52,7 @@ public class HelloResource {
         "rectangle-selection",
         "rich-text-editor",
         "ripple",
+        "topology",
         "user-feedback",
         "vertical-tabs",
         "video-player"
