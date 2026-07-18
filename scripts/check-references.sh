@@ -50,8 +50,12 @@ echo "==> Sub-check 1: vendor-refs"
 
   missing_count=0
   while IFS= read -r ref; do
-    # ref looks like  /web/vendor/alpine/alpine.min.js  (no query string here)
+    # ref looks like  /web/vendor/alpine/alpine.min.js — possibly with a
+    # cache-busting query (?v={pha:assetVersion}) or fragment; strip both
+    # before resolving to a file on disk.
     rel="${ref#/web/}"
+    rel="${rel%%\?*}"
+    rel="${rel%%#*}"
     file="$WEB_DIR/$rel"
     if [ ! -f "$file" ]; then
       missing_count=$((missing_count + 1))
