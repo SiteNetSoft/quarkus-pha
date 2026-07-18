@@ -70,7 +70,10 @@ public class ExtensionsRoutes {
     /** Example fragments served per catalog-view item. Each maps to a template at
         templates/extensions/catalog-view/{name}/{example}.html and a card on the demo page.
         Items not listed here fall back to a single "basic" example. */
-    private static final Map<String, Set<String>> CATALOG_VIEW_EXAMPLES = Map.of();
+    private static final Map<String, Set<String>> CATALOG_VIEW_EXAMPLES = Map.of(
+        "catalog-item-header", Set.of("basic", "vendor-description"),
+        "catalog-tile",        Set.of("basic", "footer", "link", "icon-badges", "text-badge", "children")
+    );
 
     /** Examples for a catalog-view item, defaulting to just "basic" when none are declared. */
     private static Set<String> catalogViewExamples(String name) {
