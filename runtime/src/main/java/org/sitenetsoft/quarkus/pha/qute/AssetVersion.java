@@ -13,7 +13,10 @@ import io.quarkus.qute.TemplateExtension;
  * <p>layouts/_head.html suffixes every always-loaded asset URL with
  * {@code ?v={pha:assetVersion}} so consumer browser caches turn over exactly
  * when the extension upgrades (static resources are otherwise served with
- * {@code Cache-Control: public, immutable, max-age=86400}).
+ * {@code Cache-Control: public, immutable, max-age=86400}). For SNAPSHOT
+ * builds the build step appends the build time, so the URL — and therefore
+ * the immutable cache entry — turns over on every build, not only on
+ * version upgrades.
  *
  * <p>The value arrives as the {@code pha.asset-version} system property, set
  * by the deployment module's {@code PhaProcessor#assetVersion} build step from
