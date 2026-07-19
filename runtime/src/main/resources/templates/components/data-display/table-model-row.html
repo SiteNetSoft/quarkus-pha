@@ -1,0 +1,99 @@
+{! One model-driven data row (the main <tr>, not the expandable detail row).
+   Included by table-model-content. Params: table, row. !}
+{#if table.clickable}
+<tr
+  class="pf-v6-c-table__tr"
+  :class="selected === '{row.clickKey}' ? 'pf-m-selected' : ''"
+  :aria-selected="selected === '{row.clickKey}'"
+  tabindex="0"
+  style="cursor: pointer"
+  @click="selected = '{row.clickKey}'"
+  @keydown.enter.prevent="selected = '{row.clickKey}'"
+  @keydown.space.prevent="selected = '{row.clickKey}'"
+>
+{#else}
+<tr class="pf-v6-c-table__tr{#if row.striped} pf-m-striped{/if}">
+{/if}
+  {#if table.expandable}
+  <td class="pf-v6-c-table__toggle">
+    <button
+      type="button"
+      class="pf-v6-c-button pf-m-plain"
+      :class="open ? 'pf-m-expanded' : ''"
+      :aria-expanded="open"
+      aria-label="{row.toggleAriaLabel}"
+      @click="open = !open"
+    >
+      <span class="pf-v6-c-table__toggle-icon"><i class="fas fa-angle-down" aria-hidden="true"></i></span>
+    </button>
+  </td>
+  {/if}
+  {#if table.checkboxSelect}
+  <td class="pf-v6-c-table__check">
+    <input type="checkbox" name="checkrow-{row.number}" aria-labelledby="{table.id}-{row.number}"{#if row.checked} checked{/if} />
+  </td>
+  {#else if table.radioSelect}
+  <td class="pf-v6-c-table__check">
+    <input type="radio" name="select-row" aria-labelledby="{table.id}-{row.number}"{#if row.checked} checked{/if} />
+  </td>
+  {/if}
+  {#for cell in row.cells}
+  {#if cell.kebab}
+  <td class="{cell.css}">
+    <div x-data="{ open: false }" style="position: relative">
+      <button
+        class="pf-v6-c-menu-toggle pf-m-plain"
+        type="button"
+        :class="open ? 'pf-m-expanded' : ''"
+        :aria-expanded="open"
+        @click="open = !open"
+        aria-label="{cell.menuAriaLabel}"
+      >
+        <span class="pf-v6-c-menu-toggle__icon">{icons:svg('fa:ellipsis-vertical').raw}</span>
+      </button>
+      <div
+        class="pf-v6-c-menu"
+        x-show="open"
+        x-cloak
+        @click.outside="open = false"
+        style="position: absolute; top: 100%; inset-inline-end: 0; z-index: 200; min-width: 10rem"
+      >
+        <div class="pf-v6-c-menu__content">
+          <ul class="pf-v6-c-menu__list" role="menu">
+            {#for action in cell.actions}
+            <li role="none" class="pf-v6-c-menu__list-item">
+              <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false">
+                <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">{action.label}</span></span>
+              </button>
+            </li>
+            {/for}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </td>
+  {#else if cell.actionsCell}
+  <td class="{cell.css}">
+    {#if cell.actions.size > 1}
+    <div class="pf-v6-l-flex pf-m-space-items-sm">
+      {#for action in cell.actions}
+      <button class="pf-v6-c-button {action.buttonClasses}" type="button">
+        <span class="pf-v6-c-button__text">{action.label}</span>
+      </button>
+      {/for}
+    </div>
+    {#else}
+    {#for action in cell.actions}
+    <button class="pf-v6-c-button {action.buttonClasses}" type="button">
+      <span class="pf-v6-c-button__text">{action.label}</span>
+    </button>
+    {/for}
+    {/if}
+  </td>
+  {#else if cell.rowHeader}
+  <th scope="row"{#if cell.css} class="{cell.css}"{/if}{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if}>{#if cell.link}<a href="{cell.href}">{cell.text}</a>{#else}{cell.text}{/if}</th>
+  {#else}
+  <td{#if cell.css} class="{cell.css}"{/if}{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if}{#if cell.domId} id="{cell.domId}"{/if}{#if cell.spanning} colspan="{cell.colspan}"{/if}>{#if cell.link}<a href="{cell.href}">{cell.text}</a>{#else}{cell.text}{/if}</td>
+  {/if}
+  {/for}
+</tr>
