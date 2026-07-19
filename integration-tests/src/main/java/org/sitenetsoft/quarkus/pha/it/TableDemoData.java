@@ -523,6 +523,47 @@ public class TableDemoData {
                     .expandsTo("1 node cordoned for a kernel upgrade; workloads rescheduled automatically."))
             .build();
 
+    public static Table demoTreeTable = Table.builder()
+            .id("tbl-tree").ariaLabel("Tree table of servers")
+            .column("Name").column("Type").column("Detail")
+            .treeNode(Table.node("Application servers", "Group", "2 nodes").expanded()
+                    .child(Table.node("web-1", "Server", "2 vCPU · us-east-1"))
+                    .child(Table.node("web-2", "Server", "2 vCPU · us-east-1")))
+            .treeNode(Table.node("Databases", "Group", "1 node")
+                    .child(Table.node("db-primary", "Server", "8 vCPU · eu-west-1")))
+            .build();
+
+    public static Table demoTreeCheckboxesTable = Table.builder()
+            .id("tbl-tree-checkboxes").ariaLabel("Tree table with checkboxes")
+            .treeCheckboxes().treeGridLg()
+            .column("Name").column("Type").column("Detail")
+            .treeNode(Table.node("Application servers", "Group", "2 nodes").expanded()
+                    .child(Table.node("web-1", "Server", "2 vCPU · us-east-1").key("web1"))
+                    .child(Table.node("web-2", "Server", "2 vCPU · us-east-1").key("web2")))
+            .treeNode(Table.node("Databases", "Group", "1 node")
+                    .child(Table.node("db-primary", "Server", "8 vCPU · eu-west-1").key("db1")))
+            .build();
+
+    public static Table demoTreeIconsTable = Table.builder()
+            .id("tbl-tree-icons").ariaLabel("Tree table with checkboxes and icons")
+            .treeCheckboxes().treeGridLg()
+            .column("Name").column("Type").column("Detail")
+            .treeNode(Table.node("Application servers", "Group", "2 nodes").expanded()
+                    .icon("fa-folder", "fa-folder-open")
+                    .child(Table.node("web-1", "Server", "2 vCPU · us-east-1").key("web1").checked().icon("fa-leaf"))
+                    .child(Table.node("web-2", "Server", "2 vCPU · us-east-1").key("web2").icon("fa-leaf")))
+            .build();
+
+    public static Table demoTreeFlatTable = Table.builder()
+            .id("tbl-tree-flat").ariaLabel("Flat tree table with no indentation")
+            .treeGridLg().treeNoInset()
+            .column("Name").column("Type").column("Detail")
+            .treeNode(Table.node("web-1", "Server", "2 vCPU · us-east-1"))
+            .treeNode(Table.node("web-2", "Server", "2 vCPU · us-east-1"))
+            .treeNode(Table.node("db-primary", "Server", "8 vCPU · eu-west-1"))
+            .treeNode(Table.node("cache-1", "Server", "4 vCPU · us-east-1"))
+            .build();
+
     public static Table demoTextControlTable = Table.builder()
             .id("tbl-text-control").ariaLabel("Text control modifiers example").modifier("pf-m-grid-lg").dataLabels()
             .column(TableColumn.of("Truncate (width 20%)").width(20))
