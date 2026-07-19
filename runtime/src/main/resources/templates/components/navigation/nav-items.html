@@ -1,0 +1,31 @@
+{! Nav list items rendered from org.sitenetsoft.quarkus.pha.model.NavEntry values.
+   Included by components/navigation/nav in model-driven mode; recurses for expandable subnavs.
+   Param: entries — List<NavEntry>. !}
+{#for entry in entries}
+{#if entry.expandable}
+<li class="pf-v6-c-nav__item" x-data="{ open: {entry.expanded} }" :class="{ 'pf-m-expanded': open }">
+  <button class="pf-v6-c-nav__link" id="{entry.toggleId}" aria-expanded="{entry.expanded}" :aria-expanded="open.toString()" @click="open = !open">
+    <span class="pf-v6-c-nav__link-text">{entry.label}</span>
+    <span class="pf-v6-c-nav__toggle">
+      <span class="pf-v6-c-nav__toggle-icon">{icons:svg('fa:angle-down').raw}</span>
+    </span>
+  </button>
+  <section class="pf-v6-c-nav__subnav" aria-labelledby="{entry.toggleId}"{#if !entry.expanded} hidden inert{/if} :hidden="!open" :inert="!open">
+    <ul class="pf-v6-c-nav__list">
+      {#include components/navigation/nav-items entries=entry.children /}
+    </ul>
+  </section>
+</li>
+{#else}
+<li class="pf-v6-c-nav__item">
+  {#if entry.icon}
+  <a href="{entry.href}" class="pf-v6-c-nav__link{#if entry.current} pf-m-current{/if}"{#if entry.current} aria-current="page"{/if}>
+    <span class="pf-v6-c-nav__link-icon">{icons:svg(entry.icon).raw}</span>
+    <span class="pf-v6-c-nav__link-text">{entry.label}</span>
+  </a>
+  {#else}
+  <a href="{entry.href}" class="pf-v6-c-nav__link{#if entry.current} pf-m-current{/if}"{#if entry.current} aria-current="page"{/if}>{entry.label}</a>
+  {/if}
+</li>
+{/if}
+{/for}
