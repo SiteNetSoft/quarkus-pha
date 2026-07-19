@@ -1,27 +1,2 @@
-{! Clickable expandable rows — rows select on click/Enter (live pf-m-selected, like
-   clickable-rows) and also expand via the toggle, whose click doesn't change the
-   selection. PF's docs freeze both states; ours are live. !}
-<div x-data="{ sel: 1 }">
-{#include components/data-display/data-list id="dl-clickable-expandable" ariaLabel="Clickable expandable data list"}
-{#include components/data-display/data-list-item clickable=true expandable=true startOpen=true selectedExpr="sel === 1" attrs='@click="sel = 1" @keydown.enter="sel = 1"'}
-{#include components/data-display/data-list-item-row}
-{#include components/data-display/data-list-item-control expandToggle=true toggleAriaLabel="Toggle details for First row" /}
-{#include components/data-display/data-list-item-content}
-{#include components/data-display/data-list-cell}<strong>First row</strong>{/include}
-{#include components/data-display/data-list-cell}Click selects; the toggle expands{/include}
-{/include}
-{/include}
-{#include components/data-display/data-list-expandable-content}Expanded details for the first row.{/include}
-{/include}
-{#include components/data-display/data-list-item clickable=true expandable=true selectedExpr="sel === 2" attrs='@click="sel = 2" @keydown.enter="sel = 2"'}
-{#include components/data-display/data-list-item-row}
-{#include components/data-display/data-list-item-control expandToggle=true toggleAriaLabel="Toggle details for Second row" /}
-{#include components/data-display/data-list-item-content}
-{#include components/data-display/data-list-cell}<strong>Second row</strong>{/include}
-{#include components/data-display/data-list-cell}The selected row carries pf-m-selected{/include}
-{/include}
-{/include}
-{#include components/data-display/data-list-expandable-content}Expanded details for the second row.{/include}
-{/include}
-{/include}
-</div>
+{! Populated from the Java model DataListDemoData.demoClickableExpandableList (see the Java tab). !}
+{#include components/data-display/data-list list=demoClickableExpandableList /}

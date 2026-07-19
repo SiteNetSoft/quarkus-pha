@@ -1,20 +1,2 @@
-{! With headings — cells carry real heading elements (h4 sits under the demo card's h3);
-   the second item shows pf-m-no-fill / pf-m-align-right cell modifiers, matching PF core. !}
-{#include components/data-display/data-list id="dl-with-headings" ariaLabel="Data list with headings"}
-{#include components/data-display/data-list-item}
-{#include components/data-display/data-list-item-row}
-{#include components/data-display/data-list-item-content}
-{#include components/data-display/data-list-cell}<h4 class="pf-v6-c-content--h4">Primary content</h4>{/include}
-{#include components/data-display/data-list-cell}Secondary content{/include}
-{/include}
-{/include}
-{/include}
-{#include components/data-display/data-list-item}
-{#include components/data-display/data-list-item-row}
-{#include components/data-display/data-list-item-content}
-{#include components/data-display/data-list-cell modifiers="pf-m-no-fill"}<h4 class="pf-v6-c-content--h4">Secondary content (pf-m-no-fill)</h4>{/include}
-{#include components/data-display/data-list-cell modifiers="pf-m-no-fill pf-m-align-right"}Secondary content (pf-m-align-right pf-m-no-fill){/include}
-{/include}
-{/include}
-{/include}
-{/include}
+{! Populated from the Java model DataListDemoData.demoWithHeadingsList (see the Java tab). !}
+{#include components/data-display/data-list list=demoWithHeadingsList /}
