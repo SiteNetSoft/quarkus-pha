@@ -91,9 +91,9 @@
     {/if}
   </td>
   {#else if cell.rowHeader}
-  <th scope="row"{#if cell.css} class="{cell.css}"{/if}{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if}>{#if cell.link}<a href="{cell.href}">{cell.text}</a>{#else}{cell.text}{/if}</th>
+  <th scope="row"{#if cell.css} class="{cell.css}"{/if}{#if cell.style} style="{cell.style}"{/if}{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if}>{#if cell.link}<a href="{cell.href}">{cell.text}</a>{#else}{cell.text}{/if}</th>
   {#else}
-  <td{#if cell.css} class="{cell.css}"{/if}{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if}{#if cell.domId} id="{cell.domId}"{/if}{#if cell.spanning} colspan="{cell.colspan}"{/if}>{#if cell.link}<a href="{cell.href}">{cell.text}</a>{#else}{cell.text}{/if}</td>
+  <td{#if cell.css} class="{cell.css}"{/if}{#if cell.style} style="{cell.style}"{/if}{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if}{#if cell.domId} id="{cell.domId}"{/if}{#if cell.spanning} colspan="{cell.colspan}"{/if}>{#if cell.link}<a href="{cell.href}">{cell.text}</a>{#else}{cell.text}{/if}</td>
   {/if}
   {/for}
 </tr>
