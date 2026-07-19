@@ -1,0 +1,86 @@
+{! Model-driven table content — caption, thead, bodies, tfoot from a
+   org.sitenetsoft.quarkus.pha.model.Table. Included by components/data-display/table. Param: table. !}
+{#if table.caption}
+<caption class="pf-v6-c-table__caption">{table.caption}</caption>
+{/if}
+<thead>
+  <tr class="pf-v6-c-table__tr">
+    {#for col in table.columns}
+    {#if col.toggleColumn}
+    <td></td>
+    {#else if col.checkColumn}
+    {#if table.radioSelect}
+    <td class="pf-v6-c-table__check" aria-hidden="true"></td>
+    {#else}
+    <td class="pf-v6-c-table__check">
+      <input type="checkbox" name="select-all" aria-label="Select all rows" />
+    </td>
+    {/if}
+    {#else if col.actionColumn}
+    <th scope="col" class="pf-v6-c-table__action">{#if col.label}{col.label}{/if}</th>
+    {#else if col.sortable}
+    <th scope="col" class="pf-v6-c-table__sort{#if col.sorted} pf-m-selected{/if}" aria-sort="{col.ariaSort}">
+      <button
+        type="button"
+        class="pf-v6-c-table__button"
+        hx-get="{table.sortEndpoint}?col={col.sortKey}&amp;dir={col.nextDir}"
+        hx-target="#{table.id}"
+        hx-swap="outerHTML"
+      >
+        <span class="pf-v6-c-table__button-content">
+          <span class="pf-v6-c-table__text">{col.label}</span>
+          <span class="pf-v6-c-table__sort-indicator"><i class="{col.sortIconClasses}" aria-hidden="true"></i></span>
+        </span>
+      </button>
+    </th>
+    {#else}
+    <th scope="col"{#if col.hasModifiers} class="{col.modifierClasses}"{/if}>{col.label}</th>
+    {/if}
+    {/for}
+  </tr>
+</thead>
+{#if table.expandable}
+{#for body in table.bodies}
+{#for row in body.rows}
+<tbody class="pf-v6-c-table__tbody" x-data="{ open: {row.detailExpanded} }" :class="open ? 'pf-m-expanded' : ''">
+  {#include components/data-display/table-model-row table=table row=row /}
+  {#if table.animateExpand}
+  <tr class="pf-v6-c-table__expandable-row" :class="open ? 'pf-m-expanded' : ''">
+    <td></td>
+    <td colspan="{table.detailColspan}"{#if row.detailNoPadding} class="pf-m-no-padding"{/if}>
+      <div class="pf-v6-c-table__expandable-row-content">{#if row.detailParagraph}<p>{row.detail}</p>{#else}{row.detail}{/if}</div>
+    </td>
+  </tr>
+  {#else}
+  <tr class="pf-v6-c-table__expandable-row" :class="open ? 'pf-m-expanded' : ''" x-show="open" x-cloak>
+    <td></td>
+    <td colspan="{table.detailColspan}"{#if row.detailNoPadding} class="pf-m-no-padding"{/if}>
+      <div class="pf-v6-c-table__expandable-row-content">{#if row.detailParagraph}<p>{row.detail}</p>{#else}{row.detail}{/if}</div>
+    </td>
+  </tr>
+  {/if}
+</tbody>
+{/for}
+{/for}
+{#else}
+{#for body in table.bodies}
+<tbody class="pf-v6-c-table__tbody{#if body.stripedOdd} pf-m-striped{/if}{#if body.stripedEven} pf-m-striped-even{/if}"{#if table.clickable} x-data="{ selected: '{table.initialClickKey}' }"{/if}>
+  {#for row in body.rows}
+  {#include components/data-display/table-model-row table=table row=row /}
+  {/for}
+</tbody>
+{/for}
+{/if}
+{#if table.footerRow}
+<tfoot class="pf-v6-c-table__tfoot">
+  <tr>
+    {#for cell in table.footerRow.cells}
+    {#if cell.rowHeader}
+    <th scope="row">{cell.text}</th>
+    {#else}
+    <td{#if cell.spanning} colspan="{cell.colspan}"{/if}>{cell.text}</td>
+    {/if}
+    {/for}
+  </tr>
+</tfoot>
+{/if}
