@@ -137,4 +137,32 @@ test.describe("Description List", () => {
       });
     }
   });
+
+  test.describe("Java source tab", () => {
+    test("model-driven cards get a leading Java tab, the popover composition does not", async ({ page }) => {
+      await page.goto("/components/description-list");
+      for (const ex of EXAMPLES.filter((e) => e !== "term-help-text")) {
+        const card = page.locator(`[data-rendered-href="/components/description-list/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      const compositionCard = page.locator('[data-rendered-href="/components/description-list/term-help-text"]');
+      await expect(compositionCard.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+    });
+
+    test("Java tab opens Monaco with the builder code", async ({ page }) => {
+      await page.goto("/components/description-list");
+      const card = page.locator('[data-rendered-href="/components/description-list/basic"]');
+      await card.locator('button[aria-label*="Toggle Java"]').click();
+      await expect(card.locator(".monaco-editor").first()).toBeVisible({ timeout: 10000 });
+      await expect(card.locator(".monaco-editor .view-lines")).toContainText("DescriptionList.builder()", {
+        timeout: 10000,
+      });
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/description-list/source-java/icons-on-terms");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.termIcon("fa:cube")');
+    });
+  });
 });
