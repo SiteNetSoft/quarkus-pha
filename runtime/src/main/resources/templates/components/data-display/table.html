@@ -11,7 +11,7 @@
 {! The inner wrapper is a keyboard-scrollable region: tabindex + named region role, per axe
    scrollable-region-focusable (WCAG 2.1.1). !}
 {#if table.scrollWrapped}<div class="pf-v6-c-scroll-inner-wrapper"{#if table.scrollWrapperId} id="{table.scrollWrapperId}"{/if}{#if table.scrollWrapperStyle} style="{table.scrollWrapperStyle}"{/if} tabindex="0" role="region" aria-label="{table.ariaLabel}">{/if}
-<table class="pf-v6-c-table{#if table.compact} pf-m-compact{/if}{#if table.gridMd} pf-m-grid-md{/if}{#if table.striped} pf-m-striped{/if}{#if table.borderless} pf-m-no-border-rows{/if}{#if table.expandable} pf-m-expandable{/if}{#if table.nestedHeader} pf-m-nested-column-header{/if}{#if table.stickyHeader} pf-m-sticky-header{/if}{#if table.stickyFooter} pf-m-sticky-footer{/if}{table.extraModifiers}" role="grid"{#if table.id} id="{table.id}"{/if} aria-label="{table.ariaLabel}"{#if table.clickableBody} x-data="{ selected: '{table.initialClickKey}' }"{/if}>
+<table class="pf-v6-c-table{#if table.compact} pf-m-compact{/if}{#if table.gridMd} pf-m-grid-md{/if}{#if table.striped} pf-m-striped{/if}{#if table.borderless} pf-m-no-border-rows{/if}{#if table.expandable} pf-m-expandable{/if}{#if table.nestedHeader} pf-m-nested-column-header{/if}{#if table.stickyHeader} pf-m-sticky-header{/if}{#if table.stickyFooter} pf-m-sticky-footer{/if}{table.treeModifiers}{table.extraModifiers}" role="{table.role}"{#if table.id} id="{table.id}"{/if} aria-label="{table.ariaLabel}"{#if table.clickableBody} x-data="{ selected: '{table.initialClickKey}' }"{/if}{#if table.treeRootXData} x-data="{table.treeRootXData}"{/if}>
   {#include components/data-display/table-model-content table=table /}
 </table>
 {#if table.scrollWrapped}</div>{/if}

@@ -1,0 +1,53 @@
+{! One tree-table row (pf-m-tree-view): the title cell holds the toggle (parents), the
+   checkbox (checkbox trees), the optional row icon and the name; the remaining cells are
+   plain data columns. aria-level / aria-setsize / aria-posinset and the Alpine bindings
+   are resolved on the node by Table.build(); flat trees (no parents) render without the
+   aria bookkeeping, matching PF. Included by table-model-content. Params: table, node. !}
+{#if table.treeGrid}
+<tr class="pf-v6-c-table__tr" aria-level="{node.level}" aria-setsize="{node.setSize}" aria-posinset="{node.posInSet}"{#if node.parent} :aria-expanded="{node.toggleVar}"{/if}{#if node.showExpr} x-show="{node.showExpr}" x-cloak{/if}>
+{#else}
+<tr class="pf-v6-c-table__tr">
+{/if}
+  <td class="pf-v6-c-table__tree-view-title-cell">
+    <div class="pf-v6-c-table__tree-view-main">
+      {#if node.parent}
+      <span class="pf-v6-c-table__td pf-v6-c-table__toggle">
+        <button
+          type="button"
+          class="pf-v6-c-button pf-m-plain"
+          :class="{node.toggleVar} ? 'pf-m-expanded' : ''"
+          :aria-expanded="{node.toggleVar}"
+          @click="{node.toggleVar} = !{node.toggleVar}"
+          aria-label="{node.toggleAriaLabel}"
+        >
+          <span class="pf-v6-c-button__icon">
+            <span class="pf-v6-c-table__toggle-icon"><i class="fas fa-angle-down" aria-hidden="true"></i></span>
+          </span>
+        </button>
+      </span>
+      {/if}
+      {#if table.treeCheckboxes}
+      <span class="pf-v6-c-table__td pf-v6-c-table__check">
+        {#if node.checkboxModel}
+        <input type="checkbox" aria-label="Select {node.name}" x-model="{node.checkboxModel}" />
+        {#else}
+        <input type="checkbox" aria-label="Select {node.name} and all children" :checked="{node.checkedExpr}"{#if node.indeterminateExpr} x-effect="$el.indeterminate = {node.indeterminateExpr}"{/if} @change="{node.changeExpr}" />
+        {/if}
+      </span>
+      {/if}
+      {#if node.hasIcon}
+      <span class="pf-v6-c-table__tree-view-icon">
+        {#if node.iconSwap}
+        <i class="fas fa-fw" :class="{node.toggleVar} ? '{node.iconExpanded}' : '{node.iconCollapsed}'" aria-hidden="true"></i>
+        {#else}
+        <i class="fas fa-fw {node.iconCollapsed}" aria-hidden="true"></i>
+        {/if}
+      </span>
+      {/if}
+      <span class="pf-v6-c-table__tree-view-text">{node.name}</span>
+    </div>
+  </td>
+  {#for cell in node.cells}
+  <td>{cell}</td>
+  {/for}
+</tr>
