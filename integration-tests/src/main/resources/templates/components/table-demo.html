@@ -588,69 +588,73 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="table"} {#description}
+                      {#include partials/example-card title="Basic" slug="basic" component="table" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Default rows — three users with a name, status, role and edit action.
                       </p>
                       {/description} {#content}{#include components/table/basic /}{/content} {/include} {#include
-                      partials/example-card title="Plain" slug="plain" component="table"} {#description}
+                      partials/example-card title="Plain" slug="plain" component="table" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">modifiers="pf-m-plain"</code> &mdash; no borders or hover treatment, with
                         a table <code class="ws-code">&lt;caption&gt;</code>.
                       </p>
                       {/description} {#content}{#include components/table/plain /}{/content} {/include} {#include
-                      partials/example-card title="Compact" slug="compact" component="table"} {#description}
+                      partials/example-card title="Compact" slug="compact" component="table" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">compact=true</code> — denser padding for info-heavy tables.
                       </p>
                       {/description} {#content}{#include components/table/compact /}{/content} {/include} {#include
-                      partials/example-card title="Compact expandable" slug="compact-expandable" component="table"}
-                      {#description}
+                      partials/example-card title="Compact expandable" slug="compact-expandable" component="table"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">compact=true expandable=true</code> &mdash; dense rows that still expand
                         to a detail row.
                       </p>
                       {/description} {#content}{#include components/table/compact-expandable /}{/content} {/include}
-                      {#include partials/example-card title="Striped" slug="striped" component="table"} {#description}
+                      {#include partials/example-card title="Striped" slug="striped" component="table" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">striped=true</code> — alternating row background for easier horizontal
                         scanning.
                       </p>
                       {/description} {#content}{#include components/table/striped /}{/content} {/include} {#include
-                      partials/example-card title="Striped expandable" slug="striped-expandable" component="table"}
-                      {#description}
+                      partials/example-card title="Striped expandable" slug="striped-expandable" component="table"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         With <code class="ws-code">striped=true expandable=true</code> PF stripes whole odd
                         <code class="ws-code">&lt;tbody&gt;</code> groups instead of odd rows.
                       </p>
                       {/description} {#content}{#include components/table/striped-expandable /}{/content} {/include}
                       {#include partials/example-card title="Striped multiple tbody" slug="striped-multiple-tbody"
-                      component="table"} {#description}
+                      component="table" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-striped</code> / <code class="ws-code">pf-m-striped-even</code> set
                         per tbody keep the stripe pattern continuous across body groups.
                       </p>
                       {/description} {#content}{#include components/table/striped-multiple-tbody /}{/content} {/include}
-                      {#include partials/example-card title="Striped tr" slug="striped-tr" component="table"}
-                      {#description}
+                      {#include partials/example-card title="Striped tr" slug="striped-tr" component="table"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-striped</code> on individual rows for full manual control.
                       </p>
                       {/description} {#content}{#include components/table/striped-tr /}{/content} {/include} {#include
-                      partials/example-card title="Borderless" slug="borderless" component="table"} {#description}
+                      partials/example-card title="Borderless" slug="borderless" component="table" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">borderless=true</code> — removes row dividers; pairs well with striped on
                         dashboards.
                       </p>
                       {/description} {#content}{#include components/table/borderless /}{/content} {/include} {#include
-                      partials/example-card title="Borderless compact" slug="borderless-compact" component="table"}
-                      {#description}
+                      partials/example-card title="Borderless compact" slug="borderless-compact" component="table"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">borderless=true compact=true</code> &mdash; the densest, quietest layout.
                       </p>
                       {/description} {#content}{#include components/table/borderless-compact /}{/content} {/include}
                       {#include partials/example-card title="Borderless expandable" slug="borderless-expandable"
-                      component="table"} {#description}
+                      component="table" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">borderless=true expandable=true</code> &mdash; row expansion without row
                         dividers.
@@ -663,28 +667,28 @@
                       </p>
                       {/description} {#content}{#include components/table/borderless-compound-expandable /}{/content}
                       {/include} {#include partials/example-card title="Sortable (HTMX)" slug="sortable"
-                      component="table"} {#description}
+                      component="table" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Column headers post to <code class="ws-code">/api/htmx/table-sort</code> and swap the table; no
                         client-side sorting logic.
                       </p>
                       {/description} {#content}{#include components/table/sortable /}{/content} {/include} {#include
-                      partials/example-card title="Expandable (Alpine)" slug="expandable" component="table"}
-                      {#description}
+                      partials/example-card title="Expandable (Alpine)" slug="expandable" component="table"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Per-row toggle reveals a detail row beneath; state lives in
                         <code class="ws-code">x-data</code> on the &lt;tbody&gt;.
                       </p>
                       {/description} {#content}{#include components/table/expandable /}{/content} {/include} {#include
-                      partials/example-card title="Animated expandable" slug="animated-expandable" component="table"}
-                      {#description}
+                      partials/example-card title="Animated expandable" slug="animated-expandable" component="table"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-animate-expand</code> fades and slides the detail row; rows stay
                         rendered so CSS can animate.
                       </p>
                       {/description} {#content}{#include components/table/animated-expandable /}{/content} {/include}
                       {#include partials/example-card title="Expandable with set width columns"
-                      slug="expandable-set-width" component="table"} {#description}
+                      slug="expandable-set-width" component="table" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-width-30</code>/<code class="ws-code">pf-m-width-20</code> on header
                         cells fix column proportions while rows expand.
@@ -698,7 +702,7 @@
                       </p>
                       {/description} {#content}{#include components/table/expandable-nested-table /}{/content}
                       {/include} {#include partials/example-card title="Selectable with checkboxes"
-                      slug="selectable-checkbox" component="table"} {#description}
+                      slug="selectable-checkbox" component="table" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         A leading <code class="ws-code">pf-v6-c-table__check</code> control column with per-row
                         checkboxes and a select-all in the header.
@@ -711,13 +715,14 @@
                       </p>
                       {/description} {#content}{#include components/table/selectable-indeterminate /}{/content}
                       {/include} {#include partials/example-card title="Selectable with radio" slug="selectable-radio"
-                      component="table"} {#description}
+                      component="table" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Single-row selection — radio inputs sharing one name in the
                         <code class="ws-code">pf-v6-c-table__check</code> column, no select-all.
                       </p>
                       {/description} {#content}{#include components/table/selectable-radio /}{/content} {/include}
-                      {#include partials/example-card title="Actions" slug="actions" component="table"} {#description}
+                      {#include partials/example-card title="Actions" slug="actions" component="table" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         A trailing <code class="ws-code">pf-v6-c-table__action</code> cell with a kebab overflow menu
                         (Alpine); the last row shows the inline-action alternative.
@@ -736,15 +741,16 @@
                         component for a table with no rows.
                       </p>
                       {/description} {#content}{#include components/table/empty-state /}{/content} {/include} {#include
-                      partials/example-card title="Width and text modifiers" slug="width" component="table"}
-                      {#description}
+                      partials/example-card title="Width and text modifiers" slug="width" component="table"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-width-{|{pct}|}</code> pins a column's width;
                         <code class="ws-code">pf-m-truncate</code>, <code class="ws-code">pf-m-fit-content</code> and
                         <code class="ws-code">pf-m-nowrap</code> control cell text overflow.
                       </p>
                       {/description} {#content}{#include components/table/width /}{/content} {/include} {#include
-                      partials/example-card title="Text control" slug="text-control" component="table"} {#description}
+                      partials/example-card title="Text control" slug="text-control" component="table" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Per-cell text behavior: <code class="ws-code">pf-m-truncate</code>,
                         <code class="ws-code">pf-m-break-word</code>, <code class="ws-code">pf-m-wrap</code>,
@@ -758,21 +764,22 @@
                         working in the grid layout and composes with PF layouts.
                       </p>
                       {/description} {#content}{#include components/table/table-text /}{/content} {/include} {#include
-                      partials/example-card title="Long strings" slug="long-strings" component="table"} {#description}
+                      partials/example-card title="Long strings" slug="long-strings" component="table" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         No modifiers on purpose &mdash; a long string shrinks adjacent columns, the failure mode the
                         width and text modifiers fix.
                       </p>
                       {/description} {#content}{#include components/table/long-strings /}{/content} {/include} {#include
-                      partials/example-card title="Width constrained" slug="width-constrained" component="table"}
-                      {#description}
+                      partials/example-card title="Width constrained" slug="width-constrained" component="table"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-width-40</code> caps the column; the second body adds
                         <code class="ws-code">pf-m-truncate</code> on the cell.
                       </p>
                       {/description} {#content}{#include components/table/width-constrained /}{/content} {/include}
                       {#include partials/example-card title="Hidden/visible breakpoints" slug="breakpoint-modifiers"
-                      component="table"} {#description}
+                      component="table" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Columns show and hide per breakpoint with <code class="ws-code">pf-m-hidden(-on-*)</code> /
                         <code class="ws-code">pf-m-visible-on-*</code> &mdash; resize to see them swap.
@@ -792,8 +799,8 @@
                         current favorited state.
                       </p>
                       {/description} {#content}{#include components/table/favorites-sortable /}{/content} {/include}
-                      {#include partials/example-card title="Clickable rows" slug="clickable-rows" component="table"}
-                      {#description}
+                      {#include partials/example-card title="Clickable rows" slug="clickable-rows" component="table"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Clicking (or Enter/Space on) a row selects it — <code class="ws-code">pf-m-selected</code> on
                         the grid-variant table highlights the current row.
@@ -920,7 +927,8 @@
                         <code class="ws-code">pf-m-ghost-row</code> and drops into place by the pointer's midpoint.
                       </p>
                       {/description} {#content}{#include components/table/draggable-rows /}{/content} {/include}
-                      {#include partials/example-card title="Footer" slug="footer" component="table"} {#description}
+                      {#include partials/example-card title="Footer" slug="footer" component="table" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         A summary row in <code class="ws-code">pf-v6-c-table__tfoot</code> (PatternFly 6.6+) — the
                         <code class="ws-code">th</code> uses <code class="ws-code">scope="row"</code> so assistive tech
@@ -962,9 +970,35 @@
                           Table props
                         </h3>
                         <p class="pf-v6-c-content--p pf-m-editorial">
-                          Parameters accepted by
-                          <code class="ws-code">{|{#include components/data-display/table ... /}|}</code>. Thead/tbody
-                          markup lives in the slot using bare elements (PF v6 styles them via descendant selectors).
+                          The runtime template has two modes. Pass a typed
+                          <code class="ws-code">org.sitenetsoft.quarkus.pha.model.Table</code> (built with
+                          <code class="ws-code">Table.builder()</code>) as the <code class="ws-code">table</code>
+                          parameter and the caption, header (sort buttons, selection inputs, expandable-row toggles),
+                          bodies, action cells and footer all render from the model — the examples above with a Java tab
+                          are built this way. Or omit it and hand-write thead/tbody markup in the content slot using
+                          bare elements (PF v6 styles them via descendant selectors), as the composition-heavy examples
+                          (tree tables, compound expansion, sticky layouts) still do.
+                        </p>
+                        <div class="pf-v6-c-code-block" role="group" aria-label="Table builder example">
+                          <div class="pf-v6-c-code-block__content">
+                            <pre
+                              class="pf-v6-c-code-block__pre"
+                            ><code class="pf-v6-c-code-block__code">Table table = Table.builder()
+    .id("users").ariaLabel("Users")
+    .column("Name")
+    .column(TableColumn.of("Status").sortable("status"))
+    .actionColumn()
+    .sortEndpoint("/api/htmx/table-sort")
+    .row("John Doe", "Active", TableCell.kebab("John Doe actions", "Edit", "Delete"))
+    .row(Table.row("Jane Smith", "Inactive",
+            TableCell.actions(TableAction.secondary("Edit"), TableAction.danger("Delete"))))
+    .build();</code></pre>
+                          </div>
+                        </div>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          Template side, with <code class="ws-code">table</code> in the template data:
+                          <code class="ws-code">{|{#include components/data-display/table table=table /}|}</code>.
+                          Shell-mode parameters below.
                         </p>
                         <table
                           class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
