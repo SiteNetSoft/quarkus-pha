@@ -9,11 +9,11 @@ Table table = Table.builder()
         .row("John Doe",
                 TableCell.text("A very long description that will be truncated with an ellipsis when it exceeds the column width").withModifier("pf-m-truncate"),
                 TableCell.text("Administrator"),
-                TableCell.text("Jan 1, 2026").withModifier("pf-m-nowrap"))
+                TableCell.text("Jan 1, 2026"))
         .row("Jane Smith",
                 TableCell.text("Another lengthy piece of descriptive text that demonstrates the truncation behaviour of the cell").withModifier("pf-m-truncate"),
                 TableCell.text("Editor"),
-                TableCell.text("Feb 14, 2026").withModifier("pf-m-nowrap"))
+                TableCell.text("Feb 14, 2026"))
         .build();
 
 // Template side, with `table` in the template data:

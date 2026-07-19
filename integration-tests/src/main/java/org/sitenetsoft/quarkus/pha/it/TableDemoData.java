@@ -115,11 +115,11 @@ public class TableDemoData {
             .row("John Doe",
                     TableCell.text("A very long description that will be truncated with an ellipsis when it exceeds the column width").withModifier("pf-m-truncate"),
                     TableCell.text("Administrator"),
-                    TableCell.text("Jan 1, 2026").withModifier("pf-m-nowrap"))
+                    TableCell.text("Jan 1, 2026"))
             .row("Jane Smith",
                     TableCell.text("Another lengthy piece of descriptive text that demonstrates the truncation behaviour of the cell").withModifier("pf-m-truncate"),
                     TableCell.text("Editor"),
-                    TableCell.text("Feb 14, 2026").withModifier("pf-m-nowrap"))
+                    TableCell.text("Feb 14, 2026"))
             .build();
 
     public static Table demoWidthConstrainedTable = Table.builder()
@@ -286,6 +286,110 @@ public class TableDemoData {
                     TableCell.kebab("Jane Smith actions", "Edit", "Delete"))
             .row("Bob Johnson", "Active", "Viewer",
                     TableCell.actions(TableAction.secondary("Edit"), TableAction.danger("Delete")))
+            .build();
+
+    public static Table demoStickyTable = Table.builder()
+            .id("tbl-sticky").ariaLabel("Table with sticky header and first column")
+            .stickyHeader().scrollable("max-block-size: 13rem; overflow: auto")
+            .column(TableColumn.of("Repository")
+                    .stickyCell("pf-m-left", "--pf-v6-c-table__sticky-cell--MinWidth: 10rem; --pf-v6-c-table__sticky-cell--m-left--InsetInlineStart: 0")
+                    .rowHeader())
+            .column(TableColumn.of("Branches").nowrap())
+            .column(TableColumn.of("Pull requests").nowrap())
+            .column(TableColumn.of("Workspaces").nowrap())
+            .column(TableColumn.of("Last commit").nowrap())
+            .column(TableColumn.of("Contributors").nowrap())
+            .column(TableColumn.of("Open issues").nowrap())
+            .column(TableColumn.of("Size").nowrap())
+            .row("api-gateway", "12 branches", "4 open", "2 active", "2 hours ago", "18 people", "7 issues", "1.2 GB")
+            .row("payments", "8 branches", "6 open", "3 active", "5 hours ago", "11 people", "14 issues", "0.9 GB")
+            .row("search", "5 branches", "1 open", "1 active", "1 day ago", "6 people", "3 issues", "2.4 GB")
+            .row("notifications", "9 branches", "3 open", "2 active", "3 hours ago", "9 people", "5 issues", "0.4 GB")
+            .row("billing", "7 branches", "2 open", "1 active", "6 hours ago", "8 people", "9 issues", "1.1 GB")
+            .row("analytics", "14 branches", "8 open", "4 active", "30 min ago", "22 people", "18 issues", "3.8 GB")
+            .row("auth", "6 branches", "0 open", "1 active", "2 days ago", "5 people", "2 issues", "0.6 GB")
+            .build();
+
+    public static Table demoStickyFooterTable = Table.builder()
+            .id("tbl-sticky-footer").ariaLabel("Table with a sticky footer")
+            .stickyFooter().scrollable("max-block-size: 13rem; overflow: auto")
+            .column("Invoice").column("Customer").column("Amount")
+            .row("INV-1041", "Acme Corp", "$1,200")
+            .row("INV-1042", "Globex", "$860")
+            .row("INV-1043", "Initech", "$2,430")
+            .row("INV-1044", "Umbrella", "$540")
+            .row("INV-1045", "Stark Industries", "$3,100")
+            .row("INV-1046", "Wayne Enterprises", "$1,780")
+            .row("INV-1047", "Hooli", "$920")
+            .row("INV-1048", "Vandelay", "$610")
+            .footer(TableCell.text("Total").asRowHeader().withColspan(2), TableCell.text("$11,440"))
+            .build();
+
+    public static Table demoMultipleStickyTable = Table.builder()
+            .id("tbl-multiple-sticky").ariaLabel("Table with multiple sticky columns")
+            .scrollableInner("tbl-multiple-sticky-wrapper")
+            .column(TableColumn.of("Node")
+                    .stickyCell("pf-m-left", "--pf-v6-c-table__sticky-cell--MinWidth: 100px")
+                    .nowrap().rowHeader())
+            .column(TableColumn.of("Status")
+                    .stickyCell("pf-m-left pf-m-border-right", "--pf-v6-c-table__sticky-cell--MinWidth: 80px; --pf-v6-c-table__sticky-cell--InsetInlineStart: 100px")
+                    .nowrap().rowHeader())
+            .column(TableColumn.of("Zone").nowrap())
+            .column(TableColumn.of("Kubernetes version").nowrap())
+            .column(TableColumn.of("CPU allocatable").nowrap())
+            .column(TableColumn.of("Memory allocatable").nowrap())
+            .column(TableColumn.of("Pods running").nowrap())
+            .column(TableColumn.of("Created").nowrap())
+            .column(TableColumn.of("Kernel").nowrap())
+            .row("node-a1", "Ready", "us-east-1a", "v1.31.2", "7.5 cores", "28 GiB", "42", "86 days ago", "6.1.0-18")
+            .row("node-a2", "Ready", "us-east-1b", "v1.31.2", "7.5 cores", "28 GiB", "38", "86 days ago", "6.1.0-18")
+            .row("node-b1", "NotReady", "us-east-1c", "v1.30.6", "15 cores", "60 GiB", "0", "12 days ago", "6.1.0-17")
+            .row("node-b2", "Ready", "us-east-1a", "v1.31.2", "15 cores", "60 GiB", "61", "12 days ago", "6.1.0-18")
+            .build();
+
+    public static Table demoStickyRightTable = Table.builder()
+            .id("tbl-sticky-right").ariaLabel("Table with a sticky right column")
+            .scrollableInner("tbl-sticky-right-wrapper")
+            .column(TableColumn.of("Node").nowrap())
+            .column(TableColumn.of("Zone").nowrap())
+            .column(TableColumn.of("Kubernetes version").nowrap())
+            .column(TableColumn.of("CPU allocatable").nowrap())
+            .column(TableColumn.of("Memory allocatable").nowrap())
+            .column(TableColumn.of("Pods running").nowrap())
+            .column(TableColumn.of("Created").nowrap())
+            .column(TableColumn.of("Kernel").nowrap())
+            .column(TableColumn.of("Status")
+                    .stickyCell("pf-m-right pf-m-border-left", "--pf-v6-c-table__sticky-cell--MinWidth: 120px")
+                    .nowrap().rowHeader())
+            .row("node-a1", "us-east-1a", "v1.31.2", "7.5 cores", "28 GiB", "42", "86 days ago", "6.1.0-18", "Ready")
+            .row("node-a2", "us-east-1b", "v1.31.2", "7.5 cores", "28 GiB", "38", "86 days ago", "6.1.0-18", "Ready")
+            .row("node-b1", "us-east-1c", "v1.30.6", "15 cores", "60 GiB", "0", "12 days ago", "6.1.0-17", "NotReady")
+            .row("node-b2", "us-east-1a", "v1.31.2", "15 cores", "60 GiB", "61", "12 days ago", "6.1.0-18", "Ready")
+            .build();
+
+    public static Table demoNestedHeadersTable = Table.builder()
+            .id("tbl-nested").ariaLabel("Table with nested column headers")
+            .column("Name")
+            .column(TableColumn.group("Contact", "Email", "Phone"))
+            .column(TableColumn.group("Employment", "Role", "Level"))
+            .row("John Doe", "john@example.com", "555-0100", "Admin", "Senior")
+            .row("Jane Smith", "jane@example.com", "555-0101", "Editor", "Mid")
+            .row("Bob Johnson", "bob@example.com", "555-0102", "Viewer", "Junior")
+            .build();
+
+    public static Table demoNestedStickyTable = Table.builder()
+            .id("tbl-nested-sticky").ariaLabel("Table with nested column headers and a sticky header")
+            .stickyHeader().scrollableInnerStyled("max-block-size: 13rem; overflow: auto")
+            .column("Name")
+            .column(TableColumn.group("Contact", "Email", "Phone"))
+            .column(TableColumn.group("Employment", "Role", "Level"))
+            .row("John Doe", "john@example.com", "555-0100", "Admin", "Senior")
+            .row("Jane Smith", "jane@example.com", "555-0101", "Editor", "Mid")
+            .row("Bob Johnson", "bob@example.com", "555-0102", "Viewer", "Junior")
+            .row("Amelia Chen", "amelia@example.com", "555-0103", "Admin", "Senior")
+            .row("Jordan Blake", "jordan@example.com", "555-0104", "Editor", "Senior")
+            .row("Priya Nair", "priya@example.com", "555-0105", "Viewer", "Mid")
+            .row("Tomás Rivera", "tomas@example.com", "555-0106", "Editor", "Junior")
             .build();
 
     public static Table demoTextControlTable = Table.builder()
