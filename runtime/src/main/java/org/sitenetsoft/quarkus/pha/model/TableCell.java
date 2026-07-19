@@ -33,6 +33,7 @@ public final class TableCell {
     private final String css;
     private final String dataLabel;
     private final String domId;
+    private String style;
 
     private TableCell(Kind kind, String text, String href, String menuAriaLabel,
                       List<TableAction> actions, List<String> modifiers, int colspan, boolean rowHeader,
@@ -108,14 +109,22 @@ public final class TableCell {
         if (kind == Kind.KEBAB || kind == Kind.ACTIONS) {
             classes.add("pf-v6-c-table__action");
         }
+        if (column != null && column.isSticky()) {
+            classes.add(column.stickyClasses());
+        }
         classes.addAll(modifiers);
         if (column != null && column.hasCellModifiers()) {
             classes.add(column.cellModifierClasses());
         }
         String css = classes.isEmpty() ? null : String.join(" ", classes);
         String label = emitDataLabel && column != null && column.isTextColumn() ? column.label() : null;
-        return new TableCell(kind, text, href, menuAriaLabel, actions, modifiers, colspan, rowHeader,
+        boolean header = rowHeader || (column != null && column.isRowHeaderColumn());
+        TableCell r = new TableCell(kind, text, href, menuAriaLabel, actions, modifiers, colspan, header,
                 css, label, domId);
+        if (column != null && column.isSticky()) {
+            r.style = column.stickyStyle();
+        }
+        return r;
     }
 
     public boolean isText() {
@@ -175,5 +184,10 @@ public final class TableCell {
     /** Final id attribute value (selectable tables label rows by first cell), or null. */
     public String domId() {
         return domId;
+    }
+
+    /** Final inline style value (sticky-cell custom properties), or null. */
+    public String style() {
+        return style;
     }
 }

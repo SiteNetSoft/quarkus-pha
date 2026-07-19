@@ -4,6 +4,26 @@
 <caption class="pf-v6-c-table__caption">{table.caption}</caption>
 {/if}
 <thead>
+  {#if table.nestedHeader}
+  <tr class="pf-v6-c-table__tr">
+    {#for col in table.columns}
+    {#if col.group}
+    <th scope="col" colspan="{col.groupColspan}">{col.label}</th>
+    {#else}
+    <th scope="col" rowspan="2"{#if col.headerCss} class="{col.headerCss}"{/if}>{col.label}</th>
+    {/if}
+    {/for}
+  </tr>
+  <tr class="pf-v6-c-table__tr">
+    {#for col in table.columns}
+    {#if col.group}
+    {#for sub in col.subColumns}
+    <th scope="col" class="pf-v6-c-table__subhead">{sub}</th>
+    {/for}
+    {/if}
+    {/for}
+  </tr>
+  {#else}
   <tr class="pf-v6-c-table__tr">
     {#for col in table.columns}
     {#if col.toggleColumn}
@@ -34,10 +54,11 @@
       </button>
     </th>
     {#else}
-    <th scope="col"{#if col.hasModifiers} class="{col.modifierClasses}"{/if}>{col.label}</th>
+    <th scope="col"{#if col.headerCss} class="{col.headerCss}"{/if}{#if col.sticky} style="{col.stickyStyle}"{/if}>{col.label}</th>
     {/if}
     {/for}
   </tr>
+  {/if}
 </thead>
 {#if table.expandable}
 {#for body in table.bodies}
@@ -76,7 +97,7 @@
   <tr>
     {#for cell in table.footerRow.cells}
     {#if cell.rowHeader}
-    <th scope="row">{cell.text}</th>
+    <th scope="row"{#if cell.spanning} colspan="{cell.colspan}"{/if}>{cell.text}</th>
     {#else}
     <td{#if cell.spanning} colspan="{cell.colspan}"{/if}>{cell.text}</td>
     {/if}
