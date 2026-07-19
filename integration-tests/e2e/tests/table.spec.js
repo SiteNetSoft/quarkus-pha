@@ -691,4 +691,41 @@ test.describe("Table", () => {
       await expect(page.locator("table.pf-v6-c-table").first()).toBeAttached();
     }
   });
+
+  test.describe("Java source tab", () => {
+    const MODEL_DRIVEN = [
+      "basic", "compact", "borderless", "borderless-compact", "striped", "striped-tr",
+      "striped-multiple-tbody", "plain", "footer", "width", "width-constrained", "long-strings",
+      "breakpoint-modifiers", "sortable", "selectable-checkbox", "selectable-radio",
+      "clickable-rows", "expandable", "compact-expandable", "borderless-expandable",
+      "striped-expandable", "animated-expandable", "expandable-set-width", "actions",
+      "text-control",
+    ];
+
+    test("model-driven cards get a leading Java tab, composition cards do not", async ({ page }) => {
+      await page.goto("/components/table");
+      for (const ex of MODEL_DRIVEN) {
+        const card = page.locator(`[data-rendered-href="/components/table/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      const treeCard = page.locator('[data-rendered-href="/components/table/tree-table"]');
+      await expect(treeCard.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+    });
+
+    test("Java tab opens Monaco with the builder code", async ({ page }) => {
+      await page.goto("/components/table");
+      const card = page.locator('[data-rendered-href="/components/table/basic"]');
+      await card.locator('button[aria-label*="Toggle Java"]').click();
+      await expect(card.locator(".monaco-editor").first()).toBeVisible({ timeout: 10000 });
+      await expect(card.locator(".monaco-editor .view-lines")).toContainText("Table.builder()", { timeout: 10000 });
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/table/source-java/actions");
+      expect(res.status()).toBe(200);
+      const body = await res.text();
+      expect(body).toContain("TableCell.kebab(");
+      expect(body).toContain("Table.builder()");
+    });
+  });
 });
