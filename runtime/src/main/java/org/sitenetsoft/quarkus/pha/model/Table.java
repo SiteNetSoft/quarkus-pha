@@ -3,6 +3,7 @@ package org.sitenetsoft.quarkus.pha.model;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -64,8 +65,20 @@ public final class Table {
     private final boolean scrollOuter;
     private final String scrollWrapperId;
     private final String scrollWrapperStyle;
+    private final List<TableTreeNode> treeRows;
+    private final boolean treeCheckboxes;
+    private final boolean treeGridLg;
+    private final boolean treeNoInset;
+    private final String treeRootXData;
+    private final String treeBodyXData;
 
     private Table(Builder b, List<TableBody> bodies) {
+        this.treeRows = List.copyOf(b.resolvedTreeRows);
+        this.treeCheckboxes = b.treeCheckboxes;
+        this.treeGridLg = b.treeGridLg;
+        this.treeNoInset = b.treeNoInset;
+        this.treeRootXData = b.treeRootXData;
+        this.treeBodyXData = b.treeBodyXData;
         this.stickyHeader = b.stickyHeader;
         this.stickyFooter = b.stickyFooter;
         this.scrollOuter = b.scrollOuter;
@@ -92,6 +105,11 @@ public final class Table {
     /** Row factory for refined rows: {@code Table.row("a", "b").stripedRow()}. */
     public static TableRow row(Object... cells) {
         return TableRow.of(cells);
+    }
+
+    /** Tree-node factory: the name fills the title cell, the rest the other columns. */
+    public static TableTreeNode node(String name, String... cells) {
+        return TableTreeNode.of(name, cells);
     }
 
     public static Builder builder() {
@@ -245,6 +263,55 @@ public final class Table {
         return selection != Selection.NONE;
     }
 
+    /** True when this table renders as a tree ({@code pf-m-tree-view}). */
+    public boolean isTreeView() {
+        return !treeRows.isEmpty();
+    }
+
+    /** True when the tree has real hierarchy — PF only uses role=treegrid then. */
+    public boolean isTreeGrid() {
+        return treeRows.stream().anyMatch(TableTreeNode::isParent);
+    }
+
+    /** Value of the table's role attribute. */
+    public String role() {
+        return isTreeGrid() ? "treegrid" : "grid";
+    }
+
+    /** Tree modifier classes for the table root, leading space included. */
+    public String treeModifiers() {
+        if (!isTreeView()) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder(" pf-m-tree-view");
+        if (treeGridLg) {
+            sb.append(" pf-m-tree-view-grid-lg");
+        }
+        if (treeNoInset) {
+            sb.append(" pf-m-no-inset");
+        }
+        return sb.toString();
+    }
+
+    /** Tree rows flattened in pre-order, with aria/Alpine bindings resolved. */
+    public List<TableTreeNode> treeRows() {
+        return treeRows;
+    }
+
+    public boolean isTreeCheckboxes() {
+        return treeCheckboxes;
+    }
+
+    /** Alpine x-data for the table root (checkbox trees), or null. */
+    public String treeRootXData() {
+        return treeRootXData;
+    }
+
+    /** Alpine x-data for the tbody (plain trees with toggles), or null. */
+    public String treeBodyXData() {
+        return treeBodyXData;
+    }
+
     /** Number of columns a detail cell spans (the flattened data columns). */
     public int detailColspan() {
         return Math.max(1, dataColumns().size());
@@ -280,8 +347,40 @@ public final class Table {
         private boolean scrollOuter;
         private String scrollWrapperId;
         private String scrollWrapperStyle;
+        private final List<TableTreeNode> treeNodes = new ArrayList<>();
+        private boolean treeCheckboxes;
+        private boolean treeGridLg;
+        private boolean treeNoInset;
+        // resolved by build()
+        private List<TableTreeNode> resolvedTreeRows = List.of();
+        private String treeRootXData;
+        private String treeBodyXData;
 
         private Builder() {
+        }
+
+        /** Add a top-level tree node (see {@link Table#node}); switches the table to tree mode. */
+        public Builder treeNode(TableTreeNode node) {
+            treeNodes.add(Objects.requireNonNull(node, "node"));
+            return this;
+        }
+
+        /** Render a checkbox in every tree row; parents cascade to their leaves. */
+        public Builder treeCheckboxes() {
+            this.treeCheckboxes = true;
+            return this;
+        }
+
+        /** Switch the tree to the grid layout below lg ({@code pf-m-tree-view-grid-lg}). */
+        public Builder treeGridLg() {
+            this.treeGridLg = true;
+            return this;
+        }
+
+        /** Remove the per-level indent ({@code pf-m-no-inset}). */
+        public Builder treeNoInset() {
+            this.treeNoInset = true;
+            return this;
         }
 
         /** Pin the header while scrolling ({@code pf-m-sticky-header}). */
@@ -497,6 +596,12 @@ public final class Table {
                     dataCols.add(c);
                 }
             }
+            if (!treeNodes.isEmpty()) {
+                if (!doneBodies.isEmpty()) {
+                    throw new IllegalStateException("A table cannot mix tree nodes with regular rows");
+                }
+                resolveTree(dataCols.size());
+            }
             boolean select = selection != Selection.NONE;
             List<TableBody> resolvedBodies = new ArrayList<>();
             int rowNum = 0;
@@ -525,6 +630,121 @@ public final class Table {
                 footerRow = footerRow.resolved(0, cells);
             }
             return new Table(this, resolvedBodies);
+        }
+
+        /** Flatten the tree pre-order, assigning aria positions and Alpine bindings. */
+        private void resolveTree(int dataColCount) {
+            IdentityHashMap<TableTreeNode, String> leafKeys = new IdentityHashMap<>();
+            assignLeafKeys(treeNodes, leafKeys, new int[] {0});
+
+            List<TableTreeNode> flat = new ArrayList<>();
+            List<String> toggles = new ArrayList<>();
+            List<String> selEntries = new ArrayList<>();
+            List<String> helpers = new ArrayList<>();
+            walkTree(treeNodes, 1, List.of(), dataColCount, leafKeys,
+                    flat, toggles, selEntries, helpers, new int[] {0});
+
+            this.resolvedTreeRows = flat;
+            if (treeCheckboxes) {
+                List<String> parts = new ArrayList<>(toggles);
+                parts.add("sel: { " + String.join(", ", selEntries) + " }");
+                parts.addAll(helpers);
+                this.treeRootXData = "{ " + String.join(", ", parts) + " }";
+            } else if (!toggles.isEmpty()) {
+                this.treeBodyXData = "{ " + String.join(", ", toggles) + " }";
+            }
+        }
+
+        private static void assignLeafKeys(List<TableTreeNode> nodes,
+                IdentityHashMap<TableTreeNode, String> keys, int[] counter) {
+            for (TableTreeNode n : nodes) {
+                if (n.isParent()) {
+                    assignLeafKeys(n.children(), keys, counter);
+                } else {
+                    counter[0]++;
+                    keys.put(n, n.selKey() != null ? n.selKey() : "n" + counter[0]);
+                }
+            }
+        }
+
+        private static void collectLeafKeys(List<TableTreeNode> nodes,
+                IdentityHashMap<TableTreeNode, String> keys, List<String> out) {
+            for (TableTreeNode n : nodes) {
+                if (n.isParent()) {
+                    collectLeafKeys(n.children(), keys, out);
+                } else {
+                    out.add(keys.get(n));
+                }
+            }
+        }
+
+        private void walkTree(List<TableTreeNode> siblings, int level, List<String> ancestorVars,
+                int dataColCount, IdentityHashMap<TableTreeNode, String> leafKeys,
+                List<TableTreeNode> flat, List<String> toggles, List<String> selEntries,
+                List<String> helpers, int[] parentCounter) {
+            int pos = 0;
+            for (TableTreeNode n : siblings) {
+                pos++;
+                if (n.cells().size() > dataColCount - 1) {
+                    throw new IllegalStateException("Tree node '" + n.name() + "' has " + n.cells().size()
+                            + " extra cells but the table declares only " + (dataColCount - 1)
+                            + " columns after the title column");
+                }
+                String toggleVar = null;
+                if (n.isParent()) {
+                    parentCounter[0]++;
+                    toggleVar = "g" + parentCounter[0];
+                    toggles.add(toggleVar + ": " + n.isExpanded());
+                }
+                String showExpr = ancestorVars.isEmpty() ? null : String.join(" && ", ancestorVars);
+                String checkboxModel = null;
+                String checkedExpr = null;
+                String indetExpr = null;
+                String changeExpr = null;
+                if (treeCheckboxes) {
+                    if (n.isParent()) {
+                        List<String> leaves = new ArrayList<>();
+                        collectLeafKeys(n.children(), leafKeys, leaves);
+                        if (leaves.size() == 1) {
+                            String key = "sel." + leaves.get(0);
+                            checkedExpr = key;
+                            changeExpr = key + " = !" + key;
+                        } else {
+                            int k = parentCounter[0];
+                            String all = "g" + k + "All";
+                            String some = "g" + k + "Some";
+                            String setter = "setGroup" + k;
+                            StringBuilder set = new StringBuilder(setter + "(on) {");
+                            for (String leaf : leaves) {
+                                set.append(" this.sel.").append(leaf).append(" = on;");
+                            }
+                            set.append(" }");
+                            helpers.add(set.toString());
+                            helpers.add("get " + all + "() { return "
+                                    + leaves.stream().map(l -> "this.sel." + l)
+                                            .reduce((a, b) -> a + " && " + b).orElse("false") + " }");
+                            helpers.add("get " + some + "() { return "
+                                    + leaves.stream().map(l -> "this.sel." + l)
+                                            .reduce((a, b) -> a + " || " + b).orElse("false") + " }");
+                            checkedExpr = all;
+                            indetExpr = some + " && !" + all;
+                            changeExpr = setter + "(!" + all + ")";
+                        }
+                    } else {
+                        String key = leafKeys.get(n);
+                        selEntries.add(key + ": " + n.isChecked());
+                        checkboxModel = "sel." + key;
+                    }
+                }
+                flat.add(n.resolved(level, siblings.size(), pos, toggleVar, showExpr,
+                        checkboxModel, checkedExpr, indetExpr, changeExpr));
+                if (n.isParent()) {
+                    List<String> anc = new ArrayList<>(ancestorVars);
+                    anc.add(toggleVar);
+                    walkTree(n.children(), level + 1, anc, dataColCount, leafKeys,
+                            flat, toggles, selEntries, helpers, parentCounter);
+                }
+            }
         }
 
         private static TableBody.Stripe bodyStripe(TableBody body) {
