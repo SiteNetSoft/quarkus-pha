@@ -1,5 +1,5 @@
 {#include layouts/base} {#title}Navigation{/title} {#head}
-<script src="/web/js/alpine/components/code-example.js"></script>
+<script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
 {/head} {#body}
 <div id="root">
   <div style="outline: none" tabindex="-1" id="ws-router">
@@ -162,21 +162,22 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Vertical" slug="vertical" component="navigation"}
-                      {#description}
+                      {#include partials/example-card title="Vertical" slug="vertical" component="navigation"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Flat list of links. The active item gets <code class="ws-code">pf-m-current</code> +
                         <code class="ws-code">aria-current="page"</code>.
                       </p>
                       {/description} {#content}{#include components/navigation/vertical /}{/content} {/include}
-                      {#include partials/example-card title="Grouped" slug="grouped" component="navigation"}
-                      {#description}
+                      {#include partials/example-card title="Grouped" slug="grouped" component="navigation"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Multiple labelled sections inside one nav. Each section has its own
                         <code class="ws-code">__section-title</code> and <code class="ws-code">__list</code>.
                       </p>
                       {/description} {#content}{#include components/navigation/grouped /}{/content} {/include} {#include
-                      partials/example-card title="Expandable" slug="expandable" component="navigation"} {#description}
+                      partials/example-card title="Expandable" slug="expandable" component="navigation" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Items with a nested <code class="ws-code">__subnav</code>. The toggle is a
                         <code class="ws-code">button.pf-v6-c-nav__link</code>; Alpine flips
@@ -185,32 +186,33 @@
                       </p>
                       {/description} {#content}{#include components/navigation/expandable /}{/content} {/include}
                       {#include partials/example-card title="Expandable third level" slug="expandable-third-level"
-                      component="navigation"} {#description}
+                      component="navigation" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Subnavs nest — an expandable item inside another item's subnav gives a third level.
                       </p>
                       {/description} {#content}{#include components/navigation/expandable-third-level /}{/content}
-                      {/include} {#include partials/example-card title="Mixed" slug="mixed" component="navigation"}
-                      {#description}
+                      {/include} {#include partials/example-card title="Mixed" slug="mixed" component="navigation"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Plain links and expandable items can share one list.
                       </p>
                       {/description} {#content}{#include components/navigation/mixed /}{/content} {/include} {#include
-                      partials/example-card title="Horizontal" slug="horizontal" component="navigation"} {#description}
+                      partials/example-card title="Horizontal" slug="horizontal" component="navigation" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-horizontal</code> — for the masthead content area; see the Page
                         component's &quot;Horizontal navigation&quot; example for the full shell.
                       </p>
                       {/description} {#content}{#include components/navigation/horizontal /}{/content} {/include}
                       {#include partials/example-card title="Horizontal subnav" slug="horizontal-subnav"
-                      component="navigation"} {#description}
+                      component="navigation" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-horizontal pf-m-subnav</code> — local (tertiary) navigation under a
                         page header.
                       </p>
                       {/description} {#content}{#include components/navigation/horizontal-subnav /}{/content} {/include}
-                      {#include partials/example-card title="With item icons" slug="icons" component="navigation"}
-                      {#description}
+                      {#include partials/example-card title="With item icons" slug="icons" component="navigation"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Each link carries a <code class="ws-code">__link-icon</code> before its
                         <code class="ws-code">__link-text</code>.
@@ -230,12 +232,41 @@
                           Navigation pattern
                         </h3>
                         <p class="pf-v6-c-content--p pf-m-editorial">
-                          No runtime template — the markup is plain &lt;nav&gt; + PF subclasses. The base classes are
+                          The runtime template <code class="ws-code">components/navigation/nav</code> has two modes.
+                          Pass a typed <code class="ws-code">org.sitenetsoft.quarkus.pha.model.Nav</code> (built with
+                          <code class="ws-code">Nav.builder()</code>) as the <code class="ws-code">nav</code> parameter
+                          and the whole nav — flat lists, titled groups, expandable subnavs with their Alpine wiring,
+                          icons, <code class="ws-code">pf-m-current</code> + <code class="ws-code">aria-current</code> —
+                          renders from the model; every example on this page is built this way (the Java tab on each
+                          card shows the exact builder call). Or omit it to get the bare shell and hand-write the
+                          <code class="ws-code">__item</code> markup in the content slot. The base classes are
                           <code class="ws-code">.pf-v6-c-nav</code>, <code class="ws-code">.pf-v6-c-nav__list</code>,
                           <code class="ws-code">.pf-v6-c-nav__item</code>,
                           <code class="ws-code">.pf-v6-c-nav__link</code>, plus
                           <code class="ws-code">.pf-v6-c-nav__section</code> +
                           <code class="ws-code">.pf-v6-c-nav__section-title</code> for grouping.
+                        </p>
+                        <div class="pf-v6-c-code-block" role="group" aria-label="Nav builder example">
+                          <div class="pf-v6-c-code-block__content">
+                            <pre
+                              class="pf-v6-c-code-block__pre"
+                            ><code class="pf-v6-c-code-block__code">Nav nav = Nav.builder()
+    .id("side-nav")
+    .icon("Dashboard", "/dashboard", "fa:tachometer-alt", true)
+    .item("Projects", "/projects")
+    .expandable("Reports",
+        Nav.item("Usage", "/reports/usage"),
+        Nav.item("Billing", "/reports/billing"))
+    .build();</code></pre>
+                          </div>
+                        </div>
+                        <p class="pf-v6-c-content--p pf-m-editorial">
+                          Template side, with <code class="ws-code">nav</code> in the template data:
+                          <code class="ws-code">{|{#include components/navigation/nav nav=nav /}|}</code>. For a grouped
+                          nav use <code class="ws-code">.group(title, entries...)</code> calls instead — a nav is either
+                          grouped (sections only) or a flat list, and the builder rejects mixing the two. Give the nav
+                          an <code class="ws-code">id</code> when it has expandable items so generated toggle ids cannot
+                          collide with another nav on the page.
                         </p>
                       </div>
                       <div class="pf-v6-l-stack__item">
