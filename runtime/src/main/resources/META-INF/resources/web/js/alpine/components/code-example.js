@@ -4,10 +4,11 @@
  * rendered HTML output (after Qute processing).
  *
  * Lazy-loads Monaco (AMD bundle from /web/vendor/monaco/vs) the first time the
- * user opens a view. URLs are read from data-source-href (raw Qute) and
+ * user opens a view. URLs are read from data-source-href (raw Qute),
  * data-rendered-href (the standalone HTML page; we extract the <main> body)
- * on the x-data element. The editor is created read-only and follows the
- * page's light/dark/contrast theme via a MutationObserver on <html> class.
+ * and optionally data-java-href (the Java code that builds the example's
+ * model) on the x-data element. The editor is created read-only and follows
+ * the page's light/dark/contrast theme via a MutationObserver on <html> class.
  *
  * Usage:
  *   <div
@@ -79,8 +80,18 @@
     let editor = null;
     let quteSource = null;
     let htmlSource = null;
+    let javaSource = null;
 
     async function fetchSource(self, target) {
+      if (target === "java") {
+        if (javaSource != null) return javaSource;
+        let r = await fetch(self.javaHref, {
+          headers: { Accept: "text/plain" },
+        });
+        if (!r.ok) throw new Error("Java source fetch failed: " + r.status);
+        javaSource = await r.text();
+        return javaSource;
+      }
       if (target === "qute") {
         if (quteSource != null) return quteSource;
         let r = await fetch(self.sourceHref, {
@@ -103,15 +114,17 @@
     }
 
     return {
-      mode: null, // null | 'qute' | 'html'
+      mode: null, // null | 'java' | 'qute' | 'html'
       loading: false,
       error: null,
       sourceHref: null,
       renderedHref: null,
+      javaHref: null,
 
       init() {
         this.sourceHref = this.$root.dataset.sourceHref;
         this.renderedHref = this.$root.dataset.renderedHref;
+        this.javaHref = this.$root.dataset.javaHref || null;
       },
 
       destroy() {
@@ -153,10 +166,11 @@
           let [monaco, source] = await Promise.all([loadMonaco("/web/vendor/monaco/vs"), fetchSource(this, target)]);
           installThemeObserver();
           await this.$nextTick();
+          let language = target === "java" ? "java" : "html";
           if (!editor) {
             editor = monaco.editor.create(this.$refs.host, {
               value: source,
-              language: "html",
+              language: language,
               readOnly: true,
               automaticLayout: true,
               minimap: { enabled: false },
@@ -167,6 +181,7 @@
               theme: currentMonacoTheme(),
             });
           } else {
+            monaco.editor.setModelLanguage(editor.getModel(), language);
             editor.setValue(source);
           }
         } catch (e) {
