@@ -57,8 +57,18 @@ public final class Table {
     private final boolean clickable;
     private final String initialClickKey;
     private final String sortEndpoint;
+    private final boolean stickyHeader;
+    private final boolean stickyFooter;
+    private final boolean scrollOuter;
+    private final String scrollWrapperId;
+    private final String scrollWrapperStyle;
 
     private Table(Builder b, List<TableBody> bodies) {
+        this.stickyHeader = b.stickyHeader;
+        this.stickyFooter = b.stickyFooter;
+        this.scrollOuter = b.scrollOuter;
+        this.scrollWrapperId = b.scrollWrapperId;
+        this.scrollWrapperStyle = b.scrollWrapperStyle;
         this.id = b.id;
         this.ariaLabel = b.ariaLabel;
         this.caption = b.caption;
@@ -164,11 +174,53 @@ public final class Table {
         return modifiers.contains("pf-m-animate-expand");
     }
 
-    /** Columns that correspond to row cells (check and toggle columns are auto-rendered). */
+    /** Columns that correspond to row cells (check and toggle columns are auto-rendered;
+     * column groups flatten to their sub-columns). */
     public List<TableColumn> dataColumns() {
-        return columns.stream()
-                .filter(c -> !c.isCheckColumn() && !c.isToggleColumn())
-                .toList();
+        List<TableColumn> flat = new ArrayList<>();
+        for (TableColumn c : columns) {
+            if (c.isCheckColumn() || c.isToggleColumn()) {
+                continue;
+            }
+            if (c.isGroup()) {
+                for (String sub : c.subColumns()) {
+                    flat.add(TableColumn.of(sub));
+                }
+            } else {
+                flat.add(c);
+            }
+        }
+        return List.copyOf(flat);
+    }
+
+    /** True when any column is a group — renders the two-row nested column header. */
+    public boolean isNestedHeader() {
+        return columns.stream().anyMatch(TableColumn::isGroup);
+    }
+
+    public boolean isStickyHeader() {
+        return stickyHeader;
+    }
+
+    public boolean isStickyFooter() {
+        return stickyFooter;
+    }
+
+    /** True when the table renders inside a scroll wrapper. */
+    public boolean isScrollWrapped() {
+        return scrollOuter || scrollWrapperId != null || scrollWrapperStyle != null;
+    }
+
+    public boolean isScrollOuter() {
+        return scrollOuter;
+    }
+
+    public String scrollWrapperId() {
+        return scrollWrapperId;
+    }
+
+    public String scrollWrapperStyle() {
+        return scrollWrapperStyle;
     }
 
     public boolean hasSelection() {
@@ -200,8 +252,47 @@ public final class Table {
         private boolean clickable;
         private String initialClickKey;
         private String sortEndpoint;
+        private boolean stickyHeader;
+        private boolean stickyFooter;
+        private boolean scrollOuter;
+        private String scrollWrapperId;
+        private String scrollWrapperStyle;
 
         private Builder() {
+        }
+
+        /** Pin the header while scrolling ({@code pf-m-sticky-header}). */
+        public Builder stickyHeader() {
+            this.stickyHeader = true;
+            return this;
+        }
+
+        /** Pin the footer while scrolling ({@code pf-m-sticky-footer}). */
+        public Builder stickyFooter() {
+            this.stickyFooter = true;
+            return this;
+        }
+
+        /**
+         * Wrap in outer + inner scroll wrappers with the given inner style,
+         * e.g. {@code "max-block-size: 13rem; overflow: auto"}.
+         */
+        public Builder scrollable(String innerStyle) {
+            this.scrollOuter = true;
+            this.scrollWrapperStyle = innerStyle;
+            return this;
+        }
+
+        /** Wrap in an inner scroll wrapper only, carrying the given DOM id. */
+        public Builder scrollableInner(String wrapperId) {
+            this.scrollWrapperId = wrapperId;
+            return this;
+        }
+
+        /** Wrap in an inner scroll wrapper only, carrying the given inline style. */
+        public Builder scrollableInnerStyled(String style) {
+            this.scrollWrapperStyle = style;
+            return this;
         }
 
         public Builder id(String id) {
@@ -353,9 +444,19 @@ public final class Table {
             }
             Objects.requireNonNull(ariaLabel, "ariaLabel");
 
-            List<TableColumn> dataCols = columns.stream()
-                    .filter(c -> !c.isCheckColumn() && !c.isToggleColumn())
-                    .toList();
+            List<TableColumn> dataCols = new ArrayList<>();
+            for (TableColumn c : columns) {
+                if (c.isCheckColumn() || c.isToggleColumn()) {
+                    continue;
+                }
+                if (c.isGroup()) {
+                    for (String sub : c.subColumns()) {
+                        dataCols.add(TableColumn.of(sub));
+                    }
+                } else {
+                    dataCols.add(c);
+                }
+            }
             boolean select = selection != Selection.NONE;
             List<TableBody> resolvedBodies = new ArrayList<>();
             int rowNum = 0;

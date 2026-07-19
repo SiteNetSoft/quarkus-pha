@@ -27,18 +27,44 @@ public final class TableColumn {
     private final List<String> modifiers;
     private final String sortKey;
     private final Sort sort;
+    private final List<String> subColumns;
+    private final String stickyModifiers;
+    private final String stickyStyle;
+    private final boolean rowHeader;
 
     private TableColumn(Kind kind, String label, List<String> modifiers, String sortKey, Sort sort) {
+        this(kind, label, modifiers, sortKey, sort, List.of(), null, null, false);
+    }
+
+    private TableColumn(Kind kind, String label, List<String> modifiers, String sortKey, Sort sort,
+                        List<String> subColumns, String stickyModifiers, String stickyStyle, boolean rowHeader) {
         this.kind = kind;
         this.label = label;
         this.modifiers = List.copyOf(modifiers);
         this.sortKey = sortKey;
         this.sort = sort;
+        this.subColumns = List.copyOf(subColumns);
+        this.stickyModifiers = stickyModifiers;
+        this.stickyStyle = stickyStyle;
+        this.rowHeader = rowHeader;
     }
 
     /** Regular text column. */
     public static TableColumn of(String label) {
         return new TableColumn(Kind.TEXT, Objects.requireNonNull(label, "label"), List.of(), null, Sort.NONE);
+    }
+
+    /**
+     * Parent header spanning sub-columns (nested column headers): the parent
+     * renders with a colspan in the first header row, the sub-labels as
+     * {@code __subhead} cells in the second.
+     */
+    public static TableColumn group(String label, String... subColumns) {
+        if (subColumns.length == 0) {
+            throw new IllegalArgumentException("A column group needs at least one sub-column: " + label);
+        }
+        return new TableColumn(Kind.TEXT, Objects.requireNonNull(label, "label"), List.of(), null, Sort.NONE,
+                List.of(subColumns), null, null, false);
     }
 
     /** Leading select-all checkbox column ({@code pf-v6-c-table__check} header cell). */
@@ -62,7 +88,8 @@ public final class TableColumn {
 
     /** Copy that sorts server-side under this key (see {@link Table.Builder#sortEndpoint}). */
     public TableColumn sortable(String sortKey) {
-        return new TableColumn(kind, label, modifiers, Objects.requireNonNull(sortKey, "sortKey"), Sort.NONE);
+        return new TableColumn(kind, label, modifiers, Objects.requireNonNull(sortKey, "sortKey"), Sort.NONE,
+                subColumns, stickyModifiers, stickyStyle, rowHeader);
     }
 
     /** Copy marked as the actively sorted column. */
@@ -70,7 +97,8 @@ public final class TableColumn {
         if (sortKey == null) {
             throw new IllegalStateException("sorted() requires sortable(key) first: " + label);
         }
-        return new TableColumn(kind, label, modifiers, sortKey, ascending ? Sort.ASCENDING : Sort.DESCENDING);
+        return new TableColumn(kind, label, modifiers, sortKey, ascending ? Sort.ASCENDING : Sort.DESCENDING,
+                subColumns, stickyModifiers, stickyStyle, rowHeader);
     }
 
     /** Copy with {@code pf-m-width-<pct>}; pct is one of PatternFly's width steps. */
@@ -98,7 +126,53 @@ public final class TableColumn {
     public TableColumn withModifier(String modifierClass) {
         List<String> m = new ArrayList<>(modifiers);
         m.add(modifierClass);
-        return new TableColumn(kind, label, m, sortKey, sort);
+        return new TableColumn(kind, label, m, sortKey, sort, subColumns, stickyModifiers, stickyStyle, rowHeader);
+    }
+
+    /**
+     * Copy pinned while scrolling: {@code modifiers} e.g. {@code "pf-m-left"} or
+     * {@code "pf-m-right pf-m-border-left"}, {@code style} the sticky-cell custom
+     * properties verbatim (MinWidth / InsetInlineStart per PF's scrollable-table
+     * recipe). Applies to the header cell and to this column's body cells.
+     */
+    public TableColumn stickyCell(String modifiers, String style) {
+        return new TableColumn(kind, label, this.modifiers, sortKey, sort, subColumns,
+                Objects.requireNonNull(modifiers, "modifiers"), Objects.requireNonNull(style, "style"), rowHeader);
+    }
+
+    /** Copy whose body cells render as row headers ({@code <th scope="row">}). */
+    public TableColumn rowHeader() {
+        return new TableColumn(kind, label, modifiers, sortKey, sort, subColumns,
+                stickyModifiers, stickyStyle, true);
+    }
+
+    public boolean isGroup() {
+        return !subColumns.isEmpty();
+    }
+
+    public List<String> subColumns() {
+        return subColumns;
+    }
+
+    public int groupColspan() {
+        return subColumns.size();
+    }
+
+    public boolean isSticky() {
+        return stickyModifiers != null;
+    }
+
+    /** Full class list for a sticky header/body cell, e.g. "pf-v6-c-table__sticky-cell pf-m-left". */
+    public String stickyClasses() {
+        return "pf-v6-c-table__sticky-cell " + stickyModifiers;
+    }
+
+    public String stickyStyle() {
+        return stickyStyle;
+    }
+
+    public boolean isRowHeaderColumn() {
+        return rowHeader;
     }
 
     public boolean isTextColumn() {
@@ -125,19 +199,35 @@ public final class TableColumn {
         return !modifiers.isEmpty();
     }
 
+    /** Final header-cell class value (sticky classes + modifiers), or null for none. */
+    public String headerCss() {
+        List<String> parts = new ArrayList<>();
+        if (isSticky()) {
+            parts.add(stickyClasses());
+        }
+        if (!modifiers.isEmpty()) {
+            parts.add(String.join(" ", modifiers));
+        }
+        return parts.isEmpty() ? null : String.join(" ", parts);
+    }
+
     public String modifierClasses() {
         return String.join(" ", modifiers);
     }
 
-    /** Visibility modifier classes that body cells in this column must repeat. */
+    /** Modifier classes that body cells in this column repeat (visibility + nowrap). */
     public boolean hasCellModifiers() {
-        return modifiers.stream().anyMatch(m -> m.startsWith("pf-m-hidden") || m.startsWith("pf-m-visible"));
+        return modifiers.stream().anyMatch(TableColumn::isCellInherited);
     }
 
     public String cellModifierClasses() {
         return modifiers.stream()
-                .filter(m -> m.startsWith("pf-m-hidden") || m.startsWith("pf-m-visible"))
+                .filter(TableColumn::isCellInherited)
                 .reduce((a, b) -> a + " " + b).orElse("");
+    }
+
+    private static boolean isCellInherited(String m) {
+        return m.startsWith("pf-m-hidden") || m.startsWith("pf-m-visible") || m.equals("pf-m-nowrap");
     }
 
     public boolean isSortable() {
