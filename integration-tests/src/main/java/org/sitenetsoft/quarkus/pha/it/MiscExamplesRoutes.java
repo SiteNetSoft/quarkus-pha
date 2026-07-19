@@ -226,6 +226,22 @@ public class MiscExamplesRoutes {
     }
 
     @GET
+    @Path("/{name:(" + NAME_REGEX + ")}/source-java/{example}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String sourceJava(@PathParam("name") String name, @PathParam("example") String example) {
+        validate(name, example);
+        String resourcePath = "/code-samples/" + name + "/" + example + ".java";
+        try (InputStream in = getClass().getResourceAsStream(resourcePath)) {
+            if (in == null) {
+                throw new NotFoundException("Missing Java sample for: " + name + "/" + example);
+            }
+            return new String(in.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed reading " + resourcePath, e);
+        }
+    }
+
+    @GET
     @Path("/{name:(" + NAME_REGEX + ")}/{example}")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance standalone(@PathParam("name") String name, @PathParam("example") String example) {

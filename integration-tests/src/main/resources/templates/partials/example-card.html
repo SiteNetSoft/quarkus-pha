@@ -3,14 +3,17 @@ Parameters: !} {! title — h3 text (e.g. "Single selectable") !} {! slug — id
 standalone/source URLs (e.g. "single-selectable") !} {! component — parent component slug (e.g. "tree-view"), used to
 build the source/standalone URLs. !} {! urlPrefix — (optional, default /components) overrides the path segment in front
 of {component}. !} {! description — (optional, plain text) short explanatory paragraph. For rich-HTML content use the
-#description slot — Prettier mangles HTML inside the description="..." attribute. !} {! Slots: !} {! #content — the
-example markup (the demo body itself, no chrome). !} {! #description — (optional) rich-HTML description block; caller
-supplies its own wrapping paragraph. !} {! Pick one of description="..." OR #description; don't use both. !} {#let
-prefix=(urlPrefix ?: '/components')}
+#description slot — Prettier mangles HTML inside the description="..." attribute. !} {! javaSource — (optional,
+boolean) adds a leading "Java" tab that fetches {prefix}/{component}/source-java/{slug} — for model-driven examples
+whose data is built in Java; the snippet lives in resources/code-samples/{component}/{slug}.java. !} {! Slots: !} {!
+#content — the example markup (the demo body itself, no chrome). !} {! #description — (optional) rich-HTML description
+block; caller supplies its own wrapping paragraph. !} {! Pick one of description="..." OR #description; don't use both.
+!} {#let prefix=(urlPrefix ?: '/components')}
 <div
   class="pf-v6-l-stack pf-m-gutter"
   data-source-href="{prefix}/{component}/source/{slug}"
   data-rendered-href="{prefix}/{component}/{slug}"
+  {#if javaSource??}data-java-href="{prefix}/{component}/source-java/{slug}"{/if}
   x-data="phaCodeExample()"
 >
   <div class="pf-v6-l-stack__item">
@@ -29,6 +32,18 @@ prefix=(urlPrefix ?: '/components')}
       <div class="pf-v6-c-code-editor__header pf-m-plain">
         <div class="pf-v6-c-code-editor__header-content">
           <div class="pf-v6-c-code-editor__controls">
+            {#if javaSource??}
+            <button
+              type="button"
+              class="pf-v6-c-button pf-m-plain ws-code-editor-control"
+              :class="mode === 'java' ? 'pf-m-active' : ''"
+              :aria-expanded="mode === 'java' ? 'true' : 'false'"
+              aria-label="Toggle Java source in {title} example"
+              @click="toggleMode('java')"
+            >
+              <span class="pf-v6-c-button__icon">{icons:svg('fa-brands:java').raw} Java</span>
+            </button>
+            {/if}
             <button
               type="button"
               class="pf-v6-c-button pf-m-plain ws-code-editor-control"
