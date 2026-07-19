@@ -12,7 +12,7 @@ import java.util.Objects;
 @TemplateData
 public final class TableAction {
 
-    public enum Variant { LINK, SECONDARY, DANGER }
+    public enum Variant { LINK, PRIMARY, SECONDARY, DANGER }
 
     private final String label;
     private final Variant variant;
@@ -25,6 +25,11 @@ public final class TableAction {
     /** Inline link button ({@code pf-m-link pf-m-inline}). */
     public static TableAction link(String label) {
         return new TableAction(label, Variant.LINK);
+    }
+
+    /** Primary button (overflow menus). */
+    public static TableAction primary(String label) {
+        return new TableAction(label, Variant.PRIMARY);
     }
 
     /** Inline secondary button ({@code pf-m-secondary pf-m-inline}). */
@@ -56,9 +61,20 @@ public final class TableAction {
     /** Modifier classes for the inline button, matching PF's action-cell patterns. */
     public String buttonClasses() {
         switch (variant) {
+            case PRIMARY: return "pf-m-primary pf-m-inline";
             case SECONDARY: return "pf-m-secondary pf-m-inline";
             case DANGER: return "pf-m-link pf-m-inline pf-m-danger";
             default: return "pf-m-link pf-m-inline";
+        }
+    }
+
+    /** Modifier class for a full (non-inline) button in an overflow-menu group. */
+    public String overflowButtonClasses() {
+        switch (variant) {
+            case PRIMARY: return "pf-m-primary";
+            case SECONDARY: return "pf-m-secondary";
+            case DANGER: return "pf-m-danger";
+            default: return "pf-m-link";
         }
     }
 }

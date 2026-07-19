@@ -34,9 +34,31 @@
     {#for col in table.columns}
     {#if col.toggleColumn}
     <td></td>
+    {#else if col.favoriteColumn}
+    {#if table.favoritesSortable}
+    <th scope="col" class="pf-v6-c-table__favorite pf-v6-c-table__sort" :class="dir ? 'pf-m-selected' : ''" :aria-sort="dir === 'desc' ? 'descending' : (dir === 'asc' ? 'ascending' : 'none')">
+      <button type="button" class="pf-v6-c-table__button" @click="sortFavs()" aria-label="Sort by favorites">
+        <span class="pf-v6-c-table__button-content">
+          <span class="pf-v6-c-table__sort-indicator">
+            <i class="fas" :class="dir ? (dir === 'desc' ? 'fa-long-arrow-alt-down' : 'fa-long-arrow-alt-up') : 'fa-arrows-alt-v'" aria-hidden="true"></i>
+          </span>
+        </span>
+      </button>
+    </th>
+    {#else}
+    <td class="pf-v6-c-table__favorite" aria-hidden="true"></td>
+    {/if}
+    {#else if col.dragColumn}
+    <td class="pf-v6-c-table__draggable" aria-hidden="true"></td>
+    {#else if col.inlineEditColumn}
+    <th scope="col" class="pf-v6-c-table__inline-edit-action">{col.label}</th>
     {#else if col.checkColumn}
     {#if table.radioSelect}
     <td class="pf-v6-c-table__check" aria-hidden="true"></td>
+    {#else if table.indeterminateSelect}
+    <td class="pf-v6-c-table__check">
+      <input type="checkbox" aria-label="Select all rows" :checked="allOn" x-effect="$el.indeterminate = someOn && !allOn" @change="toggleAll()" />
+    </td>
     {#else}
     <td class="pf-v6-c-table__check">
       <input type="checkbox" name="select-all" aria-label="Select all rows" />
@@ -109,7 +131,7 @@
 {/for}
 {#else}
 {#for body in table.bodies}
-<tbody class="pf-v6-c-table__tbody{#if body.stripedOdd} pf-m-striped{/if}{#if body.stripedEven} pf-m-striped-even{/if}"{#if table.clickable} x-data="{ selected: '{table.initialClickKey}' }"{/if}>
+<tbody class="pf-v6-c-table__tbody{#if body.stripedOdd} pf-m-striped{/if}{#if body.stripedEven} pf-m-striped-even{/if}"{#if table.clickable} x-data="{ selected: '{table.initialClickKey}' }"{/if}{#if table.draggableRows} x-data="{ dragEl: null }"{/if}{#if table.favoritesSortable} x-ref="body"{/if}>
   {#for row in body.rows}
   {#include components/data-display/table-model-row table=table row=row /}
   {/for}

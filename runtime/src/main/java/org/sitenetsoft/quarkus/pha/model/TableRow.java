@@ -15,34 +15,50 @@ import java.util.Objects;
 @TemplateData
 public final class TableRow {
 
-    private final List<TableCell> cells;
-    private final boolean striped;
-    private final boolean checked;
-    private final String clickKey;
-    private final String detail;
-    private final Table detailTable;
-    private final String detailAriaLabel;
-    private final boolean detailExpanded;
-    private final boolean detailNoPadding;
-    private final boolean detailNoBackground;
-    private final boolean detailParagraph;
-    private final int number;
+    private List<TableCell> cells = List.of();
+    private boolean striped;
+    private boolean checked;
+    private String clickKey;
+    private String detail;
+    private Table detailTable;
+    private String detailAriaLabel;
+    private boolean detailExpanded;
+    private boolean detailNoPadding;
+    private boolean detailNoBackground;
+    private boolean detailParagraph;
+    private boolean favorited;
+    // resolved by Table.build()
+    private int number;
+    private String rowXData;
+    private String favExpr;
+    private String selExpr;
+    private String editStartExpr;
+    private String editSaveExpr;
 
-    private TableRow(List<TableCell> cells, boolean striped, boolean checked, String clickKey,
-             String detail, Table detailTable, String detailAriaLabel, boolean detailExpanded,
-             boolean detailNoPadding, boolean detailNoBackground, boolean detailParagraph, int number) {
-        this.cells = List.copyOf(cells);
-        this.striped = striped;
-        this.checked = checked;
-        this.clickKey = clickKey;
-        this.detail = detail;
-        this.detailTable = detailTable;
-        this.detailAriaLabel = detailAriaLabel;
-        this.detailExpanded = detailExpanded;
-        this.detailNoPadding = detailNoPadding;
-        this.detailNoBackground = detailNoBackground;
-        this.detailParagraph = detailParagraph;
-        this.number = number;
+    private TableRow() {
+    }
+
+    private TableRow copy() {
+        TableRow r = new TableRow();
+        r.cells = cells;
+        r.striped = striped;
+        r.checked = checked;
+        r.clickKey = clickKey;
+        r.detail = detail;
+        r.detailTable = detailTable;
+        r.detailAriaLabel = detailAriaLabel;
+        r.detailExpanded = detailExpanded;
+        r.detailNoPadding = detailNoPadding;
+        r.detailNoBackground = detailNoBackground;
+        r.detailParagraph = detailParagraph;
+        r.favorited = favorited;
+        r.number = number;
+        r.rowXData = rowXData;
+        r.favExpr = favExpr;
+        r.selExpr = selExpr;
+        r.editStartExpr = editStartExpr;
+        r.editSaveExpr = editSaveExpr;
+        return r;
     }
 
     static TableRow of(Object... cells) {
@@ -57,26 +73,40 @@ public final class TableRow {
                         "Row cells must be String or TableCell, got: " + (c == null ? "null" : c.getClass()));
             }
         }
-        return new TableRow(list, false, false, null, null, null, null, false, false, false, false, 0);
+        TableRow r = new TableRow();
+        r.cells = List.copyOf(list);
+        return r;
     }
 
     /** Copy with {@code pf-m-striped} on the row (for manually striped tables). */
     public TableRow stripedRow() {
-        return new TableRow(cells, true, checked, clickKey, detail, detailTable, detailAriaLabel,
-                detailExpanded, detailNoPadding, detailNoBackground, detailParagraph, number);
+        TableRow r = copy();
+        r.striped = true;
+        return r;
     }
 
     /** Copy whose selection checkbox/radio starts checked. */
     public TableRow checkedRow() {
-        return new TableRow(cells, striped, true, clickKey, detail, detailTable, detailAriaLabel,
-                detailExpanded, detailNoPadding, detailNoBackground, detailParagraph, number);
+        TableRow r = copy();
+        r.checked = true;
+        return r;
     }
 
-    /** Copy identified by a key for click-to-select tables (see {@link Table.Builder#clickable}). */
+    /** Copy whose favorite star starts on (favoritable tables). */
+    public TableRow favorited() {
+        TableRow r = copy();
+        r.favorited = true;
+        return r;
+    }
+
+    /**
+     * Copy identified by a key used for click-to-select rows, tri-state
+     * selection maps and favorites sorting (see {@link Table.Builder}).
+     */
     public TableRow key(String clickKey) {
-        return new TableRow(cells, striped, checked, Objects.requireNonNull(clickKey, "clickKey"),
-                detail, detailTable, detailAriaLabel, detailExpanded, detailNoPadding, detailNoBackground,
-                detailParagraph, number);
+        TableRow r = copy();
+        r.clickKey = Objects.requireNonNull(clickKey, "clickKey");
+        return r;
     }
 
     /**
@@ -85,9 +115,9 @@ public final class TableRow {
      * "Toggle details for {first cell text}" unless overridden.
      */
     public TableRow expandsTo(String detail) {
-        return new TableRow(cells, striped, checked, clickKey,
-                Objects.requireNonNull(detail, "detail"), detailTable, detailAriaLabel, detailExpanded,
-                detailNoPadding, detailNoBackground, detailParagraph, number);
+        TableRow r = copy();
+        r.detail = Objects.requireNonNull(detail, "detail");
+        return r;
     }
 
     /**
@@ -96,40 +126,56 @@ public final class TableRow {
      * nested-table recipe.
      */
     public TableRow expandsToTable(Table detailTable) {
-        return new TableRow(cells, striped, checked, clickKey, detail,
-                Objects.requireNonNull(detailTable, "detailTable"), detailAriaLabel, detailExpanded,
-                true, true, detailParagraph, number);
+        TableRow r = copy();
+        r.detailTable = Objects.requireNonNull(detailTable, "detailTable");
+        r.detailNoPadding = true;
+        r.detailNoBackground = true;
+        return r;
     }
 
     /** Copy with an explicit toggle aria-label (default derives from the first cell). */
     public TableRow detailAriaLabel(String ariaLabel) {
-        return new TableRow(cells, striped, checked, clickKey, detail, detailTable,
-                Objects.requireNonNull(ariaLabel, "ariaLabel"), detailExpanded, detailNoPadding,
-                detailNoBackground, detailParagraph, number);
+        TableRow r = copy();
+        r.detailAriaLabel = Objects.requireNonNull(ariaLabel, "ariaLabel");
+        return r;
     }
 
     /** Copy whose detail row starts expanded. */
     public TableRow expanded() {
-        return new TableRow(cells, striped, checked, clickKey, detail, detailTable, detailAriaLabel,
-                true, detailNoPadding, detailNoBackground, detailParagraph, number);
+        TableRow r = copy();
+        r.detailExpanded = true;
+        return r;
     }
 
     /** Copy whose detail content renders with pf-m-no-padding. */
     public TableRow noPaddingDetail() {
-        return new TableRow(cells, striped, checked, clickKey, detail, detailTable, detailAriaLabel,
-                detailExpanded, true, detailNoBackground, detailParagraph, number);
+        TableRow r = copy();
+        r.detailNoPadding = true;
+        return r;
     }
 
     /** Copy whose detail text renders wrapped in a paragraph element. */
     public TableRow paragraphDetail() {
-        return new TableRow(cells, striped, checked, clickKey, detail, detailTable, detailAriaLabel,
-                detailExpanded, detailNoPadding, detailNoBackground, true, number);
+        TableRow r = copy();
+        r.detailParagraph = true;
+        return r;
     }
 
     /** Copy with resolved cells and its 1-based row number; called from Table.build(). */
     TableRow resolved(int number, List<TableCell> resolvedCells) {
-        return new TableRow(resolvedCells, striped, checked, clickKey, detail, detailTable,
-                detailAriaLabel, detailExpanded, detailNoPadding, detailNoBackground, detailParagraph, number);
+        TableRow r = copy();
+        r.number = number;
+        r.cells = List.copyOf(resolvedCells);
+        return r;
+    }
+
+    /** Copy with the row-level Alpine bindings; called from Table.build(). */
+    TableRow withAlpine(String rowXData, String favExpr, String selExpr) {
+        TableRow r = copy();
+        r.rowXData = rowXData;
+        r.favExpr = favExpr;
+        r.selExpr = selExpr;
+        return r;
     }
 
     /** 1-based row number within the table, assigned at build(). */
@@ -147,6 +193,10 @@ public final class TableRow {
 
     public boolean isChecked() {
         return checked;
+    }
+
+    public boolean isFavorited() {
+        return favorited;
     }
 
     public String clickKey() {
@@ -193,6 +243,39 @@ public final class TableRow {
                 .filter(c -> c.isCompound() && c.isExpanded())
                 .map(TableCell::expandKey)
                 .findFirst().orElse(null);
+    }
+
+    /** Row-level Alpine x-data (favoritable / inline-edit rows), or null. */
+    public String rowXData() {
+        return rowXData;
+    }
+
+    /** Alpine expression for this row's favorite state, e.g. {@code fav} or {@code fav.john}. */
+    public String favExpr() {
+        return favExpr;
+    }
+
+    /** Alpine x-model expression for this row's checkbox in tri-state selection, e.g. {@code sel.john}. */
+    public String selExpr() {
+        return selExpr;
+    }
+
+    /** Copy with the inline-edit expressions; called from Table.build(). */
+    TableRow withEditExprs(String startExpr, String saveExpr) {
+        TableRow r = copy();
+        r.editStartExpr = startExpr;
+        r.editSaveExpr = saveExpr;
+        return r;
+    }
+
+    /** Alpine expression starting an inline edit (copies values into drafts). */
+    public String editStartExpr() {
+        return editStartExpr;
+    }
+
+    /** Alpine expression committing an inline edit (copies drafts into values). */
+    public String editSaveExpr() {
+        return editSaveExpr;
     }
 
     /** aria-label for the expand toggle button. */
