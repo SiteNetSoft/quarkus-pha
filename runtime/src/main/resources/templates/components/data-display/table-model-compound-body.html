@@ -1,0 +1,44 @@
+{! One compound-expandable row group: a control row whose compound cells are their own
+   expansion toggles, followed by one detail row per compound cell. One cell per row is
+   open at a time, tracked by exp on the tbody; pf-m-animate-expand tables keep the detail
+   rows rendered and add the noAnim switch per PF. Included by table-model-content.
+   Params: table, row. !}
+<tbody class="pf-v6-c-table__tbody" x-data="{ exp: {#if row.compoundExpandedKey}'{row.compoundExpandedKey}'{#else}null{/if}{#if table.animateExpand}, noAnim: false{/if} }" :class="exp ? 'pf-m-expanded' : ''">
+  {#if table.animateExpand}
+  <tr class="pf-v6-c-table__tr pf-v6-c-table__control-row" :class="(exp ? 'pf-m-expanded ' : '') + (noAnim ? 'pf-m-no-animate-expand' : '')">
+  {#else}
+  <tr class="pf-v6-c-table__tr pf-v6-c-table__control-row" :class="exp ? 'pf-m-expanded' : ''">
+  {/if}
+    {#for cell in row.cells}
+    {#if cell.compound}
+    <td{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if} class="{cell.css}" :class="exp === '{cell.expandKey}' ? 'pf-m-expanded' : ''">
+      <button
+        type="button"
+        class="pf-v6-c-table__button"
+        :aria-expanded="exp === '{cell.expandKey}'"
+        {#if table.animateExpand}@click="noAnim = exp !== null && exp !== '{cell.expandKey}'; exp = exp === '{cell.expandKey}' ? null : '{cell.expandKey}'"{#else}@click="exp = exp === '{cell.expandKey}' ? null : '{cell.expandKey}'"{/if}
+      >
+        <span class="pf-v6-c-table__button-content"><span class="pf-v6-c-table__text">{cell.text}</span></span>
+      </button>
+    </td>
+    {#else if cell.rowHeader}
+    <th scope="row"{#if cell.css} class="{cell.css}"{/if}{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if}>{#if cell.link}<a href="{cell.href}">{cell.text}</a>{#else}{cell.text}{/if}</th>
+    {#else}
+    <td{#if cell.css} class="{cell.css}"{/if}{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if}>{#if cell.link}<a href="{cell.href}">{cell.text}</a>{#else}{cell.text}{/if}</td>
+    {/if}
+    {/for}
+  </tr>
+  {#for cell in row.cells}
+  {#if cell.compound}
+  {#if table.animateExpand}
+  <tr class="pf-v6-c-table__expandable-row" :class="exp === '{cell.expandKey}' ? 'pf-m-expanded' : ''">
+  {#else}
+  <tr class="pf-v6-c-table__expandable-row" :class="exp === '{cell.expandKey}' ? 'pf-m-expanded' : ''" x-show="exp === '{cell.expandKey}'" x-cloak>
+  {/if}
+    <td colspan="{table.compoundDetailColspan}"{#if cell.detailNoPadding} class="pf-m-no-padding"{/if}>
+      <div class="pf-v6-c-table__expandable-row-content{#if cell.detailNoBackground} pf-m-no-background{/if}">{#if cell.detailTable}{#include components/data-display/table table=cell.detailTable /}{#else}{cell.detail}{/if}</div>
+    </td>
+  </tr>
+  {/if}
+  {/for}
+</tbody>

@@ -7,7 +7,13 @@
   {#if table.nestedHeader}
   <tr class="pf-v6-c-table__tr">
     {#for col in table.columns}
-    {#if col.group}
+    {#if col.toggleColumn}
+    <td rowspan="2"></td>
+    {#else if col.checkColumn}
+    <td class="pf-v6-c-table__check" rowspan="2">
+      <input type="checkbox" name="select-all" aria-label="Select all rows" />
+    </td>
+    {#else if col.group}
     <th scope="col" colspan="{col.groupColspan}">{col.label}</th>
     {#else}
     <th scope="col" rowspan="2"{#if col.headerCss} class="{col.headerCss}"{/if}>{col.label}</th>
@@ -60,23 +66,35 @@
   </tr>
   {/if}
 </thead>
-{#if table.expandable}
+{#if table.compound}
 {#for body in table.bodies}
 {#for row in body.rows}
+{#include components/data-display/table-model-compound-body table=table row=row /}
+{/for}
+{/for}
+{#else if table.expandable}
+{#for body in table.bodies}
+{#for row in body.rows}
+{#if table.clickableBody}
+<tbody class="pf-v6-c-table__tbody pf-m-clickable" x-data="{ open: {row.detailExpanded} }" :class="(selected === '{row.clickKey}' ? 'pf-m-selected ' : '') + (open ? 'pf-m-expanded' : '')" tabindex="0" @click="selected = '{row.clickKey}'" @keydown.enter.prevent="selected = '{row.clickKey}'" @keydown.space.prevent="selected = '{row.clickKey}'">
+{#else}
 <tbody class="pf-v6-c-table__tbody" x-data="{ open: {row.detailExpanded} }" :class="open ? 'pf-m-expanded' : ''">
+{/if}
   {#include components/data-display/table-model-row table=table row=row /}
   {#if table.animateExpand}
   <tr class="pf-v6-c-table__expandable-row" :class="open ? 'pf-m-expanded' : ''">
     <td></td>
+    {#if table.hasSelection}<td></td>{/if}
     <td colspan="{table.detailColspan}"{#if row.detailNoPadding} class="pf-m-no-padding"{/if}>
-      <div class="pf-v6-c-table__expandable-row-content">{#if row.detailParagraph}<p>{row.detail}</p>{#else}{row.detail}{/if}</div>
+      <div class="pf-v6-c-table__expandable-row-content{#if row.detailNoBackground} pf-m-no-background{/if}">{#if row.detailTable}{#include components/data-display/table table=row.detailTable /}{#else if row.detailParagraph}<p>{row.detail}</p>{#else}{row.detail}{/if}</div>
     </td>
   </tr>
   {#else}
   <tr class="pf-v6-c-table__expandable-row" :class="open ? 'pf-m-expanded' : ''" x-show="open" x-cloak>
     <td></td>
+    {#if table.hasSelection}<td></td>{/if}
     <td colspan="{table.detailColspan}"{#if row.detailNoPadding} class="pf-m-no-padding"{/if}>
-      <div class="pf-v6-c-table__expandable-row-content">{#if row.detailParagraph}<p>{row.detail}</p>{#else}{row.detail}{/if}</div>
+      <div class="pf-v6-c-table__expandable-row-content{#if row.detailNoBackground} pf-m-no-background{/if}">{#if row.detailTable}{#include components/data-display/table table=row.detailTable /}{#else if row.detailParagraph}<p>{row.detail}</p>{#else}{row.detail}{/if}</div>
     </td>
   </tr>
   {/if}
