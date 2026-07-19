@@ -359,7 +359,7 @@ test.describe("Table", () => {
 
   test.describe("Compound expandable", () => {
     test("clicking a cell toggle expands its detail row", async ({ page }) => {
-      const detail = page.locator("#tbl-compound .pf-v6-c-table__expandable-row");
+      const detail = page.locator("#tbl-compound .pf-v6-c-table__expandable-row").first();
       await expect(detail).toBeHidden();
       await page.locator("#tbl-compound .pf-v6-c-table__compound-expansion-toggle button").first().click();
       await expect(detail).toBeVisible();
