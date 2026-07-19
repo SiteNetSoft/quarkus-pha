@@ -564,6 +564,81 @@ public class TableDemoData {
             .treeNode(Table.node("cache-1", "Server", "4 vCPU · us-east-1"))
             .build();
 
+    public static Table demoFavoritableTable = Table.builder()
+            .id("tbl-favorite").ariaLabel("Favoritable table")
+            .favoriteColumn()
+            .column("Name").column("Status").column("Role")
+            .row(Table.row("John Doe", "Active", "Admin").favorited())
+            .row("Jane Smith", "Inactive", "Editor")
+            .row("Bob Johnson", "Active", "Viewer")
+            .build();
+
+    public static Table demoFavoritesSortableTable = Table.builder()
+            .id("tbl-favorites-sortable").ariaLabel("Favoritable table sortable by favorites")
+            .favoriteColumn().favoritesSortable()
+            .column("Name").column("Status").column("Role")
+            .row(Table.row("John Doe", "Active", "Admin").key("john").favorited())
+            .row(Table.row("Jane Smith", "Inactive", "Editor").key("jane"))
+            .row(Table.row("Bob Johnson", "Active", "Viewer").key("bob"))
+            .build();
+
+    public static Table demoSelectIndeterminateTable = Table.builder()
+            .id("tbl-select-indeterminate").ariaLabel("Selectable table with indeterminate select-all")
+            .checkColumn().indeterminateSelection()
+            .column("Name").column("Status").column("Role")
+            .row(Table.row("John Doe", "Active", "Admin").key("john"))
+            .row(Table.row("Jane Smith", "Inactive", "Editor").key("jane").checkedRow())
+            .row(Table.row("Bob Johnson", "Active", "Viewer").key("bob"))
+            .build();
+
+    public static Table demoEmptyStateTable = Table.builder()
+            .id("tbl-empty").ariaLabel("Table with no results")
+            .column("Name").column("Status").column("Role")
+            .row(TableCell.emptyState("fa:magnifying-glass", "No results found",
+                    "No results match the filter criteria. Clear all filters and try again."))
+            .build();
+
+    public static Table demoOverflowMenuTable = Table.builder()
+            .id("tbl-overflow-menu").ariaLabel("Table with overflow menus").dataLabels()
+            .column("Job").column("Queue").column("State").actionColumn()
+            .row("nightly-report", "batch", "Idle",
+                    TableCell.overflowMenu("nightly-report actions",
+                            TableAction.primary("Start"), TableAction.secondary("Stop")))
+            .row("index-rebuild", "maintenance", "Running",
+                    TableCell.overflowMenu("index-rebuild actions",
+                            TableAction.primary("Start"), TableAction.secondary("Stop")))
+            .build();
+
+    public static Table demoTableTextTable = Table.builder()
+            .id("tbl-table-text").ariaLabel("Table text element example").gridMd()
+            .caption("Cell content wrapped in the pf-v6-c-table__text element")
+            .column("Selector").column("Result")
+            .row(TableCell.text("td.pf-m-truncate").asRowHeader().withModifier("pf-m-fit-content").asTableText(),
+                    TableCell.text("This cell contains a single table text wrapper and the cell applies pf-m-truncate, so the text truncates in table layout and stays controlled in grid layout.")
+                            .withModifier("pf-m-truncate").asTableText())
+            .row(TableCell.text("pf-v6-l-stack").asRowHeader().withModifier("pf-m-fit-content").asTableText(),
+                    TableCell.textStack(
+                            TableCell.text("Multiple elements in a cell should be wrapped with a div or a PatternFly layout so the table's grid fallback doesn't stack them unexpectedly."),
+                            TableCell.link("http://truncatemodifierappliedtoaverylongurlthatwillforcethetabletobreakluckilywehavethetabletextelement.com", "#")
+                                    .withModifier("pf-m-truncate")))
+            .build();
+
+    public static Table demoEditableTable = Table.builder()
+            .id("tbl-editable").ariaLabel("Editable table")
+            .column("Name").column("Role").inlineEditColumn("Edit")
+            .row("John Doe", "Admin")
+            .row("Jane Smith", "Editor")
+            .build();
+
+    public static Table demoDraggableTable = Table.builder()
+            .id("tbl-draggable").ariaLabel("Draggable rows table")
+            .dragColumn()
+            .column("Name").column("Status").column("Role")
+            .row("John Doe", "Active", "Admin")
+            .row("Jane Smith", "Inactive", "Editor")
+            .row("Bob Johnson", "Active", "Viewer")
+            .build();
+
     public static Table demoTextControlTable = Table.builder()
             .id("tbl-text-control").ariaLabel("Text control modifiers example").modifier("pf-m-grid-lg").dataLabels()
             .column(TableColumn.of("Truncate (width 20%)").width(20))

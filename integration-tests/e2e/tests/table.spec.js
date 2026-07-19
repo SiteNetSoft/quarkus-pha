@@ -704,7 +704,8 @@ test.describe("Table", () => {
       "compound-expandable", "borderless-compound-expandable", "animated-compound-expandable",
       "compound-expandable-nested-table", "expandable-nested-table", "nested-expandable",
       "clickable-expandable", "tree-table", "tree-table-checkboxes", "tree-table-icons",
-      "tree-table-flat",
+      "tree-table-flat", "favoritable", "favorites-sortable", "selectable-indeterminate",
+      "empty-state", "overflow-menu", "table-text", "editable-rows", "draggable-rows",
     ];
 
     test("model-driven cards get a leading Java tab, composition cards do not", async ({ page }) => {
@@ -713,8 +714,8 @@ test.describe("Table", () => {
         const card = page.locator(`[data-rendered-href="/components/table/${ex}"]`);
         await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
       }
-      const editableCard = page.locator('[data-rendered-href="/components/table/editable-rows"]');
-      await expect(editableCard.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+      const compositionCard = page.locator('[data-rendered-href="/components/table/cell-with-image-alignment"]');
+      await expect(compositionCard.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
     });
 
     test("Java tab opens Monaco with the builder code", async ({ page }) => {
