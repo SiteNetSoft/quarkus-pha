@@ -258,29 +258,31 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="data-list"} {#description}
+                      {#include partials/example-card title="Basic" slug="basic" component="data-list" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">Rows of cells inside item-content.</p>
                       {/description} {#content}{#include components/data-list/basic /}{/content} {/include} {#include
-                      partials/example-card title="With headings" slug="with-headings" component="data-list"}
-                      {#description}
+                      partials/example-card title="With headings" slug="with-headings" component="data-list"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Heading cells plus <code class="ws-code">pf-m-no-fill</code> /
                         <code class="ws-code">pf-m-align-right</code> cell modifiers.
                       </p>
                       {/description} {#content}{#include components/data-list/with-headings /}{/content} {/include}
-                      {#include partials/example-card title="Compact" slug="compact" component="data-list"}
-                      {#description}
+                      {#include partials/example-card title="Compact" slug="compact" component="data-list"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-compact</code> — tighter rows.
                       </p>
                       {/description} {#content}{#include components/data-list/compact /}{/content} {/include} {#include
-                      partials/example-card title="Plain" slug="plain" component="data-list"} {#description}
+                      partials/example-card title="Plain" slug="plain" component="data-list" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-plain</code> removes row backgrounds and borders.
                       </p>
                       {/description} {#content}{#include components/data-list/plain /}{/content} {/include} {#include
                       partials/example-card title="Checkboxes, actions and additional cells" slug="checkboxes-actions"
-                      component="data-list"} {#description}
+                      component="data-list" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">__item-control</code> checks plus
                         <code class="ws-code">__item-action</code> buttons; the third row swaps a kebab for buttons at
@@ -288,72 +290,73 @@
                       </p>
                       {/description} {#content}{#include components/data-list/checkboxes-actions /}{/content} {/include}
                       {#include partials/example-card title="Actions: single and multiple" slug="actions"
-                      component="data-list"} {#description}
+                      component="data-list" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         A lone action button and a kebab menu of actions.
                       </p>
                       {/description} {#content}{#include components/data-list/actions /}{/content} {/include} {#include
-                      partials/example-card title="Expandable" slug="expandable" component="data-list"} {#description}
+                      partials/example-card title="Expandable" slug="expandable" component="data-list" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         A toggle in the item control reveals <code class="ws-code">__expandable-content</code>.
                       </p>
                       {/description} {#content}{#include components/data-list/expandable /}{/content} {/include}
                       {#include partials/example-card title="Compact expandable" slug="compact-expandable"
-                      component="data-list"} {#description}
+                      component="data-list" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-compact</code> combined with live expandable rows.
                       </p>
                       {/description} {#content}{#include components/data-list/compact-expandable /}{/content} {/include}
                       {#include partials/example-card title="Nested expandable" slug="nested-expandable"
-                      component="data-list"} {#description}
+                      component="data-list" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         The first row’s expandable content holds a nested data list with its own toggles.
                       </p>
                       {/description} {#content}{#include components/data-list/nested-expandable /}{/content} {/include}
                       {#include partials/example-card title="Mixed expandable" slug="mixed-expandable"
-                      component="data-list"} {#description}
+                      component="data-list" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">Expandable and plain rows share one list.</p>
                       {/description} {#content}{#include components/data-list/mixed-expandable /}{/content} {/include}
                       {#include partials/example-card title="Width modifiers" slug="width-modifiers"
-                      component="data-list"} {#description}
+                      component="data-list" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-flex-2/3/4/5</code> and
                         <code class="ws-code">pf-m-no-fill</code> size individual cells.
                       </p>
                       {/description} {#content}{#include components/data-list/width-modifiers /}{/content} {/include}
-                      {#include partials/example-card title="Clickable rows" slug="clickable-rows"
-                      component="data-list"} {#description}
+                      {#include partials/example-card title="Clickable rows" slug="clickable-rows" component="data-list"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-clickable</code> rows; the active one carries
                         <code class="ws-code">pf-m-selected</code>.
                       </p>
                       {/description} {#content}{#include components/data-list/clickable-rows /}{/content} {/include}
                       {#include partials/example-card title="Clickable expandable rows" slug="clickable-expandable-rows"
-                      component="data-list"} {#description}
+                      component="data-list" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Rows select on click and expand via the toggle; both states are live.
                       </p>
                       {/description} {#content}{#include components/data-list/clickable-expandable-rows /}{/content}
                       {/include} {#include partials/example-card title="Controlling text" slug="controlling-text"
-                      component="data-list"} {#description}
+                      component="data-list" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-break-word / pf-m-truncate / pf-m-nowrap</code>.
                       </p>
                       {/description} {#content}{#include components/data-list/controlling-text /}{/content} {/include}
-                      {#include partials/example-card title="As grid" slug="as-grid" component="data-list"}
-                      {#description}
+                      {#include partials/example-card title="As grid" slug="as-grid" component="data-list"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-grid</code> stacks each row’s cells into a grid at every width.
                       </p>
                       {/description} {#content}{#include components/data-list/as-grid /}{/content} {/include} {#include
                       partials/example-card title="Small grid breakpoint" slug="sm-grid-breakpoint"
-                      component="data-list"} {#description}
+                      component="data-list" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-grid-sm</code> stacks cells below the sm breakpoint.
                       </p>
                       {/description} {#content}{#include components/data-list/sm-grid-breakpoint /}{/content} {/include}
-                      {#include partials/example-card title="With no grid" slug="no-grid" component="data-list"}
-                      {#description}
+                      {#include partials/example-card title="With no grid" slug="no-grid" component="data-list"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-grid-none</code> keeps cells on one line at every width.
                       </p>
