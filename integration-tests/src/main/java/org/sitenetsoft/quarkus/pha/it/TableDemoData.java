@@ -392,6 +392,137 @@ public class TableDemoData {
             .row("Tomás Rivera", "tomas@example.com", "555-0106", "Editor", "Junior")
             .build();
 
+    public static Table demoCompoundTable = Table.builder()
+            .id("tbl-compound").ariaLabel("Compound expandable table")
+            .column("Repository").column("Branches").column("Pull requests").column("Workspaces")
+            .row("node-1",
+                    TableCell.compound("10 branches", "branches", "10 branches across 3 teams; default is main."),
+                    TableCell.compound("5 pull requests", "prs", "5 open pull requests, 2 awaiting review."),
+                    TableCell.compound("3 workspaces", "ws", "3 active workspaces, 1 archived."))
+            .build();
+
+    public static Table demoBorderlessCompoundTable = Table.builder()
+            .id("tbl-borderless-compound").ariaLabel("Borderless compound expandable table example")
+            .borderless().gridMd()
+            .column("Registry").column("Images").column("Tags").column("Visibility")
+            .row(TableCell.text("registry.internal/platform").asRowHeader(),
+                    TableCell.compound("12 images", "images",
+                            "Most pulled: pha-runtime (2.1K/day), pha-gateway (900/day). 3 images unused for 90+ days."),
+                    TableCell.compound("48 tags", "tags",
+                            "Latest: 2.15.1, 2.15.0, 2.14.3. Untagged manifests are garbage-collected weekly."),
+                    TableCell.text("Private"))
+            .row(TableCell.text("registry.internal/sandbox").asRowHeader(),
+                    TableCell.compound("5 images", "images",
+                            "Scratch images for experiments; auto-deleted after 30 days of inactivity."),
+                    TableCell.compound("9 tags", "tags",
+                            "Tags follow the branch name; only main is retained past a week."),
+                    TableCell.text("Team"))
+            .build();
+
+    public static Table demoAnimatedCompoundTable = Table.builder()
+            .id("tbl-animated-compound").ariaLabel("Animated compound expandable table example")
+            .gridMd().modifier("pf-m-animate-expand")
+            .column("Workspace").column("Members").column("Projects").column("Last activity")
+            .row(TableCell.text("siemur/test-space").asRowHeader(),
+                    TableCell.compound("5 members", "members",
+                            "Amelia, Jordan, Priya, Sam and Tomás have access; Amelia is the owner.").expanded(),
+                    TableCell.compound("3 projects", "projects",
+                            "Projects: storefront, billing-service and design-tokens."),
+                    TableCell.text("20 minutes ago"))
+            .row(TableCell.text("siemur/staging").asRowHeader(),
+                    TableCell.compound("2 members", "members",
+                            "Jordan and Priya have access; Jordan is the owner."),
+                    TableCell.compound("1 project", "projects", "Projects: load-test-harness."),
+                    TableCell.text("2 days ago"))
+            .build();
+
+    public static Table demoCompoundNestedTable = Table.builder()
+            .id("tbl-compound-nested").ariaLabel("Compound expandable table with nested table")
+            .gridMd()
+            .column("Repository").column("Branches").column("Pull requests").column("Workspaces")
+            .row(TableCell.text("pha-runtime").asRowHeader(),
+                    TableCell.compoundTable("4 branches", "branches", branchesOf("pha-runtime",
+                            new String[] { "main", "2 hours ago", "Passing" },
+                            new String[] { "develop", "20 minutes ago", "Passing" },
+                            new String[] { "feature/icons", "3 days ago", "Failing" })).expanded(),
+                    TableCell.compound("2 pull requests", "prs", "2 pull requests currently under review.")
+                            .noPaddingDetail().noBackgroundDetail(),
+                    TableCell.text("3 workspaces"))
+            .row(TableCell.text("pha-deployment").asRowHeader(),
+                    TableCell.compoundTable("2 branches", "branches", branchesOf("pha-deployment",
+                            new String[] { "main", "1 day ago", "Passing" },
+                            new String[] { "develop", "4 hours ago", "Passing" })),
+                    TableCell.compound("1 pull request", "prs", "1 pull request currently under review.")
+                            .noPaddingDetail().noBackgroundDetail(),
+                    TableCell.text("1 workspace"))
+            .build();
+
+    private static Table branchesOf(String repo, String[]... branches) {
+        Table.Builder b = Table.builder()
+                .ariaLabel("Branches of " + repo).compact().borderless().dataLabels()
+                .column("Branch").column("Last commit").column("Status");
+        for (String[] r : branches) {
+            b.row(r[0], r[1], r[2]);
+        }
+        return b.build();
+    }
+
+    public static Table demoExpandableNestedTable = Table.builder()
+            .id("tbl-expandable-nested").ariaLabel("Expandable table with nested table")
+            .gridMd()
+            .toggleColumn()
+            .column("Deployment").column("Environment").column("Status")
+            .row(Table.row("release-2.15", "Production", "In progress")
+                    .expandsToTable(rolloutStepsFor("release-2.15",
+                            new String[] { "Database migration", "14:02", "Succeeded" },
+                            new String[] { "Canary (5% traffic)", "14:20", "Succeeded" },
+                            new String[] { "Full rollout", "—", "Running" }))
+                    .expanded()
+                    .detailAriaLabel("Toggle rollout steps for release-2.15"))
+            .row(Table.row("release-2.14", "Production", "Complete")
+                    .expandsToTable(rolloutStepsFor("release-2.14",
+                            new String[] { "Database migration", "May 28, 10:14", "Succeeded" },
+                            new String[] { "Canary (5% traffic)", "May 28, 10:31", "Succeeded" },
+                            new String[] { "Full rollout", "May 28, 11:05", "Succeeded" }))
+                    .detailAriaLabel("Toggle rollout steps for release-2.14"))
+            .build();
+
+    private static Table rolloutStepsFor(String release, String[]... steps) {
+        Table.Builder b = Table.builder()
+                .ariaLabel("Rollout steps for " + release).compact().borderless().dataLabels()
+                .column("Step").column("Finished").column("Result");
+        for (String[] r : steps) {
+            b.row(r[0], r[1], r[2]);
+        }
+        return b.build();
+    }
+
+    public static Table demoNestedExpandableTable = Table.builder()
+            .id("tbl-nested-expandable").ariaLabel("Table with nested column headers and expandable rows")
+            .toggleColumn().checkColumn()
+            .column("Name")
+            .column(TableColumn.group("Contact", "Email", "Phone"))
+            .column("Role")
+            .row(Table.row("John Doe", "john@example.com", "555-0100", "Admin")
+                    .expandsTo("Joined March 2024. Manages the platform and infrastructure teams."))
+            .row(Table.row("Jane Smith", "jane@example.com", "555-0101", "Editor")
+                    .expandsTo("Joined August 2025. Owns the editorial calendar and content review."))
+            .build();
+
+    public static Table demoClickableExpandableTable = Table.builder()
+            .id("tbl-clickable-expandable").ariaLabel("Clickable and expandable table example")
+            .gridMd()
+            .toggleColumn()
+            .clickable("staging")
+            .column("Cluster").column("Nodes").column("Status")
+            .row(Table.row("prod-us-east", "14", "Ready").key("prod")
+                    .expandsTo("Kubernetes 1.31, 14/14 nodes ready. Control plane spread across 3 zones."))
+            .row(Table.row("staging", "6", "Ready").key("staging")
+                    .expandsTo("Mirrors prod topology at reduced scale. Auto-sleeps outside business hours."))
+            .row(Table.row("dev-sandbox", "3", "Degraded").key("dev")
+                    .expandsTo("1 node cordoned for a kernel upgrade; workloads rescheduled automatically."))
+            .build();
+
     public static Table demoTextControlTable = Table.builder()
             .id("tbl-text-control").ariaLabel("Text control modifiers example").modifier("pf-m-grid-lg").dataLabels()
             .column(TableColumn.of("Truncate (width 20%)").width(20))
