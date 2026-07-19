@@ -18,7 +18,7 @@ import java.util.Objects;
 @TemplateData
 public final class TableColumn {
 
-    public enum Kind { TEXT, CHECK, TOGGLE, ACTION }
+    public enum Kind { TEXT, CHECK, TOGGLE, ACTION, FAVORITE, DRAG, INLINE_EDIT }
 
     public enum Sort { NONE, ASCENDING, DESCENDING }
 
@@ -75,6 +75,21 @@ public final class TableColumn {
     /** Leading empty column above expandable-row toggles. */
     public static TableColumn toggle() {
         return new TableColumn(Kind.TOGGLE, null, List.of(), null, Sort.NONE);
+    }
+
+    /** Leading favorite-star column ({@code pf-v6-c-table__favorite}). */
+    public static TableColumn favorite() {
+        return new TableColumn(Kind.FAVORITE, null, List.of(), null, Sort.NONE);
+    }
+
+    /** Leading drag-grip column ({@code pf-v6-c-table__draggable}). */
+    public static TableColumn drag() {
+        return new TableColumn(Kind.DRAG, null, List.of(), null, Sort.NONE);
+    }
+
+    /** Trailing inline-edit action column ({@code pf-v6-c-table__inline-edit-action}). */
+    public static TableColumn inlineEdit(String label) {
+        return new TableColumn(Kind.INLINE_EDIT, Objects.requireNonNull(label, "label"), List.of(), null, Sort.NONE);
     }
 
     /** Trailing action column ({@code pf-v6-c-table__action}); label optional. */
@@ -189,6 +204,18 @@ public final class TableColumn {
 
     public boolean isActionColumn() {
         return kind == Kind.ACTION;
+    }
+
+    public boolean isFavoriteColumn() {
+        return kind == Kind.FAVORITE;
+    }
+
+    public boolean isDragColumn() {
+        return kind == Kind.DRAG;
+    }
+
+    public boolean isInlineEditColumn() {
+        return kind == Kind.INLINE_EDIT;
     }
 
     public String label() {

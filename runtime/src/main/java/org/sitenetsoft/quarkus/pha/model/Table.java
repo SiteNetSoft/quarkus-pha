@@ -32,12 +32,14 @@ import java.util.Objects;
  *
  * <p>Coverage: density/striping/border variants, captions, footers, column
  * width/text/visibility modifiers, multiple striped bodies, sortable headers
- * (server-driven via HTMX), checkbox/radio selection, click-to-select rows
- * (and click-to-select tbodies combined with expansion), single-level
- * expandable rows (plain text or nested-table details), compound per-cell
- * expansion, sticky layouts, and nested column headers. Tree tables and
- * editable/draggable rows are not yet modeled — compose those by hand in the
- * content slot.
+ * (server-driven via HTMX), checkbox/radio selection (plus live tri-state
+ * select-all), click-to-select rows (and click-to-select tbodies combined
+ * with expansion), single-level expandable rows (plain text or nested-table
+ * details), compound per-cell expansion, sticky layouts, nested column
+ * headers, tree tables, favorites (plain and sortable), draggable rows,
+ * inline-edit rows, responsive overflow menus, table-text wrappers and
+ * empty-state bodies. Bespoke compositions (popovers in headers, toolbars,
+ * drawers, custom cell markup) stay hand-written in the content slot.
  */
 @TemplateData
 public final class Table {
@@ -71,8 +73,14 @@ public final class Table {
     private final boolean treeNoInset;
     private final String treeRootXData;
     private final String treeBodyXData;
+    private final boolean favoritesSortable;
+    private final boolean indeterminateSelect;
+    private final String rootXData;
 
     private Table(Builder b, List<TableBody> bodies) {
+        this.favoritesSortable = b.favoritesSortable;
+        this.indeterminateSelect = b.indeterminateSelect;
+        this.rootXData = b.rootXData;
         this.treeRows = List.copyOf(b.resolvedTreeRows);
         this.treeCheckboxes = b.treeCheckboxes;
         this.treeGridLg = b.treeGridLg;
@@ -210,12 +218,14 @@ public final class Table {
         return modifiers.contains("pf-m-animate-expand");
     }
 
-    /** Columns that correspond to row cells (check and toggle columns are auto-rendered;
-     * column groups flatten to their sub-columns). */
+    /** Columns that correspond to row cells (control columns — check, toggle,
+     * favorite, drag, inline-edit — are auto-rendered; column groups flatten
+     * to their sub-columns). */
     public List<TableColumn> dataColumns() {
         List<TableColumn> flat = new ArrayList<>();
         for (TableColumn c : columns) {
-            if (c.isCheckColumn() || c.isToggleColumn()) {
+            if (c.isCheckColumn() || c.isToggleColumn()
+                    || c.isFavoriteColumn() || c.isDragColumn() || c.isInlineEditColumn()) {
                 continue;
             }
             if (c.isGroup()) {
@@ -312,6 +322,36 @@ public final class Table {
         return treeBodyXData;
     }
 
+    /** True when a leading favorite-star column is declared. */
+    public boolean isFavorites() {
+        return columns.stream().anyMatch(TableColumn::isFavoriteColumn);
+    }
+
+    /** True when the favorite header is a live sort control over favorite state. */
+    public boolean isFavoritesSortable() {
+        return favoritesSortable;
+    }
+
+    /** True when rows reorder by dragging (leading grip column). */
+    public boolean isDraggableRows() {
+        return columns.stream().anyMatch(TableColumn::isDragColumn);
+    }
+
+    /** True when rows toggle between a read view and inline edit inputs. */
+    public boolean isInlineEdit() {
+        return columns.stream().anyMatch(TableColumn::isInlineEditColumn);
+    }
+
+    /** True when the select-all checkbox is a live tri-state control. */
+    public boolean isIndeterminateSelect() {
+        return indeterminateSelect;
+    }
+
+    /** Generated Alpine x-data for the table root (favorites sorting / tri-state selection), or null. */
+    public String rootXData() {
+        return rootXData;
+    }
+
     /** Number of columns a detail cell spans (the flattened data columns). */
     public int detailColspan() {
         return Math.max(1, dataColumns().size());
@@ -351,10 +391,13 @@ public final class Table {
         private boolean treeCheckboxes;
         private boolean treeGridLg;
         private boolean treeNoInset;
+        private boolean favoritesSortable;
+        private boolean indeterminateSelect;
         // resolved by build()
         private List<TableTreeNode> resolvedTreeRows = List.of();
         private String treeRootXData;
         private String treeBodyXData;
+        private String rootXData;
 
         private Builder() {
         }
@@ -497,6 +540,36 @@ public final class Table {
             return this;
         }
 
+        /** Leading favorite-star column; refine rows with {@link TableRow#favorited()}. */
+        public Builder favoriteColumn() {
+            columns.add(TableColumn.favorite());
+            return this;
+        }
+
+        /** Make the favorite header a live sort control over favorite state (rows need keys). */
+        public Builder favoritesSortable() {
+            this.favoritesSortable = true;
+            return this;
+        }
+
+        /** Leading grip column; rows reorder by dragging (native HTML5 drag). */
+        public Builder dragColumn() {
+            columns.add(TableColumn.drag());
+            return this;
+        }
+
+        /** Trailing inline-edit action column; text cells toggle to inputs with Save/Cancel. */
+        public Builder inlineEditColumn(String label) {
+            columns.add(TableColumn.inlineEdit(label));
+            return this;
+        }
+
+        /** Make the select-all checkbox a live tri-state control (rows need keys). */
+        public Builder indeterminateSelection() {
+            this.indeterminateSelect = true;
+            return this;
+        }
+
         public Builder actionColumn(String label) {
             columns.add(TableColumn.action(label));
             return this;
@@ -582,10 +655,19 @@ public final class Table {
                 }
             }
             Objects.requireNonNull(ariaLabel, "ariaLabel");
+            boolean hasFavorites = columns.stream().anyMatch(TableColumn::isFavoriteColumn);
+            boolean hasInlineEdit = columns.stream().anyMatch(TableColumn::isInlineEditColumn);
+            if (favoritesSortable && !hasFavorites) {
+                throw new IllegalStateException("favoritesSortable() requires a favoriteColumn()");
+            }
+            if (indeterminateSelect && columns.stream().noneMatch(TableColumn::isCheckColumn)) {
+                throw new IllegalStateException("indeterminateSelection() requires a checkColumn()");
+            }
 
             List<TableColumn> dataCols = new ArrayList<>();
             for (TableColumn c : columns) {
-                if (c.isCheckColumn() || c.isToggleColumn()) {
+                if (c.isCheckColumn() || c.isToggleColumn()
+                        || c.isFavoriteColumn() || c.isDragColumn() || c.isInlineEditColumn()) {
                     continue;
                 }
                 if (c.isGroup()) {
@@ -604,6 +686,7 @@ public final class Table {
             }
             boolean select = selection != Selection.NONE;
             List<TableBody> resolvedBodies = new ArrayList<>();
+            List<String> stateEntries = new ArrayList<>();
             int rowNum = 0;
             for (TableBody body : doneBodies) {
                 List<TableRow> resolvedRows = new ArrayList<>();
@@ -613,14 +696,83 @@ public final class Table {
                         throw new IllegalStateException("Row " + rowNum + " has " + row.cells().size()
                                 + " cells but the table declares only " + dataCols.size() + " data columns");
                     }
+                    String rowKey = row.clickKey() != null ? row.clickKey() : "row" + rowNum;
                     List<TableCell> resolvedCells = new ArrayList<>();
                     for (int i = 0; i < row.cells().size(); i++) {
-                        String domId = select && i == 0 && id != null ? id + "-" + rowNum : null;
-                        resolvedCells.add(row.cells().get(i).resolved(dataCols.get(i), dataLabels, domId));
+                        TableCell cell = row.cells().get(i);
+                        if (cell.isEmptyStateCell() && cell.colspan() == 1) {
+                            cell = cell.withColspan(Math.max(1, dataCols.size()));
+                        }
+                        if (hasInlineEdit && cell.isText()) {
+                            String var = camelize(dataCols.get(i).label());
+                            cell = cell.withEditBindings(var,
+                                    "d" + Character.toUpperCase(var.charAt(0)) + var.substring(1),
+                                    dataCols.get(i).label());
+                        }
+                        String domId = select && !indeterminateSelect && i == 0 && id != null
+                                ? id + "-" + rowNum : null;
+                        resolvedCells.add(cell.resolved(dataCols.get(i), dataLabels, domId));
                     }
-                    resolvedRows.add(row.resolved(rowNum, resolvedCells));
+                    String rowXData = null;
+                    String favExpr = null;
+                    String selExpr = null;
+                    if (hasFavorites && !favoritesSortable) {
+                        rowXData = "{ fav: " + row.isFavorited() + " }";
+                        favExpr = "fav";
+                    } else if (favoritesSortable) {
+                        favExpr = "fav." + rowKey;
+                        stateEntries.add(rowKey + ": " + row.isFavorited());
+                    }
+                    if (indeterminateSelect) {
+                        selExpr = "sel." + rowKey;
+                        stateEntries.add(rowKey + ": " + row.isChecked());
+                    }
+                    String editStart = null;
+                    String editSave = null;
+                    if (hasInlineEdit) {
+                        StringBuilder xd = new StringBuilder("{ editing: false");
+                        StringBuilder start = new StringBuilder();
+                        StringBuilder save = new StringBuilder();
+                        List<String> drafts = new ArrayList<>();
+                        for (TableCell cell : resolvedCells) {
+                            if (cell.editVar() != null) {
+                                xd.append(", ").append(cell.editVar()).append(": '")
+                                        .append(escapeJs(cell.text())).append("'");
+                                drafts.add(cell.editDraft());
+                                start.append(cell.editDraft()).append(" = ").append(cell.editVar()).append("; ");
+                                save.append(cell.editVar()).append(" = ").append(cell.editDraft()).append("; ");
+                            }
+                        }
+                        for (String draft : drafts) {
+                            xd.append(", ").append(draft).append(": ''");
+                        }
+                        rowXData = xd.append(" }").toString();
+                        editStart = start.append("editing = true").toString();
+                        editSave = save.append("editing = false").toString();
+                    }
+                    TableRow resolved = row.resolved(rowNum, resolvedCells);
+                    if (rowXData != null || favExpr != null || selExpr != null) {
+                        resolved = resolved.withAlpine(rowXData, favExpr, selExpr);
+                    }
+                    if (editStart != null) {
+                        resolved = resolved.withEditExprs(editStart, editSave);
+                    }
+                    resolvedRows.add(resolved.key(rowKey));
                 }
                 resolvedBodies.add(new TableBody(bodyStripe(body), resolvedRows));
+            }
+            if (favoritesSortable) {
+                rootXData = "{ fav: { " + String.join(", ", stateEntries) + " }, dir: null, "
+                        + "sortFavs() { this.dir = this.dir === 'desc' ? 'asc' : 'desc'; "
+                        + "const rows = Array.from(this.$refs.body.children); "
+                        + "rows.sort((a, b) => { const d = (this.fav[b.dataset.key] ? 1 : 0) - (this.fav[a.dataset.key] ? 1 : 0); "
+                        + "return this.dir === 'desc' ? d : -d; }); "
+                        + "rows.forEach((r) => this.$refs.body.appendChild(r)); } }";
+            } else if (indeterminateSelect) {
+                rootXData = "{ sel: { " + String.join(", ", stateEntries) + " }, "
+                        + "get allOn() { return Object.values(this.sel).every(Boolean) }, "
+                        + "get someOn() { return Object.values(this.sel).some(Boolean) }, "
+                        + "toggleAll() { const on = !this.allOn; Object.keys(this.sel).forEach((k) => { this.sel[k] = on }) } }";
             }
             if (footerRow != null) {
                 List<TableCell> cells = new ArrayList<>();
@@ -745,6 +897,29 @@ public final class Table {
                             flat, toggles, selEntries, helpers, parentCounter);
                 }
             }
+        }
+
+        /** Camel-case identifier from a column label: "Last seen" → "lastSeen". */
+        private static String camelize(String label) {
+            StringBuilder sb = new StringBuilder();
+            boolean upperNext = false;
+            for (char ch : label.toCharArray()) {
+                if (Character.isLetterOrDigit(ch)) {
+                    sb.append(upperNext && sb.length() > 0 ? Character.toUpperCase(ch) : Character.toLowerCase(ch));
+                    upperNext = false;
+                } else {
+                    upperNext = true;
+                }
+            }
+            if (sb.length() == 0) {
+                throw new IllegalStateException("Cannot derive an edit variable from column label: " + label);
+            }
+            return sb.toString();
+        }
+
+        /** Escape a value for a single-quoted JS string literal. */
+        private static String escapeJs(String value) {
+            return value.replace("\\", "\\\\").replace("'", "\\'");
         }
 
         private static TableBody.Stripe bodyStripe(TableBody body) {
