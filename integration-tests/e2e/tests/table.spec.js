@@ -699,7 +699,8 @@ test.describe("Table", () => {
       "breakpoint-modifiers", "sortable", "selectable-checkbox", "selectable-radio",
       "clickable-rows", "expandable", "compact-expandable", "borderless-expandable",
       "striped-expandable", "animated-expandable", "expandable-set-width", "actions",
-      "text-control",
+      "text-control", "sticky", "sticky-footer", "multiple-sticky-columns",
+      "sticky-right-column", "nested-column-headers", "nested-sticky-header",
     ];
 
     test("model-driven cards get a leading Java tab, composition cards do not", async ({ page }) => {
