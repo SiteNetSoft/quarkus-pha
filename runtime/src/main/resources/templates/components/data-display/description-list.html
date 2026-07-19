@@ -1,3 +1,21 @@
-{! Description list — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the list.
-                                                  fillColumns (optional) !}
+{! Description list — PatternFly v6. !}
+{! Two modes.
+   Model-driven: pass list=<org.sitenetsoft.quarkus.pha.model.DescriptionList> (built via
+     DescriptionList.builder()) — term/description groups (text, link or inline link-button
+     descriptions, optional term icons), layout modifiers in call order, card-display groups.
+   Slot shell: omit list and compose the groups in the main block.
+   Shell params (optional): id — DOM id on the root. fillColumns — pf-m-fill-columns. !}
+{#if list??}
+<dl class="pf-v6-c-description-list{list.css}"{#if list.id} id="{list.id}"{/if}{#if list.styleVars} style="{list.styleVars}"{/if}{#if list.ariaLabel} aria-label="{list.ariaLabel}"{/if}>
+  {#for group in list.groups}
+  <div class="{#if list.cardGroups}pf-v6-c-card{#else}pf-v6-c-description-list__group{/if}">
+    <dt class="pf-v6-c-description-list__term">{#if group.termIcon}<span class="pf-v6-c-description-list__term-icon">{icons:svg(group.termIcon).raw}</span>{/if}<span class="pf-v6-c-description-list__text">{group.term}</span></dt>
+    <dd class="pf-v6-c-description-list__description">
+      <div class="pf-v6-c-description-list__text">{#if group.link}<a href="{group.href}">{group.descText}</a>{#else if group.linkButton}<button class="pf-v6-c-button pf-m-link pf-m-inline" type="button"><span class="pf-v6-c-button__icon pf-m-start">{icons:svg(group.buttonIcon).raw}</span><span class="pf-v6-c-button__text">{group.descText}</span></button>{#else}{group.descText}{/if}</div>
+    </dd>
+  </div>
+  {/for}
+</dl>
+{#else}
 <dl class="pf-v6-c-description-list{#if fillColumns??} pf-m-fill-columns{/if}"{#if id??} id="{id}"{/if}>{#insert content}{/insert}</dl>
+{/if}
