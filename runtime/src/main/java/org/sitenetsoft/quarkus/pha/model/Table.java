@@ -29,12 +29,14 @@ import java.util.Objects;
  *
  * Template side: <code>{#include components/data-display/table table=table /}</code>
  *
- * <p>Batch-1 coverage: density/striping/border variants, captions, footers,
- * column width/text/visibility modifiers, multiple striped bodies, sortable
- * headers (server-driven via HTMX), checkbox/radio selection, click-to-select
- * rows, and single-level expandable rows. Tree tables, compound expansion,
- * sticky layouts, nested headers, and editable/draggable rows are not yet
- * modeled — compose those by hand in the content slot.
+ * <p>Coverage: density/striping/border variants, captions, footers, column
+ * width/text/visibility modifiers, multiple striped bodies, sortable headers
+ * (server-driven via HTMX), checkbox/radio selection, click-to-select rows
+ * (and click-to-select tbodies combined with expansion), single-level
+ * expandable rows (plain text or nested-table details), compound per-cell
+ * expansion, sticky layouts, and nested column headers. Tree tables and
+ * editable/draggable rows are not yet modeled — compose those by hand in the
+ * content slot.
  */
 @TemplateData
 public final class Table {
@@ -164,9 +166,25 @@ public final class Table {
         return sortEndpoint;
     }
 
-    /** True when any row carries expandable detail content. */
+    /** True when any row expands — row-level detail rows or compound cells ({@code pf-m-expandable}). */
     public boolean isExpandable() {
-        return bodies.stream().flatMap(b -> b.rows().stream()).anyMatch(TableRow::isExpandable);
+        return bodies.stream().flatMap(b -> b.rows().stream())
+                .anyMatch(r -> r.isExpandable() || r.isCompound());
+    }
+
+    /** True when any row uses compound per-cell expansion toggles. */
+    public boolean isCompound() {
+        return bodies.stream().flatMap(b -> b.rows().stream()).anyMatch(TableRow::isCompound);
+    }
+
+    /** Clickable selection carried per row (non-expandable tables). */
+    public boolean isClickableRow() {
+        return clickable && !isExpandable();
+    }
+
+    /** Clickable selection carried per tbody (expandable tables select the whole row group). */
+    public boolean isClickableBody() {
+        return clickable && isExpandable();
     }
 
     /** True when {@code pf-m-animate-expand} is among the modifiers (detail rows stay rendered). */
@@ -227,9 +245,14 @@ public final class Table {
         return selection != Selection.NONE;
     }
 
-    /** Number of columns a detail cell spans (all columns minus the toggle column). */
+    /** Number of columns a detail cell spans (the flattened data columns). */
     public int detailColspan() {
-        return Math.max(1, columns.size() - 1);
+        return Math.max(1, dataColumns().size());
+    }
+
+    /** Number of columns a compound detail cell spans (data columns plus a selection column). */
+    public int compoundDetailColspan() {
+        return Math.max(1, dataColumns().size() + (hasSelection() ? 1 : 0));
     }
 
     public static final class Builder {
@@ -441,6 +464,23 @@ public final class Table {
             if (anyDetail && !hasToggle) {
                 throw new IllegalStateException(
                         "Expandable rows need a leading toggleColumn() in the header");
+            }
+            for (TableBody body : doneBodies) {
+                for (TableRow row : body.rows()) {
+                    if (!row.isCompound()) {
+                        continue;
+                    }
+                    if (row.isExpandable()) {
+                        throw new IllegalStateException(
+                                "A row cannot combine compound cells with row-level detail content");
+                    }
+                    long open = row.cells().stream()
+                            .filter(c -> c.isCompound() && c.isExpanded()).count();
+                    if (open > 1) {
+                        throw new IllegalStateException(
+                                "At most one compound cell per row may start expanded");
+                    }
+                }
             }
             Objects.requireNonNull(ariaLabel, "ariaLabel");
 
