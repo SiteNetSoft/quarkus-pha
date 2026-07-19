@@ -13,3 +13,11 @@
 .pf-v6-svg {
   overflow: visible;
 }
+
+/* patternfly.org's all-components landing page ships this in a per-page Gatsby CSS
+   chunk (css/components/all-components/landing-pages/index.*.css) that the docs-bundle
+   export doesn't contain: without it the sticky search toolbar sits flush against the
+   component gallery below it. Verified against the live site 2026-07-18. */
+.ws-section-gallery .pf-v6-c-toolbar {
+  margin-block-end: var(--pf-t--global--spacer--md);
+}
