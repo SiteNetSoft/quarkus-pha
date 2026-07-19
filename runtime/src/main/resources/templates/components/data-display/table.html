@@ -1,6 +1,16 @@
-{! Table — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the table.
-                                        compact (optional), gridMd (optional), striped (optional), borderless (optional), expandable (optional), ariaLabel (optional),
-                                        modifiers (optional) — extra pf-m-* classes appended verbatim (e.g. "pf-m-plain", "pf-m-animate-expand") !}
+{! Table — PatternFly v6 !}
+{! Two modes.
+   Model-driven: pass table=<org.sitenetsoft.quarkus.pha.model.Table> (built via Table.builder()) —
+     caption, header (incl. sort buttons / selection / toggles), bodies, action cells and footer all
+     render from the model.
+   Slot shell: omit table and supply thead/tbody markup yourself through the content slot.
+     Shell params (all optional): id; compact; gridMd; striped; borderless; expandable; ariaLabel;
+     modifiers — extra pf-m-* classes appended verbatim (e.g. "pf-m-plain", "pf-m-animate-expand"). !}
+{#if table??}
+<table class="pf-v6-c-table{#if table.compact} pf-m-compact{/if}{#if table.gridMd} pf-m-grid-md{/if}{#if table.striped} pf-m-striped{/if}{#if table.borderless} pf-m-no-border-rows{/if}{#if table.expandable} pf-m-expandable{/if}{table.extraModifiers}" role="grid"{#if table.id} id="{table.id}"{/if} aria-label="{table.ariaLabel}">
+  {#include components/data-display/table-model-content table=table /}
+</table>
+{#else}
 <table
   class="pf-v6-c-table{#if compact??} pf-m-compact{/if}{#if gridMd??} pf-m-grid-md{/if}{#if striped??} pf-m-striped{/if}{#if borderless??} pf-m-no-border-rows{/if}{#if expandable??} pf-m-expandable{/if}{#if modifiers??} {modifiers}{/if}"
   role="grid"
@@ -9,3 +19,4 @@
 >
   {#insert content}{/insert}
 </table>
+{/if}
