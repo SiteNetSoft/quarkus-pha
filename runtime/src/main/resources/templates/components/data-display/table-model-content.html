@@ -66,7 +66,13 @@
   </tr>
   {/if}
 </thead>
-{#if table.compound}
+{#if table.treeView}
+<tbody class="pf-v6-c-table__tbody"{#if table.treeBodyXData} x-data="{table.treeBodyXData}"{/if}>
+  {#for node in table.treeRows}
+  {#include components/data-display/table-model-tree-row table=table node=node /}
+  {/for}
+</tbody>
+{#else if table.compound}
 {#for body in table.bodies}
 {#for row in body.rows}
 {#include components/data-display/table-model-compound-body table=table row=row /}
