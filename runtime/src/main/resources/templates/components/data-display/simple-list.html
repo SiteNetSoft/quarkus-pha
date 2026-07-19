@@ -1,2 +1,30 @@
-{! Simple list — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the list. !}
+{! Simple list — PatternFly v6. !}
+{! Two modes.
+   Model-driven: pass list=<org.sitenetsoft.quarkus.pha.model.SimpleList> (built via SimpleList.builder()) —
+     flat or titled-section lists of anchor/button items, incl. click-to-select Alpine wiring.
+   Slot shell: omit list and compose the markup in the main block.
+   Shell params: id (optional) — DOM id on the root. !}
+{#if list??}
+<div class="pf-v6-c-simple-list"{#if list.id} id="{list.id}"{/if}{#if list.selectable} x-data="{ sel: {list.initialKey} }"{/if}>
+  {#if list.grouped}
+  {#for section in list.sections}
+  <section class="pf-v6-c-simple-list__section">
+    <h2 class="pf-v6-c-simple-list__title">{section.title}</h2>
+    <ul class="pf-v6-c-simple-list__list" role="list">
+      {#for item in section.items}
+      {#include components/data-display/simple-list-model-item list=list item=item /}
+      {/for}
+    </ul>
+  </section>
+  {/for}
+  {#else}
+  <ul class="pf-v6-c-simple-list__list" role="list">
+    {#for item in list.items}
+    {#include components/data-display/simple-list-model-item list=list item=item /}
+    {/for}
+  </ul>
+  {/if}
+</div>
+{#else}
 <div class="pf-v6-c-simple-list"{#if id??} id="{id}"{/if}>{#insert content}{/insert}</div>
+{/if}
