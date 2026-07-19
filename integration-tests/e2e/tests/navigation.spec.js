@@ -135,6 +135,47 @@ test.describe("Navigation", () => {
     });
   });
 
+  test.describe("Model-generated markup", () => {
+    test("expandable toggle ids derive from the nav id in document order", async ({ page }) => {
+      await expect(page.locator("#nav-expandable-toggle-1")).toBeAttached();
+      await expect(page.locator("#nav-expandable-toggle-2")).toBeAttached();
+      await expect(page.locator("#nav-expandable-third-level-toggle-1")).toBeAttached();
+      await expect(page.locator("#nav-expandable-third-level-toggle-2")).toBeAttached();
+    });
+
+    test("grouped section titles come from the model", async ({ page }) => {
+      const titles = page.locator("#nav-grouped .pf-v6-c-nav__section-title");
+      await expect(titles.nth(0)).toHaveText("Workspace");
+      await expect(titles.nth(1)).toHaveText("Account");
+    });
+  });
+
+  test.describe("Java source tab", () => {
+    test("every example card has a leading Java tab", async ({ page }) => {
+      for (const example of EXAMPLES) {
+        const card = page.locator(`[data-rendered-href="/components/navigation/${example}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+        const firstControl = card.locator(".pf-v6-c-code-editor__controls button").first();
+        await expect(firstControl).toHaveAttribute("aria-label", /Toggle Java/);
+      }
+    });
+
+    test("Java tab opens Monaco with the builder code", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/navigation/vertical"]');
+      await card.locator('button[aria-label*="Toggle Java"]').click();
+      await expect(card.locator(".monaco-editor").first()).toBeVisible({ timeout: 10000 });
+      await expect(card.locator(".monaco-editor .view-lines")).toContainText("Nav.builder()", { timeout: 10000 });
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/navigation/source-java/grouped");
+      expect(res.status()).toBe(200);
+      const body = await res.text();
+      expect(body).toContain('.group("Workspace"');
+      expect(body).toContain("Nav.builder()");
+    });
+  });
+
   test.describe("Standalone routes", () => {
     for (const example of EXAMPLES) {
       test(`/components/navigation/${example} returns 200`, async ({ page }) => {

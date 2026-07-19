@@ -1,28 +1,3 @@
-<nav class="pf-v6-c-nav" id="nav-mixed" aria-label="Mixed navigation" style="max-width: 280px">
-  <ul class="pf-v6-c-nav__list">
-    <li class="pf-v6-c-nav__item">
-      <a href="#" class="pf-v6-c-nav__link pf-m-current" aria-current="page">Link 1 (not expandable)</a>
-    </li>
-    <li class="pf-v6-c-nav__item" x-data="{ open: false }" :class="{ 'pf-m-expanded': open }">
-      <button
-        class="pf-v6-c-nav__link"
-        id="nav-mixed-toggle-1"
-        aria-expanded="false"
-        :aria-expanded="open.toString()"
-        @click="open = !open"
-      >
-        <span class="pf-v6-c-nav__link-text">Link 2 (expandable)</span>
-        <span class="pf-v6-c-nav__toggle">
-          <span class="pf-v6-c-nav__toggle-icon">{icons:svg('fa:angle-down').raw}</span>
-        </span>
-      </button>
-      <section class="pf-v6-c-nav__subnav" aria-labelledby="nav-mixed-toggle-1" hidden inert :hidden="!open" :inert="!open">
-        <ul class="pf-v6-c-nav__list">
-          <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link">Subnav link 1</a></li>
-          <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link">Subnav link 2</a></li>
-        </ul>
-      </section>
-    </li>
-    <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link">Link 3 (not expandable)</a></li>
-  </ul>
-</nav>
+{! Plain links and expandable items in one list, populated from
+   GlobalTemplateData.demoMixedNav (see the Java tab). !}
+<div style="max-width: 280px">{#include components/navigation/nav nav=demoMixedNav /}</div>
