@@ -1,12 +1,24 @@
-{! Data list — PatternFly v6. Root of the data-list family; compose data-list-item
-   includes in the main block. !}
-{! Optional params:
+{! Data list — PatternFly v6. !}
+{! Two modes.
+   Model-driven: pass list=<org.sitenetsoft.quarkus.pha.model.DataList> (built via DataList.builder()) —
+     rows, cells, checkboxes, expand toggles, actions and click-selection all render from the model.
+   Slot shell: omit list and compose data-list-item includes in the main block. !}
+{! Shell params (all optional):
      id        — DOM id on the root.
      ariaLabel — labels the list for AT.
      compact   — pf-m-compact.   plain — pf-m-plain.
      gridBreakpoint — grid modifier suffix, e.g. "sm" renders pf-m-grid-sm.
      modifiers — extra pf-m-* classes (e.g. pf-m-grid / pf-m-grid-none).
      attrs     — raw attribute passthrough on the root. !}
+{#if list??}
+{#if list.clickable}<div x-data="{ sel: {list.initialKey} }">{/if}
+<ul class="pf-v6-c-data-list{#if list.compact} pf-m-compact{/if}{#if list.plain} pf-m-plain{/if}{#if list.gridBreakpoint} pf-m-grid-{list.gridBreakpoint}{/if}{list.extraModifiers}" role="list"{#if list.id} id="{list.id}"{/if} aria-label="{list.ariaLabel}">
+  {#for item in list.items}
+  {#include components/data-display/data-list-model-item list=list item=item /}
+  {/for}
+</ul>
+{#if list.clickable}</div>{/if}
+{#else}
 <ul
   class="pf-v6-c-data-list{#if compact??} pf-m-compact{/if}{#if plain??} pf-m-plain{/if}{#if gridBreakpoint??} pf-m-grid-{gridBreakpoint}{/if}{#if modifiers??} {modifiers}{/if}"
   role="list"
@@ -14,5 +26,8 @@
   {#if ariaLabel??}aria-label="{ariaLabel}"{/if}
   {#if attrs??}{attrs.raw}{/if}
 >
-  {#let dataListId=id id=null attrs=null}{#insert /}{/let}
+  {! modifiers is also nulled — nested cell/action includes take their own modifiers param
+     and would otherwise inherit the root's (Qute includes inherit ALL parent data). !}
+  {#let dataListId=id id=null attrs=null modifiers=null}{#insert /}{/let}
 </ul>
+{/if}

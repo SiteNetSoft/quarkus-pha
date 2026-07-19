@@ -1,0 +1,69 @@
+{! One model-driven data-list row: control area (expand toggle or checkbox), the cells,
+   trailing action areas (buttons / kebab / responsive pair) and the expandable content
+   (plain text or a nested model-driven data list, included recursively). Clickable lists
+   read/write the wrapper's `sel` state; item keys are verbatim JS literals. Included by
+   data-list. Params: list, item. !}
+<li class="pf-v6-c-data-list__item{#if list.clickable} pf-m-clickable{/if}"{#if list.clickable} tabindex="0"{/if}{#if item.expandable} x-data="{ open: {item.startOpen} }"{/if}{#if item.expandable && list.clickable} :class="(open ? 'pf-m-expanded ' : '') + ((sel === {item.key}) ? 'pf-m-selected' : '')"{#else if item.expandable} :class="open ? 'pf-m-expanded' : ''"{#else if list.clickable} :class="(sel === {item.key}) ? 'pf-m-selected' : ''"{/if}{#if list.clickable} @click="sel = {item.key}" @keydown.enter="sel = {item.key}"{/if}>
+  <div class="pf-v6-c-data-list__item-row">
+    {#if item.expandable || item.checkbox}
+    <div class="pf-v6-c-data-list__item-control">
+      {#if item.expandable}
+      <div class="pf-v6-c-data-list__toggle">
+        <button
+          class="pf-v6-c-button pf-m-plain"
+          type="button"
+          aria-label="{item.toggleAriaLabel}"
+          :aria-expanded="open.toString()"
+          @click.stop="open = !open"
+        >
+          <span class="pf-v6-c-button__icon"><span class="pf-v6-c-data-list__toggle-icon">{icons:svg('fa:angle-right').raw}</span></span>
+        </button>
+      </div>
+      {#else}
+      <div class="pf-v6-c-data-list__check"><input type="checkbox" id="{item.checkId}" aria-label="Select row" /></div>
+      {/if}
+    </div>
+    {/if}
+    <div class="pf-v6-c-data-list__item-content">
+      {#for cell in item.cells}
+      <div class="pf-v6-c-data-list__cell{#if cell.css} {cell.css}{/if}"{#if cell.domId} id="{cell.domId}"{/if}>{#if cell.icon}{icons:svg(cell.iconName).raw}{#else if cell.heading}<h4 class="pf-v6-c-content--h4">{cell.text}</h4>{#else if cell.title}<strong>{cell.text}</strong>{#if cell.description}
+  <div class="pf-v6-u-color-200">{cell.description}</div>{/if}{#else}{cell.text}{/if}</div>
+      {/for}
+    </div>
+    {#for area in item.actionAreas}
+    {#if area.kebab}
+    <div class="pf-v6-c-data-list__item-action{#if area.css} {area.css}{/if}" x-data="{ open: false }" style="position: relative">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="{area.ariaLabel}" :aria-expanded="open.toString()" @click="open = !open">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:ellipsis-vertical').raw}</span>
+      </button>
+      {! div-based menu structure — a ul/li menu nested inside the data-list's role="list"
+         tree trips the html-validator's li-role rule, and the styling is class-driven anyway. !}
+      <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; right: 0; z-index: 200; min-width: 10rem">
+        <div class="pf-v6-c-menu__content">
+          <div class="pf-v6-c-menu__list" role="menu">
+            {#for action in area.actions}
+            <div class="pf-v6-c-menu__list-item{#if action.danger} pf-m-danger{/if}">
+              <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false">
+                <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">{action.label}</span></span>
+              </button>
+            </div>
+            {/for}
+          </div>
+        </div>
+      </div>
+    </div>
+    {#else}
+    <div class="pf-v6-c-data-list__item-action{#if area.css} {area.css}{/if}">
+      {#for action in area.actions}
+      <button class="pf-v6-c-button {action.overflowButtonClasses}" type="button"><span class="pf-v6-c-button__text">{action.label}</span></button>
+      {/for}
+    </div>
+    {/if}
+    {/for}
+  </div>
+  {#if item.expandable}
+  <div class="pf-v6-c-data-list__expandable-content" x-show="open" x-cloak>
+    <div class="pf-v6-c-data-list__expandable-content-body">{#if item.detailList}{#include components/data-display/data-list list=item.detailList /}{#else}{item.detail}{/if}</div>
+  </div>
+  {/if}
+</li>
