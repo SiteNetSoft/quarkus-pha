@@ -1,18 +1,3 @@
 {! PatternFly's default empty-state example: icon + title + body + a footer with two
-   EmptyStateActions groups — the primary action, then a row of link buttons. One {#actions}
-   block holds both __actions groups (Qute allows only one block per insert name). !}
-{#include components/feedback/empty-state iconName="fa:cubes" titleText="Empty state" bodyText="This represents the empty state pattern in PatternFly. Hopefully it's simple enough to use but flexible enough to meet a variety of needs." hasActions=true}
-{#actions}
-<div class="pf-v6-c-empty-state__actions">
-  {#include components/actions/button variant="primary"}{#content}Primary action{/content}{/include}
-</div>
-<div class="pf-v6-c-empty-state__actions">
-  {#include components/actions/button variant="link"}{#content}Multiple{/content}{/include}
-  {#include components/actions/button variant="link"}{#content}Action buttons{/content}{/include}
-  {#include components/actions/button variant="link"}{#content}Can{/content}{/include}
-  {#include components/actions/button variant="link"}{#content}Go here{/content}{/include}
-  {#include components/actions/button variant="link"}{#content}In the second{/content}{/include}
-  {#include components/actions/button variant="link"}{#content}Action area{/content}{/include}
-</div>
-{/actions}
-{/include}
+   action groups — the primary action, then a row of link buttons. !}
+{#include components/feedback/empty-state emptyState=demoEmptyBasic /}

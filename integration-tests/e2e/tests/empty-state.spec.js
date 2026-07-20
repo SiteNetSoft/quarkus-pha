@@ -97,4 +97,19 @@ test.describe("Empty state", () => {
     await expect(actions.locator(".pf-v6-c-button.pf-m-secondary")).toHaveText("Import existing");
     await expect(actions.locator(".pf-v6-c-button.pf-m-link")).toHaveText(["Browse templates", "Learn more"]);
   });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/empty-state");
+      for (const ex of ["basic", "spinner", "with-actions"]) {
+        const card = page.locator(`[data-rendered-href="/components/empty-state/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/empty-state/source-java/with-actions");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('Button.of("Import existing").variant("secondary")');
+    });
+  });
 });

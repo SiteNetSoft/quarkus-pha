@@ -1,9 +1,3 @@
 {! PatternFly "no match found" empty state — a search icon, a no-results headline, body copy,
-   and a single clear-filters link action. Built from the plain template (iconName + hasActions). !}
-{#include components/feedback/empty-state iconName="fa:magnifying-glass" titleText="No results found" bodyText="No results match the filter criteria. Clear all filters and try again." hasActions=true}
-{#actions}
-<div class="pf-v6-c-empty-state__actions">
-  {#include components/actions/button variant="link"}{#content}Clear all filters{/content}{/include}
-</div>
-{/actions}
-{/include}
+   and a single clear-filters link action. !}
+{#include components/feedback/empty-state emptyState=demoEmptyNoMatch /}
