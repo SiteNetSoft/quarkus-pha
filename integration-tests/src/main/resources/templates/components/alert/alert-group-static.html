@@ -1,11 +1,4 @@
+{! Populated from the Java model AlertDemoData.demoAlertGroupStatic (see the Java tab). !}
 <ul class="pf-v6-c-alert-group" id="al-group-static">
-  <li class="pf-v6-c-alert-group__item">
-    {#include components/feedback/alert id="al-group-static-1" variant="success" inline=true title="Success alert" /}
-  </li>
-  <li class="pf-v6-c-alert-group__item">
-    {#include components/feedback/alert id="al-group-static-2" variant="info" inline=true title="Info alert" /}
-  </li>
-  <li class="pf-v6-c-alert-group__item">
-    {#include components/feedback/alert id="al-group-static-3" variant="warning" inline=true title="Warning alert" /}
-  </li>
+  {#for a in demoAlertGroupStatic}<li class="pf-v6-c-alert-group__item">{#include components/feedback/alert alert=a /}</li>{/for}
 </ul>

@@ -1,5 +1,4 @@
+{! Populated from the Java model AlertDemoData.demoAlertsPlainInline (see the Java tab). !}
 <div style="display: flex; flex-direction: column; gap: 0.5rem">
-  {#include components/feedback/alert id="al-plain-info" variant="info" inline=true plain=true title="Plain inline info alert" /}
-  {#include components/feedback/alert id="al-plain-success" variant="success" inline=true plain=true title="Plain inline success alert" /}
-  {#include components/feedback/alert id="al-plain-danger" variant="danger" inline=true plain=true title="Plain inline danger alert" /}
+  {#for a in demoAlertsPlainInline}{#include components/feedback/alert alert=a /}{/for}
 </div>
