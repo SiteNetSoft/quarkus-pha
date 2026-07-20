@@ -45,9 +45,7 @@ test.describe("Content", () => {
   });
 
   test("body example renders p, small, blockquote, pre with matching classes", async ({ page }) => {
-    const preview = page
-      .locator('[data-source-href="/components/content/source/body"]')
-      .locator(".ws-preview-html");
+    const preview = page.locator('[data-source-href="/components/content/source/body"]').locator(".ws-preview-html");
     await expect(preview.locator("p.pf-v6-c-content--p")).toBeVisible();
     await expect(preview.locator("small.pf-v6-c-content--small")).toBeVisible();
     await expect(preview.locator("blockquote.pf-v6-c-content--blockquote")).toBeVisible();
@@ -102,5 +100,20 @@ test.describe("Content", () => {
       const res = await page.goto(`/components/content/${slug}`);
       expect(res.status()).toBe(200);
     }
+  });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/content");
+      for (const ex of ["body", "content-as-a-wrapper", "plain-list"]) {
+        const card = page.locator(`[data-rendered-href="/components/content/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/content/source-java/link-and-visited-link");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.href("#visited").visited()');
+    });
   });
 });
