@@ -5,6 +5,13 @@
               inline (boolean — pf-m-inline, renders inline with surrounding text),
               tooltip (string — shown via the title attribute on hover) !}
 {! Date / time formatting is a server-side concern — pre-format the string in your route. !}
+{! Model mode: pass timestamp=<org.sitenetsoft.quarkus.pha.model.Timestamp> — the model's text replaces the content slot. !}
+{#if timestamp??}
+<time class="pf-v6-c-timestamp{#if timestamp.isInline} pf-m-inline{/if}"{#if timestamp.id??} id="{timestamp.id}"{/if}{#if timestamp.datetime??} datetime="{timestamp.datetime}"{/if}{#if timestamp.tooltip??} title="{timestamp.tooltip}"{/if}>
+  <span class="pf-v6-c-timestamp__text">{timestamp.text}</span>
+</time>
+{#else}
 <time class="pf-v6-c-timestamp{#if inline??} pf-m-inline{/if}"{#if id??} id="{id}"{/if}{#if datetime??} datetime="{datetime}"{/if}{#if tooltip??} title="{tooltip}"{/if}>
   <span class="pf-v6-c-timestamp__text">{#insert/}</span>
 </time>
+{/if}
