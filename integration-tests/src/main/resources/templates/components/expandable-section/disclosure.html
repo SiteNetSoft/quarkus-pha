@@ -1,7 +1,2 @@
-<div class="pf-v6-c-expandable-section pf-m-display-lg pf-m-limit-width" id="es-disclosure" x-data="{ expanded: false }" :class="{ 'pf-m-expanded': expanded }">
-  <button class="pf-v6-c-expandable-section__toggle" type="button" :aria-expanded="expanded" @click="expanded = !expanded">
-    <span class="pf-v6-c-expandable-section__toggle-icon">{icons:svg('fa:angle-right').raw}</span>
-    <span>Disclosure variation</span>
-  </button>
-  <div class="pf-v6-c-expandable-section__content" x-show="expanded" x-cloak><p>The disclosure variation uses the large display size with a width limit.</p></div>
-</div>
+{! Populated from the Java model ExpandableSectionDemoData.demoEsDisclosure (see the Java tab). !}
+{#include components/data-display/expandable-section section=demoEsDisclosure /}

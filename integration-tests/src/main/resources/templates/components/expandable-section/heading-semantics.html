@@ -1,11 +1,2 @@
-<div class="pf-v6-c-expandable-section" id="es-heading-semantics" x-data="{ expanded: false }" :class="{ 'pf-m-expanded': expanded }">
-  <h2 style="margin: 0">
-    <button class="pf-v6-c-expandable-section__toggle" type="button" :aria-expanded="expanded" @click="expanded = !expanded">
-    <span class="pf-v6-c-expandable-section__toggle-icon">{icons:svg('fa:angle-right').raw}</span>
-    <span>Section wrapped in an h2</span>
-    </button>
-  </h2>
-  <div class="pf-v6-c-expandable-section__content" x-show="expanded" x-cloak>
-    <p>The toggle sits inside a real heading element so the section lands in the page outline.</p>
-  </div>
-</div>
+{! Populated from the Java model ExpandableSectionDemoData.demoEsHeadingSemantics (see the Java tab). !}
+{#include components/data-display/expandable-section section=demoEsHeadingSemantics /}

@@ -74,4 +74,21 @@ test.describe("Expandable section", () => {
       });
     }
   });
+  test.describe("Java source tab", () => {
+    test("model-driven cards get a leading Java tab; custom-toggle does not", async ({ page }) => {
+      await page.goto("/components/expandable-section");
+      for (const ex of ["collapsed", "truncate-expansion", "heading-semantics"]) {
+        const card = page.locator(`[data-rendered-href="/components/expandable-section/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      const handWritten = page.locator('[data-rendered-href="/components/expandable-section/custom-toggle"]');
+      await expect(handWritten.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/expandable-section/source-java/truncate-expansion");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain(".asTruncate()");
+    });
+  });
 });
