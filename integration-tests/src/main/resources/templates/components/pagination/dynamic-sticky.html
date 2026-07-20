@@ -1,11 +1,12 @@
 {! Our interactive extra — a checkbox toggles pf-m-sticky live on the root. !}
+{! Populated from the Java model PaginationDemoData.demoPgDynamicSticky (see the Java tab). !}
 <div x-data="{ sticky: true }">
   <div class="pf-v6-c-check" style="margin-bottom: 0.5rem">
     <input class="pf-v6-c-check__input" type="checkbox" id="pg-dynamic-sticky-check" x-model="sticky" />
     <label class="pf-v6-c-check__label" for="pg-dynamic-sticky-check">Pagination is sticky</label>
   </div>
   <div style="height: 220px; overflow-y: auto; border: 1px solid var(--pf-t--global--border--color--default)" tabindex="0">
-    {#include components/pagination/_pagination-flavor id="pg-dynamic-sticky" navLabel="Pagination nav - dynamic sticky example" stickyDynamic="toggle" /}
+    {#include components/navigation/pagination pagination=demoPgDynamicSticky /}
     <p style="padding: 0.5rem 1rem">Row 1</p>
     <p style="padding: 0.5rem 1rem">Row 2</p>
     <p style="padding: 0.5rem 1rem">Row 3</p>
