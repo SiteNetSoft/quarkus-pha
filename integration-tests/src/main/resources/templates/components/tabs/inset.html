@@ -1,12 +1,3 @@
-{! Responsive insets — pf-m-inset-*-on-* breakpoint modifiers, mirroring PF core's
-   "Default tab insets" example. Single-value insets use the inset= param instead. !}
-<div x-data="{ active: 'i1' }">
-  {#include components/navigation/tabs id="tabs-inset" modifiers="pf-m-inset-sm-on-md pf-m-inset-lg-on-lg pf-m-inset-2xl-on-xl" ariaLabel="Tabs with adjusted inset"}{#content}
-  {#include components/navigation/tab tabKey="i1" text="Users" /}
-  {#include components/navigation/tab tabKey="i2" text="Containers" /}
-  {#include components/navigation/tab tabKey="i3" text="Database" /}
-  {/content}{/include}
-  {#include components/navigation/tab-content tabKey="i1"}Users panel content{/include}
-  {#include components/navigation/tab-content tabKey="i2" cloak=true}Containers panel content{/include}
-  {#include components/navigation/tab-content tabKey="i3" cloak=true}Database panel content{/include}
-</div>
+{! Responsive insets — pf-m-inset-*-on-* breakpoint modifiers. !}
+{! Populated from the Java model TabsDemoData.demoTabsInset (see the Java tab). !}
+{#include components/navigation/tabs tabs=demoTabsInset /}

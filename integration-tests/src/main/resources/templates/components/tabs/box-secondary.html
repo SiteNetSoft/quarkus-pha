@@ -1,11 +1,3 @@
-{! Box + secondary nested tabs. Composed from tab + tab-content. !}
-<div x-data="{ active: 's1' }">
-  {#include components/navigation/tabs id="tabs-box-secondary" box=true secondary=true ariaLabel="Box secondary tabs"}{#content}
-  {#include components/navigation/tab tabKey="s1" text="Users" /}
-  {#include components/navigation/tab tabKey="s2" text="Containers" /}
-  {#include components/navigation/tab tabKey="s3" text="Database" /}
-  {/content}{/include}
-  {#include components/navigation/tab-content tabKey="s1"}Users panel content{/include}
-  {#include components/navigation/tab-content tabKey="s2" cloak=true}Containers panel content{/include}
-  {#include components/navigation/tab-content tabKey="s3" cloak=true}Database panel content{/include}
-</div>
+{! Box + secondary nested tabs. !}
+{! Populated from the Java model TabsDemoData.demoTabsBoxSecondary (see the Java tab). !}
+{#include components/navigation/tabs tabs=demoTabsBoxSecondary /}

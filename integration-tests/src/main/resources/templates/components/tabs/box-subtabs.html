@@ -1,34 +1,8 @@
 {! Box tabs with a secondary pf-m-subtab row. The main row is boxed; the subtab row stays plain. !}
+{! Populated from the Java models TabsDemoData.demoTabsBoxSubtabsMain + demoTabsBoxSubtabsSecondary (see the Java tab). !}
 <div x-data="{ active: 't1', sub: 's1' }">
-  {#include components/navigation/tabs id="tabs-box-subtabs-main" box=true ariaLabel="Main box tabs"}{#content}
-  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 't1' ? 'pf-m-current' : ''">
-    <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 't1'" :tabindex="active === 't1' ? 0 : -1" @click="active = 't1'">
-      <span class="pf-v6-c-tabs__item-text">Users</span>
-    </button>
-  </li>
-  <li role="presentation" class="pf-v6-c-tabs__item" :class="active === 't2' ? 'pf-m-current' : ''">
-    <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="active === 't2'" :tabindex="active === 't2' ? 0 : -1" @click="active = 't2'">
-      <span class="pf-v6-c-tabs__item-text">Containers</span>
-    </button>
-  </li>
-  {/content}{/include}
-  {#include components/navigation/tabs id="tabs-box-subtabs-secondary" subtab=true ariaLabel="Secondary tabs"}{#content}
-  <li role="presentation" class="pf-v6-c-tabs__item" :class="sub === 's1' ? 'pf-m-current' : ''">
-    <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="sub === 's1'" :tabindex="sub === 's1' ? 0 : -1" @click="sub = 's1'">
-      <span class="pf-v6-c-tabs__item-text">Active</span>
-    </button>
-  </li>
-  <li role="presentation" class="pf-v6-c-tabs__item" :class="sub === 's2' ? 'pf-m-current' : ''">
-    <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="sub === 's2'" :tabindex="sub === 's2' ? 0 : -1" @click="sub = 's2'">
-      <span class="pf-v6-c-tabs__item-text">Disabled</span>
-    </button>
-  </li>
-  <li role="presentation" class="pf-v6-c-tabs__item" :class="sub === 's3' ? 'pf-m-current' : ''">
-    <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="sub === 's3'" :tabindex="sub === 's3' ? 0 : -1" @click="sub = 's3'">
-      <span class="pf-v6-c-tabs__item-text">Pending</span>
-    </button>
-  </li>
-  {/content}{/include}
+  {#include components/navigation/tabs tabs=demoTabsBoxSubtabsMain /}
+  {#include components/navigation/tabs tabs=demoTabsBoxSubtabsSecondary /}
   <section class="pf-v6-c-tab-content" role="tabpanel">
     <div class="pf-v6-c-tab-content__body">Main: <span x-text="active">t1</span> / sub: <span x-text="sub">s1</span></div>
   </section>

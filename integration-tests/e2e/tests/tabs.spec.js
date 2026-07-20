@@ -262,4 +262,44 @@ test.describe("Tabs", () => {
       });
     }
   });
+  test.describe("Java source tab", () => {
+    // Overflow/dynamic/expandable/help/close stay hand-written (composition machinery).
+    const HAND_WRITTEN = [
+      "overflow",
+      "box-overflow",
+      "horizontal-overflow",
+      "dynamic",
+      "vertical-expandable",
+      "vertical-expandable-responsive",
+      "help",
+      "close",
+      "help-and-close",
+    ];
+
+    test("model-driven cards get a leading Java tab; hand-written ones do not", async ({ page }) => {
+      await page.goto("/components/tabs");
+      for (const ex of ["basic", "vertical", "nav-tabs", "animate-subtabs"]) {
+        const card = page.locator(`[data-rendered-href="/components/tabs/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      for (const ex of HAND_WRITTEN) {
+        const card = page.locator(`[data-rendered-href="/components/tabs/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+      }
+    });
+
+    test("Java tab opens Monaco with the builder code", async ({ page }) => {
+      await page.goto("/components/tabs");
+      const card = page.locator('[data-rendered-href="/components/tabs/basic"]');
+      await card.locator('button[aria-label*="Toggle Java"]').click();
+      await expect(card.locator(".monaco-editor").first()).toBeVisible({ timeout: 10000 });
+      await expect(card.locator(".monaco-editor .view-lines")).toContainText("Tabs.of(", { timeout: 10000 });
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/tabs/source-java/subtabs");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.stateVar("sub")');
+    });
+  });
 });
