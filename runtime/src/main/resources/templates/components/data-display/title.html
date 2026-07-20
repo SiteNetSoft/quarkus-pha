@@ -1,4 +1,9 @@
 {! Title — PatternFly v6 !}
 {! Content slot: heading text (required, passed as the include body) !}
 {! Optional params: size (md|lg|xl|2xl|3xl|4xl, default = heading level so h2 → pf-m-h2), headingLevel (h1|h2|h3|h4|h5|h6, default h1), id !}
+{! Model mode: pass titleModel=<...model.Title> — param name dodges the ubiquitous title= layout args. !}
+{#if titleModel??}
+<{titleModel.headingTag} class="pf-v6-c-title pf-m-{titleModel.sizeToken}"{#if titleModel.id??} id="{titleModel.id}"{/if}>{titleModel.text}</{titleModel.headingTag}>
+{#else}
 {#let h=(headingLevel ?: 'h1')}<{h} class="pf-v6-c-title pf-m-{size ?: h}"{#if id??} id="{id}"{/if}>{#insert/}</{h}>{/let}
+{/if}

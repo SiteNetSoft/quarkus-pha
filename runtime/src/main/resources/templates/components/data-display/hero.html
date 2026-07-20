@@ -1,6 +1,16 @@
 {! Hero — PatternFly v6. A prominent page-level banner region; content is the
    include's main block inside the hero body. !}
 {! Optional: id, glass (pf-m-glass translucent backdrop), attrs (raw passthrough). !}
+{! Model mode: pass hero=<...model.Hero> — raw-HTML body plus an optional composed CTA Button. !}
+{#if hero??}
+<section class="pf-v6-c-hero{#if hero.isGlass} pf-m-glass{/if}" id="{hero.id}">
+  <div class="pf-v6-c-hero__body">
+    {hero.html.raw}
+    {#if hero.cta??}{#include components/actions/button btn=hero.cta /}{/if}
+  </div>
+</section>
+{#else}
 <section class="pf-v6-c-hero{#if glass??} pf-m-glass{/if}"{#if id??} id="{id}"{/if}{#if attrs??} {attrs.raw}{/if}>
   <div class="pf-v6-c-hero__body">{#let id=null attrs=null}{#insert /}{/let}</div>
 </section>
+{/if}
