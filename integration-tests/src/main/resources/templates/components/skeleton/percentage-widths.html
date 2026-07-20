@@ -1,8 +1,3 @@
 <div class="ws-preview-html" style="display: grid; gap: 0.5rem; max-width: 600px">
-  {#include components/feedback/skeleton id="sk-w25" width="25" screenreaderText="Loading (25%)" /}
-  {#include components/feedback/skeleton id="sk-w33" width="33" screenreaderText="Loading (33%)" /}
-  {#include components/feedback/skeleton id="sk-w50" width="50" screenreaderText="Loading (50%)" /}
-  {#include components/feedback/skeleton id="sk-w66" width="66" screenreaderText="Loading (66%)" /}
-  {#include components/feedback/skeleton id="sk-w75" width="75" screenreaderText="Loading (75%)" /}
-  {#include components/feedback/skeleton id="sk-w-full" screenreaderText="Loading (100%)" /}
+  {#for sk in demoSksWidths}{#include components/feedback/skeleton skeleton=sk /}{/for}
 </div>
