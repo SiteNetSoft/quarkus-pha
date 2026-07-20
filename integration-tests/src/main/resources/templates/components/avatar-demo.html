@@ -150,7 +150,8 @@
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Basic" slug="basic" component="avatar"} {#description}
+                        {#include partials/example-card title="Basic" slug="basic" component="avatar" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Both PF flavours: an <code class="ws-code">&lt;img&gt;</code> with an image source (here an
                           inline SVG silhouette; in production point it at a real user-image URL), and a
@@ -158,7 +159,8 @@
                           icon.
                         </p>
                         {/description} {#content}{#include components/avatar/basic /}{/content} {/include} {#include
-                        partials/example-card title="Bordered" slug="bordered" component="avatar"} {#description}
+                        partials/example-card title="Bordered" slug="bordered" component="avatar" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Add <code class="ws-code">pf-m-bordered</code> for a hairline ring on non-colorful avatars
                           (colorful ones include their own border) — useful to distinguish stacked or overlapping
@@ -167,7 +169,8 @@
                           <a href="#bordered-sizes">Bordered sizes</a>.
                         </p>
                         {/description} {#content}{#include components/avatar/bordered /}{/content} {/include} {#include
-                        partials/example-card title="Sizes" slug="sizes" component="avatar"} {#description}
+                        partials/example-card title="Sizes" slug="sizes" component="avatar" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           All four size modifiers — <code class="ws-code">pf-m-sm</code>,
                           <code class="ws-code">pf-m-md</code> (default), <code class="ws-code">pf-m-lg</code>,
@@ -176,22 +179,23 @@
                           see <a href="#bordered-sizes">Bordered sizes</a>.
                         </p>
                         {/description} {#content}{#include components/avatar/sizes /}{/content} {/include} {#include
-                        partials/example-card title="Bordered sizes" slug="bordered-sizes" component="avatar"}
-                        {#description}
+                        partials/example-card title="Bordered sizes" slug="bordered-sizes" component="avatar"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           The four sizes on the <code class="ws-code">&lt;img&gt;</code> flavour with
                           <code class="ws-code">pf-m-bordered</code> — the border thickness scales subtly with size.
                         </p>
                         {/description} {#content}{#include components/avatar/bordered-sizes /}{/content} {/include}
-                        {#include partials/example-card title="Initials" slug="initials" component="avatar"}
-                        {#description}
+                        {#include partials/example-card title="Initials" slug="initials" component="avatar"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           The common fallback for users without a profile photo — a div avatar with the initials in a
                           <code class="ws-code">__initials</code> span. Pass a single initial so the text fits. Works
                           bordered or with any of the nine <a href="#colors">color modifiers</a>.
                         </p>
                         {/description} {#content}{#include components/avatar/initials /}{/content} {/include} {#include
-                        partials/example-card title="Colors" slug="colors" component="avatar"} {#description}
+                        partials/example-card title="Colors" slug="colors" component="avatar" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Color modifiers (PatternFly 6.6+): <code class="ws-code">pf-m-colorful</code> plus one of nine
                           color classes, on a <code class="ws-code">&lt;div role="img"&gt;</code> holding an icon or
