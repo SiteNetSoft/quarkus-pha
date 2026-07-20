@@ -12,6 +12,89 @@
 {! only because React stringifies children when assigned to `value={…}`; there is no       !}
 {! equivalent in Qute (no built-in {#capture} to a string). Keeping `text` as a String     !}
 {! is the only shape that works uniformly across all three variants.                       !}
+{! Model mode: pass clipboardCopy=<org.sitenetsoft.quarkus.pha.model.ClipboardCopy> — adds body-copy (array/JSON),
+   text styling and extra-action flavours. !}
+{#if clipboardCopy??}
+{#if clipboardCopy.isInline}
+<div class="pf-v6-c-clipboard-copy pf-m-inline{#if clipboardCopy.isBlock} pf-m-block{/if}" id="{clipboardCopy.id}"
+     x-data="{ copied: false }">
+  {#if clipboardCopy.isCode}<code class="pf-v6-c-clipboard-copy__text pf-m-code" x-ref="text"{#if clipboardCopy.textStyle??} style="{clipboardCopy.textStyle}"{/if}>{clipboardCopy.text}</code>{#else}<span class="pf-v6-c-clipboard-copy__text" x-ref="text"{#if clipboardCopy.textStyle??} style="{clipboardCopy.textStyle}"{/if}>{clipboardCopy.text}</span>{/if}
+  <span class="pf-v6-c-clipboard-copy__actions">
+    <span class="pf-v6-c-clipboard-copy__actions-item">
+      <button class="pf-v6-c-button pf-m-plain pf-m-no-padding" type="button"
+              :aria-label="copied ? 'Successfully copied to clipboard!' : 'Copy to clipboard'"
+              @click="navigator.clipboard.writeText($refs.text.textContent.trim()); copied = true; setTimeout(() => copied = false, 2000)">
+        <span class="pf-v6-c-button__icon">
+          <span x-show="!copied">{icons:svg('fa:copy').raw}</span><span x-show="copied" x-cloak>{icons:svg('fa:check').raw}</span>
+        </span>
+      </button>
+    </span>
+    {#if clipboardCopy.extraActionIcon??}
+    <span class="pf-v6-c-clipboard-copy__actions-item">
+      <button class="pf-v6-c-button pf-m-plain pf-m-no-padding" type="button" aria-label="{clipboardCopy.extraActionLabel}">
+        <span class="pf-v6-c-button__icon">{icons:svg(clipboardCopy.extraActionIcon).raw}</span>
+      </button>
+    </span>
+    {/if}
+  </span>
+</div>
+{#else if clipboardCopy.isExpandableShape}
+<div class="pf-v6-c-clipboard-copy" id="{clipboardCopy.id}"
+     x-data="{ copied: false, expanded: {#if clipboardCopy.isStartExpanded}true{#else}false{/if} }"
+     :class="expanded && 'pf-m-expanded'">
+  <div class="pf-v6-c-clipboard-copy__group">
+    <button class="pf-v6-c-button pf-m-control" type="button"
+            :aria-expanded="expanded.toString()"
+            aria-label="Toggle content"
+            aria-controls="{clipboardCopy.id}-content"
+            @click="expanded = !expanded">
+      <span class="pf-v6-c-button__icon">
+        <span class="pf-v6-c-clipboard-copy__toggle-icon">
+          {icons:svg('fa:angle-right').raw}
+        </span>
+      </span>
+    </button>
+    <span class="pf-v6-c-form-control{#if clipboardCopy.isReadonly} pf-m-readonly{/if}">
+      <input type="text" value="{clipboardCopy.text}" id="{clipboardCopy.id}-input" aria-label="Copyable input"{#if !clipboardCopy.isBodyCopy} x-ref="input"{/if}{#if clipboardCopy.isReadonly || clipboardCopy.isBodyCopy} readonly{/if}>
+    </span>
+    <button class="pf-v6-c-button pf-m-control" type="button"
+            :aria-label="copied ? 'Successfully copied to clipboard!' : 'Copy to clipboard'"
+            @click="navigator.clipboard.writeText({#if clipboardCopy.isBodyCopy}$refs.body.innerText{#else}$refs.input.value{/if}); copied = true; setTimeout(() => copied = false, 2000)">
+      <span class="pf-v6-c-button__icon">
+        <span x-show="!copied">{icons:svg('fa:copy').raw}</span><span x-show="copied" x-cloak>{icons:svg('fa:check').raw}</span>
+      </span>
+    </button>
+  </div>
+  {#if clipboardCopy.isBodyCopy}
+  <div class="pf-v6-c-clipboard-copy__expandable-content" id="{clipboardCopy.id}-content"
+       x-show="expanded" x-ref="body">
+    {clipboardCopy.expandedHtml.raw}
+  </div>
+  {#else}
+  <div class="pf-v6-c-clipboard-copy__expandable-content" id="{clipboardCopy.id}-content"
+       x-show="expanded" x-cloak>
+    {clipboardCopy.panelText}
+  </div>
+  {/if}
+</div>
+{#else}
+<div class="pf-v6-c-clipboard-copy" id="{clipboardCopy.id}"
+     x-data="{ copied: false }">
+  <div class="pf-v6-c-clipboard-copy__group">
+    <span class="pf-v6-c-form-control{#if clipboardCopy.isReadonly} pf-m-readonly{/if}">
+      <input type="text" value="{clipboardCopy.text}" id="{clipboardCopy.id}-input" aria-label="Copyable input" x-ref="input"{#if clipboardCopy.isReadonly} readonly{/if}>
+    </span>
+    <button class="pf-v6-c-button pf-m-control" type="button"
+            :aria-label="copied ? 'Successfully copied to clipboard!' : 'Copy to clipboard'"
+            @click="navigator.clipboard.writeText($refs.input.value); copied = true; setTimeout(() => copied = false, 2000)">
+      <span class="pf-v6-c-button__icon">
+        <span x-show="!copied">{icons:svg('fa:copy').raw}</span><span x-show="copied" x-cloak>{icons:svg('fa:check').raw}</span>
+      </span>
+    </button>
+  </div>
+</div>
+{/if}
+{#else}
 {#if inline??}
 <div class="pf-v6-c-clipboard-copy pf-m-inline{#if block??} pf-m-block{/if}" id="{id}"
      x-data="{ copied: false }">
@@ -76,4 +159,5 @@
     </button>
   </div>
 </div>
+{/if}
 {/if}
