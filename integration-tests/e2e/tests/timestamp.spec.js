@@ -23,14 +23,10 @@ test.describe("Timestamp", () => {
   });
 
   test("basic timestamp renders human-readable text", async ({ page }) => {
-    await expect(
-      page.locator("#ts-basic .pf-v6-c-timestamp__text")
-    ).toHaveText("May 20, 2026 at 2:30 PM");
+    await expect(page.locator("#ts-basic .pf-v6-c-timestamp__text")).toHaveText("May 20, 2026 at 2:30 PM");
   });
 
-  test("basic timestamp is a <time> element with datetime attribute", async ({
-    page,
-  }) => {
+  test("basic timestamp is a <time> element with datetime attribute", async ({ page }) => {
     const ts = page.locator("time#ts-basic");
     await expect(ts).toHaveClass(/pf-v6-c-timestamp/);
     await expect(ts).toHaveAttribute("datetime", "2026-05-20T14:30:00Z");
@@ -41,10 +37,7 @@ test.describe("Timestamp", () => {
   });
 
   test("with-tooltip variant has title attribute", async ({ page }) => {
-    await expect(page.locator("#ts-tooltip")).toHaveAttribute(
-      "title",
-      "2026-05-20 14:30:00 UTC"
-    );
+    await expect(page.locator("#ts-tooltip")).toHaveAttribute("title", "2026-05-20 14:30:00 UTC");
   });
 
   test.describe("Parity additions", () => {
@@ -71,6 +64,28 @@ test.describe("Timestamp", () => {
     test("/components/timestamp/custom-content returns 200", async ({ page }) => {
       const res = await page.goto("/components/timestamp/custom-content");
       expect(res.status()).toBe(200);
+    });
+  });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/timestamp");
+      for (const ex of ["basic", "custom-format", "inline"]) {
+        const card = page.locator(`[data-rendered-href="/components/timestamp/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/timestamp/source-java/with-tooltip");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.tooltip("2026-05-20 14:30:00 UTC")');
+    });
+
+    test("custom-format renders the interpunct character, not a unicode escape", async ({ page }) => {
+      await page.goto("/components/timestamp/custom-format");
+      const text = page.locator("#ts-custom-format .pf-v6-c-timestamp__text");
+      await expect(text).toHaveText("2026-05-20 \u00b7 14:30 UTC");
+      await expect(text).not.toContainText("\\u00b7");
     });
   });
 });
