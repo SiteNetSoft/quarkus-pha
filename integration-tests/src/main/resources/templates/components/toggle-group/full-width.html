@@ -1,17 +1,1 @@
-<div class="pf-v6-c-toggle-group pf-m-fill" id="tg-full-width" role="group" aria-label="Toggle group" x-data="{ sel: 'one' }">
-  <div class="pf-v6-c-toggle-group__item">
-    <button class="pf-v6-c-toggle-group__button" type="button" :aria-pressed="sel === 'one'" :class="sel === 'one' ? 'pf-m-selected' : ''" @click="sel = 'one'">
-      <span class="pf-v6-c-toggle-group__text">Development</span>
-    </button>
-  </div>
-  <div class="pf-v6-c-toggle-group__item">
-    <button class="pf-v6-c-toggle-group__button" type="button" :aria-pressed="sel === 'two'" :class="sel === 'two' ? 'pf-m-selected' : ''" @click="sel = 'two'">
-      <span class="pf-v6-c-toggle-group__text">Staging</span>
-    </button>
-  </div>
-  <div class="pf-v6-c-toggle-group__item">
-    <button class="pf-v6-c-toggle-group__button" type="button" :aria-pressed="sel === 'three'" :class="sel === 'three' ? 'pf-m-selected' : ''" @click="sel = 'three'">
-      <span class="pf-v6-c-toggle-group__text">Production</span>
-    </button>
-  </div>
-</div>
+{#include components/forms/toggle-group toggleGroup=demoTgFullWidth /}
