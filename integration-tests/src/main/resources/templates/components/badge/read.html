@@ -1,6 +1,5 @@
 {! Read state — viewed / acknowledged items. !}
+{! Populated from the Java model BadgeDemoData.demoBadgesRead (see the Java tab). !}
 <div style="display: flex; gap: 0.5rem">
-  {#include components/data-display/badge id="badge-read-7" value="7" variant="read" /}
-  {#include components/data-display/badge id="badge-read-24" value="24" variant="read" /}
-  {#include components/data-display/badge id="badge-read-999" value="999+" variant="read" /}
+  {#for b in demoBadgesRead}{#include components/data-display/badge badge=b /}{/for}
 </div>
