@@ -67,4 +67,27 @@ test.describe("Truncate", () => {
       expect(res.status()).toBe(200);
     });
   });
+  test.describe("Java source tab", () => {
+    test("model-driven cards get a leading Java tab; custom-tooltip-position does not", async ({ page }) => {
+      await page.goto("/components/truncate");
+      for (const ex of ["end", "middle", "max-chars", "with-links"]) {
+        const card = page.locator(`[data-rendered-href="/components/truncate/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      const custom = page.locator('[data-rendered-href="/components/truncate/custom-tooltip-position"]');
+      await expect(custom.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/truncate/source-java/middle");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.position("middle").trailingNumChars(8)');
+    });
+
+    test("model max-chars flavour still truncates via Alpine", async ({ page }) => {
+      await page.goto("/components/truncate/max-chars");
+      const start = page.locator("#trunc-max-chars .pf-v6-c-truncate__start");
+      await expect(start).toHaveText(/^Vestibulum interdum \u2026$/);
+    });
+  });
 });
