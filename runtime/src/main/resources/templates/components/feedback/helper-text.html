@@ -18,6 +18,33 @@
 {!   variant   (single-item shortcut only) — indeterminate | warning | success | error !}
 {!   dynamic   (single-item shortcut only) — boolean; applies pf-m-dynamic for animations !}
 {!   iconName  (single-item shortcut only) — overrides the default per-variant icon !}
+{! Model mode: pass helperText=<org.sitenetsoft.quarkus.pha.model.HelperText> — single div or ul-list shape. !}
+{#if helperText??}
+{#if helperText.isListShape}
+<ul class="pf-v6-c-helper-text" id="{helperText.id}" role="list"{#if helperText.ariaLabel??} aria-label="{helperText.ariaLabel}"{/if}>
+  {#for it in helperText.items}
+  <li class="pf-v6-c-helper-text__item{#if it.variant??} pf-m-{it.variant}{/if}{#if it.isDynamic} pf-m-dynamic{/if}">
+    {#if it.displayIcon??}
+    <span class="pf-v6-c-helper-text__item-icon">{icons:svg(it.displayIcon).raw}</span>
+    {/if}
+    <span class="pf-v6-c-helper-text__item-text">{it.text}</span>
+    {#if it.screenReaderText??}<span class="pf-v6-screen-reader">{it.screenReaderText}</span>{/if}
+  </li>
+  {/for}
+</ul>
+{#else}
+<div class="pf-v6-c-helper-text" id="{helperText.id}">
+  {#for it in helperText.items}
+  <div class="pf-v6-c-helper-text__item{#if it.variant??} pf-m-{it.variant}{/if}{#if it.isDynamic} pf-m-dynamic{/if}">
+    {#if it.displayIcon??}
+    <span class="pf-v6-c-helper-text__item-icon">{icons:svg(it.displayIcon).raw}</span>
+    {/if}
+    <span class="pf-v6-c-helper-text__item-text">{it.text}</span>
+  </div>
+  {/for}
+</div>
+{/if}
+{#else}
 {#let c=(component ?: 'div')}
 <{c} class="pf-v6-c-helper-text"{#if id??} id="{id}"{/if}{#if c is 'ul'} role="list"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}{/if}>
   {#if c is 'ul'}
@@ -34,3 +61,4 @@
   {/if}
 </{c}>
 {/let}
+{/if}
