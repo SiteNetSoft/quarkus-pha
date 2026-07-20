@@ -97,8 +97,12 @@ test.describe("About modal", () => {
         .locator('[data-rendered-href="/components/about-modal/basic"] button', { hasText: "About" })
         .first()
         .click();
-      await expect(page.locator('[data-rendered-href="/components/about-modal/basic"] .pf-v6-c-about-modal-box')).toBeVisible();
-      await expect(page.locator('[data-rendered-href="/components/about-modal/complex-content"] .pf-v6-c-about-modal-box')).toBeHidden();
+      await expect(
+        page.locator('[data-rendered-href="/components/about-modal/basic"] .pf-v6-c-about-modal-box'),
+      ).toBeVisible();
+      await expect(
+        page.locator('[data-rendered-href="/components/about-modal/complex-content"] .pf-v6-c-about-modal-box'),
+      ).toBeHidden();
     });
   });
 
@@ -115,6 +119,30 @@ test.describe("About modal", () => {
       const link = card.locator('a[aria-label*="Open"]');
       await expect(link).toHaveAttribute("href", "/components/about-modal/complex-content");
       await expect(link).toHaveAttribute("target", "_blank");
+    });
+  });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/about-modal");
+      for (const ex of ["basic", "complex-content", "without-product-name"]) {
+        const card = page.locator(`[data-rendered-href="/components/about-modal/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/about-modal/source-java/without-product-name");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.ariaLabel("About this product")');
+    });
+
+    test("model trigger still opens and closes the dialog", async ({ page }) => {
+      await page.goto("/components/about-modal/basic");
+      await page.getByRole("button", { name: "About", exact: true }).click();
+      const dialog = page.locator(".pf-v6-c-about-modal-box");
+      await expect(dialog).toBeVisible();
+      await page.keyboard.press("Escape");
+      await expect(dialog).toBeHidden();
     });
   });
 });

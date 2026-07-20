@@ -1,18 +1,2 @@
 {! Basic about-modal with productName, brand image, description-list body, trademark, and strapline. !}
-<button class="pf-v6-c-button pf-m-primary" type="button" @click="$dispatch('open-about-modal-basic')">About</button>
-{#include components/feedback/about-modal id="basic" productName="quarkus-pha" brandImageSrc="/web/images/quarkus-pha-logo-dark.svg" brandImageAlt="quarkus-pha logo" backgroundImage="/web/images/pf-background.svg" headingLevel="h2"} {#content}
-<dl class="pf-v6-c-description-list pf-m-horizontal">
-  <div class="pf-v6-c-description-list__group">
-    <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Version</span></dt>
-    <dd class="pf-v6-c-description-list__description">
-      <div class="pf-v6-c-description-list__text">1.0.0-SNAPSHOT</div>
-    </dd>
-  </div>
-  <div class="pf-v6-c-description-list__group">
-    <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Quarkus</span></dt>
-    <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">3.35.3</div></dd>
-  </div>
-</dl>
-{/content} {#trademark}
-<p class="pf-v6-c-about-modal-box__strapline">Trademark and legal notices</p>
-{/trademark} {#strapline}Copyright &copy; 2026 SiteNetSoft{/strapline} {/include}
+{#include components/feedback/about-modal aboutModal=demoAmBasic /}
