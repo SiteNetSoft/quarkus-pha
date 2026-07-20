@@ -2,6 +2,36 @@
                                            displayStack  (optional) — boolean; pf-m-display-stack (brand row above content).
                                            displayInline (optional) — boolean; pf-m-display-inline (brand and content side-by-side).
                                            inset         (optional) — none | sm | md | lg | xl | 2xl; pf-m-inset-{inset}. !}
+{! Model mode: pass masthead=<org.sitenetsoft.quarkus.pha.model.Masthead> — brand/toggle/content come from the model;
+   rich content compositions (toolbars, composed buttons) stay on the slot shell. !}
+{#if masthead??}
+<header class="pf-v6-c-masthead{masthead.modifiers}" id="{masthead.id}"{#if masthead.style??} style="{masthead.style}"{/if}>
+  <div class="pf-v6-c-masthead__main">
+    {#if masthead.toggleAriaLabel??}
+    <span class="pf-v6-c-masthead__toggle">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="{masthead.toggleAriaLabel}">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:bars').raw}</span>
+      </button>
+    </span>
+    {/if}
+    <div class="pf-v6-c-masthead__brand">{#if masthead.isLogoImages}<a class="pf-v6-c-masthead__logo" href="{masthead.logoHref}" aria-label="{masthead.logoAriaLabel}">
+        <img
+          class="pf-v6-c-brand pha-masthead-logo--light"
+          src="{masthead.lightSrc}"
+          alt="{masthead.brandAlt}"
+          style="--pf-v6-c-brand--Height: {masthead.brandHeight}"
+        />
+        <img
+          class="pf-v6-c-brand pha-masthead-logo--dark"
+          src="{masthead.darkSrc}"
+          alt="{masthead.brandAlt}"
+          style="--pf-v6-c-brand--Height: {masthead.brandHeight}"
+        />
+      </a>{#else if masthead.logoText??}<a class="pf-v6-c-masthead__logo" href="#"><strong>{masthead.logoText}</strong></a>{#else}{masthead.brandHtml.raw}{/if}</div>
+  </div>
+  <div class="pf-v6-c-masthead__content">{masthead.contentHtml.raw}</div>
+</header>
+{#else}
 <header class="pf-v6-c-masthead{#if displayStack??} pf-m-display-stack{/if}{#if displayInline??} pf-m-display-inline{/if}{#if inset??} pf-m-inset-{inset}{/if}"{#if id??} id="{id}"{/if}>
   <div class="pf-v6-c-masthead__main">
     {#insert toggle}{/insert}
@@ -9,3 +39,4 @@
   </div>
   <div class="pf-v6-c-masthead__content">{#insert content}{/insert}</div>
 </header>
+{/if}
