@@ -17,7 +17,9 @@ test.describe("Helper text", () => {
   });
 
   test("basic card renders all status variants with auto-icons", async ({ page }) => {
-    await expect(page.locator("#ht-basic-static .pf-v6-c-helper-text__item-text")).toHaveText("This is default helper text");
+    await expect(page.locator("#ht-basic-static .pf-v6-c-helper-text__item-text")).toHaveText(
+      "This is default helper text",
+    );
     await expect(page.locator("#ht-basic-success .pf-v6-c-helper-text__item")).toHaveClass(/pf-m-success/);
     await expect(page.locator("#ht-basic-warning .pf-v6-c-helper-text__item")).toHaveClass(/pf-m-warning/);
     await expect(page.locator("#ht-basic-error .pf-v6-c-helper-text__item")).toHaveClass(/pf-m-error/);
@@ -46,5 +48,20 @@ test.describe("Helper text", () => {
       expect(res.status()).toBe(200);
       await expect(page.locator(".pf-v6-c-helper-text").first()).toBeVisible();
     }
+  });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/helper-text");
+      for (const ex of ["basic", "multiple-items", "with-custom-icons"]) {
+        const card = page.locator(`[data-rendered-href="/components/helper-text/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/helper-text/source-java/multiple-items");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('Item.of("At least 8 characters").variant("success")');
+    });
   });
 });
