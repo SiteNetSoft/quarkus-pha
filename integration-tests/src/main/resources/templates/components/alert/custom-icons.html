@@ -1,4 +1,4 @@
+{! Populated from the Java model AlertDemoData.demoAlertsCustomIcons (see the Java tab). !}
 <div style="display: flex; flex-direction: column; gap: 0.5rem">
-  {#include components/feedback/alert id="al-custom-icon-1" variant="success" title="Success alert with a custom rocket icon" customIcon=icons:svg('fa:rocket') /}
-  {#include components/feedback/alert id="al-custom-icon-2" variant="warning" title="Warning alert with a custom clock icon" customIcon=icons:svg('fa:clock') /}
+  {#for a in demoAlertsCustomIcons}{#include components/feedback/alert alert=a /}{/for}
 </div>

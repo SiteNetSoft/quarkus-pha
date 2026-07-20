@@ -51,9 +51,7 @@ test.describe("Alert", () => {
 
     for (const [selector, prefix] of VARIANTS) {
       test(`${selector} carries the "${prefix}" prefix`, async ({ page }) => {
-        await expect(
-          page.locator(`${selector} .pf-v6-c-alert__title .pf-v6-screen-reader`)
-        ).toHaveText(prefix);
+        await expect(page.locator(`${selector} .pf-v6-c-alert__title .pf-v6-screen-reader`)).toHaveText(prefix);
       });
     }
 
@@ -171,5 +169,27 @@ test.describe("Alert", () => {
         expect(res.status()).toBe(200);
       });
     }
+  });
+  test.describe("Java source tab", () => {
+    // Timeout, dynamic-groups and the toast demos stay hand-written (live list state).
+    const HAND_WRITTEN = ["timeout", "dynamic-groups", "alert-group-toast", "alert-group-toast-overflow"];
+
+    test("model-driven cards get a leading Java tab; hand-written ones do not", async ({ page }) => {
+      await page.goto("/components/alert");
+      for (const ex of ["variants", "expandable", "alert-group-static"]) {
+        const card = page.locator(`[data-rendered-href="/components/alert/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      for (const ex of HAND_WRITTEN) {
+        const card = page.locator(`[data-rendered-href="/components/alert/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/alert/source-java/expandable");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain(".asExpandable()");
+    });
   });
 });
