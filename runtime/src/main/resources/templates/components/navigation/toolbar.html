@@ -35,6 +35,6 @@
 </div>
 {#else}
 <div class="pf-v6-c-toolbar{#if variant??} pf-m-{variant}{/if}{#if noBackground??} pf-m-no-background{/if}{#if sticky??} pf-m-sticky{/if}{#if vertical??} pf-m-vertical{/if}{#if modifiers??} {modifiers}{/if}"{#if id??} id="{id}"{/if}{#if attrs??} {attrs.raw}{/if}>
-  {#let toolbarId=id id=null attrs=null}{#insert /}{/let}
+  {#let toolbarId=id id=null attrs=null modifiers=null sticky=null variant=null vertical=null}{#insert /}{/let}
 </div>
 {/if}

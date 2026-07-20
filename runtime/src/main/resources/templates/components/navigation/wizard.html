@@ -74,20 +74,20 @@
 {#else}
 <div class="pf-v6-c-wizard{#if plain??} pf-m-plain{/if}"{#if id??} id="{id}"{/if}{#if attrs??} {attrs.raw}{/if}>
   {#if hasHeader??}
-  <div class="pf-v6-c-wizard__header">{#let id=null attrs=null}{#insert wizardHeader}{/insert}{/let}</div>
+  <div class="pf-v6-c-wizard__header">{#let id=null attrs=null plain=null}{#insert wizardHeader}{/insert}{/let}</div>
   {/if}
   <div class="pf-v6-c-wizard__outer-wrap">
     <div class="pf-v6-c-wizard__inner-wrap">
       <nav class="pf-v6-c-wizard__nav" aria-label="{#if navLabel??}{navLabel}{#else}Steps{/if}">
         <ol class="pf-v6-c-wizard__nav-list">
-          {#let id=null attrs=null}{#insert navItems}{/insert}{/let}
+          {#let id=null attrs=null plain=null}{#insert navItems}{/insert}{/let}
         </ol>
       </nav>
       <div class="pf-v6-c-wizard__main">
-        <div class="pf-v6-c-wizard__main-body">{#let id=null attrs=null}{#insert body}{/insert}{/let}</div>
+        <div class="pf-v6-c-wizard__main-body">{#let id=null attrs=null plain=null}{#insert body}{/insert}{/let}</div>
       </div>
     </div>
-    <footer class="pf-v6-c-wizard__footer">{#let id=null attrs=null}{#insert footer}{/insert}{/let}</footer>
+    <footer class="pf-v6-c-wizard__footer">{#let id=null attrs=null plain=null}{#insert footer}{/insert}{/let}</footer>
   </div>
 </div>
 {/if}

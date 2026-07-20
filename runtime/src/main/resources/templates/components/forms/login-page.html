@@ -16,7 +16,7 @@
 <div class="pf-v6-c-login"{#if id??} id="{id}"{/if}{#if attrs??} {attrs.raw}{/if}>
   <div class="pf-v6-c-login__container">
     {#if hasLoginHeader??}
-    <header class="pf-v6-c-login__header">{#insert loginHeader}{/insert}</header>
+    <header class="pf-v6-c-login__header">{#let attrs=null id=null}{#insert loginHeader}{/insert}{/let}</header>
     {/if}
     <div class="pf-v6-c-login__main">
       <header class="pf-v6-c-login__main-header">
@@ -25,18 +25,18 @@
         <{h} class="pf-v6-c-title pf-m-3xl">{titleText}</{h}>
         {/let}
         {/if}
-        {#insert loginHeaderDesc}{/insert}
+        {#let attrs=null id=null}{#insert loginHeaderDesc}{/insert}{/let}
         {#if hasHeaderUtilities??}
-        <div class="pf-v6-c-login__main-header-utilities">{#insert loginHeaderUtilities}{/insert}</div>
+        <div class="pf-v6-c-login__main-header-utilities">{#let attrs=null id=null}{#insert loginHeaderUtilities}{/insert}{/let}</div>
         {/if}
       </header>
-      <div class="pf-v6-c-login__main-body">{#insert loginBody}{/insert}</div>
+      <div class="pf-v6-c-login__main-body">{#let attrs=null id=null}{#insert loginBody}{/insert}{/let}</div>
       {#if hasLoginFooter??}
-      <footer class="pf-v6-c-login__main-footer">{#insert loginFooter}{/insert}</footer>
+      <footer class="pf-v6-c-login__main-footer">{#let attrs=null id=null}{#insert loginFooter}{/insert}{/let}</footer>
       {/if}
     </div>
     {#if hasPageFooter??}
-    <footer class="pf-v6-c-login__footer">{#insert loginPageFooter}{/insert}</footer>
+    <footer class="pf-v6-c-login__footer">{#let attrs=null id=null}{#insert loginPageFooter}{/insert}{/let}</footer>
     {/if}
   </div>
 </div>

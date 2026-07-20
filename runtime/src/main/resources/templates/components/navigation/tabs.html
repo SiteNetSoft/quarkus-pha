@@ -97,7 +97,7 @@
   {! nav=true renders link-style navigation, not an ARIA tablist — tablist requires
      role=tab children, which nav links are not. !}
   <ul class="pf-v6-c-tabs__list"{#if !nav??} role="tablist"{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if} @keydown="handleKeyNav($event)">
-    {#insert content}{/insert}
+    {#let box=null filled=null id=null inset=null modifiers=null secondary=null subtab=null vertical=null}{#insert content}{/insert}{/let}
   </ul>
 </div>
 {/if}

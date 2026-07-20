@@ -26,7 +26,7 @@
 {#else}
 {#let c=((component is 'ol') ? 'ol' : 'ul')}
 <{c} class="pf-v6-c-list{#if plain??} pf-m-plain{/if}{#if inline??} pf-m-inline{/if}{#if bordered??} pf-m-bordered{/if}{#if iconLg??} pf-m-icon-lg{/if}"{#if id??} id="{id}"{/if}{#if c is 'ol' && type??} type="{type}"{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if} role="list">
-  {#insert content}{/insert}
+  {#let bordered=null c=null id=null inline=null plain=null}{#insert content}{/insert}{/let}
 </{c}>
 {/let}
 {/if}

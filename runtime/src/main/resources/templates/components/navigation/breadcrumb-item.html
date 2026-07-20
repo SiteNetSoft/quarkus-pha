@@ -28,24 +28,24 @@
   {#if isDropdown??}
   <div class="pf-v6-c-breadcrumb__dropdown" x-data="phaBreadcrumbDropdown()">
     <button type="button" class="pf-v6-c-menu-toggle pf-m-plain pf-m-text" aria-haspopup="true" :aria-expanded="open.toString()" @click="toggle()" @keydown.escape.window="close()" id="{dropdownId}-toggle">
-      <span class="pf-v6-c-menu-toggle__text">{#insert/}</span>
+      <span class="pf-v6-c-menu-toggle__text">{#let current=null heading=null href=null target=null}{#insert/}{/let}</span>
       <span class="pf-v6-c-menu-toggle__controls">
         <span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:angle-down').raw}</span>
       </span>
     </button>
     <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="close()" id="{dropdownId}" style="position: absolute; z-index: 200; margin-top: 0.25rem">
       <div class="pf-v6-c-menu__content">
-        {#insert dropdown}{/insert}
+        {#let current=null heading=null href=null target=null}{#insert dropdown}{/insert}{/let}
       </div>
     </div>
   </div>
   {#else if heading??}
-  {#let h=(headingLevel ?: 'h1')}<{h} class="pf-v6-c-breadcrumb__heading"><a {#if href??}href="{href}"{/if}{#if target??} target="{target}"{/if} class="pf-v6-c-breadcrumb__link pf-m-current" aria-current="page">{#insert/}</a></{h}>{/let}
+  {#let h=(headingLevel ?: 'h1')}<{h} class="pf-v6-c-breadcrumb__heading"><a {#if href??}href="{href}"{/if}{#if target??} target="{target}"{/if} class="pf-v6-c-breadcrumb__link pf-m-current" aria-current="page">{#let current=null heading=null href=null target=null}{#insert/}{/let}</a></{h}>{/let}
   {#else if href??}
-  <a href="{href}"{#if target??} target="{target}"{/if} class="pf-v6-c-breadcrumb__link{#if current??} pf-m-current{/if}"{#if current??} aria-current="page"{/if}>{#insert/}</a>
+  <a href="{href}"{#if target??} target="{target}"{/if} class="pf-v6-c-breadcrumb__link{#if current??} pf-m-current{/if}"{#if current??} aria-current="page"{/if}>{#let current=null heading=null href=null target=null}{#insert/}{/let}</a>
   {#else if current??}
-  <span class="pf-v6-c-breadcrumb__link pf-m-current" aria-current="page">{#insert/}</span>
+  <span class="pf-v6-c-breadcrumb__link pf-m-current" aria-current="page">{#let current=null heading=null href=null target=null}{#insert/}{/let}</span>
   {#else}
-  {#insert/}
+  {#let current=null heading=null href=null target=null}{#insert/}{/let}
   {/if}
 </li>

@@ -6,6 +6,6 @@
      headingLevel — h1…h6 (default h2). Styling comes from the class, not the tag. !}
 {#let h=(headingLevel ?: 'h2')}
 <div class="pf-v6-c-card__title"{#if id??} id="{id}"{/if}>
-  <{h} class="pf-v6-c-card__title-text">{#insert /}</{h}>
+  <{h} class="pf-v6-c-card__title-text">{#let id=null}{#insert /}{/let}</{h}>
 </div>
 {/let}

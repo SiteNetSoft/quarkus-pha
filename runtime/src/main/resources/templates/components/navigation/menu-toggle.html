@@ -39,7 +39,7 @@
 {/if}
 {#else}
 <button class="pf-v6-c-menu-toggle{#if plain??} pf-m-plain{/if}{#if primary??} pf-m-primary{/if}{#if expanded??} pf-m-expanded{/if}" type="button"{#if id??} id="{id}"{/if}{#if disabled??} disabled{/if} aria-expanded="{#if expanded??}true{#else}false{/if}"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
-  <span class="pf-v6-c-menu-toggle__text">{#insert/}</span>
+  <span class="pf-v6-c-menu-toggle__text">{#let disabled=null expanded=null id=null plain=null primary=null toggle=null}{#insert/}{/let}</span>
   {#if plain??}{#else}
   <span class="pf-v6-c-menu-toggle__controls">
     <span class="pf-v6-c-menu-toggle__toggle-icon">

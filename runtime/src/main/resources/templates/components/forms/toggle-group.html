@@ -14,6 +14,6 @@
 </div>
 {#else}
 <div class="pf-v6-c-toggle-group"{#if id??} id="{id}"{/if} role="group"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
-  {#insert content}{/insert}
+  {#let id=null}{#insert content}{/insert}{/let}
 </div>
 {/if}

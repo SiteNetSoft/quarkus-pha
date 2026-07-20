@@ -16,5 +16,5 @@
 {!                nearest enclosing slot of the same name in the call stack, so     !}
 {!                reusing "content" would recurse infinitely.                       !}
 <div class="pf-v6-c-backdrop"{#if id??} id="{id}"{/if}>
-  {#insert overlay}{/insert}
+  {#let id=null}{#insert overlay}{/insert}{/let}
 </div>

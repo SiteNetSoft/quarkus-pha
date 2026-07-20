@@ -33,9 +33,9 @@
 </div>
 {/if}
 {#else if component?? && (component is 'h1' || component is 'h2' || component is 'h3' || component is 'h4' || component is 'h5' || component is 'h6' || component is 'p' || component is 'a' || component is 'small' || component is 'blockquote' || component is 'pre' || component is 'hr' || component is 'ul' || component is 'ol' || component is 'dl' || component is 'li' || component is 'dt' || component is 'dd')}
-<{component} class="pf-v6-c-content--{component}{#if editorial??} pf-m-editorial{/if}{#if visited??} pf-m-visited{/if}{#if plainList??} pf-m-plain{/if}"{#if id??} id="{id}"{/if}{#if href??} href="{href}"{/if}>{#if text??}{text}{#else}{#insert content}{/insert}{/if}</{component}>
+<{component} class="pf-v6-c-content--{component}{#if editorial??} pf-m-editorial{/if}{#if visited??} pf-m-visited{/if}{#if plainList??} pf-m-plain{/if}"{#if id??} id="{id}"{/if}{#if href??} href="{href}"{/if}>{#if text??}{text}{#else}{#let component=null editorial=null href=null id=null text=null visited=null}{#insert content}{/insert}{/let}{/if}</{component}>
 {#else}
 <div class="pf-v6-c-content{#if editorial??} pf-m-editorial{/if}{#if visited??} pf-m-visited{/if}"{#if id??} id="{id}"{/if}>
-  {#insert content}{/insert}
+  {#let component=null editorial=null href=null id=null text=null visited=null}{#insert content}{/insert}{/let}
 </div>
 {/if}

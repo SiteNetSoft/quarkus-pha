@@ -1,4 +1,4 @@
 {! Data list item action — trailing action area (buttons / kebab menu). Main-block content. !}
 {! Optional: modifiers — pf-m-* classes (e.g. responsive pf-m-hidden pf-m-visible-on-lg).
              attrs — raw attribute passthrough (e.g. x-data + positioning for a kebab). !}
-<div class="pf-v6-c-data-list__item-action{#if modifiers??} {modifiers}{/if}"{#if attrs??} {attrs.raw}{/if}>{#insert /}</div>
+<div class="pf-v6-c-data-list__item-action{#if modifiers??} {modifiers}{/if}"{#if attrs??} {attrs.raw}{/if}>{#let attrs=null modifiers=null}{#insert /}{/let}</div>

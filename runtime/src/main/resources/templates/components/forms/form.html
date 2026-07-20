@@ -28,5 +28,5 @@
   {/for}
 </form>
 {#else}
-<form class="pf-v6-c-form{#if horizontal??} pf-m-horizontal{/if}"{#if id??} id="{id}"{/if} novalidate>{#insert content}{/insert}</form>
+<form class="pf-v6-c-form{#if horizontal??} pf-m-horizontal{/if}"{#if id??} id="{id}"{/if} novalidate>{#let horizontal=null id=null}{#insert content}{/insert}{/let}</form>
 {/if}
