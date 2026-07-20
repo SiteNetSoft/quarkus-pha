@@ -1,0 +1,77 @@
+{! One model-driven tree-view <li role="treeitem">, recursing into children.
+   The node anatomy follows the tree's interaction pattern:
+     checkboxes      — div node with optional toggle button, cascading checkbox and labelled text span
+     selectableNodes — expandable nodes get a div with separate toggle + text buttons;
+                       leaves fall back to the whole-node button
+     default         — whole-node button with optional toggle, icon, title/description and badge
+   Params: tree, item. Included by tree-view-model-tree. !}
+<li{#if item.id} id="{item.id}"{/if} class="pf-v6-c-tree-view__list-item{#if item.expanded} pf-m-expanded{/if}" role="treeitem"{#if tree.checkboxes} aria-checked="{item.checked}"{#else} aria-selected="false"{/if}{#if item.expandable} aria-expanded="{item.expanded}"{/if} tabindex="-1">
+  <div class="pf-v6-c-tree-view__content">
+    {#if tree.checkboxes}
+    <div class="pf-v6-c-tree-view__node">
+      <span class="pf-v6-c-tree-view__node-container">
+        {#if item.expandable}
+        <button class="pf-v6-c-tree-view__node-toggle" type="button" id="{item.toggleId}" aria-label="Toggle" aria-labelledby="{item.toggleId} {item.textId}">
+          <span class="pf-v6-c-tree-view__node-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+        </button>
+        {/if}
+        <span class="pf-v6-c-tree-view__node-check">
+          <span class="pf-v6-c-check pf-m-standalone">
+            <input class="pf-v6-c-check__input" type="checkbox"{#if item.checked} checked="checked"{/if} id="{item.checkId}" aria-label="Select" aria-labelledby="{item.checkId} {item.textId}" />
+          </span>
+        </span>
+        <span class="pf-v6-c-tree-view__node-text" id="{item.textId}">{item.text}</span>
+      </span>
+    </div>
+    {#else if tree.selectableNodes && item.expandable}
+    <div class="pf-v6-c-tree-view__node" id="{item.nodeId}">
+      <span class="pf-v6-c-tree-view__node-container">
+        <button class="pf-v6-c-tree-view__node-toggle" type="button" tabindex="-1" aria-labelledby="{item.nodeId}">
+          <span class="pf-v6-c-tree-view__node-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+        </button>
+        <button class="pf-v6-c-tree-view__node-text" type="button" tabindex="-1">{item.text}</button>
+      </span>
+    </div>
+    {#else}
+    <button class="pf-v6-c-tree-view__node" type="button">
+      <span class="pf-v6-c-tree-view__node-container">
+        {#if item.expandable}
+        <span class="pf-v6-c-tree-view__node-toggle">
+          <span class="pf-v6-c-tree-view__node-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+        </span>
+        {/if}
+        {#if item.displayIcon}
+        <span class="pf-v6-c-tree-view__node-icon">{icons:svg(item.displayIcon).raw}</span>
+        {/if}
+        {#if item.description}
+        <span class="pf-v6-c-tree-view__node-content">
+          <span class="pf-v6-c-tree-view__node-title">{item.text}</span>
+          <span class="pf-v6-c-tree-view__node-text">{item.description}</span>
+        </span>
+        {#else}
+        <span class="pf-v6-c-tree-view__node-text">{item.text}</span>
+        {/if}
+        {#if item.badge}
+        <span class="pf-v6-c-tree-view__node-count">
+          <span class="pf-v6-c-badge pf-m-read">{item.badge}</span>
+        </span>
+        {/if}
+      </span>
+    </button>
+    {/if}
+    {#if item.actionIcon}
+    <div class="pf-v6-c-tree-view__action">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="{item.actionAriaLabel}" tabindex="-1">
+        <span class="pf-v6-c-button__icon">{icons:svg(item.actionIcon).raw}</span>
+      </button>
+    </div>
+    {/if}
+  </div>
+  {#if item.parent}
+  <ul class="pf-v6-c-tree-view__list" role="group">
+    {#for child in item.children}
+    {#include components/navigation/tree-view-model-item tree=tree item=child /}
+    {/for}
+  </ul>
+  {/if}
+</li>

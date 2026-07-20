@@ -1,0 +1,25 @@
+{! Model-driven tree-view body: the pf-v6-c-tree-view container with optional search header
+   and the recursive item list. Included by tree-view (model branch).
+   Params: tree — the TreeView model.
+           bare (optional) — set when an outer wrapper already carries the id and
+           x-data="phaTreeView()" (expand-all button variant). !}
+<div class="pf-v6-c-tree-view{#if tree.compact} pf-m-compact{/if}{#if tree.noBackground} pf-m-no-background{/if}{#if tree.guides} pf-m-guides{/if}"{#if bare??}{#else}{#if tree.id} id="{tree.id}"{/if} x-data="phaTreeView()"{/if}>
+  {#if tree.hasSearch}
+  <div class="pf-v6-c-tree-view__search">
+    <div class="pf-v6-c-text-input-group">
+      <div class="pf-v6-c-text-input-group__main pf-m-icon">
+        <span class="pf-v6-c-text-input-group__text">
+          <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:search').raw}</span>
+          <input class="pf-v6-c-text-input-group__text-input" type="text" placeholder="{tree.searchPlaceholder}" aria-label="{tree.searchAriaLabel}" @input="handleSearchInput($event)" />
+        </span>
+      </div>
+    </div>
+  </div>
+  <hr class="pf-v6-c-divider" />
+  {/if}
+  <ul class="pf-v6-c-tree-view__list" role="tree" aria-multiselectable="{tree.multiselectable}"{#if tree.ariaLabel} aria-label="{tree.ariaLabel}"{/if} @keydown="handleKeyNav($event)" @click="handleClick($event)">
+    {#for item in tree.items}
+    {#include components/navigation/tree-view-model-item tree=tree item=item /}
+    {/for}
+  </ul>
+</div>
