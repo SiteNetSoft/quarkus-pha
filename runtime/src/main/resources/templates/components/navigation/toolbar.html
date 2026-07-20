@@ -6,6 +6,35 @@
      noBackground    — pf-m-no-background.
      sticky          — pf-m-sticky.
      vertical        — pf-m-vertical. !}
+{! Model mode: pass toolbar=<org.sitenetsoft.quarkus.pha.model.Toolbar> — typed sections/groups/items
+   (Button + MenuToggle cross-model, generated search, text, dividers). Live filter/label-group
+   compositions keep the slot shell. !}
+{#if toolbar??}
+<div class="pf-v6-c-toolbar{toolbar.rootModifiers}" id="{toolbar.id}">
+  {#for sec in toolbar.sections}
+  <div class="pf-v6-c-toolbar__content">
+    <div class="pf-v6-c-toolbar__content-section{sec.modifierSuffix}">
+      {#for e in sec.entries}
+      {#if e.isItemEntry}
+      {#include components/navigation/toolbar-model-item tbItem=e.itemValue /}
+      {#else if e.isGroupEntry}
+      <div class="pf-v6-c-toolbar__group{e.groupValue.classSuffix}"{#if e.groupValue.styleValue??} style="{e.groupValue.styleValue}"{/if}>
+        {#for it in e.groupValue.items}
+        {#include components/navigation/toolbar-model-item tbItem=it /}
+        {/for}
+      </div>
+      {#else if e.isDividerDivEntry}
+      <div class="pf-v6-c-divider pf-m-vertical" role="separator"></div>
+      {#else if e.isDividerHrEntry}
+      <hr class="pf-v6-c-divider pf-m-vertical" />
+      {/if}
+      {/for}
+    </div>
+  </div>
+  {/for}
+</div>
+{#else}
 <div class="pf-v6-c-toolbar{#if variant??} pf-m-{variant}{/if}{#if noBackground??} pf-m-no-background{/if}{#if sticky??} pf-m-sticky{/if}{#if vertical??} pf-m-vertical{/if}{#if modifiers??} {modifiers}{/if}"{#if id??} id="{id}"{/if}{#if attrs??} {attrs.raw}{/if}>
   {#let toolbarId=id id=null attrs=null}{#insert /}{/let}
 </div>
+{/if}
