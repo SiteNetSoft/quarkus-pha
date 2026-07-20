@@ -160,14 +160,16 @@
                         </div>
                       </div>
 
-                      {#include partials/example-card title="Basic" slug="basic" component="tooltip"} {#description}
+                      {#include partials/example-card title="Basic" slug="basic" component="tooltip" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Wrap a trigger in the <code class="ws-code">{|{#trigger}|}</code> slot and put the text in
                         <code class="ws-code">{|{#tip}|}</code>. <strong>Hover or focus</strong> the button — the
                         tooltip appears after PatternFly's 300ms delay and hides again on mouse-out / blur.
                       </p>
                       {/description} {#content}{#include components/tooltip/basic /}{/content} {/include} {#include
-                      partials/example-card title="Positions" slug="positions" component="tooltip"} {#description}
+                      partials/example-card title="Positions" slug="positions" component="tooltip" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">position</code> = <code class="ws-code">top</code> |
                         <code class="ws-code">bottom</code> | <code class="ws-code">left</code> |
@@ -175,8 +177,8 @@
                         surrounding content.
                       </p>
                       {/description} {#content}{#include components/tooltip/positions /}{/content} {/include} {#include
-                      partials/example-card title="Diagonal positions" slug="diagonal-positions" component="tooltip"}
-                      {#description}
+                      partials/example-card title="Diagonal positions" slug="diagonal-positions" component="tooltip"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         The eight diagonal modifiers — <code class="ws-code">top-left</code>,
                         <code class="ws-code">bottom-right</code>, <code class="ws-code">left-top</code>, etc. The
@@ -184,20 +186,22 @@
                         moves the arrow to the matching corner.
                       </p>
                       {/description} {#content}{#include components/tooltip/diagonal-positions /}{/content} {/include}
-                      {#include partials/example-card title="On icon" slug="on-icon" component="tooltip"} {#description}
+                      {#include partials/example-card title="On icon" slug="on-icon" component="tooltip"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Tooltips commonly hang off a plain icon button. Give the button an
                         <code class="ws-code">aria-label</code> so assistive tech still announces it.
                       </p>
                       {/description} {#content}{#include components/tooltip/on-icon /}{/content} {/include} {#include
-                      partials/example-card title="Long content" slug="long-content" component="tooltip"} {#description}
+                      partials/example-card title="Long content" slug="long-content" component="tooltip"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         PatternFly caps the bubble at <code class="ws-code">18.75rem</code> (300px); longer text wraps
                         onto multiple lines instead of stretching across the page.
                       </p>
                       {/description} {#content}{#include components/tooltip/long-content /}{/content} {/include}
-                      {#include partials/example-card title="Left aligned text" slug="left-aligned" component="tooltip"}
-                      {#description}
+                      {#include partials/example-card title="Left aligned text" slug="left-aligned" component="tooltip"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">textAlignLeft=true</code> adds
                         <code class="ws-code">pf-m-text-align-left</code> to the content — PatternFly centers tooltip

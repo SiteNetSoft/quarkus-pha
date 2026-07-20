@@ -1,7 +1,4 @@
 {! Tooltips commonly hang off a plain icon button — give it an aria-label for AT users. !}
 <div style="padding: 3.5rem; text-align: center">
-  {#include components/feedback/tooltip id="tt-icon" position="top"}
-  {#trigger}{#include components/actions/button variant="plain" ariaLabel="More information" icon="fa:circle-info" /}{/trigger}
-  {#tip}More information about this field{/tip}
-  {/include}
+  {#include components/feedback/tooltip tooltip=demoTtIcon /}
 </div>

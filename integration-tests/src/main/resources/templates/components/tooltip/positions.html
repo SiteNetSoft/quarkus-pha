@@ -1,7 +1,4 @@
 {! position = top | bottom | left | right — the tip sits on that side of the trigger, 15px away. !}
 <div style="display: flex; gap: 3.5rem; flex-wrap: wrap; justify-content: center; padding: 3.5rem">
-  {#include components/feedback/tooltip id="tt-top" position="top"}{#trigger}{#include components/actions/button variant="secondary"}{#content}Top{/content}{/include}{/trigger}{#tip}Top tooltip{/tip}{/include}
-  {#include components/feedback/tooltip id="tt-right" position="right"}{#trigger}{#include components/actions/button variant="secondary"}{#content}Right{/content}{/include}{/trigger}{#tip}Right tooltip{/tip}{/include}
-  {#include components/feedback/tooltip id="tt-bottom" position="bottom"}{#trigger}{#include components/actions/button variant="secondary"}{#content}Bottom{/content}{/include}{/trigger}{#tip}Bottom tooltip{/tip}{/include}
-  {#include components/feedback/tooltip id="tt-left" position="left"}{#trigger}{#include components/actions/button variant="secondary"}{#content}Left{/content}{/include}{/trigger}{#tip}Left tooltip{/tip}{/include}
+  {#for t in demoTtsPositions}{#include components/feedback/tooltip tooltip=t /}{/for}
 </div>

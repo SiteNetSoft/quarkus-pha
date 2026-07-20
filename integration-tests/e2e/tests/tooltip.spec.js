@@ -68,15 +68,11 @@ test.describe("Tooltip", () => {
       "right-top",
       "right-bottom",
     ]) {
-      await expect(page.locator(`#tt-${pos}`)).toHaveClass(
-        new RegExp(`pf-m-${pos}(\\s|$)`)
-      );
+      await expect(page.locator(`#tt-${pos}`)).toHaveClass(new RegExp(`pf-m-${pos}(\\s|$)`));
     }
   });
 
-  test("diagonal bubble edge-aligns with the trigger instead of centering", async ({
-    page,
-  }) => {
+  test("diagonal bubble edge-aligns with the trigger instead of centering", async ({ page }) => {
     await page.goto("/components/tooltip/diagonal-positions");
     const trigger = page.getByRole("button", { name: "Top left" });
     await trigger.hover();
@@ -90,14 +86,10 @@ test.describe("Tooltip", () => {
 
   test("left-aligned: content carries pf-m-text-align-left", async ({ page }) => {
     await page.goto("/components/tooltip/left-aligned");
-    await expect(
-      page.locator("#tt-left-aligned .pf-v6-c-tooltip__content")
-    ).toHaveClass(/pf-m-text-align-left/);
+    await expect(page.locator("#tt-left-aligned .pf-v6-c-tooltip__content")).toHaveClass(/pf-m-text-align-left/);
   });
 
-  test("dynamic content: tip has aria-live and swaps text on click, live", async ({
-    page,
-  }) => {
+  test("dynamic content: tip has aria-live and swaps text on click, live", async ({ page }) => {
     await page.goto("/components/tooltip/dynamic-content");
     const tip = page.locator("#tt-dynamic");
     await expect(tip).toHaveAttribute("aria-live", "polite");
@@ -121,5 +113,22 @@ test.describe("Tooltip", () => {
       expect(res.status()).toBe(200);
       await expect(page.locator(".pha-tooltip").first()).toBeAttached();
     }
+  });
+  test.describe("Java source tab", () => {
+    test("model-driven cards get a leading Java tab; dynamic-content does not", async ({ page }) => {
+      await page.goto("/components/tooltip");
+      for (const ex of ["basic", "diagonal-positions", "on-icon"]) {
+        const card = page.locator(`[data-rendered-href="/components/tooltip/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      const dynamic = page.locator('[data-rendered-href="/components/tooltip/dynamic-content"]');
+      await expect(dynamic.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/tooltip/source-java/on-icon");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('Button.icon("fa:circle-info", "More information")');
+    });
   });
 });
