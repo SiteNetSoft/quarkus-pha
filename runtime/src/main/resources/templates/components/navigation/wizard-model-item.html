@@ -1,0 +1,20 @@
+{! Wizard nav step — model-mode partial. Pass wnItem=<Wizard.Step>, wnAnchors=<boolean>. !}
+<li class="pf-v6-c-wizard__nav-item"{#if wnItem.showExprText??} x-show="{wnItem.showExprText}"{/if}>
+  {#if wnItem.isDisabled}
+  <button type="button" class="pf-v6-c-wizard__nav-link pf-m-disabled" disabled>
+    <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">{wnItem.label}</span></span>
+  </button>
+  {#else if wnAnchors}
+  <a href="#" class="pf-v6-c-wizard__nav-link" :class="{ 'pf-m-current': {wnItem.currentExpr} }" :aria-current="({wnItem.currentExpr}) ? 'step' : false" @click.prevent="{wnItem.clickExpr}">
+    <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">{wnItem.label}</span></span>
+  </a>
+  {#else}
+  <button type="button" class="pf-v6-c-wizard__nav-link{#if wnItem.statusToken??} pf-m-{wnItem.statusToken}{/if}" :class="{ 'pf-m-current': {wnItem.currentExpr} }" :aria-current="({wnItem.currentExpr}) ? 'step' : false" @click="{wnItem.clickExpr}">
+    <span class="pf-v6-c-wizard__nav-link-main">
+      {#if wnItem.stepNumText??}<span class="pf-v6-c-wizard__toggle-num">{wnItem.stepNumText}</span>{/if}
+      <span class="pf-v6-c-wizard__nav-link-text">{wnItem.label}</span>
+      {#if wnItem.statusToken??}<span class="pf-v6-c-wizard__nav-link-status-icon">{#if wnItem.isSuccessStatus}{icons:svg('fa:circle-check').raw}{#else}{icons:svg('fa:circle-exclamation').raw}{/if}</span>{/if}
+    </span>
+  </button>
+  {/if}
+</li>
