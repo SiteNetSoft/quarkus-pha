@@ -1,7 +1,3 @@
-{! Fixed: each expanded body is capped at 9.375rem with overflow scroll. Multiple items expand independently. Composed from accordion-item. !}
-{#include components/data-display/accordion id="acc-fixed"}{#items}
-{#include components/data-display/accordion-item itemId="acc-fixed-item-1" title="Item one" fixed=true}<p>This is the expandable content for item one. The fixed modifier caps the expanded body at 9.375rem, so once the content runs taller than that the body scrolls instead of growing.</p><p>Use a fixed accordion for changelogs, license text, and long help answers — the reader keeps their place on the page while the details scroll independently inside the panel.</p><p>Nothing outside the accordion moves when this inner region scrolls; the scrollbar lives inside the item body.</p><p>These stacked paragraphs guarantee the body exceeds the cap at any viewport width.</p><p>Scroll inside the body to reach this final paragraph.</p>{/include}
-{#include components/data-display/accordion-item itemId="acc-fixed-item-2" title="Item two" fixed=true}This is the expandable content for item two. It provides details and additional information.{/include}
-{#include components/data-display/accordion-item itemId="acc-fixed-item-3" title="Item three" fixed=true}This is the expandable content for item three. It provides details and additional information.{/include}
-{#include components/data-display/accordion-item itemId="acc-fixed-item-4" title="Item four" fixed=true}This is the expandable content for item four. It provides details and additional information.{/include}
-{/items}{/include}
+{! Fixed: each expanded body is capped at 9.375rem with overflow scroll. !}
+{! Populated from the Java model AccordionDemoData.demoAccFixed (see the Java tab). !}
+{#include components/data-display/accordion accordion=demoAccFixed /}

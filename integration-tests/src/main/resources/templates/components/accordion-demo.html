@@ -151,15 +151,15 @@
                         </div>
 
                         {#include partials/example-card title="Definition list" slug="definition-list"
-                        component="accordion"} {#description}
+                        component="accordion" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           The PF default — renders as <code class="ws-code">&lt;dl&gt;</code> /
                           <code class="ws-code">&lt;dt&gt;</code> / <code class="ws-code">&lt;dd&gt;</code> for
                           term/definition semantics. Multiple items may be expanded at once.
                         </p>
                         {/description} {#content}{#include components/accordion/definition-list /}{/content} {/include}
-                        {#include partials/example-card title="Single expand" slug="single-expand"
-                        component="accordion"} {#description}
+                        {#include partials/example-card title="Single expand" slug="single-expand" component="accordion"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Only one item open at a time. Requires shared Alpine state across items, so this variant is
                           hand-rolled rather than using the runtime template — the technique is reusable when
@@ -167,22 +167,22 @@
                         </p>
                         {/description} {#content}{#include components/accordion/single-expand /}{/content} {/include}
                         {#include partials/example-card title="Fixed (multiple expand)" slug="fixed-multiple"
-                        component="accordion"} {#description}
+                        component="accordion" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">fixed=true</code> caps each expanded body at
                           <code class="ws-code">9.375rem</code> (PF default) with overflow scroll. Multiple items can be
                           open simultaneously.
                         </p>
                         {/description} {#content}{#include components/accordion/fixed-multiple /}{/content} {/include}
-                        {#include partials/example-card title="Bordered" slug="bordered" component="accordion"}
-                        {#description}
+                        {#include partials/example-card title="Bordered" slug="bordered" component="accordion"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">bordered=true</code> adds <code class="ws-code">pf-m-bordered</code> —
                           items are separated by bottom borders and the container has no rounded corners.
                         </p>
                         {/description} {#content}{#include components/accordion/bordered /}{/content} {/include}
                         {#include partials/example-card title="Large bordered" slug="large-bordered"
-                        component="accordion"} {#description}
+                        component="accordion" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">displayLg=true</code> with <code class="ws-code">bordered=true</code> —
                           PF.org's "Display size large": bigger toggle type and inset, here with an inline
@@ -190,7 +190,7 @@
                         </p>
                         {/description} {#content}{#include components/accordion/large-bordered /}{/content} {/include}
                         {#include partials/example-card title="Toggle at start" slug="toggle-start"
-                        component="accordion"} {#description}
+                        component="accordion" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">toggleStart=true</code> flips the toggle icon to the left of the text —
                           PF's <code class="ws-code">togglePosition='start'</code>.

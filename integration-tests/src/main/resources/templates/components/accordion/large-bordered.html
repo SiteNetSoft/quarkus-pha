@@ -1,10 +1,3 @@
-{! Large bordered — pf-m-display-lg + pf-m-bordered (PF.org "Display size large"). The last
-   item's body carries an inline call-to-action link, mirroring the PF example content. !}
-{#include components/data-display/accordion id="acc-large-bordered" bordered=true displayLg=true}{#items}
-{#include components/data-display/accordion-item itemId="acc-lg-item-1" title="Item one"}This is the expandable content for item one. It provides details and additional information.{/include}
-{#include components/data-display/accordion-item itemId="acc-lg-item-2" title="Item two"}This is the expandable content for item two. It provides details and additional information.{/include}
-{#include components/data-display/accordion-item itemId="acc-lg-item-3" title="Item three"}
-<p>This is the expandable content for item three, with a follow-up action for the reader.</p>
-<a href="#" class="pf-v6-c-button pf-m-link pf-m-inline"><span class="pf-v6-c-button__text">Call to action</span></a>
-{/include}
-{/items}{/include}
+{! Large bordered — pf-m-display-lg + pf-m-bordered. !}
+{! Populated from the Java model AccordionDemoData.demoAccLargeBordered (see the Java tab). !}
+{#include components/data-display/accordion accordion=demoAccLargeBordered /}
