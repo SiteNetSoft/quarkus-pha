@@ -79,4 +79,27 @@ test.describe("List", () => {
       await expect(page.locator(".pf-v6-c-list").first()).toBeVisible();
     }
   });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/list");
+      for (const ex of ["basic", "ordered", "with-large-icons"]) {
+        const card = page.locator(`[data-rendered-href="/components/list/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/list/source-java/with-icons");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.item("fa:circle-check", "Step one complete")');
+    });
+
+    test("ordered lists render real ol elements — the shell rendered ul", async ({ page }) => {
+      await page.goto("/components/list/ordered");
+      await expect(page.locator("ol#list-ordered-1")).toBeAttached();
+      await expect(page.locator("ol#list-ordered-A")).toHaveAttribute("type", "A");
+      await expect(page.locator("ol#list-ordered-i")).toHaveAttribute("type", "i");
+      await expect(page.locator("ul#list-ordered-1")).toHaveCount(0);
+    });
+  });
 });

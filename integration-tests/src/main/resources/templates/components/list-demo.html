@@ -158,19 +158,22 @@
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Basic" slug="basic" component="list"} {#description}
+                        {#include partials/example-card title="Basic" slug="basic" component="list" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           A standard unordered list rendered as <code class="ws-code">&lt;ul&gt;</code> with default
                           bullets and indent.
                         </p>
                         {/description} {#content}{#include components/list/basic /}{/content} {/include} {#include
-                        partials/example-card title="Inline" slug="inline" component="list"} {#description}
+                        partials/example-card title="Inline" slug="inline" component="list" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Set <code class="ws-code">inline=true</code> for <code class="ws-code">pf-m-inline</code> —
                           items flow horizontally on one row (wrapping as needed).
                         </p>
                         {/description} {#content}{#include components/list/inline /}{/content} {/include} {#include
-                        partials/example-card title="Ordered" slug="ordered" component="list"} {#description}
+                        partials/example-card title="Ordered" slug="ordered" component="list" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Set <code class="ws-code">component="ol"</code> to render an
                           <code class="ws-code">&lt;ol&gt;</code>. Pair with <code class="ws-code">type</code> (<code
@@ -181,7 +184,8 @@
                           <code class="ws-code">I</code> | <code class="ws-code">i</code>) for non-numeric numbering.
                         </p>
                         {/description} {#content}{#include components/list/ordered /}{/content} {/include} {#include
-                        partials/example-card title="Plain" slug="plain" component="list"} {#description}
+                        partials/example-card title="Plain" slug="plain" component="list" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Set <code class="ws-code">plain=true</code> for <code class="ws-code">pf-m-plain</code> —
                           bullets removed, no inline-start padding. Useful when the items themselves provide their own
@@ -189,15 +193,15 @@
                         </p>
                         {/description} {#content}{#include components/list/plain /}{/content} {/include} {#include
                         partials/example-card title="With horizontal rules" slug="with-horizontal-rules"
-                        component="list"} {#description}
+                        component="list" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Combine <code class="ws-code">bordered=true</code> with
                           <code class="ws-code">plain=true</code> to render dividing lines between items. PF v6 calls
                           this the 'with horizontal rules' variant.
                         </p>
                         {/description} {#content}{#include components/list/with-horizontal-rules /}{/content} {/include}
-                        {#include partials/example-card title="With icons" slug="with-icons" component="list"}
-                        {#description}
+                        {#include partials/example-card title="With icons" slug="with-icons" component="list"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Render an icon in place of the bullet by wrapping each
                           <code class="ws-code">&lt;li&gt;</code>'s leading element in
@@ -206,8 +210,8 @@
                           so the default bullet isn't doubled.
                         </p>
                         {/description} {#content}{#include components/list/with-icons /}{/content} {/include} {#include
-                        partials/example-card title="With large icons" slug="with-large-icons" component="list"}
-                        {#description}
+                        partials/example-card title="With large icons" slug="with-large-icons" component="list"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Add <code class="ws-code">iconLg=true</code> on top of the icon pattern to size icons at PF
                           v6's <code class="ws-code">icon-size--lg</code> token. Best for media-style rows with title +
