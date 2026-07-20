@@ -2,7 +2,21 @@
 {! Required: id — derives {id}-field on the input for label `for=` wiring.
               name, label !}
 {! Optional: checked (optional), disabled (optional), description (optional), body (optional), standalone (optional) !}
-{#if standalone??}
+{! Model mode: pass radio=<org.sitenetsoft.quarkus.pha.model.Radio>. !}
+{#if radio??}
+{#if radio.isStandalone}
+<div class="pf-v6-c-radio pf-m-standalone" id="{radio.id}">
+  <input class="pf-v6-c-radio__input" type="radio" id="{radio.id}-field" name="{radio.name}"{#if radio.isChecked} checked{/if}{#if radio.isDisabled} disabled{/if} aria-label="{radio.ariaLabelResolved}">
+</div>
+{#else}
+<div class="pf-v6-c-radio" id="{radio.id}">
+  <input class="pf-v6-c-radio__input" type="radio" id="{radio.id}-field" name="{radio.name}"{#if radio.isChecked} checked{/if}{#if radio.isDisabled} disabled{/if}>
+  <label class="pf-v6-c-radio__label{#if radio.isDisabled} pf-m-disabled{/if}" for="{radio.id}-field">{radio.label}</label>
+  {#if radio.description??}<span class="pf-v6-c-radio__description">{radio.description}</span>{/if}
+  {#if radio.bodyText??}<span class="pf-v6-c-radio__body">{radio.bodyText}</span>{/if}
+</div>
+{/if}
+{#else if standalone??}
 <div class="pf-v6-c-radio pf-m-standalone" id="{id}">
   <input class="pf-v6-c-radio__input" type="radio" id="{id}-field" name="{name}"{#if checked??} checked{/if}{#if disabled??} disabled{/if} aria-label="{#if ariaLabel??}{ariaLabel}{#else}{name}{/if}">
 </div>
