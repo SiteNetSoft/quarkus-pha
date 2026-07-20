@@ -1,0 +1,6 @@
+{! Page main-section — model-mode partial. Pass sec=<Page.Section>. !}
+<section class="pf-v6-c-page__main-section{sec.modifierSuffix}"{#if sec.sectionAriaLabel??} aria-label="{sec.sectionAriaLabel}"{/if}{#if sec.sectionAriaLabelledBy??} aria-labelledby="{sec.sectionAriaLabelledBy}"{/if}>
+  <div class="pf-v6-c-page__main-body"{#if sec.bodyStyleValue??} style="{sec.bodyStyleValue}"{/if}>
+    {sec.html.raw}
+  </div>
+</section>
