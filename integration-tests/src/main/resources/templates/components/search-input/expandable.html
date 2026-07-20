@@ -1,19 +1,2 @@
 {! Collapsed to a magnifier button; expanding reveals the input and focuses it. !}
-<div id="si-expandable" x-data="{ open: false, value: '' }">
-  <div class="pf-v6-c-text-input-group" x-show="open" x-cloak style="max-width: 320px; display: inline-flex">
-  <div class="pf-v6-c-text-input-group__main pf-m-icon">
-    <span class="pf-v6-c-text-input-group__text">
-      <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
-      <input class="pf-v6-c-text-input-group__text-input" type="search" id="si-expandable-input" placeholder="Search…" aria-label="Search" x-model="value" />
-    </span>
-  </div>
-    <div class="pf-v6-c-text-input-group__utilities">
-      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close search" @click="open = false; value = ''">
-        <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
-      </button>
-    </div>
-  </div>
-  <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Open search" x-show="!open" @click="open = true; $nextTick(() => document.getElementById('si-expandable-input').focus())">
-    <span class="pf-v6-c-button__icon">{icons:svg('fa:magnifying-glass').raw}</span>
-  </button>
-</div>
+{#include components/forms/search-input searchInput=demoSiExpandable /}

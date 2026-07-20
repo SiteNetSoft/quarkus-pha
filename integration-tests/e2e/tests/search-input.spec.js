@@ -117,4 +117,38 @@ test.describe("Search Input", () => {
       });
     }
   });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/search-input");
+      for (const ex of ["basic", "autocomplete", "advanced", "with-submit", "expandable"]) {
+        const card = page.locator(`[data-rendered-href="/components/search-input/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/search-input/source-java/advanced");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.advancedField("Date", "YYYY-MM-DD")');
+    });
+
+    test("generated autocomplete fills from the menu", async ({ page }) => {
+      await page.goto("/components/search-input/autocomplete");
+      const menu = page.locator("#si-autocomplete .pf-v6-c-menu");
+      await expect(menu).toBeVisible();
+      await menu.getByRole("menuitem", { name: "appleseed" }).click();
+      await expect(page.locator('#si-autocomplete input[aria-label="Search with autocomplete"]')).toHaveValue(
+        "appleseed",
+      );
+      await expect(menu).toBeHidden();
+    });
+
+    test("generated advanced form composes the query", async ({ page }) => {
+      await page.goto("/components/search-input/advanced-expanded");
+      await page.locator("#si-advanced-expanded-username").fill("jane");
+      await page.locator("#si-advanced-expanded-date").fill("2026-07-20");
+      await page.locator("#si-advanced-expanded").getByRole("button", { name: "Search", exact: true }).click();
+      await expect(page.locator("#si-advanced-expanded-input")).toHaveValue("username:jane date:2026-07-20");
+    });
+  });
 });

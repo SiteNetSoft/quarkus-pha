@@ -1,21 +1,2 @@
 {! Result count plus previous/next match navigation. !}
-<div class="pf-v6-c-text-input-group" id="si-navigable" x-data="{ value: 'orange', current: 1, total: 3 }" style="max-width: 420px">
-  <div class="pf-v6-c-text-input-group__main pf-m-icon">
-    <span class="pf-v6-c-text-input-group__text">
-      <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
-      <input class="pf-v6-c-text-input-group__text-input" type="search" id="si-navigable-input" placeholder="Search…" aria-label="Search" x-model="value" />
-    </span>
-  </div>
-  <div class="pf-v6-c-text-input-group__utilities" x-show="value !== ''">
-    <span class="pf-v6-c-badge pf-m-read" style="align-self: center"><span x-text="current">1</span> / <span x-text="total">3</span></span>
-    <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Previous match" :disabled="current === 1" @click="current--">
-      <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-up').raw}</span>
-    </button>
-    <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Next match" :disabled="current === total" @click="current++">
-      <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-down').raw}</span>
-    </button>
-    <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Clear search" @click="value = ''">
-      <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
-    </button>
-  </div>
-</div>
+{#include components/forms/search-input searchInput=demoSiNavigable /}
