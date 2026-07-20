@@ -163,15 +163,11 @@ test.describe("Page", () => {
     });
 
     test("page main area has content", async ({ page }) => {
-      await expect(
-        page.locator(`${card} #pg-basic .pf-v6-c-page__main-body`)
-      ).toContainText("Page content");
+      await expect(page.locator(`${card} #pg-basic .pf-v6-c-page__main-body`)).toContainText("Page content");
     });
 
     test("page masthead shows brand", async ({ page }) => {
-      await expect(
-        page.locator(`${card} #pg-basic .pf-v6-c-masthead__brand`)
-      ).toContainText("App name");
+      await expect(page.locator(`${card} #pg-basic .pf-v6-c-masthead__brand`)).toContainText("App name");
     });
   });
 
@@ -188,6 +184,36 @@ test.describe("Page", () => {
       const link = card.locator('a[aria-label*="Open"]');
       await expect(link).toHaveAttribute("href", "/components/page/basic");
       await expect(link).toHaveAttribute("target", "_blank");
+    });
+  });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/page");
+      for (const ex of ["basic", "group-section", "vertical-nav", "multiple-sidebar-body"]) {
+        const card = page.locator(`[data-rendered-href="/components/page/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/page/source-java/vertical-nav");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.sidebarNav("Vertical nav demo secondary"');
+    });
+
+    test("generated sidebar toggle collapses and expands", async ({ page }) => {
+      await page.goto("/components/page/uncontrolled-nav");
+      const sidebar = page.locator("#pg-uncontrolled-nav .pf-v6-c-page__sidebar");
+      await expect(sidebar).toBeVisible();
+      await page.locator('#pg-uncontrolled-nav button[aria-label="Uncontrolled nav demo"]').click();
+      await expect(sidebar).toBeHidden();
+    });
+
+    test("group breadcrumb renders the canonical Breadcrumb anatomy", async ({ page }) => {
+      await page.goto("/components/page/group-section");
+      const nav = page.locator("#pg-group-breadcrumb");
+      await expect(nav).toBeAttached();
+      await expect(nav.locator(".pf-v6-c-breadcrumb__item-divider").first()).toHaveAttribute("aria-hidden", "true");
     });
   });
 });
