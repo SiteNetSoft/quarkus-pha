@@ -5,6 +5,20 @@
               disabled (optional), stacked (optional — icon above the title),
               displayLg (optional — larger stacked icon), attrs (optional — raw
               attribute passthrough for Alpine directives etc.) !}
+{! Model mode: pass tile=<org.sitenetsoft.quarkus.pha.model.Tile>. Selection groups stay hand-written. !}
+{#if tile??}
+<div class="pf-v6-c-tile{#if tile.isSelected} pf-m-selected{/if}{#if tile.isDisabled} pf-m-disabled{/if}{#if tile.isDisplayLg} pf-m-display-lg{/if}"{#if tile.id??} id="{tile.id}"{/if}{#if tile.isDisabled} aria-disabled="true"{/if} tabindex="0">
+  <div class="pf-v6-c-tile__header{#if tile.isStacked} pf-m-stacked{/if}">
+    {#if tile.iconName??}
+    <div class="pf-v6-c-tile__icon">{icons:svg(tile.iconName).raw}</div>
+    {/if}
+    <div class="pf-v6-c-tile__title">{tile.title}</div>
+  </div>
+  {#if tile.bodyText??}
+  <div class="pf-v6-c-tile__body">{tile.bodyText}</div>
+  {/if}
+</div>
+{#else}
 <div class="pf-v6-c-tile{#if selected??} pf-m-selected{/if}{#if disabled??} pf-m-disabled{/if}{#if displayLg??} pf-m-display-lg{/if}"{#if id??} id="{id}"{/if}{#if disabled??} aria-disabled="true"{/if} tabindex="0"{#if attrs??} {attrs.raw}{/if}>
   <div class="pf-v6-c-tile__header{#if stacked??} pf-m-stacked{/if}">
     {#if iconName??}
@@ -16,3 +30,4 @@
   <div class="pf-v6-c-tile__body">{bodyText}</div>
   {/if}
 </div>
+{/if}
