@@ -6,6 +6,55 @@
      hasHeader    — render the header (omit for the lightweight variant).
      titleText    — header title (default "Notifications").
      headerStatus — text for the __header-status line (e.g. "3 unread"). !}
+{! Model mode: pass notificationDrawer=<org.sitenetsoft.quarkus.pha.model.NotificationDrawer> — items or groups. !}
+{#if notificationDrawer??}
+<div
+  class="pf-v6-c-notification-drawer"
+  id="{notificationDrawer.id}"
+  role="region"
+  aria-label="{notificationDrawer.ariaLabelResolved}"
+  {#if notificationDrawer.xData??}x-data="{notificationDrawer.xData}"{/if}
+  {#if notificationDrawer.style??}style="{notificationDrawer.style}"{/if}
+>
+  {#if notificationDrawer.isHasHeader}
+  <div class="pf-v6-c-notification-drawer__header">
+    <h1 class="pf-v6-c-notification-drawer__header-title">{notificationDrawer.titleText}</h1>
+    {#if notificationDrawer.headerStatus??}<span class="pf-v6-c-notification-drawer__header-status">{notificationDrawer.headerStatus}</span>{/if}
+  </div>
+  {/if}
+  <div class="pf-v6-c-notification-drawer__body">
+    {#if notificationDrawer.isGrouped}
+    {#for g in notificationDrawer.groups}
+    <section class="pf-v6-c-notification-drawer__group" :class="{ 'pf-m-expanded': {g.openVar} }">
+      <button
+        class="pf-v6-c-notification-drawer__group-toggle"
+        type="button"
+        :aria-expanded="{g.openVar}.toString()"
+        @click="{g.openVar} = !{g.openVar}"
+      >
+        <span class="pf-v6-c-notification-drawer__group-toggle-title">{g.title}</span>
+        {#if g.count??}<span class="pf-v6-c-notification-drawer__group-toggle-count"><span class="pf-v6-c-badge pf-m-unread">{g.count}</span></span>{/if}
+        <span class="pf-v6-c-notification-drawer__group-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+      </button>
+      <div class="pf-v6-c-notification-drawer__group-list" x-show="{g.openVar}" x-cloak>
+        <ul class="pf-v6-c-notification-drawer__list" role="list">
+          {#for it in g.items}
+          {#include components/feedback/notification-drawer-model-item item=it /}
+          {/for}
+        </ul>
+      </div>
+    </section>
+    {/for}
+    {#else}
+    <ul class="pf-v6-c-notification-drawer__list" role="list">
+      {#for it in notificationDrawer.items}
+      {#include components/feedback/notification-drawer-model-item item=it /}
+      {/for}
+    </ul>
+    {/if}
+  </div>
+</div>
+{#else}
 <div
   class="pf-v6-c-notification-drawer"
   {#if id??}id="{id}"{/if}
@@ -21,3 +70,4 @@
   {/if}
   <div class="pf-v6-c-notification-drawer__body">{#let id=null attrs=null}{#insert /}{/let}</div>
 </div>
+{/if}
