@@ -9,6 +9,36 @@
      hasCompassSidebarStart / hasCompassSidebarEnd — sidebars (matching slots).
      hasCompassFooter    — render the footer (compassFooter slot).
      dockExpanded / headerExpanded / footerExpanded — pf-m-expanded on that region. !}
+{! Model mode: pass compass=<org.sitenetsoft.quarkus.pha.model.Compass> — dock/header actions are composed Buttons; main/footer raw HTML. !}
+{#if compass??}
+<div class="pf-v6-c-compass{#if compass.isDocked} pf-m-docked{/if}" id="{compass.id}"{#if compass.style??} style="{compass.style}"{/if}>
+  {#if compass.isHasDock}
+  <div class="pf-v6-c-compass__dock">
+    <div class="pf-v6-c-compass__dock-main"{#if compass.dockStyle??} style="{compass.dockStyle}"{/if}>
+      {#for b in compass.dockButtons}{#include components/actions/button btn=b /}{/for}
+    </div>
+  </div>
+  {/if}
+  <div class="pf-v6-c-compass__container">
+    {#if compass.isHasHeader}
+    <div class="pf-v6-c-compass__header{#if compass.isHeaderExpanded} pf-m-expanded{/if}">
+      <div class="pf-v6-c-compass__main-header-content"{#if compass.headerContentStyle??} style="{compass.headerContentStyle}"{/if}>
+        <h2 class="pf-v6-c-compass__main-header-title">{compass.headerTitle}</h2>
+        {#if compass.isHasHeaderActions}
+        <div class="pf-v6-l-flex pf-m-space-items-sm">
+          {#for b in compass.headerActions}{#include components/actions/button btn=b /}{/for}
+        </div>
+        {/if}
+      </div>
+    </div>
+    {/if}
+    <div class="pf-v6-c-compass__main">{compass.mainHtml.raw}</div>
+    {#if compass.footerHtml??}
+    <div class="pf-v6-c-compass__footer{#if compass.isFooterExpanded} pf-m-expanded{/if}">{compass.footerHtml.raw}</div>
+    {/if}
+  </div>
+</div>
+{#else}
 <div class="pf-v6-c-compass{#if docked??} pf-m-docked{/if}"{#if id??} id="{id}"{/if}{#if attrs??} {attrs.raw}{/if}>
   {#let compassId=id id=null attrs=null}
   {#if hasCompassDock??}
@@ -31,3 +61,4 @@
   </div>
   {/let}
 </div>
+{/if}
