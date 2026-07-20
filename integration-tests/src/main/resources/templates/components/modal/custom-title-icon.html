@@ -1,12 +1,1 @@
-<div x-data="{ open: false }">
-  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = true"><span class="pf-v6-c-button__text">Open custom-icon modal</span></button>
-  {#include components/feedback/modal id="mo-custom-title-icon" size="md"}
-  {#include components/feedback/modal-close /}
-  {#include components/feedback/modal-header headingLevel="h2" iconName="fa:rocket"}Custom icon modal{/include}
-  {#include components/feedback/modal-body}<p>Any icon can sit in the title icon slot.</p>{/include}
-  {#include components/feedback/modal-footer}
-  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = false"><span class="pf-v6-c-button__text">Confirm</span></button>
-  <button class="pf-v6-c-button pf-m-link" type="button" @click="open = false"><span class="pf-v6-c-button__text">Cancel</span></button>
-  {/include}
-  {/include}
-</div>
+{#include components/feedback/modal modal=demoMoCustomTitleIcon /}

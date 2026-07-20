@@ -1,18 +1,2 @@
 {! No title — the modal box is labelled via aria-label; body and footer remain. !}
-<div x-data="{ open: false }">
-  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = true">
-    <span class="pf-v6-c-button__text">Open modal without a title</span>
-  </button>
-  {#include components/feedback/modal id="mo-without-title" size="md" ariaLabel="Example of a modal without a title"}
-  {#include components/feedback/modal-close /}
-  {#include components/feedback/modal-body}<p>
-    When a modal has no title element, the modal box itself must carry an
-    <code class="ws-code">aria-label</code> naming the dialog for assistive technologies.
-  </p>{/include}
-  {#include components/feedback/modal-footer}
-  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = false">
-    <span class="pf-v6-c-button__text">Close</span>
-  </button>
-  {/include}
-  {/include}
-</div>
+{#include components/feedback/modal modal=demoMoWithoutTitle /}
