@@ -1,32 +1,10 @@
 <div class="ws-preview-html" style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap">
+  {#for i in demoIconsContainer}
   <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem">
     <span style="outline: 1px dashed var(--pf-t--global--border--color--brand--default, #06c); padding: 0.25rem">
-      {#include components/icon name="fa:circle-info" size="3xl" iconSize="sm" label="3xl container, sm glyph" /}
+      {#include components/icon iconModel=i /}
     </span>
-    <code class="ws-code">size="3xl" iconSize="sm"</code>
+    <code class="ws-code">size("3xl").iconSize("{i.iconSize}")</code>
   </div>
-  <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem">
-    <span style="outline: 1px dashed var(--pf-t--global--border--color--brand--default, #06c); padding: 0.25rem">
-      {#include components/icon name="fa:circle-info" size="3xl" iconSize="md" label="3xl container, md glyph" /}
-    </span>
-    <code class="ws-code">size="3xl" iconSize="md"</code>
-  </div>
-  <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem">
-    <span style="outline: 1px dashed var(--pf-t--global--border--color--brand--default, #06c); padding: 0.25rem">
-      {#include components/icon name="fa:circle-info" size="3xl" iconSize="lg" label="3xl container, lg glyph" /}
-    </span>
-    <code class="ws-code">size="3xl" iconSize="lg"</code>
-  </div>
-  <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem">
-    <span style="outline: 1px dashed var(--pf-t--global--border--color--brand--default, #06c); padding: 0.25rem">
-      {#include components/icon name="fa:circle-info" size="3xl" iconSize="xl" label="3xl container, xl glyph" /}
-    </span>
-    <code class="ws-code">size="3xl" iconSize="xl"</code>
-  </div>
-  <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem">
-    <span style="outline: 1px dashed var(--pf-t--global--border--color--brand--default, #06c); padding: 0.25rem">
-      {#include components/icon name="fa:circle-info" size="3xl" iconSize="3xl" label="3xl container, 3xl glyph" /}
-    </span>
-    <code class="ws-code">size="3xl" iconSize="3xl"</code>
-  </div>
+  {/for}
 </div>

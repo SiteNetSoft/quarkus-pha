@@ -216,14 +216,16 @@
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Basic" slug="basic" component="icon"} {#description}
+                        {#include partials/example-card title="Basic" slug="basic" component="icon" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           The simplest usage — pass a <code class="ws-code">name</code> in
                           <code class="ws-code">set:slug</code> form. The icon defaults to medium size and is hidden
                           from screen readers.
                         </p>
                         {/description} {#content}{#include components/icon/basic /}{/content} {/include} {#include
-                        partials/example-card title="Icon sets" slug="sets" component="icon"} {#description}
+                        partials/example-card title="Icon sets" slug="sets" component="icon" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Same API, four sources: <code class="ws-code">fa</code>,
                           <code class="ws-code">fa-regular</code>, <code class="ws-code">fa-brands</code>, and
@@ -231,7 +233,8 @@
                           <code class="ws-code">web/vendor/icons/</code>.
                         </p>
                         {/description} {#content}{#include components/icon/sets /}{/content} {/include} {#include
-                        partials/example-card title="Sizes" slug="sizes" component="icon"} {#description}
+                        partials/example-card title="Sizes" slug="sizes" component="icon" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           PF v6 ships six standalone size modifiers — <code class="ws-code">sm</code>,
                           <code class="ws-code">md</code>, <code class="ws-code">lg</code>,
@@ -239,15 +242,16 @@
                           <code class="ws-code">3xl</code> — that resolve to global icon-size tokens.
                         </p>
                         {/description} {#content}{#include components/icon/sizes /}{/content} {/include} {#include
-                        partials/example-card title="Body sizes" slug="body-sizes" component="icon"} {#description}
+                        partials/example-card title="Body sizes" slug="body-sizes" component="icon" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Body-relative sizes (<code class="ws-code">body-sm</code>,
                           <code class="ws-code">body-default</code>, <code class="ws-code">body-lg</code>) match the
                           surrounding body text's icon-size token. Use these when an icon sits beside body copy.
                         </p>
                         {/description} {#content}{#include components/icon/body-sizes /}{/content} {/include} {#include
-                        partials/example-card title="Heading sizes" slug="heading-sizes" component="icon"}
-                        {#description}
+                        partials/example-card title="Heading sizes" slug="heading-sizes" component="icon"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Heading-relative sizes (<code class="ws-code">heading-sm</code> through
                           <code class="ws-code">heading-3xl</code>) match the surrounding heading's icon-size token. Use
@@ -255,7 +259,7 @@
                         </p>
                         {/description} {#content}{#include components/icon/heading-sizes /}{/content} {/include}
                         {#include partials/example-card title="Sizing within container" slug="sizing-within-container"
-                        component="icon"} {#description}
+                        component="icon" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Pass <code class="ws-code">iconSize</code> to size the icon glyph independently of its
                           <code class="ws-code">size</code> container. <code class="ws-code">iconSize</code> applies
@@ -264,16 +268,16 @@
                           <code class="ws-code">size</code> stays on the wrapper.
                         </p>
                         {/description} {#content}{#include components/icon/sizing-within-container /}{/content}
-                        {/include} {#include partials/example-card title="Inline" slug="inline" component="icon"}
-                        {#description}
+                        {/include} {#include partials/example-card title="Inline" slug="inline" component="icon"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Set <code class="ws-code">inline=true</code> so the icon inherits the surrounding font size
                           and color via PF's <code class="ws-code">pf-m-inline</code> modifier. Useful inside running
                           prose.
                         </p>
                         {/description} {#content}{#include components/icon/inline /}{/content} {/include} {#include
-                        partials/example-card title="Status colors" slug="status-colors" component="icon"}
-                        {#description}
+                        partials/example-card title="Status colors" slug="status-colors" component="icon"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Pass <code class="ws-code">status</code> to color the icon via PF v6 semantic tokens:
                           <code class="ws-code">info</code>, <code class="ws-code">success</code>,
@@ -281,8 +285,8 @@
                           <code class="ws-code">custom</code>.
                         </p>
                         {/description} {#content}{#include components/icon/status-colors /}{/content} {/include}
-                        {#include partials/example-card title="In progress" slug="in-progress" component="icon"}
-                        {#description}
+                        {#include partials/example-card title="In progress" slug="in-progress" component="icon"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">inProgress=true</code> adds
                           <code class="ws-code">pf-m-in-progress</code> on the wrapper and renders a
@@ -292,14 +296,14 @@
                         </p>
                         {/description} {#content}{#include components/icon/in-progress /}{/content} {/include} {#include
                         partials/example-card title="Custom in-progress icon" slug="custom-in-progress-icon"
-                        component="icon"} {#description}
+                        component="icon" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Pass <code class="ws-code">progressIcon</code> to render a Font Awesome / pficon glyph inside
                           the <code class="ws-code">__progress</code> overlay instead of the default PF v6 spinner.
                         </p>
                         {/description} {#content}{#include components/icon/custom-in-progress-icon /}{/content}
                         {/include} {#include partials/example-card title="With accessible label" slug="with-label"
-                        component="icon"} {#description}
+                        component="icon" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Pass <code class="ws-code">label</code> to expose the icon to assistive technology — the
                           rendered <code class="ws-code">&lt;svg&gt;</code> gets

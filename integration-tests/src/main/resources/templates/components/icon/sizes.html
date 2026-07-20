@@ -1,26 +1,8 @@
 <div class="ws-preview-html" style="display: flex; align-items: baseline; gap: 1.5rem; flex-wrap: wrap">
+  {#for i in demoIconsSizes}
   <span style="display: inline-flex; flex-direction: column; align-items: center; gap: 0.25rem">
-    {#include components/icon name="fa:circle-info" size="sm" /}
-    <code class="ws-code">sm</code>
+    {#include components/icon iconModel=i /}
+    <code class="ws-code">{i.size}</code>
   </span>
-  <span style="display: inline-flex; flex-direction: column; align-items: center; gap: 0.25rem">
-    {#include components/icon name="fa:circle-info" size="md" /}
-    <code class="ws-code">md</code>
-  </span>
-  <span style="display: inline-flex; flex-direction: column; align-items: center; gap: 0.25rem">
-    {#include components/icon name="fa:circle-info" size="lg" /}
-    <code class="ws-code">lg</code>
-  </span>
-  <span style="display: inline-flex; flex-direction: column; align-items: center; gap: 0.25rem">
-    {#include components/icon name="fa:circle-info" size="xl" /}
-    <code class="ws-code">xl</code>
-  </span>
-  <span style="display: inline-flex; flex-direction: column; align-items: center; gap: 0.25rem">
-    {#include components/icon name="fa:circle-info" size="2xl" /}
-    <code class="ws-code">2xl</code>
-  </span>
-  <span style="display: inline-flex; flex-direction: column; align-items: center; gap: 0.25rem">
-    {#include components/icon name="fa:circle-info" size="3xl" /}
-    <code class="ws-code">3xl</code>
-  </span>
+  {/for}
 </div>

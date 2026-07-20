@@ -1,6 +1,6 @@
 <div class="ws-preview-html" style="display: flex; flex-direction: column; gap: 1rem">
   <div style="display: flex; align-items: center; gap: 0.75rem">
-    {#include components/icon name="fa:trash" size="lg" label="Delete item" /}
+    {#include components/icon iconModel=demoIconLabeled /}
     <span
       >Pass <code class="ws-code">label</code> to expose the icon to assistive tech. The rendered
       <code class="ws-code">&lt;svg&gt;</code> gets <code class="ws-code">role="img"</code> and the matching
@@ -8,7 +8,7 @@
     >
   </div>
   <div style="display: flex; align-items: center; gap: 0.75rem">
-    {#include components/icon name="fa:trash" size="lg" /}
+    {#include components/icon iconModel=demoIconDecorative /}
     <span
       >Without <code class="ws-code">label</code>, the SVG is marked <code class="ws-code">aria-hidden="true"</code> —
       appropriate when the icon is purely decorative or sits next to text that already conveys the meaning.</span
