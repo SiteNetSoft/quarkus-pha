@@ -1,14 +1,2 @@
-<div class="ws-preview-html">
-  {#include components/data-display/label-group id="lbg-static-dynamic" ariaLabel="Static labels, dynamic label group"}
-  {#content}
-  <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-sd-1" color="blue" removable=true removeClick="$el.closest('li').remove()"}Static label 1{/include}
-  </li>
-  <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-sd-2" color="blue" removable=true removeClick="$el.closest('li').remove()"}Static label 2{/include}
-  </li>
-  <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-sd-3" color="blue" removable=true removeClick="$el.closest('li').remove()"}Static label 3{/include}
-  </li>
-  {/content} {/include}
-</div>
+{! Populated from the Java model LabelDemoData.demoLabelGroupStaticDynamic (see the Java tab). !}
+<div class="ws-preview-html">{#include components/data-display/label-group group=demoLabelGroupStaticDynamic /}</div>

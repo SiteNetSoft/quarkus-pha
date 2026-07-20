@@ -1,11 +1,4 @@
+{! Populated from the Java model LabelDemoData.demoLabelsOutlined (see the Java tab). !}
 <div class="ws-preview-html" style="display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center">
-  {#include components/data-display/label id="lbl-outline-grey" variant="outline"}Grey{/include}
-  {#include components/data-display/label id="lbl-outline-blue" color="blue" variant="outline"}Blue{/include}
-  {#include components/data-display/label id="lbl-outline-teal" color="teal" variant="outline"}Teal{/include}
-  {#include components/data-display/label id="lbl-outline-green" color="green" variant="outline"}Green{/include}
-  {#include components/data-display/label id="lbl-outline-orange" color="orange" variant="outline"}Orange{/include}
-  {#include components/data-display/label id="lbl-outline-purple" color="purple" variant="outline"}Purple{/include}
-  {#include components/data-display/label id="lbl-outline-red" color="red" variant="outline"}Red{/include}
-  {#include components/data-display/label id="lbl-outline-icon" color="blue" variant="outline" iconName="fa:circle-info"}With icon{/include}
-  {#include components/data-display/label id="lbl-outline-removable" color="blue" variant="outline" removable=true}Removable{/include}
+  {#for lbl in demoLabelsOutlined}{#include components/data-display/label label=lbl /}{/for}
 </div>

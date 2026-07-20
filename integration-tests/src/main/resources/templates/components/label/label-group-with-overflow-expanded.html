@@ -1,26 +1,3 @@
-{! The same overflow group as above, but rendered already expanded (startExpanded) — the
-   Show Less toggle is live and collapses back to "3 more". !}
-<div class="ws-preview-html">
-  {#include components/data-display/label-group id="lbg-overflow-expanded" numLabels=3 startExpanded=true
-  ariaLabel="Label group with overflow expanded"}
-  {#content}
-  <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-ofe-1" iconName="fa:circle-info"}Label one{/include}
-  </li>
-  <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-ofe-2" color="blue" iconName="fa:circle-info"}Label two{/include}
-  </li>
-  <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-ofe-3" color="green" iconName="fa:circle-info"}Label three{/include}
-  </li>
-  <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-ofe-4" color="teal" iconName="fa:circle-info"}Label four{/include}
-  </li>
-  <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-ofe-5" color="purple" iconName="fa:circle-info"}Label five{/include}
-  </li>
-  <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-ofe-6" color="orange" iconName="fa:circle-info"}Label six{/include}
-  </li>
-  {/content} {/include}
-</div>
+{! The same overflow group as above, but rendered already expanded (startExpanded) — the Show Less toggle is live and collapses back to "3 more". !}
+{! Populated from the Java model LabelDemoData.demoLabelGroupOverflowExpanded (see the Java tab). !}
+<div class="ws-preview-html">{#include components/data-display/label-group group=demoLabelGroupOverflowExpanded /}</div>

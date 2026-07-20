@@ -1,15 +1,6 @@
-<div class="ws-preview-html" style="display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center" x-data>
-  <span
-    class="pf-v6-c-label pf-m-blue pf-m-editable"
-    id="lbl-editable"
-    x-data="phaLabelEditable()"
-    @click="start()"
-    @keydown="onKey($event)"
-  >
-    <span class="pf-v6-c-label__content" tabindex="0">
-      <span class="pf-v6-c-label__text" x-ref="text" @blur="commit()" @keydown="onKey($event)">Edit me</span>
-    </span>
-  </span>
+{! Populated from the Java model LabelDemoData.demoLabelEditable (see the Java tab). !}
+<div class="ws-preview-html" style="display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center">
+  {#include components/data-display/label label=demoLabelEditable /}
   <span style="color: var(--pf-t--global--text--color--subtle, #888); font-size: 0.875rem">
     Click the label (or press Enter / Space when focused) to edit. Enter commits, Esc cancels, blur commits.
   </span>
