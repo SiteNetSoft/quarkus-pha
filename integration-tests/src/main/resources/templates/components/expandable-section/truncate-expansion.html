@@ -1,10 +1,2 @@
-{! pf-m-truncate — the content is always present but clamped while collapsed;
-   the toggle has no icon and sits below the text. !}
-<div class="pf-v6-c-expandable-section pf-m-truncate" id="es-truncate-expansion" x-data="{ expanded: false }" :class="{ 'pf-m-expanded': expanded }" style="max-width: 480px">
-  <div class="pf-v6-c-expandable-section__content">
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante, id vehicula ex accumsan ut. Morbi viverra, eros vel porttitor facilisis, eros purus aliquet erat, nec lobortis felis elit pulvinar sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium est a porttitor vehicula. Quisque vel commodo urna. Morbi mattis rutrum ante, id vehicula ex accumsan ut. Morbi viverra, eros vel porttitor facilisis, eros purus aliquet erat, nec lobortis felis elit pulvinar sem.</p>
-  </div>
-  <button class="pf-v6-c-expandable-section__toggle" type="button" :aria-expanded="expanded" @click="expanded = !expanded">
-    <span x-text="expanded ? 'Show less' : 'Show more'">Show more</span>
-  </button>
-</div>
+{! Populated from the Java model ExpandableSectionDemoData.demoEsTruncateExpansion (see the Java tab). !}
+{#include components/data-display/expandable-section section=demoEsTruncateExpansion /}
