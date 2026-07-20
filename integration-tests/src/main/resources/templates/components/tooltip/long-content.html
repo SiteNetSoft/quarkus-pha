@@ -1,7 +1,4 @@
 {! PatternFly caps the bubble at 18.75rem (300px); longer text wraps instead of stretching. !}
 <div style="padding: 3.5rem; text-align: center">
-  {#include components/feedback/tooltip id="tt-long" position="bottom"}
-  {#trigger}{#include components/actions/button variant="secondary"}{#content}Long tooltip{/content}{/include}{/trigger}
-  {#tip}This tooltip carries a lot of text. PatternFly caps the bubble at 18.75rem wide, so the content wraps onto multiple lines rather than stretching across the page.{/tip}
-  {/include}
+  {#include components/feedback/tooltip tooltip=demoTtLong /}
 </div>
