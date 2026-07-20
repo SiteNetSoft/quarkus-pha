@@ -12,6 +12,16 @@
                         content changes while open (dynamic-content pattern). !}
 {! Slots: {#trigger} — the hover/focus target (button, icon button, link).
           {#tip} — the tooltip text. !}
+{! Model mode: pass tooltip=<org.sitenetsoft.quarkus.pha.model.Tooltip> — the trigger is a composed Button model. !}
+{#if tooltip??}
+<div class="pha-tooltip" x-data="phaTooltip()">
+  <span x-ref="trigger" @mouseenter="show()" @mouseleave="hide()" @focusin="show()" @focusout="hide()" aria-describedby="{tooltip.id}">{#include components/actions/button btn=tooltip.trigger /}</span>
+  <div x-ref="tip" x-show="open" x-cloak role="tooltip" id="{tooltip.id}"{#if tooltip.ariaLive??} aria-live="{tooltip.ariaLive}"{/if} class="pf-v6-c-tooltip pf-m-{tooltip.position}">
+    <div class="pf-v6-c-tooltip__arrow"></div>
+    <div class="pf-v6-c-tooltip__content{#if tooltip.isTextAlignLeft} pf-m-text-align-left{/if}">{tooltip.tipText}</div>
+  </div>
+</div>
+{#else}
 <div class="pha-tooltip" x-data="phaTooltip()">
   <span x-ref="trigger" @mouseenter="show()" @mouseleave="hide()" @focusin="show()" @focusout="hide()"{#if id??} aria-describedby="{id}"{/if}>{! Shadow id/attrs so they don't leak into composed
       buttons via Qute include-data inheritance — explicit values on the button still win. !}{#let id=null attrs=null}{#insert trigger}{/insert}{/let}</span>
@@ -20,3 +30,4 @@
     <div class="pf-v6-c-tooltip__content{#if textAlignLeft??} pf-m-text-align-left{/if}">{#insert tip}{/insert}</div>
   </div>
 </div>
+{/if}
