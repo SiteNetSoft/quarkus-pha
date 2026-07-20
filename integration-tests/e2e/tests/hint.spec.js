@@ -22,20 +22,14 @@ test.describe("Hint", () => {
   });
 
   test("basic hint has title and body text", async ({ page }) => {
-    await expect(page.locator("#ht-basic .pf-v6-c-hint__title")).toHaveText(
-      "Pro tip"
-    );
+    await expect(page.locator("#ht-basic .pf-v6-c-hint__title")).toHaveText("Pro tip");
     await expect(page.locator("#ht-basic .pf-v6-c-hint__body")).toBeVisible();
   });
 
   test("with-content hint has title, body, and footer", async ({ page }) => {
-    await expect(page.locator("#ht-content .pf-v6-c-hint__title")).toHaveText(
-      "Hint with action"
-    );
+    await expect(page.locator("#ht-content .pf-v6-c-hint__title")).toHaveText("Hint with action");
     await expect(page.locator("#ht-content .pf-v6-c-hint__body")).toBeVisible();
-    await expect(
-      page.locator("#ht-content .pf-v6-c-hint__footer")
-    ).toBeVisible();
+    await expect(page.locator("#ht-content .pf-v6-c-hint__footer")).toBeVisible();
   });
 
   test.describe("Parity additions", () => {
@@ -47,6 +41,27 @@ test.describe("Hint", () => {
     test("/components/hint/without-title returns 200", async ({ page }) => {
       const res = await page.goto("/components/hint/without-title");
       expect(res.status()).toBe(200);
+    });
+  });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/hint");
+      for (const ex of ["basic", "with-content", "without-title"]) {
+        const card = page.locator(`[data-rendered-href="/components/hint/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/hint/source-java/with-content");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain(".footerHtml(");
+    });
+
+    test("model with-content hint renders the footer action link", async ({ page }) => {
+      await page.goto("/components/hint/with-content");
+      const footer = page.locator("#ht-content .pf-v6-c-hint__footer");
+      await expect(footer.locator("a.pf-v6-c-button")).toHaveText("Read the guide");
     });
   });
 });
