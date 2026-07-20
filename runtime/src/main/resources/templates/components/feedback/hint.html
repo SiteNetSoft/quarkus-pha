@@ -2,6 +2,18 @@
                                        title (rendered in __title), bodyText (rendered in __body) !}
 {! For richer content (footer, action links) hand-render the div.pf-v6-c-hint !} {! markup directly — we don't expose a
 slot here to avoid Qute slot-name collisions with example-card. !}
+{! Model mode: pass hint=<org.sitenetsoft.quarkus.pha.model.Hint> — adds a raw-HTML footer for action links. !}
+{#if hint??}
+<div class="pf-v6-c-hint" id="{hint.id}">
+  {#if hint.title??}
+  <div class="pf-v6-c-hint__title">{hint.title}</div>
+  {/if} {#if hint.bodyText??}
+  <div class="pf-v6-c-hint__body">{hint.bodyText}</div>
+  {/if} {#if hint.footerHtml??}
+  <div class="pf-v6-c-hint__footer">{hint.footerHtml.raw}</div>
+  {/if}
+</div>
+{#else}
 <div class="pf-v6-c-hint"{#if id??} id="{id}"{/if}>
   {#if title??}
   <div class="pf-v6-c-hint__title">{title}</div>
@@ -9,3 +21,4 @@ slot here to avoid Qute slot-name collisions with example-card. !}
   <div class="pf-v6-c-hint__body">{bodyText}</div>
   {/if}
 </div>
+{/if}
