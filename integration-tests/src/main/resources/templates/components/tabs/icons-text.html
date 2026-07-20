@@ -1,11 +1,3 @@
-{! Tabs with leading icons. Composed from tab (icon param) + tab-content. !}
-<div x-data="{ active: 'it1' }">
-  {#include components/navigation/tabs id="tabs-icons-text" ariaLabel="Tabs with icons and text"}{#content}
-  {#include components/navigation/tab tabKey="it1" text="Users" icon="fa:users" /}
-  {#include components/navigation/tab tabKey="it2" text="Containers" icon="fa:cube" /}
-  {#include components/navigation/tab tabKey="it3" text="Database" icon="fa:database" /}
-  {/content}{/include}
-  {#include components/navigation/tab-content tabKey="it1"}Users panel content{/include}
-  {#include components/navigation/tab-content tabKey="it2" cloak=true}Containers panel content{/include}
-  {#include components/navigation/tab-content tabKey="it3" cloak=true}Database panel content{/include}
-</div>
+{! Tabs with leading icons. !}
+{! Populated from the Java model TabsDemoData.demoTabsIconsText (see the Java tab). !}
+{#include components/navigation/tabs tabs=demoTabsIconsText /}

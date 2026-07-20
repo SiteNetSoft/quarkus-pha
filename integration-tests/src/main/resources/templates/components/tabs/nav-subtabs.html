@@ -1,33 +1,8 @@
+{! Main + secondary navigation-link rows sharing chrome-owned state. !}
+{! Populated from the Java models TabsDemoData.demoTabsNavMain + demoTabsNavSubtab (see the Java tab). !}
 <div x-data="{ active: 'm1', sub: 'sb1' }">
-  {#include components/navigation/tabs id="tabs-nav-main" nav=true ariaLabel="Main navigation tabs"}{#content}
-  <li class="pf-v6-c-tabs__item" :class="active === 'm1' ? 'pf-m-current' : ''">
-    <a href="#" class="pf-v6-c-tabs__link" :aria-current="active === 'm1' ? 'page' : false" @click.prevent="active = 'm1'">
-      <span class="pf-v6-c-tabs__item-text">Cluster</span>
-    </a>
-  </li>
-  <li class="pf-v6-c-tabs__item" :class="active === 'm2' ? 'pf-m-current' : ''">
-    <a href="#" class="pf-v6-c-tabs__link" :aria-current="active === 'm2' ? 'page' : false" @click.prevent="active = 'm2'">
-      <span class="pf-v6-c-tabs__item-text">Nodes</span>
-    </a>
-  </li>
-  {/content}{/include}
-  {#include components/navigation/tabs id="tabs-nav-subtab" nav=true subtab=true ariaLabel="Secondary navigation tabs"}{#content}
-  <li class="pf-v6-c-tabs__item" :class="sub === 'sb1' ? 'pf-m-current' : ''">
-    <a href="#" class="pf-v6-c-tabs__link" :aria-current="sub === 'sb1' ? 'page' : false" @click.prevent="sub = 'sb1'">
-      <span class="pf-v6-c-tabs__item-text">Details</span>
-    </a>
-  </li>
-  <li class="pf-v6-c-tabs__item" :class="sub === 'sb2' ? 'pf-m-current' : ''">
-    <a href="#" class="pf-v6-c-tabs__link" :aria-current="sub === 'sb2' ? 'page' : false" @click.prevent="sub = 'sb2'">
-      <span class="pf-v6-c-tabs__item-text">Metrics</span>
-    </a>
-  </li>
-  <li class="pf-v6-c-tabs__item" :class="sub === 'sb3' ? 'pf-m-current' : ''">
-    <a href="#" class="pf-v6-c-tabs__link" :aria-current="sub === 'sb3' ? 'page' : false" @click.prevent="sub = 'sb3'">
-      <span class="pf-v6-c-tabs__item-text">Events</span>
-    </a>
-  </li>
-  {/content}{/include}
+  {#include components/navigation/tabs tabs=demoTabsNavMain /}
+  {#include components/navigation/tabs tabs=demoTabsNavSubtab /}
   <section class="pf-v6-c-tab-content" role="tabpanel">
     <div class="pf-v6-c-tab-content__body">
       Main: <span x-text="active">m1</span> / sub: <span x-text="sub">sb1</span>

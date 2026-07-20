@@ -1,9 +1,3 @@
-{! Padded content body — tab-content with padding=true emits pf-m-padding. !}
-<div x-data="{ active: 'cb1' }">
-  {#include components/navigation/tabs id="tabs-content-body-padding" ariaLabel="Tabs with padded content body"}{#content}
-  {#include components/navigation/tab tabKey="cb1" text="Users" /}
-  {#include components/navigation/tab tabKey="cb2" text="Containers" /}
-  {/content}{/include}
-  {#include components/navigation/tab-content tabKey="cb1" padding=true}This tab content body carries <code class="ws-code">pf-m-padding</code>.{/include}
-  {#include components/navigation/tab-content tabKey="cb2" padding=true cloak=true}Containers panel — also padded.{/include}
-</div>
+{! Padded content body — panelPadding() emits pf-m-padding. !}
+{! Populated from the Java model TabsDemoData.demoTabsContentBodyPadding (see the Java tab). !}
+{#include components/navigation/tabs tabs=demoTabsContentBodyPadding /}

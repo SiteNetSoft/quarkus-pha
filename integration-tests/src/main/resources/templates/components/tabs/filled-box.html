@@ -1,11 +1,3 @@
-{! Filled box tabs — pf-m-fill + pf-m-box. Composed from tab + tab-content. !}
-<div x-data="{ active: 'fb1' }">
-  {#include components/navigation/tabs id="tabs-filled-box" filled=true box=true ariaLabel="Filled box tabs"}{#content}
-  {#include components/navigation/tab tabKey="fb1" text="Users" /}
-  {#include components/navigation/tab tabKey="fb2" text="Containers" /}
-  {#include components/navigation/tab tabKey="fb3" text="Database" /}
-  {/content}{/include}
-  {#include components/navigation/tab-content tabKey="fb1"}Users panel content{/include}
-  {#include components/navigation/tab-content tabKey="fb2" cloak=true}Containers panel content{/include}
-  {#include components/navigation/tab-content tabKey="fb3" cloak=true}Database panel content{/include}
-</div>
+{! Filled box tabs — pf-m-fill + pf-m-box. !}
+{! Populated from the Java model TabsDemoData.demoTabsFilledBox (see the Java tab). !}
+{#include components/navigation/tabs tabs=demoTabsFilledBox /}

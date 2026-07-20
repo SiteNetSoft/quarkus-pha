@@ -1,11 +1,3 @@
-{! pageInsets=true emits pf-m-page-insets. Composed from tab + tab-content. !}
-<div x-data="{ active: 'p1' }">
-  {#include components/navigation/tabs id="tabs-page-insets" pageInsets=true ariaLabel="Tabs with page insets"}{#content}
-  {#include components/navigation/tab tabKey="p1" text="Users" /}
-  {#include components/navigation/tab tabKey="p2" text="Containers" /}
-  {#include components/navigation/tab tabKey="p3" text="Database" /}
-  {/content}{/include}
-  {#include components/navigation/tab-content tabKey="p1"}Users panel content{/include}
-  {#include components/navigation/tab-content tabKey="p2" cloak=true}Containers panel content{/include}
-  {#include components/navigation/tab-content tabKey="p3" cloak=true}Database panel content{/include}
-</div>
+{! pageInsets() emits pf-m-page-insets. !}
+{! Populated from the Java model TabsDemoData.demoTabsPageInsets (see the Java tab). !}
+{#include components/navigation/tabs tabs=demoTabsPageInsets /}

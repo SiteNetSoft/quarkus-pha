@@ -1,18 +1,3 @@
-{! Animated current-tab accent — pf-m-animate-current slides the accent bar to the current
-   tab. PF core hardcodes the --link-accent-- variables; here Alpine measures the current
-   tab and keeps them live (the "functional example" core defers to React for). !}
-<div
-  x-data="{ active: 'ad1',
-    accent(root) { root.querySelectorAll('.pf-v6-c-tabs').forEach(function (t) { var list = t.querySelector('.pf-v6-c-tabs__list'); var cur = t.querySelector('.pf-v6-c-tabs__item.pf-m-current .pf-v6-c-tabs__link'); if (!list || !cur) return; var lr = list.getBoundingClientRect(); var cr = cur.getBoundingClientRect(); var vertical = t.classList.contains('pf-m-vertical'); t.style.setProperty('--pf-v6-c-tabs--link-accent--start', Math.round(vertical ? cr.top - lr.top : cr.left - lr.left) + 'px'); t.style.setProperty('--pf-v6-c-tabs--link-accent--length', Math.round(vertical ? cr.height : cr.width) + 'px'); }); } }"
-  x-effect="active; $nextTick(function () { accent($root) })"
-  @resize.window.debounce.100ms="accent($root)"
->
-  {#include components/navigation/tabs id="tabs-animate-default" modifiers="pf-m-animate-current" ariaLabel="Animated tabs"}{#content}
-  {#include components/navigation/tab tabKey="ad1" text="Users" /}
-  {#include components/navigation/tab tabKey="ad2" text="Containers" /}
-  {#include components/navigation/tab tabKey="ad3" text="Database" /}
-  {/content}{/include}
-  {#include components/navigation/tab-content tabKey="ad1"}Users panel content{/include}
-  {#include components/navigation/tab-content tabKey="ad2" cloak=true}Containers panel content{/include}
-  {#include components/navigation/tab-content tabKey="ad3" cloak=true}Database panel content{/include}
-</div>
+{! Animated current-tab accent — animated() emits the live accent-measuring wrapper. !}
+{! Populated from the Java model TabsDemoData.demoTabsAnimateDefault (see the Java tab). !}
+{#include components/navigation/tabs tabs=demoTabsAnimateDefault /}

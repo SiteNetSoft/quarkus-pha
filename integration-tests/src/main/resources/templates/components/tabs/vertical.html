@@ -1,13 +1,3 @@
-{! Vertical tabs — pf-m-vertical. Composed from tab + tab-content. !}
-<div x-data="{ active: 'v1' }" style="display: flex; gap: 1rem">
-  {#include components/navigation/tabs id="tabs-vertical" vertical=true}{#content}
-  {#include components/navigation/tab tabKey="v1" text="General" /}
-  {#include components/navigation/tab tabKey="v2" text="Security" /}
-  {#include components/navigation/tab tabKey="v3" text="Notifications" /}
-  {/content}{/include}
-  <div style="flex: 1">
-    {#include components/navigation/tab-content tabKey="v1" padding=true}General settings.{/include}
-    {#include components/navigation/tab-content tabKey="v2" padding=true cloak=true}Security settings.{/include}
-    {#include components/navigation/tab-content tabKey="v3" padding=true cloak=true}Notification preferences.{/include}
-  </div>
-</div>
+{! Vertical tabs — pf-m-vertical with the flex layout chrome. !}
+{! Populated from the Java model TabsDemoData.demoTabsVertical (see the Java tab). !}
+{#include components/navigation/tabs tabs=demoTabsVertical /}
