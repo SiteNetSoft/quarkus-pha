@@ -1,18 +1,2 @@
 {! No productName — the dialog uses ariaLabel for AT context instead of aria-labelledby. The brand image still anchors recognition. !}
-<button class="pf-v6-c-button pf-m-primary" type="button" @click="$dispatch('open-about-modal-noname')">
-  About (no product name)
-</button>
-{#include components/feedback/about-modal id="noname" ariaLabel="About this product" brandImageSrc="/web/images/quarkus-pha-logo-dark.svg" brandImageAlt="quarkus-pha logo" backgroundImage="/web/images/pf-background.svg"} {#content}
-<p>
-  This dialog has no product-name heading. Screen readers announce the modal via the <code>aria-label</code> attribute
-  instead.
-</p>
-<dl class="pf-v6-c-description-list pf-m-horizontal">
-  <div class="pf-v6-c-description-list__group">
-    <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Version</span></dt>
-    <dd class="pf-v6-c-description-list__description">
-      <div class="pf-v6-c-description-list__text">1.0.0-SNAPSHOT</div>
-    </dd>
-  </div>
-</dl>
-{/content} {#strapline}Copyright &copy; 2026 SiteNetSoft{/strapline} {/include}
+{#include components/feedback/about-modal aboutModal=demoAmNoName /}
