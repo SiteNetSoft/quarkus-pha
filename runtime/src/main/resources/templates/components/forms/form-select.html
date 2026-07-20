@@ -2,6 +2,22 @@
 {! Required: id — used for the select's name; derives {id}-field on the inner <select> for form submission wiring. !}
 {! Optional: disabled, required, validated (success|warning|error) !}
 {! Slot: options — one or more <option> / <optgroup> elements. !}
+{! Model mode: pass formSelect=<org.sitenetsoft.quarkus.pha.model.FormSelect> — options are raw HTML on the model. !}
+{#if formSelect??}
+<span class="pf-v6-c-form-control{#if formSelect.validated??} pf-m-{formSelect.validated}{/if}{#if formSelect.isDisabled} pf-m-disabled{/if}" id="{formSelect.id}">
+  <select id="{formSelect.id}-field" name="{formSelect.id}"{#if formSelect.isDisabled} disabled{/if}{#if formSelect.isRequired} required{/if} aria-label="{formSelect.ariaLabel}"{#if formSelect.isError} aria-invalid="true"{/if}>
+    {formSelect.optionsHtml.raw}
+  </select>
+  <span class="pf-v6-c-form-control__toggle-icon">{icons:svg('fa:caret-down').raw}</span>
+  {#if formSelect.validated??}
+  <span class="pf-v6-c-form-control__utilities">
+    <span class="pf-v6-c-form-control__icon pf-m-status">
+      {#if formSelect.isSuccess}{icons:svg('fa:circle-check').raw}{#else if formSelect.isWarning}{icons:svg('fa:triangle-exclamation').raw}{#else if formSelect.isError}{icons:svg('fa:circle-exclamation').raw}{/if}
+    </span>
+  </span>
+  {/if}
+</span>
+{#else}
 <span class="pf-v6-c-form-control{#if validated??} pf-m-{validated}{/if}{#if disabled??} pf-m-disabled{/if}" id="{id}">
   <select id="{id}-field" name="{id}"{#if disabled??} disabled{/if}{#if required??} required{/if} aria-label="{#if ariaLabel??}{ariaLabel}{#else}Select{/if}"{#if validated??}{#if validated is 'error'} aria-invalid="true"{/if}{/if}>
     {#insert options}{/insert}
@@ -15,3 +31,4 @@
   </span>
   {/if}
 </span>
+{/if}
