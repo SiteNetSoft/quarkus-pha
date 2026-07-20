@@ -267,4 +267,47 @@ test.describe("Menu", () => {
       });
     }
   });
+
+  test.describe("Java source tab", () => {
+    // Drilldowns, flyouts and favorites stay hand-written (live composition state).
+    const HAND_WRITTEN = [
+      "favorites",
+      "with-drilldown",
+      "scrollable-drilldown",
+      "width-modified-drilldown",
+      "drilldown-initial-state",
+      "drilldown-breadcrumbs",
+      "drilldown-inline-filter",
+      "flyout",
+      "flyout-positions",
+    ];
+
+    test("model-driven cards get a leading Java tab; hand-written ones do not", async ({ page }) => {
+      await page.goto("/components/menu");
+      for (const ex of ["basic", "titled-groups", "option-single-select", "search-footer"]) {
+        const card = page.locator(`[data-rendered-href="/components/menu/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      for (const ex of HAND_WRITTEN) {
+        const card = page.locator(`[data-rendered-href="/components/menu/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+      }
+    });
+
+    test("Java tab opens Monaco with the builder code", async ({ page }) => {
+      await page.goto("/components/menu");
+      const card = page.locator('[data-rendered-href="/components/menu/basic"]');
+      await card.locator('button[aria-label*="Toggle Java"]').click();
+      await expect(card.locator(".monaco-editor").first()).toBeVisible({ timeout: 10000 });
+      await expect(card.locator(".monaco-editor .view-lines")).toContainText("Menu.builder()", {
+        timeout: 10000,
+      });
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/menu/source-java/option-multi-select");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain(".selectMulti()");
+    });
+  });
 });
