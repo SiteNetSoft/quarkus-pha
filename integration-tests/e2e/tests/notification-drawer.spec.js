@@ -54,4 +54,27 @@ test.describe("Notification Drawer", () => {
       expect(res.status()).toBe(200);
     });
   });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/notification-drawer");
+      for (const ex of ["basic", "groups", "lightweight"]) {
+        const card = page.locator(`[data-rendered-href="/components/notification-drawer/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/notification-drawer/source-java/groups");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.group("Production alerts", true, "2"');
+    });
+
+    test("generated groups expand and collapse", async ({ page }) => {
+      await page.goto("/components/notification-drawer/groups");
+      const staging = page.locator("#nd-groups section", { hasText: "Staging alerts" });
+      await expect(staging.locator(".pf-v6-c-notification-drawer__list")).toBeHidden();
+      await staging.locator("button.pf-v6-c-notification-drawer__group-toggle").click();
+      await expect(staging.locator(".pf-v6-c-notification-drawer__list")).toBeVisible();
+    });
+  });
 });
