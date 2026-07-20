@@ -199,8 +199,8 @@
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Color modifiers (PatternFly 6.6+): <code class="ws-code">pf-m-colorful</code> plus one of nine
                           color classes, on a <code class="ws-code">&lt;div role="img"&gt;</code> holding an icon or
-                          initials — the border comes automatically. Hand-rendered markup; the runtime template stays
-                          the plain <code class="ws-code">&lt;img&gt;</code> flavour.
+                          initials — the border comes automatically. The Avatar model renders this via its colorful
+                          anatomy; param mode stays the plain <code class="ws-code">&lt;img&gt;</code> flavour.
                         </p>
                         {/description} {#content}{#include components/avatar/colors /}{/content} {/include}
 
@@ -224,7 +224,9 @@
                           </h3>
                           <p class="pf-v6-c-content--p pf-m-editorial">
                             Parameters accepted by
-                            <code class="ws-code">{|{#include components/data-display/avatar ... /}|}</code>.
+                            <code class="ws-code">{|{#include components/data-display/avatar ... /}|}</code>. Model
+                            mode: pass <code class="ws-code">avatar=&lt;Avatar&gt;</code> built in Java instead — the
+                            Java tab on each example shows the builder.
                           </p>
                           <table
                             class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
@@ -349,9 +351,9 @@
                           </p>
                           <p class="pf-v6-c-content--p pf-m-editorial">
                             <strong>Initials fallback.</strong> For users without a photo, render the div flavour with
-                            an <code class="ws-code">__initials</code> span — bordered or colorful. The runtime template
-                            is the <code class="ws-code">&lt;img&gt;</code> flavour only, so initials avatars are
-                            hand-written markup; see the <a href="#initials">Initials</a> example.
+                            an <code class="ws-code">__initials</code> span — bordered or colorful. In param mode the
+                            runtime template is the <code class="ws-code">&lt;img&gt;</code> flavour only; the Avatar
+                            model renders initials directly — see the <a href="#initials">Initials</a> example.
                           </p>
                           <p class="pf-v6-c-content--p pf-m-editorial">
                             <strong>Failed-load fallback.</strong> PatternFly's CSS has no built-in placeholder for
