@@ -1,7 +1,4 @@
+{! Populated from the Java model ButtonDemoData.demoButtonsSmall (see the Java tab). !}
 <div class="ws-preview-html" style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center">
-  {#include components/actions/button id="btn-sm-primary" variant="primary" size="sm"}{#content}Small
-  primary{/content}{/include}
-{#include components/actions/button id="btn-sm-secondary" variant="secondary" size="sm"}{#content}Small secondary{/content}{/include}
-{#include components/actions/button id="btn-sm-tertiary" variant="tertiary" size="sm"}{#content}Small tertiary{/content}{/include}
-{#include components/actions/button id="btn-sm-link" variant="link" size="sm"}{#content}Small link{/content}{/include}
+  {#for b in demoButtonsSmall}{#include components/actions/button btn=b /}{/for}
 </div>

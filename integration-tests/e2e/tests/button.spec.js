@@ -111,4 +111,29 @@ test.describe("Button", () => {
       await expect(page.locator("#login-btn")).toBeVisible({ timeout: 5000 });
     });
   });
+  test.describe("Java source tab", () => {
+    test("model-driven cards get a leading Java tab; progress-login does not", async ({ page }) => {
+      await page.goto("/components/button");
+      for (const ex of ["variant-examples", "circle-buttons", "hamburger", "custom-component"]) {
+        const card = page.locator(`[data-rendered-href="/components/button/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      const handWritten = page.locator('[data-rendered-href="/components/button/progress-login"]');
+      await expect(handWritten.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+    });
+
+    test("Java tab opens Monaco with the builder code", async ({ page }) => {
+      await page.goto("/components/button");
+      const card = page.locator('[data-rendered-href="/components/button/variant-examples"]');
+      await card.locator('button[aria-label*="Toggle Java"]').click();
+      await expect(card.locator(".monaco-editor").first()).toBeVisible({ timeout: 10000 });
+      await expect(card.locator(".monaco-editor .view-lines")).toContainText("Button.of(", { timeout: 10000 });
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/button/source-java/hamburger");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('Button.hamburger("Open menu")');
+    });
+  });
 });

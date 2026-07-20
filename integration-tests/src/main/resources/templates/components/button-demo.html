@@ -271,43 +271,43 @@
                         </div>
 
                         {#include partials/example-card title="Variant examples" slug="variant-examples"
-                        component="button"} {#description}
+                        component="button" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           All eight variants: primary, secondary, tertiary, danger, warning, link, plain (icon-only),
                           control.
                         </p>
                         {/description} {#content}{#include components/button/variant-examples /}{/content} {/include}
                         {#include partials/example-card title="Disabled buttons" slug="disabled-buttons"
-                        component="button"} {#description}
+                        component="button" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">disabled=true</code> renders the HTML
                           <code class="ws-code">disabled</code> attribute — fully non-interactive, removed from the tab
                           order. For an aria-disabled variant that stays focusable, see below.
                         </p>
                         {/description} {#content}{#include components/button/disabled-buttons /}{/content} {/include}
-                        {#include partials/example-card title="Small buttons" slug="small-buttons" component="button"}
-                        {#description}
+                        {#include partials/example-card title="Small buttons" slug="small-buttons" component="button"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Pass <code class="ws-code">size="sm"</code> for compact contexts (toolbars, dense forms, table
                           action columns).
                         </p>
                         {/description} {#content}{#include components/button/small-buttons /}{/content} {/include}
-                        {#include partials/example-card title="Call to action" slug="call-to-action" component="button"}
-                        {#description}
+                        {#include partials/example-card title="Call to action" slug="call-to-action" component="button"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Pass <code class="ws-code">size="lg"</code> for prominent CTAs (hero sections, marketing
                           tiles).
                         </p>
                         {/description} {#content}{#include components/button/call-to-action /}{/content} {/include}
-                        {#include partials/example-card title="Block level" slug="block-level" component="button"}
-                        {#description}
+                        {#include partials/example-card title="Block level" slug="block-level" component="button"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">block=true</code> stretches the button to fill its container width.
                           Common inside modal footers and login forms.
                         </p>
                         {/description} {#content}{#include components/button/block-level /}{/content} {/include}
                         {#include partials/example-card title="Progress indicators" slug="progress-indicators"
-                        component="button"} {#description}
+                        component="button" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">isLoading=true</code> adds <code class="ws-code">pf-m-progress</code> /
                           <code class="ws-code">pf-m-in-progress</code> and renders the PF v6 spinner inside a
@@ -316,7 +316,7 @@
                         </p>
                         {/description} {#content}{#include components/button/progress-indicators /}{/content} {/include}
                         {#include partials/example-card title="Links as buttons" slug="links-as-buttons"
-                        component="button"} {#description}
+                        component="button" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Pass <code class="ws-code">href="..."</code> to render an
                           <code class="ws-code">&lt;a&gt;</code> with button styling. Combine with
@@ -325,7 +325,7 @@
                         </p>
                         {/description} {#content}{#include components/button/links-as-buttons /}{/content} {/include}
                         {#include partials/example-card title="Inline link as span" slug="inline-link-as-span"
-                        component="button"} {#description}
+                        component="button" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">component="span" variant="link" inline=true</code> renders the styled
                           element as a <code class="ws-code">&lt;span&gt;</code> — useful inside running prose where
@@ -334,7 +334,7 @@
                         </p>
                         {/description} {#content}{#include components/button/inline-link-as-span /}{/content} {/include}
                         {#include partials/example-card title="Custom component" slug="custom-component"
-                        component="button"} {#description}
+                        component="button" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">component="span"</code> / <code class="ws-code">"div"</code> / etc.
                           replaces the host element. Use sparingly — the host element loses its native button semantics
@@ -342,7 +342,7 @@
                         </p>
                         {/description} {#content}{#include components/button/custom-component /}{/content} {/include}
                         {#include partials/example-card title="Aria-disabled examples" slug="aria-disabled-examples"
-                        component="button"} {#description}
+                        component="button" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">ariaDisabled=true</code> communicates the disabled state to assistive
                           tech without setting the HTML <code class="ws-code">disabled</code> attribute — the button
@@ -350,7 +350,7 @@
                         </p>
                         {/description} {#content}{#include components/button/aria-disabled-examples /}{/content}
                         {/include} {#include partials/example-card title="Button with count" slug="button-with-count"
-                        component="button"} {#description}
+                        component="button" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Pass <code class="ws-code">count</code> to render a PF v6 badge on the trailing edge of the
                           button. <code class="ws-code">countRead=true</code> switches the badge to the muted (read)
@@ -358,23 +358,23 @@
                         </p>
                         {/description} {#content}{#include components/button/button-with-count /}{/content} {/include}
                         {#include partials/example-card title="Plain with no padding" slug="plain-with-no-padding"
-                        component="button"} {#description}
+                        component="button" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">hasNoPadding=true</code> strips the inline padding on
                           <code class="ws-code">variant="plain"</code> buttons. Useful when a plain icon button sits
                           inside another inline element and you want the icon flush.
                         </p>
                         {/description} {#content}{#include components/button/plain-with-no-padding /}{/content}
-                        {/include} {#include partials/example-card title="Stateful" slug="stateful" component="button"}
-                        {#description}
+                        {/include} {#include partials/example-card title="Stateful" slug="stateful" component="button"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">variant="stateful"</code> + <code class="ws-code">stateful=true</code> +
                           <code class="ws-code">state="read"|"unread"|"attention"</code> renders a notification-style
                           icon button that reflects the current state via PF's stateful tokens.
                         </p>
                         {/description} {#content}{#include components/button/stateful /}{/content} {/include} {#include
-                        partials/example-card title="Circle buttons" slug="circle-buttons" component="button"}
-                        {#description}
+                        partials/example-card title="Circle buttons" slug="circle-buttons" component="button"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">circle=true</code> renders a circular icon-only button (<code
                             class="ws-code"
@@ -383,8 +383,8 @@
                           Always pass <code class="ws-code">ariaLabel</code>.
                         </p>
                         {/description} {#content}{#include components/button/circle-buttons /}{/content} {/include}
-                        {#include partials/example-card title="Button types" slug="button-types" component="button"}
-                        {#description}
+                        {#include partials/example-card title="Button types" slug="button-types" component="button"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">type="submit"</code> / <code class="ws-code">"reset"</code> set the
                           form-control behaviour of a <code class="ws-code">&lt;button&gt;</code>; the default is
@@ -400,8 +400,8 @@
                           <code class="ws-code">pf-m-in-progress</code> while it runs.
                         </p>
                         {/description} {#content}{#include components/button/progress-login /}{/content} {/include}
-                        {#include partials/example-card title="Favorite" slug="favorite" component="button"}
-                        {#description}
+                        {#include partials/example-card title="Favorite" slug="favorite" component="button"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">favorite=true</code> turns the button into a star toggle.
                           <code class="ws-code">favorited=true</code> switches to the filled state — PF v6 cross-fades
@@ -410,14 +410,16 @@
                           <code class="ws-code">__icon-favorited</code> sub-spans.
                         </p>
                         {/description} {#content}{#include components/button/favorite /}{/content} {/include} {#include
-                        partials/example-card title="Settings" slug="settings" component="button"} {#description}
+                        partials/example-card title="Settings" slug="settings" component="button" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">settings=true</code> renders a gear icon with PF v6's rotate-on-hover
                           transition. Always pair with <code class="ws-code">ariaLabel</code> since the button is
                           icon-only.
                         </p>
                         {/description} {#content}{#include components/button/settings /}{/content} {/include} {#include
-                        partials/example-card title="Hamburger" slug="hamburger" component="button"} {#description}
+                        partials/example-card title="Hamburger" slug="hamburger" component="button" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">hamburger=true</code> renders the three-line menu icon. Add
                           <code class="ws-code">hamburgerVariant="expand"|"collapse"</code> to morph between the bars
