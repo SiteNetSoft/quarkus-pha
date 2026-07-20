@@ -69,6 +69,25 @@ public class FormsExamplesRoutes {
     }
 
     @GET
+    @Path("/{name:(checkbox|radio|text-area|text-input|form-control|form-select|form)}/source-java/{example}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String sourceJava(@PathParam("name") String name, @PathParam("example") String example) {
+        Set<String> allowed = EXAMPLES.get(name);
+        if (allowed == null || !allowed.contains(example)) {
+            throw new NotFoundException("Unknown " + name + " example: " + example);
+        }
+        String resourcePath = "/code-samples/" + name + "/" + example + ".java";
+        try (InputStream in = getClass().getResourceAsStream(resourcePath)) {
+            if (in == null) {
+                throw new NotFoundException("Missing Java sample for: " + example);
+            }
+            return new String(in.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed reading " + resourcePath, e);
+        }
+    }
+
+    @GET
     @Path("/{name:(form|form-control|checkbox|form-select|radio|text-area|text-input)}/{example}")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance standalone(@PathParam("name") String name, @PathParam("example") String example) {
