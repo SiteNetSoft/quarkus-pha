@@ -1,12 +1,12 @@
-{! pf-m-sticky-base always; pf-m-sticky-stuck applied live while the container is scrolled.
-   Covers PF HTML "Top sticky with base and stuck" and React "Dynamic sticky top". !}
+{! pf-m-sticky-base always; pf-m-sticky-stuck applied live while the container is scrolled. Covers PF HTML "Top sticky with base and stuck" and React "Dynamic sticky top". !}
+{! Populated from the Java model PaginationDemoData.demoPgStickyBaseStuck (see the Java tab). !}
 <div x-data="{ stuck: false }">
   <div
     style="height: 220px; overflow-y: auto; border: 1px solid var(--pf-t--global--border--color--default)"
     tabindex="0"
     @scroll="stuck = $el.scrollTop > 0"
   >
-    {#include components/pagination/_pagination-flavor id="pg-sticky-base-stuck" navLabel="Pagination nav - top sticky with base and stuck example" modifiers="pf-m-sticky-base" stickyDynamic="scroll" /}
+    {#include components/navigation/pagination pagination=demoPgStickyBaseStuck /}
     <p style="padding: 0.5rem 1rem">Row 1</p>
     <p style="padding: 0.5rem 1rem">Row 2</p>
     <p style="padding: 0.5rem 1rem">Row 3</p>
