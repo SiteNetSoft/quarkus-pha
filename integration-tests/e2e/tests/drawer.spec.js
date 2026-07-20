@@ -235,4 +235,36 @@ test.describe("Drawer", () => {
       });
     }
   });
+  test.describe("Java source tab", () => {
+    test("model-driven cards get a leading Java tab; scope-sharing compositions do not", async ({ page }) => {
+      await page.goto("/components/drawer");
+      for (const ex of ["basic", "resizable-end", "stacked-content-body", "static"]) {
+        const card = page.locator(`[data-rendered-href="/components/drawer/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      for (const ex of ["secondary-background", "focus-trap"]) {
+        const card = page.locator(`[data-rendered-href="/components/drawer/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/drawer/source-java/resizable-end");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain(".resizable(500, 150)");
+    });
+
+    test("generated toggle opens the panel and the head close button closes it", async ({ page }) => {
+      await page.goto("/components/drawer/basic");
+      const panel = page.locator("#dr-basic .pf-v6-c-drawer__panel");
+      await expect(panel).toBeHidden();
+      const toggle = page.locator("#dr-basic .pf-v6-c-drawer__content button.pf-m-primary");
+      await expect(toggle).toHaveText("Open drawer");
+      await toggle.click();
+      await expect(panel).toBeVisible();
+      await expect(toggle).toHaveText("Close drawer");
+      await panel.locator('button[aria-label="Close drawer panel"]').click();
+      await expect(panel).toBeHidden();
+    });
+  });
 });

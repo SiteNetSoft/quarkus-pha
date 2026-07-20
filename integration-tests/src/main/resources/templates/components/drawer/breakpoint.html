@@ -1,15 +1,1 @@
-{#include components/data-display/drawer id="dr-breakpoint" attrs='style="min-height: 240px"'}
-{#include components/data-display/drawer-main}
-{#include components/data-display/drawer-content}
-{#include components/data-display/drawer-body padding=true}
-    <button class="pf-v6-c-button pf-m-primary" type="button" :aria-expanded="expanded.toString()" @click="expanded = !expanded; if (expanded) $nextTick(() => $refs.focus.focus())">
-      <span class="pf-v6-c-button__text">Toggle drawer</span>
-    </button>
-    <p style="margin-top: 1rem">The panel width is set with <code class="ws-code">pf-m-width-33</code> — width modifiers (25/33/50/66/75/100) also come in -on-lg / -on-xl forms.</p>
-{/include}
-{/include}
-{#include components/data-display/drawer-panel panelWidth="pf-m-width-33"}
-{#include components/data-display/drawer-head}<span :tabindex="expanded ? '0' : '-1'" x-ref="focus">Drawer panel header</span>{/include}
-{/include}
-{/include}
-{/include}
+{#include components/data-display/drawer drawer=demoDrBreakpoint /}
