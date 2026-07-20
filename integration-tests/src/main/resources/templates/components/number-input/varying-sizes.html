@@ -1,35 +1,3 @@
 <div style="display: flex; flex-direction: column; gap: 0.5rem">
-<div class="pf-v6-c-number-input" id="ni-size-1" x-data="{ val: 1 }">
-  <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Minus"  @click="val = val - 1">
-    <span class="pf-v6-c-number-input__icon">{icons:svg('fa:minus').raw}</span>
-  </button>
-  <span class="pf-v6-c-form-control">
-    <input type="number" x-model.number="val" aria-label="Number input" style="width: 4ch" />
-  </span>
-  <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Plus"  @click="val = val + 1">
-    <span class="pf-v6-c-number-input__icon">{icons:svg('fa:plus').raw}</span>
-  </button>
-</div>
-<div class="pf-v6-c-number-input" id="ni-size-2" x-data="{ val: 1234567 }">
-  <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Minus"  @click="val = val - 1">
-    <span class="pf-v6-c-number-input__icon">{icons:svg('fa:minus').raw}</span>
-  </button>
-  <span class="pf-v6-c-form-control">
-    <input type="number" x-model.number="val" aria-label="Number input" style="width: 10ch" />
-  </span>
-  <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Plus"  @click="val = val + 1">
-    <span class="pf-v6-c-number-input__icon">{icons:svg('fa:plus').raw}</span>
-  </button>
-</div>
-<div class="pf-v6-c-number-input" id="ni-size-3" x-data="{ val: 12 }">
-  <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Minus"  @click="val = val - 1">
-    <span class="pf-v6-c-number-input__icon">{icons:svg('fa:minus').raw}</span>
-  </button>
-  <span class="pf-v6-c-form-control">
-    <input type="number" x-model.number="val" aria-label="Number input" style="width: 18ch" />
-  </span>
-  <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Plus"  @click="val = val + 1">
-    <span class="pf-v6-c-number-input__icon">{icons:svg('fa:plus').raw}</span>
-  </button>
-</div>
+  {#for n in demoNisSizes}{#include components/forms/number-input numberInput=n /}{/for}
 </div>
