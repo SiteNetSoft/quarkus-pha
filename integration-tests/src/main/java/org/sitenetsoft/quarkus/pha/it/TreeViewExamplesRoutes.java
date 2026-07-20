@@ -75,6 +75,24 @@ public class TreeViewExamplesRoutes {
     }
 
     @GET
+    @Path("/tree-view/source-java/{example}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String sourceJava(@PathParam("example") String example) {
+        if (!EXAMPLES.contains(example)) {
+            throw new NotFoundException("Unknown tree-view example: " + example);
+        }
+        String resourcePath = "/code-samples/tree-view/" + example + ".java";
+        try (InputStream in = getClass().getResourceAsStream(resourcePath)) {
+            if (in == null) {
+                throw new NotFoundException("Missing Java sample for: " + example);
+            }
+            return new String(in.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed reading " + resourcePath, e);
+        }
+    }
+
+    @GET
     @Path("/tree-view/{example}")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance standalone(@PathParam("example") String example) {
