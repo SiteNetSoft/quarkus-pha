@@ -1,11 +1,1 @@
-<div x-data="{ open: false }">
-  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = true"><span class="pf-v6-c-button__text">Open 50%-width modal</span></button>
-  {#include components/feedback/modal id="mo-custom-width" width="50%"}
-  {#include components/feedback/modal-close /}
-  {#include components/feedback/modal-header headingLevel="h2"}Custom width{/include}
-  {#include components/feedback/modal-body}<p>An inline width (here 50%) replaces the size modifier.</p>{/include}
-  {#include components/feedback/modal-footer}
-  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = false"><span class="pf-v6-c-button__text">Confirm</span></button>
-  {/include}
-  {/include}
-</div>
+{#include components/feedback/modal modal=demoMoCustomWidth /}

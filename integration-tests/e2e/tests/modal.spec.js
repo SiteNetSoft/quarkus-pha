@@ -225,4 +225,34 @@ test.describe("Modal", () => {
       });
     }
   });
+  test.describe("Java source tab", () => {
+    test("model-driven cards get a leading Java tab; live compositions do not", async ({ page }) => {
+      await page.goto("/components/modal");
+      for (const ex of ["basic", "danger-alert", "scrollable", "generic-container"]) {
+        const card = page.locator(`[data-rendered-href="/components/modal/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      for (const ex of ["sizes", "with-form", "with-dropdown", "custom-header"]) {
+        const card = page.locator(`[data-rendered-href="/components/modal/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/modal/source-java/danger-alert-title");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain(".statusTitle()");
+    });
+
+    test("model modal opens, closes, and its close button is labeled Close", async ({ page }) => {
+      await page.goto("/components/modal/without-title");
+      await page.getByRole("button", { name: "Open modal without a title" }).click();
+      const box = page.locator("#mo-without-title");
+      await expect(box).toBeVisible();
+      const close = box.locator(".pf-v6-c-modal-box__close button");
+      await expect(close).toHaveAttribute("aria-label", "Close");
+      await close.click();
+      await expect(box).toBeHidden();
+    });
+  });
 });
