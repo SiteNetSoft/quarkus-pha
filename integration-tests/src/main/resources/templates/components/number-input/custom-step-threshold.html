@@ -1,12 +1,2 @@
 {! Steps of 3, clamped between 0 and 12 — the buttons disable at the thresholds. !}
-<div class="pf-v6-c-number-input" id="ni-custom-step-threshold" x-data="{ val: 6 }">
-  <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Minus" :disabled="val <= 0" @click="val = Math.max(val - 3, 0)">
-    <span class="pf-v6-c-number-input__icon">{icons:svg('fa:minus').raw}</span>
-  </button>
-  <span class="pf-v6-c-form-control">
-    <input type="number" x-model.number="val" aria-label="Number input" min="0" max="12" />
-  </span>
-  <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Plus" :disabled="val >= 12" @click="val = Math.min(val + 3, 12)">
-    <span class="pf-v6-c-number-input__icon">{icons:svg('fa:plus').raw}</span>
-  </button>
-</div>
+{#include components/forms/number-input numberInput=demoNiCustomStepThreshold /}

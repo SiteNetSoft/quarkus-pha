@@ -72,4 +72,29 @@ test.describe("Number Input", () => {
       });
     }
   });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/number-input");
+      for (const ex of ["basic", "custom-step-threshold", "with-status"]) {
+        const card = page.locator(`[data-rendered-href="/components/number-input/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/number-input/source-java/custom-step-threshold");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain(".step(3).min(0).max(12)");
+    });
+
+    test("min(0) actually clamps — the shell dropped falsy zero bounds", async ({ page }) => {
+      await page.goto("/components/number-input/bounded");
+      const input = page.locator("#ni-bounded input");
+      await expect(input).toHaveAttribute("min", "0");
+      const minus = page.locator('#ni-bounded button[aria-label="Minus"]');
+      for (let i = 0; i < 3; i++) await minus.click();
+      await expect(input).toHaveValue("0");
+      await expect(minus).toBeDisabled();
+    });
+  });
 });
