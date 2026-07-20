@@ -2,6 +2,64 @@
 {! Required: id — derives {id}-title for aria-labelledby wiring when titleText is set. !}
 {! Optional: titleText (optional), position (optional: top|bottom|left|right), variant (optional: danger|warning|success|info),
               ariaLabel (optional — required when titleText is absent so the dialog has an accessible name) !}
+{! Model mode: pass popover=<org.sitenetsoft.quarkus.pha.model.Popover> — renders the FULL live pattern
+   (trigger + Alpine wrapper + box); click, hoverable, or static-open modes. !}
+{#if popover??}
+{#if popover.isStaticOpen}
+<div style="{popover.chromeStyle}">
+  <button class="pf-v6-c-button pf-m-{popover.triggerVariant}" type="button"><span class="pf-v6-c-button__text">{popover.triggerText}</span></button>
+  <div style="{popover.wrapperStyle}">
+{#else if popover.isHoverable}
+<div x-data="{ open: false }" style="{popover.chromeStyle}">
+  <button class="pf-v6-c-button pf-m-{popover.triggerVariant}" type="button" :aria-expanded="open.toString()" @mouseenter="open = true" @mouseleave="open = false" @focus="open = true" @blur="open = false">
+    <span class="pf-v6-c-button__text">{popover.triggerText}</span>
+  </button>
+  <div x-show="open" x-cloak style="{popover.wrapperStyle}">
+{#else}
+<div x-data="{ open: false }" style="{popover.chromeStyle}">
+  <button class="pf-v6-c-button pf-m-{popover.triggerVariant}" type="button" :aria-expanded="open.toString()" @click="open = !open">
+    <span class="pf-v6-c-button__text">{popover.triggerText}</span>
+  </button>
+  <div x-show="open" x-cloak @click.outside="open = false" style="{popover.wrapperStyle}">
+{/if}
+    <div class="pf-v6-c-popover{popover.boxModifiers}" id="{popover.id}" role="dialog"{#if popover.title??} aria-labelledby="{popover.id}-title"{#else} aria-label="{popover.ariaLabel}"{/if}{#if popover.isDescribedByBody} aria-describedby="{popover.id}-body"{/if}>
+      <div class="pf-v6-c-popover__arrow"></div>
+      <div class="pf-v6-c-popover__content">
+        {#if popover.isDismissable}
+        <div class="pf-v6-c-popover__close">
+          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="open = false">
+            <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+          </button>
+        </div>
+        {/if}
+        {#if popover.title??}
+        <header class="pf-v6-c-popover__header">
+          {#if popover.isTitlePlain}
+          <span class="pf-v6-c-popover__title-text" id="{popover.id}-title">{popover.title}</span>
+          {#else}
+          <h4 class="pf-v6-c-popover__title">
+            {#if popover.titleIcon??}<span class="pf-v6-c-popover__title-icon">{icons:svg(popover.titleIcon).raw}</span>{/if}<span class="pf-v6-c-popover__title-text" id="{popover.id}-title">{popover.title}</span>
+          </h4>
+          {/if}
+        </header>
+        {/if}
+        <div class="pf-v6-c-popover__body"{#if popover.isDescribedByBody} id="{popover.id}-body"{/if}>{popover.body}</div>
+        {#if popover.footerText??}
+        <footer class="pf-v6-c-popover__footer">{popover.footerText}</footer>
+        {#else if popover.isHasFooterButtons}
+        <footer class="pf-v6-c-popover__footer">
+          {#for fb in popover.footerButtons}
+          <button class="pf-v6-c-button {fb.modifiers}" type="button"{#if fb.isCloses} @click="open = false"{/if}>
+            <span class="pf-v6-c-button__text">{fb.text}</span>
+          </button>
+          {/for}
+        </footer>
+        {/if}
+      </div>
+    </div>
+  </div>
+</div>
+{#else}
 <div class="pf-v6-c-popover{#if position??} pf-m-{position}{#else} pf-m-top{/if}{#if variant??} pf-m-{variant}{/if}" id="{id}" role="dialog" aria-modal="true"{#if titleText??} aria-labelledby="{id}-title"{#else if ariaLabel??} aria-label="{ariaLabel}"{/if} x-data="{ popoverOpen: false }" x-effect="if (popoverOpen) PHA.trapFocus($el); else PHA.releaseFocus($el);">
   <div class="pf-v6-c-popover__arrow"></div>
   <div class="pf-v6-c-popover__content">
@@ -21,3 +79,4 @@
     {#insert footer}{/insert}
   </div>
 </div>
+{/if}
