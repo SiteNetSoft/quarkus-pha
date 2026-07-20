@@ -7,6 +7,13 @@
 {!   label          (optional) — accessible label (aria-label). Defaults to "Loading" when no labelledBy. !}
 {!   ariaLabelledBy (optional) — id of an existing element that names this spinner. Overrides label. !}
 {!   ariaValuetext  (optional) — progress text (aria-valuetext); defaults to "Loading..." per PF v6 !}
+{! Model mode: pass spinner=<org.sitenetsoft.quarkus.pha.model.Spinner>. !}
+{#if spinner??}
+<svg class="pf-v6-c-spinner{#if spinner.size??} pf-m-{spinner.size}{/if}{#if spinner.isInline} pf-m-inline{/if}" role="progressbar" viewBox="0 0 100 100"{#if spinner.diameter??} style="--pf-v6-c-spinner--diameter: {spinner.diameter}"{/if} aria-label="{spinner.label}" aria-valuetext="{spinner.ariaValuetext}">
+  <circle class="pf-v6-c-spinner__path" cx="50" cy="50" r="45" fill="none"></circle>
+</svg>
+{#else}
 <svg class="pf-v6-c-spinner{#if size??} pf-m-{size}{/if}{#if inline??} pf-m-inline{/if}" role="progressbar" viewBox="0 0 100 100"{#if diameter??} style="--pf-v6-c-spinner--diameter: {diameter}"{/if}{#if ariaLabelledBy??} aria-labelledby="{ariaLabelledBy}"{#else}{#if label??} aria-label="{label}"{#else} aria-label="Loading"{/if}{/if} aria-valuetext="{#if ariaValuetext??}{ariaValuetext}{#else}Loading...{/if}">
   <circle class="pf-v6-c-spinner__path" cx="50" cy="50" r="45" fill="none"></circle>
 </svg>
+{/if}
