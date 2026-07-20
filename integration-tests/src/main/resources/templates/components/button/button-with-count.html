@@ -1,4 +1,4 @@
+{! Populated from the Java model ButtonDemoData.demoButtonsWithCount (see the Java tab). !}
 <div class="ws-preview-html" style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center">
-  {#include components/actions/button id="btn-count-unread" variant="secondary" count=5}{#content}Notifications{/content}{/include}
-  {#include components/actions/button id="btn-count-read" variant="secondary" count=12 countRead=true}{#content}Messages{/content}{/include}
+  {#for b in demoButtonsWithCount}{#include components/actions/button btn=b /}{/for}
 </div>
