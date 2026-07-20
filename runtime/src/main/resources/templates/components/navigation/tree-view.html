@@ -1,6 +1,11 @@
 {! Tree view — PatternFly v6 !}
-{! Optional: id — DOM id on the root; omit unless something else references the tree.
-              compact (optional), guides (optional) !}
+{! Two modes.
+   Model-driven: pass tree=<org.sitenetsoft.quarkus.pha.model.TreeView> (built via TreeView.builder()) —
+     renders the whole tree incl. the phaTreeView() Alpine wiring; supports the whole-node,
+     separate-selection and checkbox interaction patterns, search, expand-all, icons, badges, actions.
+   Slot shell: omit tree and compose the <li> items in the main block (params below).
+   Shell params: id — DOM id on the root; omit unless something else references the tree.
+                 compact (optional), guides (optional) !}
 {! Requires: /web/js/alpine/components/tree-view.js loaded before Alpine !}
 {! !}
 {! This template renders the outer wrapper only. Each <li> tree item is the !}
@@ -31,6 +36,20 @@
 {! See integration-tests/.../templates/components/tree-view/{single-selectable, !}
 {! multiselectable, with-separate-selection-and-expansion}.html for working !}
 {! examples of each pattern. !}
+{#if tree??}
+{#if tree.toggleAllButton}
+<div{#if tree.id} id="{tree.id}"{/if} x-data="phaTreeView()">
+  <div class="pf-v6-l-stack__item">
+    <button class="pf-v6-c-button pf-m-link" type="button" @click="toggleAll()">
+      <span class="pf-v6-c-button__text" x-text="allExpanded ? 'Collapse all' : 'Expand all'">Expand all</span>
+    </button>
+  </div>
+  {#include components/navigation/tree-view-model-tree tree=tree bare=true /}
+</div>
+{#else}
+{#include components/navigation/tree-view-model-tree tree=tree /}
+{/if}
+{#else}
 <div class="pf-v6-c-tree-view{#if compact??} pf-m-compact{/if}{#if guides??} pf-m-guides{/if}"{#if id??} id="{id}"{/if} x-data="phaTreeView()">
   <ul class="pf-v6-c-tree-view__list" role="tree"{#if multi??} aria-multiselectable="true"{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if}
       @keydown="handleKeyNav($event)"
@@ -38,3 +57,4 @@
     {#insert content}{/insert}
   </ul>
 </div>
+{/if}
