@@ -1,3 +1,145 @@
-{! Pagination — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the pagination.
-                                             compact, bottom (optional booleans); modifiers — extra pf-m-* classes (optional) !}
+{! Pagination — PatternFly v6 !}
+{! Two modes.
+   Model-driven: pass pagination=<org.sitenetsoft.quarkus.pha.model.Pagination> (built via
+     Pagination.of(id, navLabel)) — renders the full live pagination: total-items, per-page
+     menu, and the nav with page input, all wired through generated Alpine state.
+   Slot shell: omit pagination and compose the markup in the main block.
+   Shell params: id — DOM id on the root; omit unless something else references the pagination.
+                 compact, bottom (optional booleans); modifiers — extra pf-m-* classes (optional) !}
+{#if pagination??}
+<div
+  class="pf-v6-c-pagination{#if pagination.compact} pf-m-compact{/if}{#if pagination.bottom} pf-m-bottom{/if}{#if pagination.modifiers} {pagination.modifiers}{/if}"
+  id="{pagination.id}"
+  {#if pagination.stickyToggle}:class="sticky ? 'pf-m-sticky' : ''"{/if}{#if pagination.stickyScroll}:class="stuck ? 'pf-m-sticky-stuck' : ''"{/if}
+  x-data="{
+    page: {pagination.startPage}, perPage: {pagination.perPage}, total: {pagination.total}, open: false,
+    locked: {#if pagination.disabled}true{#else}false{/if},
+    endless: {#if pagination.indeterminate}true{#else}false{/if},
+    get pages() { return this.endless ? 999999 : Math.max(1, Math.ceil(this.total / this.perPage)) },
+    get first() { return this.total === 0 ? 0 : (this.page - 1) * this.perPage + 1 },
+    get last() { return this.endless ? this.page * this.perPage : Math.min(this.page * this.perPage, this.total) },
+    get range() { return this.first + ' - ' + this.last },
+    setPerPage(n) { this.perPage = n; if (this.page > this.pages) this.page = this.pages; this.open = false },
+    clamp() { const p = Math.floor(Number(this.page) || 1); this.page = Math.min(Math.max(1, p), this.pages) }
+  }"
+>
+  {#if !pagination.bottom}
+  <div class="pf-v6-c-pagination__total-items">
+    <b aria-hidden="true" x-text="range">1 - 10</b> of <b>{#if pagination.indeterminate}many{#else}{pagination.total}{/if}</b>
+  </div>
+  {/if}
+  <div class="pf-v6-c-pagination__page-menu" style="position: relative">
+    <button
+      class="pf-v6-c-menu-toggle pf-m-plain pf-m-text{#if pagination.bottom} pf-m-top{/if}"
+      type="button"
+      id="{pagination.toggleId}"
+      :class="open ? 'pf-m-expanded' : ''"
+      :aria-expanded="open"
+      @click="open = !open"
+      {#if pagination.disabled}disabled{/if}
+    >
+      <span class="pf-v6-c-menu-toggle__text"
+        ><b x-text="range">1 - 10</b>&nbsp;of&nbsp;<b>{#if pagination.indeterminate}many{#else}{pagination.total}{/if}</b></span
+      >
+      <span class="pf-v6-c-menu-toggle__controls"
+        ><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span
+      >
+    </button>
+    <div
+      class="pf-v6-c-menu"
+      x-show="open"
+      x-cloak
+      @click.outside="open = false"
+      style="position: absolute; {#if pagination.bottom}bottom: 100%;{#else}top: 100%;{/if} left: 0; z-index: 200; min-width: 10rem"
+    >
+      <div class="pf-v6-c-menu__content">
+        <ul class="pf-v6-c-menu__list" role="listbox" aria-label="Items per page">
+          <template x-for="n in [10, 20, 50]" :key="n">
+            <li role="none" class="pf-v6-c-menu__list-item" :class="perPage === n ? 'pf-m-selected' : ''">
+              <button
+                class="pf-v6-c-menu__item"
+                type="button"
+                role="option"
+                :aria-selected="perPage === n"
+                @click="setPerPage(n)"
+              >
+                <span class="pf-v6-c-menu__item-main"
+                  ><span class="pf-v6-c-menu__item-text" x-text="n + ' per page'"></span
+                ></span>
+              </button>
+            </li>
+          </template>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <nav class="pf-v6-c-pagination__nav" aria-label="{pagination.navLabel}">
+    {#if !pagination.compact}
+    <div class="pf-v6-c-pagination__nav-control pf-m-first">
+      <button
+        class="pf-v6-c-button pf-m-plain"
+        type="button"
+        aria-label="Go to first page"
+        :disabled="locked || page === 1"
+        @click="page = 1"
+      >
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angles-left').raw}</span>
+      </button>
+    </div>
+    {/if}
+    <div class="pf-v6-c-pagination__nav-control pf-m-prev">
+      <button
+        class="pf-v6-c-button pf-m-plain"
+        type="button"
+        aria-label="Go to previous page"
+        :disabled="locked || page === 1"
+        @click="page--"
+      >
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-left').raw}</span>
+      </button>
+    </div>
+    {#if !pagination.compact}
+    <div class="pf-v6-c-pagination__nav-page-select">
+      <span class="pf-v6-c-form-control{#if pagination.disabled} pf-m-disabled{/if}">
+        <input
+          type="number"
+          aria-label="Current page"
+          min="1"
+          {#if !pagination.indeterminate}:max="pages"{/if}
+          x-model.number="page"
+          @change="clamp()"
+          {#if pagination.disabled}disabled{/if}
+        />
+      </span>
+      {#if !pagination.indeterminate}<span aria-hidden="true">of <span x-text="pages">53</span></span>{/if}
+    </div>
+    {/if}
+    <div class="pf-v6-c-pagination__nav-control pf-m-next">
+      <button
+        class="pf-v6-c-button pf-m-plain"
+        type="button"
+        aria-label="Go to next page"
+        :disabled="locked || page === pages"
+        @click="page++"
+      >
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-right').raw}</span>
+      </button>
+    </div>
+    {#if !pagination.compact}
+    <div class="pf-v6-c-pagination__nav-control pf-m-last">
+      <button
+        class="pf-v6-c-button pf-m-plain"
+        type="button"
+        aria-label="Go to last page"
+        {#if pagination.indeterminate}disabled{#else}:disabled="locked || page === pages"{/if}
+        @click="page = pages"
+      >
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angles-right').raw}</span>
+      </button>
+    </div>
+    {/if}
+  </nav>
+</div>
+{#else}
 <div class="pf-v6-c-pagination{#if compact??} pf-m-compact{/if}{#if bottom??} pf-m-bottom{/if}{#if modifiers??} {modifiers}{/if}"{#if id??} id="{id}"{/if}>{#insert content}{/insert}</div>
+{/if}
