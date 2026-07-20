@@ -1,8 +1,5 @@
 <div class="ws-preview-html" style="display: flex; gap: 1rem; height: 200px; align-items: stretch">
-  {#include components/feedback/skeleton id="sk-h25" width="sm" height="25" screenreaderText="Loading (25%)" /}
-  {#include components/feedback/skeleton id="sk-h50" width="sm" height="50" screenreaderText="Loading (50%)" /}
-  {#include components/feedback/skeleton id="sk-h75" width="sm" height="75" screenreaderText="Loading (75%)" /}
-  {#include components/feedback/skeleton id="sk-h100" width="sm" height="100" screenreaderText="Loading (100%)" /}
+  {#for sk in demoSksHeights}{#include components/feedback/skeleton skeleton=sk /}{/for}
 </div>
 <p style="margin-top: 0.75rem; color: var(--pf-t--global--text--color--subtle, #888); font-size: 0.875rem">
   Percentage heights require a parent with an explicit height (the wrapper here is
