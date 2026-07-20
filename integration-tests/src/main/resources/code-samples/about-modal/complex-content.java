@@ -20,7 +20,7 @@ AboutModal aboutModal = AboutModal
                       <div class="pf-v6-l-flex pf-m-space-items-md pf-m-justify-content-space-between">
                         <div>
                           <strong>Server</strong><br />
-                          <span>Quarkus 3.35 + Qute</span>
+                          <span>Quarkus 3.37 + Qute</span>
                         </div>
                         <div>
                           <strong>UI</strong><br />

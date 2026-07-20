@@ -24,7 +24,7 @@ public class ExpandableSectionDemoData {
 
     public static ExpandableSection demoEsExpanded = ExpandableSection
             .of("es-expanded", "Section open by default").asExpanded()
-            .content("\n<p>Pass <code>expanded=true</code> to start the section in the open state.</p>\n")
+            .content("\n<p>Call <code>asExpanded()</code> on the builder to start the section in the open state.</p>\n")
             .build();
 
     public static ExpandableSection demoEsDetached = ExpandableSection
