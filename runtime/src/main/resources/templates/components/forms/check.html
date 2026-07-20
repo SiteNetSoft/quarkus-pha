@@ -3,7 +3,26 @@
 {! Optional: label (optional), checked (optional), disabled (optional),
               required (optional), description (optional), body (optional),
               standalone (optional), reversed (optional), ariaLabel (optional for standalone) !}
-{#if standalone??}
+{! Model mode: pass check=<org.sitenetsoft.quarkus.pha.model.Check>. !}
+{#if check??}
+{#if check.isStandalone}
+<div class="pf-v6-c-check pf-m-standalone" id="{check.id}-wrap">
+  <input class="pf-v6-c-check__input" type="checkbox" id="{check.id}" name="{check.id}"{#if check.isChecked} checked{/if}{#if check.isDisabled} disabled{/if}{#if check.ariaLabel??} aria-label="{check.ariaLabel}"{/if}>
+</div>
+{#else if check.isReversed}
+<div class="pf-v6-c-check" id="{check.id}-wrap">
+  <label class="pf-v6-c-check__label{#if check.isDisabled} pf-m-disabled{/if}" for="{check.id}">{check.label}</label>
+  <input class="pf-v6-c-check__input" type="checkbox" id="{check.id}" name="{check.id}"{#if check.isChecked} checked{/if}{#if check.isDisabled} disabled{/if}>
+</div>
+{#else}
+<label class="pf-v6-c-check" for="{check.id}" id="{check.id}-wrap">
+  <input class="pf-v6-c-check__input" type="checkbox" id="{check.id}" name="{check.id}"{#if check.isChecked} checked{/if}{#if check.isDisabled} disabled{/if}{#if check.isRequired} required{/if}{#if check.description??} aria-describedby="{check.id}-description"{/if}>
+  <span class="pf-v6-c-check__label{#if check.isDisabled} pf-m-disabled{/if}">{check.label}{#if check.isRequired} <span class="pf-v6-c-check__label-required" aria-hidden="true">&#42;</span>{/if}</span>
+  {#if check.description??}<span class="pf-v6-c-check__description" id="{check.id}-description">{check.description}</span>{/if}
+  {#if check.bodyText??}<span class="pf-v6-c-check__body">{check.bodyText}</span>{/if}
+</label>
+{/if}
+{#else if standalone??}
 <div class="pf-v6-c-check pf-m-standalone" id="{id}-wrap">
   <input class="pf-v6-c-check__input" type="checkbox" id="{id}" name="{id}"{#if checked??} checked{/if}{#if disabled??} disabled{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
 </div>
