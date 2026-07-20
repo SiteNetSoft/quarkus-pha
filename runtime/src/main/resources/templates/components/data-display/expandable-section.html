@@ -1,5 +1,40 @@
 {! Expandable section — PatternFly v6 !} {! Required: toggleText !} {! Optional: id — DOM id on the root; omit unless something else references the section.
                                                                                 expanded (optional) !}
+{! Model mode: pass section=<org.sitenetsoft.quarkus.pha.model.ExpandableSection> —
+   all variations incl. detached, disclosure, indented, truncate, dynamic toggle text,
+   custom toggle markup and heading-wrapped toggles. !}
+{#if section??}
+{#if section.truncate}
+<div class="pf-v6-c-expandable-section pf-m-truncate" id="{section.id}" x-data="{ expanded: false }" :class="{ 'pf-m-expanded': expanded }"{#if section.style} style="{section.style}"{/if}>
+  <div class="pf-v6-c-expandable-section__content">{section.contentHtml.raw}</div>
+  <button class="pf-v6-c-expandable-section__toggle" type="button" :aria-expanded="expanded" @click="expanded = !expanded">
+    <span x-text="expanded ? '{section.showLessText}' : '{section.showMoreText}'">{section.showMoreText}</span>
+  </button>
+</div>
+{#else if section.detached}
+<div class="pf-v6-c-expandable-section pf-m-expand-top" id="{section.id}" x-data="{ expanded: false }" :class="{ 'pf-m-expanded': expanded }"{#if section.style} style="{section.style}"{/if}>
+  <div class="pf-v6-c-expandable-section__content" x-show="expanded" x-cloak>{section.contentHtml.raw}</div>
+  <button class="pf-v6-c-expandable-section__toggle" type="button" :aria-expanded="expanded" @click="expanded = !expanded">
+    {#if section.toggleHtml}<span class="pf-v6-c-expandable-section__toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+    {section.toggleHtml.raw}{#else if section.dynamicToggle}<span class="pf-v6-c-expandable-section__toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+    <span x-text="expanded ? '{section.showLessText}' : '{section.showMoreText}'">{section.showMoreText}</span>{#else}<span class="pf-v6-c-expandable-section__toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+    <span>{section.toggleText}</span>{/if}
+  </button>
+</div>
+{#else}
+<div class="pf-v6-c-expandable-section{#if section.disclosure} pf-m-display-lg pf-m-limit-width{/if}{#if section.indented} pf-m-indented{/if}" id="{section.id}" x-data="{ expanded: {section.expanded} }" :class="{ 'pf-m-expanded': expanded }"{#if section.style} style="{section.style}"{/if}>
+  {#if section.headingLevel}<{section.headingLevel} style="margin: 0">
+  {/if}<button class="pf-v6-c-expandable-section__toggle" type="button" :aria-expanded="expanded" @click="expanded = !expanded">
+    {#if section.toggleHtml}<span class="pf-v6-c-expandable-section__toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+    {section.toggleHtml.raw}{#else if section.dynamicToggle}<span class="pf-v6-c-expandable-section__toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+    <span x-text="expanded ? '{section.showLessText}' : '{section.showMoreText}'">{section.showMoreText}</span>{#else}<span class="pf-v6-c-expandable-section__toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+    <span>{section.toggleText}</span>{/if}
+  </button>{#if section.headingLevel}
+  </{section.headingLevel}>{/if}
+  <div class="pf-v6-c-expandable-section__content" x-show="expanded" x-cloak>{section.contentHtml.raw}</div>
+</div>
+{/if}
+{#else}
 <div
   class="pf-v6-c-expandable-section"
   {#if id??}id="{id}"{/if}
@@ -17,3 +52,4 @@
   </button>
   <div class="pf-v6-c-expandable-section__content" x-show="expanded" x-cloak>{#insert content}{/insert}</div>
 </div>
+{/if}
