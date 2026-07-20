@@ -169,4 +169,28 @@ test.describe("Pagination", () => {
       });
     }
   });
+  test.describe("Java source tab", () => {
+    // All 20 examples are model-driven (PaginationDemoData).
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/pagination");
+      for (const ex of EXAMPLES) {
+        const card = page.locator(`[data-rendered-href="/components/pagination/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("Java tab opens Monaco with the builder code", async ({ page }) => {
+      await page.goto("/components/pagination");
+      const card = page.locator('[data-rendered-href="/components/pagination/top"]');
+      await card.locator('button[aria-label*="Toggle Java"]').click();
+      await expect(card.locator(".monaco-editor").first()).toBeVisible({ timeout: 10000 });
+      await expect(card.locator(".monaco-editor .view-lines")).toContainText("Pagination", { timeout: 10000 });
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/pagination/source-java/indeterminate");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain(".asIndeterminate()");
+    });
+  });
 });
