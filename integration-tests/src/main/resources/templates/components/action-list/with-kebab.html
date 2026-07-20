@@ -1,13 +1,3 @@
-{! Single group plus a kebab menu toggle. The {#items} slot takes arbitrary markup, so the kebab (a
-   menu-toggle, not a button) drops straight in — this is the case the old groups= map param couldn't express. !}
-{#include components/actions/action-list}{#items}
-<div class="pf-v6-c-action-list__group">
-  <div class="pf-v6-c-action-list__item">{#include components/actions/button variant="primary"}{#content}Next{/content}{/include}</div>
-  <div class="pf-v6-c-action-list__item">{#include components/actions/button variant="secondary"}{#content}Back{/content}{/include}</div>
-  <div class="pf-v6-c-action-list__item">
-    <button class="pf-v6-c-menu-toggle pf-m-plain" type="button" aria-label="More actions" aria-expanded="false">
-      <span class="pf-v6-c-menu-toggle__icon">{icons:svg('fa:ellipsis-vertical').raw}</span>
-    </button>
-  </div>
-</div>
-{/items}{/include}
+{! Single group plus a kebab menu toggle, reusing the MenuToggle model. !}
+{! Populated from the Java model ActionListDemoData.demoAlWithKebab (see the Java tab). !}
+{#include components/actions/action-list actionList=demoAlWithKebab /}

@@ -90,4 +90,20 @@ test.describe("Action list", () => {
     const body = await res.text();
     expect(body).toContain("components/actions/action-list");
   });
+  test.describe("Java source tab", () => {
+    // All 8 examples are model-driven (ActionListDemoData), reusing Button/MenuToggle.
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/action-list");
+      for (const ex of ["single-group", "with-kebab", "icons-group"]) {
+        const card = page.locator(`[data-rendered-href="/components/action-list/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/action-list/source-java/with-kebab");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('MenuToggle.of("")');
+    });
+  });
 });

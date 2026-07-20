@@ -1,7 +1,3 @@
-{! Divergence from PF — pf-m-vertical (vertical=true) stacks actions instead of laying them out in a row. !}
-{#include components/actions/action-list vertical=true}{#items}
-<div class="pf-v6-c-action-list__group">
-  <div class="pf-v6-c-action-list__item">{#include components/actions/button variant="primary"}{#content}Save{/content}{/include}</div>
-  <div class="pf-v6-c-action-list__item">{#include components/actions/button variant="link"}{#content}Cancel{/content}{/include}</div>
-</div>
-{/items}{/include}
+{! Divergence from PF — vertical() stacks actions instead of laying them out in a row. !}
+{! Populated from the Java model ActionListDemoData.demoAlVertical (see the Java tab). !}
+{#include components/actions/action-list actionList=demoAlVertical /}
