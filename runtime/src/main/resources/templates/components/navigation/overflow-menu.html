@@ -1,2 +1,39 @@
 {! Overflow menu — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the menu. !}
+{! Model mode: pass overflowMenu=<org.sitenetsoft.quarkus.pha.model.OverflowMenu> — Button groups + kebab control. !}
+{#if overflowMenu??}
+<div class="pf-v6-c-overflow-menu{#if overflowMenu.isVertical} pf-m-vertical{/if}" id="{overflowMenu.id}">
+  <div class="pf-v6-c-overflow-menu__content"{#if overflowMenu.isCollapsible} x-show="!narrow"{/if}>
+    {#for g in overflowMenu.groups}
+    <div class="pf-v6-c-overflow-menu__group {#if g.isIconGroup}pf-m-icon-button-group{#else}pf-m-button-group{/if}">
+      {#for b in g.buttons}
+      <div class="pf-v6-c-overflow-menu__item">{#include components/actions/button btn=b /}</div>
+      {/for}
+    </div>
+    {/for}
+  </div>
+  {#if overflowMenu.isHasMenu}
+  <div class="pf-v6-c-overflow-menu__control" x-data="{ open: false }" style="position: relative">
+    <button class="pf-v6-c-menu-toggle pf-m-plain" type="button" aria-label="{overflowMenu.controlAriaLabel}" :aria-expanded="open.toString()" @click="open = !open">
+      <span class="pf-v6-c-menu-toggle__icon">{icons:svg('fa:ellipsis-vertical').raw}</span>
+    </button>
+    <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; right: 0; z-index: 200; min-width: 10rem">
+      <div class="pf-v6-c-menu__content">
+        <ul class="pf-v6-c-menu__list" role="menu">
+          {#for it in overflowMenu.menuItems}
+          <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">{it}</span></span></button></li>
+          {/for}
+        </ul>
+      </div>
+    </div>
+  </div>
+  {#else}
+  <div class="pf-v6-c-overflow-menu__control"{#if overflowMenu.isCollapsible} x-show="narrow" x-cloak{/if}>
+    <button class="pf-v6-c-menu-toggle pf-m-plain" type="button" aria-label="{overflowMenu.controlAriaLabel}">
+      <span class="pf-v6-c-menu-toggle__icon">{icons:svg('fa:ellipsis-vertical').raw}</span>
+    </button>
+  </div>
+  {/if}
+</div>
+{#else}
 <div class="pf-v6-c-overflow-menu"{#if id??} id="{id}"{/if}>{#insert content}{/insert}</div>
+{/if}
