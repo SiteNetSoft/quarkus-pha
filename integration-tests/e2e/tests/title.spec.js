@@ -40,4 +40,19 @@ test.describe("Title", () => {
     await expect(card.locator("h5.pf-v6-c-title.pf-m-lg")).toHaveText("lg title");
     await expect(card.locator("h6.pf-v6-c-title.pf-m-md")).toHaveText("md title");
   });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/title");
+      for (const ex of ["default-sizes", "custom-sizes"]) {
+        const card = page.locator(`[data-rendered-href="/components/title/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/title/source-java/custom-sizes");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.headingLevel("h2").size("3xl")');
+    });
+  });
 });

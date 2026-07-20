@@ -38,4 +38,19 @@ test.describe("Notification Badge", () => {
       await expect(page.locator(`#${id} .pf-v6-c-button__icon svg`)).toBeVisible();
     }
   });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/notification-badge");
+      for (const ex of ["read", "unread", "attention"]) {
+        const card = page.locator(`[data-rendered-href="/components/notification-badge/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/notification-badge/source-java/attention");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.variant("attention").count("!")');
+    });
+  });
 });
