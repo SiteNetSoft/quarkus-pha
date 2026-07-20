@@ -1,15 +1,2 @@
 {! Item widths are controlled per breakpoint with --pf-v6-c-toolbar__item--Width custom properties. !}
-{#include components/navigation/toolbar id="tb-width-control"}
-  {#include components/navigation/toolbar-content}
-    {#include components/navigation/toolbar-content-section}
-      {#include components/navigation/toolbar-group}
-        {#include components/navigation/toolbar-item attrs='style="--pf-v6-c-toolbar__item--Width: 80px; --pf-v6-c-toolbar__item--Width-on-xl: 10rem; outline: 1px dashed var(--pf-t--global--border--color--default)"'}
-          80px / 10rem on xl
-        {/include}
-        {#include components/navigation/toolbar-item}Item{/include}
-      {/include}
-      <hr class="pf-v6-c-divider pf-m-vertical" />
-      {#include components/navigation/toolbar-item}Item{/include}
-    {/include}
-  {/include}
-{/include}
+{#include components/navigation/toolbar toolbar=demoTbWidthControl /}

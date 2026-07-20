@@ -1,38 +1,3 @@
 <div style="display: flex; flex-direction: column; gap: 0.5rem">
-{#include components/navigation/toolbar id="tb-color-default"}
-  {#include components/navigation/toolbar-content}
-    {#include components/navigation/toolbar-content-section}
-        {#include components/navigation/toolbar-item}
-          <button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">Default background</span></button>
-        {/include}
-    {/include}
-  {/include}
-{/include}
-{#include components/navigation/toolbar id="tb-color-primary" variant="primary"}
-  {#include components/navigation/toolbar-content}
-    {#include components/navigation/toolbar-content-section}
-        {#include components/navigation/toolbar-item}
-          <button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">Primary background</span></button>
-        {/include}
-    {/include}
-  {/include}
-{/include}
-{#include components/navigation/toolbar id="tb-color-secondary" variant="secondary"}
-  {#include components/navigation/toolbar-content}
-    {#include components/navigation/toolbar-content-section}
-        {#include components/navigation/toolbar-item}
-          <button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">Secondary background</span></button>
-        {/include}
-    {/include}
-  {/include}
-{/include}
-{#include components/navigation/toolbar id="tb-color-none" noBackground=true}
-  {#include components/navigation/toolbar-content}
-    {#include components/navigation/toolbar-content-section}
-        {#include components/navigation/toolbar-item}
-          <button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">No background</span></button>
-        {/include}
-    {/include}
-  {/include}
-{/include}
+  {#for t in demoTbsColors}{#include components/navigation/toolbar toolbar=t /}{/for}
 </div>

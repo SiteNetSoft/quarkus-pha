@@ -184,4 +184,36 @@ test.describe("Toolbar", () => {
       await expect(link).toHaveAttribute("target", "_blank");
     });
   });
+  test.describe("Java source tab", () => {
+    test("model-driven cards get a leading Java tab; live compositions do not", async ({ page }) => {
+      await page.goto("/components/toolbar");
+      for (const ex of ["basic", "groups", "filter-group", "width-control"]) {
+        const card = page.locator(`[data-rendered-href="/components/toolbar/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      for (const ex of ["stacked", "with-filters", "toggle-groups", "label-group"]) {
+        const card = page.locator(`[data-rendered-href="/components/toolbar/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/toolbar/source-java/groups");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('Item.toggle(MenuToggle.of("Status").build())');
+    });
+
+    test("model items no longer inherit group/root modifier classes", async ({ page }) => {
+      await page.goto("/components/toolbar/insets");
+      await expect(page.locator("#tb-insets")).toHaveClass(/pf-m-inset-md/);
+      const items = page.locator("#tb-insets .pf-v6-c-toolbar__item");
+      for (const item of await items.all()) {
+        await expect(item).not.toHaveClass(/pf-m-inset-md/);
+      }
+      await page.goto("/components/toolbar/groups");
+      const filterGroup = page.locator("#tb-groups .pf-v6-c-toolbar__group").first();
+      await expect(filterGroup).toHaveClass(/pf-m-filter-group/);
+      await expect(filterGroup.locator(".pf-v6-c-toolbar__item").first()).not.toHaveClass(/pf-m-filter/);
+    });
+  });
 });
