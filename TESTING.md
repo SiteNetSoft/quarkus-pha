@@ -129,7 +129,7 @@ standalone:
 cd integration-tests/e2e
 podman run --rm --network=host --ipc=host \
   -v "$PWD:/work:Z" -w /work \
-  mcr.microsoft.com/playwright:v1.59.1-noble \
+  mcr.microsoft.com/playwright:v1.61.1-noble \
   bash -c 'npx playwright test tests/<spec-name>.spec.js'
 ```
 

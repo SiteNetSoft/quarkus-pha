@@ -57,6 +57,38 @@ Family conventions:
   for custom Alpine directives.
 - Includes shadow inherited `id`/`attrs` so they never leak into nested includes.
 
+### Typed component models
+
+Every component can also be built from a typed Java model instead of template
+parameters. The `org.sitenetsoft.quarkus.pha.model` package ships ~90
+immutable builder classes (`Alert`, `Card`, `Table`, `Wizard`, `Toolbar`, …)
+that a backend constructs and hands to the same include via a single
+model parameter:
+
+```java
+Alert alert = Alert.of("Deployment complete").variant("success")
+    .description("Your application is live.")
+    .actionLink("View deployment", "#").actionLink("Roll back", "#")
+    .build();
+```
+
+```html
+{#include components/feedback/alert alert=alert /}
+```
+
+The model branch of each template renders the full PatternFly anatomy —
+including the Alpine.js wiring for expandable, selectable, and editable
+states — so consumers describe components as data and never touch the
+markup. Both modes stay supported: template parameters for quick one-offs,
+models for anything data-driven. Composite families (card, page, wizard,
+toolbar) take nested records (`Card.Header`, `Wizard.Step`,
+`Toolbar.Group`, …) in place of slot composition, and models compose
+across components (a `Toolbar.Item` can hold a `Button` or `MenuToggle`).
+
+Every example on the demo pages has a **Java tab** showing the exact
+builder code that produced it; the props table on each page names the
+model parameter for that component.
+
 Every component has a demo page with examples matching the patternfly.org docs,
 a Qute-source viewer, and a props table: run the showcase (below) and browse
 `http://localhost:9090/`.
