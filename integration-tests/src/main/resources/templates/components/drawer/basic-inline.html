@@ -1,15 +1,1 @@
-{#include components/data-display/drawer id="dr-basic-inline" inline=true attrs='style="min-height: 240px"'}
-{#include components/data-display/drawer-main}
-{#include components/data-display/drawer-content}
-{#include components/data-display/drawer-body padding=true}
-    <button class="pf-v6-c-button pf-m-primary" type="button" :aria-expanded="expanded.toString()" @click="expanded = !expanded">
-      <span class="pf-v6-c-button__text">Toggle drawer</span>
-    </button>
-    <p style="margin-top: 1rem"><code class="ws-code">pf-m-inline</code> — the panel shares space with the content instead of overlapping it; no backdrop semantics.</p>
-{/include}
-{/include}
-{#include components/data-display/drawer-panel}
-{#include components/data-display/drawer-head}<span :tabindex="expanded ? '0' : '-1'" x-ref="focus">Drawer panel header</span>{/include}
-{/include}
-{/include}
-{/include}
+{#include components/data-display/drawer drawer=demoDrBasicInline /}

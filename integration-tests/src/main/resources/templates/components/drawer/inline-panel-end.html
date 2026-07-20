@@ -1,15 +1,1 @@
-{#include components/data-display/drawer id="dr-inline-panel-end" inline=true attrs='style="min-height: 240px"'}
-{#include components/data-display/drawer-main}
-{#include components/data-display/drawer-content}
-{#include components/data-display/drawer-body padding=true}
-    <button class="pf-v6-c-button pf-m-primary" type="button" :aria-expanded="expanded.toString()" @click="expanded = !expanded; if (expanded) $nextTick(() => $refs.focus.focus())">
-      <span class="pf-v6-c-button__text">Toggle drawer</span>
-    </button>
-    <p style="margin-top: 1rem">Inline drawer, panel at the end — <code class="ws-code">pf-m-inline</code>.</p>
-{/include}
-{/include}
-{#include components/data-display/drawer-panel}
-{#include components/data-display/drawer-head}<span :tabindex="expanded ? '0' : '-1'" x-ref="focus">Drawer panel header</span>{/include}
-{/include}
-{/include}
-{/include}
+{#include components/data-display/drawer drawer=demoDrInlinePanelEnd /}
