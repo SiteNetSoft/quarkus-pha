@@ -1,4 +1,9 @@
 {! Skip to content — PatternFly v6 !} {! Required: href !} {! Optional: id — DOM id on the link; omit unless something else references it. !} {! Content slot (required): visible link text. The body
 MUST be filled — the link's !} {! accessible name comes from the text. Use "Skip to content" unless you have a reason.
 !}
+{! Model mode: pass skipToContent=<...model.SkipToContent>. !}
+{#if skipToContent??}
+<a href="{skipToContent.href}" class="pf-v6-c-skip-to-content"{#if skipToContent.id??} id="{skipToContent.id}"{/if}>{skipToContent.text}</a>
+{#else}
 <a href="{href}" class="pf-v6-c-skip-to-content"{#if id??} id="{id}"{/if}>{#insert/}</a>
+{/if}

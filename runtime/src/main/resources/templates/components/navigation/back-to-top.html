@@ -13,9 +13,19 @@
 {!   scrollableSelector (optional) — CSS selector for a scrollable element to spy   !}
 {!                                   on instead of window scroll. The button also   !}
 {!                                   scrolls THAT element back to 0 on click.       !}
+{! Model mode: pass backToTop=<...model.BackToTop> — the phaBackToTop args are generated in Java. !}
+{#if backToTop??}
+<div class="pf-v6-c-back-to-top"{#if backToTop.id??} id="{backToTop.id}"{/if} x-data="{backToTop.xData}" x-show="visible" x-cloak x-transition>
+  <button class="pf-v6-c-button pf-m-primary" type="button" @click="scrollToTop()">
+    <span class="pf-v6-c-button__text">{backToTop.title}</span>
+    <span class="pf-v6-c-button__icon pf-m-end">{icons:svg('fa:angle-up').raw}</span>
+  </button>
+</div>
+{#else}
 <div class="pf-v6-c-back-to-top"{#if id??} id="{id}"{/if} x-data="phaBackToTop({#if scrollableSelector??}'{scrollableSelector}'{#else}null{/if}, {#if alwaysVisible??}true{#else}false{/if})" x-show="visible" x-cloak x-transition>
   <button class="pf-v6-c-button pf-m-primary" type="button" @click="scrollToTop()">
     <span class="pf-v6-c-button__text">{#if title??}{title}{#else}Back to top{/if}</span>
     <span class="pf-v6-c-button__icon pf-m-end">{icons:svg('fa:angle-up').raw}</span>
   </button>
 </div>
+{/if}

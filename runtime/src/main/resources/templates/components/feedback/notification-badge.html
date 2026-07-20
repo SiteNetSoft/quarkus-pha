@@ -3,9 +3,17 @@
    renders as a badge inside pf-v6-c-button__count. !}
 {! Optional: id — DOM id on the root; omit unless something else references the badge.
               variant (read | unread | attention — default read), count (visible number), ariaLabel !}
+{! Model mode: pass notificationBadge=<...model.NotificationBadge>. !}
+{#if notificationBadge??}
+<button class="pf-v6-c-button pf-m-stateful pf-m-{notificationBadge.variant}" type="button" id="{notificationBadge.id}" aria-label="{notificationBadge.ariaLabel}">
+  <span class="pf-v6-c-button__icon">{icons:svg('fa:bell').raw}</span>
+  {#if notificationBadge.count??}<span class="pf-v6-c-button__count"><span class="pf-v6-c-badge {#if notificationBadge.isRead}pf-m-read{#else}pf-m-unread{/if}">{notificationBadge.count}</span></span>{/if}
+</button>
+{#else}
 {#let v=(variant ?: 'read')}
 <button class="pf-v6-c-button pf-m-stateful pf-m-{v}" type="button"{#if id??} id="{id}"{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
   <span class="pf-v6-c-button__icon">{icons:svg('fa:bell').raw}</span>
   {#if count??}<span class="pf-v6-c-button__count"><span class="pf-v6-c-badge {#if v is 'read'}pf-m-read{#else}pf-m-unread{/if}">{count}</span></span>{/if}
 </button>
 {/let}
+{/if}
