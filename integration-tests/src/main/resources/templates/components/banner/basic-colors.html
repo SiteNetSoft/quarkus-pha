@@ -1,18 +1,5 @@
 {! All eight color modifiers. Color banners are PF's content/marketing variant — no icon, just a tinted strip. !}
-{#include components/feedback/banner id="banner"}{#message}Default banner{/message}{/include}
-<br />
-{#include components/feedback/banner id="banner-red" variant="red"}{#message}Red banner{/message}{/include}
-<br />
-{#include components/feedback/banner id="banner-orangered" variant="orangered"}{#message}Orangered banner{/message}{/include}
-<br />
-{#include components/feedback/banner id="banner-orange" variant="orange"}{#message}Orange banner{/message}{/include}
-<br />
-{#include components/feedback/banner id="banner-yellow" variant="yellow"}{#message}Yellow banner{/message}{/include}
-<br />
-{#include components/feedback/banner id="banner-green" variant="green"}{#message}Green banner{/message}{/include}
-<br />
-{#include components/feedback/banner id="banner-teal" variant="teal"}{#message}Teal banner{/message}{/include}
-<br />
-{#include components/feedback/banner id="banner-blue" variant="blue"}{#message}Blue banner{/message}{/include}
-<br />
-{#include components/feedback/banner id="banner-purple" variant="purple"}{#message}Purple banner{/message}{/include}
+{! Populated from the Java model BannerDemoData.demoBannersColors (see the Java tab). !}
+{#for b in demoBannersColors}{#if b_index > 0}<br />
+{/if}{#include components/feedback/banner banner=b /}
+{/for}

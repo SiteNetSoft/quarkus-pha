@@ -1,12 +1,5 @@
 {! Banners support inline links — they inherit color contrast and are underlined. !}
-{#include components/feedback/banner}{#message}Default banner with a <a href="#">link</a>{/message}{/include}
-<br />
-{#include components/feedback/banner}{#message}Default banner with a
-    <a
-            class="pf-m-disabled"
-            role="link"
-            aria-disabled="true"
-    >disabled link</a>{/message}{/include}
-<br />
-{#include components/feedback/banner variant="blue"}{#message}Blue banner with an {#include components/actions/button id="btn-plain" variant="link" inline=true ariaLabel="inline"}{#content}inline link button{/content}{/include}
-{/message}{/include}
+{! Populated from the Java model BannerDemoData.demoBannersWithLinks (see the Java tab). !}
+{#for b in demoBannersWithLinks}{#if b_index > 0}<br />
+{/if}{#include components/feedback/banner banner=b /}
+{/for}
