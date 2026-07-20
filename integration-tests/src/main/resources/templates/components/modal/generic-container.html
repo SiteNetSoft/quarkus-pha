@@ -1,13 +1,3 @@
 {! Bare modal box — no header, body, footer, or close; the box is a generic, padding-free
    container (PF's wizard-in-a-modal use case). Close with Escape. !}
-<div x-data="{ open: false }">
-  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = true">
-    <span class="pf-v6-c-button__text">Open generic modal container</span>
-  </button>
-  {#include components/feedback/modal id="mo-generic-container" size="md" ariaLabel="Generic modal container"}
-  <p style="padding: 1rem">
-    The modal box children elements can be removed, and the modal serves as a generic container. One use case of this
-    is when creating a wizard in a modal. Press <kbd>Escape</kbd> to close this one.
-  </p>
-  {/include}
-</div>
+{#include components/feedback/modal modal=demoMoGenericContainer /}

@@ -1,12 +1,1 @@
-<div x-data="{ open: false }">
-  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = true"><span class="pf-v6-c-button__text">Open modal with description</span></button>
-  {#include components/feedback/modal id="mo-with-description" size="md"}
-  {#include components/feedback/modal-close /}
-  {#include components/feedback/modal-header headingLevel="h2" descriptionText="A static description appears here, below the modal title."}With a static description{/include}
-  {#include components/feedback/modal-body}<p>The description sits in the header below the title and does not scroll with the body.</p>{/include}
-  {#include components/feedback/modal-footer}
-  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = false"><span class="pf-v6-c-button__text">Confirm</span></button>
-  <button class="pf-v6-c-button pf-m-link" type="button" @click="open = false"><span class="pf-v6-c-button__text">Cancel</span></button>
-  {/include}
-  {/include}
-</div>
+{#include components/feedback/modal modal=demoMoWithDescription /}
