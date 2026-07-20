@@ -1,18 +1,4 @@
 <div style="display: flex; height: 260px; border: 1px solid var(--pf-t--global--border--color--default)">
-{#include components/navigation/toolbar id="tb-vertical" vertical=true}
-  {#include components/navigation/toolbar-content}
-    {#include components/navigation/toolbar-content-section}
-        {#include components/navigation/toolbar-item}
-          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Grid view"><span class="pf-v6-c-button__icon">{icons:svg('fa:table-cells-large').raw}</span></button>
-        {/include}
-        {#include components/navigation/toolbar-item}
-          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Filter"><span class="pf-v6-c-button__icon">{icons:svg('fa:filter').raw}</span></button>
-        {/include}
-        {#include components/navigation/toolbar-item}
-          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Settings"><span class="pf-v6-c-button__icon">{icons:svg('fa:gear').raw}</span></button>
-        {/include}
-    {/include}
-  {/include}
-{/include}
+  {#include components/navigation/toolbar toolbar=demoTbVertical /}
   <div style="padding: 1rem">Content beside the vertical toolbar.</div>
 </div>

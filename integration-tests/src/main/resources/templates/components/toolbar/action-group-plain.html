@@ -1,18 +1,2 @@
 {! pf-m-action-group-plain — tighter spacing for icon-only plain buttons. !}
-{#include components/navigation/toolbar id="tb-action-group-plain"}
-  {#include components/navigation/toolbar-content}
-    {#include components/navigation/toolbar-content-section}
-      {#include components/navigation/toolbar-group modifiers="pf-m-action-group-plain"}
-        {#include components/navigation/toolbar-item}
-          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Column view"><span class="pf-v6-c-button__icon">{icons:svg('fa:table-columns').raw}</span></button>
-        {/include}
-        {#include components/navigation/toolbar-item}
-          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Expand"><span class="pf-v6-c-button__icon">{icons:svg('fa:expand').raw}</span></button>
-        {/include}
-        {#include components/navigation/toolbar-item}
-          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Settings"><span class="pf-v6-c-button__icon">{icons:svg('fa:gear').raw}</span></button>
-        {/include}
-      {/include}
-    {/include}
-  {/include}
-{/include}
+{#include components/navigation/toolbar toolbar=demoTbActionGroupPlain /}
