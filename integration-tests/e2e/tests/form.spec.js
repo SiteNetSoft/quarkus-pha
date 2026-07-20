@@ -94,4 +94,32 @@ test.describe("Form", () => {
       });
     }
   });
+  test.describe("Java source tab", () => {
+    test("model-driven cards get a leading Java tab; Alpine forms do not", async ({ page }) => {
+      await page.goto("/components/form");
+      for (const ex of ["basic", "grid", "sections", "invalid-form-alert"]) {
+        const card = page.locator(`[data-rendered-href="/components/form/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      for (const ex of ["field-groups", "validated"]) {
+        const card = page.locator(`[data-rendered-href="/components/form/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/form/source-java/invalid-form-alert");
+      expect(res.status()).toBe(200);
+      const body = await res.text();
+      expect(body).toContain('.dangerAlert("Fill out all required fields before continuing.")');
+      expect(body).toContain('.helper("Age must be a number.", "error")');
+    });
+
+    test("model groups keep the label-for wiring onto composed TextInputs", async ({ page }) => {
+      await page.goto("/components/form/basic");
+      const label = page.locator('label[for="form-basic-name-field"]');
+      await expect(label).toBeAttached();
+      await expect(page.locator("#form-basic-name-field")).toBeAttached();
+    });
+  });
 });
