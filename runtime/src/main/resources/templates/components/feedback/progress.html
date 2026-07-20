@@ -28,6 +28,25 @@
 {!   ariaLabelledBy  (optional) — aria-labelledby on the bar.                       !}
 {!   ariaDescribedBy (optional) — aria-describedby on the bar. Required when        !}
 {!                                helperText is set.                                !}
+{! Model mode: pass progress=<org.sitenetsoft.quarkus.pha.model.Progress> (built via
+   Progress.of(id, value)) — mirrors the parameter surface below; helper text renders
+   with a derived {id}-helper id wired into aria-describedby, and the indicator width
+   is the true percentage of the min..max range. !}
+{#if progress??}
+<div class="pf-v6-c-progress{#if progress.size} pf-m-{progress.size}{/if}{#if progress.variant} pf-m-{progress.variant}{/if}{#if progress.measureInside} pf-m-inside{/if}{#if progress.measureOutside} pf-m-outside{/if}{#if progress.singleline} pf-m-singleline{/if}" id="{progress.id}">
+  {#if progress.title}<div class="pf-v6-c-progress__description{#if progress.truncateTitle} pf-m-truncate{/if}" id="{progress.descriptionId}">{progress.title}</div>{/if}
+  <div class="pf-v6-c-progress__status">
+    {#if progress.measureInStatus}<span class="pf-v6-c-progress__measure">{progress.measure}</span>{/if}
+    {#if progress.statusIcon}<span class="pf-v6-c-progress__status-icon">{icons:svg(progress.statusIcon).raw}</span>{/if}
+  </div>
+  <div class="pf-v6-c-progress__bar" role="progressbar" aria-valuemin="{progress.minValue}" aria-valuemax="{progress.maxValue}" aria-valuenow="{progress.value}"{#if progress.valueText} aria-valuetext="{progress.valueText}"{/if}{#if progress.ariaLabel} aria-label="{progress.ariaLabel}"{#else if progress.title} aria-labelledby="{progress.descriptionId}"{/if}{#if progress.helperText} aria-describedby="{progress.helperId}"{/if}>
+    <div class="pf-v6-c-progress__indicator" style="width: {progress.percent}%">
+      {#if progress.measureInside}<span class="pf-v6-c-progress__measure">{progress.measure}</span>{/if}
+    </div>
+  </div>
+  {#if progress.helperText}<div class="pf-v6-c-progress__helper-text" id="{progress.helperId}">{progress.helperText}</div>{/if}
+</div>
+{#else}
 <div class="pf-v6-c-progress{#if size??} pf-m-{size}{/if}{#if variant??} pf-m-{variant}{/if}{#if measureLocation?? && (measureLocation is 'outside' || measureLocation is 'inside')} pf-m-{measureLocation}{/if}{#if singleline??} pf-m-singleline{/if}" id="{id}">
   {#if title??}<div class="pf-v6-c-progress__description{#if truncateTitle??} pf-m-truncate{/if}" id="{id}-description">{title}</div>{/if}
   <div class="pf-v6-c-progress__status">
@@ -41,3 +60,4 @@
   </div>
   {#if helperText??}<div class="pf-v6-c-progress__helper-text">{helperText}</div>{/if}
 </div>
+{/if}
