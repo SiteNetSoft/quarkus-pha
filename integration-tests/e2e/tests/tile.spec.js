@@ -69,4 +69,23 @@ test.describe("Tile", () => {
       });
     }
   });
+  test.describe("Java source tab", () => {
+    test("model-driven cards get a leading Java tab; selection examples do not", async ({ page }) => {
+      await page.goto("/components/tile");
+      for (const ex of ["basic", "large-icons"]) {
+        const card = page.locator(`[data-rendered-href="/components/tile/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      for (const ex of ["single-selection", "multiple-selection"]) {
+        const card = page.locator(`[data-rendered-href="/components/tile/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/tile/source-java/large-icons");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain(".stacked().displayLg()");
+    });
+  });
 });
