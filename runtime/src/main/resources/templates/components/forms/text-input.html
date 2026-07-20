@@ -4,6 +4,22 @@
 {!           placeholder, value, disabled, readonly, required, expanded, !}
 {!           validated (success|warning|error — emits pf-m-* + status icon), !}
 {!           iconName (Font Awesome icon name — renders as prefix utility icon) !}
+{! Model mode: pass textInput=<org.sitenetsoft.quarkus.pha.model.TextInput>. !}
+{#if textInput??}
+<span class="pf-v6-c-form-control{#if textInput.validated??} pf-m-{textInput.validated}{/if}{#if textInput.isDisabled} pf-m-disabled{/if}{#if textInput.isReadonly} pf-m-readonly{/if}{#if textInput.isExpanded} pf-m-expanded{/if}{#if textInput.iconName??} pf-m-icon{/if}" id="{textInput.id}">
+  <input type="{textInput.type}" id="{textInput.id}-field" name="{textInput.id}"{#if textInput.placeholder??} placeholder="{textInput.placeholder}"{/if}{#if textInput.isDisabled} disabled{/if}{#if textInput.isReadonly} readonly{/if}{#if textInput.isRequired} required{/if}{#if textInput.value??} value="{textInput.value}"{/if} aria-label="{textInput.ariaLabelResolved}"{#if textInput.isError} aria-invalid="true"{/if}>
+  {#if textInput.iconName??}
+  <span class="pf-v6-c-form-control__icon">{icons:svg(textInput.iconName).raw}</span>
+  {/if}
+  {#if textInput.validated??}
+  <span class="pf-v6-c-form-control__utilities">
+    <span class="pf-v6-c-form-control__icon pf-m-status">
+      {#if textInput.isSuccess}{icons:svg('fa:circle-check').raw}{#else if textInput.isWarning}{icons:svg('fa:triangle-exclamation').raw}{#else if textInput.isError}{icons:svg('fa:circle-exclamation').raw}{/if}
+    </span>
+  </span>
+  {/if}
+</span>
+{#else}
 <span class="pf-v6-c-form-control{#if validated??} pf-m-{validated}{/if}{#if disabled??} pf-m-disabled{/if}{#if readonly??} pf-m-readonly{/if}{#if expanded??} pf-m-expanded{/if}{#if iconName??} pf-m-icon{/if}" id="{id}">
   <input type="{#if type??}{type}{#else}text{/if}" id="{id}-field" name="{id}"{#if placeholder??} placeholder="{placeholder}"{/if}{#if disabled??} disabled{/if}{#if readonly??} readonly{/if}{#if required??} required{/if}{#if value??} value="{value}"{/if} aria-label="{#if ariaLabel??}{ariaLabel}{#else if placeholder??}{placeholder}{#else if value??}{value}{#else}{id}{/if}"{#if validated??}{#if validated is 'error'} aria-invalid="true"{/if}{/if}>
   {#if iconName??}
@@ -17,3 +33,4 @@
   </span>
   {/if}
 </span>
+{/if}
