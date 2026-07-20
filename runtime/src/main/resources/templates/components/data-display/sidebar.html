@@ -1,5 +1,19 @@
 {! Sidebar — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the sidebar.
                                           panelRight (optional), gutter (optional), stack (optional) !}
+{! Model mode: pass sidebar=<org.sitenetsoft.quarkus.pha.model.Sidebar> — raw-HTML panel/content, adds split + contentFirst. !}
+{#if sidebar??}
+<div class="pf-v6-c-sidebar{sidebar.modifiers}" id="{sidebar.id}">
+  <div class="pf-v6-c-sidebar__main">
+    {#if sidebar.isContentFirst}
+    <div class="pf-v6-c-sidebar__content{sidebar.contentClasses}"{#if sidebar.contentStyle??} style="{sidebar.contentStyle}"{/if}>{sidebar.contentHtml.raw}</div>
+    <div class="pf-v6-c-sidebar__panel{sidebar.panelClasses}"{#if sidebar.panelStyle??} style="{sidebar.panelStyle}"{/if}>{sidebar.panelHtml.raw}</div>
+    {#else}
+    <div class="pf-v6-c-sidebar__panel{sidebar.panelClasses}"{#if sidebar.panelStyle??} style="{sidebar.panelStyle}"{/if}>{sidebar.panelHtml.raw}</div>
+    <div class="pf-v6-c-sidebar__content{sidebar.contentClasses}"{#if sidebar.contentStyle??} style="{sidebar.contentStyle}"{/if}>{sidebar.contentHtml.raw}</div>
+    {/if}
+  </div>
+</div>
+{#else}
 <div
   class="pf-v6-c-sidebar{#if panelRight??} pf-m-panel-right{/if}{#if gutter??} pf-m-gutter{/if}{#if stack??} pf-m-stack{/if}"
   {#if id??}id="{id}"{/if}
@@ -9,3 +23,4 @@
     <div class="pf-v6-c-sidebar__content">{#insert content}{/insert}</div>
   </div>
 </div>
+{/if}
