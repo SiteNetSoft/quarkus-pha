@@ -7,4 +7,9 @@
               sticky — adds pf-m-sticky for pinned-to-top behavior inside a scroll container.
               screenReaderText — visually-hidden prefix announced by AT (e.g. "Warning:"). !}
 {! Slot: message — the visible banner message. !}
+{! Model mode: pass banner=<org.sitenetsoft.quarkus.pha.model.Banner> (built via Banner.of(message)). !}
+{#if banner??}
+<div class="pf-v6-c-banner{#if banner.variant} pf-m-{banner.variant}{/if}{#if banner.sticky} pf-m-sticky{/if}"{#if banner.id} id="{banner.id}"{/if}>{#if banner.screenReaderText}<span class="pf-v6-screen-reader">{banner.screenReaderText}</span>{/if}{#if banner.statusIcon}<span aria-hidden="true">{icons:svg(banner.statusIcon).raw}</span>{#if banner.variant == 'info'}{#else} {/if}{/if}{banner.messageHtml.raw}</div>
+{#else}
 <div class="pf-v6-c-banner{#if variant??} pf-m-{variant}{/if}{#if sticky??} pf-m-sticky{/if}"{#if id??} id="{id}"{/if}>{#if screenReaderText??}<span class="pf-v6-screen-reader">{screenReaderText}</span>{/if}{#if variant??}{#if variant is 'success'}<span aria-hidden="true">{icons:svg('fa:circle-check').raw}</span> {#else if variant is 'warning'}<span aria-hidden="true">{icons:svg('fa:triangle-exclamation').raw}</span> {#else if variant is 'danger'}<span aria-hidden="true">{icons:svg('fa:circle-exclamation').raw}</span> {#else if variant is 'info'}<span aria-hidden="true">{icons:svg('fa:circle-info').raw}</span>{/if}{/if}{#insert message}{/insert}</div>
+{/if}
