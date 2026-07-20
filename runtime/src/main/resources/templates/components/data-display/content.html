@@ -23,7 +23,16 @@
 {! Slot:                                                                          !}
 {!   {#content} — children. In wrapper mode, use raw HTML (h1, p, ul, etc.). In   !}
 {!                element mode, use whatever inline markup the tag accepts.       !}
-{#if component?? && (component is 'h1' || component is 'h2' || component is 'h3' || component is 'h4' || component is 'h5' || component is 'h6' || component is 'p' || component is 'a' || component is 'small' || component is 'blockquote' || component is 'pre' || component is 'hr' || component is 'ul' || component is 'ol' || component is 'dl' || component is 'li' || component is 'dt' || component is 'dd')}
+{! Model mode: pass contentModel=<org.sitenetsoft.quarkus.pha.model.Content> (param name dodges the content slot). !}
+{#if contentModel??}
+{#if contentModel.isElement}
+<{contentModel.component} class="pf-v6-c-content--{contentModel.component}{contentModel.modifiers}"{#if contentModel.id??} id="{contentModel.id}"{/if}{#if contentModel.href??} href="{contentModel.href}"{/if}>{#if contentModel.text??}{contentModel.text}{#else}{contentModel.htmlBody.raw}{/if}</{contentModel.component}>
+{#else}
+<div class="pf-v6-c-content{contentModel.modifiers}"{#if contentModel.id??} id="{contentModel.id}"{/if}>
+  {contentModel.htmlBody.raw}
+</div>
+{/if}
+{#else if component?? && (component is 'h1' || component is 'h2' || component is 'h3' || component is 'h4' || component is 'h5' || component is 'h6' || component is 'p' || component is 'a' || component is 'small' || component is 'blockquote' || component is 'pre' || component is 'hr' || component is 'ul' || component is 'ol' || component is 'dl' || component is 'li' || component is 'dt' || component is 'dd')}
 <{component} class="pf-v6-c-content--{component}{#if editorial??} pf-m-editorial{/if}{#if visited??} pf-m-visited{/if}{#if plainList??} pf-m-plain{/if}"{#if id??} id="{id}"{/if}{#if href??} href="{href}"{/if}>{#if text??}{text}{#else}{#insert content}{/insert}{/if}</{component}>
 {#else}
 <div class="pf-v6-c-content{#if editorial??} pf-m-editorial{/if}{#if visited??} pf-m-visited{/if}"{#if id??} id="{id}"{/if}>
