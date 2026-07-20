@@ -72,9 +72,7 @@ test.describe("Clipboard copy", () => {
     });
 
     test("input has correct value", async ({ page }) => {
-      await expect(page.locator("#cc-basic-input")).toHaveValue(
-        "Copy this string to your clipboard"
-      );
+      await expect(page.locator("#cc-basic-input")).toHaveValue("Copy this string to your clipboard");
     });
 
     test("copy button is visible with correct aria-label", async ({ page }) => {
@@ -90,23 +88,17 @@ test.describe("Clipboard copy", () => {
     });
 
     test("input has correct value", async ({ page }) => {
-      await expect(page.locator("#cc-readonly-input")).toHaveValue(
-        "ghp_a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7"
-      );
+      await expect(page.locator("#cc-readonly-input")).toHaveValue("ghp_a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7");
     });
 
     test("form control has readonly modifier", async ({ page }) => {
-      await expect(page.locator("#cc-readonly .pf-v6-c-form-control")).toHaveClass(
-        /pf-m-readonly/
-      );
+      await expect(page.locator("#cc-readonly .pf-v6-c-form-control")).toHaveClass(/pf-m-readonly/);
     });
   });
 
   test.describe("Expandable", () => {
     test("toggle button is visible", async ({ page }) => {
-      const toggle = page.locator(
-        "#cc-expandable .pf-v6-c-clipboard-copy__toggle-icon"
-      );
+      const toggle = page.locator("#cc-expandable .pf-v6-c-clipboard-copy__toggle-icon");
       await expect(toggle).toBeVisible();
     });
 
@@ -116,16 +108,12 @@ test.describe("Clipboard copy", () => {
     });
 
     test("toggle button has aria-expanded false by default", async ({ page }) => {
-      const toggleBtn = page.locator(
-        "#cc-expandable .pf-v6-c-clipboard-copy__group > button.pf-m-control"
-      ).first();
+      const toggleBtn = page.locator("#cc-expandable .pf-v6-c-clipboard-copy__group > button.pf-m-control").first();
       await expect(toggleBtn).toHaveAttribute("aria-expanded", "false");
     });
 
     test("clicking toggle reveals expandable content", async ({ page }) => {
-      const toggleBtn = page.locator(
-        "#cc-expandable .pf-v6-c-clipboard-copy__group > button.pf-m-control"
-      ).first();
+      const toggleBtn = page.locator("#cc-expandable .pf-v6-c-clipboard-copy__group > button.pf-m-control").first();
       await toggleBtn.click();
       const content = page.locator("#cc-expandable-content");
       await expect(content).toBeVisible();
@@ -133,13 +121,9 @@ test.describe("Clipboard copy", () => {
     });
 
     test("expanded content contains full text", async ({ page }) => {
-      const toggleBtn = page.locator(
-        "#cc-expandable .pf-v6-c-clipboard-copy__group > button.pf-m-control"
-      ).first();
+      const toggleBtn = page.locator("#cc-expandable .pf-v6-c-clipboard-copy__group > button.pf-m-control").first();
       await toggleBtn.click();
-      await expect(page.locator("#cc-expandable-content")).toContainText(
-        "Full multi-line content"
-      );
+      await expect(page.locator("#cc-expandable-content")).toContainText("Full multi-line content");
     });
   });
 
@@ -156,14 +140,35 @@ test.describe("Clipboard copy", () => {
     });
 
     test("displays correct text", async ({ page }) => {
-      await expect(
-        page.locator("#cc-inline .pf-v6-c-clipboard-copy__text")
-      ).toContainText("npm install");
+      await expect(page.locator("#cc-inline .pf-v6-c-clipboard-copy__text")).toContainText("npm install");
     });
 
     test("copy button uses plain style", async ({ page }) => {
       const btn = page.locator("#cc-inline .pf-v6-c-button");
       await expect(btn).toHaveClass(/pf-m-plain/);
+    });
+  });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/clipboard-copy");
+      for (const ex of ["basic", "expanded-with-array", "inline-compact-with-additional-action"]) {
+        const card = page.locator(`[data-rendered-href="/components/clipboard-copy/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/clipboard-copy/source-java/expanded-with-array");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain(".expandedHtml(");
+    });
+
+    test("model expandable panel still toggles", async ({ page }) => {
+      await page.goto("/components/clipboard-copy/expandable");
+      const panel = page.locator("#cc-expandable-content");
+      await expect(panel).toBeHidden();
+      await page.locator('#cc-expandable button[aria-label="Toggle content"]').click();
+      await expect(panel).toBeVisible();
     });
   });
 });
