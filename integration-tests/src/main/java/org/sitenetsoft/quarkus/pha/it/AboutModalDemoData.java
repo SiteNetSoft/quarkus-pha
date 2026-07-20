@@ -28,7 +28,7 @@ public class AboutModalDemoData {
                       </div>
                       <div class="pf-v6-c-description-list__group">
                         <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Quarkus</span></dt>
-                        <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">3.35.3</div></dd>
+                        <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">3.37.2</div></dd>
                       </div>
                     </dl>""")
             .trademarkHtml("<p class=\"pf-v6-c-about-modal-box__strapline\">Trademark and legal notices</p>")
@@ -55,7 +55,7 @@ public class AboutModalDemoData {
                           <div class="pf-v6-l-flex pf-m-space-items-md pf-m-justify-content-space-between">
                             <div>
                               <strong>Server</strong><br />
-                              <span>Quarkus 3.35 + Qute</span>
+                              <span>Quarkus 3.37 + Qute</span>
                             </div>
                             <div>
                               <strong>UI</strong><br />

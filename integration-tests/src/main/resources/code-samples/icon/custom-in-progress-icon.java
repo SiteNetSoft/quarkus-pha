@@ -7,4 +7,4 @@ Icon iconUlProgress = Icon.of("fa:upload").size("xl")
         .inProgress().label("Uploading").build();
 
 // Template side, with the data in scope:
-// {#include components/icon iconModel=icon... /} (one include per icon)
+// {#include components/icon iconModel=iconDlProgress /} (one include per icon)

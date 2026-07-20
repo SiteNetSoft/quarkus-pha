@@ -51,7 +51,7 @@ public class ClipboardCopyDemoData {
 
     public static ClipboardCopy demoCcRoExpandedDefault = ClipboardCopy
             .of("cc-ro-expanded-default", "Starts expanded").readonly().expandable().expanded()
-            .expandedText("This panel is open on load thanks to expanded=true.").build();
+            .expandedText("This panel is open on load thanks to the builder's expanded() call.").build();
 
     public static ClipboardCopy demoCcRoExpanded = ClipboardCopy
             .of("cc-ro-expanded", "Read-only and expandable").readonly().expandable()
