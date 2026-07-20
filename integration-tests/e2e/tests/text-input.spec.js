@@ -13,9 +13,7 @@ test.describe("Text Input", () => {
 
   test.describe("Basic", () => {
     test("has pf-v6-c-form-control class", async ({ page }) => {
-      await expect(page.locator("#ti-basic")).toHaveClass(
-        /pf-v6-c-form-control/
-      );
+      await expect(page.locator("#ti-basic")).toHaveClass(/pf-v6-c-form-control/);
     });
   });
 
@@ -50,6 +48,25 @@ test.describe("Text Input", () => {
     test("/components/text-input/icon-invalid returns 200", async ({ page }) => {
       const res = await page.goto("/components/text-input/icon-invalid");
       expect(res.status()).toBe(200);
+    });
+  });
+  test.describe("Java source tab", () => {
+    test("model-driven cards get a leading Java tab; raw-anatomy variants do not", async ({ page }) => {
+      await page.goto("/components/text-input");
+      for (const ex of ["basic", "types", "with-icon"]) {
+        const card = page.locator(`[data-rendered-href="/components/text-input/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      for (const ex of ["icon-invalid", "start-truncated"]) {
+        const card = page.locator(`[data-rendered-href="/components/text-input/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/text-input/source-java/with-icon");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.icon("fa:magnifying-glass")');
     });
   });
 });
