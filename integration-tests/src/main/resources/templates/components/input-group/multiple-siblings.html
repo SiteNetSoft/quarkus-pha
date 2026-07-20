@@ -1,16 +1,4 @@
 {! Several groups stacked — each row is its own input-group. !}
 <div style="display: flex; flex-direction: column; gap: 0.5rem">
-  {#include components/forms/input-group id="ig-sib-1"}
-  {#include components/forms/input-group-item box=true}<span class="pf-v6-c-input-group__text">$</span>{/include}
-  {#include components/forms/input-group-item fill=true}
-  <span class="pf-v6-c-form-control"><input type="number" aria-label="Amount in dollars" value="100" /></span>
-  {/include}
-  {#include components/forms/input-group-item box=true}<span class="pf-v6-c-input-group__text">.00</span>{/include}
-  {/include}
-  {#include components/forms/input-group id="ig-sib-2"}
-  {#include components/forms/input-group-item fill=true}
-  <span class="pf-v6-c-form-control"><input type="text" aria-label="Hostname" placeholder="Hostname" /></span>
-  {/include}
-  {#include components/forms/input-group-item box=true disabled=true}<span class="pf-v6-c-input-group__text">.internal</span>{/include}
-  {/include}
+  {#for g in demoIgsSiblings}{#include components/forms/input-group inputGroup=g /}{/for}
 </div>

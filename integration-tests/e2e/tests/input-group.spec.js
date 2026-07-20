@@ -47,4 +47,23 @@ test.describe("Input group", () => {
       });
     }
   });
+  test.describe("Java source tab", () => {
+    test("model-driven cards get a leading Java tab; Alpine flyouts do not", async ({ page }) => {
+      await page.goto("/components/input-group");
+      for (const ex of ["basic", "multiple-siblings", "with-textarea"]) {
+        const card = page.locator(`[data-rendered-href="/components/input-group/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      for (const ex of ["with-dropdown", "with-popover"]) {
+        const card = page.locator(`[data-rendered-href="/components/input-group/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/input-group/source-java/with-textarea");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('Button.of("Send").variant("control")');
+    });
+  });
 });
