@@ -1,9 +1,16 @@
 {! Menu — PatternFly v6. Root of the menu family; compose menu-content (> menu-list /
    menu-group) in the main block. The root owns roving-focus keyboard nav (handleKeyNav,
    referenced by menu-list's @keydown). !}
+{! Two modes.
+   Model-driven: pass menu=<org.sitenetsoft.quarkus.pha.model.Menu> (built via Menu.builder())
+     — renders the whole menu incl. generated Alpine for select/checkbox/view-more/search modes.
+   Slot shell: omit menu and compose menu-content in the main block (params below). !}
 {! Optional params:
      id, attrs   — root id / raw passthrough.
      plain       — pf-m-plain.   scrollable — pf-m-scrollable.   modifiers — extra pf-m-* classes. !}
+{#if menu??}
+{#include components/navigation/menu-model menu=menu /}
+{#else}
 <div
   class="pf-v6-c-menu{#if plain??} pf-m-plain{/if}{#if scrollable??} pf-m-scrollable{/if}{#if modifiers??} {modifiers}{/if}"
   {#if id??}id="{id}"{/if}
@@ -24,3 +31,4 @@
 >
   {#let menuId=id id=null attrs=null}{#insert /}{/let}
 </div>
+{/if}

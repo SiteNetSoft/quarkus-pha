@@ -1,0 +1,68 @@
+{! One model-driven menu entry. Shape follows the menu's interaction mode:
+     divider          — separator li
+     selectSingle     — menuitemradio button wired to the shared `selected` state
+     selectMulti      — menuitemcheckbox button wired to the shared `sel` array
+     checkboxes       — label + checkbox input bound to its generated state var
+     default          — button/link item (icons, descriptions, danger, disabled,
+                        external, optional trailing action / favorite button);
+                        in a searchFilter menu the li x-shows on the query.
+   Params: menu, item. Included by menu-model. !}
+{#if item.divider}
+<li class="pf-v6-c-divider" role="separator"></li>
+{#else if menu.selectSingle}
+<li role="none" class="pf-v6-c-menu__list-item">
+  <button class="pf-v6-c-menu__item" type="button" role="menuitemradio" :class="{ 'pf-m-selected': selected === '{item.key}' }" aria-checked="false" :aria-checked="(selected === '{item.key}').toString()" @click="selected = '{item.key}'">
+    <span class="pf-v6-c-menu__item-main">
+      <span class="pf-v6-c-menu__item-text">{item.text}</span>
+      <span class="pf-v6-c-menu__item-select-icon" x-show="selected === '{item.key}'">{icons:svg('fa:check').raw}</span>
+    </span>
+  </button>
+</li>
+{#else if menu.selectMulti}
+<li role="none" class="pf-v6-c-menu__list-item">
+  <button class="pf-v6-c-menu__item" type="button" role="menuitemcheckbox" :class="{ 'pf-m-selected': sel.includes('{item.key}') }" aria-checked="false" :aria-checked="(sel.includes('{item.key}')).toString()" @click="sel.includes('{item.key}') ? sel = sel.filter(x => x !== '{item.key}') : sel.push('{item.key}')">
+    <span class="pf-v6-c-menu__item-main">
+      <span class="pf-v6-c-menu__item-text">{item.text}</span>
+      <span class="pf-v6-c-menu__item-select-icon" x-show="sel.includes('{item.key}')">{icons:svg('fa:check').raw}</span>
+    </span>
+  </button>
+</li>
+{#else if menu.checkboxes}
+<li class="pf-v6-c-menu__list-item">
+  <label class="pf-v6-c-menu__item" for="{item.checkboxId}">
+    <span class="pf-v6-c-menu__item-main">
+      <span class="pf-v6-c-menu__item-check">
+        <span class="pf-v6-c-check pf-m-standalone">
+          <input class="pf-v6-c-check__input" type="checkbox" id="{item.checkboxId}" x-model="{item.stateVar}" />
+        </span>
+      </span>
+      <span class="pf-v6-c-menu__item-text">{item.text}</span>
+    </span>
+  </label>
+</li>
+{#else}
+<li{#if item.actionIcon}{#else} role="none"{/if} class="pf-v6-c-menu__list-item{#if item.danger} pf-m-danger{/if}{#if item.disabled && item.href} pf-m-disabled{/if}"{#if item.actionIcon}{#else}{#if menu.hasSearch} x-show="'{item.text}'.toLowerCase().indexOf(q.toLowerCase()) !== -1"{/if}{/if}>
+  {#if item.href}
+  <a class="pf-v6-c-menu__item" href="{item.href}" role="menuitem"{#if item.itemId} id="{item.itemId}"{/if}{#if item.disabled} aria-disabled="true" tabindex="-1"{#else if item.external} target="_blank" rel="noopener noreferrer"{/if}>
+  {#else}
+  <button class="pf-v6-c-menu__item" type="button"{#if item.actionIcon}{#else} role="menuitem"{/if}{#if item.itemId} id="{item.itemId}"{/if}{#if item.disabled} disabled{/if}>
+  {/if}
+    <span class="pf-v6-c-menu__item-main">
+      {#if item.icon}<span class="pf-v6-c-menu__item-icon">{icons:svg(item.icon).raw}</span>{/if}
+      {#if item.srPrefix}<span class="pf-v6-screen-reader">{item.srPrefix}</span>{/if}
+      <span class="pf-v6-c-menu__item-text">{item.text}</span>
+      {#if item.external}<span class="pf-v6-c-menu__item-external-icon">{icons:svg('fa:arrow-up-right-from-square').raw}</span>{/if}
+      {#if item.description}<span class="pf-v6-c-menu__item-description">{item.description}</span>{/if}
+    </span>
+  {#if item.href}</a>{#else}</button>{/if}
+  {#if item.favoriteAction}
+  <button class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action pf-m-favorite" type="button" aria-label="{item.actionAriaLabel}" x-data="{ fav: false }" :class="{ 'pf-m-favorited': fav }" @click="fav = !fav">
+    <span class="pf-v6-c-menu__item-action-icon">{icons:svg(item.actionIcon).raw}</span>
+  </button>
+  {#else if item.actionIcon}
+  <button class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action" type="button" aria-label="{item.actionAriaLabel}">
+    <span class="pf-v6-c-menu__item-action-icon">{icons:svg(item.actionIcon).raw}</span>
+  </button>
+  {/if}
+</li>
+{/if}
