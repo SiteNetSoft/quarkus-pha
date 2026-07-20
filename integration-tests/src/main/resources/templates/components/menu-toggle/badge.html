@@ -1,4 +1,4 @@
+{! Populated from the Java model MenuToggleDemoData.demoToggleBadge (see the Java tab). !}
 <div class="pf-v6-l-flex pf-m-space-items-md pf-m-align-items-center" id="mt-badge-row">
-  <button class="pf-v6-c-menu-toggle" type="button" id="mt-badge" aria-expanded="false"><span class="pf-v6-c-menu-toggle__text">Count</span><span class="pf-v6-c-menu-toggle__count"><span class="pf-v6-c-badge pf-m-unread">4 selected</span></span><span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span></button>
-  <button class="pf-v6-c-menu-toggle pf-m-plain pf-m-text" type="button" id="mt-badge-plain" aria-expanded="false" aria-label="Menu toggle with badge"><span class="pf-v6-c-menu-toggle__count"><span class="pf-v6-c-badge pf-m-unread">4</span></span><span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span></button>
+  {#for t in demoToggleBadge}{#include components/navigation/menu-toggle toggle=t /}{/for}
 </div>
