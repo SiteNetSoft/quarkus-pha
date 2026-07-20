@@ -1,22 +1,8 @@
 <div class="ws-preview-html" style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap">
+  {#for sp in demoSpsSizes}
   <span style="display: inline-flex; flex-direction: column; align-items: center; gap: 0.25rem">
-    {#include components/feedback/spinner size="xs" label="Loading (xs)" /}
-    <code class="ws-code">xs</code>
+    {#include components/feedback/spinner spinner=sp /}
+    <code class="ws-code">{sp.size}</code>
   </span>
-  <span style="display: inline-flex; flex-direction: column; align-items: center; gap: 0.25rem">
-    {#include components/feedback/spinner size="sm" label="Loading (sm)" /}
-    <code class="ws-code">sm</code>
-  </span>
-  <span style="display: inline-flex; flex-direction: column; align-items: center; gap: 0.25rem">
-    {#include components/feedback/spinner size="md" label="Loading (md)" /}
-    <code class="ws-code">md</code>
-  </span>
-  <span style="display: inline-flex; flex-direction: column; align-items: center; gap: 0.25rem">
-    {#include components/feedback/spinner size="lg" label="Loading (lg)" /}
-    <code class="ws-code">lg</code>
-  </span>
-  <span style="display: inline-flex; flex-direction: column; align-items: center; gap: 0.25rem">
-    {#include components/feedback/spinner size="xl" label="Loading (xl)" /}
-    <code class="ws-code">xl</code>
-  </span>
+  {/for}
 </div>
