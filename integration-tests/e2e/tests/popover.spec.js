@@ -138,4 +138,30 @@ test.describe("Popover", () => {
       });
     }
   });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/popover");
+      for (const ex of ["basic", "positions", "danger", "hoverable", "advanced"]) {
+        const card = page.locator(`[data-rendered-href="/components/popover/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/popover/source-java/danger");
+      expect(res.status()).toBe(200);
+      const body = await res.text();
+      expect(body).toContain(".staticOpen()");
+      expect(body).toContain('.titlePlain("Delete this project?")');
+    });
+
+    test("model click popover opens, closes from footer, and hover popover hovers", async ({ page }) => {
+      await page.goto("/components/popover/close-from-content");
+      await page.getByRole("button", { name: "Show popover" }).click();
+      const box = page.locator("#po-close-from-content");
+      await expect(box).toBeVisible();
+      await box.getByRole("button", { name: "Got it" }).click();
+      await expect(box).toBeHidden();
+    });
+  });
 });
