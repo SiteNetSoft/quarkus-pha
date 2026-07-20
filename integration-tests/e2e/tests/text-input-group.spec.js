@@ -24,9 +24,7 @@ test.describe("Text Input Group", () => {
 
   test.describe("Basic", () => {
     test("has pf-v6-c-text-input-group class", async ({ page }) => {
-      await expect(page.locator("#tig-basic")).toHaveClass(
-        /pf-v6-c-text-input-group/
-      );
+      await expect(page.locator("#tig-basic")).toHaveClass(/pf-v6-c-text-input-group/);
     });
 
     test("has text input", async ({ page }) => {
@@ -36,9 +34,7 @@ test.describe("Text Input Group", () => {
 
   test.describe("With icon and utilities", () => {
     test("has icon element", async ({ page }) => {
-      await expect(
-        page.locator("#tig-icon .pf-v6-c-text-input-group__icon")
-      ).toBeVisible();
+      await expect(page.locator("#tig-icon .pf-v6-c-text-input-group__icon")).toBeVisible();
     });
 
     test("clear utility appears with text and clears it", async ({ page }) => {
@@ -56,9 +52,7 @@ test.describe("Text Input Group", () => {
   test.describe("Plain", () => {
     test("carries pf-m-plain and a prefilled value", async ({ page }) => {
       await expect(page.locator("#tig-plain")).toHaveClass(/pf-m-plain/);
-      await expect(page.locator("#tig-plain input:not([disabled])")).toHaveValue(
-        "Text input group with plain styling"
-      );
+      await expect(page.locator("#tig-plain input:not([disabled])")).toHaveValue("Text input group with plain styling");
     });
   });
 
@@ -109,5 +103,30 @@ test.describe("Text Input Group", () => {
         await expect(page.locator(".pf-v6-c-text-input-group").first()).toBeAttached();
       });
     }
+  });
+  test.describe("Java source tab", () => {
+    test("model-driven cards get a leading Java tab; Alpine utilities do not", async ({ page }) => {
+      await page.goto("/components/text-input-group");
+      for (const ex of ["basic", "autocomplete-hint", "with-status"]) {
+        const card = page.locator(`[data-rendered-href="/components/text-input-group/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      for (const ex of ["with-icon", "filters", "filters-expanded"]) {
+        const card = page.locator(`[data-rendered-href="/components/text-input-group/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/text-input-group/source-java/with-status");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.status("success")');
+    });
+
+    test("model status flavour renders the trailing status icon", async ({ page }) => {
+      await page.goto("/components/text-input-group/with-status");
+      await expect(page.locator("#tig-status-success .pf-v6-c-text-input-group__icon.pf-m-status")).toBeAttached();
+      await expect(page.locator("#tig-status-error input")).toHaveAttribute("aria-invalid", "true");
+    });
   });
 });

@@ -1,6 +1,5 @@
-{! pf-m-plain removes the group's own border/background — only for use inside an ancestor
+{! plain() removes the group's own border/background — only for use inside an ancestor
    that provides its own. The dashed wrapper shows the component's extent, as on patternfly.org. !}
 <div style="border: 1px dashed var(--pf-t--global--border--color--default); padding: 0.5rem; max-width: 360px">
-  {#include components/forms/text-input-group id="tig-plain" plain=true
-  value="Text input group with plain styling" ariaLabel="Plain text input group" /}
+  {#include components/forms/text-input-group textInputGroup=demoTigPlain /}
 </div>
