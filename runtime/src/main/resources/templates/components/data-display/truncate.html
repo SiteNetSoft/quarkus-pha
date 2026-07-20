@@ -2,7 +2,30 @@
 {! Required: content !}
 {! Optional: id, position (end | start | middle — default end),
               trailingNumChars (for middle truncation, default 7) !}
-{#if position??}
+{! Model mode: pass truncate=<org.sitenetsoft.quarkus.pha.model.Truncate> — adds maxChars (Alpine char budget)
+   and link (truncating anchor) flavours; middle-mode split happens in Java. !}
+{#if truncate??}
+  {#if truncate.isLink}
+<a href="{truncate.linkHref}"{#if truncate.id??} id="{truncate.id}"{/if} style="display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{truncate.content}</a>
+  {#else if truncate.isMaxChars}
+<span class="pf-v6-c-truncate"{#if truncate.id??} id="{truncate.id}"{/if} x-data="{truncate.maxCharsXData}">
+  <span class="pf-v6-c-truncate__start" x-text="{truncate.maxCharsExpr}"></span>
+</span>
+  {#else if truncate.isMiddle}
+<span class="pf-v6-c-truncate"{#if truncate.id??} id="{truncate.id}"{/if} title="{truncate.content}">
+  <span class="pf-v6-c-truncate__start">{truncate.startText}</span>
+  <span class="pf-v6-c-truncate__end">{truncate.endText}</span>
+</span>
+  {#else if truncate.isStart}
+<span class="pf-v6-c-truncate"{#if truncate.id??} id="{truncate.id}"{/if} title="{truncate.content}">
+  <span class="pf-v6-c-truncate__end">{truncate.content}</span>
+</span>
+  {#else}
+<span class="pf-v6-c-truncate"{#if truncate.id??} id="{truncate.id}"{/if} title="{truncate.content}">
+  <span class="pf-v6-c-truncate__start">{truncate.content}</span>
+</span>
+  {/if}
+{#else if position??}
   {#if position is 'middle'}
 <span class="pf-v6-c-truncate"{#if id??} id="{id}"{/if} title="{content}">
   <span class="pf-v6-c-truncate__start">{content.substring(0, content.length - (trailingNumChars ?: 7))}</span>
