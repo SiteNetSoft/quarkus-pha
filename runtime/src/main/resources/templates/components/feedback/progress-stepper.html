@@ -1,8 +1,38 @@
 {! Progress stepper — PatternFly v6 !}
-{! Optional: id — DOM id on the root; omit unless something else references the stepper.
-              vertical (optional), compact (optional), center (optional),
-              modifiers (optional — extra pf-m-* classes, e.g. responsive pf-m-vertical-on-lg),
-              ariaLabel (optional — labels the stepper) !}
+{! Two modes.
+   Model-driven: pass stepper=<org.sitenetsoft.quarkus.pha.model.ProgressStepper> (built via
+     ProgressStepper.builder()) — renders every step incl. statuses, stock/custom icons,
+     descriptions and the in-process spinner.
+   Slot shell: omit stepper and compose the <li> steps in the main block.
+   Shell params: id — DOM id on the root; omit unless something else references the stepper.
+                 vertical (optional), compact (optional), center (optional),
+                 modifiers (optional — extra pf-m-* classes, e.g. responsive pf-m-vertical-on-lg),
+                 ariaLabel (optional — labels the stepper) !}
+{#if stepper??}
+<ol class="pf-v6-c-progress-stepper{#if stepper.vertical} pf-m-vertical{/if}{#if stepper.compact} pf-m-compact{/if}{#if stepper.center} pf-m-center{/if}{#if stepper.modifiers} {stepper.modifiers}{/if}"{#if stepper.id} id="{stepper.id}"{/if} role="list"{#if stepper.ariaLabel} aria-label="{stepper.ariaLabel}"{/if}>
+  {#for step in stepper.steps}
+  <li class="pf-v6-c-progress-stepper__step{#if step.statusClass} {step.statusClass}{/if}"{#if step.current} aria-current="step"{/if}>
+    <div class="pf-v6-c-progress-stepper__step-connector">
+      {#if step.inProcess}
+      <span class="pf-v6-c-progress-stepper__step-icon">
+        {#include components/feedback/spinner size="xs" label=step.spinnerLabel /}
+      </span>
+      {#else if step.displayIcon}
+      <span class="pf-v6-c-progress-stepper__step-icon">{icons:svg(step.displayIcon).raw}</span>
+      {#else}
+      <span class="pf-v6-c-progress-stepper__step-icon"></span>
+      {/if}
+    </div>
+    <div class="pf-v6-c-progress-stepper__step-main">
+      <div class="pf-v6-c-progress-stepper__step-title">{step.title}</div>
+      {#if step.description}
+      <div class="pf-v6-c-progress-stepper__step-description">{step.description}</div>
+      {/if}
+    </div>
+  </li>
+  {/for}
+</ol>
+{#else}
 <ol
   class="pf-v6-c-progress-stepper{#if vertical??} pf-m-vertical{/if}{#if compact??} pf-m-compact{/if}{#if center??} pf-m-center{/if}{#if modifiers??} {modifiers}{/if}"
   {#if id??}id="{id}"{/if}
@@ -11,3 +41,4 @@
 >
   {#insert content}{/insert}
 </ol>
+{/if}
