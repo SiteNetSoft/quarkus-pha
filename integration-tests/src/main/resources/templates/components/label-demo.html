@@ -361,22 +361,22 @@
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Filled labels" slug="filled-labels" component="label"}
-                        {#description}
+                        {#include partials/example-card title="Filled labels" slug="filled-labels" component="label"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           All nine colors, the four status auto-icons (info / success / warning / danger), removable +
                           disabled + clickable variants.
                         </p>
                         {/description} {#content}{#include components/label/filled-labels /}{/content} {/include}
-                        {#include partials/example-card title="Outlined labels" slug="outlined-labels"
-                        component="label"} {#description}
+                        {#include partials/example-card title="Outlined labels" slug="outlined-labels" component="label"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Pass <code class="ws-code">variant="outline"</code> for the outlined treatment. All color and
                           removable / icon combinations work the same way.
                         </p>
                         {/description} {#content}{#include components/label/outlined-labels /}{/content} {/include}
-                        {#include partials/example-card title="Compact labels" slug="compact-labels" component="label"}
-                        {#description}
+                        {#include partials/example-card title="Compact labels" slug="compact-labels" component="label"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Pass <code class="ws-code">compact=true</code> for the tighter density used in toolbars,
                           filter chips, and table action columns.
@@ -392,7 +392,7 @@
                         </p>
                         {/description} {#content}{#include components/label/label-with-custom-render /}{/content}
                         {/include} {#include partials/example-card title="Editable labels" slug="editable-labels"
-                        component="label"} {#description}
+                        component="label" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">editable=true</code> opts into PF v6's edit-in-place chrome. Wire the
                           Alpine <code class="ws-code">phaLabelEditable</code> component for the click-to-edit /
@@ -400,7 +400,7 @@
                         </p>
                         {/description} {#content}{#include components/label/editable-labels /}{/content} {/include}
                         {#include partials/example-card title="Basic label group" slug="basic-label-group"
-                        component="label"} {#description}
+                        component="label" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Wrap labels in <code class="ws-code">label-group</code> to lay them out as a single navigable
                           group. Each label sits in its own
@@ -408,7 +408,7 @@
                         </p>
                         {/description} {#content}{#include components/label/basic-label-group /}{/content} {/include}
                         {#include partials/example-card title="Label group with overflow"
-                        slug="label-group-with-overflow" component="label"} {#description}
+                        slug="label-group-with-overflow" component="label" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Pass <code class="ws-code">numLabels</code> to collapse extras behind an "N more" toggle. The
                           Alpine <code class="ws-code">phaLabelGroup</code> component hides items past the threshold and
@@ -416,7 +416,7 @@
                         </p>
                         {/description} {#content}{#include components/label/label-group-with-overflow /}{/content}
                         {/include} {#include partials/example-card title="Label group with categories"
-                        slug="label-group-with-categories" component="label"} {#description}
+                        slug="label-group-with-categories" component="label" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Pass <code class="ws-code">categoryName</code> to prepend a category label and apply
                           <code class="ws-code">pf-m-category</code>. Common pattern for filter chip stacks (Platform:
@@ -424,21 +424,21 @@
                         </p>
                         {/description} {#content}{#include components/label/label-group-with-categories /}{/content}
                         {/include} {#include partials/example-card title="Label group with removable categories"
-                        slug="label-group-with-removable-categories" component="label"} {#description}
+                        slug="label-group-with-removable-categories" component="label" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">closable=true</code> on the category group adds its close button; five
                           labels collapse to three behind the overflow toggle. Useful for "applied filters" toolbars.
                         </p>
                         {/description} {#content}{#include components/label/label-group-with-removable-categories
                         /}{/content} {/include} {#include partials/example-card title="Vertical label group"
-                        slug="vertical-label-group" component="label"} {#description}
+                        slug="vertical-label-group" component="label" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">vertical=true</code> stacks labels in a column — here a closable
                           category with five labels collapsing to three, as on patternfly.org.
                         </p>
                         {/description} {#content}{#include components/label/vertical-label-group /}{/content} {/include}
                         {#include partials/example-card title="Editable label group" slug="editable-label-group"
-                        component="label"} {#description}
+                        component="label" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Drop editable labels (each with its own <code class="ws-code">phaLabelEditable</code> Alpine
                           binding) into a label-group to let users edit chip text in place.
@@ -453,83 +453,87 @@
                         </p>
                         {/description} {#content}{#include components/label/editable-label-group-with-add-button
                         /}{/content} {/include} {#include partials/example-card title="Overflow label"
-                        slug="overflow-label" component="label"} {#description}
+                        slug="overflow-label" component="label" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           A button-flavoured <code class="ws-code">pf-m-overflow</code> label — the affordance label
                           groups use to reveal hidden labels.
                         </p>
                         {/description} {#content}{#include components/label/overflow-label /}{/content} {/include}
-                        {#include partials/example-card title="Add label" slug="add-label" component="label"}
-                        {#description}
+                        {#include partials/example-card title="Add label" slug="add-label" component="label"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           A button-flavoured <code class="ws-code">pf-m-add</code> label for adding new labels to a
                           group.
                         </p>
                         {/description} {#content}{#include components/label/add-label /}{/content} {/include} {#include
                         partials/example-card title="Label group with overflow expanded"
-                        slug="label-group-with-overflow-expanded" component="label"} {#description}
+                        slug="label-group-with-overflow-expanded" component="label" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           The overflow group rendered already expanded (<code class="ws-code">startExpanded</code>) —
                           Show less collapses it live.
                         </p>
                         {/description} {#content}{#include components/label/label-group-with-overflow-expanded
                         /}{/content} {/include} {#include partials/example-card title="Vertical label group with
-                        overflow" slug="vertical-label-group-with-overflow" component="label"} {#description}
+                        overflow" slug="vertical-label-group-with-overflow" component="label" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">pf-m-vertical</code> stacking combined with the live overflow toggle (3
                           shown).
                         </p>
                         {/description} {#content}{#include components/label/vertical-label-group-with-overflow
                         /}{/content} {/include} {#include partials/example-card title="Vertical label group with
-                        overflow expanded" slug="vertical-label-group-with-overflow-expanded" component="label"}
-                        {#description}
+                        overflow expanded" slug="vertical-label-group-with-overflow-expanded" component="label"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           The vertical overflow group rendered already expanded — Show less collapses it live.
                         </p>
                         {/description} {#content}{#include components/label/vertical-label-group-with-overflow-expanded
                         /}{/content} {/include} {#include partials/example-card title="Vertical label group with
-                        category" slug="vertical-label-group-with-category" component="label"} {#description}
+                        category" slug="vertical-label-group-with-category" component="label" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Vertical stacking plus a category name via <code class="ws-code">pf-m-category</code>.
                         </p>
                         {/description} {#content}{#include components/label/vertical-label-group-with-category
                         /}{/content} {/include} {#include partials/example-card title="Vertical label group with
-                        removable category" slug="vertical-label-group-with-removable-category" component="label"}
-                        {#description}
+                        removable category" slug="vertical-label-group-with-removable-category" component="label"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Vertical category group whose labels are removable and whose group has a close button.
                         </p>
                         {/description} {#content}{#include components/label/vertical-label-group-with-removable-category
                         /}{/content} {/include} {#include partials/example-card title="Static labels, dynamic label
-                        group" slug="static-labels-dynamic-group" component="label"} {#description}
+                        group" slug="static-labels-dynamic-group" component="label" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Removable static labels in a dynamic group — the close buttons remove their label live.
                         </p>
                         {/description} {#content}{#include components/label/static-labels-dynamic-group /}{/content}
                         {/include} {#include partials/example-card title="Mixed labels, dynamic label group"
-                        slug="mixed-labels-dynamic-group" component="label"} {#description}
+                        slug="mixed-labels-dynamic-group" component="label" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Static removable labels and inline-editable labels mixed in one group.
                         </p>
                         {/description} {#content}{#include components/label/mixed-labels-dynamic-group /}{/content}
                         {/include} {#include partials/example-card title="Label group with compact labels"
-                        slug="label-group-with-compact-labels" component="label"} {#description}
+                        slug="label-group-with-compact-labels" component="label" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           A group whose labels all carry <code class="ws-code">pf-m-compact</code>.
                         </p>
                         {/description} {#content}{#include components/label/label-group-with-compact-labels /}{/content}
                         {/include} {#include partials/example-card title="Label group with compact labels and overflow"
-                        slug="label-group-with-compact-labels-and-overflow" component="label"} {#description}
+                        slug="label-group-with-compact-labels-and-overflow" component="label" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Compact labels with the live overflow toggle (3 shown).
                         </p>
                         {/description} {#content}{#include components/label/label-group-with-compact-labels-and-overflow
                         /}{/content} {/include} {#include partials/example-card title="Vertical label group with compact
-                        labels" slug="vertical-label-group-with-compact-labels" component="label"} {#description}
+                        labels" slug="vertical-label-group-with-compact-labels" component="label" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">Compact labels stacked vertically.</p>
                         {/description} {#content}{#include components/label/vertical-label-group-with-compact-labels
                         /}{/content} {/include} {#include partials/example-card title="Labels with truncation"
-                        slug="labels-with-truncation" component="label"} {#description}
+                        slug="labels-with-truncation" component="label" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Cap label text with <code class="ws-code">--pf-v6-c-label__text--MaxWidth</code>; overflow
                           ellipsizes, alone or in a group.

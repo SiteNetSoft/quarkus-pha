@@ -132,4 +132,37 @@ test.describe("Label", () => {
       });
     }
   });
+
+  test.describe("Java source tab", () => {
+    // All examples except the two hand-written compositions are model-driven (LabelDemoData).
+    const HAND_WRITTEN = ["label-with-custom-render", "editable-label-group-with-add-button"];
+
+    test("model-driven cards get a leading Java tab; hand-written ones do not", async ({ page }) => {
+      await page.goto("/components/label");
+      for (const ex of ["filled-labels", "basic-label-group", "editable-label-group", "labels-with-truncation"]) {
+        const card = page.locator(`[data-rendered-href="/components/label/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      for (const ex of HAND_WRITTEN) {
+        const card = page.locator(`[data-rendered-href="/components/label/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+      }
+    });
+
+    test("Java tab opens Monaco with the builder code", async ({ page }) => {
+      await page.goto("/components/label");
+      const card = page.locator('[data-rendered-href="/components/label/basic-label-group"]');
+      await card.locator('button[aria-label*="Toggle Java"]').click();
+      await expect(card.locator(".monaco-editor").first()).toBeVisible({ timeout: 10000 });
+      await expect(card.locator(".monaco-editor .view-lines")).toContainText("LabelGroup.builder()", {
+        timeout: 10000,
+      });
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/label/source-java/labels-with-truncation");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.maxWidth("38ch")');
+    });
+  });
 });
