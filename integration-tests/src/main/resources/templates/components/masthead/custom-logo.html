@@ -1,31 +1,3 @@
-<header class="pf-v6-c-masthead" id="mh-custom-logo">
-  <div class="pf-v6-c-masthead__main">
-    <span class="pf-v6-c-masthead__toggle">
-      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Global navigation">
-        <span class="pf-v6-c-button__icon">{icons:svg('fa:bars').raw}</span>
-      </button>
-    </span>
-    <div class="pf-v6-c-masthead__brand">
-      {! The logo is rendered as a custom component — an <a> wrapping a brand image.
-         Mirrors PF's "logo using custom component" example. !}
-      <a class="pf-v6-c-masthead__logo" href="#" aria-label="PHA Showcase home">
-        {! Both variants are rendered; pha.css hides the one that doesn't match pf-v6-theme-dark. Only the
-           --light/--dark modifiers are used: the pha-masthead-logo base class hard-sets height:40px and
-           would override this example's 36px. !}
-        <img
-          class="pf-v6-c-brand pha-masthead-logo--light"
-          src="/web/images/quarkus-pha-logo.svg"
-          alt="Quarkus PHA"
-          style="--pf-v6-c-brand--Height: 36px"
-        />
-        <img
-          class="pf-v6-c-brand pha-masthead-logo--dark"
-          src="/web/images/quarkus-pha-logo-dark.svg"
-          alt="Quarkus PHA"
-          style="--pf-v6-c-brand--Height: 36px"
-        />
-      </a>
-    </div>
-  </div>
-  <div class="pf-v6-c-masthead__content">Content</div>
-</header>
+{! The logo is rendered as theme-paired brand images — logoImages(...) on the model.
+   Mirrors PF's "logo using custom component" example. !}
+{#include components/navigation/masthead masthead=demoMhCustomLogo /}
