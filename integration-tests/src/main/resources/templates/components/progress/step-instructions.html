@@ -1,5 +1,6 @@
+{! Populated from the Java model ProgressDemoData.demoProgStepInstructions (see the Java tab). !}
 <div class="ws-preview-html">
-  {#include components/feedback/progress id="prog-step-instructions" value=2 min=0 max=5 title="Onboarding" label="Step 2 of 5" valueText="Step 2 of 5: configure billing" helperText="Configure billing details. Next step: invite team members." ariaDescribedBy="prog-step-instructions-helper" /}
+  {#include components/feedback/progress progress=demoProgStepInstructions /}
   <p style="margin-top: 0.75rem; color: var(--pf-t--global--text--color--subtle, #888); font-size: 0.875rem">
     Step-based progress with <code class="ws-code">helperText</code> below the bar. Wire
     <code class="ws-code">ariaDescribedBy</code> to point at the helper-text element id when the helper isn't obvious

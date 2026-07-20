@@ -55,4 +55,34 @@ test.describe("Progress", () => {
       await expect(link).toHaveAttribute("target", "_blank");
     });
   });
+  test.describe("Java source tab", () => {
+    // All 18 examples are model-driven (ProgressDemoData).
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/progress");
+      for (const ex of ["basic", "finite-step", "single-line", "truncate-title"]) {
+        const card = page.locator(`[data-rendered-href="/components/progress/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("Java tab opens Monaco with the builder code", async ({ page }) => {
+      await page.goto("/components/progress");
+      const card = page.locator('[data-rendered-href="/components/progress/basic"]');
+      await card.locator('button[aria-label*="Toggle Java"]').click();
+      await expect(card.locator(".monaco-editor").first()).toBeVisible({ timeout: 10000 });
+      await expect(card.locator(".monaco-editor .view-lines")).toContainText("Progress.of(", { timeout: 10000 });
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/progress/source-java/finite-step");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain(".range(0, 5)");
+    });
+
+    test("step progress indicator width reflects the min-max range", async ({ page }) => {
+      await page.goto("/components/progress");
+      const indicator = page.locator("#prog-finite-step .pf-v6-c-progress__indicator");
+      await expect(indicator).toHaveAttribute("style", /width: 40%/);
+    });
+  });
 });
