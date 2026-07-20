@@ -3,9 +3,19 @@
 {! Optional: id — DOM id on the root; omit unless something else references the brand.
               width, height, picture !}
 {! Block: sources (optional, for picture element) !}
+{! Model mode: pass brand=<org.sitenetsoft.quarkus.pha.model.Brand> — sources(html) switches to the picture anatomy. !}
+{#if brand??}
+{#if brand.isPicture}<picture class="pf-v6-c-brand pf-m-picture"{#if brand.id??} id="{brand.id}"{/if}{#if brand.sizeStyle??} style="{brand.sizeStyle}"{/if}>
+  {brand.sourcesHtml.raw}
+  <img src="{brand.src}" alt="{brand.alt}" />
+</picture>{#else}
+<img class="pf-v6-c-brand"{#if brand.id??} id="{brand.id}"{/if} src="{brand.src}" alt="{brand.alt}"{#if brand.sizeStyle??} style="{brand.sizeStyle}"{/if} />
+{/if}
+{#else}
 {#if picture??}<picture class="pf-v6-c-brand pf-m-picture"{#if id??} id="{id}"{/if}{#if width??} style="--pf-v6-c-brand--Width: {width}{#if height??}; --pf-v6-c-brand--Height: {height}{/if}"{#else}{#if height??} style="--pf-v6-c-brand--Height: {height}"{/if}{/if}>
   {#insert sources}{/insert}
   <img src="{src}" alt="{alt}" />
 </picture>{#else}
 <img class="pf-v6-c-brand"{#if id??} id="{id}"{/if} src="{src}" alt="{alt}"{#if width??} style="--pf-v6-c-brand--Width: {width}{#if height??}; --pf-v6-c-brand--Height: {height}{/if}"{#else}{#if height??} style="--pf-v6-c-brand--Height: {height}"{/if}{/if} />
+{/if}
 {/if}
