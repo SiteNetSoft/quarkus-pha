@@ -1,5 +1,24 @@
 {! Input group — PatternFly v6. Compose input-group-item includes in the main block. !}
 {! Optional: id, attrs (raw passthrough). !}
+{! Model mode: pass inputGroup=<org.sitenetsoft.quarkus.pha.model.InputGroup> — box/fill/button items. !}
+{#if inputGroup??}
+<div class="pf-v6-c-input-group" id="{inputGroup.id}">
+  {#for it in inputGroup.items}
+  {#if it.isBox}
+  <div class="pf-v6-c-input-group__item pf-m-box{#if it.isDisabled} pf-m-disabled{/if}"{#if it.isDisabled} aria-disabled="true"{/if}><span class="pf-v6-c-input-group__text">{it.boxText}</span></div>
+  {#else if it.isFill}
+  <div class="pf-v6-c-input-group__item pf-m-fill">
+    {it.html.raw}
+  </div>
+  {#else}
+  <div class="pf-v6-c-input-group__item">
+    {#include components/actions/button btn=it.button /}
+  </div>
+  {/if}
+  {/for}
+</div>
+{#else}
 <div class="pf-v6-c-input-group"{#if id??} id="{id}"{/if}{#if attrs??} {attrs.raw}{/if}>
   {#let inputGroupId=id id=null attrs=null}{#insert /}{/let}
 </div>
+{/if}
