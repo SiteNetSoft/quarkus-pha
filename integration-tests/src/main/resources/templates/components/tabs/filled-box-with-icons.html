@@ -1,11 +1,3 @@
-{! Filled box tabs with leading icons — pf-m-fill + pf-m-box. Composed from tab + tab-content. !}
-<div x-data="{ active: 'fbi1' }">
-  {#include components/navigation/tabs id="tabs-filled-box-with-icons" filled=true box=true ariaLabel="Filled box tabs with icons"}{#content}
-  {#include components/navigation/tab tabKey="fbi1" text="Users" icon="fa:users" /}
-  {#include components/navigation/tab tabKey="fbi2" text="Containers" icon="fa:cube" /}
-  {#include components/navigation/tab tabKey="fbi3" text="Database" icon="fa:database" /}
-  {/content}{/include}
-  {#include components/navigation/tab-content tabKey="fbi1"}Users panel content{/include}
-  {#include components/navigation/tab-content tabKey="fbi2" cloak=true}Containers panel content{/include}
-  {#include components/navigation/tab-content tabKey="fbi3" cloak=true}Database panel content{/include}
-</div>
+{! Filled box tabs with leading icons — pf-m-fill + pf-m-box. !}
+{! Populated from the Java model TabsDemoData.demoTabsFilledBoxWithIcons (see the Java tab). !}
+{#include components/navigation/tabs tabs=demoTabsFilledBoxWithIcons /}

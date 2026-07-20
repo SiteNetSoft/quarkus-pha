@@ -1,11 +1,3 @@
-{! Filled tabs (pf-m-fill) with leading icons. Composed from tab + tab-content. !}
-<div x-data="{ active: 'f1' }">
-  {#include components/navigation/tabs id="tabs-filled-with-icons" filled=true ariaLabel="Filled tabs with icons"}{#content}
-  {#include components/navigation/tab tabKey="f1" text="Users" icon="fa:users" /}
-  {#include components/navigation/tab tabKey="f2" text="Containers" icon="fa:cube" /}
-  {#include components/navigation/tab tabKey="f3" text="Database" icon="fa:database" /}
-  {/content}{/include}
-  {#include components/navigation/tab-content tabKey="f1"}Users panel content{/include}
-  {#include components/navigation/tab-content tabKey="f2" cloak=true}Containers panel content{/include}
-  {#include components/navigation/tab-content tabKey="f3" cloak=true}Database panel content{/include}
-</div>
+{! Filled tabs (pf-m-fill) with leading icons. !}
+{! Populated from the Java model TabsDemoData.demoTabsFilledWithIcons (see the Java tab). !}
+{#include components/navigation/tabs tabs=demoTabsFilledWithIcons /}

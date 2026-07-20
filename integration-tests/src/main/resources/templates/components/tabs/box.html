@@ -1,9 +1,3 @@
-{! box=true emits pf-m-box — bordered, paper-card appearance. Composed from tab + tab-content. !}
-<div x-data="{ active: 'b1' }">
-  {#include components/navigation/tabs id="tabs-box" box=true}{#content}
-  {#include components/navigation/tab tabKey="b1" text="Tab 1" /}
-  {#include components/navigation/tab tabKey="b2" text="Tab 2" /}
-  {/content}{/include}
-  {#include components/navigation/tab-content tabKey="b1" padding=true}Box variant — content one.{/include}
-  {#include components/navigation/tab-content tabKey="b2" padding=true cloak=true}Box variant — content two.{/include}
-</div>
+{! box() emits pf-m-box — bordered, paper-card appearance. !}
+{! Populated from the Java model TabsDemoData.demoTabsBox (see the Java tab). !}
+{#include components/navigation/tabs tabs=demoTabsBox /}
