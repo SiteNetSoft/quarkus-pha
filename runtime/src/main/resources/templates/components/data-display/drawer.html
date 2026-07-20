@@ -13,6 +13,80 @@
      attrs       — raw attribute passthrough on the root.
    The root owns the `expanded` Alpine state and the bound pf-m-expanded class —
    toggles inside the content use @click="expanded = !expanded". !}
+{! Model mode: pass drawer=<org.sitenetsoft.quarkus.pha.model.Drawer> — generated toggle/panel wiring;
+   scope-sharing chrome compositions keep the slot shell. !}
+{#if drawer??}
+<div
+  class="pf-v6-c-drawer{drawer.modifiers}"
+  id="{drawer.id}"
+  {#if drawer.isResizable}x-data="phaDrawerResizable" data-position="{drawer.resizePosition}" data-default-size="{drawer.resizeDefaultAttr}" data-min-size="{drawer.resizeMinAttr}"{#else}x-data="{ expanded: {#if drawer.isStartOpen}true{#else}false{/if} }"{/if}
+  :class="expanded ? 'pf-m-expanded' : ''"
+  {#if drawer.style??}style="{drawer.style}"{/if}
+>
+  {#if drawer.sectionHtml??}
+  <div class="pf-v6-c-drawer__section">{drawer.sectionHtml.raw}</div>
+  {/if}
+  <div class="pf-v6-c-drawer__main">
+    <div class="pf-v6-c-drawer__content">
+      <div class="pf-v6-c-drawer__body{#if !drawer.isFirstBodyBare} pf-m-padding{/if}">
+        {#if drawer.isHasToggle}
+        {#if drawer.isTextSwap}
+        <button class="pf-v6-c-button pf-m-primary" type="button" :aria-expanded="expanded.toString()" @click="expanded = !expanded">
+          <span class="pf-v6-c-button__text" x-text="expanded ? '{drawer.toggleCloseText}' : '{drawer.toggleOpenText}'">{drawer.toggleOpenText}</span>
+        </button>
+        {#else if drawer.isToggleFocus}
+        <button class="pf-v6-c-button pf-m-primary" type="button" :aria-expanded="expanded.toString()" @click="expanded = !expanded; if (expanded) $nextTick(() => $refs.focus.focus())">
+          <span class="pf-v6-c-button__text">{drawer.toggleText}</span>
+        </button>
+        {#else}
+        <button class="pf-v6-c-button pf-m-primary" type="button" :aria-expanded="expanded.toString()" @click="expanded = !expanded">
+          <span class="pf-v6-c-button__text">{drawer.toggleText}</span>
+        </button>
+        {/if}
+        {/if}
+        {#if drawer.contentText??}{drawer.contentText.raw}{/if}
+      </div>
+      {#for cb in drawer.extraContentBodies}
+      <div class="pf-v6-c-drawer__body{#if cb.isPadding} pf-m-padding{/if}{#if cb.isNoPadding} pf-m-no-padding{/if}">{cb.html.raw}</div>
+      {/for}
+    </div>
+    <div
+      class="pf-v6-c-drawer__panel{#if drawer.isResizable} pf-m-resizable{/if}{#if drawer.isPanelSecondary} pf-m-secondary{/if}{#if drawer.panelWidths??} {drawer.panelWidths}{/if}"
+      {#if drawer.isResizable}x-ref="panel"{/if}
+      x-show="expanded"
+      x-cloak
+      :aria-hidden="(!expanded).toString()"
+    >
+      {#if drawer.isResizable}
+      <div
+        class="pf-v6-c-drawer__splitter{#if !drawer.isPanelBottom} pf-m-vertical{/if}"
+        x-ref="splitter"
+        role="separator"
+        tabindex="0"
+        aria-orientation="{#if drawer.isPanelBottom}horizontal{#else}vertical{/if}"
+        aria-label="Resize drawer panel"
+        aria-valuenow="50"
+        @pointerdown="startResize"
+        @keydown="keyResize"
+      >
+        <div class="pf-v6-c-drawer__splitter-handle" aria-hidden="true"></div>
+      </div>
+      <div class="pf-v6-c-drawer__panel-main">
+        {#if drawer.headHtml??}{#include components/data-display/drawer-head}{drawer.headHtml.raw}{/include}{/if}
+        {#for pb in drawer.panelBodies}
+        <div class="pf-v6-c-drawer__body{#if pb.isPadding} pf-m-padding{/if}{#if pb.isNoPadding} pf-m-no-padding{/if}">{pb.html.raw}</div>
+        {/for}
+      </div>
+      {#else}
+      {#if drawer.headHtml??}{#include components/data-display/drawer-head}{drawer.headHtml.raw}{/include}{/if}
+      {#for pb in drawer.panelBodies}
+      <div class="pf-v6-c-drawer__body{#if pb.isPadding} pf-m-padding{/if}{#if pb.isNoPadding} pf-m-no-padding{/if}">{pb.html.raw}</div>
+      {/for}
+      {/if}
+    </div>
+  </div>
+</div>
+{#else}
 <div
   class="pf-v6-c-drawer{#if inline??} pf-m-inline{/if}{#if static??} pf-m-static{/if}{#if pill??} pf-m-pill{/if}{#if panelLeft??} pf-m-panel-left{/if}{#if panelBottom??} pf-m-panel-bottom{/if}"
   {#if id??}id="{id}"{/if}
@@ -22,3 +96,4 @@
 >
   {#let drawerId=id id=null attrs=null}{#insert /}{/let}
 </div>
+{/if}
