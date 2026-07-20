@@ -145,4 +145,23 @@ test.describe("Masthead", () => {
       await expect(link).toHaveAttribute("target", "_blank");
     });
   });
+  test.describe("Java source tab", () => {
+    test("model-driven cards get a leading Java tab; composed content examples do not", async ({ page }) => {
+      await page.goto("/components/masthead");
+      for (const ex of ["custom-logo", "display-stack", "insets"]) {
+        const card = page.locator(`[data-rendered-href="/components/masthead/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      for (const ex of ["basic", "mixed-content"]) {
+        const card = page.locator(`[data-rendered-href="/components/masthead/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/masthead/source-java/custom-logo");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.logoImages("#", "PHA Showcase home"');
+    });
+  });
 });
