@@ -189,8 +189,8 @@
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Using hr" slug="using-hr" component="divider"}
-                        {#description}
+                        {#include partials/example-card title="Using hr" slug="using-hr" component="divider"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           The default — render a semantic <code class="ws-code">&lt;hr&gt;</code> with PF v6 styling.
                           Use anywhere <code class="ws-code">&lt;hr&gt;</code> is valid HTML.
@@ -204,15 +204,16 @@
                           <code class="ws-code">&lt;hr&gt;</code> would be invalid HTML.
                         </p>
                         {/description} {#content}{#include components/divider/using-li /}{/content} {/include} {#include
-                        partials/example-card title="Using div" slug="using-div" component="divider"} {#description}
+                        partials/example-card title="Using div" slug="using-div" component="divider" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Pass <code class="ws-code">component="div"</code> for hosts where
                           <code class="ws-code">&lt;hr&gt;</code> is awkward (button groups, custom flex layouts). Same
                           visual treatment, valid in any block context.
                         </p>
                         {/description} {#content}{#include components/divider/using-div /}{/content} {/include}
-                        {#include partials/example-card title="Inset medium" slug="inset-medium" component="divider"}
-                        {#description}
+                        {#include partials/example-card title="Inset medium" slug="inset-medium" component="divider"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Pass <code class="ws-code">inset="md"</code> to pull the divider line in from the edges by the
                           medium spacer token. Available tokens: <code class="ws-code">none</code>,
@@ -223,7 +224,7 @@
                         </p>
                         {/description} {#content}{#include components/divider/inset-medium /}{/content} {/include}
                         {#include partials/example-card title="Inset at various breakpoints"
-                        slug="inset-at-various-breakpoints" component="divider"} {#description}
+                        slug="inset-at-various-breakpoints" component="divider" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Stack the per-breakpoint params (<code class="ws-code">insetOnSm</code>,
                           <code class="ws-code">insetOnMd</code>, <code class="ws-code">insetOnLg</code>,
@@ -232,7 +233,7 @@
                         </p>
                         {/description} {#content}{#include components/divider/inset-at-various-breakpoints /}{/content}
                         {/include} {#include partials/example-card title="Vertical in flex layout"
-                        slug="vertical-in-flex-layout" component="divider"} {#description}
+                        slug="vertical-in-flex-layout" component="divider" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Set <code class="ws-code">vertical=true</code> inside a flex container. The divider switches
                           to a vertical line and stretches to the row height. Implies
@@ -240,7 +241,7 @@
                         </p>
                         {/description} {#content}{#include components/divider/vertical-in-flex-layout /}{/content}
                         {/include} {#include partials/example-card title="Vertical, inset small"
-                        slug="vertical-in-flex-layout-inset-small" component="divider"} {#description}
+                        slug="vertical-in-flex-layout-inset-small" component="divider" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Combine <code class="ws-code">vertical=true</code> with
                           <code class="ws-code">inset="sm"</code> to shorten the line so it doesn't span the full
@@ -248,7 +249,8 @@
                         </p>
                         {/description} {#content}{#include components/divider/vertical-in-flex-layout-inset-small
                         /}{/content} {/include} {#include partials/example-card title="Vertical, inset at breakpoints"
-                        slug="vertical-in-flex-layout-inset-at-various-breakpoints" component="divider"} {#description}
+                        slug="vertical-in-flex-layout-inset-at-various-breakpoints" component="divider" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Vertical divider whose inset grows with the viewport. Compose
                           <code class="ws-code">vertical=true</code> with the per-breakpoint inset params.
@@ -256,7 +258,8 @@
                         {/description} {#content}{#include
                         components/divider/vertical-in-flex-layout-inset-at-various-breakpoints /}{/content} {/include}
                         {#include partials/example-card title="Switch orientation at breakpoints"
-                        slug="switch-orientation-at-various-breakpoints" component="divider"} {#description}
+                        slug="switch-orientation-at-various-breakpoints" component="divider" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Use <code class="ws-code">verticalOnMd</code> / <code class="ws-code">verticalOnLg</code> etc.
                           to flip from horizontal to vertical at a breakpoint. Pair with

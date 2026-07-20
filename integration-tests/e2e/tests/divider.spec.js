@@ -90,4 +90,21 @@ test.describe("Divider", () => {
       expect(res.status()).toBe(200);
     }
   });
+  test.describe("Java source tab", () => {
+    test("model-driven cards get a leading Java tab; using-li does not", async ({ page }) => {
+      await page.goto("/components/divider");
+      for (const ex of ["using-hr", "vertical-in-flex-layout"]) {
+        const card = page.locator(`[data-rendered-href="/components/divider/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      const handWritten = page.locator('[data-rendered-href="/components/divider/using-li"]');
+      await expect(handWritten.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/divider/source-java/inset-at-various-breakpoints");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.insetOn("md", "sm")');
+    });
+  });
 });
