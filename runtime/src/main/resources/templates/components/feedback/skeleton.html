@@ -23,6 +23,13 @@
 {!                                matching text size. Useful for text-line skeletons!}
 {!   screenreaderText (optional) — text rendered inside pf-v6-screen-reader for     !}
 {!                                  assistive tech.                                 !}
+{! Model mode: pass skeleton=<org.sitenetsoft.quarkus.pha.model.Skeleton> instead of the params above. !}
+{#if skeleton??}
+<div class="pf-v6-c-skeleton{#if skeleton.shape??} pf-m-{skeleton.shape}{/if}{#if skeleton.width??} pf-m-width-{skeleton.width}{/if}{#if skeleton.height??} pf-m-height-{skeleton.height}{/if}{#if skeleton.fontSize??} pf-m-text-{skeleton.fontSize}{/if}"{#if skeleton.id??} id="{skeleton.id}"{/if}{#if skeleton.widthValue??} style="width: {skeleton.widthValue}{#if skeleton.heightValue??}; height: {skeleton.heightValue}{/if}"{#else if skeleton.heightValue??} style="height: {skeleton.heightValue}"{/if}>
+  {#if skeleton.screenReaderText??}<span class="pf-v6-screen-reader">{skeleton.screenReaderText}</span>{/if}
+</div>
+{#else}
 <div class="pf-v6-c-skeleton{#if shape??} pf-m-{shape}{/if}{#if width??} pf-m-width-{width}{/if}{#if height??} pf-m-height-{height}{/if}{#if fontSize??} pf-m-text-{fontSize}{/if}"{#if id??} id="{id}"{/if}{#if widthValue??} style="width: {widthValue}{#if heightValue??}; height: {heightValue}{/if}"{#else if heightValue??} style="height: {heightValue}"{/if}>
   {#if screenreaderText??}<span class="pf-v6-screen-reader">{screenreaderText}</span>{/if}
 </div>
+{/if}
