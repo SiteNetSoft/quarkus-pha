@@ -12,6 +12,35 @@
           {#actions} — the footer's action area. Provide one OR MORE
           <div class="pf-v6-c-empty-state__actions"> groups (PF's EmptyStateActions), each composing
           button components. PF commonly uses two: a primary action, then a row of links. !}
+{! Model mode: pass emptyState=<org.sitenetsoft.quarkus.pha.model.EmptyState> — footer actions are composed Button models. !}
+{#if emptyState??}
+<div class="pf-v6-c-empty-state{emptyState.modifiers}"{#if emptyState.id??} id="{emptyState.id}"{/if}>
+  <div class="pf-v6-c-empty-state__content">
+    <div class="pf-v6-c-empty-state__header">
+      {#if emptyState.isSpinnerShape}
+      <div class="pf-v6-c-empty-state__icon">{#include components/feedback/spinner size=emptyState.spinnerSize label=emptyState.spinnerLabel /}</div>
+      {#else if emptyState.iconName??}
+      <div class="pf-v6-c-empty-state__icon">{icons:svg(emptyState.iconName).raw}</div>
+      {/if}
+      <div class="pf-v6-c-empty-state__title">
+        <h4 class="pf-v6-c-empty-state__title-text">{emptyState.titleText}</h4>
+      </div>
+    </div>
+    {#if emptyState.bodyText??}
+    <div class="pf-v6-c-empty-state__body">{emptyState.bodyText}</div>
+    {/if}
+    {#if emptyState.isHasActions}
+    <div class="pf-v6-c-empty-state__footer">
+      {#for group in emptyState.actionGroups}
+      <div class="pf-v6-c-empty-state__actions">
+        {#for b in group}{#include components/actions/button btn=b /}{/for}
+      </div>
+      {/for}
+    </div>
+    {/if}
+  </div>
+</div>
+{#else}
 <div class="pf-v6-c-empty-state{#if size??} pf-m-{size}{/if}{#if status??} pf-m-{status}{/if}"{#if id??} id="{id}"{/if}>
   <div class="pf-v6-c-empty-state__content">
     <div class="pf-v6-c-empty-state__header">
@@ -34,3 +63,4 @@
     {/if}
   </div>
 </div>
+{/if}
