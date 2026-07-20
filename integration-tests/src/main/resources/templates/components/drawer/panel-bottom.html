@@ -1,15 +1,1 @@
-{#include components/data-display/drawer id="dr-panel-bottom" panelBottom=true attrs='style="height: 280px"'}
-{#include components/data-display/drawer-main}
-{#include components/data-display/drawer-content}
-{#include components/data-display/drawer-body padding=true}
-    <button class="pf-v6-c-button pf-m-primary" type="button" :aria-expanded="expanded.toString()" @click="expanded = !expanded; if (expanded) $nextTick(() => $refs.focus.focus())">
-      <span class="pf-v6-c-button__text">Toggle drawer</span>
-    </button>
-    <p style="margin-top: 1rem">The panel slides up from the bottom — <code class="ws-code">pf-m-panel-bottom</code> on the drawer root. The drawer needs an explicit height for a bottom panel to be visible.</p>
-{/include}
-{/include}
-{#include components/data-display/drawer-panel}
-{#include components/data-display/drawer-head}<span :tabindex="expanded ? '0' : '-1'" x-ref="focus">Drawer panel header</span>{/include}
-{/include}
-{/include}
-{/include}
+{#include components/data-display/drawer drawer=demoDrPanelBottom /}

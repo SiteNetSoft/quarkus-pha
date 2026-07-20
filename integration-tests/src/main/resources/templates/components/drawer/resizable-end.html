@@ -1,17 +1,1 @@
-{#include components/data-display/drawer id="dr-resizable-end" resizable=true defaultSize=500 minSize=150 attrs='style="min-height: 240px"'}
-{#include components/data-display/drawer-main}
-{#include components/data-display/drawer-content}
-{#include components/data-display/drawer-body padding=true}
-    <button class="pf-v6-c-button pf-m-primary" type="button" :aria-expanded="expanded.toString()" @click="expanded = !expanded">
-      <span class="pf-v6-c-button__text">Toggle drawer</span>
-    </button>
-    <p style="margin-top: 1rem">Drag the splitter (or focus it and use the arrow keys) to resize the panel. Minimum size 150px, default 500px.</p>
-{/include}
-{/include}
-{#include components/data-display/drawer-panel resizable=true}
-{#include components/data-display/drawer-panel-main}
-{#include components/data-display/drawer-head}<span>Drawer panel header</span>{/include}
-{/include}
-{/include}
-{/include}
-{/include}
+{#include components/data-display/drawer drawer=demoDrResizableEnd /}
