@@ -16,6 +16,61 @@
                   Without it the modal expects an outer x-data providing `open`.
      escapeExpr — override the Escape-key expression (e.g. close an inner dropdown first).
      attrs      — raw attribute passthrough on the modal-box. !}
+{! Model mode: pass modal=<org.sitenetsoft.quarkus.pha.model.Modal> — renders the FULL live pattern
+   (launcher + backdrop + box). Live inner-state compositions keep the slot shell. !}
+{#if modal??}
+<div x-data="{ open: false }">
+  <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = true"><span class="pf-v6-c-button__text">{modal.triggerText}</span></button>
+  <div
+    class="pf-v6-c-backdrop"
+    id="{modal.id}-backdrop"
+    x-show="open"
+    x-cloak
+    @keydown.escape.window="if (open) open = false"
+  >
+    <div class="pf-v6-l-bullseye">
+      <div
+        class="pf-v6-c-modal-box{modal.boxModifiers}"
+        id="{modal.id}"
+        role="dialog"
+        aria-modal="true"
+        {#if modal.ariaLabel??}aria-label="{modal.ariaLabel}"{#else}aria-labelledby="{modal.id}-title"{/if}
+        {#if modal.width??}style="--pf-v6-c-modal-box--Width: {modal.width}"{/if}
+      >
+        {#if !modal.isNoClose}
+        <div class="pf-v6-c-modal-box__close">
+          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="open = false">
+            <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+          </button>
+        </div>
+        {/if}
+        {#if modal.genericHtml??}
+        {modal.genericHtml.raw}
+        {#else}
+        {#if modal.title??}
+        <header class="pf-v6-c-modal-box__header">
+          <div class="pf-v6-c-modal-box__header-main">
+          <{modal.headingTag} class="pf-v6-c-modal-box__title{#if modal.displayTitleIcon??} pf-m-icon{/if}{#if modal.isStatusTitle && modal.variant??} pf-m-{modal.variant}{/if}" id="{modal.id}-title">
+            {#if modal.displayTitleIcon??}<span class="pf-v6-c-modal-box__title-icon">{icons:svg(modal.displayTitleIcon).raw}</span>{/if}{#if modal.isAlertPrefix}<span class="pf-v6-screen-reader">{modal.alertPrefixText} alert:</span>{/if}<span class="pf-v6-c-modal-box__title-text">{modal.title}</span>
+          </{modal.headingTag}>
+          {#if modal.description??}<div class="pf-v6-c-modal-box__description">{modal.description}</div>{/if}
+          </div>
+        </header>
+        {/if}
+        <div class="pf-v6-c-modal-box__body"{#if modal.isBodyScrollable} tabindex="0"{/if}>{modal.bodyHtml.raw}</div>
+        {#if modal.footer.size > 0}
+        <footer class="pf-v6-c-modal-box__footer">
+          {#for fb in modal.footer}
+          <button class="pf-v6-c-button {fb.classes}" type="button" @click="open = false"><span class="pf-v6-c-button__text">{fb.text}</span></button>
+          {/for}
+        </footer>
+        {/if}
+        {/if}
+      </div>
+    </div>
+  </div>
+</div>
+{#else}
 <div
   class="pf-v6-c-backdrop"
   id="{id}-backdrop"
@@ -40,3 +95,4 @@
     </div>
   </div>
 </div>
+{/if}
