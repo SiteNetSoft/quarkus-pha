@@ -131,14 +131,15 @@
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Basic" slug="basic" component="spinner"} {#description}
+                        {#include partials/example-card title="Basic" slug="basic" component="spinner" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           A default spinner with no size override. PF v6's base styles render it at medium diameter with
                           an accessible label of "Loading".
                         </p>
                         {/description} {#content}{#include components/spinner/basic /}{/content} {/include} {#include
-                        partials/example-card title="Size variations" slug="size-variations" component="spinner"}
-                        {#description}
+                        partials/example-card title="Size variations" slug="size-variations" component="spinner"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           PF v6 ships five size modifiers — <code class="ws-code">xs</code>,
                           <code class="ws-code">sm</code>, <code class="ws-code">md</code>,
@@ -146,15 +147,16 @@
                           spinner-diameter tokens.
                         </p>
                         {/description} {#content}{#include components/spinner/size-variations /}{/content} {/include}
-                        {#include partials/example-card title="Custom size" slug="custom-size" component="spinner"}
-                        {#description}
+                        {#include partials/example-card title="Custom size" slug="custom-size" component="spinner"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Pass <code class="ws-code">diameter</code> with any CSS length to set
                           <code class="ws-code">--pf-v6-c-spinner--diameter</code> inline. Useful when the preset size
                           modifiers don't match a layout exactly.
                         </p>
                         {/description} {#content}{#include components/spinner/custom-size /}{/content} {/include}
-                        {#include partials/example-card title="Inline" slug="inline" component="spinner"} {#description}
+                        {#include partials/example-card title="Inline" slug="inline" component="spinner"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Set <code class="ws-code">inline=true</code> so the spinner inherits the surrounding font size
                           and color via <code class="ws-code">pf-m-inline</code>. Useful inside running prose, headings,

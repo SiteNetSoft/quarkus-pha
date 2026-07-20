@@ -46,4 +46,19 @@ test.describe("Spinner", () => {
       await expect(page.locator(".pf-v6-c-spinner").first()).toBeVisible();
     }
   });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/spinner");
+      for (const ex of ["basic", "custom-size", "size-variations"]) {
+        const card = page.locator(`[data-rendered-href="/components/spinner/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/spinner/source-java/custom-size");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.diameter("80px")');
+    });
+  });
 });
