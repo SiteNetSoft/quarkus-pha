@@ -1,5 +1,4 @@
+{! Populated from the Java model ButtonDemoData.demoButtonTypes (see the Java tab). !}
 <div class="ws-preview-html" style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center">
-  {#include components/actions/button id="btn-type-submit" type="submit"}{#content}Submit{/content}{/include}
-  {#include components/actions/button id="btn-type-reset" type="reset"}{#content}Reset{/content}{/include}
-  {#include components/actions/button id="btn-type-default"}{#content}Default{/content}{/include}
+  {#for b in demoButtonTypes}{#include components/actions/button btn=b /}{/for}
 </div>

@@ -1,7 +1,4 @@
+{! Populated from the Java model ButtonDemoData.demoButtonsCallToAction (see the Java tab). !}
 <div class="ws-preview-html" style="display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center">
-  {#include components/actions/button id="btn-cta-primary" variant="primary" size="lg"}{#content}Call to
-  action{/content}{/include}
-{#include components/actions/button id="btn-cta-secondary" variant="secondary" size="lg"}{#content}Call to action{/content}{/include}
-{#include components/actions/button id="btn-cta-tertiary" variant="tertiary" size="lg"}{#content}Call to action{/content}{/include}
-{#include components/actions/button id="btn-cta-link" variant="link" size="lg"}{#content}Call to action{/content}{/include}
+  {#for b in demoButtonsCallToAction}{#include components/actions/button btn=b /}{/for}
 </div>
