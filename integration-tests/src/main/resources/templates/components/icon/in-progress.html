@@ -1,7 +1,7 @@
 <div class="ws-preview-html" style="display: flex; align-items: center; gap: 1rem">
-  {#include components/icon name="fa:save" size="xl" inProgress=true label="Saving" /}
+  {#include components/icon iconModel=demoIconInProgress /}
   <span>
-    With <code class="ws-code">inProgress=true</code>, the wrapper gets
+    With <code class="ws-code">inProgress()</code>, the wrapper gets
     <code class="ws-code">pf-m-in-progress</code> and an additional <code class="ws-code">__progress</code> overlay is
     rendered containing the PF v6 spinner. PF's CSS hides <code class="ws-code">__content</code> (opacity 0) and shows
     <code class="ws-code">__progress</code> (opacity 1) — no JavaScript involved.
