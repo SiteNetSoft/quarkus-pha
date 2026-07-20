@@ -125,4 +125,23 @@ test.describe("Checkbox", () => {
       expect(res.status()).toBe(200);
     });
   });
+  test.describe("Java source tab", () => {
+    test("model-driven cards get a leading Java tab; anatomy/Alpine variants do not", async ({ page }) => {
+      await page.goto("/components/checkbox");
+      for (const ex of ["basic", "standalone", "with-description"]) {
+        const card = page.locator(`[data-rendered-href="/components/checkbox/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      for (const ex of ["controlled", "label-wraps", "description-and-body"]) {
+        const card = page.locator(`[data-rendered-href="/components/checkbox/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/checkbox/source-java/standalone");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('Check.standalone("cb-standalone", "Select all rows")');
+    });
+  });
 });
