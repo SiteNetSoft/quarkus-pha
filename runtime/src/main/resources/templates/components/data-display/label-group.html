@@ -22,6 +22,28 @@
 {!                                                                                  !}
 {! Slot:                                                                            !}
 {!   {#content}  — label includes. Each label is wrapped in an <li> by the group.  !}
+{! Model mode: pass group=<org.sitenetsoft.quarkus.pha.model.LabelGroup> (built via
+   LabelGroup.builder()) — the group wraps each Label model in its <li> chrome. !}
+{#if group??}
+<div class="pf-v6-c-label-group{#if group.categoryName} pf-m-category{/if}{#if group.vertical} pf-m-vertical{/if}"{#if group.id} id="{group.id}"{/if} role="group" aria-label="{group.categoryName ?: (group.ariaLabel ?: 'Label group category')}" x-data="phaLabelGroup({group.numLabels ?: 3}{#if group.startExpanded}, true{/if})">
+  <div class="pf-v6-c-label-group__main">
+    {#if group.categoryName}<span class="pf-v6-c-label-group__label" aria-hidden="true">{group.categoryName}</span>{/if}
+    <ul class="pf-v6-c-label-group__list" role="list" x-ref="list">
+      {#for lbl in group.labels}
+      <li class="pf-v6-c-label-group__list-item">{#include components/data-display/label label=lbl /}</li>
+      {/for}
+      <li class="pf-v6-c-label-group__list-item pha-label-group__overflow" x-show="overflowVisible" x-cloak>
+        <button class="pf-v6-c-label pf-m-overflow" type="button" @click="toggle()" :aria-expanded="expanded.toString()">
+          <span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text" x-text="expanded ? (expandedText || 'Show Less') : (collapsedTextTemplate.replace('REMAINING_PLACEHOLDER', hiddenCount.toString()))"></span></span>
+        </button>
+      </li>
+    </ul>
+  </div>
+  {#if group.closable}<div class="pf-v6-c-label-group__close">
+    <button class="pf-v6-c-button pf-m-plain pf-m-no-padding" type="button" aria-label="{group.closeBtnAria ?: 'Close label group'}"><span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span></button>
+  </div>{/if}
+</div>
+{#else}
 <div class="pf-v6-c-label-group{#if categoryName??} pf-m-category{/if}{#if vertical??} pf-m-vertical{/if}"{#if id??} id="{id}"{/if} role="group"{#if categoryName??} aria-label="{categoryName}"{#else if ariaLabel??} aria-label="{ariaLabel}"{#else} aria-label="Label group category"{/if} x-data="phaLabelGroup({#if numLabels??}{numLabels}{#else}3{/if}{#if startExpanded??}, true{/if})"{#if collapsedText??} data-collapsed-text="{collapsedText}"{/if}{#if expandedText??} data-expanded-text="{expandedText}"{/if}>
   <div class="pf-v6-c-label-group__main">
     {#if categoryName??}<span class="pf-v6-c-label-group__label" aria-hidden="true">{categoryName}</span>{/if}
@@ -38,3 +60,4 @@
     <button class="pf-v6-c-button pf-m-plain pf-m-no-padding" type="button" aria-label="{#if closeBtnAria??}{closeBtnAria}{#else}Close label group{/if}"><span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span></button>
   </div>{/if}
 </div>
+{/if}
