@@ -1,5 +1,4 @@
+{! Populated from the Java model MenuToggleDemoData.demoTogglePlainText (see the Java tab). !}
 <div class="pf-v6-l-flex pf-m-space-items-md pf-m-align-items-center" id="mt-plain-text-row">
-  <button class="pf-v6-c-menu-toggle pf-m-plain pf-m-text" type="button" id="mt-plain-text" aria-expanded="false" aria-label="Plain menu toggle"><span class="pf-v6-c-menu-toggle__text">Text</span><span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span></button>
-  <button class="pf-v6-c-menu-toggle pf-m-plain pf-m-text pf-m-expanded" type="button" id="mt-plain-text-expanded" aria-expanded="true" aria-label="Expanded plain menu toggle"><span class="pf-v6-c-menu-toggle__text">Text</span><span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span></button>
-  <button class="pf-v6-c-menu-toggle pf-m-plain pf-m-text" type="button" id="mt-plain-text-disabled" aria-expanded="false" aria-label="Disabled plain menu toggle" disabled><span class="pf-v6-c-menu-toggle__text">Text</span><span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span></button>
+  {#for t in demoTogglePlainText}{#include components/navigation/menu-toggle toggle=t /}{/for}
 </div>

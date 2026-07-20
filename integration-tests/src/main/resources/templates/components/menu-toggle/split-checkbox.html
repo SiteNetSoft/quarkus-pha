@@ -1,34 +1,4 @@
+{! Populated from the Java model MenuToggleDemoData.demoToggleSplitCheckbox (see the Java tab). !}
 <div class="pf-v6-l-flex pf-m-space-items-md pf-m-align-items-center" id="mt-split-checkbox-row">
-  <div class="pf-v6-c-menu-toggle pf-m-split-button" id="mt-split-check">
-  <label class="pf-v6-c-check pf-m-standalone">
-    <input class="pf-v6-c-check__input" type="checkbox" id="mt-split-check-check" aria-label="Select all" />
-  </label>
-  <button class="pf-v6-c-menu-toggle__button" type="button" id="mt-split-check-toggle-button" aria-expanded="false" aria-label="Menu toggle">
-    <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
-  </button>
-</div>
-  <div class="pf-v6-c-menu-toggle pf-m-split-button pf-m-primary" id="mt-split-check-primary">
-  <label class="pf-v6-c-check pf-m-standalone">
-    <input class="pf-v6-c-check__input" type="checkbox" id="mt-split-check-primary-check" aria-label="Select all" />
-  </label>
-  <button class="pf-v6-c-menu-toggle__button" type="button" id="mt-split-check-primary-toggle-button" aria-expanded="false" aria-label="Menu toggle">
-    <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
-  </button>
-</div>
-  <div class="pf-v6-c-menu-toggle pf-m-split-button pf-m-secondary" id="mt-split-check-secondary">
-  <label class="pf-v6-c-check pf-m-standalone">
-    <input class="pf-v6-c-check__input" type="checkbox" id="mt-split-check-secondary-check" aria-label="Select all" />
-  </label>
-  <button class="pf-v6-c-menu-toggle__button" type="button" id="mt-split-check-secondary-toggle-button" aria-expanded="false" aria-label="Menu toggle">
-    <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
-  </button>
-</div>
-  <div class="pf-v6-c-menu-toggle pf-m-split-button pf-m-disabled" id="mt-split-check-disabled">
-  <label class="pf-v6-c-check pf-m-standalone">
-    <input class="pf-v6-c-check__input" type="checkbox" id="mt-split-check-disabled-check" aria-label="Select all" disabled />
-  </label>
-  <button class="pf-v6-c-menu-toggle__button" type="button" id="mt-split-check-disabled-toggle-button" aria-expanded="false" aria-label="Menu toggle" disabled>
-    <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
-  </button>
-</div>
+  {#for t in demoToggleSplitCheckbox}{#include components/navigation/menu-toggle toggle=t /}{/for}
 </div>
