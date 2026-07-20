@@ -4,6 +4,79 @@
               noBorderBottom, nav (pf-m-nav — tab links are anchors), inset (sm|md|lg|xl|2xl|none),
               modifiers (extra pf-m-* classes verbatim, e.g. responsive insets or pf-m-animate-current),
               ariaLabel (optional — labels the tablist) !}
+{! Model mode: pass tabs=<org.sitenetsoft.quarkus.pha.model.Tabs> (built via Tabs.of(id))
+   — renders the strip and its panels with the Alpine selection state; externalState()
+   binds to chrome-owned variables for paired main/subtab rows. !}
+{#if tabs??}
+{#if tabs.ownState}
+{#if tabs.animated}
+<div
+  x-data="{ {tabs.stateVar}: '{tabs.activeKey}',
+    accent(root) { root.querySelectorAll('.pf-v6-c-tabs').forEach(function (t) { var list = t.querySelector('.pf-v6-c-tabs__list'); var cur = t.querySelector('.pf-v6-c-tabs__item.pf-m-current .pf-v6-c-tabs__link'); if (!list || !cur) return; var lr = list.getBoundingClientRect(); var cr = cur.getBoundingClientRect(); var vertical = t.classList.contains('pf-m-vertical'); t.style.setProperty('--pf-v6-c-tabs--link-accent--start', Math.round(vertical ? cr.top - lr.top : cr.left - lr.left) + 'px'); t.style.setProperty('--pf-v6-c-tabs--link-accent--length', Math.round(vertical ? cr.height : cr.width) + 'px'); }); } }"
+  x-effect="{tabs.stateVar}; $nextTick(function () { accent($root) })"
+  @resize.window.debounce.100ms="accent($root)"
+{#if tabs.vertical}  style="display: flex; gap: 1rem"
+{/if}>
+{#else}
+<div x-data="{ {tabs.stateVar}: '{tabs.activeKey}' }"{#if tabs.vertical} style="display: flex; gap: 1rem"{/if}>
+{/if}
+{/if}
+{#if !tabs.panelsOnly}
+<div
+  class="pf-v6-c-tabs{#if tabs.box} pf-m-box{/if}{#if tabs.vertical} pf-m-vertical{/if}{#if tabs.filled} pf-m-fill{/if}{#if tabs.secondary} pf-m-secondary{/if}{#if tabs.subtab} pf-m-subtab{/if}{#if tabs.pageInsets} pf-m-page-insets{/if}{#if tabs.noBorderBottom} pf-m-no-border-bottom{/if}{#if tabs.nav} pf-m-nav{/if}{#if tabs.inset} pf-m-inset-{tabs.inset}{/if}{#if tabs.animated} pf-m-animate-current{/if}{#if tabs.modifiers} {tabs.modifiers}{/if}"
+  id="{tabs.id}"
+  x-data="{
+  handleKeyNav(e) {
+    var tabs = Array.from($el.querySelectorAll('[role=tab]'));
+    var idx = tabs.indexOf(e.target);
+    if (idx < 0) return;
+    var next = -1;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (idx + 1) % tabs.length;
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = (idx - 1 + tabs.length) % tabs.length;
+    else if (e.key === 'Home') next = 0;
+    else if (e.key === 'End') next = tabs.length - 1;
+    if (next >= 0) { e.preventDefault(); tabs[next].focus(); }
+  }
+}"
+>
+  <ul class="pf-v6-c-tabs__list"{#if !tabs.nav} role="tablist"{/if}{#if tabs.ariaLabel} aria-label="{tabs.ariaLabel}"{/if} @keydown="handleKeyNav($event)">
+    {#for item in tabs.items}
+    {#if tabs.nav}
+    <li class="pf-v6-c-tabs__item" :class="{tabs.stateVar} === '{item.key}' ? 'pf-m-current' : ''">
+      <a href="#" class="pf-v6-c-tabs__link" :aria-current="{tabs.stateVar} === '{item.key}' ? 'page' : false" @click.prevent="{tabs.stateVar} = '{item.key}'">
+        <span class="pf-v6-c-tabs__item-text">{item.text}</span>
+      </a>
+    </li>
+    {#else}
+    <li role="presentation" class="pf-v6-c-tabs__item" :class="{tabs.stateVar} === '{item.key}' ? 'pf-m-current' : ''">
+      <button class="pf-v6-c-tabs__link" type="button" role="tab" :aria-selected="{tabs.stateVar} === '{item.key}'" :tabindex="{tabs.stateVar} === '{item.key}' ? 0 : -1" @click="{tabs.stateVar} = '{item.key}'"{#if item.disabled} disabled aria-disabled="true"{/if}>
+        {#if item.icon}<span class="pf-v6-c-tabs__item-icon">{icons:svg(item.icon).raw}</span>{/if}<span class="pf-v6-c-tabs__item-text">{item.text}</span>
+      </button>
+    </li>
+    {/if}
+    {/for}
+  </ul>
+</div>
+{/if}
+{#if tabs.hasPanels}
+{#if tabs.vertical}
+<div style="flex: 1">
+{/if}
+{#for item in tabs.items}
+{#if item.panelHtml}
+<section class="pf-v6-c-tab-content{#if tabs.panelSecondary} pf-m-secondary{/if}" role="tabpanel" x-show="{tabs.stateVar} === '{item.key}'"{#if tabs.nav || item_index > 0} x-cloak{/if}>
+  <div class="pf-v6-c-tab-content__body{#if tabs.panelPadding} pf-m-padding{/if}">{item.panelHtml.raw}</div>
+</section>
+{/if}
+{/for}
+{#if tabs.vertical}
+</div>
+{/if}
+{/if}
+{#if tabs.ownState}
+</div>
+{/if}
+{#else}
 <div
   class="pf-v6-c-tabs{#if box??} pf-m-box{/if}{#if vertical??} pf-m-vertical{/if}{#if filled??} pf-m-fill{/if}{#if secondary??} pf-m-secondary{/if}{#if subtab??} pf-m-subtab{/if}{#if pageInsets??} pf-m-page-insets{/if}{#if noBorderBottom??} pf-m-no-border-bottom{/if}{#if nav??} pf-m-nav{/if}{#if inset??} pf-m-inset-{inset}{/if}{#if modifiers??} {modifiers}{/if}"
   {#if id??}id="{id}"{/if}
@@ -27,3 +100,4 @@
     {#insert content}{/insert}
   </ul>
 </div>
+{/if}
