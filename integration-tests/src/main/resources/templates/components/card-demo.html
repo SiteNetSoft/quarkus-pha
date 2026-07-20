@@ -314,32 +314,35 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="card"} {#description}
+                      {#include partials/example-card title="Basic" slug="basic" component="card" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">Title, body, and footer — the minimal card.</p>
                       {/description} {#content}{#include components/card/basic /}{/content} {/include} {#include
-                      partials/example-card title="Card with subtitle" slug="subtitle" component="card"} {#description}
+                      partials/example-card title="Card with subtitle" slug="subtitle" component="card" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         A <code class="ws-code">pf-v6-c-card__subtitle</code> below the title.
                       </p>
                       {/description} {#content}{#include components/card/subtitle /}{/content} {/include} {#include
                       partials/example-card title="Card with subtitle and actions" slug="subtitle-actions"
-                      component="card"} {#description}
+                      component="card" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Header actions (kebab + checkbox) with a title and subtitle in the header main area.
                       </p>
                       {/description} {#content}{#include components/card/subtitle-actions /}{/content} {/include}
-                      {#include partials/example-card title="Secondary cards" slug="secondary" component="card"}
-                      {#description}
+                      {#include partials/example-card title="Secondary cards" slug="secondary" component="card"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-secondary</code> — secondary background variant.
                       </p>
                       {/description} {#content}{#include components/card/secondary /}{/content} {/include} {#include
-                      partials/example-card title="Compact" slug="compact" component="card"} {#description}
+                      partials/example-card title="Compact" slug="compact" component="card" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-compact</code> — tighter padding for dense grids.
                       </p>
                       {/description} {#content}{#include components/card/compact /}{/content} {/include} {#include
-                      partials/example-card title="Flat" slug="flat" component="card"} {#description}
+                      partials/example-card title="Flat" slug="flat" component="card" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Kept for back-compat — PF v6 cards are flat by default; the
                         <code class="ws-code">flat</code> param is accepted but emits no class.
@@ -353,98 +356,98 @@
                       </p>
                       {/description} {#content}{#include components/card/modifiers /}{/content} {/include} {#include
                       partials/example-card title="Header images and actions" slug="header-images-actions"
-                      component="card"} {#description}
+                      component="card" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Brand image in the header with end-aligned actions.
                       </p>
                       {/description} {#content}{#include components/card/header-images-actions /}{/content} {/include}
                       {#include partials/example-card title="Title inline with images and actions"
-                      slug="title-inline-images-actions" component="card"} {#description}
+                      slug="title-inline-images-actions" component="card" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">Image and title share the header main area.</p>
                       {/description} {#content}{#include components/card/title-inline-images-actions /}{/content}
                       {/include} {#include partials/example-card title="Card header without title"
-                      slug="header-without-title" component="card"} {#description}
+                      slug="header-without-title" component="card" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">A header that carries only actions.</p>
                       {/description} {#content}{#include components/card/header-without-title /}{/content} {/include}
                       {#include partials/example-card title="Card with header that wraps" slug="header-wraps"
-                      component="card"} {#description}
+                      component="card" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-wrap</code> lets long titles wrap under the actions.
                       </p>
                       {/description} {#content}{#include components/card/header-wraps /}{/content} {/include} {#include
-                      partials/example-card title="With HTML heading element" slug="heading-element" component="card"}
-                      {#description}
+                      partials/example-card title="With HTML heading element" slug="heading-element" component="card"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         The title text takes whatever heading level fits the page outline.
                       </p>
                       {/description} {#content}{#include components/card/heading-element /}{/content} {/include}
                       {#include partials/example-card title="With multiple body sections" slug="multiple-body-sections"
-                      component="card"} {#description}
+                      component="card" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Cards can stack several <code class="ws-code">__body</code> elements.
                       </p>
                       {/description} {#content}{#include components/card/multiple-body-sections /}{/content} {/include}
                       {#include partials/example-card title="With a primary body section that fills"
-                      slug="body-section-fills" component="card"} {#description}
+                      slug="body-section-fills" component="card" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Bodies default to filling; <code class="ws-code">pf-m-no-fill</code> opts out per section.
                       </p>
                       {/description} {#content}{#include components/card/body-section-fills /}{/content} {/include}
-                      {#include partials/example-card title="Selectable" slug="selectable" component="card"}
-                      {#description}
+                      {#include partials/example-card title="Selectable" slug="selectable" component="card"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-selectable</code> + a checkbox in
                         <code class="ws-code">__selectable-actions</code>; Alpine flips
                         <code class="ws-code">pf-m-selected</code>. Third card is disabled.
                       </p>
                       {/description} {#content}{#include components/card/selectable /}{/content} {/include} {#include
-                      partials/example-card title="Single selectable" slug="single-selectable" component="card"}
-                      {#description}
+                      partials/example-card title="Single selectable" slug="single-selectable" component="card"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Radio-backed selection — exactly one card holds <code class="ws-code">pf-m-selected</code>.
                       </p>
                       {/description} {#content}{#include components/card/single-selectable /}{/content} {/include}
-                      {#include partials/example-card title="Actionable" slug="actionable" component="card"}
-                      {#description}
+                      {#include partials/example-card title="Actionable" slug="actionable" component="card"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-clickable</code> with an invisible
                         <code class="ws-code">__clickable-action</code> overlay — button, link, and disabled variants.
                       </p>
                       {/description} {#content}{#include components/card/actionable /}{/content} {/include} {#include
                       partials/example-card title="Actionable and selectable" slug="actionable-selectable"
-                      component="card"} {#description}
+                      component="card" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Checkbox selection combined with a clickable title.
                       </p>
                       {/description} {#content}{#include components/card/actionable-selectable /}{/content} {/include}
-                      {#include partials/example-card title="Expandable cards" slug="expandable" component="card"}
-                      {#description}
+                      {#include partials/example-card title="Expandable cards" slug="expandable" component="card"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">__header-toggle</code> +
                         <code class="ws-code">__expandable-content</code>; the toggle icon rotates via
                         <code class="ws-code">pf-m-expanded</code>.
                       </p>
                       {/description} {#content}{#include components/card/expandable /}{/content} {/include} {#include
-                      partials/example-card title="Expandable with icon" slug="expandable-with-icon" component="card"}
-                      {#description}
+                      partials/example-card title="Expandable with icon" slug="expandable-with-icon" component="card"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Expandable card with a brand image in place of the title.
                       </p>
                       {/description} {#content}{#include components/card/expandable-with-icon /}{/content} {/include}
-                      {#include partials/example-card title="Card with dividers" slug="with-dividers" component="card"}
-                      {#description}
+                      {#include partials/example-card title="Card with dividers" slug="with-dividers" component="card"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-v6-c-divider</code> rules between the card sections.
                       </p>
                       {/description} {#content}{#include components/card/with-dividers /}{/content} {/include} {#include
                       partials/example-card title="Single selectable tiles" slug="single-selectable-tiles"
-                      component="card"} {#description}
+                      component="card" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Tile-style selectable cards backed by radios.
                       </p>
                       {/description} {#content}{#include components/card/single-selectable-tiles /}{/content} {/include}
                       {#include partials/example-card title="Multi selectable tiles" slug="multi-selectable-tiles"
-                      component="card"} {#description}
+                      component="card" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Tile-style selectable cards backed by checkboxes.
                       </p>

@@ -1,29 +1,4 @@
+{! Populated from the Java model CardDemoData.demoCardsSelectable (see the Java tab). !}
 <div class="pf-v6-l-gallery pf-m-gutter" id="cd-selectable" x-data="{ sel1: false, sel2: false }">
-  {#include components/data-display/card id="cd-selectable-1" selectable=true selectedExpr="sel1"}
-  {#include components/data-display/card-header hasSelectableActions=true}
-  {#cardSelectableActions}
-  <div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="cd-selectable-1-check" aria-labelledby="cd-selectable-1-title" x-model="sel1" /></div>
-  {/cardSelectableActions}
-  {#include components/data-display/card-title id="cd-selectable-1-title"}First card{/include}
-  {/include}
-  {#include components/data-display/card-body}This card is selectable.{/include}
-  {/include}
-  {#include components/data-display/card id="cd-selectable-2" selectable=true selectedExpr="sel2"}
-  {#include components/data-display/card-header hasSelectableActions=true}
-  {#cardSelectableActions}
-  <div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="cd-selectable-2-check" aria-labelledby="cd-selectable-2-title" x-model="sel2" /></div>
-  {/cardSelectableActions}
-  {#include components/data-display/card-title id="cd-selectable-2-title"}Second card{/include}
-  {/include}
-  {#include components/data-display/card-body}This card is selectable.{/include}
-  {/include}
-  {#include components/data-display/card id="cd-selectable-3" selectable=true disabled=true}
-  {#include components/data-display/card-header hasSelectableActions=true}
-  {#cardSelectableActions}
-  <div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="cd-selectable-3-check" aria-labelledby="cd-selectable-3-title" disabled /></div>
-  {/cardSelectableActions}
-  {#include components/data-display/card-title id="cd-selectable-3-title"}Third card{/include}
-  {/include}
-  {#include components/data-display/card-body}This card is disabled.{/include}
-  {/include}
+  {#for c in demoCardsSelectable}{#include components/data-display/card card=c /}{/for}
 </div>

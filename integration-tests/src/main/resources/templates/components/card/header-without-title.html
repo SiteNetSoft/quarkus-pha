@@ -1,11 +1,4 @@
+{! Populated from the Java model CardDemoData.demoCardHeaderWithoutTitle (see the Java tab). !}
 <div style="max-width: 400px">
-  {#include components/data-display/card id="cd-header-without-title"}
-  {#include components/data-display/card-header hasCardActions=true}
-  {#cardActions}
-  <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Card actions"><span class="pf-v6-c-button__icon">{icons:svg('fa:ellipsis-vertical').raw}</span></button>
-  <div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="cd-header-without-title-check" aria-labelledby="cd-header-without-title-title" aria-label="Select card" /></div>
-  {/cardActions}
-  {/include}
-  {#include components/data-display/card-body}This is the card body. The header above carries only actions — no title element at all.{/include}
-  {/include}
+  {#include components/data-display/card card=demoCardHeaderWithoutTitle /}
 </div>
