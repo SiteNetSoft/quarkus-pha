@@ -74,4 +74,19 @@ test.describe("Back to top", () => {
       await expect(link).toHaveAttribute("target", "_blank");
     });
   });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/back-to-top");
+      for (const ex of ["basic"]) {
+        const card = page.locator(`[data-rendered-href="/components/back-to-top/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/back-to-top/source-java/basic");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('BackToTop.of().id("back-to-top-basic")');
+    });
+  });
 });
