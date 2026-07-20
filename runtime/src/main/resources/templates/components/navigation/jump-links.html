@@ -1,5 +1,69 @@
 {! Jump links — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the nav.
                                              vertical (optional), center (optional), ariaLabel (optional) !}
+{! Model mode: pass jumpLinks=<org.sitenetsoft.quarkus.pha.model.JumpLinks> (built via
+   JumpLinks.of(id)) — plain or button-link lists, header label, subsections, and both
+   expandable shapes. !}
+{#if jumpLinks??}
+{#if jumpLinks.expandableSimple}
+<nav class="pf-v6-c-jump-links{#if jumpLinks.vertical} pf-m-vertical{/if}{#if jumpLinks.center} pf-m-center{/if} pf-m-expandable" id="{jumpLinks.id}" aria-label="{jumpLinks.ariaLabel}" x-data="{ open: {jumpLinks.startOpen} }" :class="{ 'pf-m-expanded': open }"{#if jumpLinks.style} style="{jumpLinks.style}"{/if}>
+  <div class="pf-v6-c-jump-links__header">
+    <button class="pf-v6-c-jump-links__toggle pf-v6-c-button pf-m-plain" type="button" :aria-expanded="open.toString()" @click="open = !open">
+      <span class="pf-v6-c-jump-links__toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+      <span>{jumpLinks.toggleText}</span>
+    </button>
+  </div>
+  <div class="pf-v6-c-jump-links__main" x-show="open">
+    <ul class="pf-v6-c-jump-links__list" role="list">
+      {#for item in jumpLinks.items}
+      {#include components/navigation/jump-links-model-item jumpLinks=jumpLinks item=item /}
+      {/for}
+    </ul>
+  </div>
+</nav>
+{#else if jumpLinks.expandableResponsive}
+<nav class="pf-v6-c-jump-links{#if jumpLinks.vertical} pf-m-vertical{/if}{#if jumpLinks.center} pf-m-center{/if} pf-m-expandable {jumpLinks.expandableModifiers}" id="{jumpLinks.id}" aria-label="{jumpLinks.ariaLabel}" x-data="{ open: false }" :class="{ 'pf-m-expanded': open }"{#if jumpLinks.style} style="{jumpLinks.style}"{/if}>
+  <div class="pf-v6-c-jump-links__header">
+    <div class="pf-v6-c-jump-links__toggle">
+      <button class="pf-v6-c-button pf-m-plain" type="button" :aria-expanded="open.toString()" @click="open = !open">
+        <span class="pf-v6-c-button__icon"><span class="pf-v6-c-jump-links__toggle-icon">{icons:svg('fa:angle-right').raw}</span></span>
+        <span class="pf-v6-c-button__text">{jumpLinks.toggleText}</span>
+      </button>
+    </div>
+    {#if jumpLinks.label}
+    <div class="pf-v6-c-jump-links__label">{jumpLinks.label}</div>
+    {/if}
+  </div>
+  <div class="pf-v6-c-jump-links__main">
+    <ul class="pf-v6-c-jump-links__list" role="list">
+      {#for item in jumpLinks.items}
+      {#include components/navigation/jump-links-model-item jumpLinks=jumpLinks item=item /}
+      {/for}
+    </ul>
+  </div>
+</nav>
+{#else if jumpLinks.hasMain}
+<nav class="pf-v6-c-jump-links{#if jumpLinks.vertical} pf-m-vertical{/if}{#if jumpLinks.center} pf-m-center{/if}" id="{jumpLinks.id}" aria-label="{jumpLinks.ariaLabel}"{#if jumpLinks.style} style="{jumpLinks.style}"{/if}>
+  <div class="pf-v6-c-jump-links__main">
+    <div class="pf-v6-c-jump-links__header">
+      <div class="pf-v6-c-jump-links__label">{jumpLinks.label}</div>
+    </div>
+    <ul class="pf-v6-c-jump-links__list" role="list">
+      {#for item in jumpLinks.items}
+      {#include components/navigation/jump-links-model-item jumpLinks=jumpLinks item=item /}
+      {/for}
+    </ul>
+  </div>
+</nav>
+{#else}
+<nav class="pf-v6-c-jump-links{#if jumpLinks.vertical} pf-m-vertical{/if}{#if jumpLinks.center} pf-m-center{/if}" id="{jumpLinks.id}" aria-label="{jumpLinks.ariaLabel}"{#if jumpLinks.style} style="{jumpLinks.style}"{/if}>
+  <ul class="pf-v6-c-jump-links__list">
+    {#for item in jumpLinks.items}
+    {#include components/navigation/jump-links-model-item jumpLinks=jumpLinks item=item /}
+    {/for}
+  </ul>
+</nav>
+{/if}
+{#else}
 <nav
   class="pf-v6-c-jump-links{#if vertical??} pf-m-vertical{/if}{#if center??} pf-m-center{/if}"
   {#if id??}id="{id}"{/if}
@@ -9,3 +73,4 @@
     {#insert content}{/insert}
   </ul>
 </nav>
+{/if}
