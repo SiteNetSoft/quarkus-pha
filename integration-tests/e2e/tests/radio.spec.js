@@ -55,4 +55,23 @@ test.describe("Radio", () => {
       });
     }
   });
+  test.describe("Java source tab", () => {
+    test("model-driven cards get a leading Java tab; controlled/reversed do not", async ({ page }) => {
+      await page.goto("/components/radio");
+      for (const ex of ["basic", "with-description", "label-wraps"]) {
+        const card = page.locator(`[data-rendered-href="/components/radio/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      for (const ex of ["controlled", "reversed"]) {
+        const card = page.locator(`[data-rendered-href="/components/radio/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/radio/source-java/with-description");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.description("30 GB storage, priority support.")');
+    });
+  });
 });
