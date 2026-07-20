@@ -1,0 +1,11 @@
+{! Notification drawer item — model-mode partial. Pass item=<NotificationDrawer.Item>. !}
+<li class="pf-v6-c-notification-drawer__list-item{#if item.isRead} pf-m-read{#else} pf-m-unread{/if} pf-m-{item.variant}">
+  <div class="pf-v6-c-notification-drawer__list-item-header">
+    <span class="pf-v6-c-notification-drawer__list-item-header-icon">{icons:svg(item.displayIcon).raw}</span>
+    <h2 class="pf-v6-c-notification-drawer__list-item-header-title">{item.title}</h2>
+  </div>
+  {#if item.description??}
+  <p class="pf-v6-c-notification-drawer__list-item-description">{item.description}</p>
+  {/if}
+  {#if item.timestamp??}<small class="pf-v6-c-notification-drawer__list-item-timestamp">{item.timestamp}</small>{/if}
+</li>
