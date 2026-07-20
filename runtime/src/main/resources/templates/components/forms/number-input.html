@@ -2,6 +2,24 @@
 {! Required: value !}
 {! Optional: id — DOM id on the root; omit unless something else references the input.
               min (optional), max (optional), unit (optional), disabled (optional) !}
+{! Model mode: pass numberInput=<org.sitenetsoft.quarkus.pha.model.NumberInput> — Alpine expressions generated in Java
+   (canonical minimal forms: no Infinity clamps, :disabled omitted when never disabled). !}
+{#if numberInput??}
+<div class="pf-v6-c-number-input" id="{numberInput.id}" x-data="{numberInput.xData}">
+  <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Minus"{#if numberInput.minusDisabledExpr??} :disabled="{numberInput.minusDisabledExpr}"{/if} @click="{numberInput.minusClick}">
+    <span class="pf-v6-c-number-input__icon">{icons:svg('fa:minus').raw}</span>
+  </button>
+  <span class="pf-v6-c-form-control"{#if numberInput.isStatus} :class="{numberInput.statusClassExpr}"{/if}>
+    <input type="number" x-model.number="val"{#if numberInput.minAttr??} min="{numberInput.minAttr}"{/if}{#if numberInput.maxAttr??} max="{numberInput.maxAttr}"{/if}{#if numberInput.isDisabled} disabled{/if} aria-label="{numberInput.inputAriaLabel}"{#if numberInput.isStatus} :aria-invalid="(val < 0).toString()"{/if}{#if numberInput.inputStyle??} style="{numberInput.inputStyle}"{/if}>
+  </span>
+  <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Plus"{#if numberInput.plusDisabledExpr??} :disabled="{numberInput.plusDisabledExpr}"{/if} @click="{numberInput.plusClick}">
+    <span class="pf-v6-c-number-input__icon">{icons:svg('fa:plus').raw}</span>
+  </button>
+  {#if numberInput.unit??}
+  <span class="pf-v6-c-number-input__unit">{numberInput.unit}</span>
+  {/if}
+</div>
+{#else}
 <div class="pf-v6-c-number-input"{#if id??} id="{id}"{/if} x-data="{ val: {value} }">
   <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Minus"
           @click="val = Math.max(val - 1, {#if min??}{min}{#else}-Infinity{/if})"
@@ -22,3 +40,4 @@
   <span class="pf-v6-c-number-input__unit">{unit}</span>
   {/if}
 </div>
+{/if}
