@@ -4,6 +4,25 @@
               plain (optional — pf-m-plain; use only inside an ancestor with its own border/background),
               value (optional — prefilled text), ariaLabel (optional),
               hintText (optional — autocomplete ghost rendered as PF's disabled pf-m-hint input) !}
+{! Model mode: pass textInputGroup=<org.sitenetsoft.quarkus.pha.model.TextInputGroup> — adds the status flavour. !}
+{#if textInputGroup??}
+<div class="pf-v6-c-text-input-group{#if textInputGroup.isDisabled} pf-m-disabled{/if}{#if textInputGroup.isPlain} pf-m-plain{/if}{#if textInputGroup.status??} pf-m-{textInputGroup.status}{/if}" id="{textInputGroup.id}">
+  <div class="pf-v6-c-text-input-group__main{#if textInputGroup.iconName??} pf-m-icon{/if}">
+    <span class="pf-v6-c-text-input-group__text">
+      {#if textInputGroup.iconName??}
+      <span class="pf-v6-c-text-input-group__icon">{icons:svg(textInputGroup.iconName).raw}</span>
+      {/if}
+      {#if textInputGroup.hintText??}
+      <input class="pf-v6-c-text-input-group__text-input pf-m-hint" type="text" value="{textInputGroup.hintText}" disabled aria-hidden="true">
+      {/if}
+      <input class="pf-v6-c-text-input-group__text-input" type="text"{#if textInputGroup.value??} value="{textInputGroup.value}"{/if}{#if textInputGroup.placeholder??} placeholder="{textInputGroup.placeholder}"{/if}{#if textInputGroup.ariaLabel??} aria-label="{textInputGroup.ariaLabel}"{/if}{#if textInputGroup.isError} aria-invalid="true"{/if}{#if textInputGroup.isDisabled} disabled{/if}>
+      {#if textInputGroup.statusIcon??}
+      <span class="pf-v6-c-text-input-group__icon pf-m-status">{icons:svg(textInputGroup.statusIcon).raw}</span>
+      {/if}
+    </span>
+  </div>
+</div>
+{#else}
 <div class="pf-v6-c-text-input-group{#if disabled??} pf-m-disabled{/if}{#if plain??} pf-m-plain{/if}"{#if id??} id="{id}"{/if}>
   <div class="pf-v6-c-text-input-group__main{#if iconName??} pf-m-icon{/if}">
     <span class="pf-v6-c-text-input-group__text">
@@ -17,3 +36,4 @@
     </span>
   </div>
 </div>
+{/if}
