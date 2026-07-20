@@ -1,18 +1,2 @@
 {! Multi-select — independent toggles. Common for filters. !}
-<div class="pf-v6-c-toggle-group" id="tg-multi" role="group" aria-label="Filters" x-data="{ filters: { bold: false, italic: true, underline: false } }">
-  <div class="pf-v6-c-toggle-group__item">
-    <button class="pf-v6-c-toggle-group__button" type="button" :aria-pressed="filters.bold" :class="filters.bold ? 'pf-m-selected' : ''" @click="filters.bold = !filters.bold">
-      <span class="pf-v6-c-toggle-group__text">Bold</span>
-    </button>
-  </div>
-  <div class="pf-v6-c-toggle-group__item">
-    <button class="pf-v6-c-toggle-group__button" type="button" :aria-pressed="filters.italic" :class="filters.italic ? 'pf-m-selected' : ''" @click="filters.italic = !filters.italic">
-      <span class="pf-v6-c-toggle-group__text">Italic</span>
-    </button>
-  </div>
-  <div class="pf-v6-c-toggle-group__item">
-    <button class="pf-v6-c-toggle-group__button" type="button" :aria-pressed="filters.underline" :class="filters.underline ? 'pf-m-selected' : ''" @click="filters.underline = !filters.underline">
-      <span class="pf-v6-c-toggle-group__text">Underline</span>
-    </button>
-  </div>
-</div>
+{#include components/forms/toggle-group toggleGroup=demoTgMulti /}
