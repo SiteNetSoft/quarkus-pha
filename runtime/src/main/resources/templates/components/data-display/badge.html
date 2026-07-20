@@ -3,4 +3,9 @@
 {! Optional: id — DOM id on the root; omit unless something else references the badge.
               variant (read | unread | disabled) — default unread; screenReaderText — visually-hidden text appended for AT consumers !}
 {! The disabled variant carries aria-disabled so AT announces it as inactive and contrast checkers exempt its (intentionally muted) PF colors. !}
+{! Model mode: pass badge=<org.sitenetsoft.quarkus.pha.model.Badge> (built via Badge.of(value)). !}
+{#if badge??}
+<span class="pf-v6-c-badge pf-m-{badge.variant}"{#if badge.id} id="{badge.id}"{/if}{#if badge.disabledVariant} aria-disabled="true"{/if}>{badge.value}{#if badge.screenReaderText} <span class="pf-v6-screen-reader">{badge.screenReaderText}</span>{/if}</span>
+{#else}
 <span class="pf-v6-c-badge pf-m-{#if variant??}{variant}{#else}unread{/if}"{#if id??} id="{id}"{/if}{#if variant?? && variant == 'disabled'} aria-disabled="true"{/if}>{value}{#if screenReaderText??} <span class="pf-v6-screen-reader">{screenReaderText}</span>{/if}</span>
+{/if}
