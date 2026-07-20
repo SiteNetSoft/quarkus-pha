@@ -63,6 +63,24 @@ public class BreadcrumbExamplesRoutes {
     }
 
     @GET
+    @Path("/breadcrumb/source-java/{example}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String sourceJava(@PathParam("example") String example) {
+        if (!EXAMPLES.contains(example)) {
+            throw new NotFoundException("Unknown breadcrumb example: " + example);
+        }
+        String resourcePath = "/code-samples/breadcrumb/" + example + ".java";
+        try (InputStream in = getClass().getResourceAsStream(resourcePath)) {
+            if (in == null) {
+                throw new NotFoundException("Missing Java sample for: " + example);
+            }
+            return new String(in.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed reading " + resourcePath, e);
+        }
+    }
+
+    @GET
     @Path("/breadcrumb/{example}")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance standalone(@PathParam("example") String example) {

@@ -150,29 +150,29 @@
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Basic" slug="basic" component="breadcrumb"}
-                        {#description}
+                        {#include partials/example-card title="Basic" slug="basic" component="breadcrumb"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Standard hierarchy: home → ... → current page. Each crumb except the last is a link; the last
                           is marked current.
                         </p>
                         {/description} {#content}{#include components/breadcrumb/basic /}{/content} {/include} {#include
-                        partials/example-card title="Without home link" slug="without-home-link" component="breadcrumb"}
-                        {#description}
+                        partials/example-card title="Without home link" slug="without-home-link" component="breadcrumb"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Omit href on the first crumb to render it as plain text instead of a link. Useful when the
                           home node isn't navigable from the current view (e.g. the user came from a deep link).
                         </p>
                         {/description} {#content}{#include components/breadcrumb/without-home-link /}{/content}
                         {/include} {#include partials/example-card title="With heading" slug="with-heading"
-                        component="breadcrumb"} {#description}
+                        component="breadcrumb" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           heading=true wraps the current crumb in an h1 — the breadcrumb doubles as the page title for
                           screen readers. Skip a separate page title row when using this pattern.
                         </p>
                         {/description} {#content}{#include components/breadcrumb/with-heading /}{/content} {/include}
                         {#include partials/example-card title="With dropdown" slug="with-dropdown"
-                        component="breadcrumb"} {#description}
+                        component="breadcrumb" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           isDropdown=true swaps the crumb's link for a menu toggle. The dropdown slot holds a PF v6
                           menu. Useful when a level has many sibling pages users might want to jump between.
