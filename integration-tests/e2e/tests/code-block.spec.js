@@ -21,9 +21,7 @@ test.describe("Code block", () => {
     });
 
     test("displays code text", async ({ page }) => {
-      await expect(page.locator("#cb-basic .pf-v6-c-code-block__code")).toContainText(
-        "apiVersion: v1"
-      );
+      await expect(page.locator("#cb-basic .pf-v6-c-code-block__code")).toContainText("apiVersion: v1");
     });
 
     test("has no header actions", async ({ page }) => {
@@ -48,6 +46,29 @@ test.describe("Code block", () => {
       await expect(pre).toBeVisible();
       const code = pre.locator("code.pf-v6-c-code-block__code");
       await expect(code).toContainText("curl -X POST");
+    });
+  });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/code-block");
+      for (const ex of ["basic", "with-copy"]) {
+        const card = page.locator(`[data-rendered-href="/components/code-block/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/code-block/source-java/with-copy");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain(".withCopy()");
+    });
+
+    test("model with-copy block still copies via the header button", async ({ page }) => {
+      await page.goto("/components/code-block/with-copy");
+      const btn = page.locator("#cb-copy button");
+      await expect(btn).toHaveAttribute("aria-label", "Copy to clipboard");
+      await btn.click();
+      await expect(btn).toHaveAttribute("aria-label", "Successfully copied to clipboard!");
     });
   });
 });
