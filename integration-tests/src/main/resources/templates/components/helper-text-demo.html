@@ -130,22 +130,22 @@
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Basic" slug="basic" component="helper-text"}
-                        {#description}
+                        {#include partials/example-card title="Basic" slug="basic" component="helper-text"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Single-item helper text at every status. Each status auto-renders a default icon when no
                           <code class="ws-code">iconName</code> is passed.
                         </p>
                         {/description} {#content}{#include components/helper-text/basic /}{/content} {/include}
                         {#include partials/example-card title="With custom icons" slug="with-custom-icons"
-                        component="helper-text"} {#description}
+                        component="helper-text" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Pass <code class="ws-code">iconName</code> to override the default status icon with a Font
                           Awesome / pficon glyph.
                         </p>
                         {/description} {#content}{#include components/helper-text/with-custom-icons /}{/content}
                         {/include} {#include partials/example-card title="Multiple items" slug="multiple-items"
-                        component="helper-text"} {#description}
+                        component="helper-text" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Compose many items inside one container by opening the
                           <code class="ws-code">helper-text</code> include's <code class="ws-code">items</code> slot and
