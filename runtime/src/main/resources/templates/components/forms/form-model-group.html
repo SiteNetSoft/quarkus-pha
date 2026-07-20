@@ -1,0 +1,23 @@
+{! Form group — model-mode partial for components/forms/form. Pass group=<Form.Group>. !}
+<div class="pf-v6-c-form__group">
+  <div class="pf-v6-c-form__group-label{#if group.isNoPaddingTop} pf-m-no-padding-top{/if}">
+    {#if group.labelInfo??}
+    <div class="pf-v6-c-form__group-label-main">
+      <label class="pf-v6-c-form__label" for="{group.forId}">
+        <span class="pf-v6-c-form__label-text">{group.label}</span>
+      </label>
+      <span class="pf-v6-c-form__group-label-info">{group.labelInfo}</span>
+    </div>
+    {#else}
+    <label class="pf-v6-c-form__label" for="{group.forId}">
+      <span class="pf-v6-c-form__label-text">{group.label}</span>
+      {#if group.isRequired}<span class="pf-v6-c-form__label-required" aria-hidden="true">&#42;</span>{/if}
+    </label>
+    {/if}
+  </div>
+  <div class="pf-v6-c-form__group-control">
+    {#if group.helperText?? && group.isHelperOnTop}{#include components/forms/form-model-helper group=group /}{/if}
+    {#if group.textInput??}{#include components/forms/text-input textInput=group.textInput /}{#else}{group.controlHtml.raw}{/if}
+    {#if group.helperText?? && !group.isHelperOnTop}{#include components/forms/form-model-helper group=group /}{/if}
+  </div>
+</div>
