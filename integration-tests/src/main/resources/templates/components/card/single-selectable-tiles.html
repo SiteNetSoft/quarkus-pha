@@ -1,38 +1,4 @@
+{! Populated from the Java model CardDemoData.demoCardsSingleSelectableTiles (see the Java tab). !}
 <div class="pf-v6-l-gallery pf-m-gutter" id="cd-single-selectable-tiles" x-data="{ chosen: '' }">
-  {#include components/data-display/card id="cd-tile-1" selectable=true selectedExpr="chosen === 'one'"}
-  {#include components/data-display/card-header hasSelectableActions=true hasHeaderMain=true}
-  {#cardSelectableActions}
-  <div class="pf-v6-c-radio pf-m-standalone"><input class="pf-v6-c-radio__input" type="radio" name="cd-tile-radio" id="cd-tile-1-input" aria-labelledby="cd-tile-1-title" value="one" x-model="chosen" /></div>
-  {/cardSelectableActions}
-  {#cardHeaderMain}
-  {icons:svg('fa:server').raw}
-  {/cardHeaderMain}
-  {#include components/data-display/card-title id="cd-tile-1-title"}Tile one{/include}
-  {/include}
-  {#include components/data-display/card-body}Pick exactly one tile.{/include}
-  {/include}
-  {#include components/data-display/card id="cd-tile-2" selectable=true selectedExpr="chosen === 'two'"}
-  {#include components/data-display/card-header hasSelectableActions=true hasHeaderMain=true}
-  {#cardSelectableActions}
-  <div class="pf-v6-c-radio pf-m-standalone"><input class="pf-v6-c-radio__input" type="radio" name="cd-tile-radio" id="cd-tile-2-input" aria-labelledby="cd-tile-2-title" value="two" x-model="chosen" /></div>
-  {/cardSelectableActions}
-  {#cardHeaderMain}
-  {icons:svg('fa:server').raw}
-  {/cardHeaderMain}
-  {#include components/data-display/card-title id="cd-tile-2-title"}Tile two{/include}
-  {/include}
-  {#include components/data-display/card-body}Radio-backed selectable card.{/include}
-  {/include}
-  {#include components/data-display/card id="cd-tile-3" selectable=true selectedExpr="chosen === 'three'"}
-  {#include components/data-display/card-header hasSelectableActions=true hasHeaderMain=true}
-  {#cardSelectableActions}
-  <div class="pf-v6-c-radio pf-m-standalone"><input class="pf-v6-c-radio__input" type="radio" name="cd-tile-radio" id="cd-tile-3-input" aria-labelledby="cd-tile-3-title" value="three" x-model="chosen" /></div>
-  {/cardSelectableActions}
-  {#cardHeaderMain}
-  {icons:svg('fa:server').raw}
-  {/cardHeaderMain}
-  {#include components/data-display/card-title id="cd-tile-3-title"}Tile three{/include}
-  {/include}
-  {#include components/data-display/card-body}Tiles are just selectable cards.{/include}
-  {/include}
+  {#for c in demoCardsSingleSelectableTiles}{#include components/data-display/card card=c /}{/for}
 </div>

@@ -1,11 +1,4 @@
+{! Populated from the Java model CardDemoData.demoCardActionableSelectable (see the Java tab). !}
 <div class="pf-v6-l-gallery pf-m-gutter" id="cd-actionable-selectable" x-data="{ sel1: false, clicks: 0 }">
-  {#include components/data-display/card id="cd-actionable-selectable-1" clickable=true selectable=true selectedExpr="sel1"}
-  {#include components/data-display/card-header hasSelectableActions=true}
-  {#cardSelectableActions}
-  <div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="cd-actionable-selectable-1-check" aria-labelledby="cd-actionable-selectable-1-title" x-model="sel1" /></div>
-  {/cardSelectableActions}
-  {#include components/data-display/card-title id="cd-actionable-selectable-1-title"}<button class="pf-v6-c-card__clickable-action" type="button" @click="clicks++" style="all: unset; cursor: pointer">Clickable title</button>{/include}
-  {/include}
-  {#include components/data-display/card-body}Selectable via the checkbox AND actionable via the title — clicked <span x-text="clicks">0</span> times.{/include}
-  {/include}
+  {#include components/data-display/card card=demoCardActionableSelectable /}
 </div>

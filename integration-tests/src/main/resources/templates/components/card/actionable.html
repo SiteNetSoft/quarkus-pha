@@ -1,29 +1,4 @@
+{! Populated from the Java model CardDemoData.demoCardsActionable (see the Java tab). !}
 <div class="pf-v6-l-gallery pf-m-gutter" id="cd-actionable" x-data="{ clicks: 0 }">
-  {#include components/data-display/card id="cd-actionable-1" clickable=true}
-  {#include components/data-display/card-header hasSelectableActions=true}
-  {#cardSelectableActions}
-  <button class="pf-v6-c-card__clickable-action" type="button" aria-labelledby="cd-actionable-1-title" @click="clicks++"></button>
-  {/cardSelectableActions}
-  {#include components/data-display/card-title id="cd-actionable-1-title"}First card{/include}
-  {/include}
-  {#include components/data-display/card-body}Performs an action on click — clicked <span x-text="clicks">0</span> times.{/include}
-  {/include}
-  {#include components/data-display/card id="cd-actionable-2" clickable=true}
-  {#include components/data-display/card-header hasSelectableActions=true}
-  {#cardSelectableActions}
-  <a class="pf-v6-c-card__clickable-action" href="#" aria-labelledby="cd-actionable-2-title"></a>
-  {/cardSelectableActions}
-  {#include components/data-display/card-title id="cd-actionable-2-title"}Second card{/include}
-  {/include}
-  {#include components/data-display/card-body}This whole card is a link.{/include}
-  {/include}
-  {#include components/data-display/card id="cd-actionable-3" clickable=true disabled=true}
-  {#include components/data-display/card-header hasSelectableActions=true}
-  {#cardSelectableActions}
-  <button class="pf-v6-c-card__clickable-action" type="button" aria-labelledby="cd-actionable-3-title" disabled></button>
-  {/cardSelectableActions}
-  {#include components/data-display/card-title id="cd-actionable-3-title"}Third card{/include}
-  {/include}
-  {#include components/data-display/card-body}This clickable card is disabled.{/include}
-  {/include}
+  {#for c in demoCardsActionable}{#include components/data-display/card card=c /}{/for}
 </div>

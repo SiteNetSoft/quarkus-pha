@@ -1,14 +1,4 @@
+{! Populated from the Java model CardDemoData.demoCardHeaderImagesActions (see the Java tab). !}
 <div style="max-width: 400px">
-  {#include components/data-display/card id="cd-header-images-actions"}
-  {#include components/data-display/card-header hasCardActions=true}
-  {#cardActions}
-  <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Card actions"><span class="pf-v6-c-button__icon">{icons:svg('fa:ellipsis-vertical').raw}</span></button>
-  <div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="cd-header-images-actions-check" aria-labelledby="cd-header-images-actions-title" /></div>
-  {/cardActions}
-  <img class="pf-v6-c-brand" src="/web/images/quarkus-pha-icon.svg" alt="Quarkus PHA" style="--pf-v6-c-brand--Height: 40px" />
-  {/include}
-  {#include components/data-display/card-title id="cd-header-images-actions-title"}Card title{/include}
-  {#include components/data-display/card-body}A brand image in the header with actions aligned to the end.{/include}
-  {#include components/data-display/card-footer}Footer{/include}
-  {/include}
+  {#include components/data-display/card card=demoCardHeaderImagesActions /}
 </div>

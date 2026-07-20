@@ -1,15 +1,4 @@
+{! Populated from the Java model CardDemoData.demoCardExpandable (see the Java tab). !}
 <div style="max-width: 400px">
-  {#include components/data-display/card id="cd-expandable" expandable=true}
-  {#include components/data-display/card-header expandable=true hasCardActions=true}
-  {#cardActions}
-  <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Card actions"><span class="pf-v6-c-button__icon">{icons:svg('fa:ellipsis-vertical').raw}</span></button>
-  <div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="cd-expandable-check" aria-labelledby="cd-expandable-title" /></div>
-  {/cardActions}
-  {#include components/data-display/card-title id="cd-expandable-title"}Expandable card{/include}
-  {/include}
-  {#include components/data-display/card-expandable-content}
-  {#include components/data-display/card-body}The expandable content — hidden until the toggle is expanded.{/include}
-  {#include components/data-display/card-footer}Footer{/include}
-  {/include}
-  {/include}
+  {#include components/data-display/card card=demoCardExpandable /}
 </div>

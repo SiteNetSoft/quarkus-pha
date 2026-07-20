@@ -1,14 +1,4 @@
+{! Populated from the Java model CardDemoData.demoCardsSecondary (see the Java tab). !}
 <div class="pf-v6-l-gallery pf-m-gutter" id="cd-secondary" style="--pf-v6-l-gallery--GridTemplateColumns--min: 260px">
-  {#include components/data-display/card id="cd-secondary-1" secondary=true}
-  {#include components/data-display/card-title}First card{/include}
-  {#include components/data-display/card-body}<code>pf-m-secondary</code> uses the secondary background color variant.{/include}
-  {/include}
-  {#include components/data-display/card id="cd-secondary-2" secondary=true}
-  {#include components/data-display/card-title}Second card{/include}
-  {#include components/data-display/card-body}Secondary cards pair well on a primary surface.{/include}
-  {/include}
-  {#include components/data-display/card id="cd-secondary-3" secondary=true}
-  {#include components/data-display/card-title}Third card{/include}
-  {#include components/data-display/card-body}All three share the secondary treatment.{/include}
-  {/include}
+  {#for c in demoCardsSecondary}{#include components/data-display/card card=c /}{/for}
 </div>
