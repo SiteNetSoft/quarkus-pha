@@ -166,4 +166,21 @@ test.describe("Accordion", () => {
       await expect(link).toHaveAttribute("target", "_blank");
     });
   });
+  test.describe("Java source tab", () => {
+    // All 6 examples are model-driven (AccordionDemoData) — incl. single-expand via
+    // the model's shared generated state.
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/accordion");
+      for (const ex of ["bordered", "definition-list", "single-expand"]) {
+        const card = page.locator(`[data-rendered-href="/components/accordion/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/accordion/source-java/single-expand");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain(".singleExpand()");
+    });
+  });
 });

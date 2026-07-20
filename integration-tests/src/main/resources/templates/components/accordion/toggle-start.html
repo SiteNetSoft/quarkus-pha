@@ -1,7 +1,3 @@
-{! Toggle icon appears before the text instead of at the end (PF's togglePosition='start'). Composed from accordion-item. !}
-{#include components/data-display/accordion id="acc-toggle-start" toggleStart=true}{#items}
-{#include components/data-display/accordion-item itemId="acc-toggle-start-item-1" title="Item one" toggleStart=true}This is the expandable content for item one. It provides details and additional information.{/include}
-{#include components/data-display/accordion-item itemId="acc-toggle-start-item-2" title="Item two" toggleStart=true}This is the expandable content for item two. It provides details and additional information.{/include}
-{#include components/data-display/accordion-item itemId="acc-toggle-start-item-3" title="Item three" toggleStart=true}This is the expandable content for item three. It provides details and additional information.{/include}
-{#include components/data-display/accordion-item itemId="acc-toggle-start-item-4" title="Item four" toggleStart=true}This is the expandable content for item four. It provides details and additional information.{/include}
-{/items}{/include}
+{! Toggle icon appears before the text instead of at the end. !}
+{! Populated from the Java model AccordionDemoData.demoAccToggleStart (see the Java tab). !}
+{#include components/data-display/accordion accordion=demoAccToggleStart /}
