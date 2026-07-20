@@ -1,0 +1,14 @@
+import org.sitenetsoft.quarkus.pha.model.*;
+
+Menu menu = Menu.builder()
+        .id("mn-header-footer").scrollable().style("max-width: 220px")
+        .header("Header")
+        .items(MenuItem.of("Action 1"), MenuItem.of("Action 2"), MenuItem.of("Action 3"),
+                MenuItem.of("Action 4"), MenuItem.of("Action 5"), MenuItem.of("Action 6"),
+                MenuItem.of("Action 7"), MenuItem.of("Action 8"), MenuItem.of("Action 9"),
+                MenuItem.of("Action 10"), MenuItem.of("Action 11"), MenuItem.of("Action 12"))
+        .footerButton("Footer")
+        .build();
+
+// Template side, with `menu` in the template data:
+// {#include components/navigation/menu menu=menu /}
