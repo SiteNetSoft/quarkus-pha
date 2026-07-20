@@ -92,4 +92,33 @@ test.describe("Progress Stepper", () => {
       });
     }
   });
+
+  test.describe("Java source tab", () => {
+    // All examples except help-popover are model-driven (ProgressStepperDemoData).
+    const MODEL_DRIVEN = EXAMPLES.filter((e) => e !== "help-popover");
+
+    test("model-driven cards get a leading Java tab; help-popover does not", async ({ page }) => {
+      for (const ex of MODEL_DRIVEN) {
+        const card = page.locator(`[data-rendered-href="/components/progress-stepper/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      const handWritten = page.locator('[data-rendered-href="/components/progress-stepper/help-popover"]');
+      await expect(handWritten.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+    });
+
+    test("Java tab opens Monaco with the builder code", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/progress-stepper/horizontal"]');
+      await card.locator('button[aria-label*="Toggle Java"]').click();
+      await expect(card.locator(".monaco-editor").first()).toBeVisible({ timeout: 10000 });
+      await expect(card.locator(".monaco-editor .view-lines")).toContainText("ProgressStepper.builder()", {
+        timeout: 10000,
+      });
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/progress-stepper/source-java/with-failure");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain(".asDanger().asCurrent()");
+    });
+  });
 });
