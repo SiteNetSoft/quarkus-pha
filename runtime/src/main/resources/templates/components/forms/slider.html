@@ -1,5 +1,36 @@
 {! Slider — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the slider.
                                           value (optional, default 50), min (optional, default 0), max (optional, default 100), disabled (optional) !}
+{! Model mode: pass slider=<org.sitenetsoft.quarkus.pha.model.Slider> — Alpine wiring generated in Java. !}
+{#if slider??}
+<div
+  class="pf-v6-c-slider{#if slider.isDisabled} pf-m-disabled{/if}"
+  id="{slider.id}"
+  x-data="{slider.xData}"
+  :style="'--pf-v6-c-slider--value: ' + val"
+>
+  <div class="pf-v6-c-slider__main">
+    <div
+      class="pf-v6-c-slider__rail"
+      @click="{slider.railClick}"
+    >
+      <div class="pf-v6-c-slider__rail-track"></div>
+    </div>
+    <div
+      class="pf-v6-c-slider__thumb"
+      role="slider"
+      tabindex="0"
+      @keydown="{slider.keydown}"
+      aria-label="{slider.ariaLabel}"
+      aria-valuemin="{slider.minAttr}"
+      aria-valuemax="{slider.maxAttr}"
+      aria-valuenow="{slider.value}"
+      :aria-valuenow="val"
+      :style="{slider.thumbStyle}"
+    ></div>
+    <div class="pf-v6-c-slider__value pf-m-floating" x-text="val"></div>
+  </div>
+</div>
+{#else}
 <div
   class="pf-v6-c-slider{#if disabled??} pf-m-disabled{/if}"
   {#if id??}id="{id}"{/if}
@@ -31,3 +62,4 @@
     <div class="pf-v6-c-slider__value pf-m-floating" x-text="val"></div>
   </div>
 </div>
+{/if}
