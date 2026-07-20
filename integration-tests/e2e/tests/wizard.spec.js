@@ -80,8 +80,12 @@ test.describe("Wizard", () => {
 
   test.describe("Step status", () => {
     test("success and danger nav links carry status icons", async ({ page }) => {
-      await expect(page.locator("#wiz-step-status .pf-v6-c-wizard__nav-link.pf-m-success .pf-v6-c-wizard__nav-link-status-icon")).toBeVisible();
-      await expect(page.locator("#wiz-step-status .pf-v6-c-wizard__nav-link.pf-m-danger .pf-v6-c-wizard__nav-link-status-icon")).toBeVisible();
+      await expect(
+        page.locator("#wiz-step-status .pf-v6-c-wizard__nav-link.pf-m-success .pf-v6-c-wizard__nav-link-status-icon"),
+      ).toBeVisible();
+      await expect(
+        page.locator("#wiz-step-status .pf-v6-c-wizard__nav-link.pf-m-danger .pf-v6-c-wizard__nav-link-status-icon"),
+      ).toBeVisible();
     });
   });
 
@@ -151,5 +155,43 @@ test.describe("Wizard", () => {
         await expect(page.locator(".pf-v6-c-wizard").first()).toBeAttached();
       });
     }
+  });
+  test.describe("Java source tab", () => {
+    test("model-driven cards get a leading Java tab; HTMX/composition wizards do not", async ({ page }) => {
+      await page.goto("/components/wizard");
+      for (const ex of ["plain", "expandable-steps", "progressive-steps", "header"]) {
+        const card = page.locator(`[data-rendered-href="/components/wizard/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      for (const ex of ["basic", "within-modal", "submit-progress", "toggle-step-visibility"]) {
+        const card = page.locator(`[data-rendered-href="/components/wizard/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/wizard/source-java/expandable-steps");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.expandableGroup("Configuration"');
+    });
+
+    test("generated step machine navigates and clamps", async ({ page }) => {
+      await page.goto("/components/wizard/plain");
+      const next = page.locator("#wiz-plain footer").getByRole("button", { name: "Next" });
+      const back = page.locator("#wiz-plain footer").getByRole("button", { name: "Back" });
+      await expect(back).toBeDisabled();
+      await next.click();
+      await next.click();
+      await expect(next).toBeDisabled();
+      await expect(page.locator("#wiz-plain .pf-v6-c-wizard__nav-link.pf-m-current")).toHaveText(/Review/);
+    });
+
+    test("expandable group toggles and substeps gain aria-current", async ({ page }) => {
+      await page.goto("/components/wizard/expandable-steps");
+      const group = page.locator("#wiz-expandable-steps .pf-v6-c-wizard__nav-item.pf-m-expandable");
+      await expect(group).toHaveClass(/pf-m-expanded/);
+      await group.locator("> button").click();
+      await expect(group).not.toHaveClass(/pf-m-expanded/);
+    });
   });
 });
