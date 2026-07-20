@@ -1,0 +1,14 @@
+import org.sitenetsoft.quarkus.pha.model.*;
+
+import java.util.List;
+
+String avatarImg = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2036%2036'%3E%3Ccircle%20cx='18'%20cy='18'%20r='18'%20fill='%23d2d2d2'/%3E%3Ccircle%20cx='18'%20cy='12'%20r='7'%20fill='%23fff'/%3E%3Cpath%20d='M4%2032c0-8%206-12%2014-12s14%204%2014%2012'%20fill='%23fff'/%3E%3C/svg%3E";
+
+List<Avatar> avatars = List.of(
+        Avatar.of(avatarImg, "Small bordered avatar").id("avatar-bordered-sm").size("sm").bordered().build(),
+        Avatar.of(avatarImg, "Medium bordered avatar").id("avatar-bordered-md").size("md").bordered().build(),
+        Avatar.of(avatarImg, "Large bordered avatar").id("avatar-bordered-lg").size("lg").bordered().build(),
+        Avatar.of(avatarImg, "Extra large bordered avatar").id("avatar-bordered-xl").size("xl").bordered().build());
+
+// Template side, with the data in scope:
+// {#for a in avatars}{#include components/data-display/avatar avatar=a /}{/for}
