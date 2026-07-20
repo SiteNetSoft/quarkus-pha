@@ -179,7 +179,7 @@
                         </div>
 
                         {#include partials/example-card title="Content as a wrapper" slug="content-as-a-wrapper"
-                        component="content"} {#description}
+                        component="content" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Wrap arbitrary HTML in a
                           <code class="ws-code">&lt;div class=&quot;pf-v6-c-content&quot;&gt;</code>. PF v6's CSS styles
@@ -187,8 +187,8 @@
                           wrappers needed.
                         </p>
                         {/description} {#content}{#include components/content/content-as-a-wrapper /}{/content}
-                        {/include} {#include partials/example-card title="Headings" slug="headings" component="content"}
-                        {#description}
+                        {/include} {#include partials/example-card title="Headings" slug="headings" component="content"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Render any heading level via <code class="ws-code">component="h1"</code>..<code
                             class="ws-code"
@@ -197,37 +197,38 @@
                           <code class="ws-code">{|pf-v6-c-content--{component}|}</code> as its class.
                         </p>
                         {/description} {#content}{#include components/content/headings /}{/content} {/include} {#include
-                        partials/example-card title="Body" slug="body" component="content"} {#description}
+                        partials/example-card title="Body" slug="body" component="content" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Body-level elements: <code class="ws-code">p</code>, <code class="ws-code">small</code>,
                           <code class="ws-code">blockquote</code>, <code class="ws-code">pre</code>. Pass each through
                           with the appropriate <code class="ws-code">component</code> param.
                         </p>
                         {/description} {#content}{#include components/content/body /}{/content} {/include} {#include
-                        partials/example-card title="Unordered list" slug="unordered-list" component="content"}
-                        {#description}
+                        partials/example-card title="Unordered list" slug="unordered-list" component="content"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Set <code class="ws-code">component="ul"</code> and pass
                           <code class="ws-code">&lt;li&gt;</code> children through the content slot. The wrapper itself
                           becomes the <code class="ws-code">&lt;ul&gt;</code>.
                         </p>
                         {/description} {#content}{#include components/content/unordered-list /}{/content} {/include}
-                        {#include partials/example-card title="Ordered list" slug="ordered-list" component="content"}
-                        {#description}
+                        {#include partials/example-card title="Ordered list" slug="ordered-list" component="content"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Same shape as the unordered list with <code class="ws-code">component="ol"</code> — emits a
                           numbered list.
                         </p>
                         {/description} {#content}{#include components/content/ordered-list /}{/content} {/include}
-                        {#include partials/example-card title="Plain list" slug="plain-list" component="content"}
-                        {#description}
+                        {#include partials/example-card title="Plain list" slug="plain-list" component="content"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Combine <code class="ws-code">component="ul"</code> (or <code class="ws-code">ol</code>) with
                           <code class="ws-code">plainList=true</code> to strip default bullet / numbering styling.
                         </p>
                         {/description} {#content}{#include components/content/plain-list /}{/content} {/include}
                         {#include partials/example-card title="Description list" slug="description-list"
-                        component="content"} {#description}
+                        component="content" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Set <code class="ws-code">component="dl"</code> and pass alternating
                           <code class="ws-code">&lt;dt&gt;</code> / <code class="ws-code">&lt;dd&gt;</code> children. PF
@@ -235,7 +236,7 @@
                         </p>
                         {/description} {#content}{#include components/content/description-list /}{/content} {/include}
                         {#include partials/example-card title="Link and visited link" slug="link-and-visited-link"
-                        component="content"} {#description}
+                        component="content" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Set <code class="ws-code">component="a"</code> with <code class="ws-code">href</code> to
                           render a styled anchor. Add <code class="ws-code">visited=true</code> for the visited-state
@@ -243,7 +244,7 @@
                         </p>
                         {/description} {#content}{#include components/content/link-and-visited-link /}{/content}
                         {/include} {#include partials/example-card title="Editorial content" slug="editorial-content"
-                        component="content"} {#description}
+                        component="content" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           In wrapper mode, <code class="ws-code">editorial=true</code> bumps body and small text up one
                           size tier — better for long-form prose where readability matters more than density.
