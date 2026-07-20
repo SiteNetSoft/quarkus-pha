@@ -6,6 +6,72 @@
      plain     — pf-m-plain (no nav border / chrome).
      hasHeader — render the __header region with the wizardHeader slot. !}
 {! Slots: wizardHeader (optional), navItems, body, footer. !}
+{! Model mode: pass wizard=<org.sitenetsoft.quarkus.pha.model.Wizard> — the client-side Alpine step machine
+   (server-driven HTMX wizards keep the slot shell). Wrap chrome owns nothing; x-data lives on an outer div. !}
+{#if wizard??}
+<div x-data="{wizard.xData}">
+<div class="pf-v6-c-wizard{#if wizard.isPlain} pf-m-plain{/if}" id="{wizard.id}">
+  {#if wizard.isHasHeader}
+  <div class="pf-v6-c-wizard__header">
+    <div class="pf-v6-c-wizard__close">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close wizard">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+      </button>
+    </div>
+    <div class="pf-v6-c-wizard__title">
+      <h2 class="pf-v6-c-wizard__title-text">{wizard.headerTitle}</h2>
+    </div>
+    {#if wizard.headerDescription??}
+    <div class="pf-v6-c-wizard__description">{wizard.headerDescription}</div>
+    {/if}
+  </div>
+  {/if}
+  <div class="pf-v6-c-wizard__outer-wrap">
+    <div class="pf-v6-c-wizard__inner-wrap">
+      <nav class="pf-v6-c-wizard__nav" aria-label="{wizard.navLabel}">
+        <ol class="pf-v6-c-wizard__nav-list">
+          {#for e in wizard.entries}
+          {#if e.isGroup}
+          <li class="pf-v6-c-wizard__nav-item pf-m-expandable" :class="{ 'pf-m-expanded': open }">
+            <button type="button" class="pf-v6-c-wizard__nav-link" :aria-expanded="open.toString()" @click="open = !open">
+              <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">{e.groupLabel}</span></span>
+              <span class="pf-v6-c-wizard__nav-link-toggle">
+                <span class="pf-v6-c-wizard__nav-link-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+              </span>
+            </button>
+            <ol class="pf-v6-c-wizard__nav-list" x-show="open" x-cloak>
+              {#for sub in e.substeps}
+              {#include components/navigation/wizard-model-item wnItem=sub wnAnchors=false /}
+              {/for}
+            </ol>
+          </li>
+          {#else}
+          {#include components/navigation/wizard-model-item wnItem=e.step wnAnchors=wizard.isAnchors /}
+          {/if}
+          {/for}
+        </ol>
+      </nav>
+      <div class="pf-v6-c-wizard__main">
+        <div class="pf-v6-c-wizard__main-body">
+          {#for pn in wizard.panels}
+          <div x-show="{pn.currentExpr}" x-cloak>
+            {pn.paneHtml.raw}
+          </div>
+          {/for}
+        </div>
+      </div>
+    </div>
+    <footer class="pf-v6-c-wizard__footer">
+      {#for fb in wizard.footer}
+      <button type="button" class="pf-v6-c-button {fb.classes}"{#if fb.showExprText??} x-show="{fb.showExprText}"{/if}{#if fb.disabledExprText??} :disabled="{fb.disabledExprText}"{/if}{#if fb.clickExprText??} @click="{fb.clickExprText}"{/if}>
+        <span class="pf-v6-c-button__text">{fb.text}</span>
+      </button>
+      {/for}
+    </footer>
+  </div>
+</div>
+</div>
+{#else}
 <div class="pf-v6-c-wizard{#if plain??} pf-m-plain{/if}"{#if id??} id="{id}"{/if}{#if attrs??} {attrs.raw}{/if}>
   {#if hasHeader??}
   <div class="pf-v6-c-wizard__header">{#let id=null attrs=null}{#insert wizardHeader}{/insert}{/let}</div>
@@ -24,3 +90,4 @@
     <footer class="pf-v6-c-wizard__footer">{#let id=null attrs=null}{#insert footer}{/insert}{/let}</footer>
   </div>
 </div>
+{/if}
