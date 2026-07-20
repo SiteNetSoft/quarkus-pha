@@ -64,4 +64,19 @@ test.describe("Skeleton", () => {
       await expect(page.locator(".pf-v6-c-skeleton").first()).toBeVisible();
     }
   });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/skeleton");
+      for (const ex of ["default", "shapes", "text-modifiers"]) {
+        const card = page.locator(`[data-rendered-href="/components/skeleton/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/skeleton/source-java/shapes");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.widthValue("80px").heightValue("80px")');
+    });
+  });
 });
