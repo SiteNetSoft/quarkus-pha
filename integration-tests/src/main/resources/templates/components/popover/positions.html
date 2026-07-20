@@ -2,20 +2,5 @@
    as its own frozen example). The wrapper styles anchor each popover to its trigger the
    way PF's JS positioning would. !}
 <div class="pf-v6-l-flex pf-m-space-items-md" style="flex-wrap: wrap; row-gap: 1rem">
-  {#include components/popover/_position-flavor id="po-pos-top" label="Top" modifier="pf-m-top"
-    wrapperStyle="bottom: 100%; left: 50%; transform: translateX(-50%)" /}
-  {#include components/popover/_position-flavor id="po-pos-right" label="Right" modifier="pf-m-right"
-    wrapperStyle="left: 100%; top: 50%; transform: translateY(-50%)" /}
-  {#include components/popover/_position-flavor id="po-pos-bottom" label="Bottom" modifier="pf-m-bottom"
-    wrapperStyle="top: 100%; left: 50%; transform: translateX(-50%)" /}
-  {#include components/popover/_position-flavor id="po-pos-left" label="Left" modifier="pf-m-left"
-    wrapperStyle="right: 100%; top: 50%; transform: translateY(-50%)" /}
-  {#include components/popover/_position-flavor id="po-pos-left-top" label="Left top" modifier="pf-m-left-top"
-    wrapperStyle="right: 100%; top: 0" /}
-  {#include components/popover/_position-flavor id="po-pos-left-bottom" label="Left bottom" modifier="pf-m-left-bottom"
-    wrapperStyle="right: 100%; bottom: 0" /}
-  {#include components/popover/_position-flavor id="po-pos-bottom-left" label="Bottom left" modifier="pf-m-bottom-left"
-    wrapperStyle="top: 100%; left: 0" /}
-  {#include components/popover/_position-flavor id="po-pos-bottom-right" label="Bottom right" modifier="pf-m-bottom-right"
-    wrapperStyle="top: 100%; right: 0" /}
+  {#for p in demoPosPositions}{#include components/feedback/popover popover=p /}{/for}
 </div>
