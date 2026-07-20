@@ -1,8 +1,3 @@
-{! pf-m-icons on the root (iconList=true) — every action is an icon-only button, tighter spacing throughout. !}
-{#include components/actions/action-list iconList=true}{#items}
-<div class="pf-v6-c-action-list__group">
-  <div class="pf-v6-c-action-list__item">{#include components/actions/button variant="plain" icon="fa:pen-to-square" ariaLabel="Edit" /}</div>
-  <div class="pf-v6-c-action-list__item">{#include components/actions/button variant="plain" icon="fa:copy" ariaLabel="Clone" /}</div>
-  <div class="pf-v6-c-action-list__item">{#include components/actions/button variant="plain" icon="fa:trash" ariaLabel="Delete" /}</div>
-</div>
-{/items}{/include}
+{! pf-m-icons on the root — every action is an icon-only button, tighter spacing. !}
+{! Populated from the Java model ActionListDemoData.demoAlIconsList (see the Java tab). !}
+{#include components/actions/action-list actionList=demoAlIconsList /}

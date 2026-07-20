@@ -1,7 +1,3 @@
 {! Modal / form pattern — primary save action plus a link-styled cancel, same group. !}
-{#include components/actions/action-list}{#items}
-<div class="pf-v6-c-action-list__group">
-  <div class="pf-v6-c-action-list__item">{#include components/actions/button variant="primary"}{#content}Save{/content}{/include}</div>
-  <div class="pf-v6-c-action-list__item">{#include components/actions/button variant="link"}{#content}Cancel{/content}{/include}</div>
-</div>
-{/items}{/include}
+{! Populated from the Java model ActionListDemoData.demoAlCancelForm (see the Java tab). !}
+{#include components/actions/action-list actionList=demoAlCancelForm /}

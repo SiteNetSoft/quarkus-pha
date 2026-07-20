@@ -1,7 +1,3 @@
-{! Single group — primary + secondary, composed from the button component via the {#items} slot. !}
-{#include components/actions/action-list}{#items}
-<div class="pf-v6-c-action-list__group">
-  <div class="pf-v6-c-action-list__item">{#include components/actions/button variant="primary"}{#content}Next{/content}{/include}</div>
-  <div class="pf-v6-c-action-list__item">{#include components/actions/button variant="secondary"}{#content}Back{/content}{/include}</div>
-</div>
-{/items}{/include}
+{! Single group — primary + secondary. !}
+{! Populated from the Java model ActionListDemoData.demoAlSingleGroup (see the Java tab). !}
+{#include components/actions/action-list actionList=demoAlSingleGroup /}
