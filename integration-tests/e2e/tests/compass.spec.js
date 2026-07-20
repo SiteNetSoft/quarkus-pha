@@ -28,7 +28,7 @@ test.describe("Compass", () => {
 
   test("main header structure has a title and toolbar", async ({ page }) => {
     await expect(page.locator("#cmp-header-structure .pf-v6-c-compass__main-header-title")).toHaveText(
-      "Main header structure"
+      "Main header structure",
     );
   });
 
@@ -40,5 +40,20 @@ test.describe("Compass", () => {
         await expect(page.locator(".pf-v6-c-compass").first()).toBeAttached();
       });
     }
+  });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/compass");
+      for (const ex of ["basic", "docked-nav", "main-header-structure"]) {
+        const card = page.locator(`[data-rendered-href="/components/compass/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/compass/source-java/docked-nav");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('Button.icon("fa:house", "Home").variant("plain")');
+    });
   });
 });

@@ -1,18 +1,2 @@
-{! pf-m-docked adds the dock rail; icon buttons live in __dock-main. !}
-{#include components/navigation/compass id="cmp-docked" docked=true hasCompassDock=true hasCompassHeader=true headerExpanded=true attrs='style="height: 320px; border: 1px dashed var(--pf-t--global--border--color--default)"'}
-{#compassDock}
-<div class="pf-v6-c-compass__dock-main" style="padding: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem">
-  {#include components/actions/button variant="plain" ariaLabel="Home" icon="fa:house" /}
-  {#include components/actions/button variant="plain" ariaLabel="Search" icon="fa:magnifying-glass" /}
-  {#include components/actions/button variant="plain" ariaLabel="Settings" icon="fa:gear" /}
-</div>
-{/compassDock}
-{#compassHeader}
-<div class="pf-v6-c-compass__main-header-content" style="padding: 0.5rem 1rem">
-  <h2 class="pf-v6-c-compass__main-header-title">Docked nav</h2>
-</div>
-{/compassHeader}
-  <div class="pf-v6-c-compass__content" style="padding: 1rem">
-    <p>The dock rail sits outside the container; pf-m-docked reserves space for it.</p>
-  </div>
-{/include}
+{! docked() adds the dock rail; composed icon buttons live in __dock-main. !}
+{#include components/navigation/compass compass=demoCmpDocked /}
