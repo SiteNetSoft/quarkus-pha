@@ -132,27 +132,30 @@
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Basic" slug="basic" component="brand"} {#description}
+                        {#include partials/example-card title="Basic" slug="basic" component="brand" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           The default brand img — natural size of the source SVG. No CSS custom properties applied.
                         </p>
                         {/description} {#content}{#include components/brand/basic /}{/content} {/include} {#include
-                        partials/example-card title="With width" slug="with-width" component="brand"} {#description}
+                        partials/example-card title="With width" slug="with-width" component="brand" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Pass <code class="ws-code">width</code> to set
                           <code class="ws-code">--pf-v6-c-brand--Width</code>. Height auto-scales to preserve aspect
                           ratio.
                         </p>
                         {/description} {#content}{#include components/brand/with-width /}{/content} {/include} {#include
-                        partials/example-card title="With height" slug="with-height" component="brand"} {#description}
+                        partials/example-card title="With height" slug="with-height" component="brand" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Pass <code class="ws-code">height</code> to set
                           <code class="ws-code">--pf-v6-c-brand--Height</code>. Use this on a masthead with a
                           fixed-height bar.
                         </p>
                         {/description} {#content}{#include components/brand/with-height /}{/content} {/include}
-                        {#include partials/example-card title="Responsive" slug="responsive" component="brand"}
-                        {#description}
+                        {#include partials/example-card title="Responsive" slug="responsive" component="brand"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Pass <code class="ws-code">picture=true</code> to switch from
                           <code class="ws-code">&lt;img&gt;</code> to <code class="ws-code">&lt;picture&gt;</code>, then
