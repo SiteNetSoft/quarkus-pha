@@ -1,6 +1,5 @@
 {! Disabled state — count exists but is not actionable (e.g. filter that would return zero). !}
+{! Populated from the Java model BadgeDemoData.demoBadgesDisabled (see the Java tab). !}
 <div style="display: flex; gap: 0.5rem">
-  {#include components/data-display/badge id="badge-disabled-7" value="7" variant="disabled" /}
-  {#include components/data-display/badge id="badge-disabled-24" value="24" variant="disabled" /}
-  {#include components/data-display/badge id="badge-disabled-999" value="999+" variant="disabled" /}
+  {#for b in demoBadgesDisabled}{#include components/data-display/badge badge=b /}{/for}
 </div>
