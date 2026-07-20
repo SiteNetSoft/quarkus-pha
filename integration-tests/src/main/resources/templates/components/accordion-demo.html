@@ -161,9 +161,8 @@
                         {#include partials/example-card title="Single expand" slug="single-expand" component="accordion"
                         javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          Only one item open at a time. Requires shared Alpine state across items, so this variant is
-                          hand-rolled rather than using the runtime template — the technique is reusable when
-                          single-expand UX is preferred.
+                          Only one item open at a time. Requires shared Alpine state across items — the model's
+                          <code class="ws-code">singleExpand()</code> switch generates the shared open-index state.
                         </p>
                         {/description} {#content}{#include components/accordion/single-expand /}{/content} {/include}
                         {#include partials/example-card title="Fixed (multiple expand)" slug="fixed-multiple"
@@ -217,8 +216,10 @@
                           </h3>
                           <p class="pf-v6-c-content--p pf-m-editorial">
                             Parameters accepted by
-                            <code class="ws-code">{|{#include components/data-display/accordion ... /}|}</code>. Items
-                            are a list of <code class="ws-code">{|{title, content, expanded?}|}</code> maps.
+                            <code class="ws-code">{|{#include components/data-display/accordion ... /}|}</code>. Model
+                            mode: pass <code class="ws-code">accordion=&lt;Accordion&gt;</code> built in Java instead —
+                            the Java tab on each example shows the builder. Items are a list of
+                            <code class="ws-code">{|{title, content, expanded?}|}</code> maps.
                           </p>
                           <table
                             class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
