@@ -1,3 +1,4 @@
+{! Populated from the Java model DividerDemoData.demoDivVerticalOnMd (see the Java tab). !}
 <div class="ws-preview-html">
   <p>
     Stack vertically on small screens, switch to horizontal layout at md and above. Resize the window to watch the
@@ -5,13 +6,13 @@
   </p>
   <div style="display: flex; flex-direction: column; gap: 0.5rem; flex-wrap: wrap; min-height: 6rem">
     <span>Card top</span>
-    {#include components/data-display/divider verticalOnMd=true /}
+    {#include components/data-display/divider divider=demoDivVerticalOnMd /}
     <span>Card middle</span>
-    {#include components/data-display/divider verticalOnMd=true /}
+    {#include components/data-display/divider divider=demoDivVerticalOnMd /}
     <span>Card bottom</span>
   </div>
   <p style="margin-top: 1rem">
-    The <code class="ws-code">verticalOnMd=true</code> param emits <code class="ws-code">pf-m-vertical-on-md</code>;
-    pair with <code class="ws-code">horizontalOnXl=true</code> to flip again at the xl breakpoint.
+    The <code class="ws-code">verticalOn("md")</code> call emits <code class="ws-code">pf-m-vertical-on-md</code>;
+    pair with <code class="ws-code">horizontalOn("xl")</code> to flip again at the xl breakpoint.
   </p>
 </div>
