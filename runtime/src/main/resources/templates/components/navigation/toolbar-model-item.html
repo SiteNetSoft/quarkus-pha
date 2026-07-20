@@ -1,0 +1,11 @@
+{! Toolbar item — model-mode partial. Pass tbItem=<Toolbar.Item>. !}
+<div class="pf-v6-c-toolbar__item{tbItem.classSuffix}"{#if tbItem.styleValue??} style="{tbItem.styleValue}"{/if}>
+  {#if tbItem.isButtonItem}{#include components/actions/button btn=tbItem.buttonModel /}{#else if tbItem.isToggleItem}{#include components/navigation/menu-toggle toggle=tbItem.toggleModel /}{#else if tbItem.isSearchItem}<div class="pf-v6-c-text-input-group">
+    <div class="pf-v6-c-text-input-group__main pf-m-icon">
+      <span class="pf-v6-c-text-input-group__text">
+        <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+        <input class="pf-v6-c-text-input-group__text-input" type="search" placeholder="{tbItem.searchText}" aria-label="{tbItem.searchText}">
+      </span>
+    </div>
+  </div>{#else}{tbItem.textContent}{/if}
+</div>
