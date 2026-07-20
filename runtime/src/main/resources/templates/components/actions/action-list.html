@@ -11,4 +11,18 @@
                 </div>
               </div>
             {/items} !}
+{! Model mode: pass actionList=<org.sitenetsoft.quarkus.pha.model.ActionList> — groups of
+   Button / MenuToggle models. !}
+{#if actionList??}
+<div class="pf-v6-c-action-list{#if actionList.iconList} pf-m-icons{/if}{#if actionList.vertical} pf-m-vertical{/if}"{#if actionList.id} id="{actionList.id}"{/if}>
+{#for g in actionList.groups}
+<div class="pf-v6-c-action-list__group{#if g.icons} pf-m-icons{/if}">
+  {#for it in g.groupItems}
+  <div class="pf-v6-c-action-list__item">{#if it.button}{#include components/actions/button btn=it.button /}{#else}{#include components/navigation/menu-toggle toggle=it.toggleModel /}{/if}</div>
+  {/for}
+</div>
+{/for}
+</div>
+{#else}
 <div class="pf-v6-c-action-list{#if iconList??} pf-m-icons{/if}{#if vertical??} pf-m-vertical{/if}"{#if id??} id="{id}"{/if}>{#insert items}{/insert}</div>
+{/if}
