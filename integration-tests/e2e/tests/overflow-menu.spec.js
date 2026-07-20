@@ -53,7 +53,9 @@ test.describe("Overflow Menu", () => {
     const control = page.locator("#om-breakpoint-width .pf-v6-c-overflow-menu__control");
     await expect(content).toBeVisible();
     await expect(control).toBeHidden();
-    await container.evaluate((el) => { el.style.width = "240px"; });
+    await container.evaluate((el) => {
+      el.style.width = "240px";
+    });
     await expect(control).toBeVisible();
     await expect(content).toBeHidden();
   });
@@ -66,5 +68,29 @@ test.describe("Overflow Menu", () => {
         await expect(page.locator(".pf-v6-c-overflow-menu").first()).toBeAttached();
       });
     }
+  });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/overflow-menu");
+      for (const ex of ["basic", "persistent", "breakpoint-container-width"]) {
+        const card = page.locator(`[data-rendered-href="/components/overflow-menu/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/overflow-menu/source-java/persistent");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.persistentMenu("Edit", "Duplicate", "Archive")');
+    });
+
+    test("generated persistent kebab opens a working menu", async ({ page }) => {
+      await page.goto("/components/overflow-menu/persistent");
+      await page.locator('#om-persistent button[aria-label="More actions"]').click();
+      const menu = page.locator("#om-persistent .pf-v6-c-menu");
+      await expect(menu).toBeVisible();
+      await menu.getByRole("menuitem", { name: "Duplicate" }).click();
+      await expect(menu).toBeHidden();
+    });
   });
 });
