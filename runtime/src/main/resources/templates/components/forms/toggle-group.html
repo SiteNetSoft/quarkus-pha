@@ -1,6 +1,19 @@
 {! Toggle group — PatternFly v6 !}
 {! Optional: id — DOM id on the root; omit unless something else references the group.
               ariaLabel (optional) !}
+{! Model mode: pass toggleGroup=<org.sitenetsoft.quarkus.pha.model.ToggleGroup> — selection Alpine generated at build(). !}
+{#if toggleGroup??}
+<div class="pf-v6-c-toggle-group{toggleGroup.modifiers}" id="{toggleGroup.id}" role="group" aria-label="{toggleGroup.ariaLabel}" x-data="{toggleGroup.xData}">
+  {#for it in toggleGroup.items}
+  <div class="pf-v6-c-toggle-group__item">
+    <button class="pf-v6-c-toggle-group__button" type="button" :aria-pressed="{it.pressedExpr}" :class="{it.classExpr}" @click="{it.clickExpr}"{#if it.ariaLabel??} aria-label="{it.ariaLabel}"{/if}>
+      {#if it.iconName??}<span class="pf-v6-c-toggle-group__icon">{icons:svg(it.iconName).raw}</span>{/if}{#if it.text??}<span class="pf-v6-c-toggle-group__text">{it.text}</span>{/if}
+    </button>
+  </div>
+  {/for}
+</div>
+{#else}
 <div class="pf-v6-c-toggle-group"{#if id??} id="{id}"{/if} role="group"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
   {#insert content}{/insert}
 </div>
+{/if}
