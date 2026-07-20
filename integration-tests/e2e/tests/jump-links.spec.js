@@ -110,4 +110,20 @@ test.describe("Jump Links", () => {
       });
     }
   });
+  test.describe("Java source tab", () => {
+    // All 10 examples are model-driven (JumpLinksDemoData).
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/jump-links");
+      for (const ex of ["horizontal", "with-label", "subsections-active", "expandable-vertical-subsection"]) {
+        const card = page.locator(`[data-rendered-href="/components/jump-links/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/jump-links/source-java/subsections-active");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.subsAriaLabel("Purgatorio subsections")');
+    });
+  });
 });
