@@ -1,17 +1,4 @@
+{! Populated from the Java model CardDemoData.demoCardExpandableWithIcon (see the Java tab). !}
 <div style="max-width: 400px">
-  {#include components/data-display/card id="cd-expandable-with-icon" expandable=true}
-  {#include components/data-display/card-header expandable=true hasCardActions=true hasHeaderMain=true}
-  {#cardActions}
-  <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Card actions"><span class="pf-v6-c-button__icon">{icons:svg('fa:ellipsis-vertical').raw}</span></button>
-  <div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="cd-expandable-with-icon-check" aria-labelledby="cd-expandable-with-icon-title" aria-label="Select card" /></div>
-  {/cardActions}
-  {#cardHeaderMain}
-  <img class="pf-v6-c-brand" src="/web/images/quarkus-pha-icon.svg" alt="Quarkus PHA" style="--pf-v6-c-brand--Height: 32px" />
-  {/cardHeaderMain}
-  {/include}
-  {#include components/data-display/card-expandable-content}
-  {#include components/data-display/card-body}A brand image takes the title&#39;s place in the header.{/include}
-  {#include components/data-display/card-footer}Footer{/include}
-  {/include}
-  {/include}
+  {#include components/data-display/card card=demoCardExpandableWithIcon /}
 </div>

@@ -229,4 +229,29 @@ test.describe("Card", () => {
       await expect(link).toHaveAttribute("target", "_blank");
     });
   });
+  test.describe("Java source tab", () => {
+    test("model-driven cards get a leading Java tab; the modifier playground does not", async ({ page }) => {
+      await page.goto("/components/card");
+      for (const ex of ["basic", "expandable", "single-selectable-tiles"]) {
+        const card = page.locator(`[data-rendered-href="/components/card/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      const handWritten = page.locator('[data-rendered-href="/components/card/modifiers"]');
+      await expect(handWritten.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+    });
+
+    test("Java tab opens Monaco with the builder code", async ({ page }) => {
+      await page.goto("/components/card");
+      const card = page.locator('[data-rendered-href="/components/card/basic"]');
+      await card.locator('button[aria-label*="Toggle Java"]').click();
+      await expect(card.locator(".monaco-editor").first()).toBeVisible({ timeout: 10000 });
+      await expect(card.locator(".monaco-editor .view-lines")).toContainText("Card.of(", { timeout: 10000 });
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/card/source-java/expandable");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain(".withExpandToggle()");
+    });
+  });
 });

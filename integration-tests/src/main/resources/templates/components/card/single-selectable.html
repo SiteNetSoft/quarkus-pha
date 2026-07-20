@@ -1,29 +1,4 @@
+{! Populated from the Java model CardDemoData.demoCardsSingleSelectable (see the Java tab). !}
 <div class="pf-v6-l-gallery pf-m-gutter" id="cd-single-selectable" x-data="{ chosen: '' }">
-  {#include components/data-display/card id="cd-single-selectable-1" selectable=true selectedExpr="chosen === 'first'"}
-  {#include components/data-display/card-header hasSelectableActions=true}
-  {#cardSelectableActions}
-  <div class="pf-v6-c-radio pf-m-standalone"><input class="pf-v6-c-radio__input" type="radio" name="cd-single-selectable-radio" id="cd-single-selectable-1-radio" aria-labelledby="cd-single-selectable-1-title" value="first" x-model="chosen" /></div>
-  {/cardSelectableActions}
-  {#include components/data-display/card-title id="cd-single-selectable-1-title"}First card{/include}
-  {/include}
-  {#include components/data-display/card-body}Only one card in this set can be selected.{/include}
-  {/include}
-  {#include components/data-display/card id="cd-single-selectable-2" selectable=true selectedExpr="chosen === 'second'"}
-  {#include components/data-display/card-header hasSelectableActions=true}
-  {#cardSelectableActions}
-  <div class="pf-v6-c-radio pf-m-standalone"><input class="pf-v6-c-radio__input" type="radio" name="cd-single-selectable-radio" id="cd-single-selectable-2-radio" aria-labelledby="cd-single-selectable-2-title" value="second" x-model="chosen" /></div>
-  {/cardSelectableActions}
-  {#include components/data-display/card-title id="cd-single-selectable-2-title"}Second card{/include}
-  {/include}
-  {#include components/data-display/card-body}Radio-backed single selection.{/include}
-  {/include}
-  {#include components/data-display/card id="cd-single-selectable-3" selectable=true selectedExpr="chosen === 'third'"}
-  {#include components/data-display/card-header hasSelectableActions=true}
-  {#cardSelectableActions}
-  <div class="pf-v6-c-radio pf-m-standalone"><input class="pf-v6-c-radio__input" type="radio" name="cd-single-selectable-radio" id="cd-single-selectable-3-radio" aria-labelledby="cd-single-selectable-3-title" value="third" x-model="chosen" /></div>
-  {/cardSelectableActions}
-  {#include components/data-display/card-title id="cd-single-selectable-3-title"}Third card{/include}
-  {/include}
-  {#include components/data-display/card-body}Pick me instead.{/include}
-  {/include}
+  {#for c in demoCardsSingleSelectable}{#include components/data-display/card card=c /}{/for}
 </div>

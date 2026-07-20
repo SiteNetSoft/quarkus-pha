@@ -1,14 +1,4 @@
+{! Populated from the Java model CardDemoData.demoCardHeaderWraps (see the Java tab). !}
 <div style="max-width: 300px">
-  {#include components/data-display/card id="cd-header-wraps"}
-  {#include components/data-display/card-header wrap=true hasCardActions=true hasHeaderMain=true}
-  {#cardActions}
-  <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Card actions"><span class="pf-v6-c-button__icon">{icons:svg('fa:ellipsis-vertical').raw}</span></button>
-  <div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="cd-header-wraps-check" aria-labelledby="cd-header-wraps-title" /></div>
-  {/cardActions}
-  {#cardHeaderMain}
-  {#include components/data-display/card-title id="cd-header-wraps-title"}This is a really really really really really really really really really really long header{/include}
-  {/cardHeaderMain}
-  {/include}
-  {#include components/data-display/card-body}<code>pf-m-wrap</code> on the header lets a long title wrap under the actions.{/include}
-  {/include}
+  {#include components/data-display/card card=demoCardHeaderWraps /}
 </div>
