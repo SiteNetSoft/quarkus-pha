@@ -7,6 +7,22 @@ body-sm | body-default | body-lg !} {! | heading-sm | heading-md | heading-lg | 
 CSS hides __content and shows __progress via opacity. !} {! progressIcon (optional) — icon name rendered inside
 __progress when inProgress=true. !} {! Defaults to the PF v6 spinner component. !} {! label (optional) — accessible
 label. Applied to the visible SVG (or spinner). !}
+{! Model mode: pass iconModel=<org.sitenetsoft.quarkus.pha.model.Icon> (param name avoids the ubiquitous icon= string args). !}
+{#if iconModel??}
+<span
+  class="pf-v6-c-icon{#if iconModel.size??} pf-m-{iconModel.size}{/if}{#if iconModel.isInline} pf-m-inline{/if}{#if iconModel.isInProgress} pf-m-in-progress{/if}"
+>
+  <span class="pf-v6-c-icon__content{#if iconModel.iconSize??} pf-m-{iconModel.iconSize}{/if}{#if iconModel.status??} pf-m-{iconModel.status}{/if}"
+    >{#if iconModel.label??}{icons:svg(iconModel.name, iconModel.label).raw}{#else}{icons:svg(iconModel.name).raw}{/if}</span
+  >
+  {#if iconModel.isInProgress}<span class="pf-v6-c-icon__progress{#if iconModel.iconSize??} pf-m-{iconModel.iconSize}{/if}"
+    >{#if iconModel.progressIcon??}{#if iconModel.label??}{icons:svg(iconModel.progressIcon,
+    iconModel.label).raw}{#else}{icons:svg(iconModel.progressIcon).raw}{/if}{#else}{! The spinner matches the icon container size —
+    the shell got this via include-data inheritance of size=. !}{#if iconModel.label??}{#include components/feedback/spinner
+    size=iconModel.size label=iconModel.label /}{#else}{#include components/feedback/spinner size=iconModel.size /}{/if}{/if}</span
+  >{/if}
+</span>
+{#else}
 <span
   class="pf-v6-c-icon{#if size??} pf-m-{size}{/if}{#if inline??} pf-m-inline{/if}{#if inProgress??} pf-m-in-progress{/if}"
 >
@@ -19,3 +35,4 @@ label. Applied to the visible SVG (or spinner). !}
     label=label /}{#else}{#include components/feedback/spinner /}{/if}{/if}</span
   >{/if}
 </span>
+{/if}
