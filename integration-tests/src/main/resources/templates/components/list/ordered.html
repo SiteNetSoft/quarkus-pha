@@ -1,32 +1,14 @@
 <div class="ws-preview-html" style="display: grid; gap: 1.5rem">
   <div>
-    <p style="margin: 0 0 0.25rem; font-weight: 600">Default numeric (<code class="ws-code">type="1"</code>)</p>
-    {#include components/data-display/list id="list-ordered-1" component="ol"}
-      {#content}
-    <li>First step</li>
-    <li>Second step</li>
-    <li>Third step</li>
-      {/content}
-    {/include}
+    <p style="margin: 0 0 0.25rem; font-weight: 600">Default numeric (<code class="ws-code">type "1"</code>)</p>
+    {#include components/data-display/list itemList=demoListsOrdered.0 /}
   </div>
   <div>
-    <p style="margin: 0 0 0.25rem; font-weight: 600">Uppercase letters (<code class="ws-code">type="A"</code>)</p>
-    {#include components/data-display/list id="list-ordered-A" component="ol" type="A"}
-      {#content}
-    <li>First step</li>
-    <li>Second step</li>
-    <li>Third step</li>
-      {/content}
-    {/include}
+    <p style="margin: 0 0 0.25rem; font-weight: 600">Uppercase letters (<code class="ws-code">type("A")</code>)</p>
+    {#include components/data-display/list itemList=demoListsOrdered.1 /}
   </div>
   <div>
-    <p style="margin: 0 0 0.25rem; font-weight: 600">Lowercase roman (<code class="ws-code">type="i"</code>)</p>
-    {#include components/data-display/list id="list-ordered-i" component="ol" type="i"}
-      {#content}
-    <li>First step</li>
-    <li>Second step</li>
-    <li>Third step</li>
-      {/content}
-    {/include}
+    <p style="margin: 0 0 0.25rem; font-weight: 600">Lowercase roman (<code class="ws-code">type("i")</code>)</p>
+    {#include components/data-display/list itemList=demoListsOrdered.2 /}
   </div>
 </div>
