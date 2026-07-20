@@ -1,0 +1,108 @@
+{! Model-driven menu body: optional generated-state wrapper, the pf-v6-c-menu root with
+   roving-focus keyboard nav, optional header/search regions, grouped or flat item lists
+   (via menu-model-item), view-more and loading rows, and the footer region.
+   Params: menu — the Menu model. Included by menu (model branch). !}
+{#if menu.wrapperXData}
+<div x-data="{menu.wrapperXData}">
+{/if}
+<div
+  class="pf-v6-c-menu{#if menu.plain} pf-m-plain{/if}{#if menu.scrollable} pf-m-scrollable{/if}{#if menu.modifiers} {menu.modifiers}{/if}"
+  {#if menu.id}id="{menu.id}"{/if}
+  x-data="{
+  handleKeyNav(e) {
+    var items = Array.from($el.querySelectorAll('[role=menuitem]'));
+    var idx = items.indexOf(e.target);
+    if (idx < 0) return;
+    var next = -1;
+    if (e.key === 'ArrowDown') next = (idx + 1) % items.length;
+    else if (e.key === 'ArrowUp') next = (idx - 1 + items.length) % items.length;
+    else if (e.key === 'Home') next = 0;
+    else if (e.key === 'End') next = items.length - 1;
+    if (next >= 0) { e.preventDefault(); items[next].focus(); }
+  }
+}"
+  {#if menu.style}style="{menu.style}"{/if}
+>
+  {#if menu.header}
+  <div class="pf-v6-c-menu__header">{menu.header}</div>
+  <hr class="pf-v6-c-divider" />
+  {/if}
+  {#if menu.hasSearch}
+  <div class="pf-v6-c-menu__search">
+    <div class="pf-v6-c-menu__search-input">
+      <div class="pf-v6-c-text-input-group">
+        <div class="pf-v6-c-text-input-group__main pf-m-icon">
+          <span class="pf-v6-c-text-input-group__text">
+            <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+            <input class="pf-v6-c-text-input-group__text-input" type="text" x-model="q" placeholder="{menu.searchPlaceholder}" aria-label="{menu.searchAriaLabel}" />
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="pf-v6-c-divider" />
+  {/if}
+  <div class="pf-v6-c-menu__content"{#if menu.contentStyle} style="{menu.contentStyle}"{/if}>
+    {#if menu.grouped}
+    {#for g in menu.groups}
+    {#if g_index > 0}
+    <hr class="pf-v6-c-divider" />
+    {/if}
+    <section class="pf-v6-c-menu__group">
+      {#if g.title}
+      <h4 class="pf-v6-c-menu__group-title">{g.title}</h4>
+      {/if}
+      <ul class="pf-v6-c-menu__list" role="menu" @keydown="handleKeyNav($event)">
+        {#for item in g.items}
+        {#include components/navigation/menu-model-item menu=menu item=item /}
+        {/for}
+      </ul>
+    </section>
+    {/for}
+    {#else}
+    <ul class="pf-v6-c-menu__list"{#if !menu.listNoRole} role="menu"{/if} @keydown="handleKeyNav($event)">
+      {#for item in menu.items}
+      {#include components/navigation/menu-model-item menu=menu item=item /}
+      {/for}
+      {#if menu.hasViewMore}
+      <template x-for="n in extra" :key="n">
+        <li role="none" class="pf-v6-c-menu__list-item">
+          <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+            <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text" x-text="'{menu.viewMoreLoadedPrefix}' + n"></span></span>
+          </button>
+        </li>
+      </template>
+      <li role="none" class="pf-v6-c-menu__list-item pf-m-load" x-show="extra === 0">
+        <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="extra = {menu.viewMoreCount}">
+          <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">{menu.viewMoreText}</span></span>
+        </button>
+      </li>
+      {/if}
+      {#if menu.loadingLabel}
+      <li role="none" class="pf-v6-c-menu__list-item pf-m-loading" aria-hidden="true">
+        <div class="pf-v6-c-menu__item">
+          <span class="pf-v6-c-menu__item-main">
+            <span class="pf-v6-c-menu__item-text">
+              {#include components/feedback/spinner size="lg" label=menu.loadingLabel /}
+            </span>
+          </span>
+        </div>
+      </li>
+      {/if}
+    </ul>
+    {/if}
+  </div>
+  {#if menu.footerButton}
+  {#if menu.footerDivider}
+  <hr class="pf-v6-c-divider" />
+  {/if}
+  <div class="pf-v6-c-menu__footer">
+    <button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">
+      <span class="pf-v6-c-button__text">{menu.footerButton}</span>
+    </button>
+  </div>
+  {/if}
+</div>
+{#if menu.wrapperXData}
+</div>
+{/if}
