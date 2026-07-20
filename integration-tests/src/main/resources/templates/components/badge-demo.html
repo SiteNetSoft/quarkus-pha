@@ -130,24 +130,27 @@
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Read" slug="read" component="badge"} {#description}
+                        {#include partials/example-card title="Read" slug="read" component="badge" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Badges marked as read — already-viewed counts. Visually muted relative to unread.
                         </p>
                         {/description} {#content}{#include components/badge/read /}{/content} {/include} {#include
-                        partials/example-card title="Unread" slug="unread" component="badge"} {#description}
+                        partials/example-card title="Unread" slug="unread" component="badge" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Unread badges — new or unseen items. The visually prominent state; PF's default.
                         </p>
                         {/description} {#content}{#include components/badge/unread /}{/content} {/include} {#include
-                        partials/example-card title="Disabled" slug="disabled" component="badge"} {#description}
+                        partials/example-card title="Disabled" slug="disabled" component="badge" javaSource=true}
+                        {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Disabled badges — the count exists but is not actionable (e.g. a filter that would return zero
                           results).
                         </p>
                         {/description} {#content}{#include components/badge/disabled /}{/content} {/include} {#include
-                        partials/example-card title="Screen reader text" slug="screen-reader" component="badge"}
-                        {#description}
+                        partials/example-card title="Screen reader text" slug="screen-reader" component="badge"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Pass <code class="ws-code">screenReaderText</code> to append a visually-hidden span that
                           announces the meaning of the count to assistive tech. The visible text is just
