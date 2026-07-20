@@ -149,4 +149,31 @@ test.describe("Menu Toggle", () => {
       });
     }
   });
+
+  test.describe("Java source tab", () => {
+    // All 25 examples are model-driven (MenuToggleDemoData).
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/menu-toggle");
+      for (const ex of EXAMPLES) {
+        const card = page.locator(`[data-rendered-href="/components/menu-toggle/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("Java tab opens Monaco with the builder code", async ({ page }) => {
+      await page.goto("/components/menu-toggle");
+      const card = page.locator('[data-rendered-href="/components/menu-toggle/basic"]');
+      await card.locator('button[aria-label*="Toggle Java"]').click();
+      await expect(card.locator(".monaco-editor").first()).toBeVisible({ timeout: 10000 });
+      await expect(card.locator(".monaco-editor .view-lines")).toContainText("MenuToggle.of(", {
+        timeout: 10000,
+      });
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/menu-toggle/source-java/split-checkbox");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('MenuToggle.split("mt-split-check")');
+    });
+  });
 });

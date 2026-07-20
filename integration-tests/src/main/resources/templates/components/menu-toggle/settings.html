@@ -1,4 +1,4 @@
+{! Populated from the Java model MenuToggleDemoData.demoToggleSettings (see the Java tab). !}
 <div class="pf-v6-l-flex pf-m-space-items-md pf-m-align-items-center" id="mt-settings-row">
-  <button class="pf-v6-c-menu-toggle pf-m-settings" type="button" id="mt-settings" aria-expanded="false"><span class="pf-v6-c-menu-toggle__icon">{icons:svg('fa:gear').raw}</span><span class="pf-v6-c-menu-toggle__text">Settings</span><span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span></button>
-  <button class="pf-v6-c-menu-toggle pf-m-plain pf-m-settings" type="button" id="mt-settings-plain" aria-expanded="false" aria-label="Settings"><span class="pf-v6-c-menu-toggle__icon">{icons:svg('fa:gear').raw}</span></button>
+  {#for t in demoToggleSettings}{#include components/navigation/menu-toggle toggle=t /}{/for}
 </div>
