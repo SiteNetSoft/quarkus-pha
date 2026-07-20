@@ -62,4 +62,19 @@ test.describe("Brand", () => {
       });
     }
   });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/brand");
+      for (const ex of ["basic", "responsive", "with-height"]) {
+        const card = page.locator(`[data-rendered-href="/components/brand/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/brand/source-java/responsive");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.sources("<source media=');
+    });
+  });
 });
