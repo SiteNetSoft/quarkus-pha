@@ -1,8 +1,21 @@
-{! Avatar — PatternFly v6 !} {! Required: src, alt !} {! Optional: id — DOM id on the root; omit unless something else references the avatar.
+{! Avatar — PatternFly v6 !}
+{! Model mode: pass avatar=<org.sitenetsoft.quarkus.pha.model.Avatar> — img, initials or SVG anatomy. !}
+{! Param mode (img flavour only): !}
+{! Required: src, alt !} {! Optional: id — DOM id on the root; omit unless something else references the avatar.
                                                    size (sm/md/lg/xl), bordered !}
+{#if avatar??}
+{#if avatar.isImg}
+<img class="pf-v6-c-avatar{avatar.modifiers}"{#if avatar.id??} id="{avatar.id}"{/if} src="{avatar.src}" alt="{avatar.alt}" />
+{#else}
+<div class="pf-v6-c-avatar{avatar.modifiers}"{#if avatar.id??} id="{avatar.id}"{/if} role="img" aria-label="{avatar.ariaLabel}">
+  {#if avatar.isInitialsShape}<span class="pf-v6-c-avatar__initials" aria-hidden="true">{avatar.initialsText}</span>{#else}{avatar.svgHtml.raw}{/if}
+</div>
+{/if}
+{#else}
 <img
   class="pf-v6-c-avatar{#if size??} pf-m-{size}{/if}{#if bordered??} pf-m-bordered{/if}"
   {#if id??}id="{id}"{/if}
   src="{src}"
   alt="{alt}"
 />
+{/if}
