@@ -91,4 +91,33 @@ test.describe("Slider", () => {
       expect(res.status()).toBe(200);
     });
   });
+  test.describe("Java source tab", () => {
+    test("model-driven cards get a leading Java tab; composition examples do not", async ({ page }) => {
+      await page.goto("/components/slider");
+      for (const ex of ["basic", "custom-range", "disabled"]) {
+        const card = page.locator(`[data-rendered-href="/components/slider/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      for (const ex of ["actions", "value-input"]) {
+        const card = page.locator(`[data-rendered-href="/components/slider/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/slider/source-java/custom-range");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain(".min(-10).max(40)");
+    });
+
+    test("generated keyboard wiring still moves the thumb", async ({ page }) => {
+      await page.goto("/components/slider/basic");
+      const thumb = page.locator("#sl-basic .pf-v6-c-slider__thumb");
+      await thumb.focus();
+      await page.keyboard.press("ArrowRight");
+      await expect(thumb).toHaveAttribute("aria-valuenow", "51");
+      await page.keyboard.press("End");
+      await expect(thumb).toHaveAttribute("aria-valuenow", "100");
+    });
+  });
 });
