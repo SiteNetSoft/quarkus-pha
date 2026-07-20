@@ -85,4 +85,21 @@ test.describe("Breadcrumb", () => {
       await expect(page.locator(".pf-v6-c-breadcrumb")).toBeVisible();
     }
   });
+  test.describe("Java source tab", () => {
+    test("model-driven cards get a leading Java tab; auto-generated keeps the crumbs mode", async ({ page }) => {
+      await page.goto("/components/breadcrumb");
+      for (const ex of ["basic", "with-dropdown"]) {
+        const card = page.locator(`[data-rendered-href="/components/breadcrumb/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      const auto = page.locator('[data-rendered-href="/components/breadcrumb/auto-generated"]');
+      await expect(auto.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/breadcrumb/source-java/with-dropdown");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.dropdown("bc-dropdown-section")');
+    });
+  });
 });
