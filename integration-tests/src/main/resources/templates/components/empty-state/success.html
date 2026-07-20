@@ -1,16 +1,2 @@
 {! PatternFly success status (pf-m-success) — a check-circle icon and a confirming headline. !}
-{#include components/feedback/empty-state status="success" iconName="fa:circle-check" titleText="You're all set" bodyText="This represents the empty state pattern in PatternFly. Hopefully it's simple enough to use but flexible enough to meet a variety of needs." hasActions=true}
-{#actions}
-<div class="pf-v6-c-empty-state__actions">
-  {#include components/actions/button variant="primary"}{#content}Primary action{/content}{/include}
-</div>
-<div class="pf-v6-c-empty-state__actions">
-  {#include components/actions/button variant="link"}{#content}Multiple{/content}{/include}
-  {#include components/actions/button variant="link"}{#content}Action buttons{/content}{/include}
-  {#include components/actions/button variant="link"}{#content}Can{/content}{/include}
-  {#include components/actions/button variant="link"}{#content}Go here{/content}{/include}
-  {#include components/actions/button variant="link"}{#content}In the second{/content}{/include}
-  {#include components/actions/button variant="link"}{#content}Action area{/content}{/include}
-</div>
-{/actions}
-{/include}
+{#include components/feedback/empty-state emptyState=demoEmptySuccess /}
