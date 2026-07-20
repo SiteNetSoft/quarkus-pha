@@ -4,6 +4,19 @@
 {!           disabled, readonly, required, expanded, !}
 {!           resize (vertical | horizontal | both — emits pf-m-resize-*; default = browser default), !}
 {!           validated (success|warning|error) !}
+{! Model mode: pass textArea=<org.sitenetsoft.quarkus.pha.model.TextArea>. !}
+{#if textArea??}
+<span class="pf-v6-c-form-control pf-m-textarea{#if textArea.validated??} pf-m-{textArea.validated}{/if}{#if textArea.resize??} pf-m-resize-{textArea.resize}{/if}{#if textArea.isDisabled} pf-m-disabled{/if}{#if textArea.isReadonly} pf-m-readonly{/if}{#if textArea.isExpanded} pf-m-expanded{/if}" id="{textArea.id}">
+  <textarea id="{textArea.id}-field" name="{textArea.id}"{#if textArea.placeholder??} placeholder="{textArea.placeholder}"{/if}{#if textArea.isDisabled} disabled{/if}{#if textArea.isReadonly} readonly{/if}{#if textArea.isRequired} required{/if}{#if textArea.rows??} rows="{textArea.rows}"{/if} aria-label="{textArea.ariaLabelResolved}"{#if textArea.isError} aria-invalid="true"{/if}>{#if textArea.value??}{textArea.value}{/if}</textarea>
+  {#if textArea.validated??}
+  <span class="pf-v6-c-form-control__utilities">
+    <span class="pf-v6-c-form-control__icon pf-m-status">
+      {#if textArea.isSuccess}{icons:svg('fa:circle-check').raw}{#else if textArea.isWarning}{icons:svg('fa:triangle-exclamation').raw}{#else if textArea.isError}{icons:svg('fa:circle-exclamation').raw}{/if}
+    </span>
+  </span>
+  {/if}
+</span>
+{#else}
 <span class="pf-v6-c-form-control pf-m-textarea{#if validated??} pf-m-{validated}{/if}{#if resize??} pf-m-resize-{resize}{/if}{#if disabled??} pf-m-disabled{/if}{#if readonly??} pf-m-readonly{/if}{#if expanded??} pf-m-expanded{/if}" id="{id}">
   <textarea id="{id}-field" name="{id}"{#if placeholder??} placeholder="{placeholder}"{/if}{#if disabled??} disabled{/if}{#if readonly??} readonly{/if}{#if required??} required{/if}{#if rows??} rows="{rows}"{/if} aria-label="{#if ariaLabel??}{ariaLabel}{#else if placeholder??}{placeholder}{#else if value??}{value}{#else}{id}{/if}"{#if validated??}{#if validated is 'error'} aria-invalid="true"{/if}{/if}>{#if value??}{value}{/if}</textarea>
   {#if validated??}
@@ -14,3 +27,4 @@
   </span>
   {/if}
 </span>
+{/if}
