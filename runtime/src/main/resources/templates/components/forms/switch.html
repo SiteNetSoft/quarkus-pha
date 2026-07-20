@@ -1,6 +1,19 @@
 {! Switch — PatternFly v6 !}
+{! Model mode: pass sw=<org.sitenetsoft.quarkus.pha.model.Switch> — adds ariaLabel support for label-less switches. !}
+{! Param mode: !}
 {! Required: id — derives {id}-field on the input for label `for=` wiring. !}
 {! Optional: label (optional), checked (optional), disabled (optional), reversed (optional) !}
+{#if sw??}
+<label class="pf-v6-c-switch{#if sw.isReversed} pf-m-reverse{/if}" id="{sw.id}" for="{sw.id}-field">
+  <input class="pf-v6-c-switch__input" type="checkbox" id="{sw.id}-field"{#if sw.ariaLabel??} aria-label="{sw.ariaLabel}"{/if}{#if sw.isChecked} checked{/if}{#if sw.isDisabled} disabled{/if}>
+  <span class="pf-v6-c-switch__toggle">
+    <span class="pf-v6-c-switch__toggle-icon">
+      {icons:svg('fa:check').raw}
+    </span>
+  </span>
+  {#if sw.label??}<span class="pf-v6-c-switch__label">{sw.label}</span>{/if}
+</label>
+{#else}
 <label class="pf-v6-c-switch{#if reversed??} pf-m-reverse{/if}" id="{id}" for="{id}-field">
   <input class="pf-v6-c-switch__input" type="checkbox" id="{id}-field"{#if checked??} checked{/if}{#if disabled??} disabled{/if}>
   <span class="pf-v6-c-switch__toggle">
@@ -10,3 +23,4 @@
   </span>
   {#if label??}<span class="pf-v6-c-switch__label">{label}</span>{/if}
 </label>
+{/if}
