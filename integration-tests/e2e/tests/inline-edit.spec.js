@@ -94,4 +94,29 @@ test.describe("Inline Edit", () => {
       });
     }
   });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/inline-edit");
+      for (const ex of ["basic", "multiple", "validated", "with-label", "free-form"]) {
+        const card = page.locator(`[data-rendered-href="/components/inline-edit/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/inline-edit/source-java/multiple");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.field("Name", "Jane Smith")');
+    });
+
+    test("generated multiple shape edits all fields at once", async ({ page }) => {
+      await page.goto("/components/inline-edit/multiple");
+      await page.locator('#ie-multiple button[aria-label="Edit all fields"]').click();
+      const nameInput = page.locator('#ie-multiple input[aria-label="Name"]');
+      await expect(nameInput).toBeVisible();
+      await expect(nameInput).toHaveValue("Jane Smith");
+      await page.locator("#ie-multiple").getByRole("button", { name: "Save" }).click();
+      await expect(nameInput).toBeHidden();
+    });
+  });
 });
