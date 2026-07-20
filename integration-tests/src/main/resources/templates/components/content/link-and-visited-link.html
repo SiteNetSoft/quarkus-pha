@@ -1,4 +1,3 @@
 <div class="ws-preview-html" style="display: grid; gap: 0.5rem">
-  {#include components/data-display/content component="a" href="#default" text="Default link styling" /}
-  {#include components/data-display/content component="a" href="#visited" visited=true text="Visited link styling" /}
+  {#for c in demoContentLinks}{#include components/data-display/content contentModel=c /}{/for}
 </div>
