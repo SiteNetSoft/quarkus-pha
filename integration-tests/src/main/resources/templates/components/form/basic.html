@@ -1,11 +1,2 @@
 {! Vertical form with two form-groups. Each group has a label + a form-control. !}
-{#include components/forms/form id="form-basic"}{#content}
-  <div class="pf-v6-c-form__group">
-    <div class="pf-v6-c-form__group-label"><label class="pf-v6-c-form__label" for="form-basic-name-field"><span class="pf-v6-c-form__label-text">Name</span></label></div>
-    <div class="pf-v6-c-form__group-control">{#include components/forms/text-input id="form-basic-name" placeholder="Enter name" /}</div>
-  </div>
-  <div class="pf-v6-c-form__group">
-    <div class="pf-v6-c-form__group-label"><label class="pf-v6-c-form__label" for="form-basic-email-field"><span class="pf-v6-c-form__label-text">Email</span></label></div>
-    <div class="pf-v6-c-form__group-control">{#include components/forms/text-input id="form-basic-email" type="email" placeholder="name@example.com" /}</div>
-  </div>
-{/content}{/include}
+{#include components/forms/form form=demoFormBasic /}
