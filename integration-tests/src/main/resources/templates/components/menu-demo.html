@@ -387,52 +387,57 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic menus" slug="basic" component="menu"} {#description}
+                      {#include partials/example-card title="Basic menus" slug="basic" component="menu" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Plain action items plus a disabled item and a divider-separated danger item.
                       </p>
                       {/description} {#content}{#include components/menu/basic /}{/content} {/include} {#include
-                      partials/example-card title="With icons" slug="with-icons" component="menu"} {#description}
+                      partials/example-card title="With icons" slug="with-icons" component="menu" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Items carry an <code class="ws-code">__item-icon</code>.
                       </p>
                       {/description} {#content}{#include components/menu/with-icons /}{/content} {/include} {#include
-                      partials/example-card title="With actions" slug="with-actions" component="menu"} {#description}
+                      partials/example-card title="With actions" slug="with-actions" component="menu" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         A plain action button per item in <code class="ws-code">__item-action</code> — the star uses
                         PF’s favorite button styling.
                       </p>
                       {/description} {#content}{#include components/menu/with-actions /}{/content} {/include} {#include
-                      partials/example-card title="With links" slug="with-links" component="menu"} {#description}
+                      partials/example-card title="With links" slug="with-links" component="menu" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Anchor items with an <code class="ws-code">__item-external-icon</code>; one aria-disabled.
                       </p>
                       {/description} {#content}{#include components/menu/with-links /}{/content} {/include} {#include
-                      partials/example-card title="With descriptions" slug="with-descriptions" component="menu"}
-                      {#description}
+                      partials/example-card title="With descriptions" slug="with-descriptions" component="menu"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         A second <code class="ws-code">__item-description</code> line per item.
                       </p>
                       {/description} {#content}{#include components/menu/with-descriptions /}{/content} {/include}
-                      {#include partials/example-card title="Item checkbox" slug="item-checkbox" component="menu"}
-                      {#description}
+                      {#include partials/example-card title="Item checkbox" slug="item-checkbox" component="menu"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Label items wrapping a standalone check in <code class="ws-code">__item-check</code>.
                       </p>
                       {/description} {#content}{#include components/menu/item-checkbox /}{/content} {/include} {#include
-                      partials/example-card title="Menu footer" slug="footer" component="menu"} {#description}
+                      partials/example-card title="Menu footer" slug="footer" component="menu" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         A link button in <code class="ws-code">pf-v6-c-menu__footer</code>.
                       </p>
                       {/description} {#content}{#include components/menu/footer /}{/content} {/include} {#include
-                      partials/example-card title="Separated items" slug="separated-items" component="menu"}
-                      {#description}
+                      partials/example-card title="Separated items" slug="separated-items" component="menu"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         A <code class="ws-code">pf-v6-c-divider</code> between item groups.
                       </p>
                       {/description} {#content}{#include components/menu/separated-items /}{/content} {/include}
                       {#include partials/example-card title="Titled groups of items" slug="titled-groups"
-                      component="menu"} {#description}
+                      component="menu" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">__group</code> sections with
                         <code class="ws-code">__group-title</code> headings.
@@ -443,37 +448,37 @@
                         Starring an item moves it into the Favorites group — Alpine owns the item array.
                       </p>
                       {/description} {#content}{#include components/menu/favorites /}{/content} {/include} {#include
-                      partials/example-card title="Filtering with search input" slug="filtering-search"
-                      component="menu"} {#description}
+                      partials/example-card title="Filtering with search input" slug="filtering-search" component="menu"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         A search text-input-group in <code class="ws-code">__search</code>; items filter as you type.
                       </p>
                       {/description} {#content}{#include components/menu/filtering-search /}{/content} {/include}
                       {#include partials/example-card title="Option single select" slug="option-single-select"
-                      component="menu"} {#description}
+                      component="menu" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         One selected option gets <code class="ws-code">pf-m-selected</code> + a check in
                         <code class="ws-code">__item-select-icon</code>.
                       </p>
                       {/description} {#content}{#include components/menu/option-single-select /}{/content} {/include}
                       {#include partials/example-card title="Option multi select" slug="option-multi-select"
-                      component="menu"} {#description}
+                      component="menu" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">Any number of options can be selected.</p>
                       {/description} {#content}{#include components/menu/option-multi-select /}{/content} {/include}
-                      {#include partials/example-card title="Scrollable menus" slug="scrollable" component="menu"}
-                      {#description}
+                      {#include partials/example-card title="Scrollable menus" slug="scrollable" component="menu"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-scrollable</code> caps the content height.
                       </p>
                       {/description} {#content}{#include components/menu/scrollable /}{/content} {/include} {#include
                       partials/example-card title="Scrollable menu with custom height" slug="scrollable-custom-height"
-                      component="menu"} {#description}
+                      component="menu" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">--pf-v6-c-menu__content--MaxHeight</code> overrides the cap.
                       </p>
                       {/description} {#content}{#include components/menu/scrollable-custom-height /}{/content}
                       {/include} {#include partials/example-card title="With view more" slug="view-more"
-                      component="menu"} {#description}
+                      component="menu" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         A <code class="ws-code">pf-m-load</code> item appends more items on click.
                       </p>
@@ -485,8 +490,8 @@
                         and nested menus.
                       </p>
                       {/description} {#content}{#include components/menu/with-drilldown /}{/content} {/include}
-                      {#include partials/example-card title="Danger menu item" slug="danger-item" component="menu"}
-                      {#description}
+                      {#include partials/example-card title="Danger menu item" slug="danger-item" component="menu"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         A divider-separated <code class="ws-code">pf-m-danger</code> item with a screen-reader prefix.
                       </p>
@@ -536,36 +541,37 @@
                       </p>
                       {/description} {#content}{#include components/menu/drilldown-inline-filter /}{/content} {/include}
                       {#include partials/example-card title="Scrollable menu with header and footer"
-                      slug="header-footer" component="menu"} {#description}
+                      slug="header-footer" component="menu" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         A scrollable list framed by <code class="ws-code">__header</code> and
                         <code class="ws-code">__footer</code> regions.
                       </p>
                       {/description} {#content}{#include components/menu/header-footer /}{/content} {/include} {#include
                       partials/example-card title="Scrollable menu with search and footer" slug="search-footer"
-                      component="menu"} {#description}
+                      component="menu" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         A scrollable list with a live <code class="ws-code">__search</code> region and a footer.
                       </p>
                       {/description} {#content}{#include components/menu/search-footer /}{/content} {/include} {#include
-                      partials/example-card title="Loading" slug="loading" component="menu"} {#description}
+                      partials/example-card title="Loading" slug="loading" component="menu" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         A <code class="ws-code">pf-m-loading</code> item holds a large spinner while items load.
                       </p>
                       {/description} {#content}{#include components/menu/loading /}{/content} {/include} {#include
-                      partials/example-card title="Plain" slug="plain" component="menu"} {#description}
+                      partials/example-card title="Plain" slug="plain" component="menu" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-plain</code> drops the menu border and shadow.
                       </p>
                       {/description} {#content}{#include components/menu/plain /}{/content} {/include} {#include
                       partials/example-card title="Plain with search and footer" slug="plain-search-footer"
-                      component="menu"} {#description}
+                      component="menu" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         The plain variant with search and footer regions and a divider before the footer.
                       </p>
                       {/description} {#content}{#include components/menu/plain-search-footer /}{/content} {/include}
                       {#include partials/example-card title="Plain scrollable with search and footer"
-                      slug="plain-scrollable-search-footer" component="menu"} {#description}
+                      slug="plain-scrollable-search-footer" component="menu" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Plain and scrollable combined with search and footer regions.
                       </p>
