@@ -1,2 +1,93 @@
 {! Page — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the page. !}
+{! Model mode: pass page=<org.sitenetsoft.quarkus.pha.model.Page> — masthead, generated sidebar, ordered main entries. !}
+{#if page??}
+<div class="pf-v6-c-page" id="{page.id}"{#if page.isHasToggle} x-data="{ sidebarOpen: true }"{/if}{#if page.style??} style="{page.style}"{/if}>
+  <header class="pf-v6-c-masthead{#if page.isMastheadInline} pf-m-display-inline{/if}">
+    <div class="pf-v6-c-masthead__main">
+      {#if page.isHasToggle}
+      <span class="pf-v6-c-masthead__toggle">
+        <button
+          class="pf-v6-c-button pf-m-plain"
+          type="button"
+          aria-label="{page.toggleAriaLabel}"
+          :aria-expanded="sidebarOpen.toString()"
+          @click="sidebarOpen = !sidebarOpen"
+        >
+          <span class="pf-v6-c-button__icon">{icons:svg('fa:bars').raw}</span>
+        </button>
+      </span>
+      {/if}
+      <div class="pf-v6-c-masthead__brand"><strong>{page.brand}</strong></div>
+    </div>
+    {#if page.toolbarText??}
+    <div class="pf-v6-c-masthead__content">
+      <div class="pf-v6-c-toolbar">
+        <div class="pf-v6-c-toolbar__content">
+          <div class="pf-v6-c-toolbar__content-section">
+            <div class="pf-v6-c-toolbar__item">{page.toolbarText}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {#else if page.isHasHorizontalNav}
+    <div class="pf-v6-c-masthead__content">
+      <nav class="pf-v6-c-nav pf-m-horizontal" aria-label="{page.horizontalNavAriaLabel}">
+        <ul class="pf-v6-c-nav__list">
+          {#for it in page.horizontalNav}
+          <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link{#if it.isCurrent} pf-m-current{/if}"{#if it.isCurrent} aria-current="page"{/if}>{it.text}</a></li>
+          {/for}
+        </ul>
+      </nav>
+    </div>
+    {/if}
+  </header>
+  {#if page.isHasSidebar}
+  <div
+    class="pf-v6-c-page__sidebar"
+    :class="{ 'pf-m-expanded': sidebarOpen, 'pf-m-collapsed': !sidebarOpen }"
+    x-show="sidebarOpen"
+  >
+    {#if page.sidebarContextSelector??}
+    <div class="pf-v6-c-page__sidebar-body pf-m-context-selector">
+      {page.sidebarContextSelector}
+    </div>
+    {/if}
+    <div class="pf-v6-c-page__sidebar-body{#if page.isSidebarNavFill} pf-m-fill{/if}">
+      <nav class="pf-v6-c-nav" aria-label="{page.sidebarNavAriaLabel}">
+        <ul class="pf-v6-c-nav__list">
+          {#for it in page.sidebarNav}
+          <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link{#if it.isCurrent} pf-m-current{/if}"{#if it.isCurrent} aria-current="page"{/if}>{it.text}</a></li>
+          {/for}
+        </ul>
+      </nav>
+    </div>
+  </div>
+  {/if}
+  <div class="pf-v6-c-page__main-container">
+    <div class="pf-v6-c-page__main"{#if page.isScrollableMain} tabindex="0" style="overflow-y: auto"{#else} tabindex="-1"{/if}>
+      {#for e in page.entries}
+      {#if e.isSection}
+      {#include components/navigation/page-model-section sec=e.section /}
+      {#else if e.isGroup}
+      <div class="pf-v6-c-page__main-group{#if e.isGroupPlain} pf-m-plain{/if}">
+        {#if e.groupBreadcrumb??}
+        <div class="pf-v6-c-page__main-breadcrumb">
+          {#include components/navigation/breadcrumb breadcrumb=e.groupBreadcrumb /}
+        </div>
+        {/if}
+        {#for gs in e.groupSections}
+        {#include components/navigation/page-model-section sec=gs /}
+        {/for}
+      </div>
+      {#else if e.isRegion}
+      <div class="pf-v6-c-page__main-{e.regionKind}" role="region"{#if e.regionAriaLabel??} aria-label="{e.regionAriaLabel}"{/if}>
+        {e.regionHtml.raw}
+      </div>
+      {/if}
+      {/for}
+    </div>
+  </div>
+</div>
+{#else}
 <div class="pf-v6-c-page"{#if id??} id="{id}"{/if}>{#insert content}{/insert}</div>
+{/if}
