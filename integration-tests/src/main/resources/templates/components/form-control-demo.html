@@ -121,18 +121,19 @@
                         </div>
                       </div>
 
-                      {#include partials/example-card title="Basic" slug="basic" component="form-control"}
-                      {#description}
+                      {#include partials/example-card title="Basic" slug="basic" component="form-control"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">Default form-control around a text input.</p>
                       {/description} {#content}{#include components/form-control/basic /}{/content} {/include} {#include
-                      partials/example-card title="Validated" slug="validated" component="form-control"} {#description}
+                      partials/example-card title="Validated" slug="validated" component="form-control" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Three validation states stacked — <code class="ws-code">pf-m-success</code>,
                         <code class="ws-code">pf-m-warning</code>, <code class="ws-code">pf-m-error</code>.
                       </p>
                       {/description} {#content}{#include components/form-control/validated /}{/content} {/include}
                       {#include partials/example-card title="Disabled / read only" slug="disabled-readonly"
-                      component="form-control"} {#description}
+                      component="form-control" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-disabled</code> vs. <code class="ws-code">pf-m-readonly</code>.
                       </p>
