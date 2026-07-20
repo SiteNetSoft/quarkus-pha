@@ -14,6 +14,29 @@
 {!                                                                                !}
 {! Slot:                                                                          !}
 {!   {#content} — panel-header / panel-main / panel-footer includes              !}
+{! Model mode: pass panel=<org.sitenetsoft.quarkus.pha.model.Panel> — sections (header/main/footer) come from the model. !}
+{#if panel??}
+<div class="pf-v6-c-panel{panel.modifiers}" id="{panel.id}"{#if panel.style??} style="{panel.style}"{/if}>
+  {#if panel.headerHtml??}
+  <div class="pf-v6-c-panel__header">
+    {panel.headerHtml.raw}
+  </div>
+  {/if}
+  <div class="pf-v6-c-panel__main"{#if panel.isMainFocusable} tabindex="0"{/if}{#if panel.maxHeight??} style="--pf-v6-c-panel__main--MaxHeight: {panel.maxHeight}"{/if}>
+    {#if panel.isWrapBody}
+    <div class="pf-v6-c-panel__main-body">{panel.mainHtml.raw}</div>
+    {#else}
+    {panel.mainHtml.raw}
+    {/if}
+  </div>
+  {#if panel.footerHtml??}
+  <div class="pf-v6-c-panel__footer">
+    {panel.footerHtml.raw}
+  </div>
+  {/if}
+</div>
+{#else}
 <div class="pf-v6-c-panel{#if bordered??} pf-m-bordered{/if}{#if raised??} pf-m-raised{/if}{#if secondary??} pf-m-secondary{/if}{#if scrollable??} pf-m-scrollable{/if}"{#if id??} id="{id}"{/if}>
   {#insert content}{/insert}
 </div>
+{/if}
