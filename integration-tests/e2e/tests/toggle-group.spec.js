@@ -17,9 +17,7 @@ test.describe("Toggle Group", () => {
 
   test.describe("Single select", () => {
     test("has pf-v6-c-toggle-group class", async ({ page }) => {
-      await expect(page.locator("#tg-single")).toHaveClass(
-        /pf-v6-c-toggle-group/
-      );
+      await expect(page.locator("#tg-single")).toHaveClass(/pf-v6-c-toggle-group/);
     });
 
     test("has toggle buttons", async ({ page }) => {
@@ -28,17 +26,13 @@ test.describe("Toggle Group", () => {
     });
 
     test("one button has pf-m-selected modifier", async ({ page }) => {
-      await expect(
-        page.locator("#tg-single .pf-v6-c-toggle-group__button.pf-m-selected")
-      ).toBeVisible();
+      await expect(page.locator("#tg-single .pf-v6-c-toggle-group__button.pf-m-selected")).toBeVisible();
     });
   });
 
   test.describe("Multi select", () => {
     test("has pf-v6-c-toggle-group class", async ({ page }) => {
-      await expect(page.locator("#tg-multi")).toHaveClass(
-        /pf-v6-c-toggle-group/
-      );
+      await expect(page.locator("#tg-multi")).toHaveClass(/pf-v6-c-toggle-group/);
     });
 
     test("has toggle buttons", async ({ page }) => {
@@ -80,6 +74,29 @@ test.describe("Toggle Group", () => {
     test("/components/toggle-group/full-width returns 200", async ({ page }) => {
       const res = await page.goto("/components/toggle-group/full-width");
       expect(res.status()).toBe(200);
+    });
+  });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/toggle-group");
+      for (const ex of ["single-select", "multi-select", "with-icons"]) {
+        const card = page.locator(`[data-rendered-href="/components/toggle-group/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/toggle-group/source-java/multi-select");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.multiVar("filters")');
+    });
+
+    test("generated single-select still selects exactly one", async ({ page }) => {
+      await page.goto("/components/toggle-group/single-select");
+      const grid = page.locator("#tg-single button", { hasText: "Grid" });
+      await grid.click();
+      await expect(grid).toHaveClass(/pf-m-selected/);
+      await expect(page.locator("#tg-single button.pf-m-selected")).toHaveCount(1);
     });
   });
 });
