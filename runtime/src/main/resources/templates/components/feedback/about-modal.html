@@ -3,6 +3,64 @@
 {! Optional: productName, ariaLabel (required when productName is absent), backgroundImage, closeButtonAriaLabel, noContentContainer, headingLevel (default h1) !}
 {! Slots: content, strapline, trademark !}
 {! Open via: $dispatch('open-about-modal-{id}'). Multiple instances on a page get distinct event names via the id suffix. !}
+{! Model mode: pass aboutModal=<org.sitenetsoft.quarkus.pha.model.AboutModal> — trigger button + raw content/trademark/strapline. !}
+{#if aboutModal??}
+{#if aboutModal.triggerText??}
+<button class="pf-v6-c-button pf-m-primary" type="button" @click="$dispatch('open-about-modal-{aboutModal.id}')">{aboutModal.triggerText}</button>
+{/if}
+<div x-data="{ open: false }"
+     @open-about-modal-{aboutModal.id}.window="open = true"
+     @keydown.escape.window="if (open) open = false"
+     x-effect="if (open) PHA.trapFocus($el); else PHA.releaseFocus($el);">
+  <div class="pf-v6-c-backdrop"
+       x-show="open"
+       x-transition.opacity
+       @click.self="open = false"
+       style="display: none;">
+    <div class="pf-v6-c-about-modal-box"
+         role="dialog"
+         aria-modal="true"
+         {#if aboutModal.productName??}aria-labelledby="{aboutModal.id}-title"{#else}aria-label="{aboutModal.ariaLabel}"{/if}
+         {#if aboutModal.backgroundImage??}style="--pf-v6-c-about-modal-box--BackgroundImage: url({aboutModal.backgroundImage})"{/if}>
+      <div class="pf-v6-c-about-modal-box__brand">
+        <img class="pf-v6-c-about-modal-box__brand-image"
+             src="{aboutModal.brandImageSrc}"
+             alt="{aboutModal.brandImageAlt}" />
+      </div>
+      <div class="pf-v6-c-about-modal-box__close">
+        <button class="pf-v6-c-button pf-m-plain"
+                type="button"
+                aria-label="{aboutModal.closeButtonAriaLabel}"
+                @click="open = false">
+          <span class="pf-v6-c-button__icon">
+            {icons:svg('fa:times').raw}
+          </span>
+        </button>
+      </div>
+      {#if aboutModal.productName??}
+      <div class="pf-v6-c-about-modal-box__header">
+        <{aboutModal.headingTag} class="pf-v6-c-title pf-m-4xl" id="{aboutModal.id}-title">{aboutModal.productName}</{aboutModal.headingTag}>
+      </div>
+      {/if}
+      {#if aboutModal.isNoContentContainer}
+      {aboutModal.contentHtml.raw}
+      {#else}
+      <div class="pf-v6-c-about-modal-box__content">
+        <div class="pf-v6-c-about-modal-box__body">
+          {aboutModal.contentHtml.raw}
+        </div>
+        {#if aboutModal.trademarkHtml??}{aboutModal.trademarkHtml.raw}{/if}
+        {#if aboutModal.straplineHtml??}
+        <p class="pf-v6-c-about-modal-box__strapline">
+          {aboutModal.straplineHtml.raw}
+        </p>
+        {/if}
+      </div>
+      {/if}
+    </div>
+  </div>
+</div>
+{#else}
 <div x-data="{ open: false }"
      @open-about-modal-{id}.window="open = true"
      @keydown.escape.window="if (open) open = false"
@@ -53,3 +111,4 @@
     </div>
   </div>
 </div>
+{/if}
