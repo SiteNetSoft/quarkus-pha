@@ -1,7 +1,43 @@
 {! Menu toggle — PatternFly v6 !}
+{! Two modes.
+   Model-driven: pass toggle=<org.sitenetsoft.quarkus.pha.model.MenuToggle> (built via
+     MenuToggle.of/split/typeahead builders) — variants, status icons, icon/avatar/badge,
+     and the split-button / typeahead shapes.
+   Slot shell: omit toggle and use the params + content slot below. !}
 {! Optional: id — DOM id on the root; omit unless something else (e.g. aria-controls from a menu) references it.
               plain, primary, expanded, disabled, ariaLabel !}
 {! Content slot: toggle label (required for non-plain toggles, passed as include body). !}
+{#if toggle??}
+{#if toggle.split}
+<div class="pf-v6-c-menu-toggle pf-m-split-button{#if toggle.primary} pf-m-primary{/if}{#if toggle.secondary} pf-m-secondary{/if}{#if toggle.disabled} pf-m-disabled{/if}"{#if toggle.id} id="{toggle.id}"{/if}>
+  {#if toggle.actionButton}<button class="pf-v6-c-menu-toggle__button" type="button">{toggle.actionButton}</button>{/if}
+  {#if toggle.checkbox}<label class="pf-v6-c-check pf-m-standalone">
+    <input class="pf-v6-c-check__input" type="checkbox" id="{toggle.checkId}" aria-label="{toggle.checkAriaLabel}"{#if toggle.disabled} disabled{/if} />{#if toggle.checkLabel}<span class="pf-v6-c-check__label">{toggle.checkLabel}</span>{/if}
+  </label>{/if}
+  {#if toggle.splitText}<span class="pf-v6-c-menu-toggle__text">{toggle.splitText}</span>{/if}
+  <button class="pf-v6-c-menu-toggle__button{#if toggle.toggleText} pf-m-text{/if}" type="button" id="{toggle.toggleButtonId}" aria-expanded="{toggle.expanded}" aria-label="Menu toggle"{#if toggle.disabled} disabled{/if}>
+    {#if toggle.toggleIcon}<span class="pf-v6-c-menu-toggle__icon">{icons:svg(toggle.toggleIcon).raw}</span>{/if}
+    {#if toggle.toggleText}<span class="pf-v6-c-menu-toggle__text">{toggle.toggleText}</span>{/if}
+    <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
+  </button>
+</div>
+{#else if toggle.typeahead}
+<div class="pf-v6-c-menu-toggle pf-m-typeahead pf-m-full-width"{#if toggle.id} id="{toggle.id}"{/if}>
+  <div class="pf-v6-c-text-input-group pf-m-plain">
+    <div class="pf-v6-c-text-input-group__main">
+      <span class="pf-v6-c-text-input-group__text">
+        <input class="pf-v6-c-text-input-group__text-input" type="text" id="{toggle.inputId}" placeholder="{toggle.typeaheadPlaceholder}" aria-label="{toggle.typeaheadPlaceholder}" />
+      </span>
+    </div>
+  </div>
+  <button class="pf-v6-c-menu-toggle__button" type="button" id="{toggle.buttonId}" aria-expanded="false" aria-label="Menu toggle">
+    <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
+  </button>
+</div>
+{#else}
+<button class="pf-v6-c-menu-toggle{#if toggle.primary} pf-m-primary{/if}{#if toggle.secondary} pf-m-secondary{/if}{#if toggle.danger} pf-m-danger{/if}{#if toggle.status} pf-m-{toggle.status}{/if}{#if toggle.plain} pf-m-plain{/if}{#if toggle.textModifier} pf-m-text{/if}{#if toggle.circle} pf-m-circle{/if}{#if toggle.settings} pf-m-settings{/if}{#if toggle.placeholder} pf-m-placeholder{/if}{#if toggle.small} pf-m-small{/if}{#if toggle.fullHeight} pf-m-full-height{/if}{#if toggle.fullWidth} pf-m-full-width{/if}{#if toggle.expanded} pf-m-expanded{/if}" type="button"{#if toggle.id} id="{toggle.id}"{/if} aria-expanded="{toggle.expanded}"{#if toggle.ariaLabel} aria-label="{toggle.ariaLabel}"{/if}{#if toggle.disabled} disabled{/if}>{#if toggle.avatar}<span class="pf-v6-c-menu-toggle__icon"><img class="pf-v6-c-avatar" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2036%2036'%3E%3Ccircle%20cx='18'%20cy='18'%20r='18'%20fill='%23d2d2d2'/%3E%3Ccircle%20cx='18'%20cy='12'%20r='7'%20fill='%23fff'/%3E%3Cpath%20d='M4%2032c0-8%206-12%2014-12s14%204%2014%2012'%20fill='%23fff'/%3E%3C/svg%3E" alt="avatar" style="--pf-v6-c-avatar--Width: 1.5rem; --pf-v6-c-avatar--Height: 1.5rem" /></span>{#else if toggle.icon}<span class="pf-v6-c-menu-toggle__icon">{icons:svg(toggle.icon).raw}</span>{/if}{#if toggle.showText}<span class="pf-v6-c-menu-toggle__text">{toggle.text}</span>{/if}{#if toggle.badge}<span class="pf-v6-c-menu-toggle__count"><span class="pf-v6-c-badge pf-m-unread">{toggle.badge}</span></span>{/if}{#if toggle.showControls}<span class="pf-v6-c-menu-toggle__controls">{#if toggle.statusIcon}<span class="pf-v6-c-menu-toggle__status-icon">{icons:svg(toggle.statusIcon).raw}</span>{/if}<span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>{/if}</button>
+{/if}
+{#else}
 <button class="pf-v6-c-menu-toggle{#if plain??} pf-m-plain{/if}{#if primary??} pf-m-primary{/if}{#if expanded??} pf-m-expanded{/if}" type="button"{#if id??} id="{id}"{/if}{#if disabled??} disabled{/if} aria-expanded="{#if expanded??}true{#else}false{/if}"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
   <span class="pf-v6-c-menu-toggle__text">{#insert/}</span>
   {#if plain??}{#else}
@@ -12,3 +48,4 @@
   </span>
   {/if}
 </button>
+{/if}
