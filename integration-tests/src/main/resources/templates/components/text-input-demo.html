@@ -163,24 +163,26 @@
                         </div>
                       </div>
 
-                      {#include partials/example-card title="Basic" slug="basic" component="text-input"} {#description}
+                      {#include partials/example-card title="Basic" slug="basic" component="text-input" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">Default text input with a placeholder.</p>
                       {/description} {#content}{#include components/text-input/basic /}{/content} {/include} {#include
-                      partials/example-card title="Disabled" slug="disabled" component="text-input"} {#description}
+                      partials/example-card title="Disabled" slug="disabled" component="text-input" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">disabled=true</code> emits the disabled HTML attribute plus
                         <code class="ws-code">pf-m-disabled</code> on the form-control wrapper.
                       </p>
                       {/description} {#content}{#include components/text-input/disabled /}{/content} {/include}
-                      {#include partials/example-card title="Read only" slug="readonly" component="text-input"}
-                      {#description}
+                      {#include partials/example-card title="Read only" slug="readonly" component="text-input"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">readonly=true</code> — value shows but isn't editable. Adds
                         <code class="ws-code">pf-m-readonly</code> for the muted styling.
                       </p>
                       {/description} {#content}{#include components/text-input/readonly /}{/content} {/include}
-                      {#include partials/example-card title="Invalid" slug="invalid" component="text-input"}
-                      {#description}
+                      {#include partials/example-card title="Invalid" slug="invalid" component="text-input"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Pass <code class="ws-code">validated="error"</code> for
                         <code class="ws-code">pf-m-error</code> + the matching status icon. Also sets
@@ -188,14 +190,15 @@
                         <code class="ws-code">success | warning | error</code>.
                       </p>
                       {/description} {#content}{#include components/text-input/invalid /}{/content} {/include} {#include
-                      partials/example-card title="With icon" slug="with-icon" component="text-input"} {#description}
+                      partials/example-card title="With icon" slug="with-icon" component="text-input" javaSource=true}
+                      {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Prefix icon — <code class="ws-code">iconName="fa:magnifying-glass"</code> emits
                         <code class="ws-code">pf-m-icon</code> and renders the SVG inside the form-control.
                       </p>
                       {/description} {#content}{#include components/text-input/with-icon /}{/content} {/include}
-                      {#include partials/example-card title="Input types" slug="types" component="text-input"}
-                      {#description}
+                      {#include partials/example-card title="Input types" slug="types" component="text-input"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Common type variants — email, password, number, date. Type maps directly to the HTML
                         <code class="ws-code">type</code> attribute.
