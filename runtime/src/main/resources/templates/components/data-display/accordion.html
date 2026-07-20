@@ -15,6 +15,82 @@
 {!             to avoid colliding with the example-card partial's "content" slot.   !}
 {!             The root id is shadowed to null around the insert so it can't leak   !}
 {!             onto the composed items (which carry their own itemId).              !}
+{! Model mode: pass accordion=<org.sitenetsoft.quarkus.pha.model.Accordion> (built via
+   Accordion.of(id)) — self-stated items by default, singleExpand() for shared state,
+   definitionList() for the dl/dt/dd shape. !}
+{#if accordion??}
+{#if accordion.definitionList}
+<dl class="pf-v6-c-accordion{#if accordion.bordered} pf-m-bordered{/if}{#if accordion.displayLg} pf-m-display-lg{/if}{#if accordion.toggleStart} pf-m-toggle-start{/if}" id="{accordion.id}"{#if accordion.ariaLabel} aria-label="{accordion.ariaLabel}"{/if}>
+  {#for item in accordion.items}
+<div class="pf-v6-c-accordion__item" x-data="{ expanded: {item.expanded} }" :class="{ 'pf-m-expanded': expanded }">
+  {#if accordion.definitionList}<dt>{#else}<{item.heading}>{/if}
+    <button class="pf-v6-c-accordion__toggle" id="{item.itemId}-toggle" aria-controls="{item.itemId}-content" @click="expanded = !expanded" :aria-expanded="expanded.toString()">
+      {#if accordion.toggleStart}
+      <span class="pf-v6-c-accordion__toggle-icon"><svg viewBox="0 0 384 512" fill="currentColor" aria-hidden="true" width="1em" height="1em"><path d="M169.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 306.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg></span>
+      <span class="pf-v6-c-accordion__toggle-text">{item.title}</span>
+      {#else}
+      <span class="pf-v6-c-accordion__toggle-text">{item.title}</span>
+      <span class="pf-v6-c-accordion__toggle-icon"><svg viewBox="0 0 384 512" fill="currentColor" aria-hidden="true" width="1em" height="1em"><path d="M169.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 306.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg></span>
+      {/if}
+    </button>
+  {#if accordion.definitionList}</dt>{#else}</{item.heading}>{/if}
+  {#if accordion.definitionList}
+  <dd class="pf-v6-c-accordion__expandable-content{#if item.fixed} pf-m-fixed{/if}" id="{item.itemId}-content" aria-labelledby="{item.itemId}-toggle" :class="{ 'pf-m-expanded': expanded }">
+    <div class="pf-v6-c-accordion__expandable-content-body">{item.bodyHtml.raw}</div>
+  </dd>
+  {#else}
+  <div class="pf-v6-c-accordion__expandable-content{#if item.fixed} pf-m-fixed{/if}" id="{item.itemId}-content" role="region" aria-labelledby="{item.itemId}-toggle" :class="{ 'pf-m-expanded': expanded }">
+    <div class="pf-v6-c-accordion__expandable-content-body">{item.bodyHtml.raw}</div>
+  </div>
+  {/if}
+</div>
+  {/for}
+</dl>
+{#else if accordion.singleExpand}
+<div class="pf-v6-c-accordion{#if accordion.bordered} pf-m-bordered{/if}{#if accordion.displayLg} pf-m-display-lg{/if}" id="{accordion.id}" x-data="{ open: null }"{#if accordion.ariaLabel} aria-label="{accordion.ariaLabel}"{/if}>
+  {#for item in accordion.items}
+<div class="pf-v6-c-accordion__item" :class="{ 'pf-m-expanded': open === '{item.key}' }">
+  <{item.heading}>
+    <button class="pf-v6-c-accordion__toggle" id="{item.itemId}-toggle" aria-controls="{item.itemId}-content" @click="open = open === '{item.key}' ? null : '{item.key}'" :aria-expanded="(open === '{item.key}').toString()">
+      <span class="pf-v6-c-accordion__toggle-text">{item.title}</span>
+      <span class="pf-v6-c-accordion__toggle-icon"><svg viewBox="0 0 384 512" fill="currentColor" aria-hidden="true" width="1em" height="1em"><path d="M169.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 306.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg></span>
+    </button>
+  </{item.heading}>
+  <div class="pf-v6-c-accordion__expandable-content" id="{item.itemId}-content" role="region" aria-labelledby="{item.itemId}-toggle" :class="{ 'pf-m-expanded': open === '{item.key}' }">
+    <div class="pf-v6-c-accordion__expandable-content-body">{item.bodyHtml.raw}</div>
+  </div>
+</div>
+  {/for}
+</div>
+{#else}
+<div class="pf-v6-c-accordion{#if accordion.bordered} pf-m-bordered{/if}{#if accordion.displayLg} pf-m-display-lg{/if}{#if accordion.toggleStart} pf-m-toggle-start{/if}" id="{accordion.id}"{#if accordion.ariaLabel} aria-label="{accordion.ariaLabel}"{/if}>
+  {#for item in accordion.items}
+<div class="pf-v6-c-accordion__item" x-data="{ expanded: {item.expanded} }" :class="{ 'pf-m-expanded': expanded }">
+  {#if accordion.definitionList}<dt>{#else}<{item.heading}>{/if}
+    <button class="pf-v6-c-accordion__toggle" id="{item.itemId}-toggle" aria-controls="{item.itemId}-content" @click="expanded = !expanded" :aria-expanded="expanded.toString()">
+      {#if accordion.toggleStart}
+      <span class="pf-v6-c-accordion__toggle-icon"><svg viewBox="0 0 384 512" fill="currentColor" aria-hidden="true" width="1em" height="1em"><path d="M169.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 306.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg></span>
+      <span class="pf-v6-c-accordion__toggle-text">{item.title}</span>
+      {#else}
+      <span class="pf-v6-c-accordion__toggle-text">{item.title}</span>
+      <span class="pf-v6-c-accordion__toggle-icon"><svg viewBox="0 0 384 512" fill="currentColor" aria-hidden="true" width="1em" height="1em"><path d="M169.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 306.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg></span>
+      {/if}
+    </button>
+  {#if accordion.definitionList}</dt>{#else}</{item.heading}>{/if}
+  {#if accordion.definitionList}
+  <dd class="pf-v6-c-accordion__expandable-content{#if item.fixed} pf-m-fixed{/if}" id="{item.itemId}-content" aria-labelledby="{item.itemId}-toggle" :class="{ 'pf-m-expanded': expanded }">
+    <div class="pf-v6-c-accordion__expandable-content-body">{item.bodyHtml.raw}</div>
+  </dd>
+  {#else}
+  <div class="pf-v6-c-accordion__expandable-content{#if item.fixed} pf-m-fixed{/if}" id="{item.itemId}-content" role="region" aria-labelledby="{item.itemId}-toggle" :class="{ 'pf-m-expanded': expanded }">
+    <div class="pf-v6-c-accordion__expandable-content-body">{item.bodyHtml.raw}</div>
+  </div>
+  {/if}
+</div>
+  {/for}
+</div>
+{/if}
+{#else}
 {#if definitionList??}
 <dl class="pf-v6-c-accordion{#if bordered??} pf-m-bordered{/if}{#if displayLg??} pf-m-display-lg{/if}{#if toggleStart??} pf-m-toggle-start{/if}" id="{id}"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
   {#let id=null}{#insert items}{/insert}{/let}
@@ -23,4 +99,5 @@
 <div class="pf-v6-c-accordion{#if bordered??} pf-m-bordered{/if}{#if displayLg??} pf-m-display-lg{/if}{#if toggleStart??} pf-m-toggle-start{/if}" id="{id}"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
   {#let id=null}{#insert items}{/insert}{/let}
 </div>
+{/if}
 {/if}
