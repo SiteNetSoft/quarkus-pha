@@ -66,4 +66,23 @@ test.describe("Text Area", () => {
       });
     }
   });
+  test.describe("Java source tab", () => {
+    test("model-driven cards get a leading Java tab; Alpine/styled variants do not", async ({ page }) => {
+      await page.goto("/components/text-area");
+      for (const ex of ["basic", "resize-vertical", "invalid"]) {
+        const card = page.locator(`[data-rendered-href="/components/text-area/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      for (const ex of ["auto-resizing", "not-resizable", "validated"]) {
+        const card = page.locator(`[data-rendered-href="/components/text-area/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/text-area/source-java/resize-vertical");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.resize("vertical")');
+    });
+  });
 });
