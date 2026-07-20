@@ -57,4 +57,26 @@ test.describe("Switch", () => {
       expect(res.status()).toBe(200);
     });
   });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/switch");
+      for (const ex of ["basic", "without-label"]) {
+        const card = page.locator(`[data-rendered-href="/components/switch/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/switch/source-java/without-label");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('.ariaLabel("Enable feature")');
+    });
+
+    test("model-driven without-label switch keeps its aria-label wiring", async ({ page }) => {
+      await page.goto("/components/switch/without-label");
+      const input = page.locator("#sw-without-label-field");
+      await expect(input).toHaveAttribute("aria-label", "Enable feature");
+      await expect(input).toBeChecked();
+    });
+  });
 });
