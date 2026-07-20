@@ -1,26 +1,6 @@
 {! Truncation — cap the text with --pf-v6-c-label__text--MaxWidth; the label ellipsizes overflow. !}
+{! Populated from the Java models LabelDemoData.demoLabelTruncated + demoLabelGroupTruncate (see the Java tab). !}
 <div class="ws-preview-html" style="display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start">
-  <span class="pf-v6-c-label pf-m-filled" id="lbl-truncated">
-    <span class="pf-v6-c-label__content">
-      <span class="pf-v6-c-label__text" style="--pf-v6-c-label__text--MaxWidth: 38ch"
-        >Label with set max-width truncation that keeps going well past the cap</span
-      >
-    </span>
-    <span class="pf-v6-c-label__actions">
-      <button class="pf-v6-c-button pf-m-plain pf-m-no-padding" type="button" aria-label="Remove"><span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span></button>
-    </span>
-  </span>
-  {#include components/data-display/label-group id="lbg-truncate" ariaLabel="Label group with truncation"}
-  {#content}
-  <li class="pf-v6-c-label-group__list-item">
-    <span class="pf-v6-c-label pf-m-filled pf-m-blue" id="lbg-tr-1">
-      <span class="pf-v6-c-label__content">
-        <span class="pf-v6-c-label__text" style="--pf-v6-c-label__text--MaxWidth: 20ch">Grouped label with a very long name</span>
-      </span>
-    </span>
-  </li>
-  <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-tr-2" color="green"}Short label{/include}
-  </li>
-  {/content} {/include}
+  {#include components/data-display/label label=demoLabelTruncated /}
+  {#include components/data-display/label-group group=demoLabelGroupTruncate /}
 </div>

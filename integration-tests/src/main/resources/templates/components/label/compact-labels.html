@@ -1,7 +1,4 @@
+{! Populated from the Java model LabelDemoData.demoLabelsCompact (see the Java tab). !}
 <div class="ws-preview-html" style="display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center">
-  {#include components/data-display/label id="lbl-cmp-grey" compact=true}Compact grey{/include}
-  {#include components/data-display/label id="lbl-cmp-blue" color="blue" compact=true}Compact blue{/include}
-  {#include components/data-display/label id="lbl-cmp-outline" variant="outline" compact=true}Compact outline{/include}
-  {#include components/data-display/label id="lbl-cmp-icon" color="green" compact=true iconName="fa:circle-check"}Compact icon{/include}
-  {#include components/data-display/label id="lbl-cmp-removable" color="blue" compact=true removable=true}Compact removable{/include}
+  {#for lbl in demoLabelsCompact}{#include components/data-display/label label=lbl /}{/for}
 </div>

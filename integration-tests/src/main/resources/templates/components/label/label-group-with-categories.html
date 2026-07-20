@@ -1,25 +1,5 @@
+{! Populated from the Java models LabelDemoData.demoLabelGroupPlatform + demoLabelGroupLanguage (see the Java tab). !}
 <div class="ws-preview-html" style="display: flex; flex-direction: column; gap: 0.75rem">
-  {#include components/data-display/label-group id="lbg-cat-platform" categoryName="Platform"} {#content}
-  <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-cat-p-1" color="blue"}Kubernetes{/include}
-  </li>
-  <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-cat-p-2" color="red"}OpenShift{/include}
-  </li>
-  <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-cat-p-3" color="orange"}AWS{/include}
-  </li>
-  {/content} {/include}
-{#include components/data-display/label-group id="lbg-cat-language" categoryName="Language"}
-  {#content}
-  <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-cat-l-1" color="orangered"}Java{/include}
-  </li>
-  <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-cat-l-2" color="teal"}Go{/include}
-  </li>
-  <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-cat-l-3" color="yellow"}Python{/include}
-  </li>
-  {/content} {/include}
+  {#include components/data-display/label-group group=demoLabelGroupPlatform /}
+  {#include components/data-display/label-group group=demoLabelGroupLanguage /}
 </div>

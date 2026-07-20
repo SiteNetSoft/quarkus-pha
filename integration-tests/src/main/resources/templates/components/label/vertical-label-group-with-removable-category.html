@@ -1,14 +1,2 @@
-<div class="ws-preview-html">
-  {#include components/data-display/label-group id="lbg-vertical-category-removable" vertical=true categoryName="Category 1" closable=true closeBtnAria="Close vertical label group"}
-  {#content}
-  <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-vcatr-1" iconName="fa:circle-info" removable=true removeClick="$el.closest('li').remove()"}Label 1{/include}
-  </li>
-  <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-vcatr-2" color="blue" iconName="fa:circle-info" removable=true removeClick="$el.closest('li').remove()"}Label 2{/include}
-  </li>
-  <li class="pf-v6-c-label-group__list-item">
-    {#include components/data-display/label id="lbg-vcatr-3" color="green" iconName="fa:circle-info" removable=true removeClick="$el.closest('li').remove()"}Label 3{/include}
-  </li>
-  {/content} {/include}
-</div>
+{! Populated from the Java model LabelDemoData.demoLabelGroupVerticalRemovableCategory (see the Java tab). !}
+<div class="ws-preview-html">{#include components/data-display/label-group group=demoLabelGroupVerticalRemovableCategory /}</div>
