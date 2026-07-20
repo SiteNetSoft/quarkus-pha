@@ -121,8 +121,8 @@
                           </div>
                         </div>
 
-                        {#include partials/example-card title="Basic" slug="basic" component="about-modal"}
-                        {#description}
+                        {#include partials/example-card title="Basic" slug="basic" component="about-modal"
+                        javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           Product name + brand image + description-list body + trademark + strapline. Opened via a
                           custom event scoped to the modal's <code class="ws-code">id</code> so multiple modals can
@@ -130,7 +130,7 @@
                         </p>
                         {/description} {#content}{#include components/about-modal/basic /}{/content} {/include}
                         {#include partials/example-card title="Without product name" slug="without-product-name"
-                        component="about-modal"} {#description}
+                        component="about-modal" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           When <code class="ws-code">productName</code> is omitted, the dialog declares
                           <code class="ws-code">aria-label</code> for AT context instead of
@@ -139,7 +139,7 @@
                         </p>
                         {/description} {#content}{#include components/about-modal/without-product-name /}{/content}
                         {/include} {#include partials/example-card title="Complex content" slug="complex-content"
-                        component="about-modal"} {#description}
+                        component="about-modal" javaSource=true} {#description}
                         <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                           <code class="ws-code">noContentContainer=true</code> skips the default body wrapper so you can
                           custom-position content with PF layouts. Useful for marketing/launch screens where the
