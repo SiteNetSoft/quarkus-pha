@@ -17,6 +17,32 @@
                     gets pf-m-selected. Use for selection driven by outer x-data state.
      attrs        — raw attribute passthrough (Alpine directives etc.). Inherits through
                     nested includes; shadowed inside the card family's slots. !}
+{! Model mode: pass card=<org.sitenetsoft.quarkus.pha.model.Card> (built via Card.of(id))
+   — ordered sections plus the Header config; body/footer/title content renders unescaped. !}
+{#if card??}
+<div
+  class="pf-v6-c-card{#if card.compact} pf-m-compact{/if}{#if card.displayLg} pf-m-display-lg{/if}{#if card.plain} pf-m-plain{/if}{#if card.fullHeight} pf-m-full-height{/if}{#if card.secondary} pf-m-secondary{/if}{#if card.selectable} pf-m-selectable{/if}{#if card.clickable} pf-m-clickable{/if}{#if card.disabled} pf-m-disabled{/if}"
+  {#if card.disabled}aria-disabled="true"{/if}
+  id="{card.id}"
+  {#if card.expandable}x-data="{ expanded: false }" :class="expanded ? 'pf-m-expanded' : ''"{/if}
+  {#if card.selectedExpr}:class="({card.selectedExpr}) ? 'pf-m-selected' : ''"{/if}
+>
+  {#if card.header}{#include components/data-display/card-model-header card=card h=card.header /}{/if}
+  {#for s in card.sections}
+  {#if s.kind == 'title'}
+  <div class="pf-v6-c-card__title"{#if s.id} id="{s.id}"{/if}><{s.headingLevel} class="pf-v6-c-card__title-text">{s.html.raw}</{s.headingLevel}></div>
+  {#else if s.kind == 'body'}
+  <div class="pf-v6-c-card__body{#if s.noFill} pf-m-no-fill{/if}">{s.html.raw}</div>
+  {#else if s.kind == 'footer'}
+  <div class="pf-v6-c-card__footer">{s.html.raw}</div>
+  {#else if s.kind == 'divider'}
+  <hr class="pf-v6-c-divider" />
+  {#else if s.kind == 'expandable'}
+  <div class="pf-v6-c-card__expandable-content" x-show="expanded" x-cloak><div class="pf-v6-c-card__body">{s.html.raw}</div>{#if s.footerHtml}<div class="pf-v6-c-card__footer">{s.footerHtml.raw}</div>{/if}</div>
+  {/if}
+  {/for}
+</div>
+{#else}
 <div
   class="pf-v6-c-card{#if compact??} pf-m-compact{/if}{#if displayLg??} pf-m-display-lg{/if}{#if plain??} pf-m-plain{/if}{#if fullHeight??} pf-m-full-height{/if}{#if secondary??} pf-m-secondary{/if}{#if selectable??} pf-m-selectable{/if}{#if clickable??} pf-m-clickable{/if}{#if selected??} pf-m-selected{/if}{#if disabled??} pf-m-disabled{/if}"
   {#if disabled??}aria-disabled="true"{/if}
@@ -29,3 +55,4 @@
      inheritance) — an explicit id on card-title etc. still overrides. !}
   {#let id=null attrs=null}{#insert /}{/let}
 </div>
+{/if}

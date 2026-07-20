@@ -1,0 +1,28 @@
+{! Model-driven card header: expand toggle, kebab/checkbox actions, selectable-actions
+   input (checkbox / radio / clickable button or anchor), header-main stack and bare
+   brand/title. Params: card, h (= card.header). Included by card (model branch). !}
+<div class="pf-v6-c-card__header{#if h.wrap} pf-m-wrap{/if}">
+  {#if h.expandableToggle}
+  <div class="pf-v6-c-card__header-toggle">
+    <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Details" :aria-expanded="expanded.toString()" @click="expanded = !expanded">
+      <span class="pf-v6-c-button__icon"><span class="pf-v6-c-card__header-toggle-icon">{icons:svg('fa:angle-right').raw}</span></span>
+    </button>
+  </div>
+  {/if}
+  {#if h.hasActions}
+  <div class="pf-v6-c-card__actions">{#if h.kebabAria}<button class="pf-v6-c-button pf-m-plain" type="button" aria-label="{h.kebabAria}"><span class="pf-v6-c-button__icon">{icons:svg('fa:ellipsis-vertical').raw}</span></button>{/if}{#if h.checkboxId}<div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="{h.checkboxId}" aria-labelledby="{h.checkboxLabelledBy}"{#if h.checkboxAriaLabel} aria-label="{h.checkboxAriaLabel}"{/if} /></div>{/if}</div>
+  {/if}
+  {#if h.hasSelectableActions}
+  <div class="pf-v6-c-card__selectable-actions">
+    {#if h.selKind == 'check'}<div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="{h.selId}" aria-labelledby="{h.selLabelledBy}"{#if h.selXModel} x-model="{h.selXModel}"{/if}{#if h.selDisabled} disabled{/if} /></div>{/if}
+    {#if h.selKind == 'radio'}<div class="pf-v6-c-radio pf-m-standalone"><input class="pf-v6-c-radio__input" type="radio" name="{h.selName}" id="{h.selId}" aria-labelledby="{h.selLabelledBy}" value="{h.selValue}" x-model="{h.selXModel}" /></div>{/if}
+    {#if h.selKind == 'clickButton'}<button class="pf-v6-c-card__clickable-action" type="button" aria-labelledby="{h.selLabelledBy}"{#if h.selClickExpr} @click="{h.selClickExpr}"{/if}{#if h.selDisabled} disabled{/if}></button>{/if}
+    {#if h.selKind == 'clickAnchor'}<a class="pf-v6-c-card__clickable-action" href="{h.selHref}" aria-labelledby="{h.selLabelledBy}"></a>{/if}
+  </div>
+  {/if}
+  {#if h.hasHeaderMain}
+  <div class="pf-v6-c-card__header-main">{#if h.brandInMain}<img class="pf-v6-c-brand" src="{h.brandSrc}" alt="{h.brandAlt}" style="--pf-v6-c-brand--Height: {h.brandHeight}" />{/if}{#if h.mainIcon}{icons:svg(h.mainIcon).raw}{/if}{#if h.mainTitleHtml}<div class="pf-v6-c-card__title"{#if h.mainTitleId} id="{h.mainTitleId}"{/if}><h2 class="pf-v6-c-card__title-text">{h.mainTitleHtml.raw}</h2></div>{/if}{#if h.mainSubtitle}<div class="pf-v6-c-card__subtitle">{h.mainSubtitle}</div>{/if}</div>
+  {/if}
+  {#if h.brandSrc}{#if !h.brandInMain}<img class="pf-v6-c-brand" src="{h.brandSrc}" alt="{h.brandAlt}" style="--pf-v6-c-brand--Height: {h.brandHeight}" />{/if}{/if}
+  {#if h.titleHtml}<div class="pf-v6-c-card__title"{#if h.titleId} id="{h.titleId}"{/if}><h2 class="pf-v6-c-card__title-text">{h.titleHtml.raw}</h2></div>{/if}
+</div>
