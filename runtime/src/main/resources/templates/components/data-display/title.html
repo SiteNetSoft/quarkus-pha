@@ -5,5 +5,5 @@
 {#if titleModel??}
 <{titleModel.headingTag} class="pf-v6-c-title pf-m-{titleModel.sizeToken}"{#if titleModel.id??} id="{titleModel.id}"{/if}>{titleModel.text}</{titleModel.headingTag}>
 {#else}
-{#let h=(headingLevel ?: 'h1')}<{h} class="pf-v6-c-title pf-m-{size ?: h}"{#if id??} id="{id}"{/if}>{#insert/}</{h}>{/let}
+{#let h=(headingLevel ?: 'h1')}<{h} class="pf-v6-c-title pf-m-{size ?: h}"{#if id??} id="{id}"{/if}>{#let id=null size=null}{#insert/}{/let}</{h}>{/let}
 {/if}

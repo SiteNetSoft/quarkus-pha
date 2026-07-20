@@ -93,11 +93,11 @@
 {#else}
 {#if definitionList??}
 <dl class="pf-v6-c-accordion{#if bordered??} pf-m-bordered{/if}{#if displayLg??} pf-m-display-lg{/if}{#if toggleStart??} pf-m-toggle-start{/if}" id="{id}"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
-  {#let id=null}{#insert items}{/insert}{/let}
+  {#let id=null bordered=null}{#insert items}{/insert}{/let}
 </dl>
 {#else}
 <div class="pf-v6-c-accordion{#if bordered??} pf-m-bordered{/if}{#if displayLg??} pf-m-display-lg{/if}{#if toggleStart??} pf-m-toggle-start{/if}" id="{id}"{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
-  {#let id=null}{#insert items}{/insert}{/let}
+  {#let id=null bordered=null}{#insert items}{/insert}{/let}
 </div>
 {/if}
 {/if}

@@ -30,7 +30,7 @@
     </button>
   </dt>
   <dd class="pf-v6-c-accordion__expandable-content{#if fixed??} pf-m-fixed{/if}" id="{itemId}-content" aria-labelledby="{itemId}-toggle" :class="{ 'pf-m-expanded': expanded }">
-    {#if isCustomContent??}{#insert/}{#else}<div class="pf-v6-c-accordion__expandable-content-body">{#insert/}</div>{/if}
+    {#if isCustomContent??}{#let expanded=null fixed=null}{#insert/}{/let}{#else}<div class="pf-v6-c-accordion__expandable-content-body">{#let expanded=null fixed=null}{#insert/}{/let}</div>{/if}
   </dd>
 </div>
 {#else}
@@ -48,7 +48,7 @@
     </button>
   </{h}>
   <div class="pf-v6-c-accordion__expandable-content{#if fixed??} pf-m-fixed{/if}" id="{itemId}-content" role="region" aria-labelledby="{itemId}-toggle" :class="{ 'pf-m-expanded': expanded }">
-    {#if isCustomContent??}{#insert/}{#else}<div class="pf-v6-c-accordion__expandable-content-body">{#insert/}</div>{/if}
+    {#if isCustomContent??}{#let expanded=null fixed=null}{#insert/}{/let}{#else}<div class="pf-v6-c-accordion__expandable-content-body">{#let expanded=null fixed=null}{#insert/}{/let}</div>{/if}
   </div>
 </div>
 {/let}

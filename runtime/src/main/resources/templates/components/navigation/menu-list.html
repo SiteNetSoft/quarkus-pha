@@ -3,4 +3,4 @@
 {! Optional: ariaLabel — labels the menu for AT.
              noRole — omit role="menu" (for lists whose items are not menuitems, e.g.
                       checkbox/action menus — avoids the aria-required-children failure). !}
-<ul class="pf-v6-c-menu__list"{#if !noRole??} role="menu"{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if}{#if attrs??} {attrs.raw}{/if} @keydown="handleKeyNav($event)">{#insert /}</ul>
+<ul class="pf-v6-c-menu__list"{#if !noRole??} role="menu"{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if}{#if attrs??} {attrs.raw}{/if} @keydown="handleKeyNav($event)">{#let attrs=null}{#insert /}{/let}</ul>

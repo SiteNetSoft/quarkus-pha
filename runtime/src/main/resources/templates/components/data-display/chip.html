@@ -4,13 +4,13 @@ chip text (passed as include body). !} {! Optional params: removable, overflow, 
 (close button label) !} {#if overflow??}
 <button class="pf-v6-c-label pf-m-overflow" type="button" id="{id}">
   <span class="pf-v6-c-label__content">
-    <span class="pf-v6-c-label__text">{#insert/}</span>
+    <span class="pf-v6-c-label__text">{#let overflow=null removable=null}{#insert/}{/let}</span>
   </span>
 </button>
 {#else}
 <span class="pf-v6-c-label pf-m-filled" id="{id}">
   <span class="pf-v6-c-label__content">
-    <span class="pf-v6-c-label__text" id="{id}-text">{#insert/}</span>
+    <span class="pf-v6-c-label__text" id="{id}-text">{#let overflow=null removable=null}{#insert/}{/let}</span>
     {#if badge??}
     <span class="pf-v6-c-badge pf-m-read">{badge}</span>
     {/if}

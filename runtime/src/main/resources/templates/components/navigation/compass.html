@@ -42,21 +42,21 @@
 <div class="pf-v6-c-compass{#if docked??} pf-m-docked{/if}"{#if id??} id="{id}"{/if}{#if attrs??} {attrs.raw}{/if}>
   {#let compassId=id id=null attrs=null}
   {#if hasCompassDock??}
-  <div class="pf-v6-c-compass__dock{#if dockExpanded??} pf-m-expanded{/if}">{#insert compassDock}{/insert}</div>
+  <div class="pf-v6-c-compass__dock{#if dockExpanded??} pf-m-expanded{/if}">{#let docked=null}{#insert compassDock}{/insert}{/let}</div>
   {/if}
   <div class="pf-v6-c-compass__container">
     {#if hasCompassHeader??}
-    <div class="pf-v6-c-compass__header{#if headerExpanded??} pf-m-expanded{/if}">{#insert compassHeader}{/insert}</div>
+    <div class="pf-v6-c-compass__header{#if headerExpanded??} pf-m-expanded{/if}">{#let docked=null}{#insert compassHeader}{/insert}{/let}</div>
     {/if}
     {#if hasCompassSidebarStart??}
-    <div class="pf-v6-c-compass__sidebar pf-m-start pf-m-expanded">{#insert compassSidebarStart}{/insert}</div>
+    <div class="pf-v6-c-compass__sidebar pf-m-start pf-m-expanded">{#let docked=null}{#insert compassSidebarStart}{/insert}{/let}</div>
     {/if}
-    <div class="pf-v6-c-compass__main">{#insert /}</div>
+    <div class="pf-v6-c-compass__main">{#let docked=null}{#insert /}{/let}</div>
     {#if hasCompassSidebarEnd??}
-    <div class="pf-v6-c-compass__sidebar pf-m-end pf-m-expanded">{#insert compassSidebarEnd}{/insert}</div>
+    <div class="pf-v6-c-compass__sidebar pf-m-end pf-m-expanded">{#let docked=null}{#insert compassSidebarEnd}{/insert}{/let}</div>
     {/if}
     {#if hasCompassFooter??}
-    <div class="pf-v6-c-compass__footer{#if footerExpanded??} pf-m-expanded{/if}">{#insert compassFooter}{/insert}</div>
+    <div class="pf-v6-c-compass__footer{#if footerExpanded??} pf-m-expanded{/if}">{#let docked=null}{#insert compassFooter}{/insert}{/let}</div>
     {/if}
   </div>
   {/let}

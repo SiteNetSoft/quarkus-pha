@@ -13,7 +13,7 @@
 {/if}
 {#else}
 {#if picture??}<picture class="pf-v6-c-brand pf-m-picture"{#if id??} id="{id}"{/if}{#if width??} style="--pf-v6-c-brand--Width: {width}{#if height??}; --pf-v6-c-brand--Height: {height}{/if}"{#else}{#if height??} style="--pf-v6-c-brand--Height: {height}"{/if}{/if}>
-  {#insert sources}{/insert}
+  {#let height=null id=null picture=null width=null}{#insert sources}{/insert}{/let}
   <img src="{src}" alt="{alt}" />
 </picture>{#else}
 <img class="pf-v6-c-brand"{#if id??} id="{id}"{/if} src="{src}" alt="{alt}"{#if width??} style="--pf-v6-c-brand--Width: {width}{#if height??}; --pf-v6-c-brand--Height: {height}{/if}"{#else}{#if height??} style="--pf-v6-c-brand--Height: {height}"{/if}{/if} />

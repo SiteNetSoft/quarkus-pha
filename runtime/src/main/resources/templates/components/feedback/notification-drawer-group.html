@@ -14,5 +14,5 @@ boolean, e.g. "g1"). Optional: count (badge number), countRead (pf-m-read badge 
     >{/if}
     <span class="pf-v6-c-notification-drawer__group-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
   </button>
-  <div class="pf-v6-c-notification-drawer__group-list" x-show="{openVar}" x-cloak>{#insert /}</div>
+  <div class="pf-v6-c-notification-drawer__group-list" x-show="{openVar}" x-cloak>{#let count=null}{#insert /}{/let}</div>
 </section>

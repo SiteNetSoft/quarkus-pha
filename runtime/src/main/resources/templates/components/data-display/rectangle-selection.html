@@ -7,5 +7,5 @@
   {#if id??}id="{id}"{/if}
   x-data="rectangleSelection({ selector: '{#if selector??}{selector}{#else}[data-selectable]{/if}', fadeOut: {#if fadeOut??}{fadeOut}{#else}true{/if} })"
 >
-  {#insert content}{/insert}
+  {#let id=null selector=null}{#insert content}{/insert}{/let}
 </div>

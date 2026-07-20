@@ -48,7 +48,7 @@
   <div class="pf-v6-c-label-group__main">
     {#if categoryName??}<span class="pf-v6-c-label-group__label" aria-hidden="true">{categoryName}</span>{/if}
     <ul class="pf-v6-c-label-group__list" role="list" x-ref="list">
-      {#insert content}{/insert}
+      {#let closable=null id=null vertical=null}{#insert content}{/insert}{/let}
       <li class="pf-v6-c-label-group__list-item pha-label-group__overflow" x-show="overflowVisible" x-cloak>
         <button class="pf-v6-c-label pf-m-overflow" type="button" @click="toggle()" :aria-expanded="expanded.toString()">
           <span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text" x-text="expanded ? (expandedText || 'Show Less') : (collapsedTextTemplate.replace('REMAINING_PLACEHOLDER', hiddenCount.toString()))"></span></span>

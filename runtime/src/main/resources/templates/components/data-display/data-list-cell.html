@@ -2,4 +2,4 @@
 {! Optional: id — DOM id on the cell.
              modifiers — extra pf-m-* classes, e.g. "pf-m-flex-2", "pf-m-no-fill",
              "pf-m-truncate", "pf-m-break-word", "pf-m-nowrap". !}
-<div class="pf-v6-c-data-list__cell{#if modifiers??} {modifiers}{/if}"{#if id??} id="{id}"{/if}>{#insert /}</div>
+<div class="pf-v6-c-data-list__cell{#if modifiers??} {modifiers}{/if}"{#if id??} id="{id}"{/if}>{#let id=null modifiers=null}{#insert /}{/let}</div>

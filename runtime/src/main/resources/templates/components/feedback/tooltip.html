@@ -24,10 +24,10 @@
 {#else}
 <div class="pha-tooltip" x-data="phaTooltip()">
   <span x-ref="trigger" @mouseenter="show()" @mouseleave="hide()" @focusin="show()" @focusout="hide()"{#if id??} aria-describedby="{id}"{/if}>{! Shadow id/attrs so they don't leak into composed
-      buttons via Qute include-data inheritance — explicit values on the button still win. !}{#let id=null attrs=null}{#insert trigger}{/insert}{/let}</span>
+      buttons via Qute include-data inheritance — explicit values on the button still win. !}{#let id=null attrs=null position=null}{#insert trigger}{/insert}{/let}</span>
   <div x-ref="tip" x-show="open" x-cloak role="tooltip"{#if id??} id="{id}"{/if}{#if ariaLive??} aria-live="{ariaLive}"{/if} class="pf-v6-c-tooltip pf-m-{#if position??}{position}{#else}top{/if}">
     <div class="pf-v6-c-tooltip__arrow"></div>
-    <div class="pf-v6-c-tooltip__content{#if textAlignLeft??} pf-m-text-align-left{/if}">{#insert tip}{/insert}</div>
+    <div class="pf-v6-c-tooltip__content{#if textAlignLeft??} pf-m-text-align-left{/if}">{#let position=null}{#insert tip}{/insert}{/let}</div>
   </div>
 </div>
 {/if}

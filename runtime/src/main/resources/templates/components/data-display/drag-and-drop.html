@@ -1,2 +1,2 @@
 {! Drag and drop — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the container. !}
-<div{#if id??} id="{id}"{/if}>{#insert content}{/insert}</div>
+<div{#if id??} id="{id}"{/if}>{#let id=null}{#insert content}{/insert}{/let}</div>

@@ -34,9 +34,9 @@
 {#else}
 <header class="pf-v6-c-masthead{#if displayStack??} pf-m-display-stack{/if}{#if displayInline??} pf-m-display-inline{/if}{#if inset??} pf-m-inset-{inset}{/if}"{#if id??} id="{id}"{/if}>
   <div class="pf-v6-c-masthead__main">
-    {#insert toggle}{/insert}
-    <div class="pf-v6-c-masthead__brand">{#insert brand}{/insert}</div>
+    {#let id=null inset=null}{#insert toggle}{/insert}{/let}
+    <div class="pf-v6-c-masthead__brand">{#let id=null inset=null}{#insert brand}{/insert}{/let}</div>
   </div>
-  <div class="pf-v6-c-masthead__content">{#insert content}{/insert}</div>
+  <div class="pf-v6-c-masthead__content">{#let id=null inset=null}{#insert content}{/insert}{/let}</div>
 </header>
 {/if}

@@ -45,7 +45,7 @@
   <div class="pf-v6-c-empty-state__content">
     <div class="pf-v6-c-empty-state__header">
       {#if customIcon??}
-      <div class="pf-v6-c-empty-state__icon">{#insert icon}{/insert}</div>
+      <div class="pf-v6-c-empty-state__icon">{#let status=null}{#insert icon}{/insert}{/let}</div>
       {#else if iconName??}
       <div class="pf-v6-c-empty-state__icon">{icons:svg(iconName).raw}</div>
       {/if}
@@ -59,7 +59,7 @@
     {#if hasActions??}
     {! Shadow size/id to null so the empty-state's own layout params don't leak (Qute include-data
        inheritance) into composed action buttons; an explicit size/id on a button still overrides. !}
-    <div class="pf-v6-c-empty-state__footer">{#let size=null id=null}{#insert actions}{/insert}{/let}</div>
+    <div class="pf-v6-c-empty-state__footer">{#let size=null id=null status=null}{#insert actions}{/insert}{/let}</div>
     {/if}
   </div>
 </div>

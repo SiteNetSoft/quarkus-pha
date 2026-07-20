@@ -26,7 +26,7 @@
   {#else if variant??}
   <span class="pf-v6-c-helper-text__item-icon">{#if variant is 'success'}{icons:svg('fa:circle-check').raw}{#else if variant is 'warning'}{icons:svg('fa:triangle-exclamation').raw}{#else if variant is 'error'}{icons:svg('fa:circle-exclamation').raw}{#else if variant is 'indeterminate'}{icons:svg('fa:minus').raw}{/if}</span>
   {/if}
-  <span class="pf-v6-c-helper-text__item-text">{#insert/}</span>
+  <span class="pf-v6-c-helper-text__item-text">{#let component=null dynamic=null variant=null}{#insert/}{/let}</span>
   {#if screenReaderText??}<span class="pf-v6-screen-reader">{screenReaderText}</span>{/if}
 </{c}>
 {/let}

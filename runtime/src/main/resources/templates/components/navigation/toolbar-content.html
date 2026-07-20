@@ -1,4 +1,4 @@
 {! Toolbar content — one content row. Compose toolbar-content-section (and an
    optional expandable filters section) inside. Main-block content. !}
 {! Optional: attrs — raw passthrough (e.g. x-show for an expandable row). !}
-<div class="pf-v6-c-toolbar__content{#if modifiers??} {modifiers}{/if}"{#if attrs??} {attrs.raw}{/if}>{#let attrs=null}{#insert /}{/let}</div>
+<div class="pf-v6-c-toolbar__content{#if modifiers??} {modifiers}{/if}"{#if attrs??} {attrs.raw}{/if}>{#let attrs=null modifiers=null}{#insert /}{/let}</div>

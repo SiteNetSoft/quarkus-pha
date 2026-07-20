@@ -12,6 +12,6 @@
 </time>
 {#else}
 <time class="pf-v6-c-timestamp{#if inline??} pf-m-inline{/if}"{#if id??} id="{id}"{/if}{#if datetime??} datetime="{datetime}"{/if}{#if tooltip??} title="{tooltip}"{/if}>
-  <span class="pf-v6-c-timestamp__text">{#insert/}</span>
+  <span class="pf-v6-c-timestamp__text">{#let datetime=null id=null inline=null}{#insert/}{/let}</span>
 </time>
 {/if}
