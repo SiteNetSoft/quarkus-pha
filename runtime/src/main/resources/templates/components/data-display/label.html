@@ -69,21 +69,21 @@
 <a class="pf-v6-c-label{#if color??} pf-m-{color}{/if}{#if status??} pf-m-{status}{/if}{#if variant??} pf-m-{variant}{#else} pf-m-filled{/if}{#if compact??} pf-m-compact{/if}{#if disabled??} pf-m-disabled{/if}{#if clickable??} pf-m-clickable{/if}{#if editable??} pf-m-editable{/if}"{#if id??} id="{id}"{/if} href="{href}">
   <span class="pf-v6-c-label__content">
     {#if iconName??}<span class="pf-v6-c-label__icon">{icons:svg(iconName).raw}</span>{#else if status??}<span class="pf-v6-c-label__icon">{#if status is 'info'}{icons:svg('fa:circle-info').raw}{#else if status is 'success'}{icons:svg('fa:circle-check').raw}{#else if status is 'warning'}{icons:svg('fa:triangle-exclamation').raw}{#else if status is 'danger'}{icons:svg('fa:circle-exclamation').raw}{#else if status is 'custom'}{icons:svg('fa:bell').raw}{/if}</span>{/if}
-    <span class="pf-v6-c-label__text">{#insert/}</span>
+    <span class="pf-v6-c-label__text">{#let clickable=null color=null compact=null disabled=null editable=null href=null id=null removable=null status=null variant=null}{#insert/}{/let}</span>
   </span>
 </a>
 {#else if vv is 'overflow' || vv is 'add'}
 {! PF renders overflow/add labels as buttons — they are interactive affordances !}
 <button type="button" class="pf-v6-c-label pf-m-{variant}{#if compact??} pf-m-compact{/if}{#if disabled??} pf-m-disabled{/if}"{#if id??} id="{id}"{/if}{#if disabled??} disabled{/if}>
   <span class="pf-v6-c-label__content">
-    <span class="pf-v6-c-label__text">{#insert/}</span>
+    <span class="pf-v6-c-label__text">{#let clickable=null color=null compact=null disabled=null editable=null href=null id=null removable=null status=null variant=null}{#insert/}{/let}</span>
   </span>
 </button>
 {#else}
 <span class="pf-v6-c-label{#if color??} pf-m-{color}{/if}{#if status??} pf-m-{status}{/if}{#if variant??} pf-m-{variant}{#else} pf-m-filled{/if}{#if compact??} pf-m-compact{/if}{#if disabled??} pf-m-disabled{/if}{#if clickable??} pf-m-clickable{/if}{#if editable??} pf-m-editable{/if}"{#if id??} id="{id}"{/if}>
   <span class="pf-v6-c-label__content"{#if editable??} tabindex="0"{/if}>
     {#if iconName??}<span class="pf-v6-c-label__icon">{icons:svg(iconName).raw}</span>{#else if status??}<span class="pf-v6-c-label__icon">{#if status is 'info'}{icons:svg('fa:circle-info').raw}{#else if status is 'success'}{icons:svg('fa:circle-check').raw}{#else if status is 'warning'}{icons:svg('fa:triangle-exclamation').raw}{#else if status is 'danger'}{icons:svg('fa:circle-exclamation').raw}{#else if status is 'custom'}{icons:svg('fa:bell').raw}{/if}</span>{/if}
-    <span class="pf-v6-c-label__text">{#insert/}</span>
+    <span class="pf-v6-c-label__text">{#let clickable=null color=null compact=null disabled=null editable=null href=null id=null removable=null status=null variant=null}{#insert/}{/let}</span>
   </span>
   {#if removable??}<span class="pf-v6-c-label__actions">
     {! pf-m-no-padding matches PF's label close button — without it the plain button's padding

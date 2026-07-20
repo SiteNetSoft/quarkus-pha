@@ -50,6 +50,6 @@
     <span class="pf-v6-c-expandable-section__toggle-icon"> {icons:svg('fa:angle-right').raw} </span>
     {toggleText}
   </button>
-  <div class="pf-v6-c-expandable-section__content" x-show="expanded" x-cloak>{#insert content}{/insert}</div>
+  <div class="pf-v6-c-expandable-section__content" x-show="expanded" x-cloak>{#let expanded=null id=null section=null}{#insert content}{/insert}{/let}</div>
 </div>
 {/if}

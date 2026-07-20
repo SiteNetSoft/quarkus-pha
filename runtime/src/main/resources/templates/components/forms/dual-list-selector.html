@@ -1,4 +1,4 @@
 {! Dual list selector — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the selector. !}
 {! Optional: modifiers — extra pf-m-* classes on the root (e.g. pf-m-animate-expand for animated trees). !}
 {! Optional: attrs — raw attribute passthrough (Alpine directives etc.), rendered verbatim. !}
-<div class="pf-v6-c-dual-list-selector{#if modifiers??} {modifiers}{/if}"{#if id??} id="{id}"{/if}{#if attrs??} {attrs.raw}{/if}>{#insert content}{/insert}</div>
+<div class="pf-v6-c-dual-list-selector{#if modifiers??} {modifiers}{/if}"{#if id??} id="{id}"{/if}{#if attrs??} {attrs.raw}{/if}>{#let attrs=null id=null modifiers=null}{#insert content}{/insert}{/let}</div>

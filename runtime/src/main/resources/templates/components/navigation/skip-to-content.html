@@ -5,5 +5,5 @@ MUST be filled — the link's !} {! accessible name comes from the text. Use "Sk
 {#if skipToContent??}
 <a href="{skipToContent.href}" class="pf-v6-c-skip-to-content"{#if skipToContent.id??} id="{skipToContent.id}"{/if}>{skipToContent.text}</a>
 {#else}
-<a href="{href}" class="pf-v6-c-skip-to-content"{#if id??} id="{id}"{/if}>{#insert/}</a>
+<a href="{href}" class="pf-v6-c-skip-to-content"{#if id??} id="{id}"{/if}>{#let id=null}{#insert/}{/let}</a>
 {/if}

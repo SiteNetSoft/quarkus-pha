@@ -18,10 +18,10 @@
 <header class="pf-v6-c-modal-box__header{#if hasModalHelp??} pf-m-help{/if}">
   <div class="pf-v6-c-modal-box__header-main">
   <{h} class="pf-v6-c-modal-box__title{#if iconName?? || variant??} pf-m-icon{/if}{#if statusTitle?? && variant??} pf-m-{variant}{/if}"{#if modalId??} id="{modalId}-title"{/if}>
-    {#if iconName??}<span class="pf-v6-c-modal-box__title-icon">{icons:svg(iconName).raw}</span>{#else if variant??}<span class="pf-v6-c-modal-box__title-icon">{#if variant is 'danger'}{icons:svg('fa:circle-exclamation').raw}{#else if variant is 'warning'}{icons:svg('fa:exclamation-triangle').raw}{#else if variant is 'success'}{icons:svg('fa:circle-check').raw}{#else if variant is 'custom'}{icons:svg('fa:bell').raw}{#else}{icons:svg('fa:circle-info').raw}{/if}</span>{/if}{#if alert?? && variant??}<span class="pf-v6-screen-reader">{#if variant is 'custom'}Default{#else if variant is 'success'}Success{#else if variant is 'warning'}Warning{#else if variant is 'danger'}Danger{#else}Info{/if} alert:</span>{/if}<span class="pf-v6-c-modal-box__title-text">{#insert /}</span>
+    {#if iconName??}<span class="pf-v6-c-modal-box__title-icon">{icons:svg(iconName).raw}</span>{#else if variant??}<span class="pf-v6-c-modal-box__title-icon">{#if variant is 'danger'}{icons:svg('fa:circle-exclamation').raw}{#else if variant is 'warning'}{icons:svg('fa:exclamation-triangle').raw}{#else if variant is 'success'}{icons:svg('fa:circle-check').raw}{#else if variant is 'custom'}{icons:svg('fa:bell').raw}{#else}{icons:svg('fa:circle-info').raw}{/if}</span>{/if}{#if alert?? && variant??}<span class="pf-v6-screen-reader">{#if variant is 'custom'}Default{#else if variant is 'success'}Success{#else if variant is 'warning'}Warning{#else if variant is 'danger'}Danger{#else}Info{/if} alert:</span>{/if}<span class="pf-v6-c-modal-box__title-text">{#let variant=null}{#insert /}{/let}</span>
   </{h}>
   {#if descriptionText??}<div class="pf-v6-c-modal-box__description">{descriptionText}</div>{/if}
   </div>
-  {#if hasModalHelp??}{#insert modalHelp}{/insert}{/if}
+  {#if hasModalHelp??}{#let variant=null}{#insert modalHelp}{/insert}{/let}{/if}
 </header>
 {/let}

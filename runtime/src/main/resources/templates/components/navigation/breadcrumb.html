@@ -70,7 +70,7 @@
 {#else}
 <nav class="pf-v6-c-breadcrumb"{#if id??} id="{id}"{/if} aria-label="{#if ariaLabel??}{ariaLabel}{#else}Breadcrumb{/if}">
   <ol class="pf-v6-c-breadcrumb__list">
-    {#if crumbs??}{#for c in crumbs}{#include components/navigation/breadcrumb-item href=c.href current=c.current}{c.text}{/include}{/for}{#else}{#insert items}{/insert}{/if}
+    {#if crumbs??}{#for c in crumbs}{#include components/navigation/breadcrumb-item href=c.href current=c.current}{c.text}{/include}{/for}{#else}{#let crumbs=null id=null}{#insert items}{/insert}{/let}{/if}
   </ol>
 </nav>
 {/if}

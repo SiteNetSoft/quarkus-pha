@@ -20,7 +20,7 @@
 {#else}
 <span class="pf-v6-c-form-control{#if validated??} pf-m-{validated}{/if}{#if disabled??} pf-m-disabled{/if}" id="{id}">
   <select id="{id}-field" name="{id}"{#if disabled??} disabled{/if}{#if required??} required{/if} aria-label="{#if ariaLabel??}{ariaLabel}{#else}Select{/if}"{#if validated??}{#if validated is 'error'} aria-invalid="true"{/if}{/if}>
-    {#insert options}{/insert}
+    {#let disabled=null required=null validated=null}{#insert options}{/insert}{/let}
   </select>
   <span class="pf-v6-c-form-control__toggle-icon">{icons:svg('fa:caret-down').raw}</span>
   {#if validated??}

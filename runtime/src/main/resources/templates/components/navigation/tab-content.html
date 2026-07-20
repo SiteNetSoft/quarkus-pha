@@ -10,5 +10,5 @@
 {!   cloak   (optional) — add x-cloak (use on non-default panels to avoid a flash   !}
 {!                        of the hidden panel before Alpine initializes).          !}
 <section class="pf-v6-c-tab-content{#if secondary??} pf-m-secondary{/if}" role="tabpanel" x-show="active === '{tabKey}'"{#if cloak??} x-cloak{/if}>
-  <div class="pf-v6-c-tab-content__body{#if padding??} pf-m-padding{/if}">{#insert/}</div>
+  <div class="pf-v6-c-tab-content__body{#if padding??} pf-m-padding{/if}">{#let cloak=null padding=null secondary=null}{#insert/}{/let}</div>
 </section>

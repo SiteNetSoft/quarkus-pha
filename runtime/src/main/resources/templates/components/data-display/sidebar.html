@@ -19,8 +19,8 @@
   {#if id??}id="{id}"{/if}
 >
   <div class="pf-v6-c-sidebar__main">
-    <div class="pf-v6-c-sidebar__panel">{#insert panel}{/insert}</div>
-    <div class="pf-v6-c-sidebar__content">{#insert content}{/insert}</div>
+    <div class="pf-v6-c-sidebar__panel">{#let gutter=null id=null stack=null}{#insert panel}{/insert}{/let}</div>
+    <div class="pf-v6-c-sidebar__content">{#let gutter=null id=null stack=null}{#insert content}{/insert}{/let}</div>
   </div>
 </div>
 {/if}

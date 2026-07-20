@@ -146,7 +146,7 @@
   </div>
   {/if}
   {#if hasActionLinks??}
-  <div class="pf-v6-c-alert__action-group" {#if expandable??}x-show="expanded"{/if}>{#insert actionLinks}{/insert}</div>
+  <div class="pf-v6-c-alert__action-group" {#if expandable??}x-show="expanded"{/if}>{#let closable=null description=null expandable=null id=null inline=null plain=null variant=null}{#insert actionLinks}{/insert}{/let}</div>
   {/if}
 </div>
 {/let}

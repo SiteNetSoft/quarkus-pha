@@ -50,7 +50,7 @@
         {#if ariaLabel??}aria-label="{ariaLabel}"{/if}
         x-effect="$el.querySelectorAll('.pf-v6-c-menu__list-item').forEach(li => { const text = li.querySelector('.pf-v6-c-menu__item-text'); li.style.display = !search || (text && text.textContent.toLowerCase().includes(search.toLowerCase())) ? '' : 'none'; })"
       >
-        {#insert content}{/insert}
+        {#let id=null}{#insert content}{/insert}{/let}
       </ul>
     </div>
   </div>
