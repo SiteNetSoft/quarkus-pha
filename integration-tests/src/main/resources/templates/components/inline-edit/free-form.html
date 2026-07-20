@@ -1,13 +1,3 @@
 {! Free form edit — a bare __editable-text block. Core renders it inert; ours is
    actually editable (contenteditable), per the live-over-static rule. !}
-<div class="pf-v6-c-inline-edit" id="ie-free-form">
-  <div
-    class="pf-v6-c-inline-edit__editable-text"
-    role="textbox"
-    id="ie-free-form-text"
-    contenteditable="true"
-    aria-label="Editable free form text"
-  >
-    Free form text — click and type to edit.
-  </div>
-</div>
+{#include components/forms/inline-edit inlineEdit=demoIeFreeForm /}
