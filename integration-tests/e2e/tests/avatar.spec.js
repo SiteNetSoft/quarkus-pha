@@ -143,6 +143,21 @@ test.describe("Avatar", () => {
     const res = await request.get("/components/avatar/source/basic");
     expect(res.status()).toBe(200);
     const body = await res.text();
-    expect(body).toContain("pf-v6-c-avatar");
+    expect(body).toContain("components/data-display/avatar");
+  });
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/avatar");
+      for (const ex of ["basic", "colors", "sizes"]) {
+        const card = page.locator(`[data-rendered-href="/components/avatar/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/avatar/source-java/colors");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('Avatar.silhouette("Red avatar").color("red")');
+    });
   });
 });

@@ -58,6 +58,24 @@ public class AvatarExamplesRoutes {
     }
 
     @GET
+    @Path("/avatar/source-java/{example}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String sourceJava(@PathParam("example") String example) {
+        if (!EXAMPLES.contains(example)) {
+            throw new NotFoundException("Unknown avatar example: " + example);
+        }
+        String resourcePath = "/code-samples/avatar/" + example + ".java";
+        try (InputStream in = getClass().getResourceAsStream(resourcePath)) {
+            if (in == null) {
+                throw new NotFoundException("Missing Java sample for: " + example);
+            }
+            return new String(in.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed reading " + resourcePath, e);
+        }
+    }
+
+    @GET
     @Path("/avatar/{example}")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance standalone(@PathParam("example") String example) {

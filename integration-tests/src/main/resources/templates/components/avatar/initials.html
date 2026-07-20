@@ -2,34 +2,5 @@
    (single initial recommended). First a bordered default avatar, then the nine colorful
    variants, all with initial "C" — mirrors PF core's "With initials" example. !}
 <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap">
-  <div class="pf-v6-c-avatar pf-m-bordered" id="avatar-initials" role="img" aria-label="Avatar with initial C">
-    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
-  </div>
-  <div class="pf-v6-c-avatar pf-m-colorful pf-m-red" role="img" aria-label="Red avatar with initial C">
-    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
-  </div>
-  <div class="pf-v6-c-avatar pf-m-colorful pf-m-orangered" role="img" aria-label="Orange-red avatar with initial C">
-    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
-  </div>
-  <div class="pf-v6-c-avatar pf-m-colorful pf-m-orange" role="img" aria-label="Orange avatar with initial C">
-    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
-  </div>
-  <div class="pf-v6-c-avatar pf-m-colorful pf-m-yellow" role="img" aria-label="Yellow avatar with initial C">
-    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
-  </div>
-  <div class="pf-v6-c-avatar pf-m-colorful pf-m-green" role="img" aria-label="Green avatar with initial C">
-    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
-  </div>
-  <div class="pf-v6-c-avatar pf-m-colorful pf-m-teal" role="img" aria-label="Teal avatar with initial C">
-    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
-  </div>
-  <div class="pf-v6-c-avatar pf-m-colorful pf-m-blue" role="img" aria-label="Blue avatar with initial C">
-    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
-  </div>
-  <div class="pf-v6-c-avatar pf-m-colorful pf-m-purple" role="img" aria-label="Purple avatar with initial C">
-    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
-  </div>
-  <div class="pf-v6-c-avatar pf-m-colorful pf-m-gray" role="img" aria-label="Gray avatar with initial C">
-    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
-  </div>
+  {#for a in demoAvatarsInitials}{#include components/data-display/avatar avatar=a /}{/for}
 </div>

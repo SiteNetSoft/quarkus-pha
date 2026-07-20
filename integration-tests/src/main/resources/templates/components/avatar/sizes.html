@@ -2,36 +2,5 @@
    Mirrors PF core's "Size variations" example (div flavour); the img flavour at every size
    is shown in the Bordered sizes example below. !}
 <div style="display: flex; align-items: center; gap: 1rem">
-  <div
-    class="pf-v6-c-avatar pf-m-colorful pf-m-red pf-m-sm"
-    id="avatar-sm"
-    role="img"
-    aria-label="Small red avatar with initial C"
-  >
-    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
-  </div>
-  <div
-    class="pf-v6-c-avatar pf-m-colorful pf-m-red pf-m-md"
-    id="avatar-md"
-    role="img"
-    aria-label="Medium red avatar with initial C"
-  >
-    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
-  </div>
-  <div
-    class="pf-v6-c-avatar pf-m-colorful pf-m-red pf-m-lg"
-    id="avatar-lg"
-    role="img"
-    aria-label="Large red avatar with initial C"
-  >
-    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
-  </div>
-  <div
-    class="pf-v6-c-avatar pf-m-colorful pf-m-red pf-m-xl"
-    id="avatar-xl"
-    role="img"
-    aria-label="Extra large red avatar with initial C"
-  >
-    <span class="pf-v6-c-avatar__initials" aria-hidden="true">C</span>
-  </div>
+  {#for a in demoAvatarsSizes}{#include components/data-display/avatar avatar=a /}{/for}
 </div>
