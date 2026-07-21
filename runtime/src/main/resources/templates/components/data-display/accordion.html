@@ -13,8 +13,8 @@
 {! Slot:                                                                            !}
 {!   {#items} — one or more accordion-item includes. Named "items" (not "content")  !}
 {!             to avoid colliding with the example-card partial's "content" slot.   !}
-{!             The root id is shadowed to null around the insert so it can't leak   !}
-{!             onto the composed items (which carry their own itemId).              !}
+{!             The root id/bordered are shadowed to null around the insert so they  !}
+{!             can't leak onto the composed items (which carry their own itemId).   !}
 {! Model mode: pass accordion=<org.sitenetsoft.quarkus.pha.model.Accordion> (built via
    Accordion.of(id)) — self-stated items by default, singleExpand() for shared state,
    definitionList() for the dl/dt/dd shape. !}

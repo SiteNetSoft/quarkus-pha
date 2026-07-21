@@ -51,8 +51,10 @@
   {#if selectedExpr??}:class="({selectedExpr}) ? 'pf-m-selected' : ''"{/if}
   {#if attrs??}{attrs.raw}{/if}
 >
-  {! Shadow id/attrs so they don't leak into composed section includes (Qute include-data
-     inheritance) — an explicit id on card-title etc. still overrides. !}
+  {! Shadow id/attrs and the card's state/variant params (clickable, compact, disabled,
+     expandable, plain, secondary, selectable, selected) so they don't leak into composed
+     section includes (Qute include-data inheritance) — an explicit id on card-title etc.
+     still overrides. !}
   {#let id=null attrs=null clickable=null compact=null disabled=null expandable=null plain=null secondary=null selectable=null selected=null}{#insert /}{/let}
 </div>
 {/if}
