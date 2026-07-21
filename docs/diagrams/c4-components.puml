@@ -1,0 +1,26 @@
+@startuml c4-components
+!include <C4/C4_Component>
+
+title Component View — quarkus-pha modules
+
+Container_Boundary(runtime, "runtime module (ships to consumers)") {
+  Component(templates, "Qute fragment templates", "templates/components/**", "One self-contained HTML fragment per component; include shells with optional params")
+  Component(models, "Typed component models", "org.sitenetsoft.quarkus.pha.model", "Builder-style @TemplateData Java API; renders the same canonical markup as the shells")
+  Component(icons, "IconResolver", "Qute namespace icons:", "Inlines vendored FA/pficon SVGs server-side; placeholder on unknown names")
+  Component(assets, "Static assets", "META-INF/resources/web/**", "PatternFly CSS, HTMX, Alpine, charts/maps libs, project CSS/JS — served at /web/...")
+}
+
+Container_Boundary(deployment, "deployment module (build-time only)") {
+  Component(processor, "PhaProcessor", "@BuildStep", "Feature registration; resolves the extension version into the pha.asset-version cache-busting property")
+}
+
+Container_Boundary(consumer, "Consumer application") {
+  Component(routes, "App routes", "JAX-RS + Qute", "Renders pages/fragments; passes data or typed models to component templates")
+}
+
+Rel(routes, templates, "includes / renders")
+Rel(routes, models, "builds and passes to templates")
+Rel(models, templates, "render via component shells")
+Rel(templates, icons, "icons:svg(...)")
+Rel(processor, assets, "versions asset URLs at build time")
+@enduml
