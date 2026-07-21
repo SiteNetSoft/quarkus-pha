@@ -22,12 +22,16 @@ rendered bare after the regions — the usual spot for a direct card-title inclu
     </button>
   </div>
   {/if} {#if hasCardActions??}
-  <div class="pf-v6-c-card__actions">{#let id=null attrs=null expandable=null wrap=null}{#insert cardActions}{/insert}{/let}</div>
+  <div class="pf-v6-c-card__actions">
+    {#let id=null attrs=null expandable=null wrap=null}{#insert cardActions}{/insert}{/let}
+  </div>
   {/if} {#if hasSelectableActions??}
   <div class="pf-v6-c-card__selectable-actions">
     {#let id=null attrs=null expandable=null wrap=null}{#insert cardSelectableActions}{/insert}{/let}
   </div>
   {/if} {#if hasHeaderMain??}
-  <div class="pf-v6-c-card__header-main">{#let id=null attrs=null expandable=null wrap=null}{#insert cardHeaderMain}{/insert}{/let}</div>
+  <div class="pf-v6-c-card__header-main">
+    {#let id=null attrs=null expandable=null wrap=null}{#insert cardHeaderMain}{/insert}{/let}
+  </div>
   {/if} {#let attrs=null expandable=null wrap=null}{#insert /}{/let}
 </div>
