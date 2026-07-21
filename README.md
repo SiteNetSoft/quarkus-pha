@@ -1,5 +1,6 @@
 # Quarkus pha
 > pha = [PatternFly](https://www.patternfly.org/) [HTMX](https://htmx.org/) [Alpine.js](https://alpinejs.dev/)
+> Live component docs & demos: <https://sitenetsoft.org/quarkus-pha> (static build — for the fully interactive version, run the showcase locally)
 
 <p align="center">
   <picture>
@@ -24,6 +25,100 @@ and every UI transition is a server-rendered fragment swap.
 | Server-driven UI | HTMX |
 | Data viz / maps | Apache ECharts, D3.js, MapLibre |
 | Templates | Qute (Quarkus-native) |
+
+## Why HTMX + Alpine.js instead of React or Angular
+
+Not because SPAs are bad — because for server-rendered business UIs, the SPA
+architecture solves problems this stack doesn't have, and charges for them anyway.
+
+**1. One state, not two.** A SPA framework keeps a client-side copy of server
+state — fetched as JSON, cached in stores, invalidated, and re-synchronized on
+every mutation. The developer manages two state machines and the drift between
+them. Here there is nothing to synchronize: the DOM the server rendered *is*
+the application state ([HATEOAS](https://htmx.org/essays/hateoas/) — hypermedia
+as the engine of application state). When state changes, the server renders the
+new fragment and HTMX swaps it in. Alpine holds only throwaway view state —
+"is this menu open" — that no one needs to reconcile with the backend.
+
+**2. Business logic lives once, on the server.** Because React and Angular own
+a frontend state, the rules that govern that state — validation, permissions,
+what's visible when — end up implemented twice: once in Java, once in the
+framework. Two implementations drift, and the JSON API between them becomes a
+second public interface to secure and version. In this stack the server is the
+only place business logic exists; the browser receives its conclusions as HTML.
+
+**3. Lighter, faster, easier to learn.** htmx is ~16 kB gzipped and
+dependency-free; Alpine's entire API is [15 attributes, 6 properties and 2
+methods](https://alpinejs.dev/) — both libraries together ship ~32 kB gzipped,
+before React itself (let alone an app bundle) has loaded. The learning curve is
+"attributes in your HTML", not a framework's component lifecycle, hooks rules,
+and toolchain. And the end-user's machine does less: no bundle parse, no
+hydration, no client-side render — first paint is the page the server sent.
+The best public data point is [Contexte's production port from React to
+htmx](https://htmx.org/essays/a-real-world-react-to-htmx-port/): 67 % less
+code, 96 % fewer JS dependencies, 50–60 % faster time-to-interactive, 46 %
+lower browser memory use, with no loss in user experience.
+
+Two more that follow from the architecture:
+
+- **No frontend build step.** Consumers add a Gradle dependency and write Qute.
+  No Node toolchain, no bundler, no npm tree to audit.
+- **Immune to framework churn.** Tiny, stable APIs mean no framework-major
+  migration every couple of years — and PatternFly is consumed as CSS + tokens
+  only, so its React layer's churn never reaches this stack.
+
+The honest trade-off: highly offline, optimistic-UI, or editor-like apps
+(think Figma, not dashboards) genuinely benefit from a client-side framework.
+This stack targets the other 90% of business UIs — data-driven pages, forms,
+tables, dashboards — where the server is already the source of truth.
+
+## Architecture
+
+Four views, biggest picture first. Regenerate with `bash scripts/diagrams.sh`
+(sources in `docs/diagrams/`).
+
+### System context
+
+quarkus-pha is a Quarkus extension a consumer application depends on. The browser
+receives server-rendered PatternFly DOM; HTMX moves fragments, Alpine.js reacts
+locally. There is no JS framework and no client-side routing.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/c4-context-dark.svg">
+  <img alt="C4 system context" src="docs/diagrams/c4-context.svg">
+</picture>
+
+### Inside the extension
+
+The runtime module ships Qute fragment templates, the typed Java component models,
+the `icons:` resolver, and all static assets served under `/web`. The deployment
+module runs at build time only.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/c4-components-dark.svg">
+  <img alt="C4 component view" src="docs/diagrams/c4-components.svg">
+</picture>
+
+### A plain page render — no HTMX
+
+HTMX is optional. Components render identically in an ordinary full-page Qute
+response, and interactivity that needs no server data afterwards — tabs,
+toggles, menus — is pure Alpine local state with zero round-trips.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/sequence-page-render-dark.svg">
+  <img alt="Plain page render sequence" src="docs/diagrams/sequence-page-render.svg">
+</picture>
+
+### One HTMX interaction, end to end
+
+The core contract: the server always renders the DOM. JSON never becomes HTML in
+the browser.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/sequence-htmx-render-dark.svg">
+  <img alt="HTMX render sequence" src="docs/diagrams/sequence-htmx-render.svg">
+</picture>
 
 ## Using components
 
@@ -110,7 +205,9 @@ standalone, and how to add a new test layer.
 
 ## Running the showcase in dev mode
 
-The component showcase lives in the `integration-tests` module and runs on port 9090:
+The component showcase lives in the `integration-tests` module and runs on port 9090.
+Gradle needs **Java 25** — the snippets below use the Debian/Ubuntu OpenJDK path;
+adjust `JAVA_HOME` to your install (or omit it if your default `java` is already 25):
 
 ```shell script
 JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64 \
@@ -119,44 +216,35 @@ JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64 \
 
 Then browse <http://localhost:9090/> for the component index.
 
-## Packaging and running the application
+## Packaging the showcase
 
-The application can be packaged using:
-
-```shell script
-./gradlew build
-```
-
-It produces the `quarkus-run.jar` file in the `build/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `build/quarkus-app/lib/` directory.
-
-The application is now runnable using `java -jar build/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
+The showcase app (the `integration-tests` module) packages like any Quarkus app:
 
 ```shell script
-./gradlew build -Dquarkus.package.jar.type=uber-jar
+JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64 \
+  ./gradlew :quarkus-pha-integration-tests:quarkusBuild
 ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar build/*-runner.jar`.
+It produces `integration-tests/build/quarkus-app/quarkus-run.jar`, runnable with
+`java -jar integration-tests/build/quarkus-app/quarkus-run.jar`.
 
 ## Creating a native executable
 
-You can create a native executable using:
+The extension is native-image compatible — the full Playwright suite passes
+against the native binary. Build it (in a container, no local GraalVM needed):
 
 ```shell script
-./gradlew build -Dquarkus.native.enabled=true
+JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64 \
+  ./gradlew :quarkus-pha-integration-tests:quarkusBuild \
+  -Dquarkus.native.enabled=true \
+  -Dquarkus.package.jar.enabled=false \
+  -Dquarkus.native.container-build=true
 ```
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
-
-```shell script
-./gradlew build -Dquarkus.native.enabled=true -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./build/quarkus-pha-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/gradle-tooling>.
+(`-Dquarkus.package.jar.enabled=false` is required — Quarkus refuses to emit
+both JAR and native outputs in one build.) The result is
+`integration-tests/build/quarkus-pha-integration-tests-1.0.0-SNAPSHOT-runner`.
+See <https://quarkus.io/guides/gradle-tooling> for more on native builds.
 
 ## Units
 - [components](runtime/src/main/resources/templates/components)
@@ -189,160 +277,7 @@ If you ever need to add demo-only styling (e.g. consistent padding around the
 example body), define `.ws-preview-html { … }` in `pha.css` rather than
 inlining `style="…"` on each fragment.
 
-## TODO
-- [x] Icon (https://www.patternfly.org/components/icon)
-- [x] Title (https://www.patternfly.org/components/title)
-- [x] Helper text (https://www.patternfly.org/components/helper-text)
-- [x] List (https://www.patternfly.org/components/list)
-- [x] Content (https://www.patternfly.org/components/content)
-- [x] Divider (https://www.patternfly.org/components/divider)
-- [x] Panel (https://www.patternfly.org/components/panel)
-- [x] Button (https://www.patternfly.org/components/button)
-- [x] Label (https://www.patternfly.org/components/label/)
-- [x] Skeleton (https://www.patternfly.org/components/skeleton)
-- [x] Progress (https://www.patternfly.org/components/progress)
-- [x] Backdrop (https://www.patternfly.org/components/backdrop)
-- [x] Background image (https://www.patternfly.org/components/background-image)
-- [x] Breadcrumb (https://www.patternfly.org/components/breadcrumb)
-- [x] Back to the top (https://www.patternfly.org/components/back-to-top)
-- [x] Action list (https://www.patternfly.org/components/action-list/)
-- [x] Avatar (https://www.patternfly.org/components/avatar/)
-- [x] Badge (https://www.patternfly.org/components/badge/)
-- [x] Banner (https://www.patternfly.org/components/banner/)
-- [x] Brand (https://www.patternfly.org/components/brand/)
-- [x] Layouts
-  - [x] Bullseye (https://www.patternfly.org/layouts/bullseye)
-  - [x] Flex (https://www.patternfly.org/layouts/flex)
-  - [x] Gallery (https://www.patternfly.org/layouts/gallery)
-  - [x] Grid (https://www.patternfly.org/layouts/grid)
-  - [x] Level (https://www.patternfly.org/layouts/level)
-  - [x] Split (https://www.patternfly.org/layouts/split)
-  - [x] Stack (https://www.patternfly.org/layouts/stack)
-- [x] Form
-  - [x] Form control (https://www.patternfly.org/components/forms/form-control)
-  - [x] Checkbox (https://www.patternfly.org/components/forms/checkbox/)
-  - [x] Form select (https://www.patternfly.org/components/forms/form-select)
-  - [x] Form (https://www.patternfly.org/components/forms/form)
-  - [x] Radio (https://www.patternfly.org/components/forms/radio)
-  - [x] Text area (https://www.patternfly.org/components/forms/text-area)
-  - [x] Text input (https://www.patternfly.org/components/forms/text-input)
-- [x] Timestamp (https://www.patternfly.org/components/timestamp)
-- [x] Truncate (https://www.patternfly.org/components/truncate)
-- [x] Tooltip (https://www.patternfly.org/components/tooltip)
-- [x] Toggle group (https://www.patternfly.org/components/toggle-group)
-- [x] Search input (https://www.patternfly.org/components/search-input)
-- [x] Popover (https://www.patternfly.org/components/popover)
-- [x] Slider (https://www.patternfly.org/components/slider)
-- [x] Spinner (https://www.patternfly.org/components/spinner)
-- [x] Switch (https://www.patternfly.org/components/switch)
-- [x] Text input group (https://www.patternfly.org/components/text-input-group)
-- [x] Jump links (https://www.patternfly.org/components/jump-links) -> This is what is used in the web page of Tree view
-- [x] Simple list (https://www.patternfly.org/components/simple-list)
-- [x] Table (https://www.patternfly.org/components/table)
-- [x] Tabs (https://www.patternfly.org/components/tabs)
-- [x] Tree view (https://www.patternfly.org/components/tree-view/)
-- [x] Alert (https://www.patternfly.org/components/alert)
-- [x] Clipboard copy (https://www.patternfly.org/components/clipboard-copy)
-- [x] Drag and drop (https://www.patternfly.org/components/drag-and-drop)
-- [x] Menus
-  - [x] Menu (https://www.patternfly.org/components/menus/menu)
-  - [x] Application launcher (https://www.patternfly.org/components/menus/application-launcher)
-  - [x] Context selector (https://www.patternfly.org/components/menus/context-selector)
-  - [x] Custom menus (https://www.patternfly.org/components/menus/custom-menus)
-  - [x] Dropdown (https://www.patternfly.org/components/menus/dropdown)
-  - [x] Menu toggle (https://www.patternfly.org/components/menus/menu-toggle)
-  - [x] Options menu (https://www.patternfly.org/components/menus/options-menu)
-  - [x] Select (https://www.patternfly.org/components/menus/select)
-- [x] Overflow menu (https://www.patternfly.org/components/overflow-menu)
-- [x] Navigation (https://www.patternfly.org/components/navigation)
-- [x] Notification badge (https://www.patternfly.org/components/notification-badge)
-- [x] Notification drawer (https://www.patternfly.org/components/notification-drawer)
-- [x] Number input (https://www.patternfly.org/components/number-input)
-- [x] Card (https://www.patternfly.org/components/card/)
-- [x] Description list (https://www.patternfly.org/components/description-list)
-- [x] Hint (https://www.patternfly.org/components/hint)
-- [x] Expandable section (https://www.patternfly.org/components/expandable-section)
-- [x] Masthead (https://www.patternfly.org/components/masthead)
-- [x] Page (https://www.patternfly.org/components/page)
-- [x] Pagination (https://www.patternfly.org/components/pagination)
-- [x] Password generator (https://www.patternfly.org/components/password-generator)
-- [x] Password strength (https://www.patternfly.org/components/password-strength)
-- [x] Progress stepper (https://www.patternfly.org/components/progress-stepper)
-- [x] Sidebar (https://www.patternfly.org/components/sidebar)
-- [x] Drawer (https://www.patternfly.org/components/drawer)
-- [x] Skip to content (https://www.patternfly.org/components/skip-to-content)
-- [x] Toolbar (https://www.patternfly.org/components/toolbar)
-- [x] Wizard (https://www.patternfly.org/components/wizard)
-- [x] Empty state (https://www.patternfly.org/components/empty-state/)
-- [x] Multiple file upload (https://www.patternfly.org/components/file-upload/multiple-file-upload)
-- [x] Simple file upload (https://www.patternfly.org/components/file-upload/simple-file-upload)
-- [x] Code block (https://www.patternfly.org/components/code-block)
-- [x] Code editor (https://www.patternfly.org/components/code-editor)
-- [x] Inline edit (https://www.patternfly.org/components/inline-edit)
-- [x] Login page (https://www.patternfly.org/components/login-page)
-- [x] Modal (https://www.patternfly.org/components/modal)
-- [x] Date and time
-  - [x] Calendar month (https://www.patternfly.org/components/date-and-time/calendar-month)
-  - [x] Date and time picker (https://www.patternfly.org/components/date-and-time/date-and-time-picker)
-  - [x] Date picker (https://www.patternfly.org/components/date-and-time/date-picker)
-  - [x] Time picker (https://www.patternfly.org/components/date-and-time/time-picker)
-- [x] Data list (https://www.patternfly.org/components/data-list)
-- [x] Dual list selector (https://www.patternfly.org/components/dual-list-selector)
-- [x] Compass (https://www.patternfly.org/components/compass)
-- [x] Hero (https://www.patternfly.org/components/hero)
-- [x] Input group (https://www.patternfly.org/components/input-group)
-- [x] Topology
-  - [x] Custom nodes (https://www.patternfly.org/topology/custom-nodes)
-  - [x] Custom edges (https://www.patternfly.org/topology/custom-edges)
-  - [x] Anchors (https://www.patternfly.org/topology/anchors)
-  - [x] Selection (https://www.patternfly.org/topology/selection)
-  - [x] Pan and zoom (https://www.patternfly.org/topology/pan-and-zoom)
-  - [x] Context menu (https://www.patternfly.org/topology/context-menu)
-  - [x] Drag and drop (https://www.patternfly.org/topology/drag-and-drop)
-  - [x] Control bar (https://www.patternfly.org/topology/control-bar)
-  - [x] Toolbar (https://www.patternfly.org/topology/toolbar)
-  - [x] Sidebar (https://www.patternfly.org/topology/sidebar)
-  - [x] Layouts (https://www.patternfly.org/topology/layouts)
-  - [x] Pipelines (https://www.patternfly.org/topology/pipelines)
-- [x] Charts
-  - [x] Colors for charts (https://www.patternfly.org/charts/colors-for-charts)
-  - [x] Area chart (https://www.patternfly.org/charts/area-chart)
-  - [x] Bar chart (https://www.patternfly.org/charts/bar-chart)
-  - [x] Box plot chart (https://www.patternfly.org/charts/box-plot-chart)
-  - [x] Bullet chart (https://www.patternfly.org/charts/bullet-chart)
-  - [x] Donut chart (https://www.patternfly.org/charts/donut-chart)
-  - [x] Donut utilization chart (https://www.patternfly.org/charts/donut-utilization-chart)
-  - [x] Legends (https://www.patternfly.org/charts/legends)
-  - [x] Line chart (https://www.patternfly.org/charts/line-chart)
-  - [x] Patterns (https://www.patternfly.org/charts/patterns)
-  - [x] Pie chart (https://www.patternfly.org/charts/pie-chart)
-  - [x] Resize observer (https://www.patternfly.org/charts/resize-observer)
-  - [x] Sankey chart (https://www.patternfly.org/charts/sankey-chart)
-  - [x] Scatter chart (https://www.patternfly.org/charts/scatter-chart)
-  - [x] Skeletons (https://www.patternfly.org/charts/skeletons)
-  - [x] Sparkline chart (https://www.patternfly.org/charts/sparkline-chart)
-  - [x] Stack chart (https://www.patternfly.org/charts/stack-chart)
-  - [x] Themes (https://www.patternfly.org/charts/themes)
-  - [x] Threshold chart (https://www.patternfly.org/charts/threshold-chart)
-  - [x] Tooltips (https://www.patternfly.org/charts/tooltips)
-- [x] Patterns
-  - [x] Card view (https://www.patternfly.org/patterns/card-view)
-  - [x] Dashboard (https://www.patternfly.org/patterns/dashboard)
-  - [x] Filters (https://www.patternfly.org/patterns/filters)
-  - [x] Password generator (https://www.patternfly.org/patterns/password-generator)
-  - [x] Password strength (https://www.patternfly.org/patterns/password-strength)
-  - [x] Primary-detail (https://www.patternfly.org/patterns/primary-detail)
-  - [x] Right-to-left (https://www.patternfly.org/patterns/right-to-left)
-- [x] Extensions
-  - [x] Log viewer (https://www.patternfly.org/extensions/log-viewer)
-  - [x] User feedback (https://www.patternfly.org/extensions/user-feedback)
-  - [x] Data view
-    - [x] Data view overview (https://www.patternfly.org/extensions/data-view/overview)
-    - [x] Data view toolbar (https://www.patternfly.org/extensions/data-view/toolbar/?page=1&perPage=5)
-    - [x] Data view table (https://www.patternfly.org/extensions/data-view/table)
-  - [x] Catalog view
-    - [x] Catalog item header (https://www.patternfly.org/extensions/catalog-view/catalog-item-header)
-    - [x] Catalog tile (https://www.patternfly.org/extensions/catalog-view/catalog-tile)
-    - [x] Filter side panel (https://www.patternfly.org/extensions/catalog-view/filter-side-panel)
-    - [x] Properties side panel (https://www.patternfly.org/extensions/catalog-view/properties-side-panel)
-    - [x] Vertical tabs (https://www.patternfly.org/extensions/catalog-view/vertical-tabs)
+## License
+
+Apache License 2.0 — see [LICENSE](LICENSE).
+Contributions welcome: see [CONTRIBUTING.md](CONTRIBUTING.md); security reports: see [SECURITY.md](SECURITY.md).
