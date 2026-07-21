@@ -8,6 +8,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 WEB_DIR="$PROJECT_ROOT/runtime/src/main/resources/META-INF/resources/web"
 VENDOR_DIR="$WEB_DIR/vendor"
+IT_MEDIA_DIR="$PROJECT_ROOT/integration-tests/src/main/resources/META-INF/resources/web/vendor/media"
+mkdir -p "$IT_MEDIA_DIR"
 
 echo "==> Creating vendor output directory..."
 mkdir -p "$VENDOR_DIR"
@@ -16,6 +18,7 @@ echo "==> Running Podman container to install and copy frontend deps..."
 podman run --rm \
   -v "$WEB_DIR/package.json:/work/package.json:ro,Z" \
   -v "$VENDOR_DIR:/output:Z" \
+  -v "$IT_MEDIA_DIR:/output-it-media:Z" \
   docker.io/library/node:22-alpine \
   sh -c '
     set -e
@@ -89,33 +92,38 @@ podman run --rm \
     # The demo used to source clips from commondatastorage.googleapis.com, which
     # now returns 403. Synthetic clips keep the demo self-contained: no CDN to rot,
     # no third-party traffic when someone views the page, works offline.
+    # Generated into the integration-tests demo app (not the runtime vendor tree)
+    # so the clips never ship inside the extension JAR; the served URL stays
+    # /web/vendor/media/.
     echo "  Sample media (ffmpeg)..."
     apk add --no-cache ffmpeg >/dev/null 2>&1
-    mkdir -p /output/media
     ffmpeg -y -loglevel error \
       -f lavfi -i testsrc2=duration=10:size=640x360:rate=30 \
       -f lavfi -i sine=frequency=440:duration=10 \
       -c:v libx264 -preset veryfast -pix_fmt yuv420p -movflags +faststart \
-      -c:a aac -b:a 64k -shortest /output/media/sample-pattern.mp4
+      -c:a aac -b:a 64k -shortest /output-it-media/sample-pattern.mp4
     ffmpeg -y -loglevel error \
       -f lavfi -i smptebars=duration=10:size=640x360:rate=30 \
       -f lavfi -i sine=frequency=523:duration=10 \
       -c:v libx264 -preset veryfast -pix_fmt yuv420p -movflags +faststart \
-      -c:a aac -b:a 64k -shortest /output/media/sample-bars.mp4
+      -c:a aac -b:a 64k -shortest /output-it-media/sample-bars.mp4
     ffmpeg -y -loglevel error \
       -f lavfi -i testsrc=duration=10:size=640x360:rate=30 \
       -f lavfi -i sine=frequency=349:duration=10 \
       -c:v libx264 -preset veryfast -pix_fmt yuv420p -movflags +faststart \
-      -c:a aac -b:a 64k -shortest /output/media/sample-counter.mp4
-    ffmpeg -y -loglevel error -i /output/media/sample-pattern.mp4 \
-      -vframes 1 -q:v 3 /output/media/sample-pattern.jpg
+      -c:a aac -b:a 64k -shortest /output-it-media/sample-counter.mp4
+    ffmpeg -y -loglevel error -i /output-it-media/sample-pattern.mp4 \
+      -vframes 1 -q:v 3 /output-it-media/sample-pattern.jpg
 
     # Cytoscape.js (graph visualization for the topology bucket)
     echo "  Cytoscape.js..."
     mkdir -p /output/cytoscape
     cp node_modules/cytoscape/dist/cytoscape.min.js /output/cytoscape/
 
-    # PatternFly extensions — CSS-only vendor (React components ignored)
+    # PatternFly extensions — CSS-only vendor (React components ignored).
+    # The two @patternfly/react-* packages in web/package.json exist ONLY as
+    # sources for these stylesheets; no React code is vendored or served.
+    # See CONTRIBUTING.md ("A note on the @patternfly/react-* packages").
     echo "  PatternFly extensions (CSS)..."
     mkdir -p /output/patternfly-extensions
     cp node_modules/@patternfly/react-user-feedback/dist/esm/Feedback/Feedback.css \
