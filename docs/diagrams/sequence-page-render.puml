@@ -1,0 +1,29 @@
+@startuml sequence-page-render
+title Plain page render — no HTMX involved (Alpine only)
+
+actor User
+participant "Browser" as Browser
+participant "JAX-RS route\n(consumer app)" as Route
+participant "Typed model /\ntemplate data" as Model
+participant "Qute engine\n(layout + component fragments)" as Qute
+participant "Alpine.js" as Alpine
+
+User -> Browser : navigate to page
+Browser -> Route : GET /page
+Route -> Model : build typed component models
+Route -> Qute : render full page\n(layout wraps component includes)
+Qute --> Route : complete HTML document\n(x-data attributes inline)
+Route --> Browser : 200 text/html
+Browser -> Browser : parse DOM, load /web assets\n(PatternFly CSS, Alpine)
+Browser -> Alpine : DOM ready, scan tree
+Alpine -> Browser : hydrate x-data state
+note right of Alpine
+  From here, interactivity that
+  needs no server data is pure
+  Alpine local state — tabs,
+  toggles, menus — with zero
+  round-trips. HTMX only enters
+  when the page wants
+  server-driven updates.
+end note
+@enduml
