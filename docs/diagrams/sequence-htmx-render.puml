@@ -1,0 +1,27 @@
+@startuml sequence-htmx-render
+title The rendering contract: server renders DOM, Alpine reacts, HTMX moves
+
+actor User
+participant "Browser DOM\n(PatternFly markup)" as DOM
+participant "HTMX" as HTMX
+participant "Alpine.js" as Alpine
+participant "JAX-RS route\n(consumer app)" as Route
+participant "Typed model /\ntemplate data" as Model
+participant "Qute engine\n(component fragment)" as Qute
+
+User -> DOM : click / input / scroll
+DOM -> HTMX : hx-get / hx-post trigger
+HTMX -> Route : HTTP request (fragment URL)
+Route -> Model : build typed component model
+Route -> Qute : render component template with model
+Qute --> Route : HTML fragment (final DOM,\nx-data attributes inline)
+Route --> HTMX : 200 text/html
+HTMX -> DOM : hx-swap (replace target subtree)
+DOM -> Alpine : new subtree scanned
+Alpine -> DOM : hydrate x-data state,\nlocal reactivity only
+note right of Qute
+  JSON never becomes HTML
+  in the browser — the server
+  always renders the DOM.
+end note
+@enduml

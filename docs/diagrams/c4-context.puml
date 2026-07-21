@@ -1,0 +1,19 @@
+@startuml c4-context
+!include <C4/C4_Context>
+
+title System Context — quarkus-pha
+
+Person(user, "End user", "Uses the consumer application in a browser")
+Person(dev, "Application developer", "Builds a Quarkus app with server-rendered UI")
+
+System_Boundary(app, "Consumer Quarkus application") {
+  System(pha, "quarkus-pha extension", "Qute component templates, typed Java models, bundled PatternFly/HTMX/Alpine assets")
+}
+
+System_Ext(browser, "Browser", "PatternFly-styled DOM. HTMX issues requests and swaps fragments; Alpine.js provides local reactivity. No JS framework, no client-side routing.")
+
+Rel(dev, pha, "Adds as dependency; composes components in Qute templates / typed models")
+Rel(user, browser, "Interacts with")
+Rel(browser, app, "Full page loads + HTMX fragment requests", "HTTP")
+Rel(app, browser, "Server-rendered HTML (pages and fragments) + static assets under /web", "HTML/CSS/JS")
+@enduml
