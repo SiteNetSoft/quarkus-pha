@@ -89,8 +89,8 @@
       {#if width??}style="--pf-v6-c-modal-box--Width: {width}"{/if}
       {#if attrs??}{attrs.raw}{/if}
     >
-      {! Re-expose id as modalId for the family's internal wiring, then shadow id/attrs so
-         they don't leak into composed includes (Qute include-data inheritance). !}
+      {! Re-expose id as modalId for the family's internal wiring, then shadow id/attrs/size/width
+         so they don't leak into composed includes (Qute include-data inheritance). !}
       {#let modalId=id id=null attrs=null size=null width=null}{#insert /}{/let}
     </div>
   </div>
