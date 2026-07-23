@@ -12,7 +12,9 @@ relative/absolute time string. !}
       'success'}{icons:svg('fa:circle-check').raw}{#else if variant is
       'danger'}{icons:svg('fa:circle-exclamation').raw}{#else}{icons:svg('fa:circle-info').raw}{/if}</span
     >
-    <h2 class="pf-v6-c-notification-drawer__list-item-header-title">{title}</h2>
+    <h2 class="pf-v6-c-notification-drawer__list-item-header-title">
+      {#if variant??}<span class="pf-v6-screen-reader">{variant} notification:</span> {/if}{title}
+    </h2>
   </div>
   {#if description??}
   <div class="pf-v6-c-notification-drawer__list-item-description">{description}</div>
