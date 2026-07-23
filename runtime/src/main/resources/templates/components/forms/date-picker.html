@@ -1,22 +1,33 @@
 {! Date picker — PatternFly v6 !}
-{! Optional: id — DOM id on the root; omit unless something else references the picker.
-              value (optional), placeholder (optional), disabled (optional), ariaLabel (optional) !}
-<div class="pf-v6-c-date-picker"{#if id??} id="{id}"{/if} x-data="{ open: false }">
+{! Optional: id — DOM id on the root; derives {id}-input on the text input and {id}-picked
+              (the selection-event anchor swapped out-of-band by the calendar endpoint).
+              value (optional), placeholder (optional), disabled (optional), ariaLabel (optional),
+              calendar (optional) — a CalendarMonth model; when present the popover hosts the fully
+              interactive calendar (month/year nav via HTMX; picking a date fills the input and
+              closes the popover via the pha-date-picked event). !}
+{! Slot: calendar — custom popover content when no calendar model is passed. !}
+<div class="pf-v6-c-date-picker"{#if id??} id="{id}"{/if} x-data="{ open: false }"
+     @pha-date-picked="$refs.dpInput.value = $event.detail; open = false">
   <div class="pf-v6-c-date-picker__input">
     <div class="pf-v6-c-input-group">
       <div class="pf-v6-c-input-group__item pf-m-fill">
         <span class="pf-v6-c-form-control">
-          <input type="text"{#if value??} value="{value}"{/if}{#if placeholder??} placeholder="{placeholder}"{/if}{#if disabled??} disabled{/if} aria-label="{#if ariaLabel??}{ariaLabel}{#else}Date picker{/if}">
+          <input type="text"{#if id??} id="{id}-input"{/if} x-ref="dpInput"{#if value??} value="{value}"{/if}{#if placeholder??} placeholder="{placeholder}"{/if}{#if disabled??} disabled{/if} aria-label="{#if ariaLabel??}{ariaLabel}{#else}Date picker{/if}">
         </span>
       </div>
       <div class="pf-v6-c-input-group__item">
-        <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Toggle date picker"{#if disabled??} disabled{/if} @click="open = !open">
-          {icons:svg('fa:calendar-alt').raw}
+        <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Toggle date picker" :aria-expanded="open.toString()"{#if disabled??} disabled{/if} @click="open = !open">
+          <span class="pf-v6-c-button__icon">{icons:svg('fa:calendar-alt').raw}</span>
         </button>
       </div>
     </div>
   </div>
+  {#if id??}<span id="{id}-picked" hidden></span>{/if}
   <div class="pf-v6-c-date-picker__calendar" x-show="open" x-cloak @click.outside="open = false">
+    {#if calendar??}
+    {#include components/forms/calendar-month calendarMonth=calendar /}
+    {#else}
     {#let disabled=null id=null placeholder=null value=null}{#insert calendar}{/insert}{/let}
+    {/if}
   </div>
 </div>

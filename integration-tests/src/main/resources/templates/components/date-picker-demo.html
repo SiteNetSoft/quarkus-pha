@@ -116,6 +116,24 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#invalid" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Invalid</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#custom-width" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Custom widths</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -197,6 +215,20 @@
                       {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">Input and toggle disabled.</p>
                       {/description} {#content}{#include components/date-picker/disabled /}{/content} {/include}
+                      {#include partials/example-card title="Invalid" slug="invalid" component="date-picker"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Bad input flips the form-control and helper text to the error state; picking from the calendar
+                        fixes it.
+                      </p>
+                      {/description} {#content}{#include components/date-picker/invalid /}{/content} {/include}
+                      {#include partials/example-card title="Custom widths" slug="custom-width" component="date-picker"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Input width via the PF width variable — a fixed 220px picker and a 12ch character-based one.
+                      </p>
+                      {/description} {#content}{#include components/date-picker/custom-width /}{/content} {/include}
+
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"
