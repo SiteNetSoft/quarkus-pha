@@ -10,14 +10,16 @@
   </div>
   {/if}
   {#if h.hasActions}
-  <div class="pf-v6-c-card__actions">{#if h.kebabAria}<button class="pf-v6-c-button pf-m-plain" type="button" aria-label="{h.kebabAria}"><span class="pf-v6-c-button__icon">{icons:svg('fa:ellipsis-vertical').raw}</span></button>{/if}{#if h.checkboxId}<div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="{h.checkboxId}" aria-labelledby="{h.checkboxLabelledBy}"{#if h.checkboxAriaLabel} aria-label="{h.checkboxAriaLabel}"{/if} /></div>{/if}</div>
+  <div class="pf-v6-c-card__actions">{#if h.kebabAria}<div x-data="{ open: false }" style="position: relative; display: inline-block"><button class="pf-v6-c-menu-toggle pf-m-plain" type="button" aria-label="{h.kebabAria}" :aria-expanded="open.toString()" @click="open = !open"><span class="pf-v6-c-menu-toggle__icon">{icons:svg('fa:ellipsis-vertical').raw}</span></button><div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; right: 0; z-index: 200; min-width: 10rem"><div class="pf-v6-c-menu__content"><ul class="pf-v6-c-menu__list" role="menu"><li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Action</span></span></button></li><li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Another action</span></span></button></li><li role="none" class="pf-v6-c-menu__list-item pf-m-disabled"><button class="pf-v6-c-menu__item" type="button" role="menuitem" disabled><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Disabled action</span></span></button></li></ul></div></div></div>{/if}{#if h.checkboxId}<div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="{h.checkboxId}" aria-labelledby="{h.checkboxLabelledBy}"{#if h.checkboxAriaLabel} aria-label="{h.checkboxAriaLabel}"{/if} /></div>{/if}</div>
   {/if}
   {#if h.hasSelectableActions}
+  <div class="pf-v6-c-card__actions pf-m-no-offset">
   <div class="pf-v6-c-card__selectable-actions">
-    {#if h.selKind == 'check'}<div class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" id="{h.selId}" aria-labelledby="{h.selLabelledBy}"{#if h.selXModel} x-model="{h.selXModel}"{/if}{#if h.selDisabled} disabled{/if} /></div>{/if}
-    {#if h.selKind == 'radio'}<div class="pf-v6-c-radio pf-m-standalone"><input class="pf-v6-c-radio__input" type="radio" name="{h.selName}" id="{h.selId}" aria-labelledby="{h.selLabelledBy}" value="{h.selValue}" x-model="{h.selXModel}" /></div>{/if}
+    {#if h.selKind == 'check'}<div class="pf-v6-c-check"><input class="pf-v6-c-check__input" type="checkbox" id="{h.selId}" aria-labelledby="{h.selLabelledBy}"{#if h.selXModel} x-model="{h.selXModel}"{/if}{#if h.selDisabled} disabled{/if} /><label class="pf-v6-c-check__label" for="{h.selId}"></label></div>{/if}
+    {#if h.selKind == 'radio'}<div class="pf-v6-c-radio"><input class="pf-v6-c-radio__input" type="radio" name="{h.selName}" id="{h.selId}" aria-labelledby="{h.selLabelledBy}" value="{h.selValue}" x-model="{h.selXModel}" /><label class="pf-v6-c-radio__label" for="{h.selId}"></label></div>{/if}
     {#if h.selKind == 'clickButton'}<button class="pf-v6-c-card__clickable-action" type="button" aria-labelledby="{h.selLabelledBy}"{#if h.selClickExpr} @click="{h.selClickExpr}"{/if}{#if h.selDisabled} disabled{/if}></button>{/if}
     {#if h.selKind == 'clickAnchor'}<a class="pf-v6-c-card__clickable-action" href="{h.selHref}" aria-labelledby="{h.selLabelledBy}"></a>{/if}
+  </div>
   </div>
   {/if}
   {#if h.hasHeaderMain}

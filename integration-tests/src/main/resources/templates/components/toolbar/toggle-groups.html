@@ -24,16 +24,46 @@
   {/include}
   {#include components/navigation/toolbar-group variant="filter"}
   {#include components/navigation/toolbar-item}
-    <button class="pf-v6-c-menu-toggle" type="button" aria-expanded="false">
-      <span class="pf-v6-c-menu-toggle__text">Status</span>
-      <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
-    </button>
+    <div x-data="{ menuOpen: false, sel: 'Status' }" style="position: relative">
+      <button class="pf-v6-c-menu-toggle" type="button" :class="menuOpen ? 'pf-m-expanded' : ''" :aria-expanded="menuOpen.toString()" @click="menuOpen = !menuOpen">
+        <span class="pf-v6-c-menu-toggle__text" x-text="sel">Status</span>
+        <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
+      </button>
+      <div class="pf-v6-c-menu" x-show="menuOpen" x-cloak @click.outside="menuOpen = false" style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 10rem">
+        <div class="pf-v6-c-menu__content">
+          <ul class="pf-v6-c-menu__list" role="listbox">
+            <template x-for="opt in ['Any', 'New', 'Open', 'Pending', 'Closed']" :key="opt">
+              <li role="none" class="pf-v6-c-menu__list-item" :class="sel === opt ? 'pf-m-selected' : ''">
+                <button class="pf-v6-c-menu__item" type="button" role="option" :aria-selected="(sel === opt).toString()" @click="sel = opt; menuOpen = false">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text" x-text="opt"></span></span>
+                </button>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </div>
+    </div>
   {/include}
   {#include components/navigation/toolbar-item}
-    <button class="pf-v6-c-menu-toggle" type="button" aria-expanded="false">
-      <span class="pf-v6-c-menu-toggle__text">Risk</span>
-      <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
-    </button>
+    <div x-data="{ menuOpen: false, sel: 'Risk' }" style="position: relative">
+      <button class="pf-v6-c-menu-toggle" type="button" :class="menuOpen ? 'pf-m-expanded' : ''" :aria-expanded="menuOpen.toString()" @click="menuOpen = !menuOpen">
+        <span class="pf-v6-c-menu-toggle__text" x-text="sel">Risk</span>
+        <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
+      </button>
+      <div class="pf-v6-c-menu" x-show="menuOpen" x-cloak @click.outside="menuOpen = false" style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 10rem">
+        <div class="pf-v6-c-menu__content">
+          <ul class="pf-v6-c-menu__list" role="listbox">
+            <template x-for="opt in ['Any', 'Low', 'Medium', 'High']" :key="opt">
+              <li role="none" class="pf-v6-c-menu__list-item" :class="sel === opt ? 'pf-m-selected' : ''">
+                <button class="pf-v6-c-menu__item" type="button" role="option" :aria-selected="(sel === opt).toString()" @click="sel = opt; menuOpen = false">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text" x-text="opt"></span></span>
+                </button>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </div>
+    </div>
   {/include}
   {/include}
 {/include}
@@ -46,16 +76,46 @@
 <div class="pf-v6-c-toolbar__expandable-content" :class="{ 'pf-m-expanded': open }">
   {#include components/navigation/toolbar-group variant="filter"}
   {#include components/navigation/toolbar-item}
-    <button class="pf-v6-c-menu-toggle" type="button" aria-expanded="false">
-      <span class="pf-v6-c-menu-toggle__text">Status</span>
-      <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
-    </button>
+    <div x-data="{ menuOpen: false, sel: 'Status' }" style="position: relative">
+      <button class="pf-v6-c-menu-toggle" type="button" :class="menuOpen ? 'pf-m-expanded' : ''" :aria-expanded="menuOpen.toString()" @click="menuOpen = !menuOpen">
+        <span class="pf-v6-c-menu-toggle__text" x-text="sel">Status</span>
+        <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
+      </button>
+      <div class="pf-v6-c-menu" x-show="menuOpen" x-cloak @click.outside="menuOpen = false" style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 10rem">
+        <div class="pf-v6-c-menu__content">
+          <ul class="pf-v6-c-menu__list" role="listbox">
+            <template x-for="opt in ['Any', 'New', 'Open', 'Pending', 'Closed']" :key="opt">
+              <li role="none" class="pf-v6-c-menu__list-item" :class="sel === opt ? 'pf-m-selected' : ''">
+                <button class="pf-v6-c-menu__item" type="button" role="option" :aria-selected="(sel === opt).toString()" @click="sel = opt; menuOpen = false">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text" x-text="opt"></span></span>
+                </button>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </div>
+    </div>
   {/include}
   {#include components/navigation/toolbar-item}
-    <button class="pf-v6-c-menu-toggle" type="button" aria-expanded="false">
-      <span class="pf-v6-c-menu-toggle__text">Risk</span>
-      <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
-    </button>
+    <div x-data="{ menuOpen: false, sel: 'Risk' }" style="position: relative">
+      <button class="pf-v6-c-menu-toggle" type="button" :class="menuOpen ? 'pf-m-expanded' : ''" :aria-expanded="menuOpen.toString()" @click="menuOpen = !menuOpen">
+        <span class="pf-v6-c-menu-toggle__text" x-text="sel">Risk</span>
+        <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
+      </button>
+      <div class="pf-v6-c-menu" x-show="menuOpen" x-cloak @click.outside="menuOpen = false" style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 10rem">
+        <div class="pf-v6-c-menu__content">
+          <ul class="pf-v6-c-menu__list" role="listbox">
+            <template x-for="opt in ['Any', 'Low', 'Medium', 'High']" :key="opt">
+              <li role="none" class="pf-v6-c-menu__list-item" :class="sel === opt ? 'pf-m-selected' : ''">
+                <button class="pf-v6-c-menu__item" type="button" role="option" :aria-selected="(sel === opt).toString()" @click="sel = opt; menuOpen = false">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text" x-text="opt"></span></span>
+                </button>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </div>
+    </div>
   {/include}
   {/include}
 </div>

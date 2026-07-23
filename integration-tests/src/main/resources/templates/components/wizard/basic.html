@@ -37,7 +37,7 @@
       <label class="pf-v6-c-form__label" for="wiz-basic-name"><span class="pf-v6-c-form__label-text">Name</span></label>
     </div>
     <div class="pf-v6-c-form__group-control">
-      <input class="pf-v6-c-form-control" type="text" id="wiz-basic-name" value="production-east" />
+      <span class="pf-v6-c-form-control"><input type="text" id="wiz-basic-name" value="production-east" /></span>
     </div>
   </div>
   <div class="pf-v6-c-form__group">
@@ -47,7 +47,7 @@
       >
     </div>
     <div class="pf-v6-c-form__group-control">
-      <input class="pf-v6-c-form-control" type="text" id="wiz-basic-region" value="us-east-1" />
+      <span class="pf-v6-c-form-control"><input type="text" id="wiz-basic-region" value="us-east-1" /></span>
     </div>
   </div>
 </form>
@@ -73,7 +73,13 @@
   </div>
   <div class="pf-v6-c-action-list__group">
     <div class="pf-v6-c-action-list__item">
-      <button type="button" class="pf-v6-c-button pf-m-link">
+      <button
+        type="button"
+        class="pf-v6-c-button pf-m-link"
+        hx-get="/api/htmx/wizard/basic/step/1"
+        hx-target="#wiz-basic"
+        hx-swap="outerHTML"
+      >
         <span class="pf-v6-c-button__text">Cancel</span>
       </button>
     </div>

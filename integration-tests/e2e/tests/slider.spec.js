@@ -120,4 +120,18 @@ test.describe("Slider", () => {
       await expect(thumb).toHaveAttribute("aria-valuenow", "100");
     });
   });
+
+  test("thumb is pointer-draggable (PF primary interaction)", async ({ page }) => {
+    const slider = page.locator("#sl-basic");
+    const thumb = slider.locator(".pf-v6-c-slider__thumb");
+    const rail = slider.locator(".pf-v6-c-slider__rail");
+    const railBox = await rail.boundingBox();
+    const thumbBox = await thumb.boundingBox();
+    await page.mouse.move(thumbBox.x + thumbBox.width / 2, thumbBox.y + thumbBox.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(railBox.x + railBox.width * 0.9, thumbBox.y + thumbBox.height / 2, { steps: 5 });
+    await page.mouse.up();
+    const value = await thumb.getAttribute("aria-valuenow");
+    expect(Number(value)).toBeGreaterThan(75);
+  });
 });

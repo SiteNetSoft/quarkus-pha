@@ -33,7 +33,26 @@
   </div>
   <div class="pf-v6-c-description-list__group">
     <dt class="pf-v6-c-description-list__term">
-      <span class="pf-v6-c-description-list__text pf-m-help-text" role="button" tabindex="0">Namespace</span>
+      <span x-data="{ open: false }" style="position: relative; display: inline-block">
+        <span
+          class="pf-v6-c-description-list__text pf-m-help-text"
+          role="button"
+          tabindex="0"
+          :aria-expanded="open.toString()"
+          @click="open = !open"
+          @keydown.enter.prevent="open = !open"
+          @keydown.escape="open = false"
+          >Namespace</span
+        >
+        <div x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; left: 0; z-index: 200; width: 280px">
+          <div class="pf-v6-c-popover pf-m-bottom" role="dialog" aria-label="Namespace help">
+            <div class="pf-v6-c-popover__arrow"></div>
+            <div class="pf-v6-c-popover__content">
+              <div class="pf-v6-c-popover__body">Additional info about namespace</div>
+            </div>
+          </div>
+        </div>
+      </span>
     </dt>
     <dd class="pf-v6-c-description-list__description">
       <div class="pf-v6-c-description-list__text"><a href="#">mary-test</a></div>
@@ -41,7 +60,26 @@
   </div>
   <div class="pf-v6-c-description-list__group">
     <dt class="pf-v6-c-description-list__term">
-      <span class="pf-v6-c-description-list__text pf-m-help-text" role="button" tabindex="0">Labels</span>
+      <span x-data="{ open: false }" style="position: relative; display: inline-block">
+        <span
+          class="pf-v6-c-description-list__text pf-m-help-text"
+          role="button"
+          tabindex="0"
+          :aria-expanded="open.toString()"
+          @click="open = !open"
+          @keydown.enter.prevent="open = !open"
+          @keydown.escape="open = false"
+          >Labels</span
+        >
+        <div x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; left: 0; z-index: 200; width: 280px">
+          <div class="pf-v6-c-popover pf-m-bottom" role="dialog" aria-label="Labels help">
+            <div class="pf-v6-c-popover__arrow"></div>
+            <div class="pf-v6-c-popover__content">
+              <div class="pf-v6-c-popover__body">Additional info about labels</div>
+            </div>
+          </div>
+        </div>
+      </span>
     </dt>
     <dd class="pf-v6-c-description-list__description">
       <div class="pf-v6-c-description-list__text">example</div>
@@ -49,7 +87,26 @@
   </div>
   <div class="pf-v6-c-description-list__group">
     <dt class="pf-v6-c-description-list__term">
-      <span class="pf-v6-c-description-list__text pf-m-help-text" role="button" tabindex="0">Pod selector</span>
+      <span x-data="{ open: false }" style="position: relative; display: inline-block">
+        <span
+          class="pf-v6-c-description-list__text pf-m-help-text"
+          role="button"
+          tabindex="0"
+          :aria-expanded="open.toString()"
+          @click="open = !open"
+          @keydown.enter.prevent="open = !open"
+          @keydown.escape="open = false"
+          >Pod selector</span
+        >
+        <div x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; left: 0; z-index: 200; width: 280px">
+          <div class="pf-v6-c-popover pf-m-bottom" role="dialog" aria-label="Pod selector help">
+            <div class="pf-v6-c-popover__arrow"></div>
+            <div class="pf-v6-c-popover__content">
+              <div class="pf-v6-c-popover__body">Additional info about pod selector</div>
+            </div>
+          </div>
+        </div>
+      </span>
     </dt>
     <dd class="pf-v6-c-description-list__description">
       <div class="pf-v6-c-description-list__text">
@@ -62,7 +119,26 @@
   </div>
   <div class="pf-v6-c-description-list__group">
     <dt class="pf-v6-c-description-list__term">
-      <span class="pf-v6-c-description-list__text pf-m-help-text" role="button" tabindex="0">Annotation</span>
+      <span x-data="{ open: false }" style="position: relative; display: inline-block">
+        <span
+          class="pf-v6-c-description-list__text pf-m-help-text"
+          role="button"
+          tabindex="0"
+          :aria-expanded="open.toString()"
+          @click="open = !open"
+          @keydown.enter.prevent="open = !open"
+          @keydown.escape="open = false"
+          >Annotation</span
+        >
+        <div x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; left: 0; z-index: 200; width: 280px">
+          <div class="pf-v6-c-popover pf-m-bottom" role="dialog" aria-label="Annotation help">
+            <div class="pf-v6-c-popover__arrow"></div>
+            <div class="pf-v6-c-popover__content">
+              <div class="pf-v6-c-popover__body">Additional info about annotation</div>
+            </div>
+          </div>
+        </div>
+      </span>
     </dt>
     <dd class="pf-v6-c-description-list__description">
       <div class="pf-v6-c-description-list__text">2 Annotations</div>

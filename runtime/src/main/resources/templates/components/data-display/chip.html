@@ -18,13 +18,14 @@ chip text (passed as include body). !} {! Optional params: removable, overflow, 
   {#if removable??}
   <span class="pf-v6-c-label__actions">
     <button
-      class="pf-v6-c-button pf-m-plain"
+      class="pf-v6-c-button pf-m-no-padding pf-m-plain"
       type="button"
       aria-labelledby="{id}-remove {id}-text"
       aria-label="{#if ariaLabel??}{ariaLabel}{#else}Remove{/if}"
       id="{id}-remove"
+      @click="$el.closest('.pf-v6-c-label').remove()"
     >
-      {icons:svg('fa:times').raw}
+      <span class="pf-v6-c-button__icon">{icons:svg('fa:times').raw}</span>
     </button>
   </span>
   {/if}

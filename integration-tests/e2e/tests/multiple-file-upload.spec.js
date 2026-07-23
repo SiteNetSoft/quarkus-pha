@@ -53,7 +53,7 @@ test.describe("Multiple File Upload", () => {
   test.describe("File upload status", () => {
     test("starts collapsed and expands via the toggle", async ({ page }) => {
       const mfu = page.locator("#mfu-status");
-      const toggle = mfu.locator(".pf-v6-c-expandable-section__toggle");
+      const toggle = mfu.locator(".pf-v6-c-expandable-section__toggle button");
       await expect(toggle).toHaveAttribute("aria-expanded", "false");
       await expect(toggle).toContainText("0 of 3 files uploaded");
       await expect(mfu.locator(".pf-v6-c-multiple-file-upload__status-item").first()).toBeHidden();
@@ -65,7 +65,7 @@ test.describe("Multiple File Upload", () => {
 
     test("close buttons remove items and the count follows", async ({ page }) => {
       const mfu = page.locator("#mfu-status");
-      await mfu.locator(".pf-v6-c-expandable-section__toggle").click();
+      await mfu.locator(".pf-v6-c-expandable-section__toggle button").click();
       await mfu.locator(".pf-v6-c-multiple-file-upload__status-item-close button").first().click();
       await expect(mfu.locator(".pf-v6-c-multiple-file-upload__status-item")).toHaveCount(2);
       await expect(mfu.locator(".pf-v6-c-multiple-file-upload__status-progress-text")).toHaveText(
@@ -77,7 +77,7 @@ test.describe("Multiple File Upload", () => {
   test.describe("Expanded status variants", () => {
     test("status-expanded starts expanded with three visible items", async ({ page }) => {
       const mfu = page.locator("#mfu-status-expanded");
-      await expect(mfu.locator(".pf-v6-c-expandable-section__toggle")).toHaveAttribute("aria-expanded", "true");
+      await expect(mfu.locator(".pf-v6-c-expandable-section__toggle button")).toHaveAttribute("aria-expanded", "true");
       await expect(mfu.locator(".pf-v6-c-multiple-file-upload__status-item")).toHaveCount(3);
       await expect(mfu.locator(".pf-v6-c-multiple-file-upload__status-item").first()).toBeVisible();
     });
@@ -85,7 +85,7 @@ test.describe("Multiple File Upload", () => {
     test("horizontal-status-expanded combines pf-m-horizontal with the expanded status", async ({ page }) => {
       const mfu = page.locator("#mfu-horizontal-status-expanded");
       await expect(mfu).toHaveClass(/pf-m-horizontal/);
-      await expect(mfu.locator(".pf-v6-c-expandable-section__toggle")).toHaveAttribute("aria-expanded", "true");
+      await expect(mfu.locator(".pf-v6-c-expandable-section__toggle button")).toHaveAttribute("aria-expanded", "true");
       await expect(mfu.locator(".pf-v6-c-multiple-file-upload__status-item")).toHaveCount(3);
     });
   });
