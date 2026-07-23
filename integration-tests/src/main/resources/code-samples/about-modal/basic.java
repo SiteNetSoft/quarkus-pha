@@ -6,19 +6,24 @@ AboutModal aboutModal = AboutModal
         .backgroundImage("/web/images/pf-background.svg")
         .trigger("About")
         .content("""
-                <dl class="pf-v6-c-description-list pf-m-horizontal">
-                  <div class="pf-v6-c-description-list__group">
-                    <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Version</span></dt>
-                    <dd class="pf-v6-c-description-list__description">
-                      <div class="pf-v6-c-description-list__text">1.0.0-SNAPSHOT</div>
-                    </dd>
-                  </div>
-                  <div class="pf-v6-c-description-list__group">
-                    <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Quarkus</span></dt>
-                    <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">3.37.2</div></dd>
-                  </div>
-                </dl>""")
-        .trademarkHtml("<p class=\"pf-v6-c-about-modal-box__strapline\">Trademark and legal notices</p>")
+                <div class="pf-v6-c-content">
+                  <dl>
+                    <dt>Version</dt>
+                    <dd>1.0.0-SNAPSHOT</dd>
+                    <dt>Quarkus</dt>
+                    <dd>3.37.3</dd>
+                    <dt>PatternFly</dt>
+                    <dd>6.6.0</dd>
+                    <dt>HTMX</dt>
+                    <dd>2.0.10</dd>
+                    <dt>Alpine.js</dt>
+                    <dd>3.15.12</dd>
+                    <dt>Java</dt>
+                    <dd>25</dd>
+                    <dt>License</dt>
+                    <dd>Apache-2.0</dd>
+                  </dl>
+                </div>""")
         .strapline("Copyright &copy; 2026 SiteNetSoft")
         .build();
 

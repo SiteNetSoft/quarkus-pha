@@ -4,111 +4,126 @@
 {! Slots: content, strapline, trademark !}
 {! Open via: $dispatch('open-about-modal-{id}'). Multiple instances on a page get distinct event names via the id suffix. !}
 {! Model mode: pass aboutModal=<org.sitenetsoft.quarkus.pha.model.AboutModal> — trigger button + raw content/trademark/strapline. !}
+{! The backdrop teleports to <body>: the PF page main-container creates a stacking context
+   (z-index + glass backdrop-filter) that would trap the fixed backdrop under the masthead.
+   PF React portals modals to document.body for the same reason. !}
 {#if aboutModal??}
 {#if aboutModal.triggerText??}
 <button class="pf-v6-c-button pf-m-primary" type="button" @click="$dispatch('open-about-modal-{aboutModal.id}')">{aboutModal.triggerText}</button>
 {/if}
 <div x-data="{ open: false }"
      @open-about-modal-{aboutModal.id}.window="open = true"
-     @keydown.escape.window="if (open) open = false"
-     x-effect="if (open) PHA.trapFocus($el); else PHA.releaseFocus($el);">
-  <div class="pf-v6-c-backdrop"
-       x-show="open"
-       x-transition.opacity
-       @click.self="open = false"
-       style="display: none;">
-    <div class="pf-v6-c-about-modal-box"
-         role="dialog"
-         aria-modal="true"
-         {#if aboutModal.productName??}aria-labelledby="{aboutModal.id}-title"{#else}aria-label="{aboutModal.ariaLabel}"{/if}
-         {#if aboutModal.backgroundImage??}style="--pf-v6-c-about-modal-box--BackgroundImage: url({aboutModal.backgroundImage})"{/if}>
-      <div class="pf-v6-c-about-modal-box__brand">
-        <img class="pf-v6-c-about-modal-box__brand-image"
-             src="{aboutModal.brandImageSrc}"
-             alt="{aboutModal.brandImageAlt}" />
-      </div>
-      <div class="pf-v6-c-about-modal-box__close">
-        <button class="pf-v6-c-button pf-m-plain"
-                type="button"
-                aria-label="{aboutModal.closeButtonAriaLabel}"
-                @click="open = false">
-          <span class="pf-v6-c-button__icon">
-            {icons:svg('fa:times').raw}
-          </span>
-        </button>
-      </div>
-      {#if aboutModal.productName??}
-      <div class="pf-v6-c-about-modal-box__header">
-        <{aboutModal.headingTag} class="pf-v6-c-title pf-m-4xl" id="{aboutModal.id}-title">{aboutModal.productName}</{aboutModal.headingTag}>
-      </div>
-      {/if}
-      {#if aboutModal.isNoContentContainer}
-      {aboutModal.contentHtml.raw}
-      {#else}
-      <div class="pf-v6-c-about-modal-box__content">
-        <div class="pf-v6-c-about-modal-box__body">
-          {aboutModal.contentHtml.raw}
+     @keydown.escape.window="if (open) open = false">
+  <template x-teleport="body">
+    <div class="pf-v6-c-backdrop"
+         id="{aboutModal.id}-backdrop"
+         x-show="open"
+         x-transition.opacity
+         x-effect="if (open) PHA.trapFocus($el); else PHA.releaseFocus($el);"
+         style="display: none;">
+      <div class="pf-v6-l-bullseye" @click.self="open = false">
+        <div class="pf-v6-c-modal-box pf-m-lg"
+             role="dialog"
+             aria-modal="true"
+             {#if aboutModal.productName??}aria-labelledby="{aboutModal.id}-title"{#else}aria-label="{aboutModal.ariaLabel}"{/if}>
+          <div class="pf-v6-c-about-modal-box"
+               {#if aboutModal.backgroundImage??}style="--pf-v6-c-about-modal-box--BackgroundImage: url({aboutModal.backgroundImage})"{/if}>
+            <div class="pf-v6-c-about-modal-box__brand">
+              <img class="pf-v6-c-about-modal-box__brand-image"
+                   src="{aboutModal.brandImageSrc}"
+                   alt="{aboutModal.brandImageAlt}" />
+            </div>
+            <div class="pf-v6-c-about-modal-box__close">
+              <button class="pf-v6-c-button pf-m-plain"
+                      type="button"
+                      aria-label="{aboutModal.closeButtonAriaLabel}"
+                      @click="open = false">
+                <span class="pf-v6-c-button__icon">
+                  {icons:svg('fa:times').raw}
+                </span>
+              </button>
+            </div>
+            {#if aboutModal.productName??}
+            <div class="pf-v6-c-about-modal-box__header">
+              <{aboutModal.headingTag} class="pf-v6-c-title pf-m-4xl" id="{aboutModal.id}-title">{aboutModal.productName}</{aboutModal.headingTag}>
+            </div>
+            {/if}
+            {#if aboutModal.isNoContentContainer}
+            {aboutModal.contentHtml.raw}
+            {#else}
+            <div class="pf-v6-c-about-modal-box__content">
+              <div class="pf-v6-c-about-modal-box__body">
+                {aboutModal.contentHtml.raw}
+              </div>
+              {#if aboutModal.trademarkHtml??}{aboutModal.trademarkHtml.raw}{/if}
+              {#if aboutModal.straplineHtml??}
+              <p class="pf-v6-c-about-modal-box__strapline">
+                {aboutModal.straplineHtml.raw}
+              </p>
+              {/if}
+            </div>
+            {/if}
+          </div>
         </div>
-        {#if aboutModal.trademarkHtml??}{aboutModal.trademarkHtml.raw}{/if}
-        {#if aboutModal.straplineHtml??}
-        <p class="pf-v6-c-about-modal-box__strapline">
-          {aboutModal.straplineHtml.raw}
-        </p>
-        {/if}
       </div>
-      {/if}
     </div>
-  </div>
+  </template>
 </div>
 {#else}
 <div x-data="{ open: false }"
      @open-about-modal-{id}.window="open = true"
-     @keydown.escape.window="if (open) open = false"
-     x-effect="if (open) PHA.trapFocus($el); else PHA.releaseFocus($el);">
-  <div class="pf-v6-c-backdrop"
-       x-show="open"
-       x-transition.opacity
-       @click.self="open = false"
-       style="display: none;">
-    <div class="pf-v6-c-about-modal-box"
-         role="dialog"
-         aria-modal="true"
-         {#if productName??}aria-labelledby="{id}-title"{#else}aria-label="{ariaLabel}"{/if}
-         {#if backgroundImage??}style="--pf-v6-c-about-modal-box--BackgroundImage: url({backgroundImage})"{/if}>
-      <div class="pf-v6-c-about-modal-box__brand">
-        <img class="pf-v6-c-about-modal-box__brand-image"
-             src="{brandImageSrc}"
-             alt="{brandImageAlt}" />
-      </div>
-      <div class="pf-v6-c-about-modal-box__close">
-        <button class="pf-v6-c-button pf-m-plain"
-                type="button"
-                aria-label="{closeButtonAriaLabel ?: 'Close dialog'}"
-                @click="open = false">
-          <span class="pf-v6-c-button__icon">
-            {icons:svg('fa:times').raw}
-          </span>
-        </button>
-      </div>
-      {#if productName??}
-      <div class="pf-v6-c-about-modal-box__header">
-        {#let h=(headingLevel ?: 'h1')}<{h} class="pf-v6-c-title pf-m-4xl" id="{id}-title">{productName}</{h}>{/let}
-      </div>
-      {/if}
-      {#if noContentContainer??}
-      {#insert content}{/insert}
-      {#else}
-      <div class="pf-v6-c-about-modal-box__content">
-        <div class="pf-v6-c-about-modal-box__body">
-          {#insert content}{/insert}
+     @keydown.escape.window="if (open) open = false">
+  <template x-teleport="body">
+    <div class="pf-v6-c-backdrop"
+         id="{id}-backdrop"
+         x-show="open"
+         x-transition.opacity
+         x-effect="if (open) PHA.trapFocus($el); else PHA.releaseFocus($el);"
+         style="display: none;">
+      <div class="pf-v6-l-bullseye" @click.self="open = false">
+        <div class="pf-v6-c-modal-box pf-m-lg"
+             role="dialog"
+             aria-modal="true"
+             {#if productName??}aria-labelledby="{id}-title"{#else}aria-label="{ariaLabel}"{/if}>
+          <div class="pf-v6-c-about-modal-box"
+               {#if backgroundImage??}style="--pf-v6-c-about-modal-box--BackgroundImage: url({backgroundImage})"{/if}>
+            <div class="pf-v6-c-about-modal-box__brand">
+              <img class="pf-v6-c-about-modal-box__brand-image"
+                   src="{brandImageSrc}"
+                   alt="{brandImageAlt}" />
+            </div>
+            <div class="pf-v6-c-about-modal-box__close">
+              <button class="pf-v6-c-button pf-m-plain"
+                      type="button"
+                      aria-label="{closeButtonAriaLabel ?: 'Close dialog'}"
+                      @click="open = false">
+                <span class="pf-v6-c-button__icon">
+                  {icons:svg('fa:times').raw}
+                </span>
+              </button>
+            </div>
+            {#if productName??}
+            <div class="pf-v6-c-about-modal-box__header">
+              {#let h=(headingLevel ?: 'h1')}<{h} class="pf-v6-c-title pf-m-4xl" id="{id}-title">{productName}</{h}>{/let}
+            </div>
+            {/if}
+            {#if noContentContainer??}
+            {#insert content}{/insert}
+            {#else}
+            <div class="pf-v6-c-about-modal-box__content">
+              <div class="pf-v6-c-about-modal-box__body">
+                {#insert content}{/insert}
+              </div>
+              {#insert trademark}{/insert}
+              <p class="pf-v6-c-about-modal-box__strapline">
+                {#insert strapline}{/insert}
+              </p>
+            </div>
+            {/if}
+          </div>
         </div>
-        {#insert trademark}{/insert}
-        <p class="pf-v6-c-about-modal-box__strapline">
-          {#insert strapline}{/insert}
-        </p>
       </div>
-      {/if}
     </div>
-  </div>
+  </template>
 </div>
 {/if}

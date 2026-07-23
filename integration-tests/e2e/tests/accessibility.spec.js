@@ -42,7 +42,10 @@ test.describe("Accessibility", () => {
   // ── About Modal Focus Trapping ──
 
   test.describe("About modal focus trapping", () => {
+    // The about-modal backdrop teleports to <body> (x-teleport) and the dialog
+    // role/aria live on the PF modal-box wrapper — scope by backdrop id.
     const card = '[data-rendered-href="/components/about-modal/basic"]';
+    const backdrop = "#basic-backdrop";
 
     test.beforeEach(async ({ page }) => {
       await page.goto("/components/about-modal");
@@ -50,20 +53,20 @@ test.describe("Accessibility", () => {
 
     test("about modal has role dialog", async ({ page }) => {
       await page.locator(`${card} button`, { hasText: "About" }).first().click();
-      const modal = page.locator(`${card} .pf-v6-c-about-modal-box`);
-      await expect(modal).toHaveAttribute("role", "dialog");
-      await expect(modal).toHaveAttribute("aria-modal", "true");
+      const dialog = page.locator(`${backdrop} .pf-v6-c-modal-box`);
+      await expect(dialog).toHaveAttribute("role", "dialog");
+      await expect(dialog).toHaveAttribute("aria-modal", "true");
     });
 
     test("about modal has aria-labelledby", async ({ page }) => {
       await page.locator(`${card} button`, { hasText: "About" }).first().click();
-      const modal = page.locator(`${card} .pf-v6-c-about-modal-box`);
-      await expect(modal).toHaveAttribute("aria-labelledby", "basic-title");
+      const dialog = page.locator(`${backdrop} .pf-v6-c-modal-box`);
+      await expect(dialog).toHaveAttribute("aria-labelledby", "basic-title");
     });
 
     test("close button has aria-label", async ({ page }) => {
       await page.locator(`${card} button`, { hasText: "About" }).first().click();
-      const closeBtn = page.locator(`${card} .pf-v6-c-about-modal-box__close button`);
+      const closeBtn = page.locator(`${backdrop} .pf-v6-c-about-modal-box__close button`);
       await expect(closeBtn).toHaveAttribute("aria-label", "Close dialog");
     });
   });
