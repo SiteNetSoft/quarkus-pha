@@ -1,21 +1,4 @@
-{! With multiple icon badges — hand-rendered, since a Qute include can't take an inline badge list. !}
+{! With multiple icon badges — the model's badge list stacks several icon badges. !}
 <div class="pf-v6-l-gallery pf-m-gutter" style="--pf-v6-l-gallery--GridTemplateColumns--min: 240px">
-  <div role="button" tabindex="0" id="ct-istio" class="pf-v6-c-card catalog-tile-pf">
-    <div class="pf-v6-c-card__header catalog-tile-pf-header">
-      <span class="catalog-tile-pf-icon pf-v6-c-icon fas fa-diagram-project" aria-hidden="true"></span>
-      <div class="catalog-tile-pf-badge-container">
-        <span class="catalog-tile-pf-badge pf-v6-c-icon fas fa-certificate" title="Certified" aria-label="Certified"></span>
-        <span class="catalog-tile-pf-badge pf-v6-c-icon fas fa-star" title="Featured partner" aria-label="Featured partner"></span>
-      </div>
-    </div>
-    <div class="pf-v6-c-card__title">
-      <span class="pf-v6-c-card__title-text catalog-tile-pf-title">Istio</span>
-      <p class="catalog-tile-pf-subtitle">CNCF</p>
-    </div>
-    <div class="pf-v6-c-card__body catalog-tile-pf-body">
-      <p class="catalog-tile-pf-description">
-        <span>Service mesh for microservices — traffic management, security, and observability.</span>
-      </p>
-    </div>
-  </div>
+  {#include components/extensions/catalog-tile catalogTile=demoCtIstio /}
 </div>

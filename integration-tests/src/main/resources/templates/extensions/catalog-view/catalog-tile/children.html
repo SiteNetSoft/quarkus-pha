@@ -1,22 +1,5 @@
-{! Children instead of description — arbitrary body content, exempt from the description
-   line-clamp (no catalog-tile-pf-description class), so long text is never truncated. !}
+{! Children instead of description — bodyHtml carries arbitrary body content, exempt from the
+   description line-clamp (no catalog-tile-pf-description class), so long text is never truncated. !}
 <div class="pf-v6-l-gallery pf-m-gutter" style="--pf-v6-l-gallery--GridTemplateColumns--min: 240px">
-  <div role="button" tabindex="0" id="ct-children" class="pf-v6-c-card catalog-tile-pf catalog-tile-pf-featured">
-    <div class="pf-v6-c-card__header catalog-tile-pf-header">
-      <span class="catalog-tile-pf-icon pf-v6-c-icon fas fa-feather" aria-hidden="true"></span>
-      <div class="catalog-tile-pf-badge-container">
-        <span class="catalog-tile-pf-badge pf-v6-c-icon fas fa-certificate" title="Certified" aria-label="Certified"></span>
-      </div>
-    </div>
-    <div class="pf-v6-c-card__title">
-      <span class="pf-v6-c-card__title-text catalog-tile-pf-title">Qute</span>
-      <p class="catalog-tile-pf-subtitle">Quarkus</p>
-    </div>
-    <div class="pf-v6-c-card__body catalog-tile-pf-body">
-      This is a long stretch of arbitrary body content that is not truncated, illustrating how a tile
-      can carry richer content than a plain description. Descriptions normally clamp at three lines
-      (one line with a footer); body content placed directly in the card body has no clamp at all and
-      can run as long as it needs to.
-    </div>
-  </div>
+  {#include components/extensions/catalog-tile catalogTile=demoCtQute /}
 </div>

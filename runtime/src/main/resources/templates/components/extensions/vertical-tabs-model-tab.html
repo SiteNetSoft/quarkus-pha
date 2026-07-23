@@ -1,0 +1,16 @@
+{! Vertical tabs — model-driven tab item; recurses over tab.children (data recursion is safe
+   where slot recursion is not). Internal partial of vertical-tabs.html's model mode. !}
+<li class="vertical-tabs-pf-tab{#if tab.active} active{/if}"{#if tab.id??} id="{tab.id}"{/if}>
+  {#if tab.href??}
+  <a href="{tab.href}"{#if tab.active} aria-current="page"{/if}>{tab.title}</a>
+  {#else}
+  <span{#if tab.active} aria-current="page"{/if}>{tab.title}</span>
+  {/if}
+  {#if tab.children}
+  <ul class="vertical-tabs-pf">
+    {#for child in tab.children}
+    {#include components/extensions/vertical-tabs-model-tab tab=child /}
+    {/for}
+  </ul>
+  {/if}
+</li>

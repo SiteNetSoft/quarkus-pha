@@ -1,7 +1,18 @@
 {! Properties side panel — PatternFly catalog-view extension !}
-{! Optional: id — DOM id on the root; omit unless something else references the panel. !}
-{! Slots: properties (PropertyItem entries — use components/extensions/property-item for each) !}
+{! Model mode: pass propertiesSidePanel=<org.sitenetsoft.quarkus.pha.model.PropertiesSidePanel> — label/value rows come from the model. !}
+{! Flat mode — Optional: id. Slots: properties (PropertyItem entries — use components/extensions/property-item for each) !}
 {! Requires: /web/vendor/patternfly-extensions/catalog-view.css !}
+{#if propertiesSidePanel??}
+<div class="properties-side-panel-pf"{#if propertiesSidePanel.id??} id="{propertiesSidePanel.id}"{/if}>
+  {#for property in propertiesSidePanel.properties}
+  <div class="properties-side-panel-pf-property">
+    <p class="properties-side-panel-pf-property-label">{property.label}</p>
+    <p class="properties-side-panel-pf-property-value">{property.value}</p>
+  </div>
+  {/for}
+</div>
+{#else}
 <div class="properties-side-panel-pf"{#if id??} id="{id}"{/if}>
   {#insert properties}{/insert}
 </div>
+{/if}

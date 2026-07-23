@@ -408,6 +408,24 @@ public class ExtensionsRoutes {
     }
 
     @GET
+    @Path("/catalog-view/{name}/source-java/{example}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String catalogViewSourceJava(@PathParam("name") String name, @PathParam("example") String example) {
+        if (!CATALOG_VIEW_TITLES.containsKey(name) || !catalogViewExamples(name).contains(example)) {
+            throw new NotFoundException("Unknown catalog-view example: " + name + "/" + example);
+        }
+        String resourcePath = "/code-samples/catalog-view/" + name + "/" + example + ".java";
+        try (InputStream in = getClass().getResourceAsStream(resourcePath)) {
+            if (in == null) {
+                throw new NotFoundException("Missing Java snippet for: " + name + "/" + example);
+            }
+            return new String(in.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed reading " + resourcePath, e);
+        }
+    }
+
+    @GET
     @Path("/catalog-view/{name}/{example}")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance catalogViewStandalone(@PathParam("name") String name, @PathParam("example") String example) {

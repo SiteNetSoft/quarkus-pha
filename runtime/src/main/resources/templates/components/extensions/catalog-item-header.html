@@ -1,7 +1,22 @@
 {! Catalog item header — PatternFly catalog-view extension !}
-{! Required: title !}
-{! Optional: iconImg (URL), iconAlt, iconClass (CSS class for icon glyph — mutually exclusive with iconImg), vendor, id, headingLevel (default h1) !}
+{! Model mode: pass catalogItemHeader=<org.sitenetsoft.quarkus.pha.model.CatalogItemHeader> — vendorHtml is raw, so the subtitle can carry markup. !}
+{! Flat mode — Required: title. Optional: iconImg (URL), iconAlt, iconClass (CSS class for icon glyph — mutually exclusive with iconImg), vendor, id, headingLevel (default h1) !}
 {! Requires: /web/vendor/patternfly-extensions/catalog-view.css !}
+{#if catalogItemHeader??}
+<header class="catalog-item-header-pf"{#if catalogItemHeader.id??} id="{catalogItemHeader.id}"{/if}>
+  {#if catalogItemHeader.iconImg??}
+  <img class="catalog-item-header-pf-icon" src="{catalogItemHeader.iconImg}" alt="{catalogItemHeader.iconAlt}" />
+  {#else if catalogItemHeader.iconClass??}
+  <span class="catalog-item-header-pf-icon {catalogItemHeader.iconClass}" aria-hidden="true"></span>
+  {/if}
+  <div class="catalog-item-header-pf-text">
+    {#let h=catalogItemHeader.headingTag}<{h} class="pf-v6-c-title catalog-item-header-pf-title">{catalogItemHeader.title}</{h}>{/let}
+    {#if catalogItemHeader.vendorHtml??}
+    <p class="pf-v6-c-content--p catalog-item-header-pf-subtitle">{catalogItemHeader.vendorHtml.raw}</p>
+    {/if}
+  </div>
+</header>
+{#else}
 <header class="catalog-item-header-pf"{#if id??} id="{id}"{/if}>
   {#if iconImg??}
   <img class="catalog-item-header-pf-icon" src="{iconImg}" alt="{iconAlt ?: ''}" />
@@ -15,3 +30,4 @@
     {/if}
   </div>
 </header>
+{/if}
