@@ -48,10 +48,10 @@ phaAlpine("phaVideoPlayer", (config = {}) => ({
       return;
     }
 
-    let el = this.$el.querySelector(".pha-c-video-player__video");
+    const el = this.$el.querySelector(".pha-c-video-player__video");
     if (!el) return;
 
-    let opts = {
+    const opts = {
       autoplay: !!config.autoplay,
       loop: !!config.loop,
       muted: !!config.muted,
@@ -88,7 +88,7 @@ phaAlpine("phaVideoPlayer", (config = {}) => ({
       this.$dispatch("video-ended");
     });
     this._player.on("error", () => {
-      let err = this._player.error();
+      const err = this._player.error();
       this.$dispatch("video-error", {
         code: err ? err.code : 0,
         message: err ? err.message : "unknown error",

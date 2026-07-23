@@ -92,7 +92,7 @@ phaAlpine("phaDocumentEditor", (config = {}) => ({
     var data;
     try {
       data = JSON.parse(e.data);
-    } catch (ex) {
+    } catch {
       return;
     }
 
