@@ -9,7 +9,7 @@ import java.util.Objects;
  *
  * <pre>
  * Timestamp.of("May 20, 2026 at 2:30 PM").datetime("2026-05-20T14:30:00Z").build()
- * Timestamp.of("2 hours ago").datetime("2026-05-20T14:30:00Z").inline().build()
+ * Timestamp.of("2 hours ago").datetime("2026-05-20T14:30:00Z").build()
  * Timestamp.of("2 hours ago").tooltip("2026-05-20 14:30:00 UTC").build()
  * </pre>
  *
@@ -22,14 +22,12 @@ public final class Timestamp {
     private final String text;
     private final String id;
     private final String datetime;
-    private final boolean inline;
     private final String tooltip;
 
     private Timestamp(Builder b) {
         this.text = b.text;
         this.id = b.id;
         this.datetime = b.datetime;
-        this.inline = b.inline;
         this.tooltip = b.tooltip;
     }
 
@@ -51,9 +49,6 @@ public final class Timestamp {
         return datetime;
     }
 
-    public boolean isInline() {
-        return inline;
-    }
 
     public String tooltip() {
         return tooltip;
@@ -63,7 +58,6 @@ public final class Timestamp {
         private String text;
         private String id;
         private String datetime;
-        private boolean inline;
         private String tooltip;
 
         private Builder() {
@@ -80,11 +74,6 @@ public final class Timestamp {
             return this;
         }
 
-        /** Render inline with surrounding text (pf-m-inline). */
-        public Builder inline() {
-            this.inline = true;
-            return this;
-        }
 
         /** Native browser tooltip (title attribute), e.g. the full ISO timestamp. */
         public Builder tooltip(String tooltip) {

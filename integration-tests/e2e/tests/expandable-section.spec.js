@@ -25,7 +25,7 @@ test.describe("Expandable section", () => {
 
   test("collapsed toggles open; expanded starts open", async ({ page }) => {
     await expect(page.locator("#es-collapsed")).not.toHaveClass(/pf-m-expanded/);
-    await page.locator("#es-collapsed .pf-v6-c-expandable-section__toggle").click();
+    await page.locator("#es-collapsed .pf-v6-c-expandable-section__toggle button").click();
     await expect(page.locator("#es-collapsed")).toHaveClass(/pf-m-expanded/);
     await expect(page.locator("#es-expanded")).toHaveClass(/pf-m-expanded/);
   });
@@ -33,7 +33,7 @@ test.describe("Expandable section", () => {
   test("dynamic toggle text flips with the state", async ({ page }) => {
     const toggle = page.locator("#es-dynamic-toggle-text .pf-v6-c-expandable-section__toggle");
     await expect(toggle.locator("span[x-text]")).toHaveText("Show more");
-    await toggle.click();
+    await toggle.locator("button").click();
     await expect(toggle.locator("span[x-text]")).toHaveText("Show less");
   });
 
@@ -60,7 +60,7 @@ test.describe("Expandable section", () => {
     await expect(section.locator(".pf-v6-c-expandable-section__content")).toBeVisible();
     const toggleText = section.locator(".pf-v6-c-expandable-section__toggle span[x-text]");
     await expect(toggleText).toHaveText("Show more");
-    await section.locator(".pf-v6-c-expandable-section__toggle").click();
+    await section.locator(".pf-v6-c-expandable-section__toggle button").click();
     await expect(section).toHaveClass(/pf-m-expanded/);
     await expect(toggleText).toHaveText("Show less");
   });

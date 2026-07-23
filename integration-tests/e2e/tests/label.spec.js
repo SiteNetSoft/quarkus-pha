@@ -45,10 +45,12 @@ test.describe("Label", () => {
     }
   });
 
-  test("overflow and add labels render as buttons", async ({ page }) => {
+  test("overflow and add labels render a button at content level (PF anatomy)", async ({ page }) => {
     for (const id of ["lbl-overflow", "lbl-add"]) {
-      const tag = await page.locator(`#${id}`).evaluate((el) => el.tagName);
-      expect(tag).toBe("BUTTON");
+      const root = page.locator(`#${id}`);
+      // PF 6.6: the root is always a span; the interactive element is __content
+      expect(await root.evaluate((el) => el.tagName)).toBe("SPAN");
+      expect(await root.locator(".pf-v6-c-label__content").evaluate((el) => el.tagName)).toBe("BUTTON");
     }
     await expect(page.locator("#lbl-overflow")).toHaveClass(/pf-m-overflow/);
     await expect(page.locator("#lbl-add")).toHaveClass(/pf-m-add/);

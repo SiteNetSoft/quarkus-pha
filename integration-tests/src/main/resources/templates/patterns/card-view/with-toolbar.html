@@ -4,22 +4,22 @@
       <div class="pf-v6-c-toolbar__content-section">
         <div class="pf-v6-c-toolbar__group">
           <div class="pf-v6-c-toolbar__item">
-            <input
-              type="search"
-              class="pf-v6-c-form-control"
-              placeholder="Search projects"
-              x-model="search"
-              aria-label="Search projects"
-            />
+            <span class="pf-v6-c-form-control"
+              ><input type="search" placeholder="Search projects" x-model="search" aria-label="Search projects"
+            /></span>
           </div>
         </div>
         <div class="pf-v6-c-toolbar__group">
           <div class="pf-v6-c-toolbar__item">
-            <select class="pf-v6-c-form-control" aria-label="Sort" x-model="sort">
-              <option value="name">Name (A→Z)</option>
-              <option value="recent">Most recent</option>
-              <option value="status">Status</option>
-            </select>
+            <span class="pf-v6-c-form-control"
+              ><select aria-label="Sort" x-model="sort">
+                <option value="name">Name (A→Z)</option>
+                <option value="recent">Most recent</option>
+                <option value="status">Status</option></select
+              ><span class="pf-v6-c-form-control__utilities"
+                ><span class="pf-v6-c-form-control__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span
+              ></span
+            >
           </div>
         </div>
         <div class="pf-v6-c-toolbar__group pf-m-icon-button-group" style="margin-left: auto">

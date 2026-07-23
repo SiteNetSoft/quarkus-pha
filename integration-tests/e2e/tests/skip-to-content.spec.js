@@ -11,8 +11,13 @@ test.describe("Skip to Content", () => {
   });
 
   test.describe("Basic", () => {
-    test("skip to content has pf-v6-c-skip-to-content class", async ({ page }) => {
-      await expect(page.locator("#stc-basic")).toHaveClass(/pf-v6-c-skip-to-content/);
+    test("skip to content uses the PF wrapper + button-link anatomy", async ({ page }) => {
+      // PF 6.6: wrapper div carries the component class (positioned via :focus-within);
+      // the link inside is a primary button
+      const link = page.locator("#stc-basic");
+      await expect(page.locator(".pf-v6-c-skip-to-content > #stc-basic")).toBeAttached();
+      await expect(link).toHaveClass(/pf-v6-c-button/);
+      await expect(link).toHaveClass(/pf-m-primary/);
     });
 
     test("skip to content has an href attribute", async ({ page }) => {

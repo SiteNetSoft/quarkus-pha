@@ -40,55 +40,55 @@
 {!   custom   → pf-m-custom   + fa:bell                                            !}
 {#if label??}
 {#if label.href}
-<a class="pf-v6-c-label{#if label.color} pf-m-{label.color}{/if}{#if label.status} pf-m-{label.status}{/if}{#if label.variant} pf-m-{label.variant}{#else} pf-m-filled{/if}{#if label.compact} pf-m-compact{/if}{#if label.disabled} pf-m-disabled{/if}{#if label.clickable} pf-m-clickable{/if}"{#if label.id} id="{label.id}"{/if} href="{label.href}">
-  <span class="pf-v6-c-label__content">
+<span class="pf-v6-c-label{#if label.color} pf-m-{label.color}{/if}{#if label.status} pf-m-{label.status}{/if}{#if label.variant} pf-m-{label.variant}{#else} pf-m-filled{/if}{#if label.compact} pf-m-compact{/if}{#if label.disabled} pf-m-disabled{/if} pf-m-clickable"{#if label.id} id="{label.id}"{/if}>
+  <a class="pf-v6-c-label__content pf-m-clickable" href="{label.href}">
     {#if label.displayIcon}<span class="pf-v6-c-label__icon">{icons:svg(label.displayIcon).raw}</span>{/if}
     <span class="pf-v6-c-label__text"{#if label.maxWidth} style="--pf-v6-c-label__text--MaxWidth: {label.maxWidth}"{/if}>{label.text}</span>
-  </span>
-</a>
+  </a>
+</span>
 {#else if label.buttonVariant}
-<button type="button" class="pf-v6-c-label pf-m-{label.variant}{#if label.compact} pf-m-compact{/if}{#if label.disabled} pf-m-disabled{/if}"{#if label.id} id="{label.id}"{/if}{#if label.disabled} disabled{/if}>
-  <span class="pf-v6-c-label__content">
+<span class="pf-v6-c-label pf-m-{label.variant}{#if label.compact} pf-m-compact{/if}{#if label.disabled} pf-m-disabled{/if}"{#if label.id} id="{label.id}"{/if}>
+  <button type="button" class="pf-v6-c-label__content"{#if label.disabled} disabled{/if}>
     <span class="pf-v6-c-label__text">{label.text}</span>
-  </span>
-</button>
+  </button>
+</span>
 {#else}
 <span class="pf-v6-c-label{#if label.color} pf-m-{label.color}{/if}{#if label.status} pf-m-{label.status}{/if}{#if label.variant} pf-m-{label.variant}{#else} pf-m-filled{/if}{#if label.compact} pf-m-compact{/if}{#if label.disabled} pf-m-disabled{/if}{#if label.clickable} pf-m-clickable{/if}{#if label.editable} pf-m-editable{/if}"{#if label.id} id="{label.id}"{/if}{#if label.editable} x-data="phaLabelEditable()" @click="start()" @keydown="onKey($event)"{/if}>
-  <span class="pf-v6-c-label__content"{#if label.editable} tabindex="0"{/if}>
+  {#if label.editable}<button type="button" class="pf-v6-c-label__content" aria-label="Editable text">{#else if label.clickable}<button type="button" class="pf-v6-c-label__content pf-m-clickable">{#else}<span class="pf-v6-c-label__content">{/if}
     {#if label.displayIcon}<span class="pf-v6-c-label__icon">{icons:svg(label.displayIcon).raw}</span>{/if}
     <span class="pf-v6-c-label__text"{#if label.maxWidth} style="--pf-v6-c-label__text--MaxWidth: {label.maxWidth}"{/if}{#if label.editable} x-ref="text" @blur="commit()" @keydown="onKey($event)"{/if}>{label.text}</span>
-  </span>
+  {#if label.editable || label.clickable}</button>{#else}</span>{/if}
   {#if label.removable}<span class="pf-v6-c-label__actions">
-    <button class="pf-v6-c-button pf-m-plain pf-m-no-padding" type="button"{#if label.removeClick} @click="{label.removeClick}"{/if} aria-label="{label.removeAria ?: 'Remove'}"><span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span></button>
+    <button class="pf-v6-c-button pf-m-plain pf-m-no-padding" type="button" @click="{#if label.removeClick}{label.removeClick}{#else}$el.closest('.pf-v6-c-label').remove(){/if}" aria-label="{label.removeAria ?: 'Remove'}"><span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span></button>
   </span>{/if}
 </span>
 {/if}
 {#else}
 {#let vv=(variant ?: '')}
 {#if href??}
-<a class="pf-v6-c-label{#if color??} pf-m-{color}{/if}{#if status??} pf-m-{status}{/if}{#if variant??} pf-m-{variant}{#else} pf-m-filled{/if}{#if compact??} pf-m-compact{/if}{#if disabled??} pf-m-disabled{/if}{#if clickable??} pf-m-clickable{/if}{#if editable??} pf-m-editable{/if}"{#if id??} id="{id}"{/if} href="{href}">
-  <span class="pf-v6-c-label__content">
+<span class="pf-v6-c-label{#if color??} pf-m-{color}{/if}{#if status??} pf-m-{status}{/if}{#if variant??} pf-m-{variant}{#else} pf-m-filled{/if}{#if compact??} pf-m-compact{/if}{#if disabled??} pf-m-disabled{/if} pf-m-clickable{#if editable??} pf-m-editable{/if}"{#if id??} id="{id}"{/if}>
+  <a class="pf-v6-c-label__content pf-m-clickable" href="{href}">
     {#if iconName??}<span class="pf-v6-c-label__icon">{icons:svg(iconName).raw}</span>{#else if status??}<span class="pf-v6-c-label__icon">{#if status is 'info'}{icons:svg('fa:circle-info').raw}{#else if status is 'success'}{icons:svg('fa:circle-check').raw}{#else if status is 'warning'}{icons:svg('fa:triangle-exclamation').raw}{#else if status is 'danger'}{icons:svg('fa:circle-exclamation').raw}{#else if status is 'custom'}{icons:svg('fa:bell').raw}{/if}</span>{/if}
     <span class="pf-v6-c-label__text">{#let clickable=null color=null compact=null disabled=null editable=null href=null id=null removable=null status=null variant=null}{#insert/}{/let}</span>
-  </span>
-</a>
+  </a>
+</span>
 {#else if vv is 'overflow' || vv is 'add'}
 {! PF renders overflow/add labels as buttons — they are interactive affordances !}
-<button type="button" class="pf-v6-c-label pf-m-{variant}{#if compact??} pf-m-compact{/if}{#if disabled??} pf-m-disabled{/if}"{#if id??} id="{id}"{/if}{#if disabled??} disabled{/if}>
-  <span class="pf-v6-c-label__content">
+<span class="pf-v6-c-label pf-m-{variant}{#if compact??} pf-m-compact{/if}{#if disabled??} pf-m-disabled{/if}"{#if id??} id="{id}"{/if}>
+  <button type="button" class="pf-v6-c-label__content"{#if disabled??} disabled{/if}>
     <span class="pf-v6-c-label__text">{#let clickable=null color=null compact=null disabled=null editable=null href=null id=null removable=null status=null variant=null}{#insert/}{/let}</span>
-  </span>
-</button>
+  </button>
+</span>
 {#else}
 <span class="pf-v6-c-label{#if color??} pf-m-{color}{/if}{#if status??} pf-m-{status}{/if}{#if variant??} pf-m-{variant}{#else} pf-m-filled{/if}{#if compact??} pf-m-compact{/if}{#if disabled??} pf-m-disabled{/if}{#if clickable??} pf-m-clickable{/if}{#if editable??} pf-m-editable{/if}"{#if id??} id="{id}"{/if}>
-  <span class="pf-v6-c-label__content"{#if editable??} tabindex="0"{/if}>
+  {#if editable??}<button type="button" class="pf-v6-c-label__content" aria-label="Editable text">{#else if clickable??}<button type="button" class="pf-v6-c-label__content pf-m-clickable">{#else}<span class="pf-v6-c-label__content">{/if}
     {#if iconName??}<span class="pf-v6-c-label__icon">{icons:svg(iconName).raw}</span>{#else if status??}<span class="pf-v6-c-label__icon">{#if status is 'info'}{icons:svg('fa:circle-info').raw}{#else if status is 'success'}{icons:svg('fa:circle-check').raw}{#else if status is 'warning'}{icons:svg('fa:triangle-exclamation').raw}{#else if status is 'danger'}{icons:svg('fa:circle-exclamation').raw}{#else if status is 'custom'}{icons:svg('fa:bell').raw}{/if}</span>{/if}
     <span class="pf-v6-c-label__text">{#let clickable=null color=null compact=null disabled=null editable=null href=null id=null removable=null status=null variant=null}{#insert/}{/let}</span>
-  </span>
+  {#if editable?? || clickable??}</button>{#else}</span>{/if}
   {#if removable??}<span class="pf-v6-c-label__actions">
     {! pf-m-no-padding matches PF's label close button — without it the plain button's padding
        inflates the label height from 26px to 36px !}
-    <button class="pf-v6-c-button pf-m-plain pf-m-no-padding" type="button"{#if removeClick??} @click="{removeClick}"{/if} aria-label="{#if removeAria??}{removeAria}{#else}Remove{/if}"><span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span></button>
+    <button class="pf-v6-c-button pf-m-plain pf-m-no-padding" type="button" @click="{#if removeClick??}{removeClick}{#else}$el.closest('.pf-v6-c-label').remove(){/if}" aria-label="{#if removeAria??}{removeAria}{#else}Remove{/if}"><span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span></button>
   </span>{/if}
 </span>
 {/if}

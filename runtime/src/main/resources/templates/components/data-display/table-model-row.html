@@ -24,12 +24,12 @@
 <tr class="pf-v6-c-table__tr{#if row.striped} pf-m-striped{/if}"{#if row.rowXData} x-data="{row.rowXData}"{/if}{#if table.favoritesSortable} data-key="{row.clickKey}"{/if}>
 {/if}
   {#if table.draggableRows}
-  <td class="pf-v6-c-table__draggable">
+  <td class="pf-v6-c-table__td pf-v6-c-table__draggable">
     <span class="pf-v6-c-table__toggle-icon" style="cursor: grab" aria-hidden="true">{icons:svg('fa:grip-vertical').raw}</span>
   </td>
   {/if}
   {#if table.favorites}
-  <td class="pf-v6-c-table__favorite">
+  <td class="pf-v6-c-table__td pf-v6-c-table__favorite">
     <button
       type="button"
       class="pf-v6-c-button pf-m-plain"
@@ -43,7 +43,7 @@
   </td>
   {/if}
   {#if table.expandable}
-  <td class="pf-v6-c-table__toggle">
+  <td class="pf-v6-c-table__td pf-v6-c-table__toggle">
     <button
       type="button"
       class="pf-v6-c-button pf-m-plain"
@@ -52,28 +52,28 @@
       aria-label="{row.toggleAriaLabel}"
       {#if table.clickableBody}@click.stop="open = !open"{#else}@click="open = !open"{/if}
     >
-      <span class="pf-v6-c-table__toggle-icon"><i class="fas fa-angle-down" aria-hidden="true"></i></span>
+      <span class="pf-v6-c-button__icon"><span class="pf-v6-c-table__toggle-icon"><i class="fas fa-angle-down" aria-hidden="true"></i></span></span>
     </button>
   </td>
   {/if}
   {#if table.checkboxSelect}
   {#if table.indeterminateSelect}
-  <td class="pf-v6-c-table__check">
-    <input type="checkbox" aria-label="Select {row.firstCellText}" x-model="{row.selExpr}" />
+  <td class="pf-v6-c-table__td pf-v6-c-table__check">
+    <label class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" aria-label="Select {row.firstCellText}" x-model="{row.selExpr}" /></label>
   </td>
   {#else}
-  <td class="pf-v6-c-table__check">
-    <input type="checkbox" name="checkrow-{row.number}" aria-labelledby="{table.id}-{row.number}"{#if row.checked} checked{/if} />
+  <td class="pf-v6-c-table__td pf-v6-c-table__check">
+    <label class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" name="checkrow-{row.number}" aria-labelledby="{table.id}-{row.number}"{#if row.checked} checked{/if} /></label>
   </td>
   {/if}
   {#else if table.radioSelect}
-  <td class="pf-v6-c-table__check">
-    <input type="radio" name="select-row" aria-labelledby="{table.id}-{row.number}"{#if row.checked} checked{/if} />
+  <td class="pf-v6-c-table__td pf-v6-c-table__check">
+    <label class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="radio" name="select-row" aria-labelledby="{table.id}-{row.number}"{#if row.checked} checked{/if} /></label>
   </td>
   {/if}
   {#for cell in row.cells}
   {#if cell.kebab}
-  <td class="{cell.css}">
+  <td class="pf-v6-c-table__td {cell.css}">
     <div x-data="{ open: false }" style="position: relative">
       <button
         class="pf-v6-c-menu-toggle pf-m-plain"
@@ -107,7 +107,7 @@
     </div>
   </td>
   {#else if cell.actionsCell}
-  <td class="{cell.css}">
+  <td class="pf-v6-c-table__td {cell.css}">
     {#if cell.actions.size > 1}
     <div class="pf-v6-l-flex pf-m-space-items-sm">
       {#for action in cell.actions}
@@ -125,7 +125,7 @@
     {/if}
   </td>
   {#else if cell.overflowMenu}
-  <td class="{cell.css}">
+  <td class="pf-v6-c-table__td {cell.css}">
     <div
       class="pf-v6-c-overflow-menu"
       x-data="{ lg: window.matchMedia('(min-width: 62rem)').matches }"
@@ -176,11 +176,11 @@
     </div>
   </td>
   {#else if cell.emptyStateCell}
-  <td colspan="{cell.colspan}">
+  <td class="pf-v6-c-table__td" colspan="{cell.colspan}">
     {#include components/feedback/empty-state _isolated=true titleText=cell.text iconName=cell.emptyIcon size="sm" bodyText=cell.emptyBody /}
   </td>
   {#else if cell.textStack}
-  <td{#if cell.css} class="{cell.css}"{/if}{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if}>
+  <td{#if cell.css} class="pf-v6-c-table__td {cell.css}"{/if}{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if}>
     <div class="pf-v6-l-stack pf-m-gutter">
       {#for item in cell.items}
       <div class="pf-v6-l-stack__item">
@@ -190,18 +190,18 @@
     </div>
   </td>
   {#else if cell.rowHeader}
-  <th scope="row"{#if cell.css} class="{cell.css}"{/if}{#if cell.style} style="{cell.style}"{/if}{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if}>{#if cell.link}<a href="{cell.href}">{cell.text}</a>{#else if cell.tableText}<div class="pf-v6-c-table__text">{cell.text}</div>{#else}{cell.text}{/if}</th>
+  <th scope="row"{#if cell.css} class="pf-v6-c-table__th {cell.css}"{/if}{#if cell.style} style="{cell.style}"{/if}{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if}>{#if cell.link}<a href="{cell.href}">{cell.text}</a>{#else if cell.tableText}<div class="pf-v6-c-table__text">{cell.text}</div>{#else}{cell.text}{/if}</th>
   {#else if cell.editVar}
-  <td{#if cell.css} class="{cell.css}"{/if}{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if}>
+  <td{#if cell.css} class="pf-v6-c-table__td {cell.css}"{/if}{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if}>
     <span x-show="!editing" x-text="{cell.editVar}"></span>
     <span class="pf-v6-c-form-control" x-show="editing" x-cloak><input type="text" aria-label="{cell.editLabel}" x-model="{cell.editDraft}" /></span>
   </td>
   {#else}
-  <td{#if cell.css} class="{cell.css}"{/if}{#if cell.style} style="{cell.style}"{/if}{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if}{#if cell.domId} id="{cell.domId}"{/if}{#if cell.spanning} colspan="{cell.colspan}"{/if}>{#if cell.link}<a href="{cell.href}">{cell.text}</a>{#else if cell.tableText}<span class="pf-v6-c-table__text">{cell.text}</span>{#else}{cell.text}{/if}</td>
+  <td{#if cell.css} class="pf-v6-c-table__td {cell.css}"{/if}{#if cell.style} style="{cell.style}"{/if}{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if}{#if cell.domId} id="{cell.domId}"{/if}{#if cell.spanning} colspan="{cell.colspan}"{/if}>{#if cell.link}<a href="{cell.href}">{cell.text}</a>{#else if cell.tableText}<span class="pf-v6-c-table__text">{cell.text}</span>{#else}{cell.text}{/if}</td>
   {/if}
   {/for}
   {#if table.inlineEdit}
-  <td class="pf-v6-c-table__inline-edit-action">
+  <td class="pf-v6-c-table__td pf-v6-c-table__inline-edit-action">
     <button type="button" class="pf-v6-c-button pf-m-secondary" x-show="!editing" @click="{row.editStartExpr}">
       <span class="pf-v6-c-button__text">Edit</span>
     </button>

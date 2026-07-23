@@ -12,12 +12,12 @@
     </button>
     <span style="flex: 1"></span>
     <span class="pf-v6-c-label pf-m-compact pf-m-outline"><span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text">Layout</span></span></span>
-    <select class="pf-v6-c-form-control" style="width: auto" x-model="layout" @change="$refs.topo.getCy().layout({ name: layout, animate: false }).run()">
+    <span class="pf-v6-c-form-control"><select x-model="layout" @change="$refs.topo.getCy().layout({ name: layout, animate: false }).run()">
       <option value="cose">cose</option>
       <option value="breadthfirst">breadthfirst</option>
       <option value="concentric">concentric</option>
       <option value="grid">grid</option>
-    </select>
+    </select><span class="pf-v6-c-form-control__utilities"><span class="pf-v6-c-form-control__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span></span>
   </div>
   <div
     class="pha-c-topology"

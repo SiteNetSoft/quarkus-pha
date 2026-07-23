@@ -8,7 +8,7 @@
 {#else}
 <tr class="pf-v6-c-table__tr">
 {/if}
-  <td class="pf-v6-c-table__tree-view-title-cell">
+  <td class="pf-v6-c-table__td pf-v6-c-table__tree-view-title-cell">
     <div class="pf-v6-c-table__tree-view-main">
       {#if node.parent}
       <span class="pf-v6-c-table__td pf-v6-c-table__toggle">
@@ -29,9 +29,9 @@
       {#if table.treeCheckboxes}
       <span class="pf-v6-c-table__td pf-v6-c-table__check">
         {#if node.checkboxModel}
-        <input type="checkbox" aria-label="Select {node.name}" x-model="{node.checkboxModel}" />
+        <label class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" aria-label="Select {node.name}" x-model="{node.checkboxModel}" /></label>
         {#else}
-        <input type="checkbox" aria-label="Select {node.name} and all children" :checked="{node.checkedExpr}"{#if node.indeterminateExpr} x-effect="$el.indeterminate = {node.indeterminateExpr}"{/if} @change="{node.changeExpr}" />
+        <label class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" aria-label="Select {node.name} and all children" :checked="{node.checkedExpr}"{#if node.indeterminateExpr} x-effect="$el.indeterminate = {node.indeterminateExpr}"{/if} @change="{node.changeExpr}" /></label>
         {/if}
       </span>
       {/if}
@@ -48,6 +48,6 @@
     </div>
   </td>
   {#for cell in node.cells}
-  <td>{cell}</td>
+  <td class="pf-v6-c-table__td">{cell}</td>
   {/for}
 </tr>
