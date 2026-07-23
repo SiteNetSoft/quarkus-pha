@@ -1,7 +1,7 @@
 {! Log Viewer — PatternFly v6 (extension) !}
 {! Required: lines (List of strings — one per log line) !}
 {! Optional: id — DOM id on the root; omit unless something else references the log viewer.
-              lineNumbers (bool), nowrap (bool), height (CSS length on __scroll-container), ansi (bool — parse ANSI escape codes into colored spans, client-side), linesAreHtml (bool — when true, lines are already-escaped HTML rendered raw; use with server-side ANSI conversion or pre-formatted lines), ariaLabel, withHeader (bool — render __header wrapper around #header slot), withFooter (bool — render __footer wrapper around #footer slot) !}
+              lineNumbers (bool), nowrap (bool), height (CSS length on __scroll-container), ansi (bool — parse ANSI escape codes into colored spans, client-side), linesAreHtml (bool — when true, lines are already-escaped HTML rendered raw; use with server-side ANSI conversion or pre-formatted lines), ariaLabel, withHeader (bool — render __header wrapper around #header slot), withFooter (bool — render a pha-c-log-viewer__footer wrapper around the #footer slot; upstream log-viewer has no footer element) !}
 {! Slots: header (toolbar/title row, only used when withHeader=true), footer (controls, only used when withFooter=true) !}
 {! Behavior owned by phaLogViewer() — search highlighting, wrap toggle, ANSI rendering, scroll-to-bottom. !}
 {! Requires: /web/js/alpine/components/log-viewer.js loaded before Alpine. !}
@@ -35,6 +35,6 @@
     </div>
   </div>
   {#if withFooter??}
-  <div class="pf-v6-c-log-viewer__footer">{#insert footer}{/insert}</div>
+  <div class="pha-c-log-viewer__footer">{#insert footer}{/insert}</div>
   {/if}
 </div>
