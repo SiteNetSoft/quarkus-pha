@@ -1,0 +1,10 @@
+{! Date-picker calendar swap response: the re-rendered interactive calendar, plus — on a date pick (pick=1) — an
+out-of-band span whose x-init dispatches pha-date-picked so the picker fills its input and closes. The span keeps its id
+so future picks re-swap it. !} {#include components/forms/calendar-month calendarMonth=cal /} {#if picked??}
+<span
+  id="{pickerId}-picked"
+  hidden
+  hx-swap-oob="outerHTML:#{pickerId}-picked"
+  x-init="$dispatch('pha-date-picked', '{picked}')"
+></span>
+{/if}

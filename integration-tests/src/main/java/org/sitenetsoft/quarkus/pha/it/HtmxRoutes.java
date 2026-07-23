@@ -17,11 +17,19 @@ import jakarta.ws.rs.sse.OutboundSseEvent;
 import jakarta.ws.rs.sse.Sse;
 
 import io.quarkus.qute.Engine;
+import io.quarkus.qute.Location;
+import io.quarkus.qute.Template;
+import io.quarkus.qute.TemplateInstance;
 import io.smallrye.mutiny.Multi;
 
+import org.sitenetsoft.quarkus.pha.model.CalendarMonth;
+
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -58,6 +66,80 @@ public class HtmxRoutes {
     );
 
     private static final int PAGE_SIZE = 6;
+
+    @Inject
+    @Location("components/calendar-month/basic")
+    Template calendarMonthBasicFragment;
+
+    @Inject
+    @Location("components/calendar-month/date-range")
+    Template calendarMonthRangeFragment;
+
+    /** PF clamps the year input to 1900-2100; out-of-range/garbage falls back. */
+    private static YearMonth calendarGrid(Integer year, Integer month, LocalDate fallback) {
+        int y = (year != null && year >= 1900 && year <= 2100) ? year : fallback.getYear();
+        int m = (month != null && month >= 1 && month <= 12) ? month : fallback.getMonthValue();
+        return YearMonth.of(y, m);
+    }
+
+    private static LocalDate parseDate(String value, LocalDate fallback) {
+        if (value == null) {
+            return fallback;
+        }
+        try {
+            return LocalDate.parse(value);
+        } catch (DateTimeParseException e) {
+            return fallback;
+        }
+    }
+
+    @Inject
+    @Location("partials/date-picker-calendar")
+    Template datePickerCalendarPartial;
+
+    @GET
+    @Path("/date-picker/{example}")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance datePickerCalendar(@PathParam("example") String example,
+            @QueryParam("year") Integer year, @QueryParam("month") Integer month,
+            @QueryParam("selected") String selected, @QueryParam("pick") String pick) {
+        DatePickerDemoData.Config config = DatePickerDemoData.CONFIGS.get(example);
+        if (config == null) {
+            throw new NotFoundException("Unknown date-picker example: " + example);
+        }
+        LocalDate sel = parseDate(selected, null);
+        YearMonth grid = calendarGrid(year, month, sel != null ? sel : LocalDate.of(2026, 5, 1));
+        TemplateInstance ti = datePickerCalendarPartial
+                .data("cal", DatePickerDemoData.calendar(example, grid, sel))
+                .data("pickerId", config.pickerId());
+        if (pick != null && sel != null) {
+            ti = ti.data("picked", config.format().format(sel));
+        }
+        return ti;
+    }
+
+    @GET
+    @Path("/calendar-month/basic")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance calendarMonthBasic(@QueryParam("year") Integer year,
+            @QueryParam("month") Integer month, @QueryParam("selected") String selected) {
+        LocalDate sel = parseDate(selected, CalendarMonthDemoData.BASIC_DEFAULT_SELECTED);
+        YearMonth grid = calendarGrid(year, month, sel);
+        return calendarMonthBasicFragment.data("demoCalBasic", CalendarMonthDemoData.basic(grid, sel));
+    }
+
+    @GET
+    @Path("/calendar-month/date-range")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance calendarMonthRange(@QueryParam("year") Integer year,
+            @QueryParam("month") Integer month, @QueryParam("end") String end) {
+        LocalDate endDate = parseDate(end, CalendarMonthDemoData.RANGE_DEFAULT_END);
+        if (endDate.isBefore(CalendarMonthDemoData.RANGE_START)) {
+            endDate = CalendarMonthDemoData.RANGE_DEFAULT_END;
+        }
+        YearMonth grid = calendarGrid(year, month, endDate);
+        return calendarMonthRangeFragment.data("demoCalRange", CalendarMonthDemoData.range(grid, endDate));
+    }
 
     @GET
     @Path("/search")
