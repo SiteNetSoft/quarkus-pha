@@ -26,14 +26,17 @@ test.describe("Timestamp", () => {
     await expect(page.locator("#ts-basic .pf-v6-c-timestamp__text")).toHaveText("May 20, 2026 at 2:30 PM");
   });
 
-  test("basic timestamp is a <time> element with datetime attribute", async ({ page }) => {
-    const ts = page.locator("time#ts-basic");
+  test("basic timestamp nests a <time> element with datetime attribute", async ({ page }) => {
+    const ts = page.locator("#ts-basic");
     await expect(ts).toHaveClass(/pf-v6-c-timestamp/);
-    await expect(ts).toHaveAttribute("datetime", "2026-05-20T14:30:00Z");
+    // PF anatomy: span root, datetime on the inner <time class="__text">
+    await expect(ts.locator("time.pf-v6-c-timestamp__text")).toHaveAttribute("datetime", "2026-05-20T14:30:00Z");
   });
 
-  test("inline variant has pf-m-inline modifier", async ({ page }) => {
-    await expect(page.locator("#ts-inline")).toHaveClass(/pf-m-inline/);
+  test("inline timestamp flows inside a sentence (PF default, no modifier)", async ({ page }) => {
+    // PF 6.6 has no pf-m-inline for timestamp — the component is inline-block by default
+    await expect(page.locator("#ts-inline")).not.toHaveClass(/pf-m-inline/);
+    await expect(page.locator("p > #ts-inline")).toBeAttached();
   });
 
   test("with-tooltip variant has title attribute", async ({ page }) => {
@@ -48,7 +51,7 @@ test.describe("Timestamp", () => {
     test("custom content keeps the machine-readable datetime", async ({ page }) => {
       const t = page.locator("#ts-custom-content");
       await expect(t).toHaveText("3 weeks ago");
-      await expect(t).toHaveAttribute("datetime", "2026-05-20T14:30:00Z");
+      await expect(t.locator("time.pf-v6-c-timestamp__text")).toHaveAttribute("datetime", "2026-05-20T14:30:00Z");
     });
 
     test("/components/timestamp/basic-formats returns 200", async ({ page }) => {

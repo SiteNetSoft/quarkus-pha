@@ -2,16 +2,17 @@
 {! Content slot: pre-formatted, human-readable timestamp string (passed as the include body — !}
 {! mirrors PF React's `children` override of the auto-formatted default). !}
 {! Optional: id, datetime (ISO 8601 — the machine-readable value used for the <time> datetime attribute),
-              inline (boolean — pf-m-inline, renders inline with surrounding text),
               tooltip (string — shown via the title attribute on hover) !}
+{! PF anatomy: span.pf-v6-c-timestamp root wrapping time.pf-v6-c-timestamp__text (datetime lives on the
+   inner <time>). The component is display:inline-block by default — there is no pf-m-inline in PF 6.6. !}
 {! Date / time formatting is a server-side concern — pre-format the string in your route. !}
 {! Model mode: pass timestamp=<org.sitenetsoft.quarkus.pha.model.Timestamp> — the model's text replaces the content slot. !}
 {#if timestamp??}
-<time class="pf-v6-c-timestamp{#if timestamp.isInline} pf-m-inline{/if}"{#if timestamp.id??} id="{timestamp.id}"{/if}{#if timestamp.datetime??} datetime="{timestamp.datetime}"{/if}{#if timestamp.tooltip??} title="{timestamp.tooltip}"{/if}>
-  <span class="pf-v6-c-timestamp__text">{timestamp.text}</span>
-</time>
+<span class="pf-v6-c-timestamp"{#if timestamp.id??} id="{timestamp.id}"{/if}{#if timestamp.tooltip??} title="{timestamp.tooltip}"{/if}>
+  <time class="pf-v6-c-timestamp__text"{#if timestamp.datetime??} datetime="{timestamp.datetime}"{/if}>{timestamp.text}</time>
+</span>
 {#else}
-<time class="pf-v6-c-timestamp{#if inline??} pf-m-inline{/if}"{#if id??} id="{id}"{/if}{#if datetime??} datetime="{datetime}"{/if}{#if tooltip??} title="{tooltip}"{/if}>
-  <span class="pf-v6-c-timestamp__text">{#let datetime=null id=null inline=null}{#insert/}{/let}</span>
-</time>
+<span class="pf-v6-c-timestamp"{#if id??} id="{id}"{/if}{#if tooltip??} title="{tooltip}"{/if}>
+  <time class="pf-v6-c-timestamp__text"{#if datetime??} datetime="{datetime}"{/if}>{#let datetime=null id=null inline=null}{#insert/}{/let}</time>
+</span>
 {/if}

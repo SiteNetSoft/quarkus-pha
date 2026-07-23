@@ -6,36 +6,52 @@
    (canonical minimal forms: no Infinity clamps, :disabled omitted when never disabled). !}
 {#if numberInput??}
 <div class="pf-v6-c-number-input" id="{numberInput.id}" x-data="{numberInput.xData}">
+  <div class="pf-v6-c-input-group">
+  <div class="pf-v6-c-input-group__item">
   <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Minus"{#if numberInput.minusDisabledExpr??} :disabled="{numberInput.minusDisabledExpr}"{/if} @click="{numberInput.minusClick}">
-    <span class="pf-v6-c-number-input__icon">{icons:svg('fa:minus').raw}</span>
+    <span class="pf-v6-c-button__icon"><span class="pf-v6-c-number-input__icon">{icons:svg('fa:minus').raw}</span></span>
   </button>
+  </div>
+  <div class="pf-v6-c-input-group__item pf-m-fill">
   <span class="pf-v6-c-form-control"{#if numberInput.isStatus} :class="{numberInput.statusClassExpr}"{/if}>
     <input type="number" x-model.number="val"{#if numberInput.minAttr??} min="{numberInput.minAttr}"{/if}{#if numberInput.maxAttr??} max="{numberInput.maxAttr}"{/if}{#if numberInput.isDisabled} disabled{/if} aria-label="{numberInput.inputAriaLabel}"{#if numberInput.isStatus} :aria-invalid="(val < 0).toString()"{/if}{#if numberInput.inputStyle??} style="{numberInput.inputStyle}"{/if}>
   </span>
+  </div>
+  <div class="pf-v6-c-input-group__item">
   <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Plus"{#if numberInput.plusDisabledExpr??} :disabled="{numberInput.plusDisabledExpr}"{/if} @click="{numberInput.plusClick}">
-    <span class="pf-v6-c-number-input__icon">{icons:svg('fa:plus').raw}</span>
+    <span class="pf-v6-c-button__icon"><span class="pf-v6-c-number-input__icon">{icons:svg('fa:plus').raw}</span></span>
   </button>
+  </div>
+  </div>
   {#if numberInput.unit??}
   <span class="pf-v6-c-number-input__unit">{numberInput.unit}</span>
   {/if}
 </div>
 {#else}
 <div class="pf-v6-c-number-input"{#if id??} id="{id}"{/if} x-data="{ val: {value} }">
+  <div class="pf-v6-c-input-group">
+  <div class="pf-v6-c-input-group__item">
   <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Minus"
           @click="val = Math.max(val - 1, {#if min??}{min}{#else}-Infinity{/if})"
           {! Fold component disabled into the Alpine binding: a static `disabled` attr is silently overridden by
              `:disabled` (Alpine sets the property), so disabled=true must live inside the expression. !}
           :disabled="{#if disabled??}true{#else if min??}val <= {min}{#else}false{/if}">
-    <span class="pf-v6-c-number-input__icon">{icons:svg('fa:minus').raw}</span>
+    <span class="pf-v6-c-button__icon"><span class="pf-v6-c-number-input__icon">{icons:svg('fa:minus').raw}</span></span>
   </button>
+  </div>
+  <div class="pf-v6-c-input-group__item pf-m-fill">
   <span class="pf-v6-c-form-control">
     <input type="number" x-model.number="val"{#if min??} min="{min}"{/if}{#if max??} max="{max}"{/if}{#if disabled??} disabled{/if} aria-label="{#if ariaLabel??}{ariaLabel}{#else if unit??}{unit} count{#else}Number input{/if}">
   </span>
+  </div>
+  <div class="pf-v6-c-input-group__item">
   <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Plus"
           @click="val = Math.min(val + 1, {#if max??}{max}{#else}Infinity{/if})"
           :disabled="{#if disabled??}true{#else if max??}val >= {max}{#else}false{/if}">
-    <span class="pf-v6-c-number-input__icon">{icons:svg('fa:plus').raw}</span>
+    <span class="pf-v6-c-button__icon"><span class="pf-v6-c-number-input__icon">{icons:svg('fa:plus').raw}</span></span>
   </button>
+  </div>
+  </div>
   {#if unit??}
   <span class="pf-v6-c-number-input__unit">{unit}</span>
   {/if}
