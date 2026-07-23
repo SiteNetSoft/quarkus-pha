@@ -47,8 +47,8 @@ public class ProgressExamplesRoutes {
         "warning",
         "inside-success",
         "outside-failure",
-        "failure-without-measure"
-    );
+        "failure-without-measure",
+            "static-width");
 
     @Inject
     Engine engine;

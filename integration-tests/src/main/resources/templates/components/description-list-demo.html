@@ -310,6 +310,15 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#display-2xl" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Display 2xl</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -529,7 +538,12 @@
                         Each term carries a <code class="ws-code">__term-icon</code> before its text.
                       </p>
                       {/description} {#content}{#include components/description-list/icons-on-terms /}{/content}
-                      {/include}
+                      {/include} {#include partials/example-card title="Display 2xl" slug="display-2xl"
+                      component="description-list" javaSource=true} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The largest display styling (pf-m-display-2xl).
+                      </p>
+                      {/description} {#content}{#include components/description-list/display-2xl /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2

@@ -24,6 +24,7 @@ public final class Banner {
     private final String messageHtml;
     private final String variant;
     private final boolean sticky;
+    private final boolean pill;
     private final String screenReaderText;
 
     private Banner(Builder b) {
@@ -31,6 +32,7 @@ public final class Banner {
         this.messageHtml = b.messageHtml;
         this.variant = b.variant;
         this.sticky = b.sticky;
+        this.pill = b.pill;
         this.screenReaderText = b.screenReaderText;
     }
 
@@ -66,6 +68,10 @@ public final class Banner {
         };
     }
 
+    public boolean isPill() {
+        return pill;
+    }
+
     public boolean isSticky() {
         return sticky;
     }
@@ -79,6 +85,7 @@ public final class Banner {
         private String messageHtml;
         private String variant;
         private boolean sticky;
+        private boolean pill;
         private String screenReaderText;
 
         private Builder() {
@@ -96,6 +103,12 @@ public final class Banner {
         }
 
         /** Pins to the top of its scroll container. */
+        /** Pill-shaped banner (PF 6.6 pf-m-pill). */
+        public Builder pill() {
+            this.pill = true;
+            return this;
+        }
+
         public Builder asSticky() {
             this.sticky = true;
             return this;

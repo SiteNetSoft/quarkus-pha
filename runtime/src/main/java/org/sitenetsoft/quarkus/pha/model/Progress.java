@@ -37,6 +37,7 @@ public final class Progress {
     private final String variant;
     private final String measureLocation;
     private final boolean singleline;
+    private final boolean staticWidthMeasure;
     private final String ariaLabel;
 
     private Progress(Builder b) {
@@ -46,6 +47,7 @@ public final class Progress {
         this.max = b.max;
         this.title = b.title;
         this.truncateTitle = b.truncateTitle;
+        this.staticWidthMeasure = b.staticWidthMeasure;
         this.label = b.label;
         this.valueText = b.valueText;
         this.helperText = b.helperText;
@@ -151,6 +153,11 @@ public final class Progress {
         return "outside".equals(measureLocation);
     }
 
+    /** pf-m-static-width on the measure — fixed measure width to stop layout shift. */
+    public boolean isStaticWidthMeasure() {
+        return staticWidthMeasure;
+    }
+
     /** True when the measure renders in the status row (top/outside placements). */
     public boolean isMeasureInStatus() {
         return !("inside".equals(measureLocation) || "none".equals(measureLocation));
@@ -179,6 +186,7 @@ public final class Progress {
         private String variant;
         private String measureLocation;
         private boolean singleline;
+        private boolean staticWidthMeasure;
         private String ariaLabel;
 
         private Builder() {
@@ -200,6 +208,12 @@ public final class Progress {
         public Builder range(int min, int max) {
             this.min = min;
             this.max = max;
+            return this;
+        }
+
+        /** Fixed-width measure (pf-m-static-width) so the bar doesn't shift as digits change. */
+        public Builder staticWidthMeasure() {
+            this.staticWidthMeasure = true;
             return this;
         }
 

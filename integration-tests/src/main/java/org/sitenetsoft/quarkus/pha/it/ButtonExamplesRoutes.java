@@ -48,8 +48,8 @@ public class ButtonExamplesRoutes {
         "progress-login",
         "favorite",
         "settings",
-        "hamburger"
-    );
+        "hamburger",
+            "clicked");
 
     @Inject
     Engine engine;

@@ -25,8 +25,8 @@ public class BannerExamplesRoutes {
         "status",
         "with-links",
         "screen-reader",
-        "sticky"
-    );
+        "sticky",
+            "pill");
 
     @Inject
     Engine engine;

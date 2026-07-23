@@ -132,6 +132,11 @@ public final class DescriptionList {
             return modifier("pf-m-display-lg");
         }
 
+        /** 2xl display styling. */
+        public Builder display2xl() {
+            return modifier("pf-m-display-2xl");
+        }
+
         /**
          * Column-count tokens, e.g. {@code columns("2-col")} or
          * {@code columns("2-col-on-lg", "3-col-on-xl")} — each renders as

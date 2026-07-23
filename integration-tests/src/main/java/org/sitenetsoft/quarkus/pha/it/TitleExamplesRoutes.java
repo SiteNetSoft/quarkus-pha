@@ -34,8 +34,9 @@ public class TitleExamplesRoutes {
 
     private static final Set<String> EXAMPLES = Set.of(
         "default-sizes",
-        "custom-sizes"
-    );
+        "custom-sizes",
+            "heading-levels",
+            "page-title");
 
     @Inject
     Engine engine;

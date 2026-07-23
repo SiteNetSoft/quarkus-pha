@@ -91,6 +91,15 @@
                                     ></span
                                   >
                                 </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#pill" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Pill</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
                               </ul>
                             </li>
                             <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -174,7 +183,12 @@
                           the banner pins to the top of its nearest scroll parent (here a 220px-tall box). Useful for
                           persistent warnings in scrollable panels.
                         </p>
-                        {/description} {#content}{#include components/banner/sticky /}{/content} {/include}
+                        {/description} {#content}{#include components/banner/sticky /}{/content} {/include} {#include
+                        partials/example-card title="Pill" slug="pill" component="banner"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          Pill-shaped status banners (PF 6.6 pf-m-pill) with status icon and screen-reader prefix.
+                        </p>
+                        {/description} {#content}{#include components/banner/pill /}{/content} {/include}
 
                         <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                           <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
