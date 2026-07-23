@@ -147,9 +147,11 @@ podman run --rm \
     cp node_modules/quill/dist/quill.bubble.css /output/quill/
     cp node_modules/quill/dist/quill.core.css /output/quill/
 
-    # Icons — raw SVGs from Font Awesome Free + PatternFly v6 source
-    # FA Free ships per-icon SVGs directly; pficon SVGs are not on npm so we
-    # generate them from the PF v6 source repo (pficons.mjs definitions).
+    # Icons — raw SVGs from Font Awesome Free + PatternFly v6
+    # FA Free ships per-icon SVGs directly; pficon SVGs are generated from the
+    # pficons.mjs definitions shipped in the @patternfly/patternfly npm package
+    # (icons/pficons.mjs). Do NOT fetch these from a GitHub tag archive — the
+    # v6.6.0 tag was deleted upstream and tag URLs are mutable.
     echo "  Icons (FA Free solid/regular/brands)..."
     mkdir -p /output/icons/fa-solid /output/icons/fa-regular /output/icons/fa-brands
     cp node_modules/@fortawesome/fontawesome-free/svgs/solid/*.svg   /output/icons/fa-solid/
@@ -157,17 +159,13 @@ podman run --rm \
     cp node_modules/@fortawesome/fontawesome-free/svgs/brands/*.svg  /output/icons/fa-brands/
     cp node_modules/@fortawesome/fontawesome-free/LICENSE.txt        /output/icons/fa-LICENSE.txt 2>/dev/null || true
 
-    echo "  Icons (PatternFly v6.6.0 pficons from GitHub source)..."
-    apk add --no-cache curl tar >/dev/null 2>&1
+    echo "  Icons (PatternFly pficons from the npm package)..."
     mkdir -p /output/icons/pficon /tmp/pf
-    cd /tmp/pf
-    curl -fsSL https://github.com/patternfly/patternfly/archive/refs/tags/v6.6.0.tar.gz \
-      | tar -xz --strip-components=1 \
-          patternfly-6.6.0/src/icons/definitions/pficons.mjs \
-          patternfly-6.6.0/LICENSE.txt
-    cp LICENSE.txt /output/icons/pficon-LICENSE.txt 2>/dev/null || true
+    PF_VERSION=$(node -p "require(\"/work/node_modules/@patternfly/patternfly/package.json\").version")
+    printf "pficon SVGs generated from @patternfly/patternfly %s (icons/pficons.mjs), MIT licensed.\nhttps://github.com/patternfly/patternfly/blob/main/LICENSE.txt\n" "$PF_VERSION" \
+      > /output/icons/pficon-LICENSE.txt
     cat > /tmp/pf/build-pficons.mjs <<EOF
-import { pfIcons } from "/tmp/pf/src/icons/definitions/pficons.mjs";
+import { pfIcons } from "/work/node_modules/@patternfly/patternfly/icons/pficons.mjs";
 import { writeFileSync } from "fs";
 
 let count = 0;
@@ -229,7 +227,7 @@ EOF
       const pkg = require(\"/work/node_modules/cytoscape/package.json\");
       console.log(\"  Cytoscape:   \" + pkg.version);
     "
-    echo "  pficon:      patternfly/patternfly@v6.6.0 (GitHub source)"
+    echo "  pficon:      @patternfly/patternfly ${PF_VERSION} (npm icons/pficons.mjs)"
   '
 
 echo ""
