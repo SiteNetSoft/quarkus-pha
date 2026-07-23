@@ -1,5 +1,5 @@
 <div x-data="{ v: '', bad() { if (this.v === '') return false; var d = new Date(this.v); return isNaN(d) || d < new Date('2026-01-01') || d > new Date('2026-12-31') } }" style="max-width: 300px">
-  <div class="pf-v6-c-date-picker" id="dp-min-max">
+  <div class="pf-v6-c-date-picker" id="dp-min-max" x-data="{ open: false }" @pha-date-picked="v = $event.detail; open = false">
     <div class="pf-v6-c-date-picker__input">
       <div class="pf-v6-c-input-group">
         <div class="pf-v6-c-input-group__item pf-m-fill">
@@ -8,9 +8,13 @@
           </span>
         </div>
         <div class="pf-v6-c-input-group__item">
-          <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Toggle date picker">{icons:svg('fa:calendar-alt').raw}</button>
+          <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Toggle date picker" :aria-expanded="open.toString()" @click="open = !open"><span class="pf-v6-c-button__icon">{icons:svg('fa:calendar-alt').raw}</span></button>
         </div>
       </div>
+    </div>
+    <span id="dp-min-max-picked" hidden></span>
+    <div class="pf-v6-c-date-picker__calendar" x-show="open" x-cloak @click.outside="open = false">
+      {#include components/forms/calendar-month calendarMonth=dpCalMinMax /}
     </div>
     <div class="pf-v6-c-date-picker__helper-text">
       <div class="pf-v6-c-helper-text" aria-live="polite">

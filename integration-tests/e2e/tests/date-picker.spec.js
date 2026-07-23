@@ -24,7 +24,7 @@ test.describe("Date Picker", () => {
 
   test("basic has a date-picker with input and toggle", async ({ page }) => {
     await expect(page.locator("#dp-basic")).toHaveClass(/pf-v6-c-date-picker/);
-    await expect(page.locator("#dp-basic input")).toBeVisible();
+    await expect(page.locator("#dp-basic-input")).toBeVisible();
     await expect(page.locator("#dp-basic button[aria-label='Toggle date picker']")).toBeVisible();
   });
 
@@ -33,7 +33,7 @@ test.describe("Date Picker", () => {
     await input.click();
     await input.blur();
     await expect(page.locator("#dp-required .pf-v6-c-helper-text__item.pf-m-error")).toBeVisible();
-    await expect(page.locator("#dp-required .pf-v6-c-form-control")).toHaveClass(/pf-m-error/);
+    await expect(page.locator("#dp-required .pf-v6-c-date-picker__input .pf-v6-c-form-control")).toHaveClass(/pf-m-error/);
   });
 
   test("helper text echoes the typed date", async ({ page }) => {
@@ -67,5 +67,49 @@ test.describe("Date Picker", () => {
         await expect(page.locator(".pf-v6-c-date-picker").first()).toBeAttached();
       });
     }
+  });
+
+  test.describe("Interactive calendar popover (PF behavior)", () => {
+    test("toggle opens a real calendar and picking a date fills the input and closes", async ({ page }) => {
+      const picker = page.locator("#dp-basic");
+      await picker.locator('button[aria-label="Toggle date picker"]').click();
+      const calendar = picker.locator(".pf-v6-c-date-picker__calendar");
+      await expect(calendar).toBeVisible();
+      await expect(calendar.locator(".pf-v6-c-calendar-month")).toBeVisible();
+      await calendar.locator('button[aria-label="21 May 2026"]').click();
+      await expect(picker.locator("#dp-basic-input")).toHaveValue("2026-05-21");
+      await expect(calendar).toBeHidden(); // picking closes the popover
+    });
+
+    test("month navigation works inside the popover", async ({ page }) => {
+      const picker = page.locator("#dp-value");
+      await picker.locator('button[aria-label="Toggle date picker"]').click();
+      const calendar = picker.locator(".pf-v6-c-date-picker__calendar");
+      await calendar.locator('button[aria-label="Next month"]').click();
+      await expect(calendar.locator(".pf-v6-c-menu-toggle__text")).toHaveText("June");
+      await expect(calendar).toBeVisible(); // nav keeps the popover open
+    });
+
+    test("with-value calendar opens on the pre-selected date", async ({ page }) => {
+      const picker = page.locator("#dp-value");
+      await picker.locator('button[aria-label="Toggle date picker"]').click();
+      const selected = picker.locator("td.pf-m-selected button");
+      await expect(selected).toHaveAttribute("aria-label", "20 May 2026");
+    });
+
+    test("american format example formats the picked date as MM/DD/YYYY", async ({ page }) => {
+      const picker = page.locator("#dp-american");
+      await picker.locator('button[aria-label="Toggle date picker"]').click();
+      await picker.locator('button[aria-label="10 March 2026"]').click();
+      await expect(page.locator("#dp-american-field")).toHaveValue("03/10/2026");
+    });
+
+    test("x-model examples receive the picked date (helper text reacts)", async ({ page }) => {
+      const picker = page.locator("#dp-helper-text");
+      await picker.locator('button[aria-label="Toggle date picker"]').click();
+      await picker.locator('button[aria-label="7 May 2026"]').click();
+      await expect(page.locator("#dp-helper-text-field")).toHaveValue("2026-05-07");
+      await expect(picker.locator(".pf-v6-c-helper-text__item-text")).toContainText("Selected: 2026-05-07");
+    });
   });
 });

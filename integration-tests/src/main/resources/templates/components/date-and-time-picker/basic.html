@@ -1,6 +1,6 @@
 {! Date + time pair — compose Date picker + Time picker side-by-side. !}
 <div style="display: flex; gap: 0.5rem">
-  {#include components/forms/date-picker id="dtp-date" value="2026-05-20" /}
+  {#include components/forms/date-picker id="dtp-date" value="2026-05-20" calendar=dtpCal /}
   <div class="pf-v6-c-time-picker" id="dtp-time" x-data="{ open: false, value: '14:30' }" style="position: relative">
     <div class="pf-v6-c-input-group">
       <div class="pf-v6-c-input-group__item pf-m-fill">
@@ -9,9 +9,20 @@
         </span>
       </div>
       <div class="pf-v6-c-input-group__item">
-        <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Toggle time picker" @click="open = !open">
+        <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Toggle time picker" :aria-expanded="open.toString()" @click="open = !open">
           <span class="pf-v6-c-button__icon">{icons:svg('fa:clock').raw}</span>
         </button>
+      </div>
+    </div>
+    <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; left: 0; z-index: 200; max-height: 200px; overflow-y: auto; min-width: 100%">
+      <div class="pf-v6-c-menu__content">
+        <ul class="pf-v6-c-menu__list" role="menu">
+          <template x-for="h in 24" :key="h">
+            <template x-for="m in ['00', '30']" :key="h + '-' + m">
+              <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="value = (h - 1).toString().padStart(2, '0') + ':' + m; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text" x-text="(h - 1).toString().padStart(2, '0') + ':' + m"></span></span></button></li>
+            </template>
+          </template>
+        </ul>
       </div>
     </div>
   </div>

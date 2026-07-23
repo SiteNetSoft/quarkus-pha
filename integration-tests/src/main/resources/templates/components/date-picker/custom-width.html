@@ -1,0 +1,43 @@
+{! Custom input widths — a fixed width via the PF width var, and a ch-based width. !}
+<div class="pf-v6-l-stack pf-m-gutter">
+  <div class="pf-v6-c-date-picker" id="dp-width-fixed" style="--pf-v6-c-date-picker__input--c-form-control--Width: 220px" x-data="{ open: false }" @pha-date-picked="$refs.dpf.value = $event.detail; open = false">
+    <div class="pf-v6-c-date-picker__input">
+      <div class="pf-v6-c-input-group">
+        <div class="pf-v6-c-input-group__item pf-m-fill">
+          <span class="pf-v6-c-form-control">
+            <input type="text" id="dp-width-fixed-field" x-ref="dpf" placeholder="YYYY-MM-DD" aria-label="Fixed width date picker" />
+          </span>
+        </div>
+        <div class="pf-v6-c-input-group__item">
+          <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Toggle date picker" :aria-expanded="open.toString()" @click="open = !open">
+            <span class="pf-v6-c-button__icon">{icons:svg('fa:calendar-alt').raw}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <span id="dp-width-fixed-picked" hidden></span>
+    <div class="pf-v6-c-date-picker__calendar" x-show="open" x-cloak @click.outside="open = false">
+      {#include components/forms/calendar-month calendarMonth=dpCalWidthFixed /}
+    </div>
+  </div>
+  <div class="pf-v6-c-date-picker" id="dp-width-chars" style="--pf-v6-c-date-picker__input--c-form-control--Width: 12ch" x-data="{ open: false }" @pha-date-picked="$refs.dpf.value = $event.detail; open = false">
+    <div class="pf-v6-c-date-picker__input">
+      <div class="pf-v6-c-input-group">
+        <div class="pf-v6-c-input-group__item pf-m-fill">
+          <span class="pf-v6-c-form-control">
+            <input type="text" id="dp-width-chars-field" x-ref="dpf" placeholder="YYYY-MM-DD" aria-label="Character width date picker" />
+          </span>
+        </div>
+        <div class="pf-v6-c-input-group__item">
+          <button class="pf-v6-c-button pf-m-control" type="button" aria-label="Toggle date picker" :aria-expanded="open.toString()" @click="open = !open">
+            <span class="pf-v6-c-button__icon">{icons:svg('fa:calendar-alt').raw}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <span id="dp-width-chars-picked" hidden></span>
+    <div class="pf-v6-c-date-picker__calendar" x-show="open" x-cloak @click.outside="open = false">
+      {#include components/forms/calendar-month calendarMonth=dpCalWidthChars /}
+    </div>
+  </div>
+</div>
