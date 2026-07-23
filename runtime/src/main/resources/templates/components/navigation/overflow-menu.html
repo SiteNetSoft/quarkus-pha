@@ -27,10 +27,23 @@
     </div>
   </div>
   {#else}
-  <div class="pf-v6-c-overflow-menu__control"{#if overflowMenu.isCollapsible} x-show="narrow" x-cloak{/if}>
-    <button class="pf-v6-c-menu-toggle pf-m-plain" type="button" aria-label="{overflowMenu.controlAriaLabel}">
+  {! The kebab mirrors PF React's overflow dropdown: it lists the menu's actions
+     (button text, or aria-label for icon-only actions). !}
+  <div class="pf-v6-c-overflow-menu__control" x-data="{ open: false }" style="position: relative"{#if overflowMenu.isCollapsible} x-show="narrow" x-cloak{/if}>
+    <button class="pf-v6-c-menu-toggle pf-m-plain" type="button" aria-label="{overflowMenu.controlAriaLabel}" :aria-expanded="open.toString()" @click="open = !open">
       <span class="pf-v6-c-menu-toggle__icon">{icons:svg('fa:ellipsis-vertical').raw}</span>
     </button>
+    <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; right: 0; z-index: 200; min-width: 10rem">
+      <div class="pf-v6-c-menu__content">
+        <ul class="pf-v6-c-menu__list" role="menu">
+          {#for g in overflowMenu.groups}
+          {#for b in g.buttons}
+          <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">{#if b.text}{b.text}{#else}{b.ariaLabel}{/if}</span></span></button></li>
+          {/for}
+          {/for}
+        </ul>
+      </div>
+    </div>
   </div>
   {/if}
 </div>

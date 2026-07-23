@@ -44,7 +44,7 @@
       >
     </div>
     <div class="pf-v6-c-form__group-control">
-      <input class="pf-v6-c-form-control" type="text" id="wiz-substeps-repo" value="github.com/example/web" />
+      <span class="pf-v6-c-form-control"><input type="text" id="wiz-substeps-repo" value="github.com/example/web" /></span>
     </div>
   </div>
   <div class="pf-v6-c-form__group">
@@ -54,7 +54,7 @@
       >
     </div>
     <div class="pf-v6-c-form__group-control">
-      <input class="pf-v6-c-form-control" type="text" id="wiz-substeps-branch" value="main" />
+      <span class="pf-v6-c-form-control"><input type="text" id="wiz-substeps-branch" value="main" /></span>
     </div>
   </div>
 </form>
@@ -80,7 +80,13 @@
   </div>
   <div class="pf-v6-c-action-list__group">
     <div class="pf-v6-c-action-list__item">
-      <button type="button" class="pf-v6-c-button pf-m-link">
+      <button
+        type="button"
+        class="pf-v6-c-button pf-m-link"
+        hx-get="/api/htmx/wizard/with-substeps/step/1"
+        hx-target="#wiz-substeps"
+        hx-swap="outerHTML"
+      >
         <span class="pf-v6-c-button__text">Cancel</span>
       </button>
     </div>

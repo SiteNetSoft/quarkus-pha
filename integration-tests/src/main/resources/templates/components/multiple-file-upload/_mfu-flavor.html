@@ -15,18 +15,25 @@
   x-data="{
     dragging: false,
     open: {#if startExpanded??}true{#else}false{/if},
-    files: [
+    files: [{#if status??}
       { key: 'png', name: 'filename.png', size: '40 mb', value: 35 },
       { key: 'doc', name: 'filename.doc', size: '30 mb', value: 70 },
       { key: 'pdf', name: 'filename.pdf', size: '25 mb', value: 50 }
-    ]
+    {/if}],
+    addFiles(list) {
+      for (var i = 0; i < list.length; i++) {
+        this.files.push({ key: list[i].name + '-' + Date.now() + '-' + i, name: list[i].name, size: Math.max(1, Math.round(list[i].size / 1024)) + ' kb', value: 100 });
+      }
+      if (list.length) this.open = true;
+    }
   }"
   :class="dragging ? 'pf-m-drag-over' : ''"
   @dragenter.prevent="dragging = true"
   @dragover.prevent="dragging = true"
   @dragleave="if (!$el.contains($event.relatedTarget)) dragging = false"
-  @drop.prevent="dragging = false"
+  @drop.prevent="dragging = false; addFiles($event.dataTransfer.files)"
 >
+  <input type="file" multiple x-ref="file" style="display: none" aria-hidden="true" tabindex="-1" @change="addFiles($event.target.files); $event.target.value = ''" />
   <div class="pf-v6-c-multiple-file-upload__main">
     <div class="pf-v6-c-multiple-file-upload__title">
       <div class="pf-v6-c-multiple-file-upload__title-icon">
@@ -36,29 +43,29 @@
       <div class="pf-v6-c-multiple-file-upload__title-text-separator">or</div>
     </div>
     <div class="pf-v6-c-multiple-file-upload__upload">
-      <button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">Upload</span></button>
+      <button class="pf-v6-c-button pf-m-secondary" type="button" @click="$refs.file.click()"><span class="pf-v6-c-button__text">Upload</span></button>
     </div>
     <div class="pf-v6-c-multiple-file-upload__info">Accepted file types: JPEG, Doc, PDF, PNG</div>
   </div>
-  {#if status??}
-  <div class="pf-v6-c-multiple-file-upload__status">
+  <div class="pf-v6-c-multiple-file-upload__status"{#if !status??} x-show="files.length > 0" x-cloak{/if}>
     <div class="pf-v6-c-expandable-section" :class="open ? 'pf-m-expanded' : ''">
-      <button
-        class="pf-v6-c-expandable-section__toggle"
-        type="button"
-        :aria-expanded="open"
-        @click="open = !open"
-      >
-        <span class="pf-v6-c-expandable-section__toggle-icon">{icons:svg('fa:angle-right').raw}</span>
-        <span class="pf-v6-c-multiple-file-upload__status-progress">
-          <span class="pf-v6-c-multiple-file-upload__status-progress-icon">{icons:svg('fa:spinner').raw}</span>
-          <span
-            class="pf-v6-c-multiple-file-upload__status-progress-text"
-            x-text="'0 of ' + files.length + ' files uploaded'"
-            >0 of 3 files uploaded</span
+      <div class="pf-v6-c-expandable-section__toggle">
+        <button class="pf-v6-c-button pf-m-link" type="button" :aria-expanded="open" @click="open = !open">
+          <span class="pf-v6-c-button__icon pf-m-start"
+            ><span class="pf-v6-c-expandable-section__toggle-icon">{icons:svg('fa:angle-down').raw}</span></span
           >
-        </span>
-      </button>
+          <span class="pf-v6-c-button__text">
+            <span class="pf-v6-c-multiple-file-upload__status-progress">
+              <span class="pf-v6-c-multiple-file-upload__status-progress-icon">{icons:svg('fa:spinner').raw}</span>
+              <span
+                class="pf-v6-c-multiple-file-upload__status-progress-text"
+                x-text="files.filter(f => f.value === 100).length + ' of ' + files.length + ' files uploaded'"
+                >0 of 3 files uploaded</span
+              >
+            </span>
+          </span>
+        </button>
+      </div>
       <div class="pf-v6-c-expandable-section__content" x-show="open" x-cloak>
         <ul class="pf-v6-c-multiple-file-upload__status-list" role="list">
           <template x-for="file in files" :key="file.key">
@@ -103,5 +110,4 @@
       </div>
     </div>
   </div>
-  {/if}
 </div>

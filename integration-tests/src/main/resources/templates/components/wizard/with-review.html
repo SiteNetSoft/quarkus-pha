@@ -34,7 +34,7 @@
       >
     </div>
     <div class="pf-v6-c-form__group-control">
-      <input class="pf-v6-c-form-control" type="text" id="wiz-review-name" name="name" value="Atlas migration" />
+      <span class="pf-v6-c-form-control"><input type="text" id="wiz-review-name" name="name" value="Atlas migration" /></span>
     </div>
   </div>
   <div class="pf-v6-c-form__group">
@@ -44,11 +44,11 @@
       >
     </div>
     <div class="pf-v6-c-form__group-control">
-      <select class="pf-v6-c-form-control" id="wiz-review-visibility" name="visibility">
+      <span class="pf-v6-c-form-control"><select id="wiz-review-visibility" name="visibility">
         <option value="private" selected>Private</option>
         <option value="internal">Internal</option>
         <option value="public">Public</option>
-      </select>
+      </select><span class="pf-v6-c-form-control__utilities"><span class="pf-v6-c-form-control__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span></span>
     </div>
   </div>
 </form>
@@ -74,7 +74,13 @@
   </div>
   <div class="pf-v6-c-action-list__group">
     <div class="pf-v6-c-action-list__item">
-      <button type="button" class="pf-v6-c-button pf-m-link">
+      <button
+        type="button"
+        class="pf-v6-c-button pf-m-link"
+        hx-get="/api/htmx/wizard/with-review/step/1"
+        hx-target="#wiz-review"
+        hx-swap="outerHTML"
+      >
         <span class="pf-v6-c-button__text">Cancel</span>
       </button>
     </div>

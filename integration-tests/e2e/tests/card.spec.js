@@ -107,7 +107,7 @@ test.describe("Card", () => {
   test.describe("Header variations", () => {
     test("header-images-actions has a brand image and actions", async ({ page }) => {
       await expect(page.locator("#cd-header-images-actions .pf-v6-c-card__header img.pf-v6-c-brand")).toBeVisible();
-      await expect(page.locator("#cd-header-images-actions .pf-v6-c-card__actions button")).toBeVisible();
+      await expect(page.locator("#cd-header-images-actions .pf-v6-c-card__actions .pf-v6-c-menu-toggle")).toBeVisible();
     });
 
     test("header-without-title has actions but no title", async ({ page }) => {
@@ -139,7 +139,7 @@ test.describe("Card", () => {
       const card = page.locator("#cd-selectable-1");
       await expect(card).toHaveClass(/pf-m-selectable/);
       await expect(card).not.toHaveClass(/pf-m-selected/);
-      await page.locator("#cd-selectable-1-check").check();
+      await page.locator('label[for="cd-selectable-1-check"]').click();
       await expect(card).toHaveClass(/pf-m-selected/);
     });
 
@@ -151,9 +151,9 @@ test.describe("Card", () => {
 
   test.describe("Single selectable", () => {
     test("radio selection is exclusive", async ({ page }) => {
-      await page.locator("#cd-single-selectable-1-radio").check();
+      await page.locator('label[for="cd-single-selectable-1-radio"]').click();
       await expect(page.locator("#cd-single-selectable-1")).toHaveClass(/pf-m-selected/);
-      await page.locator("#cd-single-selectable-2-radio").check();
+      await page.locator('label[for="cd-single-selectable-2-radio"]').click();
       await expect(page.locator("#cd-single-selectable-2")).toHaveClass(/pf-m-selected/);
       await expect(page.locator("#cd-single-selectable-1")).not.toHaveClass(/pf-m-selected/);
     });
@@ -194,11 +194,11 @@ test.describe("Card", () => {
 
   test.describe("Tiles", () => {
     test("multi tiles toggle independently", async ({ page }) => {
-      await page.locator("#cd-mtile-1-input").check();
-      await page.locator("#cd-mtile-2-input").check();
+      await page.locator('label[for="cd-mtile-1-input"]').click();
+      await page.locator('label[for="cd-mtile-2-input"]').click();
       await expect(page.locator("#cd-mtile-1")).toHaveClass(/pf-m-selected/);
       await expect(page.locator("#cd-mtile-2")).toHaveClass(/pf-m-selected/);
-      await page.locator("#cd-mtile-1-input").uncheck();
+      await page.locator('label[for="cd-mtile-1-input"]').click();
       await expect(page.locator("#cd-mtile-1")).not.toHaveClass(/pf-m-selected/);
       await expect(page.locator("#cd-mtile-2")).toHaveClass(/pf-m-selected/);
     });

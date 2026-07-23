@@ -42,14 +42,17 @@
         </button>
         {/if}
         {#if downloadButton??}
-        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Download code">
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Download code"
+                @click="(a => (document.body.appendChild(a), a.click(), a.remove()))(Object.assign(document.createElement('a'), { href: URL.createObjectURL(new Blob([$el.closest('.pf-v6-c-code-editor').querySelector('.pf-v6-c-code-editor__code-pre').textContent], { type: 'text/plain' })), download: 'code.txt' }))">
           <span class="pf-v6-c-button__icon">
             {icons:svg('fa:download').raw}
           </span>
         </button>
         {/if}
         {#if uploadButton??}
-        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Upload code">
+        <input type="file" x-ref="uploadFile" style="display: none" aria-hidden="true" tabindex="-1"
+               @change="$event.target.files.length && (r => (r.onload = e => ($el.closest('.pf-v6-c-code-editor').querySelector('.pf-v6-c-code-editor__code-pre').textContent = e.target.result), r.readAsText($event.target.files[0])))(new FileReader())" />
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Upload code" @click="$refs.uploadFile.click()">
           <span class="pf-v6-c-button__icon">
             {icons:svg('fa:upload').raw}
           </span>

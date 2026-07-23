@@ -68,7 +68,7 @@ public final class Slider {
     }
 
     public String xData() {
-        return "{ val: " + value + " }";
+        return "{ val: " + value + ", dragging: false }";
     }
 
     public String railClick() {
