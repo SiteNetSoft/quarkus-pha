@@ -1,23 +1,6 @@
-{! Basic + featured tiles — the featured one carries an icon badge, which is hand-rendered
-   because a Qute include can't take an inline badge list. !}
+{! Basic + featured tiles — the featured one carries an icon badge via the model's badge list. !}
 <div class="pf-v6-l-gallery pf-m-gutter" style="--pf-v6-l-gallery--GridTemplateColumns--min: 240px">
-  {#include components/extensions/catalog-tile id="ct-quarkus" title="Quarkus" vendor="Red Hat" description="Supersonic, subatomic Java framework — Kubernetes-native, GraalVM-friendly, built for the cloud era." iconClass="pf-v6-c-icon fas fa-bolt" /}
-  <div role="button" tabindex="0" id="ct-htmx" class="pf-v6-c-card catalog-tile-pf catalog-tile-pf-featured">
-    <div class="pf-v6-c-card__header catalog-tile-pf-header">
-      <span class="catalog-tile-pf-icon pf-v6-c-icon fas fa-arrow-right-arrow-left" aria-hidden="true"></span>
-      <div class="catalog-tile-pf-badge-container">
-        <span class="catalog-tile-pf-badge pf-v6-c-icon fas fa-certificate" title="Certified" aria-label="Certified"></span>
-      </div>
-    </div>
-    <div class="pf-v6-c-card__title">
-      <span class="pf-v6-c-card__title-text catalog-tile-pf-title">HTMX</span>
-      <p class="catalog-tile-pf-subtitle">Big Sky Software</p>
-    </div>
-    <div class="pf-v6-c-card__body catalog-tile-pf-body">
-      <p class="catalog-tile-pf-description">
-        <span>High-power tools for HTML — modern UX with minimal JavaScript. Adds AJAX, CSS Transitions, WebSockets and SSE directly to HTML, using attributes.</span>
-      </p>
-    </div>
-  </div>
-  {#include components/extensions/catalog-tile id="ct-alpine" title="Alpine.js" vendor="Caleb Porzio" description="Your new, lightweight JavaScript framework — Tailwind for JavaScript. 15kB and reactive." iconClass="pf-v6-c-icon fas fa-mountain" /}
+  {#include components/extensions/catalog-tile catalogTile=demoCtQuarkus /}
+  {#include components/extensions/catalog-tile catalogTile=demoCtHtmx /}
+  {#include components/extensions/catalog-tile catalogTile=demoCtAlpine /}
 </div>

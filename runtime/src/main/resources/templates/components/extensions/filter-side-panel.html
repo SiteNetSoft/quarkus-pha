@@ -1,7 +1,36 @@
 {! Filter side panel — PatternFly catalog-view extension !}
-{! Optional: id — DOM id on the root; omit unless something else references the panel. !}
-{! Slots: categories (filter categories — use components/extensions/filter-side-panel-category for each) !}
+{! Model mode: pass filterSidePanel=<org.sitenetsoft.quarkus.pha.model.FilterSidePanel> — categories and items come from the model. !}
+{! Flat mode — Optional: id. Slots: categories (use components/extensions/filter-side-panel-category for each) !}
 {! Requires: /web/vendor/patternfly-extensions/catalog-view.css !}
+{#if filterSidePanel??}
+<div class="filter-panel-pf"{#if filterSidePanel.id??} id="{filterSidePanel.id}"{/if}>
+  {#for category in filterSidePanel.categories}
+  <div class="filter-panel-pf-category">
+    {#let h=category.headingTag}<{h} class="filter-panel-pf-category-title">{category.title}</{h}>{/let}
+    <ul class="filter-panel-pf-category-items">
+      {#for item in category.items}
+      <li class="filter-panel-pf-category-item">
+        <label class="pf-v6-c-check">
+          <input
+            class="pf-v6-c-check__input"
+            type="checkbox"
+            {#if item.id??}id="{item.id}"{/if}
+            {#if item.checked}checked="checked"{/if}
+            {#if item.disabled}disabled{/if}
+          />
+          <span class="pf-v6-c-check__label">{item.label}</span>
+        </label>
+        {#if item.count??}
+        <span class="filter-panel-pf-category-item-count">{item.count}</span>
+        {/if}
+      </li>
+      {/for}
+    </ul>
+  </div>
+  {/for}
+</div>
+{#else}
 <div class="filter-panel-pf"{#if id??} id="{id}"{/if}>
   {#insert categories}{/insert}
 </div>
+{/if}
