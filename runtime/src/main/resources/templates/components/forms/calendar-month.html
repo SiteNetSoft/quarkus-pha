@@ -1,27 +1,130 @@
 {! Calendar month — PatternFly v6 !}
-{! Required: id — derives {id}-year on the year input.
-              month, year, weeks (list of week lists) !}
-{! Week list: list of day maps with {date, adjacent?, current?, selected?, disabled?, startRange?, endRange?, inRange?} !}
-<div class="pf-v6-c-calendar-month" id="{id}">
+{! Model mode: pass calendarMonth=<org.sitenetsoft.quarkus.pha.model.CalendarMonth> — fully
+   interactive, mirroring PF React CalendarMonth: prev/next month, month-select menu and year
+   input re-fetch the fragment via HTMX (server-rendered swap), clicking a date selects it and
+   jumps to its month, arrow keys move the roving focus (PHA.calendarArrowNav), and range mode
+   previews the extended band on hover (hovering past the committed end moves the effective
+   range end, across month boundaries — cleared on leaving the table). !}
+{! Flat mode (static): id, month, year, weeks (list of week lists).
+   Week list: day maps with {date, adjacent?, current?, selected?, disabled?, startRange?, endRange?, inRange?} !}
+{#if calendarMonth??}
+<div class="pf-v6-c-calendar-month" id="{calendarMonth.id}" x-data="{ open: false, hover: 0 }">
   <div class="pf-v6-c-calendar-month__header">
     <div class="pf-v6-c-calendar-month__header-nav-control pf-m-prev-month">
-      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Previous month">
-        {icons:svg('fa:angle-left').raw}
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Previous month"
+              {#if calendarMonth.prevUrl??}hx-get="{calendarMonth.prevUrl}" hx-target="closest .pf-v6-c-calendar-month" hx-swap="outerHTML"{/if}>
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-left').raw}</span>
       </button>
     </div>
     <div class="pf-v6-c-input-group">
       <div class="pf-v6-c-input-group__item pf-m-fill">
-        <span class="pf-v6-c-calendar-month__header-month">{month}</span>
+        <div class="pf-v6-c-calendar-month__header-month" style="position: relative">
+          <button class="pf-v6-c-menu-toggle" type="button" style="width: 140px"
+                  {#if calendarMonth.monthOptions??}:class="open ? 'pf-m-expanded' : ''" :aria-expanded="open" @click="open = !open"{#else}aria-expanded="false"{/if}
+                  id="{calendarMonth.id}-month-select">
+            <span class="pf-v6-c-menu-toggle__text">{calendarMonth.monthName}</span>
+            <span class="pf-v6-c-menu-toggle__controls">
+              <span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span>
+            </span>
+          </button>
+          {#if calendarMonth.monthOptions??}
+          <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false"
+               style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 140px">
+            <div class="pf-v6-c-menu__content">
+              <ul class="pf-v6-c-menu__list" role="listbox" aria-label="Select month">
+                {#for opt in calendarMonth.monthOptions}
+                <li role="none" class="pf-v6-c-menu__list-item{#if opt.selected} pf-m-selected{/if}">
+                  <button class="pf-v6-c-menu__item" type="button" role="option" aria-selected="{opt.selected}"
+                          hx-get="{opt.url}" hx-target="closest .pf-v6-c-calendar-month" hx-swap="outerHTML"
+                          @click="open = false">
+                    <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">{opt.name}</span></span>
+                  </button>
+                </li>
+                {/for}
+              </ul>
+            </div>
+          </div>
+          {/if}
+        </div>
       </div>
       <div class="pf-v6-c-input-group__item">
         <div class="pf-v6-c-calendar-month__header-year">
-          <input class="pf-v6-c-form-control" type="number" value="{year}" id="{id}-year" aria-label="Select year" />
+          <span class="pf-v6-c-form-control">
+            <input type="number" name="year" value="{calendarMonth.year}" id="{calendarMonth.id}-year" aria-label="Select year"
+                   {#if calendarMonth.yearUrl??}hx-get="{calendarMonth.yearUrl}" hx-trigger="change" hx-target="closest .pf-v6-c-calendar-month" hx-swap="outerHTML"{/if} />
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="pf-v6-c-calendar-month__header-nav-control pf-m-next-month">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Next month"
+              {#if calendarMonth.nextUrl??}hx-get="{calendarMonth.nextUrl}" hx-target="closest .pf-v6-c-calendar-month" hx-swap="outerHTML"{/if}>
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-right').raw}</span>
+      </button>
+    </div>
+  </div>
+  <table class="pf-v6-c-calendar-month__calendar"{#if calendarMonth.range} @mouseleave="hover = 0"{/if}>
+    <thead class="pf-v6-c-calendar-month__days">
+      <tr class="pf-v6-c-calendar-month__days-row">
+        <th class="pf-v6-c-calendar-month__day"><span class="pf-v6-screen-reader">Sunday</span><span aria-hidden="true">S</span></th>
+        <th class="pf-v6-c-calendar-month__day"><span class="pf-v6-screen-reader">Monday</span><span aria-hidden="true">M</span></th>
+        <th class="pf-v6-c-calendar-month__day"><span class="pf-v6-screen-reader">Tuesday</span><span aria-hidden="true">T</span></th>
+        <th class="pf-v6-c-calendar-month__day"><span class="pf-v6-screen-reader">Wednesday</span><span aria-hidden="true">W</span></th>
+        <th class="pf-v6-c-calendar-month__day"><span class="pf-v6-screen-reader">Thursday</span><span aria-hidden="true">T</span></th>
+        <th class="pf-v6-c-calendar-month__day"><span class="pf-v6-screen-reader">Friday</span><span aria-hidden="true">F</span></th>
+        <th class="pf-v6-c-calendar-month__day"><span class="pf-v6-screen-reader">Saturday</span><span aria-hidden="true">S</span></th>
+      </tr>
+    </thead>
+    <tbody class="pf-v6-c-calendar-month__dates" @keydown="PHA.calendarArrowNav($event)">
+      {#for week in calendarMonth.weeks}
+      <tr class="pf-v6-c-calendar-month__dates-row">
+        {#for day in week}
+        <td class="pf-v6-c-calendar-month__dates-cell{#if day.adjacent} pf-m-adjacent-month{/if}{#if day.current} pf-m-current{/if}{#if day.selected} pf-m-selected{/if}{#if day.disabled} pf-m-disabled{/if}{#if day.inRange} pf-m-in-range{/if}{#if day.startRange} pf-m-start-range{/if}"
+            {#if day.endRange}:class="hover > {calendarMonth.endOrd} ? '' : 'pf-m-end-range'"{#else if day.afterEnd}:class="hover >= {day.ord} ? ({day.ord} == hover ? 'pf-m-in-range pf-m-end-range' : 'pf-m-in-range') : ''"{/if}>
+          <button class="pf-v6-c-calendar-month__date{#if day.disabled} pf-m-disabled{/if}"
+                  type="button" aria-label="{day.ariaLabel}" tabindex="{#if day.tabZero}0{#else}-1{/if}"
+                  {#if day.disabled}disabled{#else}
+                  {#if calendarMonth.range}@mouseover="hover = {day.ord}"{/if}
+                  {#if day.endRange}:class="hover > {calendarMonth.endOrd} ? '' : 'pf-m-hover'"{#else if day.afterEnd}:class="{day.ord} == hover ? 'pf-m-hover' : ''"{/if}
+                  {#if day.url??}hx-get="{day.url}" hx-target="closest .pf-v6-c-calendar-month" hx-swap="outerHTML"{/if}
+                  {/if}>{day.date}</button>
+        </td>
+        {/for}
+      </tr>
+      {/for}
+    </tbody>
+  </table>
+</div>
+{#else}
+<div class="pf-v6-c-calendar-month" id="{id}">
+  <div class="pf-v6-c-calendar-month__header">
+    <div class="pf-v6-c-calendar-month__header-nav-control pf-m-prev-month">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Previous month">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-left').raw}</span>
+      </button>
+    </div>
+    <div class="pf-v6-c-input-group">
+      <div class="pf-v6-c-input-group__item pf-m-fill">
+        <div class="pf-v6-c-calendar-month__header-month">
+          <button class="pf-v6-c-menu-toggle" type="button" style="width: 140px" aria-expanded="false" id="{id}-month-select">
+            <span class="pf-v6-c-menu-toggle__text">{month}</span>
+            <span class="pf-v6-c-menu-toggle__controls">
+              <span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span>
+            </span>
+          </button>
+        </div>
+      </div>
+      <div class="pf-v6-c-input-group__item">
+        <div class="pf-v6-c-calendar-month__header-year">
+          <span class="pf-v6-c-form-control">
+            <input type="number" value="{year}" id="{id}-year" aria-label="Select year" />
+          </span>
         </div>
       </div>
     </div>
     <div class="pf-v6-c-calendar-month__header-nav-control pf-m-next-month">
       <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Next month">
-        {icons:svg('fa:angle-right').raw}
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-right').raw}</span>
       </button>
     </div>
   </div>
@@ -50,3 +153,4 @@
     </tbody>
   </table>
 </div>
+{/if}

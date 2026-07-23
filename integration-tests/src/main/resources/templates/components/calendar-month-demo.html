@@ -111,14 +111,18 @@
                       {#include partials/example-card title="Basic" slug="basic" component="calendar-month"}
                       {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        May 2026 — selected + current day on the 20th. Hand-rendered for the demo; the runtime template
-                        wants a structured weeks array.
+                        Fully interactive, mirroring PF React: the arrows, month menu, and year input navigate
+                        (server-rendered HTMX swaps), clicking a date selects it and jumps to its month, and arrow keys
+                        move the focus through the grid. Starts on May 2026 with the 20th selected; the real current day
+                        gets its ring when you navigate to today's month.
                       </p>
                       {/description} {#content}{#include components/calendar-month/basic /}{/content} {/include}
                       {#include partials/example-card title="Date range" slug="date-range" component="calendar-month"}
                       {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        The 12th–20th carry start-range / in-range / end-range cells.
+                        The PF range-selection behavior: dates before the fixed range start (the 12th) are disabled,
+                        clicking a date commits it as the new range end, and hovering past the end previews extending
+                        the band — across month boundaries too. Navigation keeps the committed range.
                       </p>
                       {/description} {#content}{#include components/calendar-month/date-range /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
@@ -140,7 +144,12 @@
                         </h3>
                         <p class="pf-v6-c-content--p pf-m-editorial">
                           Parameters accepted by
-                          <code class="ws-code">{|{#include components/forms/calendar-month ... /}|}</code>.
+                          <code class="ws-code">{|{#include components/forms/calendar-month ... /}|}</code>. Model mode:
+                          pass <code class="ws-code">calendarMonth=&lt;CalendarMonth&gt;</code> built in Java — it
+                          computes the grid from a <code class="ws-code">YearMonth</code> and, given an
+                          <code class="ws-code">hxUrl</code> endpoint, wires all navigation (prev/next, month menu, year
+                          input, date selection) as server-rendered HTMX swaps plus the range hover preview. The flat
+                          parameters below render a static, non-navigable calendar.
                         </p>
                         <table
                           class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
