@@ -2,11 +2,7 @@
    bare anchors for plain lists, button-links for labeled/subsection/expandable shapes.
    Params: jumpLinks, item. Included by jump-links (model branch). !}
 <li class="pf-v6-c-jump-links__item{#if item.current} pf-m-current{/if}"{#if item.ariaCurrent} aria-current="location"{/if}>
-  {#if jumpLinks.buttonLinks}
   <span class="pf-v6-c-jump-links__link"><a href="{item.href}" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">{item.text}</span></span></a></span>
-  {#else}
-  <a href="{item.href}" class="pf-v6-c-jump-links__link"><span class="pf-v6-c-jump-links__link-text">{item.text}</span></a>
-  {/if}
   {#if item.hasSubs}
   <ul class="pf-v6-c-jump-links__list" role="list"{#if item.subsAriaLabel} aria-label="{item.subsAriaLabel}"{/if}>
     {#for sub in item.subs}

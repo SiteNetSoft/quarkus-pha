@@ -52,8 +52,8 @@
       {#if item.srPrefix}<span class="pf-v6-screen-reader">{item.srPrefix}</span>{/if}
       <span class="pf-v6-c-menu__item-text">{item.text}</span>
       {#if item.external}<span class="pf-v6-c-menu__item-external-icon">{icons:svg('fa:arrow-up-right-from-square').raw}</span>{/if}
-      {#if item.description}<span class="pf-v6-c-menu__item-description">{item.description}</span>{/if}
     </span>
+    {#if item.description}<span class="pf-v6-c-menu__item-description">{item.description}</span>{/if}
   {#if item.href}</a>{#else}</button>{/if}
   {#if item.favoriteAction}
   <button class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action pf-m-favorite" type="button" aria-label="{item.actionAriaLabel}" x-data="{ fav: false }" :class="{ 'pf-m-favorited': fav }" @click="fav = !fav">

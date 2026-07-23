@@ -37,9 +37,9 @@
           {#if popover.isTitlePlain}
           <span class="pf-v6-c-popover__title-text" id="{popover.id}-title">{popover.title}</span>
           {#else}
-          <h4 class="pf-v6-c-popover__title">
-            {#if popover.titleIcon??}<span class="pf-v6-c-popover__title-icon">{icons:svg(popover.titleIcon).raw}</span>{/if}<span class="pf-v6-c-popover__title-text" id="{popover.id}-title">{popover.title}</span>
-          </h4>
+          <div class="pf-v6-c-popover__title" id="{popover.id}-title">
+            {#if popover.titleIcon??}<span class="pf-v6-c-popover__title-icon">{icons:svg(popover.titleIcon).raw}</span>{/if}<h1 class="pf-v6-c-popover__title-text">{popover.title}</h1>
+          </div>
           {/if}
         </header>
         {/if}
@@ -65,12 +65,14 @@
   <div class="pf-v6-c-popover__content">
     <div class="pf-v6-c-popover__close">
       <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="popoverOpen = false">
-        {icons:svg('fa:times').raw}
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:times').raw}</span>
       </button>
     </div>
     {#if titleText??}
     <header class="pf-v6-c-popover__header">
-      <span class="pf-v6-c-popover__title-text" id="{id}-title">{titleText}</span>
+      <div class="pf-v6-c-popover__title" id="{id}-title">
+        <h1 class="pf-v6-c-popover__title-text">{titleText}</h1>
+      </div>
     </header>
     {/if}
     <div class="pf-v6-c-popover__body">

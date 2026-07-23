@@ -14,7 +14,7 @@
   {#if wizard.isHasHeader}
   <div class="pf-v6-c-wizard__header">
     <div class="pf-v6-c-wizard__close">
-      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close wizard">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close wizard" @click="step = 1">
         <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
       </button>
     </div>
@@ -26,6 +26,15 @@
     {/if}
   </div>
   {/if}
+  <div class="pf-v6-c-wizard__toggle" x-data="{ navOpen: false }" :class="navOpen ? 'pf-m-expanded' : ''" :aria-expanded="navOpen.toString()" role="button" tabindex="0" @click="navOpen = !navOpen; $el.closest('.pf-v6-c-wizard').querySelector('.pf-v6-c-wizard__nav').style.display = navOpen ? 'block' : ''" @keydown.enter.prevent="$el.click()">
+    <span class="pf-v6-c-wizard__toggle-list">
+      <span class="pf-v6-c-wizard__toggle-list-item">
+        <span class="pf-v6-c-wizard__toggle-num" x-text="$el.closest('.pf-v6-c-wizard').querySelector('.pf-v6-c-wizard__nav-link.pf-m-current .pf-v6-c-wizard__toggle-num') ? $el.closest('.pf-v6-c-wizard').querySelector('.pf-v6-c-wizard__nav-link.pf-m-current .pf-v6-c-wizard__toggle-num').textContent : '1'">1</span>
+        <span x-text="($el.closest('.pf-v6-c-wizard').querySelector('.pf-v6-c-wizard__nav-link.pf-m-current .pf-v6-c-wizard__nav-link-main') || { textContent: 'Step' }).textContent.trim()">Step</span>
+      </span>
+    </span>
+    <span class="pf-v6-c-wizard__toggle-icon">{icons:svg('fa:caret-down').raw}</span>
+  </div>
   <div class="pf-v6-c-wizard__outer-wrap">
     <div class="pf-v6-c-wizard__inner-wrap">
       <nav class="pf-v6-c-wizard__nav" aria-label="{wizard.navLabel}">
@@ -62,11 +71,17 @@
       </div>
     </div>
     <footer class="pf-v6-c-wizard__footer">
-      {#for fb in wizard.footer}
-      <button type="button" class="pf-v6-c-button {fb.classes}"{#if fb.showExprText??} x-show="{fb.showExprText}"{/if}{#if fb.disabledExprText??} :disabled="{fb.disabledExprText}"{/if}{#if fb.clickExprText??} @click="{fb.clickExprText}"{/if}>
-        <span class="pf-v6-c-button__text">{fb.text}</span>
-      </button>
-      {/for}
+      <div class="pf-v6-c-action-list">
+        <div class="pf-v6-c-action-list__group">
+          {#for fb in wizard.footer}
+          <div class="pf-v6-c-action-list__item"{#if fb.showExprText??} x-show="{fb.showExprText}"{/if}>
+            <button type="button" class="pf-v6-c-button {fb.classes}"{#if fb.disabledExprText??} :disabled="{fb.disabledExprText}"{/if}{#if fb.clickExprText??} @click="{fb.clickExprText}"{/if}>
+              <span class="pf-v6-c-button__text">{fb.text}</span>
+            </button>
+          </div>
+          {/for}
+        </div>
+      </div>
     </footer>
   </div>
 </div>

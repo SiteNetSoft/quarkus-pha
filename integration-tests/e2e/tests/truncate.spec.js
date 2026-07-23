@@ -43,9 +43,10 @@ test.describe("Truncate", () => {
       await expect(wrap.locator(".pf-v6-c-tooltip")).toBeVisible();
     });
 
-    test("max-chars clamps to 20 characters plus ellipsis", async ({ page }) => {
-      const text = await page.locator("#trunc-max-chars .pf-v6-c-truncate__start").textContent();
-      expect(text.length).toBe(21);
+    test("max-chars clamps to 20 characters with the omission span carrying the ellipsis", async ({ page }) => {
+      const text = await page.locator("#trunc-max-chars .pf-v6-c-truncate__text").textContent();
+      expect(text.length).toBe(20);
+      await expect(page.locator("#trunc-max-chars .pf-v6-c-truncate__omission")).toBeVisible();
     });
 
     test("link variant truncates the anchor", async ({ page }) => {
@@ -86,8 +87,8 @@ test.describe("Truncate", () => {
 
     test("model max-chars flavour still truncates via Alpine", async ({ page }) => {
       await page.goto("/components/truncate/max-chars");
-      const start = page.locator("#trunc-max-chars .pf-v6-c-truncate__start");
-      await expect(start).toHaveText(/^Vestibulum interdum \u2026$/);
+      const start = page.locator("#trunc-max-chars .pf-v6-c-truncate__text");
+      await expect(start).toHaveText(/^Vestibulum interdum $/);
     });
   });
 });

@@ -24,27 +24,29 @@
   {/if}
   <div class="pf-v6-c-notification-drawer__body">
     {#if notificationDrawer.isGrouped}
+    <div class="pf-v6-c-notification-drawer__group-list">
     {#for g in notificationDrawer.groups}
     <section class="pf-v6-c-notification-drawer__group" :class="{ 'pf-m-expanded': {g.openVar} }">
-      <button
-        class="pf-v6-c-notification-drawer__group-toggle"
-        type="button"
-        :aria-expanded="{g.openVar}.toString()"
-        @click="{g.openVar} = !{g.openVar}"
-      >
-        <span class="pf-v6-c-notification-drawer__group-toggle-title">{g.title}</span>
-        {#if g.count??}<span class="pf-v6-c-notification-drawer__group-toggle-count"><span class="pf-v6-c-badge pf-m-unread">{g.count}</span></span>{/if}
-        <span class="pf-v6-c-notification-drawer__group-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
-      </button>
-      <div class="pf-v6-c-notification-drawer__group-list" x-show="{g.openVar}" x-cloak>
-        <ul class="pf-v6-c-notification-drawer__list" role="list">
-          {#for it in g.items}
-          {#include components/feedback/notification-drawer-model-item item=it /}
-          {/for}
-        </ul>
-      </div>
+      <h1>
+        <button
+          class="pf-v6-c-notification-drawer__group-toggle"
+          type="button"
+          :aria-expanded="{g.openVar}.toString()"
+          @click="{g.openVar} = !{g.openVar}"
+        >
+          <span class="pf-v6-c-notification-drawer__group-toggle-title">{g.title}</span>
+          {#if g.count??}<span class="pf-v6-c-notification-drawer__group-toggle-count"><span class="pf-v6-c-badge pf-m-unread">{g.count}</span></span>{/if}
+          <span class="pf-v6-c-notification-drawer__group-toggle-icon">{icons:svg('fa:angle-down').raw}</span>
+        </button>
+      </h1>
+      <ul class="pf-v6-c-notification-drawer__list" role="list" x-show="{g.openVar}" x-cloak>
+        {#for it in g.items}
+        {#include components/feedback/notification-drawer-model-item item=it /}
+        {/for}
+      </ul>
     </section>
     {/for}
+    </div>
     {#else}
     <ul class="pf-v6-c-notification-drawer__list" role="list">
       {#for it in notificationDrawer.items}

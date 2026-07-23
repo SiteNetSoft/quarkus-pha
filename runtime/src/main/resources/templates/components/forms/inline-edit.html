@@ -25,14 +25,10 @@
     </div>
     <div class="pf-v6-c-inline-edit__group pf-m-action-group pf-m-icon-group">
       <div class="pf-v6-c-inline-edit__action pf-m-valid">
-        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Save" :disabled="val.trim().length === 0">
-          {icons:svg('fa:check').raw}
-        </button>
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Save" :disabled="val.trim().length === 0"><span class="pf-v6-c-button__icon">{icons:svg('fa:check').raw}</span></button>
       </div>
       <div class="pf-v6-c-inline-edit__action">
-        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Cancel" @click="val = ''">
-          {icons:svg('fa:times').raw}
-        </button>
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Cancel" @click="val = ''"><span class="pf-v6-c-button__icon">{icons:svg('fa:times').raw}</span></button>
       </div>
     </div>
   </div>
@@ -83,9 +79,7 @@
     <span class="pf-v6-c-inline-edit__label pf-m-bold">{inlineEdit.label}</span>
     <div class="pf-v6-c-inline-edit__value" x-show="!editing" x-text="val"></div>
     <div class="pf-v6-c-inline-edit__action pf-m-enable-editable" x-show="!editing">
-      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="{inlineEdit.editAriaLabel}" @click="editing = true">
-        {icons:svg('fa:pencil-alt').raw}
-      </button>
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="{inlineEdit.editAriaLabel}" @click="editing = true"><span class="pf-v6-c-button__icon">{icons:svg('fa:pencil-alt').raw}</span></button>
     </div>
   </div>
   <div class="pf-v6-c-inline-edit__group" x-show="editing" x-cloak>
@@ -95,14 +89,10 @@
     </div>
     <div class="pf-v6-c-inline-edit__group pf-m-action-group pf-m-icon-group">
       <div class="pf-v6-c-inline-edit__action pf-m-valid">
-        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Save" @click="editing = false">
-          {icons:svg('fa:check').raw}
-        </button>
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Save" @click="editing = false"><span class="pf-v6-c-button__icon">{icons:svg('fa:check').raw}</span></button>
       </div>
       <div class="pf-v6-c-inline-edit__action">
-        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Cancel" @click="editing = false">
-          {icons:svg('fa:times').raw}
-        </button>
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Cancel" @click="editing = false"><span class="pf-v6-c-button__icon">{icons:svg('fa:times').raw}</span></button>
       </div>
     </div>
   </div>
@@ -112,9 +102,7 @@
   <div class="pf-v6-c-inline-edit__group">
     <div class="pf-v6-c-inline-edit__value" x-show="!editing" x-text="val"></div>
     <div class="pf-v6-c-inline-edit__action pf-m-enable-editable" x-show="!editing">
-      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Edit" @click="editing = true">
-        {icons:svg('fa:pencil-alt').raw}
-      </button>
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Edit" @click="editing = true"><span class="pf-v6-c-button__icon">{icons:svg('fa:pencil-alt').raw}</span></button>
     </div>
   </div>
   <div class="pf-v6-c-inline-edit__group" x-show="editing" x-cloak>
@@ -125,14 +113,10 @@
     </div>
     <div class="pf-v6-c-inline-edit__group pf-m-action-group pf-m-icon-group">
       <div class="pf-v6-c-inline-edit__action pf-m-valid">
-        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Save" @click="editing = false">
-          {icons:svg('fa:check').raw}
-        </button>
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Save" @click="editing = false"><span class="pf-v6-c-button__icon">{icons:svg('fa:check').raw}</span></button>
       </div>
       <div class="pf-v6-c-inline-edit__action">
-        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Cancel" @click="editing = false">
-          {icons:svg('fa:times').raw}
-        </button>
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Cancel" @click="editing = false"><span class="pf-v6-c-button__icon">{icons:svg('fa:times').raw}</span></button>
       </div>
     </div>
   </div>
@@ -148,9 +132,7 @@
   <div class="pf-v6-c-inline-edit__group">
     <div class="pf-v6-c-inline-edit__value" x-show="!editing" x-text="val"></div>
     <div class="pf-v6-c-inline-edit__action pf-m-enable-editable" x-show="!editing">
-      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Edit" @click="editing = true">
-        {icons:svg('fa:pencil-alt').raw}
-      </button>
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Edit" @click="editing = true"><span class="pf-v6-c-button__icon">{icons:svg('fa:pencil-alt').raw}</span></button>
     </div>
   </div>
   <div class="pf-v6-c-inline-edit__group" x-show="editing" x-cloak>
@@ -161,14 +143,10 @@
     </div>
     <div class="pf-v6-c-inline-edit__group pf-m-action-group pf-m-icon-group">
       <div class="pf-v6-c-inline-edit__action pf-m-valid">
-        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Save" @click="editing = false">
-          {icons:svg('fa:check').raw}
-        </button>
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Save" @click="editing = false"><span class="pf-v6-c-button__icon">{icons:svg('fa:check').raw}</span></button>
       </div>
       <div class="pf-v6-c-inline-edit__action">
-        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Cancel" @click="editing = false">
-          {icons:svg('fa:times').raw}
-        </button>
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Cancel" @click="editing = false"><span class="pf-v6-c-button__icon">{icons:svg('fa:times').raw}</span></button>
       </div>
     </div>
   </div>

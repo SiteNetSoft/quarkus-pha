@@ -27,23 +27,27 @@
   <p x-show="submitted !== ''" x-cloak style="align-self: center; margin-inline-start: 0.75rem">Searched for: <strong x-text="submitted"></strong></p>
 </div>
 {#else if searchInput.isExpandableToggle}
-<div id="{searchInput.id}" x-data="{searchInput.xData}">
-  <div class="pf-v6-c-text-input-group" x-show="open" x-cloak style="max-width: 320px; display: inline-flex">
-    <div class="pf-v6-c-text-input-group__main pf-m-icon">
-      <span class="pf-v6-c-text-input-group__text">
-        <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
-        <input class="pf-v6-c-text-input-group__text-input" type="search" id="{searchInput.id}-input"{#if searchInput.placeholder??} placeholder="{searchInput.placeholder}"{/if} aria-label="{searchInput.ariaLabel}" x-model="value" />
-      </span>
-    </div>
-    <div class="pf-v6-c-text-input-group__utilities">
-      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close search" @click="open = false; value = ''">
-        <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
-      </button>
+<div class="pf-v6-c-input-group pf-m-search-expandable pf-m-plain" id="{searchInput.id}" x-data="{searchInput.xData}" :class="open ? 'pf-m-expanded' : ''">
+  <div class="pf-v6-c-input-group__item pf-m-search-input" x-show="open" x-cloak>
+    <div class="pf-v6-c-text-input-group">
+      <div class="pf-v6-c-text-input-group__main pf-m-icon">
+        <span class="pf-v6-c-text-input-group__text">
+          <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+          <input class="pf-v6-c-text-input-group__text-input" type="text" id="{searchInput.id}-input"{#if searchInput.placeholder??} placeholder="{searchInput.placeholder}"{/if} aria-label="{searchInput.ariaLabel}" x-model="value" />
+        </span>
+      </div>
+      <div class="pf-v6-c-text-input-group__utilities">
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close search" @click="open = false; value = ''">
+          <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+        </button>
+      </div>
     </div>
   </div>
-  <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Open search" x-show="!open" @click="open = true; $nextTick(() => document.getElementById('{searchInput.id}-input').focus())">
-    <span class="pf-v6-c-button__icon">{icons:svg('fa:magnifying-glass').raw}</span>
-  </button>
+  <div class="pf-v6-c-input-group__item pf-m-search-expand" x-show="!open">
+    <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Open search" @click="open = true; $nextTick(() => document.getElementById('{searchInput.id}-input').focus())">
+      <span class="pf-v6-c-button__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+    </button>
+  </div>
 </div>
 {#else if searchInput.isAutocomplete}
 <div

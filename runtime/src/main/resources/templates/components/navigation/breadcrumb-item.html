@@ -26,7 +26,7 @@
 <li class="pf-v6-c-breadcrumb__item">
   <span class="pf-v6-c-breadcrumb__item-divider" aria-hidden="true">{icons:svg('fa:angle-right').raw}</span>
   {#if isDropdown??}
-  <div class="pf-v6-c-breadcrumb__dropdown" x-data="phaBreadcrumbDropdown()">
+  <span class="pf-v6-c-breadcrumb__dropdown" x-data="phaBreadcrumbDropdown()">
     <button type="button" class="pf-v6-c-menu-toggle pf-m-plain pf-m-text" aria-haspopup="true" :aria-expanded="open.toString()" @click="toggle()" @keydown.escape.window="close()" id="{dropdownId}-toggle">
       <span class="pf-v6-c-menu-toggle__text">{#let current=null heading=null href=null target=null}{#insert/}{/let}</span>
       <span class="pf-v6-c-menu-toggle__controls">
@@ -38,7 +38,7 @@
         {#let current=null heading=null href=null target=null}{#insert dropdown}{/insert}{/let}
       </div>
     </div>
-  </div>
+  </span>
   {#else if heading??}
   {#let h=(headingLevel ?: 'h1')}<{h} class="pf-v6-c-breadcrumb__heading"><a {#if href??}href="{href}"{/if}{#if target??} target="{target}"{/if} class="pf-v6-c-breadcrumb__link pf-m-current" aria-current="page">{#let current=null heading=null href=null target=null}{#insert/}{/let}</a></{h}>{/let}
   {#else if href??}

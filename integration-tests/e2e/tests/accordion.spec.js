@@ -68,7 +68,8 @@ test.describe("Accordion", () => {
       await firstToggle.click();
       await expect(firstContent).toBeVisible();
       await expect(firstToggle).toHaveAttribute("aria-expanded", "true");
-      await expect(firstContent).toHaveClass(/pf-m-expanded/);
+      // PF 6.6 drives expansion solely from pf-m-expanded on the __item
+      await expect(accordion.locator(".pf-v6-c-accordion__item").first()).toHaveClass(/pf-m-expanded/);
     });
 
     test("toggle ids and content aria-labelledby are linked", async ({ page }) => {

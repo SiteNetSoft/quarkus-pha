@@ -35,8 +35,8 @@
 {#if progress??}
 <div class="pf-v6-c-progress{#if progress.size} pf-m-{progress.size}{/if}{#if progress.variant} pf-m-{progress.variant}{/if}{#if progress.measureInside} pf-m-inside{/if}{#if progress.measureOutside} pf-m-outside{/if}{#if progress.singleline} pf-m-singleline{/if}" id="{progress.id}">
   {#if progress.title}<div class="pf-v6-c-progress__description{#if progress.truncateTitle} pf-m-truncate{/if}" id="{progress.descriptionId}">{progress.title}</div>{/if}
-  <div class="pf-v6-c-progress__status">
-    {#if progress.measureInStatus}<span class="pf-v6-c-progress__measure">{progress.measure}</span>{/if}
+  <div class="pf-v6-c-progress__status" aria-hidden="true">
+    {#if progress.measureInStatus}<span class="pf-v6-c-progress__measure{#if progress.isStaticWidthMeasure} pf-m-static-width{/if}">{progress.measure}</span>{/if}
     {#if progress.statusIcon}<span class="pf-v6-c-progress__status-icon">{icons:svg(progress.statusIcon).raw}</span>{/if}
   </div>
   <div class="pf-v6-c-progress__bar" role="progressbar" aria-valuemin="{progress.minValue}" aria-valuemax="{progress.maxValue}" aria-valuenow="{progress.value}"{#if progress.valueText} aria-valuetext="{progress.valueText}"{/if}{#if progress.ariaLabel} aria-label="{progress.ariaLabel}"{#else if progress.title} aria-labelledby="{progress.descriptionId}"{/if}{#if progress.helperText} aria-describedby="{progress.helperId}"{/if}>
@@ -44,12 +44,12 @@
       {#if progress.measureInside}<span class="pf-v6-c-progress__measure">{progress.measure}</span>{/if}
     </div>
   </div>
-  {#if progress.helperText}<div class="pf-v6-c-progress__helper-text" id="{progress.helperId}">{progress.helperText}</div>{/if}
+  {#if progress.helperText}<div class="pf-v6-c-progress__helper-text"><div class="pf-v6-c-helper-text" id="{progress.helperId}"><div class="pf-v6-c-helper-text__item"><span class="pf-v6-c-helper-text__item-text">{progress.helperText}</span></div></div></div>{/if}
 </div>
 {#else}
 <div class="pf-v6-c-progress{#if size??} pf-m-{size}{/if}{#if variant??} pf-m-{variant}{/if}{#if measureLocation?? && (measureLocation is 'outside' || measureLocation is 'inside')} pf-m-{measureLocation}{/if}{#if singleline??} pf-m-singleline{/if}" id="{id}">
   {#if title??}<div class="pf-v6-c-progress__description{#if truncateTitle??} pf-m-truncate{/if}" id="{id}-description">{title}</div>{/if}
-  <div class="pf-v6-c-progress__status">
+  <div class="pf-v6-c-progress__status" aria-hidden="true">
     {#if !(measureLocation?? && (measureLocation is 'inside' || measureLocation is 'none'))}<span class="pf-v6-c-progress__measure">{#if label??}{label}{#else}{value}%{/if}</span>{/if}
     {#if variant??}<span class="pf-v6-c-progress__status-icon">{#if variant is 'success'}{icons:svg('fa:circle-check').raw}{#else if variant is 'warning'}{icons:svg('fa:triangle-exclamation').raw}{#else if variant is 'danger'}{icons:svg('fa:circle-exclamation').raw}{/if}</span>{/if}
   </div>
