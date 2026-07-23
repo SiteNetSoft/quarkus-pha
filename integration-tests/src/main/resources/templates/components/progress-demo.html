@@ -213,6 +213,17 @@
                                     ></span
                                   >
                                 </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#static-width" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text"
+                                          >Outside static width measure</span
+                                        ></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
                               </ul>
                             </li>
                             <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -380,7 +391,12 @@
                           for the user (e.g. an indeterminate step that errored).
                         </p>
                         {/description} {#content}{#include components/progress/failure-without-measure /}{/content}
-                        {/include}
+                        {/include} {#include partials/example-card title="Outside static width measure"
+                        slug="static-width" component="progress" javaSource=true} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          pf-m-static-width fixes the measure width so the bar does not shift as digits change.
+                        </p>
+                        {/description} {#content}{#include components/progress/static-width /}{/content} {/include}
 
                         <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                           <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">

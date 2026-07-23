@@ -1,0 +1,26 @@
+{! Loading state — pf-m-loading with a spinner over the file details while a file is read. !}
+<div class="pf-v6-c-file-upload pf-m-loading" id="sfu-loading" style="max-width: 480px">
+  <div class="pf-v6-c-file-upload__file-select">
+    <div class="pf-v6-c-input-group">
+      <div class="pf-v6-c-input-group__item pf-m-fill">
+        <span class="pf-v6-c-form-control pf-m-readonly">
+          <input type="text" readonly id="sfu-loading-filename" value="Sample.png" aria-label="Read only filename" aria-describedby="sfu-loading-browse" />
+        </span>
+      </div>
+      <div class="pf-v6-c-input-group__item">
+        <button class="pf-v6-c-button pf-m-control" type="button" disabled id="sfu-loading-browse"><span class="pf-v6-c-button__text">Upload</span></button>
+      </div>
+      <div class="pf-v6-c-input-group__item">
+        <button class="pf-v6-c-button pf-m-control" type="button"><span class="pf-v6-c-button__text">Clear</span></button>
+      </div>
+    </div>
+  </div>
+  <div class="pf-v6-c-file-upload__file-details">
+    <span class="pf-v6-c-form-control pf-m-textarea pf-m-resize-vertical">
+      <textarea id="sfu-loading-details" aria-label="File contents being read" readonly>Reading Sample.png…</textarea>
+    </span>
+    <div class="pf-v6-c-file-upload__file-details-spinner">
+      {#include components/feedback/spinner size="lg" label="Loading..." /}
+    </div>
+  </div>
+</div>

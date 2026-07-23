@@ -1,0 +1,17 @@
+{! Vertical toolbar with height visibility breakpoints — pf-m-hidden + pf-m-visible-on-*-height
+   show items only when the container is tall enough. Fixed-height wrapper so it demos live. !}
+<div style="height: 260px; overflow: hidden; border: var(--pf-t--global--border--width--regular) dashed var(--pf-t--global--border--color--default)">
+  <div class="pf-v6-c-toolbar pf-m-vertical" id="tb-vertical-height" style="height: 100%">
+    <div class="pf-v6-c-toolbar__content" style="height: 100%">
+      <div class="pf-v6-c-toolbar__content-section">
+        <div class="pf-v6-c-toolbar__item">Always visible</div>
+        <div class="pf-v6-c-toolbar__item">Always visible</div>
+        <hr class="pf-v6-c-divider" />
+        <div class="pf-v6-c-toolbar__item pf-m-hidden pf-m-visible-on-md-height">Visible at md height</div>
+        <div class="pf-v6-c-toolbar__group pf-m-hidden pf-m-visible-on-lg-height">
+          <div class="pf-v6-c-toolbar__item">Visible at lg height</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

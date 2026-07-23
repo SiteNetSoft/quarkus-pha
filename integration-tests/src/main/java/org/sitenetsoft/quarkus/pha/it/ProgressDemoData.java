@@ -16,6 +16,11 @@ public class ProgressDemoData {
     public static Progress demoProgBasic = Progress.of("prog-basic", 33)
             .title("Basic progress").build();
 
+    public static Progress demoProgStaticWidth = Progress.of("prog-static-width", 33)
+            .title("Static width measure")
+            .staticWidthMeasure()
+            .build();
+
     public static Progress demoProgSmall = Progress.of("prog-small", 33)
             .title("Small progress").size("sm").build();
 

@@ -119,6 +119,15 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#loading" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">File upload loading</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -208,6 +217,13 @@
                       component="simple-file-upload"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">Controls disabled.</p>
                       {/description} {#content}{#include components/simple-file-upload/disabled /}{/content} {/include}
+                      {#include partials/example-card title="File upload loading" slug="loading"
+                      component="simple-file-upload"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        pf-m-loading with a spinner over the file details while a file is being read.
+                      </p>
+                      {/description} {#content}{#include components/simple-file-upload/loading /}{/content} {/include}
+
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

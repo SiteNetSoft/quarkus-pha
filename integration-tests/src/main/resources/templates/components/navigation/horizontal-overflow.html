@@ -1,0 +1,29 @@
+{! Horizontal nav with overflow scroll buttons (pf-m-scrollable) — the buttons scroll the
+   list and disable at the edges. Constrained width so the overflow actually engages. !}
+<div style="max-width: 420px" x-data="{ atStart: true, atEnd: false,
+    update() { var l = $refs.list; this.atStart = l.scrollLeft <= 0; this.atEnd = l.scrollLeft + l.clientWidth >= l.scrollWidth - 1 } }"
+  x-init="$nextTick(() => update())">
+  <nav class="pf-v6-c-nav pf-m-scrollable pf-m-horizontal" aria-label="Global" id="nav-horizontal-overflow">
+    <div class="pf-v6-c-nav__scroll-button">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Scroll start" :disabled="atStart"
+              @click="$refs.list.scrollBy({ left: -150, behavior: 'smooth' }); setTimeout(() => update(), 350)">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-left').raw}</span>
+      </button>
+    </div>
+    <ul class="pf-v6-c-nav__list" role="list" x-ref="list" @scroll.debounce.150ms="update()" style="overflow-x: auto; scrollbar-width: none">
+      <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link pf-m-current" aria-current="page"><span class="pf-v6-c-nav__link-text">Overview</span></a></li>
+      <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link"><span class="pf-v6-c-nav__link-text">Workloads</span></a></li>
+      <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link"><span class="pf-v6-c-nav__link-text">Networking</span></a></li>
+      <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link"><span class="pf-v6-c-nav__link-text">Storage</span></a></li>
+      <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link"><span class="pf-v6-c-nav__link-text">Builds</span></a></li>
+      <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link"><span class="pf-v6-c-nav__link-text">Observability</span></a></li>
+      <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link"><span class="pf-v6-c-nav__link-text">Compute</span></a></li>
+    </ul>
+    <div class="pf-v6-c-nav__scroll-button">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Scroll end" :disabled="atEnd"
+              @click="$refs.list.scrollBy({ left: 150, behavior: 'smooth' }); setTimeout(() => update(), 350)">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-right').raw}</span>
+      </button>
+    </div>
+  </nav>
+</div>

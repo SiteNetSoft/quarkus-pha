@@ -81,8 +81,8 @@ public class TableExamplesRoutes {
         "draggable-rows",
         "footer",
         "cell-with-image-alignment",
-        "container-query-with-drawer"
-    );
+        "container-query-with-drawer",
+            "sticky-base-and-stuck");
 
     @Inject
     Engine engine;

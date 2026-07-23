@@ -149,6 +149,11 @@ public class DescriptionListDemoData {
             .displayLg().groups(standardGroups())
             .build();
 
+    public static DescriptionList demoDescDisplay2xl = DescriptionList.builder()
+            .id("dl-display-2xl").ariaLabel("Description list 2xl display size")
+            .display2xl().groups(standardGroups())
+            .build();
+
     public static DescriptionList demoDescLargeDisplaySizeAndCard = DescriptionList.builder()
             .id("dl-large-display-size-and-card").ariaLabel("Description list large-display-size-and-card")
             .displayLg().columns("2-col-on-lg").cardGroups().groups(standardGroups())

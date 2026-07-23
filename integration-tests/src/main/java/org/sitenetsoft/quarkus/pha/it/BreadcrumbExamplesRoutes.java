@@ -34,8 +34,8 @@ public class BreadcrumbExamplesRoutes {
         "without-home-link",
         "with-heading",
         "with-dropdown",
-        "auto-generated"
-    );
+        "auto-generated",
+            "with-buttons");
 
     @Inject
     Engine engine;
