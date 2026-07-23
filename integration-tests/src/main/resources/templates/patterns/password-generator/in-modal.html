@@ -48,7 +48,7 @@
               >
             </div>
             <div class="pf-v6-c-form__group-control">
-              <input class="pf-v6-c-form-control" id="modal-username" type="text" value="dramos" />
+              <span class="pf-v6-c-form-control"><input id="modal-username" type="text" value="dramos" /></span>
             </div>
           </div>
           <div class="pf-v6-c-form__group">
@@ -58,7 +58,9 @@
               >
             </div>
             <div class="pf-v6-c-form__group-control" style="display: flex; gap: 0.5rem; align-items: center">
-              <input class="pf-v6-c-form-control" id="modal-pwd" type="text" readonly x-model="pwd" style="flex: 1" />
+              <span class="pf-v6-c-form-control pf-m-readonly"
+                ><input id="modal-pwd" type="text" readonly x-model="pwd"
+              /></span>
               <button type="button" class="pf-v6-c-button pf-m-secondary" @click="generate()">
                 <span class="pf-v6-c-button__text">Regenerate</span>
               </button>

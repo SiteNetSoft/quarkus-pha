@@ -3,20 +3,20 @@
 {#if table.caption}
 <caption class="pf-v6-c-table__caption">{table.caption}</caption>
 {/if}
-<thead>
+<thead class="pf-v6-c-table__thead">
   {#if table.nestedHeader}
   <tr class="pf-v6-c-table__tr">
     {#for col in table.columns}
     {#if col.toggleColumn}
-    <td rowspan="2"></td>
+    <td class="pf-v6-c-table__td" rowspan="2"></td>
     {#else if col.checkColumn}
-    <td class="pf-v6-c-table__check" rowspan="2">
-      <input type="checkbox" name="select-all" aria-label="Select all rows" />
+    <td class="pf-v6-c-table__td pf-v6-c-table__check" rowspan="2">
+      <label class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" name="select-all" aria-label="Select all rows" @change="$el.closest('table').querySelectorAll('tbody .pf-v6-c-table__check input[type=checkbox]').forEach(cb => { cb.checked = $event.target.checked; cb.dispatchEvent(new Event('change')) })" /></label>
     </td>
     {#else if col.group}
-    <th scope="col" colspan="{col.groupColspan}">{col.label}</th>
+    <th class="pf-v6-c-table__th" scope="col" colspan="{col.groupColspan}">{col.label}</th>
     {#else}
-    <th scope="col" rowspan="2"{#if col.headerCss} class="{col.headerCss}"{/if}>{col.label}</th>
+    <th scope="col" rowspan="2"{#if col.headerCss} class="pf-v6-c-table__th {col.headerCss}"{/if}>{col.label}</th>
     {/if}
     {/for}
   </tr>
@@ -24,7 +24,7 @@
     {#for col in table.columns}
     {#if col.group}
     {#for sub in col.subColumns}
-    <th scope="col" class="pf-v6-c-table__subhead">{sub}</th>
+    <th scope="col" class="pf-v6-c-table__th pf-v6-c-table__subhead">{sub}</th>
     {/for}
     {/if}
     {/for}
@@ -33,10 +33,10 @@
   <tr class="pf-v6-c-table__tr">
     {#for col in table.columns}
     {#if col.toggleColumn}
-    <td></td>
+    <td class="pf-v6-c-table__td"></td>
     {#else if col.favoriteColumn}
     {#if table.favoritesSortable}
-    <th scope="col" class="pf-v6-c-table__favorite pf-v6-c-table__sort" :class="dir ? 'pf-m-selected' : ''" :aria-sort="dir === 'desc' ? 'descending' : (dir === 'asc' ? 'ascending' : 'none')">
+    <th scope="col" class="pf-v6-c-table__th pf-v6-c-table__favorite pf-v6-c-table__sort" :class="dir ? 'pf-m-selected' : ''" :aria-sort="dir === 'desc' ? 'descending' : (dir === 'asc' ? 'ascending' : 'none')">
       <button type="button" class="pf-v6-c-table__button" @click="sortFavs()" aria-label="Sort by favorites">
         <span class="pf-v6-c-table__button-content">
           <span class="pf-v6-c-table__sort-indicator">
@@ -46,28 +46,28 @@
       </button>
     </th>
     {#else}
-    <td class="pf-v6-c-table__favorite" aria-hidden="true"></td>
+    <td class="pf-v6-c-table__td pf-v6-c-table__favorite" aria-hidden="true"></td>
     {/if}
     {#else if col.dragColumn}
-    <td class="pf-v6-c-table__draggable" aria-hidden="true"></td>
+    <td class="pf-v6-c-table__td pf-v6-c-table__draggable" aria-hidden="true"></td>
     {#else if col.inlineEditColumn}
-    <th scope="col" class="pf-v6-c-table__inline-edit-action">{col.label}</th>
+    <th scope="col" class="pf-v6-c-table__th pf-v6-c-table__inline-edit-action">{col.label}</th>
     {#else if col.checkColumn}
     {#if table.radioSelect}
-    <td class="pf-v6-c-table__check" aria-hidden="true"></td>
+    <td class="pf-v6-c-table__td pf-v6-c-table__check" aria-hidden="true"></td>
     {#else if table.indeterminateSelect}
-    <td class="pf-v6-c-table__check">
-      <input type="checkbox" aria-label="Select all rows" :checked="allOn" x-effect="$el.indeterminate = someOn && !allOn" @change="toggleAll()" />
+    <td class="pf-v6-c-table__td pf-v6-c-table__check">
+      <label class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" aria-label="Select all rows" :checked="allOn" x-effect="$el.indeterminate = someOn && !allOn" @change="toggleAll()" /></label>
     </td>
     {#else}
-    <td class="pf-v6-c-table__check">
-      <input type="checkbox" name="select-all" aria-label="Select all rows" />
+    <td class="pf-v6-c-table__td pf-v6-c-table__check">
+      <label class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="checkbox" name="select-all" aria-label="Select all rows" @change="$el.closest('table').querySelectorAll('tbody .pf-v6-c-table__check input[type=checkbox]').forEach(cb => { cb.checked = $event.target.checked; cb.dispatchEvent(new Event('change')) })" /></label>
     </td>
     {/if}
     {#else if col.actionColumn}
-    <th scope="col" class="pf-v6-c-table__action">{#if col.label}{col.label}{/if}</th>
+    <th scope="col" class="pf-v6-c-table__th pf-v6-c-table__action">{#if col.label}{col.label}{/if}</th>
     {#else if col.sortable}
-    <th scope="col" class="pf-v6-c-table__sort{#if col.sorted} pf-m-selected{/if}" aria-sort="{col.ariaSort}">
+    <th scope="col" class="pf-v6-c-table__th pf-v6-c-table__sort{#if col.sorted} pf-m-selected{/if}" aria-sort="{col.ariaSort}">
       <button
         type="button"
         class="pf-v6-c-table__button"
@@ -82,7 +82,7 @@
       </button>
     </th>
     {#else}
-    <th scope="col"{#if col.headerCss} class="{col.headerCss}"{/if}{#if col.sticky} style="{col.stickyStyle}"{/if}>{col.label}</th>
+    <th scope="col"{#if col.headerCss} class="pf-v6-c-table__th {col.headerCss}"{/if}{#if col.sticky} style="{col.stickyStyle}"{/if}>{col.label}</th>
     {/if}
     {/for}
   </tr>
@@ -111,17 +111,17 @@
   {#include components/data-display/table-model-row table=table row=row /}
   {#if table.animateExpand}
   <tr class="pf-v6-c-table__expandable-row" :class="open ? 'pf-m-expanded' : ''">
-    <td></td>
-    {#if table.hasSelection}<td></td>{/if}
-    <td colspan="{table.detailColspan}"{#if row.detailNoPadding} class="pf-m-no-padding"{/if}>
+    <td class="pf-v6-c-table__td"></td>
+    {#if table.hasSelection}<td class="pf-v6-c-table__td"></td>{/if}
+    <td colspan="{table.detailColspan}"{#if row.detailNoPadding} class="pf-v6-c-table__td pf-m-no-padding"{/if}>
       <div class="pf-v6-c-table__expandable-row-content{#if row.detailNoBackground} pf-m-no-background{/if}">{#if row.detailTable}{#include components/data-display/table table=row.detailTable /}{#else if row.detailParagraph}<p>{row.detail}</p>{#else}{row.detail}{/if}</div>
     </td>
   </tr>
   {#else}
   <tr class="pf-v6-c-table__expandable-row" :class="open ? 'pf-m-expanded' : ''" x-show="open" x-cloak>
-    <td></td>
-    {#if table.hasSelection}<td></td>{/if}
-    <td colspan="{table.detailColspan}"{#if row.detailNoPadding} class="pf-m-no-padding"{/if}>
+    <td class="pf-v6-c-table__td"></td>
+    {#if table.hasSelection}<td class="pf-v6-c-table__td"></td>{/if}
+    <td colspan="{table.detailColspan}"{#if row.detailNoPadding} class="pf-v6-c-table__td pf-m-no-padding"{/if}>
       <div class="pf-v6-c-table__expandable-row-content{#if row.detailNoBackground} pf-m-no-background{/if}">{#if row.detailTable}{#include components/data-display/table table=row.detailTable /}{#else if row.detailParagraph}<p>{row.detail}</p>{#else}{row.detail}{/if}</div>
     </td>
   </tr>
@@ -143,9 +143,9 @@
   <tr>
     {#for cell in table.footerRow.cells}
     {#if cell.rowHeader}
-    <th scope="row"{#if cell.spanning} colspan="{cell.colspan}"{/if}>{cell.text}</th>
+    <th class="pf-v6-c-table__th" scope="row"{#if cell.spanning} colspan="{cell.colspan}"{/if}>{cell.text}</th>
     {#else}
-    <td{#if cell.spanning} colspan="{cell.colspan}"{/if}>{cell.text}</td>
+    <td class="pf-v6-c-table__td"{#if cell.spanning} colspan="{cell.colspan}"{/if}>{cell.text}</td>
     {/if}
     {/for}
   </tr>

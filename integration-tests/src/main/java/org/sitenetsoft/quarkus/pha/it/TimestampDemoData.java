@@ -35,7 +35,7 @@ public class TimestampDemoData {
             .id("ts-custom-format").datetime("2026-05-20T14:30:00Z").build();
 
     public static Timestamp demoTsInline = Timestamp.of("2 hours ago")
-            .id("ts-inline").datetime("2026-05-20T14:30:00Z").inline().build();
+            .id("ts-inline").datetime("2026-05-20T14:30:00Z").build();
 
     public static Timestamp demoTsTooltip = Timestamp.of("2 hours ago")
             .id("ts-tooltip").datetime("2026-05-20T14:30:00Z")

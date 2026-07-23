@@ -45,9 +45,9 @@ test.describe("Button", () => {
   });
 
   test.describe("Small", () => {
-    test("has pf-m-sm modifier", async ({ page }) => {
-      await expect(page.locator("#btn-sm-primary")).toHaveClass(/pf-m-sm/);
-      await expect(page.locator("#btn-sm-secondary")).toHaveClass(/pf-m-sm/);
+    test("has pf-m-small modifier", async ({ page }) => {
+      await expect(page.locator("#btn-sm-primary")).toHaveClass(/pf-m-small/);
+      await expect(page.locator("#btn-sm-secondary")).toHaveClass(/pf-m-small/);
     });
   });
 
@@ -68,10 +68,10 @@ test.describe("Button", () => {
   });
 
   test.describe("Call to action", () => {
-    test("has pf-m-lg modifier", async ({ page }) => {
-      await expect(page.locator("#btn-cta-primary")).toHaveClass(/pf-m-lg/);
-      await expect(page.locator("#btn-cta-secondary")).toHaveClass(/pf-m-lg/);
-      await expect(page.locator("#btn-cta-tertiary")).toHaveClass(/pf-m-lg/);
+    test("has pf-m-display-lg modifier", async ({ page }) => {
+      await expect(page.locator("#btn-cta-primary")).toHaveClass(/pf-m-display-lg/);
+      await expect(page.locator("#btn-cta-secondary")).toHaveClass(/pf-m-display-lg/);
+      await expect(page.locator("#btn-cta-tertiary")).toHaveClass(/pf-m-display-lg/);
     });
   });
 

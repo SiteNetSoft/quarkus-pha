@@ -20,7 +20,7 @@
         </button>
       </div>
       {#else}
-      <div class="pf-v6-c-data-list__check"><input type="checkbox" id="{item.checkId}" aria-label="Select row" /></div>
+      <div class="pf-v6-c-data-list__check"><label class="pf-v6-c-check pf-m-standalone" for="{item.checkId}"><input class="pf-v6-c-check__input" type="checkbox" id="{item.checkId}" aria-label="Select row" /></label></div>
       {/if}
     </div>
     {/if}
@@ -33,8 +33,8 @@
     {#for area in item.actionAreas}
     {#if area.kebab}
     <div class="pf-v6-c-data-list__item-action{#if area.css} {area.css}{/if}" x-data="{ open: false }" style="position: relative">
-      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="{area.ariaLabel}" :aria-expanded="open.toString()" @click="open = !open">
-        <span class="pf-v6-c-button__icon">{icons:svg('fa:ellipsis-vertical').raw}</span>
+      <button class="pf-v6-c-menu-toggle pf-m-plain" type="button" aria-label="{area.ariaLabel}" :aria-expanded="open.toString()" @click="open = !open">
+        <span class="pf-v6-c-menu-toggle__icon">{icons:svg('fa:ellipsis-vertical').raw}</span>
       </button>
       {! div-based menu structure — a ul/li menu nested inside the data-list's role="list"
          tree trips the html-validator's li-role rule, and the styling is class-driven anyway. !}

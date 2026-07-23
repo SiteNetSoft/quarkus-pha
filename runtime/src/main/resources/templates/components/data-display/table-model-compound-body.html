@@ -11,7 +11,7 @@
   {/if}
     {#for cell in row.cells}
     {#if cell.compound}
-    <td{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if} class="{cell.css}" :class="exp === '{cell.expandKey}' ? 'pf-m-expanded' : ''">
+    <td{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if} class="pf-v6-c-table__td {cell.css}" :class="exp === '{cell.expandKey}' ? 'pf-m-expanded' : ''">
       <button
         type="button"
         class="pf-v6-c-table__button"
@@ -22,9 +22,9 @@
       </button>
     </td>
     {#else if cell.rowHeader}
-    <th scope="row"{#if cell.css} class="{cell.css}"{/if}{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if}>{#if cell.link}<a href="{cell.href}">{cell.text}</a>{#else}{cell.text}{/if}</th>
+    <th scope="row"{#if cell.css} class="pf-v6-c-table__th {cell.css}"{/if}{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if}>{#if cell.link}<a href="{cell.href}">{cell.text}</a>{#else}{cell.text}{/if}</th>
     {#else}
-    <td{#if cell.css} class="{cell.css}"{/if}{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if}>{#if cell.link}<a href="{cell.href}">{cell.text}</a>{#else}{cell.text}{/if}</td>
+    <td{#if cell.css} class="pf-v6-c-table__td {cell.css}"{/if}{#if cell.dataLabel} data-label="{cell.dataLabel}"{/if}>{#if cell.link}<a href="{cell.href}">{cell.text}</a>{#else}{cell.text}{/if}</td>
     {/if}
     {/for}
   </tr>
@@ -35,7 +35,7 @@
   {#else}
   <tr class="pf-v6-c-table__expandable-row" :class="exp === '{cell.expandKey}' ? 'pf-m-expanded' : ''" x-show="exp === '{cell.expandKey}'" x-cloak>
   {/if}
-    <td colspan="{table.compoundDetailColspan}"{#if cell.detailNoPadding} class="pf-m-no-padding"{/if}>
+    <td colspan="{table.compoundDetailColspan}"{#if cell.detailNoPadding} class="pf-v6-c-table__td pf-m-no-padding"{/if}>
       <div class="pf-v6-c-table__expandable-row-content{#if cell.detailNoBackground} pf-m-no-background{/if}">{#if cell.detailTable}{#include components/data-display/table table=cell.detailTable /}{#else}{cell.detail}{/if}</div>
     </td>
   </tr>

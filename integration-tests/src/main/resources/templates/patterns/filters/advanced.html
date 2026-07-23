@@ -4,21 +4,25 @@
       <div class="pf-v6-c-toolbar__content-section">
         <div class="pf-v6-c-toolbar__group">
           <div class="pf-v6-c-toolbar__item">
-            <select class="pf-v6-c-form-control" x-model="attr" aria-label="Attribute">
-              <option>Status</option>
-              <option>Region</option>
-              <option>Owner</option>
-              <option>Created</option>
-            </select>
+            <span class="pf-v6-c-form-control"
+              ><select x-model="attr" aria-label="Attribute">
+                <option>Status</option>
+                <option>Region</option>
+                <option>Owner</option>
+                <option>Created</option></select
+              ><span class="pf-v6-c-form-control__utilities"
+                ><span class="pf-v6-c-form-control__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span
+              ></span
+            >
           </div>
           <div class="pf-v6-c-toolbar__item">
-            <input
-              type="text"
-              class="pf-v6-c-form-control"
-              x-model="value"
-              :placeholder="'Filter by ' + attr.toLowerCase()"
-              :aria-label="'Filter by ' + attr.toLowerCase()"
-            />
+            <span class="pf-v6-c-form-control"
+              ><input
+                type="text"
+                x-model="value"
+                :placeholder="'Filter by ' + attr.toLowerCase()"
+                :aria-label="'Filter by ' + attr.toLowerCase()"
+            /></span>
           </div>
           <div class="pf-v6-c-toolbar__item">
             <button
