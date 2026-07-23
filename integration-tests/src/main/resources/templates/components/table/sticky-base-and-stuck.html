@@ -2,22 +2,22 @@
    pf-m-sticky-header-stuck (the base/stuck pattern for headers under other sticky chrome). !}
 <div class="pf-v6-c-scroll-outer-wrapper" style="max-height: 260px">
   <div class="pf-v6-c-scroll-inner-wrapper" tabindex="0" role="region" aria-label="Scrollable table with sticky header">
-    <table class="pf-v6-c-table pf-m-grid-md pf-m-sticky-header-stuck pf-m-sticky-header-base" role="grid" aria-label="Sticky header base and stuck" id="tbl-sticky-base-stuck">
+    <table class="pf-v6-c-table pf-m-grid-md pf-m-sticky-header-stuck pf-m-sticky-header-base" aria-label="Sticky header base and stuck" id="tbl-sticky-base-stuck">
       <thead class="pf-v6-c-table__thead">
-        <tr class="pf-v6-c-table__tr" role="row">
-          <th class="pf-v6-c-table__th" role="columnheader" scope="col">Repositories</th>
-          <th class="pf-v6-c-table__th" role="columnheader" scope="col">Branches</th>
-          <th class="pf-v6-c-table__th" role="columnheader" scope="col">Pull requests</th>
-          <th class="pf-v6-c-table__th" role="columnheader" scope="col">Workspaces</th>
+        <tr class="pf-v6-c-table__tr">
+          <th class="pf-v6-c-table__th" scope="col">Repositories</th>
+          <th class="pf-v6-c-table__th" scope="col">Branches</th>
+          <th class="pf-v6-c-table__th" scope="col">Pull requests</th>
+          <th class="pf-v6-c-table__th" scope="col">Workspaces</th>
         </tr>
       </thead>
-      <tbody class="pf-v6-c-table__tbody" role="rowgroup">
+      <tbody class="pf-v6-c-table__tbody">
         {#for i in 12}
-        <tr class="pf-v6-c-table__tr" role="row">
-          <td class="pf-v6-c-table__td" role="cell" data-label="Repositories">Repository {i}</td>
-          <td class="pf-v6-c-table__td" role="cell" data-label="Branches">10</td>
-          <td class="pf-v6-c-table__td" role="cell" data-label="Pull requests">25</td>
-          <td class="pf-v6-c-table__td" role="cell" data-label="Workspaces">5</td>
+        <tr class="pf-v6-c-table__tr">
+          <td class="pf-v6-c-table__td" data-label="Repositories">Repository {i}</td>
+          <td class="pf-v6-c-table__td" data-label="Branches">10</td>
+          <td class="pf-v6-c-table__td" data-label="Pull requests">25</td>
+          <td class="pf-v6-c-table__td" data-label="Workspaces">5</td>
         </tr>
         {/for}
       </tbody>
