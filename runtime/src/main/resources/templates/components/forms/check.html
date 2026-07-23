@@ -6,9 +6,9 @@
 {! Model mode: pass check=<org.sitenetsoft.quarkus.pha.model.Check>. !}
 {#if check??}
 {#if check.isStandalone}
-<div class="pf-v6-c-check pf-m-standalone" id="{check.id}-wrap">
+<label class="pf-v6-c-check pf-m-standalone" id="{check.id}-wrap" for="{check.id}">
   <input class="pf-v6-c-check__input" type="checkbox" id="{check.id}" name="{check.id}"{#if check.isChecked} checked{/if}{#if check.isDisabled} disabled{/if}{#if check.ariaLabel??} aria-label="{check.ariaLabel}"{/if}>
-</div>
+</label>
 {#else if check.isReversed}
 <div class="pf-v6-c-check" id="{check.id}-wrap">
   <label class="pf-v6-c-check__label{#if check.isDisabled} pf-m-disabled{/if}" for="{check.id}">{check.label}</label>
@@ -23,9 +23,9 @@
 </label>
 {/if}
 {#else if standalone??}
-<div class="pf-v6-c-check pf-m-standalone" id="{id}-wrap">
+<label class="pf-v6-c-check pf-m-standalone" id="{id}-wrap" for="{id}">
   <input class="pf-v6-c-check__input" type="checkbox" id="{id}" name="{id}"{#if checked??} checked{/if}{#if disabled??} disabled{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
-</div>
+</label>
 {#else if reversed??}
 {! reversed = label before input via DOM order alone — PF v6 has no pf-m-reversed class !}
 <div class="pf-v6-c-check" id="{id}-wrap">

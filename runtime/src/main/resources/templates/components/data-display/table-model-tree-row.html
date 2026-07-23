@@ -8,7 +8,7 @@
 {#else}
 <tr class="pf-v6-c-table__tr">
 {/if}
-  <td class="pf-v6-c-table__td pf-v6-c-table__tree-view-title-cell">
+  <th scope="row" class="pf-v6-c-table__th pf-v6-c-table__tree-view-title-cell">
     <div class="pf-v6-c-table__tree-view-main">
       {#if node.parent}
       <span class="pf-v6-c-table__td pf-v6-c-table__toggle">
@@ -46,7 +46,7 @@
       {/if}
       <span class="pf-v6-c-table__tree-view-text">{node.name}</span>
     </div>
-  </td>
+  </th>
   {#for cell in node.cells}
   <td class="pf-v6-c-table__td">{cell}</td>
   {/for}

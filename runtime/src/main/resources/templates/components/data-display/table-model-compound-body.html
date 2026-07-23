@@ -18,7 +18,7 @@
         :aria-expanded="exp === '{cell.expandKey}'"
         {#if table.animateExpand}@click="noAnim = exp !== null && exp !== '{cell.expandKey}'; exp = exp === '{cell.expandKey}' ? null : '{cell.expandKey}'"{#else}@click="exp = exp === '{cell.expandKey}' ? null : '{cell.expandKey}'"{/if}
       >
-        <span class="pf-v6-c-table__button-content"><span class="pf-v6-c-table__text">{cell.text}</span></span>
+        <span class="pf-v6-c-table__text">{cell.text}</span>
       </button>
     </td>
     {#else if cell.rowHeader}
