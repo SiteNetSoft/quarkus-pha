@@ -17,14 +17,14 @@
       aria-labelledby="{id}-title"
     >
       <div class="pf-v6-c-modal-box__close">
-        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="open = false">
-          {icons:svg('fa:times').raw}
-        </button>
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="open = false"><span class="pf-v6-c-button__icon">{icons:svg('fa:times').raw}</span></button>
       </div>
       <header class="pf-v6-c-modal-box__header">
-        <h1 class="pf-v6-c-modal-box__title" id="{id}-title">
+        <div class="pf-v6-c-modal-box__header-main">
+          <h1 class="pf-v6-c-modal-box__title" id="{id}-title">
           <span class="pf-v6-c-modal-box__title-text">{titleText}</span>
         </h1>
+        </div>
       </header>
       <div
         class="pf-v6-c-modal-box__body"

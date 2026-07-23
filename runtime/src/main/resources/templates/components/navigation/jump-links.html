@@ -7,10 +7,12 @@
 {#if jumpLinks.expandableSimple}
 <nav class="pf-v6-c-jump-links{#if jumpLinks.vertical} pf-m-vertical{/if}{#if jumpLinks.center} pf-m-center{/if} pf-m-expandable" id="{jumpLinks.id}" aria-label="{jumpLinks.ariaLabel}" x-data="{ open: {jumpLinks.startOpen} }" :class="{ 'pf-m-expanded': open }"{#if jumpLinks.style} style="{jumpLinks.style}"{/if}>
   <div class="pf-v6-c-jump-links__header">
-    <button class="pf-v6-c-jump-links__toggle pf-v6-c-button pf-m-plain" type="button" :aria-expanded="open.toString()" @click="open = !open">
-      <span class="pf-v6-c-jump-links__toggle-icon">{icons:svg('fa:angle-right').raw}</span>
-      <span>{jumpLinks.toggleText}</span>
-    </button>
+    <div class="pf-v6-c-jump-links__toggle">
+      <button class="pf-v6-c-button pf-m-plain" type="button" :aria-expanded="open.toString()" @click="open = !open">
+        <span class="pf-v6-c-button__icon pf-m-start"><span class="pf-v6-c-jump-links__toggle-icon">{icons:svg('fa:angle-down').raw}</span></span>
+        <span class="pf-v6-c-button__text">{jumpLinks.toggleText}</span>
+      </button>
+    </div>
   </div>
   <div class="pf-v6-c-jump-links__main" x-show="open">
     <ul class="pf-v6-c-jump-links__list" role="list">

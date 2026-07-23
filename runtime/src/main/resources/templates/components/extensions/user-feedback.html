@@ -64,7 +64,7 @@
                 <span class="pf-v6-c-form__label-text">Enter your feedback</span>
               </label>
               <div class="pf-v6-c-form__group-control">
-                <textarea class="pf-v6-c-form-control chr-c-feedback-text-area" :id="'{id}-feedback'" rows="5" x-model="feedback"></textarea>
+                <span class="pf-v6-c-form-control pf-m-textarea"><textarea class="chr-c-feedback-text-area" :id="'{id}-feedback'" rows="5" x-model="feedback"></textarea></span>
               </div>
             </div>
             <div class="pf-v6-c-form__group">
@@ -79,11 +79,9 @@
                   <span class="pf-v6-c-form__label-text">Email</span>
                 </label>
                 <div class="pf-v6-c-form__group-control">
-                  <input class="pf-v6-c-form-control" type="email" :id="'{id}-email-share'" x-model="email" @blur="validateEmail()" />
+                  <span class="pf-v6-c-form-control"><input type="email" :id="'{id}-email-share'" x-model="email" @blur="validateEmail()" /></span>
                 </div>
-                <div class="pf-v6-c-form__helper-text" x-show="emailError" x-cloak>
-                  <span class="pf-v6-c-helper-text__item pf-m-error" x-text="emailError"></span>
-                </div>
+                <div class="pf-v6-c-form__helper-text" x-show="emailError" x-cloak><div class="pf-v6-c-helper-text"><div class="pf-v6-c-helper-text__item pf-m-error"><span class="pf-v6-c-helper-text__item-text" x-text="emailError"></span></div></div></div>
               </div>
             </template>
             <ul class="pf-v6-c-action-list chr-c-feedback-footer">
@@ -118,7 +116,7 @@
                 <span class="pf-v6-c-form__label-text">Bug description</span>
               </label>
               <div class="pf-v6-c-form__group-control">
-                <textarea class="pf-v6-c-form-control chr-c-feedback-text-area" :id="'{id}-bug'" rows="5" x-model="bug"></textarea>
+                <span class="pf-v6-c-form-control pf-m-textarea"><textarea class="chr-c-feedback-text-area" :id="'{id}-bug'" rows="5" x-model="bug"></textarea></span>
               </div>
             </div>
             <ul class="pf-v6-c-action-list chr-c-feedback-footer">
@@ -153,11 +151,9 @@
                 <span class="pf-v6-c-form__label-text">Email</span>
               </label>
               <div class="pf-v6-c-form__group-control">
-                <input class="pf-v6-c-form-control" type="email" :id="'{id}-email-research'" x-model="email" @blur="validateEmail()" />
+                <span class="pf-v6-c-form-control"><input type="email" :id="'{id}-email-research'" x-model="email" @blur="validateEmail()" /></span>
               </div>
-              <div class="pf-v6-c-form__helper-text" x-show="emailError" x-cloak>
-                <span class="pf-v6-c-helper-text__item pf-m-error" x-text="emailError"></span>
-              </div>
+              <div class="pf-v6-c-form__helper-text" x-show="emailError" x-cloak><div class="pf-v6-c-helper-text"><div class="pf-v6-c-helper-text__item pf-m-error"><span class="pf-v6-c-helper-text__item-text" x-text="emailError"></span></div></div></div>
             </div>
             <ul class="pf-v6-c-action-list chr-c-feedback-footer">
               <li class="pf-v6-c-action-list__item">
@@ -181,7 +177,7 @@
 
         {! ---- success ---- !}
         <div class="chr-c-feedback-success-content" x-show="page === 'success'" x-cloak>
-          <span class="pf-v6-c-icon" style="color: var(--pf-t--global--icon--color--status--success--default); font-size: 3rem">{icons:svg('fa:check-circle').raw}</span>
+          <span class="pf-v6-c-icon pf-m-2xl"><span class="pf-v6-c-icon__content">{icons:svg('fa:check-circle').raw}</span></span>
           <h2 class="pf-v6-c-content--h1" id="{id}-title-success" x-text="successTitle">Feedback sent</h2>
           <p x-text="successMessage">Thank you, we appreciate your feedback.</p>
           <button class="pf-v6-c-button pf-m-primary" type="button" @click="close()">
@@ -191,7 +187,7 @@
 
         {! ---- error ---- !}
         <div class="chr-c-feedback-success-content" x-show="page === 'error'" x-cloak>
-          <span class="pf-v6-c-icon" style="color: var(--pf-t--global--icon--color--status--danger--default); font-size: 3rem">{icons:svg('fa:exclamation-circle').raw}</span>
+          <span class="pf-v6-c-icon pf-m-2xl"><span class="pf-v6-c-icon__content">{icons:svg('fa:exclamation-circle').raw}</span></span>
           <h2 class="pf-v6-c-content--h1" id="{id}-title-error">Something went wrong</h2>
           <p>There was a problem processing your request. Please try again.</p>
           <button class="pf-v6-c-button pf-m-primary" type="button" @click="back()">

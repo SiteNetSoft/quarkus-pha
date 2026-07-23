@@ -8,8 +8,8 @@
   {#if truncate.isLink}
 <a href="{truncate.linkHref}"{#if truncate.id??} id="{truncate.id}"{/if} style="display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{truncate.content}</a>
   {#else if truncate.isMaxChars}
-<span class="pf-v6-c-truncate"{#if truncate.id??} id="{truncate.id}"{/if} x-data="{truncate.maxCharsXData}">
-  <span class="pf-v6-c-truncate__start" x-text="{truncate.maxCharsExpr}"></span>
+<span class="pf-v6-c-truncate pf-m-fixed" tabindex="0"{#if truncate.id??} id="{truncate.id}"{/if} x-data="{truncate.maxCharsXData}" title="{truncate.content}">
+  <span class="pf-v6-c-truncate__text" x-text="{truncate.maxCharsExpr}"></span><span class="pf-v6-c-truncate__omission" aria-hidden="true" x-show="full.length > {truncate.maxCharsAttr}">&hellip;</span><span class="pf-v6-screen-reader">{truncate.content}</span>
 </span>
   {#else if truncate.isMiddle}
 <span class="pf-v6-c-truncate"{#if truncate.id??} id="{truncate.id}"{/if} title="{truncate.content}">

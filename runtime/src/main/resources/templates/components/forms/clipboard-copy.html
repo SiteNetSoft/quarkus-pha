@@ -39,7 +39,7 @@
   </span>
 </div>
 {#else if clipboardCopy.isExpandableShape}
-<div class="pf-v6-c-clipboard-copy" id="{clipboardCopy.id}"
+<div class="pf-v6-c-clipboard-copy{#if clipboardCopy.isReadonly} pf-m-readonly{/if}" id="{clipboardCopy.id}"
      x-data="{ copied: false, expanded: {#if clipboardCopy.isStartExpanded}true{#else}false{/if} }"
      :class="expanded && 'pf-m-expanded'">
   <div class="pf-v6-c-clipboard-copy__group">
@@ -50,7 +50,7 @@
             @click="expanded = !expanded">
       <span class="pf-v6-c-button__icon">
         <span class="pf-v6-c-clipboard-copy__toggle-icon">
-          {icons:svg('fa:angle-right').raw}
+          {icons:svg('fa:angle-down').raw}
         </span>
       </span>
     </button>
@@ -78,7 +78,7 @@
   {/if}
 </div>
 {#else}
-<div class="pf-v6-c-clipboard-copy" id="{clipboardCopy.id}"
+<div class="pf-v6-c-clipboard-copy{#if clipboardCopy.isReadonly} pf-m-readonly{/if}" id="{clipboardCopy.id}"
      x-data="{ copied: false }">
   <div class="pf-v6-c-clipboard-copy__group">
     <span class="pf-v6-c-form-control{#if clipboardCopy.isReadonly} pf-m-readonly{/if}">
@@ -112,7 +112,7 @@
   </span>
 </div>
 {#else if expandable??}
-<div class="pf-v6-c-clipboard-copy" id="{id}"
+<div class="pf-v6-c-clipboard-copy{#if readonly??} pf-m-readonly{/if}" id="{id}"
      x-data="{ copied: false, expanded: {#if expanded??}true{#else}false{/if} }"
      :class="expanded && 'pf-m-expanded'">
   <div class="pf-v6-c-clipboard-copy__group">
@@ -123,7 +123,7 @@
             @click="expanded = !expanded">
       <span class="pf-v6-c-button__icon">
         <span class="pf-v6-c-clipboard-copy__toggle-icon">
-          {icons:svg('fa:angle-right').raw}
+          {icons:svg('fa:angle-down').raw}
         </span>
       </span>
     </button>
@@ -144,7 +144,7 @@
   </div>
 </div>
 {#else}
-<div class="pf-v6-c-clipboard-copy" id="{id}"
+<div class="pf-v6-c-clipboard-copy{#if readonly??} pf-m-readonly{/if}" id="{id}"
      x-data="{ copied: false }">
   <div class="pf-v6-c-clipboard-copy__group">
     <span class="pf-v6-c-form-control{#if readonly??} pf-m-readonly{/if}">

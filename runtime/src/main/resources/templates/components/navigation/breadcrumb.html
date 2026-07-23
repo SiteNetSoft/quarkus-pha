@@ -28,12 +28,12 @@
    Breadcrumb.of(id)) — typed items incl. heading and dropdown crumb shapes. !}
 {#if breadcrumb??}
 <nav class="pf-v6-c-breadcrumb" id="{breadcrumb.id}" aria-label="{breadcrumb.ariaLabel}">
-  <ol class="pf-v6-c-breadcrumb__list">
+  <ol class="pf-v6-c-breadcrumb__list" role="list">
     {#for item in breadcrumb.items}
     <li class="pf-v6-c-breadcrumb__item">
       <span class="pf-v6-c-breadcrumb__item-divider" aria-hidden="true">{icons:svg('fa:angle-right').raw}</span>
       {#if item.dropdownShape}
-      <div class="pf-v6-c-breadcrumb__dropdown" x-data="phaBreadcrumbDropdown()">
+      <span class="pf-v6-c-breadcrumb__dropdown" x-data="phaBreadcrumbDropdown()">
         <button type="button" class="pf-v6-c-menu-toggle pf-m-plain pf-m-text" aria-haspopup="true" :aria-expanded="open.toString()" @click="toggle()" @keydown.escape.window="close()" id="{item.dropdownId}-toggle">
           <span class="pf-v6-c-menu-toggle__text">{item.text}</span>
           <span class="pf-v6-c-menu-toggle__controls">
@@ -53,7 +53,7 @@
             </ul>
           </div>
         </div>
-      </div>
+      </span>
       {#else if item.headingShape}
       <{item.headingTag} class="pf-v6-c-breadcrumb__heading"><a {#if item.href}href="{item.href}"{/if} class="pf-v6-c-breadcrumb__link pf-m-current" aria-current="page">{item.text}</a></{item.headingTag}>
       {#else if item.href}
@@ -69,7 +69,7 @@
 </nav>
 {#else}
 <nav class="pf-v6-c-breadcrumb"{#if id??} id="{id}"{/if} aria-label="{#if ariaLabel??}{ariaLabel}{#else}Breadcrumb{/if}">
-  <ol class="pf-v6-c-breadcrumb__list">
+  <ol class="pf-v6-c-breadcrumb__list" role="list">
     {#if crumbs??}{#for c in crumbs}{#include components/navigation/breadcrumb-item href=c.href current=c.current}{c.text}{/include}{/for}{#else}{#let crumbs=null id=null}{#insert items}{/insert}{/let}{/if}
   </ol>
 </nav>

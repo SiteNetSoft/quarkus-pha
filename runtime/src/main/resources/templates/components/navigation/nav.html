@@ -11,20 +11,20 @@
   {#for group in nav.entries}
   <section class="pf-v6-c-nav__section">
     <h2 class="pf-v6-c-nav__section-title">{group.label}</h2>
-    <ul class="pf-v6-c-nav__list">
+    <ul class="pf-v6-c-nav__list" role="list">
       {#include components/navigation/nav-items entries=group.children /}
     </ul>
   </section>
   {/for}
   {#else}
-  <ul class="pf-v6-c-nav__list">
+  <ul class="pf-v6-c-nav__list" role="list">
     {#include components/navigation/nav-items entries=nav.entries /}
   </ul>
   {/if}
 </nav>
 {#else}
 <nav class="pf-v6-c-nav{#if horizontal??} pf-m-horizontal{/if}"{#if id??} id="{id}"{/if} aria-label="{#if ariaLabel??}{ariaLabel}{#else}Navigation{/if}"{#if currentPath??} data-current-path="{currentPath}"{/if}>
-  <ul class="pf-v6-c-nav__list">
+  <ul class="pf-v6-c-nav__list" role="list">
     {#let horizontal=null id=null}{#insert content}{/insert}{/let}
   </ul>
 </nav>

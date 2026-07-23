@@ -2,19 +2,19 @@
 by openVar; put a notification-drawer-list include in the main block. !} {! Required: title, openVar (name of the x-data
 boolean, e.g. "g1"). Optional: count (badge number), countRead (pf-m-read badge instead of unread). !}
 <section class="pf-v6-c-notification-drawer__group" :class="{ 'pf-m-expanded': {openVar} }">
-  <button
-    class="pf-v6-c-notification-drawer__group-toggle"
-    type="button"
-    :aria-expanded="{openVar}.toString()"
-    @click="{openVar} = !{openVar}"
-  >
-    <span class="pf-v6-c-notification-drawer__group-toggle-title">{title}</span>
-    {#if count??}<span class="pf-v6-c-notification-drawer__group-toggle-count"
-      ><span class="pf-v6-c-badge {#if countRead??}pf-m-read{#else}pf-m-unread{/if}">{count}</span></span
-    >{/if}
-    <span class="pf-v6-c-notification-drawer__group-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
-  </button>
-  <div class="pf-v6-c-notification-drawer__group-list" x-show="{openVar}" x-cloak>
-    {#let count=null}{#insert /}{/let}
-  </div>
+  <h1>
+    <button
+      class="pf-v6-c-notification-drawer__group-toggle"
+      type="button"
+      :aria-expanded="{openVar}.toString()"
+      @click="{openVar} = !{openVar}"
+    >
+      <span class="pf-v6-c-notification-drawer__group-toggle-title">{title}</span>
+      {#if count??}<span class="pf-v6-c-notification-drawer__group-toggle-count"
+        ><span class="pf-v6-c-badge {#if countRead??}pf-m-read{#else}pf-m-unread{/if}">{count}</span></span
+      >{/if}
+      <span class="pf-v6-c-notification-drawer__group-toggle-icon">{icons:svg('fa:angle-down').raw}</span>
+    </button>
+  </h1>
+  <div x-show="{openVar}" x-cloak>{#let count=null}{#insert /}{/let}</div>
 </section>

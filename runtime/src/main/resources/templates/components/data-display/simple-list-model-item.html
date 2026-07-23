@@ -4,9 +4,9 @@
 <li class="pf-v6-c-simple-list__item">
   {#if item.anchor}
   {#if list.selectable}
-  <a class="pf-v6-c-simple-list__item-link" href="{item.href}" :aria-current="sel === {item.key} ? 'page' : null" :class="sel === {item.key} ? 'pf-m-current' : ''" @click.prevent="sel = {item.key}">{item.text}</a>
+  <a class="pf-v6-c-simple-list__item-link pf-m-link" href="{item.href}" :aria-current="sel === {item.key} ? 'page' : null" :class="sel === {item.key} ? 'pf-m-current' : ''" @click.prevent="sel = {item.key}" tabindex="0">{item.text}</a>
   {#else}
-  <a class="pf-v6-c-simple-list__item-link{#if item.current} pf-m-current{/if}" href="{item.href}"{#if item.current} aria-current="page"{/if}>{item.text}</a>
+  <a class="pf-v6-c-simple-list__item-link pf-m-link{#if item.current} pf-m-current{/if}" href="{item.href}"{#if item.current} aria-current="page"{/if} tabindex="0">{item.text}</a>
   {/if}
   {#else}
   {#if list.selectable}

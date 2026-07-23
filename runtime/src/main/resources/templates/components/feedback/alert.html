@@ -20,7 +20,7 @@
   {#if alert.expandable}
   <div class="pf-v6-c-alert__toggle">
     <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Toggle alert details" aria-expanded="false" @click="expanded = !expanded" :aria-expanded="expanded.toString()">
-      <span class="pf-v6-c-alert__toggle-icon">
+      <span class="pf-v6-c-button__icon"><span class="pf-v6-c-alert__toggle-icon">
         <svg viewBox="0 0 256 512" fill="currentColor" aria-hidden="true" width="1em" height="1em"><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg>
       </span>
     </button>
@@ -48,10 +48,10 @@
     {/if}
   </div>
   {#if alert.description}
-  <h3 class="pf-v6-c-alert__title{#if alert.truncate} pf-m-truncate{/if}">
+  <p class="pf-v6-c-alert__title{#if alert.truncate} pf-m-truncate{/if}">
     <span class="pf-v6-screen-reader">{alert.variant} alert:</span>
     {alert.title}
-  </h3>
+  </p>
   {#else}
   <p class="pf-v6-c-alert__title{#if alert.truncate} pf-m-truncate{/if}">
     <span class="pf-v6-screen-reader">{alert.variant} alert:</span>
@@ -91,7 +91,7 @@
   {#if expandable??}
   <div class="pf-v6-c-alert__toggle">
     <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Toggle alert details" aria-expanded="false" @click="expanded = !expanded" :aria-expanded="expanded.toString()">
-      <span class="pf-v6-c-alert__toggle-icon">
+      <span class="pf-v6-c-button__icon"><span class="pf-v6-c-alert__toggle-icon">
         <svg viewBox="0 0 256 512" fill="currentColor" aria-hidden="true" width="1em" height="1em"><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg>
       </span>
     </button>
@@ -119,10 +119,10 @@
     {/if}
   </div>
   {#if description??}
-  <h3 class="pf-v6-c-alert__title{#if truncate??} pf-m-truncate{/if}">
+  <p class="pf-v6-c-alert__title{#if truncate??} pf-m-truncate{/if}">
     <span class="pf-v6-screen-reader">{v} alert:</span>
     {title}
-  </h3>
+  </p>
   {#else}
   <p class="pf-v6-c-alert__title{#if truncate??} pf-m-truncate{/if}">
     <span class="pf-v6-screen-reader">{v} alert:</span>

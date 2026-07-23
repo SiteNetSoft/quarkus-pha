@@ -8,27 +8,27 @@
   <select id="{formSelect.id}-field" name="{formSelect.id}"{#if formSelect.isDisabled} disabled{/if}{#if formSelect.isRequired} required{/if} aria-label="{formSelect.ariaLabel}"{#if formSelect.isError} aria-invalid="true"{/if}>
     {formSelect.optionsHtml.raw}
   </select>
-  <span class="pf-v6-c-form-control__toggle-icon">{icons:svg('fa:caret-down').raw}</span>
-  {#if formSelect.validated??}
   <span class="pf-v6-c-form-control__utilities">
+    {#if formSelect.validated??}
     <span class="pf-v6-c-form-control__icon pf-m-status">
       {#if formSelect.isSuccess}{icons:svg('fa:circle-check').raw}{#else if formSelect.isWarning}{icons:svg('fa:triangle-exclamation').raw}{#else if formSelect.isError}{icons:svg('fa:circle-exclamation').raw}{/if}
     </span>
+    {/if}
+    <span class="pf-v6-c-form-control__toggle-icon">{icons:svg('fa:caret-down').raw}</span>
   </span>
-  {/if}
 </span>
 {#else}
 <span class="pf-v6-c-form-control{#if validated??} pf-m-{validated}{/if}{#if disabled??} pf-m-disabled{/if}" id="{id}">
   <select id="{id}-field" name="{id}"{#if disabled??} disabled{/if}{#if required??} required{/if} aria-label="{#if ariaLabel??}{ariaLabel}{#else}Select{/if}"{#if validated??}{#if validated is 'error'} aria-invalid="true"{/if}{/if}>
     {#let disabled=null required=null validated=null}{#insert options}{/insert}{/let}
   </select>
-  <span class="pf-v6-c-form-control__toggle-icon">{icons:svg('fa:caret-down').raw}</span>
-  {#if validated??}
   <span class="pf-v6-c-form-control__utilities">
+    {#if validated??}
     <span class="pf-v6-c-form-control__icon pf-m-status">
       {#if validated is 'success'}{icons:svg('fa:circle-check').raw}{#else if validated is 'warning'}{icons:svg('fa:triangle-exclamation').raw}{#else if validated is 'error'}{icons:svg('fa:circle-exclamation').raw}{/if}
     </span>
+    {/if}
+    <span class="pf-v6-c-form-control__toggle-icon">{icons:svg('fa:caret-down').raw}</span>
   </span>
-  {/if}
 </span>
 {/if}

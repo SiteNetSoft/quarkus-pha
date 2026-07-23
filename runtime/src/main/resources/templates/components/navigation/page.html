@@ -7,13 +7,16 @@
       {#if page.isHasToggle}
       <span class="pf-v6-c-masthead__toggle">
         <button
-          class="pf-v6-c-button pf-m-plain"
+          class="pf-v6-c-button pf-m-hamburger pf-m-plain"
           type="button"
           aria-label="{page.toggleAriaLabel}"
           :aria-expanded="sidebarOpen.toString()"
+          :class="sidebarOpen ? 'pf-m-expand' : ''"
           @click="sidebarOpen = !sidebarOpen"
         >
-          <span class="pf-v6-c-button__icon">{icons:svg('fa:bars').raw}</span>
+          <span class="pf-v6-c-button__icon"
+            ><svg viewBox="0 0 10 10" class="pf-v6-c-button--hamburger-icon pf-v6-svg" width="1em" height="1em"><path class="pf-v6-c-button--hamburger-icon--top" d="M1,1 L9,1"/><path class="pf-v6-c-button--hamburger-icon--middle" d="M1,5 L9,5"/><path class="pf-v6-c-button--hamburger-icon--arrow" d="M1,5 L1,5 L1,5"/><path class="pf-v6-c-button--hamburger-icon--bottom" d="M9,9 L1,9"/></svg></span
+          >
         </button>
       </span>
       {/if}
@@ -34,7 +37,7 @@
       <nav class="pf-v6-c-nav pf-m-horizontal" aria-label="{page.horizontalNavAriaLabel}">
         <ul class="pf-v6-c-nav__list">
           {#for it in page.horizontalNav}
-          <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link{#if it.isCurrent} pf-m-current{/if}"{#if it.isCurrent} aria-current="page"{/if}>{it.text}</a></li>
+          <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link{#if it.isCurrent} pf-m-current{/if}"{#if it.isCurrent} aria-current="page"{/if}><span class="pf-v6-c-nav__link-text">{it.text}</span></a></li>
           {/for}
         </ul>
       </nav>
@@ -42,29 +45,31 @@
     {/if}
   </header>
   {#if page.isHasSidebar}
-  <div
+  <aside
     class="pf-v6-c-page__sidebar"
     :class="{ 'pf-m-expanded': sidebarOpen, 'pf-m-collapsed': !sidebarOpen }"
     x-show="sidebarOpen"
   >
-    {#if page.sidebarContextSelector??}
-    <div class="pf-v6-c-page__sidebar-body pf-m-context-selector">
-      {page.sidebarContextSelector}
+    <div class="pf-v6-c-page__sidebar-main">
+      {#if page.sidebarContextSelector??}
+      <div class="pf-v6-c-page__sidebar-body pf-m-context-selector">
+        {page.sidebarContextSelector}
+      </div>
+      {/if}
+      <div class="pf-v6-c-page__sidebar-body{#if page.isSidebarNavFill} pf-m-fill{/if}">
+        <nav class="pf-v6-c-nav" aria-label="{page.sidebarNavAriaLabel}">
+          <ul class="pf-v6-c-nav__list" role="list">
+            {#for it in page.sidebarNav}
+            <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link{#if it.isCurrent} pf-m-current{/if}"{#if it.isCurrent} aria-current="page"{/if}><span class="pf-v6-c-nav__link-text">{it.text}</span></a></li>
+            {/for}
+          </ul>
+        </nav>
+      </div>
     </div>
-    {/if}
-    <div class="pf-v6-c-page__sidebar-body{#if page.isSidebarNavFill} pf-m-fill{/if}">
-      <nav class="pf-v6-c-nav" aria-label="{page.sidebarNavAriaLabel}">
-        <ul class="pf-v6-c-nav__list">
-          {#for it in page.sidebarNav}
-          <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link{#if it.isCurrent} pf-m-current{/if}"{#if it.isCurrent} aria-current="page"{/if}>{it.text}</a></li>
-          {/for}
-        </ul>
-      </nav>
-    </div>
-  </div>
+  </aside>
   {/if}
   <div class="pf-v6-c-page__main-container">
-    <div class="pf-v6-c-page__main"{#if page.isScrollableMain} tabindex="0" style="overflow-y: auto"{#else} tabindex="-1"{/if}>
+    <main class="pf-v6-c-page__main"{#if page.isScrollableMain} tabindex="0" style="overflow-y: auto"{#else} tabindex="-1"{/if}>
       {#for e in page.entries}
       {#if e.isSection}
       {#include components/navigation/page-model-section sec=e.section /}
@@ -85,7 +90,7 @@
       </div>
       {/if}
       {/for}
-    </div>
+    </main>
   </div>
 </div>
 {#else}
