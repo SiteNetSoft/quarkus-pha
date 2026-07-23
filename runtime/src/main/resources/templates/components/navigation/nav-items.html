@@ -11,7 +11,7 @@
     </span>
   </button>
   <section class="pf-v6-c-nav__subnav" aria-labelledby="{entry.toggleId}"{#if !entry.expanded} hidden inert{/if} :hidden="!open" :inert="!open">
-    <ul class="pf-v6-c-nav__list">
+    <ul class="pf-v6-c-nav__list" role="list">
       {#include components/navigation/nav-items entries=entry.children /}
     </ul>
   </section>
@@ -24,7 +24,7 @@
     <span class="pf-v6-c-nav__link-text">{entry.label}</span>
   </a>
   {#else}
-  <a href="{entry.href}" class="pf-v6-c-nav__link{#if entry.current} pf-m-current{/if}"{#if entry.current} aria-current="page"{/if}>{entry.label}</a>
+  <a href="{entry.href}" class="pf-v6-c-nav__link{#if entry.current} pf-m-current{/if}"{#if entry.current} aria-current="page"{/if}><span class="pf-v6-c-nav__link-text">{entry.label}</span></a>
   {/if}
 </li>
 {/if}

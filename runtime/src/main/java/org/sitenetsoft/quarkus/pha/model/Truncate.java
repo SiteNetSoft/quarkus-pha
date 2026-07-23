@@ -70,8 +70,12 @@ public final class Truncate {
     }
 
     /** The Alpine x-text expression for the char-budget flavour. */
+    public int maxCharsAttr() {
+        return maxChars;
+    }
+
     public String maxCharsExpr() {
-        return "full.length > " + maxChars + " ? full.slice(0, " + maxChars + ") + '\\u2026' : full";
+        return "full.length > " + maxChars + " ? full.slice(0, " + maxChars + ") : full";
     }
 
     public boolean isMiddle() {

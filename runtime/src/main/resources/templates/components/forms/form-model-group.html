@@ -1,13 +1,13 @@
 {! Form group — model-mode partial for components/forms/form. Pass group=<Form.Group>. !}
 <div class="pf-v6-c-form__group">
-  <div class="pf-v6-c-form__group-label{#if group.isNoPaddingTop} pf-m-no-padding-top{/if}">
+  <div class="pf-v6-c-form__group-label{#if group.labelInfo??} pf-m-info{/if}{#if group.isNoPaddingTop} pf-m-no-padding-top{/if}">
     {#if group.labelInfo??}
     <div class="pf-v6-c-form__group-label-main">
       <label class="pf-v6-c-form__label" for="{group.forId}">
         <span class="pf-v6-c-form__label-text">{group.label}</span>
       </label>
-      <span class="pf-v6-c-form__group-label-info">{group.labelInfo}</span>
     </div>
+    <div class="pf-v6-c-form__group-label-info">{group.labelInfo}</div>
     {#else}
     <label class="pf-v6-c-form__label" for="{group.forId}">
       <span class="pf-v6-c-form__label-text">{group.label}</span>

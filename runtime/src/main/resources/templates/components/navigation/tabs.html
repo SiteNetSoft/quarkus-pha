@@ -39,6 +39,13 @@
   }
 }"
 >
+  {#if !tabs.vertical}
+  <div class="pf-v6-c-tabs__scroll-button">
+    <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Scroll left" aria-hidden="true" tabindex="-1" @click="$el.closest('.pf-v6-c-tabs').querySelector('.pf-v6-c-tabs__list').scrollBy({ left: -200, behavior: 'smooth' })">
+      <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-left').raw}</span>
+    </button>
+  </div>
+  {/if}
   <ul class="pf-v6-c-tabs__list"{#if !tabs.nav} role="tablist"{/if}{#if tabs.ariaLabel} aria-label="{tabs.ariaLabel}"{/if} @keydown="handleKeyNav($event)">
     {#for item in tabs.items}
     {#if tabs.nav}
@@ -56,6 +63,13 @@
     {/if}
     {/for}
   </ul>
+  {#if !tabs.vertical}
+  <div class="pf-v6-c-tabs__scroll-button">
+    <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Scroll right" aria-hidden="true" tabindex="-1" @click="$el.closest('.pf-v6-c-tabs').querySelector('.pf-v6-c-tabs__list').scrollBy({ left: 200, behavior: 'smooth' })">
+      <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-right').raw}</span>
+    </button>
+  </div>
+  {/if}
 </div>
 {/if}
 {#if tabs.hasPanels}
@@ -96,8 +110,22 @@
 >
   {! nav=true renders link-style navigation, not an ARIA tablist — tablist requires
      role=tab children, which nav links are not. !}
+  {#if !vertical??}
+  <div class="pf-v6-c-tabs__scroll-button">
+    <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Scroll left" aria-hidden="true" tabindex="-1" @click="$el.closest('.pf-v6-c-tabs').querySelector('.pf-v6-c-tabs__list').scrollBy({ left: -200, behavior: 'smooth' })">
+      <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-left').raw}</span>
+    </button>
+  </div>
+  {/if}
   <ul class="pf-v6-c-tabs__list"{#if !nav??} role="tablist"{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if} @keydown="handleKeyNav($event)">
     {#let box=null filled=null id=null inset=null modifiers=null secondary=null subtab=null vertical=null}{#insert content}{/insert}{/let}
   </ul>
+  {#if !vertical??}
+  <div class="pf-v6-c-tabs__scroll-button">
+    <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Scroll right" aria-hidden="true" tabindex="-1" @click="$el.closest('.pf-v6-c-tabs').querySelector('.pf-v6-c-tabs__list').scrollBy({ left: 200, behavior: 'smooth' })">
+      <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-right').raw}</span>
+    </button>
+  </div>
+  {/if}
 </div>
 {/if}

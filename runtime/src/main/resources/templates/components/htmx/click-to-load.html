@@ -9,7 +9,7 @@
     hx-target="#{id}"
     hx-indicator="#{id}-indicator"
   >
-    {#if buttonText??}{buttonText}{#else}Load more{/if}
+    <span class="pf-v6-c-button__text">{#if buttonText??}{buttonText}{#else}Load more{/if}</span>
     <span class="htmx-indicator" id="{id}-indicator" aria-hidden="true">
       <span class="pha-c-htmx-spinner" style="margin-left: 0.5em"></span>
     </span>

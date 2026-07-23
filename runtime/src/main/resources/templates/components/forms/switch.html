@@ -2,25 +2,21 @@
 {! Model mode: pass sw=<org.sitenetsoft.quarkus.pha.model.Switch> — adds ariaLabel support for label-less switches. !}
 {! Param mode: !}
 {! Required: id — derives {id}-field on the input for label `for=` wiring. !}
-{! Optional: label (optional), checked (optional), disabled (optional), reversed (optional) !}
+{! Optional: label (optional), checked (optional), disabled (optional), reversed (optional), checkIcon (optional — the "label and check icon" variant; the label gets pf-m-on) !}
 {#if sw??}
 <label class="pf-v6-c-switch{#if sw.isReversed} pf-m-reverse{/if}" id="{sw.id}" for="{sw.id}-field">
-  <input class="pf-v6-c-switch__input" type="checkbox" id="{sw.id}-field"{#if sw.ariaLabel??} aria-label="{sw.ariaLabel}"{/if}{#if sw.isChecked} checked{/if}{#if sw.isDisabled} disabled{/if}>
+  <input class="pf-v6-c-switch__input" type="checkbox" role="switch" id="{sw.id}-field"{#if sw.ariaLabel??} aria-label="{sw.ariaLabel}"{/if}{#if sw.isChecked} checked{/if}{#if sw.isDisabled} disabled{/if}>
   <span class="pf-v6-c-switch__toggle">
-    <span class="pf-v6-c-switch__toggle-icon">
-      {icons:svg('fa:check').raw}
-    </span>
+    {#if sw.isCheckIcon}<span class="pf-v6-c-switch__toggle-icon">{icons:svg('fa:check').raw}</span>{/if}
   </span>
-  {#if sw.label??}<span class="pf-v6-c-switch__label">{sw.label}</span>{/if}
+  {#if sw.label??}<span class="pf-v6-c-switch__label{#if sw.isCheckIcon} pf-m-on{/if}">{sw.label}</span>{/if}
 </label>
 {#else}
 <label class="pf-v6-c-switch{#if reversed??} pf-m-reverse{/if}" id="{id}" for="{id}-field">
-  <input class="pf-v6-c-switch__input" type="checkbox" id="{id}-field"{#if checked??} checked{/if}{#if disabled??} disabled{/if}>
+  <input class="pf-v6-c-switch__input" type="checkbox" role="switch" id="{id}-field"{#if checked??} checked{/if}{#if disabled??} disabled{/if}>
   <span class="pf-v6-c-switch__toggle">
-    <span class="pf-v6-c-switch__toggle-icon">
-      {icons:svg('fa:check').raw}
-    </span>
+    {#if checkIcon??}<span class="pf-v6-c-switch__toggle-icon">{icons:svg('fa:check').raw}</span>{/if}
   </span>
-  {#if label??}<span class="pf-v6-c-switch__label">{label}</span>{/if}
+  {#if label??}<span class="pf-v6-c-switch__label{#if checkIcon??} pf-m-on{/if}">{label}</span>{/if}
 </label>
 {/if}
