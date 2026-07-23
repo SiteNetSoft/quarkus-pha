@@ -1,8 +1,49 @@
 {! Catalog tile — PatternFly catalog-view extension !}
-{! Required: title !}
-{! Optional: id — DOM id on the root; omit unless something else references the tile.
-              href (when set, renders as <a>; otherwise <div role="button">), iconImg (URL), iconAlt, iconClass (CSS class for icon glyph), vendor, description, footer, featured (bool — pf-m-featured), badges (List of CSS class strings rendered as icon spans on the right) !}
+{! Model mode: pass catalogTile=<org.sitenetsoft.quarkus.pha.model.CatalogTile> — supports badge lists (icon or text) and bodyHtml children, which the flat include cannot express. !}
+{! Flat mode — Required: title. Optional: id, href (when set, renders as <a>; otherwise <div role="button">), iconImg (URL), iconAlt, iconClass (CSS class for icon glyph), vendor, description, footer, featured (bool — pf-m-featured), badges (List of CSS class strings rendered as icon spans on the right) !}
 {! Requires: /web/vendor/patternfly-extensions/catalog-view.css !}
+{#if catalogTile??}
+{#if catalogTile.href??}
+<a href="{catalogTile.href}"{#if catalogTile.id??} id="{catalogTile.id}"{/if} class="pf-v6-c-card catalog-tile-pf{#if catalogTile.featured} catalog-tile-pf-featured{/if}">
+{#else}
+<div role="button" tabindex="0"{#if catalogTile.id??} id="{catalogTile.id}"{/if} class="pf-v6-c-card catalog-tile-pf{#if catalogTile.featured} catalog-tile-pf-featured{/if}">
+{/if}
+  <div class="pf-v6-c-card__header catalog-tile-pf-header">
+    {#if catalogTile.iconImg??}
+    <img class="catalog-tile-pf-icon" src="{catalogTile.iconImg}" alt="{catalogTile.iconAlt}" />
+    {#else if catalogTile.iconClass??}
+    <span class="catalog-tile-pf-icon {catalogTile.iconClass}" aria-hidden="true"></span>
+    {/if}
+    {#if catalogTile.badges}
+    <div class="catalog-tile-pf-badge-container">
+      {#for badge in catalogTile.badges}
+      {#if badge.iconClass??}
+      <span class="catalog-tile-pf-badge {badge.iconClass}" title="{badge.label}" aria-label="{badge.label}"></span>
+      {#else}
+      <span class="catalog-tile-pf-badge">{badge.text}</span>
+      {/if}
+      {/for}
+    </div>
+    {/if}
+  </div>
+  <div class="pf-v6-c-card__title">
+    <span class="pf-v6-c-card__title-text catalog-tile-pf-title">{catalogTile.title}</span>
+    {#if catalogTile.vendor??}
+    <p class="catalog-tile-pf-subtitle">{catalogTile.vendor}</p>
+    {/if}
+  </div>
+  {#if catalogTile.description??}
+  <div class="pf-v6-c-card__body catalog-tile-pf-body">
+    <p class="catalog-tile-pf-description"><span>{catalogTile.description}</span></p>
+  </div>
+  {#else if catalogTile.bodyHtml??}
+  <div class="pf-v6-c-card__body catalog-tile-pf-body">{catalogTile.bodyHtml.raw}</div>
+  {/if}
+  {#if catalogTile.footer??}
+  <div class="pf-v6-c-card__footer catalog-tile-pf-footer">{catalogTile.footer}</div>
+  {/if}
+{#if catalogTile.href??}</a>{#else}</div>{/if}
+{#else}
 {#if href??}
 <a href="{href}"{#if id??} id="{id}"{/if} class="pf-v6-c-card catalog-tile-pf{#if featured??} catalog-tile-pf-featured{/if}">
 {#else}
@@ -37,3 +78,4 @@
   <div class="pf-v6-c-card__footer catalog-tile-pf-footer">{footer}</div>
   {/if}
 {#if href??}</a>{#else}</div>{/if}
+{/if}

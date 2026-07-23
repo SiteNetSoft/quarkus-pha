@@ -97,4 +97,39 @@ test.describe("Catalog view extensions", () => {
       await expect(page.locator("#vt-databases > ul.vertical-tabs-pf > .vertical-tabs-pf-tab")).toHaveCount(3);
     });
   });
+
+  test.describe("Java source tabs (model-driven examples)", () => {
+    const EXAMPLES = [
+      ["catalog-item-header", ["basic", "vendor-description"]],
+      ["catalog-tile", ["basic", "footer", "link", "icon-badges", "text-badge", "children"]],
+      ["filter-side-panel", ["basic"]],
+      ["properties-side-panel", ["basic"]],
+      ["vertical-tabs", ["basic"]],
+    ];
+
+    for (const [name, examples] of EXAMPLES) {
+      test(`every ${name} card gets a leading Java tab`, async ({ page }) => {
+        await page.goto(`/extensions/catalog-view/${name}`);
+        for (const ex of examples) {
+          const card = page.locator(`[data-rendered-href="/extensions/catalog-view/${name}/${ex}"]`);
+          await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+        }
+      });
+    }
+
+    test("source-java routes serve the builder snippets as plain text", async ({ page }) => {
+      for (const [name, examples] of EXAMPLES) {
+        for (const ex of examples) {
+          const res = await page.request.get(`/extensions/catalog-view/${name}/source-java/${ex}`);
+          expect(res.status()).toBe(200);
+          expect(await res.text()).toContain("org.sitenetsoft.quarkus.pha.model");
+        }
+      }
+    });
+
+    test("vertical-tabs nested children come from the model (no hand-rendered branch)", async ({ page }) => {
+      const res = await page.request.get("/extensions/catalog-view/vertical-tabs/source-java/basic");
+      expect(await res.text()).toContain('.child(VerticalTabs.Tab.of("PostgreSQL")');
+    });
+  });
 });
