@@ -11,6 +11,14 @@ allprojects {
 subprojects {
     apply plugin: 'java'
 
+    configurations.all {
+        resolutionStrategy {
+            // GHSA-r7wm-3cxj-wff9: Quarkus 3.37.4 still pins jackson-core 2.22.0;
+            // drop this force once the BOM ships >= 2.22.1
+            force 'com.fasterxml.jackson.core:jackson-core:2.22.1'
+        }
+    }
+
     java {
         sourceCompatibility = JavaVersion.VERSION_25
         targetCompatibility = JavaVersion.VERSION_25
