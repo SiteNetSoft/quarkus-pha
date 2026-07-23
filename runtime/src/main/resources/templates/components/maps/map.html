@@ -2,7 +2,9 @@
 {! Optional: id — DOM id on the root; omit unless something else references the map.
               lat (optional), lng (optional), zoom (optional), style (optional), height (optional),
               navigationControl (optional), scaleControl (optional), fullscreenControl (optional) !}
-{! Requires: /web/vendor/maplibre/maplibre-gl.js loaded before Alpine !}
+{! Requires: the MapLibre ESM module shim (see the map demo page head): a module script
+   importing /web/vendor/maplibre/maplibre-gl.mjs, assigning window.maplibregl and firing
+   the maplibre-ready event. v6 ships no UMD bundle. !}
 {! Requires: /web/vendor/maplibre/maplibre-gl.css !}
 {! Requires: /web/js/alpine/components/map.js loaded before Alpine !}
 {! Requires: /web/css/components/map.css !}
