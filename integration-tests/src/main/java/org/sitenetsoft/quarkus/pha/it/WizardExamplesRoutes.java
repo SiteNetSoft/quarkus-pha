@@ -46,8 +46,8 @@ public class WizardExamplesRoutes {
         "submit-progress",
         "custom-footer",
         "custom-nav-item",
-        "within-modal"
-    );
+        "within-modal",
+            "with-drawer");
 
     @Inject
     Engine engine;

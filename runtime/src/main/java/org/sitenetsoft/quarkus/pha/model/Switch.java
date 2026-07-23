@@ -25,6 +25,7 @@ public final class Switch {
     private final boolean checked;
     private final boolean disabled;
     private final boolean reversed;
+    private final boolean checkIcon;
 
     private Switch(Builder b) {
         this.id = b.id;
@@ -33,6 +34,7 @@ public final class Switch {
         this.checked = b.checked;
         this.disabled = b.disabled;
         this.reversed = b.reversed;
+        this.checkIcon = b.checkIcon;
     }
 
     public static Builder of(String id) {
@@ -61,6 +63,10 @@ public final class Switch {
         return disabled;
     }
 
+    public boolean isCheckIcon() {
+        return checkIcon;
+    }
+
     public boolean isReversed() {
         return reversed;
     }
@@ -72,6 +78,7 @@ public final class Switch {
         private boolean checked;
         private boolean disabled;
         private boolean reversed;
+        private boolean checkIcon;
 
         private Builder() {
         }
@@ -98,6 +105,12 @@ public final class Switch {
         }
 
         /** Label before the toggle (pf-m-reverse). */
+        /** The "label and check icon" variant — check glyph inside the toggle. */
+        public Builder checkIcon() {
+            this.checkIcon = true;
+            return this;
+        }
+
         public Builder reversed() {
             this.reversed = true;
             return this;

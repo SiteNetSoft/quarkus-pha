@@ -32,8 +32,9 @@ public class HelperTextExamplesRoutes {
     private static final Set<String> EXAMPLES = Set.of(
         "basic",
         "with-custom-icons",
-        "multiple-items"
-    );
+        "multiple-items",
+            "dynamic",
+            "dynamic-list");
 
     @Inject
     Engine engine;

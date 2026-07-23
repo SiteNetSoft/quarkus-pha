@@ -1,0 +1,20 @@
+{! Hint with an actions area (pf-m-no-offset) — a primary action plus a working kebab menu. !}
+<div class="pf-v6-c-hint" id="hint-actions">
+  <div class="pf-v6-c-hint__actions pf-m-no-offset">
+    <div x-data="{ open: false }" style="position: relative; display: inline-block">
+      <button class="pf-v6-c-menu-toggle pf-m-plain" type="button" aria-label="Hint actions" :aria-expanded="open.toString()" @click="open = !open">
+        <span class="pf-v6-c-menu-toggle__icon">{icons:svg('fa:ellipsis-vertical').raw}</span>
+      </button>
+      <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; right: 0; z-index: 200; min-width: 10rem">
+        <div class="pf-v6-c-menu__content">
+          <ul class="pf-v6-c-menu__list" role="menu">
+            <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Dismiss</span></span></button></li>
+            <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Learn more</span></span></button></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pf-v6-c-hint__title">Do more with Find it Fix it capabilities</div>
+  <div class="pf-v6-c-hint__body">Upgrade to Smart Management to remediate all your systems across regions and geographies.</div>
+</div>

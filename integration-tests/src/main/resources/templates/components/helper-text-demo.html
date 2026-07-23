@@ -73,6 +73,24 @@
                                     ></span
                                   >
                                 </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#dynamic" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Dynamic</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
+                                <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                  <span class="pf-v6-c-jump-links__link"
+                                    ><a href="#dynamic-list" class="pf-v6-c-button pf-m-link"
+                                      ><span class="pf-v6-c-button__text"
+                                        ><span class="pf-v6-c-jump-links__link-text">Dynamic list</span></span
+                                      ></a
+                                    ></span
+                                  >
+                                </li>
                               </ul>
                             </li>
                             <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -153,6 +171,18 @@
                           password-requirement checklists, multi-field validation summaries, etc.
                         </p>
                         {/description} {#content}{#include components/helper-text/multiple-items /}{/content} {/include}
+                        {#include partials/example-card title="Dynamic" slug="dynamic" component="helper-text"}
+                        {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          pf-m-dynamic status-transition helper text — the live-validation shape across all five states.
+                        </p>
+                        {/description} {#content}{#include components/helper-text/dynamic /}{/content} {/include}
+                        {#include partials/example-card title="Dynamic list" slug="dynamic-list"
+                        component="helper-text"} {#description}
+                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                          The same dynamic states as a requirements list (ul) — the password-rules shape.
+                        </p>
+                        {/description} {#content}{#include components/helper-text/dynamic-list /}{/content} {/include}
 
                         <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                           <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
