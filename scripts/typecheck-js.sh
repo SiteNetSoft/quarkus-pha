@@ -78,6 +78,7 @@ interface Window {
   Alpine?: any;
   htmx?: any;
   PHA?: any;
+  maplibregl?: any;
   phaAlpine?: any;
   // Monaco loads its AMD loader onto window.require + window.monaco at runtime.
   require?: any;
