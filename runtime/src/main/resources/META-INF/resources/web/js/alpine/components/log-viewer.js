@@ -58,17 +58,17 @@ phaAlpine("phaLogViewer", () => ({
   },
 
   _highlight() {
-    let texts = this.$root.querySelectorAll(".pf-v6-c-log-viewer__text");
-    let q = (this.query || "").trim();
+    const texts = this.$root.querySelectorAll(".pf-v6-c-log-viewer__text");
+    const q = (this.query || "").trim();
     let count = 0;
     texts.forEach((node) => {
-      let raw = node.dataset.raw != null ? node.dataset.raw : node.textContent;
+      const raw = node.dataset.raw != null ? node.dataset.raw : node.textContent;
       if (!q) {
         node.innerHTML = this.ansi ? this._ansiToHtml(raw) : this._escape(raw);
         return;
       }
-      let escaped = this.ansi ? this._stripAnsi(raw) : raw;
-      let parts = escaped.split(this._buildQueryRegex(q));
+      const escaped = this.ansi ? this._stripAnsi(raw) : raw;
+      const parts = escaped.split(this._buildQueryRegex(q));
       let html = "";
       parts.forEach((part, i) => {
         if (i % 2 === 1) {
@@ -91,10 +91,10 @@ phaAlpine("phaLogViewer", () => ({
   },
 
   _focusCurrent() {
-    let matches = this.$root.querySelectorAll(".pf-v6-c-log-viewer__string.pf-m-match");
+    const matches = this.$root.querySelectorAll(".pf-v6-c-log-viewer__string.pf-m-match");
     matches.forEach((m) => m.classList.remove("pf-m-current"));
     if (this.matchCount === 0) return;
-    let current = matches[this.currentIndex];
+    const current = matches[this.currentIndex];
     if (current) {
       current.classList.add("pf-m-current");
       current.scrollIntoView({ block: "nearest", behavior: "smooth" });
@@ -102,7 +102,7 @@ phaAlpine("phaLogViewer", () => ({
   },
 
   _buildQueryRegex(q) {
-    let escaped = q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     return new RegExp("(" + escaped + ")", "gi");
   },
 
@@ -120,16 +120,16 @@ phaAlpine("phaLogViewer", () => ({
   /* ---- scroll ---- */
 
   scrollToBottom() {
-    let s = this.$refs.scroll;
+    const s = this.$refs.scroll;
     if (s) s.scrollTop = s.scrollHeight;
   },
 
   /* ---- ANSI ---- */
 
   _renderAnsi() {
-    let texts = this.$root.querySelectorAll(".pf-v6-c-log-viewer__text");
+    const texts = this.$root.querySelectorAll(".pf-v6-c-log-viewer__text");
     texts.forEach((node) => {
-      let raw = node.dataset.raw != null ? node.dataset.raw : node.textContent;
+      const raw = node.dataset.raw != null ? node.dataset.raw : node.textContent;
       node.innerHTML = this._ansiToHtml(raw);
     });
   },
@@ -141,7 +141,7 @@ phaAlpine("phaLogViewer", () => ({
   _ansiToHtml(s) {
     // Subset of ECMA-48 SGR — colors 30-37 / 90-97, bright bg 40-47 / 100-107,
     // bold (1), reset (0/empty). Unknown codes are dropped.
-    let COLORS = {
+    const COLORS = {
       30: "#000",
       31: "#c00",
       32: "#0a0",
@@ -162,12 +162,12 @@ phaAlpine("phaLogViewer", () => ({
     let out = "";
     let pos = 0;
     let stack = 0;
-    let re = /\x1B\[([0-9;]*)m/g;
+    const re = /\x1B\[([0-9;]*)m/g;
     let m;
     while ((m = re.exec(s)) !== null) {
       out += this._escape(s.slice(pos, m.index));
       pos = m.index + m[0].length;
-      let codes = m[1] === "" ? [0] : m[1].split(";").map((c) => parseInt(c, 10));
+      const codes = m[1] === "" ? [0] : m[1].split(";").map((c) => parseInt(c, 10));
       codes.forEach((code) => {
         if (code === 0) {
           while (stack > 0) {

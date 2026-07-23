@@ -30,7 +30,7 @@
   function loadMonaco(base) {
     if (monacoReady) return monacoReady;
     monacoReady = new Promise(function (resolve, reject) {
-      let s = document.createElement("script");
+      const s = document.createElement("script");
       s.src = base + "/loader.js";
       s.onload = function () {
         window.require.config({ paths: { vs: base } });
@@ -48,9 +48,9 @@
   }
 
   function currentMonacoTheme() {
-    let cl = document.documentElement.classList;
-    let dark = cl.contains("pf-v6-theme-dark");
-    let hc = cl.contains("pf-v6-theme-high-contrast");
+    const cl = document.documentElement.classList;
+    const dark = cl.contains("pf-v6-theme-dark");
+    const hc = cl.contains("pf-v6-theme-high-contrast");
     if (dark && hc) return "hc-black";
     if (dark) return "vs-dark";
     if (hc) return "hc-light";
@@ -60,7 +60,7 @@
   function installThemeObserver() {
     if (themeObserverInstalled) return;
     themeObserverInstalled = true;
-    let obs = new MutationObserver(function () {
+    const obs = new MutationObserver(function () {
       if (window.monaco && window.monaco.editor) {
         window.monaco.editor.setTheme(currentMonacoTheme());
       }
@@ -85,7 +85,7 @@
     async function fetchSource(self, target) {
       if (target === "java") {
         if (javaSource != null) return javaSource;
-        let r = await fetch(self.javaHref, {
+        const r = await fetch(self.javaHref, {
           headers: { Accept: "text/plain" },
         });
         if (!r.ok) throw new Error("Java source fetch failed: " + r.status);
@@ -94,7 +94,7 @@
       }
       if (target === "qute") {
         if (quteSource != null) return quteSource;
-        let r = await fetch(self.sourceHref, {
+        const r = await fetch(self.sourceHref, {
           headers: { Accept: "text/plain" },
         });
         if (!r.ok) throw new Error("Source fetch failed: " + r.status);
@@ -102,12 +102,12 @@
         return quteSource;
       }
       if (htmlSource != null) return htmlSource;
-      let r = await fetch(self.renderedHref, {
+      const r = await fetch(self.renderedHref, {
         headers: { Accept: "text/html" },
       });
       if (!r.ok) throw new Error("Rendered fetch failed: " + r.status);
-      let doc = new DOMParser().parseFromString(await r.text(), "text/html");
-      let main = doc.querySelector("main");
+      const doc = new DOMParser().parseFromString(await r.text(), "text/html");
+      const main = doc.querySelector("main");
       if (!main) throw new Error("No <main> in rendered page");
       htmlSource = main.innerHTML.trim();
       return htmlSource;
@@ -144,7 +144,7 @@
       },
 
       async copy() {
-        let target = this.mode || "qute";
+        const target = this.mode || "qute";
         let value;
         try {
           value = await fetchSource(this, target);
@@ -154,7 +154,7 @@
         }
         try {
           await navigator.clipboard.writeText(value);
-        } catch (_) {
+        } catch {
           /* ignore — clipboard may be unavailable in non-secure contexts */
         }
       },
@@ -163,10 +163,10 @@
         this.loading = true;
         this.error = null;
         try {
-          let [monaco, source] = await Promise.all([loadMonaco("/web/vendor/monaco/vs"), fetchSource(this, target)]);
+          const [monaco, source] = await Promise.all([loadMonaco("/web/vendor/monaco/vs"), fetchSource(this, target)]);
           installThemeObserver();
           await this.$nextTick();
-          let language = target === "java" ? "java" : "html";
+          const language = target === "java" ? "java" : "html";
           if (!editor) {
             editor = monaco.editor.create(this.$refs.host, {
               value: source,

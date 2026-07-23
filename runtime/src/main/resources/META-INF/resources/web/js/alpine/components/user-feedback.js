@@ -67,14 +67,14 @@ phaAlpine("phaUserFeedback", () => ({
   },
 
   validateEmail() {
-    let value = (this.email || "").trim();
+    const value = (this.email || "").trim();
     if (!value) {
       this.emailError = "";
       return false;
     }
     // RFC 5322 lite — good enough for client-side validation, server should
     // re-validate before persisting.
-    let ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
     this.emailError = ok ? "" : "Email address is invalid.";
     return ok;
   },
@@ -83,7 +83,7 @@ phaAlpine("phaUserFeedback", () => ({
     if ((type === "share" && this.optInResearch) || type === "research") {
       if (!this.validateEmail()) return;
     }
-    let payload =
+    const payload =
       type === "share"
         ? { feedback: this.feedback, email: this.optInResearch ? this.email : null }
         : type === "bug"
@@ -96,7 +96,7 @@ phaAlpine("phaUserFeedback", () => ({
     // Default behaviour: assume success after a short delay. Hosts that want a
     // server round-trip can preventDefault, do their own request, and call
     // markSuccess()/markError() on the component via $refs.
-    let self = this;
+    const self = this;
     setTimeout(function () {
       self._markSuccessFor(type);
     }, 250);

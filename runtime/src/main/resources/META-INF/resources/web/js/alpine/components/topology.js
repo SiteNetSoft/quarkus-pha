@@ -97,8 +97,8 @@ phaAlpine("phaTopology", (config = {}) => ({
   _cy: null,
 
   init() {
-    let container = this.$el.querySelector(".pha-c-topology__canvas") || this.$el;
-    let self = this;
+    const container = this.$el.querySelector(".pha-c-topology__canvas") || this.$el;
+    const self = this;
 
     this._cy = cytoscape({
       container: container,
@@ -112,9 +112,9 @@ phaAlpine("phaTopology", (config = {}) => ({
     });
 
     this._cy.on("tap", function (evt) {
-      let target = evt.target;
-      let kind = target === self._cy ? "core" : target.isNode() ? "node" : "edge";
-      let id = kind === "core" ? null : target.id();
+      const target = evt.target;
+      const kind = target === self._cy ? "core" : target.isNode() ? "node" : "edge";
+      const id = kind === "core" ? null : target.id();
       if (typeof config.onTap === "function") {
         config.onTap({ target: kind, id: id, event: evt });
       }

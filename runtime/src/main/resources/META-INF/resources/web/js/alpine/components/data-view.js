@@ -26,9 +26,9 @@ phaAlpine("phaDataView", () => ({
   expanded: [], // row keys (row.name) whose detail row is open (expandable example)
 
   init() {
-    let rawRows = this.$root.dataset.rows;
-    let rawCols = this.$root.dataset.columns;
-    let rawPP = this.$root.dataset.perPage;
+    const rawRows = this.$root.dataset.rows;
+    const rawCols = this.$root.dataset.columns;
+    const rawPP = this.$root.dataset.perPage;
     try {
       this.rows = rawRows ? JSON.parse(rawRows) : [];
       this.columns = rawCols ? JSON.parse(rawCols) : [];
@@ -38,17 +38,17 @@ phaAlpine("phaDataView", () => ({
       console.warn("phaDataView: failed to parse data-rows / data-columns", e);
     }
     if (rawPP) {
-      let n = parseInt(rawPP, 10);
+      const n = parseInt(rawPP, 10);
       if (!Number.isNaN(n) && n > 0) this.perPage = n;
     }
   },
 
   get filtered() {
-    let q = (this.query || "").trim().toLowerCase();
+    const q = (this.query || "").trim().toLowerCase();
     if (!q) return this.rows;
     return this.rows.filter((r) =>
       this.columns.some((col) => {
-        let v = r[col.key];
+        const v = r[col.key];
         return v != null && String(v).toLowerCase().includes(q);
       }),
     );
@@ -56,11 +56,11 @@ phaAlpine("phaDataView", () => ({
 
   get sorted() {
     if (this.sortColumn == null) return this.filtered;
-    let col = this.sortColumn;
-    let dir = this.sortDir === "desc" ? -1 : 1;
+    const col = this.sortColumn;
+    const dir = this.sortDir === "desc" ? -1 : 1;
     return [...this.filtered].sort((a, b) => {
-      let av = a[col];
-      let bv = b[col];
+      const av = a[col];
+      const bv = b[col];
       if (av == null && bv == null) return 0;
       if (av == null) return -dir;
       if (bv == null) return dir;
@@ -78,7 +78,7 @@ phaAlpine("phaDataView", () => ({
   },
 
   get visible() {
-    let start = (this.page - 1) * this.perPage;
+    const start = (this.page - 1) * this.perPage;
     return this.sorted.slice(start, start + this.perPage);
   },
 
@@ -97,7 +97,7 @@ phaAlpine("phaDataView", () => ({
   },
 
   setPage(p) {
-    let max = this.pageCount;
+    const max = this.pageCount;
     if (p < 1) p = 1;
     if (p > max) p = max;
     this.page = p;
@@ -127,19 +127,19 @@ phaAlpine("phaDataView", () => ({
   },
 
   toggleRow(key) {
-    let i = this.selected.indexOf(key);
+    const i = this.selected.indexOf(key);
     if (i === -1) this.selected.push(key);
     else this.selected.splice(i, 1);
   },
 
   // select-all acts on the rows currently visible on the page
   get allVisibleSelected() {
-    let vis = this.visible;
+    const vis = this.visible;
     return vis.length > 0 && vis.every((r) => this.selected.includes(r.name));
   },
 
   toggleAll() {
-    let vis = this.visible.map((r) => r.name);
+    const vis = this.visible.map((r) => r.name);
     if (this.allVisibleSelected) {
       this.selected = this.selected.filter((k) => !vis.includes(k));
     } else {
@@ -159,7 +159,7 @@ phaAlpine("phaDataView", () => ({
   },
 
   toggleExpand(key) {
-    let i = this.expanded.indexOf(key);
+    const i = this.expanded.indexOf(key);
     if (i === -1) this.expanded.push(key);
     else this.expanded.splice(i, 1);
   },

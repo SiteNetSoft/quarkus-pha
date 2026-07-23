@@ -57,7 +57,7 @@ phaAlpine("phaTreeView", (config = {}) => ({
   allExpanded: false,
 
   init() {
-    let initial = config.initial || "collapsed";
+    const initial = config.initial || "collapsed";
     if (initial === "expanded") {
       this.expandAll();
     } else if (initial === "preserve") {
@@ -91,22 +91,22 @@ phaAlpine("phaTreeView", (config = {}) => ({
   handleClick(e) {
     if (!this.$root.contains(e.target)) return;
 
-    let li = e.target.closest("li.pf-v6-c-tree-view__list-item");
+    const li = e.target.closest("li.pf-v6-c-tree-view__list-item");
     if (!li) return;
 
     /* Skip clicks on action-area buttons (e.g. row actions menu). */
     if (e.target.closest(".pf-v6-c-tree-view__action")) return;
 
-    let toggleBtn = e.target.closest("button.pf-v6-c-tree-view__node-toggle");
-    let textBtn = e.target.closest("button.pf-v6-c-tree-view__node-text");
-    let nodeBtn = e.target.closest("button.pf-v6-c-tree-view__node");
-    let checkbox = e.target.closest("input[type='checkbox']");
+    const toggleBtn = e.target.closest("button.pf-v6-c-tree-view__node-toggle");
+    const textBtn = e.target.closest("button.pf-v6-c-tree-view__node-text");
+    const nodeBtn = e.target.closest("button.pf-v6-c-tree-view__node");
+    const checkbox = e.target.closest("input[type='checkbox']");
 
     this._setFocusedItem(li);
 
     /* Checkbox toggled directly — cascade after the native state change. */
     if (checkbox) {
-      let self = this;
+      const self = this;
       requestAnimationFrame(function () {
         self._cascadeCheckbox(li, !!checkbox.checked);
       });
@@ -149,13 +149,13 @@ phaAlpine("phaTreeView", (config = {}) => ({
      * which was dropped because <label> wrapping both a toggle button
      * and the checkbox input is HTML-invalid (multiple form descendants).
      */
-    let nodeWrapper = e.target.closest(".pf-v6-c-tree-view__node");
+    const nodeWrapper = e.target.closest(".pf-v6-c-tree-view__node");
     if (nodeWrapper) {
-      let localCheck = nodeWrapper.querySelector("input[type='checkbox']");
+      const localCheck = nodeWrapper.querySelector("input[type='checkbox']");
       if (localCheck) {
         e.preventDefault();
         localCheck.checked = !localCheck.checked;
-        let self = this;
+        const self = this;
         requestAnimationFrame(function () {
           self._cascadeCheckbox(li, !!localCheck.checked);
         });
@@ -166,7 +166,7 @@ phaAlpine("phaTreeView", (config = {}) => ({
   /* ---- keyboard navigation ---- */
 
   handleKeyNav(e) {
-    let currentLi = e.target.closest("li[role=treeitem]");
+    const currentLi = e.target.closest("li[role=treeitem]");
     if (!currentLi) return;
 
     /* Space / Enter — toggle selection (and expand if branch). */
@@ -183,7 +183,7 @@ phaAlpine("phaTreeView", (config = {}) => ({
     if (e.key === "ArrowRight") {
       if (this._childList(currentLi)) {
         if (this._isExpanded(currentLi)) {
-          let firstChild = currentLi.querySelector(":scope > ul.pf-v6-c-tree-view__list > li[role=treeitem]");
+          const firstChild = currentLi.querySelector(":scope > ul.pf-v6-c-tree-view__list > li[role=treeitem]");
           if (firstChild) {
             e.preventDefault();
             this._setFocusedItem(firstChild);
@@ -203,7 +203,7 @@ phaAlpine("phaTreeView", (config = {}) => ({
         this._setExpanded(currentLi, false);
         this._syncAllExpanded();
       } else {
-        let parent = currentLi.parentElement && currentLi.parentElement.closest("li[role=treeitem]");
+        const parent = currentLi.parentElement && currentLi.parentElement.closest("li[role=treeitem]");
         if (parent) {
           e.preventDefault();
           this._setFocusedItem(parent);
@@ -212,8 +212,8 @@ phaAlpine("phaTreeView", (config = {}) => ({
       return;
     }
 
-    let visible = this._visibleItems();
-    let idx = visible.indexOf(currentLi);
+    const visible = this._visibleItems();
+    const idx = visible.indexOf(currentLi);
     if (idx < 0) return;
     let next = -1;
     if (e.key === "ArrowDown") next = Math.min(idx + 1, visible.length - 1);
@@ -229,8 +229,8 @@ phaAlpine("phaTreeView", (config = {}) => ({
   /* ---- search filter ---- */
 
   handleSearchInput(e) {
-    let query = (e.target.value || "").trim().toLowerCase();
-    let items = this._items();
+    const query = (e.target.value || "").trim().toLowerCase();
+    const items = this._items();
     if (!query) {
       items.forEach(function (li) {
         li.style.display = "";
@@ -240,8 +240,8 @@ phaAlpine("phaTreeView", (config = {}) => ({
     }
     /* Mark items whose own label matches. */
     items.forEach((li) => {
-      let textEl = li.querySelector(":scope > .pf-v6-c-tree-view__content .pf-v6-c-tree-view__node-text");
-      let text = (textEl ? textEl.textContent : "").toLowerCase();
+      const textEl = li.querySelector(":scope > .pf-v6-c-tree-view__content .pf-v6-c-tree-view__node-text");
+      const text = (textEl ? textEl.textContent : "").toLowerCase();
       li.dataset.phaTreeMatch = text.indexOf(query) >= 0 ? "self" : "none";
     });
     /* Propagate up: ancestor matches if any descendant matches. */
@@ -250,16 +250,16 @@ phaAlpine("phaTreeView", (config = {}) => ({
       .reverse()
       .forEach((li) => {
         if (li.dataset.phaTreeMatch === "self") return;
-        let kids = this._childList(li);
+        const kids = this._childList(li);
         if (!kids) return;
-        let anyMatch = Array.from(kids.querySelectorAll(":scope > li.pf-v6-c-tree-view__list-item")).some(
+        const anyMatch = Array.from(kids.querySelectorAll(":scope > li.pf-v6-c-tree-view__list-item")).some(
           (c) => c.dataset.phaTreeMatch !== "none",
         );
         if (anyMatch) li.dataset.phaTreeMatch = "ancestor";
       });
     /* Apply visibility + auto-expand matches with kids. */
     items.forEach((li) => {
-      let state = li.dataset.phaTreeMatch;
+      const state = li.dataset.phaTreeMatch;
       li.style.display = state === "none" ? "none" : "";
       if ((state === "self" || state === "ancestor") && this._childList(li)) {
         this._setExpanded(li, true);
@@ -295,7 +295,7 @@ phaAlpine("phaTreeView", (config = {}) => ({
   _setExpanded(li, expanded) {
     li.classList.toggle("pf-m-expanded", expanded);
     li.setAttribute("aria-expanded", expanded ? "true" : "false");
-    let child = this._childList(li);
+    const child = this._childList(li);
     if (child) {
       if (expanded) child.removeAttribute("inert");
       else child.setAttribute("inert", "");
@@ -303,20 +303,20 @@ phaAlpine("phaTreeView", (config = {}) => ({
   },
 
   _syncAllExpanded() {
-    let expandable = this._items().filter((li) => this._childList(li));
+    const expandable = this._items().filter((li) => this._childList(li));
     this.allExpanded = expandable.length > 0 && expandable.every((li) => this._isExpanded(li));
   },
 
   /* Roving focus — exactly one item is tabindex=0; arrow keys move it. */
 
   _initRovingFocus() {
-    let items = this._items();
+    const items = this._items();
     if (!items.length) return;
     items.forEach(function (li) {
       li.setAttribute("tabindex", "-1");
     });
     /* Pick the currently selected item if any, otherwise the first. */
-    let initial =
+    const initial =
       items.find(function (li) {
         return li.getAttribute("aria-selected") === "true";
       }) || items[0];
@@ -331,7 +331,7 @@ phaAlpine("phaTreeView", (config = {}) => ({
      * Focus the wrapper element actually responsible for receiving focus:
      * either the <button> / <label> / <div> __node, or the <li> itself.
      */
-    let nodeEl = this._nodeWrapper(li);
+    const nodeEl = this._nodeWrapper(li);
     if (nodeEl && (nodeEl.tagName === "BUTTON" || nodeEl.tagName === "A")) {
       nodeEl.focus();
     } else {
@@ -342,27 +342,27 @@ phaAlpine("phaTreeView", (config = {}) => ({
   /* Selection — aria-selected on <li>, pf-m-current on the __node wrapper. */
 
   _isMultiSelectable() {
-    let tree = this.$root.querySelector("ul.pf-v6-c-tree-view__list[role='tree']");
+    const tree = this.$root.querySelector("ul.pf-v6-c-tree-view__list[role='tree']");
     return !!(tree && tree.getAttribute("aria-multiselectable") === "true");
   },
 
   _toggleSelected(li) {
-    let multi = this._isMultiSelectable();
-    let wasSelected = li.getAttribute("aria-selected") === "true";
+    const multi = this._isMultiSelectable();
+    const wasSelected = li.getAttribute("aria-selected") === "true";
     if (!multi) {
       /* Clear other selections. */
       this._items().forEach((other) => {
         if (other === li) return;
         if (other.getAttribute("aria-selected") === "true") {
           other.setAttribute("aria-selected", "false");
-          let n = this._nodeWrapper(other);
+          const n = this._nodeWrapper(other);
           if (n) n.classList.remove("pf-m-current");
         }
       });
     }
-    let next = !wasSelected;
+    const next = !wasSelected;
     li.setAttribute("aria-selected", next ? "true" : "false");
-    let nodeEl = this._nodeWrapper(li);
+    const nodeEl = this._nodeWrapper(li);
     if (nodeEl) nodeEl.classList.toggle("pf-m-current", next);
   },
 
@@ -373,14 +373,14 @@ phaAlpine("phaTreeView", (config = {}) => ({
   },
 
   _directChildItems(li) {
-    let kids = this._childList(li);
+    const kids = this._childList(li);
     if (!kids) return [];
     return Array.from(kids.querySelectorAll(":scope > li.pf-v6-c-tree-view__list-item"));
   },
 
   _cascadeCheckbox(li, checked) {
     /* Push state down to every descendant checkbox. */
-    let descendants = li.querySelectorAll("li.pf-v6-c-tree-view__list-item input[type='checkbox']");
+    const descendants = li.querySelectorAll("li.pf-v6-c-tree-view__list-item input[type='checkbox']");
     descendants.forEach(function (cb) {
       cb.checked = checked;
       cb.indeterminate = false;
@@ -394,20 +394,20 @@ phaAlpine("phaTreeView", (config = {}) => ({
   },
 
   _updateParentCheckbox(li) {
-    let cb = this._checkboxOf(li);
+    const cb = this._checkboxOf(li);
     if (!cb) return;
-    let kids = this._directChildItems(li);
+    const kids = this._directChildItems(li);
     if (!kids.length) return;
-    let childCbs = kids
+    const childCbs = kids
       .map((c) => this._checkboxOf(c))
       .filter(function (c) {
         return !!c;
       });
     if (!childCbs.length) return;
-    let checked = childCbs.filter(function (c) {
+    const checked = childCbs.filter(function (c) {
       return c.checked;
     }).length;
-    let indeterminate = childCbs.filter(function (c) {
+    const indeterminate = childCbs.filter(function (c) {
       return c.indeterminate;
     }).length;
     if (checked === childCbs.length && indeterminate === 0) {
