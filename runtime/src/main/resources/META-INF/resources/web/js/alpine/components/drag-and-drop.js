@@ -43,7 +43,7 @@ phaAlpine("phaDragDrop", () => ({
     this.root = this.$root;
     try {
       this.lists = JSON.parse(this.root.dataset.lists || "{}");
-    } catch (e) {
+    } catch {
       this.lists = {};
     }
     this.persistUrl = this.root.dataset.persistUrl || null;

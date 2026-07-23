@@ -32,7 +32,7 @@
  *
  * License: Apache 2.0
  */
-let PHA_QUILL_TOOLBARS = {
+const PHA_QUILL_TOOLBARS = {
   full: [
     [{ header: [1, 2, 3, false] }],
     ["bold", "italic", "underline", "strike"],
@@ -59,13 +59,13 @@ phaAlpine("phaRichTextEditor", (config = {}) => ({
       return;
     }
 
-    let surface = this.$el.querySelector(".pha-c-rich-text-editor__surface");
+    const surface = this.$el.querySelector(".pha-c-rich-text-editor__surface");
     if (!surface) return;
 
     // The Qute template supplies config as data-* on the root; an explicit config
     // argument still wins so direct JS callers keep working.
-    let ds = this.$root.dataset;
-    let settings = {
+    const ds = this.$root.dataset;
+    const settings = {
       theme: config.theme ?? ds.theme,
       placeholder: config.placeholder ?? ds.placeholder,
       readOnly: config.readOnly ?? ds.readOnly === "true",
@@ -74,10 +74,10 @@ phaAlpine("phaRichTextEditor", (config = {}) => ({
     };
     this._settings = settings;
 
-    let toolbarKey = settings.toolbar || "full";
-    let toolbar = PHA_QUILL_TOOLBARS[toolbarKey] || PHA_QUILL_TOOLBARS.full;
+    const toolbarKey = settings.toolbar || "full";
+    const toolbar = PHA_QUILL_TOOLBARS[toolbarKey] || PHA_QUILL_TOOLBARS.full;
 
-    let modules = { toolbar: toolbar };
+    const modules = { toolbar: toolbar };
 
     this._editor = new Quill(surface, {
       theme: settings.theme === "bubble" ? "bubble" : "snow",

@@ -12,11 +12,13 @@
   align-items: center;
   border-radius: var(--pf-t--global--border--radius--small);
 }
+
 .pha-dd-label {
   display: flex;
   align-items: center;
   padding-block: var(--pf-t--global--spacer--sm);
   padding-inline-end: var(--pf-t--global--spacer--md);
+
   /* pin the body text colour so the label can't inherit a light/white colour from any context
      (the overlay clone + the in-list placeholder must keep normal dark text while dragging) */
   color: var(--pf-t--global--text--color--regular);
@@ -34,19 +36,23 @@
   aspect-ratio: 1; /* ...height derived from it → a square hover target */
   flex-shrink: 0;
   border-radius: var(--pf-t--global--border--radius--small);
+
   /* the dots inherit the plain-button text colour like PF's DragButton (dark in light theme, WHITE
      in dark theme) — a constant colour that does NOT change on hover/press; only the bg greys */
   color: var(--pf-t--global--text--color--regular);
   cursor: grab;
   touch-action: none;
 }
+
 .pha-dd-grip:hover,
 .pha-dd-grip:active {
   background-color: var(--pf-t--global--background--color--action--plain--hover);
 }
+
 .pha-dd-grip:active {
   cursor: grabbing;
 }
+
 .pha-dd-grip:focus-visible {
   outline: var(--pf-t--global--border--width--regular) solid var(--pf-t--global--border--color--brand--default);
   outline-offset: -1px;
@@ -84,6 +90,7 @@
 .pha-dd-placeholder {
   position: relative;
 }
+
 .pha-dd-placeholder::after {
   content: "";
   position: absolute;
@@ -92,6 +99,7 @@
   border-radius: var(--pf-t--global--border--radius--small);
   pointer-events: none;
 }
+
 .pha-dd-placeholder .pha-dd-grip {
   background-color: var(--pf-t--global--background--color--action--plain--hover);
 }
@@ -109,10 +117,12 @@ body.pha-dd-dragging {
   flex-direction: column;
   gap: var(--pf-t--global--spacer--lg);
 }
+
 .pha-dd-zone-title {
   font-weight: var(--pf-t--global--font--weight--body--bold);
   margin-block-end: var(--pf-t--global--spacer--sm);
 }
+
 /* The droppable list within a zone keeps a min-height so an emptied zone still accepts drops */
 .pha-dd-zone-list {
   min-height: 3rem;

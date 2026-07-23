@@ -31,7 +31,7 @@
  * through 300 → 100/500 → 200/400 shades. Default for every chart via the
  * registered "patternfly" theme.
  */
-let PF_COLORS = [
+const PF_COLORS = [
   "#0066cc" /* blue-300   */,
   "#63993d" /* green-300  */,
   "#37a3a3" /* teal-300   */,
@@ -65,7 +65,8 @@ let PF_COLORS = [
  * recommends it when series have no inherent order (area & line charts).
  * Opt in per chart: x-data="phaChart({ option: { color: PF_COLORS_UNORDERED, ... } })".
  */
-let PF_COLORS_UNORDERED = [
+// eslint-disable-next-line no-unused-vars -- referenced from template x-data expressions, not from this file
+const PF_COLORS_UNORDERED = [
   "#0066cc" /* blue-300   */,
   "#dca614" /* yellow-300 */,
   "#63993d" /* green-300  */,
@@ -103,7 +104,7 @@ let PF_COLORS_UNORDERED = [
   "#a3a3a3" /* black-400  */,
 ];
 
-let PF_THEME = {
+const PF_THEME = {
   color: PF_COLORS,
   backgroundColor: "transparent",
   textStyle: { fontFamily: "RedHatText, Helvetica, Arial, sans-serif" },
@@ -136,7 +137,7 @@ let PF_THEME = {
  * representative shape with theme: "skeleton" and silent series (no tooltip /
  * legend / interaction) to stand in for a chart while its data is fetched.
  */
-let SKELETON_THEME = {
+const SKELETON_THEME = {
   color: ["#e0e0e0", "#ededed", "#d2d2d2", "#f0f0f0"],
   backgroundColor: "transparent",
   textStyle: { color: "#e0e0e0" },
@@ -168,9 +169,9 @@ phaAlpine("phaChart", (config = {}) => ({
   _resizeFrame: null,
 
   init() {
-    let container = this.$el.querySelector(".pha-c-chart__canvas") || this.$el;
-    let theme = config.theme || "patternfly";
-    let renderer = config.renderer || "canvas";
+    const container = this.$el.querySelector(".pha-c-chart__canvas") || this.$el;
+    const theme = config.theme || "patternfly";
+    const renderer = config.renderer || "canvas";
 
     this._chart = echarts.init(container, theme, { renderer: renderer });
 
@@ -189,7 +190,7 @@ phaAlpine("phaChart", (config = {}) => ({
       }
     }
 
-    let self = this;
+    const self = this;
 
     /*
      * Auto-resize. A ResizeObserver on the container catches BOTH viewport

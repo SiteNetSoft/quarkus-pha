@@ -25,13 +25,25 @@ export default [
         Event: "readonly",
         HTMLElement: "readonly",
         MutationObserver: "readonly",
+        ResizeObserver: "readonly",
         requestAnimationFrame: "readonly",
+        cancelAnimationFrame: "readonly",
+        localStorage: "readonly",
+        navigator: "readonly",
+        DOMParser: "readonly",
+        URL: "readonly",
+        CSS: "readonly",
         // Stack globals
         Alpine: "readonly",
         htmx: "readonly",
         echarts: "readonly",
         d3: "readonly",
-        maplibregl: "readonly"
+        maplibregl: "readonly",
+        cytoscape: "readonly",
+        Quill: "readonly",
+        videojs: "readonly",
+        // Project globals (defined in alpine/register.js)
+        phaAlpine: "readonly"
       }
     },
     rules: {
@@ -39,7 +51,7 @@ export default [
       "no-undef": "error",
       "no-console": "off",
       "prefer-const": "warn",
-      "eqeqeq": ["error", "always"]
+      "eqeqeq": ["error", "always", { "null": "ignore" }]
     }
   }
 ];
