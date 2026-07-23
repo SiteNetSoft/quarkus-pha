@@ -32,13 +32,13 @@
   <td class="pf-v6-c-table__td pf-v6-c-table__favorite">
     <button
       type="button"
-      class="pf-v6-c-button pf-m-plain"
+      class="pf-v6-c-button pf-m-favorite pf-m-plain"
       :class="{row.favExpr} ? 'pf-m-favorited' : ''"
       :aria-label="{row.favExpr} ? 'Unfavorite {row.firstCellText}' : 'Favorite {row.firstCellText}'"
       :aria-pressed="{row.favExpr}"
       @click="{row.favExpr} = !{row.favExpr}"
     >
-      <span class="pf-v6-c-button__icon">{icons:svg('fa:star').raw}</span>
+      <span class="pf-v6-c-button__icon"><span class="pf-v6-c-button__icon-favorite">{icons:svg('fa-regular:star').raw}</span><span class="pf-v6-c-button__icon-favorited">{icons:svg('fa:star').raw}</span></span>
     </button>
   </td>
   {/if}

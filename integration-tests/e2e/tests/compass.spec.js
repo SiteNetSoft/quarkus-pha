@@ -16,7 +16,8 @@ test.describe("Compass", () => {
   test("basic has container, header, main, and footer regions", async ({ page }) => {
     await expect(page.locator("#cmp-basic")).toHaveClass(/pf-v6-c-compass/);
     await expect(page.locator("#cmp-basic .pf-v6-c-compass__container")).toBeVisible();
-    await expect(page.locator("#cmp-basic .pf-v6-c-compass__header")).toBeVisible();
+    // PF 6.6: the main header lives inside __main as __main-header
+    await expect(page.locator("#cmp-basic .pf-v6-c-compass__main-header")).toBeVisible();
     await expect(page.locator("#cmp-basic .pf-v6-c-compass__main")).toBeVisible();
     await expect(page.locator("#cmp-basic .pf-v6-c-compass__footer")).toBeVisible();
   });

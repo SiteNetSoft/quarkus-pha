@@ -27,8 +27,7 @@
     {#if it.displayIcon??}
     <span class="pf-v6-c-helper-text__item-icon">{icons:svg(it.displayIcon).raw}</span>
     {/if}
-    <span class="pf-v6-c-helper-text__item-text">{it.text}</span>
-    {#if it.screenReaderText??}<span class="pf-v6-screen-reader">{it.screenReaderText}</span>{/if}
+    <span class="pf-v6-c-helper-text__item-text">{#if it.screenReaderText??}<span class="pf-v6-screen-reader">{it.screenReaderText}</span> {/if}{it.text}</span>
   </li>
   {/for}
 </ul>
