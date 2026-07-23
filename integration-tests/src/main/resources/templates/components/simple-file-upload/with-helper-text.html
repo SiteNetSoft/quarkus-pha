@@ -1,13 +1,8 @@
 <div class="pf-v6-c-file-upload" id="sfu-helper" x-data="{ name: '', content: '', read(e) { var f = e.target.files[0]; if (!f) return; this.name = f.name; var d = this; var r = new FileReader(); r.onload = function (ev) { d.content = ev.target.result }; r.readAsText(f) } }" style="max-width: 480px">
   <input type="file" x-ref="file" style="display: none" aria-hidden="true" tabindex="-1" @change="read($event)" />
-  <div class="pf-v6-c-file-upload__file-select">
-    <span class="pf-v6-c-form-control">
+  <div class="pf-v6-c-file-upload__file-select"><div class="pf-v6-c-input-group"><div class="pf-v6-c-input-group__item pf-m-fill"><span class="pf-v6-c-form-control pf-m-readonly">
       <input type="text" id="sfu-helper-filename" readonly placeholder="No file chosen" aria-label="File name" x-model="name" />
-    </span>
-    <button class="pf-v6-c-button pf-m-control" type="button" @click="$refs.file.click()">Browse...</button>
-    <button class="pf-v6-c-button pf-m-control" type="button" :disabled="name === ''" @click="name = ''; content = ''; $refs.file.value = ''">Clear</button>
-  </div>
-  <div class="pf-v6-c-file-upload__file-details">
+    </span></div><div class="pf-v6-c-input-group__item"><button class="pf-v6-c-button pf-m-control" type="button" @click="$refs.file.click()"><span class="pf-v6-c-button__text">Browse...</span></button></div><div class="pf-v6-c-input-group__item"><button class="pf-v6-c-button pf-m-control" type="button" :disabled="name === ''" @click="name = ''; content = ''; $refs.file.value = ''"><span class="pf-v6-c-button__text">Clear</span></button></div></div></div><div class="pf-v6-c-file-upload__file-details">
     <span class="pf-v6-c-form-control pf-m-textarea pf-m-resize-vertical">
       <textarea id="sfu-helper-details" rows="4" aria-label="File contents" x-model="content" readonly placeholder="File preview"></textarea>
     </span>

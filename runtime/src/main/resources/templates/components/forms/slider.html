@@ -6,7 +6,7 @@
   class="pf-v6-c-slider{#if slider.isDisabled} pf-m-disabled{/if}"
   id="{slider.id}"
   x-data="{slider.xData}"
-  :style="'--pf-v6-c-slider--value: ' + val"
+  :style="'--pf-v6-c-slider--value: ' + ((val - {slider.minAttr}) / ({slider.maxAttr} - {slider.minAttr}) * 100) + '%'"
 >
   <div class="pf-v6-c-slider__main">
     <div
@@ -20,6 +20,9 @@
       role="slider"
       tabindex="0"
       @keydown="{slider.keydown}"
+      @pointerdown="dragging = true; $el.setPointerCapture($event.pointerId)"
+      @pointermove="dragging && !$el.closest('.pf-m-disabled') && (val = Math.min({slider.maxAttr}, Math.max({slider.minAttr}, Math.round(((($event.clientX - $el.closest('.pf-v6-c-slider__main').querySelector('.pf-v6-c-slider__rail').getBoundingClientRect().left) / $el.closest('.pf-v6-c-slider__main').querySelector('.pf-v6-c-slider__rail').getBoundingClientRect().width) * ({slider.maxAttr} - {slider.minAttr})) + {slider.minAttr}))))"
+      @pointerup="dragging = false"
       aria-label="{slider.ariaLabel}"
       aria-valuemin="{slider.minAttr}"
       aria-valuemax="{slider.maxAttr}"
@@ -34,8 +37,8 @@
 <div
   class="pf-v6-c-slider{#if disabled??} pf-m-disabled{/if}"
   {#if id??}id="{id}"{/if}
-  x-data="{ val: {#if value??}{value}{#else}50{/if} }"
-  :style="'--pf-v6-c-slider--value: ' + val"
+  x-data="{ val: {#if value??}{value}{#else}50{/if}, dragging: false }"
+  :style="'--pf-v6-c-slider--value: ' + ((val - {#if min??}{min}{#else}0{/if}) / ({#if max??}{max}{#else}100{/if} - {#if min??}{min}{#else}0{/if}) * 100) + '%'"
 >
   <div class="pf-v6-c-slider__main">
     <div
@@ -52,6 +55,9 @@
          (multi-line attributes with embedded Qute break Prettier). Declaration-free &&-guard chain (Alpine
          compiles handlers as `__self.result = <expr>`, so no var/let/const). !}
       @keydown="!$el.closest('.pf-m-disabled') && ((($event.key === 'ArrowRight' || $event.key === 'ArrowUp') && ($event.preventDefault(), val = Math.min({#if max??}{max}{#else}100{/if}, val + 1))), (($event.key === 'ArrowLeft' || $event.key === 'ArrowDown') && ($event.preventDefault(), val = Math.max({#if min??}{min}{#else}0{/if}, val - 1))), ($event.key === 'Home' && ($event.preventDefault(), val = {#if min??}{min}{#else}0{/if})), ($event.key === 'End' && ($event.preventDefault(), val = {#if max??}{max}{#else}100{/if})), ($event.key === 'PageUp' && ($event.preventDefault(), val = Math.min({#if max??}{max}{#else}100{/if}, val + 10))), ($event.key === 'PageDown' && ($event.preventDefault(), val = Math.max({#if min??}{min}{#else}0{/if}, val - 10))))"
+            @pointerdown="dragging = true; $el.setPointerCapture($event.pointerId)"
+      @pointermove="dragging && !$el.closest('.pf-m-disabled') && (val = Math.min({#if max??}{max}{#else}100{/if}, Math.max({#if min??}{min}{#else}0{/if}, Math.round(((($event.clientX - $el.closest('.pf-v6-c-slider__main').querySelector('.pf-v6-c-slider__rail').getBoundingClientRect().left) / $el.closest('.pf-v6-c-slider__main').querySelector('.pf-v6-c-slider__rail').getBoundingClientRect().width) * ({#if max??}{max}{#else}100{/if} - {#if min??}{min}{#else}0{/if})) + {#if min??}{min}{#else}0{/if}))))"
+      @pointerup="dragging = false"
       aria-label="{#if ariaLabel??}{ariaLabel}{#else}Value{/if}"
       aria-valuemin="{#if min??}{min}{#else}0{/if}"
       aria-valuemax="{#if max??}{max}{#else}100{/if}"

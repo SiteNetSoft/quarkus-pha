@@ -156,7 +156,9 @@
                           <div class="pf-v6-c-jump-links__header">
                             <div class="pf-v6-c-jump-links__toggle">
                               <button
-                                aria-expanded="false"
+                                x-data="{ tocOpen: false }"
+                                :aria-expanded="tocOpen.toString()"
+                                @click="tocOpen = !tocOpen; $el.closest('.pf-v6-c-jump-links__main').querySelector('.pf-v6-c-jump-links__list').style.display = tocOpen ? '' : 'none'"
                                 id="pf-1777292252887iraait40mle"
                                 class="pf-v6-c-button pf-m-plain"
                                 type="button"
@@ -518,6 +520,8 @@
                   data-ouia-component-type="PF6/Button"
                   data-ouia-safe="true"
                   data-ouia-component-id="OUIA-Generated-Button-primary-3"
+                  x-data
+                  @click="($el.closest('.pf-v6-c-page__main-container') || document.documentElement).scrollTo({ top: 0, behavior: 'smooth' })"
                 >
                   <span class="pf-v6-c-button__text">Back to top</span
                   ><span class="pf-v6-c-button__icon pf-m-end"

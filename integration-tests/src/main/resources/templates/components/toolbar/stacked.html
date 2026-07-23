@@ -9,16 +9,46 @@
       {/include}
       {#include components/navigation/toolbar-group variant="filter"}
         {#include components/navigation/toolbar-item}
-          <button class="pf-v6-c-menu-toggle" type="button" aria-expanded="false">
-            <span class="pf-v6-c-menu-toggle__text">Status</span>
-            <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
-          </button>
+          <div x-data="{ open: false, sel: 'Status' }" style="position: relative">
+            <button class="pf-v6-c-menu-toggle" type="button" :class="open ? 'pf-m-expanded' : ''" :aria-expanded="open.toString()" @click="open = !open">
+              <span class="pf-v6-c-menu-toggle__text" x-text="sel">Status</span>
+              <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
+            </button>
+            <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 10rem">
+              <div class="pf-v6-c-menu__content">
+                <ul class="pf-v6-c-menu__list" role="listbox">
+                  <template x-for="opt in ['Any', 'New', 'Open', 'Pending', 'Closed']" :key="opt">
+                    <li role="none" class="pf-v6-c-menu__list-item" :class="sel === opt ? 'pf-m-selected' : ''">
+                      <button class="pf-v6-c-menu__item" type="button" role="option" :aria-selected="(sel === opt).toString()" @click="sel = opt; open = false">
+                        <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text" x-text="opt"></span></span>
+                      </button>
+                    </li>
+                  </template>
+                </ul>
+              </div>
+            </div>
+          </div>
         {/include}
         {#include components/navigation/toolbar-item}
-          <button class="pf-v6-c-menu-toggle" type="button" aria-expanded="false">
-            <span class="pf-v6-c-menu-toggle__text">Risk</span>
-            <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
-          </button>
+          <div x-data="{ open: false, sel: 'Risk' }" style="position: relative">
+            <button class="pf-v6-c-menu-toggle" type="button" :class="open ? 'pf-m-expanded' : ''" :aria-expanded="open.toString()" @click="open = !open">
+              <span class="pf-v6-c-menu-toggle__text" x-text="sel">Risk</span>
+              <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
+            </button>
+            <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 10rem">
+              <div class="pf-v6-c-menu__content">
+                <ul class="pf-v6-c-menu__list" role="listbox">
+                  <template x-for="opt in ['Any', 'Low', 'Medium', 'High']" :key="opt">
+                    <li role="none" class="pf-v6-c-menu__list-item" :class="sel === opt ? 'pf-m-selected' : ''">
+                      <button class="pf-v6-c-menu__item" type="button" role="option" :aria-selected="(sel === opt).toString()" @click="sel = opt; open = false">
+                        <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text" x-text="opt"></span></span>
+                      </button>
+                    </li>
+                  </template>
+                </ul>
+              </div>
+            </div>
+          </div>
         {/include}
       {/include}
       {#include components/navigation/toolbar-item}
@@ -30,10 +60,19 @@
               </div>
             </div>
           </div>
-          <div class="pf-v6-c-overflow-menu__control">
-            <button class="pf-v6-c-menu-toggle pf-m-plain" type="button" aria-label="More actions">
+          <div class="pf-v6-c-overflow-menu__control" x-data="{ open: false }" style="position: relative">
+            <button class="pf-v6-c-menu-toggle pf-m-plain" type="button" aria-label="More actions" :aria-expanded="open.toString()" @click="open = !open">
               <span class="pf-v6-c-menu-toggle__icon">{icons:svg('fa:ellipsis-vertical').raw}</span>
             </button>
+            <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 10rem">
+              <div class="pf-v6-c-menu__content">
+                <ul class="pf-v6-c-menu__list" role="menu">
+                  <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Edit</span></span></button></li>
+                  <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Export</span></span></button></li>
+                  <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Delete</span></span></button></li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       {/include}
@@ -62,15 +101,15 @@
           <button class="pf-v6-c-button pf-m-secondary" type="button"><span class="pf-v6-c-button__text">Action</span></button>
         {/include}
       {#include components/navigation/toolbar-item modifiers="pf-m-pagination"}
-        <div class="pf-v6-c-pagination pf-m-compact">
+        <div class="pf-v6-c-pagination pf-m-compact" x-data="{ page: 1, pages: 4 }">
           <nav class="pf-v6-c-pagination__nav" aria-label="Pagination">
             <div class="pf-v6-c-pagination__nav-control pf-m-prev">
-              <button class="pf-v6-c-button pf-m-plain" type="button" disabled aria-label="Go to previous page">
+              <button class="pf-v6-c-button pf-m-plain" type="button" :disabled="page <= 1" aria-label="Go to previous page" @click="page = Math.max(1, page - 1)">
                 <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-left').raw}</span>
               </button>
             </div>
             <div class="pf-v6-c-pagination__nav-control pf-m-next">
-              <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to next page">
+              <button class="pf-v6-c-button pf-m-plain" type="button" :disabled="page >= pages" aria-label="Go to next page" @click="page = Math.min(pages, page + 1)">
                 <span class="pf-v6-c-button__icon">{icons:svg('fa:angle-right').raw}</span>
               </button>
             </div>

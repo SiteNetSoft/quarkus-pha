@@ -40,7 +40,7 @@
     </ul>
   </div>
   {#if group.closable}<div class="pf-v6-c-label-group__close">
-    <button class="pf-v6-c-button pf-m-plain pf-m-no-padding" type="button" aria-label="{group.closeBtnAria ?: 'Close label group'}"><span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span></button>
+    <button class="pf-v6-c-button pf-m-small pf-m-plain" type="button" aria-label="{group.closeBtnAria ?: 'Close label group'}" @click="$el.closest('.pf-v6-c-label-group').remove()"><span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span></button>
   </div>{/if}
 </div>
 {#else}
@@ -57,7 +57,7 @@
     </ul>
   </div>
   {#if closable??}<div class="pf-v6-c-label-group__close">
-    <button class="pf-v6-c-button pf-m-plain pf-m-no-padding" type="button" aria-label="{#if closeBtnAria??}{closeBtnAria}{#else}Close label group{/if}"><span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span></button>
+    <button class="pf-v6-c-button pf-m-small pf-m-plain" type="button" aria-label="{#if closeBtnAria??}{closeBtnAria}{#else}Close label group{/if}" @click="$el.closest('.pf-v6-c-label-group').remove()"><span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span></button>
   </div>{/if}
 </div>
 {/if}

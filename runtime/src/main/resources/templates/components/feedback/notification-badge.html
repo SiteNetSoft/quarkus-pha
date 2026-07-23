@@ -5,13 +5,13 @@
               variant (read | unread | attention — default read), count (visible number), ariaLabel !}
 {! Model mode: pass notificationBadge=<...model.NotificationBadge>. !}
 {#if notificationBadge??}
-<button class="pf-v6-c-button pf-m-stateful pf-m-{notificationBadge.variant}" type="button" id="{notificationBadge.id}" aria-label="{notificationBadge.ariaLabel}">
+<button class="pf-v6-c-button pf-m-stateful pf-m-{notificationBadge.variant}" type="button" id="{notificationBadge.id}" aria-label="{notificationBadge.ariaLabel}" x-data="{ expanded: false }" @click="expanded = !expanded; $el.classList.remove('pf-m-unread', 'pf-m-attention'); $el.classList.add('pf-m-read'); $el.querySelector('.pf-v6-c-badge') && ($el.querySelector('.pf-v6-c-badge').classList.remove('pf-m-unread'), $el.querySelector('.pf-v6-c-badge').classList.add('pf-m-read'))" :class="expanded ? 'pf-m-clicked' : ''" :aria-expanded="expanded.toString()">
   <span class="pf-v6-c-button__icon">{icons:svg('fa:bell').raw}</span>
   {#if notificationBadge.count??}<span class="pf-v6-c-button__count"><span class="pf-v6-c-badge {#if notificationBadge.isRead}pf-m-read{#else}pf-m-unread{/if}">{notificationBadge.count}</span></span>{/if}
 </button>
 {#else}
 {#let v=(variant ?: 'read')}
-<button class="pf-v6-c-button pf-m-stateful pf-m-{v}" type="button"{#if id??} id="{id}"{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if}>
+<button class="pf-v6-c-button pf-m-stateful pf-m-{v}" type="button"{#if id??} id="{id}"{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if} x-data="{ expanded: false }" @click="expanded = !expanded; $el.classList.remove('pf-m-unread', 'pf-m-attention'); $el.classList.add('pf-m-read'); $el.querySelector('.pf-v6-c-badge') && ($el.querySelector('.pf-v6-c-badge').classList.remove('pf-m-unread'), $el.querySelector('.pf-v6-c-badge').classList.add('pf-m-read'))" :class="expanded ? 'pf-m-clicked' : ''" :aria-expanded="expanded.toString()">
   <span class="pf-v6-c-button__icon">{icons:svg('fa:bell').raw}</span>
   {#if count??}<span class="pf-v6-c-button__count"><span class="pf-v6-c-badge {#if v is 'read'}pf-m-read{#else}pf-m-unread{/if}">{count}</span></span>{/if}
 </button>

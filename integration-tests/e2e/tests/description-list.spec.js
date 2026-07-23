@@ -81,15 +81,21 @@ test.describe("Description List", () => {
   });
 
   test.describe("Term help text", () => {
-    test("terms use pf-m-help-text and the first opens a popover", async ({ page }) => {
+    test("terms use pf-m-help-text and every term opens a popover", async ({ page }) => {
       const terms = page.locator("#dl-term-help-text .pf-v6-c-description-list__text.pf-m-help-text");
       await expect(terms).toHaveCount(5);
-      const popover = page.locator("#dl-term-help-text .pf-v6-c-popover");
-      await expect(popover).toBeHidden();
+      // every help term now composes a popover (PF DescriptionListTermHelpTextButton behavior)
+      const popovers = page.locator("#dl-term-help-text .pf-v6-c-popover");
+      await expect(popovers).toHaveCount(5);
+      const first = popovers.first();
+      await expect(first).toBeHidden();
       await terms.first().click();
-      await expect(popover).toBeVisible();
+      await expect(first).toBeVisible();
       await page.keyboard.press("Escape");
-      await expect(popover).toBeHidden();
+      await expect(first).toBeHidden();
+      // a later (previously inert) term opens its own popover too
+      await terms.nth(2).click();
+      await expect(popovers.nth(2)).toBeVisible();
     });
   });
 

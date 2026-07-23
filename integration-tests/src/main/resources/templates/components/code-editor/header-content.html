@@ -1,9 +1,35 @@
 {#include components/data-display/code-editor id="ce-header-content" language="HTML" copyButton=true downloadButton=true uploadButton=true headerMain="Header main content" shortcuts=true}
 {#shortcutsSlot}
-<button class="pf-v6-c-button pf-m-link" type="button">
+<div x-data="{ open: false }" style="position: relative; display: inline-block">
+<button class="pf-v6-c-button pf-m-link" type="button" :aria-expanded="open.toString()" @click="open = !open">
   <span class="pf-v6-c-button__icon pf-m-start">{icons:svg('fa:circle-question').raw}</span>
   <span class="pf-v6-c-button__text">View shortcuts</span>
 </button>
+  <div class="pf-v6-c-popover" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; right: 0; z-index: 300; min-width: 20rem">
+    <div class="pf-v6-c-popover__arrow" style="display: none"></div>
+    <div class="pf-v6-c-popover__content">
+      <header class="pf-v6-c-popover__header">
+        <div class="pf-v6-c-popover__title"><h1 class="pf-v6-c-popover__title-text">Keyboard shortcuts</h1></div>
+      </header>
+      <div class="pf-v6-c-popover__body">
+        <dl class="pf-v6-c-description-list pf-m-horizontal pf-m-compact">
+          <div class="pf-v6-c-description-list__group">
+            <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">F1</span></dt>
+            <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">View all editor shortcuts</div></dd>
+          </div>
+          <div class="pf-v6-c-description-list__group">
+            <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Ctrl + Space</span></dt>
+            <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">Activate auto complete</div></dd>
+          </div>
+          <div class="pf-v6-c-description-list__group">
+            <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Ctrl + Shift + M</span></dt>
+            <dd class="pf-v6-c-description-list__description"><div class="pf-v6-c-description-list__text">Toggle tab action</div></dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
 {/shortcutsSlot}
 {#content}code goes here{/content}
 {/include}

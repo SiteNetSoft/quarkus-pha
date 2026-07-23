@@ -1,12 +1,24 @@
 {! Simple file upload — PatternFly v6 (file-upload) !}
 {! Required: id — derives {id}-filename on the filename display input. !}
 {! Optional: browseText (optional), clearText (optional), disabled (optional) !}
-<div class="pf-v6-c-file-upload" id="{id}">
+{! Fully wired: Browse opens the native file dialog via a visually hidden file input;
+   the chosen file's name fills the readonly filename display; Clear resets both. !}
+<div class="pf-v6-c-file-upload" id="{id}" x-data="{ name: '' }">
+  <input type="file" x-ref="file" style="display: none" aria-hidden="true" tabindex="-1"
+         @change="name = $event.target.files.length ? $event.target.files[0].name : ''" />
   <div class="pf-v6-c-file-upload__file-select">
-    <span class="pf-v6-c-form-control">
-      <input type="text" id="{id}-filename" readonly placeholder="No file chosen" aria-label="File name">
-    </span>
-    <button class="pf-v6-c-button pf-m-control" type="button"{#if disabled??} disabled{/if}>{#if browseText??}{browseText}{#else}Browse...{/if}</button>
-    <button class="pf-v6-c-button pf-m-control" type="button"{#if disabled??} disabled{/if}>{#if clearText??}{clearText}{#else}Clear{/if}</button>
+    <div class="pf-v6-c-input-group">
+      <div class="pf-v6-c-input-group__item pf-m-fill">
+        <span class="pf-v6-c-form-control pf-m-readonly">
+          <input type="text" id="{id}-filename" readonly placeholder="No file chosen" aria-label="File name" x-model="name">
+        </span>
+      </div>
+      <div class="pf-v6-c-input-group__item">
+        <button class="pf-v6-c-button pf-m-control" type="button"{#if disabled??} disabled{#else} @click="$refs.file.click()"{/if}><span class="pf-v6-c-button__text">{#if browseText??}{browseText}{#else}Browse...{/if}</span></button>
+      </div>
+      <div class="pf-v6-c-input-group__item">
+        <button class="pf-v6-c-button pf-m-control" type="button"{#if disabled??} disabled{#else} :disabled="name === ''" @click="name = ''; $refs.file.value = ''"{/if}><span class="pf-v6-c-button__text">{#if clearText??}{clearText}{#else}Clear{/if}</span></button>
+      </div>
+    </div>
   </div>
 </div>
