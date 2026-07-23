@@ -73,8 +73,12 @@ podman run --rm \
     # MapLibre GL JS
     echo "  MapLibre GL..."
     mkdir -p /output/maplibre
-    cp node_modules/maplibre-gl/dist/maplibre-gl.js /output/maplibre/
+    # v6 is ESM-only: main module + shared/worker chunks it loads by relative URL
+    cp node_modules/maplibre-gl/dist/maplibre-gl.mjs /output/maplibre/
+    cp node_modules/maplibre-gl/dist/maplibre-gl-shared.mjs /output/maplibre/
+    cp node_modules/maplibre-gl/dist/maplibre-gl-worker.mjs /output/maplibre/
     cp node_modules/maplibre-gl/dist/maplibre-gl.css /output/maplibre/
+    rm -f /output/maplibre/maplibre-gl.js
 
     # Monaco Editor (AMD loader bundle — no build step needed at runtime)
     echo "  Monaco Editor..."

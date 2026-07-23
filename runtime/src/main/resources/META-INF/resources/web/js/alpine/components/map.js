@@ -73,6 +73,19 @@ phaAlpine("phaMap", (config = {}) => ({
   _loaded: false,
 
   init() {
+    // MapLibre v6 is ESM-only; the page loads it via a module shim that sets
+    // window.maplibregl and fires maplibre-ready. Wait for it if it hasn't run yet.
+    if (!window.maplibregl) {
+      var self = this;
+      window.addEventListener(
+        "maplibre-ready",
+        function () {
+          self.init();
+        },
+        { once: true },
+      );
+      return;
+    }
     var container = this.$el.querySelector(".pha-c-map__container") || this.$el;
 
     var style = config.style || "osm";

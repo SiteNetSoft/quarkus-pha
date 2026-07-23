@@ -1,7 +1,11 @@
 {#include layouts/base} {#title}Map{/title} {#head}
 <link rel="stylesheet" href="/web/vendor/maplibre/maplibre-gl.css" />
 <link rel="stylesheet" href="/web/css/components/map.css" />
-<script src="/web/vendor/maplibre/maplibre-gl.js"></script>
+<script type="module">
+  import * as maplibregl from "/web/vendor/maplibre/maplibre-gl.mjs";
+  window.maplibregl = maplibregl;
+  window.dispatchEvent(new Event("maplibre-ready"));
+</script>
 <script src="/web/js/alpine/components/map.js?v={pha:assetVersion}"></script>
 {/head} {#body}
 <div style="padding: 2rem">
