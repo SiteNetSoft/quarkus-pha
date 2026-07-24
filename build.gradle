@@ -6,6 +6,24 @@ allprojects {
         mavenCentral()
         mavenLocal()
     }
+
+    // Build-time only: the Gradle plugin classpath is not covered by the
+    // subprojects resolutionStrategy below, and none of this ships to
+    // consumers of the extension. jackson stays on the BOM's 2.22.0 here;
+    // plexus-utils is pinned to 3.6.1 by quarkus-bom but dragged up to the
+    // vulnerable 4.0.2 by io.smallrye.beanbag:smallrye-beanbag-maven, which
+    // requests it directly (highest-version-wins beats the BOM pin).
+    // GHSA-6fmv-xxpf-w3cw is fixed in 4.0.3. Drop these once the Quarkus
+    // tooling ships the patched versions itself.
+    buildscript {
+        configurations.classpath {
+            resolutionStrategy {
+                force 'com.fasterxml.jackson.core:jackson-core:2.22.1'
+                force 'com.fasterxml.jackson.core:jackson-databind:2.22.1'
+                force 'org.codehaus.plexus:plexus-utils:4.0.3'
+            }
+        }
+    }
 }
 
 subprojects {
