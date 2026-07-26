@@ -137,13 +137,35 @@ test.describe("Wizard", () => {
   });
 
   test.describe("Within modal", () => {
+    // The backdrop teleports to <body>, so modal assertions are scoped by the
+    // backdrop id, not by the example card that hosts the trigger.
+    const backdrop = "#wiz-within-modal-backdrop";
+
     test("opens a modal containing the wizard", async ({ page }) => {
       const card = page.locator('[data-rendered-href="/components/wizard/within-modal"]');
-      await expect(card.locator(".pf-v6-c-modal-box")).toBeHidden();
+      await expect(page.locator(`${backdrop} .pf-v6-c-modal-box`)).toBeHidden();
       await card.locator("button", { hasText: "Open wizard modal" }).click();
-      await expect(card.locator(".pf-v6-c-modal-box #wiz-within-modal")).toBeVisible();
+      await expect(page.locator(`${backdrop} .pf-v6-c-modal-box #wiz-within-modal`)).toBeVisible();
       await page.keyboard.press("Escape");
-      await expect(card.locator(".pf-v6-c-modal-box")).toBeHidden();
+      await expect(page.locator(`${backdrop} .pf-v6-c-modal-box`)).toBeHidden();
+    });
+
+    test("paints above the masthead (regression: stacking-context trap)", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/wizard/within-modal"]');
+      await card.locator("button", { hasText: "Open wizard modal" }).click();
+      await expect(page.locator(`${backdrop} .pf-v6-c-modal-box`)).toBeVisible();
+      // Hit-test the center of the masthead: with the modal open, the top
+      // paint target there must belong to the teleported backdrop, not the
+      // masthead. An inline backdrop is trapped in the page main-container's
+      // stacking context and paints under the masthead.
+      const hitBackdrop = await page.evaluate((backdropSel) => {
+        const masthead = document.querySelector(".pf-v6-c-masthead");
+        if (!masthead) return "no-masthead";
+        const r = masthead.getBoundingClientRect();
+        const el = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+        return el && el.closest(backdropSel) ? "backdrop" : (el?.className ?? "none");
+      }, backdrop);
+      expect(hitBackdrop).toBe("backdrop");
     });
   });
 

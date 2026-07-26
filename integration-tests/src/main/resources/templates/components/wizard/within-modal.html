@@ -2,7 +2,10 @@
   <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = true; step = 1">
     <span class="pf-v6-c-button__text">Open wizard modal</span>
   </button>
-  <div class="pf-v6-c-backdrop" x-show="open" x-cloak style="position: fixed">
+  {! The backdrop teleports to document.body: the page main-container is a stacking context that
+     would trap it under the masthead. !}
+  <template x-teleport="body">
+  <div class="pf-v6-c-backdrop" id="wiz-within-modal-backdrop" x-show="open" style="display: none">
     <div class="pf-v6-l-bullseye">
       <div class="pf-v6-c-modal-box pf-m-md" role="dialog" aria-modal="true" aria-label="Wizard in modal" @keydown.escape.window="open = false">
         <div class="pf-v6-c-modal-box__close">
@@ -58,4 +61,5 @@
       </div>
     </div>
   </div>
+  </template>
 </div>
