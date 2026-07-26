@@ -1,0 +1,112 @@
+{! PF parity: react-core 6.6.0 demos DescriptionListInDrawer — a two-column column-fill description
+   list inside a drawer panel beside a card gallery (PF's full-page chrome is provided by the docs
+   page itself). !}
+<div class="pf-v6-c-drawer" id="dl-in-drawer" x-data="{ open: true }" :class="open ? 'pf-m-expanded' : ''">
+  <div class="pf-v6-c-drawer__main">
+    <div class="pf-v6-c-drawer__content">
+      <div class="pf-v6-c-drawer__body">
+        <div class="pf-v6-l-gallery pf-m-gutter">
+          <div class="pf-v6-l-gallery__item">
+            <div class="pf-v6-c-card">
+              <div class="pf-v6-c-card__body">
+                <button class="pf-v6-c-button pf-m-link pf-m-inline" type="button" @click="open = !open">
+                  <span class="pf-v6-c-button__text" x-text="(open ? 'Close' : 'Open') + ' drawer'">Close drawer</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          {#for i in 6}
+          <div class="pf-v6-l-gallery__item">
+            <div class="pf-v6-c-card">
+              <div class="pf-v6-c-card__body">Card-{i}</div>
+            </div>
+          </div>
+          {/for}
+        </div>
+      </div>
+    </div>
+    <div class="pf-v6-c-drawer__panel" x-show="open">
+      <div class="pf-v6-c-drawer__body">
+        <div class="pf-v6-c-drawer__head">
+          <h2 class="pf-v6-c-title pf-m-h2"><span tabindex="-1">test</span></h2>
+          <div class="pf-v6-c-drawer__actions">
+            <div class="pf-v6-c-drawer__close">
+              <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close drawer" @click="open = false">
+                <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pf-v6-c-drawer__body">
+        <dl class="pf-v6-c-description-list pf-m-2-col pf-m-fill-columns" aria-label="Details">
+          <div class="pf-v6-c-description-list__group">
+            <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Name</span></dt>
+            <dd class="pf-v6-c-description-list__description">
+              <div class="pf-v6-c-description-list__text">test</div>
+            </dd>
+          </div>
+          <div class="pf-v6-c-description-list__group">
+            <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Namespace</span></dt>
+            <dd class="pf-v6-c-description-list__description">
+              <div class="pf-v6-c-description-list__text"><a href="#dl-in-drawer">mary-test</a></div>
+            </dd>
+          </div>
+          <div class="pf-v6-c-description-list__group">
+            <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Labels</span></dt>
+            <dd class="pf-v6-c-description-list__description">
+              <div class="pf-v6-c-description-list__text">app=test</div>
+            </dd>
+          </div>
+          <div class="pf-v6-c-description-list__group">
+            <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Pod selector</span></dt>
+            <dd class="pf-v6-c-description-list__description">
+              <div class="pf-v6-c-description-list__text">Node selector is not available at this time</div>
+            </dd>
+          </div>
+          <div class="pf-v6-c-description-list__group">
+            <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Tolerations</span></dt>
+            <dd class="pf-v6-c-description-list__description">
+              <div class="pf-v6-c-description-list__text">No tolerations</div>
+            </dd>
+          </div>
+          <div class="pf-v6-c-description-list__group">
+            <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Annotations</span></dt>
+            <dd class="pf-v6-c-description-list__description">
+              <div class="pf-v6-c-description-list__text">No annotations</div>
+            </dd>
+          </div>
+          <div class="pf-v6-c-description-list__group">
+            <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Status</span></dt>
+            <dd class="pf-v6-c-description-list__description">
+              <div class="pf-v6-c-description-list__text">Active</div>
+            </dd>
+          </div>
+          <div class="pf-v6-c-description-list__group">
+            <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Created at:</span></dt>
+            <dd class="pf-v6-c-description-list__description">
+              <div class="pf-v6-c-description-list__text">3 minutes ago</div>
+            </dd>
+          </div>
+          <div class="pf-v6-c-description-list__group">
+            <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Pod selector</span></dt>
+            <dd class="pf-v6-c-description-list__description">
+              <div class="pf-v6-c-description-list__text">
+                <button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">
+                  <span class="pf-v6-c-button__icon pf-m-start">{icons:svg('fa:circle-plus').raw}</span>
+                  <span class="pf-v6-c-button__text">app=MyApp</span>
+                </button>
+              </div>
+            </dd>
+          </div>
+          <div class="pf-v6-c-description-list__group">
+            <dt class="pf-v6-c-description-list__term"><span class="pf-v6-c-description-list__text">Session affinity</span></dt>
+            <dd class="pf-v6-c-description-list__description">
+              <div class="pf-v6-c-description-list__text">None</div>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>

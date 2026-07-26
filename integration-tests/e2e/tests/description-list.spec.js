@@ -28,6 +28,7 @@ const EXAMPLES = [
   "auto-fit-min-width",
   "auto-fit-min-width-responsive",
   "icons-on-terms",
+  "in-drawer",
 ];
 
 // id -> expected modifier classes on the <dl>
@@ -147,7 +148,7 @@ test.describe("Description List", () => {
   test.describe("Java source tab", () => {
     test("model-driven cards get a leading Java tab, the popover composition does not", async ({ page }) => {
       await page.goto("/components/description-list");
-      for (const ex of EXAMPLES.filter((e) => e !== "term-help-text")) {
+      for (const ex of EXAMPLES.filter((e) => e !== "term-help-text" && e !== "in-drawer")) {
         const card = page.locator(`[data-rendered-href="/components/description-list/${ex}"]`);
         await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
       }
@@ -171,4 +172,15 @@ test.describe("Description List", () => {
       expect(await res.text()).toContain('.termIcon("fa:cube")');
     });
   });
+
+  test("in-drawer panel holds the description list and toggles", async ({ page }) => {
+    await page.goto("/components/description-list");
+    const drawer = page.locator("#dl-in-drawer");
+    await expect(drawer.locator(".pf-v6-c-description-list")).toBeVisible();
+    await drawer.locator('button[aria-label="Close drawer"]').click();
+    await expect(drawer.locator(".pf-v6-c-description-list")).toBeHidden();
+    await drawer.locator("button", { hasText: "Open drawer" }).click();
+    await expect(drawer.locator(".pf-v6-c-description-list")).toBeVisible();
+  });
+
 });

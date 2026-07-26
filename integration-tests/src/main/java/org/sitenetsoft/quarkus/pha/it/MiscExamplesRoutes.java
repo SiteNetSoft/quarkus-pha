@@ -89,7 +89,8 @@ public class MiscExamplesRoutes {
                                                "display-size-card-horizontal-term-width", "auto-fit",
                                                "auto-fit-min-width", "auto-fit-min-width-responsive",
                                                "icons-on-terms",
-            "display-2xl"));
+            "display-2xl",
+            "in-drawer"));
         m.put("skip-to-content",       Set.of("basic", "custom-text"));
         m.put("empty-state",           Set.of("basic", "extra-small", "small", "large", "extra-large", "success", "spinner", "no-match", "no-icon", "with-actions",
                                                "with-status"));
