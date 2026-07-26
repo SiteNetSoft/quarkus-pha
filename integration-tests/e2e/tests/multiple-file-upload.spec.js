@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-const EXAMPLES = ["basic", "horizontal", "status", "status-expanded", "horizontal-status-expanded"];
+const EXAMPLES = ["basic", "horizontal", "status", "status-expanded", "horizontal-status-expanded", "rejected-files"];
 
 test.describe("Multiple File Upload", () => {
   test.beforeEach(async ({ page }) => {
@@ -8,7 +8,7 @@ test.describe("Multiple File Upload", () => {
   });
 
   test("page loads with correct heading", async ({ page }) => {
-    await expect(page.locator("h1")).toHaveText("Multiple file upload");
+    await expect(page.locator("h1#ws-page-title")).toHaveText("Multiple file upload");
   });
 
   test("ToC anchors render for every example", async ({ page }) => {
@@ -99,4 +99,22 @@ test.describe("Multiple File Upload", () => {
       });
     }
   });
+
+  test("rejected-files opens the warning modal for unaccepted types", async ({ page }) => {
+    await page.goto("/components/multiple-file-upload");
+    const demo = page.locator("#mfu-rejected");
+    await demo
+      .locator('input[type="file"]')
+      .setInputFiles({ name: "notes.txt", mimeType: "text/plain", buffer: Buffer.from("hello") });
+    const backdrop = page.locator("#mfu-rejected-backdrop");
+    await expect(backdrop.locator(".pf-v6-c-modal-box")).toBeVisible();
+    await expect(backdrop).toContainText("notes.txt is not an accepted file type");
+    await backdrop.locator('button[aria-label="Close"]').click();
+    await expect(backdrop.locator(".pf-v6-c-modal-box")).toBeHidden();
+    await demo
+      .locator('input[type="file"]')
+      .setInputFiles({ name: "image.png", mimeType: "image/png", buffer: Buffer.from("fake") });
+    await expect(demo.locator(".pf-v6-c-multiple-file-upload__status-item")).toHaveCount(1);
+  });
+
 });
