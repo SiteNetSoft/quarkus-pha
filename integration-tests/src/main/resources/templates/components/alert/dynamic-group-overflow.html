@@ -1,0 +1,50 @@
+{! PF parity: react-core 6.6.0 AlertGroupSingularDynamicOverflow — an inline dynamic group shows at
+   most four alerts; the rest collapse behind a "View N more alerts" overflow message. !}
+<div
+  x-data="{ alerts: [], counter: 0,
+    add(variant) { this.counter++; this.alerts.unshift({ id: this.counter, variant: variant, title: variant.charAt(0).toUpperCase() + variant.slice(1) + ' alert' }); } }"
+  id="al-dynamic-group-overflow-demo"
+>
+  <div class="pf-v6-l-flex pf-m-space-items-xs" style="margin-bottom: 1rem">
+    <button class="pf-v6-c-button pf-m-secondary" type="button" @click="add('success')">
+      <span class="pf-v6-c-button__text">Add single success alert</span>
+    </button>
+    <button class="pf-v6-c-button pf-m-secondary" type="button" @click="add('danger')">
+      <span class="pf-v6-c-button__text">Add single danger alert</span>
+    </button>
+    <button class="pf-v6-c-button pf-m-secondary" type="button" @click="add('info')">
+      <span class="pf-v6-c-button__text">Add single info alert</span>
+    </button>
+  </div>
+  <ul class="pf-v6-c-alert-group" aria-live="polite" aria-atomic="false">
+    <template x-for="a in alerts.slice(0, 4)" :key="a.id">
+      <li class="pf-v6-c-alert-group__item">
+        <div class="pf-v6-c-alert" :class="'pf-m-' + a.variant">
+          <div class="pf-v6-c-alert__icon">
+            <span x-show="a.variant === 'success'">{icons:svg('fa:circle-check').raw}</span>
+            <span x-show="a.variant === 'info'" x-cloak>{icons:svg('fa:circle-info').raw}</span>
+            <span x-show="a.variant === 'danger'" x-cloak>{icons:svg('fa:exclamation-circle').raw}</span>
+          </div>
+          <p class="pf-v6-c-alert__title">
+            <span class="pf-v6-screen-reader" x-text="a.variant + ' alert:'"></span> <span x-text="a.title"></span>
+          </p>
+          <div class="pf-v6-c-alert__action">
+            <button
+              class="pf-v6-c-button pf-m-plain"
+              type="button"
+              :aria-label="'Close ' + a.title"
+              @click="alerts = alerts.filter(function (x) { return x.id !== a.id; })"
+            >
+              <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+            </button>
+          </div>
+        </div>
+      </li>
+    </template>
+    <li class="pf-v6-c-alert-group__item" x-show="alerts.length > 4" x-cloak>
+      <button class="pf-v6-c-alert-group__overflow-button" type="button">
+        View <span x-text="alerts.length - 4"></span> more alerts
+      </button>
+    </li>
+  </ul>
+</div>
