@@ -45,7 +45,10 @@ public class WizardExamplesRoutes {
         "toggle-step-visibility",
         "submit-progress",
         "custom-footer",
+        "custom-nav",
         "custom-nav-item",
+        "focus-content",
+        "incrementally-enabled",
         "within-modal",
             "with-drawer");
 

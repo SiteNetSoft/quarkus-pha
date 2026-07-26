@@ -111,6 +111,17 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#incrementally-enabled" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Incrementally enabled steps</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#expandable-steps" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">Expandable steps</span></span
@@ -187,9 +198,29 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#custom-nav" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Custom navigation</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#custom-nav-item" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">Custom navigation item</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#focus-content" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Focus content on next/back</span
+                                      ></span
                                     ></a
                                   ></span
                                 >
@@ -295,8 +326,14 @@
                       component="wizard" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">Nav links rendered as anchors.</p>
                       {/description} {#content}{#include components/wizard/nav-anchors /}{/content} {/include} {#include
-                      partials/example-card title="Expandable steps" slug="expandable-steps" component="wizard"
-                      javaSource=true} {#description}
+                      partials/example-card title="Incrementally enabled steps" slug="incrementally-enabled"
+                      component="wizard"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Steps stay disabled until Next has reached them; visited steps stay clickable.
+                      </p>
+                      {/description} {#content}{#include components/wizard/incrementally-enabled /}{/content} {/include}
+                      {#include partials/example-card title="Expandable steps" slug="expandable-steps"
+                      component="wizard" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         <code class="ws-code">pf-m-expandable/pf-m-expanded</code> nav item with a nested step list.
                       </p>
@@ -338,10 +375,22 @@
                       javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">Custom button set in the footer.</p>
                       {/description} {#content}{#include components/wizard/custom-footer /}{/content} {/include}
-                      {#include partials/example-card title="Custom navigation item" slug="custom-nav-item"
-                      component="wizard" javaSource=true} {#description}
+                      {#include partials/example-card title="Custom navigation" slug="custom-nav" component="wizard"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The nav is built by hand instead of generated from the steps, so every item is freely clickable.
+                      </p>
+                      {/description} {#content}{#include components/wizard/custom-nav /}{/content} {/include} {#include
+                      partials/example-card title="Custom navigation item" slug="custom-nav-item" component="wizard"
+                      javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">Nav items with step numbers.</p>
                       {/description} {#content}{#include components/wizard/custom-nav-item /}{/content} {/include}
+                      {#include partials/example-card title="Focus content on next/back" slug="focus-content"
+                      component="wizard"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        After Next or Back, keyboard focus jumps to the step content body.
+                      </p>
+                      {/description} {#content}{#include components/wizard/focus-content /}{/content} {/include}
                       {#include partials/example-card title="Within modal" slug="within-modal" component="wizard"}
                       {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">A compact wizard inside a modal dialog.</p>

@@ -8,6 +8,7 @@ const EXAMPLES = [
   "header",
   "disabled-steps",
   "nav-anchors",
+  "incrementally-enabled",
   "expandable-steps",
   "step-status",
   "form-validation",
@@ -16,7 +17,9 @@ const EXAMPLES = [
   "toggle-step-visibility",
   "submit-progress",
   "custom-footer",
+  "custom-nav",
   "custom-nav-item",
+  "focus-content",
   "within-modal",
 ];
 
@@ -126,6 +129,39 @@ test.describe("Wizard", () => {
     });
   });
 
+  test.describe("Incrementally enabled steps", () => {
+    test("later steps unlock only as Next reaches them", async ({ page }) => {
+      const wiz = page.locator("#wiz-incrementally-enabled");
+      const links = wiz.locator(".pf-v6-c-wizard__nav-link");
+      await expect(links.nth(1)).toBeDisabled();
+      await wiz.locator(".pf-v6-c-button.pf-m-primary").click();
+      await expect(links.nth(1)).toBeEnabled();
+      await expect(links.nth(1)).toHaveClass(/pf-m-current/);
+      await expect(links.nth(2)).toBeDisabled();
+      await links.nth(0).click();
+      await expect(links.nth(0)).toHaveClass(/pf-m-current/);
+      await expect(links.nth(1)).toBeEnabled();
+    });
+  });
+
+  test.describe("Custom navigation", () => {
+    test("every hand-built nav item is freely clickable", async ({ page }) => {
+      const wiz = page.locator("#wiz-custom-nav");
+      const links = wiz.locator(".pf-v6-c-wizard__nav-link");
+      await links.nth(2).click();
+      await expect(links.nth(2)).toHaveClass(/pf-m-current/);
+      await expect(wiz.locator(".pf-v6-c-wizard__main-body")).toContainText("awkward");
+    });
+  });
+
+  test.describe("Focus content", () => {
+    test("Next moves keyboard focus to the step body", async ({ page }) => {
+      const wiz = page.locator("#wiz-focus-content");
+      await wiz.locator(".pf-v6-c-button.pf-m-primary").click();
+      await expect(wiz.locator(".pf-v6-c-wizard__main-body")).toBeFocused();
+    });
+  });
+
   test.describe("Submit progress", () => {
     test("finishing runs the progress bar to 100%", async ({ page }) => {
       const wiz = page.locator("#wiz-submit-progress");
@@ -185,7 +221,15 @@ test.describe("Wizard", () => {
         const card = page.locator(`[data-rendered-href="/components/wizard/${ex}"]`);
         await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
       }
-      for (const ex of ["basic", "within-modal", "submit-progress", "toggle-step-visibility"]) {
+      for (const ex of [
+        "basic",
+        "within-modal",
+        "submit-progress",
+        "toggle-step-visibility",
+        "custom-nav",
+        "focus-content",
+        "incrementally-enabled",
+      ]) {
         const card = page.locator(`[data-rendered-href="/components/wizard/${ex}"]`);
         await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
       }
