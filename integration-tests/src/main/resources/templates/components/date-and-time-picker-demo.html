@@ -53,6 +53,17 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#range" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Date and time range picker</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -107,6 +118,13 @@
                         Date picker + time picker side-by-side. Each maintains its own state.
                       </p>
                       {/description} {#content}{#include components/date-and-time-picker/basic /}{/content} {/include}
+                      {#include partials/example-card title="Date and time range picker" slug="range"
+                      component="date-and-time-picker"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Two date + time pairs joined by "to" — the end pair stays disabled until a start date is picked,
+                        and an error helper appears when the end date lands before the start.
+                      </p>
+                      {/description} {#content}{#include components/date-and-time-picker/range /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

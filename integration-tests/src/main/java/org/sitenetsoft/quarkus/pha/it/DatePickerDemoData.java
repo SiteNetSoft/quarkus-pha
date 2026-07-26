@@ -34,6 +34,8 @@ public class DatePickerDemoData {
             Map.entry("min-max", new Config("dp-min-max", ISO)),
             Map.entry("required", new Config("dp-required", ISO)),
             Map.entry("date-and-time", new Config("dtp-date", ISO)),
+            Map.entry("range-from", new Config("dtrp-from", ISO)),
+            Map.entry("range-to", new Config("dtrp-to", ISO)),
             Map.entry("invalid", new Config("dp-invalid", ISO)),
             Map.entry("width-fixed", new Config("dp-width-fixed", ISO)),
             Map.entry("width-chars", new Config("dp-width-chars", ISO)));
@@ -70,6 +72,12 @@ public class DatePickerDemoData {
 
     @TemplateGlobal
     public static CalendarMonth dtpCal = calendar("date-and-time", DEMO_MONTH, LocalDate.of(2026, 5, 20));
+
+    @TemplateGlobal
+    public static CalendarMonth dtrpFromCal = calendar("range-from", DEMO_MONTH, null);
+
+    @TemplateGlobal
+    public static CalendarMonth dtrpToCal = calendar("range-to", DEMO_MONTH, null);
 
     @TemplateGlobal
     public static CalendarMonth dpCalInvalid = calendar("invalid", DEMO_MONTH, null);

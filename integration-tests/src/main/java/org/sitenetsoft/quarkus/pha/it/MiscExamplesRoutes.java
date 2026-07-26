@@ -201,7 +201,7 @@ public class MiscExamplesRoutes {
                                                "date-select"));
         m.put("password-generator",    Set.of("basic"));
         m.put("password-strength",     Set.of("basic"));
-        m.put("date-and-time-picker",  Set.of("basic"));
+        m.put("date-and-time-picker",  Set.of("basic", "range"));
         m.put("time-picker",           Set.of("basic", "twelve-hour", "custom-delimiter", "min-max",
                                                "with-seconds", "twenty-four-with-seconds"));
         m.put("navigation",            Set.of("vertical", "grouped", "expandable", "expandable-third-level",
