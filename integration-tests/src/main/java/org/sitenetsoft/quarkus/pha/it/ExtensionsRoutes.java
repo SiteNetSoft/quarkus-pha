@@ -252,7 +252,7 @@ public class ExtensionsRoutes {
     @Inject
     Engine engine;
 
-    @Location("extensions/log-viewer")
+    @Location("extensions/log-viewer-demo")
     @Inject
     Template logViewerPage;
 
@@ -260,7 +260,7 @@ public class ExtensionsRoutes {
     @Inject
     Template logViewerStandalonePage;
 
-    @Location("extensions/user-feedback")
+    @Location("extensions/user-feedback-demo")
     @Inject
     Template userFeedbackPage;
 
