@@ -5,6 +5,8 @@ test.describe("Accessibility", () => {
   // ── Modal Focus Trapping ──
 
   test.describe("Modal focus trapping", () => {
+    // The modal backdrop teleports to <body> (x-teleport), so modal assertions
+    // are scoped by the modal-box id, not by the card that hosts the trigger.
     const card = '[data-rendered-href="/components/modal/basic"]';
 
     test.beforeEach(async ({ page }) => {
@@ -13,20 +15,20 @@ test.describe("Accessibility", () => {
 
     test("modal has role dialog and aria-modal", async ({ page }) => {
       await page.locator(`${card} button`, { hasText: "Open modal" }).first().click();
-      const modalBox = page.locator(`${card} #mo-basic`);
+      const modalBox = page.locator("#mo-basic");
       await expect(modalBox).toHaveAttribute("role", "dialog");
       await expect(modalBox).toHaveAttribute("aria-modal", "true");
     });
 
     test("modal has aria-labelledby pointing to title", async ({ page }) => {
       await page.locator(`${card} button`, { hasText: "Open modal" }).first().click();
-      const modalBox = page.locator(`${card} #mo-basic`);
+      const modalBox = page.locator("#mo-basic");
       await expect(modalBox).toHaveAttribute("aria-labelledby", "mo-basic-title");
     });
 
     test("Escape key closes the modal", async ({ page }) => {
       await page.locator(`${card} button`, { hasText: "Open modal" }).first().click();
-      const modalBox = page.locator(`${card} #mo-basic`);
+      const modalBox = page.locator("#mo-basic");
       await expect(modalBox).toBeVisible();
       await page.keyboard.press("Escape");
       await expect(modalBox).not.toBeVisible();
@@ -34,7 +36,7 @@ test.describe("Accessibility", () => {
 
     test("close button has aria-label", async ({ page }) => {
       await page.locator(`${card} button`, { hasText: "Open modal" }).first().click();
-      const closeBtn = page.locator(`${card} .pf-v6-c-modal-box__close button`);
+      const closeBtn = page.locator("#mo-basic .pf-v6-c-modal-box__close button");
       await expect(closeBtn).toHaveAttribute("aria-label", "Close");
     });
   });
