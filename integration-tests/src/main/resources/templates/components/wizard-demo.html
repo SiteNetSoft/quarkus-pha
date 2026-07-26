@@ -243,6 +243,17 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-drawer-info-step" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >With drawer and informational step</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -400,8 +411,14 @@
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         The wizard body hosts a drawer — step content opens a details panel in place.
                       </p>
-                      {/description} {#content}{#include components/wizard/with-drawer /}{/content} {/include}
-
+                      {/description} {#content}{#include components/wizard/with-drawer /}{/content} {/include} {#include
+                      partials/example-card title="With drawer and informational step" slug="with-drawer-info-step"
+                      component="wizard"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Every step carries an inline "see more information" link that opens a drawer beside the step
+                        content; Configuration expands into two substeps.
+                      </p>
+                      {/description} {#content}{#include components/wizard/with-drawer-info-step /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

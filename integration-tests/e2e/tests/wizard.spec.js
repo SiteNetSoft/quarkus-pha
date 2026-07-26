@@ -21,6 +21,7 @@ const EXAMPLES = [
   "custom-nav-item",
   "focus-content",
   "within-modal",
+  "with-drawer-info-step",
 ];
 
 test.describe("Wizard", () => {
@@ -144,6 +145,19 @@ test.describe("Wizard", () => {
     });
   });
 
+  test.describe("With drawer and informational step", () => {
+    test("the inline link opens the drawer for the current step", async ({ page }) => {
+      const wiz = page.locator("#wiz-drawer-info-step");
+      await expect(wiz.locator(".pf-v6-c-drawer__panel")).toBeHidden();
+      await wiz.locator("button", { hasText: "see more information" }).click();
+      await expect(wiz.locator(".pf-v6-c-drawer__panel")).toContainText("Drawer content: Information");
+      await wiz.locator(".pf-v6-c-button.pf-m-primary").click();
+      await expect(wiz.locator(".pf-v6-c-drawer__panel")).toContainText("Configuration substep A");
+      await wiz.locator('button[aria-label="Close drawer"]').click();
+      await expect(wiz.locator(".pf-v6-c-drawer__panel")).toBeHidden();
+    });
+  });
+
   test.describe("Custom navigation", () => {
     test("every hand-built nav item is freely clickable", async ({ page }) => {
       const wiz = page.locator("#wiz-custom-nav");
@@ -229,6 +243,7 @@ test.describe("Wizard", () => {
         "custom-nav",
         "focus-content",
         "incrementally-enabled",
+        "with-drawer-info-step",
       ]) {
         const card = page.locator(`[data-rendered-href="/components/wizard/${ex}"]`);
         await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);

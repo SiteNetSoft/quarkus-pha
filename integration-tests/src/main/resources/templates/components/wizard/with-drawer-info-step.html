@@ -1,0 +1,104 @@
+{! PF parity: react-core 6.6.0 demos InPageWithDrawerInformationalStep — a wizard whose steps carry
+   an inline "see more information" link that opens a drawer beside the step content; Configuration
+   expands into two substeps and Review finishes. !}
+<div
+  x-data="{ step: 1, drawerOpen: false,
+    stepName(s) { return { 1: 'Information', 2: 'Configuration substep A', 3: 'Configuration substep B', 4: 'Additional', 5: 'Review' }[s]; } }"
+>
+  {#include components/navigation/wizard id="wiz-drawer-info-step" navLabel="Wizard with informational drawer steps"}
+  {#navItems}
+  {#include components/navigation/wizard-nav-item label="Information" currentExpr="step === 1" attrs='@click="step = 1"' /}
+  <li class="pf-v6-c-wizard__nav-item pf-m-expandable pf-m-expanded">
+    <button type="button" class="pf-v6-c-wizard__nav-link" aria-expanded="true" @click="step = 2">
+      <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">Configuration</span></span>
+      <span class="pf-v6-c-wizard__nav-link-toggle">
+        <span class="pf-v6-c-wizard__nav-link-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+      </span>
+    </button>
+    <ol class="pf-v6-c-wizard__nav-list">
+      <li class="pf-v6-c-wizard__nav-item">
+        <button
+          type="button"
+          class="pf-v6-c-wizard__nav-link"
+          :class="{ 'pf-m-current': step === 2 }"
+          :aria-current="step === 2 ? 'step' : false"
+          @click="step = 2"
+        >
+          <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">Substep A</span></span>
+        </button>
+      </li>
+      <li class="pf-v6-c-wizard__nav-item">
+        <button
+          type="button"
+          class="pf-v6-c-wizard__nav-link"
+          :class="{ 'pf-m-current': step === 3 }"
+          :aria-current="step === 3 ? 'step' : false"
+          @click="step = 3"
+        >
+          <span class="pf-v6-c-wizard__nav-link-main"><span class="pf-v6-c-wizard__nav-link-text">Substep B</span></span>
+        </button>
+      </li>
+    </ol>
+  </li>
+  {#include components/navigation/wizard-nav-item label="Additional" currentExpr="step === 4" attrs='@click="step = 4"' /}
+  {#include components/navigation/wizard-nav-item label="Review" currentExpr="step === 5" attrs='@click="step = 5"' /}
+  {/navItems}
+  {#body}
+  <div class="pf-v6-c-drawer" :class="drawerOpen ? 'pf-m-expanded' : ''" style="height: 100%">
+    <div class="pf-v6-c-drawer__main">
+      <div class="pf-v6-c-drawer__content">
+        <div class="pf-v6-c-drawer__body">
+          <div class="pf-v6-c-wizard__main-body">
+            <p class="pf-v6-c-content--p" x-text="stepName(step) + ' content'">Information content</p>
+            <p class="pf-v6-c-content--p">
+              Wizard description goes here. If you need more assistance,
+              <button class="pf-v6-c-button pf-m-link pf-m-inline" type="button" @click="drawerOpen = true">
+                <span class="pf-v6-c-button__text">see more information</span>
+              </button>
+              in the side drawer.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="pf-v6-c-drawer__panel" x-show="drawerOpen" x-cloak>
+        <div class="pf-v6-c-drawer__body">
+          <div class="pf-v6-c-drawer__head">
+            <span tabindex="-1" x-text="'Drawer content: ' + stepName(step)">Drawer content</span>
+            <div class="pf-v6-c-drawer__actions">
+              <div class="pf-v6-c-drawer__close">
+                <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close drawer" @click="drawerOpen = false">
+                  <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {/body}
+  {#footer}
+  <div class="pf-v6-c-action-list">
+    <div class="pf-v6-c-action-list__group">
+      <div class="pf-v6-c-action-list__item">
+        <button type="button" class="pf-v6-c-button pf-m-primary" :disabled="step === 5" @click="step = step + 1">
+          <span class="pf-v6-c-button__text" x-text="step === 4 ? 'Finish' : 'Next'">Next</span>
+        </button>
+      </div>
+      <div class="pf-v6-c-action-list__item">
+        <button type="button" class="pf-v6-c-button pf-m-secondary" :disabled="step === 1" @click="step = step - 1">
+          <span class="pf-v6-c-button__text">Back</span>
+        </button>
+      </div>
+    </div>
+    <div class="pf-v6-c-action-list__group">
+      <div class="pf-v6-c-action-list__item">
+        <button type="button" class="pf-v6-c-button pf-m-link">
+          <span class="pf-v6-c-button__text">Cancel</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  {/footer}
+  {/include}
+</div>
