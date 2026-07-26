@@ -1,5 +1,23 @@
 import { test, expect } from "@playwright/test";
 
+// Press Tab repeatedly and assert focus never leaves the container.
+const expectTabStaysWithin = async (page, containerSel, presses = 8) => {
+  for (let i = 0; i < presses; i++) {
+    await page.keyboard.press("Tab");
+    const inside = await page.evaluate(
+      (sel) => !!(document.activeElement && document.activeElement.closest(sel)),
+      containerSel,
+    );
+    expect(inside, `Tab press ${i + 1} moved focus outside ${containerSel}`).toBe(true);
+  }
+};
+
+const expectFocusInside = async (page, containerSel) => {
+  await expect
+    .poll(() => page.evaluate((sel) => !!(document.activeElement && document.activeElement.closest(sel)), containerSel))
+    .toBe(true);
+};
+
 test.describe("Accessibility", () => {
   // ── Modal Focus Trapping ──
 
@@ -37,6 +55,60 @@ test.describe("Accessibility", () => {
       await page.locator(`${card} button`, { hasText: "Open modal" }).first().click();
       const closeBtn = page.locator("#mo-basic .pf-v6-c-modal-box__close button");
       await expect(closeBtn).toHaveAttribute("aria-label", "Close");
+    });
+
+    test("opening the modal traps focus inside the dialog", async ({ page }) => {
+      await page.locator(`${card} button`, { hasText: "Open modal" }).first().click();
+      await expect(page.locator("#mo-basic")).toBeVisible();
+      await expectFocusInside(page, "#mo-basic-backdrop");
+      await expectTabStaysWithin(page, "#mo-basic-backdrop");
+    });
+
+    test("closing with Escape returns focus to the trigger", async ({ page }) => {
+      const trigger = page.locator(`${card} button`, { hasText: "Open modal" }).first();
+      await trigger.click();
+      await expect(page.locator("#mo-basic")).toBeVisible();
+      await page.keyboard.press("Tab");
+      await page.keyboard.press("Escape");
+      await expect(page.locator("#mo-basic")).toBeHidden();
+      await expect(trigger).toBeFocused();
+    });
+  });
+
+  // ── Modal Family Focus Trapping ──
+
+  test.describe("Modal family focus trapping", () => {
+    test("lazy-modal traps focus while open", async ({ page }) => {
+      await page.goto("/components/lazy-modal");
+      await page.locator("#open-lazy-modal-btn").click();
+      await expect(page.locator("#lazy-modal-demo-backdrop")).toBeVisible();
+      await expectFocusInside(page, "#lazy-modal-demo-backdrop");
+      await expectTabStaysWithin(page, "#lazy-modal-demo-backdrop");
+    });
+
+    test("user-feedback modal traps focus while open", async ({ page }) => {
+      await page.goto("/extensions/user-feedback");
+      await page.locator("#uf-full").getByRole("button", { name: "Share your feedback" }).click();
+      await expect(page.locator("#uf-full-backdrop .pf-v6-c-modal-box")).toBeVisible();
+      await expectFocusInside(page, "#uf-full-backdrop");
+      await expectTabStaysWithin(page, "#uf-full-backdrop");
+    });
+
+    test("wizard within-modal traps focus while open", async ({ page }) => {
+      await page.goto("/components/wizard");
+      await page
+        .locator('[data-rendered-href="/components/wizard/within-modal"] button', { hasText: "Open wizard modal" })
+        .click();
+      await expect(page.locator("#wiz-within-modal-backdrop .pf-v6-c-modal-box")).toBeVisible();
+      await expectFocusInside(page, "#wiz-within-modal-backdrop");
+      await expectTabStaysWithin(page, "#wiz-within-modal-backdrop");
+    });
+
+    test("password-generator in-modal traps focus (open at load)", async ({ page }) => {
+      await page.goto("/patterns/password-generator");
+      await expect(page.locator("#pwd-modal-backdrop .pf-v6-c-modal-box")).toBeVisible();
+      await expectFocusInside(page, "#pwd-modal-backdrop");
+      await expectTabStaysWithin(page, "#pwd-modal-backdrop");
     });
   });
 

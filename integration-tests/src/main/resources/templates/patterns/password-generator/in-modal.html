@@ -26,7 +26,13 @@
   {! The backdrop teleports to document.body: the page main-container is a stacking context that would trap it under the
   masthead. !}
   <template x-teleport="body">
-    <div class="pf-v6-c-backdrop" id="pwd-modal-backdrop" x-show="open" style="display: none">
+    <div
+      class="pf-v6-c-backdrop"
+      id="pwd-modal-backdrop"
+      x-show="open"
+      style="display: none"
+      x-effect="if (open) PHA.trapFocus($el); else PHA.releaseFocus($el);"
+    >
       <div
         class="pf-v6-c-modal-box pf-m-md"
         role="dialog"
