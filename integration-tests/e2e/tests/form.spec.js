@@ -14,6 +14,8 @@ const EXAMPLES = [
   "grid",
   "field-groups",
   "with-helper",
+  "action-group",
+  "form-state",
 ];
 
 test.describe("Form", () => {
@@ -82,6 +84,36 @@ test.describe("Form", () => {
       await group.locator(".pf-v6-c-form__field-group-toggle button").click();
       await expect(body).toBeHidden();
       await expect(group).not.toHaveClass(/pf-m-expanded/);
+    });
+  });
+
+  test.describe("Form state", () => {
+    test("submitting empty flags the required input in central state", async ({ page }) => {
+      const form = page.locator("#form-state-demo");
+      await expect(form.locator(".pf-v6-c-helper-text__item.pf-m-error")).toBeHidden();
+      await form.locator('button[type="submit"]').click();
+      await expect(form.locator(".pf-v6-c-helper-text__item.pf-m-error")).toBeVisible();
+      await form.locator("#form-state-input").fill("prod-east");
+      await expect(form.locator(".pf-v6-c-helper-text__item.pf-m-error")).toBeHidden();
+    });
+
+    test("show form state dumps live values and errors", async ({ page }) => {
+      const form = page.locator("#form-state-demo");
+      await form.locator("#form-state-input").fill("hello");
+      await form.locator("button", { hasText: "Show form state" }).click();
+      const dump = form.locator("pre");
+      await expect(dump).toBeVisible();
+      await expect(dump).toContainText('"input-id": "hello"');
+      await expect(dump).toContainText('"select-id": "Option 1"');
+      await form.locator("button", { hasText: "Hide form state" }).click();
+      await expect(dump).toBeHidden();
+    });
+
+    test("select feeds the central state", async ({ page }) => {
+      const form = page.locator("#form-state-demo");
+      await form.locator("#form-state-select").click();
+      await form.locator("button", { hasText: "Option 2" }).click();
+      await expect(form.locator("#form-state-select .pf-v6-c-menu-toggle__text")).toHaveText("Option 2");
     });
   });
 

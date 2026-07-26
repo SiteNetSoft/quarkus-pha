@@ -1,0 +1,109 @@
+{! PF parity: react-core 6.6.0 FormState — one central state object (FormContextProvider in React,
+   an Alpine scope here) backs every field; Submit validates against it and "Show form state" dumps
+   the live values and errors. !}
+<form
+  class="pf-v6-c-form"
+  novalidate
+  id="form-state-demo"
+  x-data="{ values: { 'input-id': '', 'textarea-id': '', 'select-id': 'Option 1' }, errors: {}, selectOpen: false, stateOpen: false,
+    submit() { if (!this.values['input-id']) { this.errors['input-id'] = 'Input value is required.'; } else { alert('Form submitted with: ' + JSON.stringify(this.values)); } } }"
+  @submit.prevent="submit()"
+>
+  <div class="pf-v6-c-form__group">
+    <div class="pf-v6-c-form__group-label">
+      <label class="pf-v6-c-form__label" for="form-state-input">
+        <span class="pf-v6-c-form__label-text">Input value</span>&nbsp;<span class="pf-v6-c-form__label-required" aria-hidden="true">*</span>
+      </label>
+    </div>
+    <div class="pf-v6-c-form__group-control">
+      <span class="pf-v6-c-form-control pf-m-required" :class="errors['input-id'] ? 'pf-m-error' : ''">
+        <input
+          type="text"
+          id="form-state-input"
+          name="form-state-input"
+          required
+          :aria-invalid="errors['input-id'] ? 'true' : 'false'"
+          x-model="values['input-id']"
+          @input="delete errors['input-id']"
+        />
+      </span>
+      <div class="pf-v6-c-form__helper-text" x-show="errors['input-id']" x-cloak>
+        <div class="pf-v6-c-helper-text">
+          <div class="pf-v6-c-helper-text__item pf-m-error">
+            <span class="pf-v6-c-helper-text__item-icon">{icons:svg('fa:exclamation-circle').raw}</span>
+            <span class="pf-v6-c-helper-text__item-text" x-text="errors['input-id']"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pf-v6-c-form__group">
+    <div class="pf-v6-c-form__group-control">
+      <span class="pf-v6-c-form-control">
+        <textarea id="form-state-textarea" name="form-state-textarea" aria-label="Form state text area" x-model="values['textarea-id']"></textarea>
+      </span>
+    </div>
+  </div>
+  <div class="pf-v6-c-form__group">
+    <div class="pf-v6-c-form__group-control">
+      <div style="position: relative; width: 200px">
+        <button
+          class="pf-v6-c-menu-toggle"
+          type="button"
+          id="form-state-select"
+          style="width: 200px"
+          :aria-expanded="selectOpen.toString()"
+          @click="selectOpen = !selectOpen"
+        >
+          <span class="pf-v6-c-menu-toggle__text" x-text="values['select-id']">Option 1</span>
+          <span class="pf-v6-c-menu-toggle__controls">
+            <span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span>
+          </span>
+        </button>
+        <div
+          class="pf-v6-c-menu"
+          x-show="selectOpen"
+          x-cloak
+          @click.outside="selectOpen = false"
+          style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 100%"
+        >
+          <div class="pf-v6-c-menu__content">
+            <ul class="pf-v6-c-menu__list" role="listbox" aria-label="Form state select options">
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="option" @click="values['select-id'] = 'Option 1'; selectOpen = false">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Option 1</span></span>
+                </button>
+              </li>
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="option" @click="values['select-id'] = 'Option 2'; selectOpen = false">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Option 2</span></span>
+                </button>
+              </li>
+              <li role="none" class="pf-v6-c-menu__list-item">
+                <button class="pf-v6-c-menu__item" type="button" role="option" @click="values['select-id'] = 'Option 3'; selectOpen = false">
+                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Option 3</span></span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pf-v6-c-form__group pf-m-action">
+    <div class="pf-v6-c-form__group-control">
+      <div class="pf-v6-c-form__actions">
+        <button class="pf-v6-c-button pf-m-primary" type="submit">
+          <span class="pf-v6-c-button__text">Submit</span>
+        </button>
+        <button class="pf-v6-c-button pf-m-link" type="button" @click="stateOpen = !stateOpen">
+          <span class="pf-v6-c-button__text" x-text="(stateOpen ? 'Hide' : 'Show') + ' form state'">Show form state</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div x-show="stateOpen" x-cloak>
+    <hr class="pf-v6-c-divider" />
+    <pre x-text="JSON.stringify({ values: values, errors: errors }, null, 2)"></pre>
+  </div>
+</form>
