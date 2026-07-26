@@ -64,6 +64,17 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#header-help" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Header tooltips and popovers</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#compact" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">Compact</span></span
@@ -159,6 +170,17 @@
                                   ><a href="#sortable" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">Sortable (HTMX)</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#sortable-custom-control" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Sortable — custom control</span
+                                      ></span
                                     ></a
                                   ></span
                                 >
@@ -611,6 +633,14 @@
                         a table <code class="ws-code">&lt;caption&gt;</code>.
                       </p>
                       {/description} {#content}{#include components/table/plain /}{/content} {/include} {#include
+                      partials/example-card title="Header tooltips and popovers" slug="header-help" component="table"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Header cells carry info tooltips and popovers via
+                        <code class="ws-code">pf-v6-c-table__column-help</code>; plus a centered column, secondary-row
+                        backgrounds and a colspan cell.
+                      </p>
+                      {/description} {#content}{#include components/table/header-help /}{/content} {/include} {#include
                       partials/example-card title="Compact" slug="compact" component="table" javaSource=true}
                       {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
@@ -684,8 +714,15 @@
                         client-side sorting logic.
                       </p>
                       {/description} {#content}{#include components/table/sortable /}{/content} {/include} {#include
-                      partials/example-card title="Expandable (Alpine)" slug="expandable" component="table"
-                      javaSource=true} {#description}
+                      partials/example-card title="Sortable — custom control" slug="sortable-custom-control"
+                      component="table"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A toolbar select drives the sort instead of clickable headers — each choice hits
+                        <code class="ws-code">/api/htmx/table-sort-custom</code> and swaps the server-sorted table.
+                      </p>
+                      {/description} {#content}{#include components/table/sortable-custom-control /}{/content}
+                      {/include} {#include partials/example-card title="Expandable (Alpine)" slug="expandable"
+                      component="table" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         Per-row toggle reveals a detail row beneath; state lives in
                         <code class="ws-code">x-data</code> on the &lt;tbody&gt;.
