@@ -1,0 +1,96 @@
+{! PF parity: react-core 6.6.0 LabelGroupEditableAddModal — like the add-dropdown variant, but the
+   "Add label" control opens a small modal with a form; submitting prepends the typed label. !}
+<div
+  x-data="{ modalOpen: false, draft: '', next: 4, labels: [{ id: 0, name: 'Label 1' }, { id: 1, name: 'Label 2' }, { id: 2, name: 'Label 3' }],
+    add() { if (this.draft.trim() !== '') { this.labels.unshift({ id: this.next, name: this.draft.trim() }); this.next = this.next + 1; } this.draft = ''; this.modalOpen = false; } }"
+  id="lbg-add-modal-demo"
+>
+  <div class="pf-v6-c-label-group pf-m-category pf-m-editable" role="group" aria-label="Label group 2">
+    <div class="pf-v6-c-label-group__main">
+      <span class="pf-v6-c-label-group__label" aria-hidden="true">Label group 2</span>
+      <ul class="pf-v6-c-label-group__list" role="list">
+        <template x-for="l in labels" :key="l.id">
+          <li class="pf-v6-c-label-group__list-item">
+            <span class="pf-v6-c-label pf-m-blue">
+              <span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text" x-text="l.name"></span></span>
+              <span class="pf-v6-c-label__actions">
+                <button
+                  class="pf-v6-c-button pf-m-plain pf-m-no-padding"
+                  type="button"
+                  :aria-label="'Remove ' + l.name"
+                  @click="labels = labels.filter((x) => x.id !== l.id)"
+                >
+                  <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+                </button>
+              </span>
+            </span>
+          </li>
+        </template>
+        <li class="pf-v6-c-label-group__list-item">
+          <button
+            class="pf-v6-c-label pf-m-overflow"
+            type="button"
+            aria-haspopup="dialog"
+            @click="modalOpen = true; $nextTick(() => document.getElementById('lbg-add-modal-input').focus())"
+          >
+            <span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text">Add label</span></span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  {! The backdrop teleports to document.body: the page main-container is a stacking context that
+     would trap it under the masthead. !}
+  <template x-teleport="body">
+    <div
+      class="pf-v6-c-backdrop"
+      id="lbg-add-modal-backdrop"
+      x-show="modalOpen"
+      style="display: none"
+      x-effect="if (modalOpen) PHA.trapFocus($el); else PHA.releaseFocus($el);"
+    >
+      <div class="pf-v6-l-bullseye">
+        <div
+          class="pf-v6-c-modal-box pf-m-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="lbg-add-modal-title"
+          @keydown.escape.window="modalOpen = false"
+        >
+          <div class="pf-v6-c-modal-box__close">
+            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="modalOpen = false">
+              <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+            </button>
+          </div>
+          <header class="pf-v6-c-modal-box__header">
+            <h1 class="pf-v6-c-modal-box__title" id="lbg-add-modal-title">Add label</h1>
+          </header>
+          <div class="pf-v6-c-modal-box__body">
+            <form class="pf-v6-c-form" novalidate @submit.prevent="add()">
+              <div class="pf-v6-c-form__group">
+                <div class="pf-v6-c-form__group-label">
+                  <label class="pf-v6-c-form__label" for="lbg-add-modal-input">
+                    <span class="pf-v6-c-form__label-text">Label text</span>
+                  </label>
+                </div>
+                <div class="pf-v6-c-form__group-control">
+                  <span class="pf-v6-c-form-control">
+                    <input type="text" id="lbg-add-modal-input" name="lbg-add-modal-input" x-model="draft" />
+                  </span>
+                </div>
+              </div>
+            </form>
+          </div>
+          <footer class="pf-v6-c-modal-box__footer">
+            <button class="pf-v6-c-button pf-m-primary" type="button" :disabled="draft.trim() === ''" @click="add()">
+              <span class="pf-v6-c-button__text">Save</span>
+            </button>
+            <button class="pf-v6-c-button pf-m-link" type="button" @click="draft = ''; modalOpen = false">
+              <span class="pf-v6-c-button__text">Cancel</span>
+            </button>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </template>
+</div>

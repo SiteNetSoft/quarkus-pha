@@ -42,6 +42,8 @@ public class LabelExamplesRoutes {
         "vertical-label-group",
         "editable-label-group",
         "editable-label-group-with-add-button",
+        "editable-add-dropdown",
+        "editable-add-modal",
         "overflow-label",
         "add-label",
         "label-group-with-overflow-expanded",
