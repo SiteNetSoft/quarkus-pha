@@ -51,8 +51,10 @@ test.describe("Expandable section", () => {
     await expect(toggle.locator(".pf-v6-c-badge")).toHaveText("4");
   });
 
-  test("heading semantics nests the toggle inside an h2", async ({ page }) => {
-    await expect(page.locator("#es-heading-semantics h2 > .pf-v6-c-expandable-section__toggle")).toBeAttached();
+  test("heading semantics puts the toggle class on an h2", async ({ page }) => {
+    // the h2 IS the toggle wrapper — a heading may only contain phrasing content,
+    // so the usual toggle div would be invalid HTML inside it
+    await expect(page.locator("#es-heading-semantics h2.pf-v6-c-expandable-section__toggle > button")).toBeAttached();
   });
 
   test("truncate expansion keeps content visible and toggles the clamp", async ({ page }) => {
@@ -91,4 +93,5 @@ test.describe("Expandable section", () => {
       expect(await res.text()).toContain(".asTruncate()");
     });
   });
+
 });

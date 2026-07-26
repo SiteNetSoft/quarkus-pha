@@ -33,7 +33,8 @@
     <li class="pf-v6-c-breadcrumb__item">
       <span class="pf-v6-c-breadcrumb__item-divider" aria-hidden="true">{icons:svg('fa:angle-right').raw}</span>
       {#if item.dropdownShape}
-      <span class="pf-v6-c-breadcrumb__dropdown" x-data="phaBreadcrumbDropdown()">
+      {! div, not span — the floating menu is a div and a div inside a span is invalid HTML. !}
+      <div class="pf-v6-c-breadcrumb__dropdown" x-data="phaBreadcrumbDropdown()" style="display: inline-block">
         <button type="button" class="pf-v6-c-menu-toggle pf-m-plain pf-m-text" aria-haspopup="true" :aria-expanded="open.toString()" @click="toggle()" @keydown.escape.window="close()" id="{item.dropdownId}-toggle">
           <span class="pf-v6-c-menu-toggle__text">{item.text}</span>
           <span class="pf-v6-c-menu-toggle__controls">
@@ -42,10 +43,10 @@
         </button>
         <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="close()" id="{item.dropdownId}" style="position: absolute; z-index: 200; margin-top: 0.25rem">
           <div class="pf-v6-c-menu__content">
-            <ul class="pf-v6-c-menu__list" role="menu">
+            <ul class="pf-v6-c-menu__list">
               {#for o in item.options}
-              <li role="none" class="pf-v6-c-menu__list-item">
-                <a href="{o.href}" class="pf-v6-c-menu__item" role="menuitem">
+              <li class="pf-v6-c-menu__list-item">
+                <a href="{o.href}" class="pf-v6-c-menu__item">
                   <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">{o.text}</span></span>
                 </a>
               </li>
@@ -53,7 +54,7 @@
             </ul>
           </div>
         </div>
-      </span>
+      </div>
       {#else if item.headingShape}
       <{item.headingTag} class="pf-v6-c-breadcrumb__heading"><a {#if item.href}href="{item.href}"{/if} class="pf-v6-c-breadcrumb__link pf-m-current" aria-current="page">{item.text}</a></{item.headingTag}>
       {#else if item.href}

@@ -38,7 +38,7 @@
           <span class="pf-v6-c-popover__title-text" id="{popover.id}-title">{popover.title}</span>
           {#else}
           <div class="pf-v6-c-popover__title" id="{popover.id}-title">
-            {#if popover.titleIcon??}<span class="pf-v6-c-popover__title-icon">{icons:svg(popover.titleIcon).raw}</span>{/if}<h1 class="pf-v6-c-popover__title-text">{popover.title}</h1>
+            {#if popover.titleIcon??}<span class="pf-v6-c-popover__title-icon">{icons:svg(popover.titleIcon).raw}</span>{/if}<span class="pf-v6-c-popover__title-text">{popover.title}</span>
           </div>
           {/if}
         </header>
@@ -71,7 +71,7 @@
     {#if titleText??}
     <header class="pf-v6-c-popover__header">
       <div class="pf-v6-c-popover__title" id="{id}-title">
-        <h1 class="pf-v6-c-popover__title-text">{titleText}</h1>
+        <span class="pf-v6-c-popover__title-text">{titleText}</span>
       </div>
     </header>
     {/if}
