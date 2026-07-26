@@ -44,7 +44,7 @@ public class MiscExamplesRoutes {
         m.put("switch",                Set.of("basic", "checked", "disabled", "reversed", "without-label",
             "check-icon"));
         m.put("toggle-group",          Set.of("single-select", "multi-select", "with-icons", "text-and-icons", "compact", "full-width"));
-        m.put("slider",                Set.of("basic", "continuous", "value-input", "actions", "custom-range", "disabled"));
+        m.put("slider",                Set.of("basic", "continuous", "value-input", "thumb-value-input", "actions", "custom-range", "disabled"));
         m.put("text-input-group",      Set.of("basic", "with-icon", "disabled", "plain", "autocomplete-hint", "filters", "filters-expanded", "with-status"));
         m.put("search-input",          Set.of("basic", "with-clear", "no-match", "result-count", "navigable-options",
                                                "with-submit", "expandable", "advanced", "advanced-expanded",
