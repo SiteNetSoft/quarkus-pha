@@ -22,6 +22,19 @@ test.describe("Lazy Modal", () => {
     await expect(page.locator("#lazy-modal-demo-backdrop")).toBeVisible({ timeout: 3000 });
   });
 
+  test("backdrop teleports to <body> (regression: stacking-context trap)", async ({ page }) => {
+    await page.locator("#open-lazy-modal-btn").click();
+    await expect(page.locator("#lazy-modal-demo-backdrop")).toBeVisible({ timeout: 3000 });
+    // This demo page's bare layout has no masthead, so the stacking trap is
+    // not observable here — assert the portal contract instead: the backdrop
+    // must be a direct child of <body>, outside any page stacking context
+    // (an inline backdrop paints under the masthead on full PF pages).
+    const parentTag = await page.evaluate(
+      () => document.getElementById("lazy-modal-demo-backdrop").parentElement.tagName,
+    );
+    expect(parentTag).toBe("BODY");
+  });
+
   test("modal has correct title", async ({ page }) => {
     await page.locator("#open-lazy-modal-btn").click();
     await expect(page.locator("#lazy-modal-demo-title")).toContainText("Server Details");
