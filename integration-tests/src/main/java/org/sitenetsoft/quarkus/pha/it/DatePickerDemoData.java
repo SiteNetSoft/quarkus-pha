@@ -37,6 +37,7 @@ public class DatePickerDemoData {
             Map.entry("range-from", new Config("dtrp-from", ISO)),
             Map.entry("range-to", new Config("dtrp-to", ISO)),
             Map.entry("invalid", new Config("dp-invalid", ISO)),
+            Map.entry("controlled-calendar", new Config("dp-controlled-calendar", ISO)),
             Map.entry("width-fixed", new Config("dp-width-fixed", ISO)),
             Map.entry("width-chars", new Config("dp-width-chars", ISO)));
 
@@ -81,6 +82,9 @@ public class DatePickerDemoData {
 
     @TemplateGlobal
     public static CalendarMonth dpCalInvalid = calendar("invalid", DEMO_MONTH, null);
+
+    @TemplateGlobal
+    public static CalendarMonth dpCalControlledCalendar = calendar("controlled-calendar", DEMO_MONTH, null);
 
     @TemplateGlobal
     public static CalendarMonth dpCalWidthFixed = calendar("width-fixed", DEMO_MONTH, null);

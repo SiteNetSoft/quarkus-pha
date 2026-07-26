@@ -163,7 +163,8 @@ public class MiscExamplesRoutes {
         m.put("date-picker",           Set.of("basic", "required", "american-format", "helper-text", "min-max",
                                                "french", "with-value", "disabled",
             "invalid",
-            "custom-width"));
+            "custom-width",
+            "controlled-calendar"));
         m.put("menu",                  Set.of("basic", "danger-item", "with-icons", "with-actions", "with-links",
                                                "with-descriptions", "item-checkbox", "footer", "separated-items",
                                                "titled-groups", "favorites", "filtering-search", "option-single-select",
