@@ -145,6 +145,17 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#advanced-composable" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Composable advanced search</span
+                                      ></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -251,8 +262,14 @@
                         The advanced attribute panel rendered already open; the caret still toggles it live.
                       </p>
                       {/description} {#content}{#include components/search-input/advanced-expanded /}{/content}
+                      {/include} {#include partials/example-card title="Composable advanced search"
+                      slug="advanced-composable" component="search-input"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The advanced pane is composed by hand from primitives — a raised panel with a form that composes
+                        the query back into the search input.
+                      </p>
+                      {/description} {#content}{#include components/search-input/advanced-composable /}{/content}
                       {/include}
-
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

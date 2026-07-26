@@ -1,0 +1,139 @@
+{! PF parity: react-core 6.6.0 demos SearchInputAdvancedComposable — the advanced-search pane is
+   composed by hand from primitives: a raised panel holding a form with a text input, a "Date
+   within" select, and a date field. Submitting composes the query back into the search input. !}
+<div
+  x-data="{ value: '', open: false, hasWords: '', dateWithin: '1 day', ofDate: '', dwOpen: false,
+    compose() { this.value = (this.hasWords + (this.ofDate !== '' ? ' date:' + this.ofDate + ' date-within:' + this.dateWithin : '')).trim(); this.open = false; },
+    reset() { this.hasWords = ''; this.dateWithin = '1 day'; this.ofDate = ''; this.value = ''; } }"
+  id="si-advanced-composable"
+  style="position: relative; max-width: 480px"
+>
+  <div class="pf-v6-c-input-group">
+    <div class="pf-v6-c-input-group__item pf-m-fill">
+      <div class="pf-v6-c-text-input-group">
+        <div class="pf-v6-c-text-input-group__main pf-m-icon">
+          <span class="pf-v6-c-text-input-group__text">
+            <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+            <input
+              class="pf-v6-c-text-input-group__text-input"
+              type="search"
+              id="si-advanced-composable-input"
+              aria-label="Composable advanced search"
+              x-model="value"
+            />
+          </span>
+        </div>
+        <div class="pf-v6-c-text-input-group__utilities" x-show="value !== ''">
+          <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Clear search" @click="value = ''; reset()">
+            <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="pf-v6-c-input-group__item">
+      <button
+        class="pf-v6-c-button pf-m-control"
+        type="button"
+        aria-label="Advanced search"
+        :aria-expanded="open.toString()"
+        @click="open = !open"
+      >
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:caret-down').raw}</span>
+      </button>
+    </div>
+  </div>
+  <div
+    role="dialog"
+    aria-label="Advanced search form"
+    x-show="open"
+    x-cloak
+    style="position: absolute; top: 100%; left: 0; right: 0; z-index: 200"
+  >
+    <div class="pf-v6-c-panel pf-m-raised">
+      <div class="pf-v6-c-panel__main">
+        <div class="pf-v6-c-panel__main-body">
+          <form class="pf-v6-c-form" novalidate @submit.prevent="compose()">
+            <div class="pf-v6-c-form__group">
+              <div class="pf-v6-c-form__group-label">
+                <label class="pf-v6-c-form__label" for="si-adv-has-words">
+                  <span class="pf-v6-c-form__label-text">Has the words</span>
+                </label>
+              </div>
+              <div class="pf-v6-c-form__group-control">
+                <span class="pf-v6-c-form-control">
+                  <input type="text" id="si-adv-has-words" name="si-adv-has-words" x-model="hasWords" />
+                </span>
+              </div>
+            </div>
+            <div class="pf-v6-c-form__group">
+              <div class="pf-v6-c-form__group-label">
+                <label class="pf-v6-c-form__label" for="si-adv-date-within">
+                  <span class="pf-v6-c-form__label-text">Date within</span>
+                </label>
+              </div>
+              <div class="pf-v6-c-form__group-control">
+                <div style="position: relative">
+                  <button
+                    class="pf-v6-c-menu-toggle pf-m-full-width"
+                    type="button"
+                    id="si-adv-date-within"
+                    :aria-expanded="dwOpen.toString()"
+                    @click="dwOpen = !dwOpen"
+                  >
+                    <span class="pf-v6-c-menu-toggle__text" x-text="dateWithin">1 day</span>
+                    <span class="pf-v6-c-menu-toggle__controls">
+                      <span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span>
+                    </span>
+                  </button>
+                  <div
+                    class="pf-v6-c-menu"
+                    x-show="dwOpen"
+                    x-cloak
+                    @click.outside="dwOpen = false"
+                    style="position: absolute; top: 100%; left: 0; z-index: 300; min-width: 100%; max-height: 200px; overflow-y: auto"
+                  >
+                    <div class="pf-v6-c-menu__content">
+                      <ul class="pf-v6-c-menu__list" role="listbox" aria-label="Date within options">
+                        <template x-for="o in ['1 day', '3 days', '1 week', '2 weeks', '1 month', '2 months', '6 months', '1 year']" :key="o">
+                          <li role="none" class="pf-v6-c-menu__list-item">
+                            <button class="pf-v6-c-menu__item" type="button" role="option" @click="dateWithin = o; dwOpen = false">
+                              <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text" x-text="o"></span></span>
+                            </button>
+                          </li>
+                        </template>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pf-v6-c-form__group">
+              <div class="pf-v6-c-form__group-label">
+                <label class="pf-v6-c-form__label" for="si-adv-of-date">
+                  <span class="pf-v6-c-form__label-text">Of date</span>
+                </label>
+              </div>
+              <div class="pf-v6-c-form__group-control">
+                <span class="pf-v6-c-form-control">
+                  <input type="text" id="si-adv-of-date" name="si-adv-of-date" placeholder="YYYY-MM-DD" x-model="ofDate" />
+                </span>
+              </div>
+            </div>
+            <div class="pf-v6-c-form__group pf-m-action">
+              <div class="pf-v6-c-form__group-control">
+                <div class="pf-v6-c-form__actions">
+                  <button class="pf-v6-c-button pf-m-primary" type="submit">
+                    <span class="pf-v6-c-button__text">Search</span>
+                  </button>
+                  <button class="pf-v6-c-button pf-m-link" type="button" @click="reset()">
+                    <span class="pf-v6-c-button__text">Reset</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

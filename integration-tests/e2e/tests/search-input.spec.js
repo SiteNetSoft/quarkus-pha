@@ -12,6 +12,7 @@ const EXAMPLES = [
   "expandable",
   "advanced",
   "advanced-expanded",
+  "advanced-composable",
 ];
 
 test.describe("Search Input", () => {
@@ -151,4 +152,19 @@ test.describe("Search Input", () => {
       await expect(page.locator("#si-advanced-expanded-input")).toHaveValue("username:jane date:2026-07-20");
     });
   });
+
+  test("composable advanced pane composes the query", async ({ page }) => {
+    await page.goto("/components/search-input");
+    const demo = page.locator("#si-advanced-composable");
+    await demo.locator('button[aria-label="Advanced search"]').click();
+    await expect(demo.locator('[role="dialog"]')).toBeVisible();
+    await demo.locator("#si-adv-has-words").fill("hello");
+    await demo.locator("#si-adv-of-date").fill("2026-05-20");
+    await demo.locator('button[type="submit"]').click();
+    await expect(demo.locator("#si-advanced-composable-input")).toHaveValue(
+      "hello date:2026-05-20 date-within:1 day",
+    );
+    await expect(demo.locator('[role="dialog"]')).toBeHidden();
+  });
+
 });
