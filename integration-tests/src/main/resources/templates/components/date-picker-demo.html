@@ -145,6 +145,15 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#date-range" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Date range picker</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -245,8 +254,13 @@
                         An external button opens and closes the picker's calendar popover.
                       </p>
                       {/description} {#content}{#include components/date-picker/controlled-calendar /}{/content}
-                      {/include}
-
+                      {/include} {#include partials/example-card title="Date range picker" slug="date-range"
+                      component="date-picker"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Start and end pickers joined by "to" — picking a start date enables the end picker and pre-fills
+                        it with the next day.
+                      </p>
+                      {/description} {#content}{#include components/date-picker/date-range /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

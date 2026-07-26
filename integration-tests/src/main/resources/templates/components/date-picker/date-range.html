@@ -1,0 +1,30 @@
+{! PF parity: react-core 6.6.0 demos DatePickerRange — start and end pickers joined by "to". Picking
+   a start date enables the end picker and pre-fills it with the next day; an error helper shows when
+   the end date lands before the start. ISO dates compare lexically. !}
+<div
+  x-data="{ from: '', to: '', get invalid() { return this.from !== '' && this.to !== '' && this.to < this.from; } }"
+  id="dp-range"
+>
+  <div class="pf-v6-l-split">
+    <div
+      class="pf-v6-l-split__item"
+      @pha-date-picked="from = $event.detail; to = ((d) => (d.setDate(d.getDate() + 1), d.toISOString().slice(0, 10)))(new Date($event.detail)); document.getElementById('dp-range-to-input').value = to"
+    >
+      {#include components/forms/date-picker id="dp-range-from" placeholder="YYYY-MM-DD" ariaLabel="Start date" calendar=dpCalRangeFrom /}
+    </div>
+    <div class="pf-v6-l-split__item" style="padding: 6px 12px 0 12px">to</div>
+    <div
+      class="pf-v6-l-split__item"
+      @pha-date-picked="to = $event.detail"
+      x-effect="$el.querySelectorAll('input, .pf-v6-c-button.pf-m-control').forEach(function (el) { el.disabled = (from === ''); })"
+    >
+      {#include components/forms/date-picker id="dp-range-to" placeholder="YYYY-MM-DD" ariaLabel="End date" calendar=dpCalRangeTo /}
+    </div>
+  </div>
+  <div class="pf-v6-c-helper-text" x-show="invalid" x-cloak>
+    <div class="pf-v6-c-helper-text__item pf-m-error">
+      <span class="pf-v6-c-helper-text__item-icon">{icons:svg('fa:exclamation-circle').raw}</span>
+      <span class="pf-v6-c-helper-text__item-text">The "to" date must be after the "from" date</span>
+    </div>
+  </div>
+</div>
