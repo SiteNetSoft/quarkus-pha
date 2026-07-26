@@ -73,12 +73,16 @@ stop_vnu() {
 }
 
 discover_paths() {
-  # Scrape homepage for component / extension links + add known demo pages
+  # Scrape the components grid for component / extension links + add known demo
+  # pages. The landing page ("/") only links a couple of showcase components, so
+  # scraping it alone silently shrank coverage to a handful of paths after the
+  # site restructure — the grid is the authoritative index.
   local html
-  html=$(curl -fsS "$QUARKUS_URL/")
+  html=$(curl -fsS "$QUARKUS_URL/"; curl -fsS "$QUARKUS_URL/components")
 
   {
     echo "/"
+    echo "/components"
     echo "$html" | grep -oE 'href="(/components|/extensions)/[a-z0-9/-]+"' \
       | sed -E 's/^href="(.+)"$/\1/' \
       | sort -u
