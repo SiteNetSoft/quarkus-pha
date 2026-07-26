@@ -1,0 +1,49 @@
+{! PF parity: react-core 6.6.0 NotificationBadgeWithAnimation — Add Notification bumps the count and
+   sets pf-m-notify on all three badges; the icon animation runs once and the class drops again on
+   animationend. !}
+<div x-data="{ count: 0, notify: false }" id="nb-with-animation-demo">
+  <div class="pf-v6-l-flex pf-m-space-items-sm" style="margin-bottom: 1rem">
+    <button
+      class="pf-v6-c-button pf-m-stateful pf-m-read"
+      :class="notify ? 'pf-m-notify' : ''"
+      type="button"
+      id="nb-anim-read"
+      aria-label="Notification badge with read variant and no count"
+      @animationend="notify = false"
+    >
+      <span class="pf-v6-c-button__icon">{icons:svg('fa:bell').raw}</span>
+      <span class="pf-v6-c-button__count" x-show="count > 0" x-cloak
+        ><span class="pf-v6-c-badge pf-m-read" x-text="count"></span
+      ></span>
+    </button>
+    <button
+      class="pf-v6-c-button pf-m-stateful pf-m-unread"
+      :class="notify ? 'pf-m-notify' : ''"
+      type="button"
+      id="nb-anim-unread"
+      aria-label="Notification badge animation with unread variant and count"
+      @animationend="notify = false"
+    >
+      <span class="pf-v6-c-button__icon">{icons:svg('fa:bell').raw}</span>
+      <span class="pf-v6-c-button__count" x-show="count > 0" x-cloak
+        ><span class="pf-v6-c-badge pf-m-unread" x-text="count"></span
+      ></span>
+    </button>
+    <button
+      class="pf-v6-c-button pf-m-stateful pf-m-attention"
+      :class="notify ? 'pf-m-notify' : ''"
+      type="button"
+      id="nb-anim-attention"
+      aria-label="Notification badge animation with attention variant and count"
+      @animationend="notify = false"
+    >
+      <span class="pf-v6-c-button__icon">{icons:svg('fa:bell').raw}</span>
+      <span class="pf-v6-c-button__count" x-show="count > 0" x-cloak
+        ><span class="pf-v6-c-badge pf-m-unread" x-text="count"></span
+      ></span>
+    </button>
+  </div>
+  <button class="pf-v6-c-button pf-m-primary" type="button" @click="count++; notify = true">
+    <span class="pf-v6-c-button__text">Add Notification</span>
+  </button>
+</div>

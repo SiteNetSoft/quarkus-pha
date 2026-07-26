@@ -5,10 +5,30 @@ test.describe("Notification Badge", () => {
     await page.goto("/components/notification-badge");
   });
 
-  test("page loads with all 3 example sections in ToC", async ({ page }) => {
+  test("page loads with the example sections in ToC", async ({ page }) => {
     await expect(page.locator("#read")).toBeVisible();
     await expect(page.locator("#unread")).toBeVisible();
     await expect(page.locator("#attention")).toBeVisible();
+    await expect(page.locator("#with-animation")).toBeVisible();
+  });
+
+  test.describe("With animation", () => {
+    test("adding a notification bumps the count and pulses pf-m-notify", async ({ page }) => {
+      const demo = page.locator("#nb-with-animation-demo");
+      await expect(demo.locator("#nb-anim-read .pf-v6-c-button__count")).toBeHidden();
+      await demo.locator("button", { hasText: "Add Notification" }).click();
+      await expect(demo.locator("#nb-anim-read .pf-v6-c-badge")).toHaveText("1");
+      await expect(demo.locator("#nb-anim-unread .pf-v6-c-badge")).toHaveText("1");
+      await expect(demo.locator("#nb-anim-attention .pf-v6-c-badge")).toHaveText("1");
+      await demo.locator("button", { hasText: "Add Notification" }).click();
+      await expect(demo.locator("#nb-anim-read .pf-v6-c-badge")).toHaveText("2");
+    });
+
+    test("standalone route renders", async ({ page }) => {
+      const res = await page.goto("/components/notification-badge/with-animation");
+      expect(res.status()).toBe(200);
+      await expect(page.locator("#nb-with-animation-demo")).toBeVisible();
+    });
   });
 
   test.describe("Read", () => {

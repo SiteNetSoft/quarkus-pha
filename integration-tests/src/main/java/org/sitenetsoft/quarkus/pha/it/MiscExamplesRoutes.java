@@ -182,7 +182,7 @@ public class MiscExamplesRoutes {
                                                "split-checkbox-icon-text", "split-action",
                                                "full-height", "full-width", "in-form", "typeahead", "status",
                                                "placeholder"));
-        m.put("notification-badge",    Set.of("read", "unread", "attention"));
+        m.put("notification-badge",    Set.of("read", "unread", "attention", "with-animation"));
         m.put("page",                  Set.of("basic", "vertical-nav", "multiple-sidebar-body", "horizontal-nav",
                                                "uncontrolled-nav", "filled-sections", "main-section-padding",
                                                "main-section-variations", "group-section", "centered-section",
