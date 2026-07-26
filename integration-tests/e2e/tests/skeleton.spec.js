@@ -58,7 +58,7 @@ test.describe("Skeleton", () => {
   });
 
   test("standalone example routes render", async ({ page }) => {
-    for (const slug of ["default", "percentage-widths", "percentage-heights", "text-modifiers", "shapes"]) {
+    for (const slug of ["default", "percentage-widths", "percentage-heights", "text-modifiers", "shapes", "card"]) {
       const res = await page.goto(`/components/skeleton/${slug}`);
       expect(res.status()).toBe(200);
       await expect(page.locator(".pf-v6-c-skeleton").first()).toBeVisible();
@@ -79,4 +79,12 @@ test.describe("Skeleton", () => {
       expect(await res.text()).toContain('.widthValue("80px").heightValue("80px")');
     });
   });
+
+  test("skeleton card gallery renders seven placeholder cards", async ({ page }) => {
+    await page.goto("/components/skeleton");
+    const demo = page.locator("#sk-card-demo");
+    await expect(demo.locator(".pf-v6-c-card")).toHaveCount(7);
+    await expect(demo.locator(".pf-v6-c-skeleton").first()).toBeVisible();
+  });
+
 });

@@ -1,0 +1,31 @@
+{! PF parity: react-core 6.6.0 demos SkeletonCard — a gallery of compact cards whose contents are
+   skeleton placeholders (PF's full-page chrome is provided by the docs page itself). !}
+<div class="pf-v6-l-gallery pf-m-gutter" id="sk-card-demo">
+  {#for i in 7}
+  <div class="pf-v6-l-gallery__item">
+    <div class="pf-v6-c-card pf-m-compact">
+      <div class="pf-v6-c-card__body">
+        <div class="pf-v6-l-flex pf-m-column">
+          <div class="pf-v6-c-skeleton"><span class="pf-v6-screen-reader">Loading content</span></div>
+          <div class="pf-v6-c-skeleton pf-m-width-66"></div>
+          <div class="pf-v6-c-skeleton pf-m-width-25"></div>
+          <div class="pf-v6-c-skeleton pf-m-width-50"></div>
+        </div>
+      </div>
+      <div class="pf-v6-c-card__body">
+        <div class="pf-v6-c-skeleton pf-m-square pf-m-width-75">
+          <span class="pf-v6-screen-reader">Loading medium square contents</span>
+        </div>
+      </div>
+      <div class="pf-v6-c-card__body">
+        <div class="pf-v6-l-flex pf-m-column">
+          <div class="pf-v6-c-skeleton"><span class="pf-v6-screen-reader">Loading content</span></div>
+          <div class="pf-v6-c-skeleton pf-m-width-25"></div>
+          <div class="pf-v6-c-skeleton pf-m-width-75"></div>
+          <div class="pf-v6-c-skeleton pf-m-width-50"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {/for}
+</div>

@@ -34,7 +34,8 @@ public class SkeletonExamplesRoutes {
         "percentage-widths",
         "percentage-heights",
         "text-modifiers",
-        "shapes"
+        "shapes",
+        "card"
     );
 
     @Inject
