@@ -23,66 +23,65 @@
   <button type="button" class="pf-v6-c-button pf-m-primary" @click="open = true" x-show="!open">
     <span class="pf-v6-c-button__text">Open "Create user" modal</span>
   </button>
-  <div
-    class="pf-v6-c-backdrop"
-    x-show="open"
-    x-cloak
-    style="position: fixed; inset: 0; background: rgba(3, 3, 3, 0.62); z-index: 5"
-  >
-    <div
-      class="pf-v6-c-modal-box pf-m-md"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="pwd-modal-title"
-      style="position: absolute; top: 5rem; left: 50%; transform: translateX(-50%); max-width: 520px; width: 90%"
-    >
-      <header class="pf-v6-c-modal-box__header">
-        <h2 id="pwd-modal-title" class="pf-v6-c-modal-box__title">Create user</h2>
-      </header>
-      <div class="pf-v6-c-modal-box__body">
-        <form class="pf-v6-c-form">
-          <div class="pf-v6-c-form__group">
-            <div class="pf-v6-c-form__group-label">
-              <label class="pf-v6-c-form__label" for="modal-username"
-                ><span class="pf-v6-c-form__label-text">Username</span></label
+  {! The backdrop teleports to document.body: the page main-container is a stacking context that would trap it under the
+  masthead. !}
+  <template x-teleport="body">
+    <div class="pf-v6-c-backdrop" id="pwd-modal-backdrop" x-show="open" style="display: none">
+      <div
+        class="pf-v6-c-modal-box pf-m-md"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="pwd-modal-title"
+        style="position: absolute; top: 5rem; left: 50%; transform: translateX(-50%); max-width: 520px; width: 90%"
+      >
+        <header class="pf-v6-c-modal-box__header">
+          <h2 id="pwd-modal-title" class="pf-v6-c-modal-box__title">Create user</h2>
+        </header>
+        <div class="pf-v6-c-modal-box__body">
+          <form class="pf-v6-c-form">
+            <div class="pf-v6-c-form__group">
+              <div class="pf-v6-c-form__group-label">
+                <label class="pf-v6-c-form__label" for="modal-username"
+                  ><span class="pf-v6-c-form__label-text">Username</span></label
+                >
+              </div>
+              <div class="pf-v6-c-form__group-control">
+                <span class="pf-v6-c-form-control"><input id="modal-username" type="text" value="dramos" /></span>
+              </div>
+            </div>
+            <div class="pf-v6-c-form__group">
+              <div class="pf-v6-c-form__group-label">
+                <label class="pf-v6-c-form__label" for="modal-pwd"
+                  ><span class="pf-v6-c-form__label-text">Initial password</span></label
+                >
+              </div>
+              <div class="pf-v6-c-form__group-control" style="display: flex; gap: 0.5rem; align-items: center">
+                <span class="pf-v6-c-form-control pf-m-readonly"
+                  ><input id="modal-pwd" type="text" readonly x-model="pwd"
+                /></span>
+                <button type="button" class="pf-v6-c-button pf-m-secondary" @click="generate()">
+                  <span class="pf-v6-c-button__text">Regenerate</span>
+                </button>
+              </div>
+              <small style="display: block; margin-top: 0.5rem" class="pf-v6-u-color-200"
+                >Length: <span x-text="length"></span> ·
+                <label><input type="checkbox" x-model="upper" @change="generate()" /> A–Z</label>
+                <label><input type="checkbox" x-model="lower" @change="generate()" /> a–z</label>
+                <label><input type="checkbox" x-model="digits" @change="generate()" /> 0–9</label>
+                <label><input type="checkbox" x-model="symbols" @change="generate()" /> !@#</label></small
               >
             </div>
-            <div class="pf-v6-c-form__group-control">
-              <span class="pf-v6-c-form-control"><input id="modal-username" type="text" value="dramos" /></span>
-            </div>
-          </div>
-          <div class="pf-v6-c-form__group">
-            <div class="pf-v6-c-form__group-label">
-              <label class="pf-v6-c-form__label" for="modal-pwd"
-                ><span class="pf-v6-c-form__label-text">Initial password</span></label
-              >
-            </div>
-            <div class="pf-v6-c-form__group-control" style="display: flex; gap: 0.5rem; align-items: center">
-              <span class="pf-v6-c-form-control pf-m-readonly"
-                ><input id="modal-pwd" type="text" readonly x-model="pwd"
-              /></span>
-              <button type="button" class="pf-v6-c-button pf-m-secondary" @click="generate()">
-                <span class="pf-v6-c-button__text">Regenerate</span>
-              </button>
-            </div>
-            <small style="display: block; margin-top: 0.5rem" class="pf-v6-u-color-200"
-              >Length: <span x-text="length"></span> ·
-              <label><input type="checkbox" x-model="upper" @change="generate()" /> A–Z</label>
-              <label><input type="checkbox" x-model="lower" @change="generate()" /> a–z</label>
-              <label><input type="checkbox" x-model="digits" @change="generate()" /> 0–9</label>
-              <label><input type="checkbox" x-model="symbols" @change="generate()" /> !@#</label></small
-            >
-          </div>
-        </form>
+          </form>
+        </div>
+        <footer class="pf-v6-c-modal-box__footer">
+          <button type="button" class="pf-v6-c-button pf-m-primary" @click="open = false">
+            <span class="pf-v6-c-button__text">Create</span>
+          </button>
+          <button type="button" class="pf-v6-c-button pf-m-link" @click="open = false">
+            <span class="pf-v6-c-button__text">Cancel</span>
+          </button>
+        </footer>
       </div>
-      <footer class="pf-v6-c-modal-box__footer">
-        <button type="button" class="pf-v6-c-button pf-m-primary" @click="open = false">
-          <span class="pf-v6-c-button__text">Create</span>
-        </button>
-        <button type="button" class="pf-v6-c-button pf-m-link" @click="open = false">
-          <span class="pf-v6-c-button__text">Cancel</span>
-        </button>
-      </footer>
     </div>
-  </div>
+  </template>
 </div>
