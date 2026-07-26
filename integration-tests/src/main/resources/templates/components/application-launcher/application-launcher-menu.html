@@ -1,0 +1,304 @@
+{! PF parity: react-core 6.6.0 demos/CustomMenus/ApplicationLauncherDemo.tsx — the deprecated
+   application-launcher rebuilt from menu pieces: plain waffle toggle, search filter, favorites
+   with star actions, grouped items with dividers, external link, tooltip and disabled items. !}
+<div
+  x-data="{
+    open: false,
+    q: '',
+    favs: [],
+    names: [ 'Application 1', 'Application 2', 'Custom component (such as @reach/router Link)', 'Custom component with icon', 'Application 3 with tooltip', 'Unavailable Application' ],
+    match(i) { return this.q === '' || this.names[i].toLowerCase().indexOf(this.q.toLowerCase()) !== -1; },
+    fav(i) { return this.favs.indexOf(i) !== -1; },
+    toggleFav(i) { if (this.fav(i)) { this.favs = this.favs.filter(function (f) { return f !== i; }); } else { this.favs.push(i); } },
+    get favVisible() { return [ 0, 1, 2, 3, 4 ].some(function (i) { return this.fav(i) && this.match(i); }, this); },
+    get g1() { return this.match(0) || this.match(1); },
+    get g2() { return this.match(2) || this.match(3); },
+    get g3() { return this.match(4) || this.match(5); }
+  }"
+  @keydown.escape="open = false"
+  style="position: relative; display: inline-block"
+>
+  <button
+    class="pf-v6-c-menu-toggle pf-m-plain"
+    type="button"
+    :class="open ? 'pf-m-expanded' : ''"
+    :aria-expanded="open"
+    @click="open = !open; if (open) { $nextTick(function () { $refs.search.focus(); }); }"
+    aria-label="Application launcher"
+    id="al-menu-toggle"
+  >
+    <span class="pf-v6-c-menu-toggle__icon"
+      ><svg class="pf-v6-svg" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true" role="img" width="1em" height="1em"><path d="M9.75 3.25v5.5c0 .552-.449 1-1 1h-5.5c-.551 0-1-.448-1-1v-5.5c0-.552.449-1 1-1h5.5c.551 0 1 .448 1 1Zm9-1h-5.5c-.551 0-1 .448-1 1v5.5c0 .552.449 1 1 1h5.5c.551 0 1-.448 1-1v-5.5c0-.552-.449-1-1-1Zm10 0h-5.5c-.551 0-1 .448-1 1v5.5c0 .552.449 1 1 1h5.5c.551 0 1-.448 1-1v-5.5c0-.552-.449-1-1-1Zm-20 10h-5.5c-.551 0-1 .448-1 1v5.5c0 .552.449 1 1 1h5.5c.551 0 1-.448 1-1v-5.5c0-.552-.449-1-1-1Zm10 0h-5.5c-.551 0-1 .448-1 1v5.5c0 .552.449 1 1 1h5.5c.551 0 1-.448 1-1v-5.5c0-.552-.449-1-1-1Zm10 0h-5.5c-.551 0-1 .448-1 1v5.5c0 .552.449 1 1 1h5.5c.551 0 1-.448 1-1v-5.5c0-.552-.449-1-1-1Zm-20 10h-5.5c-.551 0-1 .448-1 1v5.5c0 .552.449 1 1 1h5.5c.551 0 1-.448 1-1v-5.5c0-.552-.449-1-1-1Zm10 0h-5.5c-.551 0-1 .448-1 1v5.5c0 .552.449 1 1 1h5.5c.551 0 1-.448 1-1v-5.5c0-.552-.449-1-1-1Zm10 0h-5.5c-.551 0-1 .448-1 1v5.5c0 .552.449 1 1 1h5.5c.551 0 1-.448 1-1v-5.5c0-.552-.449-1-1-1Z"></path></svg></span
+    >
+  </button>
+  <div
+    class="pf-v6-c-menu"
+    x-show="open"
+    x-cloak
+    @click.outside="open = false"
+    style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 20rem; width: max-content; max-width: 90vw"
+  >
+    <div class="pf-v6-c-menu__search">
+      <div class="pf-v6-c-menu__search-input">
+        <div class="pf-v6-c-text-input-group">
+          <div class="pf-v6-c-text-input-group__main pf-m-icon">
+            <span class="pf-v6-c-text-input-group__text">
+              <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+              <input
+                class="pf-v6-c-text-input-group__text-input"
+                type="text"
+                x-model="q"
+                x-ref="search"
+                aria-label="Filter menu items"
+              />
+            </span>
+          </div>
+          <div class="pf-v6-c-text-input-group__utilities" x-show="q !== ''" x-cloak>
+            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Reset" @click="q = ''; $refs.search.focus()">
+              <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="pf-v6-c-divider" />
+    <div class="pf-v6-c-menu__content">
+      {! Favorites — clones of favorited items, shown only while at least one favorite matches the filter. !}
+      <section class="pf-v6-c-menu__group" x-show="favVisible" x-cloak>
+        <h4 class="pf-v6-c-menu__group-title">Favorites</h4>
+        <ul class="pf-v6-c-menu__list">
+          <li class="pf-v6-c-menu__list-item" x-show="fav(0) && match(0)">
+            <button class="pf-v6-c-menu__item" type="button">
+              <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Application 1</span></span>
+            </button>
+            <button
+              class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action pf-m-favorite pf-m-favorited"
+              type="button"
+              aria-label="Unfavorite Application 1"
+              @click="toggleFav(0)"
+            >
+              <span class="pf-v6-c-menu__item-action-icon">{icons:svg('fa:star').raw}</span>
+            </button>
+          </li>
+          <li class="pf-v6-c-menu__list-item" x-show="fav(1) && match(1)">
+            <a href="#default-link2" class="pf-v6-c-menu__item" @click.prevent>
+              <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Application 2</span></span>
+            </a>
+            <button
+              class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action pf-m-favorite pf-m-favorited"
+              type="button"
+              aria-label="Unfavorite Application 2"
+              @click="toggleFav(1)"
+            >
+              <span class="pf-v6-c-menu__item-action-icon">{icons:svg('fa:star').raw}</span>
+            </button>
+          </li>
+          <li class="pf-v6-c-menu__list-item" x-show="fav(2) && match(2)">
+            <a href="#router-link" class="pf-v6-c-menu__item">
+              <span class="pf-v6-c-menu__item-main"
+                ><span class="pf-v6-c-menu__item-text">Custom component (such as @reach/router Link)</span></span
+              >
+            </a>
+            <button
+              class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action pf-m-favorite pf-m-favorited"
+              type="button"
+              aria-label="Unfavorite Custom component (such as @reach/router Link)"
+              @click="toggleFav(2)"
+            >
+              <span class="pf-v6-c-menu__item-action-icon">{icons:svg('fa:star').raw}</span>
+            </button>
+          </li>
+          <li class="pf-v6-c-menu__list-item" x-show="fav(3) && match(3)">
+            <a href="#router-link2" class="pf-v6-c-menu__item">
+              <span class="pf-v6-c-menu__item-main">
+                <span class="pf-v6-c-menu__item-icon"
+                  ><img src="/web/images/quarkus-pha-icon.svg" alt="" width="25" height="25"
+                /></span>
+                <span class="pf-v6-c-menu__item-text">Custom component with icon</span>
+                <span class="pf-v6-c-menu__item-external-icon">{icons:svg('fa:arrow-up-right-from-square').raw}</span>
+                <span class="pf-v6-screen-reader">(opens in a new tab)</span>
+              </span>
+            </a>
+            <button
+              class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action pf-m-favorite pf-m-favorited"
+              type="button"
+              aria-label="Unfavorite Custom component with icon"
+              @click="toggleFav(3)"
+            >
+              <span class="pf-v6-c-menu__item-action-icon">{icons:svg('fa:star').raw}</span>
+            </button>
+          </li>
+          <li
+            class="pf-v6-c-menu__list-item"
+            x-show="fav(4) && match(4)"
+            x-data="{ tip: false, tx: 0, ty: 0, show(el) { var r = el.getBoundingClientRect(); this.tx = r.right; this.ty = r.top + r.height / 2; this.tip = true; } }"
+          >
+            <button
+              class="pf-v6-c-menu__item"
+              type="button"
+              @mouseenter="show($el)"
+              @mouseleave="tip = false"
+              @focus="show($el)"
+              @blur="tip = false"
+            >
+              <span class="pf-v6-c-menu__item-main"
+                ><span class="pf-v6-c-menu__item-text">Application 3 with tooltip</span></span
+              >
+            </button>
+            <button
+              class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action pf-m-favorite pf-m-favorited"
+              type="button"
+              aria-label="Unfavorite Application 3 with tooltip"
+              @click="toggleFav(4)"
+            >
+              <span class="pf-v6-c-menu__item-action-icon">{icons:svg('fa:star').raw}</span>
+            </button>
+            {! position: fixed escapes the menu's overflow-hidden clip (PF React portals the tooltip to body). !}
+            <div
+              class="pf-v6-c-tooltip pf-m-right"
+              role="tooltip"
+              x-show="tip"
+              x-cloak
+              :style="'position: fixed; left: ' + tx + 'px; top: ' + ty + 'px; transform: translateY(-50%); z-index: 300; width: max-content; max-width: 200px'"
+            >
+              <div class="pf-v6-c-tooltip__arrow"></div>
+              <div class="pf-v6-c-tooltip__content">Launch Application 3</div>
+            </div>
+          </li>
+        </ul>
+      </section>
+      <hr class="pf-v6-c-divider" x-show="favVisible" x-cloak />
+      <section class="pf-v6-c-menu__group" x-show="g1" x-cloak>
+        <h4 class="pf-v6-c-menu__group-title">Group 1</h4>
+        <ul class="pf-v6-c-menu__list">
+          <li class="pf-v6-c-menu__list-item" x-show="match(0)">
+            <button class="pf-v6-c-menu__item" type="button">
+              <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Application 1</span></span>
+            </button>
+            <button
+              class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action pf-m-favorite"
+              :class="fav(0) ? 'pf-m-favorited' : ''"
+              type="button"
+              :aria-label="(fav(0) ? 'Unfavorite ' : 'Favorite ') + 'Application 1'"
+              @click="toggleFav(0)"
+            >
+              <span class="pf-v6-c-menu__item-action-icon">{icons:svg('fa:star').raw}</span>
+            </button>
+          </li>
+          <li class="pf-v6-c-menu__list-item" x-show="match(1)">
+            <a href="#default-link2" class="pf-v6-c-menu__item" @click.prevent>
+              <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Application 2</span></span>
+            </a>
+            <button
+              class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action pf-m-favorite"
+              :class="fav(1) ? 'pf-m-favorited' : ''"
+              type="button"
+              :aria-label="(fav(1) ? 'Unfavorite ' : 'Favorite ') + 'Application 2'"
+              @click="toggleFav(1)"
+            >
+              <span class="pf-v6-c-menu__item-action-icon">{icons:svg('fa:star').raw}</span>
+            </button>
+          </li>
+        </ul>
+      </section>
+      <hr class="pf-v6-c-divider" x-show="g1 && (g2 || g3)" x-cloak />
+      <section class="pf-v6-c-menu__group" x-show="g2" x-cloak>
+        <h4 class="pf-v6-c-menu__group-title">Group 2</h4>
+        <ul class="pf-v6-c-menu__list">
+          <li class="pf-v6-c-menu__list-item" x-show="match(2)">
+            <a href="#router-link" class="pf-v6-c-menu__item">
+              <span class="pf-v6-c-menu__item-main"
+                ><span class="pf-v6-c-menu__item-text">Custom component (such as @reach/router Link)</span></span
+              >
+            </a>
+            <button
+              class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action pf-m-favorite"
+              :class="fav(2) ? 'pf-m-favorited' : ''"
+              type="button"
+              :aria-label="(fav(2) ? 'Unfavorite ' : 'Favorite ') + 'Custom component (such as @reach/router Link)'"
+              @click="toggleFav(2)"
+            >
+              <span class="pf-v6-c-menu__item-action-icon">{icons:svg('fa:star').raw}</span>
+            </button>
+          </li>
+          <li class="pf-v6-c-menu__list-item" x-show="match(3)">
+            <a href="#router-link2" class="pf-v6-c-menu__item">
+              <span class="pf-v6-c-menu__item-main">
+                <span class="pf-v6-c-menu__item-icon"
+                  ><img src="/web/images/quarkus-pha-icon.svg" alt="" width="25" height="25"
+                /></span>
+                <span class="pf-v6-c-menu__item-text">Custom component with icon</span>
+                <span class="pf-v6-c-menu__item-external-icon">{icons:svg('fa:arrow-up-right-from-square').raw}</span>
+                <span class="pf-v6-screen-reader">(opens in a new tab)</span>
+              </span>
+            </a>
+            <button
+              class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action pf-m-favorite"
+              :class="fav(3) ? 'pf-m-favorited' : ''"
+              type="button"
+              :aria-label="(fav(3) ? 'Unfavorite ' : 'Favorite ') + 'Custom component with icon'"
+              @click="toggleFav(3)"
+            >
+              <span class="pf-v6-c-menu__item-action-icon">{icons:svg('fa:star').raw}</span>
+            </button>
+          </li>
+        </ul>
+      </section>
+      <hr class="pf-v6-c-divider" x-show="g2 && g3" x-cloak />
+      <ul class="pf-v6-c-menu__list" x-show="g3" x-cloak>
+        <li
+          class="pf-v6-c-menu__list-item"
+          x-show="match(4)"
+          x-data="{ tip: false, tx: 0, ty: 0, show(el) { var r = el.getBoundingClientRect(); this.tx = r.right; this.ty = r.top + r.height / 2; this.tip = true; } }"
+        >
+          <button
+            class="pf-v6-c-menu__item"
+            type="button"
+            @mouseenter="show($el)"
+            @mouseleave="tip = false"
+            @focus="show($el)"
+            @blur="tip = false"
+          >
+            <span class="pf-v6-c-menu__item-main"
+              ><span class="pf-v6-c-menu__item-text">Application 3 with tooltip</span></span
+            >
+          </button>
+          <button
+            class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action pf-m-favorite"
+            :class="fav(4) ? 'pf-m-favorited' : ''"
+            type="button"
+            :aria-label="(fav(4) ? 'Unfavorite ' : 'Favorite ') + 'Application 3 with tooltip'"
+            @click="toggleFav(4)"
+          >
+            <span class="pf-v6-c-menu__item-action-icon">{icons:svg('fa:star').raw}</span>
+          </button>
+          {! position: fixed escapes the menu's overflow-hidden clip (PF React portals the tooltip to body). !}
+          <div
+            class="pf-v6-c-tooltip pf-m-right"
+            role="tooltip"
+            x-show="tip"
+            x-cloak
+            :style="'position: fixed; left: ' + tx + 'px; top: ' + ty + 'px; transform: translateY(-50%); z-index: 300; width: max-content; max-width: 200px'"
+          >
+            <div class="pf-v6-c-tooltip__arrow"></div>
+            <div class="pf-v6-c-tooltip__content">Launch Application 3</div>
+          </div>
+        </li>
+        <li class="pf-v6-c-menu__list-item" x-show="match(5)">
+          <button class="pf-v6-c-menu__item pf-m-disabled" type="button" disabled aria-disabled="true">
+            <span class="pf-v6-c-menu__item-main"
+              ><span class="pf-v6-c-menu__item-text">Unavailable Application</span></span
+            >
+          </button>
+        </li>
+      </ul>
+      <ul class="pf-v6-c-menu__list" x-show="!g1 && !g2 && !g3" x-cloak>
+        <li class="pf-v6-c-menu__list-item">
+          <button class="pf-v6-c-menu__item" type="button">
+            <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">No results found</span></span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

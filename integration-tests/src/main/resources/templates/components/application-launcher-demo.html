@@ -19,8 +19,9 @@
                   <div class="pf-v6-c-content pf-m-editorial">
                     <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Application launcher</h1>
                     <p>
-                      Composition pattern — a 3×N grid of app icons in a dropdown menu. The waffle-icon pattern from
-                      masthead right corners.
+                      As the application launcher component is now deprecated upstream, an application launcher is built
+                      by composing the menu suite: a plain menu toggle with the waffle icon opening a dropdown menu with
+                      search, favorites, and grouped items.
                     </p>
                   </div>
                 </div>
@@ -45,45 +46,11 @@
                             <ul class="pf-v6-c-jump-links__list" role="list">
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                  ><a href="#application-launcher-menu" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#with-sections" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With sections</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#text-items" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Text items</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#with-external" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With external links</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#align-right" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Aligned right</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >Application launcher menu</span
+                                      ></span
                                     ></a
                                   ></span
                                 >
@@ -136,40 +103,15 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="application-launcher"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Waffle-icon toggle reveals a 3×2 grid of app shortcuts.
-                      </p>
-                      {/description} {#content}{#include components/application-launcher/basic /}{/content} {/include}
-                      {#include partials/example-card title="With sections" slug="with-sections"
+                      {#include partials/example-card title="Application launcher menu" slug="application-launcher-menu"
                       component="application-launcher"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Group the grid into labelled sections (e.g. Favorites and All applications) separated by a
-                        divider.
+                        The waffle-icon toggle opens a menu with a search filter, favoritable items (star an item to pin
+                        it into a Favorites group), grouped items separated by dividers, an external link with a custom
+                        icon, a tooltip item, and a disabled item.
                       </p>
-                      {/description} {#content}{#include components/application-launcher/with-sections /}{/content}
-                      {/include} {#include partials/example-card title="Text items" slug="text-items"
-                      component="application-launcher"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        The simple variant: a vertical list of text items with leading icons instead of an icon grid.
-                      </p>
-                      {/description} {#content}{#include components/application-launcher/text-items /}{/content}
-                      {/include} {#include partials/example-card title="With external links" slug="with-external"
-                      component="application-launcher"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Items that open external apps in a new tab, marked with an external-link icon and a
-                        screen-reader hint.
-                      </p>
-                      {/description} {#content}{#include components/application-launcher/with-external /}{/content}
-                      {/include} {#include partials/example-card title="Aligned right" slug="align-right"
-                      component="application-launcher"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Masthead placement: the toggle sits at the far right, so the menu anchors right and opens back
-                        into view.
-                      </p>
-                      {/description} {#content}{#include components/application-launcher/align-right /}{/content}
-                      {/include}
+                      {/description} {#content}{#include components/application-launcher/application-launcher-menu
+                      /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"
@@ -188,8 +130,9 @@
                           Application launcher pattern
                         </h3>
                         <p class="pf-v6-c-content--p pf-m-editorial">
-                          Composition only — no runtime template. Use a plain menu-toggle with the waffle icon, attached
-                          to a CSS-grid menu of icon links.
+                          Composition only — no runtime template. A plain menu-toggle with the waffle icon opens a menu
+                          composed of a search input, a dynamic Favorites group fed by star item-actions, titled groups
+                          with dividers, and link items (external links carry the external-link icon).
                         </p>
                       </div>
                       <div class="pf-v6-l-stack__item">
@@ -201,7 +144,7 @@
                       </div>
                       <div class="pf-v6-l-stack__item">
                         <br /><a
-                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/integration-tests/src/main/resources/templates/components/application-launcher/basic.html"
+                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/integration-tests/src/main/resources/templates/components/application-launcher/application-launcher-menu.html"
                           target="_blank"
                           rel="noopener noreferrer"
                           >Edit application-launcher example on GitHub</a
