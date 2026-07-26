@@ -191,7 +191,7 @@ public class MiscExamplesRoutes {
                                                "typeahead", "typeahead-creatable", "multi-typeahead",
                                                "multi-typeahead-creatable", "multi-typeahead-checkbox", "view-more",
                                                "footer"));
-        m.put("application-launcher",  Set.of("basic", "with-sections", "text-items", "with-external", "align-right"));
+        m.put("application-launcher",  Set.of("application-launcher-menu"));
         m.put("infinite-scroll",       Set.of("basic"));
         m.put("options-menu",          Set.of("basic"));
         m.put("custom-menus",          Set.of("basic", "with-search", "flyout", "tree-view-menu", "date-select"));
