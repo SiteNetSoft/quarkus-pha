@@ -18,7 +18,7 @@
     <div class="catalog-tile-pf-badge-container">
       {#for badge in catalogTile.badges}
       {#if badge.iconClass??}
-      <span class="catalog-tile-pf-badge {badge.iconClass}" title="{badge.label}" aria-label="{badge.label}"></span>
+      <span class="catalog-tile-pf-badge {badge.iconClass}" title="{badge.label}" role="img" aria-label="{badge.label}"></span>
       {#else}
       <span class="catalog-tile-pf-badge">{badge.text}</span>
       {/if}

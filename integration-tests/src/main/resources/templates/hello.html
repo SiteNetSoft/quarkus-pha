@@ -172,7 +172,11 @@
                             aria-labelledby="{component.id}-title"
                           ></a>
                           {/cardSelectableActions}
-                          {#include components/data-display/card-title id="{component.id}-title"}{component.name}{/include}
+                          {! Qute does not interpolate expressions inside include-arg string
+                             literals — compute the derived id with #let instead. !}
+                          {#let cardTitleId=(component.id + '-title')}
+                          {#include components/data-display/card-title id=cardTitleId}{component.name}{/include}
+                          {/let}
                           {/include}
                           {#include components/data-display/card-body}
                           {#if component.image??}
@@ -203,13 +207,17 @@
                       {! ── LIST view — PF v6 data list (image + title + optional label) ── !}
                       <ul class="pf-v6-c-data-list pf-m-grid-md" role="list" x-show="view === 'list'" x-cloak>
                         {#for component in components}
-                        <a
-                          class="pha-components-list-item"
-                          href="{component.href}"
-                          style="text-decoration: none; color: inherit; display: block"
+                        {! li > a, not a > li — a ul may only contain li children, and the link
+                           is natively focusable (no tabindex descendants inside an anchor). !}
+                        <li
+                          class="pf-v6-c-data-list__item pf-m-clickable"
                           x-show="'{component.name}'.toLowerCase().includes(search.toLowerCase())"
                         >
-                          <li class="pf-v6-c-data-list__item pf-m-clickable" tabindex="0">
+                          <a
+                            class="pha-components-list-item"
+                            href="{component.href}"
+                            style="text-decoration: none; color: inherit; display: block"
+                          >
                             <div class="pf-v6-c-data-list__item-row">
                               <div class="pf-v6-c-data-list__item-content">
                                 <div class="pf-v6-c-data-list__cell" style="flex: 0 0 200px; max-width: 200px">
@@ -236,8 +244,8 @@
                                 </div>
                               </div>
                             </div>
-                          </li>
-                        </a>
+                          </a>
+                        </li>
                         {/for}
                       </ul>
                     </div>

@@ -19,14 +19,18 @@ public class CatalogViewDemoData {
 
     // ---- catalog-item-header ----
 
+    // headingLevel h4: the demo page's example headings are h3, and an embedded default h1
+    // would break the document outline (vnu heading-order check).
     public static CatalogItemHeader demoCihBasic = CatalogItemHeader
             .of("Quarkus pha")
             .vendorHtml("SiteNetSoft")
             .iconClass("pf-v6-c-icon fas fa-box")
+            .headingLevel("h4")
             .build();
 
     public static CatalogItemHeader demoCihVendor = CatalogItemHeader
             .of("Quarkus pha").id("cih-vendor")
+            .headingLevel("h4")
             .iconClass("pf-v6-c-icon fas fa-box")
             .vendorHtml("provided by <a href=\"https://github.com/SiteNetSoft\" style=\"text-decoration: underline\">SiteNetSoft</a>")
             .build();

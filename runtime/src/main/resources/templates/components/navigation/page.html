@@ -69,7 +69,10 @@
   </aside>
   {/if}
   <div class="pf-v6-c-page__main-container">
-    <main class="pf-v6-c-page__main"{#if page.isScrollableMain} tabindex="0" style="overflow-y: auto"{#else} tabindex="-1"{/if}>
+    {! embedded=true renders the main region as a div — docs/demo pages already live inside a
+       <main>, and nested or duplicate main elements are invalid HTML. Real consumers omit it. !}
+    {#let mainTag=(embedded.or(false) ? 'div' : 'main')}
+    <{mainTag} class="pf-v6-c-page__main"{#if page.isScrollableMain} tabindex="0" style="overflow-y: auto"{#else} tabindex="-1"{/if}>
       {#for e in page.entries}
       {#if e.isSection}
       {#include components/navigation/page-model-section sec=e.section /}
@@ -90,7 +93,8 @@
       </div>
       {/if}
       {/for}
-    </main>
+    </{mainTag}>
+    {/let}
   </div>
 </div>
 {#else}

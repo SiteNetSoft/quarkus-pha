@@ -25,14 +25,14 @@
 </div>
 {#else}
 <div class="pf-v6-c-expandable-section{#if section.disclosure} pf-m-display-lg pf-m-limit-width{/if}{#if section.indented} pf-m-indented{/if}" id="{section.id}" x-data="{ expanded: {section.expanded} }" :class="{ 'pf-m-expanded': expanded }"{#if section.style} style="{section.style}"{/if}>
-  {#if section.headingLevel}<{section.headingLevel} style="margin: 0">
-  {/if}<div class="pf-v6-c-expandable-section__toggle">
+  {! When a heading wraps the toggle, the __toggle class rides on the heading itself — a heading
+     may only contain phrasing content, so the usual __toggle div would be invalid HTML there. !}
+  {#if section.headingLevel}<{section.headingLevel} class="pf-v6-c-expandable-section__toggle" style="margin: 0">{#else}<div class="pf-v6-c-expandable-section__toggle">{/if}
     <button class="pf-v6-c-button pf-m-link" type="button" :aria-expanded="expanded" @click="expanded = !expanded">
       <span class="pf-v6-c-button__icon pf-m-start"><span class="pf-v6-c-expandable-section__toggle-icon">{icons:svg('fa:angle-down').raw}</span></span>
       {#if section.toggleHtml}<span class="pf-v6-c-button__text">{section.toggleHtml.raw}</span>{#else if section.dynamicToggle}<span class="pf-v6-c-button__text" x-text="expanded ? '{section.showLessText}' : '{section.showMoreText}'">{section.showMoreText}</span>{#else}<span class="pf-v6-c-button__text">{section.toggleText}</span>{/if}
     </button>
-  </div>{#if section.headingLevel}
-  </{section.headingLevel}>{/if}
+  {#if section.headingLevel}</{section.headingLevel}>{#else}</div>{/if}
   <div class="pf-v6-c-expandable-section__content" role="region" x-show="expanded" x-cloak>{section.contentHtml.raw}</div>
 </div>
 {/if}
