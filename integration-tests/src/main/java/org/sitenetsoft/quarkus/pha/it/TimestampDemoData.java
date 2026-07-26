@@ -40,4 +40,12 @@ public class TimestampDemoData {
     public static Timestamp demoTsTooltip = Timestamp.of("2 hours ago")
             .id("ts-tooltip").datetime("2026-05-20T14:30:00Z")
             .tooltip("2026-05-20 14:30:00 UTC").build();
+
+    public static Timestamp demoTsCustomTooltip = Timestamp.of("8/9/2022, 2:57 PM")
+            .id("ts-custom-tooltip").datetime("2022-08-09T14:57:00Z")
+            .tooltip("Last updated on August 9th, 2022 - 2:57 PM UTC").build();
+
+    public static Timestamp demoTsCustomTooltipContent = Timestamp.of("Halloween")
+            .id("ts-custom-tooltip-content").datetime("2022-10-31T00:00:00Z")
+            .tooltip("31st of October, 2022").build();
 }
