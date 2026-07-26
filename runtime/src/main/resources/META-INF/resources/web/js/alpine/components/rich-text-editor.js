@@ -89,6 +89,24 @@ phaAlpine("phaRichTextEditor", (config = {}) => ({
     this.length = Math.max(0, this._editor.getLength() - 1);
     this._syncHidden();
 
+    // Quill renders its dropdown pickers (header/color/background/align) as
+    // role-carrying spans with no accessible name — label them from their
+    // picker class (axe aria-command-name gates the demo page).
+    const PICKER_LABELS = {
+      "ql-header": "Text style",
+      "ql-font": "Font family",
+      "ql-size": "Font size",
+      "ql-color": "Text color",
+      "ql-background": "Background color",
+      "ql-align": "Text alignment",
+    };
+    this.$root.querySelectorAll(".ql-picker").forEach((picker) => {
+      const label = picker.querySelector(".ql-picker-label");
+      if (!label || label.hasAttribute("aria-label")) return;
+      const key = Object.keys(PICKER_LABELS).find((c) => picker.classList.contains(c));
+      label.setAttribute("aria-label", key ? PICKER_LABELS[key] : "Formatting option");
+    });
+
     this._changeHandler = (_delta, _old, source) => {
       this.length = Math.max(0, this._editor.getLength() - 1);
       this._syncHidden();
