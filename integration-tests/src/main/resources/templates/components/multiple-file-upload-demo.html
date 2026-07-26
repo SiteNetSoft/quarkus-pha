@@ -94,6 +94,15 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#rejected-files" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Rejected file handling</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -176,7 +185,14 @@
                         The horizontal variant with the status section starting expanded.
                       </p>
                       {/description} {#content}{#include components/multiple-file-upload/horizontal-status-expanded
-                      /}{/content} {/include}
+                      /}{/content} {/include} {#include partials/example-card title="Rejected file handling"
+                      slug="rejected-files" component="multiple-file-upload"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        Only JPEG, Doc, PDF and PNG are accepted — any other type opens a warning modal naming the
+                        rejected files.
+                      </p>
+                      {/description} {#content}{#include components/multiple-file-upload/rejected-files /}{/content}
+                      {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
                           id="documentation"

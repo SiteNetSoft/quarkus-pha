@@ -1,0 +1,138 @@
+{! PF parity: react-core 6.6.0 demos MultipleFileUploadRejectedFile — the drop zone accepts only
+   JPEG/Doc/PDF/PNG; dropping or picking any other type opens a warning modal naming the rejected
+   files instead of adding them to the status list. !}
+<div
+  class="pf-v6-c-multiple-file-upload"
+  id="mfu-rejected"
+  x-data="{
+    dragging: false,
+    open: false,
+    rejectedText: '',
+    files: [],
+    accepted(name) { return ['jpg', 'jpeg', 'doc', 'pdf', 'png'].indexOf(name.split('.').pop().toLowerCase()) !== -1; },
+    addFiles(list) {
+      var rejected = [];
+      for (var i = 0; i < list.length; i++) {
+        if (this.accepted(list[i].name)) {
+          this.files.push({ key: list[i].name + '-' + Date.now() + '-' + i, name: list[i].name, size: Math.max(1, Math.round(list[i].size / 1024)) + ' kb' });
+          this.open = true;
+        } else {
+          rejected.push(list[i].name);
+        }
+      }
+      if (rejected.length === 1) { this.rejectedText = rejected[0] + ' is not an accepted file type'; }
+      else if (rejected.length > 1) { this.rejectedText = rejected.join(', ') + ' are not accepted file types'; }
+    }
+  }"
+  :class="dragging ? 'pf-m-drag-over' : ''"
+  @dragenter.prevent="dragging = true"
+  @dragover.prevent="dragging = true"
+  @dragleave="if (!$el.contains($event.relatedTarget)) dragging = false"
+  @drop.prevent="dragging = false; addFiles($event.dataTransfer.files)"
+>
+  <input
+    type="file"
+    multiple
+    accept=".jpg,.jpeg,.doc,.pdf,.png"
+    x-ref="file"
+    style="display: none"
+    aria-hidden="true"
+    tabindex="-1"
+    @change="addFiles($event.target.files); $event.target.value = ''"
+  />
+  <div class="pf-v6-c-multiple-file-upload__main">
+    <div class="pf-v6-c-multiple-file-upload__title">
+      <div class="pf-v6-c-multiple-file-upload__title-icon">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:upload').raw}</span>
+      </div>
+      <div class="pf-v6-c-multiple-file-upload__title-text">Drag and drop files here</div>
+      <div class="pf-v6-c-multiple-file-upload__title-text-separator">or</div>
+    </div>
+    <div class="pf-v6-c-multiple-file-upload__upload">
+      <button class="pf-v6-c-button pf-m-secondary" type="button" @click="$refs.file.click()">
+        <span class="pf-v6-c-button__text">Upload</span>
+      </button>
+    </div>
+    <div class="pf-v6-c-multiple-file-upload__info">Accepted file types: JPEG, Doc, PDF, PNG</div>
+  </div>
+  <div class="pf-v6-c-multiple-file-upload__status" x-show="files.length > 0" x-cloak>
+    <div class="pf-v6-c-expandable-section" :class="open ? 'pf-m-expanded' : ''">
+      <div class="pf-v6-c-expandable-section__toggle">
+        <button class="pf-v6-c-button pf-m-link" type="button" :aria-expanded="open" @click="open = !open">
+          <span class="pf-v6-c-button__icon pf-m-start"
+            ><span class="pf-v6-c-expandable-section__toggle-icon">{icons:svg('fa:angle-down').raw}</span></span
+          >
+          <span class="pf-v6-c-button__text">
+            <span class="pf-v6-c-multiple-file-upload__status-progress">
+              <span class="pf-v6-c-multiple-file-upload__status-progress-icon">{icons:svg('fa:circle-check').raw}</span>
+              <span
+                class="pf-v6-c-multiple-file-upload__status-progress-text"
+                x-text="files.length + ' of ' + files.length + ' files uploaded'"
+                >0 of 0 files uploaded</span
+              >
+            </span>
+          </span>
+        </button>
+      </div>
+      <div class="pf-v6-c-expandable-section__content" x-show="open" x-cloak>
+        <ul class="pf-v6-c-multiple-file-upload__status-list" role="list">
+          <template x-for="f in files" :key="f.key">
+            <li class="pf-v6-c-multiple-file-upload__status-item">
+              <div class="pf-v6-c-multiple-file-upload__status-item-icon">{icons:svg('fa:file').raw}</div>
+              <div class="pf-v6-c-multiple-file-upload__status-item-main">
+                <div class="pf-v6-c-multiple-file-upload__status-item-progress">
+                  <span class="pf-v6-c-multiple-file-upload__status-item-progress-text" x-text="f.name"></span>
+                  <span class="pf-v6-c-multiple-file-upload__status-item-progress-size" x-text="f.size"></span>
+                </div>
+              </div>
+              <div class="pf-v6-c-multiple-file-upload__status-item-close">
+                <button
+                  class="pf-v6-c-button pf-m-plain"
+                  type="button"
+                  :aria-label="'Remove ' + f.name"
+                  @click="files = files.filter((x) => x.key !== f.key)"
+                >
+                  <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+                </button>
+              </div>
+            </li>
+          </template>
+        </ul>
+      </div>
+    </div>
+  </div>
+  {! The backdrop teleports to document.body: the page main-container is a stacking context that
+     would trap it under the masthead. !}
+  <template x-teleport="body">
+    <div
+      class="pf-v6-c-backdrop"
+      id="mfu-rejected-backdrop"
+      x-show="rejectedText !== ''"
+      style="display: none"
+      x-effect="if (rejectedText !== '') PHA.trapFocus($el); else PHA.releaseFocus($el);"
+    >
+      <div class="pf-v6-l-bullseye">
+        <div
+          class="pf-v6-c-modal-box pf-m-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="mfu-rejected-title"
+          @keydown.escape.window="rejectedText = ''"
+        >
+          <div class="pf-v6-c-modal-box__close">
+            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="rejectedText = ''">
+              <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+            </button>
+          </div>
+          <header class="pf-v6-c-modal-box__header">
+            <h1 class="pf-v6-c-modal-box__title" id="mfu-rejected-title">
+              <span class="pf-v6-c-modal-box__title-icon">{icons:svg('fa:triangle-exclamation').raw}</span>
+              <span class="pf-v6-c-modal-box__title-text">Unsupported file</span>
+            </h1>
+          </header>
+          <div class="pf-v6-c-modal-box__body" x-text="rejectedText"></div>
+        </div>
+      </div>
+    </div>
+  </template>
+</div>

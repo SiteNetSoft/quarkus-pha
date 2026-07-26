@@ -160,7 +160,7 @@ public class MiscExamplesRoutes {
                                                "success-alert", "warning-alert", "danger-alert",
                                                "danger-alert-title", "custom-focus"));
         m.put("multiple-file-upload",  Set.of("basic", "horizontal", "status", "status-expanded",
-                                               "horizontal-status-expanded"));
+                                               "horizontal-status-expanded", "rejected-files"));
         m.put("date-picker",           Set.of("basic", "required", "american-format", "helper-text", "min-max",
                                                "french", "with-value", "disabled",
             "invalid",
