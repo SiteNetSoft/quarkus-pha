@@ -29,7 +29,8 @@ public class MiscExamplesRoutes {
     private static final Map<String, Set<String>> EXAMPLES;
     static {
         Map<String, Set<String>> m = new HashMap<>();
-        m.put("timestamp",             Set.of("basic", "basic-formats", "custom-format", "custom-content", "inline", "with-tooltip"));
+        m.put("timestamp",             Set.of("basic", "basic-formats", "custom-format", "custom-content", "inline", "with-tooltip",
+                                               "custom-tooltip"));
         m.put("hero",                  Set.of("basic", "glass"));
         m.put("input-group",           Set.of("basic", "with-textarea", "with-dropdown", "with-popover",
                                                "multiple-siblings"));

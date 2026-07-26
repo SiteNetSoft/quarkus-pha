@@ -16,10 +16,20 @@ test.describe("Timestamp", () => {
     await expect(page.locator("#usage")).toBeVisible();
   });
 
-  test("all 3 example section headings use slug ids", async ({ page }) => {
+  test("example section headings use slug ids", async ({ page }) => {
     await expect(page.locator("h3#basic")).toHaveText("Default");
     await expect(page.locator("h3#inline")).toHaveText("Inline");
     await expect(page.locator("h3#with-tooltip")).toHaveText("Default tooltip");
+    await expect(page.locator("h3#custom-tooltip")).toHaveText("Custom tooltip");
+  });
+
+  test("custom tooltip carries custom title text and content", async ({ page }) => {
+    await expect(page.locator("#ts-custom-tooltip")).toHaveAttribute(
+      "title",
+      "Last updated on August 9th, 2022 - 2:57 PM UTC",
+    );
+    await expect(page.locator("#ts-custom-tooltip-content time")).toHaveText("Halloween");
+    await expect(page.locator("#ts-custom-tooltip-content")).toHaveAttribute("title", "31st of October, 2022");
   });
 
   test("basic timestamp renders human-readable text", async ({ page }) => {
