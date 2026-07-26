@@ -14,7 +14,7 @@ test.describe("User feedback", () => {
   test.describe("Full variant (home menu)", () => {
     test("trigger button opens modal on home page", async ({ page }) => {
       const root = page.locator("#uf-full");
-      const modal = root.locator(".pf-v6-c-modal-box");
+      const modal = page.locator("#uf-full-backdrop .pf-v6-c-modal-box");
       await expect(modal).toBeHidden();
       await root.getByRole("button", { name: "Share your feedback" }).click();
       await expect(modal).toBeVisible();
@@ -22,10 +22,27 @@ test.describe("User feedback", () => {
       await expect(modal.locator(".chr-c-feedback-cards .pf-v6-c-card")).toHaveCount(3);
     });
 
+    test("paints above the masthead (regression: stacking-context trap)", async ({ page }) => {
+      await page.locator("#uf-full").getByRole("button", { name: "Share your feedback" }).click();
+      await expect(page.locator("#uf-full-backdrop .pf-v6-c-modal-box")).toBeVisible();
+      // Hit-test the center of the masthead: with the modal open, the top
+      // paint target there must belong to the teleported backdrop, not the
+      // masthead. An inline backdrop is trapped in the page main-container's
+      // stacking context and paints under the masthead.
+      const hitBackdrop = await page.evaluate(() => {
+        const masthead = document.querySelector(".pf-v6-c-masthead");
+        if (!masthead) return "no-masthead";
+        const r = masthead.getBoundingClientRect();
+        const el = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+        return el && el.closest("#uf-full-backdrop") ? "backdrop" : (el?.className ?? "none");
+      });
+      expect(hitBackdrop).toBe("backdrop");
+    });
+
     test("clicking Share feedback card navigates to share form", async ({ page }) => {
       const root = page.locator("#uf-full");
       await root.getByRole("button", { name: "Share your feedback" }).click();
-      const modal = root.locator(".pf-v6-c-modal-box");
+      const modal = page.locator("#uf-full-backdrop .pf-v6-c-modal-box");
       await modal.getByRole("button", { name: "Share feedback" }).click();
       await expect(modal.locator("#uf-full-title-share")).toBeVisible();
       await expect(modal.locator("#uf-full-feedback")).toBeVisible();
@@ -34,7 +51,7 @@ test.describe("User feedback", () => {
     test("submit transitions to success page", async ({ page }) => {
       const root = page.locator("#uf-full");
       await root.getByRole("button", { name: "Share your feedback" }).click();
-      const modal = root.locator(".pf-v6-c-modal-box");
+      const modal = page.locator("#uf-full-backdrop .pf-v6-c-modal-box");
       await modal.getByRole("button", { name: "Share feedback" }).click();
       await modal.locator("#uf-full-feedback").fill("Looks great so far!");
       await modal.getByRole("button", { name: "Submit feedback" }).click();
@@ -44,7 +61,7 @@ test.describe("User feedback", () => {
     test("Back from share form returns to home", async ({ page }) => {
       const root = page.locator("#uf-full");
       await root.getByRole("button", { name: "Share your feedback" }).click();
-      const modal = root.locator(".pf-v6-c-modal-box");
+      const modal = page.locator("#uf-full-backdrop .pf-v6-c-modal-box");
       await modal.getByRole("button", { name: "Share feedback" }).click();
       // Multiple forms each have a Back button; only the share form's is visible.
       const shareForm = modal.locator(".chr-c-feedback-content").filter({ has: page.locator("#uf-full-title-share") });
@@ -55,16 +72,26 @@ test.describe("User feedback", () => {
     test("Escape closes the modal", async ({ page }) => {
       const root = page.locator("#uf-full");
       await root.getByRole("button", { name: "Share your feedback" }).click();
-      const modal = root.locator(".pf-v6-c-modal-box");
+      const modal = page.locator("#uf-full-backdrop .pf-v6-c-modal-box");
       await expect(modal).toBeVisible();
       await page.keyboard.press("Escape");
+      await expect(modal).toBeHidden();
+    });
+
+    test("clicking outside the dialog closes", async ({ page }) => {
+      await page.locator("#uf-full").getByRole("button", { name: "Share your feedback" }).click();
+      const modal = page.locator("#uf-full-backdrop .pf-v6-c-modal-box");
+      await expect(modal).toBeVisible();
+      // @click.self lives on the bullseye — a backdrop-level handler would
+      // never fire because the bullseye fully covers it.
+      await page.locator("#uf-full-backdrop .pf-v6-l-bullseye").click({ position: { x: 5, y: 5 } });
       await expect(modal).toBeHidden();
     });
 
     test("opt-in to research reveals email field", async ({ page }) => {
       const root = page.locator("#uf-full");
       await root.getByRole("button", { name: "Share your feedback" }).click();
-      const modal = root.locator(".pf-v6-c-modal-box");
+      const modal = page.locator("#uf-full-backdrop .pf-v6-c-modal-box");
       await modal.getByRole("button", { name: "Share feedback" }).click();
       await expect(modal.locator("#uf-full-email-share")).toBeHidden();
       await modal.locator("#uf-full-research").check();
@@ -74,7 +101,7 @@ test.describe("User feedback", () => {
     test("invalid email shows validation error", async ({ page }) => {
       const root = page.locator("#uf-full");
       await root.getByRole("button", { name: "Share your feedback" }).click();
-      const modal = root.locator(".pf-v6-c-modal-box");
+      const modal = page.locator("#uf-full-backdrop .pf-v6-c-modal-box");
       await modal.getByRole("button", { name: "Share feedback" }).click();
       await modal.locator("#uf-full-research").check();
       const email = modal.locator("#uf-full-email-share");
@@ -89,7 +116,7 @@ test.describe("User feedback", () => {
     test("trigger opens straight to share form with no Back button", async ({ page }) => {
       const root = page.locator("#uf-basic");
       await root.getByRole("button", { name: "Send feedback" }).click();
-      const modal = root.locator(".pf-v6-c-modal-box");
+      const modal = page.locator("#uf-basic-backdrop .pf-v6-c-modal-box");
       await expect(modal.locator("#uf-basic-title-share")).toBeVisible();
       // The share form's Back button should be x-show'd out in basic mode.
       const shareForm = modal.locator(".chr-c-feedback-content").filter({ has: page.locator("#uf-basic-title-share") });
@@ -101,7 +128,7 @@ test.describe("User feedback", () => {
     test("email field pre-populated from data-email", async ({ page }) => {
       const root = page.locator("#uf-email");
       await root.getByRole("button", { name: "Share your feedback" }).click();
-      const modal = root.locator(".pf-v6-c-modal-box");
+      const modal = page.locator("#uf-email-backdrop .pf-v6-c-modal-box");
       await modal.getByRole("button", { name: "Share feedback" }).click();
       await modal.locator("#uf-email-research").check();
       await expect(modal.locator("#uf-email-email-share")).toHaveValue("user@example.com");

@@ -14,15 +14,18 @@
     <span class="pf-v6-c-button__text">{triggerLabel ?: 'Share your feedback'}</span>
   </button>
 
+  {! The backdrop teleports to document.body: the PF page main-container creates a stacking context
+     (z-index + glass backdrop-filter) that would trap the fixed backdrop under the masthead. !}
+  <template x-teleport="body">
   <div
     class="pf-v6-c-backdrop chr-c-feedback-modal"
+    id="{id}-backdrop"
     x-show="isOpen"
-    x-cloak
+    style="display: none;"
     x-transition.opacity
     @keydown.escape.window="close()"
-    @click.self="close()"
   >
-    <div class="pf-v6-l-bullseye">
+    <div class="pf-v6-l-bullseye" @click.self="close()">
       <div class="pf-v6-c-modal-box pf-m-lg" role="dialog" aria-modal="true" :aria-labelledby="'{id}-title-' + page">
         <div class="pf-v6-c-modal-box__close">
           <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close feedback" @click="close()">
@@ -197,4 +200,5 @@
       </div>
     </div>
   </div>
+  </template>
 </div>
