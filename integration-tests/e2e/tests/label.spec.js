@@ -167,4 +167,26 @@ test.describe("Label", () => {
       expect(await res.text()).toContain('.maxWidth("38ch")');
     });
   });
+
+  test("add-dropdown demo prepends the picked label", async ({ page }) => {
+    const demo = page.locator("#lbg-add-dropdown");
+    const labels = demo.locator(".pf-v6-c-label-group__list-item .pf-v6-c-label:not(.pf-m-overflow)");
+    await expect(labels).toHaveCount(3);
+    await demo.locator("button", { hasText: "Add label" }).click();
+    await demo.locator(".pf-v6-c-menu__item", { hasText: "Label text 2" }).click();
+    await expect(labels).toHaveCount(4);
+    await expect(labels.first()).toContainText("Label text 2");
+  });
+
+  test("add-modal demo saves the typed label", async ({ page }) => {
+    const demo = page.locator("#lbg-add-modal-demo");
+    await demo.locator("button", { hasText: "Add label" }).click();
+    const backdrop = page.locator("#lbg-add-modal-backdrop");
+    await expect(backdrop.locator(".pf-v6-c-modal-box")).toBeVisible();
+    await backdrop.locator("#lbg-add-modal-input").fill("brand new");
+    await backdrop.locator("button", { hasText: "Save" }).click();
+    await expect(backdrop.locator(".pf-v6-c-modal-box")).toBeHidden();
+    await expect(demo.locator(".pf-v6-c-label", { hasText: "brand new" })).toBeVisible();
+  });
+
 });
