@@ -102,12 +102,13 @@ test.describe("Log viewer", () => {
   });
 
   test.describe("ANSI colors variant", () => {
-    test("renders inline-colored spans for SGR codes", async ({ page }) => {
+    test("renders color-classed spans for SGR codes", async ({ page }) => {
       const root = page.locator("#lv-ansi");
       await expect(root).toBeVisible();
-      // After init, the text nodes contain <span style="color:..."> wrappers
-      // for the OK / FAIL / WARN markers.
-      const colored = root.locator(".pf-v6-c-log-viewer__text span[style*='color']");
+      // After init, the text nodes contain <span class="pha-ansi-*"> wrappers
+      // for the OK / FAIL / WARN markers (theme-aware palette lives in
+      // css/components/log-viewer.css).
+      const colored = root.locator('.pf-v6-c-log-viewer__text span[class*="pha-ansi-"]');
       const count = await colored.count();
       expect(count).toBeGreaterThan(0);
     });
