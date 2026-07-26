@@ -128,6 +128,24 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#size-to-fit" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Size to fit</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#configuration-modal" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Configuration modal</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -247,6 +265,21 @@
                         Copy).
                       </p>
                       {/description} {#content}{#include components/code-editor/custom-control /}{/content} {/include}
+                      {#include partials/example-card title="Size to fit" slug="size-to-fit" component="code-editor"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The editor height grows and shrinks with its content — the code view is an editable plaintext
+                        block, so add or remove lines to see it resize.
+                      </p>
+                      {/description} {#content}{#include components/code-editor/size-to-fit /}{/content} {/include}
+                      {#include partials/example-card title="Configuration modal" slug="configuration-modal"
+                      component="code-editor"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A settings control opens a modal whose changes apply immediately — dark theme and font size
+                        (PF's minimap and line-number switches are Monaco features).
+                      </p>
+                      {/description} {#content}{#include components/code-editor/configuration-modal /}{/content}
+                      {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
