@@ -11,9 +11,9 @@
  *     pf-m-nowrap falls back to the default (break-spaces) wrap behavior.
  *   - ANSI rendering: when data-ansi="true" on the root, walk every
  *     .pf-v6-c-log-viewer__text and replace ANSI SGR escape sequences with
- *     <span style="..."> tags carrying inline color/weight CSS. Supports the
- *     subset most tooling uses — 8 standard colors, bright variants, bold,
- *     reset. Other SGR codes are dropped.
+ *     <span class="pha-ansi-*"> tags (palette in css/components/log-viewer.css,
+ *     theme-aware). Supports the subset most tooling uses — 8 standard colors,
+ *     bright variants, bold, reset. Other SGR codes are dropped.
  *   - Scroll-to-bottom: scrollToBottom() jumps the scroll container to its
  *     bottom; meant for "tail mode" toggles or after a server-driven append.
  *
@@ -141,27 +141,12 @@ phaAlpine("phaLogViewer", () => ({
   _ansiToHtml(s) {
     // Subset of ECMA-48 SGR — colors 30-37 / 90-97, bright bg 40-47 / 100-107,
     // bold (1), reset (0/empty). Unknown codes are dropped.
-    // Values are darkened from classic terminal colors so every one meets the
-    // WCAG AA 4.5:1 contrast ratio on the light theme's white background (axe
-    // gates the demo pages); whites/brights render as distinguishable grays.
-    const COLORS = {
-      30: "#000000",
-      31: "#cc0000",
-      32: "#007700",
-      33: "#996300",
-      34: "#0044cc",
-      35: "#aa00aa",
-      36: "#007a7a",
-      37: "#6e6e6e",
-      90: "#666666",
-      91: "#b32d2d",
-      92: "#008000",
-      93: "#8a5c00",
-      94: "#2f68c4",
-      95: "#8b3d8b",
-      96: "#006666",
-      97: "#595959",
-    };
+    // Colors render via pha-ansi-{code} classes (css/components/log-viewer.css)
+    // rather than inline hex so the palette can differ per theme — both the
+    // light and dark values there meet WCAG AA 4.5:1 on their backgrounds.
+    // Keep the accepted codes in sync with that stylesheet and with the
+    // server-side pre-renderer in ExtensionsRoutes.java.
+    const COLOR_CODES = new Set([30, 31, 32, 33, 34, 35, 36, 37, 90, 91, 92, 93, 94, 95, 96, 97]);
     let out = "";
     let pos = 0;
     let stack = 0;
@@ -178,10 +163,10 @@ phaAlpine("phaLogViewer", () => ({
             stack--;
           }
         } else if (code === 1) {
-          out += '<span style="font-weight:bold">';
+          out += '<span class="pha-ansi-bold">';
           stack++;
-        } else if (COLORS[code]) {
-          out += '<span style="color:' + COLORS[code] + '">';
+        } else if (COLOR_CODES.has(code)) {
+          out += '<span class="pha-ansi-' + code + '">';
           stack++;
         }
       });

@@ -177,15 +177,13 @@ public class ExtensionsRoutes {
     );
 
 
-    // Darkened from classic terminal colors so every value meets WCAG AA 4.5:1
-    // on the light theme's white background (axe gates the demo pages). Keep in
-    // sync with the COLORS map in web/js/alpine/components/log-viewer.js.
-    private static final Map<Integer, String> ANSI_COLORS = Map.ofEntries(
-        Map.entry(30, "#000000"), Map.entry(31, "#cc0000"), Map.entry(32, "#007700"), Map.entry(33, "#996300"),
-        Map.entry(34, "#0044cc"), Map.entry(35, "#aa00aa"), Map.entry(36, "#007a7a"), Map.entry(37, "#6e6e6e"),
-        Map.entry(90, "#666666"), Map.entry(91, "#b32d2d"), Map.entry(92, "#008000"), Map.entry(93, "#8a5c00"),
-        Map.entry(94, "#2f68c4"), Map.entry(95, "#8b3d8b"), Map.entry(96, "#006666"), Map.entry(97, "#595959")
-    );
+    // Colors render via pha-ansi-{code} classes (web/css/components/log-viewer.css)
+    // rather than inline hex so the palette can differ per theme — the light and
+    // dark values there each meet WCAG AA 4.5:1 on their backgrounds. Keep the
+    // accepted codes in sync with that stylesheet and with the client-side parser
+    // in web/js/alpine/components/log-viewer.js.
+    private static final Set<Integer> ANSI_COLOR_CODES =
+        Set.of(30, 31, 32, 33, 34, 35, 36, 37, 90, 91, 92, 93, 94, 95, 96, 97);
 
     private static final Pattern ANSI_SGR = Pattern.compile("\u001B\\[([0-9;]*)m");
 
@@ -222,14 +220,11 @@ public class ExtensionsRoutes {
                 if (code == 0) {
                     while (stack > 0) { out.append("</span>"); stack--; }
                 } else if (code == 1) {
-                    out.append("<span style=\"font-weight:bold\">");
+                    out.append("<span class=\"pha-ansi-bold\">");
                     stack++;
-                } else {
-                    String color = ANSI_COLORS.get(code);
-                    if (color != null) {
-                        out.append("<span style=\"color:").append(color).append("\">");
-                        stack++;
-                    }
+                } else if (ANSI_COLOR_CODES.contains(code)) {
+                    out.append("<span class=\"pha-ansi-").append(code).append("\">");
+                    stack++;
                 }
             }
         }

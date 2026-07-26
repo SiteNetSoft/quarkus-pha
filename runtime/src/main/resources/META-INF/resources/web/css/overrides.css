@@ -21,3 +21,14 @@
 .ws-section-gallery .pf-v6-c-toolbar {
   margin-block-end: var(--pf-t--global--spacer--md);
 }
+
+/* The legacy HTMX demo pages (toast-confirm, click-to-load, live-search, …) render
+   their content directly on <body> without the pf-v6-c-page chrome that normally
+   paints the themed background. The body defaults to UA white, so in dark mode the
+   themed text and link colors land on a white canvas and fail contrast (axe gates
+   the dark-theme sweep). Painting the body with the global background token makes
+   bare pages follow the theme; pages with chrome are unaffected — the page
+   component covers the body. */
+body {
+  background-color: var(--pf-t--global--background--color--primary--default);
+}
