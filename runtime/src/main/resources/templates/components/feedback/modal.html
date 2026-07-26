@@ -18,14 +18,18 @@
      attrs      — raw attribute passthrough on the modal-box. !}
 {! Model mode: pass modal=<org.sitenetsoft.quarkus.pha.model.Modal> — renders the FULL live pattern
    (launcher + backdrop + box). Live inner-state compositions keep the slot shell. !}
+{! The backdrop teleports to document.body: the PF page main-container creates a stacking context
+   (z-index + glass backdrop-filter) that would trap the fixed backdrop under the masthead.
+   PF React portals modals to document.body for the same reason. !}
 {#if modal??}
 <div x-data="{ open: false }">
   <button class="pf-v6-c-button pf-m-primary" type="button" @click="open = true"><span class="pf-v6-c-button__text">{modal.triggerText}</span></button>
+  <template x-teleport="body">
   <div
     class="pf-v6-c-backdrop"
     id="{modal.id}-backdrop"
     x-show="open"
-    x-cloak
+    style="display: none;"
     @keydown.escape.window="if (open) open = false"
   >
     <div class="pf-v6-l-bullseye">
@@ -69,14 +73,16 @@
       </div>
     </div>
   </div>
+  </template>
 </div>
 {#else}
+<template x-teleport="body">
 <div
   class="pf-v6-c-backdrop"
   id="{id}-backdrop"
   {#if eventOpen??}x-data="{ open: false }" @open-modal.window="if ($event.detail === '{id}') open = true" x-effect="if (open) PHA.trapFocus($el); else PHA.releaseFocus($el);"{/if}
   x-show="open"
-  x-cloak
+  style="display: none;"
   @keydown.escape.window="{escapeExpr ?: 'if (open) open = false'}"
 >
   <div class="pf-v6-l-bullseye">
@@ -95,4 +101,5 @@
     </div>
   </div>
 </div>
+</template>
 {/if}
