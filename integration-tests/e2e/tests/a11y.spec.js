@@ -20,10 +20,10 @@ function pathToSlug(p) {
   return p.replace(/^\//, "").replace(/\//g, "__");
 }
 
-function writeReport(testPath, results, blockingCount) {
+function writeReport(testPath, results, blockingCount, suffix = "") {
   if (!REPORT_DIR) return;
   fs.mkdirSync(REPORT_DIR, { recursive: true });
-  const file = path.join(REPORT_DIR, `${pathToSlug(testPath)}.json`);
+  const file = path.join(REPORT_DIR, `${pathToSlug(testPath)}${suffix}.json`);
   // Trim noise: only keep what's useful for triage.
   const trimmed = {
     path: testPath,
@@ -64,6 +64,38 @@ test.describe("Accessibility (axe)", () => {
         );
         throw new Error(
           `${blocking.length} critical/serious axe violation(s) on ${p}:\n  - ${lines.join("\n  - ")}`
+        );
+      }
+      expect(blocking).toEqual([]);
+    });
+  }
+});
+
+// Same sweep with the dark theme applied. Emulating prefers-color-scheme is
+// enough: the head boot script defaults pha-color-scheme to "system" and adds
+// pf-v6-theme-dark from first paint, exactly like a real dark-mode visit.
+test.describe("Accessibility (axe, dark theme)", () => {
+  test.use({ colorScheme: "dark" });
+
+  for (const p of ALL_PATHS) {
+    test(`no critical/serious axe violations on ${p} in dark theme`, async ({ page }) => {
+      await page.goto(p);
+      await page.waitForLoadState("networkidle").catch(() => {});
+      // Guard: the boot script must actually have applied the theme class,
+      // otherwise this silently degrades into a duplicate light-theme scan.
+      await page.waitForFunction(() => document.documentElement.classList.contains("pf-v6-theme-dark"));
+
+      const results = await new AxeBuilder({ page }).analyze();
+      const blocking = results.violations.filter((v) => FAIL_IMPACTS.has(v.impact));
+
+      writeReport(p, results, blocking.length, "__dark");
+
+      if (blocking.length > 0) {
+        const lines = blocking.map(
+          (v) => `[${v.impact}] ${v.id}: ${v.help} (${v.nodes.length} node(s))`
+        );
+        throw new Error(
+          `${blocking.length} critical/serious axe violation(s) on ${p} in dark theme:\n  - ${lines.join("\n  - ")}`
         );
       }
       expect(blocking).toEqual([]);
