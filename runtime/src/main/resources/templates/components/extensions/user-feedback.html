@@ -23,6 +23,7 @@
     x-show="isOpen"
     style="display: none;"
     x-transition.opacity
+    x-effect="if (isOpen) PHA.trapFocus($el); else PHA.releaseFocus($el);"
     @keydown.escape.window="close()"
   >
     <div class="pf-v6-l-bullseye" @click.self="close()">

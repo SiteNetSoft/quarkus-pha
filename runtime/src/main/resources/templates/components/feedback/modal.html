@@ -30,6 +30,7 @@
     id="{modal.id}-backdrop"
     x-show="open"
     style="display: none;"
+    x-effect="if (open) PHA.trapFocus($el); else PHA.releaseFocus($el);"
     @keydown.escape.window="if (open) open = false"
   >
     <div class="pf-v6-l-bullseye">
@@ -80,9 +81,10 @@
 <div
   class="pf-v6-c-backdrop"
   id="{id}-backdrop"
-  {#if eventOpen??}x-data="{ open: false }" @open-modal.window="if ($event.detail === '{id}') open = true" x-effect="if (open) PHA.trapFocus($el); else PHA.releaseFocus($el);"{/if}
+  {#if eventOpen??}x-data="{ open: false }" @open-modal.window="if ($event.detail === '{id}') open = true"{/if}
   x-show="open"
   style="display: none;"
+  x-effect="if (open) PHA.trapFocus($el); else PHA.releaseFocus($el);"
   @keydown.escape.window="{escapeExpr ?: 'if (open) open = false'}"
 >
   <div class="pf-v6-l-bullseye">

@@ -12,6 +12,7 @@
   x-init="window.htmx && htmx.process($el)"
   x-show="open"
   style="display: none;"
+  x-effect="if (open) PHA.trapFocus($el); else PHA.releaseFocus($el);"
   @open-modal.window="if ($event.detail === '{id}') open = true"
   @keydown.escape.window="if (open) open = false"
 >
