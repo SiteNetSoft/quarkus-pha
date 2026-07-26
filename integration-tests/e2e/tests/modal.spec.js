@@ -25,10 +25,12 @@ const EXAMPLES = [
   "danger-alert-title",
 ];
 
-// Modals render inline (no portal), so the sticky page header can overlay
-// them; dispatch clicks directly so Alpine handlers fire regardless.
-const domClick = (locator) => locator.evaluate((el) => el.click());
-
+// The modal backdrop teleports to <body> (Alpine x-teleport) so it paints
+// above the masthead — the PF page main-container is a stacking context that
+// would otherwise trap it. Modal assertions are therefore scoped by the
+// modal-box id (#mo-*), not by the example card that hosts the trigger, and
+// all clicks are real clicks (the pre-teleport dispatch-via-DOM workaround
+// is intentionally gone).
 test.describe("Modal", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/components/modal");
@@ -43,15 +45,32 @@ test.describe("Modal", () => {
   test.describe("Basic", () => {
     const card = '[data-rendered-href="/components/modal/basic"]';
 
-    test("opens, has dialog semantics, closes via button and Escape", async ({ page }) => {
-      await expect(page.locator(`${card} #mo-basic`)).not.toBeVisible();
+    test("paints above the masthead (regression: stacking-context trap)", async ({ page }) => {
       await page.locator(`${card} button`, { hasText: "Open modal" }).first().click();
-      const modal = page.locator(`${card} #mo-basic`);
+      await expect(page.locator("#mo-basic")).toBeVisible();
+      // Hit-test the center of the masthead: with the modal open, the top
+      // paint target there must belong to the teleported backdrop, not the
+      // masthead. An inline backdrop is trapped in the page main-container's
+      // stacking context and paints under the masthead.
+      const hitBackdrop = await page.evaluate(() => {
+        const masthead = document.querySelector(".pf-v6-c-masthead");
+        if (!masthead) return "no-masthead";
+        const r = masthead.getBoundingClientRect();
+        const el = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+        return el && el.closest("#mo-basic-backdrop") ? "backdrop" : (el?.className ?? "none");
+      });
+      expect(hitBackdrop).toBe("backdrop");
+    });
+
+    test("opens, has dialog semantics, closes via button and Escape", async ({ page }) => {
+      await expect(page.locator("#mo-basic")).not.toBeVisible();
+      await page.locator(`${card} button`, { hasText: "Open modal" }).first().click();
+      const modal = page.locator("#mo-basic");
       await expect(modal).toBeVisible();
       await expect(modal).toHaveAttribute("role", "dialog");
       await expect(modal).toHaveAttribute("aria-modal", "true");
       await expect(modal).toHaveAttribute("aria-labelledby", "mo-basic-title");
-      await domClick(page.locator(`${card} .pf-v6-c-modal-box__close button`));
+      await modal.locator(".pf-v6-c-modal-box__close button").click();
       await expect(modal).not.toBeVisible();
       await page.locator(`${card} button`, { hasText: "Open modal" }).first().click();
       await expect(modal).toBeVisible();
@@ -70,7 +89,7 @@ test.describe("Modal", () => {
     ]) {
       test(`${label} button opens modal with the matching size class`, async ({ page }) => {
         await page.locator(`${card} button`, { hasText: label }).first().click();
-        await expect(page.locator(`${card} .pf-v6-c-modal-box`)).toHaveClass(cls);
+        await expect(page.locator("#mo-size")).toHaveClass(cls);
       });
     }
   });
@@ -183,10 +202,10 @@ test.describe("Modal", () => {
       await card.locator("button").first().click();
       const modal = page.locator("#mo-with-dropdown");
       await expect(modal).toBeVisible();
-      await domClick(modal.locator(".pf-v6-c-menu-toggle"));
+      await modal.locator(".pf-v6-c-menu-toggle").click();
       const menu = modal.locator(".pf-v6-c-menu");
       await expect(menu).toBeVisible();
-      await domClick(menu.locator(".pf-v6-c-menu__item").first());
+      await menu.locator(".pf-v6-c-menu__item").first().click();
       await expect(modal.locator(".pf-v6-c-menu-toggle__text")).toHaveText("Action 1");
     });
   });
@@ -197,7 +216,7 @@ test.describe("Modal", () => {
       await card.locator("button").first().click();
       const modal = page.locator("#mo-with-help");
       await expect(modal.locator(".pf-v6-c-popover")).toBeHidden();
-      await domClick(modal.locator("header button[aria-label='Help']"));
+      await modal.locator("header button[aria-label='Help']").click();
       await expect(modal.locator(".pf-v6-c-popover")).toBeVisible();
     });
   });
@@ -211,7 +230,7 @@ test.describe("Modal", () => {
       await expect(create).toBeDisabled();
       await page.locator("#mo-with-form-name").fill("db-primary");
       await expect(create).toBeEnabled();
-      await domClick(create);
+      await create.click();
       await expect(modal).not.toBeVisible();
       await expect(card.locator("p", { hasText: "Created connection" })).toContainText("db-primary");
     });
