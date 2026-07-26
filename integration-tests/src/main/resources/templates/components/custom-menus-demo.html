@@ -20,8 +20,12 @@
                   <div class="pf-v6-c-content pf-m-editorial">
                     <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Custom menus</h1>
                     <p>
-                      Composition pattern — a Menu with arbitrary header / footer / search slots. Use for richer
-                      dropdowns that aren't just a flat action list (e.g. project pickers with a search box).
+                      Composition pattern — the menu suite (toggle, menu, search, groups, panels) combined into richer
+                      dropdowns: multi-select menus with item actions, favorites, drilldowns, inline filters, tree
+                      views, and date pickers. The
+                      <a href="/components/application-launcher">application launcher</a> and
+                      <a href="/components/context-selector">context selector</a> are the same pattern on their own
+                      pages.
                     </p>
                   </div>
                 </div>
@@ -46,27 +50,38 @@
                             <ul class="pf-v6-c-jump-links__list" role="list">
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
+                                  ><a href="#with-actions" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text">With actions</span></span
                                     ></a
                                   ></span
                                 >
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#with-search" class="pf-v6-c-button pf-m-link"
+                                  ><a href="#with-favorites" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With search</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text">With favorites</span></span
                                     ></a
                                   ></span
                                 >
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#flyout" class="pf-v6-c-button pf-m-link"
+                                  ><a href="#with-drilldown" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Flyout</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text">With drilldown</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-inline-search-filter" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text"
+                                        >With inline search filter</span
+                                      ></span
                                     ></a
                                   ></span
                                 >
@@ -82,9 +97,18 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#flyout" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Flyout menu</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#date-select" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Date select</span></span
+                                      ><span class="pf-v6-c-jump-links__link-text">Date select menu</span></span
                                     ></a
                                   ></span
                                 >
@@ -135,27 +159,36 @@
                           </h2>
                         </div>
                       </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="custom-menus"}
+                      {#include partials/example-card title="With actions" slug="with-actions" component="custom-menus"}
                       {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Menu with a header ("Recent projects"), items with descriptions, and a footer link.
+                        A multi-select menu whose items carry icon actions (<code class="ws-code"
+                          >pf-v6-c-menu__item-action</code
+                        >); selecting checks the item and keeps the menu open.
                       </p>
-                      {/description} {#content}{#include components/custom-menus/basic /}{/content} {/include} {#include
-                      partials/example-card title="With search" slug="with-search" component="custom-menus"}
-                      {#description}
+                      {/description} {#content}{#include components/custom-menus/with-actions /}{/content} {/include}
+                      {#include partials/example-card title="With favorites" slug="with-favorites"
+                      component="custom-menus"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        A <code class="ws-code">pf-v6-c-menu__search</code> slot filters the list live (Alpine) — the
-                        toggle + search + list + footer composition (a project picker).
+                        Star an item to pin a clone of it into a Favorites group at the top of the menu; unstar to
+                        remove it again.
                       </p>
-                      {/description} {#content}{#include components/custom-menus/with-search /}{/content} {/include}
-                      {#include partials/example-card title="Flyout" slug="flyout" component="custom-menus"}
-                      {#description}
+                      {/description} {#content}{#include components/custom-menus/with-favorites /}{/content} {/include}
+                      {#include partials/example-card title="With drilldown" slug="with-drilldown"
+                      component="custom-menus"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        A <code class="ws-code">pf-m-flyout</code> item whose nested menu flies out to the side on
-                        hover/click (nested Alpine scope).
+                        A toggle-attached drilldown menu, three levels deep — drill into a submenu, and the breadcrumb
+                        item at its top drills back out.
                       </p>
-                      {/description} {#content}{#include components/custom-menus/flyout /}{/content} {/include}
-                      {#include partials/example-card title="Tree view menu" slug="tree-view-menu"
+                      {/description} {#content}{#include components/custom-menus/with-drilldown /}{/content} {/include}
+                      {#include partials/example-card title="With inline search filter" slug="with-inline-search-filter"
+                      component="custom-menus"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A <code class="ws-code">pf-v6-c-menu__search</code> input filters the scrollable list live; when
+                        nothing matches, a disabled "No results found" item appears.
+                      </p>
+                      {/description} {#content}{#include components/custom-menus/with-inline-search-filter /}{/content}
+                      {/include} {#include partials/example-card title="Tree view menu" slug="tree-view-menu"
                       component="custom-menus"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         The toggle opens a raised <code class="ws-code">pf-v6-c-panel</code> hosting a checkbox tree
@@ -163,8 +196,15 @@
                         mirrors the open state.
                       </p>
                       {/description} {#content}{#include components/custom-menus/tree-view-menu /}{/content} {/include}
-                      {#include partials/example-card title="Date select" slug="date-select" component="custom-menus"}
+                      {#include partials/example-card title="Flyout menu" slug="flyout" component="custom-menus"}
                       {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        A <code class="ws-code">pf-m-flyout</code> item whose nested menu flies out to the side on
+                        hover/click (nested Alpine scope).
+                      </p>
+                      {/description} {#content}{#include components/custom-menus/flyout /}{/content} {/include}
+                      {#include partials/example-card title="Date select menu" slug="date-select"
+                      component="custom-menus"} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         The toggle opens a raised panel hosting the
                         <a href="/components/calendar-month">calendar-month</a> component; picking a day moves the
@@ -185,9 +225,11 @@
                           Custom menus pattern
                         </h3>
                         <p class="pf-v6-c-content--p pf-m-editorial">
-                          Composition — add <code class="ws-code">.pf-v6-c-menu__header</code> and
-                          <code class="ws-code">.pf-v6-c-menu__footer</code> around the standard menu list. Search bars
-                          use <code class="ws-code">.pf-v6-c-menu__search</code>.
+                          Composition — attach a <code class="ws-code">pf-v6-c-menu</code> to a menu-toggle and combine
+                          the menu's own slots: <code class="ws-code">.pf-v6-c-menu__search</code> for filters,
+                          <code class="ws-code">.pf-v6-c-menu__item-action</code> for per-item icon actions and
+                          favorites stars, <code class="ws-code">pf-m-drilldown</code> for nested levels, and
+                          <code class="ws-code">.pf-v6-c-menu__footer</code> for trailing actions.
                         </p>
                       </div>
                       <div class="pf-v6-l-stack__item">
@@ -200,7 +242,7 @@
                       </div>
                       <div class="pf-v6-l-stack__item">
                         <br /><a
-                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/integration-tests/src/main/resources/templates/components/custom-menus/basic.html"
+                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/integration-tests/src/main/resources/templates/components/custom-menus/with-actions.html"
                           target="_blank"
                           rel="noopener noreferrer"
                           >Edit custom-menus example on GitHub</a

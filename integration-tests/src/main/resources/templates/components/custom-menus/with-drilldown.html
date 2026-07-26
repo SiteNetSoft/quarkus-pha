@@ -1,0 +1,403 @@
+{! PF parity: react-core 6.6.0 demos/CustomMenus/DrilldownMenuDemo.tsx — a toggle-attached drilldown
+   menu, three levels deep. Alpine keeps the drill path as a stack; opening the toggle resets it.
+   The content gets a fixed height because PF's JS normally measures the active level. !}
+<div
+  x-data="{ open: false, path: [], drill(id) { this.path.push(id); }, back() { this.path.pop(); } }"
+  @keydown.escape="open = false"
+  style="position: relative; display: inline-block"
+>
+  <button
+    class="pf-v6-c-menu-toggle"
+    type="button"
+    :class="open ? 'pf-m-expanded' : ''"
+    :aria-expanded="open"
+    @click="open = !open; path = []"
+    id="cm-drilldown-toggle"
+  >
+    <span class="pf-v6-c-menu-toggle__text" x-text="open ? 'Expanded' : 'Collapsed'"></span>
+    <span class="pf-v6-c-menu-toggle__controls"
+      ><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span
+    >
+  </button>
+  <div
+    class="pf-v6-c-menu pf-m-drilldown"
+    :class="path.length > 0 ? 'pf-m-drilled-in' : ''"
+    x-show="open"
+    x-cloak
+    @click.outside="open = false"
+    style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 18rem"
+  >
+    <div class="pf-v6-c-menu__content" style="height: 300px">
+      <ul class="pf-v6-c-menu__list" role="menu">
+        <li role="none" class="pf-v6-c-menu__list-item" :class="path[0] === 'start' ? 'pf-m-current-path' : ''">
+          <button
+            class="pf-v6-c-menu__item"
+            type="button"
+            role="menuitem"
+            aria-expanded="false"
+            :aria-expanded="(path[0] === 'start').toString()"
+            @click="drill('start')"
+          >
+            <span class="pf-v6-c-menu__item-main">
+              <span class="pf-v6-c-menu__item-text">Start rollout</span>
+              <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+            </span>
+          </button>
+          <div class="pf-v6-c-menu" :class="path.length > 1 && path[0] === 'start' ? 'pf-m-drilled-in' : ''">
+            <div class="pf-v6-c-menu__content">
+              <ul class="pf-v6-c-menu__list" role="menu">
+                <li role="none" class="pf-v6-c-menu__list-item">
+                  <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="back()">
+                    <span class="pf-v6-c-menu__item-main">
+                      <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-left').raw}</span>
+                      <span class="pf-v6-c-menu__item-text">Start rollout</span>
+                    </span>
+                  </button>
+                </li>
+                <li class="pf-v6-c-divider" role="separator"></li>
+                <li
+                  role="none"
+                  class="pf-v6-c-menu__list-item"
+                  :class="path[1] === 'start-grouping' ? 'pf-m-current-path' : ''"
+                >
+                  <button
+                    class="pf-v6-c-menu__item"
+                    type="button"
+                    role="menuitem"
+                    aria-expanded="false"
+                    :aria-expanded="(path[1] === 'start-grouping').toString()"
+                    @click="drill('start-grouping')"
+                  >
+                    <span class="pf-v6-c-menu__item-main">
+                      <span class="pf-v6-c-menu__item-text">Application Grouping</span>
+                      <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+                      </span><span class="pf-v6-c-menu__item-description">Groups A-C</span>
+                  </button>
+                  <div class="pf-v6-c-menu">
+                    <div class="pf-v6-c-menu__content">
+                      <ul class="pf-v6-c-menu__list" role="menu">
+                        <li role="none" class="pf-v6-c-menu__list-item">
+                          <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="back()">
+                            <span class="pf-v6-c-menu__item-main">
+                              <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-left').raw}</span>
+                              <span class="pf-v6-c-menu__item-text">Application Grouping</span>
+                            </span>
+                          </button>
+                        </li>
+                        <li class="pf-v6-c-divider" role="separator"></li>
+                        <li role="none" class="pf-v6-c-menu__list-item">
+                          <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-main"
+                              ><span class="pf-v6-c-menu__item-text">Group A</span></span
+                            >
+                          </button>
+                        </li>
+                        <li role="none" class="pf-v6-c-menu__list-item">
+                          <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-main"
+                              ><span class="pf-v6-c-menu__item-text">Group B</span></span
+                            >
+                          </button>
+                        </li>
+                        <li role="none" class="pf-v6-c-menu__list-item">
+                          <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-main"
+                              ><span class="pf-v6-c-menu__item-text">Group C</span></span
+                            >
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li role="none" class="pf-v6-c-menu__list-item">
+                  <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                    <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Count</span></span>
+                  </button>
+                </li>
+                <li
+                  role="none"
+                  class="pf-v6-c-menu__list-item"
+                  :class="path[1] === 'start-labels' ? 'pf-m-current-path' : ''"
+                >
+                  <button
+                    class="pf-v6-c-menu__item"
+                    type="button"
+                    role="menuitem"
+                    aria-expanded="false"
+                    :aria-expanded="(path[1] === 'start-labels').toString()"
+                    @click="drill('start-labels')"
+                  >
+                    <span class="pf-v6-c-menu__item-main">
+                      <span class="pf-v6-c-menu__item-text">Labels</span>
+                      <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+                    </span>
+                  </button>
+                  <div class="pf-v6-c-menu">
+                    <div class="pf-v6-c-menu__content">
+                      <ul class="pf-v6-c-menu__list" role="menu">
+                        <li role="none" class="pf-v6-c-menu__list-item">
+                          <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="back()">
+                            <span class="pf-v6-c-menu__item-main">
+                              <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-left').raw}</span>
+                              <span class="pf-v6-c-menu__item-text">Labels</span>
+                            </span>
+                          </button>
+                        </li>
+                        <li class="pf-v6-c-divider" role="separator"></li>
+                        <li role="none" class="pf-v6-c-menu__list-item">
+                          <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-main"
+                              ><span class="pf-v6-c-menu__item-text">Label 1</span></span
+                            >
+                          </button>
+                        </li>
+                        <li role="none" class="pf-v6-c-menu__list-item">
+                          <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-main"
+                              ><span class="pf-v6-c-menu__item-text">Label 2</span></span
+                            >
+                          </button>
+                        </li>
+                        <li role="none" class="pf-v6-c-menu__list-item">
+                          <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-main"
+                              ><span class="pf-v6-c-menu__item-text">Label 3</span></span
+                            >
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li role="none" class="pf-v6-c-menu__list-item">
+                  <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                    <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Annotations</span></span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li role="none" class="pf-v6-c-menu__list-item" :class="path[0] === 'pause' ? 'pf-m-current-path' : ''">
+          <button
+            class="pf-v6-c-menu__item"
+            type="button"
+            role="menuitem"
+            aria-expanded="false"
+            :aria-expanded="(path[0] === 'pause').toString()"
+            @click="drill('pause')"
+          >
+            <span class="pf-v6-c-menu__item-main">
+              <span class="pf-v6-c-menu__item-text">Pause rollouts</span>
+              <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+            </span>
+          </button>
+          <div class="pf-v6-c-menu" :class="path.length > 1 && path[0] === 'pause' ? 'pf-m-drilled-in' : ''">
+            <div class="pf-v6-c-menu__content">
+              <ul class="pf-v6-c-menu__list" role="menu">
+                <li role="none" class="pf-v6-c-menu__list-item">
+                  <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="back()">
+                    <span class="pf-v6-c-menu__item-main">
+                      <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-left').raw}</span>
+                      <span class="pf-v6-c-menu__item-text">Pause rollouts</span>
+                    </span>
+                  </button>
+                </li>
+                <li class="pf-v6-c-divider" role="separator"></li>
+                <li
+                  role="none"
+                  class="pf-v6-c-menu__list-item"
+                  :class="path[1] === 'pause-grouping' ? 'pf-m-current-path' : ''"
+                >
+                  <button
+                    class="pf-v6-c-menu__item"
+                    type="button"
+                    role="menuitem"
+                    aria-expanded="false"
+                    :aria-expanded="(path[1] === 'pause-grouping').toString()"
+                    @click="drill('pause-grouping')"
+                  >
+                    <span class="pf-v6-c-menu__item-main">
+                      <span class="pf-v6-c-menu__item-text">Application Grouping</span>
+                      <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+                      </span><span class="pf-v6-c-menu__item-description">Groups A-C</span>
+                  </button>
+                  <div class="pf-v6-c-menu">
+                    <div class="pf-v6-c-menu__content">
+                      <ul class="pf-v6-c-menu__list" role="menu">
+                        <li role="none" class="pf-v6-c-menu__list-item">
+                          <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="back()">
+                            <span class="pf-v6-c-menu__item-main">
+                              <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-left').raw}</span>
+                              <span class="pf-v6-c-menu__item-text">Application Grouping</span>
+                            </span>
+                          </button>
+                        </li>
+                        <li class="pf-v6-c-divider" role="separator"></li>
+                        <li role="none" class="pf-v6-c-menu__list-item">
+                          <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-main"
+                              ><span class="pf-v6-c-menu__item-text">Group A</span></span
+                            >
+                          </button>
+                        </li>
+                        <li role="none" class="pf-v6-c-menu__list-item">
+                          <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-main"
+                              ><span class="pf-v6-c-menu__item-text">Group B</span></span
+                            >
+                          </button>
+                        </li>
+                        <li role="none" class="pf-v6-c-menu__list-item">
+                          <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-main"
+                              ><span class="pf-v6-c-menu__item-text">Group C</span></span
+                            >
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li role="none" class="pf-v6-c-menu__list-item">
+                  <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                    <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Count</span></span>
+                  </button>
+                </li>
+                <li
+                  role="none"
+                  class="pf-v6-c-menu__list-item"
+                  :class="path[1] === 'pause-labels' ? 'pf-m-current-path' : ''"
+                >
+                  <button
+                    class="pf-v6-c-menu__item"
+                    type="button"
+                    role="menuitem"
+                    aria-expanded="false"
+                    :aria-expanded="(path[1] === 'pause-labels').toString()"
+                    @click="drill('pause-labels')"
+                  >
+                    <span class="pf-v6-c-menu__item-main">
+                      <span class="pf-v6-c-menu__item-text">Labels</span>
+                      <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+                    </span>
+                  </button>
+                  <div class="pf-v6-c-menu">
+                    <div class="pf-v6-c-menu__content">
+                      <ul class="pf-v6-c-menu__list" role="menu">
+                        <li role="none" class="pf-v6-c-menu__list-item">
+                          <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="back()">
+                            <span class="pf-v6-c-menu__item-main">
+                              <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-left').raw}</span>
+                              <span class="pf-v6-c-menu__item-text">Labels</span>
+                            </span>
+                          </button>
+                        </li>
+                        <li class="pf-v6-c-divider" role="separator"></li>
+                        <li role="none" class="pf-v6-c-menu__list-item">
+                          <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-main"
+                              ><span class="pf-v6-c-menu__item-text">Label 1</span></span
+                            >
+                          </button>
+                        </li>
+                        <li role="none" class="pf-v6-c-menu__list-item">
+                          <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-main"
+                              ><span class="pf-v6-c-menu__item-text">Label 2</span></span
+                            >
+                          </button>
+                        </li>
+                        <li role="none" class="pf-v6-c-menu__list-item">
+                          <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-main"
+                              ><span class="pf-v6-c-menu__item-text">Label 3</span></span
+                            >
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li role="none" class="pf-v6-c-menu__list-item">
+                  <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                    <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Annotations</span></span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li role="none" class="pf-v6-c-menu__list-item" :class="path[0] === 'storage' ? 'pf-m-current-path' : ''">
+          <button
+            class="pf-v6-c-menu__item"
+            type="button"
+            role="menuitem"
+            aria-expanded="false"
+            :aria-expanded="(path[0] === 'storage').toString()"
+            @click="drill('storage')"
+          >
+            <span class="pf-v6-c-menu__item-main">
+              <span class="pf-v6-c-menu__item-icon">{icons:svg('pficon:storage-domain').raw}</span>
+              <span class="pf-v6-c-menu__item-text">Add storage</span>
+              <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-right').raw}</span>
+            </span>
+          </button>
+          <div class="pf-v6-c-menu">
+            <div class="pf-v6-c-menu__content">
+              <ul class="pf-v6-c-menu__list" role="menu">
+                <li role="none" class="pf-v6-c-menu__list-item">
+                  <button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="back()">
+                    <span class="pf-v6-c-menu__item-main">
+                      <span class="pf-v6-c-menu__item-toggle-icon">{icons:svg('fa:angle-left').raw}</span>
+                      <span class="pf-v6-c-menu__item-icon">{icons:svg('pficon:storage-domain').raw}</span>
+                      <span class="pf-v6-c-menu__item-text">Add storage</span>
+                    </span>
+                  </button>
+                </li>
+                <li class="pf-v6-c-divider" role="separator"></li>
+                <li role="none" class="pf-v6-c-menu__list-item">
+                  <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                    <span class="pf-v6-c-menu__item-main">
+                      <span class="pf-v6-c-menu__item-icon">{icons:svg('fa:code-branch').raw}</span>
+                      <span class="pf-v6-c-menu__item-text">From Git</span>
+                    </span>
+                  </button>
+                </li>
+                <li role="none" class="pf-v6-c-menu__list-item">
+                  <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                    <span class="pf-v6-c-menu__item-main">
+                      <span class="pf-v6-c-menu__item-icon">{icons:svg('pficon:server').raw}</span>
+                      <span class="pf-v6-c-menu__item-text">Container Image</span>
+                    </span>
+                  </button>
+                </li>
+                <li role="none" class="pf-v6-c-menu__list-item">
+                  <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                    <span class="pf-v6-c-menu__item-main">
+                      <span class="pf-v6-c-menu__item-icon">{icons:svg('fa:cube').raw}</span>
+                      <span class="pf-v6-c-menu__item-text">Docker File</span>
+                    </span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li role="none" class="pf-v6-c-menu__list-item">
+          <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+            <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Edit</span></span>
+          </button>
+        </li>
+        <li role="none" class="pf-v6-c-menu__list-item">
+          <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+            <span class="pf-v6-c-menu__item-main"
+              ><span class="pf-v6-c-menu__item-text">Delete deployment config</span></span
+            >
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

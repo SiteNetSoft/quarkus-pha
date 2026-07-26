@@ -14,9 +14,9 @@ test.describe("Custom menus", () => {
     await expect(page.locator("h2#documentation")).toBeVisible();
   });
 
-  test("Basic example-card section id is visible", async ({ page }) => {
-    await expect(page.locator("h3#basic")).toBeVisible();
-    await expect(page.locator("h3#basic")).toHaveText("Basic");
+  test("With actions example-card section id is visible", async ({ page }) => {
+    await expect(page.locator("h3#with-actions")).toBeVisible();
+    await expect(page.locator("h3#with-actions")).toHaveText("With actions");
   });
 
   test("Documentation sub-section ids are visible", async ({ page }) => {
@@ -24,59 +24,118 @@ test.describe("Custom menus", () => {
     await expect(page.locator("h3#usage")).toBeVisible();
   });
 
-  test.describe("Basic example", () => {
-    test("toggle is visible with default text 'Project'", async ({ page }) => {
-      const toggle = page.locator("#cm-basic-toggle");
-      await expect(toggle).toBeVisible();
-      await expect(toggle.locator(".pf-v6-c-menu-toggle__text")).toHaveText("Project");
-    });
-
-    test("menu is hidden by default", async ({ page }) => {
-      const menu = page.locator("#cm-basic-toggle").locator("..").locator(".pf-v6-c-menu");
-      await expect(menu).not.toBeVisible();
-    });
-
-    test("clicking toggle opens menu with header, items, and footer", async ({ page }) => {
-      await page.locator("#cm-basic-toggle").click();
-      const wrapper = page.locator("#cm-basic-toggle").locator("..");
-      await expect(wrapper.locator(".pf-v6-c-menu")).toBeVisible();
-      await expect(wrapper.locator(".pf-v6-c-menu__header")).toBeVisible();
-      await expect(wrapper.locator(".pf-v6-c-menu__header strong")).toHaveText("Recent projects");
-      await expect(wrapper.locator(".pf-v6-c-menu__list-item")).toHaveCount(2);
-      await expect(wrapper.locator(".pf-v6-c-menu__footer")).toBeVisible();
-    });
-
-    test("items have description text", async ({ page }) => {
-      await page.locator("#cm-basic-toggle").click();
-      const wrapper = page.locator("#cm-basic-toggle").locator("..");
-      const descriptions = wrapper.locator(".pf-v6-c-menu__item-description");
-      await expect(descriptions).toHaveCount(2);
-      await expect(descriptions.nth(0)).toHaveText("Backend service");
-      await expect(descriptions.nth(1)).toHaveText("Web frontend");
-    });
-
-    test("toggle gets expanded modifier when open", async ({ page }) => {
-      const toggle = page.locator("#cm-basic-toggle");
+  test.describe("With actions", () => {
+    test("toggle text flips between Collapsed and Expanded", async ({ page }) => {
+      const toggle = page.locator("#cm-actions-toggle");
+      await expect(toggle.locator(".pf-v6-c-menu-toggle__text")).toHaveText("Collapsed");
       await toggle.click();
-      await expect(toggle).toHaveClass(/pf-m-expanded/);
+      await expect(toggle.locator(".pf-v6-c-menu-toggle__text")).toHaveText("Expanded");
     });
 
-    test("footer contains 'Browse all projects' link", async ({ page }) => {
-      await page.locator("#cm-basic-toggle").click();
-      const wrapper = page.locator("#cm-basic-toggle").locator("..");
-      await expect(wrapper.locator(".pf-v6-c-menu__footer .pf-v6-c-button__text")).toHaveText("Browse all projects");
+    test("menu shows the Actions group with icon actions and a disabled item", async ({ page }) => {
+      await page.locator("#cm-actions-toggle").click();
+      const wrapper = page.locator("#cm-actions-toggle").locator("..");
+      await expect(wrapper.locator(".pf-v6-c-menu__group-title")).toHaveText("Actions");
+      await expect(wrapper.locator(".pf-v6-c-menu__item-action")).toHaveCount(4);
+      await expect(wrapper.locator(".pf-v6-c-menu__item", { hasText: "Item 2" })).toBeDisabled();
+    });
+
+    test("selecting checks the item and keeps the menu open; reselecting unchecks", async ({ page }) => {
+      await page.locator("#cm-actions-toggle").click();
+      const wrapper = page.locator("#cm-actions-toggle").locator("..");
+      const item1 = wrapper.locator(".pf-v6-c-menu__item", { hasText: "Item 1" });
+      await item1.click();
+      await expect(wrapper.locator(".pf-v6-c-menu")).toBeVisible();
+      await expect(item1).toHaveAttribute("aria-selected", "true");
+      await expect(item1.locator(".pf-v6-c-menu__item-select-icon")).toBeVisible();
+      const item3 = wrapper.locator(".pf-v6-c-menu__item", { hasText: "Item 3" });
+      await item3.click();
+      await expect(item3).toHaveAttribute("aria-selected", "true");
+      await item1.click();
+      await expect(item1).toHaveAttribute("aria-selected", "false");
     });
   });
 
-  test.describe("With search", () => {
-    test("typing in the search slot filters the list", async ({ page }) => {
-      await page.locator("#cm-search-toggle").click();
-      const wrapper = page.locator("#cm-search-toggle").locator("..");
+  test.describe("With favorites", () => {
+    test("no Favorites group until an item is starred", async ({ page }) => {
+      await page.locator("#cm-favorites-toggle").click();
+      const wrapper = page.locator("#cm-favorites-toggle").locator("..");
+      await expect(wrapper.locator(".pf-v6-c-menu__group-title", { hasText: "Favorites" })).not.toBeVisible();
+      await expect(wrapper.locator(".pf-v6-c-menu__group-title", { hasText: "Group 1" })).toBeVisible();
+      await expect(wrapper.locator(".pf-v6-c-menu__group-title", { hasText: "Group 2" })).toBeVisible();
+    });
+
+    test("starring pins a clone into Favorites; unstarring removes it", async ({ page }) => {
+      await page.locator("#cm-favorites-toggle").click();
+      const wrapper = page.locator("#cm-favorites-toggle").locator("..");
+      await wrapper.locator('button[aria-label="Favorite Item 2"]').click();
+      await expect(wrapper.locator(".pf-v6-c-menu__group-title", { hasText: "Favorites" })).toBeVisible();
+      await expect(wrapper.locator('button[aria-label="Unfavorite Item 2"]')).toHaveCount(2);
+      await wrapper.locator('button[aria-label="Unfavorite Item 2"]').first().click();
+      await expect(wrapper.locator(".pf-v6-c-menu__group-title", { hasText: "Favorites" })).not.toBeVisible();
+    });
+  });
+
+  test.describe("With drilldown", () => {
+    test("drilling in shows the submenu and the breadcrumb drills back out", async ({ page }) => {
+      await page.locator("#cm-drilldown-toggle").click();
+      const wrapper = page.locator("#cm-drilldown-toggle").locator("..");
+      const menu = wrapper.locator(".pf-v6-c-menu.pf-m-drilldown");
+      await expect(menu).toBeVisible();
+      await menu.locator(".pf-v6-c-menu__item", { hasText: "Start rollout" }).first().click();
+      await expect(menu).toHaveClass(/pf-m-drilled-in/);
+      const sub = menu.locator("li.pf-m-current-path > .pf-v6-c-menu").first();
+      await expect(sub.locator(".pf-v6-c-menu__item", { hasText: "Application Grouping" }).first()).toBeVisible();
+      // the first list item of the drilled-in submenu is the breadcrumb that drills back out
+      await sub.locator("li").first().locator(".pf-v6-c-menu__item").click();
+      await expect(menu).not.toHaveClass(/pf-m-drilled-in/);
+    });
+
+    test("drills three levels deep", async ({ page }) => {
+      await page.locator("#cm-drilldown-toggle").click();
+      const wrapper = page.locator("#cm-drilldown-toggle").locator("..");
+      const menu = wrapper.locator(".pf-v6-c-menu.pf-m-drilldown");
+      await menu.locator(".pf-v6-c-menu__item", { hasText: "Start rollout" }).first().click();
+      const subs = menu.locator("li.pf-m-current-path > .pf-v6-c-menu");
+      await subs.first().locator(".pf-v6-c-menu__item", { hasText: "Application Grouping" }).first().click();
+      await expect(subs.first()).toHaveClass(/pf-m-drilled-in/);
+      await expect(subs.nth(1).locator(".pf-v6-c-menu__item", { hasText: "Group A" })).toBeVisible();
+    });
+
+    test("reopening the toggle resets the drill state", async ({ page }) => {
+      const toggle = page.locator("#cm-drilldown-toggle");
+      await toggle.click();
+      const wrapper = toggle.locator("..");
+      const menu = wrapper.locator(".pf-v6-c-menu.pf-m-drilldown");
+      await menu.locator(".pf-v6-c-menu__item", { hasText: "Start rollout" }).first().click();
+      await toggle.click();
+      await toggle.click();
+      await expect(menu).not.toHaveClass(/pf-m-drilled-in/);
+    });
+  });
+
+  test.describe("With inline search filter", () => {
+    test("typing filters the list live", async ({ page }) => {
+      await page.locator("#cm-inline-search-toggle").click();
+      const wrapper = page.locator("#cm-inline-search-toggle").locator("..");
       const items = wrapper.locator(".pf-v6-c-menu__list-item");
-      await expect(items.filter({ hasText: "Apollo" })).toBeVisible();
-      await wrapper.locator(".pf-v6-c-menu__search input").fill("mer");
-      await expect(items.filter({ hasText: "Mercury" })).toBeVisible();
-      await expect(items.filter({ hasText: "Apollo" })).toBeHidden();
+      // 13 data items + the always-attached (hidden) "No results found" item
+      await expect(items).toHaveCount(14);
+      await wrapper.locator(".pf-v6-c-menu__search input").fill("azure");
+      await expect(items.filter({ hasText: "Azure" })).toHaveCount(2);
+      await expect(items.filter({ hasText: "AWS" })).toHaveCount(0);
+    });
+
+    test("no match shows the disabled No results found item; reset clears it", async ({ page }) => {
+      await page.locator("#cm-inline-search-toggle").click();
+      const wrapper = page.locator("#cm-inline-search-toggle").locator("..");
+      await wrapper.locator(".pf-v6-c-menu__search input").fill("does-not-exist");
+      const noResults = wrapper.locator(".pf-v6-c-menu__item", { hasText: "No results found" });
+      await expect(noResults).toBeVisible();
+      await expect(noResults).toBeDisabled();
+      await wrapper.locator('button[aria-label="Reset"]').click();
+      await expect(noResults).toBeHidden();
+      await expect(wrapper.locator(".pf-v6-c-menu__list-item", { hasText: "Action 1" })).toBeVisible();
     });
   });
 
@@ -158,7 +217,15 @@ test.describe("Custom menus", () => {
   });
 
   test.describe("Standalone routes", () => {
-    for (const example of ["basic", "with-search", "flyout", "tree-view-menu", "date-select"]) {
+    for (const example of [
+      "with-actions",
+      "with-favorites",
+      "with-drilldown",
+      "with-inline-search-filter",
+      "tree-view-menu",
+      "flyout",
+      "date-select",
+    ]) {
       test(`/components/custom-menus/${example} returns 200`, async ({ page }) => {
         const res = await page.goto(`/components/custom-menus/${example}`);
         expect(res.status()).toBe(200);

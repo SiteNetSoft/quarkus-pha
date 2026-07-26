@@ -2,6 +2,8 @@
 {! Required: toggleText !}
 {! Optional: id — DOM id on the root; omit unless something else references the selector. !}
 {! Content block: &lt;li&gt; menu items !}
+{! Optional #footer slot: a pf-v6-c-menu__footer element rendered after the menu content. !}
+{! The search input filters live; the search button matches PF's markup (PF only filters on click/Enter). !}
 <div
   {#if id??}id="{id}"{/if}
   x-data="{ open: false, search: '', selected: '{toggleText}' }"
@@ -20,29 +22,47 @@
     </span>
   </button>
   <div
-    class="pf-v6-c-menu"
+    class="pf-v6-c-menu pf-m-scrollable"
     x-show="open"
     x-cloak
     @click.outside="open = false"
     style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 15rem"
   >
     <div class="pf-v6-c-menu__search">
-      <div class="pf-v6-c-menu__search-input"><div class="pf-v6-c-text-input-group">
-        <div class="pf-v6-c-text-input-group__main pf-m-icon">
-          <span class="pf-v6-c-text-input-group__text">
-            <span class="pf-v6-c-text-input-group__icon"> {icons:svg('fa:search').raw} </span>
-            <input
-              class="pf-v6-c-text-input-group__text-input"
-              type="text"
-              placeholder="Search"
-              aria-label="Search"
-              x-model="search"
-              @keydown.escape="open = false"
-            />
-          </span>
+      <div class="pf-v6-c-menu__search-input">
+        <div class="pf-v6-c-input-group">
+          <div class="pf-v6-c-input-group__item pf-m-fill">
+            <div class="pf-v6-c-text-input-group">
+              <div class="pf-v6-c-text-input-group__main pf-m-icon">
+                <span class="pf-v6-c-text-input-group__text">
+                  <span class="pf-v6-c-text-input-group__icon"> {icons:svg('fa:search').raw} </span>
+                  <input
+                    class="pf-v6-c-text-input-group__text-input"
+                    type="text"
+                    placeholder="Search"
+                    aria-label="Search"
+                    x-model="search"
+                    x-ref="csSearch"
+                    @keydown.escape="open = false"
+                  />
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="pf-v6-c-input-group__item">
+            <button
+              class="pf-v6-c-button pf-m-control"
+              type="button"
+              aria-label="Search menu items"
+              @click="$refs.csSearch.focus()"
+            >
+              <span class="pf-v6-c-button__icon">{icons:svg('fa:search').raw}</span>
+            </button>
+          </div>
         </div>
-      </div></div>
+      </div>
     </div>
+    <hr class="pf-v6-c-divider" />
     <div class="pf-v6-c-menu__content">
       <ul
         class="pf-v6-c-menu__list"
@@ -53,5 +73,6 @@
         {#let id=null}{#insert content}{/insert}{/let}
       </ul>
     </div>
+    {#insert footer}{/insert}
   </div>
 </div>

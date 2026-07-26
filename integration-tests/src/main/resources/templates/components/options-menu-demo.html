@@ -101,7 +101,8 @@
                       {#include partials/example-card title="Basic" slug="basic" component="options-menu"}
                       {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Sort-by chooser — radio-group behavior with a check icon on the chosen item.
+                        Single-select menu with a check icon on the chosen option — two loose options (one disabled),
+                        then two titled groups separated by dividers. Selecting keeps the menu open.
                       </p>
                       {/description} {#content}{#include components/options-menu/basic /}{/content} {/include}
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
@@ -118,9 +119,10 @@
                           Options menu pattern
                         </h3>
                         <p class="pf-v6-c-content--p pf-m-editorial">
-                          Composition — Dropdown + role="menuitemradio" on each item. The chosen item carries
-                          <code class="ws-code">pf-m-selected</code> and renders
-                          <code class="ws-code">.pf-v6-c-menu__item-select-icon</code>.
+                          Composition — a Select-style menu: role="listbox" lists with role="option" items. The chosen
+                          item carries <code class="ws-code">pf-m-selected</code> and renders
+                          <code class="ws-code">.pf-v6-c-menu__item-select-icon</code>; groups are
+                          <code class="ws-code">.pf-v6-c-menu__group</code> sections split by dividers.
                         </p>
                       </div>
                       <div class="pf-v6-l-stack__item">

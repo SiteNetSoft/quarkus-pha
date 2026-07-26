@@ -194,7 +194,9 @@ public class MiscExamplesRoutes {
         m.put("application-launcher",  Set.of("application-launcher-menu"));
         m.put("infinite-scroll",       Set.of("basic"));
         m.put("options-menu",          Set.of("basic"));
-        m.put("custom-menus",          Set.of("basic", "with-search", "flyout", "tree-view-menu", "date-select"));
+        m.put("custom-menus",          Set.of("with-actions", "with-favorites", "with-drilldown",
+                                               "with-inline-search-filter", "tree-view-menu", "flyout",
+                                               "date-select"));
         m.put("password-generator",    Set.of("basic"));
         m.put("password-strength",     Set.of("basic"));
         m.put("date-and-time-picker",  Set.of("basic"));

@@ -1,0 +1,83 @@
+{! PF parity: react-core 6.6.0 demos/CustomMenus/InlineSearchFilterMenuDemo.tsx — a toggle-attached
+   scrollable menu whose search input filters items inline, with a disabled "No results found" item. !}
+<div
+  x-data="{
+    open: false,
+    q: '',
+    active: null,
+    items: [ 'Action 1', 'Action 2', 'Action 3', 'My project', 'OpenShift cluster', 'Production Ansible', 'AWS', 'Azure', 'My project 2', 'OpenShift cluster 2', 'Production Ansible 2', 'AWS 2', 'Azure 2' ],
+    get filtered() { return this.items.filter(function (it) { return this.q === '' || it.toLowerCase().indexOf(this.q.toLowerCase()) !== -1; }, this); }
+  }"
+  @keydown.escape="open = false"
+  style="position: relative; display: inline-block"
+>
+  <button
+    class="pf-v6-c-menu-toggle"
+    type="button"
+    :class="open ? 'pf-m-expanded' : ''"
+    :aria-expanded="open"
+    @click="open = !open"
+    id="cm-inline-search-toggle"
+  >
+    <span class="pf-v6-c-menu-toggle__text" x-text="open ? 'Expanded' : 'Collapsed'"></span>
+    <span class="pf-v6-c-menu-toggle__controls"
+      ><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span
+    >
+  </button>
+  <div
+    class="pf-v6-c-menu pf-m-scrollable"
+    x-show="open"
+    x-cloak
+    @click.outside="open = false"
+    style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 16rem"
+  >
+    <div class="pf-v6-c-menu__search">
+      <div class="pf-v6-c-menu__search-input">
+        <div class="pf-v6-c-text-input-group">
+          <div class="pf-v6-c-text-input-group__main pf-m-icon">
+            <span class="pf-v6-c-text-input-group__text">
+              <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+              <input
+                class="pf-v6-c-text-input-group__text-input"
+                type="text"
+                x-model="q"
+                x-ref="search"
+                aria-label="Filter menu items"
+              />
+            </span>
+          </div>
+          <div class="pf-v6-c-text-input-group__utilities" x-show="q !== ''" x-cloak>
+            <button
+              class="pf-v6-c-button pf-m-plain"
+              type="button"
+              aria-label="Reset"
+              @click.stop="q = ''; $refs.search.focus()"
+            >
+              <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="pf-v6-c-divider" />
+    <div class="pf-v6-c-menu__content" style="max-height: 200px">
+      <ul class="pf-v6-c-menu__list" role="listbox">
+        <template x-for="it in filtered" :key="it">
+          <li class="pf-v6-c-menu__list-item" :class="active === it ? 'pf-m-selected' : ''">
+            <button class="pf-v6-c-menu__item" type="button" role="option" :aria-selected="active === it" @click="active = it">
+              <span class="pf-v6-c-menu__item-main">
+                <span class="pf-v6-c-menu__item-text" x-text="it"></span>
+                <span class="pf-v6-c-menu__item-select-icon" x-show="active === it">{icons:svg('fa:check').raw}</span>
+              </span>
+            </button>
+          </li>
+        </template>
+        <li class="pf-v6-c-menu__list-item pf-m-disabled" x-show="q !== '' && filtered.length === 0" x-cloak>
+          <button class="pf-v6-c-menu__item pf-m-disabled" type="button" disabled aria-disabled="true">
+            <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">No results found</span></span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
