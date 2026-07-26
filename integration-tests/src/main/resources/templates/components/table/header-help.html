@@ -4,10 +4,12 @@
 <table class="pf-v6-c-table" role="grid" id="tbl-header-help" aria-label="Misc table">
   <thead>
     <tr>
-      <th scope="col" class="pf-m-help">
+      {! The floating tooltip/popover boxes are children of the th, not of the inline
+         column-help-action span — a div inside a span is invalid HTML (vnu fails CI). !}
+      <th scope="col" class="pf-m-help" x-data="{ tip: false }" style="position: relative">
         <div class="pf-v6-c-table__column-help">
           <span class="pf-v6-c-table__text">Repositories</span>
-          <span class="pf-v6-c-table__column-help-action" x-data="{ tip: false }" style="position: relative">
+          <span class="pf-v6-c-table__column-help-action">
             <button
               class="pf-v6-c-button pf-m-no-padding pf-m-plain"
               type="button"
@@ -19,24 +21,24 @@
             >
               <span class="pf-v6-c-button__icon">{icons:svg('fa:circle-question').raw}</span>
             </button>
-            <div
-              class="pf-v6-c-tooltip pf-m-top"
-              role="tooltip"
-              x-show="tip"
-              x-cloak
-              style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: max-content; max-width: 240px; z-index: 300"
-            >
-              <div class="pf-v6-c-tooltip__arrow"></div>
-              <div class="pf-v6-c-tooltip__content pf-m-text-align-left">More information about repositories</div>
-            </div>
           </span>
+        </div>
+        <div
+          class="pf-v6-c-tooltip pf-m-top"
+          role="tooltip"
+          x-show="tip"
+          x-cloak
+          style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: max-content; max-width: 240px; z-index: 300"
+        >
+          <div class="pf-v6-c-tooltip__arrow"></div>
+          <div class="pf-v6-c-tooltip__content pf-m-text-align-left">More information about repositories</div>
         </div>
       </th>
       <th scope="col">Branches</th>
-      <th scope="col" class="pf-m-help">
+      <th scope="col" class="pf-m-help" x-data="{ open: false }" style="position: relative">
         <div class="pf-v6-c-table__column-help">
           <span class="pf-v6-c-table__text">Pull requests</span>
-          <span class="pf-v6-c-table__column-help-action" x-data="{ open: false }" style="position: relative">
+          <span class="pf-v6-c-table__column-help-action">
             <button
               class="pf-v6-c-button pf-m-no-padding pf-m-plain"
               type="button"
@@ -46,35 +48,33 @@
             >
               <span class="pf-v6-c-button__icon">{icons:svg('fa:circle-question').raw}</span>
             </button>
-            <div
-              x-show="open"
-              x-cloak
-              @click.outside="open = false"
-              style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); width: 260px; z-index: 300"
-            >
-              <div class="pf-v6-c-popover pf-m-bottom" id="tbl-header-help-popover" role="dialog" aria-labelledby="tbl-header-help-popover-title">
-                <div class="pf-v6-c-popover__arrow"></div>
-                <div class="pf-v6-c-popover__content">
-                  <div class="pf-v6-c-popover__close">
-                    <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="open = false">
-                      <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
-                    </button>
-                  </div>
-                  <header class="pf-v6-c-popover__header">
-                    <div class="pf-v6-c-popover__title" id="tbl-header-help-popover-title">
-                      <h1 class="pf-v6-c-popover__title-text">Pull requests</h1>
-                    </div>
-                  </header>
-                  <div class="pf-v6-c-popover__body">More <strong>information</strong> on pull requests</div>
-                  <footer class="pf-v6-c-popover__footer">
-                    <button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">
-                      <span class="pf-v6-c-button__text">Click here for even more info</span>
-                    </button>
-                  </footer>
-                </div>
+          </span>
+        </div>
+        <div
+          x-show="open"
+          x-cloak
+          @click.outside="open = false"
+          style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); width: 260px; z-index: 300"
+        >
+          <div class="pf-v6-c-popover pf-m-bottom" id="tbl-header-help-popover" role="dialog" aria-labelledby="tbl-header-help-popover-title">
+            <div class="pf-v6-c-popover__arrow"></div>
+            <div class="pf-v6-c-popover__content">
+              <div class="pf-v6-c-popover__close">
+                <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="open = false">
+                  <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+                </button>
+              </div>
+              <div class="pf-v6-c-popover__header">
+                <span class="pf-v6-c-popover__title-text" id="tbl-header-help-popover-title">Pull requests</span>
+              </div>
+              <div class="pf-v6-c-popover__body">More <strong>information</strong> on pull requests</div>
+              <div class="pf-v6-c-popover__footer">
+                <button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">
+                  <span class="pf-v6-c-button__text">Click here for even more info</span>
+                </button>
               </div>
             </div>
-          </span>
+          </div>
         </div>
       </th>
       <th scope="col">Workspaces</th>

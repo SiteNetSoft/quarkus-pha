@@ -712,7 +712,7 @@ test.describe("Table", () => {
       const popover = page.locator("#tbl-header-help-popover");
       await expect(popover).toBeVisible();
       await expect(popover.locator(".pf-v6-c-popover__title-text")).toHaveText("Pull requests");
-      await expect(popover.locator("footer")).toContainText("Click here for even more info");
+      await expect(popover.locator(".pf-v6-c-popover__footer")).toContainText("Click here for even more info");
       await popover.locator('button[aria-label="Close"]').click();
       await expect(popover).toBeHidden();
     });
