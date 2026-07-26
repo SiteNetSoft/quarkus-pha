@@ -5,10 +5,26 @@ test.describe("Slider", () => {
     await page.goto("/components/slider");
   });
 
-  test("page loads with all 3 example sections in ToC", async ({ page }) => {
+  test("page loads with the example sections in ToC", async ({ page }) => {
     await expect(page.locator("#basic")).toBeVisible();
+    await expect(page.locator("#thumb-value-input")).toBeVisible();
     await expect(page.locator("#custom-range")).toBeVisible();
     await expect(page.locator("#disabled")).toBeVisible();
+  });
+
+  test.describe("Thumb value input", () => {
+    test("floating input tracks the thumb and clamps typed values", async ({ page }) => {
+      const slider = page.locator("#sl-thumb-value-input");
+      const input = slider.locator(".pf-v6-c-slider__value.pf-m-floating input");
+      await expect(input).toHaveValue("50");
+      await input.fill("120");
+      await input.press("Enter");
+      await expect(input).toHaveValue("100");
+      await expect(slider.locator(".pf-v6-c-slider__thumb")).toHaveAttribute("aria-valuenow", "100");
+      await input.fill("35");
+      await input.press("Enter");
+      await expect(slider.locator(".pf-v6-c-slider__thumb")).toHaveAttribute("aria-valuenow", "35");
+    });
   });
 
   test.describe("Basic", () => {
@@ -83,6 +99,11 @@ test.describe("Slider", () => {
 
     test("/components/slider/value-input returns 200", async ({ page }) => {
       const res = await page.goto("/components/slider/value-input");
+      expect(res.status()).toBe(200);
+    });
+
+    test("/components/slider/thumb-value-input returns 200", async ({ page }) => {
+      const res = await page.goto("/components/slider/thumb-value-input");
       expect(res.status()).toBe(200);
     });
 
