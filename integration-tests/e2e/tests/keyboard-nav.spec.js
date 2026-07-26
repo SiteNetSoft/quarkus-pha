@@ -31,48 +31,9 @@ function writeReport(testPath, status, detail = "") {
   );
 }
 
-const COMPONENT_PATHS = [
-  "/components/about-modal", "/components/accordion", "/components/action-list",
-  "/components/alert", "/components/application-launcher", "/components/avatar",
-  "/components/backdrop", "/components/background-image", "/components/back-to-top",
-  "/components/badge", "/components/banner", "/components/brand",
-  "/components/breadcrumb", "/components/button", "/components/calendar-month",
-  "/components/card", "/components/chart", "/components/checkbox",
-  "/components/chip", "/components/click-to-load", "/components/clipboard-copy",
-  "/components/code-block", "/components/code-editor", "/components/content",
-  "/components/context-selector", "/components/custom-menus", "/components/data-list",
-  "/components/date-and-time-picker", "/components/date-picker", "/components/description-list",
-  "/components/divider", "/components/document-editor", "/components/drag-and-drop",
-  "/components/drawer", "/components/dropdown", "/components/dual-list-selector",
-  "/components/empty-state", "/components/expandable-section", "/components/form",
-  "/components/form-control", "/components/form-select", "/components/helper-text",
-  "/components/hint", "/components/icon", "/components/infinite-scroll",
-  "/components/inline-edit", "/components/input-group", "/components/jump-links",
-  "/components/label", "/components/lazy-modal", "/components/list",
-  "/components/form-validation", "/components/sortable-table", "/components/click-to-edit", "/components/toast-confirm", "/components/skeleton-loading", "/components/i18n", "/components/live-search", "/components/login-page", "/components/map",
-  "/components/masthead", "/components/menu", "/components/menu-toggle",
-  "/components/modal", "/components/multiple-file-upload", "/components/navigation",
-  "/components/notification-badge", "/components/notification-drawer", "/components/number-input",
-  "/components/options-menu", "/components/overflow-menu", "/components/page",
-  "/components/pagination", "/components/panel", "/components/password-generator",
-  "/components/password-strength", "/components/popover", "/components/progress",
-  "/components/progress-stepper", "/components/radio", "/components/rectangle-selection",
-  "/components/search-input", "/components/select", "/components/sidebar",
-  "/components/simple-file-upload", "/components/simple-list", "/components/skeleton",
-  "/components/skip-to-content", "/components/slider", "/components/spinner",
-  "/components/switch", "/components/table", "/components/tabs",
-  "/components/text-area", "/components/text-input", "/components/text-input-group",
-  "/components/tile", "/components/hero", "/components/compass", "/components/time-picker", "/components/timestamp",
-  "/components/title", "/components/toggle-group", "/components/toolbar",
-  "/components/tooltip", "/components/tree-view", "/components/truncate",
-  "/components/wizard"
-];
-
-const DEMO_PATHS = [
-  "/demos/dashboard", "/demos/data-management", "/demos/settings", "/demos/landing"
-];
-
-const ALL_PATHS = ["/", ...COMPONENT_PATHS, ...DEMO_PATHS];
+// Page inventory shared with every sweeping spec (console-errors carries the
+// drift guard that keeps it in sync with the live grid).
+import { ALL_PATHS } from "./showcase-paths.js";
 
 const FOCUSABLE_SELECTOR = [
   'a[href]',
