@@ -59,7 +59,7 @@ public class MiscExamplesRoutes {
                                                "plain-inline", "static-live-region", "alert-group-static",
                                                "alert-group-toast", "alert-group-toast-overflow", "dynamic-groups",
                                                "dynamic-live-region", "async-live-region", "dynamic-group-overflow",
-                                               "multiple-dynamic-groups", "async-groups"));
+                                               "multiple-dynamic-groups", "async-groups", "toast-with-drawer"));
         m.put("clipboard-copy",        Set.of("basic", "readonly", "expandable", "read-only-expanded",
                                                "read-only-expanded-by-default", "expanded-with-array", "json-pre",
                                                "inline-compact", "inline", "inline-compact-with-additional-action",
