@@ -10,6 +10,8 @@ const EXAMPLES = [
   "container",
   "full-height",
   "custom-control",
+  "size-to-fit",
+  "configuration-modal",
 ];
 
 test.describe("Code editor", () => {
@@ -243,6 +245,40 @@ test.describe("Code editor", () => {
       await expect(exec).toHaveAttribute("aria-label", "Execute code", {
         timeout: 5000,
       });
+    });
+  });
+
+  test.describe("Size to fit", () => {
+    test("editable code view grows with added lines", async ({ page }) => {
+      const pre = page.locator("#ce-size-to-fit .pf-v6-c-code-editor__code-pre");
+      await expect(pre).toHaveAttribute("contenteditable", "plaintext-only");
+      const before = await pre.evaluate((el) => el.getBoundingClientRect().height);
+      await pre.click();
+      await page.keyboard.press("End");
+      await page.keyboard.press("Enter");
+      await page.keyboard.type("another line");
+      await page.keyboard.press("Enter");
+      await page.keyboard.type("and one more");
+      const after = await pre.evaluate((el) => el.getBoundingClientRect().height);
+      expect(after).toBeGreaterThan(before);
+    });
+  });
+
+  test.describe("Configuration modal", () => {
+    test("settings control reconfigures the editor live", async ({ page }) => {
+      const editor = page.locator("#ce-config-modal");
+      await editor.locator('button[aria-label="Editor settings"]').click();
+      const backdrop = page.locator("#ce-config-modal-backdrop");
+      await expect(backdrop.locator(".pf-v6-c-modal-box")).toBeVisible();
+      await backdrop.locator("#ce-config-dark + .pf-v6-c-switch__toggle").click();
+      await expect(editor).toHaveClass(/pf-v6-theme-dark/);
+      await backdrop.locator('button[aria-label="Increase font size"]').click();
+      await expect(editor.locator(".pf-v6-c-code-editor__code-pre")).toHaveAttribute(
+        "style",
+        /font-size: 15px/,
+      );
+      await page.keyboard.press("Escape");
+      await expect(backdrop.locator(".pf-v6-c-modal-box")).toBeHidden();
     });
   });
 

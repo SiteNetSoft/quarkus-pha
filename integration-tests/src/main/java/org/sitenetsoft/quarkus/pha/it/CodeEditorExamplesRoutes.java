@@ -34,7 +34,9 @@ public class CodeEditorExamplesRoutes {
         "header-content",
         "container",
         "full-height",
-        "custom-control"
+        "custom-control",
+        "size-to-fit",
+        "configuration-modal"
     );
 
     @Inject

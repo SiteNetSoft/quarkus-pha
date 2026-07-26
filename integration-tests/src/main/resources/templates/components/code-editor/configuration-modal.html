@@ -1,0 +1,136 @@
+{! PF parity: react-code-editor 6.6.0 CodeEditorConfigurationModal — a settings control opens a
+   modal whose changes apply to the editor immediately. Scoped to the options a framework-free
+   editor honors: dark theme and font size (PF's minimap/line-number switches are Monaco features). !}
+<div x-data="{ settingsOpen: false, dark: false, fontSize: 14 }" id="ce-config-modal-demo">
+  <div class="pf-v6-c-code-editor" id="ce-config-modal" :class="dark ? 'pf-v6-theme-dark' : ''">
+    <div class="pf-v6-c-code-editor__header">
+      <div class="pf-v6-c-code-editor__header-content">
+        <div class="pf-v6-c-code-editor__controls">
+          <button
+            class="pf-v6-c-button pf-m-plain"
+            type="button"
+            aria-label="Editor settings"
+            aria-haspopup="dialog"
+            @click="settingsOpen = true"
+          >
+            <span class="pf-v6-c-button__icon">{icons:svg('fa:gear').raw}</span>
+          </button>
+        </div>
+        <div class="pf-v6-c-code-editor__header-main"></div>
+      </div>
+      <div class="pf-v6-c-code-editor__tab">
+        <span class="pf-v6-c-code-editor__tab-icon">{icons:svg('fa:code').raw}</span>
+        <span class="pf-v6-c-code-editor__tab-text">Text</span>
+      </div>
+    </div>
+    <div class="pf-v6-c-code-editor__main">
+      <div dir="ltr" class="pf-v6-c-code-editor__code">
+        <pre
+          class="pf-v6-c-code-editor__code-pre"
+          contenteditable="plaintext-only"
+          spellcheck="false"
+          role="textbox"
+          aria-multiline="true"
+          aria-label="Editable code content"
+          :style="'font-size: ' + fontSize + 'px'"
+        >
+Some example content</pre
+        >
+      </div>
+    </div>
+  </div>
+  {! The backdrop teleports to document.body: the page main-container is a stacking context that
+     would trap it under the masthead. !}
+  <template x-teleport="body">
+    <div
+      class="pf-v6-c-backdrop"
+      id="ce-config-modal-backdrop"
+      x-show="settingsOpen"
+      style="display: none"
+      x-effect="if (settingsOpen) PHA.trapFocus($el); else PHA.releaseFocus($el);"
+    >
+      <div class="pf-v6-l-bullseye">
+        <div
+          class="pf-v6-c-modal-box pf-m-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="ce-config-modal-title"
+          @keydown.escape.window="settingsOpen = false"
+        >
+          <div class="pf-v6-c-modal-box__close">
+            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="settingsOpen = false">
+              <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+            </button>
+          </div>
+          <header class="pf-v6-c-modal-box__header">
+            <h1 class="pf-v6-c-modal-box__title" id="ce-config-modal-title">Editor settings</h1>
+            <div class="pf-v6-c-modal-box__description">Changes apply immediately</div>
+          </header>
+          <div class="pf-v6-c-modal-box__body">
+            <div class="pf-v6-l-flex pf-m-column pf-m-space-items-md">
+              <div class="pf-v6-l-flex pf-m-space-items-md pf-m-align-items-center">
+                <div class="pf-v6-l-flex pf-m-column pf-m-space-items-none" style="flex: 1">
+                  <div><strong>Dark theme</strong></div>
+                  <div class="pf-v6-c-content--small">Switch the editor to a dark color theme</div>
+                </div>
+                <label class="pf-v6-c-switch" for="ce-config-dark">
+                  <input
+                    class="pf-v6-c-switch__input"
+                    type="checkbox"
+                    id="ce-config-dark"
+                    aria-label="Dark theme"
+                    x-model="dark"
+                  />
+                  <span class="pf-v6-c-switch__toggle"></span>
+                  <span class="pf-v6-c-switch__label" x-text="dark ? 'Enabled' : 'Disabled'">Disabled</span>
+                </label>
+              </div>
+              <div class="pf-v6-l-flex pf-m-space-items-md pf-m-align-items-center">
+                <div class="pf-v6-l-flex pf-m-column pf-m-space-items-none" style="flex: 1">
+                  <div><strong id="ce-config-font-size-title">Font size</strong></div>
+                  <div class="pf-v6-c-content--small">Adjust the font size of the code editor</div>
+                </div>
+                <div class="pf-v6-c-number-input" role="group" aria-labelledby="ce-config-font-size-title">
+                  <div class="pf-v6-c-input-group">
+                    <div class="pf-v6-c-input-group__item">
+                      <button
+                        class="pf-v6-c-button pf-m-control"
+                        type="button"
+                        aria-label="Decrease font size"
+                        :disabled="fontSize <= 5"
+                        @click="fontSize = Math.max(5, fontSize - 1)"
+                      >
+                        <span class="pf-v6-c-button__icon">{icons:svg('fa:minus').raw}</span>
+                      </button>
+                    </div>
+                    <div class="pf-v6-c-input-group__item pf-m-fill">
+                      <span class="pf-v6-c-form-control">
+                        <input
+                          type="number"
+                          aria-label="Enter a font size"
+                          min="5"
+                          x-model.number="fontSize"
+                          style="width: 5ch"
+                        />
+                      </span>
+                    </div>
+                    <div class="pf-v6-c-input-group__item">
+                      <button
+                        class="pf-v6-c-button pf-m-control"
+                        type="button"
+                        aria-label="Increase font size"
+                        @click="fontSize = fontSize + 1"
+                      >
+                        <span class="pf-v6-c-button__icon">{icons:svg('fa:plus').raw}</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+</div>

@@ -1,0 +1,25 @@
+{! PF parity: react-code-editor 6.6.0 CodeEditorSizeToFit — the editor height grows and shrinks with
+   its content. Framework-free port: the code view is an editable plaintext pre, so the block height
+   tracks the line count as you type. !}
+<div class="pf-v6-c-code-editor" id="ce-size-to-fit">
+  <div class="pf-v6-c-code-editor__header">
+    <div class="pf-v6-c-code-editor__tab">
+      <span class="pf-v6-c-code-editor__tab-icon">{icons:svg('fa:code').raw}</span>
+      <span class="pf-v6-c-code-editor__tab-text">JavaScript</span>
+    </div>
+  </div>
+  <div class="pf-v6-c-code-editor__main">
+    <div dir="ltr" class="pf-v6-c-code-editor__code">
+      <pre
+        class="pf-v6-c-code-editor__code-pre"
+        contenteditable="plaintext-only"
+        spellcheck="false"
+        role="textbox"
+        aria-multiline="true"
+        aria-label="Editable code content"
+      >
+Some example content</pre
+      >
+    </div>
+  </div>
+</div>
