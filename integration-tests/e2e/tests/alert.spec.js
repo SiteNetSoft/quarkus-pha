@@ -22,6 +22,7 @@ const EXAMPLES = [
   "dynamic-group-overflow",
   "multiple-dynamic-groups",
   "async-groups",
+  "toast-with-drawer",
 ];
 
 test.describe("Alert", () => {
@@ -206,6 +207,17 @@ test.describe("Alert", () => {
       await demo.locator("button", { hasText: "Stop async alerts" }).click();
     });
 
+    test("toast-with-drawer caps toasts and feeds the notification drawer", async ({ page }) => {
+      const demo = page.locator("#al-toast-drawer-demo");
+      for (let i = 0; i < 4; i++) await demo.locator("button", { hasText: "Add success toast" }).click();
+      await expect(demo.locator(".pf-v6-c-alert-group__item .pf-v6-c-alert")).toHaveCount(3);
+      const overflow = demo.locator(".pf-v6-c-alert-group__overflow-button");
+      await expect(overflow).toContainText("View 1 more");
+      await overflow.click();
+      await expect(demo.locator(".pf-v6-c-notification-drawer")).toBeVisible();
+      await expect(demo.locator(".pf-v6-c-notification-drawer__list-item.pf-m-success")).toHaveCount(4);
+    });
+
     test("async live region toggle feeds info alerts", async ({ page }) => {
       const demo = page.locator("#al-async-live-region-demo");
       const toggle = demo.locator(".pf-v6-c-toggle-group__button");
@@ -239,6 +251,7 @@ test.describe("Alert", () => {
       "dynamic-group-overflow",
       "multiple-dynamic-groups",
       "async-groups",
+      "toast-with-drawer",
     ];
 
     test("model-driven cards get a leading Java tab; hand-written ones do not", async ({ page }) => {
