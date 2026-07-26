@@ -71,34 +71,71 @@ test.describe("Accessibility (axe)", () => {
   }
 });
 
-// Same sweep with the dark theme applied. Emulating prefers-color-scheme is
-// enough: the head boot script defaults pha-color-scheme to "system" and adds
-// pf-v6-theme-dark from first paint, exactly like a real dark-mode visit.
-test.describe("Accessibility (axe, dark theme)", () => {
-  test.use({ colorScheme: "dark" });
+// The same sweep repeated per themed rendering mode. Dark rides
+// prefers-color-scheme emulation — the head boot script defaults its stored
+// preference to "system" and applies the theme class from first paint,
+// exactly like a real visit. High-contrast and glass seed the stored
+// preference before the page loads instead (glass has no media query, and
+// prefers-contrast emulation is unavailable here). Each sweep guards that the
+// theme class actually applied, otherwise it would silently degrade into a
+// duplicate light-theme scan.
+const THEME_SWEEPS = [
+  {
+    name: "dark theme",
+    suffix: "__dark",
+    themeClass: "pf-v6-theme-dark",
+    use: { colorScheme: "dark" },
+  },
+  {
+    // prefers-contrast emulation is not available as a context option in this
+    // Playwright version, so seed the stored preference instead — the boot
+    // script honors "high" ahead of the media query.
+    name: "high-contrast theme",
+    suffix: "__high-contrast",
+    themeClass: "pf-v6-theme-high-contrast",
+    initScript: () => localStorage.setItem("pha-contrast", "high"),
+  },
+  {
+    name: "glass theme",
+    suffix: "__glass",
+    themeClass: "pf-v6-theme-glass",
+    initScript: () => localStorage.setItem("pha-contrast", "glass"),
+  },
+];
 
-  for (const p of ALL_PATHS) {
-    test(`no critical/serious axe violations on ${p} in dark theme`, async ({ page }) => {
-      await page.goto(p);
-      await page.waitForLoadState("networkidle").catch(() => {});
-      // Guard: the boot script must actually have applied the theme class,
-      // otherwise this silently degrades into a duplicate light-theme scan.
-      await page.waitForFunction(() => document.documentElement.classList.contains("pf-v6-theme-dark"));
+for (const theme of THEME_SWEEPS) {
+  test.describe(`Accessibility (axe, ${theme.name})`, () => {
+    if (theme.use) test.use(theme.use);
+    if (theme.initScript) {
+      test.beforeEach(async ({ page }) => {
+        await page.addInitScript(theme.initScript);
+      });
+    }
 
-      const results = await new AxeBuilder({ page }).analyze();
-      const blocking = results.violations.filter((v) => FAIL_IMPACTS.has(v.impact));
-
-      writeReport(p, results, blocking.length, "__dark");
-
-      if (blocking.length > 0) {
-        const lines = blocking.map(
-          (v) => `[${v.impact}] ${v.id}: ${v.help} (${v.nodes.length} node(s))`
+    for (const p of ALL_PATHS) {
+      test(`no critical/serious axe violations on ${p} in ${theme.name}`, async ({ page }) => {
+        await page.goto(p);
+        await page.waitForLoadState("networkidle").catch(() => {});
+        await page.waitForFunction(
+          (cls) => document.documentElement.classList.contains(cls),
+          theme.themeClass
         );
-        throw new Error(
-          `${blocking.length} critical/serious axe violation(s) on ${p} in dark theme:\n  - ${lines.join("\n  - ")}`
-        );
-      }
-      expect(blocking).toEqual([]);
-    });
-  }
-});
+
+        const results = await new AxeBuilder({ page }).analyze();
+        const blocking = results.violations.filter((v) => FAIL_IMPACTS.has(v.impact));
+
+        writeReport(p, results, blocking.length, theme.suffix);
+
+        if (blocking.length > 0) {
+          const lines = blocking.map(
+            (v) => `[${v.impact}] ${v.id}: ${v.help} (${v.nodes.length} node(s))`
+          );
+          throw new Error(
+            `${blocking.length} critical/serious axe violation(s) on ${p} in ${theme.name}:\n  - ${lines.join("\n  - ")}`
+          );
+        }
+        expect(blocking).toEqual([]);
+      });
+    }
+  });
+}
