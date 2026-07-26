@@ -12,6 +12,7 @@ const EXAMPLES = [
   "invalid",
   "custom-width",
   "controlled-calendar",
+  "date-range",
 ];
 
 test.describe("Date Picker", () => {
@@ -60,6 +61,16 @@ test.describe("Date Picker", () => {
   test("disabled input and toggle", async ({ page }) => {
     await expect(page.locator("#dp-disabled input")).toBeDisabled();
     await expect(page.locator("#dp-disabled button")).toBeDisabled();
+  });
+
+  test("date range pre-fills the end date from the start date", async ({ page }) => {
+    const from = page.locator("#dp-range-from");
+    const toField = page.locator("#dp-range-to-input");
+    await expect(toField).toBeDisabled();
+    await from.locator('button[aria-label="Toggle date picker"]').click();
+    await from.locator('button[aria-label="20 May 2026"]').click();
+    await expect(toField).toBeEnabled();
+    await expect(toField).toHaveValue("2026-05-21");
   });
 
   test("external button toggles the calendar popover", async ({ page }) => {

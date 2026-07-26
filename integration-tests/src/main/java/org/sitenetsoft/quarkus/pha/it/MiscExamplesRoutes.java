@@ -164,7 +164,8 @@ public class MiscExamplesRoutes {
                                                "french", "with-value", "disabled",
             "invalid",
             "custom-width",
-            "controlled-calendar"));
+            "controlled-calendar",
+            "date-range"));
         m.put("menu",                  Set.of("basic", "danger-item", "with-icons", "with-actions", "with-links",
                                                "with-descriptions", "item-checkbox", "footer", "separated-items",
                                                "titled-groups", "favorites", "filtering-search", "option-single-select",
