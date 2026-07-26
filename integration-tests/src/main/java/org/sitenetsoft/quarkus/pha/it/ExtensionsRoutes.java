@@ -177,11 +177,14 @@ public class ExtensionsRoutes {
     );
 
 
+    // Darkened from classic terminal colors so every value meets WCAG AA 4.5:1
+    // on the light theme's white background (axe gates the demo pages). Keep in
+    // sync with the COLORS map in web/js/alpine/components/log-viewer.js.
     private static final Map<Integer, String> ANSI_COLORS = Map.ofEntries(
-        Map.entry(30, "#000"), Map.entry(31, "#c00"), Map.entry(32, "#0a0"), Map.entry(33, "#c80"),
-        Map.entry(34, "#04c"), Map.entry(35, "#a0a"), Map.entry(36, "#0aa"), Map.entry(37, "#ccc"),
-        Map.entry(90, "#666"), Map.entry(91, "#f44"), Map.entry(92, "#4f4"), Map.entry(93, "#ff0"),
-        Map.entry(94, "#48f"), Map.entry(95, "#f4f"), Map.entry(96, "#4ff"), Map.entry(97, "#fff")
+        Map.entry(30, "#000000"), Map.entry(31, "#cc0000"), Map.entry(32, "#007700"), Map.entry(33, "#996300"),
+        Map.entry(34, "#0044cc"), Map.entry(35, "#aa00aa"), Map.entry(36, "#007a7a"), Map.entry(37, "#6e6e6e"),
+        Map.entry(90, "#666666"), Map.entry(91, "#b32d2d"), Map.entry(92, "#008000"), Map.entry(93, "#8a5c00"),
+        Map.entry(94, "#2f68c4"), Map.entry(95, "#8b3d8b"), Map.entry(96, "#006666"), Map.entry(97, "#595959")
     );
 
     private static final Pattern ANSI_SGR = Pattern.compile("\u001B\\[([0-9;]*)m");

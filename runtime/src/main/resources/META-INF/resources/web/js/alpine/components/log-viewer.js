@@ -141,23 +141,26 @@ phaAlpine("phaLogViewer", () => ({
   _ansiToHtml(s) {
     // Subset of ECMA-48 SGR — colors 30-37 / 90-97, bright bg 40-47 / 100-107,
     // bold (1), reset (0/empty). Unknown codes are dropped.
+    // Values are darkened from classic terminal colors so every one meets the
+    // WCAG AA 4.5:1 contrast ratio on the light theme's white background (axe
+    // gates the demo pages); whites/brights render as distinguishable grays.
     const COLORS = {
-      30: "#000",
-      31: "#c00",
-      32: "#0a0",
-      33: "#c80",
-      34: "#04c",
-      35: "#a0a",
-      36: "#0aa",
-      37: "#ccc",
-      90: "#666",
-      91: "#f44",
-      92: "#4f4",
-      93: "#ff0",
-      94: "#48f",
-      95: "#f4f",
-      96: "#4ff",
-      97: "#fff",
+      30: "#000000",
+      31: "#cc0000",
+      32: "#007700",
+      33: "#996300",
+      34: "#0044cc",
+      35: "#aa00aa",
+      36: "#007a7a",
+      37: "#6e6e6e",
+      90: "#666666",
+      91: "#b32d2d",
+      92: "#008000",
+      93: "#8a5c00",
+      94: "#2f68c4",
+      95: "#8b3d8b",
+      96: "#006666",
+      97: "#595959",
     };
     let out = "";
     let pos = 0;
