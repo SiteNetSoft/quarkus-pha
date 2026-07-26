@@ -1,7 +1,6 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Accessibility", () => {
-
   // ── Modal Focus Trapping ──
 
   test.describe("Modal focus trapping", () => {
