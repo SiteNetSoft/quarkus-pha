@@ -82,6 +82,8 @@ public class TableExamplesRoutes {
         "footer",
         "cell-with-image-alignment",
         "container-query-with-drawer",
+        "header-help",
+        "sortable-custom-control",
             "sticky-base-and-stuck");
 
     @Inject

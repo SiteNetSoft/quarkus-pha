@@ -53,6 +53,8 @@ const EXAMPLES = [
   "footer",
   "cell-with-image-alignment",
   "container-query-with-drawer",
+  "header-help",
+  "sortable-custom-control",
 ];
 
 const bg = (locator) => locator.evaluate((el) => getComputedStyle(el).backgroundColor);
@@ -63,7 +65,7 @@ test.describe("Table", () => {
   });
 
   test("page loads with correct heading", async ({ page }) => {
-    await expect(page.locator("h1")).toHaveText("Table");
+    await expect(page.locator("h1#ws-page-title")).toHaveText("Table");
   });
 
   test("all example sections are present", async ({ page }) => {
@@ -690,6 +692,49 @@ test.describe("Table", () => {
       expect(res.status()).toBe(200);
       await expect(page.locator("table.pf-v6-c-table").first()).toBeAttached();
     }
+  });
+
+  test.describe("Header tooltips and popovers", () => {
+    test("header info button reveals a tooltip on hover", async ({ page }) => {
+      const th = page.locator("#tbl-header-help thead th").first();
+      const tip = th.locator(".pf-v6-c-tooltip");
+      await expect(tip).toBeHidden();
+      await th.locator(".pf-v6-c-table__column-help-action button").hover();
+      await expect(tip).toBeVisible();
+      await expect(tip).toContainText("More information about repositories");
+    });
+
+    test("header info button opens a popover with header and footer", async ({ page }) => {
+      await page
+        .locator("#tbl-header-help thead th", { hasText: "Pull requests" })
+        .locator(".pf-v6-c-table__column-help-action > button")
+        .click();
+      const popover = page.locator("#tbl-header-help-popover");
+      await expect(popover).toBeVisible();
+      await expect(popover.locator(".pf-v6-c-popover__title-text")).toHaveText("Pull requests");
+      await expect(popover.locator("footer")).toContainText("Click here for even more info");
+      await popover.locator('button[aria-label="Close"]').click();
+      await expect(popover).toBeHidden();
+    });
+
+    test("row without branch/PR data collapses into a colspan cell", async ({ page }) => {
+      await expect(page.locator('#tbl-header-help tbody td[colspan="3"]')).toHaveText("one - 2");
+    });
+  });
+
+  test.describe("Sortable custom control", () => {
+    test("the toolbar select re-sorts the table server-side", async ({ page }) => {
+      const demo = page.locator("#tbl-sortable-custom-demo");
+      const firstCell = page.locator("#tbl-sortable-custom tbody tr").first().locator("td").first();
+      await expect(firstCell).toHaveText("Alice Chen");
+      await demo.locator(".pf-v6-c-menu-toggle").click();
+      await demo.locator(".pf-v6-c-menu__item", { hasText: "Descending" }).click();
+      await expect(firstCell).toHaveText("John Doe");
+      await expect(demo.locator(".pf-v6-c-menu-toggle__text")).toHaveText("Sort by: Name (desc)");
+      await demo.locator(".pf-v6-c-menu-toggle").click();
+      await demo.locator(".pf-v6-c-menu__item", { hasText: "Role" }).click();
+      await expect(firstCell).toHaveText("Bob Johnson");
+    });
   });
 
   test.describe("Java source tab", () => {

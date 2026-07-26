@@ -400,6 +400,52 @@ public class HtmxRoutes {
         return html.toString();
     }
 
+    /**
+     * Sorted table for the "Sortable — custom control" demo: plain (non-clickable) headers, sorting
+     * driven entirely by the toolbar select on the demo page. Keep the markup in sync with
+     * templates/components/table/sortable-custom-control.html.
+     */
+    @GET
+    @Path("/table-sort-custom")
+    @Produces(MediaType.TEXT_HTML)
+    public String tableSortCustom(@QueryParam("col") String col, @QueryParam("dir") String dir) {
+        int colIdx = 0;
+        for (int i = 0; i < TABLE_COLUMNS.size(); i++) {
+            if (TABLE_COLUMNS.get(i)[0].equals(col)) {
+                colIdx = i;
+                break;
+            }
+        }
+        boolean ascending = !"desc".equalsIgnoreCase(dir);
+
+        List<String[]> sorted = new ArrayList<>(TABLE_ROWS);
+        final int sortIdx = colIdx;
+        Comparator<String[]> cmp = Comparator.comparing(r -> r[sortIdx], String.CASE_INSENSITIVE_ORDER);
+        if (!ascending) {
+            cmp = cmp.reversed();
+        }
+        sorted.sort(cmp);
+
+        StringBuilder html = new StringBuilder();
+        html.append("<table class=\"pf-v6-c-table\" role=\"grid\" id=\"tbl-sortable-custom\" aria-label=\"Sortable table with custom control\">");
+        html.append("<thead><tr>");
+        for (int i = 0; i < TABLE_COLUMNS.size(); i++) {
+            String ariaSort = i == colIdx ? (ascending ? "ascending" : "descending") : "none";
+            html.append("<th scope=\"col\" aria-sort=\"").append(ariaSort).append("\">")
+                .append(escapeHtml(TABLE_COLUMNS.get(i)[1])).append("</th>");
+        }
+        html.append("</tr></thead><tbody>");
+        for (String[] row : sorted) {
+            html.append("<tr>");
+            for (String cell : row) {
+                html.append("<td>").append(escapeHtml(cell)).append("</td>");
+            }
+            html.append("</tr>");
+        }
+        html.append("</tbody></table>");
+        return html.toString();
+    }
+
     // ---------- Toasts (HX-Trigger) + confirm ----------
 
     @POST

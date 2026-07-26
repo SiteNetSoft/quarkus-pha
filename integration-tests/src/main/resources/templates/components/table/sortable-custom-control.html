@@ -1,0 +1,93 @@
+{! PF parity: react-table 6.6.0 TableSortableCustom — sorting driven by a toolbar select instead of
+   clickable column headers. The select fires an HTMX request and the server returns the re-sorted
+   table; keep the initial table markup in sync with HtmxRoutes.tableSortCustom. !}
+<div
+  x-data="{ open: false, col: 'name', dir: 'asc',
+    label(c) { return { name: 'Name', role: 'Role', region: 'Region' }[c]; },
+    apply() { this.open = false; htmx.ajax('GET', '/api/htmx/table-sort-custom?col=' + this.col + '&amp;dir=' + this.dir, { target: '#tbl-sortable-custom', swap: 'outerHTML' }); } }"
+  id="tbl-sortable-custom-demo"
+>
+  <div class="pf-v6-c-toolbar" style="margin-bottom: 1rem">
+    <div class="pf-v6-c-toolbar__content">
+      <div class="pf-v6-c-toolbar__content-section">
+        <div class="pf-v6-c-toolbar__item" style="position: relative">
+          <button
+            class="pf-v6-c-menu-toggle"
+            type="button"
+            :aria-expanded="open.toString()"
+            @click="open = !open"
+          >
+            <span class="pf-v6-c-menu-toggle__text" x-text="'Sort by: ' + label(col) + ' (' + dir + ')'">
+              Sort by: Name (asc)
+            </span>
+            <span class="pf-v6-c-menu-toggle__controls">
+              <span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span>
+            </span>
+          </button>
+          <div
+            class="pf-v6-c-menu"
+            x-show="open"
+            x-cloak
+            @click.outside="open = false"
+            style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 100%"
+          >
+            <div class="pf-v6-c-menu__content">
+              <section class="pf-v6-c-menu__group">
+                <h1 class="pf-v6-c-menu__group-title">Sort column</h1>
+                <ul class="pf-v6-c-menu__list" role="menu">
+                  <li role="none" class="pf-v6-c-menu__list-item">
+                    <button class="pf-v6-c-menu__item" type="button" role="menuitem" :aria-current="(col === 'name').toString()" @click="col = 'name'; apply()">
+                      <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Name</span></span>
+                    </button>
+                  </li>
+                  <li role="none" class="pf-v6-c-menu__list-item">
+                    <button class="pf-v6-c-menu__item" type="button" role="menuitem" :aria-current="(col === 'role').toString()" @click="col = 'role'; apply()">
+                      <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Role</span></span>
+                    </button>
+                  </li>
+                  <li role="none" class="pf-v6-c-menu__list-item">
+                    <button class="pf-v6-c-menu__item" type="button" role="menuitem" :aria-current="(col === 'region').toString()" @click="col = 'region'; apply()">
+                      <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Region</span></span>
+                    </button>
+                  </li>
+                </ul>
+              </section>
+              <hr class="pf-v6-c-divider" />
+              <section class="pf-v6-c-menu__group">
+                <h1 class="pf-v6-c-menu__group-title">Sort direction</h1>
+                <ul class="pf-v6-c-menu__list" role="menu">
+                  <li role="none" class="pf-v6-c-menu__list-item">
+                    <button class="pf-v6-c-menu__item" type="button" role="menuitem" :aria-current="(dir === 'asc').toString()" @click="dir = 'asc'; apply()">
+                      <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Ascending</span></span>
+                    </button>
+                  </li>
+                  <li role="none" class="pf-v6-c-menu__list-item">
+                    <button class="pf-v6-c-menu__item" type="button" role="menuitem" :aria-current="(dir === 'desc').toString()" @click="dir = 'desc'; apply()">
+                      <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Descending</span></span>
+                    </button>
+                  </li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <table class="pf-v6-c-table" role="grid" id="tbl-sortable-custom" aria-label="Sortable table with custom control">
+    <thead>
+      <tr>
+        <th scope="col" aria-sort="none">Name</th>
+        <th scope="col" aria-sort="none">Role</th>
+        <th scope="col" aria-sort="none">Region</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Alice Chen</td><td>Admin</td><td>us-east-1</td></tr>
+      <tr><td>Bob Johnson</td><td>Viewer</td><td>eu-west-1</td></tr>
+      <tr><td>Diego Ramos</td><td>Viewer</td><td>ap-southeast-1</td></tr>
+      <tr><td>Jane Smith</td><td>Editor</td><td>eu-west-1</td></tr>
+      <tr><td>John Doe</td><td>Admin</td><td>us-west-2</td></tr>
+    </tbody>
+  </table>
+</div>
