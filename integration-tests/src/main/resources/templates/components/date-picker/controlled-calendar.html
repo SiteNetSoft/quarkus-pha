@@ -1,0 +1,17 @@
+{! PF parity: react-core 6.6.0 DatePickerControlledCalendar — an external button drives the
+   picker's calendar popover by triggering its own toggle control. !}
+<div x-data id="dp-controlled-calendar-demo" class="pf-v6-l-flex pf-m-space-items-md pf-m-align-items-center">
+  <div>
+    {#include components/forms/date-picker id="dp-controlled-calendar" placeholder="YYYY-MM-DD" ariaLabel="Date" calendar=dpCalControlledCalendar /}
+  </div>
+  {! Beside the picker, not under it — the open calendar popover would cover a button below. !}
+  <div>
+    <button
+      class="pf-v6-c-button pf-m-primary"
+      type="button"
+      @click="document.querySelector('#dp-controlled-calendar .pf-v6-c-button.pf-m-control').click()"
+    >
+      <span class="pf-v6-c-button__text">Toggle calendar</span>
+    </button>
+  </div>
+</div>

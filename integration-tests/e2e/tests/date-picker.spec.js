@@ -9,6 +9,9 @@ const EXAMPLES = [
   "french",
   "with-value",
   "disabled",
+  "invalid",
+  "custom-width",
+  "controlled-calendar",
 ];
 
 test.describe("Date Picker", () => {
@@ -57,6 +60,16 @@ test.describe("Date Picker", () => {
   test("disabled input and toggle", async ({ page }) => {
     await expect(page.locator("#dp-disabled input")).toBeDisabled();
     await expect(page.locator("#dp-disabled button")).toBeDisabled();
+  });
+
+  test("external button toggles the calendar popover", async ({ page }) => {
+    const calendar = page.locator("#dp-controlled-calendar .pf-v6-c-date-picker__calendar");
+    const toggle = page.locator("#dp-controlled-calendar-demo button", { hasText: "Toggle calendar" });
+    await expect(calendar).toBeHidden();
+    await toggle.click();
+    await expect(calendar).toBeVisible();
+    await toggle.click();
+    await expect(calendar).toBeHidden();
   });
 
   test.describe("Standalone routes", () => {
