@@ -1,0 +1,150 @@
+{! PF parity: react-core 6.6.0 EmptyStateWithStatus — the footer's Toggle status button cycles one
+   empty state through the five status treatments. All five variants are server-rendered; Alpine only
+   switches which one shows. !}
+<div x-data="{ s: 0 }" id="es-with-status-demo">
+  <div class="pf-v6-c-empty-state pf-m-success" x-show="s === 0">
+    <div class="pf-v6-c-empty-state__content">
+      <div class="pf-v6-c-empty-state__header">
+        <div class="pf-v6-c-empty-state__icon">{icons:svg('fa:circle-check').raw}</div>
+        <div class="pf-v6-c-empty-state__title">
+          <h4 class="pf-v6-c-empty-state__title-text">You're all set</h4>
+        </div>
+      </div>
+      <div class="pf-v6-c-empty-state__body">
+        This represents the empty state pattern in PatternFly. Hopefully it's simple enough to use but flexible
+        enough to meet a variety of needs.
+      </div>
+      <div class="pf-v6-c-empty-state__footer">
+        <div class="pf-v6-c-empty-state__actions">
+          <button class="pf-v6-c-button pf-m-primary" type="button" @click="s = (s + 1) % 5">
+            <span class="pf-v6-c-button__text">Toggle status</span>
+          </button>
+        </div>
+        <div class="pf-v6-c-empty-state__actions">
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Multiple</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Action Buttons</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Can</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Go here</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">In the secondary</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Action area</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pf-v6-c-empty-state pf-m-danger" x-show="s === 1" x-cloak>
+    <div class="pf-v6-c-empty-state__content">
+      <div class="pf-v6-c-empty-state__header">
+        <div class="pf-v6-c-empty-state__icon">{icons:svg('fa:exclamation-circle').raw}</div>
+        <div class="pf-v6-c-empty-state__title">
+          <h4 class="pf-v6-c-empty-state__title-text">You're not set</h4>
+        </div>
+      </div>
+      <div class="pf-v6-c-empty-state__body">
+        This represents the empty state pattern in PatternFly. Hopefully it's simple enough to use but flexible
+        enough to meet a variety of needs.
+      </div>
+      <div class="pf-v6-c-empty-state__footer">
+        <div class="pf-v6-c-empty-state__actions">
+          <button class="pf-v6-c-button pf-m-primary" type="button" @click="s = (s + 1) % 5">
+            <span class="pf-v6-c-button__text">Toggle status</span>
+          </button>
+        </div>
+        <div class="pf-v6-c-empty-state__actions">
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Multiple</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Action Buttons</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Can</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Go here</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">In the secondary</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Action area</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pf-v6-c-empty-state pf-m-warning" x-show="s === 2" x-cloak>
+    <div class="pf-v6-c-empty-state__content">
+      <div class="pf-v6-c-empty-state__header">
+        <div class="pf-v6-c-empty-state__icon">{icons:svg('fa:triangle-exclamation').raw}</div>
+        <div class="pf-v6-c-empty-state__title">
+          <h4 class="pf-v6-c-empty-state__title-text">You're probably not set</h4>
+        </div>
+      </div>
+      <div class="pf-v6-c-empty-state__body">
+        This represents the empty state pattern in PatternFly. Hopefully it's simple enough to use but flexible
+        enough to meet a variety of needs.
+      </div>
+      <div class="pf-v6-c-empty-state__footer">
+        <div class="pf-v6-c-empty-state__actions">
+          <button class="pf-v6-c-button pf-m-primary" type="button" @click="s = (s + 1) % 5">
+            <span class="pf-v6-c-button__text">Toggle status</span>
+          </button>
+        </div>
+        <div class="pf-v6-c-empty-state__actions">
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Multiple</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Action Buttons</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Can</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Go here</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">In the secondary</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Action area</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pf-v6-c-empty-state pf-m-info" x-show="s === 3" x-cloak>
+    <div class="pf-v6-c-empty-state__content">
+      <div class="pf-v6-c-empty-state__header">
+        <div class="pf-v6-c-empty-state__icon">{icons:svg('fa:circle-info').raw}</div>
+        <div class="pf-v6-c-empty-state__title">
+          <h4 class="pf-v6-c-empty-state__title-text">You might be set</h4>
+        </div>
+      </div>
+      <div class="pf-v6-c-empty-state__body">
+        This represents the empty state pattern in PatternFly. Hopefully it's simple enough to use but flexible
+        enough to meet a variety of needs.
+      </div>
+      <div class="pf-v6-c-empty-state__footer">
+        <div class="pf-v6-c-empty-state__actions">
+          <button class="pf-v6-c-button pf-m-primary" type="button" @click="s = (s + 1) % 5">
+            <span class="pf-v6-c-button__text">Toggle status</span>
+          </button>
+        </div>
+        <div class="pf-v6-c-empty-state__actions">
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Multiple</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Action Buttons</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Can</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Go here</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">In the secondary</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Action area</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pf-v6-c-empty-state pf-m-custom" x-show="s === 4" x-cloak>
+    <div class="pf-v6-c-empty-state__content">
+      <div class="pf-v6-c-empty-state__header">
+        <div class="pf-v6-c-empty-state__icon">{icons:svg('fa:cubes').raw}</div>
+        <div class="pf-v6-c-empty-state__title">
+          <h4 class="pf-v6-c-empty-state__title-text">You're custom</h4>
+        </div>
+      </div>
+      <div class="pf-v6-c-empty-state__body">
+        This represents the empty state pattern in PatternFly. Hopefully it's simple enough to use but flexible
+        enough to meet a variety of needs.
+      </div>
+      <div class="pf-v6-c-empty-state__footer">
+        <div class="pf-v6-c-empty-state__actions">
+          <button class="pf-v6-c-button pf-m-primary" type="button" @click="s = (s + 1) % 5">
+            <span class="pf-v6-c-button__text">Toggle status</span>
+          </button>
+        </div>
+        <div class="pf-v6-c-empty-state__actions">
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Multiple</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Action Buttons</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Can</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Go here</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">In the secondary</span></button>
+          <button class="pf-v6-c-button pf-m-link" type="button"><span class="pf-v6-c-button__text">Action area</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -91,7 +91,8 @@ public class MiscExamplesRoutes {
                                                "icons-on-terms",
             "display-2xl"));
         m.put("skip-to-content",       Set.of("basic", "custom-text"));
-        m.put("empty-state",           Set.of("basic", "extra-small", "small", "large", "extra-large", "success", "spinner", "no-match", "no-icon", "with-actions"));
+        m.put("empty-state",           Set.of("basic", "extra-small", "small", "large", "extra-large", "success", "spinner", "no-match", "no-icon", "with-actions",
+                                               "with-status"));
         m.put("pagination",            Set.of("top", "sticky", "indeterminate", "bottom", "bottom-plain",
                                                "bottom-sticky", "sticky-base-stuck", "bottom-sticky-base-stuck",
                                                "bottom-static", "disabled", "compact", "display-summary",
