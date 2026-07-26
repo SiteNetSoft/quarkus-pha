@@ -1,0 +1,98 @@
+{! PF parity: react-core 6.6.0 demos AttributeValueFiltering — the menu first offers attribute keys;
+   choosing one switches it to that key's values, and choosing a value adds a "Key: value" label.
+   Backspace at "Key: " drops the selected key; Enter picks the first visible option. !}
+<div
+  x-data="{ q: '', open: false, key: '', chips: [],
+    data: { Cluster: ['acmeqe-managed-1', 'local-cluster'], Kind: ['Template', 'ReplicationController', 'ReplicaSet', 'Deployment'], Label: ['release', 'environment', 'partition'], Name: ['backup-1', 'backup-2', 'production-1', 'production-2', 'testing'], Namespace: ['default', 'public'], Status: ['running', 'idle', 'stopped'] },
+    term() { return this.key ? this.q.slice(this.key.length + 2) : this.q; },
+    matches() { return (this.key ? this.data[this.key] : Object.keys(this.data)).filter((o) => !this.term() || o.toLowerCase().indexOf(this.term().toLowerCase()) !== -1); },
+    pick(o) { if (this.key) { this.chips.push(this.key + ': ' + o); this.key = ''; this.q = ''; } else { this.key = o; this.q = o + ': '; } },
+    onBackspace() { if (this.key && this.q === this.key + ': ') { this.key = ''; this.q = ''; } } }"
+  id="tig-attribute-filter"
+  style="position: relative; max-width: 480px"
+  @click.outside="open = false"
+>
+  <div class="pf-v6-c-text-input-group">
+    <div class="pf-v6-c-text-input-group__main pf-m-icon">
+      <div class="pf-v6-c-text-input-group__group" x-show="chips.length > 0">
+        <div class="pf-v6-c-label-group">
+          <div class="pf-v6-c-label-group__main">
+            <ul class="pf-v6-c-label-group__list" role="list" aria-label="Applied filters">
+              <template x-for="(c, i) in chips" :key="c + '-' + i">
+                <li class="pf-v6-c-label-group__list-item">
+                  <span class="pf-v6-c-label pf-m-outline">
+                    <span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text" x-text="c"></span></span>
+                    <span class="pf-v6-c-label__actions">
+                      <button
+                        class="pf-v6-c-button pf-m-plain pf-m-no-padding"
+                        type="button"
+                        :aria-label="'Remove ' + c"
+                        @click="chips = chips.filter((x, xi) => xi !== i)"
+                      >
+                        <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+                      </button>
+                    </span>
+                  </span>
+                </li>
+              </template>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+      <span class="pf-v6-c-text-input-group__text">
+        <input
+          class="pf-v6-c-text-input-group__text-input"
+          type="text"
+          x-model="q"
+          @focus="open = true"
+          @input="open = true"
+          @keydown.enter.prevent="matches().length > 0 && pick(matches()[0])"
+          @keydown.backspace="onBackspace()"
+          @keydown.escape="key = ''; q = ''; open = false"
+          placeholder="Search"
+          aria-label="Attribute and value search input"
+          role="combobox"
+          aria-expanded="false"
+          :aria-expanded="open"
+        />
+      </span>
+    </div>
+    <div class="pf-v6-c-text-input-group__utilities" x-show="q !== '' || chips.length > 0">
+      <button
+        class="pf-v6-c-button pf-m-plain"
+        type="button"
+        aria-label="Clear input"
+        @click="q = ''; key = ''; chips = []"
+      >
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+      </button>
+    </div>
+  </div>
+  <div class="pf-v6-c-menu" x-show="open" x-cloak style="position: absolute; top: 100%; left: 0; right: 0; z-index: 200">
+    <div class="pf-v6-c-menu__content">
+      <ul class="pf-v6-c-menu__list" role="listbox" aria-label="Attribute and value suggestions">
+        <li role="none" class="pf-v6-c-menu__list-item" x-show="matches().length > 0">
+          <span class="pf-v6-c-menu__item pf-m-disabled">
+            <span class="pf-v6-c-menu__item-main"
+              ><span class="pf-v6-c-menu__item-text" x-text="key ? key + ' values' : 'Attributes'">Attributes</span></span
+            >
+          </span>
+        </li>
+        <li role="none" x-show="matches().length > 0"><hr class="pf-v6-c-divider" /></li>
+        <template x-for="opt in matches()" :key="opt">
+          <li role="none" class="pf-v6-c-menu__list-item">
+            <button class="pf-v6-c-menu__item" type="button" role="option" @click="pick(opt)">
+              <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text" x-text="opt"></span></span>
+            </button>
+          </li>
+        </template>
+        <li role="none" class="pf-v6-c-menu__list-item" x-show="matches().length === 0">
+          <span class="pf-v6-c-menu__item pf-m-disabled">
+            <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">No results found</span></span>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+{! PF parity: react-core 6.6.0 demos AutoCompleteSearch — a text input group used as a search field
+   with a typeahead suggestions menu; picking (or Enter on) a suggestion turns it into a removable
+   label, and the clear utility resets everything. !}
+<div
+  x-data="{ q: '', open: false, chips: [],
+    opts: ['Cluster', 'Kind', 'Label', 'Name', 'Namespace', 'Status'],
+    matches() { return this.opts.filter((o) => !this.q || o.toLowerCase().indexOf(this.q.toLowerCase()) !== -1); },
+    pick(o) { this.chips.push(o); this.q = ''; this.open = false; } }"
+  id="tig-autocomplete-search"
+  style="position: relative; max-width: 480px"
+  @click.outside="open = false"
+>
+  <div class="pf-v6-c-text-input-group">
+    <div class="pf-v6-c-text-input-group__main pf-m-icon">
+      <div class="pf-v6-c-text-input-group__group" x-show="chips.length > 0">
+        <div class="pf-v6-c-label-group">
+          <div class="pf-v6-c-label-group__main">
+            <ul class="pf-v6-c-label-group__list" role="list" aria-label="Search terms">
+              <template x-for="(c, i) in chips" :key="c + '-' + i">
+                <li class="pf-v6-c-label-group__list-item">
+                  <span class="pf-v6-c-label pf-m-outline">
+                    <span class="pf-v6-c-label__content"><span class="pf-v6-c-label__text" x-text="c"></span></span>
+                    <span class="pf-v6-c-label__actions">
+                      <button
+                        class="pf-v6-c-button pf-m-plain pf-m-no-padding"
+                        type="button"
+                        :aria-label="'Remove ' + c"
+                        @click="chips = chips.filter((x, xi) => xi !== i)"
+                      >
+                        <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+                      </button>
+                    </span>
+                  </span>
+                </li>
+              </template>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <span class="pf-v6-c-text-input-group__icon">{icons:svg('fa:magnifying-glass').raw}</span>
+      <span class="pf-v6-c-text-input-group__text">
+        <input
+          class="pf-v6-c-text-input-group__text-input"
+          type="text"
+          x-model="q"
+          @focus="open = true"
+          @input="open = true"
+          @keydown.enter.prevent="matches().length > 0 && pick(matches()[0])"
+          placeholder="Search"
+          aria-label="Search input"
+          role="combobox"
+          aria-expanded="false"
+          :aria-expanded="open"
+        />
+      </span>
+    </div>
+    <div class="pf-v6-c-text-input-group__utilities" x-show="q !== '' || chips.length > 0">
+      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Clear input" @click="q = ''; chips = []">
+        <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+      </button>
+    </div>
+  </div>
+  <div class="pf-v6-c-menu" x-show="open" x-cloak style="position: absolute; top: 100%; left: 0; right: 0; z-index: 200">
+    <div class="pf-v6-c-menu__content">
+      <ul class="pf-v6-c-menu__list" role="listbox" aria-label="Search suggestions">
+        <template x-for="opt in matches()" :key="opt">
+          <li role="none" class="pf-v6-c-menu__list-item">
+            <button class="pf-v6-c-menu__item" type="button" role="option" @click="pick(opt)">
+              <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text" x-text="opt"></span></span>
+            </button>
+          </li>
+        </template>
+        <li role="none" class="pf-v6-c-menu__list-item" x-show="matches().length === 0">
+          <span class="pf-v6-c-menu__item pf-m-disabled">
+            <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">No results found</span></span>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
