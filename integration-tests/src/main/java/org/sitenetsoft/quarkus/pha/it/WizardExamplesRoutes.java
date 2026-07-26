@@ -50,6 +50,7 @@ public class WizardExamplesRoutes {
         "focus-content",
         "incrementally-enabled",
         "within-modal",
+        "with-drawer-info-step",
             "with-drawer");
 
     @Inject
