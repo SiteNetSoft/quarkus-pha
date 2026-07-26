@@ -1,11 +1,17 @@
 {! Lazy Modal — HTMX modal with lazy-loaded content !} {! Parameters: id, titleText, loadUrl, size (optional: sm|md|lg)
 !}
+{! The backdrop teleports to document.body: the PF page main-container creates a stacking context
+   (z-index + glass backdrop-filter) that would trap the fixed backdrop under the masthead.
+   HTMX's initial scan runs before Alpine inserts the teleported clone, so x-init processes
+   the clone explicitly or the body's hx-get would never fire. !}
+<template x-teleport="body">
 <div
   class="pf-v6-c-backdrop"
   id="{id}-backdrop"
   x-data="{ open: false, loaded: false }"
+  x-init="window.htmx && htmx.process($el)"
   x-show="open"
-  x-cloak
+  style="display: none;"
   @open-modal.window="if ($event.detail === '{id}') open = true"
   @keydown.escape.window="if (open) open = false"
 >
@@ -46,3 +52,4 @@
     </div>
   </div>
 </div>
+</template>
