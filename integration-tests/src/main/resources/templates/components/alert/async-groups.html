@@ -1,0 +1,46 @@
+{! PF parity: react-core 6.6.0 AlertGroupAsync — Start/Stop drive an interval that prepends danger
+   toasts into an assertive live region; each toast is dismissable. !}
+<div
+  x-data="{ alerts: [], counter: 0, timer: null,
+    start() {
+      if (this.timer) { return; }
+      this.timer = setInterval(() => { this.counter++; this.alerts.unshift({ id: this.counter, title: 'Async notification ' + this.counter + ' was added to the queue.' }); }, 4500);
+    },
+    stop() { clearInterval(this.timer); this.timer = null; } }"
+  id="al-async-groups-demo"
+>
+  <div class="pf-v6-c-input-group" style="margin-bottom: 1rem">
+    <div class="pf-v6-c-input-group__item">
+      <button class="pf-v6-c-button pf-m-secondary" type="button" @click="start()">
+        <span class="pf-v6-c-button__text">Start async alerts</span>
+      </button>
+    </div>
+    <div class="pf-v6-c-input-group__item">
+      <button class="pf-v6-c-button pf-m-secondary" type="button" @click="stop()">
+        <span class="pf-v6-c-button__text">Stop async alerts</span>
+      </button>
+    </div>
+  </div>
+  <ul class="pf-v6-c-alert-group pf-m-toast" aria-live="assertive" aria-atomic="false">
+    <template x-for="a in alerts" :key="a.id">
+      <li class="pf-v6-c-alert-group__item">
+        <div class="pf-v6-c-alert pf-m-danger">
+          <div class="pf-v6-c-alert__icon">{icons:svg('fa:exclamation-circle').raw}</div>
+          <p class="pf-v6-c-alert__title">
+            <span class="pf-v6-screen-reader">danger alert:</span> <span x-text="a.title"></span>
+          </p>
+          <div class="pf-v6-c-alert__action">
+            <button
+              class="pf-v6-c-button pf-m-plain"
+              type="button"
+              :aria-label="'Close danger alert: ' + a.title"
+              @click="alerts = alerts.filter(function (x) { return x.id !== a.id; })"
+            >
+              <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+            </button>
+          </div>
+        </div>
+      </li>
+    </template>
+  </ul>
+</div>

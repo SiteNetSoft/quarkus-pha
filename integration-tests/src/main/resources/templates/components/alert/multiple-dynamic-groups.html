@@ -1,0 +1,46 @@
+{! PF parity: react-core 6.6.0 AlertGroupMultipleDynamic — one click prepends a collection of three
+   toasts (success, warning, danger) at once, each dismissable. !}
+<div
+  x-data="{ alerts: [], counter: 0,
+    addCollection() {
+      this.counter++;
+      this.alerts.unshift(
+        { id: this.counter + '-c', variant: 'danger', title: 'Third alert notification.' },
+        { id: this.counter + '-b', variant: 'warning', title: 'Second alert notification.' },
+        { id: this.counter + '-a', variant: 'success', title: 'First alert notification.' }
+      );
+    } }"
+  id="al-multiple-dynamic-groups-demo"
+>
+  <div class="pf-v6-l-flex pf-m-space-items-xs">
+    <button class="pf-v6-c-button pf-m-secondary" type="button" @click="addCollection()">
+      <span class="pf-v6-c-button__text">Add alert collection</span>
+    </button>
+  </div>
+  <ul class="pf-v6-c-alert-group pf-m-toast" aria-live="polite" aria-atomic="false">
+    <template x-for="a in alerts" :key="a.id">
+      <li class="pf-v6-c-alert-group__item">
+        <div class="pf-v6-c-alert" :class="'pf-m-' + a.variant">
+          <div class="pf-v6-c-alert__icon">
+            <span x-show="a.variant === 'success'">{icons:svg('fa:circle-check').raw}</span>
+            <span x-show="a.variant === 'warning'" x-cloak>{icons:svg('fa:triangle-exclamation').raw}</span>
+            <span x-show="a.variant === 'danger'" x-cloak>{icons:svg('fa:exclamation-circle').raw}</span>
+          </div>
+          <p class="pf-v6-c-alert__title">
+            <span class="pf-v6-screen-reader" x-text="a.variant + ' alert:'"></span> <span x-text="a.title"></span>
+          </p>
+          <div class="pf-v6-c-alert__action">
+            <button
+              class="pf-v6-c-button pf-m-plain"
+              type="button"
+              :aria-label="'Close ' + a.variant + ' alert: ' + a.title"
+              @click="alerts = alerts.filter(function (x) { return x.id !== a.id; })"
+            >
+              <span class="pf-v6-c-button__icon">{icons:svg('fa:xmark').raw}</span>
+            </button>
+          </div>
+        </div>
+      </li>
+    </template>
+  </ul>
+</div>

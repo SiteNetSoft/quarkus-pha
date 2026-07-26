@@ -1,0 +1,41 @@
+{! PF parity: react-core 6.6.0 AlertAsyncLiveRegion — a toggle starts an interval that prepends an
+   info alert into the live region every 4.5 seconds. !}
+<div
+  x-data="{ alerts: [], counter: 0, active: false, timer: null,
+    toggle() {
+      this.active = !this.active;
+      if (this.active) {
+        this.timer = setInterval(() => { this.counter++; this.alerts.unshift({ id: this.counter, title: 'Async alert number ' + this.counter }); }, 4500);
+      } else {
+        clearInterval(this.timer);
+        this.timer = null;
+      }
+    } }"
+  id="al-async-live-region-demo"
+>
+  <div class="pf-v6-c-toggle-group" role="group" aria-label="Toggle asynchronous alerts">
+    <div class="pf-v6-c-toggle-group__item">
+      <button
+        class="pf-v6-c-toggle-group__button"
+        :class="active ? 'pf-m-selected' : ''"
+        type="button"
+        :aria-pressed="active"
+        @click="toggle()"
+      >
+        <span class="pf-v6-c-toggle-group__text">Async alerts on</span>
+      </button>
+    </div>
+  </div>
+  <ul class="pf-v6-c-alert-group" aria-live="polite" aria-atomic="false">
+    <template x-for="a in alerts" :key="a.id">
+      <li class="pf-v6-c-alert-group__item">
+        <div class="pf-v6-c-alert pf-m-info">
+          <div class="pf-v6-c-alert__icon">{icons:svg('fa:circle-info').raw}</div>
+          <p class="pf-v6-c-alert__title">
+            <span class="pf-v6-screen-reader">info alert:</span> <span x-text="a.title"></span>
+          </p>
+        </div>
+      </li>
+    </template>
+  </ul>
+</div>

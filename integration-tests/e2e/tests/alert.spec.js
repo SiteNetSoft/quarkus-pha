@@ -17,6 +17,11 @@ const EXAMPLES = [
   "alert-group-toast",
   "alert-group-toast-overflow",
   "dynamic-groups",
+  "dynamic-live-region",
+  "async-live-region",
+  "dynamic-group-overflow",
+  "multiple-dynamic-groups",
+  "async-groups",
 ];
 
 test.describe("Alert", () => {
@@ -160,6 +165,58 @@ test.describe("Alert", () => {
       await demo.locator("button", { hasText: "Remove all" }).click();
       await expect(demo.locator(".pf-v6-c-alert-group__item")).toHaveCount(0);
     });
+
+    test("dynamic live region prepends variant alerts", async ({ page }) => {
+      const demo = page.locator("#al-dynamic-live-region-demo");
+      await demo.locator("button", { hasText: "Add single success alert" }).click();
+      await demo.locator("button", { hasText: "Add single danger alert" }).click();
+      const alerts = demo.locator(".pf-v6-c-alert-group__item .pf-v6-c-alert");
+      await expect(alerts).toHaveCount(2);
+      await expect(alerts.first()).toHaveClass(/pf-m-danger/);
+      await expect(alerts.first()).toContainText("Single danger alert");
+    });
+
+    test("overflow group caps visible alerts at four", async ({ page }) => {
+      const demo = page.locator("#al-dynamic-group-overflow-demo");
+      const add = demo.locator("button", { hasText: "Add single success alert" });
+      for (let i = 0; i < 5; i++) await add.click();
+      await expect(demo.locator(".pf-v6-c-alert-group__item .pf-v6-c-alert")).toHaveCount(4);
+      const overflow = demo.locator(".pf-v6-c-alert-group__overflow-button");
+      await expect(overflow).toBeVisible();
+      await expect(overflow).toContainText("View 1 more");
+    });
+
+    test("multiple dynamic group prepends a three-alert collection", async ({ page }) => {
+      const demo = page.locator("#al-multiple-dynamic-groups-demo");
+      await demo.locator("button", { hasText: "Add alert collection" }).click();
+      const alerts = demo.locator(".pf-v6-c-alert-group__item .pf-v6-c-alert");
+      await expect(alerts).toHaveCount(3);
+      await expect(alerts.nth(0)).toHaveClass(/pf-m-danger/);
+      await expect(alerts.nth(2)).toHaveClass(/pf-m-success/);
+      await alerts.nth(0).locator(".pf-v6-c-alert__action button").click();
+      await expect(alerts).toHaveCount(2);
+    });
+
+    test("async group starts and stops the toast interval", async ({ page }) => {
+      const demo = page.locator("#al-async-groups-demo");
+      await demo.locator("button", { hasText: "Start async alerts" }).click();
+      const alerts = demo.locator(".pf-v6-c-alert-group__item .pf-v6-c-alert");
+      await expect(alerts.first()).toBeVisible({ timeout: 10000 });
+      await expect(alerts.first()).toHaveClass(/pf-m-danger/);
+      await demo.locator("button", { hasText: "Stop async alerts" }).click();
+    });
+
+    test("async live region toggle feeds info alerts", async ({ page }) => {
+      const demo = page.locator("#al-async-live-region-demo");
+      const toggle = demo.locator(".pf-v6-c-toggle-group__button");
+      await toggle.click();
+      await expect(toggle).toHaveClass(/pf-m-selected/);
+      const alerts = demo.locator(".pf-v6-c-alert-group__item .pf-v6-c-alert");
+      await expect(alerts.first()).toBeVisible({ timeout: 10000 });
+      await expect(alerts.first()).toHaveClass(/pf-m-info/);
+      await toggle.click();
+      await expect(toggle).not.toHaveClass(/pf-m-selected/);
+    });
   });
 
   test.describe("Standalone routes", () => {
@@ -171,8 +228,18 @@ test.describe("Alert", () => {
     }
   });
   test.describe("Java source tab", () => {
-    // Timeout, dynamic-groups and the toast demos stay hand-written (live list state).
-    const HAND_WRITTEN = ["timeout", "dynamic-groups", "alert-group-toast", "alert-group-toast-overflow"];
+    // Timeout, the dynamic/async demos and the toast demos stay hand-written (live list state).
+    const HAND_WRITTEN = [
+      "timeout",
+      "dynamic-groups",
+      "alert-group-toast",
+      "alert-group-toast-overflow",
+      "dynamic-live-region",
+      "async-live-region",
+      "dynamic-group-overflow",
+      "multiple-dynamic-groups",
+      "async-groups",
+    ];
 
     test("model-driven cards get a leading Java tab; hand-written ones do not", async ({ page }) => {
       await page.goto("/components/alert");

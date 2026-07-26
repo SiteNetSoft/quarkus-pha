@@ -1,0 +1,35 @@
+{! PF parity: react-core 6.6.0 AlertDynamicLiveRegion — variant buttons prepend inline alerts into a
+   polite live region. !}
+<div
+  x-data="{ alerts: [], counter: 0,
+    add(variant) { this.counter++; this.alerts.unshift({ id: this.counter, variant: variant, title: 'Single ' + variant + ' alert' }); } }"
+  id="al-dynamic-live-region-demo"
+>
+  <div class="pf-v6-l-flex pf-m-space-items-xs" style="margin-bottom: 1rem">
+    <button class="pf-v6-c-button pf-m-secondary" type="button" @click="add('success')">
+      <span class="pf-v6-c-button__text">Add single success alert</span>
+    </button>
+    <button class="pf-v6-c-button pf-m-secondary" type="button" @click="add('info')">
+      <span class="pf-v6-c-button__text">Add single info alert</span>
+    </button>
+    <button class="pf-v6-c-button pf-m-secondary" type="button" @click="add('danger')">
+      <span class="pf-v6-c-button__text">Add single danger alert</span>
+    </button>
+  </div>
+  <ul class="pf-v6-c-alert-group" aria-live="polite" aria-relevant="additions text" aria-atomic="false">
+    <template x-for="a in alerts" :key="a.id">
+      <li class="pf-v6-c-alert-group__item">
+        <div class="pf-v6-c-alert" :class="'pf-m-' + a.variant">
+          <div class="pf-v6-c-alert__icon">
+            <span x-show="a.variant === 'success'">{icons:svg('fa:circle-check').raw}</span>
+            <span x-show="a.variant === 'info'" x-cloak>{icons:svg('fa:circle-info').raw}</span>
+            <span x-show="a.variant === 'danger'" x-cloak>{icons:svg('fa:exclamation-circle').raw}</span>
+          </div>
+          <p class="pf-v6-c-alert__title">
+            <span class="pf-v6-screen-reader" x-text="a.variant + ' alert:'"></span> <span x-text="a.title"></span>
+          </p>
+        </div>
+      </li>
+    </template>
+  </ul>
+</div>
