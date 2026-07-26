@@ -10,8 +10,7 @@
         <button class="pf-v6-c-menu__item" type="button">
           <span class="pf-v6-c-menu__item-main">
             <span class="pf-v6-c-menu__item-text" x-text="it.name"></span>
-            <span class="pf-v6-c-menu__item-description" x-text="it.desc"></span>
-          </span>
+            </span><span class="pf-v6-c-menu__item-description" x-text="it.desc"></span>
         </button>
         <button class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action pf-m-favorite pf-m-favorited" type="button" :aria-label="'Unfavorite ' + it.name" @click="it.fav = false">
           <span class="pf-v6-c-menu__item-action-icon">{icons:svg('fa:star').raw}</span>
@@ -28,8 +27,7 @@
         <button class="pf-v6-c-menu__item" type="button">
           <span class="pf-v6-c-menu__item-main">
             <span class="pf-v6-c-menu__item-text" x-text="it.name"></span>
-            <span class="pf-v6-c-menu__item-description" x-text="it.desc"></span>
-          </span>
+            </span><span class="pf-v6-c-menu__item-description" x-text="it.desc"></span>
         </button>
         <button class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action pf-m-favorite" type="button" :class="{ 'pf-m-favorited': it.fav }" :aria-label="(it.fav ? 'Unfavorite ' : 'Favorite ') + it.name" @click="it.fav = !it.fav">
           <span class="pf-v6-c-menu__item-action-icon">{icons:svg('fa:star').raw}</span>
