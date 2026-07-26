@@ -176,6 +176,15 @@
                                   ></span
                                 >
                               </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#form-state" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Form state</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
                             </ul>
                           </li>
                           <li class="pf-v6-c-jump-links__item ws-toc-item">
@@ -299,7 +308,13 @@
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
                         The canonical submit/cancel row: pf-v6-c-form__group pf-m-action wrapping pf-v6-c-form__actions.
                       </p>
-                      {/description} {#content}{#include components/form/action-group /}{/content} {/include}
+                      {/description} {#content}{#include components/form/action-group /}{/content} {/include} {#include
+                      partials/example-card title="Form state" slug="form-state" component="form"} {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        One central state object backs every field; Submit validates against it and "Show form state"
+                        dumps the live values and errors.
+                      </p>
+                      {/description} {#content}{#include components/form/form-state /}{/content} {/include}
 
                       <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
                         <h2
