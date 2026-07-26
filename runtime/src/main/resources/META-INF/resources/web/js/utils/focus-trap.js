@@ -31,6 +31,16 @@
     });
   }
 
+  function grabInitialFocus(container) {
+    // Never steal focus a caller has already placed inside the trap
+    // (e.g. a modal that focuses its primary action on open).
+    if (container.contains(document.activeElement)) return;
+    var focusable = getFocusable(container);
+    if (focusable.length > 0) {
+      focusable[0].focus();
+    }
+  }
+
   function trapFocus(container) {
     if (traps.has(container)) return; // already trapped
 
@@ -64,10 +74,15 @@
     container.addEventListener("keydown", handler);
     traps.set(container, { handler: handler, previousFocus: previousFocus });
 
-    // Focus first focusable element
-    var focusable = getFocusable(container);
-    if (focusable.length > 0) {
-      focusable[0].focus();
+    if (container.getClientRects().length === 0) {
+      // Not rendered yet — an Alpine x-effect can trap in the same reactive
+      // flush that flips x-show, before the display change lands. Grab after
+      // the frame resolves, unless the trap was released in the meantime.
+      requestAnimationFrame(function () {
+        if (traps.has(container)) grabInitialFocus(container);
+      });
+    } else {
+      grabInitialFocus(container);
     }
   }
 
