@@ -8,6 +8,7 @@ test.describe("Empty state", () => {
     "large",
     "extra-large",
     "success",
+    "with-status",
     "spinner",
     "no-match",
     "no-icon",
@@ -77,6 +78,19 @@ test.describe("Empty state", () => {
     await page.goto("/components/empty-state/extra-small");
     await expect(page.locator(".pf-v6-c-empty-state__actions")).toHaveCount(1);
     await expect(page.locator(".pf-v6-c-empty-state__actions .pf-v6-c-button.pf-m-small")).toHaveCount(6);
+  });
+
+  test("with-status toggle cycles the status treatments", async ({ page }) => {
+    await page.goto("/components/empty-state");
+    const demo = page.locator("#es-with-status-demo");
+    const success = demo.locator(".pf-v6-c-empty-state.pf-m-success");
+    const danger = demo.locator(".pf-v6-c-empty-state.pf-m-danger");
+    await expect(success).toBeVisible();
+    await expect(danger).toBeHidden();
+    await success.locator("button", { hasText: "Toggle status" }).click();
+    await expect(danger).toBeVisible();
+    await expect(success).toBeHidden();
+    await expect(danger.locator("h4.pf-v6-c-empty-state__title-text")).toHaveText("You're not set");
   });
 
   test("all example standalone routes render", async ({ page }) => {

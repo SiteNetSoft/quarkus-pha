@@ -99,6 +99,15 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#with-status" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">With status</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#spinner" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text">Spinner</span></span
@@ -218,6 +227,13 @@
                         confirming headline.
                       </p>
                       {/description} {#content}{#include components/empty-state/success /}{/content} {/include}
+                      {#include partials/example-card title="With status" slug="with-status" component="empty-state"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        The Toggle status button cycles the empty state through success, danger, warning, info and
+                        custom status treatments.
+                      </p>
+                      {/description} {#content}{#include components/empty-state/with-status /}{/content} {/include}
                       {#include partials/example-card title="Spinner" slug="spinner" component="empty-state"
                       javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
