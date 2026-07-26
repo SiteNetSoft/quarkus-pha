@@ -10,6 +10,7 @@ const EXAMPLES = [
   "custom-toggle",
   "heading-semantics",
   "truncate-expansion",
+  "truncated-text",
 ];
 
 test.describe("Expandable section", () => {
@@ -92,6 +93,17 @@ test.describe("Expandable section", () => {
       expect(res.status()).toBe(200);
       expect(await res.text()).toContain(".asTruncate()");
     });
+  });
+
+  test("truncated-text expands from character-clipped to full content", async ({ page }) => {
+    await page.goto("/components/expandable-section");
+    const es = page.locator("#es-truncated-text");
+    await expect(es.locator(".pf-v6-c-truncate")).toBeVisible();
+    await es.locator("button", { hasText: "Show more truncated content" }).click();
+    await expect(es).toHaveClass(/pf-m-expanded/);
+    await expect(es.locator(".pf-v6-c-truncate")).toBeHidden();
+    await es.locator("button", { hasText: "Show less truncated content" }).click();
+    await expect(es.locator(".pf-v6-c-truncate")).toBeVisible();
   });
 
 });

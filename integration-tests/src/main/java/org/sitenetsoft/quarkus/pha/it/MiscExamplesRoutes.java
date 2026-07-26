@@ -75,7 +75,7 @@ public class MiscExamplesRoutes {
             "actions"));
         m.put("expandable-section",    Set.of("collapsed", "expanded", "dynamic-toggle-text", "detached",
                                                "disclosure", "indented", "custom-toggle", "heading-semantics",
-                                               "truncate-expansion"));
+                                               "truncate-expansion", "truncated-text"));
         m.put("number-input",          Set.of("basic", "with-unit", "bounded", "disabled", "with-status",
                                                "varying-sizes", "custom-step", "custom-step-threshold"));
         m.put("description-list",      Set.of("basic", "term-help-text", "default-2-col", "default-3-col-on-lg",
