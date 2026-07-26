@@ -48,7 +48,7 @@ public class MiscExamplesRoutes {
         m.put("text-input-group",      Set.of("basic", "with-icon", "disabled", "plain", "autocomplete-hint", "filters", "filters-expanded", "with-status"));
         m.put("search-input",          Set.of("basic", "with-clear", "no-match", "result-count", "navigable-options",
                                                "with-submit", "expandable", "advanced", "advanced-expanded",
-                                               "autocomplete", "autocomplete-hint"));
+                                               "autocomplete", "autocomplete-hint", "advanced-composable"));
         m.put("jump-links",            Set.of("horizontal", "vertical", "centered", "with-label", "vertical-with-label",
                                                "subsections-inactive", "subsections-active",
                                                "expandable-vertical-subsection", "expandable-responsive",
