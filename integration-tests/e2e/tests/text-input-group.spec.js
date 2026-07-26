@@ -9,6 +9,8 @@ const EXAMPLES = [
   "filters",
   "filters-expanded",
   "with-status",
+  "attribute-value-filtering",
+  "autocomplete-search",
 ];
 
 test.describe("Text Input Group", () => {
@@ -129,4 +131,26 @@ test.describe("Text Input Group", () => {
       await expect(page.locator("#tig-status-error input")).toHaveAttribute("aria-invalid", "true");
     });
   });
+
+  test("attribute-value filtering builds Key: value labels", async ({ page }) => {
+    await page.goto("/components/text-input-group");
+    const demo = page.locator("#tig-attribute-filter");
+    await demo.locator("input").click();
+    await demo.locator(".pf-v6-c-menu__item", { hasText: "Status" }).click();
+    await expect(demo.locator("input")).toHaveValue("Status: ");
+    await demo.locator(".pf-v6-c-menu__item", { hasText: "running" }).click();
+    await expect(demo.locator(".pf-v6-c-label", { hasText: "Status: running" })).toBeVisible();
+    await expect(demo.locator("input")).toHaveValue("");
+  });
+
+  test("autocomplete search picks a suggestion into a label", async ({ page }) => {
+    await page.goto("/components/text-input-group");
+    const demo = page.locator("#tig-autocomplete-search");
+    await demo.locator("input").fill("Nam");
+    await expect(demo.locator(".pf-v6-c-menu__item:not(.pf-m-disabled)")).toHaveCount(2);
+    await demo.locator(".pf-v6-c-menu__item", { hasText: "Namespace" }).click();
+    await expect(demo.locator(".pf-v6-c-label", { hasText: "Namespace" })).toBeVisible();
+    await expect(demo.locator("input")).toHaveValue("");
+  });
+
 });
