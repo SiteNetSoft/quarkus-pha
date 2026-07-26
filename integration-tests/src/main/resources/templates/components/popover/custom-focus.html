@@ -1,0 +1,45 @@
+{! PF parity: react-core 6.6.0 PopoverCustomFocus — on open, keyboard focus lands on the footer
+   Cancel button (elementToFocus) instead of a close control; the popover renders no close button. !}
+<div x-data="{ open: false }" style="position: relative; display: inline-block" id="po-custom-focus-demo">
+  <button
+    class="pf-v6-c-button pf-m-primary"
+    type="button"
+    :aria-expanded="open.toString()"
+    @click="open = !open; open && $nextTick(() => document.getElementById('po-custom-focus-cancel').focus())"
+  >
+    <span class="pf-v6-c-button__text">Toggle popover with custom focus</span>
+  </button>
+  <div
+    x-show="open"
+    x-cloak
+    @click.outside="open = false"
+    style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 300px; z-index: 300"
+  >
+    <div class="pf-v6-c-popover pf-m-top" id="po-custom-focus" role="dialog" aria-labelledby="po-custom-focus-title">
+      <div class="pf-v6-c-popover__arrow"></div>
+      <div class="pf-v6-c-popover__content">
+        <header class="pf-v6-c-popover__header">
+          <div class="pf-v6-c-popover__title" id="po-custom-focus-title">
+            <h1 class="pf-v6-c-popover__title-text">Popover header</h1>
+          </div>
+        </header>
+        <div class="pf-v6-c-popover__body">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          <button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">
+            <span class="pf-v6-c-button__text">View the basic example</span>
+          </button>
+        </div>
+        <footer class="pf-v6-c-popover__footer">
+          <button
+            class="pf-v6-c-button pf-m-secondary"
+            type="button"
+            id="po-custom-focus-cancel"
+            @click="open = false"
+          >
+            <span class="pf-v6-c-button__text">Cancel</span>
+          </button>
+        </footer>
+      </div>
+    </div>
+  </div>
+</div>

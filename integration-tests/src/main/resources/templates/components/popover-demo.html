@@ -84,6 +84,15 @@
                               </li>
                               <li class="pf-v6-c-jump-links__item ws-toc-item">
                                 <span class="pf-v6-c-jump-links__link"
+                                  ><a href="#custom-focus" class="pf-v6-c-button pf-m-link"
+                                    ><span class="pf-v6-c-button__text"
+                                      ><span class="pf-v6-c-jump-links__link-text">Custom focus</span></span
+                                    ></a
+                                  ></span
+                                >
+                              </li>
+                              <li class="pf-v6-c-jump-links__item ws-toc-item">
+                                <span class="pf-v6-c-jump-links__link"
                                   ><a href="#no-header-footer" class="pf-v6-c-button pf-m-link"
                                     ><span class="pf-v6-c-button__text"
                                       ><span class="pf-v6-c-jump-links__link-text"
@@ -220,9 +229,15 @@
                       partials/example-card title="Close popover from content" slug="close-from-content"
                       component="popover" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        A footer action dismisses the popover — PF\u2019s controlled/uncontrolled close patterns.
+                        A footer action dismisses the popover — PF's controlled/uncontrolled close patterns.
                       </p>
                       {/description} {#content}{#include components/popover/close-from-content /}{/content} {/include}
+                      {#include partials/example-card title="Custom focus" slug="custom-focus" component="popover"}
+                      {#description}
+                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+                        On open, keyboard focus lands on the footer Cancel button instead of a close control.
+                      </p>
+                      {/description} {#content}{#include components/popover/custom-focus /}{/content} {/include}
                       {#include partials/example-card title="Without header/footer/close and no padding"
                       slug="no-header-footer" component="popover" javaSource=true} {#description}
                       <p class="pf-v6-c-content--p pf-m-editorial ws-p">

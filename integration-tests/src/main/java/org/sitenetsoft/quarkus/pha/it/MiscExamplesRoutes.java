@@ -118,7 +118,7 @@ public class MiscExamplesRoutes {
                                                "animate-vertical"));
         m.put("popover",               Set.of("basic", "positions", "hoverable", "close-from-content",
                                                "no-header-footer", "no-padding", "width-auto", "advanced",
-                                               "icon-in-title", "alert-variants", "danger"));
+                                               "icon-in-title", "alert-variants", "danger", "custom-focus"));
         m.put("masthead",              Set.of("basic", "mixed-content", "display-inline", "display-stack",
                                                "display-stack-inline-responsive", "insets", "custom-logo"));
         m.put("sidebar",               Set.of("basic", "stack", "panel-right", "panel-right-gutter",

@@ -5,6 +5,7 @@ const EXAMPLES = [
   "positions",
   "hoverable",
   "close-from-content",
+  "custom-focus",
   "no-header-footer",
   "no-padding",
   "width-auto",
@@ -61,6 +62,23 @@ test.describe("Popover", () => {
       await expect(popover).toBeVisible();
       await popover.locator("footer button", { hasText: "Got it" }).click();
       await expect(popover).toBeHidden();
+    });
+  });
+
+  test.describe("Custom focus", () => {
+    test("opening moves focus to the footer Cancel button", async ({ page }) => {
+      const demo = page.locator("#po-custom-focus-demo");
+      await demo.locator("> button").click();
+      await expect(page.locator("#po-custom-focus")).toBeVisible();
+      await expect(page.locator("#po-custom-focus-cancel")).toBeFocused();
+      await page.locator("#po-custom-focus-cancel").click();
+      await expect(page.locator("#po-custom-focus")).toBeHidden();
+    });
+
+    test("renders no close control", async ({ page }) => {
+      const demo = page.locator("#po-custom-focus-demo");
+      await demo.locator("> button").click();
+      await expect(page.locator("#po-custom-focus .pf-v6-c-popover__close")).toHaveCount(0);
     });
   });
 
