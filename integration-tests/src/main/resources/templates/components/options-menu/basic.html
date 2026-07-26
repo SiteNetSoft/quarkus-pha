@@ -1,21 +1,111 @@
-{! Options menu = Dropdown with a single-select group inside; chosen item gets a checkmark. !}
-<div x-data="{ open: false, choice: 'Newest' }" style="position: relative; display: inline-block">
-  <button class="pf-v6-c-menu-toggle" type="button" :class="open ? 'pf-m-expanded' : ''" :aria-expanded="open" @click="open = !open" id="om-basic-toggle">
-    <span class="pf-v6-c-menu-toggle__text">Sort by: <span x-text="choice"></span></span>
-    <span class="pf-v6-c-menu-toggle__controls"><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span>
+{! PF parity: react-core 6.6.0 demos/CustomMenus/OptionsMenuDemo.tsx — a Select-composed single-select
+   menu: two loose options (one disabled), then two titled groups, all separated by dividers.
+   Selecting checks the option and keeps the menu open. !}
+<div x-data="{ open: false, sel: '' }" @keydown.escape="open = false" style="position: relative; display: inline-block">
+  <button
+    class="pf-v6-c-menu-toggle"
+    type="button"
+    :class="open ? 'pf-m-expanded' : ''"
+    :aria-expanded="open"
+    @click="open = !open"
+    id="om-basic-toggle"
+  >
+    <span class="pf-v6-c-menu-toggle__text">Options menu</span>
+    <span class="pf-v6-c-menu-toggle__controls"
+      ><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span
+    >
   </button>
-  <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false" style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 14rem">
+  <div
+    class="pf-v6-c-menu"
+    x-show="open"
+    x-cloak
+    @click.outside="open = false"
+    style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 14rem"
+  >
     <div class="pf-v6-c-menu__content">
-      <ul class="pf-v6-c-menu__list" role="menu">
-        <template x-for="opt in ['Newest', 'Oldest', 'Name A→Z', 'Name Z→A']" :key="opt">
-          <li role="none" class="pf-v6-c-menu__list-item" :class="choice === opt ? 'pf-m-selected' : ''"><button class="pf-v6-c-menu__item" type="button" role="menuitemradio" :aria-checked="choice === opt" @click="choice = opt; open = false">
+      <ul class="pf-v6-c-menu__list" role="listbox">
+        <li class="pf-v6-c-menu__list-item" :class="sel === '0' ? 'pf-m-selected' : ''">
+          <button class="pf-v6-c-menu__item" type="button" role="option" :aria-selected="sel === '0'" @click="sel = '0'">
             <span class="pf-v6-c-menu__item-main">
-              <span class="pf-v6-c-menu__item-text" x-text="opt"></span>
-              <span class="pf-v6-c-menu__item-select-icon" x-show="choice === opt">{icons:svg('fa:check').raw}</span>
+              <span class="pf-v6-c-menu__item-text">Option 1</span>
+              <span class="pf-v6-c-menu__item-select-icon" x-show="sel === '0'">{icons:svg('fa:check').raw}</span>
             </span>
-          </button></li>
-        </template>
+          </button>
+        </li>
+        <li class="pf-v6-c-menu__list-item pf-m-disabled">
+          <button class="pf-v6-c-menu__item pf-m-disabled" type="button" role="option" disabled aria-disabled="true">
+            <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Disabled Option</span></span>
+          </button>
+        </li>
       </ul>
+      <hr class="pf-v6-c-divider" />
+      <section class="pf-v6-c-menu__group">
+        <h4 class="pf-v6-c-menu__group-title">Group 1</h4>
+        <ul class="pf-v6-c-menu__list" role="listbox">
+          <li class="pf-v6-c-menu__list-item" :class="sel === '2' ? 'pf-m-selected' : ''">
+            <button
+              class="pf-v6-c-menu__item"
+              type="button"
+              role="option"
+              :aria-selected="sel === '2'"
+              @click="sel = '2'"
+            >
+              <span class="pf-v6-c-menu__item-main">
+                <span class="pf-v6-c-menu__item-text">Option 1</span>
+                <span class="pf-v6-c-menu__item-select-icon" x-show="sel === '2'">{icons:svg('fa:check').raw}</span>
+              </span>
+            </button>
+          </li>
+          <li class="pf-v6-c-menu__list-item" :class="sel === '3' ? 'pf-m-selected' : ''">
+            <button
+              class="pf-v6-c-menu__item"
+              type="button"
+              role="option"
+              :aria-selected="sel === '3'"
+              @click="sel = '3'"
+            >
+              <span class="pf-v6-c-menu__item-main">
+                <span class="pf-v6-c-menu__item-text">Option 2</span>
+                <span class="pf-v6-c-menu__item-select-icon" x-show="sel === '3'">{icons:svg('fa:check').raw}</span>
+              </span>
+            </button>
+          </li>
+        </ul>
+      </section>
+      <hr class="pf-v6-c-divider" />
+      <section class="pf-v6-c-menu__group">
+        <h4 class="pf-v6-c-menu__group-title">Group 2</h4>
+        <ul class="pf-v6-c-menu__list" role="listbox">
+          <li class="pf-v6-c-menu__list-item" :class="sel === '4' ? 'pf-m-selected' : ''">
+            <button
+              class="pf-v6-c-menu__item"
+              type="button"
+              role="option"
+              :aria-selected="sel === '4'"
+              @click="sel = '4'"
+            >
+              <span class="pf-v6-c-menu__item-main">
+                <span class="pf-v6-c-menu__item-text">Option 1</span>
+                <span class="pf-v6-c-menu__item-select-icon" x-show="sel === '4'">{icons:svg('fa:check').raw}</span>
+              </span>
+            </button>
+          </li>
+          <li class="pf-v6-c-menu__list-item" :class="sel === '5' ? 'pf-m-selected' : ''">
+            <button
+              class="pf-v6-c-menu__item"
+              type="button"
+              role="option"
+              :aria-selected="sel === '5'"
+              @click="sel = '5'"
+            >
+              <span class="pf-v6-c-menu__item-main">
+                <span class="pf-v6-c-menu__item-text">Option 2</span>
+                <span class="pf-v6-c-menu__item-select-icon" x-show="sel === '5'">{icons:svg('fa:check').raw}</span>
+              </span>
+            </button>
+          </li>
+        </ul>
+      </section>
     </div>
   </div>
 </div>

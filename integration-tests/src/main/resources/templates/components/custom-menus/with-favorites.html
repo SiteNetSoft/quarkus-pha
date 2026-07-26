@@ -1,0 +1,108 @@
+{! PF parity: react-core 6.6.0 demos/CustomMenus/FavoritesDemo.tsx — a dropdown whose items can be
+   starred; favorited items are cloned into a Favorites group at the top of the menu. !}
+<div
+  x-data="{
+    open: false,
+    favs: [],
+    names: [ 'Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7', 'Item 8' ],
+    fav(i) { return this.favs.indexOf(i) !== -1; },
+    toggleFav(i) { if (this.fav(i)) { this.favs = this.favs.filter(function (f) { return f !== i; }); } else { this.favs.push(i); } },
+    get favSorted() { return this.favs.slice().sort(function (a, b) { return a - b; }); }
+  }"
+  @keydown.escape="open = false"
+  style="position: relative; display: inline-block"
+>
+  <button
+    class="pf-v6-c-menu-toggle"
+    type="button"
+    :class="open ? 'pf-m-expanded' : ''"
+    :aria-expanded="open"
+    @click="open = !open"
+    id="cm-favorites-toggle"
+  >
+    <span class="pf-v6-c-menu-toggle__text" x-text="open ? 'Expanded' : 'Collapsed'"></span>
+    <span class="pf-v6-c-menu-toggle__controls"
+      ><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span
+    >
+  </button>
+  <div
+    class="pf-v6-c-menu"
+    x-show="open"
+    x-cloak
+    @click.outside="open = false"
+    style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 14rem"
+  >
+    <div class="pf-v6-c-menu__content">
+      <section class="pf-v6-c-menu__group" x-show="favs.length > 0" x-cloak>
+        <h4 class="pf-v6-c-menu__group-title">Favorites</h4>
+        <ul class="pf-v6-c-menu__list">
+          <template x-for="i in favSorted" :key="'fav-' + i">
+            <li class="pf-v6-c-menu__list-item">
+              <button class="pf-v6-c-menu__item" type="button">
+                <span class="pf-v6-c-menu__item-main"
+                  ><span class="pf-v6-c-menu__item-text" x-text="names[i]"></span
+                ></span>
+              </button>
+              <button
+                class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action pf-m-favorite pf-m-favorited"
+                type="button"
+                :aria-label="'Unfavorite ' + names[i]"
+                @click="toggleFav(i)"
+              >
+                <span class="pf-v6-c-menu__item-action-icon">{icons:svg('fa:star').raw}</span>
+              </button>
+            </li>
+          </template>
+        </ul>
+      </section>
+      <hr class="pf-v6-c-divider" x-show="favs.length > 0" x-cloak />
+      <section class="pf-v6-c-menu__group">
+        <h4 class="pf-v6-c-menu__group-title">Group 1</h4>
+        <ul class="pf-v6-c-menu__list">
+          <template x-for="i in [ 0, 1, 2, 3 ]" :key="'g1-' + i">
+            <li class="pf-v6-c-menu__list-item">
+              <button class="pf-v6-c-menu__item" type="button">
+                <span class="pf-v6-c-menu__item-main"
+                  ><span class="pf-v6-c-menu__item-text" x-text="names[i]"></span
+                ></span>
+              </button>
+              <button
+                class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action pf-m-favorite"
+                type="button"
+                :class="fav(i) ? 'pf-m-favorited' : ''"
+                :aria-label="(fav(i) ? 'Unfavorite ' : 'Favorite ') + names[i]"
+                @click="toggleFav(i)"
+              >
+                <span class="pf-v6-c-menu__item-action-icon">{icons:svg('fa:star').raw}</span>
+              </button>
+            </li>
+          </template>
+        </ul>
+      </section>
+      <hr class="pf-v6-c-divider" />
+      <section class="pf-v6-c-menu__group">
+        <h4 class="pf-v6-c-menu__group-title">Group 2</h4>
+        <ul class="pf-v6-c-menu__list">
+          <template x-for="i in [ 4, 5, 6, 7 ]" :key="'g2-' + i">
+            <li class="pf-v6-c-menu__list-item">
+              <button class="pf-v6-c-menu__item" type="button">
+                <span class="pf-v6-c-menu__item-main"
+                  ><span class="pf-v6-c-menu__item-text" x-text="names[i]"></span
+                ></span>
+              </button>
+              <button
+                class="pf-v6-c-button pf-m-plain pf-v6-c-menu__item-action pf-m-favorite"
+                type="button"
+                :class="fav(i) ? 'pf-m-favorited' : ''"
+                :aria-label="(fav(i) ? 'Unfavorite ' : 'Favorite ') + names[i]"
+                @click="toggleFav(i)"
+              >
+                <span class="pf-v6-c-menu__item-action-icon">{icons:svg('fa:star').raw}</span>
+              </button>
+            </li>
+          </template>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>

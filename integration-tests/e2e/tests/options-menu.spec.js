@@ -9,9 +9,7 @@ test.describe("Options menu", () => {
     await expect(page.locator("h1#ws-page-title")).toHaveText("Options menu");
   });
 
-  test("Examples and Documentation section headings are visible", async ({
-    page,
-  }) => {
+  test("Examples and Documentation section headings are visible", async ({ page }) => {
     await expect(page.locator("h2#examples")).toBeVisible();
     await expect(page.locator("h2#documentation")).toBeVisible();
   });
@@ -27,32 +25,30 @@ test.describe("Options menu", () => {
   });
 
   test.describe("Basic example", () => {
-    test("toggle is visible with default 'Sort by: Newest' label", async ({
-      page,
-    }) => {
+    test("toggle is visible with static 'Options menu' label", async ({ page }) => {
       const toggle = page.locator("#om-basic-toggle");
       await expect(toggle).toBeVisible();
-      await expect(toggle.locator(".pf-v6-c-menu-toggle__text")).toHaveText(
-        "Sort by: Newest"
-      );
+      await expect(toggle.locator(".pf-v6-c-menu-toggle__text")).toHaveText("Options menu");
     });
 
     test("menu is hidden by default", async ({ page }) => {
-      const menu = page
-        .locator("#om-basic-toggle")
-        .locator("..")
-        .locator(".pf-v6-c-menu");
+      const menu = page.locator("#om-basic-toggle").locator("..").locator(".pf-v6-c-menu");
       await expect(menu).not.toBeVisible();
     });
 
-    test("clicking toggle opens menu with 4 radio items", async ({ page }) => {
+    test("menu shows 6 options, two titled groups, and dividers", async ({ page }) => {
       await page.locator("#om-basic-toggle").click();
       const wrapper = page.locator("#om-basic-toggle").locator("..");
       await expect(wrapper.locator(".pf-v6-c-menu")).toBeVisible();
-      await expect(wrapper.locator(".pf-v6-c-menu__list-item")).toHaveCount(4);
-      await expect(
-        wrapper.locator('[role="menuitemradio"]')
-      ).toHaveCount(4);
+      await expect(wrapper.locator(".pf-v6-c-menu__list-item")).toHaveCount(6);
+      await expect(wrapper.locator(".pf-v6-c-menu__group-title")).toHaveText(["Group 1", "Group 2"]);
+      await expect(wrapper.locator(".pf-v6-c-divider")).toHaveCount(2);
+    });
+
+    test("the Disabled Option is disabled", async ({ page }) => {
+      await page.locator("#om-basic-toggle").click();
+      const wrapper = page.locator("#om-basic-toggle").locator("..");
+      await expect(wrapper.locator(".pf-v6-c-menu__item", { hasText: "Disabled Option" })).toBeDisabled();
     });
 
     test("toggle gets expanded modifier when open", async ({ page }) => {
@@ -61,37 +57,32 @@ test.describe("Options menu", () => {
       await expect(toggle).toHaveClass(/pf-m-expanded/);
     });
 
-    test("default choice 'Newest' is marked as selected", async ({ page }) => {
+    test("selecting checks the option and keeps the menu open", async ({ page }) => {
       await page.locator("#om-basic-toggle").click();
       const wrapper = page.locator("#om-basic-toggle").locator("..");
+      await expect(wrapper.locator(".pf-v6-c-menu__list-item.pf-m-selected")).toHaveCount(0);
+      const groupOption = wrapper
+        .locator(".pf-v6-c-menu__group", { hasText: "Group 2" })
+        .locator(".pf-v6-c-menu__item", { hasText: "Option 2" });
+      await groupOption.click();
+      await expect(wrapper.locator(".pf-v6-c-menu")).toBeVisible();
       const selected = wrapper.locator(".pf-v6-c-menu__list-item.pf-m-selected");
       await expect(selected).toHaveCount(1);
-      await expect(selected.locator(".pf-v6-c-menu__item-text")).toHaveText(
-        "Newest"
-      );
-      await expect(
-        selected.locator(".pf-v6-c-menu__item-select-icon")
-      ).toBeVisible();
+      await expect(selected.locator(".pf-v6-c-menu__item-select-icon")).toBeVisible();
+      await expect(groupOption).toHaveAttribute("aria-selected", "true");
     });
 
-    test("selecting a different option updates toggle label and selection", async ({
-      page,
-    }) => {
+    test("selection is single-select across groups", async ({ page }) => {
       await page.locator("#om-basic-toggle").click();
       const wrapper = page.locator("#om-basic-toggle").locator("..");
-      await wrapper
-        .locator(".pf-v6-c-menu__item-text", { hasText: "Oldest" })
-        .click();
-      await expect(
-        page.locator("#om-basic-toggle .pf-v6-c-menu-toggle__text")
-      ).toHaveText("Sort by: Oldest");
-      // Re-open to verify the selection moved.
-      await page.locator("#om-basic-toggle").click();
-      const selected = wrapper.locator(".pf-v6-c-menu__list-item.pf-m-selected");
-      await expect(selected).toHaveCount(1);
-      await expect(selected.locator(".pf-v6-c-menu__item-text")).toHaveText(
-        "Oldest"
-      );
+      const first = wrapper.locator(".pf-v6-c-menu__item", { hasText: "Option 1" }).first();
+      await first.click();
+      const group1Option = wrapper
+        .locator(".pf-v6-c-menu__group", { hasText: "Group 1" })
+        .locator(".pf-v6-c-menu__item", { hasText: "Option 1" });
+      await group1Option.click();
+      await expect(wrapper.locator(".pf-v6-c-menu__list-item.pf-m-selected")).toHaveCount(1);
+      await expect(first).toHaveAttribute("aria-selected", "false");
     });
   });
 });

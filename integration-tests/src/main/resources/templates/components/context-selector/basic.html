@@ -1,6 +1,27 @@
-{#include components/navigation/context-selector id="cs-basic" toggleText="My project"}{#content}
+{! PF parity: react-core 6.6.0 demos/CustomMenus/ContextSelectorDemo.tsx — action/link items (incl.
+   disabled ones), ten context entries, a search input with button, and an Action footer. !}
+{#include components/navigation/context-selector id="cs-basic" toggleText="Action"}
+{#content}
+  <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="selected = 'Action'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Action</span></span></button></li>
+  <li role="none" class="pf-v6-c-menu__list-item"><a class="pf-v6-c-menu__item" href="#" role="menuitem" @click.prevent="selected = 'Link'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Link</span></span></a></li>
+  <li role="none" class="pf-v6-c-menu__list-item pf-m-disabled"><button class="pf-v6-c-menu__item pf-m-disabled" type="button" role="menuitem" disabled aria-disabled="true"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Disabled action</span></span></button></li>
+  <li role="none" class="pf-v6-c-menu__list-item pf-m-disabled"><a class="pf-v6-c-menu__item pf-m-disabled" href="#" role="menuitem" aria-disabled="true" tabindex="-1" @click.prevent><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Disabled link</span></span></a></li>
   <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="selected = 'My project'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">My project</span></span></button></li>
-  <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="selected = 'Apollo'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Apollo</span></span></button></li>
-  <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="selected = 'Mercury'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Mercury</span></span></button></li>
-  <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="selected = 'Gemini'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Gemini</span></span></button></li>
-{/content}{/include}
+  <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="selected = 'OpenShift cluster'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">OpenShift cluster</span></span></button></li>
+  <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="selected = 'Production Ansible'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Production Ansible</span></span></button></li>
+  <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="selected = 'AWS'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">AWS</span></span></button></li>
+  <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="selected = 'Azure'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Azure</span></span></button></li>
+  <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="selected = 'My project 2'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">My project 2</span></span></button></li>
+  <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="selected = 'OpenShift cluster 2'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">OpenShift cluster 2</span></span></button></li>
+  <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="selected = 'Production Ansible 2'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Production Ansible 2</span></span></button></li>
+  <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="selected = 'AWS 2'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">AWS 2</span></span></button></li>
+  <li role="none" class="pf-v6-c-menu__list-item"><button class="pf-v6-c-menu__item" type="button" role="menuitem" @click="selected = 'Azure 2'; open = false"><span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">Azure 2</span></span></button></li>
+{/content}
+{#footer}
+<div class="pf-v6-c-menu__footer">
+  <button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">
+    <span class="pf-v6-c-button__text">Action</span>
+  </button>
+</div>
+{/footer}
+{/include}
