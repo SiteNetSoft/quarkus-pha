@@ -34,13 +34,8 @@
     </div>
     {#else if page.isHasHorizontalNav}
     <div class="pf-v6-c-masthead__content">
-      <nav class="pf-v6-c-nav pf-m-horizontal" aria-label="{page.horizontalNavAriaLabel}">
-        <ul class="pf-v6-c-nav__list">
-          {#for it in page.horizontalNav}
-          <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link{#if it.isCurrent} pf-m-current{/if}"{#if it.isCurrent} aria-current="page"{/if}><span class="pf-v6-c-nav__link-text">{it.text}</span></a></li>
-          {/for}
-        </ul>
-      </nav>
+      {! Composed Nav model — rendering delegated to the nav component. !}
+      {#include components/navigation/nav nav=page.horizontalNav /}
     </div>
     {/if}
   </header>
@@ -57,13 +52,8 @@
       </div>
       {/if}
       <div class="pf-v6-c-page__sidebar-body{#if page.isSidebarNavFill} pf-m-fill{/if}">
-        <nav class="pf-v6-c-nav" aria-label="{page.sidebarNavAriaLabel}">
-          <ul class="pf-v6-c-nav__list" role="list">
-            {#for it in page.sidebarNav}
-            <li class="pf-v6-c-nav__item"><a href="#" class="pf-v6-c-nav__link{#if it.isCurrent} pf-m-current{/if}"{#if it.isCurrent} aria-current="page"{/if}><span class="pf-v6-c-nav__link-text">{it.text}</span></a></li>
-            {/for}
-          </ul>
-        </nav>
+        {! Composed Nav model — rendering delegated to the nav component. !}
+        {#include components/navigation/nav nav=page.sidebarNav /}
       </div>
     </div>
   </aside>

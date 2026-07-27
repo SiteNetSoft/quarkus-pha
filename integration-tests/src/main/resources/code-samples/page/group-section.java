@@ -1,5 +1,4 @@
 import org.sitenetsoft.quarkus.pha.model.*;
-import org.sitenetsoft.quarkus.pha.model.Page.NavItem;
 import org.sitenetsoft.quarkus.pha.model.Page.Section;
 
 Page page = Page.of("pg-group-section").style("min-height: 400px; border: 1px solid var(--pf-t--global--border--color--default)")

@@ -15,8 +15,8 @@ import java.util.Objects;
  *     .brand("App name")
  *     .section(Page.Section.of(welcomeHtml).bodyStyle("padding: 1rem")).build()
  * Page.of("pg-nav").brand("Logo").toggle("Vertical nav demo").toolbarText("header-tools")
- *     .sidebarNav("Vertical nav demo secondary",
- *         Page.NavItem.of("Nav item 1").current(), Page.NavItem.of("Nav item 2"))
+ *     .sidebar(Nav.builder().ariaLabel("Vertical nav demo secondary")
+ *         .item("Nav item 1", "#", true).item("Nav item 2", "#").build())
  *     .section(...).build()
  * </pre>
  *
@@ -27,34 +27,6 @@ import java.util.Objects;
  */
 @TemplateData
 public final class Page {
-
-    /** One nav link. */
-    @TemplateData
-    public static final class NavItem {
-        private final String text;
-        private final boolean current;
-
-        private NavItem(String text, boolean current) {
-            this.text = text;
-            this.current = current;
-        }
-
-        public static NavItem of(String text) {
-            return new NavItem(Objects.requireNonNull(text, "text"), false);
-        }
-
-        public NavItem current() {
-            return new NavItem(text, true);
-        }
-
-        public String text() {
-            return text;
-        }
-
-        public boolean isCurrent() {
-            return current;
-        }
-    }
 
     /** One main-area section ({@code __main-section}). */
     @TemplateData
@@ -184,10 +156,8 @@ public final class Page {
     private final boolean mastheadInline;
     private final String toggleAriaLabel;
     private final String toolbarText;
-    private final String horizontalNavAriaLabel;
-    private final List<NavItem> horizontalNav;
-    private final String sidebarNavAriaLabel;
-    private final List<NavItem> sidebarNav;
+    private final Nav horizontalNav;
+    private final Nav sidebarNav;
     private final boolean sidebarNavFill;
     private final String sidebarContextSelector;
     private final boolean scrollableMain;
@@ -200,9 +170,7 @@ public final class Page {
         this.mastheadInline = b.mastheadInline;
         this.toggleAriaLabel = b.toggleAriaLabel;
         this.toolbarText = b.toolbarText;
-        this.horizontalNavAriaLabel = b.horizontalNavAriaLabel;
         this.horizontalNav = b.horizontalNav;
-        this.sidebarNavAriaLabel = b.sidebarNavAriaLabel;
         this.sidebarNav = b.sidebarNav;
         this.sidebarNavFill = b.sidebarNavFill;
         this.sidebarContextSelector = b.sidebarContextSelector;
@@ -248,11 +216,7 @@ public final class Page {
         return horizontalNav != null;
     }
 
-    public String horizontalNavAriaLabel() {
-        return horizontalNavAriaLabel;
-    }
-
-    public List<NavItem> horizontalNav() {
+    public Nav horizontalNav() {
         return horizontalNav;
     }
 
@@ -260,11 +224,7 @@ public final class Page {
         return sidebarNav != null;
     }
 
-    public String sidebarNavAriaLabel() {
-        return sidebarNavAriaLabel;
-    }
-
-    public List<NavItem> sidebarNav() {
+    public Nav sidebarNav() {
         return sidebarNav;
     }
 
@@ -291,10 +251,8 @@ public final class Page {
         private boolean mastheadInline;
         private String toggleAriaLabel;
         private String toolbarText;
-        private String horizontalNavAriaLabel;
-        private List<NavItem> horizontalNav;
-        private String sidebarNavAriaLabel;
-        private List<NavItem> sidebarNav;
+        private Nav horizontalNav;
+        private Nav sidebarNav;
         private boolean sidebarNavFill;
         private String sidebarContextSelector;
         private boolean scrollableMain;
@@ -333,17 +291,23 @@ public final class Page {
             return this;
         }
 
-        /** Masthead content: horizontal nav of items. */
-        public Builder horizontalNav(String ariaLabel, NavItem... items) {
-            this.horizontalNavAriaLabel = ariaLabel;
-            this.horizontalNav = List.of(items);
+        /**
+         * Masthead content: a composed horizontal {@link Nav}. Build it with
+         * {@code Nav.builder().horizontal()} — the page delegates rendering to
+         * the nav component, so icons, expandables and groups all work here.
+         */
+        public Builder horizontalNav(Nav nav) {
+            this.horizontalNav = Objects.requireNonNull(nav, "nav");
             return this;
         }
 
-        /** Collapsible page sidebar holding one nav body. */
-        public Builder sidebarNav(String ariaLabel, NavItem... items) {
-            this.sidebarNavAriaLabel = ariaLabel;
-            this.sidebarNav = List.of(items);
+        /**
+         * Collapsible page sidebar holding one composed {@link Nav} body.
+         * The page delegates rendering to the nav component — no page-local
+         * nav-item type, and everything Nav supports works in the sidebar.
+         */
+        public Builder sidebar(Nav nav) {
+            this.sidebarNav = Objects.requireNonNull(nav, "nav");
             return this;
         }
 

@@ -3,8 +3,8 @@ package org.sitenetsoft.quarkus.pha.it;
 import io.quarkus.qute.TemplateGlobal;
 import org.sitenetsoft.quarkus.pha.model.Breadcrumb;
 import org.sitenetsoft.quarkus.pha.model.BreadcrumbItem;
+import org.sitenetsoft.quarkus.pha.model.Nav;
 import org.sitenetsoft.quarkus.pha.model.Page;
-import org.sitenetsoft.quarkus.pha.model.Page.NavItem;
 import org.sitenetsoft.quarkus.pha.model.Page.Section;
 
 /**
@@ -115,26 +115,26 @@ public class PageDemoData {
 
     public static Page demoPageHorizontalNav = Page.of("pg-horizontal-nav").style(border("min-height: 320px"))
             .brand("Logo").mastheadInline()
-            .horizontalNav("Global",
-                    NavItem.of("Horizontal nav item 1").current(),
-                    NavItem.of("Horizontal nav item 2"),
-                    NavItem.of("Horizontal nav item 3"))
+            .horizontalNav(Nav.builder().horizontal().ariaLabel("Global")
+                    .item("Horizontal nav item 1", "#", true)
+                    .item("Horizontal nav item 2", "#")
+                    .item("Horizontal nav item 3", "#").build())
             .section(Section.of("The navigation lives in the masthead content area as a horizontal"
                     + " <code class=\"ws-code\">pf-v6-c-nav pf-m-horizontal</code> — no sidebar."))
             .build();
 
     public static Page demoPageUncontrolled = Page.of("pg-uncontrolled-nav").style(border("min-height: 360px"))
             .brand("Logo").toggle("Uncontrolled nav demo")
-            .sidebarNav("Uncontrolled nav demo secondary",
-                    NavItem.of("Nav item 1").current(), NavItem.of("Nav item 2"), NavItem.of("Nav item 3"))
+            .sidebar(Nav.builder().ariaLabel("Uncontrolled nav demo secondary")
+                    .item("Nav item 1", "#", true).item("Nav item 2", "#").item("Nav item 3", "#").build())
             .section(Section.of("The sidebar state is owned entirely by the page shell (local Alpine"
                     + " state) — no outside component controls it. Click the burger to toggle."))
             .build();
 
     public static Page demoPageVerticalNav = Page.of("pg-vertical-nav").style(border("min-height: 400px"))
             .brand("Logo").toggle("Vertical nav demo").toolbarText("header-tools")
-            .sidebarNav("Vertical nav demo secondary",
-                    NavItem.of("Nav item 1").current(), NavItem.of("Nav item 2"), NavItem.of("Nav item 3"))
+            .sidebar(Nav.builder().ariaLabel("Vertical nav demo secondary")
+                    .item("Nav item 1", "#", true).item("Nav item 2", "#").item("Nav item 3", "#").build())
             .section(Section.of("<h2 id=\"pg-vertical-nav-s1\" class=\"pf-v6-c-title pf-m-xl\">Vertical nav"
                     + " example section 1</h2>").ariaLabelledBy("pg-vertical-nav-s1"))
             .section(Section.of("""
@@ -149,8 +149,8 @@ public class PageDemoData {
             .brand("Logo").toggle("Multiple sidebar body demo").toolbarText("header-tools")
             .sidebarContextSelector("First sidebar body (for a context selector/perspective switcher)")
             .sidebarNavFill()
-            .sidebarNav("Multiple sidebar body demo secondary",
-                    NavItem.of("Nav item 1").current(), NavItem.of("Nav item 2"), NavItem.of("Nav item 3"))
+            .sidebar(Nav.builder().ariaLabel("Multiple sidebar body demo secondary")
+                    .item("Nav item 1", "#", true).item("Nav item 2", "#").item("Nav item 3", "#").build())
             .section(Section.of("The sidebar stacks two <code class=\"ws-code\">pf-v6-c-page__sidebar-body</code>"
                     + " elements — the first with <code class=\"ws-code\">pf-m-context-selector</code>, the second"
                     + " with <code class=\"ws-code\">pf-m-fill</code> to take the remaining height."))
