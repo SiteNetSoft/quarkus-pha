@@ -23,15 +23,15 @@ public class ModalDemoData {
         return Modal.of(id).size("md").variant(variant).alertPrefix()
                 .trigger("Open " + title).title(title).headingLevel("h2")
                 .body(ALERT_BODY)
-                .footerButton("Confirm", "pf-m-primary")
-                .footerButton("Cancel", "pf-m-link").build();
+                .footerButton("Confirm", "primary")
+                .footerButton("Cancel", "link").build();
     }
 
     public static Modal demoMoBasic = Modal.of("mo-basic").size("md").trigger("Open modal")
             .title("Are you sure?").headingLevel("h2")
             .body("<p>This action removes the project and all its associated data. It cannot be undone.</p>")
-            .footerButton("Delete", "pf-m-danger")
-            .footerButton("Cancel", "pf-m-link").build();
+            .footerButton("Delete", "danger")
+            .footerButton("Cancel", "link").build();
 
     public static Modal demoMoInfoAlert = alert("mo-info-alert", "info", "info alert modal");
     public static Modal demoMoSuccessAlert = alert("mo-success-alert", "success", "success alert modal");
@@ -44,8 +44,8 @@ public class ModalDemoData {
             .title("With a static description").headingLevel("h2")
             .description("A static description appears here, below the modal title.")
             .body("<p>The description sits in the header below the title and does not scroll with the body.</p>")
-            .footerButton("Confirm", "pf-m-primary")
-            .footerButton("Cancel", "pf-m-link").build();
+            .footerButton("Confirm", "primary")
+            .footerButton("Cancel", "link").build();
 
     public static Modal demoMoWithoutTitle = Modal.of("mo-without-title").size("md")
             .trigger("Open modal without a title")
@@ -53,7 +53,7 @@ public class ModalDemoData {
             .body("<p>\n    When a modal has no title element, the modal box itself must carry an\n"
                     + "    <code class=\"ws-code\">aria-label</code> naming the dialog for assistive"
                     + " technologies.\n  </p>")
-            .footerButton("Close", "pf-m-primary").build();
+            .footerButton("Close", "primary").build();
 
     public static Modal demoMoNoHeaderFooter = Modal.of("mo-no-header-footer").size("md")
             .trigger("Open header/footer-less modal")
@@ -65,28 +65,28 @@ public class ModalDemoData {
             .trigger("Open top-aligned modal")
             .title("Top aligned").headingLevel("h2")
             .body("<p><code class=\"ws-code\">pf-m-align-top</code> pins the dialog to the top of the viewport.</p>")
-            .footerButton("Confirm", "pf-m-primary")
-            .footerButton("Cancel", "pf-m-link").build();
+            .footerButton("Confirm", "primary")
+            .footerButton("Cancel", "link").build();
 
     public static Modal demoMoCustomWidth = Modal.of("mo-custom-width").width("50%")
             .trigger("Open 50%-width modal")
             .title("Custom width").headingLevel("h2")
             .body("<p>An inline width (here 50%) replaces the size modifier.</p>")
-            .footerButton("Confirm", "pf-m-primary").build();
+            .footerButton("Confirm", "primary").build();
 
     public static Modal demoMoTitleIcon = Modal.of("mo-title-icon").size("md").variant("warning")
             .trigger("Open warning modal")
             .title("Warning modal").headingLevel("h2")
             .body("<p>The <code class=\"ws-code\">pf-m-warning</code> variant colors the title icon.</p>")
-            .footerButton("Confirm", "pf-m-primary")
-            .footerButton("Cancel", "pf-m-link").build();
+            .footerButton("Confirm", "primary")
+            .footerButton("Cancel", "link").build();
 
     public static Modal demoMoCustomTitleIcon = Modal.of("mo-custom-title-icon").size("md")
             .trigger("Open custom-icon modal")
             .title("Custom icon modal").headingLevel("h2").titleIcon("fa:rocket")
             .body("<p>Any icon can sit in the title icon slot.</p>")
-            .footerButton("Confirm", "pf-m-primary")
-            .footerButton("Cancel", "pf-m-link").build();
+            .footerButton("Confirm", "primary")
+            .footerButton("Cancel", "link").build();
 
     public static Modal demoMoDangerStatusTitle = Modal.of("mo-danger-status-title").size("md")
             .variant("danger").statusTitle().alertPrefix()
@@ -94,14 +94,14 @@ public class ModalDemoData {
             .title("danger alert modal").headingLevel("h2")
             .body("<p>\n    Here <code class=\"ws-code\">pf-m-danger</code> sits on the title element"
                     + " instead of the modal box — the box carries\n    no status class.\n  </p>")
-            .footerButton("Confirm", "pf-m-primary")
-            .footerButton("Cancel", "pf-m-link").build();
+            .footerButton("Confirm", "primary")
+            .footerButton("Cancel", "link").build();
 
     public static Modal demoMoScrollable = Modal.of("mo-scrollable").size("md")
             .trigger("Open scrollable modal")
             .title("Scrollable modal").headingLevel("h2").bodyScrollable()
             .body(scrollBody())
-            .footerButton("Confirm", "pf-m-primary").build();
+            .footerButton("Confirm", "primary").build();
 
     private static String scrollBody() {
         String p = "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium"
