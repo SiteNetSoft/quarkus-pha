@@ -19,8 +19,8 @@ import java.util.Objects;
  * Popover.of("po-danger").staticOpen().trigger("Delete").triggerVariant("danger")
  *     .variant("danger").titlePlain("Delete this project?")
  *     .body("This action cannot be undone…")
- *     .footerButton("Delete", "pf-m-danger", false)
- *     .footerButton("Cancel", "pf-m-link", false).build()
+ *     .footerButton("Delete", "danger", false)
+ *     .footerButton("Cancel", "link", false).build()
  * Popover.of("po-hover").hoverable().trigger("Hover or focus me")
  *     .title("Hoverable popover").body("…").build()
  * </pre>
@@ -37,22 +37,16 @@ public final class Popover {
     /** One footer action button. */
     @TemplateData
     public static final class FooterButton {
-        private final String text;
-        private final String modifiers;
+        private final Button button;
         private final boolean closes;
 
-        private FooterButton(String text, String modifiers, boolean closes) {
-            this.text = text;
-            this.modifiers = modifiers;
+        private FooterButton(Button button, boolean closes) {
+            this.button = button;
             this.closes = closes;
         }
 
-        public String text() {
-            return text;
-        }
-
-        public String modifiers() {
-            return modifiers;
+        public Button button() {
+            return button;
         }
 
         public boolean isCloses() {
@@ -331,10 +325,15 @@ public final class Popover {
         }
 
         /** Footer action button; closes=true wires @click="open = false". */
-        public Builder footerButton(String text, String modifiers, boolean closes) {
-            footerButtons.add(new FooterButton(Objects.requireNonNull(text, "text"),
-                    Objects.requireNonNull(modifiers, "modifiers"), closes));
+        /** Footer button composed from the real Button model; closes dismisses the popover on click. */
+        public Builder footerButton(Button button, boolean closes) {
+            footerButtons.add(new FooterButton(Objects.requireNonNull(button, "button"), closes));
             return this;
+        }
+
+        /** Footer button shorthand: text + variant (primary | link | danger | …). */
+        public Builder footerButton(String text, String variant, boolean closes) {
+            return footerButton(Button.of(text).variant(Objects.requireNonNull(variant, "variant")).build(), closes);
         }
 
         public Popover build() {

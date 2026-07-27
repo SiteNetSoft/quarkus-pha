@@ -7,8 +7,8 @@ Popover popover = Popover.of("po-danger").staticOpen()
                 + " width: 320px; visibility: visible")
         .titlePlain("Delete this project?")
         .body("This action cannot be undone. All associated data will be removed.")
-        .footerButton("Delete", "pf-m-danger", false)
-        .footerButton("Cancel", "pf-m-link", false).build();
+        .footerButton("Delete", "danger", false)
+        .footerButton("Cancel", "link", false).build();
 
 // Template side, with the data in scope:
 // {#include components/feedback/popover popover=popover /}

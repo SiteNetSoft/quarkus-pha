@@ -1,6 +1,7 @@
 package org.sitenetsoft.quarkus.pha.it;
 
 import io.quarkus.qute.TemplateGlobal;
+import org.sitenetsoft.quarkus.pha.model.Button;
 import org.sitenetsoft.quarkus.pha.model.Popover;
 
 import java.util.List;
@@ -50,8 +51,8 @@ public class PopoverDemoData {
                     + " width: 320px; visibility: visible")
             .titlePlain("Delete this project?")
             .body("This action cannot be undone. All associated data will be removed.")
-            .footerButton("Delete", "pf-m-danger", false)
-            .footerButton("Cancel", "pf-m-link", false).build();
+            .footerButton("Delete", "danger", false)
+            .footerButton("Cancel", "link", false).build();
 
     public static Popover demoPoNoHeaderFooter = Popover.of("po-no-header-footer")
             .trigger("Show plain popover").ariaLabel("Plain popover")
@@ -96,7 +97,7 @@ public class PopoverDemoData {
             .title("Close from content").dismissable()
             .body("An action inside the popover body or footer can dismiss it — PF documents this"
                     + " as the controlled and uncontrolled close patterns.")
-            .footerButton("Got it", "pf-m-primary", true).build();
+            .footerButton("Got it", "primary", true).build();
 
     public static Popover demoPoHoverable = Popover.of("po-hoverable").hoverable()
             .trigger("Hover or focus me")
@@ -107,5 +108,5 @@ public class PopoverDemoData {
             .trigger("Show advanced popover")
             .title("Advanced popover").titleIcon("fa:circle-info").dismissable()
             .body("Header with an icon, a dismissable close button, and footer actions together.")
-            .footerButton("Dismiss", "pf-m-link pf-m-inline", true).build();
+            .footerButton(Button.of("Dismiss").variant("link").asInline().build(), true).build();
 }
