@@ -35,12 +35,9 @@
       {#if item.dropdownShape}
       {! div, not span — the floating menu is a div and a div inside a span is invalid HTML. !}
       <div class="pf-v6-c-breadcrumb__dropdown" x-data="phaBreadcrumbDropdown()" style="display: inline-block">
-        <button type="button" class="pf-v6-c-menu-toggle pf-m-plain pf-m-text" aria-haspopup="true" :aria-expanded="open.toString()" @click="toggle()" @keydown.escape.window="close()" id="{item.dropdownId}-toggle">
-          <span class="pf-v6-c-menu-toggle__text">{item.text}</span>
-          <span class="pf-v6-c-menu-toggle__controls">
-            <span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:angle-down').raw}</span>
-          </span>
-        </button>
+        {#let tgId=(item.dropdownId + '-toggle') id=null expanded=null disabled=null primary=null}
+        {#include components/navigation/menu-toggle plain=true textMod=true withControls=true caretIcon='fa:angle-down' id=tgId toggleText=item.text toggleAttrs='aria-haspopup="true" :aria-expanded="open.toString()" @click="toggle()" @keydown.escape.window="close()"' /}
+        {/let}
         <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="close()" id="{item.dropdownId}" style="position: absolute; z-index: 200; margin-top: 0.25rem">
           <div class="pf-v6-c-menu__content">
             {! No menu/menuitem roles here: the dropdown sits inside the breadcrumb's

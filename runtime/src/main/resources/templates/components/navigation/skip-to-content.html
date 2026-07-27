@@ -7,9 +7,9 @@
 {! Model mode: pass skipToContent=<...model.SkipToContent>. !}
 {#if skipToContent??}
 <div class="pf-v6-c-skip-to-content">
-  <a class="pf-v6-c-button pf-m-primary" href="{skipToContent.href}"{#if skipToContent.id??} id="{skipToContent.id}"{/if}
-    ><span class="pf-v6-c-button__text">{skipToContent.text}</span></a
-  >
+{#let btn=null btnAttrs=null variant=null icon=null iconPosition=null disabled=null ariaDisabled=null size=null inline=null block=null circle=null count=null countRead=null ariaLabel=null ariaExpanded=null attrs=null type=null clicked=null state=null stateful=null href=null id=null component=null hamburger=null hamburgerVariant=null hamburgerExpandExpr=null settings=null favorite=null favorited=null isLoading=null spinnerLabel=null hasNoPadding=null danger=null}
+  {#include components/actions/button href=skipToContent.href id=skipToContent.id}{#content}{skipToContent.text}{/content}{/include}
+  {/let}
 </div>
 {#else}
 <div class="pf-v6-c-skip-to-content">

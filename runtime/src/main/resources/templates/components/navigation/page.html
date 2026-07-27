@@ -6,18 +6,9 @@
     <div class="pf-v6-c-masthead__main">
       {#if page.isHasToggle}
       <span class="pf-v6-c-masthead__toggle">
-        <button
-          class="pf-v6-c-button pf-m-hamburger pf-m-plain"
-          type="button"
-          aria-label="{page.toggleAriaLabel}"
-          :aria-expanded="sidebarOpen.toString()"
-          :class="sidebarOpen ? 'pf-m-expand' : ''"
-          @click="sidebarOpen = !sidebarOpen"
-        >
-          <span class="pf-v6-c-button__icon"
-            ><svg viewBox="0 0 10 10" class="pf-v6-c-button--hamburger-icon pf-v6-svg" width="1em" height="1em"><path class="pf-v6-c-button--hamburger-icon--top" d="M1,1 L9,1"/><path class="pf-v6-c-button--hamburger-icon--middle" d="M1,5 L9,5"/><path class="pf-v6-c-button--hamburger-icon--arrow" d="M1,5 L1,5 L1,5"/><path class="pf-v6-c-button--hamburger-icon--bottom" d="M9,9 L1,9"/></svg></span
-          >
-        </button>
+{#let btn=null btnAttrs=null variant=null icon=null iconPosition=null disabled=null ariaDisabled=null size=null inline=null block=null circle=null count=null countRead=null ariaLabel=null ariaExpanded=null attrs=null type=null clicked=null state=null stateful=null href=null id=null component=null hamburger=null hamburgerVariant=null hamburgerExpandExpr=null settings=null favorite=null favorited=null isLoading=null spinnerLabel=null hasNoPadding=null danger=null}
+        {#include components/actions/button hamburger=true ariaLabel=page.toggleAriaLabel hamburgerExpandExpr='sidebarOpen' /}
+        {/let}
       </span>
       {/if}
       <div class="pf-v6-c-masthead__brand"><strong>{page.brand}</strong></div>

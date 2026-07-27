@@ -29,22 +29,9 @@
   </div>
   {/if}
   <div class="pf-v6-c-pagination__page-menu" style="position: relative">
-    <button
-      class="pf-v6-c-menu-toggle pf-m-plain pf-m-text{#if pagination.bottom} pf-m-top{/if}"
-      type="button"
-      id="{pagination.toggleId}"
-      :class="open ? 'pf-m-expanded' : ''"
-      :aria-expanded="open"
-      @click="open = !open"
-      {#if pagination.disabled}disabled{/if}
-    >
-      <span class="pf-v6-c-menu-toggle__text"
-        ><b x-text="range">1 - 10</b>&nbsp;of&nbsp;<b>{#if pagination.indeterminate}many{#else}{pagination.total}{/if}</b></span
-      >
-      <span class="pf-v6-c-menu-toggle__controls"
-        ><span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span></span
-      >
-    </button>
+    {#let topCls=(pagination.bottom ? 'pf-m-top' : null) expanded=null primary=null}
+    {#include components/navigation/menu-toggle plain=true textMod=true withControls=true toggleClasses=topCls id=pagination.toggleId disabled=pagination.disabled expandedExpr='open'}<b x-text="range">1 - 10</b>&nbsp;of&nbsp;<b>{#if pagination.indeterminate}many{#else}{pagination.total}{/if}</b>{/include}
+    {/let}
     <div
       class="pf-v6-c-menu"
       x-show="open"

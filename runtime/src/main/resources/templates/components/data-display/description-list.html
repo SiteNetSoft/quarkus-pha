@@ -11,7 +11,7 @@
   <div class="{#if list.cardGroups}pf-v6-c-card{#else}pf-v6-c-description-list__group{/if}">
     <dt class="pf-v6-c-description-list__term">{#if group.termIcon}<span class="pf-v6-c-description-list__term-icon">{icons:svg(group.termIcon).raw}</span>{/if}<span class="pf-v6-c-description-list__text">{group.term}</span></dt>
     <dd class="pf-v6-c-description-list__description">
-      <div class="pf-v6-c-description-list__text">{#if group.link}<a href="{group.href}">{group.descText}</a>{#else if group.linkButton}<button class="pf-v6-c-button pf-m-link pf-m-inline" type="button"><span class="pf-v6-c-button__icon pf-m-start">{icons:svg(group.buttonIcon).raw}</span><span class="pf-v6-c-button__text">{group.descText}</span></button>{#else}{group.descText}{/if}</div>
+      <div class="pf-v6-c-description-list__text">{#if group.link}<a href="{group.href}">{group.descText}</a>{#else if group.linkButton}{#let btn=null btnAttrs=null variant=null icon=null iconPosition=null disabled=null ariaDisabled=null size=null inline=null block=null circle=null count=null countRead=null ariaLabel=null ariaExpanded=null attrs=null type=null clicked=null state=null stateful=null href=null id=null component=null hamburger=null hamburgerVariant=null hamburgerExpandExpr=null settings=null favorite=null favorited=null isLoading=null spinnerLabel=null hasNoPadding=null danger=null}{#include components/actions/button variant="link" inline=true icon=group.buttonIcon content=true}{#content}{group.descText}{/content}{/include}{/let}{#else}{group.descText}{/if}</div>
     </dd>
   </div>
   {/for}
