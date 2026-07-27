@@ -31,6 +31,19 @@ python3 "$SCRIPT_DIR/static-site-crawl.py" \
   --base-path "$BASE_PATH" \
   --out "$OUT"
 
+# Monaco is referenced only from a JS string literal (code-example.js), which
+# the crawler cannot see — it follows HTML attributes, srcset, and CSS url()
+# refs. Bundle the whole AMD tree explicitly so the code viewers work on the
+# deployed site; code-example.js derives the base path at runtime.
+MONACO_SRC="$PROJECT_ROOT/runtime/src/main/resources/META-INF/resources/web/vendor/monaco"
+if [ ! -d "$MONACO_SRC/vs" ]; then
+  echo "ERROR: $MONACO_SRC/vs is missing — run scripts/download-frontend-deps.sh first." >&2
+  exit 1
+fi
+echo "==> Bundling Monaco (JS-referenced, invisible to the crawler)..."
+mkdir -p "$OUT/web/vendor"
+cp -r "$MONACO_SRC" "$OUT/web/vendor/monaco"
+
 PREVIEW="$PROJECT_ROOT/build/static-site-preview"
 mkdir -p "$PREVIEW$(dirname "${BASE_PATH%/}")"
 ln -sfn "$OUT" "$PREVIEW${BASE_PATH%/}"
