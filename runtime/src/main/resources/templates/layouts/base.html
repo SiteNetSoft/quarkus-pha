@@ -5,6 +5,7 @@
   </head>
   <body>
     <!--class="pf-v6-c-page"-->
-    {#include components/navigation/theme-selector /} {#insert body}{/insert}
+    {! Pages whose masthead carries the theme selector (the showcase shell) pass noThemeWidget=true to suppress the
+    floating fallback. !} {#if !noThemeWidget??}{#include compositions/theme-selector /}{/if} {#insert body}{/insert}
   </body>
 </html>

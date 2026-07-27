@@ -32,7 +32,7 @@
   <div class="pf-v6-c-masthead__content">{masthead.contentHtml.raw}</div>
 </header>
 {#else}
-<header class="pf-v6-c-masthead{#if displayStack??} pf-m-display-stack{/if}{#if displayInline??} pf-m-display-inline{/if}{#if inset??} pf-m-inset-{inset}{/if}"{#if id??} id="{id}"{/if}>
+<header class="pf-v6-c-masthead{#if displayStack??} pf-m-display-stack{/if}{#if displayInline??} pf-m-display-inline{/if}{#if inset??} pf-m-inset-{inset}{/if}{#if mastheadClasses??} {mastheadClasses}{/if}"{#if id??} id="{id}"{/if}>
   <div class="pf-v6-c-masthead__main">
     {#let id=null inset=null}{#insert toggle}{/insert}{/let}
     <div class="pf-v6-c-masthead__brand">{#let id=null inset=null}{#insert brand}{/insert}{/let}</div>
