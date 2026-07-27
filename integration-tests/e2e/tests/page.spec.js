@@ -198,7 +198,7 @@ test.describe("Page", () => {
     test("source-java route serves the snippet as plain text", async ({ page }) => {
       const res = await page.request.get("/components/page/source-java/vertical-nav");
       expect(res.status()).toBe(200);
-      expect(await res.text()).toContain('.sidebarNav("Vertical nav demo secondary"');
+      expect(await res.text()).toContain('.sidebar(Nav.builder().ariaLabel("Vertical nav demo secondary")');
     });
 
     test("generated sidebar toggle collapses and expands", async ({ page }) => {
