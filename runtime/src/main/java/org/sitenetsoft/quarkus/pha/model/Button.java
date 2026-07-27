@@ -35,6 +35,7 @@ public final class Button {
     private final boolean disabled;
     private final boolean ariaDisabled;
     private final boolean clicked;
+    private final boolean danger;
     private final boolean noPadding;
     private final String spinnerLabel;
     private final String tag;
@@ -64,6 +65,7 @@ public final class Button {
         this.disabled = b.disabled;
         this.ariaDisabled = b.ariaDisabled;
         this.clicked = b.clicked;
+        this.danger = b.danger;
         this.noPadding = b.noPadding;
         this.spinnerLabel = b.spinnerLabel;
         this.tag = b.tag;
@@ -167,6 +169,11 @@ public final class Button {
         return clicked;
     }
 
+    /** Danger accent on the link/secondary variants ({@code pf-m-danger} alongside the variant). */
+    public boolean isDanger() {
+        return danger;
+    }
+
     public boolean isNoPadding() {
         return noPadding;
     }
@@ -257,6 +264,7 @@ public final class Button {
         private boolean disabled;
         private boolean ariaDisabled;
         private boolean clicked;
+        private boolean danger;
         private boolean noPadding;
         private String spinnerLabel;
         private String tag;
@@ -328,6 +336,12 @@ public final class Button {
         /** Active/clicked styling. */
         public Builder asClicked() {
             this.clicked = true;
+            return this;
+        }
+
+        /** Danger accent on the link/secondary variants. */
+        public Builder asDanger() {
+            this.danger = true;
             return this;
         }
 
