@@ -1,0 +1,130 @@
+package org.sitenetsoft.quarkus.pha.it;
+
+import io.quarkus.qute.TemplateGlobal;
+import org.sitenetsoft.quarkus.pha.model.JumpLinkItem;
+import org.sitenetsoft.quarkus.pha.model.JumpLinks;
+import org.sitenetsoft.quarkus.pha.model.Menu;
+import org.sitenetsoft.quarkus.pha.model.MenuItem;
+import org.sitenetsoft.quarkus.pha.model.Nav;
+import org.sitenetsoft.quarkus.pha.model.NavEntry;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+/**
+ * Shared data for the showcase shell (partials/showcase-page.html): the
+ * sidebar navigation and the masthead search menu. Both are derived from the
+ * same registries that drive the /components grid, the layout routes, and the
+ * pattern routes, so the shell can never drift from the real page inventory.
+ */
+@TemplateGlobal
+public class ShowcaseShellData {
+
+    private static String capitalize(String slug) {
+        return Character.toUpperCase(slug.charAt(0)) + slug.substring(1);
+    }
+
+    /** name → href for every implemented component page, sorted by name. */
+    private static Map<String, String> componentPages() {
+        Map<String, String> pages = new TreeMap<>();
+        for (Map<String, String> comp : HelloResource.buildComponentList()) {
+            String href = comp.get("href");
+            if (href != null && href.startsWith("/components/")) {
+                pages.put(comp.get("name"), href);
+            }
+        }
+        return pages;
+    }
+
+    /** name → href for every extension page, sorted by name. */
+    private static Map<String, String> extensionPages() {
+        Map<String, String> pages = new TreeMap<>();
+        for (Map<String, String> comp : HelloResource.buildComponentList()) {
+            String href = comp.get("href");
+            if (href != null && href.startsWith("/extensions/")) {
+                pages.put(comp.get("name"), href);
+            }
+        }
+        return pages;
+    }
+
+    private static Map<String, String> layoutPages() {
+        Map<String, String> pages = new TreeMap<>();
+        for (String slug : LayoutsRoutes.layoutNames()) {
+            pages.put(capitalize(slug), "/layouts/" + slug);
+        }
+        return pages;
+    }
+
+    private static Map<String, String> patternPages() {
+        Map<String, String> pages = new TreeMap<>();
+        for (Map.Entry<String, String> e : PatternsRoutes.titles().entrySet()) {
+            pages.put(e.getValue(), "/patterns/" + e.getKey());
+        }
+        return pages;
+    }
+
+    private static NavEntry[] entries(Map<String, String> pages) {
+        List<NavEntry> items = new ArrayList<>();
+        for (Map.Entry<String, String> e : pages.entrySet()) {
+            items.add(Nav.item(e.getKey(), e.getValue()));
+        }
+        return items.toArray(new NavEntry[0]);
+    }
+
+    /** Sidebar navigation: top pages plus expandable per-category page lists. */
+    public static Nav showcaseNav = Nav.builder()
+            .id("showcase-nav")
+            .ariaLabel("Showcase navigation")
+            .item("Home", "/")
+            .item("Components", "/components")
+            .expandable("All components", entries(componentPages()))
+            .expandable("Extensions", entries(extensionPages()))
+            .expandable("Layouts", entries(layoutPages()))
+            .expandable("Patterns", entries(patternPages()))
+            .item("Licenses", "/licenses")
+            .build();
+
+    /** Masthead search: a search-filter menu over every showcase page. */
+    public static Menu showcaseSearchMenu = buildSearchMenu();
+
+    /**
+     * Table of contents for a showcase page, in the ws-toc shape: vertical,
+     * collapsed behind a toggle below 2xl, a plain right-rail list at 2xl+.
+     */
+    private static JumpLinks toc(String pageId, JumpLinkItem... items) {
+        JumpLinks.Builder b = JumpLinks.of("toc-" + pageId)
+                .ariaLabel("Table of contents")
+                .vertical()
+                .expandableResponsive("pf-m-non-expandable-on-2xl ws-toc", "Table of contents");
+        for (JumpLinkItem item : items) {
+            b.item(item);
+        }
+        return b.build();
+    }
+
+    /** ToC for the backdrop demo page (showcase-shell pilot). */
+    public static JumpLinks tocBackdrop = toc("backdrop",
+            JumpLinkItem.of("Examples", "#examples")
+                    .sub(JumpLinkItem.of("Basic", "#basic"))
+                    .sub(JumpLinkItem.of("With content", "#with-content"))
+                    .sub(JumpLinkItem.of("Non-dismissible", "#non-dismissible")),
+            JumpLinkItem.of("Documentation", "#documentation")
+                    .sub(JumpLinkItem.of("Backdrop props", "#props-backdrop"))
+                    .sub(JumpLinkItem.of("Usage", "#usage")));
+
+    private static Menu buildSearchMenu() {
+        Menu.Builder b = Menu.builder()
+                .id("pha-global-search-menu")
+                .scrollable()
+                .style("max-height: 60vh; overflow-y: auto")
+                .searchFilter("Search the showcase", "Search all pages");
+        componentPages().forEach((name, href) -> b.item(MenuItem.of(name).href(href)));
+        extensionPages().forEach((name, href) -> b.item(MenuItem.of(name).href(href)));
+        layoutPages().forEach((name, href) -> b.item(MenuItem.of(name).href(href)));
+        patternPages().forEach((name, href) -> b.item(MenuItem.of(name).href(href)));
+        return b.build();
+    }
+}

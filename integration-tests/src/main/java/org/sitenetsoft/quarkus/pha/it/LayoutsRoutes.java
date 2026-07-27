@@ -30,6 +30,11 @@ import java.util.Set;
 @Path("/layouts")
 public class LayoutsRoutes {
 
+    /** Layout slugs, for the showcase shell's nav and search index. */
+    static Set<String> layoutNames() {
+        return EXAMPLES.keySet();
+    }
+
     /** Allowlist of valid example slugs per layout. */
     private static final Map<String, Set<String>> EXAMPLES = Map.of(
         "bullseye", Set.of("basic", "with-content"),

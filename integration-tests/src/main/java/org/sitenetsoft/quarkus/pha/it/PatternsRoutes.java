@@ -29,6 +29,11 @@ import java.util.Map;
 @Path("/patterns")
 public class PatternsRoutes {
 
+    /** Pattern slugs → display titles, for the showcase shell's nav and search index. */
+    static Map<String, String> titles() {
+        return TITLES;
+    }
+
     private static final Map<String, String> TITLES = Map.ofEntries(
         Map.entry("card-view",          "Card view"),
         Map.entry("dashboard",          "Dashboard"),
