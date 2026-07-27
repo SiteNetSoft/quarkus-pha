@@ -11,7 +11,9 @@ boolean, e.g. "g1"). Optional: count (badge number), countRead (pf-m-read badge 
     >
       <span class="pf-v6-c-notification-drawer__group-toggle-title">{title}</span>
       {#if count??}<span class="pf-v6-c-notification-drawer__group-toggle-count"
-        ><span class="pf-v6-c-badge {#if countRead??}pf-m-read{#else}pf-m-unread{/if}">{count}</span></span
+        >{#let id=null screenReaderText=null badge=null}{#if countRead??}{#include components/data-display/badge
+        variant="read" value=count /}{#else}{#include components/data-display/badge variant="unread" value=count
+        /}{/if}{/let}</span
       >{/if}
       <span class="pf-v6-c-notification-drawer__group-toggle-icon">{icons:svg('fa:angle-down').raw}</span>
     </button>

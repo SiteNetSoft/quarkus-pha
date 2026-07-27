@@ -35,7 +35,7 @@
           @click="{g.openVar} = !{g.openVar}"
         >
           <span class="pf-v6-c-notification-drawer__group-toggle-title">{g.title}</span>
-          {#if g.count??}<span class="pf-v6-c-notification-drawer__group-toggle-count"><span class="pf-v6-c-badge pf-m-unread">{g.count}</span></span>{/if}
+          {#if g.count??}<span class="pf-v6-c-notification-drawer__group-toggle-count">{#let id=null variant=null screenReaderText=null badge=null}{#include components/data-display/badge value=g.count /}{/let}</span>{/if}
           <span class="pf-v6-c-notification-drawer__group-toggle-icon">{icons:svg('fa:angle-down').raw}</span>
         </button>
       </h1>
