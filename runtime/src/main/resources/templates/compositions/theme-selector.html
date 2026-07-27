@@ -1,16 +1,22 @@
-{! Theme Selector — PatternFly v6, matches patternfly.org site theme switcher !} {! Toggle-group based color scheme +
-high contrast switcher !}
+{! Theme Selector composition — PatternFly v6, matches patternfly.org site theme switcher !}
+{! Toggle-group based theme + color scheme + contrast switcher. !}
+{! Optional: masthead — render as an inline toolbar item (menu drops DOWN, anchored right)
+             instead of the default fixed bottom-left floating widget. !}
 <div
   class="pha-theme-selector"
   x-data="phaThemeSelector()"
   @click.outside="open = false"
   @keydown.escape.window="if (open) { open = false; $event.stopPropagation(); }"
+  {#if masthead??}
+  style="position: relative; display: inline-block"
+  {#else}
   style="
     position: fixed;
     bottom: var(--pf-t--global--spacer--md);
     left: var(--pf-t--global--spacer--md);
     z-index: var(--pf-t--global--z-index--lg);
   "
+  {/if}
 >
   {! Toggle button — icon only, dynamic icon based on selected color scheme !}
   <button
@@ -80,7 +86,7 @@ high contrast switcher !}
   </button>
 
   {! Menu — three toggle-group sections: theme / color scheme / contrast (matches patternfly.org) !}
-  <div class="pf-v6-c-menu" x-show="open" x-transition style="display: none; position: absolute; left: 0; bottom: 100%">
+  <div class="pf-v6-c-menu" x-show="open" x-transition {#if masthead??}style="display: none; position: absolute; right: 0; top: 100%; z-index: var(--pf-t--global--z-index--lg)"{#else}style="display: none; position: absolute; left: 0; bottom: 100%"{/if}>
     <div class="pf-v6-c-menu__content">
       <section class="pf-v6-c-menu__group">
         <div class="pf-v6-c-menu__group-title" id="theme-selector-variant-title">Theme</div>

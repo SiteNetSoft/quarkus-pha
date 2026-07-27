@@ -1,0 +1,24 @@
+{! Cookie banner composition — dismissible GDPR notice panel (patternfly.org shape). !} {! Required: privacyPolicy —
+href of the privacy statement. !} {! Not wired into any layout by default; include it where a deployment needs it. !}
+<div id="ws-page-banners" x-data="{ show: true }" x-show="show">
+  <div class="pf-v6-l-flex ws-gdpr-banner-container">
+    <div class="pf-v6-c-panel pf-m-bordered pf-m-raised" id="ws-gdpr-banner">
+      <div class="pf-v6-c-panel__main">
+        <div class="pf-v6-c-panel__main-body">
+          <div class="pf-v6-l-flex pf-m-align-items-flex-start pf-m-nowrap">
+            <div class="pf-v6-u-ml-xl">
+              We use cookies on our websites to deliver our online services. Details about how we use cookies and how
+              you may disable them are set out in our
+              <a href="{privacyPolicy}">Privacy Statement</a>. By using this website you agree to our use of cookies.
+            </div>
+            <div>
+              {#let dismiss='@click="show = false"' closeLabel='Close banner'} {#let btn=null btnAttrs=null id=null
+              icon=null disabled=null href=null type=null} {#include components/actions/button variant="plain"
+              ariaLabel=closeLabel attrs=dismiss}{#content}{icons:svg('fa:xmark').raw}{/content}{/include} {/let} {/let}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
