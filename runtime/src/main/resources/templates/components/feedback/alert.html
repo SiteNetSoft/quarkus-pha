@@ -76,9 +76,8 @@
   {/if}
   {#if alert.hasActionLinks}
   <div class="pf-v6-c-alert__action-group" {#if alert.expandable}x-show="expanded"{/if}>
-{#for l in alert.actionLinks}{#if l.href}<a class="pf-v6-c-button pf-m-link pf-m-inline" href="{l.href}"><span class="pf-v6-c-button__text">{l.text}</span></a>
-{#else}<button class="pf-v6-c-button pf-m-link pf-m-inline" type="button"><span class="pf-v6-c-button__text">{l.text}</span></button>
-{/if}{/for}</div>
+{#for l in alert.actionLinks}{#include components/actions/button btn=l /}
+{/for}</div>
   {/if}
 </div>
 {#else}

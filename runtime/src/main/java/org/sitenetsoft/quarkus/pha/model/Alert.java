@@ -27,26 +27,6 @@ import java.util.Objects;
 @TemplateData
 public final class Alert {
 
-    /** One action link in the alert's footer — a link-variant button or anchor. */
-    @TemplateData
-    public static final class ActionLink {
-        private final String text;
-        private final String href;
-
-        private ActionLink(String text, String href) {
-            this.text = text;
-            this.href = href;
-        }
-
-        public String text() {
-            return text;
-        }
-
-        public String href() {
-            return href;
-        }
-    }
-
     private final String id;
     private final String title;
     private final String variant;
@@ -57,7 +37,7 @@ public final class Alert {
     private final boolean closable;
     private final boolean truncate;
     private final String customIcon;
-    private final List<ActionLink> actionLinks;
+    private final List<Button> actionLinks;
 
     private Alert(Builder b) {
         this.id = b.id;
@@ -124,7 +104,7 @@ public final class Alert {
         return !actionLinks.isEmpty();
     }
 
-    public List<ActionLink> actionLinks() {
+    public List<Button> actionLinks() {
         return actionLinks;
     }
 
@@ -140,7 +120,7 @@ public final class Alert {
         private boolean closable;
         private boolean truncate;
         private String customIcon;
-        private final List<ActionLink> actionLinks = new ArrayList<>();
+        private final List<Button> actionLinks = new ArrayList<>();
 
         private Builder() {
         }
@@ -199,17 +179,21 @@ public final class Alert {
             return this;
         }
 
+        /** Action-footer button composed from the real Button model (PF AlertActionLink). */
+        public Builder actionLink(Button button) {
+            actionLinks.add(Objects.requireNonNull(button, "button"));
+            return this;
+        }
+
         /** Inline link button in the action footer. */
         public Builder actionLink(String text) {
-            actionLinks.add(new ActionLink(Objects.requireNonNull(text, "text"), null));
-            return this;
+            return actionLink(Button.of(text).variant("link").asInline().build());
         }
 
         /** Inline link anchor in the action footer. */
         public Builder actionLink(String text, String href) {
-            actionLinks.add(new ActionLink(Objects.requireNonNull(text, "text"),
-                    Objects.requireNonNull(href, "href")));
-            return this;
+            return actionLink(Button.of(text).variant("link").asInline()
+                    .href(Objects.requireNonNull(href, "href")).build());
         }
 
         public Alert build() {
