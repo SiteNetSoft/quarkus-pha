@@ -19,35 +19,15 @@ import java.util.Objects;
 @TemplateData
 public final class BreadcrumbItem {
 
-    /** One dropdown menu option. */
-    @TemplateData
-    public static final class Option {
-        private final String text;
-        private final String href;
-
-        private Option(String text, String href) {
-            this.text = text;
-            this.href = href;
-        }
-
-        public String text() {
-            return text;
-        }
-
-        public String href() {
-            return href;
-        }
-    }
-
     private final String text;
     private final String href;
     private final boolean current;
     private final String headingLevel;
     private final String dropdownId;
-    private final List<Option> options;
+    private final List<MenuItem> options;
 
     private BreadcrumbItem(String text, String href, boolean current, String headingLevel,
-                           String dropdownId, List<Option> options) {
+                           String dropdownId, List<MenuItem> options) {
         this.text = text;
         this.href = href;
         this.current = current;
@@ -81,10 +61,17 @@ public final class BreadcrumbItem {
                 Objects.requireNonNull(dropdownId, "dropdownId"), options);
     }
 
-    public BreadcrumbItem option(String text, String href) {
-        List<Option> next = new ArrayList<>(options);
-        next.add(new Option(Objects.requireNonNull(text, "text"), Objects.requireNonNull(href, "href")));
+    /** Dropdown entry composed from the real MenuItem model. */
+    public BreadcrumbItem option(MenuItem item) {
+        List<MenuItem> next = new ArrayList<>(options);
+        next.add(Objects.requireNonNull(item, "item"));
         return new BreadcrumbItem(this.text, this.href, current, headingLevel, dropdownId, List.copyOf(next));
+    }
+
+    /** Dropdown entry shorthand: text + link target. */
+    public BreadcrumbItem option(String text, String href) {
+        return option(MenuItem.of(Objects.requireNonNull(text, "text"))
+                .href(Objects.requireNonNull(href, "href")));
     }
 
     public String text() {
@@ -115,7 +102,7 @@ public final class BreadcrumbItem {
         return dropdownId;
     }
 
-    public List<Option> options() {
+    public List<MenuItem> options() {
         return options;
     }
 }

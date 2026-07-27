@@ -9,12 +9,15 @@
      description — secondary line under the text (__item-description).
      disabled    — disables the button.
      danger      — pf-m-danger on the list-item.
-     itemId      — id on the __item element. !}
-<li role="none" class="pf-v6-c-menu__list-item{#if danger??} pf-m-danger{/if}">
+     itemId      — id on the __item element.
+     noRole      — omit the menuitem/none roles (for menus nested inside a
+                   role=list scope, e.g. the breadcrumb dropdown — vnu forbids
+                   li roles other than listitem anywhere under role=list). !}
+<li{#if !noRole??} role="none"{/if} class="pf-v6-c-menu__list-item{#if danger??} pf-m-danger{/if}">
   {#if href??}
-  <a class="pf-v6-c-menu__item" href="{href}" role="menuitem"{#if itemId??} id="{itemId}"{/if}{#if external??} target="_blank" rel="noopener noreferrer"{/if}>
+  <a class="pf-v6-c-menu__item" href="{href}"{#if !noRole??} role="menuitem"{/if}{#if itemId??} id="{itemId}"{/if}{#if external??} target="_blank" rel="noopener noreferrer"{/if}>
   {#else}
-  <button class="pf-v6-c-menu__item" type="button" role="menuitem"{#if itemId??} id="{itemId}"{/if}{#if disabled??} disabled{/if}>
+  <button class="pf-v6-c-menu__item" type="button"{#if !noRole??} role="menuitem"{/if}{#if itemId??} id="{itemId}"{/if}{#if disabled??} disabled{/if}>
   {/if}
     <span class="pf-v6-c-menu__item-main">
       {#if icon??}<span class="pf-v6-c-menu__item-icon">{icons:svg(icon).raw}</span>{/if}
