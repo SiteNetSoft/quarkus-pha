@@ -3,12 +3,16 @@
  * collapsible Monaco editor showing either the underlying Qute source or the
  * rendered HTML output (after Qute processing).
  *
- * Lazy-loads Monaco (AMD bundle from /web/vendor/monaco/vs) the first time the
- * user opens a view. URLs are read from data-source-href (raw Qute),
- * data-rendered-href (the standalone HTML page; we extract the <main> body)
- * and optionally data-java-href (the Java code that builds the example's
- * model) on the x-data element. The editor is created read-only and follows
- * the page's light/dark/contrast theme via a MutationObserver on <html> class.
+ * Lazy-loads Monaco (AMD bundle under <asset prefix>/web/vendor/monaco/vs) the
+ * first time the user opens a view; the prefix is derived from an asset tag the
+ * page already loads so the same file works at "/" in dev and under a base
+ * path (e.g. /quarkus-pha/ on GitHub Pages). When Monaco cannot load, the
+ * fetched source renders into a plain <pre><code> fallback instead of erroring.
+ * URLs are read from data-source-href (raw Qute), data-rendered-href (the
+ * standalone HTML page; we extract the <main> body) and optionally
+ * data-java-href (the Java code that builds the example's model) on the x-data
+ * element. The editor is created read-only and follows the page's
+ * light/dark/contrast theme via a MutationObserver on <html> class.
  *
  * Usage:
  *   <div
@@ -26,6 +30,28 @@
 (function () {
   let monacoReady = null;
   let themeObserverInstalled = false;
+
+  function assetPrefix() {
+    // The crawler rewrites asset URLs to the deploy base path; deriving the
+    // prefix from a tag the page already loads keeps this file byte-identical
+    // across deployments instead of hardcoding an absolute /web/ URL.
+    const el = document.querySelector('script[src*="/web/"], link[href*="/web/"]');
+    const url = el && (el.getAttribute("src") || el.getAttribute("href"));
+    return url ? url.slice(0, url.indexOf("/web/")) : "";
+  }
+
+  function renderPlain(host, source) {
+    let pre = host.querySelector(".pha-code-fallback");
+    if (!pre) {
+      host.textContent = "";
+      pre = document.createElement("pre");
+      pre.className = "pha-code-fallback";
+      pre.style.cssText = "margin: 0; height: 100%; overflow: auto; font-size: 13px; padding: 0.5rem;";
+      pre.appendChild(document.createElement("code"));
+      host.appendChild(pre);
+    }
+    pre.querySelector("code").textContent = source;
+  }
 
   function loadMonaco(base) {
     if (monacoReady) return monacoReady;
@@ -163,9 +189,20 @@
         this.loading = true;
         this.error = null;
         try {
-          const [monaco, source] = await Promise.all([loadMonaco("/web/vendor/monaco/vs"), fetchSource(this, target)]);
-          installThemeObserver();
+          const sourcePromise = fetchSource(this, target);
+          let monaco = null;
+          try {
+            monaco = await loadMonaco(assetPrefix() + "/web/vendor/monaco/vs");
+          } catch {
+            /* fall back to the plain <pre> below */
+          }
+          const source = await sourcePromise;
           await this.$nextTick();
+          if (!monaco) {
+            renderPlain(this.$refs.host, source);
+            return;
+          }
+          installThemeObserver();
           const language = target === "java" ? "java" : "html";
           if (!editor) {
             editor = monaco.editor.create(this.$refs.host, {
