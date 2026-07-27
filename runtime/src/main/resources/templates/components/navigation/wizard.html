@@ -75,9 +75,7 @@
         <div class="pf-v6-c-action-list__group">
           {#for fb in wizard.footer}
           <div class="pf-v6-c-action-list__item"{#if fb.showExprText??} x-show="{fb.showExprText}"{/if}>
-            <button type="button" class="pf-v6-c-button {fb.classes}"{#if fb.disabledExprText??} :disabled="{fb.disabledExprText}"{/if}{#if fb.clickExprText??} @click="{fb.clickExprText}"{/if}>
-              <span class="pf-v6-c-button__text">{fb.text}</span>
-            </button>
+            {#include components/actions/button btn=fb.button btnAttrs=fb.buttonAttrs /}
           </div>
           {/for}
         </div>
