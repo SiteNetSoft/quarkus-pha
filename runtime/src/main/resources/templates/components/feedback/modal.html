@@ -66,7 +66,7 @@
         {#if modal.footer.size > 0}
         <footer class="pf-v6-c-modal-box__footer">
           {#for fb in modal.footer}
-          <button class="pf-v6-c-button {fb.classes}" type="button" @click="open = false"><span class="pf-v6-c-button__text">{fb.text}</span></button>
+          {#include components/actions/button btn=fb btnAttrs='@click="open = false"' /}
           {/for}
         </footer>
         {/if}

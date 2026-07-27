@@ -31,26 +31,6 @@ import java.util.Objects;
 @TemplateData
 public final class Modal {
 
-    /** One footer button (closes on click). */
-    @TemplateData
-    public static final class FooterButton {
-        private final String text;
-        private final String classes;
-
-        private FooterButton(String text, String classes) {
-            this.text = text;
-            this.classes = classes;
-        }
-
-        public String text() {
-            return text;
-        }
-
-        public String classes() {
-            return classes;
-        }
-    }
-
     private final String id;
     private final String triggerText;
     private final String size;
@@ -68,7 +48,7 @@ public final class Modal {
     private final String bodyHtml;
     private final boolean bodyScrollable;
     private final String genericHtml;
-    private final List<FooterButton> footer;
+    private final List<Button> footer;
 
     private Modal(Builder b) {
         this.id = b.id;
@@ -196,7 +176,7 @@ public final class Modal {
         return genericHtml;
     }
 
-    public List<FooterButton> footer() {
+    public List<Button> footer() {
         return footer;
     }
 
@@ -218,7 +198,7 @@ public final class Modal {
         private String bodyHtml;
         private boolean bodyScrollable;
         private String genericHtml;
-        private final List<FooterButton> footer = new ArrayList<>();
+        private final List<Button> footer = new ArrayList<>();
 
         private Builder() {
         }
@@ -318,11 +298,15 @@ public final class Modal {
             return this;
         }
 
-        /** Footer button; all close the dialog on click. */
-        public Builder footerButton(String text, String classes) {
-            footer.add(new FooterButton(Objects.requireNonNull(text, "text"),
-                    Objects.requireNonNull(classes, "classes")));
+        /** Footer button composed from the real Button model; all close the dialog on click. */
+        public Builder footerButton(Button button) {
+            footer.add(Objects.requireNonNull(button, "button"));
             return this;
+        }
+
+        /** Footer button shorthand: text + variant (primary | link | danger | …). */
+        public Builder footerButton(String text, String variant) {
+            return footerButton(Button.of(text).variant(Objects.requireNonNull(variant, "variant")).build());
         }
 
         public Modal build() {
