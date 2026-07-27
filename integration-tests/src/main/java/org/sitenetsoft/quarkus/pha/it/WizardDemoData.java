@@ -1,6 +1,7 @@
 package org.sitenetsoft.quarkus.pha.it;
 
 import io.quarkus.qute.TemplateGlobal;
+import org.sitenetsoft.quarkus.pha.model.Button;
 import org.sitenetsoft.quarkus.pha.model.Wizard;
 import org.sitenetsoft.quarkus.pha.model.Wizard.Step;
 
@@ -37,10 +38,10 @@ public class WizardDemoData {
             .step(Step.of("Information", pane("Information", "Information content.")))
             .step(Step.of("Configuration", pane("Configuration", "Configuration content.")))
             .step(Step.of("Review", pane("Review", "Review content.")))
-            .footerButton("Continue", "pf-m-primary", null, "step === 3", "step = step + 1")
-            .footerButton("Go back", "pf-m-secondary", null, "step === 1", "step = step - 1")
-            .footerButton("Save draft", "pf-m-tertiary", null, null, null)
-            .footerButton("Abandon", "pf-m-link pf-m-danger", null, null, null)
+            .footerButton("Continue", "primary", null, "step === 3", "step = step + 1")
+            .footerButton("Go back", "secondary", null, "step === 1", "step = step - 1")
+            .footerButton("Save draft", "tertiary", null, null, null)
+            .footerButton(Button.of("Abandon").variant("link").asDanger().build(), null, null, null)
             .build();
 
     public static Wizard demoWizDisabledSteps = Wizard.of("wiz-disabled-steps")
@@ -73,8 +74,8 @@ public class WizardDemoData {
                       </div>
                     </form>"""))
             .step(Step.of("Review", pane("Review", "Review content.")))
-            .footerButton("Next", "pf-m-primary", null, "step === 2 || name.trim() === ''", "step = 2")
-            .footerButton("Back", "pf-m-secondary", null, "step === 1", "step = 1")
+            .footerButton("Next", "primary", null, "step === 2 || name.trim() === ''", "step = 2")
+            .footerButton("Back", "secondary", null, "step === 1", "step = 1")
             .build();
 
     public static Wizard demoWizProgressive = Wizard.of("wiz-progressive-steps")
@@ -92,9 +93,9 @@ public class WizardDemoData {
             .step(Step.of("Custom configuration", pane("Custom settings", "Custom settings content."))
                     .showExpr("custom"))
             .step(Step.of("Review", pane("Review", "Review content.")))
-            .footerButton("Next", "pf-m-primary", null, "step === 3",
+            .footerButton("Next", "primary", null, "step === 3",
                     "step = (step === 1 && mode === 'custom') ? 2 : 3")
-            .footerButton("Back", "pf-m-secondary", null, "step === 1",
+            .footerButton("Back", "secondary", null, "step === 1",
                     "step = (step === 3 && mode === 'custom') ? 2 : 1")
             .build();
 

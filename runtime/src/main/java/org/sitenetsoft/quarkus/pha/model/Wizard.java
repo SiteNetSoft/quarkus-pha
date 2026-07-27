@@ -155,38 +155,42 @@ public final class Wizard {
     /** One footer button with raw Alpine expressions. */
     @TemplateData
     public static final class FooterButton {
-        private final String text;
-        private final String classes;
+        private final Button button;
         private final String showExpr;
         private final String disabledExpr;
         private final String clickExpr;
 
-        private FooterButton(String text, String classes, String showExpr, String disabledExpr, String clickExpr) {
-            this.text = text;
-            this.classes = classes;
+        private FooterButton(Button button, String showExpr, String disabledExpr, String clickExpr) {
+            this.button = button;
             this.showExpr = showExpr;
             this.disabledExpr = disabledExpr;
             this.clickExpr = clickExpr;
         }
 
-        public String text() {
-            return text;
-        }
-
-        public String classes() {
-            return classes;
+        public Button button() {
+            return button;
         }
 
         public String showExprText() {
             return showExpr;
         }
 
-        public String disabledExprText() {
-            return disabledExpr;
-        }
-
-        public String clickExprText() {
-            return clickExpr;
+        /** Alpine bindings (:disabled/@click) for the delegated button include, or null when static. */
+        public String buttonAttrs() {
+            if (disabledExpr == null && clickExpr == null) {
+                return null;
+            }
+            StringBuilder sb = new StringBuilder();
+            if (disabledExpr != null) {
+                sb.append(":disabled=\"").append(disabledExpr).append('"');
+            }
+            if (clickExpr != null) {
+                if (sb.length() > 0) {
+                    sb.append(' ');
+                }
+                sb.append("@click=\"").append(clickExpr).append('"');
+            }
+            return sb.toString();
         }
     }
 
@@ -237,12 +241,12 @@ public final class Wizard {
         List<FooterButton> fb = new ArrayList<>();
         if (b.standardFooter) {
             int max = idx;
-            fb.add(new FooterButton(b.nextText, "pf-m-primary", null,
+            fb.add(new FooterButton(Button.of(b.nextText).build(), null,
                     "step === " + max, "step = Math.min(" + max + ", step + 1)"));
-            fb.add(new FooterButton(b.backText, "pf-m-secondary", null,
+            fb.add(new FooterButton(Button.of(b.backText).variant("secondary").build(), null,
                     "step === 1", "step = Math.max(1, step - 1)"));
             if (b.cancel) {
-                fb.add(new FooterButton("Cancel", "pf-m-link", null, null, null));
+                fb.add(new FooterButton(Button.of("Cancel").variant("link").build(), null, null, null));
             }
         }
         fb.addAll(b.footerButtons);
@@ -374,12 +378,19 @@ public final class Wizard {
             return this;
         }
 
-        /** Explicit footer button with raw Alpine expressions (nullable each). */
-        public Builder footerButton(String text, String classes, String showExpr,
+        /** Explicit footer button composed from the real Button model, with raw Alpine expressions (nullable each). */
+        public Builder footerButton(Button button, String showExpr,
                                     String disabledExpr, String clickExpr) {
-            footerButtons.add(new FooterButton(Objects.requireNonNull(text, "text"),
-                    Objects.requireNonNull(classes, "classes"), showExpr, disabledExpr, clickExpr));
+            footerButtons.add(new FooterButton(Objects.requireNonNull(button, "button"),
+                    showExpr, disabledExpr, clickExpr));
             return this;
+        }
+
+        /** Footer button shorthand: text + variant (primary | secondary | tertiary | …). */
+        public Builder footerButton(String text, String variant, String showExpr,
+                                    String disabledExpr, String clickExpr) {
+            return footerButton(Button.of(text).variant(Objects.requireNonNull(variant, "variant")).build(),
+                    showExpr, disabledExpr, clickExpr);
         }
 
         public Wizard build() {

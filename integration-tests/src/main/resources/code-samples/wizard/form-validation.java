@@ -19,8 +19,8 @@ Wizard wizard = Wizard.of("wiz-form-validation")
                   </div>
                 </form>"""))
         .step(Step.of("Review", "<h2 class=\"pf-v6-c-content--h2\">Review</h2><p>Review content.</p>"))
-        .footerButton("Next", "pf-m-primary", null, "step === 2 || name.trim() === ''", "step = 2")
-        .footerButton("Back", "pf-m-secondary", null, "step === 1", "step = 1")
+        .footerButton("Next", "primary", null, "step === 2 || name.trim() === ''", "step = 2")
+        .footerButton("Back", "secondary", null, "step === 1", "step = 1")
         .build();
 
 // Template side, with the data in scope:
