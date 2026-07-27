@@ -43,13 +43,11 @@
         </button>
         <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="close()" id="{item.dropdownId}" style="position: absolute; z-index: 200; margin-top: 0.25rem">
           <div class="pf-v6-c-menu__content">
+            {! No menu/menuitem roles here: the dropdown sits inside the breadcrumb's
+               role=list scope, where vnu forbids li roles other than listitem. !}
             <ul class="pf-v6-c-menu__list">
               {#for o in item.options}
-              <li class="pf-v6-c-menu__list-item">
-                <a href="{o.href}" class="pf-v6-c-menu__item">
-                  <span class="pf-v6-c-menu__item-main"><span class="pf-v6-c-menu__item-text">{o.text}</span></span>
-                </a>
-              </li>
+              {#include components/navigation/menu-item noRole=true text=o.text href=o.href icon=o.icon description=o.description external=o.external disabled=o.disabled danger=o.danger itemId=o.itemId /}
               {/for}
             </ul>
           </div>
