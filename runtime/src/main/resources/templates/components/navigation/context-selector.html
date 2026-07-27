@@ -9,18 +9,10 @@
   x-data="{ open: false, search: '', selected: '{toggleText}' }"
   style="position: relative; display: inline-block"
 >
-  <button
-    class="pf-v6-c-menu-toggle"
-    type="button"
-    :class="{ 'pf-m-expanded': open }"
-    :aria-expanded="open"
-    @click="open = !open"
-  >
-    <span class="pf-v6-c-menu-toggle__text" x-text="selected"></span>
-    <span class="pf-v6-c-menu-toggle__controls">
-      <span class="pf-v6-c-menu-toggle__toggle-icon"> {icons:svg('fa:caret-down').raw} </span>
-    </span>
-  </button>
+  {#let id=null expanded=null disabled=null primary=null plain=null}
+  {! toggleText seeds the SSR label; the x-text binding takes over once Alpine boots. !}
+  {#include components/navigation/menu-toggle toggleText=toggleText toggleTextAttrs='x-text="selected"' expandedExpr='open' /}
+  {/let}
   <div
     class="pf-v6-c-menu pf-m-scrollable"
     x-show="open"

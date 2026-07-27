@@ -19,14 +19,13 @@
     <div class="pf-v6-c-input-group">
       <div class="pf-v6-c-input-group__item pf-m-fill">
         <div class="pf-v6-c-calendar-month__header-month" style="position: relative">
-          <button class="pf-v6-c-menu-toggle" type="button" style="width: 140px"
-                  {#if calendarMonth.monthOptions??}:class="open ? 'pf-m-expanded' : ''" :aria-expanded="open" @click="open = !open"{#else}aria-expanded="false"{/if}
-                  id="{calendarMonth.id}-month-select">
-            <span class="pf-v6-c-menu-toggle__text">{calendarMonth.monthName}</span>
-            <span class="pf-v6-c-menu-toggle__controls">
-              <span class="pf-v6-c-menu-toggle__toggle-icon">{icons:svg('fa:caret-down').raw}</span>
-            </span>
-          </button>
+          {#let mtId=(calendarMonth.id + '-month-select') id=null expanded=null disabled=null primary=null plain=null}
+          {#if calendarMonth.monthOptions??}
+          {#include components/navigation/menu-toggle id=mtId toggleText=calendarMonth.monthName expandedExpr='open' toggleAttrs='style="width: 140px"' /}
+          {#else}
+          {#include components/navigation/menu-toggle id=mtId toggleText=calendarMonth.monthName toggleAttrs='style="width: 140px"' /}
+          {/if}
+          {/let}
           {#if calendarMonth.monthOptions??}
           <div class="pf-v6-c-menu" x-show="open" x-cloak @click.outside="open = false"
                style="position: absolute; top: 100%; left: 0; z-index: 200; min-width: 140px">

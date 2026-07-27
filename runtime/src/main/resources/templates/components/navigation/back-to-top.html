@@ -16,10 +16,9 @@
 {! Model mode: pass backToTop=<...model.BackToTop> — the phaBackToTop args are generated in Java. !}
 {#if backToTop??}
 <div class="pf-v6-c-back-to-top"{#if backToTop.id??} id="{backToTop.id}"{/if} x-data="{backToTop.xData}" x-show="visible" x-cloak x-transition>
-  <button class="pf-v6-c-button pf-m-primary" type="button" @click="scrollToTop()">
-    <span class="pf-v6-c-button__text">{backToTop.title}</span>
-    <span class="pf-v6-c-button__icon pf-m-end">{icons:svg('fa:angle-up').raw}</span>
-  </button>
+{#let btn=null btnAttrs=null variant=null icon=null iconPosition=null disabled=null ariaDisabled=null size=null inline=null block=null circle=null count=null countRead=null ariaLabel=null ariaExpanded=null attrs=null type=null clicked=null state=null stateful=null href=null id=null component=null hamburger=null hamburgerVariant=null hamburgerExpandExpr=null settings=null favorite=null favorited=null isLoading=null spinnerLabel=null hasNoPadding=null danger=null}
+  {#include components/actions/button icon='fa:angle-up' iconPosition='end' content=true attrs='@click="scrollToTop()"'}{#content}{backToTop.title}{/content}{/include}
+  {/let}
 </div>
 {#else}
 <div class="pf-v6-c-back-to-top"{#if id??} id="{id}"{/if} x-data="phaBackToTop({#if scrollableSelector??}'{scrollableSelector}'{#else}null{/if}, {#if alwaysVisible??}true{#else}false{/if})" x-show="visible" x-cloak x-transition>

@@ -97,9 +97,9 @@
   <hr class="pf-v6-c-divider" />
   {/if}
   <div class="pf-v6-c-menu__footer">
-    <button class="pf-v6-c-button pf-m-link pf-m-inline" type="button">
-      <span class="pf-v6-c-button__text">{menu.footerButton}</span>
-    </button>
+{#let btn=null btnAttrs=null variant=null icon=null iconPosition=null disabled=null ariaDisabled=null size=null inline=null block=null circle=null count=null countRead=null ariaLabel=null ariaExpanded=null attrs=null type=null clicked=null state=null stateful=null href=null id=null component=null hamburger=null hamburgerVariant=null hamburgerExpandExpr=null settings=null favorite=null favorited=null isLoading=null spinnerLabel=null hasNoPadding=null danger=null}
+    {#include components/actions/button variant="link" inline=true}{#content}{menu.footerButton}{/content}{/include}
+    {/let}
   </div>
   {/if}
 </div>

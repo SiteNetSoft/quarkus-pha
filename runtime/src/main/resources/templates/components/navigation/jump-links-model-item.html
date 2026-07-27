@@ -2,7 +2,7 @@
    bare anchors for plain lists, button-links for labeled/subsection/expandable shapes.
    Params: jumpLinks, item. Included by jump-links (model branch). !}
 <li class="pf-v6-c-jump-links__item{#if item.current} pf-m-current{/if}"{#if item.ariaCurrent} aria-current="location"{/if}>
-  <span class="pf-v6-c-jump-links__link"><a href="{item.href}" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">{item.text}</span></span></a></span>
+  <span class="pf-v6-c-jump-links__link">{#let btn=null btnAttrs=null variant=null icon=null iconPosition=null disabled=null ariaDisabled=null size=null inline=null block=null circle=null count=null countRead=null ariaLabel=null ariaExpanded=null attrs=null type=null clicked=null state=null stateful=null href=null id=null component=null hamburger=null hamburgerVariant=null hamburgerExpandExpr=null settings=null favorite=null favorited=null isLoading=null spinnerLabel=null hasNoPadding=null danger=null}{#include components/actions/button variant="link" href=item.href}{#content}<span class="pf-v6-c-jump-links__link-text">{item.text}</span>{/content}{/include}{/let}</span>
   {#if item.hasSubs}
   <ul class="pf-v6-c-jump-links__list" role="list"{#if item.subsAriaLabel} aria-label="{item.subsAriaLabel}"{/if}>
     {#for sub in item.subs}
