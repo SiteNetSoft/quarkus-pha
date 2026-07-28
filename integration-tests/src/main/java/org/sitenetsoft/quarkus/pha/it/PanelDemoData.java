@@ -71,7 +71,7 @@ public class PanelDemoData {
             .build();
 
     public static Panel demoPnScrollable = Panel.of("panel-scrollable")
-            .scrollable().bordered().maxHeight("16rem")
+            .scrollable().bordered().maxHeight("16rem").focusableMain()
             .body("""
                     <p>
                       Scrollable panels pair <code class="ws-code">.scrollable()</code> on the builder with
@@ -87,7 +87,7 @@ public class PanelDemoData {
             .build();
 
     public static Panel demoPnScrollableHf = Panel.of("panel-scrollable-hf")
-            .scrollable().bordered().maxHeight("14rem")
+            .scrollable().bordered().maxHeight("14rem").focusableMain()
             .header("<strong>Sticky header</strong>")
             .body("""
                     <p>

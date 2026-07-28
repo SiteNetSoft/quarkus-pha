@@ -1,7 +1,7 @@
 import org.sitenetsoft.quarkus.pha.model.*;
 
 Panel panel = Panel.of("panel-scrollable")
-        .scrollable().bordered().maxHeight("16rem")
+        .scrollable().bordered().maxHeight("16rem").focusableMain()
         .body("""
                 <p>
                   Scrollable panels pair <code class="ws-code">.scrollable()</code> on the builder with
