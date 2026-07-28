@@ -13,14 +13,14 @@
     <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
   </div>
 </div>
-{#include partials/example-card title="Basic" slug="basic" component="calendar-month"} {#description}
+{#include partials/example-card title="Basic" slug="basic" component="calendar-month" javaSource=true} {#description}
 <p class="pf-v6-c-content--p pf-m-editorial ws-p">
   Fully interactive, mirroring PF React: the arrows, month menu, and year input navigate (server-rendered HTMX swaps),
   clicking a date selects it and jumps to its month, and arrow keys move the focus through the grid. Starts on May 2026
   with the 20th selected; the real current day gets its ring when you navigate to today's month.
 </p>
 {/description} {#content}{#include components/calendar-month/basic /}{/content} {/include} {#include
-partials/example-card title="Date range" slug="date-range" component="calendar-month"} {#description}
+partials/example-card title="Date range" slug="date-range" component="calendar-month" javaSource=true} {#description}
 <p class="pf-v6-c-content--p pf-m-editorial ws-p">
   The PF range-selection behavior: dates before the fixed range start (the 12th) are disabled, clicking a date commits
   it as the new range end, and hovering past the end previews extending the band — across month boundaries too.

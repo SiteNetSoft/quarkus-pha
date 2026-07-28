@@ -218,4 +218,20 @@ test.describe("Calendar month", () => {
       expect(res.status()).toBe(200);
     });
   });
+
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/calendar-month");
+      for (const ex of ["basic", "date-range"]) {
+        const card = page.locator(`[data-rendered-href="/components/calendar-month/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/calendar-month/source-java/date-range");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain(".range(LocalDate.of(2026, 5, 12)");
+    });
+  });
 });

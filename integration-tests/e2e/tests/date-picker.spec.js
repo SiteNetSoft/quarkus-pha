@@ -37,7 +37,9 @@ test.describe("Date Picker", () => {
     await input.click();
     await input.blur();
     await expect(page.locator("#dp-required .pf-v6-c-helper-text__item.pf-m-error")).toBeVisible();
-    await expect(page.locator("#dp-required .pf-v6-c-date-picker__input .pf-v6-c-form-control")).toHaveClass(/pf-m-error/);
+    await expect(page.locator("#dp-required .pf-v6-c-date-picker__input .pf-v6-c-form-control")).toHaveClass(
+      /pf-m-error/,
+    );
   });
 
   test("helper text echoes the typed date", async ({ page }) => {
@@ -134,6 +136,38 @@ test.describe("Date Picker", () => {
       await picker.locator('button[aria-label="7 May 2026"]').click();
       await expect(page.locator("#dp-helper-text-field")).toHaveValue("2026-05-07");
       await expect(picker.locator(".pf-v6-c-helper-text__item-text")).toContainText("Selected: 2026-05-07");
+    });
+  });
+
+  test.describe("Java source tab", () => {
+    test("model-driven example cards get a leading Java tab; disabled does not", async ({ page }) => {
+      await page.goto("/components/date-picker");
+      const withJava = [
+        "basic",
+        "required",
+        "american-format",
+        "helper-text",
+        "min-max",
+        "french",
+        "with-value",
+        "invalid",
+        "custom-width",
+        "controlled-calendar",
+        "date-range",
+      ];
+      for (const ex of withJava) {
+        const card = page.locator(`[data-rendered-href="/components/date-picker/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      // disabled is a pure param-mode include — no Java-built calendar, no Java tab.
+      const disabledCard = page.locator('[data-rendered-href="/components/date-picker/disabled"]');
+      await expect(disabledCard.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+    });
+
+    test("source-java route serves the snippet as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/date-picker/source-java/basic");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('CalendarMonth.of("dp-basic-cal"');
     });
   });
 });
