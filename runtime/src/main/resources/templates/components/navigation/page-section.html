@@ -1,0 +1,12 @@
+{! Page main-section — one pf-v6-c-page__main-section + main-body block for the page component's
+   structured slot mode (pure Qute, no model). !}
+{! Optional: modifiers — verbatim pf-m-* tokens on the section (e.g. "pf-m-fill",
+             "pf-m-no-fill pf-m-limit-width", "pf-m-padding-on-xl"), matching the model's
+             verbatim-modifier philosophy; sectionAriaLabel — aria-label on the section;
+             bodyStyle — inline style on the main-body. !}
+{! Slot: {#sectionBody} — the section content. !}
+<section class="pf-v6-c-page__main-section{#if modifiers??} {modifiers}{/if}"{#if sectionAriaLabel??} aria-label="{sectionAriaLabel}"{/if}>
+  <div class="pf-v6-c-page__main-body"{#if bodyStyle??} style="{bodyStyle}"{/if}>
+    {#let modifiers=null sectionAriaLabel=null bodyStyle=null}{#insert sectionBody}{/insert}{/let}
+  </div>
+</section>

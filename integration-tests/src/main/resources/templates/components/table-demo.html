@@ -355,7 +355,28 @@ partials/example-card title="Sticky header with base and stuck" slug="sticky-bas
 <p class="pf-v6-c-content--p pf-m-editorial ws-p">
   The base/stuck sticky-header pattern inside an offset scroll container.
 </p>
-{/description} {#content}{#include components/table/sticky-base-and-stuck /}{/content} {/include}
+{/description} {#content}{#include components/table/sticky-base-and-stuck /}{/content} {/include} {#include
+partials/example-card title="Composable (pure Qute)" slug="composable" component="table"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Sticky header in a scrollable region, sort headers and row selection — assembled from the slot-mode shell plus the
+  <code class="ws-code">table-sort-th</code>, <code class="ws-code">table-check-th</code> and
+  <code class="ws-code">table-check-td</code> includes. No Java model: the sort headers render the states; wire their
+  <code class="ws-code">attrs</code> to HTMX to make them live.
+</p>
+{/description} {#content}{#include components/table/composable /}{/content} {/include} {#include partials/example-card
+title="Composable expandable (pure Qute)" slug="composable-expandable" component="table"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Expandable rows from <code class="ws-code">table-tbody-expandable</code> +
+  <code class="ws-code">table-toggle-td</code> + <code class="ws-code">table-expandable-tr</code>, each tbody owning its
+  own Alpine open state.
+</p>
+{/description} {#content}{#include components/table/composable-expandable /}{/content} {/include} {#include
+partials/example-card title="Composable tree (pure Qute)" slug="composable-tree" component="table"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  A treegrid built from <code class="ws-code">table-tree-tr</code> bricks; the tbody owns the expansion booleans that
+  <code class="ws-code">toggleVar</code> and <code class="ws-code">showExpr</code> reference.
+</p>
+{/description} {#content}{#include components/table/composable-tree /}{/content} {/include}
 
 <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
   <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">

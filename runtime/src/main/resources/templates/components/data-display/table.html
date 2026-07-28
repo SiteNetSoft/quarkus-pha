@@ -3,9 +3,15 @@
    Model-driven: pass table=<org.sitenetsoft.quarkus.pha.model.Table> (built via Table.builder()) —
      caption, header (incl. sort buttons / selection / toggles), bodies, action cells and footer all
      render from the model.
-   Slot shell: omit table and supply thead/tbody markup yourself through the content slot.
+   Slot shell: omit table and supply thead/tbody markup yourself through the content slot,
+     composing table-sort-th / table-check-th / table-check-td / table-toggle-td /
+     table-tbody-expandable / table-expandable-tr / table-tree-tr includes for the interactive anatomy.
      Shell params (all optional): id; compact; gridMd; striped; borderless; expandable; ariaLabel;
-     modifiers — extra pf-m-* classes appended verbatim (e.g. "pf-m-plain", "pf-m-animate-expand"). !}
+     stickyHeader / stickyFooter — pf-m-sticky-{header|footer}; scrollable — wraps the table in the
+     scroll-outer/inner wrappers (keyboard-scrollable region labelled by ariaLabel), with optional
+     scrollStyle on the inner wrapper (e.g. "max-height: 20rem"); treeView — pf-m-tree-view;
+     treeGridLg — pf-m-tree-view-grid-lg; treeGrid — role="treegrid" (parent-bearing trees; pass with
+     treeView); modifiers — extra pf-m-* classes appended verbatim (e.g. "pf-m-plain", "pf-m-animate-expand"). !}
 {#if table??}
 {#if table.scrollOuter}<div class="pf-v6-c-scroll-outer-wrapper">{/if}
 {! The inner wrapper is a keyboard-scrollable region: tabindex + named region role, per axe
@@ -17,12 +23,14 @@
 {#if table.scrollWrapped}</div>{/if}
 {#if table.scrollOuter}</div>{/if}
 {#else}
+{#if scrollable??}<div class="pf-v6-c-scroll-outer-wrapper"><div class="pf-v6-c-scroll-inner-wrapper"{#if scrollStyle??} style="{scrollStyle}"{/if} tabindex="0" role="region" aria-label="{#if ariaLabel??}{ariaLabel}{#else}Data table{/if}">{/if}
 <table
-  class="pf-v6-c-table{#if compact??} pf-m-compact{/if}{#if gridMd??} pf-m-grid-md{/if}{#if striped??} pf-m-striped{/if}{#if borderless??} pf-m-no-border-rows{/if}{#if expandable??} pf-m-expandable{/if}{#if modifiers??} {modifiers}{/if}"
-  role="grid"
+  class="pf-v6-c-table{#if compact??} pf-m-compact{/if}{#if gridMd??} pf-m-grid-md{/if}{#if striped??} pf-m-striped{/if}{#if borderless??} pf-m-no-border-rows{/if}{#if expandable??} pf-m-expandable{/if}{#if stickyHeader??} pf-m-sticky-header{/if}{#if stickyFooter??} pf-m-sticky-footer{/if}{#if treeView??} pf-m-tree-view{/if}{#if treeGridLg??} pf-m-tree-view-grid-lg{/if}{#if modifiers??} {modifiers}{/if}"
+  role="{#if treeGrid??}treegrid{#else}grid{/if}"
   {#if id??}id="{id}"{/if}
   aria-label="{#if ariaLabel??}{ariaLabel}{#else}Data table{/if}"
 >
-  {#let borderless=null compact=null expandable=null id=null modifiers=null striped=null}{#insert content}{/insert}{/let}
+  {#let borderless=null compact=null expandable=null id=null modifiers=null striped=null scrollable=null scrollStyle=null stickyHeader=null stickyFooter=null treeView=null treeGrid=null treeGridLg=null}{#insert content}{/insert}{/let}
 </table>
+{#if scrollable??}</div></div>{/if}
 {/if}

@@ -1,0 +1,18 @@
+{! Expand-toggle cell (pure Qute) for the table component's slot mode: the chevron button flipping an Alpine boolean.
+Pair with table-tbody-expandable + table-expandable-tr sharing the same expr. !} {! Required: ariaLabel. !} {! Optional:
+expr — the Alpine boolean to toggle (default 'open'). !} {#let toggleExpr=(expr ?: 'open')}
+<td class="pf-v6-c-table__td pf-v6-c-table__toggle">
+  <button
+    type="button"
+    class="pf-v6-c-button pf-m-plain"
+    :class="{toggleExpr} ? 'pf-m-expanded' : ''"
+    :aria-expanded="{toggleExpr}"
+    aria-label="{ariaLabel}"
+    @click="{toggleExpr} = !{toggleExpr}"
+  >
+    <span class="pf-v6-c-button__icon"
+      ><span class="pf-v6-c-table__toggle-icon"><i class="fas fa-angle-down" aria-hidden="true"></i></span
+    ></span>
+  </button>
+</td>
+{/let}

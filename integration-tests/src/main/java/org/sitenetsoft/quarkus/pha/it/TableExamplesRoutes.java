@@ -31,6 +31,9 @@ public class TableExamplesRoutes {
 
     private static final Set<String> EXAMPLES = Set.of(
         "basic",
+        "composable",
+        "composable-expandable",
+        "composable-tree",
         "plain",
         "compact",
         "compact-expandable",

@@ -1,0 +1,26 @@
+{! Pure-Qute table: the slot-mode shell (sticky header in a scrollable region) composing
+   table-sort-th, table-check-th and table-check-td bricks — no Java model anywhere. The sort
+   headers show the rendered states; wire attrs='hx-get="..." ...' to make them live. !}
+{#include components/data-display/table id='table-composable' ariaLabel='Composable table' stickyHeader=true
+scrollable=true scrollStyle='max-height: 16rem'}
+{#content}
+<thead class="pf-v6-c-table__thead">
+  <tr class="pf-v6-c-table__tr">
+    {#include components/data-display/table-check-th /}
+    {#include components/data-display/table-sort-th label='Repository' sort='asc' /}
+    {#include components/data-display/table-sort-th label='Branches' /}
+    <th scope="col" class="pf-v6-c-table__th">Last commit</th>
+  </tr>
+</thead>
+<tbody class="pf-v6-c-table__tbody">
+  {#for i in 8}
+  <tr class="pf-v6-c-table__tr">
+    {#include components/data-display/table-check-td name='composable-row' ariaLabelledby=('table-composable-' + i) /}
+    <th scope="row" class="pf-v6-c-table__th" id="table-composable-{i}">Repository {i}</th>
+    <td class="pf-v6-c-table__td">{i}</td>
+    <td class="pf-v6-c-table__td">2 days ago</td>
+  </tr>
+  {/for}
+</tbody>
+{/content}
+{/include}

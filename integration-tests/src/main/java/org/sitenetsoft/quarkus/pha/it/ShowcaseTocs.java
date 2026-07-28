@@ -891,7 +891,8 @@ public class ShowcaseTocs {
                     .sub(JumpLinkItem.of("Horizontal", "#horizontal"))
                     .sub(JumpLinkItem.of("Horizontal subnav", "#horizontal-subnav"))
                     .sub(JumpLinkItem.of("With item icons", "#icons"))
-                    .sub(JumpLinkItem.of("Horizontal overflow", "#horizontal-overflow")),
+                    .sub(JumpLinkItem.of("Horizontal overflow", "#horizontal-overflow"))
+                    .sub(JumpLinkItem.of("Composable (pure Qute)", "#composable")),
             JumpLinkItem.of("Documentation", "#documentation")
                     .sub(JumpLinkItem.of("Navigation pattern", "#props-navigation"))
                     .sub(JumpLinkItem.of("Usage", "#usage")));
@@ -968,7 +969,8 @@ public class ShowcaseTocs {
                     .sub(JumpLinkItem.of("Group section", "#group-section"))
                     .sub(JumpLinkItem.of("Centered section", "#centered-section"))
                     .sub(JumpLinkItem.of("Plain sections and groups", "#plain-sections"))
-                    .sub(JumpLinkItem.of("Dynamic sticky section", "#dynamic-sticky-section")),
+                    .sub(JumpLinkItem.of("Dynamic sticky section", "#dynamic-sticky-section"))
+                    .sub(JumpLinkItem.of("Composable (pure Qute)", "#composable")),
             JumpLinkItem.of("Documentation", "#documentation")
                     .sub(JumpLinkItem.of("Page props", "#props-page"))
                     .sub(JumpLinkItem.of("Usage", "#usage")));
@@ -1328,7 +1330,10 @@ public class ShowcaseTocs {
                     .sub(JumpLinkItem.of("Footer", "#footer"))
                     .sub(JumpLinkItem.of("Cell with image alignment", "#cell-with-image-alignment"))
                     .sub(JumpLinkItem.of("Container query with drawer", "#container-query-with-drawer"))
-                    .sub(JumpLinkItem.of("Sticky header with base and stuck", "#sticky-base-and-stuck")),
+                    .sub(JumpLinkItem.of("Sticky header with base and stuck", "#sticky-base-and-stuck"))
+                    .sub(JumpLinkItem.of("Composable (pure Qute)", "#composable"))
+                    .sub(JumpLinkItem.of("Composable expandable (pure Qute)", "#composable-expandable"))
+                    .sub(JumpLinkItem.of("Composable tree (pure Qute)", "#composable-tree")),
             JumpLinkItem.of("Documentation", "#documentation")
                     .sub(JumpLinkItem.of("Table props", "#props-table"))
                     .sub(JumpLinkItem.of("Usage", "#usage")));

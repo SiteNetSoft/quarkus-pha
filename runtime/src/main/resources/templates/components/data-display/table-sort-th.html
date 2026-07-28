@@ -1,0 +1,17 @@
+{! Sortable column header (pure Qute) for the table component's slot mode. !}
+{! Required: label. !}
+{! Optional: sort — 'asc' | 'desc' (omit for an unsorted column: aria-sort="none", double-arrow icon);
+             attrs — verbatim attributes on the button wiring the actual sort action, e.g.
+             attrs='hx-get="/api/htmx/table-sort?col=name&dir=desc" hx-target="#my-table" hx-swap="outerHTML"'
+             or an Alpine @click. The header renders the state; sorting stays server-driven (HTMX)
+             or consumer-wired (Alpine). !}
+{#let sortState=(sort ?: 'none')}
+<th scope="col" class="pf-v6-c-table__th pf-v6-c-table__sort{#if sortState != 'none'} pf-m-selected{/if}" aria-sort="{#if sortState == 'asc'}ascending{#else if sortState == 'desc'}descending{#else}none{/if}">
+  <button type="button" class="pf-v6-c-table__button"{#if attrs??} {attrs.raw}{/if}>
+    <span class="pf-v6-c-table__button-content">
+      <span class="pf-v6-c-table__text">{label}</span>
+      <span class="pf-v6-c-table__sort-indicator"><i class="{#if sortState == 'asc'}fas fa-long-arrow-alt-up{#else if sortState == 'desc'}fas fa-long-arrow-alt-down{#else}fas fa-arrows-alt-v{/if}" aria-hidden="true"></i></span>
+    </span>
+  </button>
+</th>
+{/let}
