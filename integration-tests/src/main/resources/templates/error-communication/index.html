@@ -1,16 +1,5 @@
-{#include layouts/base} {#title}Error communication{/title} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content">
-        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
-          ><span class="pf-v6-c-button__text">Skip to content</span></a
-        >
-      </div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
+{#include layouts/base noThemeWidget=true} {#title}Error communication{/title} {#body}
+{#include partials/showcase-page bare=true} {#showcaseBody}
             <section class="pf-v6-c-page__main-section pf-m-limit-width">
               <div class="pf-v6-c-page__main-body">
                 <div class="pf-v6-c-content pf-m-editorial">
@@ -35,10 +24,5 @@
                 </div>
               </div>
             </section>
-          </main>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-{/body} {/include}
+          
+{/showcaseBody} {/include} {/body} {/include}

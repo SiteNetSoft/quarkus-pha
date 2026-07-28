@@ -1,121 +1,20 @@
-{#include layouts/base} {#title}User feedback{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}User feedback{/title} {#head}
 <link rel="stylesheet" href="/web/vendor/patternfly-extensions/user-feedback.css" />
 <script src="/web/js/alpine/components/user-feedback.js?v={pha:assetVersion}"></script>
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
 {/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content">
-        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
-          ><span class="pf-v6-c-button__text">Skip to content</span></a
-        >
-      </div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-c-content pf-m-editorial">
-                    <p>
+{#include partials/showcase-page title="User feedback" toc=tocUserFeedback} {#lede}
+<p>
                       <a class="pf-v6-c-button pf-m-link pf-m-inline" href="/"
                         ><span class="pf-v6-c-button__text">&larr; Components</span></a
                       >
                     </p>
-                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">User feedback</h1>
                     <p>
                       Multi-page feedback modal: home menu → share / bug-report / research-opt-in forms → success or
                       error. PatternFly extension. Click the trigger button in any example below to open the modal.
                     </p>
-                  </div>
-                </div>
-              </section>
-
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-u-h-100">
-                    <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                      <nav
-                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
-                        aria-label="Table of contents"
-                      >
-                        <div class="pf-v6-c-jump-links__main">
-                          <ul class="pf-v6-c-jump-links__list" role="list">
-                            <li class="pf-v6-c-jump-links__item ws-toc-item">
-                              <span class="pf-v6-c-jump-links__link"
-                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
-                                  ><span class="pf-v6-c-button__text"
-                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
-                                  ></a
-                                ></span
-                              >
-                              <ul class="pf-v6-c-jump-links__list" role="list">
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#full" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Full menu</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#basic" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#with-prefilled-email" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Pre-filled email</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                              </ul>
-                            </li>
-                            <li class="pf-v6-c-jump-links__item ws-toc-item">
-                              <span class="pf-v6-c-jump-links__link"
-                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
-                                  ><span class="pf-v6-c-button__text"
-                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
-                                  ></a
-                                ></span
-                              >
-                              <ul class="pf-v6-c-jump-links__list" role="list">
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#props-user-feedback" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Props</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                              </ul>
-                            </li>
-                          </ul>
-                        </div>
-                      </nav>
-
-                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
                           <div>
                             <h2
                               id="examples"
@@ -267,16 +166,4 @@
                             >Edit user-feedback.html on GitHub</a
                           >
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </main>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-{/body} {/include}
+{/showcaseBody} {/include} {/body} {/include}

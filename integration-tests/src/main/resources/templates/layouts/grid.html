@@ -1,61 +1,11 @@
-{#include layouts/base} {#title}Grid — Layouts{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}Grid — Layouts{/title} {#head}
 {#include layouts/_demo-css-link /}
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
 {/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content"><a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"><span class="pf-v6-c-button__text">Skip to content</span></a></div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-c-content pf-m-editorial">
-                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Grid</h1>
-                    <p>A 12-column responsive grid. Each child sets its span with <code class="ws-code">pf-m-N-col</code> (plus per-breakpoint variants like <code class="ws-code">pf-m-6-col-on-md</code>). Use Grid when columns need to be different widths.</p>
-                  </div>
-                </div>
-              </section>
-
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                    <nav class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc" aria-label="Table of contents">
-                      <div class="pf-v6-c-jump-links__main">
-                        <ul class="pf-v6-c-jump-links__list" role="list">
-                          <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#examples" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Examples</span></span></a></span>
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#basic" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Basic</span></span></a></span></li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#with-gutter" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">With gutter</span></span></a></span></li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#spans" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Spans</span></span></a></span></li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#responsive-spans" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Responsive spans</span></span></a></span></li>
-                            <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#smart" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Smart</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#smart-overrides" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Smart with overrides</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#nested" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Nested</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#offsets" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Offsets</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#row-spans" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Row spans</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#as-list" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">As a list</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#ordering" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Ordering</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#ordering-responsive" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Responsive ordering</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#ordering-grouped" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Grouped ordering</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#ordering-grouped-responsive" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Grouped responsive ordering</span></span></a></span></li>
-</ul>
-                          </li>
-                          <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#documentation" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Documentation</span></span></a></span>
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#props-grid" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Grid props</span></span></a></span></li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#usage" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Usage</span></span></a></span></li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </nav>
-
-                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center"><div><h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2></div></div>
+{#include partials/showcase-page title="Grid" toc=tocLayoutGrid} {#lede}
+<p>A 12-column responsive grid. Each child sets its span with <code class="ws-code">pf-m-N-col</code> (plus per-breakpoint variants like <code class="ws-code">pf-m-6-col-on-md</code>). Use Grid when columns need to be different widths.</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center"><div><h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2></div></div>
 
                       {#include partials/example-card title="Basic" slug="basic" component="../layouts/grid" description="Mixed spans — two 6-cols across the top, three 4-cols below. No gutter."} {#content}{#include layouts/grid/basic /}{/content} {/include}
                       {#include partials/example-card title="With gutter" slug="with-gutter" component="../layouts/grid" description="&lt;code class=&quot;ws-code&quot;&gt;gutter=true&lt;/code&gt; enables row and column gaps."} {#content}{#include layouts/grid/with-gutter /}{/content} {/include}
@@ -95,15 +45,4 @@
                       </div>
 
                       <div class="pf-v6-l-stack__item"><br /><a href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/layouts/primitives/grid.html" target="_blank" rel="noopener noreferrer">Edit grid.html on GitHub</a></div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </main>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-{/body} {/include}
+{/showcaseBody} {/include} {/body} {/include}

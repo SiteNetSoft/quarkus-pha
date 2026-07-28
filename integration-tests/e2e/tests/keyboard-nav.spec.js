@@ -141,7 +141,7 @@ test.describe("Keyboard navigation — targeted patterns", () => {
     await page.goto("/components/menu");
     await page.waitForLoadState("networkidle").catch(() => {});
 
-    const firstItem = page.locator('[role="menuitem"]').first();
+    const firstItem = page.locator('#ws-page-content-router [role="menuitem"]').first();
     await firstItem.focus();
     const startText = (await firstItem.textContent())?.trim();
 

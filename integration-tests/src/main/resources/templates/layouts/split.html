@@ -1,51 +1,11 @@
-{#include layouts/base} {#title}Split — Layouts{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}Split — Layouts{/title} {#head}
 {#include layouts/_demo-css-link /}
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
 {/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content"><a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"><span class="pf-v6-c-button__text">Skip to content</span></a></div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-c-content pf-m-editorial">
-                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Split</h1>
-                    <p>Horizontal layout where items default to their natural content width. Set <code class="ws-code">pf-m-fill</code> on one item to make it absorb the remaining space — the classic three-column "sidebar / body / aside" pattern.</p>
-                  </div>
-                </div>
-              </section>
-
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                    <nav class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc" aria-label="Table of contents">
-                      <div class="pf-v6-c-jump-links__main">
-                        <ul class="pf-v6-c-jump-links__list" role="list">
-                          <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#examples" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Examples</span></span></a></span>
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#basic" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Basic</span></span></a></span></li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#with-fill" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">With fill</span></span></a></span></li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#with-gutter" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">With gutter</span></span></a></span></li>
-                            <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#wrappable" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Wrappable</span></span></a></span></li>
-</ul>
-                          </li>
-                          <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#documentation" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Documentation</span></span></a></span>
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#props-split" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Split props</span></span></a></span></li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#usage" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Usage</span></span></a></span></li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </nav>
-
-                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center"><div><h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2></div></div>
+{#include partials/showcase-page title="Split" toc=tocLayoutSplit} {#lede}
+<p>Horizontal layout where items default to their natural content width. Set <code class="ws-code">pf-m-fill</code> on one item to make it absorb the remaining space — the classic three-column "sidebar / body / aside" pattern.</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center"><div><h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2></div></div>
 
                       {#include partials/example-card title="Basic" slug="basic" component="../layouts/split" description="Items sized to content — no fill, no gap. They cluster at the start."} {#content}{#include layouts/split/basic /}{/content} {/include}
                       {#include partials/example-card title="With fill" slug="with-fill" component="../layouts/split" description="Add &lt;code class=&quot;ws-code&quot;&gt;pf-m-fill&lt;/code&gt; to one item — it grows to consume all remaining horizontal space."} {#content}{#include layouts/split/with-fill /}{/content} {/include}
@@ -75,15 +35,4 @@
                       </div>
 
                       <div class="pf-v6-l-stack__item"><br /><a href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/layouts/primitives/split.html" target="_blank" rel="noopener noreferrer">Edit split.html on GitHub</a></div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </main>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-{/body} {/include}
+{/showcaseBody} {/include} {/body} {/include}
