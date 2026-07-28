@@ -1,1044 +1,381 @@
-{#include layouts/base} {#title}Table{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}Table{/title} {#head}
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
-{/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content">
-        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
-          ><span class="pf-v6-c-button__text">Skip to content</span></a
-        >
-      </div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-c-content pf-m-editorial">
-                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Table</h1>
-                    <p>
-                      A grid of rows and columns for structured data. Use when every row has the same shape and column
-                      headers carry meaning. For list-shaped data without column headers, prefer
-                      <a href="/components/data-list">Data list</a>.
-                    </p>
-                  </div>
-                </div>
-              </section>
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                    <nav
-                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
-                      aria-label="Table of contents"
-                    >
-                      <div class="pf-v6-c-jump-links__main">
-                        <ul class="pf-v6-c-jump-links__list" role="list">
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#plain" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Plain</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#header-help" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Header tooltips and popovers</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#compact" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Compact</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#compact-expandable" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Compact expandable</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#striped" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Striped</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#striped-expandable" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Striped expandable</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#striped-multiple-tbody" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Striped multiple tbody</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#striped-tr" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Striped tr</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#borderless" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Borderless</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#borderless-compact" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Borderless compact</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#borderless-expandable" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Borderless expandable</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#borderless-compound-expandable" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Borderless compound expandable</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#sortable" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Sortable (HTMX)</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#sortable-custom-control" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Sortable — custom control</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#expandable" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Expandable (Alpine)</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#animated-expandable" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Animated expandable</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#expandable-set-width" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Expandable with set width columns</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#expandable-nested-table" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Expandable with nested table</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#selectable-checkbox" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Selectable with checkboxes</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#selectable-indeterminate" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Selectable with indeterminate state</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#selectable-radio" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Selectable with radio</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#actions" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Actions</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#overflow-menu" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Overflow menu</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#empty-state" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Empty state</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#width" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Width and text modifiers</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#text-control" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Text control</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#table-text" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Table text element</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#long-strings" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Long strings</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#width-constrained" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Width constrained</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#breakpoint-modifiers" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Hidden/visible breakpoints</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#favoritable" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Favoritable</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#favorites-sortable" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Favorites sortable</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#clickable-rows" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Clickable rows</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#clickable-expandable" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Clickable and expandable</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#nested-column-headers" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Nested column headers</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#nested-expandable" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Nested headers and expandable rows</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#nested-sticky-header" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Nested headers, sticky header</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#editable-rows" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Editable rows</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#compound-expandable" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Compound expandable</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#compound-expandable-nested-table" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Compound expandable with nested table</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#animated-compound-expandable" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Animated compound expandable</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#sticky" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Sticky header and column</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#sticky-footer" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Sticky footer</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#multiple-sticky-columns" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Multiple sticky columns</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#sticky-right-column" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Sticky right column</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#tree-table" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Tree table</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#tree-table-checkboxes" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Tree table with checkboxes</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#tree-table-icons" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Tree table with checkboxes and icons</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#tree-table-flat" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Tree with no children or indentation</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#draggable-rows" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Draggable rows</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#footer" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Footer</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#cell-with-image-alignment" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Cell with image alignment</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#container-query-with-drawer" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Container query with drawer</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#sticky-base-and-stuck" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Sticky header with base and stuck</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#props-table" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Table props</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </nav>
-                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
-                        <div>
-                          <h2
-                            id="examples"
-                            tabindex="-1"
-                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                          >
-                            Examples
-                          </h2>
-                        </div>
-                      </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="table" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Default rows — three users with a name, status, role and edit action.
-                      </p>
-                      {/description} {#content}{#include components/table/basic /}{/content} {/include} {#include
-                      partials/example-card title="Plain" slug="plain" component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">modifiers="pf-m-plain"</code> &mdash; no borders or hover treatment, with
-                        a table <code class="ws-code">&lt;caption&gt;</code>.
-                      </p>
-                      {/description} {#content}{#include components/table/plain /}{/content} {/include} {#include
-                      partials/example-card title="Header tooltips and popovers" slug="header-help" component="table"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Header cells carry info tooltips and popovers via
-                        <code class="ws-code">pf-v6-c-table__column-help</code>; plus a centered column, secondary-row
-                        backgrounds and a colspan cell.
-                      </p>
-                      {/description} {#content}{#include components/table/header-help /}{/content} {/include} {#include
-                      partials/example-card title="Compact" slug="compact" component="table" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">compact=true</code> — denser padding for info-heavy tables.
-                      </p>
-                      {/description} {#content}{#include components/table/compact /}{/content} {/include} {#include
-                      partials/example-card title="Compact expandable" slug="compact-expandable" component="table"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">compact=true expandable=true</code> &mdash; dense rows that still expand
-                        to a detail row.
-                      </p>
-                      {/description} {#content}{#include components/table/compact-expandable /}{/content} {/include}
-                      {#include partials/example-card title="Striped" slug="striped" component="table" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">striped=true</code> — alternating row background for easier horizontal
-                        scanning.
-                      </p>
-                      {/description} {#content}{#include components/table/striped /}{/content} {/include} {#include
-                      partials/example-card title="Striped expandable" slug="striped-expandable" component="table"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        With <code class="ws-code">striped=true expandable=true</code> PF stripes whole odd
-                        <code class="ws-code">&lt;tbody&gt;</code> groups instead of odd rows.
-                      </p>
-                      {/description} {#content}{#include components/table/striped-expandable /}{/content} {/include}
-                      {#include partials/example-card title="Striped multiple tbody" slug="striped-multiple-tbody"
-                      component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-striped</code> / <code class="ws-code">pf-m-striped-even</code> set
-                        per tbody keep the stripe pattern continuous across body groups.
-                      </p>
-                      {/description} {#content}{#include components/table/striped-multiple-tbody /}{/content} {/include}
-                      {#include partials/example-card title="Striped tr" slug="striped-tr" component="table"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-striped</code> on individual rows for full manual control.
-                      </p>
-                      {/description} {#content}{#include components/table/striped-tr /}{/content} {/include} {#include
-                      partials/example-card title="Borderless" slug="borderless" component="table" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">borderless=true</code> — removes row dividers; pairs well with striped on
-                        dashboards.
-                      </p>
-                      {/description} {#content}{#include components/table/borderless /}{/content} {/include} {#include
-                      partials/example-card title="Borderless compact" slug="borderless-compact" component="table"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">borderless=true compact=true</code> &mdash; the densest, quietest layout.
-                      </p>
-                      {/description} {#content}{#include components/table/borderless-compact /}{/content} {/include}
-                      {#include partials/example-card title="Borderless expandable" slug="borderless-expandable"
-                      component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">borderless=true expandable=true</code> &mdash; row expansion without row
-                        dividers.
-                      </p>
-                      {/description} {#content}{#include components/table/borderless-expandable /}{/content} {/include}
-                      {#include partials/example-card title="Borderless compound expandable"
-                      slug="borderless-compound-expandable" component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Borderless with per-cell compound expansion toggles.
-                      </p>
-                      {/description} {#content}{#include components/table/borderless-compound-expandable /}{/content}
-                      {/include} {#include partials/example-card title="Sortable (HTMX)" slug="sortable"
-                      component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Column headers post to <code class="ws-code">/api/htmx/table-sort</code> and swap the table; no
-                        client-side sorting logic.
-                      </p>
-                      {/description} {#content}{#include components/table/sortable /}{/content} {/include} {#include
-                      partials/example-card title="Sortable — custom control" slug="sortable-custom-control"
-                      component="table"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        A toolbar select drives the sort instead of clickable headers — each choice hits
-                        <code class="ws-code">/api/htmx/table-sort-custom</code> and swaps the server-sorted table.
-                      </p>
-                      {/description} {#content}{#include components/table/sortable-custom-control /}{/content}
-                      {/include} {#include partials/example-card title="Expandable (Alpine)" slug="expandable"
-                      component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Per-row toggle reveals a detail row beneath; state lives in
-                        <code class="ws-code">x-data</code> on the &lt;tbody&gt;.
-                      </p>
-                      {/description} {#content}{#include components/table/expandable /}{/content} {/include} {#include
-                      partials/example-card title="Animated expandable" slug="animated-expandable" component="table"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-animate-expand</code> fades and slides the detail row; rows stay
-                        rendered so CSS can animate.
-                      </p>
-                      {/description} {#content}{#include components/table/animated-expandable /}{/content} {/include}
-                      {#include partials/example-card title="Expandable with set width columns"
-                      slug="expandable-set-width" component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-width-30</code>/<code class="ws-code">pf-m-width-20</code> on header
-                        cells fix column proportions while rows expand.
-                      </p>
-                      {/description} {#content}{#include components/table/expandable-set-width /}{/content} {/include}
-                      {#include partials/example-card title="Expandable with nested table"
-                      slug="expandable-nested-table" component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        The expanded detail row hosts a compact, borderless inner table in a
-                        <code class="ws-code">pf-m-no-background</code> wrapper.
-                      </p>
-                      {/description} {#content}{#include components/table/expandable-nested-table /}{/content}
-                      {/include} {#include partials/example-card title="Selectable with checkboxes"
-                      slug="selectable-checkbox" component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        A leading <code class="ws-code">pf-v6-c-table__check</code> control column with per-row
-                        checkboxes and a select-all in the header.
-                      </p>
-                      {/description} {#content}{#include components/table/selectable-checkbox /}{/content} {/include}
-                      {#include partials/example-card title="Selectable with indeterminate state"
-                      slug="selectable-indeterminate" component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Live tri-state select-all: checked when every row is selected, indeterminate when only some are.
-                      </p>
-                      {/description} {#content}{#include components/table/selectable-indeterminate /}{/content}
-                      {/include} {#include partials/example-card title="Selectable with radio" slug="selectable-radio"
-                      component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Single-row selection — radio inputs sharing one name in the
-                        <code class="ws-code">pf-v6-c-table__check</code> column, no select-all.
-                      </p>
-                      {/description} {#content}{#include components/table/selectable-radio /}{/content} {/include}
-                      {#include partials/example-card title="Actions" slug="actions" component="table" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        A trailing <code class="ws-code">pf-v6-c-table__action</code> cell with a kebab overflow menu
-                        (Alpine); the last row shows the inline-action alternative.
-                      </p>
-                      {/description} {#content}{#include components/table/actions /}{/content} {/include} {#include
-                      partials/example-card title="Overflow menu" slug="overflow-menu" component="table"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        A <code class="ws-code">pf-v6-c-overflow-menu</code> action cell: a button group on large
-                        screens that collapses to a kebab below <code class="ws-code">lg</code>.
-                      </p>
-                      {/description} {#content}{#include components/table/overflow-menu /}{/content} {/include}
-                      {#include partials/example-card title="Empty state" slug="empty-state" component="table"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        A single full-width body cell (<code class="ws-code">colspan</code>) holding the empty-state
-                        component for a table with no rows.
-                      </p>
-                      {/description} {#content}{#include components/table/empty-state /}{/content} {/include} {#include
-                      partials/example-card title="Width and text modifiers" slug="width" component="table"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-width-{|{pct}|}</code> pins a column's width;
-                        <code class="ws-code">pf-m-truncate</code>, <code class="ws-code">pf-m-fit-content</code> and
-                        <code class="ws-code">pf-m-nowrap</code> control cell text overflow.
-                      </p>
-                      {/description} {#content}{#include components/table/width /}{/content} {/include} {#include
-                      partials/example-card title="Text control" slug="text-control" component="table" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Per-cell text behavior: <code class="ws-code">pf-m-truncate</code>,
-                        <code class="ws-code">pf-m-break-word</code>, <code class="ws-code">pf-m-wrap</code>,
-                        <code class="ws-code">pf-m-fit-content</code> and <code class="ws-code">pf-m-nowrap</code>.
-                      </p>
-                      {/description} {#content}{#include components/table/text-control /}{/content} {/include} {#include
-                      partials/example-card title="Table text element" slug="table-text" component="table"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Wrapping cell content in <code class="ws-code">pf-v6-c-table__text</code> keeps text modifiers
-                        working in the grid layout and composes with PF layouts.
-                      </p>
-                      {/description} {#content}{#include components/table/table-text /}{/content} {/include} {#include
-                      partials/example-card title="Long strings" slug="long-strings" component="table" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        No modifiers on purpose &mdash; a long string shrinks adjacent columns, the failure mode the
-                        width and text modifiers fix.
-                      </p>
-                      {/description} {#content}{#include components/table/long-strings /}{/content} {/include} {#include
-                      partials/example-card title="Width constrained" slug="width-constrained" component="table"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-width-40</code> caps the column; the second body adds
-                        <code class="ws-code">pf-m-truncate</code> on the cell.
-                      </p>
-                      {/description} {#content}{#include components/table/width-constrained /}{/content} {/include}
-                      {#include partials/example-card title="Hidden/visible breakpoints" slug="breakpoint-modifiers"
-                      component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Columns show and hide per breakpoint with <code class="ws-code">pf-m-hidden(-on-*)</code> /
-                        <code class="ws-code">pf-m-visible-on-*</code> &mdash; resize to see them swap.
-                      </p>
-                      {/description} {#content}{#include components/table/breakpoint-modifiers /}{/content} {/include}
-                      {#include partials/example-card title="Favoritable" slug="favoritable" component="table"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        A leading <code class="ws-code">pf-v6-c-table__favorite</code> star column;
-                        <code class="ws-code">pf-m-favorited</code> colours the star (Alpine toggles it).
-                      </p>
-                      {/description} {#content}{#include components/table/favoritable /}{/content} {/include} {#include
-                      partials/example-card title="Favorites sortable" slug="favorites-sortable" component="table"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        The favorite column header is a live sort control &mdash; clicking it reorders rows by their
-                        current favorited state.
-                      </p>
-                      {/description} {#content}{#include components/table/favorites-sortable /}{/content} {/include}
-                      {#include partials/example-card title="Clickable rows" slug="clickable-rows" component="table"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Clicking (or Enter/Space on) a row selects it — <code class="ws-code">pf-m-selected</code> on
-                        the grid-variant table highlights the current row.
-                      </p>
-                      {/description} {#content}{#include components/table/clickable-rows /}{/content} {/include}
-                      {#include partials/example-card title="Clickable and expandable" slug="clickable-expandable"
-                      component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Clicking a row selects its tbody; the toggle expands the detail row without changing the
-                        selection.
-                      </p>
-                      {/description} {#content}{#include components/table/clickable-expandable /}{/content} {/include}
-                      {#include partials/example-card title="Nested column headers" slug="nested-column-headers"
-                      component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-nested-column-header</code> groups sub-columns (<code class="ws-code"
-                          >pf-v6-c-table__subhead</code
-                        >) under a shared parent header via rowspan/colspan.
-                      </p>
-                      {/description} {#content}{#include components/table/nested-column-headers /}{/content} {/include}
-                      {#include partials/example-card title="Nested headers and expandable rows"
-                      slug="nested-expandable" component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Control columns span both header rows (<code class="ws-code">rowspan=2</code>) while grouped
-                        columns keep their subheads; rows expand as usual.
-                      </p>
-                      {/description} {#content}{#include components/table/nested-expandable /}{/content} {/include}
-                      {#include partials/example-card title="Nested headers, sticky header" slug="nested-sticky-header"
-                      component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Both nested header rows pin while the body scrolls inside the bounded wrapper.
-                      </p>
-                      {/description} {#content}{#include components/table/nested-sticky-header /}{/content} {/include}
-                      {#include partials/example-card title="Editable rows" slug="editable-rows" component="table"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Each row toggles between a read view and inline inputs; Save commits the draft, Cancel discards
-                        it (Alpine). The action cell uses
-                        <code class="ws-code">pf-v6-c-table__inline-edit-action</code>.
-                      </p>
-                      {/description} {#content}{#include components/table/editable-rows /}{/content} {/include}
-                      {#include partials/example-card title="Compound expandable" slug="compound-expandable"
-                      component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Each cell is its own toggle (<code class="ws-code"
-                          >pf-v6-c-table__compound-expansion-toggle</code
-                        >); opening one expands a detail row scoped to that cell, one per row at a time.
-                      </p>
-                      {/description} {#content}{#include components/table/compound-expandable /}{/content} {/include}
-                      {#include partials/example-card title="Compound expandable with nested table"
-                      slug="compound-expandable-nested-table" component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        A compound toggle cell whose detail row contains a nested compact table.
-                      </p>
-                      {/description} {#content}{#include components/table/compound-expandable-nested-table /}{/content}
-                      {/include} {#include partials/example-card title="Animated compound expandable"
-                      slug="animated-compound-expandable" component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-animate-expand</code> with per-cell rows; switching between open
-                        cells is instant via <code class="ws-code">pf-m-no-animate-expand</code>.
-                      </p>
-                      {/description} {#content}{#include components/table/animated-compound-expandable /}{/content}
-                      {/include} {#include partials/example-card title="Sticky header and column" slug="sticky"
-                      component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        In a scroll wrapper, <code class="ws-code">pf-m-sticky-header</code> pins the header and
-                        <code class="ws-code">pf-v6-c-table__sticky-cell pf-m-left</code> pins the first column — scroll
-                        the table to see both.
-                      </p>
-                      {/description} {#content}{#include components/table/sticky /}{/content} {/include} {#include
-                      partials/example-card title="Sticky footer" slug="sticky-footer" component="table"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-sticky-footer</code> pins the totals row to the bottom of the scroll
-                        container.
-                      </p>
-                      {/description} {#content}{#include components/table/sticky-footer /}{/content} {/include}
-                      {#include partials/example-card title="Multiple sticky columns" slug="multiple-sticky-columns"
-                      component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Two left columns pin while scrolling right; the second offsets its inset and carries
-                        <code class="ws-code">pf-m-border-right</code>.
-                      </p>
-                      {/description} {#content}{#include components/table/multiple-sticky-columns /}{/content}
-                      {/include} {#include partials/example-card title="Sticky right column" slug="sticky-right-column"
-                      component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        The trailing column pins to the right edge with
-                        <code class="ws-code">pf-m-border-left</code> marking the boundary.
-                      </p>
-                      {/description} {#content}{#include components/table/sticky-right-column /}{/content} {/include}
-                      {#include partials/example-card title="Tree table" slug="tree-table" component="table"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-tree-view</code> with <code class="ws-code">role="treegrid"</code>;
-                        parent rows toggle their children, indented automatically by
-                        <code class="ws-code">aria-level</code>.
-                      </p>
-                      {/description} {#content}{#include components/table/tree-table /}{/content} {/include} {#include
-                      partials/example-card title="Tree table with checkboxes" slug="tree-table-checkboxes"
-                      component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Row checkboxes with a live cascade: parents check their children and show indeterminate for
-                        partial selections.
-                      </p>
-                      {/description} {#content}{#include components/table/tree-table-checkboxes /}{/content} {/include}
-                      {#include partials/example-card title="Tree table with checkboxes and icons"
-                      slug="tree-table-icons" component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Adds a <code class="ws-code">tree-view-icon</code> per row &mdash; folders for parents (open
-                        while expanded) and leaves for children.
-                      </p>
-                      {/description} {#content}{#include components/table/tree-table-icons /}{/content} {/include}
-                      {#include partials/example-card title="Tree with no children or indentation"
-                      slug="tree-table-flat" component="table" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-no-inset</code> removes the indent; all rows are leaves so the role
-                        stays <code class="ws-code">grid</code>.
-                      </p>
-                      {/description} {#content}{#include components/table/tree-table-flat /}{/content} {/include}
-                      {#include partials/example-card title="Draggable rows" slug="draggable-rows" component="table"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Drag a row by its grip to reorder; the dragged row shows
-                        <code class="ws-code">pf-m-ghost-row</code> and drops into place by the pointer's midpoint.
-                      </p>
-                      {/description} {#content}{#include components/table/draggable-rows /}{/content} {/include}
-                      {#include partials/example-card title="Footer" slug="footer" component="table" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        A summary row in <code class="ws-code">pf-v6-c-table__tfoot</code> (PatternFly 6.6+) — the
-                        <code class="ws-code">th</code> uses <code class="ws-code">scope="row"</code> so assistive tech
-                        announces the total's label.
-                      </p>
-                      {/description} {#content}{#include components/table/footer /}{/content} {/include} {#include
-                      partials/example-card title="Cell with image alignment" slug="cell-with-image-alignment"
-                      component="table"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Cell alignment defaults to baseline, which drifts next to images — the first cell tops-aligns a
-                        36px brand icon against the text block with
-                        <code class="ws-code">pf-m-align-self-flex-start</code> inside a nowrap flex. Sort headers
-                        reorder the rows live; the <code class="ws-code">?</code> buttons open column-help popovers.
-                      </p>
-                      {/description} {#content}{#include components/table/cell-with-image-alignment /}{/content}
-                      {/include} {#include partials/example-card title="Container query with drawer"
-                      slug="container-query-with-drawer" component="table"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        The drawer panel declares <code class="ws-code">container-type: inline-size</code> with
-                        <code class="ws-code">container-name: pf-v6-contain-table</code>, so its
-                        <code class="ws-code">pf-m-grid-md</code> table switches between stacked and grid layout from
-                        the <em>panel's</em> width; the main table (<code class="ws-code">pf-m-grid-lg</code>) responds
-                        to the viewport. Close and re-open the panel with the toolbar's Toggle drawer button.
-                      </p>
-                      {/description} {#content}{#include components/table/container-query-with-drawer /}{/content}
-                      {/include} {#include partials/example-card title="Sticky header with base and stuck"
-                      slug="sticky-base-and-stuck" component="table"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        The base/stuck sticky-header pattern inside an offset scroll container.
-                      </p>
-                      {/description} {#content}{#include components/table/sticky-base-and-stuck /}{/content} {/include}
+{/head} {#body} {#include partials/showcase-page title="Table" toc=tocTable} {#lede}
+<p>
+  A grid of rows and columns for structured data. Use when every row has the same shape and column headers carry
+  meaning. For list-shaped data without column headers, prefer
+  <a href="/components/data-list">Data list</a>.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
+  </div>
+</div>
+{#include partials/example-card title="Basic" slug="basic" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Default rows — three users with a name, status, role and edit action.
+</p>
+{/description} {#content}{#include components/table/basic /}{/content} {/include} {#include partials/example-card
+title="Plain" slug="plain" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">modifiers="pf-m-plain"</code> &mdash; no borders or hover treatment, with a table
+  <code class="ws-code">&lt;caption&gt;</code>.
+</p>
+{/description} {#content}{#include components/table/plain /}{/content} {/include} {#include partials/example-card
+title="Header tooltips and popovers" slug="header-help" component="table"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Header cells carry info tooltips and popovers via
+  <code class="ws-code">pf-v6-c-table__column-help</code>; plus a centered column, secondary-row backgrounds and a
+  colspan cell.
+</p>
+{/description} {#content}{#include components/table/header-help /}{/content} {/include} {#include partials/example-card
+title="Compact" slug="compact" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">compact=true</code> — denser padding for info-heavy tables.
+</p>
+{/description} {#content}{#include components/table/compact /}{/content} {/include} {#include partials/example-card
+title="Compact expandable" slug="compact-expandable" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">compact=true expandable=true</code> &mdash; dense rows that still expand to a detail row.
+</p>
+{/description} {#content}{#include components/table/compact-expandable /}{/content} {/include} {#include
+partials/example-card title="Striped" slug="striped" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">striped=true</code> — alternating row background for easier horizontal scanning.
+</p>
+{/description} {#content}{#include components/table/striped /}{/content} {/include} {#include partials/example-card
+title="Striped expandable" slug="striped-expandable" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  With <code class="ws-code">striped=true expandable=true</code> PF stripes whole odd
+  <code class="ws-code">&lt;tbody&gt;</code> groups instead of odd rows.
+</p>
+{/description} {#content}{#include components/table/striped-expandable /}{/content} {/include} {#include
+partials/example-card title="Striped multiple tbody" slug="striped-multiple-tbody" component="table" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-striped</code> / <code class="ws-code">pf-m-striped-even</code> set per tbody keep the
+  stripe pattern continuous across body groups.
+</p>
+{/description} {#content}{#include components/table/striped-multiple-tbody /}{/content} {/include} {#include
+partials/example-card title="Striped tr" slug="striped-tr" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-striped</code> on individual rows for full manual control.
+</p>
+{/description} {#content}{#include components/table/striped-tr /}{/content} {/include} {#include partials/example-card
+title="Borderless" slug="borderless" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">borderless=true</code> — removes row dividers; pairs well with striped on dashboards.
+</p>
+{/description} {#content}{#include components/table/borderless /}{/content} {/include} {#include partials/example-card
+title="Borderless compact" slug="borderless-compact" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">borderless=true compact=true</code> &mdash; the densest, quietest layout.
+</p>
+{/description} {#content}{#include components/table/borderless-compact /}{/content} {/include} {#include
+partials/example-card title="Borderless expandable" slug="borderless-expandable" component="table" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">borderless=true expandable=true</code> &mdash; row expansion without row dividers.
+</p>
+{/description} {#content}{#include components/table/borderless-expandable /}{/content} {/include} {#include
+partials/example-card title="Borderless compound expandable" slug="borderless-compound-expandable" component="table"
+javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Borderless with per-cell compound expansion toggles.</p>
+{/description} {#content}{#include components/table/borderless-compound-expandable /}{/content} {/include} {#include
+partials/example-card title="Sortable (HTMX)" slug="sortable" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Column headers post to <code class="ws-code">/api/htmx/table-sort</code> and swap the table; no client-side sorting
+  logic.
+</p>
+{/description} {#content}{#include components/table/sortable /}{/content} {/include} {#include partials/example-card
+title="Sortable — custom control" slug="sortable-custom-control" component="table"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  A toolbar select drives the sort instead of clickable headers — each choice hits
+  <code class="ws-code">/api/htmx/table-sort-custom</code> and swaps the server-sorted table.
+</p>
+{/description} {#content}{#include components/table/sortable-custom-control /}{/content} {/include} {#include
+partials/example-card title="Expandable (Alpine)" slug="expandable" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Per-row toggle reveals a detail row beneath; state lives in
+  <code class="ws-code">x-data</code> on the &lt;tbody&gt;.
+</p>
+{/description} {#content}{#include components/table/expandable /}{/content} {/include} {#include partials/example-card
+title="Animated expandable" slug="animated-expandable" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-animate-expand</code> fades and slides the detail row; rows stay rendered so CSS can
+  animate.
+</p>
+{/description} {#content}{#include components/table/animated-expandable /}{/content} {/include} {#include
+partials/example-card title="Expandable with set width columns" slug="expandable-set-width" component="table"
+javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-width-30</code>/<code class="ws-code">pf-m-width-20</code> on header cells fix column
+  proportions while rows expand.
+</p>
+{/description} {#content}{#include components/table/expandable-set-width /}{/content} {/include} {#include
+partials/example-card title="Expandable with nested table" slug="expandable-nested-table" component="table"
+javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  The expanded detail row hosts a compact, borderless inner table in a
+  <code class="ws-code">pf-m-no-background</code> wrapper.
+</p>
+{/description} {#content}{#include components/table/expandable-nested-table /}{/content} {/include} {#include
+partials/example-card title="Selectable with checkboxes" slug="selectable-checkbox" component="table" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  A leading <code class="ws-code">pf-v6-c-table__check</code> control column with per-row checkboxes and a select-all in
+  the header.
+</p>
+{/description} {#content}{#include components/table/selectable-checkbox /}{/content} {/include} {#include
+partials/example-card title="Selectable with indeterminate state" slug="selectable-indeterminate" component="table"
+javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Live tri-state select-all: checked when every row is selected, indeterminate when only some are.
+</p>
+{/description} {#content}{#include components/table/selectable-indeterminate /}{/content} {/include} {#include
+partials/example-card title="Selectable with radio" slug="selectable-radio" component="table" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Single-row selection — radio inputs sharing one name in the
+  <code class="ws-code">pf-v6-c-table__check</code> column, no select-all.
+</p>
+{/description} {#content}{#include components/table/selectable-radio /}{/content} {/include} {#include
+partials/example-card title="Actions" slug="actions" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  A trailing <code class="ws-code">pf-v6-c-table__action</code> cell with a kebab overflow menu (Alpine); the last row
+  shows the inline-action alternative.
+</p>
+{/description} {#content}{#include components/table/actions /}{/content} {/include} {#include partials/example-card
+title="Overflow menu" slug="overflow-menu" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  A <code class="ws-code">pf-v6-c-overflow-menu</code> action cell: a button group on large screens that collapses to a
+  kebab below <code class="ws-code">lg</code>.
+</p>
+{/description} {#content}{#include components/table/overflow-menu /}{/content} {/include} {#include
+partials/example-card title="Empty state" slug="empty-state" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  A single full-width body cell (<code class="ws-code">colspan</code>) holding the empty-state component for a table
+  with no rows.
+</p>
+{/description} {#content}{#include components/table/empty-state /}{/content} {/include} {#include partials/example-card
+title="Width and text modifiers" slug="width" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-width-{|{pct}|}</code> pins a column's width; <code class="ws-code">pf-m-truncate</code>,
+  <code class="ws-code">pf-m-fit-content</code> and <code class="ws-code">pf-m-nowrap</code> control cell text overflow.
+</p>
+{/description} {#content}{#include components/table/width /}{/content} {/include} {#include partials/example-card
+title="Text control" slug="text-control" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Per-cell text behavior: <code class="ws-code">pf-m-truncate</code>, <code class="ws-code">pf-m-break-word</code>,
+  <code class="ws-code">pf-m-wrap</code>, <code class="ws-code">pf-m-fit-content</code> and
+  <code class="ws-code">pf-m-nowrap</code>.
+</p>
+{/description} {#content}{#include components/table/text-control /}{/content} {/include} {#include partials/example-card
+title="Table text element" slug="table-text" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Wrapping cell content in <code class="ws-code">pf-v6-c-table__text</code> keeps text modifiers working in the grid
+  layout and composes with PF layouts.
+</p>
+{/description} {#content}{#include components/table/table-text /}{/content} {/include} {#include partials/example-card
+title="Long strings" slug="long-strings" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  No modifiers on purpose &mdash; a long string shrinks adjacent columns, the failure mode the width and text modifiers
+  fix.
+</p>
+{/description} {#content}{#include components/table/long-strings /}{/content} {/include} {#include partials/example-card
+title="Width constrained" slug="width-constrained" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-width-40</code> caps the column; the second body adds
+  <code class="ws-code">pf-m-truncate</code> on the cell.
+</p>
+{/description} {#content}{#include components/table/width-constrained /}{/content} {/include} {#include
+partials/example-card title="Hidden/visible breakpoints" slug="breakpoint-modifiers" component="table" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Columns show and hide per breakpoint with <code class="ws-code">pf-m-hidden(-on-*)</code> /
+  <code class="ws-code">pf-m-visible-on-*</code> &mdash; resize to see them swap.
+</p>
+{/description} {#content}{#include components/table/breakpoint-modifiers /}{/content} {/include} {#include
+partials/example-card title="Favoritable" slug="favoritable" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  A leading <code class="ws-code">pf-v6-c-table__favorite</code> star column;
+  <code class="ws-code">pf-m-favorited</code> colours the star (Alpine toggles it).
+</p>
+{/description} {#content}{#include components/table/favoritable /}{/content} {/include} {#include partials/example-card
+title="Favorites sortable" slug="favorites-sortable" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  The favorite column header is a live sort control &mdash; clicking it reorders rows by their current favorited state.
+</p>
+{/description} {#content}{#include components/table/favorites-sortable /}{/content} {/include} {#include
+partials/example-card title="Clickable rows" slug="clickable-rows" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Clicking (or Enter/Space on) a row selects it — <code class="ws-code">pf-m-selected</code> on the grid-variant table
+  highlights the current row.
+</p>
+{/description} {#content}{#include components/table/clickable-rows /}{/content} {/include} {#include
+partials/example-card title="Clickable and expandable" slug="clickable-expandable" component="table" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Clicking a row selects its tbody; the toggle expands the detail row without changing the selection.
+</p>
+{/description} {#content}{#include components/table/clickable-expandable /}{/content} {/include} {#include
+partials/example-card title="Nested column headers" slug="nested-column-headers" component="table" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-nested-column-header</code> groups sub-columns (<code class="ws-code"
+    >pf-v6-c-table__subhead</code
+  >) under a shared parent header via rowspan/colspan.
+</p>
+{/description} {#content}{#include components/table/nested-column-headers /}{/content} {/include} {#include
+partials/example-card title="Nested headers and expandable rows" slug="nested-expandable" component="table"
+javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Control columns span both header rows (<code class="ws-code">rowspan=2</code>) while grouped columns keep their
+  subheads; rows expand as usual.
+</p>
+{/description} {#content}{#include components/table/nested-expandable /}{/content} {/include} {#include
+partials/example-card title="Nested headers, sticky header" slug="nested-sticky-header" component="table"
+javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Both nested header rows pin while the body scrolls inside the bounded wrapper.
+</p>
+{/description} {#content}{#include components/table/nested-sticky-header /}{/content} {/include} {#include
+partials/example-card title="Editable rows" slug="editable-rows" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Each row toggles between a read view and inline inputs; Save commits the draft, Cancel discards it (Alpine). The
+  action cell uses
+  <code class="ws-code">pf-v6-c-table__inline-edit-action</code>.
+</p>
+{/description} {#content}{#include components/table/editable-rows /}{/content} {/include} {#include
+partials/example-card title="Compound expandable" slug="compound-expandable" component="table" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Each cell is its own toggle (<code class="ws-code">pf-v6-c-table__compound-expansion-toggle</code>); opening one
+  expands a detail row scoped to that cell, one per row at a time.
+</p>
+{/description} {#content}{#include components/table/compound-expandable /}{/content} {/include} {#include
+partials/example-card title="Compound expandable with nested table" slug="compound-expandable-nested-table"
+component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  A compound toggle cell whose detail row contains a nested compact table.
+</p>
+{/description} {#content}{#include components/table/compound-expandable-nested-table /}{/content} {/include} {#include
+partials/example-card title="Animated compound expandable" slug="animated-compound-expandable" component="table"
+javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-animate-expand</code> with per-cell rows; switching between open cells is instant via
+  <code class="ws-code">pf-m-no-animate-expand</code>.
+</p>
+{/description} {#content}{#include components/table/animated-compound-expandable /}{/content} {/include} {#include
+partials/example-card title="Sticky header and column" slug="sticky" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  In a scroll wrapper, <code class="ws-code">pf-m-sticky-header</code> pins the header and
+  <code class="ws-code">pf-v6-c-table__sticky-cell pf-m-left</code> pins the first column — scroll the table to see
+  both.
+</p>
+{/description} {#content}{#include components/table/sticky /}{/content} {/include} {#include partials/example-card
+title="Sticky footer" slug="sticky-footer" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-sticky-footer</code> pins the totals row to the bottom of the scroll container.
+</p>
+{/description} {#content}{#include components/table/sticky-footer /}{/content} {/include} {#include
+partials/example-card title="Multiple sticky columns" slug="multiple-sticky-columns" component="table" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Two left columns pin while scrolling right; the second offsets its inset and carries
+  <code class="ws-code">pf-m-border-right</code>.
+</p>
+{/description} {#content}{#include components/table/multiple-sticky-columns /}{/content} {/include} {#include
+partials/example-card title="Sticky right column" slug="sticky-right-column" component="table" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  The trailing column pins to the right edge with
+  <code class="ws-code">pf-m-border-left</code> marking the boundary.
+</p>
+{/description} {#content}{#include components/table/sticky-right-column /}{/content} {/include} {#include
+partials/example-card title="Tree table" slug="tree-table" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-tree-view</code> with <code class="ws-code">role="treegrid"</code>; parent rows toggle
+  their children, indented automatically by <code class="ws-code">aria-level</code>.
+</p>
+{/description} {#content}{#include components/table/tree-table /}{/content} {/include} {#include partials/example-card
+title="Tree table with checkboxes" slug="tree-table-checkboxes" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Row checkboxes with a live cascade: parents check their children and show indeterminate for partial selections.
+</p>
+{/description} {#content}{#include components/table/tree-table-checkboxes /}{/content} {/include} {#include
+partials/example-card title="Tree table with checkboxes and icons" slug="tree-table-icons" component="table"
+javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Adds a <code class="ws-code">tree-view-icon</code> per row &mdash; folders for parents (open while expanded) and
+  leaves for children.
+</p>
+{/description} {#content}{#include components/table/tree-table-icons /}{/content} {/include} {#include
+partials/example-card title="Tree with no children or indentation" slug="tree-table-flat" component="table"
+javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-no-inset</code> removes the indent; all rows are leaves so the role stays
+  <code class="ws-code">grid</code>.
+</p>
+{/description} {#content}{#include components/table/tree-table-flat /}{/content} {/include} {#include
+partials/example-card title="Draggable rows" slug="draggable-rows" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Drag a row by its grip to reorder; the dragged row shows
+  <code class="ws-code">pf-m-ghost-row</code> and drops into place by the pointer's midpoint.
+</p>
+{/description} {#content}{#include components/table/draggable-rows /}{/content} {/include} {#include
+partials/example-card title="Footer" slug="footer" component="table" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  A summary row in <code class="ws-code">pf-v6-c-table__tfoot</code> (PatternFly 6.6+) — the
+  <code class="ws-code">th</code> uses <code class="ws-code">scope="row"</code> so assistive tech announces the total's
+  label.
+</p>
+{/description} {#content}{#include components/table/footer /}{/content} {/include} {#include partials/example-card
+title="Cell with image alignment" slug="cell-with-image-alignment" component="table"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Cell alignment defaults to baseline, which drifts next to images — the first cell tops-aligns a 36px brand icon
+  against the text block with
+  <code class="ws-code">pf-m-align-self-flex-start</code> inside a nowrap flex. Sort headers reorder the rows live; the
+  <code class="ws-code">?</code> buttons open column-help popovers.
+</p>
+{/description} {#content}{#include components/table/cell-with-image-alignment /}{/content} {/include} {#include
+partials/example-card title="Container query with drawer" slug="container-query-with-drawer" component="table"}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  The drawer panel declares <code class="ws-code">container-type: inline-size</code> with
+  <code class="ws-code">container-name: pf-v6-contain-table</code>, so its
+  <code class="ws-code">pf-m-grid-md</code> table switches between stacked and grid layout from the
+  <em>panel's</em> width; the main table (<code class="ws-code">pf-m-grid-lg</code>) responds to the viewport. Close and
+  re-open the panel with the toolbar's Toggle drawer button.
+</p>
+{/description} {#content}{#include components/table/container-query-with-drawer /}{/content} {/include} {#include
+partials/example-card title="Sticky header with base and stuck" slug="sticky-base-and-stuck" component="table"}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  The base/stuck sticky-header pattern inside an offset scroll container.
+</p>
+{/description} {#content}{#include components/table/sticky-base-and-stuck /}{/content} {/include}
 
-                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
-                        <h2
-                          id="documentation"
-                          tabindex="-1"
-                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                        >
-                          Documentation
-                        </h2>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="props-table" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
-                          Table props
-                        </h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          The runtime template has two modes. Pass a typed
-                          <code class="ws-code">org.sitenetsoft.quarkus.pha.model.Table</code> (built with
-                          <code class="ws-code">Table.builder()</code>) as the <code class="ws-code">table</code>
-                          parameter and the caption, header (sort buttons, selection inputs, expandable-row toggles),
-                          bodies, action cells and footer all render from the model — the examples above with a Java tab
-                          are built this way. Or omit it and hand-write thead/tbody markup in the content slot using
-                          bare elements (PF v6 styles them via descendant selectors), as the composition-heavy examples
-                          (tree tables, compound expansion, sticky layouts) still do.
-                        </p>
-                        <div class="pf-v6-c-code-block" role="group" aria-label="Table builder example">
-                          <div class="pf-v6-c-code-block__content">
-                            <pre
-                              class="pf-v6-c-code-block__pre"
-                            ><code class="pf-v6-c-code-block__code">Table table = Table.builder()
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+    Documentation
+  </h2>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-table" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Table props</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    The runtime template has two modes. Pass a typed
+    <code class="ws-code">org.sitenetsoft.quarkus.pha.model.Table</code> (built with
+    <code class="ws-code">Table.builder()</code>) as the <code class="ws-code">table</code>
+    parameter and the caption, header (sort buttons, selection inputs, expandable-row toggles), bodies, action cells and
+    footer all render from the model — the examples above with a Java tab are built this way. Or omit it and hand-write
+    thead/tbody markup in the content slot using bare elements (PF v6 styles them via descendant selectors), as the
+    composition-heavy examples (tree tables, compound expansion, sticky layouts) still do.
+  </p>
+  <div class="pf-v6-c-code-block" role="group" aria-label="Table builder example">
+    <div class="pf-v6-c-code-block__content">
+      <pre class="pf-v6-c-code-block__pre"><code class="pf-v6-c-code-block__code">Table table = Table.builder()
     .id("users").ariaLabel("Users")
     .column("Name")
     .column(TableColumn.of("Status").sortable("status"))
@@ -1048,164 +385,144 @@
     .row(Table.row("Jane Smith", "Inactive",
             TableCell.actions(TableAction.secondary("Edit"), TableAction.danger("Delete"))))
     .build();</code></pre>
-                          </div>
-                        </div>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          Template side, with <code class="ws-code">table</code> in the template data:
-                          <code class="ws-code">{|{#include components/data-display/table table=table /}|}</code>.
-                          Shell-mode parameters below.
-                        </p>
-                        <table
-                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
-                          role="grid"
-                          aria-label="Table props"
-                        >
-                          <caption class="pf-v6-c-table__caption">
-                            <span class="ws-prop-required">*</span>
-                            required
-                          </caption>
-                          <thead class="pf-v6-c-table__thead">
-                            <tr class="pf-v6-c-table__tr">
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
-                              <th scope="col" class="pf-v6-c-table__th">Description</th>
-                            </tr>
-                          </thead>
-                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">DOM id on the &lt;table&gt;.</span>
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">compact</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Adds <code class="ws-code">pf-m-compact</code> for denser rows.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">gridMd</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Adds <code class="ws-code">pf-m-grid-md</code> — collapses to stacked cards below
-                                  md.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">striped</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Adds <code class="ws-code">pf-m-striped</code> for alternating row background.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">borderless</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Adds <code class="ws-code">pf-m-no-border-rows</code> — removes between-row
-                                  dividers.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">expandable</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Adds <code class="ws-code">pf-m-expandable</code> — opt-in for the expandable-row
-                                  layout.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">ariaLabel</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Sets <code class="ws-code">aria-label</code> on the table for screen readers.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">slot <code class="ws-code">content</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >&lt;thead&gt; and &lt;tbody&gt; rows — bare elements; PF v6 styles them via
-                                  descendant selectors.</span
-                                >
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Table vs. Data list.</strong> Use Table when every row has the same shape and column
-                          headers carry the meaning of each cell. Use <a href="/components/data-list">Data list</a> when
-                          rows are list-shaped (variable inner layout, no shared column meaning).
-                        </p>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Sorting.</strong> Server-side. The sort buttons send
-                          <code class="ws-code">hx-get</code> with the column + direction; the endpoint returns a new
-                          &lt;table&gt; with rows reordered and the right column flagged with
-                          <code class="ws-code">aria-sort</code>. No client-side sort logic — keeps a single source of
-                          truth.
-                        </p>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Expandable rows.</strong> Each pair of rows lives inside its own
-                          <code class="ws-code">&lt;tbody&gt;</code> with
-                          <code class="ws-code">x-data="{ open: false }"</code>. Toggle the
-                          <code class="ws-code">pf-m-expanded</code> class on the &lt;tbody&gt; and
-                          <code class="ws-code">x-show</code> on the detail row.
-                        </p>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <br /><a
-                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/table.html"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          >Edit table.html on GitHub</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </main>
-        </div>
-      </div>
     </div>
   </div>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    Template side, with <code class="ws-code">table</code> in the template data:
+    <code class="ws-code">{|{#include components/data-display/table table=table /}|}</code>. Shell-mode parameters
+    below.
+  </p>
+  <table
+    class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+    role="grid"
+    aria-label="Table props"
+  >
+    <caption class="pf-v6-c-table__caption">
+      <span class="ws-prop-required">*</span>
+      required
+    </caption>
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+        <th scope="col" class="pf-v6-c-table__th">Description</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">DOM id on the &lt;table&gt;.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">compact</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Adds <code class="ws-code">pf-m-compact</code> for denser rows.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">gridMd</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Adds <code class="ws-code">pf-m-grid-md</code> — collapses to stacked cards below md.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">striped</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Adds <code class="ws-code">pf-m-striped</code> for alternating row background.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">borderless</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Adds <code class="ws-code">pf-m-no-border-rows</code> — removes between-row dividers.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">expandable</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Adds <code class="ws-code">pf-m-expandable</code> — opt-in for the expandable-row layout.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">ariaLabel</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Sets <code class="ws-code">aria-label</code> on the table for screen readers.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">slot <code class="ws-code">content</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >&lt;thead&gt; and &lt;tbody&gt; rows — bare elements; PF v6 styles them via descendant selectors.</span
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-{/body} {/include}
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Table vs. Data list.</strong> Use Table when every row has the same shape and column headers carry the
+    meaning of each cell. Use <a href="/components/data-list">Data list</a> when rows are list-shaped (variable inner
+    layout, no shared column meaning).
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Sorting.</strong> Server-side. The sort buttons send <code class="ws-code">hx-get</code> with the column +
+    direction; the endpoint returns a new &lt;table&gt; with rows reordered and the right column flagged with
+    <code class="ws-code">aria-sort</code>. No client-side sort logic — keeps a single source of truth.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Expandable rows.</strong> Each pair of rows lives inside its own
+    <code class="ws-code">&lt;tbody&gt;</code> with <code class="ws-code">x-data="{ open: false }"</code>. Toggle the
+    <code class="ws-code">pf-m-expanded</code> class on the &lt;tbody&gt; and <code class="ws-code">x-show</code> on the
+    detail row.
+  </p>
+</div>
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/table.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit table.html on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

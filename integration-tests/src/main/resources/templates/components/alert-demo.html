@@ -1,588 +1,245 @@
-{#include layouts/base} {#title}Alert{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}Alert{/title} {#head}
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
-{/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content">
-        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
-          ><span class="pf-v6-c-button__text">Skip to content</span></a
-        >
-      </div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-c-content pf-m-editorial">
-                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Alert</h1>
-                    <p>
-                      An inline notification — five severity variants with auto icons. Use for time-sensitive feedback
-                      (success after save, warning before action, danger on failure). For full-width tinted strips see
-                      <a href="/components/banner">Banner</a>.
-                    </p>
-                  </div>
-                </div>
-              </section>
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                    <nav
-                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
-                      aria-label="Table of contents"
-                    >
-                      <div class="pf-v6-c-jump-links__main">
-                        <ul class="pf-v6-c-jump-links__list" role="list">
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#variants" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Alert variants</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#variations" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Alert variations</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#with-description" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With description</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#closable" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Closable</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#inline" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Inline</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#with-actions" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With action links</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#timeout" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Alert timeout</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#expandable" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Expandable alerts</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#truncated" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Truncated alerts</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#custom-icons" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Custom icons</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#plain-inline" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Plain inline alert variants</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#static-live-region" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Static live region alerts</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#alert-group-static" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Static inline alert group</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#alert-group-toast" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Toast alert group</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#alert-group-toast-overflow" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Toast alert group with overflow capture</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#dynamic-groups" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Dynamic alert groups</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#dynamic-live-region" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Dynamic live region alerts</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#async-live-region" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Async live region alerts</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#dynamic-group-overflow" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Dynamic alert group with overflow</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#multiple-dynamic-groups" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Multiple dynamic alert groups</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#async-groups" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Async alert groups</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#toast-with-drawer" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Toast alerts with notification drawer</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#props-alert" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Alert props</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </nav>
-                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
-                        <div>
-                          <h2
-                            id="examples"
-                            tabindex="-1"
-                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                          >
-                            Examples
-                          </h2>
-                        </div>
-                      </div>
-                      {#include partials/example-card title="Alert variants" slug="variants" component="alert"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        The five PF variants — info, success, warning, danger, custom.
-                      </p>
-                      {/description} {#content}{#include components/alert/variants /}{/content} {/include} {#include
-                      partials/example-card title="Alert variations" slug="variations" component="alert"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Title + description + action links + close, and reduced combinations.
-                      </p>
-                      {/description} {#content}{#include components/alert/variations /}{/content} {/include} {#include
-                      partials/example-card title="With description" slug="with-description" component="alert"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">A description paragraph below the title.</p>
-                      {/description} {#content}{#include components/alert/with-description /}{/content} {/include}
-                      {#include partials/example-card title="Closable" slug="closable" component="alert"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">The close button hides the alert (Alpine).</p>
-                      {/description} {#content}{#include components/alert/closable /}{/content} {/include} {#include
-                      partials/example-card title="Inline" slug="inline" component="alert" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-inline</code> for alerts embedded in page content.
-                      </p>
-                      {/description} {#content}{#include components/alert/inline /}{/content} {/include} {#include
-                      partials/example-card title="With action links" slug="with-actions" component="alert"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Link buttons in the <code class="ws-code">__action-group</code>.
-                      </p>
-                      {/description} {#content}{#include components/alert/with-actions /}{/content} {/include} {#include
-                      partials/example-card title="Alert timeout" slug="timeout" component="alert"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Added alerts remove themselves after 8 seconds.
-                      </p>
-                      {/description} {#content}{#include components/alert/timeout /}{/content} {/include} {#include
-                      partials/example-card title="Expandable alerts" slug="expandable" component="alert"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-expandable</code> — description and actions reveal on toggle.
-                      </p>
-                      {/description} {#content}{#include components/alert/expandable /}{/content} {/include} {#include
-                      partials/example-card title="Truncated alerts" slug="truncated" component="alert" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-truncate</code> on the title clamps it to one line.
-                      </p>
-                      {/description} {#content}{#include components/alert/truncated /}{/content} {/include} {#include
-                      partials/example-card title="Custom icons" slug="custom-icons" component="alert" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Any icon via the <code class="ws-code">customIcon</code> param.
-                      </p>
-                      {/description} {#content}{#include components/alert/custom-icons /}{/content} {/include} {#include
-                      partials/example-card title="Plain inline alert variants" slug="plain-inline" component="alert"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-inline pf-m-plain</code> — no background.
-                      </p>
-                      {/description} {#content}{#include components/alert/plain-inline /}{/content} {/include} {#include
-                      partials/example-card title="Static live region alerts" slug="static-live-region"
-                      component="alert" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        An <code class="ws-code">aria-live="polite"</code> wrapper announces updates without moving
-                        focus.
-                      </p>
-                      {/description} {#content}{#include components/alert/static-live-region /}{/content} {/include}
-                      {#include partials/example-card title="Static inline alert group" slug="alert-group-static"
-                      component="alert" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-v6-c-alert-group</code> stacking inline alerts.
-                      </p>
-                      {/description} {#content}{#include components/alert/alert-group-static /}{/content} {/include}
-                      {#include partials/example-card title="Toast alert group" slug="alert-group-toast"
-                      component="alert"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-toast</code> — fixed-position toasts; add and dismiss live.
-                      </p>
-                      {/description} {#content}{#include components/alert/alert-group-toast /}{/content} {/include}
-                      {#include partials/example-card title="Toast alert group with overflow capture"
-                      slug="alert-group-toast-overflow" component="alert"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        At most 4 toasts show; the rest collapse behind a "View N more" overflow button.
-                      </p>
-                      {/description} {#content}{#include components/alert/alert-group-toast-overflow /}{/content}
-                      {/include} {#include partials/example-card title="Dynamic alert groups" slug="dynamic-groups"
-                      component="alert"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Buttons append and remove alerts in an inline live region.
-                      </p>
-                      {/description} {#content}{#include components/alert/dynamic-groups /}{/content} {/include}
-                      {#include partials/example-card title="Dynamic live region alerts" slug="dynamic-live-region"
-                      component="alert"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Variant buttons prepend inline alerts into a polite live region.
-                      </p>
-                      {/description} {#content}{#include components/alert/dynamic-live-region /}{/content} {/include}
-                      {#include partials/example-card title="Async live region alerts" slug="async-live-region"
-                      component="alert"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        A toggle starts an interval that prepends an info alert every 4.5 seconds.
-                      </p>
-                      {/description} {#content}{#include components/alert/async-live-region /}{/content} {/include}
-                      {#include partials/example-card title="Dynamic alert group with overflow"
-                      slug="dynamic-group-overflow" component="alert"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        An inline dynamic group shows at most four alerts; the rest collapse behind a "View N more
-                        alerts" message.
-                      </p>
-                      {/description} {#content}{#include components/alert/dynamic-group-overflow /}{/content} {/include}
-                      {#include partials/example-card title="Multiple dynamic alert groups"
-                      slug="multiple-dynamic-groups" component="alert"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        One click prepends a collection of three toasts — success, warning, danger — each dismissable.
-                      </p>
-                      {/description} {#content}{#include components/alert/multiple-dynamic-groups /}{/content}
-                      {/include} {#include partials/example-card title="Async alert groups" slug="async-groups"
-                      component="alert"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Start/Stop drive an interval that prepends dismissable danger toasts into an assertive live
-                        region.
-                      </p>
-                      {/description} {#content}{#include components/alert/async-groups /}{/content} {/include} {#include
-                      partials/example-card title="Toast alerts with notification drawer" slug="toast-with-drawer"
-                      component="alert"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Variant buttons spawn toasts (three visible, the rest behind a "View N more" overflow) while
-                        every notification also lands in the drawer, toggled by the badge.
-                      </p>
-                      {/description} {#content}{#include components/alert/toast-with-drawer /}{/content} {/include}
-                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
-                        <h2
-                          id="documentation"
-                          tabindex="-1"
-                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                        >
-                          Documentation
-                        </h2>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="props-alert" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
-                          Alert props
-                        </h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          Parameters accepted by
-                          <code class="ws-code">{|{#include components/feedback/alert ... /}|}</code>. Model mode: pass
-                          <code class="ws-code">alert=&lt;Alert&gt;</code> built in Java instead — the Java tab on each
-                          example shows the builder.
-                        </p>
-                        <table
-                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
-                          role="grid"
-                          aria-label="Alert props"
-                        >
-                          <caption class="pf-v6-c-table__caption">
-                            <span class="ws-prop-required">*</span>
-                            required
-                          </caption>
-                          <thead class="pf-v6-c-table__thead">
-                            <tr class="pf-v6-c-table__tr">
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
-                              <th scope="col" class="pf-v6-c-table__th">Description</th>
-                            </tr>
-                          </thead>
-                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">variant</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><code class="ws-code">info | success | warning | danger | custom</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Severity — emits <code class="ws-code">{|pf-m-{variant}|}</code> + the matching
-                                  icon.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">title</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">Main alert headline.</span>
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">description</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">Secondary line of text.</span>
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><code class="ws-code">inline</code> / <code class="ws-code">plain</code> /
-                                  <code class="ws-code">expandable</code> / <code class="ws-code">closable</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Modifier flags — emit matching pf-m-* classes; closable adds a dismiss button.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><code class="ws-code">hasActionLinks</code> +
-                                  <code class="ws-code">{|{#actionLinks}|}</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">boolean + Slot</span>
-                              </td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Set <code class="ws-code">hasActionLinks=true</code> and fill the
-                                  <code class="ws-code">{|{#actionLinks}|}</code> slot to render PF's
-                                  <code class="ws-code">AlertActionLink</code> footer. Compose link-variant
-                                  <a href="/components/button">Button</a> components.</span
-                                >
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Pick the variant by severity.</strong> Success after completion, info for context,
-                          warning before destructive actions, danger after failures. Custom for app-specific colors.
-                        </p>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Alert vs. Banner vs. Toast.</strong> Alert sits inside content;
-                          <a href="/components/banner">Banner</a> is global / persistent at the top of the page; a toast
-                          is dismissable + temporary (often built on Alert + auto-dismiss timer).
-                        </p>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <br /><a
-                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/feedback/alert.html"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          >Edit alert.html on GitHub</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </main>
-        </div>
-      </div>
-    </div>
+{/head} {#body} {#include partials/showcase-page title="Alert" toc=tocAlert} {#lede}
+<p>
+  An inline notification — five severity variants with auto icons. Use for time-sensitive feedback (success after save,
+  warning before action, danger on failure). For full-width tinted strips see
+  <a href="/components/banner">Banner</a>.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
   </div>
 </div>
-{/body} {/include}
+{#include partials/example-card title="Alert variants" slug="variants" component="alert" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">The five PF variants — info, success, warning, danger, custom.</p>
+{/description} {#content}{#include components/alert/variants /}{/content} {/include} {#include partials/example-card
+title="Alert variations" slug="variations" component="alert" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Title + description + action links + close, and reduced combinations.
+</p>
+{/description} {#content}{#include components/alert/variations /}{/content} {/include} {#include partials/example-card
+title="With description" slug="with-description" component="alert" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">A description paragraph below the title.</p>
+{/description} {#content}{#include components/alert/with-description /}{/content} {/include} {#include
+partials/example-card title="Closable" slug="closable" component="alert" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">The close button hides the alert (Alpine).</p>
+{/description} {#content}{#include components/alert/closable /}{/content} {/include} {#include partials/example-card
+title="Inline" slug="inline" component="alert" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-inline</code> for alerts embedded in page content.
+</p>
+{/description} {#content}{#include components/alert/inline /}{/content} {/include} {#include partials/example-card
+title="With action links" slug="with-actions" component="alert" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Link buttons in the <code class="ws-code">__action-group</code>.</p>
+{/description} {#content}{#include components/alert/with-actions /}{/content} {/include} {#include partials/example-card
+title="Alert timeout" slug="timeout" component="alert"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Added alerts remove themselves after 8 seconds.</p>
+{/description} {#content}{#include components/alert/timeout /}{/content} {/include} {#include partials/example-card
+title="Expandable alerts" slug="expandable" component="alert" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-expandable</code> — description and actions reveal on toggle.
+</p>
+{/description} {#content}{#include components/alert/expandable /}{/content} {/include} {#include partials/example-card
+title="Truncated alerts" slug="truncated" component="alert" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-truncate</code> on the title clamps it to one line.
+</p>
+{/description} {#content}{#include components/alert/truncated /}{/content} {/include} {#include partials/example-card
+title="Custom icons" slug="custom-icons" component="alert" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Any icon via the <code class="ws-code">customIcon</code> param.</p>
+{/description} {#content}{#include components/alert/custom-icons /}{/content} {/include} {#include partials/example-card
+title="Plain inline alert variants" slug="plain-inline" component="alert" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-inline pf-m-plain</code> — no background.
+</p>
+{/description} {#content}{#include components/alert/plain-inline /}{/content} {/include} {#include partials/example-card
+title="Static live region alerts" slug="static-live-region" component="alert" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  An <code class="ws-code">aria-live="polite"</code> wrapper announces updates without moving focus.
+</p>
+{/description} {#content}{#include components/alert/static-live-region /}{/content} {/include} {#include
+partials/example-card title="Static inline alert group" slug="alert-group-static" component="alert" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-v6-c-alert-group</code> stacking inline alerts.
+</p>
+{/description} {#content}{#include components/alert/alert-group-static /}{/content} {/include} {#include
+partials/example-card title="Toast alert group" slug="alert-group-toast" component="alert"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-toast</code> — fixed-position toasts; add and dismiss live.
+</p>
+{/description} {#content}{#include components/alert/alert-group-toast /}{/content} {/include} {#include
+partials/example-card title="Toast alert group with overflow capture" slug="alert-group-toast-overflow"
+component="alert"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  At most 4 toasts show; the rest collapse behind a "View N more" overflow button.
+</p>
+{/description} {#content}{#include components/alert/alert-group-toast-overflow /}{/content} {/include} {#include
+partials/example-card title="Dynamic alert groups" slug="dynamic-groups" component="alert"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Buttons append and remove alerts in an inline live region.</p>
+{/description} {#content}{#include components/alert/dynamic-groups /}{/content} {/include} {#include
+partials/example-card title="Dynamic live region alerts" slug="dynamic-live-region" component="alert"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Variant buttons prepend inline alerts into a polite live region.</p>
+{/description} {#content}{#include components/alert/dynamic-live-region /}{/content} {/include} {#include
+partials/example-card title="Async live region alerts" slug="async-live-region" component="alert"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  A toggle starts an interval that prepends an info alert every 4.5 seconds.
+</p>
+{/description} {#content}{#include components/alert/async-live-region /}{/content} {/include} {#include
+partials/example-card title="Dynamic alert group with overflow" slug="dynamic-group-overflow" component="alert"}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  An inline dynamic group shows at most four alerts; the rest collapse behind a "View N more alerts" message.
+</p>
+{/description} {#content}{#include components/alert/dynamic-group-overflow /}{/content} {/include} {#include
+partials/example-card title="Multiple dynamic alert groups" slug="multiple-dynamic-groups" component="alert"}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  One click prepends a collection of three toasts — success, warning, danger — each dismissable.
+</p>
+{/description} {#content}{#include components/alert/multiple-dynamic-groups /}{/content} {/include} {#include
+partials/example-card title="Async alert groups" slug="async-groups" component="alert"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Start/Stop drive an interval that prepends dismissable danger toasts into an assertive live region.
+</p>
+{/description} {#content}{#include components/alert/async-groups /}{/content} {/include} {#include partials/example-card
+title="Toast alerts with notification drawer" slug="toast-with-drawer" component="alert"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Variant buttons spawn toasts (three visible, the rest behind a "View N more" overflow) while every notification also
+  lands in the drawer, toggled by the badge.
+</p>
+{/description} {#content}{#include components/alert/toast-with-drawer /}{/content} {/include}
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+    Documentation
+  </h2>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-alert" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Alert props</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    Parameters accepted by
+    <code class="ws-code">{|{#include components/feedback/alert ... /}|}</code>. Model mode: pass
+    <code class="ws-code">alert=&lt;Alert&gt;</code> built in Java instead — the Java tab on each example shows the
+    builder.
+  </p>
+  <table
+    class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+    role="grid"
+    aria-label="Alert props"
+  >
+    <caption class="pf-v6-c-table__caption">
+      <span class="ws-prop-required">*</span>
+      required
+    </caption>
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+        <th scope="col" class="pf-v6-c-table__th">Description</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><span class="ws-prop-required">*</span> <code class="ws-code">variant</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><code class="ws-code">info | success | warning | danger | custom</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Severity — emits <code class="ws-code">{|pf-m-{variant}|}</code> + the matching icon.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><span class="ws-prop-required">*</span> <code class="ws-code">title</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Main alert headline.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">description</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Secondary line of text.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><code class="ws-code">inline</code> / <code class="ws-code">plain</code> /
+            <code class="ws-code">expandable</code> / <code class="ws-code">closable</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Modifier flags — emit matching pf-m-* classes; closable adds a dismiss button.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><code class="ws-code">hasActionLinks</code> + <code class="ws-code">{|{#actionLinks}|}</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">boolean + Slot</span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Set <code class="ws-code">hasActionLinks=true</code> and fill the
+            <code class="ws-code">{|{#actionLinks}|}</code> slot to render PF's
+            <code class="ws-code">AlertActionLink</code> footer. Compose link-variant
+            <a href="/components/button">Button</a> components.</span
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Pick the variant by severity.</strong> Success after completion, info for context, warning before
+    destructive actions, danger after failures. Custom for app-specific colors.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Alert vs. Banner vs. Toast.</strong> Alert sits inside content; <a href="/components/banner">Banner</a> is
+    global / persistent at the top of the page; a toast is dismissable + temporary (often built on Alert + auto-dismiss
+    timer).
+  </p>
+</div>
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/feedback/alert.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit alert.html on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

@@ -1,749 +1,286 @@
-{#include layouts/base} {#title}Tabs{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}Tabs{/title} {#head}
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
-{/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content">
-        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
-          ><span class="pf-v6-c-button__text">Skip to content</span></a
-        >
-      </div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-c-content pf-m-editorial">
-                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Tabs</h1>
-                    <p>
-                      Tabbed navigation between sibling panels. Selection is driven by Alpine; arrow keys move focus
-                      between tabs via the runtime template's <code class="ws-code">handleKeyNav</code>.
-                    </p>
-                  </div>
-                </div>
-              </section>
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                    <nav
-                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
-                      aria-label="Table of contents"
-                    >
-                      <div class="pf-v6-c-jump-links__main">
-                        <ul class="pf-v6-c-jump-links__list" role="list">
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Default tabs</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#box" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Box tabs</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#box-secondary" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Boxed secondary tabs</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#box-vertical" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Box vertical tabs</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#vertical" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Vertical tabs</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#vertical-expandable" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Vertical expandable tabs</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#vertical-expandable-responsive" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Vertical expandable responsive</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#overflow" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Overflow tabs</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#horizontal-overflow" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Horizontal overflow tabs</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#box-overflow" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Box overflow tabs</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#inset" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With adjusted inset</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#box-inset" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Box tabs with adjusted insets</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#page-insets" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With page insets</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#icons-text" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With icons and text</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#subtabs" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Subtabs</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#box-subtabs" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Box tabs with subtabs</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#filled" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Filled tabs</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#filled-with-icons" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Filled tabs with icons</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#filled-box" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Filled box tabs</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#filled-box-with-icons" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Filled box tabs with icons</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#nav-tabs" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Tabs linked to nav elements</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#nav-subtabs" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Subtabs linked to nav elements</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#site-nav" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Tabs used for site navigation</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#content-body-padding" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >With tab content with body and padding</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#tab-content" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Tab content</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#tab-content-secondary" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Secondary tab content</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#dynamic" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Dynamic tabs</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#help" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With help action popover</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#close" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With close actions</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#help-and-close" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >With help and close actions</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#animate-default" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Animated tabs accent</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#animate-subtabs" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Animated subtabs accent</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#animate-filled" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Animated filled tabs accent</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#animate-vertical" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Animated vertical tabs accent</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#props-tabs" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Tabs props</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </nav>
-                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
-                        <div>
-                          <h2
-                            id="examples"
-                            tabindex="-1"
-                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                          >
-                            Examples
-                          </h2>
-                        </div>
-                      </div>
-                      {#include partials/example-card title="Default tabs" slug="basic" component="tabs"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Alpine tracks the active tab; arrow keys move focus through the tablist.
-                      </p>
-                      {/description} {#content}{#include components/tabs/basic /}{/content} {/include} {#include
-                      partials/example-card title="Box tabs" slug="box" component="tabs" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-box</code> — bordered, card-like tab heads.
-                      </p>
-                      {/description} {#content}{#include components/tabs/box /}{/content} {/include} {#include
-                      partials/example-card title="Boxed secondary tabs" slug="box-secondary" component="tabs"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-box pf-m-secondary</code> — the secondary box variation.
-                      </p>
-                      {/description} {#content}{#include components/tabs/box-secondary /}{/content} {/include} {#include
-                      partials/example-card title="Box vertical tabs" slug="box-vertical" component="tabs"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-box pf-m-vertical</code> — a boxed side rail.
-                      </p>
-                      {/description} {#content}{#include components/tabs/box-vertical /}{/content} {/include} {#include
-                      partials/example-card title="Vertical tabs" slug="vertical" component="tabs" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-vertical</code> — tab rail on the side.
-                      </p>
-                      {/description} {#content}{#include components/tabs/vertical /}{/content} {/include} {#include
-                      partials/example-card title="Vertical expandable tabs" slug="vertical-expandable"
-                      component="tabs"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-expandable</code> + a <code class="ws-code">__toggle</code> that
-                        collapses the rail behind the active tab name.
-                      </p>
-                      {/description} {#content}{#include components/tabs/vertical-expandable /}{/content} {/include}
-                      {#include partials/example-card title="Vertical expandable responsive"
-                      slug="vertical-expandable-responsive" component="tabs"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Breakpoint modifiers collapse the rail only where needed:
-                        <code class="ws-code"
-                          >pf-m-non-expandable-on-md pf-m-expandable-on-lg pf-m-non-expandable-on-xl</code
-                        >.
-                      </p>
-                      {/description} {#content}{#include components/tabs/vertical-expandable-responsive /}{/content}
-                      {/include} {#include partials/example-card title="Overflow tabs" slug="overflow" component="tabs"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-scrollable</code> with working scroll buttons — Alpine enables each
-                        side based on scroll position.
-                      </p>
-                      {/description} {#content}{#include components/tabs/overflow /}{/content} {/include} {#include
-                      partials/example-card title="Horizontal overflow tabs" slug="horizontal-overflow"
-                      component="tabs"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        A <code class="ws-code">pf-m-overflow</code> “More” tab opens a menu of the remaining tabs; the
-                        selection becomes the overflow tab’s label.
-                      </p>
-                      {/description} {#content}{#include components/tabs/horizontal-overflow /}{/content} {/include}
-                      {#include partials/example-card title="Box overflow tabs" slug="box-overflow" component="tabs"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-box pf-m-scrollable</code> — boxed tabs with working scroll buttons.
-                      </p>
-                      {/description} {#content}{#include components/tabs/box-overflow /}{/content} {/include} {#include
-                      partials/example-card title="With adjusted inset" slug="inset" component="tabs" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Responsive <code class="ws-code">pf-m-inset-*-on-*</code> modifiers; single-value insets use the
-                        <code class="ws-code">inset=</code> param.
-                      </p>
-                      {/description} {#content}{#include components/tabs/inset /}{/content} {/include} {#include
-                      partials/example-card title="Box tabs with adjusted insets" slug="box-inset" component="tabs"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Responsive <code class="ws-code">pf-m-inset-*-on-*</code> modifiers on a boxed tablist.
-                      </p>
-                      {/description} {#content}{#include components/tabs/box-inset /}{/content} {/include} {#include
-                      partials/example-card title="With page insets" slug="page-insets" component="tabs"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-page-insets</code> — aligns the tabs with page section padding.
-                      </p>
-                      {/description} {#content}{#include components/tabs/page-insets /}{/content} {/include} {#include
-                      partials/example-card title="With icons and text" slug="icons-text" component="tabs"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Each tab carries a <code class="ws-code">__item-icon</code> before its text.
-                      </p>
-                      {/description} {#content}{#include components/tabs/icons-text /}{/content} {/include} {#include
-                      partials/example-card title="Subtabs" slug="subtabs" component="tabs" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        A secondary <code class="ws-code">pf-m-subtab</code> tablist below the main tabs.
-                      </p>
-                      {/description} {#content}{#include components/tabs/subtabs /}{/content} {/include} {#include
-                      partials/example-card title="Box tabs with subtabs" slug="box-subtabs" component="tabs"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        A boxed main row over a plain <code class="ws-code">pf-m-subtab</code> row.
-                      </p>
-                      {/description} {#content}{#include components/tabs/box-subtabs /}{/content} {/include} {#include
-                      partials/example-card title="Filled tabs" slug="filled" component="tabs" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-fill</code> — tabs stretch to fill the full width.
-                      </p>
-                      {/description} {#content}{#include components/tabs/filled /}{/content} {/include} {#include
-                      partials/example-card title="Filled tabs with icons" slug="filled-with-icons" component="tabs"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-fill</code> — tabs stretch to fill the full width.
-                      </p>
-                      {/description} {#content}{#include components/tabs/filled-with-icons /}{/content} {/include}
-                      {#include partials/example-card title="Filled box tabs" slug="filled-box" component="tabs"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-fill pf-m-box</code> — filled tabs in the boxed style.
-                      </p>
-                      {/description} {#content}{#include components/tabs/filled-box /}{/content} {/include} {#include
-                      partials/example-card title="Filled box tabs with icons" slug="filled-box-with-icons"
-                      component="tabs" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Filled box tabs with leading <code class="ws-code">__item-icon</code>s.
-                      </p>
-                      {/description} {#content}{#include components/tabs/filled-box-with-icons /}{/content} {/include}
-                      {#include partials/example-card title="Tabs linked to nav elements" slug="nav-tabs"
-                      component="tabs" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-nav</code> — tab links are anchors for navigation use.
-                      </p>
-                      {/description} {#content}{#include components/tabs/nav-tabs /}{/content} {/include} {#include
-                      partials/example-card title="Subtabs linked to nav elements" slug="nav-subtabs" component="tabs"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Nav tabs with a secondary nav subtab row.</p>
-                      {/description} {#content}{#include components/tabs/nav-subtabs /}{/content} {/include} {#include
-                      partials/example-card title="Tabs used for site navigation" slug="site-nav" component="tabs"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Nav tabs + <code class="ws-code">pf-m-page-insets pf-m-no-border-bottom</code> for
-                        masthead-adjacent site nav.
-                      </p>
-                      {/description} {#content}{#include components/tabs/site-nav /}{/content} {/include} {#include
-                      partials/example-card title="With tab content with body and padding" slug="content-body-padding"
-                      component="tabs" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-v6-c-tab-content__body pf-m-padding</code> pads the panel.
-                      </p>
-                      {/description} {#content}{#include components/tabs/content-body-padding /}{/content} {/include}
-                      {#include partials/example-card title="Tab content" slug="tab-content" component="tabs"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        The <code class="ws-code">pf-v6-c-tab-content</code> panel on its own — the first panel active,
-                        the rest hidden.
-                      </p>
-                      {/description} {#content}{#include components/tabs/tab-content /}{/content} {/include} {#include
-                      partials/example-card title="Secondary tab content" slug="tab-content-secondary" component="tabs"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-secondary</code> panels — pair with subtab rows.
-                      </p>
-                      {/description} {#content}{#include components/tabs/tab-content-secondary /}{/content} {/include}
-                      {#include partials/example-card title="Dynamic tabs" slug="dynamic" component="tabs"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Add and close tabs — Alpine owns the array; close buttons in
-                        <code class="ws-code">__item-action</code>, the add button in
-                        <code class="ws-code">__add</code>.
-                      </p>
-                      {/description} {#content}{#include components/tabs/dynamic /}{/content} {/include} {#include
-                      partials/example-card title="With help action popover" slug="help" component="tabs"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        An <code class="ws-code">__item-action</code> help button opens a per-tab popover.
-                      </p>
-                      {/description} {#content}{#include components/tabs/help /}{/content} {/include} {#include
-                      partials/example-card title="With close actions" slug="close" component="tabs"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        An <code class="ws-code">__item-action</code> close button hides each tab; the flavors mirror
-                        PF’s example spread.
-                      </p>
-                      {/description} {#content}{#include components/tabs/close /}{/content} {/include} {#include
-                      partials/example-card title="With help and close actions" slug="help-and-close" component="tabs"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Help and close action buttons share the item action area.
-                      </p>
-                      {/description} {#content}{#include components/tabs/help-and-close /}{/content} {/include}
-                      {#include partials/example-card title="Animated tabs accent" slug="animate-default"
-                      component="tabs" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-animate-current</code> slides the accent bar; Alpine measures the
-                        current tab and keeps the <code class="ws-code">--link-accent--</code> variables live.
-                      </p>
-                      {/description} {#content}{#include components/tabs/animate-default /}{/content} {/include}
-                      {#include partials/example-card title="Animated subtabs accent" slug="animate-subtabs"
-                      component="tabs" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        The main and subtab rows each animate their own accent.
-                      </p>
-                      {/description} {#content}{#include components/tabs/animate-subtabs /}{/content} {/include}
-                      {#include partials/example-card title="Animated filled tabs accent" slug="animate-filled"
-                      component="tabs" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        The accent stretches with <code class="ws-code">pf-m-fill</code> tab widths.
-                      </p>
-                      {/description} {#content}{#include components/tabs/animate-filled /}{/content} {/include}
-                      {#include partials/example-card title="Animated vertical tabs accent" slug="animate-vertical"
-                      component="tabs" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        On vertical tabs the accent tracks the current tab’s offset and height.
-                      </p>
-                      {/description} {#content}{#include components/tabs/animate-vertical /}{/content} {/include}
-                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
-                        <h2
-                          id="documentation"
-                          tabindex="-1"
-                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                        >
-                          Documentation
-                        </h2>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="props-tabs" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
-                          Tabs props
-                        </h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          Parameters accepted by
-                          <code class="ws-code">{|{#include components/navigation/tabs ... /}|}</code>. Model mode: pass
-                          <code class="ws-code">tabs=&lt;Tabs&gt;</code> built in Java instead — the Java tab on each
-                          example shows the builder. Tab list items go in the slot.
-                        </p>
-                        <table
-                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
-                          role="grid"
-                          aria-label="Tabs props"
-                        >
-                          <caption class="pf-v6-c-table__caption">
-                            <span class="ws-prop-required">*</span>
-                            required
-                          </caption>
-                          <thead class="pf-v6-c-table__thead">
-                            <tr class="pf-v6-c-table__tr">
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
-                              <th scope="col" class="pf-v6-c-table__th">Description</th>
-                            </tr>
-                          </thead>
-                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><code class="ws-code">box</code> / <code class="ws-code">vertical</code> /
-                                  <code class="ws-code">filled</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Layout modifiers — emit matching <code class="ws-code">pf-m-*</code> on the
-                                  wrapper.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">modifiers</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Extra <code class="ws-code">pf-m-*</code> classes verbatim — responsive insets,
-                                  <code class="ws-code">pf-m-animate-current</code>, etc.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">slot <code class="ws-code">content</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >&lt;li class="pf-v6-c-tabs__item"&gt; entries with tab buttons.</span
-                                >
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Tabs vs. anchors.</strong> Tabs hide siblings — useful when only one panel is relevant
-                          at a time. For browsable in-page sections use
-                          <a href="/components/jump-links">Jump links</a> instead.
-                        </p>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Server-driven tabs.</strong> Replace Alpine with HTMX — each tab does
-                          <code class="ws-code">hx-get="/tab/N"</code> targeting a single panel div. Mark the active tab
-                          on the server.
-                        </p>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <br /><a
-                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/navigation/tabs.html"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          >Edit tabs.html on GitHub</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </main>
-        </div>
-      </div>
-    </div>
+{/head} {#body} {#include partials/showcase-page title="Tabs" toc=tocTabs} {#lede}
+<p>
+  Tabbed navigation between sibling panels. Selection is driven by Alpine; arrow keys move focus between tabs via the
+  runtime template's <code class="ws-code">handleKeyNav</code>.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
   </div>
 </div>
-{/body} {/include}
+{#include partials/example-card title="Default tabs" slug="basic" component="tabs" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Alpine tracks the active tab; arrow keys move focus through the tablist.
+</p>
+{/description} {#content}{#include components/tabs/basic /}{/content} {/include} {#include partials/example-card
+title="Box tabs" slug="box" component="tabs" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-box</code> — bordered, card-like tab heads.
+</p>
+{/description} {#content}{#include components/tabs/box /}{/content} {/include} {#include partials/example-card
+title="Boxed secondary tabs" slug="box-secondary" component="tabs" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-box pf-m-secondary</code> — the secondary box variation.
+</p>
+{/description} {#content}{#include components/tabs/box-secondary /}{/content} {/include} {#include partials/example-card
+title="Box vertical tabs" slug="box-vertical" component="tabs" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-box pf-m-vertical</code> — a boxed side rail.
+</p>
+{/description} {#content}{#include components/tabs/box-vertical /}{/content} {/include} {#include partials/example-card
+title="Vertical tabs" slug="vertical" component="tabs" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p"><code class="ws-code">pf-m-vertical</code> — tab rail on the side.</p>
+{/description} {#content}{#include components/tabs/vertical /}{/content} {/include} {#include partials/example-card
+title="Vertical expandable tabs" slug="vertical-expandable" component="tabs"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-expandable</code> + a <code class="ws-code">__toggle</code> that collapses the rail behind
+  the active tab name.
+</p>
+{/description} {#content}{#include components/tabs/vertical-expandable /}{/content} {/include} {#include
+partials/example-card title="Vertical expandable responsive" slug="vertical-expandable-responsive" component="tabs"}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Breakpoint modifiers collapse the rail only where needed:
+  <code class="ws-code">pf-m-non-expandable-on-md pf-m-expandable-on-lg pf-m-non-expandable-on-xl</code>.
+</p>
+{/description} {#content}{#include components/tabs/vertical-expandable-responsive /}{/content} {/include} {#include
+partials/example-card title="Overflow tabs" slug="overflow" component="tabs"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-scrollable</code> with working scroll buttons — Alpine enables each side based on scroll
+  position.
+</p>
+{/description} {#content}{#include components/tabs/overflow /}{/content} {/include} {#include partials/example-card
+title="Horizontal overflow tabs" slug="horizontal-overflow" component="tabs"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  A <code class="ws-code">pf-m-overflow</code> “More” tab opens a menu of the remaining tabs; the selection becomes the
+  overflow tab’s label.
+</p>
+{/description} {#content}{#include components/tabs/horizontal-overflow /}{/content} {/include} {#include
+partials/example-card title="Box overflow tabs" slug="box-overflow" component="tabs"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-box pf-m-scrollable</code> — boxed tabs with working scroll buttons.
+</p>
+{/description} {#content}{#include components/tabs/box-overflow /}{/content} {/include} {#include partials/example-card
+title="With adjusted inset" slug="inset" component="tabs" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Responsive <code class="ws-code">pf-m-inset-*-on-*</code> modifiers; single-value insets use the
+  <code class="ws-code">inset=</code> param.
+</p>
+{/description} {#content}{#include components/tabs/inset /}{/content} {/include} {#include partials/example-card
+title="Box tabs with adjusted insets" slug="box-inset" component="tabs" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Responsive <code class="ws-code">pf-m-inset-*-on-*</code> modifiers on a boxed tablist.
+</p>
+{/description} {#content}{#include components/tabs/box-inset /}{/content} {/include} {#include partials/example-card
+title="With page insets" slug="page-insets" component="tabs" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-page-insets</code> — aligns the tabs with page section padding.
+</p>
+{/description} {#content}{#include components/tabs/page-insets /}{/content} {/include} {#include partials/example-card
+title="With icons and text" slug="icons-text" component="tabs" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Each tab carries a <code class="ws-code">__item-icon</code> before its text.
+</p>
+{/description} {#content}{#include components/tabs/icons-text /}{/content} {/include} {#include partials/example-card
+title="Subtabs" slug="subtabs" component="tabs" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  A secondary <code class="ws-code">pf-m-subtab</code> tablist below the main tabs.
+</p>
+{/description} {#content}{#include components/tabs/subtabs /}{/content} {/include} {#include partials/example-card
+title="Box tabs with subtabs" slug="box-subtabs" component="tabs" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  A boxed main row over a plain <code class="ws-code">pf-m-subtab</code> row.
+</p>
+{/description} {#content}{#include components/tabs/box-subtabs /}{/content} {/include} {#include partials/example-card
+title="Filled tabs" slug="filled" component="tabs" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-fill</code> — tabs stretch to fill the full width.
+</p>
+{/description} {#content}{#include components/tabs/filled /}{/content} {/include} {#include partials/example-card
+title="Filled tabs with icons" slug="filled-with-icons" component="tabs" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-fill</code> — tabs stretch to fill the full width.
+</p>
+{/description} {#content}{#include components/tabs/filled-with-icons /}{/content} {/include} {#include
+partials/example-card title="Filled box tabs" slug="filled-box" component="tabs" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-fill pf-m-box</code> — filled tabs in the boxed style.
+</p>
+{/description} {#content}{#include components/tabs/filled-box /}{/content} {/include} {#include partials/example-card
+title="Filled box tabs with icons" slug="filled-box-with-icons" component="tabs" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Filled box tabs with leading <code class="ws-code">__item-icon</code>s.
+</p>
+{/description} {#content}{#include components/tabs/filled-box-with-icons /}{/content} {/include} {#include
+partials/example-card title="Tabs linked to nav elements" slug="nav-tabs" component="tabs" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-nav</code> — tab links are anchors for navigation use.
+</p>
+{/description} {#content}{#include components/tabs/nav-tabs /}{/content} {/include} {#include partials/example-card
+title="Subtabs linked to nav elements" slug="nav-subtabs" component="tabs" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Nav tabs with a secondary nav subtab row.</p>
+{/description} {#content}{#include components/tabs/nav-subtabs /}{/content} {/include} {#include partials/example-card
+title="Tabs used for site navigation" slug="site-nav" component="tabs" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Nav tabs + <code class="ws-code">pf-m-page-insets pf-m-no-border-bottom</code> for masthead-adjacent site nav.
+</p>
+{/description} {#content}{#include components/tabs/site-nav /}{/content} {/include} {#include partials/example-card
+title="With tab content with body and padding" slug="content-body-padding" component="tabs" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-v6-c-tab-content__body pf-m-padding</code> pads the panel.
+</p>
+{/description} {#content}{#include components/tabs/content-body-padding /}{/content} {/include} {#include
+partials/example-card title="Tab content" slug="tab-content" component="tabs" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  The <code class="ws-code">pf-v6-c-tab-content</code> panel on its own — the first panel active, the rest hidden.
+</p>
+{/description} {#content}{#include components/tabs/tab-content /}{/content} {/include} {#include partials/example-card
+title="Secondary tab content" slug="tab-content-secondary" component="tabs" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-secondary</code> panels — pair with subtab rows.
+</p>
+{/description} {#content}{#include components/tabs/tab-content-secondary /}{/content} {/include} {#include
+partials/example-card title="Dynamic tabs" slug="dynamic" component="tabs"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Add and close tabs — Alpine owns the array; close buttons in
+  <code class="ws-code">__item-action</code>, the add button in <code class="ws-code">__add</code>.
+</p>
+{/description} {#content}{#include components/tabs/dynamic /}{/content} {/include} {#include partials/example-card
+title="With help action popover" slug="help" component="tabs"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  An <code class="ws-code">__item-action</code> help button opens a per-tab popover.
+</p>
+{/description} {#content}{#include components/tabs/help /}{/content} {/include} {#include partials/example-card
+title="With close actions" slug="close" component="tabs"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  An <code class="ws-code">__item-action</code> close button hides each tab; the flavors mirror PF’s example spread.
+</p>
+{/description} {#content}{#include components/tabs/close /}{/content} {/include} {#include partials/example-card
+title="With help and close actions" slug="help-and-close" component="tabs"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Help and close action buttons share the item action area.</p>
+{/description} {#content}{#include components/tabs/help-and-close /}{/content} {/include} {#include
+partials/example-card title="Animated tabs accent" slug="animate-default" component="tabs" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-animate-current</code> slides the accent bar; Alpine measures the current tab and keeps the
+  <code class="ws-code">--link-accent--</code> variables live.
+</p>
+{/description} {#content}{#include components/tabs/animate-default /}{/content} {/include} {#include
+partials/example-card title="Animated subtabs accent" slug="animate-subtabs" component="tabs" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">The main and subtab rows each animate their own accent.</p>
+{/description} {#content}{#include components/tabs/animate-subtabs /}{/content} {/include} {#include
+partials/example-card title="Animated filled tabs accent" slug="animate-filled" component="tabs" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  The accent stretches with <code class="ws-code">pf-m-fill</code> tab widths.
+</p>
+{/description} {#content}{#include components/tabs/animate-filled /}{/content} {/include} {#include
+partials/example-card title="Animated vertical tabs accent" slug="animate-vertical" component="tabs" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  On vertical tabs the accent tracks the current tab’s offset and height.
+</p>
+{/description} {#content}{#include components/tabs/animate-vertical /}{/content} {/include}
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+    Documentation
+  </h2>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-tabs" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Tabs props</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    Parameters accepted by
+    <code class="ws-code">{|{#include components/navigation/tabs ... /}|}</code>. Model mode: pass
+    <code class="ws-code">tabs=&lt;Tabs&gt;</code> built in Java instead — the Java tab on each example shows the
+    builder. Tab list items go in the slot.
+  </p>
+  <table
+    class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+    role="grid"
+    aria-label="Tabs props"
+  >
+    <caption class="pf-v6-c-table__caption">
+      <span class="ws-prop-required">*</span>
+      required
+    </caption>
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+        <th scope="col" class="pf-v6-c-table__th">Description</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><code class="ws-code">box</code> / <code class="ws-code">vertical</code> /
+            <code class="ws-code">filled</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Layout modifiers — emit matching <code class="ws-code">pf-m-*</code> on the wrapper.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">modifiers</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Extra <code class="ws-code">pf-m-*</code> classes verbatim — responsive insets,
+            <code class="ws-code">pf-m-animate-current</code>, etc.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">slot <code class="ws-code">content</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">&lt;li class="pf-v6-c-tabs__item"&gt; entries with tab buttons.</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Tabs vs. anchors.</strong> Tabs hide siblings — useful when only one panel is relevant at a time. For
+    browsable in-page sections use <a href="/components/jump-links">Jump links</a> instead.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Server-driven tabs.</strong> Replace Alpine with HTMX — each tab does
+    <code class="ws-code">hx-get="/tab/N"</code> targeting a single panel div. Mark the active tab on the server.
+  </p>
+</div>
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/navigation/tabs.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit tabs.html on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

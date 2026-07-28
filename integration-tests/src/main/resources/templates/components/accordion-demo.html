@@ -1,469 +1,295 @@
-{#include layouts/base} {#title}Accordion{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}Accordion{/title} {#head}
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
-{/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content">
-        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
-          ><span class="pf-v6-c-button__text">Skip to content</span></a
-        >
-      </div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-c-content pf-m-editorial">
-                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Accordion</h1>
-                    <p>
-                      A vertically stacked set of disclosure widgets. Each item is a heading + button toggle that
-                      expands a content panel. Supports definition-list semantics, fixed-height bodies, bordered and
-                      large display variants, and a toggle-icon-at-start layout.
-                    </p>
-                  </div>
-                </div>
-              </section>
+{/head} {#body} {#include partials/showcase-page title="Accordion" toc=tocAccordion} {#lede}
+<p>
+  A vertically stacked set of disclosure widgets. Each item is a heading + button toggle that expands a content panel.
+  Supports definition-list semantics, fixed-height bodies, bordered and large display variants, and a
+  toggle-icon-at-start layout.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
+  </div>
+</div>
 
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-u-h-100">
-                    <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                      <nav
-                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
-                        aria-label="Table of contents"
-                      >
-                        <div class="pf-v6-c-jump-links__main">
-                          <ul class="pf-v6-c-jump-links__list" role="list">
-                            <li class="pf-v6-c-jump-links__item ws-toc-item">
-                              <span class="pf-v6-c-jump-links__link"
-                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
-                                  ><span class="pf-v6-c-button__text"
-                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
-                                  ></a
-                                ></span
-                              >
-                              <ul class="pf-v6-c-jump-links__list" role="list">
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#definition-list" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Definition list</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#single-expand" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Single expand</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#fixed-multiple" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text"
-                                          >Fixed (multiple expand)</span
-                                        ></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#bordered" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Bordered</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#large-bordered" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Large bordered</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#toggle-start" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Toggle at start</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                              </ul>
-                            </li>
-                            <li class="pf-v6-c-jump-links__item ws-toc-item">
-                              <span class="pf-v6-c-jump-links__link"
-                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
-                                  ><span class="pf-v6-c-button__text"
-                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
-                                  ></a
-                                ></span
-                              >
-                              <ul class="pf-v6-c-jump-links__list" role="list">
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#props-accordion" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Accordion props</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                              </ul>
-                            </li>
-                          </ul>
-                        </div>
-                      </nav>
+{#include partials/example-card title="Definition list" slug="definition-list" component="accordion" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  The PF default — renders as <code class="ws-code">&lt;dl&gt;</code> / <code class="ws-code">&lt;dt&gt;</code> /
+  <code class="ws-code">&lt;dd&gt;</code> for term/definition semantics. Multiple items may be expanded at once.
+</p>
+{/description} {#content}{#include components/accordion/definition-list /}{/content} {/include} {#include
+partials/example-card title="Single expand" slug="single-expand" component="accordion" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Only one item open at a time. Requires shared Alpine state across items — the model's
+  <code class="ws-code">singleExpand()</code> switch generates the shared open-index state.
+</p>
+{/description} {#content}{#include components/accordion/single-expand /}{/content} {/include} {#include
+partials/example-card title="Fixed (multiple expand)" slug="fixed-multiple" component="accordion" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">fixed=true</code> caps each expanded body at <code class="ws-code">9.375rem</code> (PF default)
+  with overflow scroll. Multiple items can be open simultaneously.
+</p>
+{/description} {#content}{#include components/accordion/fixed-multiple /}{/content} {/include} {#include
+partials/example-card title="Bordered" slug="bordered" component="accordion" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">bordered=true</code> adds <code class="ws-code">pf-m-bordered</code> — items are separated by
+  bottom borders and the container has no rounded corners.
+</p>
+{/description} {#content}{#include components/accordion/bordered /}{/content} {/include} {#include partials/example-card
+title="Large bordered" slug="large-bordered" component="accordion" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">displayLg=true</code> with <code class="ws-code">bordered=true</code> — PF.org's "Display size
+  large": bigger toggle type and inset, here with an inline call-to-action link in the last item's body.
+</p>
+{/description} {#content}{#include components/accordion/large-bordered /}{/content} {/include} {#include
+partials/example-card title="Toggle at start" slug="toggle-start" component="accordion" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">toggleStart=true</code> flips the toggle icon to the left of the text — PF's
+  <code class="ws-code">togglePosition='start'</code>.
+</p>
+{/description} {#content}{#include components/accordion/toggle-start /}{/content} {/include}
 
-                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
-                          <div>
-                            <h2
-                              id="examples"
-                              tabindex="-1"
-                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                            >
-                              Examples
-                            </h2>
-                          </div>
-                        </div>
-
-                        {#include partials/example-card title="Definition list" slug="definition-list"
-                        component="accordion" javaSource=true} {#description}
-                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          The PF default — renders as <code class="ws-code">&lt;dl&gt;</code> /
-                          <code class="ws-code">&lt;dt&gt;</code> / <code class="ws-code">&lt;dd&gt;</code> for
-                          term/definition semantics. Multiple items may be expanded at once.
-                        </p>
-                        {/description} {#content}{#include components/accordion/definition-list /}{/content} {/include}
-                        {#include partials/example-card title="Single expand" slug="single-expand" component="accordion"
-                        javaSource=true} {#description}
-                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          Only one item open at a time. Requires shared Alpine state across items — the model's
-                          <code class="ws-code">singleExpand()</code> switch generates the shared open-index state.
-                        </p>
-                        {/description} {#content}{#include components/accordion/single-expand /}{/content} {/include}
-                        {#include partials/example-card title="Fixed (multiple expand)" slug="fixed-multiple"
-                        component="accordion" javaSource=true} {#description}
-                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          <code class="ws-code">fixed=true</code> caps each expanded body at
-                          <code class="ws-code">9.375rem</code> (PF default) with overflow scroll. Multiple items can be
-                          open simultaneously.
-                        </p>
-                        {/description} {#content}{#include components/accordion/fixed-multiple /}{/content} {/include}
-                        {#include partials/example-card title="Bordered" slug="bordered" component="accordion"
-                        javaSource=true} {#description}
-                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          <code class="ws-code">bordered=true</code> adds <code class="ws-code">pf-m-bordered</code> —
-                          items are separated by bottom borders and the container has no rounded corners.
-                        </p>
-                        {/description} {#content}{#include components/accordion/bordered /}{/content} {/include}
-                        {#include partials/example-card title="Large bordered" slug="large-bordered"
-                        component="accordion" javaSource=true} {#description}
-                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          <code class="ws-code">displayLg=true</code> with <code class="ws-code">bordered=true</code> —
-                          PF.org's "Display size large": bigger toggle type and inset, here with an inline
-                          call-to-action link in the last item's body.
-                        </p>
-                        {/description} {#content}{#include components/accordion/large-bordered /}{/content} {/include}
-                        {#include partials/example-card title="Toggle at start" slug="toggle-start"
-                        component="accordion" javaSource=true} {#description}
-                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          <code class="ws-code">toggleStart=true</code> flips the toggle icon to the left of the text —
-                          PF's <code class="ws-code">togglePosition='start'</code>.
-                        </p>
-                        {/description} {#content}{#include components/accordion/toggle-start /}{/content} {/include}
-
-                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
-                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
-                            <div>
-                              <h2
-                                id="documentation"
-                                tabindex="-1"
-                                class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                              >
-                                Documentation
-                              </h2>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="pf-v6-l-stack__item">
-                          <h3 id="props-accordion" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
-                            Accordion props
-                          </h3>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            Parameters accepted by
-                            <code class="ws-code">{|{#include components/data-display/accordion ... /}|}</code>. Model
-                            mode: pass <code class="ws-code">accordion=&lt;Accordion&gt;</code> built in Java instead —
-                            the Java tab on each example shows the builder. Items are a list of
-                            <code class="ws-code">{|{title, content, expanded?}|}</code> maps.
-                          </p>
-                          <table
-                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
-                            role="grid"
-                            aria-label="Accordion props"
-                          >
-                            <caption class="pf-v6-c-table__caption">
-                              <span class="ws-prop-required">*</span>
-                              required
-                            </caption>
-                            <thead class="pf-v6-c-table__thead">
-                              <tr class="pf-v6-c-table__tr">
-                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
-                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
-                                <th scope="col" class="pf-v6-c-table__th">Default</th>
-                                <th scope="col" class="pf-v6-c-table__th">Description</th>
-                              </tr>
-                            </thead>
-                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
-                                  >
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >DOM id on the accordion root. Per-item toggle/content ids are derived as
-                                    <code class="ws-code">{|{id}-item-{n}-toggle|}</code> /
-                                    <code class="ws-code">{|{id}-item-{n}-content|}</code>.</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    ><span class="ws-prop-required">*</span> <code class="ws-code">items</code></span
-                                  >
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text">{|List&lt;{title, content, expanded?}&gt;|}</span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Each item renders one toggle + content pair.
-                                    <code class="ws-code">expanded</code> defaults to
-                                    <code class="ws-code">false</code>.</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">definitionList</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Render as <code class="ws-code">&lt;dl&gt;</code>/<code class="ws-code"
-                                      >&lt;dt&gt;</code
-                                    >/<code class="ws-code">&lt;dd&gt;</code> (PF default in React). Use when items
-                                    truly are term/definition pairs.</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">headingLevel</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    ><code class="ws-code">h1 | h2 | h3 | h4 | h5 | h6</code></span
-                                  >
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">h3</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Heading element wrapping each toggle (ignored when
-                                    <code class="ws-code">definitionList=true</code>, which uses
-                                    <code class="ws-code">&lt;dt&gt;</code>).</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">bordered</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Adds <code class="ws-code">pf-m-bordered</code>. PF React's
-                                    <code class="ws-code">isBordered</code>.</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">displayLg</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Adds <code class="ws-code">pf-m-display-lg</code> — larger toggle text/padding. PF
-                                    React's <code class="ws-code">displaySize='lg'</code>.</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">toggleStart</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Adds <code class="ws-code">pf-m-toggle-start</code> — toggle icon before text. PF
-                                    React's <code class="ws-code">togglePosition='start'</code>.</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">fixed</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Adds <code class="ws-code">pf-m-fixed</code> to each content panel — caps body at
-                                    <code class="ws-code">9.375rem</code> with overflow scroll. PF React's
-                                    <code class="ws-code">isFixed</code> on AccordionContent.</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">ariaLabel</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Sets <code class="ws-code">aria-label</code> on the accordion root for AT context
-                                    when no heading is nearby.</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">isCustomContent</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Skips the
-                                    <code class="ws-code">pf-v6-c-accordion__expandable-content-body</code> wrapper
-                                    around each item's content — pass raw HTML in
-                                    <code class="ws-code">item.content</code> for custom layouts.</span
-                                  >
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Divergence from PF React.</strong> We expose
-                            <code class="ws-code">definitionList</code> as <code class="ws-code">false</code>-by-default
-                            (PF React's <code class="ws-code">asDefinitionList</code> defaults to
-                            <code class="ws-code">true</code>) — most consumers use heading semantics, and PF's own
-                            examples are split roughly 50/50, so neither default is wrong. Shorter prop names:
-                            <code class="ws-code">bordered</code>, <code class="ws-code">displayLg</code>,
-                            <code class="ws-code">toggleStart</code>, <code class="ws-code">fixed</code>.
-                          </p>
-                        </div>
-
-                        <div class="pf-v6-l-stack__item">
-                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Heading vs. definition list.</strong> Use
-                            <code class="ws-code">definitionList=true</code> only when items genuinely are
-                            term/definition pairs (glossary, key facts). Otherwise stick with the default heading shape
-                            so screen readers and document outline tools see proper landmarks.
-                          </p>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Pick the right heading level.</strong> The default
-                            <code class="ws-code">h3</code> assumes the accordion is one level below an
-                            <code class="ws-code">h2</code> section heading. Override via
-                            <code class="ws-code">headingLevel</code> when the accordion is shallower or deeper in your
-                            document outline — heading levels should never skip.
-                          </p>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Single-expand requires shared state.</strong> The runtime template gives each item
-                            its own Alpine <code class="ws-code">expanded</code> flag (independent expand/collapse). For
-                            single-expand UX, hand-roll an outer
-                            <code class="ws-code">x-data="{ open: null }"</code> wrapper and gate each toggle on a
-                            shared key — see the Single expand example for the pattern.
-                          </p>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Accessibility.</strong> Each toggle is linked to its content via
-                            <code class="ws-code">aria-controls</code> +
-                            <code class="ws-code">aria-labelledby</code> automatically.
-                            <code class="ws-code">aria-expanded</code> reflects the live Alpine state. Add
-                            <code class="ws-code">ariaLabel</code>
-                            on the root when the accordion isn't preceded by a visible heading.
-                          </p>
-                        </div>
-
-                        <div class="pf-v6-l-stack__item">
-                          <br /><a
-                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/accordion.html"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            >Edit accordion.html on GitHub</a
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </main>
-        </div>
-      </div>
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+    <div>
+      <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+        Documentation
+      </h2>
     </div>
   </div>
 </div>
-{/body} {/include}
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-accordion" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Accordion props</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    Parameters accepted by
+    <code class="ws-code">{|{#include components/data-display/accordion ... /}|}</code>. Model mode: pass
+    <code class="ws-code">accordion=&lt;Accordion&gt;</code> built in Java instead — the Java tab on each example shows
+    the builder. Items are a list of <code class="ws-code">{|{title, content, expanded?}|}</code> maps.
+  </p>
+  <table
+    class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+    role="grid"
+    aria-label="Accordion props"
+  >
+    <caption class="pf-v6-c-table__caption">
+      <span class="ws-prop-required">*</span>
+      required
+    </caption>
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+        <th scope="col" class="pf-v6-c-table__th">Default</th>
+        <th scope="col" class="pf-v6-c-table__th">Description</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >DOM id on the accordion root. Per-item toggle/content ids are derived as
+            <code class="ws-code">{|{id}-item-{n}-toggle|}</code> /
+            <code class="ws-code">{|{id}-item-{n}-content|}</code>.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><span class="ws-prop-required">*</span> <code class="ws-code">items</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">{|List&lt;{title, content, expanded?}&gt;|}</span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Each item renders one toggle + content pair. <code class="ws-code">expanded</code> defaults to
+            <code class="ws-code">false</code>.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">definitionList</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Render as <code class="ws-code">&lt;dl&gt;</code>/<code class="ws-code">&lt;dt&gt;</code>/<code
+              class="ws-code"
+              >&lt;dd&gt;</code
+            >
+            (PF default in React). Use when items truly are term/definition pairs.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">headingLevel</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">h1 | h2 | h3 | h4 | h5 | h6</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">h3</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Heading element wrapping each toggle (ignored when <code class="ws-code">definitionList=true</code>, which
+            uses <code class="ws-code">&lt;dt&gt;</code>).</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">bordered</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Adds <code class="ws-code">pf-m-bordered</code>. PF React's <code class="ws-code">isBordered</code>.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">displayLg</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Adds <code class="ws-code">pf-m-display-lg</code> — larger toggle text/padding. PF React's
+            <code class="ws-code">displaySize='lg'</code>.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">toggleStart</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Adds <code class="ws-code">pf-m-toggle-start</code> — toggle icon before text. PF React's
+            <code class="ws-code">togglePosition='start'</code>.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">fixed</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Adds <code class="ws-code">pf-m-fixed</code> to each content panel — caps body at
+            <code class="ws-code">9.375rem</code> with overflow scroll. PF React's
+            <code class="ws-code">isFixed</code> on AccordionContent.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">ariaLabel</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Sets <code class="ws-code">aria-label</code> on the accordion root for AT context when no heading is
+            nearby.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">isCustomContent</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Skips the <code class="ws-code">pf-v6-c-accordion__expandable-content-body</code> wrapper around each
+            item's content — pass raw HTML in <code class="ws-code">item.content</code> for custom layouts.</span
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Divergence from PF React.</strong> We expose <code class="ws-code">definitionList</code> as
+    <code class="ws-code">false</code>-by-default (PF React's <code class="ws-code">asDefinitionList</code> defaults to
+    <code class="ws-code">true</code>) — most consumers use heading semantics, and PF's own examples are split roughly
+    50/50, so neither default is wrong. Shorter prop names: <code class="ws-code">bordered</code>,
+    <code class="ws-code">displayLg</code>, <code class="ws-code">toggleStart</code>,
+    <code class="ws-code">fixed</code>.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Heading vs. definition list.</strong> Use <code class="ws-code">definitionList=true</code> only when items
+    genuinely are term/definition pairs (glossary, key facts). Otherwise stick with the default heading shape so screen
+    readers and document outline tools see proper landmarks.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Pick the right heading level.</strong> The default <code class="ws-code">h3</code> assumes the accordion is
+    one level below an <code class="ws-code">h2</code> section heading. Override via
+    <code class="ws-code">headingLevel</code> when the accordion is shallower or deeper in your document outline —
+    heading levels should never skip.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Single-expand requires shared state.</strong> The runtime template gives each item its own Alpine
+    <code class="ws-code">expanded</code> flag (independent expand/collapse). For single-expand UX, hand-roll an outer
+    <code class="ws-code">x-data="{ open: null }"</code> wrapper and gate each toggle on a shared key — see the Single
+    expand example for the pattern.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Accessibility.</strong> Each toggle is linked to its content via
+    <code class="ws-code">aria-controls</code> + <code class="ws-code">aria-labelledby</code> automatically.
+    <code class="ws-code">aria-expanded</code> reflects the live Alpine state. Add
+    <code class="ws-code">ariaLabel</code>
+    on the root when the accordion isn't preceded by a visible heading.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/accordion.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit accordion.html on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

@@ -1,306 +1,137 @@
-{#include layouts/base} {#title}Truncate{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}Truncate{/title} {#head}
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
-{/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content">
-        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
-          ><span class="pf-v6-c-button__text">Skip to content</span></a
-        >
-      </div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-c-content pf-m-editorial">
-                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Truncate</h1>
-                    <p>
-                      Visually truncates a string with an ellipsis when it overflows its container. PF's truncate uses
-                      CSS direction tricks to pin part of the text — end (default), start, or middle. The full text is
-                      kept in a <code class="ws-code">title</code> attribute for tooltip + AT access.
-                    </p>
-                  </div>
-                </div>
-              </section>
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                    <nav
-                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
-                      aria-label="Table of contents"
-                    >
-                      <div class="pf-v6-c-jump-links__main">
-                        <ul class="pf-v6-c-jump-links__list" role="list">
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#end" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Default</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#middle" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Middle</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#start" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Start</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#custom-tooltip-position" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >With custom tooltip position</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#max-chars" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Based on max characters</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#with-links" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With links</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#props-truncate" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Truncate props</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </nav>
-                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
-                        <div>
-                          <h2
-                            id="examples"
-                            tabindex="-1"
-                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                          >
-                            Examples
-                          </h2>
-                        </div>
-                      </div>
-                      {#include partials/example-card title="Default" slug="end" component="truncate" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Truncates at the end; container width decides.
-                      </p>
-                      {/description} {#content}{#include components/truncate/end /}{/content} {/include} {#include
-                      partials/example-card title="Middle" slug="middle" component="truncate" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Keeps both ends visible.</p>
-                      {/description} {#content}{#include components/truncate/middle /}{/content} {/include} {#include
-                      partials/example-card title="Start" slug="start" component="truncate" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Keeps the tail visible.</p>
-                      {/description} {#content}{#include components/truncate/start /}{/content} {/include} {#include
-                      partials/example-card title="With custom tooltip position" slug="custom-tooltip-position"
-                      component="truncate"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Hover shows the full text in a bottom-positioned tooltip.
-                      </p>
-                      {/description} {#content}{#include components/truncate/custom-tooltip-position /}{/content}
-                      {/include} {#include partials/example-card title="Based on max characters" slug="max-chars"
-                      component="truncate" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Clamped to a 20-character budget instead of the container.
-                      </p>
-                      {/description} {#content}{#include components/truncate/max-chars /}{/content} {/include} {#include
-                      partials/example-card title="With links" slug="with-links" component="truncate" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">The anchor itself truncates.</p>
-                      {/description} {#content}{#include components/truncate/with-links /}{/content} {/include}
-
-                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
-                        <h2
-                          id="documentation"
-                          tabindex="-1"
-                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                        >
-                          Documentation
-                        </h2>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="props-truncate" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
-                          Truncate props
-                        </h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          Parameters accepted by
-                          <code class="ws-code">{|{#include components/data-display/truncate ... /}|}</code>. Model
-                          mode: pass <code class="ws-code">truncate=&lt;Truncate&gt;</code> built in Java instead — the
-                          Java tab on each example shows the builder.
-                        </p>
-                        <table
-                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
-                          role="grid"
-                          aria-label="Truncate props"
-                        >
-                          <caption class="pf-v6-c-table__caption">
-                            <span class="ws-prop-required">*</span>
-                            required
-                          </caption>
-                          <thead class="pf-v6-c-table__thead">
-                            <tr class="pf-v6-c-table__tr">
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
-                              <th scope="col" class="pf-v6-c-table__th">Description</th>
-                            </tr>
-                          </thead>
-                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">content</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >The full text. Always rendered into the &lt;span&gt; (visually truncated by CSS).
-                                  Kept as a String param (not a slot) because the middle-truncate variant needs to
-                                  substring it server-side. Matches PF React's <code class="ws-code">content</code> prop
-                                  name.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">DOM id on the wrapper.</span>
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">position</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><code class="ws-code">end | start | middle</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Where the ellipsis goes. Default <code class="ws-code">end</code>.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">trailingNumChars</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Integer</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Number of trailing chars to keep visible for
-                                  <code class="ws-code">position="middle"</code>. Default 7.</span
-                                >
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Pick the position by content type.</strong> URLs and emails:
-                          <code class="ws-code">end</code>. File paths and breadcrumbs:
-                          <code class="ws-code">start</code>. Identifiers with meaningful suffix (UUIDs, hashes):
-                          <code class="ws-code">middle</code>.
-                        </p>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Container width matters.</strong> CSS truncation only kicks in when content exceeds
-                          the parent's width. Wrap in a sized container — a flex item, table cell, or explicit
-                          max-width.
-                        </p>
-                      </div>
-
-                      <div class="pf-v6-l-stack__item">
-                        <br /><a
-                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/truncate.html"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          >Edit truncate.html on GitHub</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </main>
-        </div>
-      </div>
-    </div>
+{/head} {#body} {#include partials/showcase-page title="Truncate" toc=tocTruncate} {#lede}
+<p>
+  Visually truncates a string with an ellipsis when it overflows its container. PF's truncate uses CSS direction tricks
+  to pin part of the text — end (default), start, or middle. The full text is kept in a
+  <code class="ws-code">title</code> attribute for tooltip + AT access.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
   </div>
 </div>
-{/body} {/include}
+{#include partials/example-card title="Default" slug="end" component="truncate" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Truncates at the end; container width decides.</p>
+{/description} {#content}{#include components/truncate/end /}{/content} {/include} {#include partials/example-card
+title="Middle" slug="middle" component="truncate" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Keeps both ends visible.</p>
+{/description} {#content}{#include components/truncate/middle /}{/content} {/include} {#include partials/example-card
+title="Start" slug="start" component="truncate" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Keeps the tail visible.</p>
+{/description} {#content}{#include components/truncate/start /}{/content} {/include} {#include partials/example-card
+title="With custom tooltip position" slug="custom-tooltip-position" component="truncate"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Hover shows the full text in a bottom-positioned tooltip.</p>
+{/description} {#content}{#include components/truncate/custom-tooltip-position /}{/content} {/include} {#include
+partials/example-card title="Based on max characters" slug="max-chars" component="truncate" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Clamped to a 20-character budget instead of the container.</p>
+{/description} {#content}{#include components/truncate/max-chars /}{/content} {/include} {#include partials/example-card
+title="With links" slug="with-links" component="truncate" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">The anchor itself truncates.</p>
+{/description} {#content}{#include components/truncate/with-links /}{/content} {/include}
+
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+    Documentation
+  </h2>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-truncate" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Truncate props</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    Parameters accepted by
+    <code class="ws-code">{|{#include components/data-display/truncate ... /}|}</code>. Model mode: pass
+    <code class="ws-code">truncate=&lt;Truncate&gt;</code> built in Java instead — the Java tab on each example shows
+    the builder.
+  </p>
+  <table
+    class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+    role="grid"
+    aria-label="Truncate props"
+  >
+    <caption class="pf-v6-c-table__caption">
+      <span class="ws-prop-required">*</span>
+      required
+    </caption>
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+        <th scope="col" class="pf-v6-c-table__th">Description</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><span class="ws-prop-required">*</span> <code class="ws-code">content</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >The full text. Always rendered into the &lt;span&gt; (visually truncated by CSS). Kept as a String param
+            (not a slot) because the middle-truncate variant needs to substring it server-side. Matches PF React's
+            <code class="ws-code">content</code> prop name.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">DOM id on the wrapper.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">position</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">end | start | middle</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Where the ellipsis goes. Default <code class="ws-code">end</code>.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">trailingNumChars</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Integer</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Number of trailing chars to keep visible for <code class="ws-code">position="middle"</code>. Default
+            7.</span
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Pick the position by content type.</strong> URLs and emails: <code class="ws-code">end</code>. File paths
+    and breadcrumbs: <code class="ws-code">start</code>. Identifiers with meaningful suffix (UUIDs, hashes):
+    <code class="ws-code">middle</code>.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Container width matters.</strong> CSS truncation only kicks in when content exceeds the parent's width. Wrap
+    in a sized container — a flex item, table cell, or explicit max-width.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/truncate.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit truncate.html on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

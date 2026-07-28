@@ -1,804 +1,510 @@
-{#include layouts/base} {#title}Icon{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}Icon{/title} {#head}
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
-{/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content">
-        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary">
-          <span class="pf-v6-c-button__text">Skip to content</span>
-        </a>
-      </div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-c-content pf-m-editorial">
-                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Icon</h1>
-                    <p>
-                      Server-rendered inline SVG icons wrapped in PatternFly v6's
-                      <code class="ws-code">.pf-v6-c-icon</code> chrome. One Qute API across four icon sets — Font
-                      Awesome Solid / Regular / Brands and PatternFly's own pficons — with PF v6's full size, status,
-                      and behavior modifiers.
-                    </p>
-                  </div>
-                </div>
-              </section>
+{/head} {#body} {#include partials/showcase-page title="Icon" toc=tocIcon} {#lede}
+<p>
+  Server-rendered inline SVG icons wrapped in PatternFly v6's
+  <code class="ws-code">.pf-v6-c-icon</code> chrome. One Qute API across four icon sets — Font Awesome Solid / Regular /
+  Brands and PatternFly's own pficons — with PF v6's full size, status, and behavior modifiers.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
+  </div>
+</div>
 
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-u-h-100">
-                    <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                      <nav
-                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
-                        aria-label="Table of contents"
-                      >
-                        <div class="pf-v6-c-jump-links__main">
-                          <ul class="pf-v6-c-jump-links__list" role="list">
-                            <li class="pf-v6-c-jump-links__item ws-toc-item">
-                              <span class="pf-v6-c-jump-links__link"
-                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
-                                  ><span class="pf-v6-c-button__text"
-                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
-                                  ></a
-                                ></span
-                              >
-                              <ul class="pf-v6-c-jump-links__list" role="list">
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#basic" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#sets" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Icon sets</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#sizes" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Sizes</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#body-sizes" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Body sizes</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#heading-sizes" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Heading sizes</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#sizing-within-container" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text"
-                                          >Sizing within container</span
-                                        ></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#inline" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Inline</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#status-colors" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Status colors</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#in-progress" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">In progress</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#custom-in-progress-icon" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text"
-                                          >Custom in-progress icon</span
-                                        ></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#with-label" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">With accessible label</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                              </ul>
-                            </li>
-                            <li class="pf-v6-c-jump-links__item ws-toc-item">
-                              <span class="pf-v6-c-jump-links__link"
-                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
-                                  ><span class="pf-v6-c-button__text"
-                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
-                                  ></a
-                                ></span
-                              >
-                              <ul class="pf-v6-c-jump-links__list" role="list">
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#props-icon-component" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Icon component props</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#props-icons-svg" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">icons:svg() arguments</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#design" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Design — why two APIs?</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                              </ul>
-                            </li>
-                          </ul>
-                        </div>
-                      </nav>
+{#include partials/example-card title="Basic" slug="basic" component="icon" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  The simplest usage — pass a <code class="ws-code">name</code> in <code class="ws-code">set:slug</code> form. The icon
+  defaults to medium size and is hidden from screen readers.
+</p>
+{/description} {#content}{#include components/icon/basic /}{/content} {/include} {#include partials/example-card
+title="Icon sets" slug="sets" component="icon" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Same API, four sources: <code class="ws-code">fa</code>, <code class="ws-code">fa-regular</code>,
+  <code class="ws-code">fa-brands</code>, and <code class="ws-code">pficon</code>. The set prefix maps to the vendored
+  directory under <code class="ws-code">web/vendor/icons/</code>.
+</p>
+{/description} {#content}{#include components/icon/sets /}{/content} {/include} {#include partials/example-card
+title="Sizes" slug="sizes" component="icon" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  PF v6 ships six standalone size modifiers — <code class="ws-code">sm</code>, <code class="ws-code">md</code>,
+  <code class="ws-code">lg</code>, <code class="ws-code">xl</code>, <code class="ws-code">2xl</code>,
+  <code class="ws-code">3xl</code> — that resolve to global icon-size tokens.
+</p>
+{/description} {#content}{#include components/icon/sizes /}{/content} {/include} {#include partials/example-card
+title="Body sizes" slug="body-sizes" component="icon" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Body-relative sizes (<code class="ws-code">body-sm</code>, <code class="ws-code">body-default</code>,
+  <code class="ws-code">body-lg</code>) match the surrounding body text's icon-size token. Use these when an icon sits
+  beside body copy.
+</p>
+{/description} {#content}{#include components/icon/body-sizes /}{/content} {/include} {#include partials/example-card
+title="Heading sizes" slug="heading-sizes" component="icon" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Heading-relative sizes (<code class="ws-code">heading-sm</code> through <code class="ws-code">heading-3xl</code>)
+  match the surrounding heading's icon-size token. Use these when an icon sits beside heading copy.
+</p>
+{/description} {#content}{#include components/icon/heading-sizes /}{/content} {/include} {#include partials/example-card
+title="Sizing within container" slug="sizing-within-container" component="icon" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Pass <code class="ws-code">iconSize</code> to size the icon glyph independently of its
+  <code class="ws-code">size</code> container. <code class="ws-code">iconSize</code> applies
+  <code class="ws-code">{|pf-m-{iconSize}|}</code> to <code class="ws-code">.pf-v6-c-icon__content</code> while
+  <code class="ws-code">size</code> stays on the wrapper.
+</p>
+{/description} {#content}{#include components/icon/sizing-within-container /}{/content} {/include} {#include
+partials/example-card title="Inline" slug="inline" component="icon" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Set <code class="ws-code">inline=true</code> so the icon inherits the surrounding font size and color via PF's
+  <code class="ws-code">pf-m-inline</code> modifier. Useful inside running prose.
+</p>
+{/description} {#content}{#include components/icon/inline /}{/content} {/include} {#include partials/example-card
+title="Status colors" slug="status-colors" component="icon" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Pass <code class="ws-code">status</code> to color the icon via PF v6 semantic tokens:
+  <code class="ws-code">info</code>, <code class="ws-code">success</code>, <code class="ws-code">warning</code>,
+  <code class="ws-code">danger</code>, or <code class="ws-code">custom</code>.
+</p>
+{/description} {#content}{#include components/icon/status-colors /}{/content} {/include} {#include partials/example-card
+title="In progress" slug="in-progress" component="icon" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">inProgress=true</code> adds <code class="ws-code">pf-m-in-progress</code> on the wrapper and
+  renders a <code class="ws-code">__progress</code> overlay containing the PF v6 spinner. PF's CSS hides
+  <code class="ws-code">__content</code> and shows <code class="ws-code">__progress</code> via opacity — no JS involved.
+</p>
+{/description} {#content}{#include components/icon/in-progress /}{/content} {/include} {#include partials/example-card
+title="Custom in-progress icon" slug="custom-in-progress-icon" component="icon" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Pass <code class="ws-code">progressIcon</code> to render a Font Awesome / pficon glyph inside the
+  <code class="ws-code">__progress</code> overlay instead of the default PF v6 spinner.
+</p>
+{/description} {#content}{#include components/icon/custom-in-progress-icon /}{/content} {/include} {#include
+partials/example-card title="With accessible label" slug="with-label" component="icon" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Pass <code class="ws-code">label</code> to expose the icon to assistive technology — the rendered
+  <code class="ws-code">&lt;svg&gt;</code> gets <code class="ws-code">role=&quot;img&quot;</code> and the matching
+  <code class="ws-code">aria-label</code>. Without a label, the SVG is marked
+  <code class="ws-code">aria-hidden=&quot;true&quot;</code>.
+</p>
+{/description} {#content}{#include components/icon/with-label /}{/content} {/include}
 
-                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
-                          <div>
-                            <h2
-                              id="examples"
-                              tabindex="-1"
-                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                            >
-                              Examples
-                            </h2>
-                          </div>
-                        </div>
-
-                        {#include partials/example-card title="Basic" slug="basic" component="icon" javaSource=true}
-                        {#description}
-                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          The simplest usage — pass a <code class="ws-code">name</code> in
-                          <code class="ws-code">set:slug</code> form. The icon defaults to medium size and is hidden
-                          from screen readers.
-                        </p>
-                        {/description} {#content}{#include components/icon/basic /}{/content} {/include} {#include
-                        partials/example-card title="Icon sets" slug="sets" component="icon" javaSource=true}
-                        {#description}
-                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          Same API, four sources: <code class="ws-code">fa</code>,
-                          <code class="ws-code">fa-regular</code>, <code class="ws-code">fa-brands</code>, and
-                          <code class="ws-code">pficon</code>. The set prefix maps to the vendored directory under
-                          <code class="ws-code">web/vendor/icons/</code>.
-                        </p>
-                        {/description} {#content}{#include components/icon/sets /}{/content} {/include} {#include
-                        partials/example-card title="Sizes" slug="sizes" component="icon" javaSource=true}
-                        {#description}
-                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          PF v6 ships six standalone size modifiers — <code class="ws-code">sm</code>,
-                          <code class="ws-code">md</code>, <code class="ws-code">lg</code>,
-                          <code class="ws-code">xl</code>, <code class="ws-code">2xl</code>,
-                          <code class="ws-code">3xl</code> — that resolve to global icon-size tokens.
-                        </p>
-                        {/description} {#content}{#include components/icon/sizes /}{/content} {/include} {#include
-                        partials/example-card title="Body sizes" slug="body-sizes" component="icon" javaSource=true}
-                        {#description}
-                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          Body-relative sizes (<code class="ws-code">body-sm</code>,
-                          <code class="ws-code">body-default</code>, <code class="ws-code">body-lg</code>) match the
-                          surrounding body text's icon-size token. Use these when an icon sits beside body copy.
-                        </p>
-                        {/description} {#content}{#include components/icon/body-sizes /}{/content} {/include} {#include
-                        partials/example-card title="Heading sizes" slug="heading-sizes" component="icon"
-                        javaSource=true} {#description}
-                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          Heading-relative sizes (<code class="ws-code">heading-sm</code> through
-                          <code class="ws-code">heading-3xl</code>) match the surrounding heading's icon-size token. Use
-                          these when an icon sits beside heading copy.
-                        </p>
-                        {/description} {#content}{#include components/icon/heading-sizes /}{/content} {/include}
-                        {#include partials/example-card title="Sizing within container" slug="sizing-within-container"
-                        component="icon" javaSource=true} {#description}
-                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          Pass <code class="ws-code">iconSize</code> to size the icon glyph independently of its
-                          <code class="ws-code">size</code> container. <code class="ws-code">iconSize</code> applies
-                          <code class="ws-code">{|pf-m-{iconSize}|}</code> to
-                          <code class="ws-code">.pf-v6-c-icon__content</code> while
-                          <code class="ws-code">size</code> stays on the wrapper.
-                        </p>
-                        {/description} {#content}{#include components/icon/sizing-within-container /}{/content}
-                        {/include} {#include partials/example-card title="Inline" slug="inline" component="icon"
-                        javaSource=true} {#description}
-                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          Set <code class="ws-code">inline=true</code> so the icon inherits the surrounding font size
-                          and color via PF's <code class="ws-code">pf-m-inline</code> modifier. Useful inside running
-                          prose.
-                        </p>
-                        {/description} {#content}{#include components/icon/inline /}{/content} {/include} {#include
-                        partials/example-card title="Status colors" slug="status-colors" component="icon"
-                        javaSource=true} {#description}
-                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          Pass <code class="ws-code">status</code> to color the icon via PF v6 semantic tokens:
-                          <code class="ws-code">info</code>, <code class="ws-code">success</code>,
-                          <code class="ws-code">warning</code>, <code class="ws-code">danger</code>, or
-                          <code class="ws-code">custom</code>.
-                        </p>
-                        {/description} {#content}{#include components/icon/status-colors /}{/content} {/include}
-                        {#include partials/example-card title="In progress" slug="in-progress" component="icon"
-                        javaSource=true} {#description}
-                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          <code class="ws-code">inProgress=true</code> adds
-                          <code class="ws-code">pf-m-in-progress</code> on the wrapper and renders a
-                          <code class="ws-code">__progress</code> overlay containing the PF v6 spinner. PF's CSS hides
-                          <code class="ws-code">__content</code> and shows <code class="ws-code">__progress</code> via
-                          opacity — no JS involved.
-                        </p>
-                        {/description} {#content}{#include components/icon/in-progress /}{/content} {/include} {#include
-                        partials/example-card title="Custom in-progress icon" slug="custom-in-progress-icon"
-                        component="icon" javaSource=true} {#description}
-                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          Pass <code class="ws-code">progressIcon</code> to render a Font Awesome / pficon glyph inside
-                          the <code class="ws-code">__progress</code> overlay instead of the default PF v6 spinner.
-                        </p>
-                        {/description} {#content}{#include components/icon/custom-in-progress-icon /}{/content}
-                        {/include} {#include partials/example-card title="With accessible label" slug="with-label"
-                        component="icon" javaSource=true} {#description}
-                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          Pass <code class="ws-code">label</code> to expose the icon to assistive technology — the
-                          rendered <code class="ws-code">&lt;svg&gt;</code> gets
-                          <code class="ws-code">role=&quot;img&quot;</code> and the matching
-                          <code class="ws-code">aria-label</code>. Without a label, the SVG is marked
-                          <code class="ws-code">aria-hidden=&quot;true&quot;</code>.
-                        </p>
-                        {/description} {#content}{#include components/icon/with-label /}{/content} {/include}
-
-                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
-                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
-                            <div>
-                              <h2
-                                id="documentation"
-                                tabindex="-1"
-                                class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                              >
-                                Documentation
-                              </h2>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="pf-v6-l-stack__item">
-                          <h3
-                            id="props-icon-component"
-                            tabindex="-1"
-                            class="pf-v6-c-content--h3 pf-m-editorial ws-heading"
-                          >
-                            Icon component props
-                          </h3>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            Parameters accepted by <code class="ws-code">{|{#include components/icon ... /}|}</code>.
-                            Model mode: pass <code class="ws-code">iconModel=&lt;Icon&gt;</code> built in Java instead —
-                            the Java tab on each example shows the builder. All are passed as Qute named parameters.
-                          </p>
-                          <table
-                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
-                            role="grid"
-                            aria-label="Icon component props"
-                          >
-                            <caption class="pf-v6-c-table__caption">
-                              <span class="ws-prop-required">*</span>
-                              required
-                            </caption>
-                            <thead class="pf-v6-c-table__thead">
-                              <tr class="pf-v6-c-table__tr">
-                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
-                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
-                                <th scope="col" class="pf-v6-c-table__th">Default</th>
-                                <th scope="col" class="pf-v6-c-table__th">Description</th>
-                              </tr>
-                            </thead>
-                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    ><span class="ws-prop-required">*</span> <code class="ws-code">name</code></span
-                                  >
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >String <code class="ws-code">"set:slug"</code></span
-                                  >
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Icon identifier. <code class="ws-code">set</code> is one of
-                                    <code class="ws-code">fa</code>, <code class="ws-code">fa-regular</code>,
-                                    <code class="ws-code">fa-brands</code>, <code class="ws-code">pficon</code>.
-                                    <code class="ws-code">slug</code> is the icon's filename without the
-                                    <code class="ws-code">.svg</code>.</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">size</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    ><code class="ws-code"
-                                      >"sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "body-sm" | "body-default" |
-                                      "body-lg" | "heading-sm" | "heading-md" | "heading-lg" | "heading-xl" |
-                                      "heading-2xl" | "heading-3xl"</code
-                                    ></span
-                                  >
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Renders <code class="ws-code">{|pf-m-{size}|}</code> on the icon wrapper.
-                                    Standalone sizes (<code class="ws-code">sm</code>–<code class="ws-code">3xl</code>)
-                                    use fixed tokens; <code class="ws-code">body-*</code> and
-                                    <code class="ws-code">heading-*</code> inherit the matching text-relative
-                                    token.</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">iconSize</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Same union as <code class="ws-code">size</code></span
-                                  >
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Sizes the icon glyph independently from its container. Applies
-                                    <code class="ws-code">{|pf-m-{iconSize}|}</code> to
-                                    <code class="ws-code">.pf-v6-c-icon__content</code> while
-                                    <code class="ws-code">size</code> stays on the wrapper.</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">status</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    ><code class="ws-code"
-                                      >"info" | "success" | "warning" | "danger" | "custom"</code
-                                    ></span
-                                  >
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Adds <code class="ws-code">{|pf-m-{status}|}</code> to the icon's
-                                    <code class="ws-code">__content</code> element, coloring the glyph via the matching
-                                    semantic color token.</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">inline</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >When truthy, applies <code class="ws-code">pf-m-inline</code> so the icon inherits
-                                    the surrounding font size and color.</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">inProgress</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Adds <code class="ws-code">pf-m-in-progress</code> on the wrapper and renders an
-                                    additional <code class="ws-code">__progress</code> overlay alongside
-                                    <code class="ws-code">__content</code>. PF v6 CSS swaps which is visible via opacity
-                                    — no JavaScript involved.</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">progressIcon</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >String <code class="ws-code">"set:slug"</code></span
-                                  >
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >PF v6 spinner (<code class="ws-code">components/feedback/spinner</code>)</span
-                                  >
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Glyph rendered inside the <code class="ws-code">__progress</code> overlay when
-                                    <code class="ws-code">inProgress=true</code>. Omit to use the dedicated PF v6
-                                    spinner component; pass a name to override with a Font Awesome / pficon glyph. Has
-                                    no effect when <code class="ws-code">inProgress</code> is falsy.</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">label</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Accessible label. When provided, the
-                                    <code class="ws-code">&lt;svg&gt;</code> renders with
-                                    <code class="ws-code">role="img"</code> and <code class="ws-code">aria-label</code>;
-                                    otherwise it gets <code class="ws-code">aria-hidden="true"</code>.</span
-                                  >
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-
-                        <div class="pf-v6-l-stack__item">
-                          <h3 id="props-icons-svg" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
-                            <code class="ws-code">icons:svg()</code> arguments
-                          </h3>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            The <code class="ws-code">icons</code> Qute namespace exposes the raw resolver. Use it when
-                            you need just the <code class="ws-code">&lt;svg&gt;</code> without PF's
-                            <code class="ws-code">.pf-v6-c-icon</code> chrome — for example, inside a
-                            <code class="ws-code">pf-v6-c-tree-view__node-toggle-icon</code> or a button's
-                            <code class="ws-code">pf-v6-c-button__icon</code>. Always chain
-                            <code class="ws-code">.raw</code> so Qute doesn't HTML-escape the SVG.
-                          </p>
-                          <table
-                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
-                            role="grid"
-                            aria-label="icons:svg arguments"
-                          >
-                            <caption class="pf-v6-c-table__caption">
-                              <span class="ws-prop-required">*</span>
-                              required
-                            </caption>
-                            <thead class="pf-v6-c-table__thead">
-                              <tr class="pf-v6-c-table__tr">
-                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Position</th>
-                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
-                                <th scope="col" class="pf-v6-c-table__th">Description</th>
-                              </tr>
-                            </thead>
-                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    ><span class="ws-prop-required">*</span> 1 — <code class="ws-code">name</code></span
-                                  >
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >String <code class="ws-code">"set:slug"</code></span
-                                  >
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Same identifier as the component's <code class="ws-code">name</code> param. An
-                                    unknown name renders a visible red placeholder marked
-                                    <code class="ws-code">data-missing<wbr />-icon</code>.</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text">2 — <code class="ws-code">label</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text">String (optional)</span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Accessible label. Same semantics as the component's
-                                    <code class="ws-code">label</code>: when present the SVG gets
-                                    <code class="ws-code">role="img"</code> + <code class="ws-code">aria-label</code>,
-                                    otherwise <code class="ws-code">aria-hidden="true"</code>.</span
-                                  >
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            Returns a Qute <code class="ws-code">RawString</code>, so the usage is
-                            <code class="ws-code">{|{icons:svg('fa:check').raw}|}</code> or
-                            <code class="ws-code">{|{icons:svg('pficon:cluster', 'Cluster overview').raw}|}</code>.
-                          </p>
-                        </div>
-
-                        <div class="pf-v6-l-stack__item">
-                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Component vs. raw namespace.</strong> Prefer the
-                            <code class="ws-code">{|{#include components/icon /}|}</code> component whenever you want
-                            the full PF v6 icon chrome — size modifiers, status colors, inline / in-progress flags.
-                            Reach for <code class="ws-code">{|{icons:svg(...).raw}|}</code> only when you need a bare
-                            SVG inside markup that supplies its own chrome (tree-view toggles, button icon slots,
-                            code-editor controls).
-                          </p>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Where the icons live.</strong> SVGs are vendored under
-                            <code class="ws-code">runtime/.../META-INF/resources/web/vendor/icons/</code>, one
-                            subdirectory per set:
-                          </p>
-                          <table
-                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
-                            role="grid"
-                            aria-label="Icon set directories"
-                          >
-                            <thead class="pf-v6-c-table__thead">
-                              <tr class="pf-v6-c-table__tr">
-                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Set prefix</th>
-                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Vendor directory</th>
-                                <th scope="col" class="pf-v6-c-table__th">Source</th>
-                              </tr>
-                            </thead>
-                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">fa</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    ><code class="ws-code">vendor/icons/fa-solid/</code></span
-                                  >
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    ><a
-                                      href="https://fontawesome.com/v7/icons?ic=free&amp;s=solid"
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      >Font Awesome 7 Solid</a
-                                    ></span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">fa-regular</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    ><code class="ws-code">vendor/icons/fa-regular/</code></span
-                                  >
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    ><a
-                                      href="https://fontawesome.com/v7/icons?ic=free&amp;s=regular"
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      >Font Awesome 7 Regular</a
-                                    ></span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">fa-brands</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    ><code class="ws-code">vendor/icons/fa-brands/</code></span
-                                  >
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    ><a
-                                      href="https://fontawesome.com/v7/icons?f=brands"
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      >Font Awesome 7 Brands</a
-                                    ></span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">pficon</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    ><code class="ws-code">vendor/icons/pficon/</code></span
-                                  >
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    ><a
-                                      href="https://www.patternfly.org/design-foundations/icons"
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      >PatternFly v6 pficons</a
-                                    ></span
-                                  >
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Missing icons.</strong> A typo like
-                            <code class="ws-code">fa:doesnotexist</code> renders a red square placeholder carrying
-                            <code class="ws-code">data-missing<wbr />-icon</code> and logs one WARN per unique missing
-                            name. The smoke tests assert that
-                            <code class="ws-code">data-missing<wbr />-icon</code> never appears in any rendered route —
-                            so a bad name fails CI loudly rather than shipping silently.
-                          </p>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Caching.</strong> Each SVG is read from the classpath once, parsed to extract its
-                            <code class="ws-code">viewBox</code> and inner markup, and cached for the JVM's lifetime.
-                            Missing names are cached too — repeated lookups don't re-walk the classpath.
-                          </p>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Accessibility.</strong> When you pass a <code class="ws-code">label</code>, the SVG
-                            renders with <code class="ws-code">role="img"</code> and
-                            <code class="ws-code">aria-label</code>. Omit <code class="ws-code">label</code> for icons
-                            that are purely decorative or that sit next to text already conveying the meaning — they'll
-                            get <code class="ws-code">aria-hidden="true"</code> and stay out of the accessibility tree.
-                          </p>
-                        </div>
-
-                        <div class="pf-v6-l-stack__item">
-                          <h3 id="design" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
-                            Design — why two APIs?
-                          </h3>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong
-                              >Why <code class="ws-code">icons:</code> (plural) and not
-                              <code class="ws-code">icon:</code>?</strong
-                            >
-                            The namespace name marks <em>the catalog</em>; the method name is a single lookup into it —
-                            same convention as <code class="ws-code">users.find(id)</code> in OO code. Reading
-                            <code class="ws-code">{|{icons:svg('fa:check')}|}</code> as "from the icons collection, get
-                            the SVG for fa:check" matches the mental model better than treating the namespace as a
-                            singular noun. The cost is a one-letter inconsistency with
-                            <code class="ws-code">{|{#include components/icon /}|}</code>
-                            (singular path) — we accepted that to keep the catalog metaphor.
-                          </p>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Why a component <em>and</em> a namespace function?</strong>
-                            The two surfaces exist because PatternFly markup has two contexts:
-                          </p>
-                          <ul class="pf-v6-c-list">
-                            <li>
-                              <strong>Standalone icons</strong> need PF's full chrome —
-                              <code class="ws-code">.pf-v6-c-icon</code> wrapper for size / inline / in-progress
-                              modifiers, plus <code class="ws-code">.pf-v6-c-icon__content</code> for status color and
-                              iconSize. The <code class="ws-code">{|{#include components/icon ... /}|}</code> component
-                              is that chrome, parameterised. It uses Qute's <em>named</em> include parameters (e.g.
-                              <code class="ws-code">size="2xl" status="success" inProgress=true</code>) because the
-                              component takes eight optional inputs, and named params keep call sites readable.
-                            </li>
-                            <li>
-                              <strong>PatternFly-supplied slots</strong> already provide their own chrome —
-                              <code class="ws-code">.pf-v6-c-button__icon</code>,
-                              <code class="ws-code">.pf-v6-c-tree-view__node-toggle-icon</code>, and friends. They
-                              expect a bare <code class="ws-code">&lt;svg&gt;</code> inside; wrapping in another
-                              <code class="ws-code">.pf-v6-c-icon</code> container would nest chrome inside chrome and
-                              break the layout. The <code class="ws-code">{|{icons:svg(name).raw}|}</code> namespace
-                              returns just the SVG — positional args (<code class="ws-code">name</code>, optional
-                              <code class="ws-code">label</code>) are enough because there's no chrome to configure.
-                            </li>
-                          </ul>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Could it be unified?</strong> A single
-                            <code class="ws-code">{|{icons:svg(name).chrome}|}</code> accessor looks tempting, but Qute
-                            namespace functions are positional. Chrome with eight optional inputs would force either an
-                            unreadable positional call (<code class="ws-code"
-                              >{|icons:svg('fa:save', '2xl', null, 'success', false, true, null, 'Saving')|}</code
-                            >) or a fluent builder Qute's grammar wasn't built for. The include's named parameters are
-                            the right fit for chrome configuration; the namespace function is the right fit for "just
-                            the SVG". That's why they coexist.
-                          </p>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Rule of thumb.</strong> If you're authoring a standalone icon, reach for the
-                            component. If PatternFly's CSS already gives you an icon slot, reach for
-                            <code class="ws-code">icons:svg(...).raw</code>.
-                          </p>
-                        </div>
-
-                        <div class="pf-v6-l-stack__item">
-                          <br /><a
-                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/java/org/sitenetsoft/quarkus/pha/qute/IconResolver.java"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            >Edit IconResolver.java on GitHub</a
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </main>
-        </div>
-      </div>
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+    <div>
+      <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+        Documentation
+      </h2>
     </div>
   </div>
 </div>
-{/body} {/include}
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-icon-component" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+    Icon component props
+  </h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    Parameters accepted by <code class="ws-code">{|{#include components/icon ... /}|}</code>. Model mode: pass
+    <code class="ws-code">iconModel=&lt;Icon&gt;</code> built in Java instead — the Java tab on each example shows the
+    builder. All are passed as Qute named parameters.
+  </p>
+  <table
+    class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+    role="grid"
+    aria-label="Icon component props"
+  >
+    <caption class="pf-v6-c-table__caption">
+      <span class="ws-prop-required">*</span>
+      required
+    </caption>
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+        <th scope="col" class="pf-v6-c-table__th">Default</th>
+        <th scope="col" class="pf-v6-c-table__th">Description</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><span class="ws-prop-required">*</span> <code class="ws-code">name</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">String <code class="ws-code">"set:slug"</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Icon identifier. <code class="ws-code">set</code> is one of <code class="ws-code">fa</code>,
+            <code class="ws-code">fa-regular</code>, <code class="ws-code">fa-brands</code>,
+            <code class="ws-code">pficon</code>. <code class="ws-code">slug</code> is the icon's filename without the
+            <code class="ws-code">.svg</code>.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">size</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><code class="ws-code"
+              >"sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "body-sm" | "body-default" | "body-lg" | "heading-sm" |
+              "heading-md" | "heading-lg" | "heading-xl" | "heading-2xl" | "heading-3xl"</code
+            ></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Renders <code class="ws-code">{|pf-m-{size}|}</code> on the icon wrapper. Standalone sizes (<code
+              class="ws-code"
+              >sm</code
+            >–<code class="ws-code">3xl</code>) use fixed tokens; <code class="ws-code">body-*</code> and
+            <code class="ws-code">heading-*</code> inherit the matching text-relative token.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">iconSize</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Same union as <code class="ws-code">size</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Sizes the icon glyph independently from its container. Applies
+            <code class="ws-code">{|pf-m-{iconSize}|}</code> to
+            <code class="ws-code">.pf-v6-c-icon__content</code> while <code class="ws-code">size</code> stays on the
+            wrapper.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">status</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><code class="ws-code">"info" | "success" | "warning" | "danger" | "custom"</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Adds <code class="ws-code">{|pf-m-{status}|}</code> to the icon's
+            <code class="ws-code">__content</code> element, coloring the glyph via the matching semantic color
+            token.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">inline</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >When truthy, applies <code class="ws-code">pf-m-inline</code> so the icon inherits the surrounding font
+            size and color.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">inProgress</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Adds <code class="ws-code">pf-m-in-progress</code> on the wrapper and renders an additional
+            <code class="ws-code">__progress</code> overlay alongside <code class="ws-code">__content</code>. PF v6 CSS
+            swaps which is visible via opacity — no JavaScript involved.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">progressIcon</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">String <code class="ws-code">"set:slug"</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >PF v6 spinner (<code class="ws-code">components/feedback/spinner</code>)</span
+          >
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Glyph rendered inside the <code class="ws-code">__progress</code> overlay when
+            <code class="ws-code">inProgress=true</code>. Omit to use the dedicated PF v6 spinner component; pass a name
+            to override with a Font Awesome / pficon glyph. Has no effect when
+            <code class="ws-code">inProgress</code> is falsy.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">label</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Accessible label. When provided, the <code class="ws-code">&lt;svg&gt;</code> renders with
+            <code class="ws-code">role="img"</code> and <code class="ws-code">aria-label</code>; otherwise it gets
+            <code class="ws-code">aria-hidden="true"</code>.</span
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-icons-svg" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+    <code class="ws-code">icons:svg()</code> arguments
+  </h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    The <code class="ws-code">icons</code> Qute namespace exposes the raw resolver. Use it when you need just the
+    <code class="ws-code">&lt;svg&gt;</code> without PF's <code class="ws-code">.pf-v6-c-icon</code> chrome — for
+    example, inside a <code class="ws-code">pf-v6-c-tree-view__node-toggle-icon</code> or a button's
+    <code class="ws-code">pf-v6-c-button__icon</code>. Always chain <code class="ws-code">.raw</code> so Qute doesn't
+    HTML-escape the SVG.
+  </p>
+  <table
+    class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+    role="grid"
+    aria-label="icons:svg arguments"
+  >
+    <caption class="pf-v6-c-table__caption">
+      <span class="ws-prop-required">*</span>
+      required
+    </caption>
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Position</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+        <th scope="col" class="pf-v6-c-table__th">Description</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><span class="ws-prop-required">*</span> 1 — <code class="ws-code">name</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">String <code class="ws-code">"set:slug"</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Same identifier as the component's <code class="ws-code">name</code> param. An unknown name renders a
+            visible red placeholder marked <code class="ws-code">data-missing<wbr />-icon</code>.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">2 — <code class="ws-code">label</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">String (optional)</span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Accessible label. Same semantics as the component's <code class="ws-code">label</code>: when present the
+            SVG gets <code class="ws-code">role="img"</code> + <code class="ws-code">aria-label</code>, otherwise
+            <code class="ws-code">aria-hidden="true"</code>.</span
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    Returns a Qute <code class="ws-code">RawString</code>, so the usage is
+    <code class="ws-code">{|{icons:svg('fa:check').raw}|}</code> or
+    <code class="ws-code">{|{icons:svg('pficon:cluster', 'Cluster overview').raw}|}</code>.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Component vs. raw namespace.</strong> Prefer the
+    <code class="ws-code">{|{#include components/icon /}|}</code> component whenever you want the full PF v6 icon chrome
+    — size modifiers, status colors, inline / in-progress flags. Reach for
+    <code class="ws-code">{|{icons:svg(...).raw}|}</code> only when you need a bare SVG inside markup that supplies its
+    own chrome (tree-view toggles, button icon slots, code-editor controls).
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Where the icons live.</strong> SVGs are vendored under
+    <code class="ws-code">runtime/.../META-INF/resources/web/vendor/icons/</code>, one subdirectory per set:
+  </p>
+  <table
+    class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+    role="grid"
+    aria-label="Icon set directories"
+  >
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Set prefix</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Vendor directory</th>
+        <th scope="col" class="pf-v6-c-table__th">Source</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">fa</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">vendor/icons/fa-solid/</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><a href="https://fontawesome.com/v7/icons?ic=free&amp;s=solid" target="_blank" rel="noopener noreferrer"
+              >Font Awesome 7 Solid</a
+            ></span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">fa-regular</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">vendor/icons/fa-regular/</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><a href="https://fontawesome.com/v7/icons?ic=free&amp;s=regular" target="_blank" rel="noopener noreferrer"
+              >Font Awesome 7 Regular</a
+            ></span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">fa-brands</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">vendor/icons/fa-brands/</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><a href="https://fontawesome.com/v7/icons?f=brands" target="_blank" rel="noopener noreferrer"
+              >Font Awesome 7 Brands</a
+            ></span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">pficon</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">vendor/icons/pficon/</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><a href="https://www.patternfly.org/design-foundations/icons" target="_blank" rel="noopener noreferrer"
+              >PatternFly v6 pficons</a
+            ></span
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Missing icons.</strong> A typo like <code class="ws-code">fa:doesnotexist</code> renders a red square
+    placeholder carrying <code class="ws-code">data-missing<wbr />-icon</code> and logs one WARN per unique missing
+    name. The smoke tests assert that <code class="ws-code">data-missing<wbr />-icon</code> never appears in any
+    rendered route — so a bad name fails CI loudly rather than shipping silently.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Caching.</strong> Each SVG is read from the classpath once, parsed to extract its
+    <code class="ws-code">viewBox</code> and inner markup, and cached for the JVM's lifetime. Missing names are cached
+    too — repeated lookups don't re-walk the classpath.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Accessibility.</strong> When you pass a <code class="ws-code">label</code>, the SVG renders with
+    <code class="ws-code">role="img"</code> and <code class="ws-code">aria-label</code>. Omit
+    <code class="ws-code">label</code> for icons that are purely decorative or that sit next to text already conveying
+    the meaning — they'll get <code class="ws-code">aria-hidden="true"</code> and stay out of the accessibility tree.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="design" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Design — why two APIs?</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Why <code class="ws-code">icons:</code> (plural) and not <code class="ws-code">icon:</code>?</strong>
+    The namespace name marks <em>the catalog</em>; the method name is a single lookup into it — same convention as
+    <code class="ws-code">users.find(id)</code> in OO code. Reading
+    <code class="ws-code">{|{icons:svg('fa:check')}|}</code> as "from the icons collection, get the SVG for fa:check"
+    matches the mental model better than treating the namespace as a singular noun. The cost is a one-letter
+    inconsistency with
+    <code class="ws-code">{|{#include components/icon /}|}</code>
+    (singular path) — we accepted that to keep the catalog metaphor.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Why a component <em>and</em> a namespace function?</strong>
+    The two surfaces exist because PatternFly markup has two contexts:
+  </p>
+  <ul class="pf-v6-c-list">
+    <li>
+      <strong>Standalone icons</strong> need PF's full chrome — <code class="ws-code">.pf-v6-c-icon</code> wrapper for
+      size / inline / in-progress modifiers, plus <code class="ws-code">.pf-v6-c-icon__content</code> for status color
+      and iconSize. The <code class="ws-code">{|{#include components/icon ... /}|}</code> component is that chrome,
+      parameterised. It uses Qute's <em>named</em> include parameters (e.g.
+      <code class="ws-code">size="2xl" status="success" inProgress=true</code>) because the component takes eight
+      optional inputs, and named params keep call sites readable.
+    </li>
+    <li>
+      <strong>PatternFly-supplied slots</strong> already provide their own chrome —
+      <code class="ws-code">.pf-v6-c-button__icon</code>,
+      <code class="ws-code">.pf-v6-c-tree-view__node-toggle-icon</code>, and friends. They expect a bare
+      <code class="ws-code">&lt;svg&gt;</code> inside; wrapping in another
+      <code class="ws-code">.pf-v6-c-icon</code> container would nest chrome inside chrome and break the layout. The
+      <code class="ws-code">{|{icons:svg(name).raw}|}</code> namespace returns just the SVG — positional args (<code
+        class="ws-code"
+        >name</code
+      >, optional <code class="ws-code">label</code>) are enough because there's no chrome to configure.
+    </li>
+  </ul>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Could it be unified?</strong> A single <code class="ws-code">{|{icons:svg(name).chrome}|}</code> accessor
+    looks tempting, but Qute namespace functions are positional. Chrome with eight optional inputs would force either an
+    unreadable positional call (<code class="ws-code"
+      >{|icons:svg('fa:save', '2xl', null, 'success', false, true, null, 'Saving')|}</code
+    >) or a fluent builder Qute's grammar wasn't built for. The include's named parameters are the right fit for chrome
+    configuration; the namespace function is the right fit for "just the SVG". That's why they coexist.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Rule of thumb.</strong> If you're authoring a standalone icon, reach for the component. If PatternFly's CSS
+    already gives you an icon slot, reach for <code class="ws-code">icons:svg(...).raw</code>.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/java/org/sitenetsoft/quarkus/pha/qute/IconResolver.java"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit IconResolver.java on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

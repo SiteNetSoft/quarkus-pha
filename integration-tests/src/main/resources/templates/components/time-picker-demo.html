@@ -1,219 +1,61 @@
-{#include layouts/base} {#title}Time picker{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}Time picker{/title} {#head}
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
-{/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content">
-        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
-          ><span class="pf-v6-c-button__text">Skip to content</span></a
-        >
-      </div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-c-content pf-m-editorial">
-                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Time picker</h1>
-                    <p>
-                      Composition pattern — text input + clock-icon toggle that opens a scrollable list of 30-minute
-                      slots. Alpine binds the chosen slot back to the input.
-                    </p>
-                  </div>
-                </div>
-              </section>
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                    <nav
-                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
-                      aria-label="Table of contents"
-                    >
-                      <div class="pf-v6-c-jump-links__main">
-                        <ul class="pf-v6-c-jump-links__list" role="list">
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Basic 24 hour</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#twelve-hour" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Basic 12 hour</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#custom-delimiter" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Custom delimiter</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#min-max" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Minimum/maximum times</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#with-seconds" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With seconds</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#twenty-four-with-seconds" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Basic 24 hours with seconds</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#props-time-picker" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Time picker pattern</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </nav>
-                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
-                        <div>
-                          <h2
-                            id="examples"
-                            tabindex="-1"
-                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                          >
-                            Examples
-                          </h2>
-                        </div>
-                      </div>
-                      {#include partials/example-card title="Basic 24 hour" slug="basic" component="time-picker"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">HH:MM slots in 30-minute steps.</p>
-                      {/description} {#content}{#include components/time-picker/basic /}{/content} {/include} {#include
-                      partials/example-card title="Basic 12 hour" slug="twelve-hour" component="time-picker"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">12-hour clock with AM/PM labels.</p>
-                      {/description} {#content}{#include components/time-picker/twelve-hour /}{/content} {/include}
-                      {#include partials/example-card title="Custom delimiter" slug="custom-delimiter"
-                      component="time-picker"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">A period instead of the colon.</p>
-                      {/description} {#content}{#include components/time-picker/custom-delimiter /}{/content} {/include}
-                      {#include partials/example-card title="Minimum/maximum times" slug="min-max"
-                      component="time-picker"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Only 09:00–17:00 offered; typed values outside the window error.
-                      </p>
-                      {/description} {#content}{#include components/time-picker/min-max /}{/content} {/include}
-                      {#include partials/example-card title="With seconds" slug="with-seconds" component="time-picker"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">12-hour slots including seconds.</p>
-                      {/description} {#content}{#include components/time-picker/with-seconds /}{/content} {/include}
-                      {#include partials/example-card title="Basic 24 hours with seconds"
-                      slug="twenty-four-with-seconds" component="time-picker"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">HH:MM:SS.</p>
-                      {/description} {#content}{#include components/time-picker/twenty-four-with-seconds /}{/content}
-                      {/include}
-                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
-                        <h2
-                          id="documentation"
-                          tabindex="-1"
-                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                        >
-                          Documentation
-                        </h2>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="props-time-picker" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
-                          Time picker pattern
-                        </h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          Composition — no runtime template. The example uses pure HTML + Alpine for the slot grid and
-                          value binding.
-                        </p>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>24-hour vs. 12-hour.</strong> The example renders 24-hour slots. For 12-hour AM/PM add
-                          a separate Alpine state for the meridiem and emit it next to the input.
-                        </p>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <br /><a
-                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/integration-tests/src/main/resources/templates/components/time-picker/basic.html"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          >Edit time-picker example on GitHub</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </main>
-        </div>
-      </div>
-    </div>
+{/head} {#body} {#include partials/showcase-page title="Time picker" toc=tocTimePicker} {#lede}
+<p>
+  Composition pattern — text input + clock-icon toggle that opens a scrollable list of 30-minute slots. Alpine binds the
+  chosen slot back to the input.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
   </div>
 </div>
-{/body} {/include}
+{#include partials/example-card title="Basic 24 hour" slug="basic" component="time-picker"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">HH:MM slots in 30-minute steps.</p>
+{/description} {#content}{#include components/time-picker/basic /}{/content} {/include} {#include partials/example-card
+title="Basic 12 hour" slug="twelve-hour" component="time-picker"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">12-hour clock with AM/PM labels.</p>
+{/description} {#content}{#include components/time-picker/twelve-hour /}{/content} {/include} {#include
+partials/example-card title="Custom delimiter" slug="custom-delimiter" component="time-picker"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">A period instead of the colon.</p>
+{/description} {#content}{#include components/time-picker/custom-delimiter /}{/content} {/include} {#include
+partials/example-card title="Minimum/maximum times" slug="min-max" component="time-picker"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Only 09:00–17:00 offered; typed values outside the window error.</p>
+{/description} {#content}{#include components/time-picker/min-max /}{/content} {/include} {#include
+partials/example-card title="With seconds" slug="with-seconds" component="time-picker"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">12-hour slots including seconds.</p>
+{/description} {#content}{#include components/time-picker/with-seconds /}{/content} {/include} {#include
+partials/example-card title="Basic 24 hours with seconds" slug="twenty-four-with-seconds" component="time-picker"}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">HH:MM:SS.</p>
+{/description} {#content}{#include components/time-picker/twenty-four-with-seconds /}{/content} {/include}
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+    Documentation
+  </h2>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-time-picker" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+    Time picker pattern
+  </h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    Composition — no runtime template. The example uses pure HTML + Alpine for the slot grid and value binding.
+  </p>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>24-hour vs. 12-hour.</strong> The example renders 24-hour slots. For 12-hour AM/PM add a separate Alpine
+    state for the meridiem and emit it next to the input.
+  </p>
+</div>
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/integration-tests/src/main/resources/templates/components/time-picker/basic.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit time-picker example on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

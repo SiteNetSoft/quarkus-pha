@@ -1,218 +1,67 @@
-{#include layouts/base} {#title}Dropdown{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}Dropdown{/title} {#head}
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
-{/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content">
-        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
-          ><span class="pf-v6-c-button__text">Skip to content</span></a
-        >
-      </div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-c-content pf-m-editorial">
-                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Dropdown</h1>
-                    <p>
-                      Composition pattern — <a href="/components/menu-toggle">Menu toggle</a> +
-                      <a href="/components/menu">Menu</a>. PF v6 doesn't ship a single Dropdown component; you compose
-                      one with Alpine for show/hide. No dedicated runtime template needed.
-                    </p>
-                  </div>
-                </div>
-              </section>
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                    <nav
-                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
-                      aria-label="Table of contents"
-                    >
-                      <div class="pf-v6-c-jump-links__main">
-                        <ul class="pf-v6-c-jump-links__list" role="list">
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Basic dropdowns</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#plain-kebab" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With kebab toggle</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#with-groups" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With groups of items</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#with-descriptions" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With item descriptions</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#split-checkbox" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Split toggle with checkbox</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#props-dropdown" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Dropdown pattern</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </nav>
-                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
-                        <div>
-                          <h2
-                            id="examples"
-                            tabindex="-1"
-                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                          >
-                            Examples
-                          </h2>
-                        </div>
-                      </div>
-                      {#include partials/example-card title="Basic dropdowns" slug="basic" component="dropdown"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Menu toggle + menu with a danger action.</p>
-                      {/description} {#content}{#include components/dropdown/basic /}{/content} {/include} {#include
-                      partials/example-card title="With kebab toggle" slug="plain-kebab" component="dropdown"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Plain icon toggle.</p>
-                      {/description} {#content}{#include components/dropdown/plain-kebab /}{/content} {/include}
-                      {#include partials/example-card title="With groups of items" slug="with-groups"
-                      component="dropdown"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Titled menu groups.</p>
-                      {/description} {#content}{#include components/dropdown/with-groups /}{/content} {/include}
-                      {#include partials/example-card title="With item descriptions" slug="with-descriptions"
-                      component="dropdown"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">A second description line per item.</p>
-                      {/description} {#content}{#include components/dropdown/with-descriptions /}{/content} {/include}
-                      {#include partials/example-card title="Split toggle with checkbox" slug="split-checkbox"
-                      component="dropdown"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        The checkbox selects; the caret opens select-all/none actions.
-                      </p>
-                      {/description} {#content}{#include components/dropdown/split-checkbox /}{/content} {/include}
-                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
-                        <h2
-                          id="documentation"
-                          tabindex="-1"
-                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                        >
-                          Documentation
-                        </h2>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="props-dropdown" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
-                          Dropdown pattern
-                        </h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          Dropdown is a composition, not a runtime template. The structure is:
-                        </p>
-                        <ul class="pf-v6-c-content--ul" style="margin-left: 2rem">
-                          <li>
-                            Outer wrapper with <code class="ws-code">x-data="{ open: false }"</code> and
-                            <code class="ws-code">position: relative</code>
-                          </li>
-                          <li>
-                            <a href="/components/menu-toggle">Menu toggle</a> button — sets
-                            <code class="ws-code">open = !open</code>
-                          </li>
-                          <li>
-                            <a href="/components/menu">Menu</a> shown via <code class="ws-code">x-show="open"</code> +
-                            <code class="ws-code">@click.outside="open = false"</code>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Vs. Select.</strong> Use dropdown for actions, select for picking a value.
-                        </p>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <br /><a
-                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/integration-tests/src/main/resources/templates/components/dropdown/basic.html"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          >Edit dropdown example on GitHub</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </main>
-        </div>
-      </div>
-    </div>
+{/head} {#body} {#include partials/showcase-page title="Dropdown" toc=tocDropdown} {#lede}
+<p>
+  Composition pattern — <a href="/components/menu-toggle">Menu toggle</a> + <a href="/components/menu">Menu</a>. PF v6
+  doesn't ship a single Dropdown component; you compose one with Alpine for show/hide. No dedicated runtime template
+  needed.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
   </div>
 </div>
-{/body} {/include}
+{#include partials/example-card title="Basic dropdowns" slug="basic" component="dropdown"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Menu toggle + menu with a danger action.</p>
+{/description} {#content}{#include components/dropdown/basic /}{/content} {/include} {#include partials/example-card
+title="With kebab toggle" slug="plain-kebab" component="dropdown"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Plain icon toggle.</p>
+{/description} {#content}{#include components/dropdown/plain-kebab /}{/content} {/include} {#include
+partials/example-card title="With groups of items" slug="with-groups" component="dropdown"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Titled menu groups.</p>
+{/description} {#content}{#include components/dropdown/with-groups /}{/content} {/include} {#include
+partials/example-card title="With item descriptions" slug="with-descriptions" component="dropdown"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">A second description line per item.</p>
+{/description} {#content}{#include components/dropdown/with-descriptions /}{/content} {/include} {#include
+partials/example-card title="Split toggle with checkbox" slug="split-checkbox" component="dropdown"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">The checkbox selects; the caret opens select-all/none actions.</p>
+{/description} {#content}{#include components/dropdown/split-checkbox /}{/content} {/include}
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+    Documentation
+  </h2>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-dropdown" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Dropdown pattern</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">Dropdown is a composition, not a runtime template. The structure is:</p>
+  <ul class="pf-v6-c-content--ul" style="margin-left: 2rem">
+    <li>
+      Outer wrapper with <code class="ws-code">x-data="{ open: false }"</code> and
+      <code class="ws-code">position: relative</code>
+    </li>
+    <li>
+      <a href="/components/menu-toggle">Menu toggle</a> button — sets
+      <code class="ws-code">open = !open</code>
+    </li>
+    <li>
+      <a href="/components/menu">Menu</a> shown via <code class="ws-code">x-show="open"</code> +
+      <code class="ws-code">@click.outside="open = false"</code>
+    </li>
+  </ul>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Vs. Select.</strong> Use dropdown for actions, select for picking a value.
+  </p>
+</div>
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/integration-tests/src/main/resources/templates/components/dropdown/basic.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit dropdown example on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

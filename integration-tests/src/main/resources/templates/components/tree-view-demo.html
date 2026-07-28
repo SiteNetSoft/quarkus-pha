@@ -1,550 +1,91 @@
-{#include layouts/base} {#title}Tree View{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}Tree View{/title} {#head}
 <script src="/web/js/alpine/components/tree-view.js?v={pha:assetVersion}"></script>
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
-{/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content">
-        <a
-          href="#ws-page-main"
-          class="pf-v6-c-button pf-m-primary"
-          data-ouia-component-type="PF6/Button"
-          data-ouia-safe="true"
-          data-ouia-component-id="OUIA-Generated-Button-primary-2"
-          ><span class="pf-v6-c-button__text">Skip to content</span></a
-        >
-      </div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div
-                    data-ouia-component-type="PF6/Content"
-                    data-ouia-safe="true"
-                    data-ouia-component-id="OUIA-Generated-Content-1"
-                    data-pf-content="true"
-                    class="pf-v6-c-content pf-m-editorial"
-                  >
-                    <div class="pf-v6-l-flex pf-m-align-items-center">
-                      <div class="">
-                        <h1
-                          data-ouia-component-type="PF6/Title"
-                          data-ouia-safe="true"
-                          data-ouia-component-id="OUIA-Generated-Title-1"
-                          id="ws-page-title"
-                          class="pf-v6-c-title pf-m-4xl"
-                        >
-                          Tree view
-                        </h1>
-                      </div>
-                      <div class=""><div class="pf-v6-l-flex pf-m-inline-flex"></div></div>
-                    </div>
-                    <p>A <b>tree view</b> is a structure that displays data in a hierarchical view.</p>
-                  </div>
-                </div>
-              </section>
-              <!--<section style="margin-top: 2rem">
-    <h2 id="basic-heading">Basic</h2>
-    <p>A basic tree view with nested items.</p>
-    {#include components/navigation/tree-view id="tv-basic"}{#content}
-    <li class="pf-v6-c-tree-view__list-item pf-m-expanded">
-      <div class="pf-v6-c-tree-view__content">
-        <button class="pf-v6-c-tree-view__node" type="button">
-          <span class="pf-v6-c-tree-view__node-container">
-            <span class="pf-v6-c-tree-view__node-toggle"
-              ><span class="pf-v6-c-tree-view__node-toggle-icon"
-                >{icons:svg('fa:angle-right').raw}</span
-            ></span>
-            <span class="pf-v6-c-tree-view__node-text">Application launcher</span>
-          </span>
-        </button>
-      </div>
-      <ul class="pf-v6-c-tree-view__list" role="group">
-        <li class="pf-v6-c-tree-view__list-item">
-          <div class="pf-v6-c-tree-view__content">
-            <button class="pf-v6-c-tree-view__node pf-m-current" type="button">
-              <span class="pf-v6-c-tree-view__node-container"
-                ><span class="pf-v6-c-tree-view__node-text">Application 1</span></span
-              >
-            </button>
-          </div>
-        </li>
-        <li class="pf-v6-c-tree-view__list-item">
-          <div class="pf-v6-c-tree-view__content">
-            <button class="pf-v6-c-tree-view__node" type="button">
-              <span class="pf-v6-c-tree-view__node-container"
-                ><span class="pf-v6-c-tree-view__node-text">Application 2</span></span
-              >
-            </button>
-          </div>
-        </li>
-      </ul>
-    </li>
-    <li class="pf-v6-c-tree-view__list-item">
-      <div class="pf-v6-c-tree-view__content">
-        <button class="pf-v6-c-tree-view__node" type="button">
-          <span class="pf-v6-c-tree-view__node-container"
-            ><span class="pf-v6-c-tree-view__node-text">Cost management</span></span
+{/head} {#body} {#include partials/showcase-page title="Tree view" toc=tocTreeView} {#lede}
+<p>A <b>tree view</b> is a structure that displays data in a hierarchical view.</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div class="">
+    <h2
+      data-ouia-component-type="PF6/Content"
+      data-ouia-safe="true"
+      data-ouia-component-id="OUIA-Generated-Content-1"
+      id="examples"
+      tabindex="-1"
+      data-pf-content="true"
+      class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
+    >
+      <span style="display: contents">
+        <button class="ws-heading-anchor" tabindex="-1" aria-hidden="true" aria-label="Copy link to Examples">
+          <svg
+            class="pf-v6-svg ws-heading-anchor-icon"
+            viewBox="0 0 512 512"
+            fill="currentColor"
+            aria-hidden="true"
+            role="img"
+            width="1em"
+            height="1em"
           >
+            <path
+              d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"
+            ></path>
+          </svg>
         </button>
-      </div>
-    </li>
-    {/content}{/include}
-  </section>
-  <section style="margin-top: 2rem">
-    <h2 id="with-guides-heading">With guides</h2>
-    <p>A tree view with visual guidelines connecting items.</p>
-    {#include components/navigation/tree-view id="tv-guides" guides=true}{#content}
-    <li class="pf-v6-c-tree-view__list-item pf-m-expanded">
-      <div class="pf-v6-c-tree-view__content">
-        <button class="pf-v6-c-tree-view__node" type="button">
-          <span class="pf-v6-c-tree-view__node-container">
-            <span class="pf-v6-c-tree-view__node-toggle"
-              ><span class="pf-v6-c-tree-view__node-toggle-icon"
-                >{icons:svg('fa:angle-right').raw}</span
-            ></span>
-            <span class="pf-v6-c-tree-view__node-text">Application launcher</span>
-          </span>
-        </button>
-      </div>
-      <ul class="pf-v6-c-tree-view__list" role="group">
-        <li class="pf-v6-c-tree-view__list-item">
-          <div class="pf-v6-c-tree-view__content">
-            <button class="pf-v6-c-tree-view__node" type="button">
-              <span class="pf-v6-c-tree-view__node-container"
-                ><span class="pf-v6-c-tree-view__node-text">Application 1</span></span
-              >
-            </button>
-          </div>
-        </li>
-        <li class="pf-v6-c-tree-view__list-item">
-          <div class="pf-v6-c-tree-view__content">
-            <button class="pf-v6-c-tree-view__node" type="button">
-              <span class="pf-v6-c-tree-view__node-container"
-                ><span class="pf-v6-c-tree-view__node-text">Application 2</span></span
-              >
-            </button>
-          </div>
-        </li>
-      </ul>
-    </li>
-    <li class="pf-v6-c-tree-view__list-item">
-      <div class="pf-v6-c-tree-view__content">
-        <button class="pf-v6-c-tree-view__node" type="button">
-          <span class="pf-v6-c-tree-view__node-container"
-            ><span class="pf-v6-c-tree-view__node-text">Cost management</span></span
-          >
-        </button>
-      </div>
-    </li>
-    {/content}{/include}
-  </section>-->
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-u-h-100">
-                    <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                      <nav
-                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
-                        aria-labelledby="pf-1777292252887iraait40mle"
-                        style="top: 45px; --jump-links-main-margin-bottom: 45px"
-                      >
-                        <div class="pf-v6-c-jump-links__main">
-                          <div class="pf-v6-c-jump-links__header">
-                            <div class="pf-v6-c-jump-links__toggle">
-                              <button
-                                x-data="{ tocOpen: false }"
-                                :aria-expanded="tocOpen.toString()"
-                                @click="tocOpen = !tocOpen; $el.closest('.pf-v6-c-jump-links__main').querySelector('.pf-v6-c-jump-links__list').style.display = tocOpen ? '' : 'none'"
-                                id="pf-1777292252887iraait40mle"
-                                class="pf-v6-c-button pf-m-plain"
-                                type="button"
-                                data-ouia-component-type="PF6/Button"
-                                data-ouia-safe="true"
-                                data-ouia-component-id="OUIA-Generated-Button-plain-1"
-                              >
-                                <span class="pf-v6-c-button__icon pf-m-start"
-                                  ><span class="pf-v6-c-jump-links__toggle-icon"
-                                    ><svg
-                                      class="pf-v6-svg"
-                                      viewBox="0 0 256 512"
-                                      fill="currentColor"
-                                      aria-hidden="true"
-                                      role="img"
-                                      width="1em"
-                                      height="1em"
-                                    >
-                                      <path
-                                        d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
-                                      ></path></svg></span></span
-                                ><span class="pf-v6-c-button__text">Table of contents</span>
-                              </button>
-                            </div>
-                          </div>
-                          <ul
-                            aria-labelledby="pf-1777292252887iraait40mle"
-                            class="pf-v6-c-jump-links__list"
-                            role="list"
-                          >
-                            <li class="pf-v6-c-jump-links__item ws-toc-item">
-                              <span class="pf-v6-c-jump-links__link"
-                                ><a
-                                  href="#examples"
-                                  class="pf-v6-c-button pf-m-link"
-                                  data-ouia-component-type="PF6/Button"
-                                  data-ouia-safe="true"
-                                  data-ouia-component-id="OUIA-Generated-Button-link-1"
-                                  ><span class="pf-v6-c-button__text"
-                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
-                                  ></a
-                                ></span
-                              >
-                              <ul class="pf-v6-c-jump-links__list" role="list">
-                                <li class="pf-v6-c-jump-links__item pf-m-current ws-toc-item" aria-current="location">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a
-                                      href="#single-selectable"
-                                      class="pf-v6-c-button pf-m-link"
-                                      data-ouia-component-type="PF6/Button"
-                                      data-ouia-safe="true"
-                                      data-ouia-component-id="OUIA-Generated-Button-link-2"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Single selectable</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a
-                                      href="#multiselectable"
-                                      class="pf-v6-c-button pf-m-link"
-                                      data-ouia-component-type="PF6/Button"
-                                      data-ouia-safe="true"
-                                      data-ouia-component-id="OUIA-Generated-Button-link-3"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Multiselectable</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a
-                                      href="#with-search"
-                                      class="pf-v6-c-button pf-m-link"
-                                      data-ouia-component-type="PF6/Button"
-                                      data-ouia-safe="true"
-                                      data-ouia-component-id="OUIA-Generated-Button-link-4"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">With search</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a
-                                      href="#with-checkboxes"
-                                      class="pf-v6-c-button pf-m-link"
-                                      data-ouia-component-type="PF6/Button"
-                                      data-ouia-safe="true"
-                                      data-ouia-component-id="OUIA-Generated-Button-link-5"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">With checkboxes</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a
-                                      href="#with-icons"
-                                      class="pf-v6-c-button pf-m-link"
-                                      data-ouia-component-type="PF6/Button"
-                                      data-ouia-safe="true"
-                                      data-ouia-component-id="OUIA-Generated-Button-link-6"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">With icons</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a
-                                      href="#with-badges"
-                                      class="pf-v6-c-button pf-m-link"
-                                      data-ouia-component-type="PF6/Button"
-                                      data-ouia-safe="true"
-                                      data-ouia-component-id="OUIA-Generated-Button-link-7"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">With badges</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a
-                                      href="#with-action-item"
-                                      class="pf-v6-c-button pf-m-link"
-                                      data-ouia-component-type="PF6/Button"
-                                      data-ouia-safe="true"
-                                      data-ouia-component-id="OUIA-Generated-Button-link-8"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">With action item</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a
-                                      href="#with-non-expandable-top-level-nodes"
-                                      class="pf-v6-c-button pf-m-link"
-                                      data-ouia-component-type="PF6/Button"
-                                      data-ouia-safe="true"
-                                      data-ouia-component-id="OUIA-Generated-Button-link-9"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text"
-                                          >With non-expandable top level nodes</span
-                                        ></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a
-                                      href="#with-selectable-expandable-nodes"
-                                      class="pf-v6-c-button pf-m-link"
-                                      data-ouia-component-type="PF6/Button"
-                                      data-ouia-safe="true"
-                                      data-ouia-component-id="OUIA-Generated-Button-link-10"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text"
-                                          >With selectable, expandable nodes</span
-                                        ></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a
-                                      href="#guides"
-                                      class="pf-v6-c-button pf-m-link"
-                                      data-ouia-component-type="PF6/Button"
-                                      data-ouia-safe="true"
-                                      data-ouia-component-id="OUIA-Generated-Button-link-11"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Guides</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a
-                                      href="#compact"
-                                      class="pf-v6-c-button pf-m-link"
-                                      data-ouia-component-type="PF6/Button"
-                                      data-ouia-safe="true"
-                                      data-ouia-component-id="OUIA-Generated-Button-link-12"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Compact</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a
-                                      href="#compact-no-background"
-                                      class="pf-v6-c-button pf-m-link"
-                                      data-ouia-component-type="PF6/Button"
-                                      data-ouia-safe="true"
-                                      data-ouia-component-id="OUIA-Generated-Button-link-13"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Compact, no background</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                              </ul>
-                            </li>
-                            <li class="pf-v6-c-jump-links__item ws-toc-item">
-                              <span class="pf-v6-c-jump-links__link"
-                                ><a
-                                  href="#documentation"
-                                  class="pf-v6-c-button pf-m-link"
-                                  data-ouia-component-type="PF6/Button"
-                                  data-ouia-safe="true"
-                                  data-ouia-component-id="OUIA-Generated-Button-link-14"
-                                  ><span class="pf-v6-c-button__text"
-                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
-                                  ></a
-                                ></span
-                              >
-                              <ul class="pf-v6-c-jump-links__list" role="list">
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a
-                                      href="#usage"
-                                      class="pf-v6-c-button pf-m-link"
-                                      data-ouia-component-type="PF6/Button"
-                                      data-ouia-safe="true"
-                                      data-ouia-component-id="OUIA-Generated-Button-link-15"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                              </ul>
-                            </li>
-                          </ul>
-                        </div>
-                      </nav>
-                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
-                          <div class="">
-                            <h2
-                              data-ouia-component-type="PF6/Content"
-                              data-ouia-safe="true"
-                              data-ouia-component-id="OUIA-Generated-Content-1"
-                              id="examples"
-                              tabindex="-1"
-                              data-pf-content="true"
-                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                            >
-                              <span style="display: contents">
-                                <button
-                                  class="ws-heading-anchor"
-                                  tabindex="-1"
-                                  aria-hidden="true"
-                                  aria-label="Copy link to Examples"
-                                >
-                                  <svg
-                                    class="pf-v6-svg ws-heading-anchor-icon"
-                                    viewBox="0 0 512 512"
-                                    fill="currentColor"
-                                    aria-hidden="true"
-                                    role="img"
-                                    width="1em"
-                                    height="1em"
-                                  >
-                                    <path
-                                      d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"
-                                    ></path>
-                                  </svg>
-                                </button>
-                              </span>
-                              Examples
-                            </h2>
-                          </div>
-                        </div>
-                        {#include partials/example-card title="Single selectable" slug="single-selectable"
-                        component="tree-view" javaSource=true} {#content}{#include
-                        components/tree-view/single-selectable /}{/content} {/include} {#include partials/example-card
-                        title="Multiselectable" slug="multiselectable" component="tree-view" javaSource=true}
-                        {#description}
-                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          A tree can be set up to allow multiple nodes to be selected. To turn on multiple selection,
-                          set <code class="ws-code">aria-multiselectable="true"</code> on the root
-                          <code class="ws-code">ul[role="tree"]</code> element.
-                        </p>
-                        {/description} {#content}{#include components/tree-view/multiselectable /}{/content} {/include}
-                        {#include partials/example-card title="With separate selection and expansion"
-                        slug="with-separate-selection-and-expansion" component="tree-view" javaSource=true}
-                        {#description}
-                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          The node renders its toggle button and text button separately so a parent node can be selected
-                          (or deselected) without toggling its expansion. The wrapper becomes a
-                          <code class="ws-code">div.pf-v6-c-tree-view__node</code> containing two child
-                          <code class="ws-code">button</code>s — one for toggle, one for the label.
-                        </p>
-                        {/description} {#content}{#include components/tree-view/with-separate-selection-and-expansion
-                        /}{/content} {/include} {#include partials/example-card title="With search" slug="with-search"
-                        component="tree-view" javaSource=true} {#description}
-                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          A search input can be used to filter tree view items. It is recommended that a tree view with
-                          more than 7 nodes includes a search input.
-                        </p>
-                        {/description} {#content}{#include components/tree-view/with-search /}{/content} {/include}
-                        {#include partials/example-card title="With checkboxes" slug="with-checkboxes"
-                        component="tree-view" javaSource=true} {#content}{#include components/tree-view/with-checkboxes
-                        /}{/content} {/include} {#include partials/example-card title="With icons" slug="with-icons"
-                        component="tree-view" javaSource=true} {#content}{#include components/tree-view/with-icons
-                        /}{/content} {/include} {#include partials/example-card title="With unique icon per item"
-                        slug="with-unique-icon-per-item" component="tree-view" javaSource=true} {#content}{#include
-                        components/tree-view/with-unique-icon-per-item /}{/content} {/include} {#include
-                        partials/example-card title="With badges" slug="with-badges" component="tree-view"
-                        javaSource=true} {#content}{#include components/tree-view/with-badges /}{/content} {/include}
-                        {#include partials/example-card title="With custom badges" slug="with-custom-badges"
-                        component="tree-view" javaSource=true} {#content}{#include
-                        components/tree-view/with-custom-badges /}{/content} {/include} {#include partials/example-card
-                        title="With action items" slug="with-action-items" component="tree-view" javaSource=true}
-                        {#content}{#include components/tree-view/with-action-items /}{/content} {/include} {#include
-                        partials/example-card title="Guides" slug="guides" component="tree-view" javaSource=true}
-                        {#content}{#include components/tree-view/guides /}{/content} {/include} {#include
-                        partials/example-card title="Compact" slug="compact" component="tree-view" javaSource=true}
-                        {#content}{#include components/tree-view/compact /}{/content} {/include} {#include
-                        partials/example-card title="Compact no background" slug="compact-no-background"
-                        component="tree-view" javaSource=true} {#content}{#include
-                        components/tree-view/compact-no-background /}{/content} {/include} {#include
-                        partials/example-card title="With non-expandable top level nodes"
-                        slug="with-non-expandable-top-level-nodes" component="tree-view" javaSource=true}
-                        {#content}{#include components/tree-view/with-non-expandable-top-level-nodes /}{/content}
-                        {/include}
-                        <div class="pf-v6-l-stack__item">
-                          <br /><a
-                            href="https://github.com/patternfly/patternfly/blob/main/src/patternfly/components/TreeView/examples/TreeView.md"
-                            target="_blank"
-                            >Edit this page on GitHub</a
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-              <div class="pf-v6-c-back-to-top ws-back-to-top">
-                <button
-                  class="pf-v6-c-button pf-m-primary"
-                  type="button"
-                  data-ouia-component-type="PF6/Button"
-                  data-ouia-safe="true"
-                  data-ouia-component-id="OUIA-Generated-Button-primary-3"
-                  x-data
-                  @click="($el.closest('.pf-v6-c-page__main-container') || document.documentElement).scrollTo({ top: 0, behavior: 'smooth' })"
-                >
-                  <span class="pf-v6-c-button__text">Back to top</span
-                  ><span class="pf-v6-c-button__icon pf-m-end"
-                    ><svg
-                      class="pf-v6-svg"
-                      viewBox="0 0 320 512"
-                      fill="currentColor"
-                      aria-hidden="true"
-                      role="img"
-                      width="1em"
-                      height="1em"
-                    >
-                      <path
-                        d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"
-                      ></path></svg
-                  ></span>
-                </button>
-              </div>
-            </div>
-          </main>
-        </div>
-      </div>
-    </div>
+      </span>
+      Examples
+    </h2>
   </div>
 </div>
-{/body} {/include}
+{#include partials/example-card title="Single selectable" slug="single-selectable" component="tree-view"
+javaSource=true} {#content}{#include components/tree-view/single-selectable /}{/content} {/include} {#include
+partials/example-card title="Multiselectable" slug="multiselectable" component="tree-view" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  A tree can be set up to allow multiple nodes to be selected. To turn on multiple selection, set
+  <code class="ws-code">aria-multiselectable="true"</code> on the root
+  <code class="ws-code">ul[role="tree"]</code> element.
+</p>
+{/description} {#content}{#include components/tree-view/multiselectable /}{/content} {/include} {#include
+partials/example-card title="With separate selection and expansion" slug="with-separate-selection-and-expansion"
+component="tree-view" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  The node renders its toggle button and text button separately so a parent node can be selected (or deselected) without
+  toggling its expansion. The wrapper becomes a
+  <code class="ws-code">div.pf-v6-c-tree-view__node</code> containing two child <code class="ws-code">button</code>s —
+  one for toggle, one for the label.
+</p>
+{/description} {#content}{#include components/tree-view/with-separate-selection-and-expansion /}{/content} {/include}
+{#include partials/example-card title="With search" slug="with-search" component="tree-view" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  A search input can be used to filter tree view items. It is recommended that a tree view with more than 7 nodes
+  includes a search input.
+</p>
+{/description} {#content}{#include components/tree-view/with-search /}{/content} {/include} {#include
+partials/example-card title="With checkboxes" slug="with-checkboxes" component="tree-view" javaSource=true}
+{#content}{#include components/tree-view/with-checkboxes /}{/content} {/include} {#include partials/example-card
+title="With icons" slug="with-icons" component="tree-view" javaSource=true} {#content}{#include
+components/tree-view/with-icons /}{/content} {/include} {#include partials/example-card title="With unique icon per
+item" slug="with-unique-icon-per-item" component="tree-view" javaSource=true} {#content}{#include
+components/tree-view/with-unique-icon-per-item /}{/content} {/include} {#include partials/example-card title="With
+badges" slug="with-badges" component="tree-view" javaSource=true} {#content}{#include components/tree-view/with-badges
+/}{/content} {/include} {#include partials/example-card title="With custom badges" slug="with-custom-badges"
+component="tree-view" javaSource=true} {#content}{#include components/tree-view/with-custom-badges /}{/content}
+{/include} {#include partials/example-card title="With action items" slug="with-action-items" component="tree-view"
+javaSource=true} {#content}{#include components/tree-view/with-action-items /}{/content} {/include} {#include
+partials/example-card title="Guides" slug="guides" component="tree-view" javaSource=true} {#content}{#include
+components/tree-view/guides /}{/content} {/include} {#include partials/example-card title="Compact" slug="compact"
+component="tree-view" javaSource=true} {#content}{#include components/tree-view/compact /}{/content} {/include}
+{#include partials/example-card title="Compact no background" slug="compact-no-background" component="tree-view"
+javaSource=true} {#content}{#include components/tree-view/compact-no-background /}{/content} {/include} {#include
+partials/example-card title="With non-expandable top level nodes" slug="with-non-expandable-top-level-nodes"
+component="tree-view" javaSource=true} {#content}{#include components/tree-view/with-non-expandable-top-level-nodes
+/}{/content} {/include}
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/patternfly/patternfly/blob/main/src/patternfly/components/TreeView/examples/TreeView.md"
+    target="_blank"
+    >Edit this page on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

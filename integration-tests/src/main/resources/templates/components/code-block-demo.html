@@ -1,240 +1,111 @@
-{#include layouts/base} {#title}Code block{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}Code block{/title} {#head}
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
-{/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content">
-        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
-          ><span class="pf-v6-c-button__text">Skip to content</span></a
-        >
-      </div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-c-content pf-m-editorial">
-                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Code block</h1>
-                    <p>
-                      A monospace, preformatted display for code or shell commands. Optionally include a
-                      copy-to-clipboard button in the header. For interactive editing see
-                      <a href="/components/code-editor">Code editor</a>.
-                    </p>
-                  </div>
-                </div>
-              </section>
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                    <nav
-                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
-                      aria-label="Table of contents"
-                    >
-                      <div class="pf-v6-c-jump-links__main">
-                        <ul class="pf-v6-c-jump-links__list" role="list">
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#with-copy" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With copy</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#expandable" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Expandable</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#props-code-block" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Code block props</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </nav>
-                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
-                        <div>
-                          <h2
-                            id="examples"
-                            tabindex="-1"
-                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                          >
-                            Examples
-                          </h2>
-                        </div>
-                      </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="code-block" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Plain code block — just the content. Multi-line YAML, JSON, shell, etc.
-                      </p>
-                      {/description} {#content}{#include components/code-block/basic /}{/content} {/include} {#include
-                      partials/example-card title="With copy" slug="with-copy" component="code-block" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Copy-to-clipboard button in the header. Icon swaps to a check for 2 seconds after copying.
-                      </p>
-                      {/description} {#content}{#include components/code-block/with-copy /}{/content} {/include}
-                      {#include partials/example-card title="Expandable" slug="expandable" component="code-block"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Long code collapses behind a detached expandable-section; Show more reveals the tail inside the
-                        block.
-                      </p>
-                      {/description} {#content}{#include components/code-block/expandable /}{/content} {/include}
-
-                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
-                        <h2
-                          id="documentation"
-                          tabindex="-1"
-                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                        >
-                          Documentation
-                        </h2>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="props-code-block" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
-                          Code block props
-                        </h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          Parameters accepted by
-                          <code class="ws-code">{|{#include components/data-display/code-block ... /}|}</code>. Model
-                          mode: pass <code class="ws-code">codeBlock=&lt;CodeBlock&gt;</code> built in Java instead —
-                          the Java tab on each example shows the builder. Code text goes in the slot.
-                        </p>
-                        <table
-                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
-                          role="grid"
-                          aria-label="Code block props"
-                        >
-                          <caption class="pf-v6-c-table__caption">
-                            <span class="ws-prop-required">*</span>
-                            required
-                          </caption>
-                          <thead class="pf-v6-c-table__thead">
-                            <tr class="pf-v6-c-table__tr">
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
-                              <th scope="col" class="pf-v6-c-table__th">Description</th>
-                            </tr>
-                          </thead>
-                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">copyButton</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Shows the copy-to-clipboard button in the header.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">slot <code class="ws-code">content</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">Code text (whitespace preserved).</span>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>HTML-escape content.</strong> The content slot renders as &lt;code&gt;; escape angle
-                          brackets and ampersands to render literally.
-                        </p>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Code block vs. inline.</strong> Code block is multi-line / paragraph-level. For inline
-                          snippets use a plain <code class="ws-code">&lt;code class="ws-code"&gt;</code> or
-                          <a href="/components/clipboard-copy">Clipboard copy</a> with
-                          <code class="ws-code">inline=true</code>.
-                        </p>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <br /><a
-                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/code-block.html"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          >Edit code-block.html on GitHub</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </main>
-        </div>
-      </div>
-    </div>
+{/head} {#body} {#include partials/showcase-page title="Code block" toc=tocCodeBlock} {#lede}
+<p>
+  A monospace, preformatted display for code or shell commands. Optionally include a copy-to-clipboard button in the
+  header. For interactive editing see
+  <a href="/components/code-editor">Code editor</a>.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
   </div>
 </div>
-{/body} {/include}
+{#include partials/example-card title="Basic" slug="basic" component="code-block" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Plain code block — just the content. Multi-line YAML, JSON, shell, etc.
+</p>
+{/description} {#content}{#include components/code-block/basic /}{/content} {/include} {#include partials/example-card
+title="With copy" slug="with-copy" component="code-block" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Copy-to-clipboard button in the header. Icon swaps to a check for 2 seconds after copying.
+</p>
+{/description} {#content}{#include components/code-block/with-copy /}{/content} {/include} {#include
+partials/example-card title="Expandable" slug="expandable" component="code-block"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Long code collapses behind a detached expandable-section; Show more reveals the tail inside the block.
+</p>
+{/description} {#content}{#include components/code-block/expandable /}{/content} {/include}
+
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+    Documentation
+  </h2>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-code-block" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Code block props</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    Parameters accepted by
+    <code class="ws-code">{|{#include components/data-display/code-block ... /}|}</code>. Model mode: pass
+    <code class="ws-code">codeBlock=&lt;CodeBlock&gt;</code> built in Java instead — the Java tab on each example shows
+    the builder. Code text goes in the slot.
+  </p>
+  <table
+    class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+    role="grid"
+    aria-label="Code block props"
+  >
+    <caption class="pf-v6-c-table__caption">
+      <span class="ws-prop-required">*</span>
+      required
+    </caption>
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+        <th scope="col" class="pf-v6-c-table__th">Description</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">copyButton</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Shows the copy-to-clipboard button in the header.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">slot <code class="ws-code">content</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Code text (whitespace preserved).</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>HTML-escape content.</strong> The content slot renders as &lt;code&gt;; escape angle brackets and ampersands
+    to render literally.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Code block vs. inline.</strong> Code block is multi-line / paragraph-level. For inline snippets use a plain
+    <code class="ws-code">&lt;code class="ws-code"&gt;</code> or
+    <a href="/components/clipboard-copy">Clipboard copy</a> with <code class="ws-code">inline=true</code>.
+  </p>
+</div>
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/code-block.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit code-block.html on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

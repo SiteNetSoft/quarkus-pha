@@ -1,616 +1,278 @@
-{#include layouts/base} {#title}Modal{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}Modal{/title} {#head}
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
-{/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content">
-        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
-          ><span class="pf-v6-c-button__text">Skip to content</span></a
-        >
-      </div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-c-content pf-m-editorial">
-                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Modal</h1>
-                    <p>
-                      A focus-trapping dialog overlaid on the page — for blocking confirmations, focused forms, or
-                      content that requires attention. Always pair with a clear close action and a real reason to block.
-                    </p>
-                  </div>
-                </div>
-              </section>
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                    <nav
-                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
-                      aria-label="Table of contents"
-                    >
-                      <div class="pf-v6-c-jump-links__main">
-                        <ul class="pf-v6-c-jump-links__list" role="list">
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Basic modals</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#scrollable" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Scrollable modals</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#with-description" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >With a static description</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#top-aligned" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Top aligned</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#sizes" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Modal sizes</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#custom-width" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Custom width</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#custom-header" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Custom header</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#no-header-footer" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">No header or footer</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#title-icon" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Title icon</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#custom-title-icon" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Custom title icon</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#with-dropdown" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With dropdown</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#with-help" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With help</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#with-form" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With form</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#custom-focus" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Custom focus</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#without-title" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Without title</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#generic-container" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Generic container</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#custom-alert" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Custom alert</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#info-alert" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Info alert</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#success-alert" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Success alert</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#warning-alert" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Warning alert</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#danger-alert" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Danger alert</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#danger-alert-title" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Danger alert with title modifier</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#props-modal" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Modal props</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </nav>
-                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
-                        <div>
-                          <h2
-                            id="examples"
-                            tabindex="-1"
-                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                          >
-                            Examples
-                          </h2>
-                        </div>
-                      </div>
-                      {#include partials/example-card title="Basic modals" slug="basic" component="modal"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Confirm dialog — backdrop, bullseye centering, Escape closes.
-                      </p>
-                      {/description} {#content}{#include components/modal/basic /}{/content} {/include} {#include
-                      partials/example-card title="Scrollable modals" slug="scrollable" component="modal"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">A long body scrolls inside the dialog.</p>
-                      {/description} {#content}{#include components/modal/scrollable /}{/content} {/include} {#include
-                      partials/example-card title="With a static description" slug="with-description" component="modal"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">__description</code> sits in the header and never scrolls away.
-                      </p>
-                      {/description} {#content}{#include components/modal/with-description /}{/content} {/include}
-                      {#include partials/example-card title="Top aligned" slug="top-aligned" component="modal"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-align-top</code> pins the dialog to the viewport top.
-                      </p>
-                      {/description} {#content}{#include components/modal/top-aligned /}{/content} {/include} {#include
-                      partials/example-card title="Modal sizes" slug="sizes" component="modal"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-sm / pf-m-md / pf-m-lg</code>.
-                      </p>
-                      {/description} {#content}{#include components/modal/sizes /}{/content} {/include} {#include
-                      partials/example-card title="Custom width" slug="custom-width" component="modal" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        An inline width overrides the size modifiers.
-                      </p>
-                      {/description} {#content}{#include components/modal/custom-width /}{/content} {/include} {#include
-                      partials/example-card title="Custom header" slug="custom-header" component="modal"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Hand-composed header content via <code class="ws-code">__header-main</code>.
-                      </p>
-                      {/description} {#content}{#include components/modal/custom-header /}{/content} {/include}
-                      {#include partials/example-card title="No header or footer" slug="no-header-footer"
-                      component="modal" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Body only; the floating close button remains.
-                      </p>
-                      {/description} {#content}{#include components/modal/no-header-footer /}{/content} {/include}
-                      {#include partials/example-card title="Title icon" slug="title-icon" component="modal"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Status variants color the <code class="ws-code">__title-icon</code> — here
-                        <code class="ws-code">pf-m-warning</code>.
-                      </p>
-                      {/description} {#content}{#include components/modal/title-icon /}{/content} {/include} {#include
-                      partials/example-card title="Custom title icon" slug="custom-title-icon" component="modal"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Any icon in the title icon slot.</p>
-                      {/description} {#content}{#include components/modal/custom-title-icon /}{/content} {/include}
-                      {#include partials/example-card title="With dropdown" slug="with-dropdown" component="modal"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        A dropdown opens inside the dialog; Escape closes the menu first, then the modal.
-                      </p>
-                      {/description} {#content}{#include components/modal/with-dropdown /}{/content} {/include}
-                      {#include partials/example-card title="With help" slug="with-help" component="modal"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">A help button in the header opens a popover.</p>
-                      {/description} {#content}{#include components/modal/with-help /}{/content} {/include} {#include
-                      partials/example-card title="With form" slug="with-form" component="modal"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        The footer submit button targets the body form via the
-                        <code class="ws-code">form</code> attribute and stays disabled until valid. For wizards in
-                        modals see the Wizard page.
-                      </p>
-                      {/description} {#content}{#include components/modal/with-form /}{/content} {/include} {#include
-                      partials/example-card title="Custom focus" slug="custom-focus" component="modal"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Opening the modal focuses the Confirm button instead of the first focusable element.
-                      </p>
-                      {/description} {#content}{#include components/modal/custom-focus /}{/content} {/include} {#include
-                      partials/example-card title="Without title" slug="without-title" component="modal"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        No title element — the modal box carries <code class="ws-code">aria-label</code> instead.
-                      </p>
-                      {/description} {#content}{#include components/modal/without-title /}{/content} {/include}
-                      {#include partials/example-card title="Generic container" slug="generic-container"
-                      component="modal" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        A bare modal box with no children — a padding-free container (wizard-in-a-modal use case).
-                        Escape closes it.
-                      </p>
-                      {/description} {#content}{#include components/modal/generic-container /}{/content} {/include}
-                      {#include partials/example-card title="Custom alert" slug="custom-alert" component="modal"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-custom</code> — the neutral alert state with a bell title icon and a
-                        screen-reader alert prefix.
-                      </p>
-                      {/description} {#content}{#include components/modal/custom-alert /}{/content} {/include} {#include
-                      partials/example-card title="Info alert" slug="info-alert" component="modal" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p"><code class="ws-code">pf-m-info</code>.</p>
-                      {/description} {#content}{#include components/modal/info-alert /}{/content} {/include} {#include
-                      partials/example-card title="Success alert" slug="success-alert" component="modal"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p"><code class="ws-code">pf-m-success</code>.</p>
-                      {/description} {#content}{#include components/modal/success-alert /}{/content} {/include}
-                      {#include partials/example-card title="Warning alert" slug="warning-alert" component="modal"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p"><code class="ws-code">pf-m-warning</code>.</p>
-                      {/description} {#content}{#include components/modal/warning-alert /}{/content} {/include}
-                      {#include partials/example-card title="Danger alert" slug="danger-alert" component="modal"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p"><code class="ws-code">pf-m-danger</code>.</p>
-                      {/description} {#content}{#include components/modal/danger-alert /}{/content} {/include} {#include
-                      partials/example-card title="Danger alert with title modifier" slug="danger-alert-title"
-                      component="modal" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        The status class sits on the title element instead of the modal box.
-                      </p>
-                      {/description} {#content}{#include components/modal/danger-alert-title /}{/content} {/include}
-                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
-                        <h2
-                          id="documentation"
-                          tabindex="-1"
-                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                        >
-                          Documentation
-                        </h2>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="props-modal" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
-                          Modal props
-                        </h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          The modal is a template family: <code class="ws-code">modal</code> renders the backdrop +
-                          bullseye + modal-box and the regions come from <code class="ws-code">modal-close</code> /
-                          <code class="ws-code">modal-header</code> / <code class="ws-code">modal-body</code> /
-                          <code class="ws-code">modal-footer</code> includes composed in its main block. The trigger
-                          button lives next to the include inside a shared <code class="ws-code">x-data</code> scope
-                          providing <code class="ws-code">open</code> (or use <code class="ws-code">eventOpen</code>
-                          for the self-contained event-driven mode).
-                        </p>
-                        <table
-                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
-                          role="grid"
-                          aria-label="Modal props"
-                        >
-                          <caption class="pf-v6-c-table__caption">
-                            <span class="ws-prop-required">*</span>
-                            required
-                          </caption>
-                          <thead class="pf-v6-c-table__thead">
-                            <tr class="pf-v6-c-table__tr">
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
-                              <th scope="col" class="pf-v6-c-table__th">Description</th>
-                            </tr>
-                          </thead>
-                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >modal-box id; the backdrop gets <code class="ws-code">{|{id}|}-backdrop</code> and
-                                  the header derives <code class="ws-code">{|{id}|}-title</code> for
-                                  <code class="ws-code">aria-labelledby</code>.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><code class="ws-code">size / variant / alignTop / width</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">String / Boolean</span>
-                              </td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><code class="ws-code">sm|md|lg</code>;
-                                  <code class="ws-code">danger|warning|success|info</code> (also colors the header
-                                  icon); <code class="ws-code">pf-m-align-top</code>; inline width (e.g. "50%").</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">ariaLabel</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Label the dialog directly — use for headerless modals.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">eventOpen</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Boolean</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Self-contained mode: opens on the <code class="ws-code">open-modal</code> window
-                                  event (detail = id), Escape closes, focus is trapped. Without it the modal expects an
-                                  outer <code class="ws-code">x-data</code> providing
-                                  <code class="ws-code">open</code>.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">escapeExpr</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Override the Escape-key expression (e.g. close an inner dropdown first).</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">attrs</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String (raw)</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Raw attribute passthrough on the modal-box. Shadowed inside the family&#39;s
-                                  inserts.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">modal-close</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Corner close button wired to <code class="ws-code">open = false</code>;
-                                  <code class="ws-code">ariaLabel</code>.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">modal-header</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Title content is the main block (rich markup welcome);
-                                  <code class="ws-code">headingLevel</code>, <code class="ws-code">iconName</code>,
-                                  <code class="ws-code">descriptionText</code>,
-                                  <code class="ws-code">hasModalHelp</code> +
-                                  <code class="ws-code">modalHelp</code> slot.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">modal-body</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Main-block content; <code class="ws-code">scrollable</code>,
-                                  <code class="ws-code">attrs</code>.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">modal-footer</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">Main-block content (action buttons).</span>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Open via event.</strong> The runtime template listens for
-                          <code class="ws-code">@open-modal.window</code> with
-                          <code class="ws-code">$event.detail === id</code>. Dispatch from any button:
-                          <code class="ws-code">$dispatch('open-modal', 'my-modal')</code>.
-                        </p>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Focus management.</strong> The runtime calls
-                          <code class="ws-code">PHA.trapFocus</code> on open and
-                          <code class="ws-code">PHA.releaseFocus</code> on close — both ship with the extension.
-                        </p>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <br /><a
-                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/feedback/modal.html"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          >Edit modal.html on GitHub</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </main>
-        </div>
-      </div>
-    </div>
+{/head} {#body} {#include partials/showcase-page title="Modal" toc=tocModal} {#lede}
+<p>
+  A focus-trapping dialog overlaid on the page — for blocking confirmations, focused forms, or content that requires
+  attention. Always pair with a clear close action and a real reason to block.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
   </div>
 </div>
-{/body} {/include}
+{#include partials/example-card title="Basic modals" slug="basic" component="modal" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Confirm dialog — backdrop, bullseye centering, Escape closes.</p>
+{/description} {#content}{#include components/modal/basic /}{/content} {/include} {#include partials/example-card
+title="Scrollable modals" slug="scrollable" component="modal" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">A long body scrolls inside the dialog.</p>
+{/description} {#content}{#include components/modal/scrollable /}{/content} {/include} {#include partials/example-card
+title="With a static description" slug="with-description" component="modal" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">__description</code> sits in the header and never scrolls away.
+</p>
+{/description} {#content}{#include components/modal/with-description /}{/content} {/include} {#include
+partials/example-card title="Top aligned" slug="top-aligned" component="modal" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-align-top</code> pins the dialog to the viewport top.
+</p>
+{/description} {#content}{#include components/modal/top-aligned /}{/content} {/include} {#include partials/example-card
+title="Modal sizes" slug="sizes" component="modal"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p"><code class="ws-code">pf-m-sm / pf-m-md / pf-m-lg</code>.</p>
+{/description} {#content}{#include components/modal/sizes /}{/content} {/include} {#include partials/example-card
+title="Custom width" slug="custom-width" component="modal" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">An inline width overrides the size modifiers.</p>
+{/description} {#content}{#include components/modal/custom-width /}{/content} {/include} {#include partials/example-card
+title="Custom header" slug="custom-header" component="modal"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Hand-composed header content via <code class="ws-code">__header-main</code>.
+</p>
+{/description} {#content}{#include components/modal/custom-header /}{/content} {/include} {#include
+partials/example-card title="No header or footer" slug="no-header-footer" component="modal" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Body only; the floating close button remains.</p>
+{/description} {#content}{#include components/modal/no-header-footer /}{/content} {/include} {#include
+partials/example-card title="Title icon" slug="title-icon" component="modal" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Status variants color the <code class="ws-code">__title-icon</code> — here <code class="ws-code">pf-m-warning</code>.
+</p>
+{/description} {#content}{#include components/modal/title-icon /}{/content} {/include} {#include partials/example-card
+title="Custom title icon" slug="custom-title-icon" component="modal" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Any icon in the title icon slot.</p>
+{/description} {#content}{#include components/modal/custom-title-icon /}{/content} {/include} {#include
+partials/example-card title="With dropdown" slug="with-dropdown" component="modal"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  A dropdown opens inside the dialog; Escape closes the menu first, then the modal.
+</p>
+{/description} {#content}{#include components/modal/with-dropdown /}{/content} {/include} {#include
+partials/example-card title="With help" slug="with-help" component="modal"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">A help button in the header opens a popover.</p>
+{/description} {#content}{#include components/modal/with-help /}{/content} {/include} {#include partials/example-card
+title="With form" slug="with-form" component="modal"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  The footer submit button targets the body form via the
+  <code class="ws-code">form</code> attribute and stays disabled until valid. For wizards in modals see the Wizard page.
+</p>
+{/description} {#content}{#include components/modal/with-form /}{/content} {/include} {#include partials/example-card
+title="Custom focus" slug="custom-focus" component="modal"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Opening the modal focuses the Confirm button instead of the first focusable element.
+</p>
+{/description} {#content}{#include components/modal/custom-focus /}{/content} {/include} {#include partials/example-card
+title="Without title" slug="without-title" component="modal" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  No title element — the modal box carries <code class="ws-code">aria-label</code> instead.
+</p>
+{/description} {#content}{#include components/modal/without-title /}{/content} {/include} {#include
+partials/example-card title="Generic container" slug="generic-container" component="modal" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  A bare modal box with no children — a padding-free container (wizard-in-a-modal use case). Escape closes it.
+</p>
+{/description} {#content}{#include components/modal/generic-container /}{/content} {/include} {#include
+partials/example-card title="Custom alert" slug="custom-alert" component="modal" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-custom</code> — the neutral alert state with a bell title icon and a screen-reader alert
+  prefix.
+</p>
+{/description} {#content}{#include components/modal/custom-alert /}{/content} {/include} {#include partials/example-card
+title="Info alert" slug="info-alert" component="modal" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p"><code class="ws-code">pf-m-info</code>.</p>
+{/description} {#content}{#include components/modal/info-alert /}{/content} {/include} {#include partials/example-card
+title="Success alert" slug="success-alert" component="modal" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p"><code class="ws-code">pf-m-success</code>.</p>
+{/description} {#content}{#include components/modal/success-alert /}{/content} {/include} {#include
+partials/example-card title="Warning alert" slug="warning-alert" component="modal" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p"><code class="ws-code">pf-m-warning</code>.</p>
+{/description} {#content}{#include components/modal/warning-alert /}{/content} {/include} {#include
+partials/example-card title="Danger alert" slug="danger-alert" component="modal" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p"><code class="ws-code">pf-m-danger</code>.</p>
+{/description} {#content}{#include components/modal/danger-alert /}{/content} {/include} {#include partials/example-card
+title="Danger alert with title modifier" slug="danger-alert-title" component="modal" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  The status class sits on the title element instead of the modal box.
+</p>
+{/description} {#content}{#include components/modal/danger-alert-title /}{/content} {/include}
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+    Documentation
+  </h2>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-modal" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Modal props</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    The modal is a template family: <code class="ws-code">modal</code> renders the backdrop + bullseye + modal-box and
+    the regions come from <code class="ws-code">modal-close</code> / <code class="ws-code">modal-header</code> /
+    <code class="ws-code">modal-body</code> / <code class="ws-code">modal-footer</code> includes composed in its main
+    block. The trigger button lives next to the include inside a shared <code class="ws-code">x-data</code> scope
+    providing <code class="ws-code">open</code> (or use <code class="ws-code">eventOpen</code>
+    for the self-contained event-driven mode).
+  </p>
+  <table
+    class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+    role="grid"
+    aria-label="Modal props"
+  >
+    <caption class="pf-v6-c-table__caption">
+      <span class="ws-prop-required">*</span>
+      required
+    </caption>
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+        <th scope="col" class="pf-v6-c-table__th">Description</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >modal-box id; the backdrop gets <code class="ws-code">{|{id}|}-backdrop</code> and the header derives
+            <code class="ws-code">{|{id}|}-title</code> for <code class="ws-code">aria-labelledby</code>.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">size / variant / alignTop / width</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">String / Boolean</span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><code class="ws-code">sm|md|lg</code>; <code class="ws-code">danger|warning|success|info</code> (also
+            colors the header icon); <code class="ws-code">pf-m-align-top</code>; inline width (e.g. "50%").</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">ariaLabel</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Label the dialog directly — use for headerless modals.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">eventOpen</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Boolean</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Self-contained mode: opens on the <code class="ws-code">open-modal</code> window event (detail = id),
+            Escape closes, focus is trapped. Without it the modal expects an outer
+            <code class="ws-code">x-data</code> providing <code class="ws-code">open</code>.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">escapeExpr</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Override the Escape-key expression (e.g. close an inner dropdown first).</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">attrs</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String (raw)</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Raw attribute passthrough on the modal-box. Shadowed inside the family&#39;s inserts.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">modal-close</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Corner close button wired to <code class="ws-code">open = false</code>;
+            <code class="ws-code">ariaLabel</code>.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">modal-header</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Title content is the main block (rich markup welcome); <code class="ws-code">headingLevel</code>,
+            <code class="ws-code">iconName</code>, <code class="ws-code">descriptionText</code>,
+            <code class="ws-code">hasModalHelp</code> + <code class="ws-code">modalHelp</code> slot.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">modal-body</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Main-block content; <code class="ws-code">scrollable</code>, <code class="ws-code">attrs</code>.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">modal-footer</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Main-block content (action buttons).</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Open via event.</strong> The runtime template listens for
+    <code class="ws-code">@open-modal.window</code> with <code class="ws-code">$event.detail === id</code>. Dispatch
+    from any button: <code class="ws-code">$dispatch('open-modal', 'my-modal')</code>.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Focus management.</strong> The runtime calls <code class="ws-code">PHA.trapFocus</code> on open and
+    <code class="ws-code">PHA.releaseFocus</code> on close — both ship with the extension.
+  </p>
+</div>
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/feedback/modal.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit modal.html on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

@@ -1,332 +1,154 @@
-{#include layouts/base} {#title}Timestamp{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}Timestamp{/title} {#head}
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
-{/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content">
-        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
-          ><span class="pf-v6-c-button__text">Skip to content</span></a
-        >
-      </div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-c-content pf-m-editorial">
-                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Timestamp</h1>
-                    <p>
-                      A consistently-formatted date/time display. Renders a semantic
-                      <code class="ws-code">&lt;time&gt;</code> element with the machine-readable ISO value in the
-                      <code class="ws-code">datetime</code> attribute. Formatting is a server-side concern — pre-format
-                      the human-readable string and pass it in.
-                    </p>
-                  </div>
-                </div>
-              </section>
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                    <nav
-                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
-                      aria-label="Table of contents"
-                    >
-                      <div class="pf-v6-c-jump-links__main">
-                        <ul class="pf-v6-c-jump-links__list" role="list">
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Default</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#basic-formats" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Basic formats</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#custom-format" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Custom format</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#custom-content" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Custom content</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#inline" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Inline</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#with-tooltip" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Default tooltip</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#custom-tooltip" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Custom tooltip</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#props-timestamp" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Timestamp props</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </nav>
-                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
-                        <div>
-                          <h2
-                            id="examples"
-                            tabindex="-1"
-                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                          >
-                            Examples
-                          </h2>
-                        </div>
-                      </div>
-                      {#include partials/example-card title="Default" slug="basic" component="timestamp"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Semantic <code class="ws-code">&lt;time&gt;</code> with a datetime attribute.
-                      </p>
-                      {/description} {#content}{#include components/timestamp/basic /}{/content} {/include} {#include
-                      partials/example-card title="Basic formats" slug="basic-formats" component="timestamp"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Full, long, medium, and short renderings of one instant.
-                      </p>
-                      {/description} {#content}{#include components/timestamp/basic-formats /}{/content} {/include}
-                      {#include partials/example-card title="Custom format" slug="custom-format" component="timestamp"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Any display string over the same datetime.</p>
-                      {/description} {#content}{#include components/timestamp/custom-format /}{/content} {/include}
-                      {#include partials/example-card title="Custom content" slug="custom-content" component="timestamp"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Relative wording ("3 weeks ago") with the machine-readable value intact.
-                      </p>
-                      {/description} {#content}{#include components/timestamp/custom-content /}{/content} {/include}
-                      {#include partials/example-card title="Inline" slug="inline" component="timestamp"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Flows inside a sentence.</p>
-                      {/description} {#content}{#include components/timestamp/inline /}{/content} {/include} {#include
-                      partials/example-card title="Default tooltip" slug="with-tooltip" component="timestamp"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Hover reveals the UTC form via a native browser tooltip.
-                      </p>
-                      {/description} {#content}{#include components/timestamp/with-tooltip /}{/content} {/include}
-                      {#include partials/example-card title="Custom tooltip" slug="custom-tooltip" component="timestamp"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        The tooltip carries custom content instead of the UTC datetime; the second timestamp also
-                        overrides the display text.
-                      </p>
-                      {/description} {#content}{#include components/timestamp/custom-tooltip /}{/content} {/include}
-
-                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
-                        <h2
-                          id="documentation"
-                          tabindex="-1"
-                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                        >
-                          Documentation
-                        </h2>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="props-timestamp" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
-                          Timestamp props
-                        </h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          Parameters accepted by
-                          <code class="ws-code">{|{#include components/data-display/timestamp ... /}|}</code>. Model
-                          mode: pass <code class="ws-code">timestamp=&lt;Timestamp&gt;</code> built in Java instead —
-                          the Java tab on each example shows the builder.
-                        </p>
-                        <table
-                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
-                          role="grid"
-                          aria-label="Timestamp props"
-                        >
-                          <caption class="pf-v6-c-table__caption">
-                            <span class="ws-prop-required">*</span>
-                            required
-                          </caption>
-                          <thead class="pf-v6-c-table__thead">
-                            <tr class="pf-v6-c-table__tr">
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
-                              <th scope="col" class="pf-v6-c-table__th">Description</th>
-                            </tr>
-                          </thead>
-                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <em>(content slot)</em></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Slot</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Pre-formatted, human-readable timestamp passed as the include body ("May 20, 2026",
-                                  "2h ago", etc.). Mirrors PF React's
-                                  <code class="ws-code">children</code> override.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">DOM id on the &lt;time&gt; element.</span>
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">datetime</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">String (ISO 8601)</span>
-                              </td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Machine-readable timestamp — emitted as the &lt;time&gt;
-                                  <code class="ws-code">datetime</code> attribute.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">tooltip</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Sets the HTML <code class="ws-code">title</code> attribute — browser-native tooltip
-                                  on hover.</span
-                                >
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Divergence from PF React.</strong> PF React's timestamp accepts a
-                          <code class="ws-code">date</code> object and formats client-side with
-                          <code class="ws-code">dateFormat</code>/<code class="ws-code">timeFormat</code>/<code
-                            class="ws-code"
-                            >customFormat</code
-                          >/<code class="ws-code">locale</code>/<code class="ws-code">is12Hour</code> props. We don't —
-                          formatting happens server-side. Pass a Java
-                          <code class="ws-code">DateTimeFormatter</code> result as the include body and the ISO string
-                          as <code class="ws-code">datetime</code>.
-                        </p>
-                      </div>
-
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Always include <code class="ws-code">datetime</code>.</strong> The visible text may be
-                          relative ("2 hours ago") or locale-formatted; the
-                          <code class="ws-code">datetime</code> attribute is what AT, search engines, and JS pickup. Use
-                          ISO 8601 with a timezone.
-                        </p>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Relative + absolute pairing.</strong> The common pattern is a relative visible text
-                          (&quot;2h ago&quot;) plus a tooltip with the absolute ISO time — see the
-                          <a href="#with-tooltip">With tooltip</a> example.
-                        </p>
-                      </div>
-
-                      <div class="pf-v6-l-stack__item">
-                        <br /><a
-                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/timestamp.html"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          >Edit timestamp.html on GitHub</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </main>
-        </div>
-      </div>
-    </div>
+{/head} {#body} {#include partials/showcase-page title="Timestamp" toc=tocTimestamp} {#lede}
+<p>
+  A consistently-formatted date/time display. Renders a semantic
+  <code class="ws-code">&lt;time&gt;</code> element with the machine-readable ISO value in the
+  <code class="ws-code">datetime</code> attribute. Formatting is a server-side concern — pre-format the human-readable
+  string and pass it in.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
   </div>
 </div>
-{/body} {/include}
+{#include partials/example-card title="Default" slug="basic" component="timestamp" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Semantic <code class="ws-code">&lt;time&gt;</code> with a datetime attribute.
+</p>
+{/description} {#content}{#include components/timestamp/basic /}{/content} {/include} {#include partials/example-card
+title="Basic formats" slug="basic-formats" component="timestamp" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Full, long, medium, and short renderings of one instant.</p>
+{/description} {#content}{#include components/timestamp/basic-formats /}{/content} {/include} {#include
+partials/example-card title="Custom format" slug="custom-format" component="timestamp" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Any display string over the same datetime.</p>
+{/description} {#content}{#include components/timestamp/custom-format /}{/content} {/include} {#include
+partials/example-card title="Custom content" slug="custom-content" component="timestamp" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Relative wording ("3 weeks ago") with the machine-readable value intact.
+</p>
+{/description} {#content}{#include components/timestamp/custom-content /}{/content} {/include} {#include
+partials/example-card title="Inline" slug="inline" component="timestamp" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Flows inside a sentence.</p>
+{/description} {#content}{#include components/timestamp/inline /}{/content} {/include} {#include partials/example-card
+title="Default tooltip" slug="with-tooltip" component="timestamp" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Hover reveals the UTC form via a native browser tooltip.</p>
+{/description} {#content}{#include components/timestamp/with-tooltip /}{/content} {/include} {#include
+partials/example-card title="Custom tooltip" slug="custom-tooltip" component="timestamp" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  The tooltip carries custom content instead of the UTC datetime; the second timestamp also overrides the display text.
+</p>
+{/description} {#content}{#include components/timestamp/custom-tooltip /}{/content} {/include}
+
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+    Documentation
+  </h2>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-timestamp" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Timestamp props</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    Parameters accepted by
+    <code class="ws-code">{|{#include components/data-display/timestamp ... /}|}</code>. Model mode: pass
+    <code class="ws-code">timestamp=&lt;Timestamp&gt;</code> built in Java instead — the Java tab on each example shows
+    the builder.
+  </p>
+  <table
+    class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+    role="grid"
+    aria-label="Timestamp props"
+  >
+    <caption class="pf-v6-c-table__caption">
+      <span class="ws-prop-required">*</span>
+      required
+    </caption>
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+        <th scope="col" class="pf-v6-c-table__th">Description</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><span class="ws-prop-required">*</span> <em>(content slot)</em></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Slot</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Pre-formatted, human-readable timestamp passed as the include body ("May 20, 2026", "2h ago", etc.).
+            Mirrors PF React's <code class="ws-code">children</code> override.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">DOM id on the &lt;time&gt; element.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">datetime</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">String (ISO 8601)</span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Machine-readable timestamp — emitted as the &lt;time&gt;
+            <code class="ws-code">datetime</code> attribute.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">tooltip</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Sets the HTML <code class="ws-code">title</code> attribute — browser-native tooltip on hover.</span
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Divergence from PF React.</strong> PF React's timestamp accepts a <code class="ws-code">date</code> object
+    and formats client-side with <code class="ws-code">dateFormat</code>/<code class="ws-code">timeFormat</code>/<code
+      class="ws-code"
+      >customFormat</code
+    >/<code class="ws-code">locale</code>/<code class="ws-code">is12Hour</code> props. We don't — formatting happens
+    server-side. Pass a Java <code class="ws-code">DateTimeFormatter</code> result as the include body and the ISO
+    string as <code class="ws-code">datetime</code>.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Always include <code class="ws-code">datetime</code>.</strong> The visible text may be relative ("2 hours
+    ago") or locale-formatted; the <code class="ws-code">datetime</code> attribute is what AT, search engines, and JS
+    pickup. Use ISO 8601 with a timezone.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Relative + absolute pairing.</strong> The common pattern is a relative visible text (&quot;2h ago&quot;)
+    plus a tooltip with the absolute ISO time — see the <a href="#with-tooltip">With tooltip</a> example.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/timestamp.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit timestamp.html on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}
