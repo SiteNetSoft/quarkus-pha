@@ -135,4 +135,35 @@ test.describe("Select", () => {
       });
     }
   });
+
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/select");
+      for (const ex of [
+        "single",
+        "option-variants",
+        "grouped",
+        "validation",
+        "checkboxes",
+        "typeahead",
+        "typeahead-creatable",
+        "multi-typeahead",
+        "multi-typeahead-creatable",
+        "multi-typeahead-checkbox",
+        "view-more",
+        "footer",
+      ]) {
+        const card = page.locator(`[data-rendered-href="/components/select/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the composed builders as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/select/source-java/typeahead");
+      expect(res.status()).toBe(200);
+      const body = await res.text();
+      expect(body).toContain("MenuToggle.typeahead(");
+      expect(body).toContain(".selectSingle()");
+    });
+  });
 });

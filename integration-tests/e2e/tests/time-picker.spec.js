@@ -1,13 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-const EXAMPLES = [
-  "basic",
-  "twelve-hour",
-  "custom-delimiter",
-  "min-max",
-  "with-seconds",
-  "twenty-four-with-seconds",
-];
+const EXAMPLES = ["basic", "twelve-hour", "custom-delimiter", "min-max", "with-seconds", "twenty-four-with-seconds"];
 
 test.describe("Time Picker", () => {
   test.beforeEach(async ({ page }) => {
@@ -61,5 +54,30 @@ test.describe("Time Picker", () => {
         await expect(page.locator(".pf-v6-c-time-picker").first()).toBeAttached();
       });
     }
+  });
+
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/time-picker");
+      for (const ex of [
+        "basic",
+        "twelve-hour",
+        "custom-delimiter",
+        "min-max",
+        "with-seconds",
+        "twenty-four-with-seconds",
+      ]) {
+        const card = page.locator(`[data-rendered-href="/components/time-picker/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the composed builders as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/time-picker/source-java/basic");
+      expect(res.status()).toBe(200);
+      const body = await res.text();
+      expect(body).toContain("Menu.builder()");
+      expect(body).toContain("MenuItem.of(String.format(");
+    });
   });
 });

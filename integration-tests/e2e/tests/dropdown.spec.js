@@ -73,4 +73,22 @@ test.describe("Dropdown", () => {
       expect(res.status()).toBe(200);
     });
   });
+
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/dropdown");
+      for (const ex of ["basic", "plain-kebab", "with-groups", "with-descriptions", "split-checkbox"]) {
+        const card = page.locator(`[data-rendered-href="/components/dropdown/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the composed builders as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/dropdown/source-java/basic");
+      expect(res.status()).toBe(200);
+      const body = await res.text();
+      expect(body).toContain("Menu.builder()");
+      expect(body).toContain('MenuItem.of("Delete").asDanger()');
+    });
+  });
 });

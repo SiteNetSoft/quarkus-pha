@@ -177,4 +177,20 @@ test.describe("Application Launcher", () => {
       await expect(link).toHaveAttribute("target", "_blank");
     });
   });
+
+  test.describe("Java source tab", () => {
+    test("the example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/application-launcher");
+      const card = page.locator('[data-rendered-href="/components/application-launcher/application-launcher-menu"]');
+      await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+    });
+
+    test("source-java route serves the composed builders as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/application-launcher/source-java/application-launcher-menu");
+      expect(res.status()).toBe(200);
+      const body = await res.text();
+      expect(body).toContain("Menu.builder()");
+      expect(body).toContain(".searchFilter(");
+    });
+  });
 });
