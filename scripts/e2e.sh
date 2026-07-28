@@ -12,8 +12,23 @@ E2E_DIR="$PROJECT_ROOT/integration-tests/e2e"
 QUARKUS_APP="$PROJECT_ROOT/integration-tests/build/quarkus-app"
 
 QUARKUS_CONTAINER="quarkus-pha-e2e"
+PLAYWRIGHT_CONTAINER="quarkus-pha-e2e-playwright"
 QUARKUS_IMAGE="registry.access.redhat.com/ubi9/openjdk-25-runtime:1.24"
 PLAYWRIGHT_IMAGE="mcr.microsoft.com/playwright:v1.61.1-noble"
+
+# Local resource guardrail: this host's CPU hard-freezes under sustained
+# all-core load, so local runs cap the Playwright container's CPU/memory and
+# default to few workers. CI runs unthrottled (workers=1 via playwright.config).
+# Override with E2E_CPUS / E2E_MEMORY / PW_WORKERS. Remote CI stays the gate;
+# prefer it over local full runs.
+PLAYWRIGHT_LIMITS=()
+if [ -z "${CI:-}" ]; then
+  HOST_CPUS="$(nproc)"
+  E2E_CPUS="${E2E_CPUS:-$(( HOST_CPUS < 8 ? HOST_CPUS : 8 ))}"
+  E2E_MEMORY="${E2E_MEMORY:-8g}"
+  PLAYWRIGHT_LIMITS=(--cpus "$E2E_CPUS" --memory "$E2E_MEMORY")
+  PW_WORKERS="${PW_WORKERS:-4}"
+fi
 
 cmd_start() {
   if curl -sf http://localhost:9090 > /dev/null 2>&1; then
@@ -142,8 +157,13 @@ cmd_test() {
 
   PLAYWRIGHT_LOG="$REPORTS_DIR/playwright.log"
 
+  # Remove stale container from a previous crashed run
+  podman rm -f "$PLAYWRIGHT_CONTAINER" 2>/dev/null || true
+
   set +e
   podman run --rm \
+    --name "$PLAYWRIGHT_CONTAINER" \
+    "${PLAYWRIGHT_LIMITS[@]}" \
     --network=host \
     --ipc=host \
     -e CI="${CI:-}" \
