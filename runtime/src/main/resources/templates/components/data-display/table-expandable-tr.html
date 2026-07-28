@@ -1,0 +1,18 @@
+{! Expandable detail row (pure Qute) for the table component's slot mode. Rendered inside a
+   table-tbody-expandable, after the data row whose table-toggle-td flips the shared expr. !}
+{! Required: colspan — data columns the detail cell spans. !}
+{! Optional: pad — leading empty cells before the detail cell (default 1 for the toggle column;
+             use 2 when a selection column follows the toggle); expr — the Alpine boolean
+             (default 'open'); noPadding — pf-m-no-padding on the detail cell; noBackground —
+             pf-m-no-background on the detail content. !}
+{! Slot: {#detail} — the expanded content. !}
+{#let stateVar=(expr ?: 'open') padCount=(pad.or(1))}
+<tr class="pf-v6-c-table__expandable-row" :class="{stateVar} ? 'pf-m-expanded' : ''" x-show="{stateVar}" x-cloak>
+  {#for i in padCount}<td class="pf-v6-c-table__td"></td>{/for}
+  <td colspan="{colspan}"{#if noPadding??} class="pf-v6-c-table__td pf-m-no-padding"{/if}>
+    <div class="pf-v6-c-table__expandable-row-content{#if noBackground??} pf-m-no-background{/if}">
+      {#let colspan=null pad=null expr=null noPadding=null noBackground=null stateVar=null padCount=null}{#insert detail}{/insert}{/let}
+    </div>
+  </td>
+</tr>
+{/let}

@@ -2,6 +2,9 @@ import { test, expect } from "@playwright/test";
 
 const EXAMPLES = [
   "basic",
+  "composable",
+  "composable-expandable",
+  "composable-tree",
   "plain",
   "compact",
   "compact-expandable",
@@ -694,6 +697,50 @@ test.describe("Table", () => {
     }
   });
 
+  test.describe("Composable (pure Qute)", () => {
+    test("sticky scrollable shell with sort headers and select-all", async ({ page }) => {
+      const table = page.locator("#table-composable");
+      await expect(table).toHaveClass(/pf-m-sticky-header/);
+      const wrapper = table.locator("xpath=ancestor::div[contains(@class, 'pf-v6-c-scroll-inner-wrapper')]");
+      await expect(wrapper).toHaveAttribute("role", "region");
+      await expect(table.locator('thead th[aria-sort="ascending"]')).toHaveCount(1);
+      await expect(table.locator('thead th[aria-sort="none"]')).toHaveCount(1);
+      await table.locator('thead input[name="select-all"]').check();
+      const rowChecks = table.locator('tbody input[name="composable-row"]');
+      await expect(rowChecks).toHaveCount(8);
+      for (const cb of await rowChecks.all()) {
+        await expect(cb).toBeChecked();
+      }
+    });
+
+    test("composable expandable rows toggle their detail", async ({ page }) => {
+      const table = page.locator("#table-composable-expandable");
+      const bodies = table.locator("tbody");
+      await expect(bodies.first()).toHaveClass(/pf-m-expanded/);
+      await expect(bodies.first().locator(".pf-v6-c-table__expandable-row")).toBeVisible();
+      const second = bodies.nth(1);
+      await expect(second.locator(".pf-v6-c-table__expandable-row")).toBeHidden();
+      await second.locator('button[aria-label="Toggle details for repo two"]').click();
+      await expect(second.locator(".pf-v6-c-table__expandable-row")).toBeVisible();
+      await expect(second.locator("td.pf-m-no-padding")).toBeAttached();
+    });
+
+    test("composable tree expands and collapses branches", async ({ page }) => {
+      const table = page.locator("#table-composable-tree");
+      await expect(table).toHaveAttribute("role", "treegrid");
+      await expect(table).toHaveClass(/pf-m-tree-view/);
+      const report = table.locator("tr", { hasText: "Report.pdf" });
+      const intro = table.locator("tr", { hasText: "Intro.mp4" });
+      await expect(report).toBeVisible();
+      await expect(intro).toBeHidden();
+      await table.locator('button[aria-label="Expand row Media"]').click();
+      await expect(intro).toBeVisible();
+      await table.locator('button[aria-label="Expand row Documents"]').click();
+      await expect(report).toBeHidden();
+      await expect(intro).toBeHidden();
+    });
+  });
+
   test.describe("Header tooltips and popovers", () => {
     test("header info button reveals a tooltip on hover", async ({ page }) => {
       const th = page.locator("#tbl-header-help thead th").first();
@@ -739,18 +786,56 @@ test.describe("Table", () => {
 
   test.describe("Java source tab", () => {
     const MODEL_DRIVEN = [
-      "basic", "compact", "borderless", "borderless-compact", "striped", "striped-tr",
-      "striped-multiple-tbody", "plain", "footer", "width", "width-constrained", "long-strings",
-      "breakpoint-modifiers", "sortable", "selectable-checkbox", "selectable-radio",
-      "clickable-rows", "expandable", "compact-expandable", "borderless-expandable",
-      "striped-expandable", "animated-expandable", "expandable-set-width", "actions",
-      "text-control", "sticky", "sticky-footer", "multiple-sticky-columns",
-      "sticky-right-column", "nested-column-headers", "nested-sticky-header",
-      "compound-expandable", "borderless-compound-expandable", "animated-compound-expandable",
-      "compound-expandable-nested-table", "expandable-nested-table", "nested-expandable",
-      "clickable-expandable", "tree-table", "tree-table-checkboxes", "tree-table-icons",
-      "tree-table-flat", "favoritable", "favorites-sortable", "selectable-indeterminate",
-      "empty-state", "overflow-menu", "table-text", "editable-rows", "draggable-rows",
+      "basic",
+      "compact",
+      "borderless",
+      "borderless-compact",
+      "striped",
+      "striped-tr",
+      "striped-multiple-tbody",
+      "plain",
+      "footer",
+      "width",
+      "width-constrained",
+      "long-strings",
+      "breakpoint-modifiers",
+      "sortable",
+      "selectable-checkbox",
+      "selectable-radio",
+      "clickable-rows",
+      "expandable",
+      "compact-expandable",
+      "borderless-expandable",
+      "striped-expandable",
+      "animated-expandable",
+      "expandable-set-width",
+      "actions",
+      "text-control",
+      "sticky",
+      "sticky-footer",
+      "multiple-sticky-columns",
+      "sticky-right-column",
+      "nested-column-headers",
+      "nested-sticky-header",
+      "compound-expandable",
+      "borderless-compound-expandable",
+      "animated-compound-expandable",
+      "compound-expandable-nested-table",
+      "expandable-nested-table",
+      "nested-expandable",
+      "clickable-expandable",
+      "tree-table",
+      "tree-table-checkboxes",
+      "tree-table-icons",
+      "tree-table-flat",
+      "favoritable",
+      "favorites-sortable",
+      "selectable-indeterminate",
+      "empty-state",
+      "overflow-menu",
+      "table-text",
+      "editable-rows",
+      "draggable-rows",
     ];
 
     test("model-driven cards get a leading Java tab, composition cards do not", async ({ page }) => {

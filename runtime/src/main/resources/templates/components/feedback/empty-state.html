@@ -5,6 +5,7 @@
               customIcon — set true and fill the {#icon} slot to put a component in the icon area
                            (e.g. a spinner) instead of an icon; overrides iconName.
               bodyText — supporting copy under the title.
+              headingLevel — h1…h6 on the title (default h4). Styling comes from the class, not the tag.
               size (xs | sm | lg | xl) — pf-m-{size} on the root.
               status (danger | warning | success | info) — pf-m-{status}; colors the icon.
               hasActions — set true and fill the {#actions} slot to render the footer. !}
@@ -50,7 +51,7 @@
       <div class="pf-v6-c-empty-state__icon">{icons:svg(iconName).raw}</div>
       {/if}
       <div class="pf-v6-c-empty-state__title">
-        <h4 class="pf-v6-c-empty-state__title-text">{titleText}</h4>
+        {#let h=(headingLevel ?: 'h4')}<{h} class="pf-v6-c-empty-state__title-text">{titleText}</{h}>{/let}
       </div>
     </div>
     {#if bodyText??}

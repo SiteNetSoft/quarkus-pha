@@ -1,0 +1,42 @@
+{! Pure-Qute page: the structured slot mode (shell=true) composing the masthead component, the
+   page-sidebar brick (with a slot-mode nav) and two page-section bricks — no Java model anywhere. !}
+{#include components/navigation/page shell=true id='page-composable' hasToggle=true embedded=true}
+{#pageMasthead}
+{#include components/navigation/masthead}
+{#toggle}
+<span class="pf-v6-c-masthead__toggle">
+  {#let btn=null btnAttrs=null variant=null icon=null iconPosition=null disabled=null ariaDisabled=null size=null
+  inline=null block=null circle=null count=null countRead=null ariaLabel=null ariaExpanded=null attrs=null type=null
+  clicked=null state=null stateful=null href=null id=null component=null hamburger=null hamburgerVariant=null
+  hamburgerExpandExpr=null settings=null favorite=null favorited=null isLoading=null spinnerLabel=null
+  hasNoPadding=null danger=null} {#include components/actions/button hamburger=true ariaLabel='Global navigation'
+  hamburgerExpandExpr='sidebarOpen' /} {/let}
+</span>
+{/toggle} {#brand}<strong>Composable app</strong>{/brand}
+{! Explicit empty content block: without it the masthead's {#insert content} walks up the include
+   stack and re-enters the demo card's content slot (StackOverflowError). !}
+{#content}{/content}
+{/include}
+{/pageMasthead}
+{#pageSidebar}
+{#include components/navigation/page-sidebar toggleExpr='sidebarOpen'}
+{#sidebarBody}
+{#include components/navigation/nav ariaLabel='Composable page navigation'}
+{#content}
+{#include components/navigation/nav-item href='#' label='Dashboard' current=true /}
+{#include components/navigation/nav-item href='#' label='Services' /}
+{#include components/navigation/nav-item href='#' label='Settings' /}
+{/content}
+{/include}
+{/sidebarBody}
+{/include}
+{/pageSidebar}
+{#pageMain}
+{#include components/navigation/page-section modifiers='pf-m-limit-width'}
+{#sectionBody}<h1 class="pf-v6-c-title pf-m-2xl">Section with limited width</h1>{/sectionBody}
+{/include}
+{#include components/navigation/page-section modifiers='pf-m-fill' sectionAriaLabel='Filled section'}
+{#sectionBody}<p>A pf-m-fill section growing to fill the remaining main area.</p>{/sectionBody}
+{/include}
+{/pageMain}
+{/include}

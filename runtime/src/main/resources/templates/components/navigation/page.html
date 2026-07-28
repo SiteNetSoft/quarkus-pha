@@ -1,5 +1,12 @@
 {! Page — PatternFly v6 !} {! Optional: id — DOM id on the root; omit unless something else references the page. !}
 {! Model mode: pass page=<org.sitenetsoft.quarkus.pha.model.Page> — masthead, generated sidebar, ordered main entries. !}
+{! Structured slot mode (pure Qute, no model): pass shell=true. Params: id; hasToggle — Alpine
+   sidebarOpen state on the root (drives a masthead hamburger with hamburgerExpandExpr='sidebarOpen'
+   and a page-sidebar with toggleExpr='sidebarOpen'); embedded — render the main region as a <div>
+   (docs/demo pages already live inside a <main>); mainId; scrollableMain.
+   Slots: {#pageMasthead} — include components/navigation/masthead here.
+          {#pageSidebar} — include components/navigation/page-sidebar here.
+          {#pageMain} — the main content; compose components/navigation/page-section includes. !}
 {#if page??}
 <div class="pf-v6-c-page" id="{page.id}"{#if page.isHasToggle} x-data="{ sidebarOpen: true }"{/if}{#if page.style??} style="{page.style}"{/if}>
   <header class="pf-v6-c-masthead{#if page.isMastheadInline} pf-m-display-inline{/if}">
@@ -74,6 +81,20 @@
       </div>
       {/if}
       {/for}
+    </{mainTag}>
+    {/let}
+  </div>
+</div>
+{#else if shell??}
+<div class="pf-v6-c-page"{#if id??} id="{id}"{/if}{#if hasToggle??} x-data="{ sidebarOpen: true }"{/if}>
+  {#let shell=null id=null hasToggle=null embedded=null mainId=null scrollableMain=null}
+  {#insert pageMasthead}{/insert}
+  {#insert pageSidebar}{/insert}
+  {/let}
+  <div class="pf-v6-c-page__main-container">
+    {#let mainTag=(embedded.or(false) ? 'div' : 'main')}
+    <{mainTag} class="pf-v6-c-page__main"{#if mainId??} id="{mainId}"{/if}{#if scrollableMain??} tabindex="0" style="overflow-y: auto"{#else} tabindex="-1"{/if}>
+      {#let shell=null id=null hasToggle=null embedded=null mainId=null mainTag=null scrollableMain=null}{#insert pageMain}{/insert}{/let}
     </{mainTag}>
     {/let}
   </div>

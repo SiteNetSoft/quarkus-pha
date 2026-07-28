@@ -1,0 +1,39 @@
+{! Pure-Qute expandable table: the slot-mode shell composing table-tbody-expandable,
+   table-toggle-td and table-expandable-tr bricks — no Java model anywhere. Each tbody owns its
+   Alpine open state; the toggle cell and detail row share the default 'open' expr. !}
+{#include components/data-display/table id='table-composable-expandable' ariaLabel='Composable expandable table'
+expandable=true}
+{#content}
+<thead class="pf-v6-c-table__thead">
+  <tr class="pf-v6-c-table__tr">
+    <td class="pf-v6-c-table__td"></td>
+    <th scope="col" class="pf-v6-c-table__th">Repository</th>
+    <th scope="col" class="pf-v6-c-table__th">Branches</th>
+  </tr>
+</thead>
+{#include components/data-display/table-tbody-expandable expanded=true}
+{#rows}
+<tr class="pf-v6-c-table__tr">
+  {#include components/data-display/table-toggle-td ariaLabel='Toggle details for repo one' /}
+  <th scope="row" class="pf-v6-c-table__th">Repo one</th>
+  <td class="pf-v6-c-table__td">10</td>
+</tr>
+{#include components/data-display/table-expandable-tr colspan=2}
+{#detail}Repo one starts expanded — its tbody passes expanded=true.{/detail}
+{/include}
+{/rows}
+{/include}
+{#include components/data-display/table-tbody-expandable}
+{#rows}
+<tr class="pf-v6-c-table__tr">
+  {#include components/data-display/table-toggle-td ariaLabel='Toggle details for repo two' /}
+  <th scope="row" class="pf-v6-c-table__th">Repo two</th>
+  <td class="pf-v6-c-table__td">3</td>
+</tr>
+{#include components/data-display/table-expandable-tr colspan=2 noPadding=true}
+{#detail}A pf-m-no-padding detail cell.{/detail}
+{/include}
+{/rows}
+{/include}
+{/content}
+{/include}

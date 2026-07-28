@@ -189,7 +189,7 @@ public class MiscExamplesRoutes {
         m.put("page",                  Set.of("basic", "vertical-nav", "multiple-sidebar-body", "horizontal-nav",
                                                "uncontrolled-nav", "filled-sections", "main-section-padding",
                                                "main-section-variations", "group-section", "centered-section",
-                                               "plain-sections", "dynamic-sticky-section"));
+                                               "plain-sections", "dynamic-sticky-section", "composable"));
         m.put("context-selector",      Set.of("basic"));
         m.put("dual-list-selector",    Set.of("basic", "with-tooltips", "with-search", "complex-actions",
                                                "tree-view", "tree-view-disabled"));
@@ -212,7 +212,7 @@ public class MiscExamplesRoutes {
                                                "with-seconds", "twenty-four-with-seconds"));
         m.put("navigation",            Set.of("vertical", "grouped", "expandable", "expandable-third-level",
                                                "mixed", "horizontal", "horizontal-subnav", "icons",
-            "horizontal-overflow"));
+            "horizontal-overflow", "composable"));
         EXAMPLES = Map.copyOf(m);
     }
 

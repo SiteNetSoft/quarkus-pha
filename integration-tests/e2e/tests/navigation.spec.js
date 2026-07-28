@@ -9,7 +9,11 @@ const EXAMPLES = [
   "horizontal",
   "horizontal-subnav",
   "icons",
+  "composable",
 ];
+
+// composable is pure Qute (no Java model) — excluded from the Java-tab loop.
+const MODEL_DRIVEN = EXAMPLES.filter((e) => e !== "composable");
 
 test.describe("Navigation", () => {
   test.beforeEach(async ({ page }) => {
@@ -59,18 +63,12 @@ test.describe("Navigation", () => {
     });
 
     test("grouped nav has 2 sections with titles", async ({ page }) => {
-      await expect(
-        page.locator(`${card} #nav-grouped .pf-v6-c-nav__section`)
-      ).toHaveCount(2);
-      await expect(
-        page.locator(`${card} #nav-grouped .pf-v6-c-nav__section-title`)
-      ).toHaveCount(2);
+      await expect(page.locator(`${card} #nav-grouped .pf-v6-c-nav__section`)).toHaveCount(2);
+      await expect(page.locator(`${card} #nav-grouped .pf-v6-c-nav__section-title`)).toHaveCount(2);
     });
 
     test("grouped nav has one current item", async ({ page }) => {
-      await expect(
-        page.locator(`${card} #nav-grouped .pf-v6-c-nav__link.pf-m-current`)
-      ).toHaveCount(1);
+      await expect(page.locator(`${card} #nav-grouped .pf-v6-c-nav__link.pf-m-current`)).toHaveCount(1);
     });
   });
 
@@ -152,7 +150,7 @@ test.describe("Navigation", () => {
 
   test.describe("Java source tab", () => {
     test("every example card has a leading Java tab", async ({ page }) => {
-      for (const example of EXAMPLES) {
+      for (const example of MODEL_DRIVEN) {
         const card = page.locator(`[data-rendered-href="/components/navigation/${example}"]`);
         await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
         const firstControl = card.locator(".pf-v6-c-code-editor__controls button").first();
@@ -184,6 +182,28 @@ test.describe("Navigation", () => {
         await expect(page.locator(".pf-v6-c-nav").first()).toBeAttached();
       });
     }
+  });
+
+  test.describe("Composable (pure Qute)", () => {
+    test("grouped sections, expandable subnav and current item render from bricks", async ({ page }) => {
+      const nav = page.locator("#nav-composable");
+      await expect(nav.locator(".pf-v6-c-nav__section")).toHaveCount(2);
+      await expect(nav.locator(".pf-v6-c-nav__section-title").first()).toHaveText("Workspace");
+      await expect(nav.locator("a.pf-v6-c-nav__link.pf-m-current")).toHaveAttribute("aria-current", "page");
+      const subnav = nav.locator(".pf-v6-c-nav__subnav");
+      await expect(subnav).toBeHidden();
+      await nav.locator("#nav-composable-settings").click();
+      await expect(subnav).toBeVisible();
+      await expect(subnav.locator("a", { hasText: "Members" })).toBeVisible();
+      await nav.locator("#nav-composable-settings").click();
+      await expect(subnav).toBeHidden();
+    });
+
+    test("composable card has a Qute tab but no Java tab", async ({ page }) => {
+      const card = page.locator('[data-rendered-href="/components/navigation/composable"]');
+      await expect(card.locator('button[aria-label*="Toggle Qute"]')).toHaveCount(1);
+      await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+    });
   });
 
   test.describe("Per-example code viewer", () => {

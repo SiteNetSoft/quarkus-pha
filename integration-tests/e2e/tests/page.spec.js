@@ -11,6 +11,7 @@ const EXAMPLES = [
   "main-section-variations",
   "group-section",
   "centered-section",
+  "composable",
   "plain-sections",
   "dynamic-sticky-section",
 ];
@@ -214,6 +215,21 @@ test.describe("Page", () => {
       const nav = page.locator("#pg-group-breadcrumb");
       await expect(nav).toBeAttached();
       await expect(nav.locator(".pf-v6-c-breadcrumb__item-divider").first()).toHaveAttribute("aria-hidden", "true");
+    });
+  });
+
+  test.describe("Composable (pure Qute)", () => {
+    test("shell mode composes masthead, sidebar and sections with a working hamburger", async ({ page }) => {
+      const root = page.locator("#page-composable");
+      await expect(root.locator("header.pf-v6-c-masthead")).toBeAttached();
+      const sidebar = root.locator("aside.pf-v6-c-page__sidebar");
+      await expect(sidebar).toBeVisible();
+      await expect(sidebar.locator("a.pf-v6-c-nav__link.pf-m-current")).toHaveText("Dashboard");
+      await expect(root.locator(".pf-v6-c-page__main-section")).toHaveCount(2);
+      await root.locator('button[aria-label="Global navigation"]').click();
+      await expect(sidebar).toBeHidden();
+      await root.locator('button[aria-label="Global navigation"]').click();
+      await expect(sidebar).toBeVisible();
     });
   });
 });

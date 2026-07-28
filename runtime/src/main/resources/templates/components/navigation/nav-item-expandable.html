@@ -1,0 +1,19 @@
+{! Expandable nav item — parent <li> with the Alpine toggle + subnav list (pure Qute, no model). !}
+{! Required: label; toggleId — DOM id on the toggle button (aria-labelledby target for the subnav). !}
+{! Optional: expanded — initially open (default false). !}
+{! Slot: {#subnav} — the child <li> entries; compose nav-item (or nested nav-item-expandable) includes. !}
+{#let initiallyOpen=(expanded.or(false))}
+<li class="pf-v6-c-nav__item" x-data="{ open: {initiallyOpen} }" :class="{ 'pf-m-expanded': open }">
+  <button class="pf-v6-c-nav__link" id="{toggleId}" aria-expanded="{initiallyOpen}" :aria-expanded="open.toString()" @click="open = !open">
+    <span class="pf-v6-c-nav__link-text">{label}</span>
+    <span class="pf-v6-c-nav__toggle">
+      <span class="pf-v6-c-nav__toggle-icon">{icons:svg('fa:angle-down').raw}</span>
+    </span>
+  </button>
+  <section class="pf-v6-c-nav__subnav" aria-labelledby="{toggleId}"{#if !initiallyOpen} hidden inert{/if} :hidden="!open" :inert="!open">
+    <ul class="pf-v6-c-nav__list" role="list">
+      {#let expanded=null initiallyOpen=null label=null toggleId=null}{#insert subnav}{/insert}{/let}
+    </ul>
+  </section>
+</li>
+{/let}

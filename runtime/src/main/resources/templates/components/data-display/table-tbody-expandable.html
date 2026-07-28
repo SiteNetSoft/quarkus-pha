@@ -1,0 +1,8 @@
+{! Expandable row group (pure Qute) for the table component's slot mode: one tbody per expandable row, owning the Alpine
+open state. Put the data row (with a table-toggle-td) and its table-expandable-tr inside the {#rows} slot; all three
+default to the same 'open' expr. !} {! Optional: expr — the Alpine boolean name (default 'open'); expanded — initially
+open (default false). !} {#let stateVar=(expr ?: 'open') initiallyOpen=(expanded.or(false))}
+<tbody class="pf-v6-c-table__tbody" x-data="{ {stateVar}: {initiallyOpen} }" :class="{stateVar} ? 'pf-m-expanded' : ''">
+  {#let expr=null expanded=null stateVar=null initiallyOpen=null}{#insert rows}{/insert}{/let}
+</tbody>
+{/let}

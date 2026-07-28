@@ -1,0 +1,13 @@
+{! Nav item — one <li><a> entry for the nav component's slot mode (pure Qute, no model). !}
+{! Required: href, label. !}
+{! Optional: icon ("set:slug") — leading link icon; current — marks the active item (pf-m-current + aria-current). !}
+<li class="pf-v6-c-nav__item">
+  {#if icon??}
+  <a href="{href}" class="pf-v6-c-nav__link{#if current??} pf-m-current{/if}"{#if current??} aria-current="page"{/if}>
+    <span class="pf-v6-c-nav__link-icon">{icons:svg(icon).raw}</span>
+    <span class="pf-v6-c-nav__link-text">{label}</span>
+  </a>
+  {#else}
+  <a href="{href}" class="pf-v6-c-nav__link{#if current??} pf-m-current{/if}"{#if current??} aria-current="page"{/if}><span class="pf-v6-c-nav__link-text">{label}</span></a>
+  {/if}
+</li>

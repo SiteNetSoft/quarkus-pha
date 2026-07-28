@@ -1,0 +1,46 @@
+{! Tree-table row (pure Qute) for the table component's slot mode (treeView=true shell, treeGrid=true
+   for parent-bearing trees). The consumer owns the Alpine expansion state — put it on the tbody
+   (x-data="{ g1: false, ... }") and reference the booleans from toggleVar / showExpr. !}
+{! Required: name — the title-cell text. !}
+{! Optional: level, setSize, posInSet — aria treegrid bookkeeping (pass all three on treeGrid trees;
+             omit on flat trees, matching the model); toggleVar — Alpine boolean for this parent's
+             expansion (its presence marks the row as a parent and renders the toggle);
+             showExpr — Alpine visibility expression for child rows (e.g. 'g1' or 'g1 && g2');
+             toggleAriaLabel (default "Expand row {name}"); icon — fa-* glyph classes for the row icon
+             (e.g. 'fa-folder'); iconExpanded — swap glyph while expanded (parents only). !}
+{! Slot: {#dataCells} — the remaining plain <td> data cells. !}
+{#if level??}
+<tr class="pf-v6-c-table__tr" aria-level="{level}" aria-setsize="{setSize}" aria-posinset="{posInSet}"{#if toggleVar??} :aria-expanded="{toggleVar}"{/if}{#if showExpr??} x-show="{showExpr}" x-cloak{/if}>
+{#else}
+<tr class="pf-v6-c-table__tr"{#if showExpr??} x-show="{showExpr}" x-cloak{/if}>
+{/if}
+  <th scope="row" class="pf-v6-c-table__th pf-v6-c-table__tree-view-title-cell">
+    <div class="pf-v6-c-table__tree-view-main">
+      {#if toggleVar??}
+      <span class="pf-v6-c-table__td pf-v6-c-table__toggle">
+        <button
+          type="button"
+          class="pf-v6-c-button pf-m-plain"
+          :class="{toggleVar} ? 'pf-m-expanded' : ''"
+          :aria-expanded="{toggleVar}"
+          @click="{toggleVar} = !{toggleVar}"
+          aria-label="{#if toggleAriaLabel??}{toggleAriaLabel}{#else}Expand row {name}{/if}"
+        >
+          <span class="pf-v6-c-button__icon"><span class="pf-v6-c-table__toggle-icon"><i class="fas fa-angle-down" aria-hidden="true"></i></span></span>
+        </button>
+      </span>
+      {/if}
+      {#if icon??}
+      <span class="pf-v6-c-table__tree-view-icon">
+        {#if iconExpanded??}
+        <i class="fas fa-fw" :class="{toggleVar} ? '{iconExpanded}' : '{icon}'" aria-hidden="true"></i>
+        {#else}
+        <i class="fas fa-fw {icon}" aria-hidden="true"></i>
+        {/if}
+      </span>
+      {/if}
+      <span class="pf-v6-c-table__tree-view-text">{name}</span>
+    </div>
+  </th>
+  {#let name=null level=null setSize=null posInSet=null toggleVar=null showExpr=null toggleAriaLabel=null icon=null iconExpanded=null}{#insert dataCells}{/insert}{/let}
+</tr>

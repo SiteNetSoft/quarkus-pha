@@ -86,7 +86,14 @@ partials/example-card title="Dynamic sticky section" slug="dynamic-sticky-sectio
   <code class="ws-code">pf-m-sticky-top</code> pins the first section while the rest scrolls; height-breakpoint variants
   make it conditional.
 </p>
-{/description} {#content}{#include components/page/dynamic-sticky-section /}{/content} {/include}
+{/description} {#content}{#include components/page/dynamic-sticky-section /}{/content} {/include} {#include
+partials/example-card title="Composable (pure Qute)" slug="composable" component="page"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  The structured slot mode (<code class="ws-code">shell=true</code>): a masthead with a working hamburger, a
+  <code class="ws-code">page-sidebar</code> wired to the same <code class="ws-code">sidebarOpen</code> state, and two
+  <code class="ws-code">page-section</code> bricks — no Java model anywhere.
+</p>
+{/description} {#content}{#include components/page/composable /}{/content} {/include}
 <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
   <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
     Documentation

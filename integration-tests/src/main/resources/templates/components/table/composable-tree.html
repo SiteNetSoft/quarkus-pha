@@ -1,0 +1,35 @@
+{! Pure-Qute tree table: the slot-mode shell (treeView + treeGrid) composing table-tree-tr bricks.
+   The tbody owns the Alpine expansion state; toggleVar / showExpr reference those booleans — no
+   Java model anywhere. !}
+{#include components/data-display/table id='table-composable-tree' ariaLabel='Composable tree table' treeView=true
+treeGrid=true}
+{#content}
+<thead class="pf-v6-c-table__thead">
+  <tr class="pf-v6-c-table__tr">
+    <th scope="col" class="pf-v6-c-table__th">Name</th>
+    <th scope="col" class="pf-v6-c-table__th">Size</th>
+  </tr>
+</thead>
+<tbody class="pf-v6-c-table__tbody" x-data="{ docs: true, media: false }">
+  {#include components/data-display/table-tree-tr name='Documents' level=1 setSize=2 posInSet=1 toggleVar='docs'
+  icon='fa-folder' iconExpanded='fa-folder-open'}
+  {#dataCells}<td class="pf-v6-c-table__td">4 items</td>{/dataCells}
+  {/include}
+  {#include components/data-display/table-tree-tr name='Report.pdf' level=2 setSize=2 posInSet=1 showExpr='docs'
+  icon='fa-file'}
+  {#dataCells}<td class="pf-v6-c-table__td">2 MB</td>{/dataCells}
+  {/include}
+  {#include components/data-display/table-tree-tr name='Media' level=2 setSize=2 posInSet=2 toggleVar='media'
+  showExpr='docs' icon='fa-folder' iconExpanded='fa-folder-open'}
+  {#dataCells}<td class="pf-v6-c-table__td">1 item</td>{/dataCells}
+  {/include}
+  {#include components/data-display/table-tree-tr name='Intro.mp4' level=3 setSize=1 posInSet=1
+  showExpr='docs && media' icon='fa-file-video'}
+  {#dataCells}<td class="pf-v6-c-table__td">40 MB</td>{/dataCells}
+  {/include}
+  {#include components/data-display/table-tree-tr name='Archive' level=1 setSize=2 posInSet=2 icon='fa-box-archive'}
+  {#dataCells}<td class="pf-v6-c-table__td">Empty</td>{/dataCells}
+  {/include}
+</tbody>
+{/content}
+{/include}

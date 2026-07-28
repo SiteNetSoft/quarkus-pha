@@ -1,0 +1,13 @@
+{! Select-all header cell (pure Qute) for the table component's slot mode: checking it drives every tbody row checkbox
+(and fires their change events), exactly like the model-driven header. !} {! Optional: ariaLabel (default "Select all
+rows"). !}
+<td class="pf-v6-c-table__td pf-v6-c-table__check">
+  <label class="pf-v6-c-check pf-m-standalone"
+    ><input
+      class="pf-v6-c-check__input"
+      type="checkbox"
+      name="select-all"
+      aria-label="{#if ariaLabel??}{ariaLabel}{#else}Select all rows{/if}"
+      @change="$el.closest('table').querySelectorAll('tbody .pf-v6-c-table__check input[type=checkbox]').forEach(cb => { cb.checked = $event.target.checked; cb.dispatchEvent(new Event('change')) })"
+  /></label>
+</td>

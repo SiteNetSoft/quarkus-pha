@@ -1,0 +1,26 @@
+{! Pure-Qute nav: the slot-mode shell (grouped=true) composed from nav-section, nav-item and
+   nav-item-expandable bricks — no Java model anywhere. !}
+<div style="max-width: 280px">
+  {#include components/navigation/nav grouped=true ariaLabel='Composable navigation' id='nav-composable'}
+  {#sections}
+  {#include components/navigation/nav-section title='Workspace'}
+  {#items}
+  {#include components/navigation/nav-item href='#' label='Overview' current=true /}
+  {#include components/navigation/nav-item href='#' label='Activity' icon='fa:chart-line' /}
+  {#include components/navigation/nav-item-expandable label='Settings' toggleId='nav-composable-settings'}
+  {#subnav}
+  {#include components/navigation/nav-item href='#' label='General' /}
+  {#include components/navigation/nav-item href='#' label='Members' /}
+  {/subnav}
+  {/include}
+  {/items}
+  {/include}
+  {#include components/navigation/nav-section title='Resources'}
+  {#items}
+  {#include components/navigation/nav-item href='#' label='Documentation' /}
+  {#include components/navigation/nav-item href='#' label='Support' /}
+  {/items}
+  {/include}
+  {/sections}
+  {/include}
+</div>

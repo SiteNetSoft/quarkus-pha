@@ -1,0 +1,15 @@
+{! Page sidebar — aside anatomy for the page component's structured slot mode (pure Qute, no model). !}
+{! Optional: toggleExpr — Alpine boolean driving expand/collapse (pair with page hasToggle=true and
+   'sidebarOpen'); fill — pf-m-fill on the body (multiple-body pattern). !}
+{! Slot: {#sidebarBody} — the sidebar content, typically a nav include. !}
+{#if toggleExpr??}
+<aside class="pf-v6-c-page__sidebar" :class="{ 'pf-m-expanded': {toggleExpr}, 'pf-m-collapsed': !{toggleExpr} }" x-show="{toggleExpr}">
+{#else}
+<aside class="pf-v6-c-page__sidebar pf-m-expanded">
+{/if}
+  <div class="pf-v6-c-page__sidebar-main">
+    <div class="pf-v6-c-page__sidebar-body{#if fill??} pf-m-fill{/if}">
+      {#let toggleExpr=null fill=null}{#insert sidebarBody}{/insert}{/let}
+    </div>
+  </div>
+</aside>

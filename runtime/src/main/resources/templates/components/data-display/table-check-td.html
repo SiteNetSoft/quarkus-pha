@@ -1,0 +1,9 @@
+{! Row-selection cell (pure Qute) for the table component's slot mode. !}
+{! Required: one of ariaLabel / ariaLabelledby — accessible name for the checkbox. !}
+{! Optional: name — input name (e.g. "checkrow-1"; radios in one table share a name);
+             radio — render a radio instead of a checkbox (single-select tables);
+             checked — initially selected;
+             modelExpr — x-model an Alpine boolean instead of plain checked state. !}
+<td class="pf-v6-c-table__td pf-v6-c-table__check">
+  <label class="pf-v6-c-check pf-m-standalone"><input class="pf-v6-c-check__input" type="{#if radio??}radio{#else}checkbox{/if}"{#if name??} name="{name}"{/if}{#if ariaLabel??} aria-label="{ariaLabel}"{/if}{#if ariaLabelledby??} aria-labelledby="{ariaLabelledby}"{/if}{#if modelExpr??} x-model="{modelExpr}"{/if}{#if checked??} checked{/if} /></label>
+</td>
