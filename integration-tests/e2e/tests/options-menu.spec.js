@@ -85,4 +85,19 @@ test.describe("Options menu", () => {
       await expect(first).toHaveAttribute("aria-selected", "false");
     });
   });
+
+  test.describe("Java source tab", () => {
+    test("the example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/options-menu");
+      const card = page.locator('[data-rendered-href="/components/options-menu/basic"]');
+      await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+    });
+
+    test("source-java route serves the composed builders as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/options-menu/source-java/basic");
+      expect(res.status()).toBe(200);
+      const body = await res.text();
+      expect(body).toContain(".selectSingle()");
+    });
+  });
 });

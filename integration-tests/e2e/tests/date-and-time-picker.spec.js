@@ -6,9 +6,7 @@ test.describe("Date and Time Picker", () => {
   });
 
   test("page loads with correct heading", async ({ page }) => {
-    await expect(page.locator("h1#ws-page-title")).toHaveText(
-      "Date and time picker"
-    );
+    await expect(page.locator("h1#ws-page-title")).toHaveText("Date and time picker");
   });
 
   test("page-level anchors are present", async ({ page }) => {
@@ -32,18 +30,14 @@ test.describe("Date and Time Picker", () => {
     await expect(page.locator("#dtp-time")).toHaveClass(/pf-v6-c-time-picker/);
   });
 
-  test("date picker has its text input with the seeded value", async ({
-    page,
-  }) => {
+  test("date picker has its text input with the seeded value", async ({ page }) => {
     const dateInput = page.locator('#dtp-date input[type="text"]');
     await expect(dateInput).toBeVisible();
     await expect(dateInput).toHaveValue("2026-05-20");
   });
 
   test("time picker has its text input with placeholder", async ({ page }) => {
-    const timeInput = page.locator(
-      '#dtp-time input[type="text"][placeholder="HH:MM"]'
-    );
+    const timeInput = page.locator('#dtp-time input[type="text"][placeholder="HH:MM"]');
     await expect(timeInput).toBeVisible();
   });
 
@@ -77,6 +71,22 @@ test.describe("Date and Time Picker", () => {
       await to.locator('button[aria-label="Toggle date picker"]').click();
       await to.locator('button[aria-label="27 May 2026"]').click();
       await expect(helper).toBeHidden();
+    });
+  });
+
+  test.describe("Java source tab", () => {
+    test("every example card gets a leading Java tab", async ({ page }) => {
+      await page.goto("/components/date-and-time-picker");
+      for (const ex of ["basic", "range"]) {
+        const card = page.locator(`[data-rendered-href="/components/date-and-time-picker/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+    });
+
+    test("source-java route serves the composed builders as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/date-and-time-picker/source-java/range");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain('CalendarMonth.of("dtrp-from-cal"');
     });
   });
 });

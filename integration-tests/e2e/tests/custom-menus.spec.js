@@ -233,4 +233,25 @@ test.describe("Custom menus", () => {
       });
     }
   });
+
+  test.describe("Java source tab", () => {
+    test("builder-expressible cards get a Java tab; drilldown/flyout/tree do not", async ({ page }) => {
+      await page.goto("/components/custom-menus");
+      for (const ex of ["with-actions", "with-favorites", "with-inline-search-filter", "date-select"]) {
+        const card = page.locator(`[data-rendered-href="/components/custom-menus/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(1);
+      }
+      // drilldown, flyout and tree-view menus have no builder equivalent — hand-rolled anatomy only.
+      for (const ex of ["with-drilldown", "flyout", "tree-view-menu"]) {
+        const card = page.locator(`[data-rendered-href="/components/custom-menus/${ex}"]`);
+        await expect(card.locator('button[aria-label*="Toggle Java"]')).toHaveCount(0);
+      }
+    });
+
+    test("source-java route serves the composed builders as plain text", async ({ page }) => {
+      const res = await page.request.get("/components/custom-menus/source-java/date-select");
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain("CalendarMonth.of(");
+    });
+  });
 });
