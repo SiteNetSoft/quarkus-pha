@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -19,6 +21,7 @@ import java.util.Objects;
  * select id derives as {@code {id}-field}.
  */
 @TemplateData
+@JsonDeserialize(builder = FormSelect.Builder.class)
 public final class FormSelect {
 
     private final String id;
@@ -79,6 +82,7 @@ public final class FormSelect {
         return required;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String optionsHtml;
@@ -112,8 +116,30 @@ public final class FormSelect {
             return this;
         }
 
+        public Builder disabled(boolean disabled) {
+            this.disabled = disabled;
+            return this;
+        }
+
         public Builder required() {
             this.required = true;
+            return this;
+        }
+
+        public Builder required(boolean required) {
+            this.required = required;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder optionsHtml(String optionsHtml) {
+            this.optionsHtml = optionsHtml;
             return this;
         }
 

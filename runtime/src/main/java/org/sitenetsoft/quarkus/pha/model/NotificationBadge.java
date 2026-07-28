@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -17,6 +19,7 @@ import java.util.Objects;
  * badge inside {@code __count} (unread styling unless the variant is read).
  */
 @TemplateData
+@JsonDeserialize(builder = NotificationBadge.Builder.class)
 public final class NotificationBadge {
 
     private final String id;
@@ -58,6 +61,7 @@ public final class NotificationBadge {
         return count;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String ariaLabel;
@@ -76,6 +80,18 @@ public final class NotificationBadge {
         /** Visible count text (e.g. "3", "!"). */
         public Builder count(String count) {
             this.count = count;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder ariaLabel(String ariaLabel) {
+            this.ariaLabel = ariaLabel;
             return this;
         }
 

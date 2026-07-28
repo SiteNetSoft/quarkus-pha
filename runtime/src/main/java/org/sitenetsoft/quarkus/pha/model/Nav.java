@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ import java.util.List;
  * page, so generated toggle ids cannot collide.
  */
 @TemplateData
+@JsonDeserialize(builder = Nav.Builder.class)
 public final class Nav {
 
     public enum Orientation { VERTICAL, HORIZONTAL, SUBNAV }
@@ -107,6 +110,7 @@ public final class Nav {
         return entries;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
 
         private String id;
@@ -173,6 +177,18 @@ public final class Nav {
         /** Titled section; a grouped nav must consist of groups only. */
         public Builder group(String title, NavEntry... children) {
             entries.add(NavEntry.group(title, List.of(children)));
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder orientation(Orientation orientation) {
+            this.orientation = orientation;
+            return this;
+        }
+
+        public Builder entries(java.util.List<NavEntry> entries) {
+            this.entries.addAll(entries);
             return this;
         }
 

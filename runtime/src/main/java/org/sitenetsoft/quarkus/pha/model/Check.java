@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -18,6 +20,7 @@ import java.util.Objects;
  * carries {@code id} itself, {@code {id}-description} wires aria-describedby.
  */
 @TemplateData
+@JsonDeserialize(builder = Check.Builder.class)
 public final class Check {
 
     private final String id;
@@ -98,6 +101,7 @@ public final class Check {
         return standalone;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String label;
@@ -134,8 +138,18 @@ public final class Check {
             return this;
         }
 
+        public Builder checked(boolean checked) {
+            this.checked = checked;
+            return this;
+        }
+
         public Builder disabled() {
             this.disabled = true;
+            return this;
+        }
+
+        public Builder disabled(boolean disabled) {
+            this.disabled = disabled;
             return this;
         }
 
@@ -144,9 +158,36 @@ public final class Check {
             return this;
         }
 
+        public Builder required(boolean required) {
+            this.required = required;
+            return this;
+        }
+
         /** Label before the input (DOM order — PF v6 has no modifier class). */
         public Builder reversed() {
             this.reversed = true;
+            return this;
+        }
+
+        public Builder reversed(boolean reversed) {
+            this.reversed = reversed;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder ariaLabel(String ariaLabel) {
+            this.ariaLabel = ariaLabel;
+            return this;
+        }
+
+        public Builder standalone(boolean standalone) {
+            this.standalone = standalone;
             return this;
         }
 

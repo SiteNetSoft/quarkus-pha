@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 /**
@@ -15,6 +17,7 @@ import io.quarkus.qute.TemplateData;
  * host page; the x-data arguments are generated at build time.
  */
 @TemplateData
+@JsonDeserialize(builder = BackToTop.Builder.class)
 public final class BackToTop {
 
     private final String id;
@@ -46,6 +49,7 @@ public final class BackToTop {
         return "phaBackToTop(" + sel + ", " + alwaysVisible + ")";
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String title;
@@ -69,6 +73,11 @@ public final class BackToTop {
         /** Skip the 400px scroll threshold. */
         public Builder alwaysVisible() {
             this.alwaysVisible = true;
+            return this;
+        }
+
+        public Builder alwaysVisible(boolean alwaysVisible) {
+            this.alwaysVisible = alwaysVisible;
             return this;
         }
 

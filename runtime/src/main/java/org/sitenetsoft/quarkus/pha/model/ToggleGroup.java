@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import java.util.Objects;
  * independent boolean toggles in a state map.
  */
 @TemplateData
+@JsonDeserialize(builder = ToggleGroup.Builder.class)
 public final class ToggleGroup {
 
     /** One toggle button — text and/or icon; key/pressed drive the generated state. */
@@ -185,6 +188,7 @@ public final class ToggleGroup {
         return items;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String ariaLabel;
@@ -203,9 +207,19 @@ public final class ToggleGroup {
             return this;
         }
 
+        public Builder compact(boolean compact) {
+            this.compact = compact;
+            return this;
+        }
+
         /** Full-width items (pf-m-fill). */
         public Builder fill() {
             this.fill = true;
+            return this;
+        }
+
+        public Builder fill(boolean fill) {
+            this.fill = fill;
             return this;
         }
 
@@ -230,6 +244,28 @@ public final class ToggleGroup {
 
         public Builder item(Item item) {
             items.add(Objects.requireNonNull(item, "item"));
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder ariaLabel(String ariaLabel) {
+            this.ariaLabel = ariaLabel;
+            return this;
+        }
+
+        public Builder multi(boolean multi) {
+            this.multi = multi;
+            return this;
+        }
+
+        public Builder items(java.util.List<Item> items) {
+            this.items.addAll(items);
             return this;
         }
 

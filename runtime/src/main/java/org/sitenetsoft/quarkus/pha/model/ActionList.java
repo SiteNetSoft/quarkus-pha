@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ import java.util.Objects;
  * {@link #iconGroup(Item...)}.
  */
 @TemplateData
+@JsonDeserialize(builder = ActionList.Builder.class)
 public final class ActionList {
 
     /** One action — a button or a menu toggle. */
@@ -114,6 +117,7 @@ public final class ActionList {
         return groups;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
 
         private String id;
@@ -136,14 +140,31 @@ public final class ActionList {
             return this;
         }
 
+        public Builder iconList(boolean iconList) {
+            this.iconList = iconList;
+            return this;
+        }
+
         /** Stack actions vertically (PHA divergence). */
         public Builder vertical() {
             this.vertical = true;
             return this;
         }
 
+        public Builder vertical(boolean vertical) {
+            this.vertical = vertical;
+            return this;
+        }
+
         public Builder group(Group group) {
             groups.add(Objects.requireNonNull(group, "group"));
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder groups(java.util.List<Group> groups) {
+            this.groups.addAll(groups);
             return this;
         }
 

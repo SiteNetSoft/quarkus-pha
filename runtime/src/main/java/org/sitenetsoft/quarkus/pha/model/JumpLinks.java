@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import java.util.Objects;
  * breakpoint-driven toggle-plus-label shape.
  */
 @TemplateData
+@JsonDeserialize(builder = JumpLinks.Builder.class)
 public final class JumpLinks {
 
     private final String id;
@@ -129,6 +132,7 @@ public final class JumpLinks {
         return items;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
 
         private String id;
@@ -159,14 +163,29 @@ public final class JumpLinks {
             return this;
         }
 
+        public Builder vertical(boolean vertical) {
+            this.vertical = vertical;
+            return this;
+        }
+
         public Builder center() {
             this.center = true;
+            return this;
+        }
+
+        public Builder center(boolean center) {
+            this.center = center;
             return this;
         }
 
         /** Button-link anatomy without a label (subsection variants). */
         public Builder buttonLinks() {
             this.buttonLinks = true;
+            return this;
+        }
+
+        public Builder buttonLinks(boolean buttonLinks) {
+            this.buttonLinks = buttonLinks;
             return this;
         }
 
@@ -220,6 +239,38 @@ public final class JumpLinks {
             for (JumpLinkItem item : items) {
                 item(item);
             }
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder expandableMode(String expandableMode) {
+            this.expandableMode = expandableMode;
+            return this;
+        }
+
+        public Builder expandableModifiers(String expandableModifiers) {
+            this.expandableModifiers = expandableModifiers;
+            return this;
+        }
+
+        public Builder toggleText(String toggleText) {
+            this.toggleText = toggleText;
+            return this;
+        }
+
+        public Builder startOpen(boolean startOpen) {
+            this.startOpen = startOpen;
+            return this;
+        }
+
+        public Builder scrollSelector(String scrollSelector) {
+            this.scrollSelector = scrollSelector;
             return this;
         }
 

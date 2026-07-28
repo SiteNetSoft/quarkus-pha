@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -18,6 +20,7 @@ import java.util.Objects;
  * status icon. Live utilities (clear buttons, filter chips) stay hand-written.
  */
 @TemplateData
+@JsonDeserialize(builder = TextInputGroup.Builder.class)
 public final class TextInputGroup {
 
     private final String id;
@@ -101,6 +104,7 @@ public final class TextInputGroup {
         return plain;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String placeholder;
@@ -154,9 +158,36 @@ public final class TextInputGroup {
             return this;
         }
 
+        public Builder disabled(boolean disabled) {
+            this.disabled = disabled;
+            return this;
+        }
+
         /** No own border/background — only inside an ancestor that provides them. */
         public Builder plain() {
             this.plain = true;
+            return this;
+        }
+
+        public Builder plain(boolean plain) {
+            this.plain = plain;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder hintText(String hintText) {
+            this.hintText = hintText;
+            return this;
+        }
+
+        public Builder iconName(String iconName) {
+            this.iconName = iconName;
             return this;
         }
 

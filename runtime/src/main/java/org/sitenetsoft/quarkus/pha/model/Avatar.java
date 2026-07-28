@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 /**
@@ -17,6 +19,7 @@ import io.quarkus.qute.TemplateData;
  * {@code pf-m-colorful} (PF 6.6 colorful flavour, div anatomies only).
  */
 @TemplateData
+@JsonDeserialize(builder = Avatar.Builder.class)
 public final class Avatar {
 
     /** PF's default person silhouette, used by the colorful flavour. */
@@ -130,6 +133,7 @@ public final class Avatar {
         return sb.toString();
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String src;
         private String alt;
@@ -163,6 +167,38 @@ public final class Avatar {
 
         public Builder bordered() {
             this.bordered = true;
+            return this;
+        }
+
+        public Builder bordered(boolean bordered) {
+            this.bordered = bordered;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder src(String src) {
+            this.src = src;
+            return this;
+        }
+
+        public Builder alt(String alt) {
+            this.alt = alt;
+            return this;
+        }
+
+        public Builder initials(String initials) {
+            this.initials = initials;
+            return this;
+        }
+
+        public Builder svgHtml(String svgHtml) {
+            this.svgHtml = svgHtml;
+            return this;
+        }
+
+        public Builder ariaLabel(String ariaLabel) {
+            this.ariaLabel = ariaLabel;
             return this;
         }
 

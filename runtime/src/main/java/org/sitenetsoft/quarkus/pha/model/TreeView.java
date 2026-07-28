@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -34,6 +36,7 @@ import java.util.Objects;
  * nodes). Selection is runtime state — no item starts selected.
  */
 @TemplateData
+@JsonDeserialize(builder = TreeView.Builder.class)
 public final class TreeView {
 
     private final String id;
@@ -120,6 +123,7 @@ public final class TreeView {
         return items;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
 
         private String id;
@@ -159,8 +163,18 @@ public final class TreeView {
             return this;
         }
 
+        public Builder multiselectable(boolean multiselectable) {
+            this.multiselectable = multiselectable;
+            return this;
+        }
+
         public Builder compact() {
             this.compact = true;
+            return this;
+        }
+
+        public Builder compact(boolean compact) {
+            this.compact = compact;
             return this;
         }
 
@@ -170,9 +184,19 @@ public final class TreeView {
             return this;
         }
 
+        public Builder noBackground(boolean noBackground) {
+            this.noBackground = noBackground;
+            return this;
+        }
+
         /** Visual guide lines connecting nested items. */
         public Builder guides() {
             this.guides = true;
+            return this;
+        }
+
+        public Builder guides(boolean guides) {
+            this.guides = guides;
             return this;
         }
 
@@ -189,6 +213,11 @@ public final class TreeView {
             return this;
         }
 
+        public Builder toggleAllButton(boolean toggleAllButton) {
+            this.toggleAllButton = toggleAllButton;
+            return this;
+        }
+
         /**
          * Separate selection and expansion (PF's hasSelectableNodes): expandable
          * nodes render distinct toggle and text buttons, so selecting a parent
@@ -199,9 +228,19 @@ public final class TreeView {
             return this;
         }
 
+        public Builder selectableNodes(boolean selectableNodes) {
+            this.selectableNodes = selectableNodes;
+            return this;
+        }
+
         /** Checkbox tree — every node carries a cascading checkbox. */
         public Builder checkboxes() {
             this.checkboxes = true;
+            return this;
+        }
+
+        public Builder checkboxes(boolean checkboxes) {
+            this.checkboxes = checkboxes;
             return this;
         }
 
@@ -231,6 +270,28 @@ public final class TreeView {
             for (TreeViewItem item : items) {
                 item(item);
             }
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder searchPlaceholder(String searchPlaceholder) {
+            this.searchPlaceholder = searchPlaceholder;
+            return this;
+        }
+
+        public Builder searchAriaLabel(String searchAriaLabel) {
+            this.searchAriaLabel = searchAriaLabel;
+            return this;
+        }
+
+        public Builder defaultIcon(String defaultIcon) {
+            this.defaultIcon = defaultIcon;
+            return this;
+        }
+
+        public Builder defaultExpandedIcon(String defaultExpandedIcon) {
+            this.defaultExpandedIcon = defaultExpandedIcon;
             return this;
         }
 

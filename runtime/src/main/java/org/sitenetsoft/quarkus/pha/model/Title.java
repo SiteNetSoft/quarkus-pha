@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -16,6 +18,7 @@ import java.util.Objects;
  * matching the param shell.
  */
 @TemplateData
+@JsonDeserialize(builder = Title.Builder.class)
 public final class Title {
 
     private final String text;
@@ -53,6 +56,7 @@ public final class Title {
         return id;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String text;
         private String headingLevel;
@@ -76,6 +80,13 @@ public final class Title {
 
         public Builder id(String id) {
             this.id = id;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder text(String text) {
+            this.text = text;
             return this;
         }
 

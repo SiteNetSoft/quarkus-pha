@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ import java.util.Objects;
  * modifier playground example stays hand-written — see the card demo page.
  */
 @TemplateData
+@JsonDeserialize(builder = Card.Builder.class)
 public final class Card {
 
     /** One ordered card section. */
@@ -432,6 +435,7 @@ public final class Card {
         return sections;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
 
         private String id;
@@ -456,8 +460,18 @@ public final class Card {
             return this;
         }
 
+        public Builder compact(boolean compact) {
+            this.compact = compact;
+            return this;
+        }
+
         public Builder secondary() {
             this.secondary = true;
+            return this;
+        }
+
+        public Builder secondary(boolean secondary) {
+            this.secondary = secondary;
             return this;
         }
 
@@ -466,8 +480,18 @@ public final class Card {
             return this;
         }
 
+        public Builder fullHeight(boolean fullHeight) {
+            this.fullHeight = fullHeight;
+            return this;
+        }
+
         public Builder displayLg() {
             this.displayLg = true;
+            return this;
+        }
+
+        public Builder displayLg(boolean displayLg) {
+            this.displayLg = displayLg;
             return this;
         }
 
@@ -476,8 +500,18 @@ public final class Card {
             return this;
         }
 
+        public Builder plain(boolean plain) {
+            this.plain = plain;
+            return this;
+        }
+
         public Builder selectable() {
             this.selectable = true;
+            return this;
+        }
+
+        public Builder selectable(boolean selectable) {
+            this.selectable = selectable;
             return this;
         }
 
@@ -486,14 +520,29 @@ public final class Card {
             return this;
         }
 
+        public Builder clickable(boolean clickable) {
+            this.clickable = clickable;
+            return this;
+        }
+
         public Builder asDisabled() {
             this.disabled = true;
+            return this;
+        }
+
+        public Builder asDisabled(boolean disabled) {
+            this.disabled = disabled;
             return this;
         }
 
         /** Wires the expand contract; pair with a header carrying the toggle. */
         public Builder expandable() {
             this.expandable = true;
+            return this;
+        }
+
+        public Builder expandable(boolean expandable) {
+            this.expandable = expandable;
             return this;
         }
 
@@ -545,6 +594,23 @@ public final class Card {
         /** Expandable content region holding a body and optional footer. */
         public Builder expandableContent(String bodyHtml, String footerHtml) {
             sections.add(new Section("expandable", bodyHtml, null, null, false, footerHtml));
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder disabled(boolean disabled) {
+            this.disabled = disabled;
+            return this;
+        }
+
+        public Builder sections(java.util.List<Section> sections) {
+            this.sections.addAll(sections);
             return this;
         }
 

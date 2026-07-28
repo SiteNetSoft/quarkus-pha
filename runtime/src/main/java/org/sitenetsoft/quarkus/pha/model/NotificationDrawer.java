@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ import java.util.Objects;
  * vars on the root). Omit {@code header} for the lightweight variant.
  */
 @TemplateData
+@JsonDeserialize(builder = NotificationDrawer.Builder.class)
 public final class NotificationDrawer {
 
     /** One notification. */
@@ -204,6 +207,7 @@ public final class NotificationDrawer {
         return xData;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String headerStatus;
@@ -252,6 +256,43 @@ public final class NotificationDrawer {
             groupOpens.add(open);
             groupCounts.add(count);
             groupItems.add(List.of(groupItemsArr));
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder headerStatus(String headerStatus) {
+            this.headerStatus = headerStatus;
+            return this;
+        }
+
+        public Builder items(java.util.List<Item> items) {
+            this.items.addAll(items);
+            return this;
+        }
+
+        public Builder groupTitles(java.util.List<String> groupTitles) {
+            this.groupTitles.addAll(groupTitles);
+            return this;
+        }
+
+        public Builder groupOpens(java.util.List<Boolean> groupOpens) {
+            this.groupOpens.addAll(groupOpens);
+            return this;
+        }
+
+        public Builder groupCounts(java.util.List<String> groupCounts) {
+            this.groupCounts.addAll(groupCounts);
+            return this;
+        }
+
+        public Builder groupItems(java.util.List<List<Item>> groupItems) {
+            this.groupItems.addAll(groupItems);
             return this;
         }
 

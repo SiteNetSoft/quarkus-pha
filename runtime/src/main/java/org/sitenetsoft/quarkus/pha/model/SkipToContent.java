@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -14,6 +16,7 @@ import java.util.Objects;
  * <p>The text is the link's accessible name — always provide it.
  */
 @TemplateData
+@JsonDeserialize(builder = SkipToContent.Builder.class)
 public final class SkipToContent {
 
     private final String href;
@@ -45,6 +48,7 @@ public final class SkipToContent {
         return id;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String href;
         private String text;
@@ -55,6 +59,18 @@ public final class SkipToContent {
 
         public Builder id(String id) {
             this.id = id;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder href(String href) {
+            this.href = href;
+            return this;
+        }
+
+        public Builder text(String text) {
+            this.text = text;
             return this;
         }
 

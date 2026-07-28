@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -17,6 +19,7 @@ import java.util.Objects;
  * wiring. Provide either a visible {@code label} or an {@code ariaLabel}.
  */
 @TemplateData
+@JsonDeserialize(builder = Switch.Builder.class)
 public final class Switch {
 
     private final String id;
@@ -71,6 +74,7 @@ public final class Switch {
         return reversed;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String label;
@@ -99,8 +103,18 @@ public final class Switch {
             return this;
         }
 
+        public Builder checked(boolean checked) {
+            this.checked = checked;
+            return this;
+        }
+
         public Builder disabled() {
             this.disabled = true;
+            return this;
+        }
+
+        public Builder disabled(boolean disabled) {
+            this.disabled = disabled;
             return this;
         }
 
@@ -111,8 +125,25 @@ public final class Switch {
             return this;
         }
 
+        public Builder checkIcon(boolean checkIcon) {
+            this.checkIcon = checkIcon;
+            return this;
+        }
+
         public Builder reversed() {
             this.reversed = true;
+            return this;
+        }
+
+        public Builder reversed(boolean reversed) {
+            this.reversed = reversed;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
             return this;
         }
 

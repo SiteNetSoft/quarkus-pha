@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -17,6 +19,7 @@ import java.util.Objects;
  * anatomy; width/height emit the PF brand CSS variables.
  */
 @TemplateData
+@JsonDeserialize(builder = Brand.Builder.class)
 public final class Brand {
 
     private final String src;
@@ -76,6 +79,7 @@ public final class Brand {
         return null;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String src;
         private String alt;
@@ -106,6 +110,23 @@ public final class Brand {
 
         /** Raw &lt;source&gt; elements — switches to the responsive picture anatomy. */
         public Builder sources(String sourcesHtml) {
+            this.sourcesHtml = sourcesHtml;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder src(String src) {
+            this.src = src;
+            return this;
+        }
+
+        public Builder alt(String alt) {
+            this.alt = alt;
+            return this;
+        }
+
+        public Builder sourcesHtml(String sourcesHtml) {
             this.sourcesHtml = sourcesHtml;
             return this;
         }

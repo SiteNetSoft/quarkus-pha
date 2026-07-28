@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -22,6 +24,7 @@ import java.util.Objects;
  * {@code aria-describedby}.
  */
 @TemplateData
+@JsonDeserialize(builder = Progress.Builder.class)
 public final class Progress {
 
     private final String id;
@@ -171,6 +174,7 @@ public final class Progress {
         return ariaLabel;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
 
         private String id;
@@ -204,6 +208,11 @@ public final class Progress {
             return this;
         }
 
+        public Builder asTruncatedTitle(boolean truncateTitle) {
+            this.truncateTitle = truncateTitle;
+            return this;
+        }
+
         /** Non-percentage bounds, e.g. {@code range(0, 5)} for step progress. */
         public Builder range(int min, int max) {
             this.min = min;
@@ -214,6 +223,11 @@ public final class Progress {
         /** Fixed-width measure (pf-m-static-width) so the bar doesn't shift as digits change. */
         public Builder staticWidthMeasure() {
             this.staticWidthMeasure = true;
+            return this;
+        }
+
+        public Builder staticWidthMeasure(boolean staticWidthMeasure) {
+            this.staticWidthMeasure = staticWidthMeasure;
             return this;
         }
 
@@ -271,9 +285,51 @@ public final class Progress {
             return this;
         }
 
+        public Builder asSingleline(boolean singleline) {
+            this.singleline = singleline;
+            return this;
+        }
+
         /** Accessible name for the bar when there is no title. */
         public Builder ariaLabel(String ariaLabel) {
             this.ariaLabel = ariaLabel;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder value(int value) {
+            this.value = value;
+            return this;
+        }
+
+        public Builder min(Integer min) {
+            this.min = min;
+            return this;
+        }
+
+        public Builder max(Integer max) {
+            this.max = max;
+            return this;
+        }
+
+        public Builder truncateTitle(boolean truncateTitle) {
+            this.truncateTitle = truncateTitle;
+            return this;
+        }
+
+        public Builder measureLocation(String measureLocation) {
+            this.measureLocation = measureLocation;
+            return this;
+        }
+
+        public Builder singleline(boolean singleline) {
+            this.singleline = singleline;
             return this;
         }
 

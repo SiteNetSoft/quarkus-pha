@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -36,14 +38,22 @@ public final class TableColumn {
         this(kind, label, modifiers, sortKey, sort, List.of(), null, null, false);
     }
 
-    private TableColumn(Kind kind, String label, List<String> modifiers, String sortKey, Sort sort,
-                        List<String> subColumns, String stickyModifiers, String stickyStyle, boolean rowHeader) {
-        this.kind = kind;
+    @JsonCreator
+    private TableColumn(@JsonProperty("kind") Kind kind,
+            @JsonProperty("label") String label,
+            @JsonProperty("modifiers") List<String> modifiers,
+            @JsonProperty("sortKey") String sortKey,
+            @JsonProperty("sort") Sort sort,
+            @JsonProperty("subColumns") List<String> subColumns,
+            @JsonProperty("stickyModifiers") String stickyModifiers,
+            @JsonProperty("stickyStyle") String stickyStyle,
+            @JsonProperty("rowHeader") boolean rowHeader) {
+        this.kind = kind == null ? Kind.TEXT : kind;
         this.label = label;
-        this.modifiers = List.copyOf(modifiers);
+        this.modifiers = modifiers == null ? List.of() : List.copyOf(modifiers);
         this.sortKey = sortKey;
         this.sort = sort;
-        this.subColumns = List.copyOf(subColumns);
+        this.subColumns = subColumns == null ? List.of() : List.copyOf(subColumns);
         this.stickyModifiers = stickyModifiers;
         this.stickyStyle = stickyStyle;
         this.rowHeader = rowHeader;

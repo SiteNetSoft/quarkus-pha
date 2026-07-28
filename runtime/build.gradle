@@ -11,6 +11,12 @@ dependencies {
     implementation 'io.quarkus:quarkus-arc'
     implementation 'io.quarkus:quarkus-qute'
 
+    // Jackson annotations on the models (the JSON view-model contract). compileOnly:
+    // the JVM ignores annotations whose classes are absent, so consumers that never
+    // deserialize models pay no dependency; consumers that do bring databind themselves.
+    compileOnly enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    compileOnly 'com.fasterxml.jackson.core:jackson-databind'
+
     annotationProcessor enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
     annotationProcessor 'io.quarkus:quarkus-extension-processor'
 }

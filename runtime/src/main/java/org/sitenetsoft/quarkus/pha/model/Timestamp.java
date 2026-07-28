@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -17,6 +19,7 @@ import java.util.Objects;
  * concern); {@code datetime} carries the machine-readable ISO 8601 value.
  */
 @TemplateData
+@JsonDeserialize(builder = Timestamp.Builder.class)
 public final class Timestamp {
 
     private final String text;
@@ -54,6 +57,7 @@ public final class Timestamp {
         return tooltip;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String text;
         private String id;
@@ -78,6 +82,13 @@ public final class Timestamp {
         /** Native browser tooltip (title attribute), e.g. the full ISO timestamp. */
         public Builder tooltip(String tooltip) {
             this.tooltip = tooltip;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder text(String text) {
+            this.text = text;
             return this;
         }
 

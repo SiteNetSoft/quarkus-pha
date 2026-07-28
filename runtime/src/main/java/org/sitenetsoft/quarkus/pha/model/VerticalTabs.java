@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import java.util.Objects;
  * slot-driven example to hand-render its nested branch).
  */
 @TemplateData
+@JsonDeserialize(builder = VerticalTabs.Builder.class)
 public final class VerticalTabs {
 
     private final String id;
@@ -80,6 +83,7 @@ public final class VerticalTabs {
             return b;
         }
 
+        @JsonPOJOBuilder(withPrefix = "")
         public static final class Builder {
             private String id;
             private String title;
@@ -104,6 +108,11 @@ public final class VerticalTabs {
             /** Current item: active class + aria-current on the link. */
             public Builder active() {
                 this.active = true;
+                return this;
+            }
+
+            public Builder active(boolean active) {
+                this.active = active;
                 return this;
             }
 
@@ -139,14 +148,36 @@ public final class VerticalTabs {
             return this;
         }
 
+        public Builder restrictTabs(boolean restrictTabs) {
+            this.restrictTabs = restrictTabs;
+            return this;
+        }
+
         /** Direct-child active marker (extension's active-tab class, with restrictTabs). */
         public Builder activeTab() {
             this.activeTab = true;
             return this;
         }
 
+        public Builder activeTab(boolean activeTab) {
+            this.activeTab = activeTab;
+            return this;
+        }
+
         public Builder tab(Tab.Builder tab) {
             this.tabs.add(tab);
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder tabs(java.util.List<Tab.Builder> tabs) {
+            this.tabs.addAll(tabs);
             return this;
         }
 

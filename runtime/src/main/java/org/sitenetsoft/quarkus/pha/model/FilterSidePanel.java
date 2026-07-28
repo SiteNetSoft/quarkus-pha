@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import java.util.Objects;
  * </pre>
  */
 @TemplateData
+@JsonDeserialize(builder = FilterSidePanel.Builder.class)
 public final class FilterSidePanel {
 
     private final String id;
@@ -57,6 +60,7 @@ public final class FilterSidePanel {
             return b;
         }
 
+        @JsonPOJOBuilder(withPrefix = "")
         public static final class Builder {
             private String title;
             private String headingLevel;
@@ -117,8 +121,18 @@ public final class FilterSidePanel {
                 return this;
             }
 
+            public Builder checked(boolean checked) {
+                this.checked = checked;
+                return this;
+            }
+
             public Builder disabled() {
                 this.disabled = true;
+                return this;
+            }
+
+            public Builder disabled(boolean disabled) {
+                this.disabled = disabled;
                 return this;
             }
 
@@ -137,6 +151,18 @@ public final class FilterSidePanel {
 
         public Builder category(Category.Builder category) {
             this.categories.add(category);
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder categories(java.util.List<Category.Builder> categories) {
+            this.categories.addAll(categories);
             return this;
         }
 

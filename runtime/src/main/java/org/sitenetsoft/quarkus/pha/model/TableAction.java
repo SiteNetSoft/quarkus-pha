@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -17,7 +19,9 @@ public final class TableAction {
     private final String label;
     private final Variant variant;
 
-    private TableAction(String label, Variant variant) {
+    @JsonCreator
+    private TableAction(@JsonProperty("label") String label,
+            @JsonProperty("variant") Variant variant) {
         this.label = Objects.requireNonNull(label, "label");
         this.variant = variant;
     }

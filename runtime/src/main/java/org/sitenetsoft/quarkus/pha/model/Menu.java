@@ -1,5 +1,10 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -32,6 +37,7 @@ import java.util.Objects;
  * favorites) stay hand-written — see the menu demo page.
  */
 @TemplateData
+@JsonDeserialize(builder = Menu.Builder.class)
 public final class Menu {
 
     /** A titled section of menu items. */
@@ -40,7 +46,8 @@ public final class Menu {
         private final String title;
         private final List<MenuItem> items;
 
-        private Group(String title, List<MenuItem> items) {
+        @JsonCreator
+        private Group(@JsonProperty("title") String title, @JsonProperty("items") List<MenuItem> items) {
             this.title = title;
             this.items = items;
         }
@@ -212,6 +219,10 @@ public final class Menu {
         return listNoRole;
     }
 
+    /* JSON-constructible (the pha view-model contract): properties bind to the field-named
+       1-arg setters below; the compound fluent conveniences (searchFilter, viewMore,
+       checkboxes(String)) stay Java-side sugar over the same fields. */
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
 
         private String id;
@@ -255,8 +266,18 @@ public final class Menu {
             return this;
         }
 
+        public Builder plain(boolean plain) {
+            this.plain = plain;
+            return this;
+        }
+
         public Builder scrollable() {
             this.scrollable = true;
+            return this;
+        }
+
+        public Builder scrollable(boolean scrollable) {
+            this.scrollable = scrollable;
             return this;
         }
 
@@ -290,10 +311,32 @@ public final class Menu {
             return this;
         }
 
+        public Builder footerDivider(boolean footerDivider) {
+            this.footerDivider = footerDivider;
+            return this;
+        }
+
+        public Builder searchPlaceholder(String searchPlaceholder) {
+            this.searchPlaceholder = searchPlaceholder;
+            return this;
+        }
+
+        public Builder searchAriaLabel(String searchAriaLabel) {
+            this.searchAriaLabel = searchAriaLabel;
+            return this;
+        }
+
         /** Search region above the content that live-filters the items as you type. */
+        @JsonIgnore
         public Builder searchFilter(String placeholder, String ariaLabel) {
             this.searchPlaceholder = Objects.requireNonNull(placeholder, "placeholder");
             this.searchAriaLabel = Objects.requireNonNull(ariaLabel, "ariaLabel");
+            return this;
+        }
+
+        /** "single" | "multi" — the JSON-facing form of selectSingle()/selectMulti(). */
+        public Builder selectMode(String selectMode) {
+            this.selectMode = selectMode;
             return this;
         }
 
@@ -309,10 +352,36 @@ public final class Menu {
             return this;
         }
 
+        public Builder checkboxes(boolean checkboxes) {
+            this.checkboxes = checkboxes;
+            return this;
+        }
+
+        public Builder checkboxIdPrefix(String checkboxIdPrefix) {
+            this.checkboxIdPrefix = Objects.requireNonNull(checkboxIdPrefix, "checkboxIdPrefix");
+            return this;
+        }
+
         /** Checkbox items; generated input ids use the given prefix ({@code {prefix}-N-input}). */
+        @JsonIgnore
         public Builder checkboxes(String idPrefix) {
             this.checkboxes = true;
             this.checkboxIdPrefix = Objects.requireNonNull(idPrefix, "idPrefix");
+            return this;
+        }
+
+        public Builder viewMoreText(String viewMoreText) {
+            this.viewMoreText = viewMoreText;
+            return this;
+        }
+
+        public Builder viewMoreCount(int viewMoreCount) {
+            this.viewMoreCount = viewMoreCount;
+            return this;
+        }
+
+        public Builder viewMoreLoadedPrefix(String viewMoreLoadedPrefix) {
+            this.viewMoreLoadedPrefix = viewMoreLoadedPrefix;
             return this;
         }
 
@@ -321,6 +390,11 @@ public final class Menu {
             this.viewMoreText = Objects.requireNonNull(text, "text");
             this.viewMoreCount = count;
             this.viewMoreLoadedPrefix = Objects.requireNonNull(loadedPrefix, "loadedPrefix");
+            return this;
+        }
+
+        public Builder loadingLabel(String loadingLabel) {
+            this.loadingLabel = loadingLabel;
             return this;
         }
 
@@ -344,6 +418,13 @@ public final class Menu {
 
         public Builder group(Group group) {
             groups.add(Objects.requireNonNull(group, "group"));
+            return this;
+        }
+
+        public Builder groups(Group... groups) {
+            for (Group g : groups) {
+                group(g);
+            }
             return this;
         }
 

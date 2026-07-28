@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.quarkus.qute.TemplateData;
 
 import java.util.List;
@@ -18,9 +20,11 @@ public final class TableBody {
     private final Stripe stripe;
     private final List<TableRow> rows;
 
-    TableBody(Stripe stripe, List<TableRow> rows) {
+    @JsonCreator
+    TableBody(@JsonProperty("stripe") Stripe stripe,
+            @JsonProperty("rows") List<TableRow> rows) {
         this.stripe = stripe;
-        this.rows = List.copyOf(rows);
+        this.rows = rows == null ? List.of() : List.copyOf(rows);
     }
 
     public List<TableRow> rows() {

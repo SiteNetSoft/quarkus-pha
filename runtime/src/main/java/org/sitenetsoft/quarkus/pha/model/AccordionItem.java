@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -26,8 +28,14 @@ public final class AccordionItem {
     private final String headingLevel;
     private final String key;
 
-    private AccordionItem(String itemId, String title, String bodyHtml, boolean expanded,
-                          boolean fixed, String headingLevel, String key) {
+    @JsonCreator
+    private AccordionItem(@JsonProperty("itemId") String itemId,
+            @JsonProperty("title") String title,
+            @JsonProperty("bodyHtml") String bodyHtml,
+            @JsonProperty("expanded") boolean expanded,
+            @JsonProperty("fixed") boolean fixed,
+            @JsonProperty("headingLevel") String headingLevel,
+            @JsonProperty("key") String key) {
         this.itemId = itemId;
         this.title = title;
         this.bodyHtml = bodyHtml;

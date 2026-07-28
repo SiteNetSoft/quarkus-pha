@@ -1,5 +1,6 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -11,6 +12,7 @@ import java.util.Objects;
  * {@link #current}.
  */
 @TemplateData
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public final class SimpleListItem {
 
     private String text;

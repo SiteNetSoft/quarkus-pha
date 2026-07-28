@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ import java.util.Objects;
  * dividers. Live filter/label-group state compositions stay on the slot shell.
  */
 @TemplateData
+@JsonDeserialize(builder = Toolbar.Builder.class)
 public final class Toolbar {
 
     /** One toolbar item. */
@@ -338,6 +341,7 @@ public final class Toolbar {
         return sections;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String variant;
@@ -361,13 +365,28 @@ public final class Toolbar {
             return this;
         }
 
+        public Builder noBackground(boolean noBackground) {
+            this.noBackground = noBackground;
+            return this;
+        }
+
         public Builder sticky() {
             this.sticky = true;
             return this;
         }
 
+        public Builder sticky(boolean sticky) {
+            this.sticky = sticky;
+            return this;
+        }
+
         public Builder vertical() {
             this.vertical = true;
+            return this;
+        }
+
+        public Builder vertical(boolean vertical) {
+            this.vertical = vertical;
             return this;
         }
 
@@ -380,6 +399,18 @@ public final class Toolbar {
         /** One content row's section. */
         public Builder section(Section section) {
             sections.add(Objects.requireNonNull(section, "section"));
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder sections(java.util.List<Section> sections) {
+            this.sections.addAll(sections);
             return this;
         }
 

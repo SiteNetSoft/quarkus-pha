@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -17,6 +19,7 @@ import java.util.Objects;
  * {@code {id}-field} for the label's {@code for=} wiring.
  */
 @TemplateData
+@JsonDeserialize(builder = Radio.Builder.class)
 public final class Radio {
 
     private final String id;
@@ -92,6 +95,7 @@ public final class Radio {
         return standalone;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String name;
@@ -132,8 +136,35 @@ public final class Radio {
             return this;
         }
 
+        public Builder checked(boolean checked) {
+            this.checked = checked;
+            return this;
+        }
+
         public Builder disabled() {
             this.disabled = true;
+            return this;
+        }
+
+        public Builder disabled(boolean disabled) {
+            this.disabled = disabled;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder standalone(boolean standalone) {
+            this.standalone = standalone;
             return this;
         }
 

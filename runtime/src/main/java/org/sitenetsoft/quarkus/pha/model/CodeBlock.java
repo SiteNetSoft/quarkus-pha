@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -17,6 +19,7 @@ import java.util.Objects;
  * — whitespace and line breaks are preserved by the pre element.
  */
 @TemplateData
+@JsonDeserialize(builder = CodeBlock.Builder.class)
 public final class CodeBlock {
 
     private final String id;
@@ -48,6 +51,7 @@ public final class CodeBlock {
         return copy;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String code;
@@ -59,6 +63,28 @@ public final class CodeBlock {
         /** Header copy-to-clipboard button (Alpine). */
         public Builder withCopy() {
             this.copy = true;
+            return this;
+        }
+
+        public Builder withCopy(boolean copy) {
+            this.copy = copy;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder code(String code) {
+            this.code = code;
+            return this;
+        }
+
+        public Builder copy(boolean copy) {
+            this.copy = copy;
             return this;
         }
 

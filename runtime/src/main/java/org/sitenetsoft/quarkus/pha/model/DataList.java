@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ import java.util.Objects;
  * hand-written through the include family's content slots.
  */
 @TemplateData
+@JsonDeserialize(builder = DataList.Builder.class)
 public final class DataList {
 
     private final String id;
@@ -100,6 +103,7 @@ public final class DataList {
         return items;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
 
         private String id;
@@ -130,8 +134,18 @@ public final class DataList {
             return this;
         }
 
+        public Builder compact(boolean compact) {
+            this.compact = compact;
+            return this;
+        }
+
         public Builder plain() {
             this.plain = true;
+            return this;
+        }
+
+        public Builder plain(boolean plain) {
+            this.plain = plain;
             return this;
         }
 
@@ -159,6 +173,23 @@ public final class DataList {
 
         public Builder item(DataListItem item) {
             items.add(Objects.requireNonNull(item, "item"));
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder modifiers(java.util.List<String> modifiers) {
+            this.modifiers.addAll(modifiers);
+            return this;
+        }
+
+        public Builder initialKey(String initialKey) {
+            this.initialKey = initialKey;
+            return this;
+        }
+
+        public Builder items(java.util.List<DataListItem> items) {
+            this.items.addAll(items);
             return this;
         }
 

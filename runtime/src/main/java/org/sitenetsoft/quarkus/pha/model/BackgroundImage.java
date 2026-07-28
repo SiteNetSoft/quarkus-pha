@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -12,6 +14,7 @@ import java.util.Objects;
  * </pre>
  */
 @TemplateData
+@JsonDeserialize(builder = BackgroundImage.Builder.class)
 public final class BackgroundImage {
 
     private final String src;
@@ -36,6 +39,7 @@ public final class BackgroundImage {
         return id;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String src;
         private String id;
@@ -45,6 +49,13 @@ public final class BackgroundImage {
 
         public Builder id(String id) {
             this.id = id;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder src(String src) {
+            this.src = src;
             return this;
         }
 

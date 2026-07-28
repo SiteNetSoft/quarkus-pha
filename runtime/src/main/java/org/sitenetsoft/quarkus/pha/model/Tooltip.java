@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -22,6 +24,7 @@ import java.util.Objects;
  * (top-left, right-bottom, ...).
  */
 @TemplateData
+@JsonDeserialize(builder = Tooltip.Builder.class)
 public final class Tooltip {
 
     private final String id;
@@ -70,6 +73,7 @@ public final class Tooltip {
         return tipText;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String position;
@@ -93,6 +97,11 @@ public final class Tooltip {
             return this;
         }
 
+        public Builder textAlignLeft(boolean textAlignLeft) {
+            this.textAlignLeft = textAlignLeft;
+            return this;
+        }
+
         /** aria-live on the tip — "polite" when tip content changes while open. */
         public Builder ariaLive(String ariaLive) {
             this.ariaLive = ariaLive;
@@ -107,6 +116,18 @@ public final class Tooltip {
 
         /** Tooltip text (escaped). */
         public Builder tip(String tipText) {
+            this.tipText = tipText;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder tipText(String tipText) {
             this.tipText = tipText;
             return this;
         }

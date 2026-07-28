@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ import java.util.Objects;
  * exclamation, error→circle-exclamation, indeterminate→minus).
  */
 @TemplateData
+@JsonDeserialize(builder = HelperText.Builder.class)
 public final class HelperText {
 
     /** One helper-text row. */
@@ -144,6 +147,7 @@ public final class HelperText {
         return items;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private boolean list;
@@ -181,6 +185,28 @@ public final class HelperText {
         /** List shape: add a row. */
         public Builder item(Item item) {
             items.add(Objects.requireNonNull(item, "item"));
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder list(boolean list) {
+            this.list = list;
+            return this;
+        }
+
+        public Builder single(Item single) {
+            this.single = single;
+            return this;
+        }
+
+        public Builder items(java.util.List<Item> items) {
+            this.items.addAll(items);
             return this;
         }
 

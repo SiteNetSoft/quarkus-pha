@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ import java.util.Objects;
  * custom headers/focus) stay on the slot shell.
  */
 @TemplateData
+@JsonDeserialize(builder = Modal.Builder.class)
 public final class Modal {
 
     private final String id;
@@ -180,6 +183,7 @@ public final class Modal {
         return footer;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String triggerText;
@@ -227,8 +231,18 @@ public final class Modal {
             return this;
         }
 
+        public Builder statusTitle(boolean statusTitle) {
+            this.statusTitle = statusTitle;
+            return this;
+        }
+
         public Builder alignTop() {
             this.alignTop = true;
+            return this;
+        }
+
+        public Builder alignTop(boolean alignTop) {
+            this.alignTop = alignTop;
             return this;
         }
 
@@ -262,6 +276,11 @@ public final class Modal {
             return this;
         }
 
+        public Builder alertPrefix(boolean alertPrefix) {
+            this.alertPrefix = alertPrefix;
+            return this;
+        }
+
         /** Static description line under the title. */
         public Builder description(String description) {
             this.description = description;
@@ -280,6 +299,11 @@ public final class Modal {
             return this;
         }
 
+        public Builder noClose(boolean noClose) {
+            this.noClose = noClose;
+            return this;
+        }
+
         /** Body content (raw HTML). */
         public Builder body(String bodyHtml) {
             this.bodyHtml = bodyHtml;
@@ -289,6 +313,11 @@ public final class Modal {
         /** Keyboard-scrollable body (tabindex 0). */
         public Builder bodyScrollable() {
             this.bodyScrollable = true;
+            return this;
+        }
+
+        public Builder bodyScrollable(boolean bodyScrollable) {
+            this.bodyScrollable = bodyScrollable;
             return this;
         }
 
@@ -307,6 +336,28 @@ public final class Modal {
         /** Footer button shorthand: text + variant (primary | link | danger | …). */
         public Builder footerButton(String text, String variant) {
             return footerButton(Button.of(text).variant(Objects.requireNonNull(variant, "variant")).build());
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder triggerText(String triggerText) {
+            this.triggerText = triggerText;
+            return this;
+        }
+
+        public Builder bodyHtml(String bodyHtml) {
+            this.bodyHtml = bodyHtml;
+            return this;
+        }
+
+        public Builder footer(java.util.List<Button> footer) {
+            this.footer.addAll(footer);
+            return this;
         }
 
         public Modal build() {

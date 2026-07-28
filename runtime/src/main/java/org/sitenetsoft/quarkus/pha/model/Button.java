@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -23,6 +25,7 @@ import java.util.Objects;
  * Builder; Qute only sees the built object's accessors.
  */
 @TemplateData
+@JsonDeserialize(builder = Button.Builder.class)
 public final class Button {
 
     private final String text;
@@ -252,6 +255,7 @@ public final class Button {
         return hamburgerVariant;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
 
         private String text;
@@ -310,9 +314,19 @@ public final class Button {
             return this;
         }
 
+        public Builder asCircle(boolean circle) {
+            this.circle = circle;
+            return this;
+        }
+
         /** Block-level button spanning its container. */
         public Builder asBlock() {
             this.block = true;
+            return this;
+        }
+
+        public Builder asBlock(boolean block) {
+            this.block = block;
             return this;
         }
 
@@ -322,8 +336,18 @@ public final class Button {
             return this;
         }
 
+        public Builder asInline(boolean inline) {
+            this.inline = inline;
+            return this;
+        }
+
         public Builder asDisabled() {
             this.disabled = true;
+            return this;
+        }
+
+        public Builder asDisabled(boolean disabled) {
+            this.disabled = disabled;
             return this;
         }
 
@@ -333,9 +357,19 @@ public final class Button {
             return this;
         }
 
+        public Builder asAriaDisabled(boolean ariaDisabled) {
+            this.ariaDisabled = ariaDisabled;
+            return this;
+        }
+
         /** Active/clicked styling. */
         public Builder asClicked() {
             this.clicked = true;
+            return this;
+        }
+
+        public Builder asClicked(boolean clicked) {
+            this.clicked = clicked;
             return this;
         }
 
@@ -345,9 +379,19 @@ public final class Button {
             return this;
         }
 
+        public Builder asDanger(boolean danger) {
+            this.danger = danger;
+            return this;
+        }
+
         /** Removes the plain button's padding so the icon sits flush. */
         public Builder asNoPadding() {
             this.noPadding = true;
+            return this;
+        }
+
+        public Builder asNoPadding(boolean noPadding) {
+            this.noPadding = noPadding;
             return this;
         }
 
@@ -404,6 +448,11 @@ public final class Button {
             return this;
         }
 
+        public Builder iconAtEnd(boolean iconAtEnd) {
+            this.iconAtEnd = iconAtEnd;
+            return this;
+        }
+
         /** Count badge after the text. */
         public Builder count(int count) {
             this.count = count;
@@ -413,6 +462,11 @@ public final class Button {
         /** Read (muted) styling on the count badge. */
         public Builder countRead() {
             this.countRead = true;
+            return this;
+        }
+
+        public Builder countRead(boolean countRead) {
+            this.countRead = countRead;
             return this;
         }
 
@@ -428,9 +482,91 @@ public final class Button {
             return this;
         }
 
+        public Builder asFavorited(boolean favorited) {
+            this.favorited = favorited;
+            return this;
+        }
+
         /** Hamburger animation variant: expand | collapse. */
         public Builder hamburgerVariant(String hamburgerVariant) {
             this.hamburgerVariant = hamburgerVariant;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder text(String text) {
+            this.text = text;
+            return this;
+        }
+
+        public Builder circle(boolean circle) {
+            this.circle = circle;
+            return this;
+        }
+
+        public Builder block(boolean block) {
+            this.block = block;
+            return this;
+        }
+
+        public Builder inline(boolean inline) {
+            this.inline = inline;
+            return this;
+        }
+
+        public Builder disabled(boolean disabled) {
+            this.disabled = disabled;
+            return this;
+        }
+
+        public Builder ariaDisabled(boolean ariaDisabled) {
+            this.ariaDisabled = ariaDisabled;
+            return this;
+        }
+
+        public Builder clicked(boolean clicked) {
+            this.clicked = clicked;
+            return this;
+        }
+
+        public Builder danger(boolean danger) {
+            this.danger = danger;
+            return this;
+        }
+
+        public Builder noPadding(boolean noPadding) {
+            this.noPadding = noPadding;
+            return this;
+        }
+
+        public Builder spinnerLabel(String spinnerLabel) {
+            this.spinnerLabel = spinnerLabel;
+            return this;
+        }
+
+        public Builder tag(String tag) {
+            this.tag = tag;
+            return this;
+        }
+
+        public Builder favorite(boolean favorite) {
+            this.favorite = favorite;
+            return this;
+        }
+
+        public Builder favorited(boolean favorited) {
+            this.favorited = favorited;
+            return this;
+        }
+
+        public Builder settings(boolean settings) {
+            this.settings = settings;
+            return this;
+        }
+
+        public Builder hamburger(boolean hamburger) {
+            this.hamburger = hamburger;
             return this;
         }
 

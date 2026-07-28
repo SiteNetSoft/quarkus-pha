@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 /**
@@ -18,6 +20,7 @@ import io.quarkus.qute.TemplateData;
  * ({@code widthValue}/{@code heightValue}) — each axis one or the other.
  */
 @TemplateData
+@JsonDeserialize(builder = Skeleton.Builder.class)
 public final class Skeleton {
 
     private final String id;
@@ -76,6 +79,7 @@ public final class Skeleton {
         return screenReaderText;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String shape;

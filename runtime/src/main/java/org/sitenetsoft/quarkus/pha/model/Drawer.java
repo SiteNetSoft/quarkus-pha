@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ import java.util.Objects;
  * Scope-sharing chrome compositions stay hand-written.
  */
 @TemplateData
+@JsonDeserialize(builder = Drawer.Builder.class)
 public final class Drawer {
 
     /** One drawer body region. */
@@ -225,6 +228,7 @@ public final class Drawer {
         return panelBodies;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private boolean inline;
@@ -257,9 +261,19 @@ public final class Drawer {
             return this;
         }
 
+        public Builder inline(boolean inline) {
+            this.inline = inline;
+            return this;
+        }
+
         /** Always-expanded split pane (pf-m-static). */
         public Builder staticMode() {
             this.staticMode = true;
+            return this;
+        }
+
+        public Builder staticMode(boolean staticMode) {
+            this.staticMode = staticMode;
             return this;
         }
 
@@ -269,8 +283,18 @@ public final class Drawer {
             return this;
         }
 
+        public Builder pill(boolean pill) {
+            this.pill = pill;
+            return this;
+        }
+
         public Builder panelLeft() {
             this.panelLeft = true;
+            return this;
+        }
+
+        public Builder panelLeft(boolean panelLeft) {
+            this.panelLeft = panelLeft;
             return this;
         }
 
@@ -279,9 +303,19 @@ public final class Drawer {
             return this;
         }
 
+        public Builder panelBottom(boolean panelBottom) {
+            this.panelBottom = panelBottom;
+            return this;
+        }
+
         /** Start open without pf-m-static. */
         public Builder startExpanded() {
             this.startExpanded = true;
+            return this;
+        }
+
+        public Builder startExpanded(boolean startExpanded) {
+            this.startExpanded = startExpanded;
             return this;
         }
 
@@ -336,6 +370,11 @@ public final class Drawer {
             return this;
         }
 
+        public Builder firstBodyBare(boolean firstBodyBare) {
+            this.firstBodyBare = firstBodyBare;
+            return this;
+        }
+
         /** Additional content body. */
         public Builder contentBody(String html, boolean padding, boolean noPadding) {
             extraContentBodies.add(new Body(Objects.requireNonNull(html, "html"), padding, noPadding));
@@ -344,6 +383,11 @@ public final class Drawer {
 
         public Builder panelSecondary() {
             this.panelSecondary = true;
+            return this;
+        }
+
+        public Builder panelSecondary(boolean panelSecondary) {
+            this.panelSecondary = panelSecondary;
             return this;
         }
 
@@ -362,6 +406,58 @@ public final class Drawer {
         /** Panel body. */
         public Builder panelBody(String html, boolean padding, boolean noPadding) {
             panelBodies.add(new Body(Objects.requireNonNull(html, "html"), padding, noPadding));
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder resizeDefault(Integer resizeDefault) {
+            this.resizeDefault = resizeDefault;
+            return this;
+        }
+
+        public Builder resizeMin(Integer resizeMin) {
+            this.resizeMin = resizeMin;
+            return this;
+        }
+
+        public Builder sectionHtml(String sectionHtml) {
+            this.sectionHtml = sectionHtml;
+            return this;
+        }
+
+        public Builder toggleOpenText(String toggleOpenText) {
+            this.toggleOpenText = toggleOpenText;
+            return this;
+        }
+
+        public Builder toggleCloseText(String toggleCloseText) {
+            this.toggleCloseText = toggleCloseText;
+            return this;
+        }
+
+        public Builder toggleText(String toggleText) {
+            this.toggleText = toggleText;
+            return this;
+        }
+
+        public Builder extraContentBodies(java.util.List<Body> extraContentBodies) {
+            this.extraContentBodies.addAll(extraContentBodies);
+            return this;
+        }
+
+        public Builder headHtml(String headHtml) {
+            this.headHtml = headHtml;
+            return this;
+        }
+
+        public Builder panelBodies(java.util.List<Body> panelBodies) {
+            this.panelBodies.addAll(panelBodies);
             return this;
         }
 

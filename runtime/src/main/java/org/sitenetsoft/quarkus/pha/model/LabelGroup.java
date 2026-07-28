@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ import java.util.Objects;
  * "N more" toggle, optionally starting expanded.
  */
 @TemplateData
+@JsonDeserialize(builder = LabelGroup.Builder.class)
 public final class LabelGroup {
 
     private final String id;
@@ -89,6 +92,7 @@ public final class LabelGroup {
         return labels;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
 
         private String id;
@@ -128,6 +132,11 @@ public final class LabelGroup {
             return this;
         }
 
+        public Builder vertical(boolean vertical) {
+            this.vertical = vertical;
+            return this;
+        }
+
         /** Close button on the group itself, with its aria-label. */
         public Builder closable(String closeBtnAria) {
             this.closable = true;
@@ -147,6 +156,11 @@ public final class LabelGroup {
             return this;
         }
 
+        public Builder startExpanded(boolean startExpanded) {
+            this.startExpanded = startExpanded;
+            return this;
+        }
+
         public Builder label(Label label) {
             labels.add(Objects.requireNonNull(label, "label"));
             return this;
@@ -156,6 +170,13 @@ public final class LabelGroup {
             for (Label label : labels) {
                 label(label);
             }
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder closeBtnAria(String closeBtnAria) {
+            this.closeBtnAria = closeBtnAria;
             return this;
         }
 

@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -20,6 +22,7 @@ import java.util.Objects;
  * subtitle can carry markup such as a provider link.
  */
 @TemplateData
+@JsonDeserialize(builder = CatalogItemHeader.Builder.class)
 public final class CatalogItemHeader {
 
     private final String id;
@@ -74,6 +77,7 @@ public final class CatalogItemHeader {
         return headingLevel != null ? headingLevel : "h1";
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String title;
@@ -113,6 +117,23 @@ public final class CatalogItemHeader {
         /** h1 (default) | h2 | ... on the title. */
         public Builder headingLevel(String headingLevel) {
             this.headingLevel = headingLevel;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder title(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public Builder iconImg(String iconImg) {
+            this.iconImg = iconImg;
+            return this;
+        }
+
+        public Builder iconAlt(String iconAlt) {
+            this.iconAlt = iconAlt;
             return this;
         }
 
