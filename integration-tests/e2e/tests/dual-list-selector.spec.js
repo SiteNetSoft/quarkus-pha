@@ -70,7 +70,7 @@ test.describe("Dual List Selector", () => {
 
   test("draggable cross-link points at the drag-and-drop demo", async ({ page }) => {
     await expect(page.locator("#draggable")).toBeAttached();
-    await expect(page.locator('a[href="/components/drag-and-drop"]')).toBeAttached();
+    await expect(page.locator('#ws-page-content-router a[href="/components/drag-and-drop"]').first()).toBeAttached();
   });
 
   test("search filters the available pane", async ({ page }) => {

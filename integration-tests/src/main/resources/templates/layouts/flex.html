@@ -1,88 +1,14 @@
-{#include layouts/base} {#title}Flex — Layouts{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}Flex — Layouts{/title} {#head}
 {#include layouts/_demo-css-link /}
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
 {/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content">
-        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
-          ><span class="pf-v6-c-button__text">Skip to content</span></a
-        >
-      </div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-c-content pf-m-editorial">
-                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Flex</h1>
-                    <p>
+{#include partials/showcase-page title="Flex" toc=tocLayoutFlex} {#lede}
+<p>
                       A flexbox-based responsive layout. Direction, justification, alignment, gap, and wrap are all
                       driven by PF modifier classes — no custom CSS needed for the common cases.
                     </p>
-                  </div>
-                </div>
-              </section>
-
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                    <nav class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc" aria-label="Table of contents">
-                      <div class="pf-v6-c-jump-links__main">
-                        <ul class="pf-v6-c-jump-links__list" role="list">
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"><a href="#examples" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Examples</span></span></a></span>
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#basic" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Basic</span></span></a></span></li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#direction-column" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Direction column</span></span></a></span></li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#with-gap" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">With gap</span></span></a></span></li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#justify-content" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Justify content</span></span></a></span></li>
-                            <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#nested" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Nested</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#nested-with-items" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Nested with items</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#spacing-parent" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Spacing on parent</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#spacing-children" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Spacing on children</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#spacing-parent-children" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Spacing on parent and children</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#row-gap" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Row gap</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#column-gap" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Column gap</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#default-layout" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Default layout</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#inline-flex" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Inline flex</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#grow" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Grow</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#grow-1" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Flex 1</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#grow-1-4" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Flex 1 to 4</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#nested-columns" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Nested columns</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#responsive-direction" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Responsive direction</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#align-right" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Align right</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#align-right-single" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Align right on single item</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#align-right-groups" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Align right on multiple groups</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#align-self-flex-end" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Align self flex end</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#align-self-center" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Align self center</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#align-self-baseline" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Align self baseline</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#align-self-stretch" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Align self stretch</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#justify-content-flex-end" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Justify content flex end</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#justify-content-space-between" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Justify content space between</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#justify-content-flex-start" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Justify content flex start</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#ordering" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Ordering</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#ordering-first-last" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">First and last ordering</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#ordering-first-last-responsive" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Responsive first last ordering</span></span></a></span></li>
-<li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#ordering-responsive" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Responsive ordering</span></span></a></span></li>
-</ul>
-                          </li>
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"><a href="#documentation" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Documentation</span></span></a></span>
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#props-flex" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Flex props</span></span></a></span></li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item"><span class="pf-v6-c-jump-links__link"><a href="#usage" class="pf-v6-c-button pf-m-link"><span class="pf-v6-c-button__text"><span class="pf-v6-c-jump-links__link-text">Usage</span></span></a></span></li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </nav>
-
-                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
                         <div><h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2></div>
                       </div>
 
@@ -161,15 +87,4 @@
                       </div>
 
                       <div class="pf-v6-l-stack__item"><br /><a href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/layouts/primitives/flex.html" target="_blank" rel="noopener noreferrer">Edit flex.html on GitHub</a></div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </main>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-{/body} {/include}
+{/showcaseBody} {/include} {/body} {/include}
