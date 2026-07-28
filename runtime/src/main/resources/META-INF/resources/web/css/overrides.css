@@ -32,3 +32,9 @@
 body {
   background-color: var(--pf-t--global--background--color--primary--default);
 }
+
+/* Alpine x-cloak must work on every page (the showcase shell's search menu
+ * relies on it pre-init); tooltip.css carries a copy for standalone pages. */
+[x-cloak] {
+  display: none !important;
+}
