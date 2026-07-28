@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ import java.util.Objects;
  * </pre>
  */
 @TemplateData
+@JsonDeserialize(builder = PropertiesSidePanel.Builder.class)
 public final class PropertiesSidePanel {
 
     private final String id;
@@ -47,6 +50,7 @@ public final class PropertiesSidePanel {
     public record Property(String label, String value) {
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private final List<Property> properties = new ArrayList<>();
@@ -57,6 +61,18 @@ public final class PropertiesSidePanel {
         public Builder property(String label, String value) {
             this.properties.add(new Property(Objects.requireNonNull(label, "label"),
                     Objects.requireNonNull(value, "value")));
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder properties(java.util.List<Property> properties) {
+            this.properties.addAll(properties);
             return this;
         }
 

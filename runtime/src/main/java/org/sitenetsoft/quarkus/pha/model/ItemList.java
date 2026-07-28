@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ import java.util.Objects;
  * {@code __item-icon} span before it.
  */
 @TemplateData
+@JsonDeserialize(builder = ItemList.Builder.class)
 public final class ItemList {
 
     /** One list row — optional icon plus raw-HTML content. */
@@ -113,8 +116,9 @@ public final class ItemList {
         return items;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
-        private final String element;
+        private String element;
         private String id;
         private String type;
         private boolean plain;
@@ -145,9 +149,19 @@ public final class ItemList {
             return this;
         }
 
+        public Builder plain(boolean plain) {
+            this.plain = plain;
+            return this;
+        }
+
         /** Horizontal row (pf-m-inline). */
         public Builder inline() {
             this.inline = true;
+            return this;
+        }
+
+        public Builder inline(boolean inline) {
+            this.inline = inline;
             return this;
         }
 
@@ -157,9 +171,19 @@ public final class ItemList {
             return this;
         }
 
+        public Builder bordered(boolean bordered) {
+            this.bordered = bordered;
+            return this;
+        }
+
         /** Larger __item-icon glyphs (pf-m-icon-lg). */
         public Builder iconLg() {
             this.iconLg = true;
+            return this;
+        }
+
+        public Builder iconLg(boolean iconLg) {
+            this.iconLg = iconLg;
             return this;
         }
 
@@ -178,6 +202,18 @@ public final class ItemList {
         public Builder item(String iconName, String html) {
             items.add(new Item(Objects.requireNonNull(iconName, "iconName"),
                     Objects.requireNonNull(html, "html")));
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder element(String element) {
+            this.element = element;
+            return this;
+        }
+
+        public Builder items(java.util.List<Item> items) {
+            this.items.addAll(items);
             return this;
         }
 

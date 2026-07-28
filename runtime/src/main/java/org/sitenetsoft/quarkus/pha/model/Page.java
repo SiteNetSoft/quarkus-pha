@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ import java.util.Objects;
  * its own scroll region (sticky-section pattern).
  */
 @TemplateData
+@JsonDeserialize(builder = Page.Builder.class)
 public final class Page {
 
     /** One main-area section ({@code __main-section}). */
@@ -244,6 +247,7 @@ public final class Page {
         return entries;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String style;
@@ -276,6 +280,11 @@ public final class Page {
         /** pf-m-display-inline on the masthead (horizontal-nav layout). */
         public Builder mastheadInline() {
             this.mastheadInline = true;
+            return this;
+        }
+
+        public Builder mastheadInline(boolean mastheadInline) {
+            this.mastheadInline = mastheadInline;
             return this;
         }
 
@@ -317,6 +326,11 @@ public final class Page {
             return this;
         }
 
+        public Builder sidebarNavFill(boolean sidebarNavFill) {
+            this.sidebarNavFill = sidebarNavFill;
+            return this;
+        }
+
         /** Leading pf-m-context-selector sidebar body with this text. */
         public Builder sidebarContextSelector(String text) {
             this.sidebarContextSelector = text;
@@ -326,6 +340,11 @@ public final class Page {
         /** Main area scrolls itself (tabindex 0 + overflow-y) — sticky-section pattern. */
         public Builder scrollableMain() {
             this.scrollableMain = true;
+            return this;
+        }
+
+        public Builder scrollableMain(boolean scrollableMain) {
+            this.scrollableMain = scrollableMain;
             return this;
         }
 
@@ -344,6 +363,28 @@ public final class Page {
         public Builder region(String kind, String ariaLabel, String html) {
             entries.add(new Entry(null, false, null, null,
                     Objects.requireNonNull(kind, "kind"), ariaLabel, Objects.requireNonNull(html, "html")));
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder toggleAriaLabel(String toggleAriaLabel) {
+            this.toggleAriaLabel = toggleAriaLabel;
+            return this;
+        }
+
+        public Builder sidebarNav(Nav sidebarNav) {
+            this.sidebarNav = sidebarNav;
+            return this;
+        }
+
+        public Builder entries(java.util.List<Entry> entries) {
+            this.entries.addAll(entries);
             return this;
         }
 

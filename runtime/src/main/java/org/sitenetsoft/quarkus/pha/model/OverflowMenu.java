@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ import java.util.Objects;
  * ResizeObserver chrome stays in the page).
  */
 @TemplateData
+@JsonDeserialize(builder = OverflowMenu.Builder.class)
 public final class OverflowMenu {
 
     /** One __group of composed buttons. */
@@ -100,6 +103,7 @@ public final class OverflowMenu {
         return menuItems;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private boolean vertical;
@@ -117,9 +121,19 @@ public final class OverflowMenu {
             return this;
         }
 
+        public Builder vertical(boolean vertical) {
+            this.vertical = vertical;
+            return this;
+        }
+
         /** Bind content/control visibility to an outer `narrow` Alpine state. */
         public Builder collapsible() {
             this.collapsible = true;
+            return this;
+        }
+
+        public Builder collapsible(boolean collapsible) {
+            this.collapsible = collapsible;
             return this;
         }
 
@@ -143,6 +157,23 @@ public final class OverflowMenu {
         /** Working kebab dropdown listing these action items. */
         public Builder persistentMenu(String... items) {
             this.menuItems = List.of(items);
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder groups(java.util.List<Group> groups) {
+            this.groups.addAll(groups);
+            return this;
+        }
+
+        public Builder menuItems(java.util.List<String> menuItems) {
+            this.menuItems.addAll(menuItems);
             return this;
         }
 

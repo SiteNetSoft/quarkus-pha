@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -20,6 +22,7 @@ import java.util.Objects;
  * overlay (default PF spinner, or {@code progressIcon}).
  */
 @TemplateData
+@JsonDeserialize(builder = Icon.Builder.class)
 public final class Icon {
 
     private final String name;
@@ -80,6 +83,7 @@ public final class Icon {
         return label;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String name;
         private String size;
@@ -117,9 +121,19 @@ public final class Icon {
             return this;
         }
 
+        public Builder inline(boolean inline) {
+            this.inline = inline;
+            return this;
+        }
+
         /** Show the __progress overlay (PF spinner unless progressIcon is set). */
         public Builder inProgress() {
             this.inProgress = true;
+            return this;
+        }
+
+        public Builder inProgress(boolean inProgress) {
+            this.inProgress = inProgress;
             return this;
         }
 
@@ -131,6 +145,13 @@ public final class Icon {
         /** Accessible label; omit for decorative icons (aria-hidden). */
         public Builder label(String label) {
             this.label = label;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder name(String name) {
+            this.name = name;
             return this;
         }
 

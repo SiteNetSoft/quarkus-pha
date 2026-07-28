@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ import java.util.Objects;
  * {@link Builder#definitionList()} renders the dl/dt/dd shape.
  */
 @TemplateData
+@JsonDeserialize(builder = Accordion.Builder.class)
 public final class Accordion {
 
     private final String id;
@@ -82,6 +85,7 @@ public final class Accordion {
         return items;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
 
         private String id;
@@ -107,9 +111,19 @@ public final class Accordion {
             return this;
         }
 
+        public Builder bordered(boolean bordered) {
+            this.bordered = bordered;
+            return this;
+        }
+
         /** Large display size. */
         public Builder displayLg() {
             this.displayLg = true;
+            return this;
+        }
+
+        public Builder displayLg(boolean displayLg) {
+            this.displayLg = displayLg;
             return this;
         }
 
@@ -119,15 +133,30 @@ public final class Accordion {
             return this;
         }
 
+        public Builder toggleStart(boolean toggleStart) {
+            this.toggleStart = toggleStart;
+            return this;
+        }
+
         /** Render as dl/dt/dd. */
         public Builder definitionList() {
             this.definitionList = true;
             return this;
         }
 
+        public Builder definitionList(boolean definitionList) {
+            this.definitionList = definitionList;
+            return this;
+        }
+
         /** Only one item open at a time (shared generated state; items need keys). */
         public Builder singleExpand() {
             this.singleExpand = true;
+            return this;
+        }
+
+        public Builder singleExpand(boolean singleExpand) {
+            this.singleExpand = singleExpand;
             return this;
         }
 
@@ -140,6 +169,13 @@ public final class Accordion {
             for (AccordionItem item : items) {
                 item(item);
             }
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
             return this;
         }
 

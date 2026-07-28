@@ -1,5 +1,6 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.Objects;
  * instead of re-deriving them.
  */
 @TemplateData
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public final class TableCell {
 
     public enum Kind { TEXT, LINK, KEBAB, ACTIONS, COMPOUND, EMPTY_STATE, OVERFLOW_MENU, TEXT_STACK }

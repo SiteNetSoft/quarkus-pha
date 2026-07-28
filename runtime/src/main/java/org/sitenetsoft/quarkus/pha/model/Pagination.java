@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -24,6 +26,7 @@ import java.util.Objects;
  * Alpine variable owned by the surrounding demo chrome.
  */
 @TemplateData
+@JsonDeserialize(builder = Pagination.Builder.class)
 public final class Pagination {
 
     private final String id;
@@ -117,6 +120,7 @@ public final class Pagination {
         return id + "-toggle";
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
 
         private String id;
@@ -158,9 +162,19 @@ public final class Pagination {
             return this;
         }
 
+        public Builder asBottom(boolean bottom) {
+            this.bottom = bottom;
+            return this;
+        }
+
         /** Compact — prev/next controls only. */
         public Builder asCompact() {
             this.compact = true;
+            return this;
+        }
+
+        public Builder asCompact(boolean compact) {
+            this.compact = compact;
             return this;
         }
 
@@ -170,9 +184,19 @@ public final class Pagination {
             return this;
         }
 
+        public Builder asDisabled(boolean disabled) {
+            this.disabled = disabled;
+            return this;
+        }
+
         /** Unknown item count — "of many", no input max, last control disabled. */
         public Builder asIndeterminate() {
             this.indeterminate = true;
+            return this;
+        }
+
+        public Builder asIndeterminate(boolean indeterminate) {
+            this.indeterminate = indeterminate;
             return this;
         }
 
@@ -191,6 +215,43 @@ public final class Pagination {
         /** Bind pf-m-sticky-stuck to an outer-scope `stuck` Alpine variable (scroll demo). */
         public Builder stickyScroll() {
             this.stickyMode = "scroll";
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder navLabel(String navLabel) {
+            this.navLabel = navLabel;
+            return this;
+        }
+
+        public Builder bottom(boolean bottom) {
+            this.bottom = bottom;
+            return this;
+        }
+
+        public Builder compact(boolean compact) {
+            this.compact = compact;
+            return this;
+        }
+
+        public Builder disabled(boolean disabled) {
+            this.disabled = disabled;
+            return this;
+        }
+
+        public Builder indeterminate(boolean indeterminate) {
+            this.indeterminate = indeterminate;
+            return this;
+        }
+
+        public Builder stickyMode(String stickyMode) {
+            this.stickyMode = stickyMode;
             return this;
         }
 

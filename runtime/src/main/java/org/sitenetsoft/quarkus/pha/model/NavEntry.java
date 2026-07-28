@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.quarkus.qute.TemplateData;
 
 import java.util.List;
@@ -30,15 +32,22 @@ public final class NavEntry {
     private final List<NavEntry> children;
     private final String toggleId;
 
-    NavEntry(Kind kind, String label, String href, String icon, boolean current,
-             boolean expanded, List<NavEntry> children, String toggleId) {
+    @JsonCreator
+    NavEntry(@JsonProperty("kind") Kind kind,
+            @JsonProperty("label") String label,
+            @JsonProperty("href") String href,
+            @JsonProperty("icon") String icon,
+            @JsonProperty("current") boolean current,
+            @JsonProperty("expanded") boolean expanded,
+            @JsonProperty("children") List<NavEntry> children,
+            @JsonProperty("toggleId") String toggleId) {
         this.kind = Objects.requireNonNull(kind, "kind");
         this.label = Objects.requireNonNull(label, "label");
         this.href = href;
         this.icon = icon;
         this.current = current;
         this.expanded = expanded;
-        this.children = List.copyOf(children);
+        this.children = children == null ? List.of() : List.copyOf(children);
         this.toggleId = toggleId;
     }
 

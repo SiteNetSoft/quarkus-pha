@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ import java.util.Objects;
  * dropdown crumb shapes.
  */
 @TemplateData
+@JsonDeserialize(builder = Breadcrumb.Builder.class)
 public final class Breadcrumb {
 
     private final String id;
@@ -51,6 +54,7 @@ public final class Breadcrumb {
         return items;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String ariaLabel;
@@ -66,6 +70,18 @@ public final class Breadcrumb {
 
         public Builder item(BreadcrumbItem item) {
             items.add(Objects.requireNonNull(item, "item"));
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder items(java.util.List<BreadcrumbItem> items) {
+            this.items.addAll(items);
             return this;
         }
 

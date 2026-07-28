@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -17,6 +19,7 @@ import java.util.Objects;
  * <p>The body is raw HTML; an optional CTA {@link Button} renders after it.
  */
 @TemplateData
+@JsonDeserialize(builder = Hero.Builder.class)
 public final class Hero {
 
     private final String id;
@@ -53,6 +56,7 @@ public final class Hero {
         return cta;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private boolean glass;
@@ -68,6 +72,11 @@ public final class Hero {
             return this;
         }
 
+        public Builder glass(boolean glass) {
+            this.glass = glass;
+            return this;
+        }
+
         /** Body content (raw HTML) — typically a title and supporting copy. */
         public Builder html(String html) {
             this.html = html;
@@ -77,6 +86,13 @@ public final class Hero {
         /** Call-to-action button rendered after the body content. */
         public Builder cta(Button cta) {
             this.cta = cta;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
             return this;
         }
 

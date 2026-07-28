@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -22,6 +24,7 @@ import java.util.Objects;
  * pf-m-width-* tokens verbatim.
  */
 @TemplateData
+@JsonDeserialize(builder = Sidebar.Builder.class)
 public final class Sidebar {
 
     private final String id;
@@ -134,6 +137,7 @@ public final class Sidebar {
         return contentFirst;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private boolean panelRight;
@@ -160,8 +164,18 @@ public final class Sidebar {
             return this;
         }
 
+        public Builder panelRight(boolean panelRight) {
+            this.panelRight = panelRight;
+            return this;
+        }
+
         public Builder gutter() {
             this.gutter = true;
+            return this;
+        }
+
+        public Builder gutter(boolean gutter) {
+            this.gutter = gutter;
             return this;
         }
 
@@ -171,9 +185,19 @@ public final class Sidebar {
             return this;
         }
 
+        public Builder stack(boolean stack) {
+            this.stack = stack;
+            return this;
+        }
+
         /** Divider line between panel and content (pf-m-split). */
         public Builder split() {
             this.split = true;
+            return this;
+        }
+
+        public Builder split(boolean split) {
+            this.split = split;
             return this;
         }
 
@@ -182,8 +206,18 @@ public final class Sidebar {
             return this;
         }
 
+        public Builder panelSecondary(boolean panelSecondary) {
+            this.panelSecondary = panelSecondary;
+            return this;
+        }
+
         public Builder panelPadding() {
             this.panelPadding = true;
+            return this;
+        }
+
+        public Builder panelPadding(boolean panelPadding) {
+            this.panelPadding = panelPadding;
             return this;
         }
 
@@ -193,9 +227,19 @@ public final class Sidebar {
             return this;
         }
 
+        public Builder panelStatic(boolean panelStatic) {
+            this.panelStatic = panelStatic;
+            return this;
+        }
+
         /** Panel stays pinned while content scrolls (pf-m-sticky). */
         public Builder panelSticky() {
             this.panelSticky = true;
+            return this;
+        }
+
+        public Builder panelSticky(boolean panelSticky) {
+            this.panelSticky = panelSticky;
             return this;
         }
 
@@ -221,6 +265,11 @@ public final class Sidebar {
             return this;
         }
 
+        public Builder contentPadding(boolean contentPadding) {
+            this.contentPadding = contentPadding;
+            return this;
+        }
+
         public Builder contentStyle(String contentStyle) {
             this.contentStyle = contentStyle;
             return this;
@@ -235,6 +284,28 @@ public final class Sidebar {
         /** Content before the panel in the DOM (right-panel reading order). */
         public Builder contentFirst() {
             this.contentFirst = true;
+            return this;
+        }
+
+        public Builder contentFirst(boolean contentFirst) {
+            this.contentFirst = contentFirst;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder panelHtml(String panelHtml) {
+            this.panelHtml = panelHtml;
+            return this;
+        }
+
+        public Builder contentHtml(String contentHtml) {
+            this.contentHtml = contentHtml;
             return this;
         }
 

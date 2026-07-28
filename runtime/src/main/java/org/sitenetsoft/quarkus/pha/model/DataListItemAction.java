@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.quarkus.qute.TemplateData;
 
 import java.util.List;
@@ -17,10 +19,14 @@ public final class DataListItemAction {
     private final List<TableAction> actions;
     private final String modifiers;
 
-    DataListItemAction(boolean kebab, String ariaLabel, List<TableAction> actions, String modifiers) {
+    @JsonCreator
+    DataListItemAction(@JsonProperty("kebab") boolean kebab,
+            @JsonProperty("ariaLabel") String ariaLabel,
+            @JsonProperty("actions") List<TableAction> actions,
+            @JsonProperty("modifiers") String modifiers) {
         this.kebab = kebab;
         this.ariaLabel = ariaLabel;
-        this.actions = List.copyOf(actions);
+        this.actions = actions == null ? List.of() : List.copyOf(actions);
         this.modifiers = modifiers;
     }
 

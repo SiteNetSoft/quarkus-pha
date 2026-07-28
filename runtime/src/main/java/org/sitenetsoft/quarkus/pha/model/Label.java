@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -41,10 +43,22 @@ public final class Label {
     private final String removeAria;
     private final String maxWidth;
 
-    private Label(String text, String id, String color, String status, String variant,
-                  boolean compact, boolean disabled, boolean clickable, boolean editable,
-                  String href, String icon, boolean removable, String removeClick,
-                  String removeAria, String maxWidth) {
+    @JsonCreator
+    private Label(@JsonProperty("text") String text,
+            @JsonProperty("id") String id,
+            @JsonProperty("color") String color,
+            @JsonProperty("status") String status,
+            @JsonProperty("variant") String variant,
+            @JsonProperty("compact") boolean compact,
+            @JsonProperty("disabled") boolean disabled,
+            @JsonProperty("clickable") boolean clickable,
+            @JsonProperty("editable") boolean editable,
+            @JsonProperty("href") String href,
+            @JsonProperty("icon") String icon,
+            @JsonProperty("removable") boolean removable,
+            @JsonProperty("removeClick") String removeClick,
+            @JsonProperty("removeAria") String removeAria,
+            @JsonProperty("maxWidth") String maxWidth) {
         this.text = text;
         this.id = id;
         this.color = color;

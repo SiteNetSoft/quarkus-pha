@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -22,6 +24,7 @@ import java.util.Objects;
  * warning = 0, success &gt; 0).
  */
 @TemplateData
+@JsonDeserialize(builder = NumberInput.Builder.class)
 public final class NumberInput {
 
     private final String id;
@@ -137,6 +140,7 @@ public final class NumberInput {
         return "Number input";
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private long value;
@@ -184,6 +188,11 @@ public final class NumberInput {
             return this;
         }
 
+        public Builder disabled(boolean disabled) {
+            this.disabled = disabled;
+            return this;
+        }
+
         /** Inline input width in ch units (varying-sizes pattern). */
         public Builder widthCh(int widthCh) {
             this.widthCh = widthCh;
@@ -193,6 +202,28 @@ public final class NumberInput {
         /** Color the control by value sign: error &lt; 0, warning = 0, success &gt; 0. */
         public Builder statusFollowsValue() {
             this.status = true;
+            return this;
+        }
+
+        public Builder statusFollowsValue(boolean status) {
+            this.status = status;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder value(long value) {
+            this.value = value;
+            return this;
+        }
+
+        public Builder status(boolean status) {
+            this.status = status;
             return this;
         }
 

@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -29,8 +31,13 @@ public final class ProgressStepperStep {
     private final String icon;
     private final String spinnerLabel;
 
-    private ProgressStepperStep(String title, String description, String status,
-                                boolean current, String icon, String spinnerLabel) {
+    @JsonCreator
+    private ProgressStepperStep(@JsonProperty("title") String title,
+            @JsonProperty("description") String description,
+            @JsonProperty("status") String status,
+            @JsonProperty("current") boolean current,
+            @JsonProperty("icon") String icon,
+            @JsonProperty("spinnerLabel") String spinnerLabel) {
         this.title = title;
         this.description = description;
         this.status = status;

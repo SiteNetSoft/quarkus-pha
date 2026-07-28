@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ import java.util.Objects;
  * hand-written.
  */
 @TemplateData
+@JsonDeserialize(builder = InputGroup.Builder.class)
 public final class InputGroup {
 
     /** One segment of the group. */
@@ -89,6 +92,7 @@ public final class InputGroup {
         return items;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private final List<Item> items = new ArrayList<>();
@@ -117,6 +121,18 @@ public final class InputGroup {
         /** Plain item holding a composed Button. */
         public Builder button(Button button) {
             items.add(new Item(null, null, Objects.requireNonNull(button, "button"), false));
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder items(java.util.List<Item> items) {
+            this.items.addAll(items);
             return this;
         }
 

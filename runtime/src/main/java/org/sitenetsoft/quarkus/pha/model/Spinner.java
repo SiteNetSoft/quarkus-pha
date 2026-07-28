@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 /**
@@ -16,6 +18,7 @@ import io.quarkus.qute.TemplateData;
  * spinners inherit the surrounding font size and color.
  */
 @TemplateData
+@JsonDeserialize(builder = Spinner.Builder.class)
 public final class Spinner {
 
     private final String label;
@@ -58,6 +61,7 @@ public final class Spinner {
         return ariaValuetext != null ? ariaValuetext : "Loading...";
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String label;
         private String size;
@@ -86,9 +90,21 @@ public final class Spinner {
             return this;
         }
 
+        public Builder inline(boolean inline) {
+            this.inline = inline;
+            return this;
+        }
+
         /** Progress text (aria-valuetext); defaults to "Loading...". */
         public Builder ariaValuetext(String ariaValuetext) {
             this.ariaValuetext = ariaValuetext;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder label(String label) {
+            this.label = label;
             return this;
         }
 

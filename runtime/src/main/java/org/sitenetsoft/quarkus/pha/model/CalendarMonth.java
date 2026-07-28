@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.time.DayOfWeek;
@@ -34,6 +36,7 @@ import java.util.Objects;
  * {@code end} in range mode). Omit it for a static, non-navigable calendar.
  */
 @TemplateData
+@JsonDeserialize(builder = CalendarMonth.Builder.class)
 public final class CalendarMonth {
 
     private final String id;
@@ -123,6 +126,7 @@ public final class CalendarMonth {
             boolean startRange, boolean endRange, boolean afterEnd, boolean tabZero) {
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private YearMonth month;
@@ -173,6 +177,28 @@ public final class CalendarMonth {
                 sb.append(rangeStart != null ? "&end=" : "&selected=").append(carryDate);
             }
             return sb.toString();
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder month(YearMonth month) {
+            this.month = month;
+            return this;
+        }
+
+        public Builder rangeStart(LocalDate rangeStart) {
+            this.rangeStart = rangeStart;
+            return this;
+        }
+
+        public Builder rangeEnd(LocalDate rangeEnd) {
+            this.rangeEnd = rangeEnd;
+            return this;
         }
 
         public CalendarMonth build() {

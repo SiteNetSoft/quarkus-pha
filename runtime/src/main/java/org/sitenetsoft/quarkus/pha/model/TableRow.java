@@ -1,5 +1,6 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.Objects;
  * expandable detail content.
  */
 @TemplateData
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public final class TableRow {
 
     private List<TableCell> cells = List.of();

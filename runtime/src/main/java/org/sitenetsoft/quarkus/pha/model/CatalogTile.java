@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ import java.util.Objects;
  * body content (PF React's children).
  */
 @TemplateData
+@JsonDeserialize(builder = CatalogTile.Builder.class)
 public final class CatalogTile {
 
     private final String id;
@@ -124,6 +127,7 @@ public final class CatalogTile {
         }
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String title;
@@ -180,6 +184,11 @@ public final class CatalogTile {
             return this;
         }
 
+        public Builder featured(boolean featured) {
+            this.featured = featured;
+            return this;
+        }
+
         /** Icon as an image URL (mutually exclusive with iconClass). */
         public Builder iconImg(String src, String alt) {
             this.iconImg = src;
@@ -195,6 +204,28 @@ public final class CatalogTile {
 
         public Builder badge(Badge badge) {
             this.badges.add(badge);
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder title(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public Builder iconImg(String iconImg) {
+            this.iconImg = iconImg;
+            return this;
+        }
+
+        public Builder iconAlt(String iconAlt) {
+            this.iconAlt = iconAlt;
+            return this;
+        }
+
+        public Builder badges(java.util.List<Badge> badges) {
+            this.badges.addAll(badges);
             return this;
         }
 

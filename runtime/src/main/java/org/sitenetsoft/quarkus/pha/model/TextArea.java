@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -17,6 +19,7 @@ import java.util.Objects;
  * back ariaLabel → placeholder → value → id, matching the param shell.
  */
 @TemplateData
+@JsonDeserialize(builder = TextArea.Builder.class)
 public final class TextArea {
 
     private final String id;
@@ -117,6 +120,7 @@ public final class TextArea {
         return expanded;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String placeholder;
@@ -171,8 +175,18 @@ public final class TextArea {
             return this;
         }
 
+        public Builder disabled(boolean disabled) {
+            this.disabled = disabled;
+            return this;
+        }
+
         public Builder readonly() {
             this.readonly = true;
+            return this;
+        }
+
+        public Builder readonly(boolean readonly) {
+            this.readonly = readonly;
             return this;
         }
 
@@ -181,8 +195,25 @@ public final class TextArea {
             return this;
         }
 
+        public Builder required(boolean required) {
+            this.required = required;
+            return this;
+        }
+
         public Builder expanded() {
             this.expanded = true;
+            return this;
+        }
+
+        public Builder expanded(boolean expanded) {
+            this.expanded = expanded;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
             return this;
         }
 

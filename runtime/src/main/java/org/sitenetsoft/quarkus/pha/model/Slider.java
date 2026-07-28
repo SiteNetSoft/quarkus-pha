@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -18,6 +20,7 @@ import java.util.Objects;
  * compositions (action buttons, synced number inputs) stay hand-written.
  */
 @TemplateData
+@JsonDeserialize(builder = Slider.Builder.class)
 public final class Slider {
 
     private final String id;
@@ -92,6 +95,7 @@ public final class Slider {
         return "'left: ' + ((val - " + min + ") / (" + max + " - " + min + ") * 100) + '%'";
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private long value;
@@ -118,8 +122,25 @@ public final class Slider {
             return this;
         }
 
+        public Builder disabled(boolean disabled) {
+            this.disabled = disabled;
+            return this;
+        }
+
         public Builder ariaLabel(String ariaLabel) {
             this.ariaLabel = ariaLabel;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder value(long value) {
+            this.value = value;
             return this;
         }
 

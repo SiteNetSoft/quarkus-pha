@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ import java.util.Objects;
  * hand-written — see the alert demo page.
  */
 @TemplateData
+@JsonDeserialize(builder = Alert.Builder.class)
 public final class Alert {
 
     private final String id;
@@ -108,6 +111,7 @@ public final class Alert {
         return actionLinks;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
 
         private String id;
@@ -149,9 +153,19 @@ public final class Alert {
             return this;
         }
 
+        public Builder asInline(boolean inline) {
+            this.inline = inline;
+            return this;
+        }
+
         /** Plain inline treatment (pair with {@link #asInline()}). */
         public Builder asPlain() {
             this.plain = true;
+            return this;
+        }
+
+        public Builder asPlain(boolean plain) {
+            this.plain = plain;
             return this;
         }
 
@@ -161,15 +175,30 @@ public final class Alert {
             return this;
         }
 
+        public Builder asExpandable(boolean expandable) {
+            this.expandable = expandable;
+            return this;
+        }
+
         /** Close button that dismisses the alert. */
         public Builder asClosable() {
             this.closable = true;
             return this;
         }
 
+        public Builder asClosable(boolean closable) {
+            this.closable = closable;
+            return this;
+        }
+
         /** Truncate a long title to a single line. */
         public Builder asTruncated() {
             this.truncate = true;
+            return this;
+        }
+
+        public Builder asTruncated(boolean truncate) {
+            this.truncate = truncate;
             return this;
         }
 
@@ -194,6 +223,43 @@ public final class Alert {
         public Builder actionLink(String text, String href) {
             return actionLink(Button.of(text).variant("link").asInline()
                     .href(Objects.requireNonNull(href, "href")).build());
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder title(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public Builder inline(boolean inline) {
+            this.inline = inline;
+            return this;
+        }
+
+        public Builder plain(boolean plain) {
+            this.plain = plain;
+            return this;
+        }
+
+        public Builder expandable(boolean expandable) {
+            this.expandable = expandable;
+            return this;
+        }
+
+        public Builder closable(boolean closable) {
+            this.closable = closable;
+            return this;
+        }
+
+        public Builder truncate(boolean truncate) {
+            this.truncate = truncate;
+            return this;
+        }
+
+        public Builder actionLinks(java.util.List<Button> actionLinks) {
+            this.actionLinks.addAll(actionLinks);
+            return this;
         }
 
         public Alert build() {

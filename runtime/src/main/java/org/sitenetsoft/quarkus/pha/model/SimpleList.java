@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ import java.util.Objects;
  * at {@code build()}.
  */
 @TemplateData
+@JsonDeserialize(builder = SimpleList.Builder.class)
 public final class SimpleList {
 
     private final String id;
@@ -77,6 +80,7 @@ public final class SimpleList {
         return sections;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
 
         private String id;
@@ -110,6 +114,23 @@ public final class SimpleList {
 
         public Builder section(SimpleListSection section) {
             sections.add(Objects.requireNonNull(section, "section"));
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder initialKey(String initialKey) {
+            this.initialKey = initialKey;
+            return this;
+        }
+
+        public Builder items(java.util.List<SimpleListItem> items) {
+            this.items.addAll(items);
+            return this;
+        }
+
+        public Builder sections(java.util.List<SimpleListSection> sections) {
+            this.sections.addAll(sections);
             return this;
         }
 

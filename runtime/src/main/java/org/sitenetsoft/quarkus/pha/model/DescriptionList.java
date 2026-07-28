@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ import java.util.Objects;
  * open a Popover — stay hand-written through the include's content slot.
  */
 @TemplateData
+@JsonDeserialize(builder = DescriptionList.Builder.class)
 public final class DescriptionList {
 
     private final String id;
@@ -78,6 +81,7 @@ public final class DescriptionList {
         return groups;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
 
         private String id;
@@ -176,6 +180,11 @@ public final class DescriptionList {
             return this;
         }
 
+        public Builder cardGroups(boolean cardGroups) {
+            this.cardGroups = cardGroups;
+            return this;
+        }
+
         public Builder group(DescriptionListGroup group) {
             groups.add(Objects.requireNonNull(group, "group"));
             return this;
@@ -188,6 +197,13 @@ public final class DescriptionList {
 
         public Builder groups(List<DescriptionListGroup> groups) {
             groups.forEach(this::group);
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder modifiers(java.util.List<String> modifiers) {
+            this.modifiers.addAll(modifiers);
             return this;
         }
 

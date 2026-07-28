@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -20,6 +22,7 @@ import java.util.Objects;
  * raw HTML.
  */
 @TemplateData
+@JsonDeserialize(builder = Panel.Builder.class)
 public final class Panel {
 
     private final String id;
@@ -116,6 +119,7 @@ public final class Panel {
         return footerHtml;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private boolean bordered;
@@ -140,8 +144,18 @@ public final class Panel {
             return this;
         }
 
+        public Builder bordered(boolean bordered) {
+            this.bordered = bordered;
+            return this;
+        }
+
         public Builder raised() {
             this.raised = true;
+            return this;
+        }
+
+        public Builder raised(boolean raised) {
+            this.raised = raised;
             return this;
         }
 
@@ -150,8 +164,18 @@ public final class Panel {
             return this;
         }
 
+        public Builder secondary(boolean secondary) {
+            this.secondary = secondary;
+            return this;
+        }
+
         public Builder scrollable() {
             this.scrollable = true;
+            return this;
+        }
+
+        public Builder scrollable(boolean scrollable) {
+            this.scrollable = scrollable;
             return this;
         }
 
@@ -161,8 +185,18 @@ public final class Panel {
             return this;
         }
 
+        public Builder scrollableAutoHeight(boolean scrollableAutoHeight) {
+            this.scrollableAutoHeight = scrollableAutoHeight;
+            return this;
+        }
+
         public Builder pill() {
             this.pill = true;
+            return this;
+        }
+
+        public Builder pill(boolean pill) {
+            this.pill = pill;
             return this;
         }
 
@@ -204,9 +238,46 @@ public final class Panel {
             return this;
         }
 
+        public Builder focusableMain(boolean mainFocusable) {
+            this.mainFocusable = mainFocusable;
+            return this;
+        }
+
         /** Footer section content (raw HTML). */
         public Builder footer(String html) {
             this.footerHtml = html;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder headerHtml(String headerHtml) {
+            this.headerHtml = headerHtml;
+            return this;
+        }
+
+        public Builder mainHtml(String mainHtml) {
+            this.mainHtml = mainHtml;
+            return this;
+        }
+
+        public Builder wrapBody(boolean wrapBody) {
+            this.wrapBody = wrapBody;
+            return this;
+        }
+
+        public Builder mainFocusable(boolean mainFocusable) {
+            this.mainFocusable = mainFocusable;
+            return this;
+        }
+
+        public Builder footerHtml(String footerHtml) {
+            this.footerHtml = footerHtml;
             return this;
         }
 

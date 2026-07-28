@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -23,6 +25,7 @@ import java.util.Objects;
  * content slot) stay on the slot shell.
  */
 @TemplateData
+@JsonDeserialize(builder = Masthead.Builder.class)
 public final class Masthead {
 
     private final String id;
@@ -132,6 +135,7 @@ public final class Masthead {
         return style;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String toggleAriaLabel;
@@ -194,9 +198,19 @@ public final class Masthead {
             return this;
         }
 
+        public Builder displayStack(boolean displayStack) {
+            this.displayStack = displayStack;
+            return this;
+        }
+
         /** Brand and content side by side (pf-m-display-inline). */
         public Builder displayInline() {
             this.displayInline = true;
+            return this;
+        }
+
+        public Builder displayInline(boolean displayInline) {
+            this.displayInline = displayInline;
             return this;
         }
 
@@ -209,6 +223,58 @@ public final class Masthead {
         /** Inline style on the header root. */
         public Builder style(String style) {
             this.style = style;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder toggleAriaLabel(String toggleAriaLabel) {
+            this.toggleAriaLabel = toggleAriaLabel;
+            return this;
+        }
+
+        public Builder logoHref(String logoHref) {
+            this.logoHref = logoHref;
+            return this;
+        }
+
+        public Builder logoAriaLabel(String logoAriaLabel) {
+            this.logoAriaLabel = logoAriaLabel;
+            return this;
+        }
+
+        public Builder lightSrc(String lightSrc) {
+            this.lightSrc = lightSrc;
+            return this;
+        }
+
+        public Builder darkSrc(String darkSrc) {
+            this.darkSrc = darkSrc;
+            return this;
+        }
+
+        public Builder brandAlt(String brandAlt) {
+            this.brandAlt = brandAlt;
+            return this;
+        }
+
+        public Builder brandHeight(String brandHeight) {
+            this.brandHeight = brandHeight;
+            return this;
+        }
+
+        public Builder contentHtml(String contentHtml) {
+            this.contentHtml = contentHtml;
+            return this;
+        }
+
+        public Builder extraModifiers(String extraModifiers) {
+            this.extraModifiers = extraModifiers;
             return this;
         }
 

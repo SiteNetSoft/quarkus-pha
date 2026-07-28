@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -27,8 +29,13 @@ public final class JumpLinkItem {
     private final String subsAriaLabel;
     private final List<JumpLinkItem> subs;
 
-    private JumpLinkItem(String text, String href, boolean current, boolean ariaCurrent,
-                         String subsAriaLabel, List<JumpLinkItem> subs) {
+    @JsonCreator
+    private JumpLinkItem(@JsonProperty("text") String text,
+            @JsonProperty("href") String href,
+            @JsonProperty("current") boolean current,
+            @JsonProperty("ariaCurrent") boolean ariaCurrent,
+            @JsonProperty("subsAriaLabel") String subsAriaLabel,
+            @JsonProperty("subs") List<JumpLinkItem> subs) {
         this.text = text;
         this.href = href;
         this.current = current;
@@ -60,7 +67,7 @@ public final class JumpLinkItem {
     public JumpLinkItem sub(JumpLinkItem item) {
         List<JumpLinkItem> next = new ArrayList<>(subs);
         next.add(Objects.requireNonNull(item, "item"));
-        return new JumpLinkItem(text, href, current, ariaCurrent, subsAriaLabel, List.copyOf(next));
+        return new JumpLinkItem(text, href, current, ariaCurrent, subsAriaLabel, next == null ? List.of() : List.copyOf(next));
     }
 
     public String text() {

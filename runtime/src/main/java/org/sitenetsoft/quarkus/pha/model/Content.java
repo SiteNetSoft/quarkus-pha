@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -20,6 +22,7 @@ import java.util.Objects;
  * {@code html} (raw) — one or the other.
  */
 @TemplateData
+@JsonDeserialize(builder = Content.Builder.class)
 public final class Content {
 
     private final String component;
@@ -93,6 +96,7 @@ public final class Content {
         return sb.toString();
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String component;
         private String text;
@@ -135,15 +139,42 @@ public final class Content {
             return this;
         }
 
+        public Builder editorial(boolean editorial) {
+            this.editorial = editorial;
+            return this;
+        }
+
         /** Visited-link styling (pf-m-visited). */
         public Builder visited() {
             this.visited = true;
             return this;
         }
 
+        public Builder visited(boolean visited) {
+            this.visited = visited;
+            return this;
+        }
+
         /** No bullets on ul/ol/dl (pf-m-plain). */
         public Builder plainList() {
             this.plainList = true;
+            return this;
+        }
+
+        public Builder plainList(boolean plainList) {
+            this.plainList = plainList;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder component(String component) {
+            this.component = component;
+            return this;
+        }
+
+        public Builder htmlBody(String htmlBody) {
+            this.htmlBody = htmlBody;
             return this;
         }
 

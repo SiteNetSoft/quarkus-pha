@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -43,10 +45,21 @@ public final class MenuItem {
     String checkboxId;
     String stateVar;
 
-    private MenuItem(String text, boolean divider, String icon, String href, boolean external,
-                     boolean disabled, boolean danger, String srPrefix, String description,
-                     String itemId, String key, boolean selected, String actionIcon,
-                     String actionAriaLabel, boolean favoriteAction) {
+    /* JSON-constructible (the pha view-model contract): copy-on-write fluent methods return new
+       instances, so Jackson binds the fields straight through this creator, e.g.
+       {"text": "Edit", "danger": true, "description": "…"}. */
+    @JsonCreator
+    private MenuItem(@JsonProperty("text") String text, @JsonProperty("divider") boolean divider,
+                     @JsonProperty("icon") String icon, @JsonProperty("href") String href,
+                     @JsonProperty("external") boolean external,
+                     @JsonProperty("disabled") boolean disabled, @JsonProperty("danger") boolean danger,
+                     @JsonProperty("srPrefix") String srPrefix,
+                     @JsonProperty("description") String description,
+                     @JsonProperty("itemId") String itemId, @JsonProperty("key") String key,
+                     @JsonProperty("selected") boolean selected,
+                     @JsonProperty("actionIcon") String actionIcon,
+                     @JsonProperty("actionAriaLabel") String actionAriaLabel,
+                     @JsonProperty("favoriteAction") boolean favoriteAction) {
         this.text = text;
         this.divider = divider;
         this.icon = icon;

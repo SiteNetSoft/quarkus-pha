@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ import java.util.Objects;
  * {@link Builder#modifiers(String)} verbatim.
  */
 @TemplateData
+@JsonDeserialize(builder = ProgressStepper.Builder.class)
 public final class ProgressStepper {
 
     private final String id;
@@ -82,6 +85,7 @@ public final class ProgressStepper {
         return steps;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
 
         private String id;
@@ -112,14 +116,29 @@ public final class ProgressStepper {
             return this;
         }
 
+        public Builder vertical(boolean vertical) {
+            this.vertical = vertical;
+            return this;
+        }
+
         public Builder compact() {
             this.compact = true;
+            return this;
+        }
+
+        public Builder compact(boolean compact) {
+            this.compact = compact;
             return this;
         }
 
         /** Center-aligned steps. */
         public Builder center() {
             this.center = true;
+            return this;
+        }
+
+        public Builder center(boolean center) {
+            this.center = center;
             return this;
         }
 

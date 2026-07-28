@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -23,6 +25,7 @@ import java.util.Objects;
  * __content wrapper for custom layouts. Content/trademark/strapline are raw HTML.
  */
 @TemplateData
+@JsonDeserialize(builder = AboutModal.Builder.class)
 public final class AboutModal {
 
     private final String id;
@@ -115,6 +118,7 @@ public final class AboutModal {
         return straplineHtml;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String brandImageSrc;
@@ -167,6 +171,11 @@ public final class AboutModal {
             return this;
         }
 
+        public Builder noContentContainer(boolean noContentContainer) {
+            this.noContentContainer = noContentContainer;
+            return this;
+        }
+
         /** Primary trigger button dispatching open-about-modal-{id}. */
         public Builder trigger(String triggerText) {
             this.triggerText = triggerText;
@@ -187,6 +196,38 @@ public final class AboutModal {
 
         /** Strapline content (raw HTML) inside the __strapline paragraph. */
         public Builder strapline(String straplineHtml) {
+            this.straplineHtml = straplineHtml;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder brandImageSrc(String brandImageSrc) {
+            this.brandImageSrc = brandImageSrc;
+            return this;
+        }
+
+        public Builder brandImageAlt(String brandImageAlt) {
+            this.brandImageAlt = brandImageAlt;
+            return this;
+        }
+
+        public Builder triggerText(String triggerText) {
+            this.triggerText = triggerText;
+            return this;
+        }
+
+        public Builder contentHtml(String contentHtml) {
+            this.contentHtml = contentHtml;
+            return this;
+        }
+
+        public Builder straplineHtml(String straplineHtml) {
             this.straplineHtml = straplineHtml;
             return this;
         }

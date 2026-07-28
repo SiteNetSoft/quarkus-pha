@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ import java.util.Objects;
  * Multi-field state vars derive from the lowercased label.
  */
 @TemplateData
+@JsonDeserialize(builder = InlineEdit.Builder.class)
 public final class InlineEdit {
 
     /** One field of the whole-row (multiple) shape. */
@@ -176,8 +179,9 @@ public final class InlineEdit {
         return xData;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
-        private final String shape;
+        private String shape;
         private String id;
         private String value;
         private String label;
@@ -187,6 +191,9 @@ public final class InlineEdit {
         private String style;
         private final List<Field> fields = new ArrayList<>();
         private final List<String> fieldValues = new ArrayList<>();
+
+        private Builder() {
+        }
 
         private Builder(String shape, String id) {
             this.shape = shape;
@@ -204,6 +211,53 @@ public final class InlineEdit {
             fields.add(new Field(Objects.requireNonNull(label, "label"),
                     label.toLowerCase(Locale.ROOT).replace(" ", "")));
             fieldValues.add(Objects.requireNonNull(initialValue, "initialValue"));
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder shape(String shape) {
+            this.shape = shape;
+            return this;
+        }
+
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder value(String value) {
+            this.value = value;
+            return this;
+        }
+
+        public Builder label(String label) {
+            this.label = label;
+            return this;
+        }
+
+        public Builder editAriaLabel(String editAriaLabel) {
+            this.editAriaLabel = editAriaLabel;
+            return this;
+        }
+
+        public Builder placeholder(String placeholder) {
+            this.placeholder = placeholder;
+            return this;
+        }
+
+        public Builder errorText(String errorText) {
+            this.errorText = errorText;
+            return this;
+        }
+
+        public Builder fields(java.util.List<Field> fields) {
+            this.fields.addAll(fields);
+            return this;
+        }
+
+        public Builder fieldValues(java.util.List<String> fieldValues) {
+            this.fieldValues.addAll(fieldValues);
             return this;
         }
 

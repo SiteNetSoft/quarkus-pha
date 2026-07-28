@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.List;
@@ -24,6 +26,7 @@ import java.util.Objects;
  * and footer content are raw HTML. Sidebars stay on the slot shell.
  */
 @TemplateData
+@JsonDeserialize(builder = Compass.Builder.class)
 public final class Compass {
 
     private final String id;
@@ -120,6 +123,7 @@ public final class Compass {
         return footerExpanded;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String style;
@@ -149,6 +153,11 @@ public final class Compass {
             return this;
         }
 
+        public Builder docked(boolean docked) {
+            this.docked = docked;
+            return this;
+        }
+
         /** Dock rail: a styled __dock-main column of composed buttons. */
         public Builder dock(String dockStyle, Button... buttons) {
             this.dockStyle = dockStyle;
@@ -174,6 +183,11 @@ public final class Compass {
             return this;
         }
 
+        public Builder headerExpanded(boolean headerExpanded) {
+            this.headerExpanded = headerExpanded;
+            return this;
+        }
+
         /** Main region content (raw HTML). */
         public Builder main(String mainHtml) {
             this.mainHtml = mainHtml;
@@ -188,6 +202,43 @@ public final class Compass {
 
         public Builder footerExpanded() {
             this.footerExpanded = true;
+            return this;
+        }
+
+        public Builder footerExpanded(boolean footerExpanded) {
+            this.footerExpanded = footerExpanded;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder dockStyle(String dockStyle) {
+            this.dockStyle = dockStyle;
+            return this;
+        }
+
+        public Builder dockButtons(java.util.List<Button> dockButtons) {
+            this.dockButtons.addAll(dockButtons);
+            return this;
+        }
+
+        public Builder headerTitle(String headerTitle) {
+            this.headerTitle = headerTitle;
+            return this;
+        }
+
+        public Builder headerContentStyle(String headerContentStyle) {
+            this.headerContentStyle = headerContentStyle;
+            return this;
+        }
+
+        public Builder mainHtml(String mainHtml) {
+            this.mainHtml = mainHtml;
             return this;
         }
 

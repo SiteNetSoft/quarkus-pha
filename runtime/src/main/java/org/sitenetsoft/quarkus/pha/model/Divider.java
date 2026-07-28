@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 /**
@@ -16,6 +18,7 @@ import io.quarkus.qute.TemplateData;
  * switches at breakpoints.
  */
 @TemplateData
+@JsonDeserialize(builder = Divider.Builder.class)
 public final class Divider {
 
     private final String component;
@@ -91,6 +94,7 @@ public final class Divider {
         return horizontalOn;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String component;
         private boolean vertical;
@@ -114,6 +118,11 @@ public final class Divider {
 
         public Builder vertical() {
             this.vertical = true;
+            return this;
+        }
+
+        public Builder vertical(boolean vertical) {
+            this.vertical = vertical;
             return this;
         }
 
@@ -145,6 +154,33 @@ public final class Divider {
         /** Switch back to horizontal at the named breakpoint. */
         public Builder horizontalOn(String breakpoint) {
             this.horizontalOn = breakpoint;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder insetOnSm(String insetOnSm) {
+            this.insetOnSm = insetOnSm;
+            return this;
+        }
+
+        public Builder insetOnMd(String insetOnMd) {
+            this.insetOnMd = insetOnMd;
+            return this;
+        }
+
+        public Builder insetOnLg(String insetOnLg) {
+            this.insetOnLg = insetOnLg;
+            return this;
+        }
+
+        public Builder insetOnXl(String insetOnXl) {
+            this.insetOnXl = insetOnXl;
+            return this;
+        }
+
+        public Builder insetOn2xl(String insetOn2xl) {
+            this.insetOn2xl = insetOn2xl;
             return this;
         }
 

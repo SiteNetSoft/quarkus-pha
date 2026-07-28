@@ -1,5 +1,8 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -42,6 +45,7 @@ import java.util.Objects;
  * drawers, custom cell markup) stay hand-written in the content slot.
  */
 @TemplateData
+@JsonDeserialize(builder = Table.Builder.class)
 public final class Table {
 
     public enum Selection { NONE, CHECKBOX, RADIO }
@@ -362,6 +366,7 @@ public final class Table {
         return Math.max(1, dataColumns().size() + (hasSelection() ? 1 : 0));
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
 
         private String id;
@@ -414,9 +419,19 @@ public final class Table {
             return this;
         }
 
+        public Builder treeCheckboxes(boolean treeCheckboxes) {
+            this.treeCheckboxes = treeCheckboxes;
+            return this;
+        }
+
         /** Switch the tree to the grid layout below lg ({@code pf-m-tree-view-grid-lg}). */
         public Builder treeGridLg() {
             this.treeGridLg = true;
+            return this;
+        }
+
+        public Builder treeGridLg(boolean treeGridLg) {
+            this.treeGridLg = treeGridLg;
             return this;
         }
 
@@ -426,15 +441,30 @@ public final class Table {
             return this;
         }
 
+        public Builder treeNoInset(boolean treeNoInset) {
+            this.treeNoInset = treeNoInset;
+            return this;
+        }
+
         /** Pin the header while scrolling ({@code pf-m-sticky-header}). */
         public Builder stickyHeader() {
             this.stickyHeader = true;
             return this;
         }
 
+        public Builder stickyHeader(boolean stickyHeader) {
+            this.stickyHeader = stickyHeader;
+            return this;
+        }
+
         /** Pin the footer while scrolling ({@code pf-m-sticky-footer}). */
         public Builder stickyFooter() {
             this.stickyFooter = true;
+            return this;
+        }
+
+        public Builder stickyFooter(boolean stickyFooter) {
+            this.stickyFooter = stickyFooter;
             return this;
         }
 
@@ -480,14 +510,29 @@ public final class Table {
             return this;
         }
 
+        public Builder compact(boolean compact) {
+            this.compact = compact;
+            return this;
+        }
+
         /** No row borders ({@code pf-m-no-border-rows}). */
         public Builder borderless() {
             this.borderless = true;
             return this;
         }
 
+        public Builder borderless(boolean borderless) {
+            this.borderless = borderless;
+            return this;
+        }
+
         public Builder striped() {
             this.striped = true;
+            return this;
+        }
+
+        public Builder striped(boolean striped) {
+            this.striped = striped;
             return this;
         }
 
@@ -501,6 +546,11 @@ public final class Table {
         /** Emit data-label attributes without the gridMd class (e.g. with pf-m-grid-lg). */
         public Builder dataLabels() {
             this.dataLabels = true;
+            return this;
+        }
+
+        public Builder dataLabels(boolean dataLabels) {
+            this.dataLabels = dataLabels;
             return this;
         }
 
@@ -552,6 +602,11 @@ public final class Table {
             return this;
         }
 
+        public Builder favoritesSortable(boolean favoritesSortable) {
+            this.favoritesSortable = favoritesSortable;
+            return this;
+        }
+
         /** Leading grip column; rows reorder by dragging (native HTML5 drag). */
         public Builder dragColumn() {
             columns.add(TableColumn.drag());
@@ -567,6 +622,11 @@ public final class Table {
         /** Make the select-all checkbox a live tri-state control (rows need keys). */
         public Builder indeterminateSelection() {
             this.indeterminateSelect = true;
+            return this;
+        }
+
+        public Builder indeterminateSelection(boolean indeterminateSelect) {
+            this.indeterminateSelect = indeterminateSelect;
             return this;
         }
 
@@ -601,6 +661,7 @@ public final class Table {
             return this;
         }
 
+        @JsonIgnore
         public Builder row(Object... cells) {
             currentRows.add(TableRow.of(cells));
             return this;
@@ -623,6 +684,76 @@ public final class Table {
                 currentRows = new ArrayList<>();
                 currentStripe = TableBody.Stripe.NONE;
             }
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder gridMd(boolean gridMd) {
+            this.gridMd = gridMd;
+            return this;
+        }
+
+        public Builder modifiers(java.util.List<String> modifiers) {
+            this.modifiers.addAll(modifiers);
+            return this;
+        }
+
+        public Builder columns(java.util.List<TableColumn> columns) {
+            this.columns.addAll(columns);
+            return this;
+        }
+
+
+
+
+        public Builder footerRow(TableRow footerRow) {
+            this.footerRow = footerRow;
+            return this;
+        }
+
+        public Builder selection(Selection selection) {
+            this.selection = selection;
+            return this;
+        }
+
+        public Builder initialClickKey(String initialClickKey) {
+            this.initialClickKey = initialClickKey;
+            return this;
+        }
+
+        public Builder scrollOuter(boolean scrollOuter) {
+            this.scrollOuter = scrollOuter;
+            return this;
+        }
+
+        public Builder scrollWrapperId(String scrollWrapperId) {
+            this.scrollWrapperId = scrollWrapperId;
+            return this;
+        }
+
+        public Builder scrollWrapperStyle(String scrollWrapperStyle) {
+            this.scrollWrapperStyle = scrollWrapperStyle;
+            return this;
+        }
+
+        public Builder treeNodes(java.util.List<TableTreeNode> treeNodes) {
+            this.treeNodes.addAll(treeNodes);
+            return this;
+        }
+
+        public Builder indeterminateSelect(boolean indeterminateSelect) {
+            this.indeterminateSelect = indeterminateSelect;
+            return this;
+        }
+
+
+
+
+
+        /** JSON contract: the friendly name for the current body's rows. */
+        public Builder rows(java.util.List<TableRow> rows) {
+            this.currentRows.addAll(rows);
+            return this;
         }
 
         public Table build() {

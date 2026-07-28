@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -22,6 +24,7 @@ import java.util.Objects;
  * renders the panel as raw HTML.
  */
 @TemplateData
+@JsonDeserialize(builder = ClipboardCopy.Builder.class)
 public final class ClipboardCopy {
 
     private final String id;
@@ -118,6 +121,7 @@ public final class ClipboardCopy {
         return extraActionLabel;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String text;
@@ -142,14 +146,29 @@ public final class ClipboardCopy {
             return this;
         }
 
+        public Builder readonly(boolean readonly) {
+            this.readonly = readonly;
+            return this;
+        }
+
         public Builder expandable() {
             this.expandable = true;
+            return this;
+        }
+
+        public Builder expandable(boolean expandable) {
+            this.expandable = expandable;
             return this;
         }
 
         /** Start with the panel open. */
         public Builder expanded() {
             this.expanded = true;
+            return this;
+        }
+
+        public Builder expanded(boolean expanded) {
+            this.expanded = expanded;
             return this;
         }
 
@@ -171,15 +190,30 @@ public final class ClipboardCopy {
             return this;
         }
 
+        public Builder inline(boolean inline) {
+            this.inline = inline;
+            return this;
+        }
+
         /** Inline code styling (pf-m-code on the text). */
         public Builder code() {
             this.code = true;
             return this;
         }
 
+        public Builder code(boolean code) {
+            this.code = code;
+            return this;
+        }
+
         /** pf-m-block on the inline shape. */
         public Builder block() {
             this.block = true;
+            return this;
+        }
+
+        public Builder block(boolean block) {
+            this.block = block;
             return this;
         }
 
@@ -193,6 +227,28 @@ public final class ClipboardCopy {
         public Builder extraAction(String icon, String ariaLabel) {
             this.extraActionIcon = Objects.requireNonNull(icon, "icon");
             this.extraActionLabel = Objects.requireNonNull(ariaLabel, "ariaLabel");
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder text(String text) {
+            this.text = text;
+            return this;
+        }
+
+        public Builder extraActionIcon(String extraActionIcon) {
+            this.extraActionIcon = extraActionIcon;
+            return this;
+        }
+
+        public Builder extraActionLabel(String extraActionLabel) {
+            this.extraActionLabel = extraActionLabel;
             return this;
         }
 

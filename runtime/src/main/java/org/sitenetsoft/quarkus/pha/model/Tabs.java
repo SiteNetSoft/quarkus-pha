@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ import java.util.Objects;
  * hand-written — see the tabs demo page.
  */
 @TemplateData
+@JsonDeserialize(builder = Tabs.Builder.class)
 public final class Tabs {
 
     private final String id;
@@ -168,6 +171,7 @@ public final class Tabs {
         return items;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
 
         private String id;
@@ -223,9 +227,19 @@ public final class Tabs {
             return this;
         }
 
+        public Builder box(boolean box) {
+            this.box = box;
+            return this;
+        }
+
         /** Vertical strip with the flex layout chrome around strip and panels. */
         public Builder vertical() {
             this.vertical = true;
+            return this;
+        }
+
+        public Builder vertical(boolean vertical) {
+            this.vertical = vertical;
             return this;
         }
 
@@ -235,9 +249,19 @@ public final class Tabs {
             return this;
         }
 
+        public Builder filled(boolean filled) {
+            this.filled = filled;
+            return this;
+        }
+
         /** Secondary treatment (pair with {@link #box()}). */
         public Builder secondary() {
             this.secondary = true;
+            return this;
+        }
+
+        public Builder secondary(boolean secondary) {
+            this.secondary = secondary;
             return this;
         }
 
@@ -247,8 +271,18 @@ public final class Tabs {
             return this;
         }
 
+        public Builder subtab(boolean subtab) {
+            this.subtab = subtab;
+            return this;
+        }
+
         public Builder pageInsets() {
             this.pageInsets = true;
+            return this;
+        }
+
+        public Builder pageInsets(boolean pageInsets) {
+            this.pageInsets = pageInsets;
             return this;
         }
 
@@ -257,9 +291,19 @@ public final class Tabs {
             return this;
         }
 
+        public Builder noBorderBottom(boolean noBorderBottom) {
+            this.noBorderBottom = noBorderBottom;
+            return this;
+        }
+
         /** Navigation-link tabs: anchors with aria-current, no ARIA tablist. */
         public Builder nav() {
             this.nav = true;
+            return this;
+        }
+
+        public Builder nav(boolean nav) {
+            this.nav = nav;
             return this;
         }
 
@@ -281,9 +325,19 @@ public final class Tabs {
             return this;
         }
 
+        public Builder animated(boolean animated) {
+            this.animated = animated;
+            return this;
+        }
+
         /** pf-m-padding on every panel body. */
         public Builder panelPadding() {
             this.panelPadding = true;
+            return this;
+        }
+
+        public Builder panelPadding(boolean panelPadding) {
+            this.panelPadding = panelPadding;
             return this;
         }
 
@@ -293,9 +347,19 @@ public final class Tabs {
             return this;
         }
 
+        public Builder panelSecondary(boolean panelSecondary) {
+            this.panelSecondary = panelSecondary;
+            return this;
+        }
+
         /** Render only the panels (no strip). */
         public Builder panelsOnly() {
             this.panelsOnly = true;
+            return this;
+        }
+
+        public Builder panelsOnly(boolean panelsOnly) {
+            this.panelsOnly = panelsOnly;
             return this;
         }
 
@@ -308,6 +372,18 @@ public final class Tabs {
             for (TabItem item : items) {
                 item(item);
             }
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder ownState(boolean ownState) {
+            this.ownState = ownState;
             return this;
         }
 

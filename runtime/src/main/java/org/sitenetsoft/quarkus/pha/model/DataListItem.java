@@ -1,5 +1,6 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.Objects;
  * trailing action areas and a selection key for clickable lists.
  */
 @TemplateData
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public final class DataListItem {
 
     private List<DataListCell> cells = List.of();

@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ import java.util.Objects;
  * forms (expandable field groups, as-you-type validation) stay hand-written.
  */
 @TemplateData
+@JsonDeserialize(builder = Form.Builder.class)
 public final class Form {
 
     /** One labeled form group. */
@@ -120,6 +123,7 @@ public final class Form {
             return helperOnTop;
         }
 
+        @JsonPOJOBuilder(withPrefix = "")
         public static final class Builder {
             private String label;
             private String forId;
@@ -140,6 +144,11 @@ public final class Form {
                 return this;
             }
 
+            public Builder required(boolean required) {
+                this.required = required;
+                return this;
+            }
+
             /** Extra info beside the label (group-label-main anatomy). */
             public Builder labelInfo(String labelInfo) {
                 this.labelInfo = labelInfo;
@@ -149,6 +158,11 @@ public final class Form {
             /** pf-m-no-padding-top on the label column (horizontal forms with stacked/on-top content). */
             public Builder noPaddingTop() {
                 this.noPaddingTop = true;
+                return this;
+            }
+
+            public Builder noPaddingTop(boolean noPaddingTop) {
+                this.noPaddingTop = noPaddingTop;
                 return this;
             }
 
@@ -180,6 +194,11 @@ public final class Form {
             /** Render the helper above the control instead of below. */
             public Builder helperOnTop() {
                 this.helperOnTop = true;
+                return this;
+            }
+
+            public Builder helperOnTop(boolean helperOnTop) {
+                this.helperOnTop = helperOnTop;
                 return this;
             }
 
@@ -328,9 +347,19 @@ public final class Form {
             return this;
         }
 
+        public Builder horizontal(boolean horizontal) {
+            this.horizontal = horizontal;
+            return this;
+        }
+
         /** Cap the form width (pf-m-limit-width). */
         public Builder limitWidth() {
             this.limitWidth = true;
+            return this;
+        }
+
+        public Builder limitWidth(boolean limitWidth) {
+            this.limitWidth = limitWidth;
             return this;
         }
 
@@ -361,6 +390,18 @@ public final class Form {
         /** Inline danger alert (invalid-form pattern). */
         public Builder dangerAlert(String title) {
             entries.add(new Entry(null, null, null, null, Objects.requireNonNull(title, "title")));
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder entries(java.util.List<Entry> entries) {
+            this.entries.addAll(entries);
             return this;
         }
 

@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -20,6 +22,7 @@ import java.util.Objects;
  * a block anchor that truncates via CSS instead of a pf-v6-c-truncate span.
  */
 @TemplateData
+@JsonDeserialize(builder = Truncate.Builder.class)
 public final class Truncate {
 
     private final String content;
@@ -96,6 +99,7 @@ public final class Truncate {
         return content.substring(content.length() - trailingNumChars);
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String content;
         private String id;
@@ -133,6 +137,18 @@ public final class Truncate {
         /** Render as a truncating block anchor with this target. */
         public Builder link(String href) {
             this.linkHref = href;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder content(String content) {
+            this.content = content;
+            return this;
+        }
+
+        public Builder linkHref(String linkHref) {
+            this.linkHref = linkHref;
             return this;
         }
 

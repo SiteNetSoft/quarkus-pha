@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -12,8 +14,12 @@ import java.util.Objects;
  * Badge.of("24").variant("read").build()
  * Badge.of("3").screenReaderText("unread notifications").build()
  * </pre>
+ *
+ * <p>JSON-constructible (the pha view-model contract): properties bind to the builder, e.g.
+ * {@code {"value": "7", "variant": "read"}} — see {@code docs/json-models} for the shape rules.
  */
 @TemplateData
+@JsonDeserialize(builder = Badge.Builder.class)
 public final class Badge {
 
     private final String id;
@@ -55,6 +61,7 @@ public final class Badge {
         return screenReaderText;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String value;
@@ -66,6 +73,12 @@ public final class Badge {
 
         public Builder id(String id) {
             this.id = id;
+            return this;
+        }
+
+        /** The badge count/text — required; JSON binds it here, {@link #of} sets it in Java. */
+        public Builder value(String value) {
+            this.value = value;
             return this;
         }
 
@@ -82,6 +95,7 @@ public final class Badge {
         }
 
         public Badge build() {
+            Objects.requireNonNull(value, "value");
             return new Badge(this);
         }
     }

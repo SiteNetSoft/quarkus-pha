@@ -1,5 +1,9 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -29,6 +33,7 @@ import java.util.Objects;
  * Next/Back (+ optional Cancel); explicit footer buttons carry raw exprs.
  */
 @TemplateData
+@JsonDeserialize(builder = Wizard.Builder.class)
 public final class Wizard {
 
     /** One wizard step. */
@@ -160,7 +165,9 @@ public final class Wizard {
         private final String disabledExpr;
         private final String clickExpr;
 
-        private FooterButton(Button button, String showExpr, String disabledExpr, String clickExpr) {
+        @JsonCreator
+        private FooterButton(@JsonProperty("button") Button button, @JsonProperty("showExpr") String showExpr,
+                @JsonProperty("disabledExpr") String disabledExpr, @JsonProperty("clickExpr") String clickExpr) {
             this.button = button;
             this.showExpr = showExpr;
             this.disabledExpr = disabledExpr;
@@ -226,7 +233,7 @@ public final class Wizard {
                     subs.add(r);
                     resolvedPanels.add(r);
                 }
-                resolvedEntries.add(new Entry(null, e.groupLabel, List.copyOf(subs)));
+                resolvedEntries.add(new Entry(null, e.groupLabel, subs == null ? List.of() : List.copyOf(subs)));
             } else if (e.step.disabled) {
                 resolvedEntries.add(e);
             } else {
@@ -235,8 +242,8 @@ public final class Wizard {
                 resolvedPanels.add(r);
             }
         }
-        this.entries = List.copyOf(resolvedEntries);
-        this.panels = List.copyOf(resolvedPanels);
+        this.entries = resolvedEntries == null ? List.of() : List.copyOf(resolvedEntries);
+        this.panels = resolvedPanels == null ? List.of() : List.copyOf(resolvedPanels);
 
         List<FooterButton> fb = new ArrayList<>();
         if (b.standardFooter) {
@@ -250,7 +257,7 @@ public final class Wizard {
             }
         }
         fb.addAll(b.footerButtons);
-        this.footer = List.copyOf(fb);
+        this.footer = fb == null ? List.of() : List.copyOf(fb);
 
         StringBuilder xd = new StringBuilder("{ step: 1");
         if (hasGroup) {
@@ -312,6 +319,7 @@ public final class Wizard {
         return xData;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String navLabel;
@@ -341,9 +349,19 @@ public final class Wizard {
             return this;
         }
 
+        public Builder plain(boolean plain) {
+            this.plain = plain;
+            return this;
+        }
+
         /** Anchor nav links instead of buttons. */
         public Builder anchors() {
             this.anchors = true;
+            return this;
+        }
+
+        public Builder anchors(boolean anchors) {
+            this.anchors = anchors;
             return this;
         }
 
@@ -391,6 +409,53 @@ public final class Wizard {
                                     String disabledExpr, String clickExpr) {
             return footerButton(Button.of(text).variant(Objects.requireNonNull(variant, "variant")).build(),
                     showExpr, disabledExpr, clickExpr);
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder headerTitle(String headerTitle) {
+            this.headerTitle = headerTitle;
+            return this;
+        }
+
+        public Builder headerDescription(String headerDescription) {
+            this.headerDescription = headerDescription;
+            return this;
+        }
+
+        public Builder standardFooter(boolean standardFooter) {
+            this.standardFooter = standardFooter;
+            return this;
+        }
+
+        public Builder nextText(String nextText) {
+            this.nextText = nextText;
+            return this;
+        }
+
+        public Builder backText(String backText) {
+            this.backText = backText;
+            return this;
+        }
+
+        public Builder cancel(boolean cancel) {
+            this.cancel = cancel;
+            return this;
+        }
+
+        public Builder entries(java.util.List<Entry> entries) {
+            this.entries.addAll(entries);
+            return this;
+        }
+
+        public Builder footerButtons(java.util.List<FooterButton> footerButtons) {
+            this.footerButtons.addAll(footerButtons);
+            return this;
         }
 
         public Wizard build() {

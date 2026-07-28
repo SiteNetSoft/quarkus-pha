@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -25,7 +27,12 @@ public final class TabItem {
     private final boolean disabled;
     private final String panelHtml;
 
-    private TabItem(String key, String text, String icon, boolean disabled, String panelHtml) {
+    @JsonCreator
+    private TabItem(@JsonProperty("key") String key,
+            @JsonProperty("text") String text,
+            @JsonProperty("icon") String icon,
+            @JsonProperty("disabled") boolean disabled,
+            @JsonProperty("panelHtml") String panelHtml) {
         this.key = key;
         this.text = text;
         this.icon = icon;

@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -18,6 +20,7 @@ import java.util.Objects;
  * </pre>
  */
 @TemplateData
+@JsonDeserialize(builder = Tile.Builder.class)
 public final class Tile {
 
     private final String title;
@@ -78,6 +81,7 @@ public final class Tile {
         return displayLg;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String title;
         private String id;
@@ -113,8 +117,18 @@ public final class Tile {
             return this;
         }
 
+        public Builder selected(boolean selected) {
+            this.selected = selected;
+            return this;
+        }
+
         public Builder disabled() {
             this.disabled = true;
+            return this;
+        }
+
+        public Builder disabled(boolean disabled) {
+            this.disabled = disabled;
             return this;
         }
 
@@ -124,9 +138,36 @@ public final class Tile {
             return this;
         }
 
+        public Builder stacked(boolean stacked) {
+            this.stacked = stacked;
+            return this;
+        }
+
         /** Larger stacked icon (pf-m-display-lg). */
         public Builder displayLg() {
             this.displayLg = true;
+            return this;
+        }
+
+        public Builder displayLg(boolean displayLg) {
+            this.displayLg = displayLg;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder title(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public Builder iconName(String iconName) {
+            this.iconName = iconName;
+            return this;
+        }
+
+        public Builder bodyText(String bodyText) {
+            this.bodyText = bodyText;
             return this;
         }
 

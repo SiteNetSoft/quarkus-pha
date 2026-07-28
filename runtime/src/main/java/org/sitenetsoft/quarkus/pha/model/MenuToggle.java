@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -26,6 +28,7 @@ import java.util.Objects;
  * {@code {id}-input}, {@code {id}-button}).
  */
 @TemplateData
+@JsonDeserialize(builder = MenuToggle.Builder.class)
 public final class MenuToggle {
 
     private final String shape; // "button" | "split" | "typeahead"
@@ -272,9 +275,10 @@ public final class MenuToggle {
         return id != null ? id + "-button" : null;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
 
-        private final String shape;
+        private String shape;
         private String text;
         private String id;
         private String ariaLabel;
@@ -324,8 +328,18 @@ public final class MenuToggle {
             return this;
         }
 
+        public Builder asPrimary(boolean primary) {
+            this.primary = primary;
+            return this;
+        }
+
         public Builder asSecondary() {
             this.secondary = true;
+            return this;
+        }
+
+        public Builder asSecondary(boolean secondary) {
+            this.secondary = secondary;
             return this;
         }
 
@@ -334,8 +348,18 @@ public final class MenuToggle {
             return this;
         }
 
+        public Builder asDanger(boolean danger) {
+            this.danger = danger;
+            return this;
+        }
+
         public Builder asPlain() {
             this.plain = true;
+            return this;
+        }
+
+        public Builder asPlain(boolean plain) {
+            this.plain = plain;
             return this;
         }
 
@@ -345,8 +369,18 @@ public final class MenuToggle {
             return this;
         }
 
+        public Builder asText(boolean textModifier) {
+            this.textModifier = textModifier;
+            return this;
+        }
+
         public Builder asCircle() {
             this.circle = true;
+            return this;
+        }
+
+        public Builder asCircle(boolean circle) {
+            this.circle = circle;
             return this;
         }
 
@@ -355,8 +389,18 @@ public final class MenuToggle {
             return this;
         }
 
+        public Builder asSettings(boolean settings) {
+            this.settings = settings;
+            return this;
+        }
+
         public Builder asPlaceholder() {
             this.placeholder = true;
+            return this;
+        }
+
+        public Builder asPlaceholder(boolean placeholder) {
+            this.placeholder = placeholder;
             return this;
         }
 
@@ -365,13 +409,28 @@ public final class MenuToggle {
             return this;
         }
 
+        public Builder asSmall(boolean small) {
+            this.small = small;
+            return this;
+        }
+
         public Builder asFullHeight() {
             this.fullHeight = true;
             return this;
         }
 
+        public Builder asFullHeight(boolean fullHeight) {
+            this.fullHeight = fullHeight;
+            return this;
+        }
+
         public Builder asFullWidth() {
             this.fullWidth = true;
+            return this;
+        }
+
+        public Builder asFullWidth(boolean fullWidth) {
+            this.fullWidth = fullWidth;
             return this;
         }
 
@@ -386,8 +445,18 @@ public final class MenuToggle {
             return this;
         }
 
+        public Builder asExpanded(boolean expanded) {
+            this.expanded = expanded;
+            return this;
+        }
+
         public Builder asDisabled() {
             this.disabled = true;
+            return this;
+        }
+
+        public Builder asDisabled(boolean disabled) {
+            this.disabled = disabled;
             return this;
         }
 
@@ -400,6 +469,11 @@ public final class MenuToggle {
         /** Leading stock avatar image. */
         public Builder asAvatar() {
             this.avatar = true;
+            return this;
+        }
+
+        public Builder asAvatar(boolean avatar) {
+            this.avatar = avatar;
             return this;
         }
 
@@ -443,6 +517,98 @@ public final class MenuToggle {
         /** Split only: text inside the caret button ({@code pf-m-text} toggle button). */
         public Builder toggleText(String toggleText) {
             this.toggleText = toggleText;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder shape(String shape) {
+            this.shape = shape;
+            return this;
+        }
+
+        public Builder text(String text) {
+            this.text = text;
+            return this;
+        }
+
+        public Builder primary(boolean primary) {
+            this.primary = primary;
+            return this;
+        }
+
+        public Builder secondary(boolean secondary) {
+            this.secondary = secondary;
+            return this;
+        }
+
+        public Builder danger(boolean danger) {
+            this.danger = danger;
+            return this;
+        }
+
+        public Builder plain(boolean plain) {
+            this.plain = plain;
+            return this;
+        }
+
+        public Builder textModifier(boolean textModifier) {
+            this.textModifier = textModifier;
+            return this;
+        }
+
+        public Builder circle(boolean circle) {
+            this.circle = circle;
+            return this;
+        }
+
+        public Builder settings(boolean settings) {
+            this.settings = settings;
+            return this;
+        }
+
+        public Builder placeholder(boolean placeholder) {
+            this.placeholder = placeholder;
+            return this;
+        }
+
+        public Builder small(boolean small) {
+            this.small = small;
+            return this;
+        }
+
+        public Builder fullHeight(boolean fullHeight) {
+            this.fullHeight = fullHeight;
+            return this;
+        }
+
+        public Builder fullWidth(boolean fullWidth) {
+            this.fullWidth = fullWidth;
+            return this;
+        }
+
+        public Builder expanded(boolean expanded) {
+            this.expanded = expanded;
+            return this;
+        }
+
+        public Builder disabled(boolean disabled) {
+            this.disabled = disabled;
+            return this;
+        }
+
+        public Builder avatar(boolean avatar) {
+            this.avatar = avatar;
+            return this;
+        }
+
+        public Builder checkAriaLabel(String checkAriaLabel) {
+            this.checkAriaLabel = checkAriaLabel;
+            return this;
+        }
+
+        public Builder typeaheadPlaceholder(String typeaheadPlaceholder) {
+            this.typeaheadPlaceholder = typeaheadPlaceholder;
             return this;
         }
 

@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -22,6 +24,7 @@ import java.util.Objects;
  * heading-wrapped toggles. Content renders unescaped.
  */
 @TemplateData
+@JsonDeserialize(builder = ExpandableSection.Builder.class)
 public final class ExpandableSection {
 
     private final String id;
@@ -118,6 +121,7 @@ public final class ExpandableSection {
         return style;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
 
         private String id;
@@ -149,9 +153,19 @@ public final class ExpandableSection {
             return this;
         }
 
+        public Builder asExpanded(boolean expanded) {
+            this.expanded = expanded;
+            return this;
+        }
+
         /** Content sits above the toggle ({@code pf-m-expand-top}). */
         public Builder asDetached() {
             this.detached = true;
+            return this;
+        }
+
+        public Builder asDetached(boolean detached) {
+            this.detached = detached;
             return this;
         }
 
@@ -161,15 +175,30 @@ public final class ExpandableSection {
             return this;
         }
 
+        public Builder asDisclosure(boolean disclosure) {
+            this.disclosure = disclosure;
+            return this;
+        }
+
         /** Content aligns under the toggle text ({@code pf-m-indented}). */
         public Builder asIndented() {
             this.indented = true;
             return this;
         }
 
+        public Builder asIndented(boolean indented) {
+            this.indented = indented;
+            return this;
+        }
+
         /** Truncate expansion — content always rendered but clamped; no toggle icon. */
         public Builder asTruncate() {
             this.truncate = true;
+            return this;
+        }
+
+        public Builder asTruncate(boolean truncate) {
+            this.truncate = truncate;
             return this;
         }
 
@@ -195,6 +224,58 @@ public final class ExpandableSection {
         /** Inline style on the root, e.g. {@code "max-width: 480px"}. */
         public Builder style(String style) {
             this.style = style;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder toggleText(String toggleText) {
+            this.toggleText = toggleText;
+            return this;
+        }
+
+        public Builder contentHtml(String contentHtml) {
+            this.contentHtml = contentHtml;
+            return this;
+        }
+
+        public Builder expanded(boolean expanded) {
+            this.expanded = expanded;
+            return this;
+        }
+
+        public Builder detached(boolean detached) {
+            this.detached = detached;
+            return this;
+        }
+
+        public Builder disclosure(boolean disclosure) {
+            this.disclosure = disclosure;
+            return this;
+        }
+
+        public Builder indented(boolean indented) {
+            this.indented = indented;
+            return this;
+        }
+
+        public Builder truncate(boolean truncate) {
+            this.truncate = truncate;
+            return this;
+        }
+
+        public Builder showMoreText(String showMoreText) {
+            this.showMoreText = showMoreText;
+            return this;
+        }
+
+        public Builder showLessText(String showLessText) {
+            this.showLessText = showLessText;
             return this;
         }
 

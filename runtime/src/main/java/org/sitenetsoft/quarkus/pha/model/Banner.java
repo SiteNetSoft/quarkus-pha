@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -18,6 +20,7 @@ import java.util.Objects;
  * links are allowed.
  */
 @TemplateData
+@JsonDeserialize(builder = Banner.Builder.class)
 public final class Banner {
 
     private final String id;
@@ -80,6 +83,7 @@ public final class Banner {
         return screenReaderText;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String messageHtml;
@@ -109,14 +113,36 @@ public final class Banner {
             return this;
         }
 
+        public Builder pill(boolean pill) {
+            this.pill = pill;
+            return this;
+        }
+
         public Builder asSticky() {
             this.sticky = true;
+            return this;
+        }
+
+        public Builder asSticky(boolean sticky) {
+            this.sticky = sticky;
             return this;
         }
 
         /** Visually-hidden prefix announced by AT, e.g. {@code "Warning:"}. */
         public Builder screenReaderText(String screenReaderText) {
             this.screenReaderText = screenReaderText;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder messageHtml(String messageHtml) {
+            this.messageHtml = messageHtml;
+            return this;
+        }
+
+        public Builder sticky(boolean sticky) {
+            this.sticky = sticky;
             return this;
         }
 

@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ import java.util.Objects;
  * {@code describedByBody()} wires aria-describedby onto a {id}-body id.
  */
 @TemplateData
+@JsonDeserialize(builder = Popover.Builder.class)
 public final class Popover {
 
     /** One footer action button. */
@@ -193,6 +196,7 @@ public final class Popover {
         return footerButtons;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String triggerText;
@@ -235,9 +239,19 @@ public final class Popover {
             return this;
         }
 
+        public Builder hoverable(boolean hoverable) {
+            this.hoverable = hoverable;
+            return this;
+        }
+
         /** Always visible — no Alpine state (frozen documentation shape). */
         public Builder staticOpen() {
             this.staticOpen = true;
+            return this;
+        }
+
+        public Builder staticOpen(boolean staticOpen) {
+            this.staticOpen = staticOpen;
             return this;
         }
 
@@ -270,8 +284,18 @@ public final class Popover {
             return this;
         }
 
+        public Builder noPadding(boolean noPadding) {
+            this.noPadding = noPadding;
+            return this;
+        }
+
         public Builder widthAuto() {
             this.widthAuto = true;
+            return this;
+        }
+
+        public Builder widthAuto(boolean widthAuto) {
+            this.widthAuto = widthAuto;
             return this;
         }
 
@@ -306,9 +330,19 @@ public final class Popover {
             return this;
         }
 
+        public Builder describedByBody(boolean describedByBody) {
+            this.describedByBody = describedByBody;
+            return this;
+        }
+
         /** Render the close X button. */
         public Builder dismissable() {
             this.dismissable = true;
+            return this;
+        }
+
+        public Builder dismissable(boolean dismissable) {
+            this.dismissable = dismissable;
             return this;
         }
 
@@ -334,6 +368,23 @@ public final class Popover {
         /** Footer button shorthand: text + variant (primary | link | danger | …). */
         public Builder footerButton(String text, String variant, boolean closes) {
             return footerButton(Button.of(text).variant(Objects.requireNonNull(variant, "variant")).build(), closes);
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder triggerText(String triggerText) {
+            this.triggerText = triggerText;
+            return this;
+        }
+
+        public Builder footerButtons(java.util.List<FooterButton> footerButtons) {
+            this.footerButtons.addAll(footerButtons);
+            return this;
         }
 
         public Popover build() {

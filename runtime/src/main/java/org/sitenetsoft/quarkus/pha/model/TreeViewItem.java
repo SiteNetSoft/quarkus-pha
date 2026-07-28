@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -43,10 +45,19 @@ public final class TreeViewItem {
     String checkId;
     String textId;
 
-    private TreeViewItem(String text, String description, String id, boolean expanded,
-                         boolean forcedExpandable, boolean checked, String icon, String expandedIcon,
-                         String badge, String actionIcon, String actionAriaLabel,
-                         List<TreeViewItem> children) {
+    @JsonCreator
+    private TreeViewItem(@JsonProperty("text") String text,
+            @JsonProperty("description") String description,
+            @JsonProperty("id") String id,
+            @JsonProperty("expanded") boolean expanded,
+            @JsonProperty("forcedExpandable") boolean forcedExpandable,
+            @JsonProperty("checked") boolean checked,
+            @JsonProperty("icon") String icon,
+            @JsonProperty("expandedIcon") String expandedIcon,
+            @JsonProperty("badge") String badge,
+            @JsonProperty("actionIcon") String actionIcon,
+            @JsonProperty("actionAriaLabel") String actionAriaLabel,
+            @JsonProperty("children") List<TreeViewItem> children) {
         this.text = text;
         this.description = description;
         this.id = id;
@@ -136,7 +147,7 @@ public final class TreeViewItem {
         List<TreeViewItem> next = new ArrayList<>(children);
         next.add(Objects.requireNonNull(child, "child"));
         return copy(description, id, expanded, forcedExpandable, checked, icon, expandedIcon,
-                badge, actionIcon, actionAriaLabel, List.copyOf(next));
+                badge, actionIcon, actionAriaLabel, next == null ? List.of() : List.copyOf(next));
     }
 
     public TreeViewItem children(TreeViewItem... items) {
@@ -145,7 +156,7 @@ public final class TreeViewItem {
             next.add(Objects.requireNonNull(child, "child"));
         }
         return copy(description, id, expanded, forcedExpandable, checked, icon, expandedIcon,
-                badge, actionIcon, actionAriaLabel, List.copyOf(next));
+                badge, actionIcon, actionAriaLabel, next == null ? List.of() : List.copyOf(next));
     }
 
     public String text() {
@@ -216,7 +227,7 @@ public final class TreeViewItem {
         return new TreeViewItem(text, description, id, expanded, forcedExpandable, checked,
                 ownIcon ? icon : defaultIcon,
                 ownIcon ? expandedIcon : defaultExpandedIcon,
-                badge, actionIcon, actionAriaLabel, List.copyOf(processedChildren));
+                badge, actionIcon, actionAriaLabel, processedChildren == null ? List.of() : List.copyOf(processedChildren));
     }
 
     public String nodeId() {

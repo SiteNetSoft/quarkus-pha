@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import java.util.Objects;
  * {@code spinner(size, label)} puts a PF spinner in the icon area.
  */
 @TemplateData
+@JsonDeserialize(builder = EmptyState.Builder.class)
 public final class EmptyState {
 
     private final String titleText;
@@ -102,6 +105,7 @@ public final class EmptyState {
         return actionGroups;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String titleText;
         private String id;
@@ -154,6 +158,38 @@ public final class EmptyState {
         /** One footer __actions group; call repeatedly for multiple groups in order. */
         public Builder actionGroup(Button... buttons) {
             actionGroups.add(List.of(buttons));
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder titleText(String titleText) {
+            this.titleText = titleText;
+            return this;
+        }
+
+        public Builder iconName(String iconName) {
+            this.iconName = iconName;
+            return this;
+        }
+
+        public Builder spinnerSize(String spinnerSize) {
+            this.spinnerSize = spinnerSize;
+            return this;
+        }
+
+        public Builder spinnerLabel(String spinnerLabel) {
+            this.spinnerLabel = spinnerLabel;
+            return this;
+        }
+
+        public Builder bodyText(String bodyText) {
+            this.bodyText = bodyText;
+            return this;
+        }
+
+        public Builder actionGroups(java.util.List<List<Button>> actionGroups) {
+            this.actionGroups.addAll(actionGroups);
             return this;
         }
 

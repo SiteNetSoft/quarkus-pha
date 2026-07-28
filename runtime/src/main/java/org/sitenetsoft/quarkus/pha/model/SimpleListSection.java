@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.quarkus.qute.TemplateData;
 
 import java.util.List;
@@ -15,12 +17,14 @@ public final class SimpleListSection {
     private final String title;
     private final List<SimpleListItem> items;
 
-    SimpleListSection(String title, List<SimpleListItem> items) {
+    @JsonCreator
+    SimpleListSection(@JsonProperty("title") String title,
+            @JsonProperty("items") List<SimpleListItem> items) {
         this.title = Objects.requireNonNull(title, "title");
         if (items.isEmpty()) {
             throw new IllegalArgumentException("Section \"" + title + "\" needs at least one item");
         }
-        this.items = List.copyOf(items);
+        this.items = items == null ? List.of() : List.copyOf(items);
     }
 
     public String title() {

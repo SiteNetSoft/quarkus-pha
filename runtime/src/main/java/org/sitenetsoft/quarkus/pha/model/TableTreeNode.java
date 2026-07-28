@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -45,14 +47,27 @@ public final class TableTreeNode {
     private final String indeterminateExpr;
     private final String changeExpr;
 
-    private TableTreeNode(String name, List<String> cells, List<TableTreeNode> children,
-                          boolean expanded, boolean checked, String selKey,
-                          String iconCollapsed, String iconExpanded,
-                          int level, int setSize, int posInSet, String toggleVar, String showExpr,
-                          String checkboxModel, String checkedExpr, String indeterminateExpr, String changeExpr) {
+    @JsonCreator
+    private TableTreeNode(@JsonProperty("name") String name,
+            @JsonProperty("cells") List<String> cells,
+            @JsonProperty("children") List<TableTreeNode> children,
+            @JsonProperty("expanded") boolean expanded,
+            @JsonProperty("checked") boolean checked,
+            @JsonProperty("selKey") String selKey,
+            @JsonProperty("iconCollapsed") String iconCollapsed,
+            @JsonProperty("iconExpanded") String iconExpanded,
+            @JsonProperty("level") int level,
+            @JsonProperty("setSize") int setSize,
+            @JsonProperty("posInSet") int posInSet,
+            @JsonProperty("toggleVar") String toggleVar,
+            @JsonProperty("showExpr") String showExpr,
+            @JsonProperty("checkboxModel") String checkboxModel,
+            @JsonProperty("checkedExpr") String checkedExpr,
+            @JsonProperty("indeterminateExpr") String indeterminateExpr,
+            @JsonProperty("changeExpr") String changeExpr) {
         this.name = name;
-        this.cells = List.copyOf(cells);
-        this.children = List.copyOf(children);
+        this.cells = cells == null ? List.of() : List.copyOf(cells);
+        this.children = children == null ? List.of() : List.copyOf(children);
         this.expanded = expanded;
         this.checked = checked;
         this.selKey = selKey;

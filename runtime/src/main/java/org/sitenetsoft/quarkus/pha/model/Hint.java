@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.Objects;
@@ -18,6 +20,7 @@ import java.util.Objects;
  * <p>The footer is raw HTML — typically an inline link button.
  */
 @TemplateData
+@JsonDeserialize(builder = Hint.Builder.class)
 public final class Hint {
 
     private final String id;
@@ -54,6 +57,7 @@ public final class Hint {
         return footerHtml;
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String title;
@@ -76,6 +80,18 @@ public final class Hint {
         /** Footer content (raw HTML) — typically an inline link button. */
         public Builder footerHtml(String footerHtml) {
             this.footerHtml = footerHtml;
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder bodyText(String bodyText) {
+            this.bodyText = bodyText;
             return this;
         }
 

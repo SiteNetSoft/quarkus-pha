@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ import java.util.Objects;
  * composes the {@code label:value} query.
  */
 @TemplateData
+@JsonDeserialize(builder = SearchInput.Builder.class)
 public final class SearchInput {
 
     /** One advanced-search form field. */
@@ -231,6 +234,7 @@ public final class SearchInput {
         return s == null ? "" : s.replace("'", "\\'");
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
         private String id;
         private String value;
@@ -279,6 +283,11 @@ public final class SearchInput {
             return this;
         }
 
+        public Builder inputId(boolean inputId) {
+            this.inputId = inputId;
+            return this;
+        }
+
         /** Static match-count badge next to the clear button. */
         public Builder count(String count) {
             this.count = count;
@@ -298,9 +307,19 @@ public final class SearchInput {
             return this;
         }
 
+        public Builder submit(boolean submit) {
+            this.submit = submit;
+            return this;
+        }
+
         /** Collapsed magnifier button that expands into the input. */
         public Builder expandableToggle() {
             this.expandableToggle = true;
+            return this;
+        }
+
+        public Builder expandableToggle(boolean expandableToggle) {
+            this.expandableToggle = expandableToggle;
             return this;
         }
 
@@ -316,9 +335,19 @@ public final class SearchInput {
             return this;
         }
 
+        public Builder hint(boolean hint) {
+            this.hint = hint;
+            return this;
+        }
+
         /** Start with the menu/panel open. */
         public Builder startOpen() {
             this.startOpen = true;
+            return this;
+        }
+
+        public Builder startOpen(boolean startOpen) {
+            this.startOpen = startOpen;
             return this;
         }
 
@@ -326,6 +355,28 @@ public final class SearchInput {
         public Builder advancedField(String label, String placeholder) {
             fields.add(new Field(Objects.requireNonNull(label, "label"),
                     label.toLowerCase(Locale.ROOT).replace(" ", ""), placeholder));
+            return this;
+        }
+
+
+        /* JSON contract: field-named setters (generated for the view-model contract). */
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder navCurrent(Integer navCurrent) {
+            this.navCurrent = navCurrent;
+            return this;
+        }
+
+        public Builder navTotal(Integer navTotal) {
+            this.navTotal = navTotal;
+            return this;
+        }
+
+        public Builder fields(java.util.List<Field> fields) {
+            this.fields.addAll(fields);
             return this;
         }
 

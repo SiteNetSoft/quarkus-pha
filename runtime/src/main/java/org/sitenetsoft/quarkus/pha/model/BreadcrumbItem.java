@@ -1,5 +1,7 @@
 package org.sitenetsoft.quarkus.pha.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.quarkus.qute.TemplateData;
 
 import java.util.ArrayList;
@@ -26,8 +28,13 @@ public final class BreadcrumbItem {
     private final String dropdownId;
     private final List<MenuItem> options;
 
-    private BreadcrumbItem(String text, String href, boolean current, String headingLevel,
-                           String dropdownId, List<MenuItem> options) {
+    @JsonCreator
+    private BreadcrumbItem(@JsonProperty("text") String text,
+            @JsonProperty("href") String href,
+            @JsonProperty("current") boolean current,
+            @JsonProperty("headingLevel") String headingLevel,
+            @JsonProperty("dropdownId") String dropdownId,
+            @JsonProperty("options") List<MenuItem> options) {
         this.text = text;
         this.href = href;
         this.current = current;
@@ -65,7 +72,7 @@ public final class BreadcrumbItem {
     public BreadcrumbItem option(MenuItem item) {
         List<MenuItem> next = new ArrayList<>(options);
         next.add(Objects.requireNonNull(item, "item"));
-        return new BreadcrumbItem(this.text, this.href, current, headingLevel, dropdownId, List.copyOf(next));
+        return new BreadcrumbItem(this.text, this.href, current, headingLevel, dropdownId, next == null ? List.of() : List.copyOf(next));
     }
 
     /** Dropdown entry shorthand: text + link target. */
