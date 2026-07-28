@@ -1,597 +1,251 @@
-{#include layouts/base} {#title}Wizard{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}Wizard{/title} {#head}
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
-{/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content">
-        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
-          ><span class="pf-v6-c-button__text">Skip to content</span></a
-        >
-      </div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-c-content pf-m-editorial">
-                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Wizard</h1>
-                    <p>
-                      A multi-step flow with a step nav on the side and Back/Next/Finish in the footer. State lives on
-                      the server — each step click does an
-                      <code class="ws-code">hx-get</code> and HTMX swaps the whole wizard.
-                    </p>
-                  </div>
-                </div>
-              </section>
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                    <nav
-                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
-                      aria-label="Table of contents"
-                    >
-                      <div class="pf-v6-c-jump-links__main">
-                        <ul class="pf-v6-c-jump-links__list" role="list">
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#with-substeps" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With substeps</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#with-review" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With review</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#plain" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Plain</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#header" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Header</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#disabled-steps" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Basic with disabled steps</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#nav-anchors" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Anchors for nav items</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#incrementally-enabled" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Incrementally enabled steps</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#expandable-steps" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Expandable steps</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#step-status" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Step status</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#form-validation" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Enabled on form validation</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#validate-button-press" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Validate on button press</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#progressive-steps" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Progressive steps</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#toggle-step-visibility" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Toggle step visibility</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#submit-progress" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Progress after submission</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#custom-footer" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Custom footer</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#custom-nav" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Custom navigation</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#custom-nav-item" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Custom navigation item</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#focus-content" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Focus content on next/back</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#within-modal" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Within modal</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#with-drawer" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With drawer</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#with-drawer-info-step" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >With drawer and informational step</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#props-wizard" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Wizard props</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </nav>
-                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
-                        <div>
-                          <h2
-                            id="examples"
-                            tabindex="-1"
-                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                          >
-                            Examples
-                          </h2>
-                        </div>
-                      </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="wizard"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Server-driven steps — HTMX swaps each step from
-                        <code class="ws-code">/api/htmx/wizard/basic/step/n</code>.
-                      </p>
-                      {/description} {#content}{#include components/wizard/basic /}{/content} {/include} {#include
-                      partials/example-card title="With substeps" slug="with-substeps" component="wizard"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">HTMX flavor with nested sub-steps.</p>
-                      {/description} {#content}{#include components/wizard/with-substeps /}{/content} {/include}
-                      {#include partials/example-card title="With review" slug="with-review" component="wizard"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">HTMX flavor ending in a review step.</p>
-                      {/description} {#content}{#include components/wizard/with-review /}{/content} {/include} {#include
-                      partials/example-card title="Plain" slug="plain" component="wizard" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-plain</code> removes the nav background.
-                      </p>
-                      {/description} {#content}{#include components/wizard/plain /}{/content} {/include} {#include
-                      partials/example-card title="Header" slug="header" component="wizard" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">__header</code> with title, description, and close button.
-                      </p>
-                      {/description} {#content}{#include components/wizard/header /}{/content} {/include} {#include
-                      partials/example-card title="Basic with disabled steps" slug="disabled-steps" component="wizard"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        A locked step uses <code class="ws-code">pf-m-disabled</code> +
-                        <code class="ws-code">disabled</code>.
-                      </p>
-                      {/description} {#content}{#include components/wizard/disabled-steps /}{/content} {/include}
-                      {#include partials/example-card title="Anchors for nav items" slug="nav-anchors"
-                      component="wizard" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Nav links rendered as anchors.</p>
-                      {/description} {#content}{#include components/wizard/nav-anchors /}{/content} {/include} {#include
-                      partials/example-card title="Incrementally enabled steps" slug="incrementally-enabled"
-                      component="wizard"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Steps stay disabled until Next has reached them; visited steps stay clickable.
-                      </p>
-                      {/description} {#content}{#include components/wizard/incrementally-enabled /}{/content} {/include}
-                      {#include partials/example-card title="Expandable steps" slug="expandable-steps"
-                      component="wizard" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-expandable/pf-m-expanded</code> nav item with a nested step list.
-                      </p>
-                      {/description} {#content}{#include components/wizard/expandable-steps /}{/content} {/include}
-                      {#include partials/example-card title="Step status" slug="step-status" component="wizard"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-success</code> / <code class="ws-code">pf-m-danger</code> nav links
-                        with status icons.
-                      </p>
-                      {/description} {#content}{#include components/wizard/step-status /}{/content} {/include} {#include
-                      partials/example-card title="Enabled on form validation" slug="form-validation" component="wizard"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Next stays disabled until the required field is filled.
-                      </p>
-                      {/description} {#content}{#include components/wizard/form-validation /}{/content} {/include}
-                      {#include partials/example-card title="Validate on button press" slug="validate-button-press"
-                      component="wizard"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Pressing Next with an empty field shows the error helper.
-                      </p>
-                      {/description} {#content}{#include components/wizard/validate-button-press /}{/content} {/include}
-                      {#include partials/example-card title="Progressive steps" slug="progressive-steps"
-                      component="wizard" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Choosing Custom setup adds a step to the nav.
-                      </p>
-                      {/description} {#content}{#include components/wizard/progressive-steps /}{/content} {/include}
-                      {#include partials/example-card title="Toggle step visibility" slug="toggle-step-visibility"
-                      component="wizard"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">A checkbox shows/hides the optional step.</p>
-                      {/description} {#content}{#include components/wizard/toggle-step-visibility /}{/content}
-                      {/include} {#include partials/example-card title="Progress after submission"
-                      slug="submit-progress" component="wizard"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Finish runs a progress bar to completion.</p>
-                      {/description} {#content}{#include components/wizard/submit-progress /}{/content} {/include}
-                      {#include partials/example-card title="Custom footer" slug="custom-footer" component="wizard"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Custom button set in the footer.</p>
-                      {/description} {#content}{#include components/wizard/custom-footer /}{/content} {/include}
-                      {#include partials/example-card title="Custom navigation" slug="custom-nav" component="wizard"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        The nav is built by hand instead of generated from the steps, so every item is freely clickable.
-                      </p>
-                      {/description} {#content}{#include components/wizard/custom-nav /}{/content} {/include} {#include
-                      partials/example-card title="Custom navigation item" slug="custom-nav-item" component="wizard"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Nav items with step numbers.</p>
-                      {/description} {#content}{#include components/wizard/custom-nav-item /}{/content} {/include}
-                      {#include partials/example-card title="Focus content on next/back" slug="focus-content"
-                      component="wizard"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        After Next or Back, keyboard focus jumps to the step content body.
-                      </p>
-                      {/description} {#content}{#include components/wizard/focus-content /}{/content} {/include}
-                      {#include partials/example-card title="Within modal" slug="within-modal" component="wizard"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">A compact wizard inside a modal dialog.</p>
-                      {/description} {#content}{#include components/wizard/within-modal /}{/content} {/include}
-                      {#include partials/example-card title="With drawer" slug="with-drawer" component="wizard"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        The wizard body hosts a drawer — step content opens a details panel in place.
-                      </p>
-                      {/description} {#content}{#include components/wizard/with-drawer /}{/content} {/include} {#include
-                      partials/example-card title="With drawer and informational step" slug="with-drawer-info-step"
-                      component="wizard"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Every step carries an inline "see more information" link that opens a drawer beside the step
-                        content; Configuration expands into two substeps.
-                      </p>
-                      {/description} {#content}{#include components/wizard/with-drawer-info-step /}{/content} {/include}
-                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
-                        <h2
-                          id="documentation"
-                          tabindex="-1"
-                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                        >
-                          Documentation
-                        </h2>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="props-wizard" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
-                          Wizard props
-                        </h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          The wizard is a template family: <code class="ws-code">wizard</code> renders the nav / main /
-                          footer scaffold (fill the <code class="ws-code">navItems</code>,
-                          <code class="ws-code">body</code>, and <code class="ws-code">footer</code> slots), and each
-                          step in the nav is a <code class="ws-code">wizard-nav-item</code> include. The Alpine step
-                          machine lives on a wrapper div; <code class="ws-code">currentExpr</code> binds the active
-                          step. The Wizard model covers header and expandable-substep variants; only the heavily custom
-                          within-modal variant stays hand-rendered.
-                        </p>
-                        <table
-                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
-                          role="grid"
-                          aria-label="Wizard props"
-                        >
-                          <caption class="pf-v6-c-table__caption">
-                            <span class="ws-prop-required">*</span>
-                            required
-                          </caption>
-                          <thead class="pf-v6-c-table__thead">
-                            <tr class="pf-v6-c-table__tr">
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
-                              <th scope="col" class="pf-v6-c-table__th">Description</th>
-                            </tr>
-                          </thead>
-                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >DOM id on the wizard root. Used as the HTMX swap target for step navigation.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">navLabel</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Sets <code class="ws-code">aria-label</code> on the step nav. Defaults to
-                                  <code class="ws-code">Steps</code>.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">slot <code class="ws-code">navItems</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >&lt;li class="pf-v6-c-wizard__nav-item"&gt; entries — flat or nested with an inner
-                                  &lt;ol&gt; for substeps.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><code class="ws-code">attrs / plain / hasHeader</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">String / Boolean</span>
-                              </td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Root x-data passthrough; pf-m-plain; render the wizardHeader slot.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">wizard-nav-item</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >One step: <code class="ws-code">label</code>, <code class="ws-code">current</code> /
-                                  <code class="ws-code">currentExpr</code>, <code class="ws-code">disabled</code>,
-                                  <code class="ws-code">status</code> (success|error),
-                                  <code class="ws-code">stepNum</code>, <code class="ws-code">attrs</code> (@click /
-                                  hx-*).</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">slot <code class="ws-code">body</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >The current step's content (heading + form / review).</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">slot <code class="ws-code">footer</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Back / Next / Finish / Cancel buttons, grouped in a
-                                  <code class="ws-code">pf-v6-c-action-list</code> — Back/Next in one group, Cancel in
-                                  its own.</span
-                                >
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Server holds the state, HTMX moves between steps.</strong> Each nav item and the
-                          Back/Next buttons send an <code class="ws-code">hx-get</code> to
-                          <code class="ws-code">{|/api/htmx/wizard/{flavor}/step/{n}|}</code>. The handler returns a
-                          fresh wizard root with the new step highlighted and the right body + footer. Target the
-                          wizard's id with <code class="ws-code">hx-swap="outerHTML"</code> so the swap replaces nav and
-                          main together.
-                        </p>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Persist progress with form posts.</strong> In a real flow each Next would
-                          <code class="ws-code">hx-post</code> the current step's form (so the server validates and
-                          stores), then return the next step. The demos use <code class="ws-code">hx-get</code> because
-                          they don't persist anything.
-                        </p>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Substeps.</strong> Nest an
-                          <code class="ws-code">&lt;ol class="pf-v6-c-wizard__nav-list"&gt;</code> inside a parent
-                          <code class="ws-code">&lt;li&gt;</code>. Toggle <code class="ws-code">aria-expanded</code> on
-                          the parent button when one of its children is current.
-                        </p>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <br /><a
-                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/navigation/wizard.html"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          >Edit wizard.html on GitHub</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </main>
-        </div>
-      </div>
-    </div>
+{/head} {#body} {#include partials/showcase-page title="Wizard" toc=tocWizard} {#lede}
+<p>
+  A multi-step flow with a step nav on the side and Back/Next/Finish in the footer. State lives on the server — each
+  step click does an
+  <code class="ws-code">hx-get</code> and HTMX swaps the whole wizard.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
   </div>
 </div>
-{/body} {/include}
+{#include partials/example-card title="Basic" slug="basic" component="wizard"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Server-driven steps — HTMX swaps each step from
+  <code class="ws-code">/api/htmx/wizard/basic/step/n</code>.
+</p>
+{/description} {#content}{#include components/wizard/basic /}{/content} {/include} {#include partials/example-card
+title="With substeps" slug="with-substeps" component="wizard"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">HTMX flavor with nested sub-steps.</p>
+{/description} {#content}{#include components/wizard/with-substeps /}{/content} {/include} {#include
+partials/example-card title="With review" slug="with-review" component="wizard"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">HTMX flavor ending in a review step.</p>
+{/description} {#content}{#include components/wizard/with-review /}{/content} {/include} {#include partials/example-card
+title="Plain" slug="plain" component="wizard" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-plain</code> removes the nav background.
+</p>
+{/description} {#content}{#include components/wizard/plain /}{/content} {/include} {#include partials/example-card
+title="Header" slug="header" component="wizard" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">__header</code> with title, description, and close button.
+</p>
+{/description} {#content}{#include components/wizard/header /}{/content} {/include} {#include partials/example-card
+title="Basic with disabled steps" slug="disabled-steps" component="wizard" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  A locked step uses <code class="ws-code">pf-m-disabled</code> + <code class="ws-code">disabled</code>.
+</p>
+{/description} {#content}{#include components/wizard/disabled-steps /}{/content} {/include} {#include
+partials/example-card title="Anchors for nav items" slug="nav-anchors" component="wizard" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Nav links rendered as anchors.</p>
+{/description} {#content}{#include components/wizard/nav-anchors /}{/content} {/include} {#include partials/example-card
+title="Incrementally enabled steps" slug="incrementally-enabled" component="wizard"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Steps stay disabled until Next has reached them; visited steps stay clickable.
+</p>
+{/description} {#content}{#include components/wizard/incrementally-enabled /}{/content} {/include} {#include
+partials/example-card title="Expandable steps" slug="expandable-steps" component="wizard" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-expandable/pf-m-expanded</code> nav item with a nested step list.
+</p>
+{/description} {#content}{#include components/wizard/expandable-steps /}{/content} {/include} {#include
+partials/example-card title="Step status" slug="step-status" component="wizard" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-success</code> / <code class="ws-code">pf-m-danger</code> nav links with status icons.
+</p>
+{/description} {#content}{#include components/wizard/step-status /}{/content} {/include} {#include partials/example-card
+title="Enabled on form validation" slug="form-validation" component="wizard" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Next stays disabled until the required field is filled.</p>
+{/description} {#content}{#include components/wizard/form-validation /}{/content} {/include} {#include
+partials/example-card title="Validate on button press" slug="validate-button-press" component="wizard"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Pressing Next with an empty field shows the error helper.</p>
+{/description} {#content}{#include components/wizard/validate-button-press /}{/content} {/include} {#include
+partials/example-card title="Progressive steps" slug="progressive-steps" component="wizard" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Choosing Custom setup adds a step to the nav.</p>
+{/description} {#content}{#include components/wizard/progressive-steps /}{/content} {/include} {#include
+partials/example-card title="Toggle step visibility" slug="toggle-step-visibility" component="wizard"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">A checkbox shows/hides the optional step.</p>
+{/description} {#content}{#include components/wizard/toggle-step-visibility /}{/content} {/include} {#include
+partials/example-card title="Progress after submission" slug="submit-progress" component="wizard"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Finish runs a progress bar to completion.</p>
+{/description} {#content}{#include components/wizard/submit-progress /}{/content} {/include} {#include
+partials/example-card title="Custom footer" slug="custom-footer" component="wizard" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Custom button set in the footer.</p>
+{/description} {#content}{#include components/wizard/custom-footer /}{/content} {/include} {#include
+partials/example-card title="Custom navigation" slug="custom-nav" component="wizard"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  The nav is built by hand instead of generated from the steps, so every item is freely clickable.
+</p>
+{/description} {#content}{#include components/wizard/custom-nav /}{/content} {/include} {#include partials/example-card
+title="Custom navigation item" slug="custom-nav-item" component="wizard" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Nav items with step numbers.</p>
+{/description} {#content}{#include components/wizard/custom-nav-item /}{/content} {/include} {#include
+partials/example-card title="Focus content on next/back" slug="focus-content" component="wizard"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">After Next or Back, keyboard focus jumps to the step content body.</p>
+{/description} {#content}{#include components/wizard/focus-content /}{/content} {/include} {#include
+partials/example-card title="Within modal" slug="within-modal" component="wizard"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">A compact wizard inside a modal dialog.</p>
+{/description} {#content}{#include components/wizard/within-modal /}{/content} {/include} {#include
+partials/example-card title="With drawer" slug="with-drawer" component="wizard"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  The wizard body hosts a drawer — step content opens a details panel in place.
+</p>
+{/description} {#content}{#include components/wizard/with-drawer /}{/content} {/include} {#include partials/example-card
+title="With drawer and informational step" slug="with-drawer-info-step" component="wizard"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Every step carries an inline "see more information" link that opens a drawer beside the step content; Configuration
+  expands into two substeps.
+</p>
+{/description} {#content}{#include components/wizard/with-drawer-info-step /}{/content} {/include}
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+    Documentation
+  </h2>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-wizard" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Wizard props</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    The wizard is a template family: <code class="ws-code">wizard</code> renders the nav / main / footer scaffold (fill
+    the <code class="ws-code">navItems</code>, <code class="ws-code">body</code>, and
+    <code class="ws-code">footer</code> slots), and each step in the nav is a
+    <code class="ws-code">wizard-nav-item</code> include. The Alpine step machine lives on a wrapper div;
+    <code class="ws-code">currentExpr</code> binds the active step. The Wizard model covers header and
+    expandable-substep variants; only the heavily custom within-modal variant stays hand-rendered.
+  </p>
+  <table
+    class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+    role="grid"
+    aria-label="Wizard props"
+  >
+    <caption class="pf-v6-c-table__caption">
+      <span class="ws-prop-required">*</span>
+      required
+    </caption>
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+        <th scope="col" class="pf-v6-c-table__th">Description</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >DOM id on the wizard root. Used as the HTMX swap target for step navigation.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">navLabel</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Sets <code class="ws-code">aria-label</code> on the step nav. Defaults to
+            <code class="ws-code">Steps</code>.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">slot <code class="ws-code">navItems</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >&lt;li class="pf-v6-c-wizard__nav-item"&gt; entries — flat or nested with an inner &lt;ol&gt; for
+            substeps.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">attrs / plain / hasHeader</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">String / Boolean</span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Root x-data passthrough; pf-m-plain; render the wizardHeader slot.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">wizard-nav-item</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >One step: <code class="ws-code">label</code>, <code class="ws-code">current</code> /
+            <code class="ws-code">currentExpr</code>, <code class="ws-code">disabled</code>,
+            <code class="ws-code">status</code> (success|error), <code class="ws-code">stepNum</code>,
+            <code class="ws-code">attrs</code> (@click / hx-*).</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">slot <code class="ws-code">body</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">The current step's content (heading + form / review).</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">slot <code class="ws-code">footer</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Back / Next / Finish / Cancel buttons, grouped in a <code class="ws-code">pf-v6-c-action-list</code> —
+            Back/Next in one group, Cancel in its own.</span
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Server holds the state, HTMX moves between steps.</strong> Each nav item and the Back/Next buttons send an
+    <code class="ws-code">hx-get</code> to <code class="ws-code">{|/api/htmx/wizard/{flavor}/step/{n}|}</code>. The
+    handler returns a fresh wizard root with the new step highlighted and the right body + footer. Target the wizard's
+    id with <code class="ws-code">hx-swap="outerHTML"</code> so the swap replaces nav and main together.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Persist progress with form posts.</strong> In a real flow each Next would
+    <code class="ws-code">hx-post</code> the current step's form (so the server validates and stores), then return the
+    next step. The demos use <code class="ws-code">hx-get</code> because they don't persist anything.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Substeps.</strong> Nest an <code class="ws-code">&lt;ol class="pf-v6-c-wizard__nav-list"&gt;</code> inside a
+    parent <code class="ws-code">&lt;li&gt;</code>. Toggle <code class="ws-code">aria-expanded</code> on the parent
+    button when one of its children is current.
+  </p>
+</div>
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/navigation/wizard.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit wizard.html on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

@@ -1,365 +1,155 @@
-{#include layouts/base} {#title}Expandable section{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}Expandable section{/title} {#head}
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
-{/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content">
-        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
-          ><span class="pf-v6-c-button__text">Skip to content</span></a
-        >
-      </div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-c-content pf-m-editorial">
-                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Expandable section</h1>
-                    <p>
-                      A click-to-expand block. Use for advanced settings, optional details, long explanations — content
-                      that some users need but most don't.
-                    </p>
-                  </div>
-                </div>
-              </section>
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                    <nav
-                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
-                      aria-label="Table of contents"
-                    >
-                      <div class="pf-v6-c-jump-links__main">
-                        <ul class="pf-v6-c-jump-links__list" role="list">
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#collapsed" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Basic (collapsed)</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#expanded" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Expanded by default</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#dynamic-toggle-text" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Dynamic toggle text</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#detached" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Detached</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#disclosure" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Disclosure variation</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#indented" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Indented expandable content</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#custom-toggle" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >With custom toggle content</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#heading-semantics" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With heading semantics</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#truncate-expansion" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Truncate expansion</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#truncated-text" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Truncated text</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#props-expandable-section" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Expandable section props</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </nav>
-                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
-                        <div>
-                          <h2
-                            id="examples"
-                            tabindex="-1"
-                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                          >
-                            Examples
-                          </h2>
-                        </div>
-                      </div>
-                      {#include partials/example-card title="Basic (collapsed)" slug="collapsed"
-                      component="expandable-section" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Starts collapsed; the toggle reveals the content.
-                      </p>
-                      {/description} {#content}{#include components/expandable-section/collapsed /}{/content} {/include}
-                      {#include partials/example-card title="Expanded by default" slug="expanded"
-                      component="expandable-section" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Same markup with the expanded flag preset.</p>
-                      {/description} {#content}{#include components/expandable-section/expanded /}{/content} {/include}
-                      {#include partials/example-card title="Dynamic toggle text" slug="dynamic-toggle-text"
-                      component="expandable-section" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        The toggle label flips between Show more / Show less — covers PF\u2019s three uncontrolled
-                        sections.
-                      </p>
-                      {/description} {#content}{#include components/expandable-section/dynamic-toggle-text /}{/content}
-                      {/include} {#include partials/example-card title="Detached" slug="detached"
-                      component="expandable-section" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-expand-top</code> — the content sits above its toggle.
-                      </p>
-                      {/description} {#content}{#include components/expandable-section/detached /}{/content} {/include}
-                      {#include partials/example-card title="Disclosure variation" slug="disclosure"
-                      component="expandable-section" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-display-lg pf-m-limit-width</code>.
-                      </p>
-                      {/description} {#content}{#include components/expandable-section/disclosure /}{/content}
-                      {/include} {#include partials/example-card title="Indented expandable content" slug="indented"
-                      component="expandable-section" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-indented</code> aligns content under the toggle text.
-                      </p>
-                      {/description} {#content}{#include components/expandable-section/indented /}{/content} {/include}
-                      {#include partials/example-card title="With custom toggle content" slug="custom-toggle"
-                      component="expandable-section"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Icon and badge composed inside the toggle text.
-                      </p>
-                      {/description} {#content}{#include components/expandable-section/custom-toggle /}{/content}
-                      {/include} {#include partials/example-card title="With heading semantics" slug="heading-semantics"
-                      component="expandable-section" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        The toggle nests inside a real h2 for the page outline.
-                      </p>
-                      {/description} {#content}{#include components/expandable-section/heading-semantics /}{/content}
-                      {/include} {#include partials/example-card title="Truncate expansion" slug="truncate-expansion"
-                      component="expandable-section" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-truncate</code> clamps the always-visible content until expanded; the
-                        toggle has no icon.
-                      </p>
-                      {/description} {#content}{#include components/expandable-section/truncate-expansion /}{/content}
-                      {/include} {#include partials/example-card title="Truncated text" slug="truncated-text"
-                      component="expandable-section"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        A truncate-variant section whose collapsed state clips by characters (a 10ch Truncate) instead
-                        of by lines.
-                      </p>
-                      {/description} {#content}{#include components/expandable-section/truncated-text /}{/content}
-                      {/include}
-                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
-                        <h2
-                          id="documentation"
-                          tabindex="-1"
-                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                        >
-                          Documentation
-                        </h2>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3
-                          id="props-expandable-section"
-                          tabindex="-1"
-                          class="pf-v6-c-content--h3 pf-m-editorial ws-heading"
-                        >
-                          Expandable section props
-                        </h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          Parameters accepted by
-                          <code class="ws-code">{|{#include components/data-display/expandable-section ... /}|}</code>.
-                          Model mode: pass <code class="ws-code">section=&lt;ExpandableSection&gt;</code> built in Java
-                          instead — the Java tab on each example shows the builder.
-                        </p>
-                        <table
-                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
-                          role="grid"
-                          aria-label="Expandable section props"
-                        >
-                          <caption class="pf-v6-c-table__caption">
-                            <span class="ws-prop-required">*</span>
-                            required
-                          </caption>
-                          <thead class="pf-v6-c-table__thead">
-                            <tr class="pf-v6-c-table__tr">
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
-                              <th scope="col" class="pf-v6-c-table__th">Description</th>
-                            </tr>
-                          </thead>
-                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">toggleText</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Visible label on the toggle button. The chevron rotates on expand.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">expanded</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Initial state. Default <code class="ws-code">false</code>.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">slot <code class="ws-code">content</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">Body content — hidden until expanded.</span>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Vs. Accordion.</strong> Expandable section is a single, independent toggle.
-                          <a href="/components/accordion">Accordion</a> coordinates multiple panels (often only one open
-                          at a time).
-                        </p>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Initial state.</strong> Start collapsed by default — that's the whole point. Use
-                          <code class="ws-code">expanded=true</code> only when there's an obvious reason (e.g. server
-                          detected a validation error inside).
-                        </p>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <br /><a
-                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/expandable-section.html"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          >Edit expandable-section.html on GitHub</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </main>
-        </div>
-      </div>
-    </div>
+{/head} {#body} {#include partials/showcase-page title="Expandable section" toc=tocExpandableSection} {#lede}
+<p>
+  A click-to-expand block. Use for advanced settings, optional details, long explanations — content that some users need
+  but most don't.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
   </div>
 </div>
-{/body} {/include}
+{#include partials/example-card title="Basic (collapsed)" slug="collapsed" component="expandable-section"
+javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Starts collapsed; the toggle reveals the content.</p>
+{/description} {#content}{#include components/expandable-section/collapsed /}{/content} {/include} {#include
+partials/example-card title="Expanded by default" slug="expanded" component="expandable-section" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Same markup with the expanded flag preset.</p>
+{/description} {#content}{#include components/expandable-section/expanded /}{/content} {/include} {#include
+partials/example-card title="Dynamic toggle text" slug="dynamic-toggle-text" component="expandable-section"
+javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  The toggle label flips between Show more / Show less — covers PF\u2019s three uncontrolled sections.
+</p>
+{/description} {#content}{#include components/expandable-section/dynamic-toggle-text /}{/content} {/include} {#include
+partials/example-card title="Detached" slug="detached" component="expandable-section" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-expand-top</code> — the content sits above its toggle.
+</p>
+{/description} {#content}{#include components/expandable-section/detached /}{/content} {/include} {#include
+partials/example-card title="Disclosure variation" slug="disclosure" component="expandable-section" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p"><code class="ws-code">pf-m-display-lg pf-m-limit-width</code>.</p>
+{/description} {#content}{#include components/expandable-section/disclosure /}{/content} {/include} {#include
+partials/example-card title="Indented expandable content" slug="indented" component="expandable-section"
+javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-indented</code> aligns content under the toggle text.
+</p>
+{/description} {#content}{#include components/expandable-section/indented /}{/content} {/include} {#include
+partials/example-card title="With custom toggle content" slug="custom-toggle" component="expandable-section"}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Icon and badge composed inside the toggle text.</p>
+{/description} {#content}{#include components/expandable-section/custom-toggle /}{/content} {/include} {#include
+partials/example-card title="With heading semantics" slug="heading-semantics" component="expandable-section"
+javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">The toggle nests inside a real h2 for the page outline.</p>
+{/description} {#content}{#include components/expandable-section/heading-semantics /}{/content} {/include} {#include
+partials/example-card title="Truncate expansion" slug="truncate-expansion" component="expandable-section"
+javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-truncate</code> clamps the always-visible content until expanded; the toggle has no icon.
+</p>
+{/description} {#content}{#include components/expandable-section/truncate-expansion /}{/content} {/include} {#include
+partials/example-card title="Truncated text" slug="truncated-text" component="expandable-section"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  A truncate-variant section whose collapsed state clips by characters (a 10ch Truncate) instead of by lines.
+</p>
+{/description} {#content}{#include components/expandable-section/truncated-text /}{/content} {/include}
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+    Documentation
+  </h2>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-expandable-section" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+    Expandable section props
+  </h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    Parameters accepted by
+    <code class="ws-code">{|{#include components/data-display/expandable-section ... /}|}</code>. Model mode: pass
+    <code class="ws-code">section=&lt;ExpandableSection&gt;</code> built in Java instead — the Java tab on each example
+    shows the builder.
+  </p>
+  <table
+    class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+    role="grid"
+    aria-label="Expandable section props"
+  >
+    <caption class="pf-v6-c-table__caption">
+      <span class="ws-prop-required">*</span>
+      required
+    </caption>
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+        <th scope="col" class="pf-v6-c-table__th">Description</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><span class="ws-prop-required">*</span> <code class="ws-code">toggleText</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Visible label on the toggle button. The chevron rotates on expand.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">expanded</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Initial state. Default <code class="ws-code">false</code>.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">slot <code class="ws-code">content</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Body content — hidden until expanded.</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Vs. Accordion.</strong> Expandable section is a single, independent toggle.
+    <a href="/components/accordion">Accordion</a> coordinates multiple panels (often only one open at a time).
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Initial state.</strong> Start collapsed by default — that's the whole point. Use
+    <code class="ws-code">expanded=true</code> only when there's an obvious reason (e.g. server detected a validation
+    error inside).
+  </p>
+</div>
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/expandable-section.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit expandable-section.html on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

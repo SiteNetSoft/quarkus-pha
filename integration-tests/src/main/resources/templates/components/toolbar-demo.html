@@ -1,637 +1,269 @@
-{#include layouts/base} {#title}Toolbar{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}Toolbar{/title} {#head}
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
 <script src="/web/js/alpine/components/label-group.js?v={pha:assetVersion}"></script>
-{/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content">
-        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
-          ><span class="pf-v6-c-button__text">Skip to content</span></a
-        >
-      </div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-c-content pf-m-editorial">
-                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Toolbar</h1>
-                    <p>
-                      Action bar pinned above a list or table — search, filters, sorts, and primary create-style
-                      actions. Use the groups + items structure to align left/right.
-                    </p>
-                  </div>
-                </div>
-              </section>
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                    <nav
-                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
-                      aria-label="Table of contents"
-                    >
-                      <div class="pf-v6-c-jump-links__main">
-                        <ul class="pf-v6-c-jump-links__list" role="list">
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#items" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Toolbar items</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#insets" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With adjusted inset</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#no-padding" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">No padding</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#width-control" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Width control</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#vertical" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Vertical toolbar</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#sticky" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Sticky toolbar</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#dynamic-sticky" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Dynamic sticky toolbar</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#groups" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With groups of items</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#filter-group" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Filter group</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#action-group" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Action group</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#action-group-plain" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Action group plain</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#action-group-inline" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Action group inline</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#color-variants" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Background color variants</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#toggle-groups" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Toggle groups</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#with-filters" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With filters</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#label-group" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Label group</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#custom-label-group-content" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Custom label group content</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#stacked" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Stacked example</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#content-wrap" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Toolbar content wrapping</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#group-spacers" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Toolbar group spacers</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#item-spacers" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Toolbar item spacers</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#column-gap" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Adjusted group column gap</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#vertical-height-visibility" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Vertical with height visibility</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#props-toolbar" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Toolbar props</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </nav>
-                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
-                        <div>
-                          <h2
-                            id="examples"
-                            tabindex="-1"
-                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                          >
-                            Examples
-                          </h2>
-                        </div>
-                      </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="toolbar" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Search, filter, and action buttons in start/end-aligned groups.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/basic /}{/content} {/include} {#include
-                      partials/example-card title="Toolbar items" slug="items" component="toolbar" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Items separated by a vertical divider, ending in a kebab.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/items /}{/content} {/include} {#include
-                      partials/example-card title="With adjusted inset" slug="insets" component="toolbar"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-inset-md pf-m-inset-xl-on-lg</code>.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/insets /}{/content} {/include} {#include
-                      partials/example-card title="No padding" slug="no-padding" component="toolbar" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-no-padding</code> removes the toolbar's own padding for use inside
-                        already-padded containers.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/no-padding /}{/content} {/include} {#include
-                      partials/example-card title="Width control" slug="width-control" component="toolbar"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Set per-breakpoint item widths with
-                        <code class="ws-code">--pf-v6-c-toolbar__item--Width</code> custom properties.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/width-control /}{/content} {/include}
-                      {#include partials/example-card title="Vertical toolbar" slug="vertical" component="toolbar"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-vertical</code> — icon rail beside content.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/vertical /}{/content} {/include} {#include
-                      partials/example-card title="Sticky toolbar" slug="sticky" component="toolbar" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-sticky</code> pins the toolbar while the container scrolls.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/sticky /}{/content} {/include} {#include
-                      partials/example-card title="Dynamic sticky toolbar" slug="dynamic-sticky" component="toolbar"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        A checkbox toggles <code class="ws-code">pf-m-sticky</code> live.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/dynamic-sticky /}{/content} {/include}
-                      {#include partials/example-card title="With groups of items" slug="groups" component="toolbar"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-filter-group</code>, an icon-button group, and an end-aligned action
-                        group.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/groups /}{/content} {/include} {#include
-                      partials/example-card title="Filter group" slug="filter-group" component="toolbar"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        The two PF filter shapes: <code class="ws-code">pf-m-filter-group</code> menu toggles, and a
-                        search input paired with a filter.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/filter-group /}{/content} {/include}
-                      {#include partials/example-card title="Action group" slug="action-group" component="toolbar"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-action-group</code> spacing for primary/secondary/tertiary action
-                        buttons.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/action-group /}{/content} {/include}
-                      {#include partials/example-card title="Action group plain" slug="action-group-plain"
-                      component="toolbar" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-action-group-plain</code> — tighter spacing for icon-only plain
-                        buttons.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/action-group-plain /}{/content} {/include}
-                      {#include partials/example-card title="Action group inline" slug="action-group-inline"
-                      component="toolbar" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-action-group-inline</code> — summary text with inline link actions.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/action-group-inline /}{/content} {/include}
-                      {#include partials/example-card title="Background color variants" slug="color-variants"
-                      component="toolbar" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Default, <code class="ws-code">pf-m-primary</code>, <code class="ws-code">pf-m-secondary</code>,
-                        and <code class="ws-code">pf-m-no-background</code>.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/color-variants /}{/content} {/include}
-                      {#include partials/example-card title="Toggle groups" slug="toggle-groups" component="toolbar"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Filters collapse behind the filter-icon toggle below lg (<code class="ws-code"
-                          >pf-m-toggle-group pf-m-show-on-lg</code
-                        >); the toggle opens the expandable content row. Covers both of PF\u2019s managed toggle-group
-                        sections.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/toggle-groups /}{/content} {/include}
-                      {#include partials/example-card title="With filters" slug="with-filters" component="toolbar"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Applied filters as removable labels in a category label-group, plus Clear all.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/with-filters /}{/content} {/include}
-                      {#include partials/example-card title="Label group" slug="label-group" component="toolbar"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Applied-filter chip groups per category inside
-                        <code class="ws-code">pf-m-label-group-container</code>, with live removal.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/label-group /}{/content} {/include}
-                      {#include partials/example-card title="Custom label group content"
-                      slug="custom-label-group-content" component="toolbar"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Chip groups combined with custom inline content — a live filter count and Clear all.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/custom-label-group-content /}{/content}
-                      {/include} {#include partials/example-card title="Stacked example" slug="stacked"
-                      component="toolbar"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">Two stacked toolbars — the second secondary.</p>
-                      {/description} {#content}{#include components/toolbar/stacked /}{/content} {/include} {#include
-                      partials/example-card title="Toolbar content wrapping" slug="content-wrap" component="toolbar"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-wrap</code> on the content section lets items wrap in narrow
-                        containers.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/content-wrap /}{/content} {/include}
-                      {#include partials/example-card title="Toolbar group spacers" slug="group-spacers"
-                      component="toolbar" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-column-gap-none</code> vs
-                        <code class="ws-code">pf-m-column-gap-2xl</code>.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/group-spacers /}{/content} {/include}
-                      {#include partials/example-card title="Toolbar item spacers" slug="item-spacers"
-                      component="toolbar" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Per-item <code class="ws-code">pf-m-gap-*</code> modifiers.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/item-spacers /}{/content} {/include}
-                      {#include partials/example-card title="Adjusted group column gap" slug="column-gap"
-                      component="toolbar"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        pf-m-column-gap-[none/sm/lg] tunes the spacing inside toolbar groups.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/column-gap /}{/content} {/include} {#include
-                      partials/example-card title="Vertical with height visibility" slug="vertical-height-visibility"
-                      component="toolbar"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        pf-m-hidden + pf-m-visible-on-*-height show vertical toolbar items only when the container is
-                        tall enough.
-                      </p>
-                      {/description} {#content}{#include components/toolbar/vertical-height-visibility /}{/content}
-                      {/include}
-
-                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
-                        <h2
-                          id="documentation"
-                          tabindex="-1"
-                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                        >
-                          Documentation
-                        </h2>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="props-toolbar" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
-                          Toolbar props
-                        </h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          The toolbar is a template family: <code class="ws-code">toolbar</code> is the root and the
-                          structure composes from <code class="ws-code">toolbar-content</code> &gt;
-                          <code class="ws-code">toolbar-content-section</code> &gt;
-                          <code class="ws-code">toolbar-group</code> / <code class="ws-code">toolbar-item</code>
-                          includes in main blocks — no generic slot names.
-                        </p>
-                        <table
-                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
-                          role="grid"
-                          aria-label="Toolbar props"
-                        >
-                          <caption class="pf-v6-c-table__caption">
-                            <span class="ws-prop-required">*</span>
-                            required
-                          </caption>
-                          <thead class="pf-v6-c-table__thead">
-                            <tr class="pf-v6-c-table__tr">
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
-                              <th scope="col" class="pf-v6-c-table__th">Description</th>
-                            </tr>
-                          </thead>
-                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">id / attrs</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">Root id / raw passthrough.</span>
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">variant</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><code class="ws-code">primary</code> |
-                                  <code class="ws-code">secondary</code> background.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><code class="ws-code">noBackground / sticky / vertical</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Boolean</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >The matching <code class="ws-code">pf-m-*</code> modifier.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">modifiers</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Extra <code class="ws-code">pf-m-*</code> classes (e.g.
-                                  <code class="ws-code">pf-m-inset-md</code>) — available on every family member.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">toolbar-content</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >One content row; <code class="ws-code">attrs</code> for x-show etc.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><code class="ws-code">toolbar-content-section</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Holds groups/items; <code class="ws-code">attrs</code>.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">toolbar-group</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><code class="ws-code">variant</code> (filter|toggle),
-                                  <code class="ws-code">alignEnd</code>, <code class="ws-code">columnGap</code>,
-                                  <code class="ws-code">modifiers</code>, <code class="ws-code">attrs</code>.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">toolbar-item</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><code class="ws-code">variant="label"</code>, <code class="ws-code">gap</code>,
-                                  <code class="ws-code">alignEnd</code>, <code class="ws-code">modifiers</code>,
-                                  <code class="ws-code">attrs</code>; content is the main block.</span
-                                >
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Pair with Table or Data list.</strong> Toolbar above a data view is the canonical
-                          pattern — search/filter on the left, page-level actions on the right.
-                        </p>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <br /><a
-                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/navigation/toolbar.html"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          >Edit toolbar.html on GitHub</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </main>
-        </div>
-      </div>
-    </div>
+{/head} {#body} {#include partials/showcase-page title="Toolbar" toc=tocToolbar} {#lede}
+<p>
+  Action bar pinned above a list or table — search, filters, sorts, and primary create-style actions. Use the groups +
+  items structure to align left/right.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
   </div>
 </div>
-{/body} {/include}
+{#include partials/example-card title="Basic" slug="basic" component="toolbar" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Search, filter, and action buttons in start/end-aligned groups.</p>
+{/description} {#content}{#include components/toolbar/basic /}{/content} {/include} {#include partials/example-card
+title="Toolbar items" slug="items" component="toolbar" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Items separated by a vertical divider, ending in a kebab.</p>
+{/description} {#content}{#include components/toolbar/items /}{/content} {/include} {#include partials/example-card
+title="With adjusted inset" slug="insets" component="toolbar" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p"><code class="ws-code">pf-m-inset-md pf-m-inset-xl-on-lg</code>.</p>
+{/description} {#content}{#include components/toolbar/insets /}{/content} {/include} {#include partials/example-card
+title="No padding" slug="no-padding" component="toolbar" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-no-padding</code> removes the toolbar's own padding for use inside already-padded
+  containers.
+</p>
+{/description} {#content}{#include components/toolbar/no-padding /}{/content} {/include} {#include partials/example-card
+title="Width control" slug="width-control" component="toolbar" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Set per-breakpoint item widths with
+  <code class="ws-code">--pf-v6-c-toolbar__item--Width</code> custom properties.
+</p>
+{/description} {#content}{#include components/toolbar/width-control /}{/content} {/include} {#include
+partials/example-card title="Vertical toolbar" slug="vertical" component="toolbar" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-vertical</code> — icon rail beside content.
+</p>
+{/description} {#content}{#include components/toolbar/vertical /}{/content} {/include} {#include partials/example-card
+title="Sticky toolbar" slug="sticky" component="toolbar" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-sticky</code> pins the toolbar while the container scrolls.
+</p>
+{/description} {#content}{#include components/toolbar/sticky /}{/content} {/include} {#include partials/example-card
+title="Dynamic sticky toolbar" slug="dynamic-sticky" component="toolbar"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">A checkbox toggles <code class="ws-code">pf-m-sticky</code> live.</p>
+{/description} {#content}{#include components/toolbar/dynamic-sticky /}{/content} {/include} {#include
+partials/example-card title="With groups of items" slug="groups" component="toolbar" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-filter-group</code>, an icon-button group, and an end-aligned action group.
+</p>
+{/description} {#content}{#include components/toolbar/groups /}{/content} {/include} {#include partials/example-card
+title="Filter group" slug="filter-group" component="toolbar" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  The two PF filter shapes: <code class="ws-code">pf-m-filter-group</code> menu toggles, and a search input paired with
+  a filter.
+</p>
+{/description} {#content}{#include components/toolbar/filter-group /}{/content} {/include} {#include
+partials/example-card title="Action group" slug="action-group" component="toolbar" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-action-group</code> spacing for primary/secondary/tertiary action buttons.
+</p>
+{/description} {#content}{#include components/toolbar/action-group /}{/content} {/include} {#include
+partials/example-card title="Action group plain" slug="action-group-plain" component="toolbar" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-action-group-plain</code> — tighter spacing for icon-only plain buttons.
+</p>
+{/description} {#content}{#include components/toolbar/action-group-plain /}{/content} {/include} {#include
+partials/example-card title="Action group inline" slug="action-group-inline" component="toolbar" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-action-group-inline</code> — summary text with inline link actions.
+</p>
+{/description} {#content}{#include components/toolbar/action-group-inline /}{/content} {/include} {#include
+partials/example-card title="Background color variants" slug="color-variants" component="toolbar" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Default, <code class="ws-code">pf-m-primary</code>, <code class="ws-code">pf-m-secondary</code>, and
+  <code class="ws-code">pf-m-no-background</code>.
+</p>
+{/description} {#content}{#include components/toolbar/color-variants /}{/content} {/include} {#include
+partials/example-card title="Toggle groups" slug="toggle-groups" component="toolbar"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Filters collapse behind the filter-icon toggle below lg (<code class="ws-code">pf-m-toggle-group pf-m-show-on-lg</code
+  >); the toggle opens the expandable content row. Covers both of PF\u2019s managed toggle-group sections.
+</p>
+{/description} {#content}{#include components/toolbar/toggle-groups /}{/content} {/include} {#include
+partials/example-card title="With filters" slug="with-filters" component="toolbar"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Applied filters as removable labels in a category label-group, plus Clear all.
+</p>
+{/description} {#content}{#include components/toolbar/with-filters /}{/content} {/include} {#include
+partials/example-card title="Label group" slug="label-group" component="toolbar"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Applied-filter chip groups per category inside
+  <code class="ws-code">pf-m-label-group-container</code>, with live removal.
+</p>
+{/description} {#content}{#include components/toolbar/label-group /}{/content} {/include} {#include
+partials/example-card title="Custom label group content" slug="custom-label-group-content" component="toolbar"}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Chip groups combined with custom inline content — a live filter count and Clear all.
+</p>
+{/description} {#content}{#include components/toolbar/custom-label-group-content /}{/content} {/include} {#include
+partials/example-card title="Stacked example" slug="stacked" component="toolbar"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Two stacked toolbars — the second secondary.</p>
+{/description} {#content}{#include components/toolbar/stacked /}{/content} {/include} {#include partials/example-card
+title="Toolbar content wrapping" slug="content-wrap" component="toolbar" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-wrap</code> on the content section lets items wrap in narrow containers.
+</p>
+{/description} {#content}{#include components/toolbar/content-wrap /}{/content} {/include} {#include
+partials/example-card title="Toolbar group spacers" slug="group-spacers" component="toolbar" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-column-gap-none</code> vs <code class="ws-code">pf-m-column-gap-2xl</code>.
+</p>
+{/description} {#content}{#include components/toolbar/group-spacers /}{/content} {/include} {#include
+partials/example-card title="Toolbar item spacers" slug="item-spacers" component="toolbar" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Per-item <code class="ws-code">pf-m-gap-*</code> modifiers.</p>
+{/description} {#content}{#include components/toolbar/item-spacers /}{/content} {/include} {#include
+partials/example-card title="Adjusted group column gap" slug="column-gap" component="toolbar"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  pf-m-column-gap-[none/sm/lg] tunes the spacing inside toolbar groups.
+</p>
+{/description} {#content}{#include components/toolbar/column-gap /}{/content} {/include} {#include partials/example-card
+title="Vertical with height visibility" slug="vertical-height-visibility" component="toolbar"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  pf-m-hidden + pf-m-visible-on-*-height show vertical toolbar items only when the container is tall enough.
+</p>
+{/description} {#content}{#include components/toolbar/vertical-height-visibility /}{/content} {/include}
+
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+    Documentation
+  </h2>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-toolbar" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Toolbar props</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    The toolbar is a template family: <code class="ws-code">toolbar</code> is the root and the structure composes from
+    <code class="ws-code">toolbar-content</code> &gt; <code class="ws-code">toolbar-content-section</code> &gt;
+    <code class="ws-code">toolbar-group</code> / <code class="ws-code">toolbar-item</code>
+    includes in main blocks — no generic slot names.
+  </p>
+  <table
+    class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+    role="grid"
+    aria-label="Toolbar props"
+  >
+    <caption class="pf-v6-c-table__caption">
+      <span class="ws-prop-required">*</span>
+      required
+    </caption>
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+        <th scope="col" class="pf-v6-c-table__th">Description</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">id / attrs</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Root id / raw passthrough.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">variant</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><code class="ws-code">primary</code> | <code class="ws-code">secondary</code> background.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">noBackground / sticky / vertical</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Boolean</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">The matching <code class="ws-code">pf-m-*</code> modifier.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">modifiers</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Extra <code class="ws-code">pf-m-*</code> classes (e.g. <code class="ws-code">pf-m-inset-md</code>) —
+            available on every family member.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">toolbar-content</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">One content row; <code class="ws-code">attrs</code> for x-show etc.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">toolbar-content-section</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Holds groups/items; <code class="ws-code">attrs</code>.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">toolbar-group</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><code class="ws-code">variant</code> (filter|toggle), <code class="ws-code">alignEnd</code>,
+            <code class="ws-code">columnGap</code>, <code class="ws-code">modifiers</code>,
+            <code class="ws-code">attrs</code>.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">toolbar-item</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Include</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><code class="ws-code">variant="label"</code>, <code class="ws-code">gap</code>,
+            <code class="ws-code">alignEnd</code>, <code class="ws-code">modifiers</code>,
+            <code class="ws-code">attrs</code>; content is the main block.</span
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Pair with Table or Data list.</strong> Toolbar above a data view is the canonical pattern — search/filter on
+    the left, page-level actions on the right.
+  </p>
+</div>
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/navigation/toolbar.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit toolbar.html on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

@@ -1,273 +1,90 @@
-{#include layouts/base} {#title}Navigation{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}Navigation{/title} {#head}
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
-{/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content">
-        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
-          ><span class="pf-v6-c-button__text">Skip to content</span></a
-        >
-      </div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-c-content pf-m-editorial">
-                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Navigation</h1>
-                    <p>
-                      Side-rail navigation for app sections. PF v6 ships flat lists, grouped sections, and expandable
-                      trees. The page-layout templates (<code class="ws-code">layouts/sidebar</code>) embed this
-                      automatically.
-                    </p>
-                  </div>
-                </div>
-              </section>
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                    <nav
-                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
-                      aria-label="Table of contents"
-                    >
-                      <div class="pf-v6-c-jump-links__main">
-                        <ul class="pf-v6-c-jump-links__list" role="list">
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#vertical" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Vertical</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#grouped" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Grouped</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#expandable" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Expandable</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#expandable-third-level" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Expandable third level</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#mixed" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Mixed</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#horizontal" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Horizontal</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#horizontal-subnav" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Horizontal subnav</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#icons" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With item icons</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#horizontal-overflow" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Horizontal overflow</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#props-navigation" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Navigation pattern</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </nav>
-                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
-                        <div>
-                          <h2
-                            id="examples"
-                            tabindex="-1"
-                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                          >
-                            Examples
-                          </h2>
-                        </div>
-                      </div>
-                      {#include partials/example-card title="Vertical" slug="vertical" component="navigation"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Flat list of links. The active item gets <code class="ws-code">pf-m-current</code> +
-                        <code class="ws-code">aria-current="page"</code>.
-                      </p>
-                      {/description} {#content}{#include components/navigation/vertical /}{/content} {/include}
-                      {#include partials/example-card title="Grouped" slug="grouped" component="navigation"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Multiple labelled sections inside one nav. Each section has its own
-                        <code class="ws-code">__section-title</code> and <code class="ws-code">__list</code>.
-                      </p>
-                      {/description} {#content}{#include components/navigation/grouped /}{/content} {/include} {#include
-                      partials/example-card title="Expandable" slug="expandable" component="navigation" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Items with a nested <code class="ws-code">__subnav</code>. The toggle is a
-                        <code class="ws-code">button.pf-v6-c-nav__link</code>; Alpine flips
-                        <code class="ws-code">pf-m-expanded</code> plus the <code class="ws-code">hidden</code> /
-                        <code class="ws-code">inert</code> attributes on the subnav.
-                      </p>
-                      {/description} {#content}{#include components/navigation/expandable /}{/content} {/include}
-                      {#include partials/example-card title="Expandable third level" slug="expandable-third-level"
-                      component="navigation" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Subnavs nest — an expandable item inside another item's subnav gives a third level.
-                      </p>
-                      {/description} {#content}{#include components/navigation/expandable-third-level /}{/content}
-                      {/include} {#include partials/example-card title="Mixed" slug="mixed" component="navigation"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Plain links and expandable items can share one list.
-                      </p>
-                      {/description} {#content}{#include components/navigation/mixed /}{/content} {/include} {#include
-                      partials/example-card title="Horizontal" slug="horizontal" component="navigation" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-horizontal</code> — for the masthead content area; see the Page
-                        component's &quot;Horizontal navigation&quot; example for the full shell.
-                      </p>
-                      {/description} {#content}{#include components/navigation/horizontal /}{/content} {/include}
-                      {#include partials/example-card title="Horizontal subnav" slug="horizontal-subnav"
-                      component="navigation" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-horizontal pf-m-subnav</code> — local (tertiary) navigation under a
-                        page header.
-                      </p>
-                      {/description} {#content}{#include components/navigation/horizontal-subnav /}{/content} {/include}
-                      {#include partials/example-card title="With item icons" slug="icons" component="navigation"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Each link carries a <code class="ws-code">__link-icon</code> before its
-                        <code class="ws-code">__link-text</code>.
-                      </p>
-                      {/description} {#content}{#include components/navigation/icons /}{/content} {/include} {#include
-                      partials/example-card title="Horizontal overflow" slug="horizontal-overflow"
-                      component="navigation"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        pf-m-scrollable horizontal nav with working scroll buttons that disable at the edges.
-                      </p>
-                      {/description} {#content}{#include components/navigation/horizontal-overflow /}{/content}
-                      {/include}
+{/head} {#body} {#include partials/showcase-page title="Navigation" toc=tocNavigation} {#lede}
+<p>
+  Side-rail navigation for app sections. PF v6 ships flat lists, grouped sections, and expandable trees. The page-layout
+  templates (<code class="ws-code">layouts/sidebar</code>) embed this automatically.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
+  </div>
+</div>
+{#include partials/example-card title="Vertical" slug="vertical" component="navigation" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Flat list of links. The active item gets <code class="ws-code">pf-m-current</code> +
+  <code class="ws-code">aria-current="page"</code>.
+</p>
+{/description} {#content}{#include components/navigation/vertical /}{/content} {/include} {#include
+partials/example-card title="Grouped" slug="grouped" component="navigation" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Multiple labelled sections inside one nav. Each section has its own
+  <code class="ws-code">__section-title</code> and <code class="ws-code">__list</code>.
+</p>
+{/description} {#content}{#include components/navigation/grouped /}{/content} {/include} {#include partials/example-card
+title="Expandable" slug="expandable" component="navigation" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Items with a nested <code class="ws-code">__subnav</code>. The toggle is a
+  <code class="ws-code">button.pf-v6-c-nav__link</code>; Alpine flips <code class="ws-code">pf-m-expanded</code> plus
+  the <code class="ws-code">hidden</code> / <code class="ws-code">inert</code> attributes on the subnav.
+</p>
+{/description} {#content}{#include components/navigation/expandable /}{/content} {/include} {#include
+partials/example-card title="Expandable third level" slug="expandable-third-level" component="navigation"
+javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Subnavs nest — an expandable item inside another item's subnav gives a third level.
+</p>
+{/description} {#content}{#include components/navigation/expandable-third-level /}{/content} {/include} {#include
+partials/example-card title="Mixed" slug="mixed" component="navigation" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Plain links and expandable items can share one list.</p>
+{/description} {#content}{#include components/navigation/mixed /}{/content} {/include} {#include partials/example-card
+title="Horizontal" slug="horizontal" component="navigation" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-horizontal</code> — for the masthead content area; see the Page component's
+  &quot;Horizontal navigation&quot; example for the full shell.
+</p>
+{/description} {#content}{#include components/navigation/horizontal /}{/content} {/include} {#include
+partials/example-card title="Horizontal subnav" slug="horizontal-subnav" component="navigation" javaSource=true}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-horizontal pf-m-subnav</code> — local (tertiary) navigation under a page header.
+</p>
+{/description} {#content}{#include components/navigation/horizontal-subnav /}{/content} {/include} {#include
+partials/example-card title="With item icons" slug="icons" component="navigation" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Each link carries a <code class="ws-code">__link-icon</code> before its <code class="ws-code">__link-text</code>.
+</p>
+{/description} {#content}{#include components/navigation/icons /}{/content} {/include} {#include partials/example-card
+title="Horizontal overflow" slug="horizontal-overflow" component="navigation"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  pf-m-scrollable horizontal nav with working scroll buttons that disable at the edges.
+</p>
+{/description} {#content}{#include components/navigation/horizontal-overflow /}{/content} {/include}
 
-                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
-                        <h2
-                          id="documentation"
-                          tabindex="-1"
-                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                        >
-                          Documentation
-                        </h2>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="props-navigation" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
-                          Navigation pattern
-                        </h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          The runtime template <code class="ws-code">components/navigation/nav</code> has two modes.
-                          Pass a typed <code class="ws-code">org.sitenetsoft.quarkus.pha.model.Nav</code> (built with
-                          <code class="ws-code">Nav.builder()</code>) as the <code class="ws-code">nav</code> parameter
-                          and the whole nav — flat lists, titled groups, expandable subnavs with their Alpine wiring,
-                          icons, <code class="ws-code">pf-m-current</code> + <code class="ws-code">aria-current</code> —
-                          renders from the model; every example on this page is built this way (the Java tab on each
-                          card shows the exact builder call). Or omit it to get the bare shell and hand-write the
-                          <code class="ws-code">__item</code> markup in the content slot. The base classes are
-                          <code class="ws-code">.pf-v6-c-nav</code>, <code class="ws-code">.pf-v6-c-nav__list</code>,
-                          <code class="ws-code">.pf-v6-c-nav__item</code>,
-                          <code class="ws-code">.pf-v6-c-nav__link</code>, plus
-                          <code class="ws-code">.pf-v6-c-nav__section</code> +
-                          <code class="ws-code">.pf-v6-c-nav__section-title</code> for grouping.
-                        </p>
-                        <div class="pf-v6-c-code-block" role="group" aria-label="Nav builder example">
-                          <div class="pf-v6-c-code-block__content">
-                            <pre
-                              class="pf-v6-c-code-block__pre"
-                            ><code class="pf-v6-c-code-block__code">Nav nav = Nav.builder()
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+    Documentation
+  </h2>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-navigation" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Navigation pattern</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    The runtime template <code class="ws-code">components/navigation/nav</code> has two modes. Pass a typed
+    <code class="ws-code">org.sitenetsoft.quarkus.pha.model.Nav</code> (built with
+    <code class="ws-code">Nav.builder()</code>) as the <code class="ws-code">nav</code> parameter and the whole nav —
+    flat lists, titled groups, expandable subnavs with their Alpine wiring, icons,
+    <code class="ws-code">pf-m-current</code> + <code class="ws-code">aria-current</code> — renders from the model;
+    every example on this page is built this way (the Java tab on each card shows the exact builder call). Or omit it to
+    get the bare shell and hand-write the <code class="ws-code">__item</code> markup in the content slot. The base
+    classes are <code class="ws-code">.pf-v6-c-nav</code>, <code class="ws-code">.pf-v6-c-nav__list</code>,
+    <code class="ws-code">.pf-v6-c-nav__item</code>, <code class="ws-code">.pf-v6-c-nav__link</code>, plus
+    <code class="ws-code">.pf-v6-c-nav__section</code> + <code class="ws-code">.pf-v6-c-nav__section-title</code> for
+    grouping.
+  </p>
+  <div class="pf-v6-c-code-block" role="group" aria-label="Nav builder example">
+    <div class="pf-v6-c-code-block__content">
+      <pre class="pf-v6-c-code-block__pre"><code class="pf-v6-c-code-block__code">Nav nav = Nav.builder()
     .id("side-nav")
     .icon("Dashboard", "/dashboard", "fa:tachometer-alt", true)
     .item("Projects", "/projects")
@@ -275,48 +92,34 @@
         Nav.item("Usage", "/reports/usage"),
         Nav.item("Billing", "/reports/billing"))
     .build();</code></pre>
-                          </div>
-                        </div>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          Template side, with <code class="ws-code">nav</code> in the template data:
-                          <code class="ws-code">{|{#include components/navigation/nav nav=nav /}|}</code>. For a grouped
-                          nav use <code class="ws-code">.group(title, entries...)</code> calls instead — a nav is either
-                          grouped (sections only) or a flat list, and the builder rejects mixing the two. Give the nav
-                          an <code class="ws-code">id</code> when it has expandable items so generated toggle ids cannot
-                          collide with another nav on the page.
-                        </p>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Server-marked active item.</strong> Mark the active link with
-                          <code class="ws-code">pf-m-current</code> +
-                          <code class="ws-code">aria-current="page"</code> on the server; no client state needed for the
-                          nav rail.
-                        </p>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Flyout and drilldown.</strong> PatternFly's flyout and drilldown nav variants are
-                          built on the Menu component rather than nav markup. For equivalent popup-menu patterns see
-                          <a href="/components/menu">Menu</a> and <a href="/components/custom-menus">Custom menus</a>.
-                        </p>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <br /><a
-                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/integration-tests/src/main/resources/templates/components/navigation/vertical.html"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          >Edit navigation example on GitHub</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </main>
-        </div>
-      </div>
     </div>
   </div>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    Template side, with <code class="ws-code">nav</code> in the template data:
+    <code class="ws-code">{|{#include components/navigation/nav nav=nav /}|}</code>. For a grouped nav use
+    <code class="ws-code">.group(title, entries...)</code> calls instead — a nav is either grouped (sections only) or a
+    flat list, and the builder rejects mixing the two. Give the nav an <code class="ws-code">id</code> when it has
+    expandable items so generated toggle ids cannot collide with another nav on the page.
+  </p>
 </div>
-{/body} {/include}
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Server-marked active item.</strong> Mark the active link with <code class="ws-code">pf-m-current</code> +
+    <code class="ws-code">aria-current="page"</code> on the server; no client state needed for the nav rail.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Flyout and drilldown.</strong> PatternFly's flyout and drilldown nav variants are built on the Menu
+    component rather than nav markup. For equivalent popup-menu patterns see <a href="/components/menu">Menu</a> and
+    <a href="/components/custom-menus">Custom menus</a>.
+  </p>
+</div>
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/integration-tests/src/main/resources/templates/components/navigation/vertical.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit navigation example on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

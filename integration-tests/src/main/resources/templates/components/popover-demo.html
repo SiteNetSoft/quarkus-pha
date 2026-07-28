@@ -1,419 +1,178 @@
-{#include layouts/base} {#title}Popover{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}Popover{/title} {#head}
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
-{/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content">
-        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
-          ><span class="pf-v6-c-button__text">Skip to content</span></a
-        >
-      </div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-c-content pf-m-editorial">
-                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Popover</h1>
-                    <p>
-                      A floating panel with header, body, and optional footer — like Tooltip but bigger and dismissable.
-                      Use for help, confirmation prompts, and richer hover/click info. Positioning is consumer's
-                      responsibility (CSS or Floating UI).
-                    </p>
-                  </div>
-                </div>
-              </section>
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                    <nav
-                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
-                      aria-label="Table of contents"
-                    >
-                      <div class="pf-v6-c-jump-links__main">
-                        <ul class="pf-v6-c-jump-links__list" role="list">
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#positions" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Position variants</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#hoverable" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Hoverable</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#close-from-content" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Close popover from content</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#custom-focus" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Custom focus</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#no-header-footer" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Without header/footer/close and no padding</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#no-padding" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">No padding</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#width-auto" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Width auto</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#advanced" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Advanced</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#icon-in-title" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text"
-                                        >Popover with icon in the title</span
-                                      ></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#alert-variants" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Alert popover</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#danger" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Danger confirmation</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#props-popover" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Popover props</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </nav>
-                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
-                        <div>
-                          <h2
-                            id="examples"
-                            tabindex="-1"
-                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                          >
-                            Examples
-                          </h2>
-                        </div>
-                      </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="popover" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Click-triggered popover with header, body, footer, and close.
-                      </p>
-                      {/description} {#content}{#include components/popover/basic /}{/content} {/include} {#include
-                      partials/example-card title="Position variants" slug="positions" component="popover"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        One live popover per PF position modifier —
-                        <code class="ws-code">pf-m-top/right/bottom/left</code> plus the corner variants (<code
-                          class="ws-code"
-                          >pf-m-left-top</code
-                        >, <code class="ws-code">pf-m-bottom-right</code>, …).
-                      </p>
-                      {/description} {#content}{#include components/popover/positions /}{/content} {/include} {#include
-                      partials/example-card title="Hoverable" slug="hoverable" component="popover" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Opens on hover or keyboard focus, closes on leave.
-                      </p>
-                      {/description} {#content}{#include components/popover/hoverable /}{/content} {/include} {#include
-                      partials/example-card title="Close popover from content" slug="close-from-content"
-                      component="popover" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        A footer action dismisses the popover — PF's controlled/uncontrolled close patterns.
-                      </p>
-                      {/description} {#content}{#include components/popover/close-from-content /}{/content} {/include}
-                      {#include partials/example-card title="Custom focus" slug="custom-focus" component="popover"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        On open, keyboard focus lands on the footer Cancel button instead of a close control.
-                      </p>
-                      {/description} {#content}{#include components/popover/custom-focus /}{/content} {/include}
-                      {#include partials/example-card title="Without header/footer/close and no padding"
-                      slug="no-header-footer" component="popover" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Body only with <code class="ws-code">pf-m-no-padding</code>.
-                      </p>
-                      {/description} {#content}{#include components/popover/no-header-footer /}{/content} {/include}
-                      {#include partials/example-card title="No padding" slug="no-padding" component="popover"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-no-padding</code> for content that brings its own padding.
-                      </p>
-                      {/description} {#content}{#include components/popover/no-padding /}{/content} {/include} {#include
-                      partials/example-card title="Width auto" slug="width-auto" component="popover" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">pf-m-width-auto</code> sizes to content.
-                      </p>
-                      {/description} {#content}{#include components/popover/width-auto /}{/content} {/include} {#include
-                      partials/example-card title="Advanced" slug="advanced" component="popover" javaSource=true}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Title icon + close + footer actions together.
-                      </p>
-                      {/description} {#content}{#include components/popover/advanced /}{/content} {/include} {#include
-                      partials/example-card title="Popover with icon in the title" slug="icon-in-title"
-                      component="popover" javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Any icon in <code class="ws-code">__title-icon</code>.
-                      </p>
-                      {/description} {#content}{#include components/popover/icon-in-title /}{/content} {/include}
-                      {#include partials/example-card title="Alert popover" slug="alert-variants" component="popover"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Severity variants — <code class="ws-code">pf-m-info / pf-m-success / pf-m-warning</code>.
-                      </p>
-                      {/description} {#content}{#include components/popover/alert-variants /}{/content} {/include}
-                      {#include partials/example-card title="Danger confirmation" slug="danger" component="popover"
-                      javaSource=true} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        Static danger-variant confirmation popover (always visible for markup reference).
-                      </p>
-                      {/description} {#content}{#include components/popover/danger /}{/content} {/include}
-                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
-                        <h2
-                          id="documentation"
-                          tabindex="-1"
-                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                        >
-                          Documentation
-                        </h2>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="props-popover" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
-                          Popover props
-                        </h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          Parameters accepted by
-                          <code class="ws-code">{|{#include components/feedback/popover ... /}|}</code>. Model mode:
-                          pass <code class="ws-code">popover=&lt;Popover&gt;</code> built in Java instead — the Java tab
-                          on each example shows the builder.
-                        </p>
-                        <table
-                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
-                          role="grid"
-                          aria-label="Popover props"
-                        >
-                          <caption class="pf-v6-c-table__caption">
-                            <span class="ws-prop-required">*</span>
-                            required
-                          </caption>
-                          <thead class="pf-v6-c-table__thead">
-                            <tr class="pf-v6-c-table__tr">
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
-                              <th scope="col" class="pf-v6-c-table__th">Description</th>
-                            </tr>
-                          </thead>
-                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >DOM id — set as <code class="ws-code">aria-describedby</code> on the trigger.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">titleText</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Header text — wires <code class="ws-code">aria-labelledby</code> if set.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">position</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><code class="ws-code">top | bottom | left | right</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Arrow side. Default <code class="ws-code">top</code>.</span
-                                >
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">variant</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><code class="ws-code">danger | warning | success | info</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">Semantic tinting.</span>
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >slots <code class="ws-code">body</code> + <code class="ws-code">footer</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Body content + optional footer with action buttons. Slot names avoid the
-                                  &quot;content&quot; collision with example-card.</span
-                                >
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Popover vs. Tooltip vs. Modal.</strong> Tooltip is a one-line label, no actions.
-                          Popover is multi-line with optional footer. Modal blocks the page until dismissed.
-                        </p>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Positioning is consumer-side.</strong> The runtime template doesn't handle anchoring —
-                          wrap the popover in a positioning element (CSS) or layer in Floating UI for collision
-                          avoidance.
-                        </p>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <br /><a
-                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/feedback/popover.html"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          >Edit popover.html on GitHub</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </main>
-        </div>
-      </div>
-    </div>
+{/head} {#body} {#include partials/showcase-page title="Popover" toc=tocPopover} {#lede}
+<p>
+  A floating panel with header, body, and optional footer — like Tooltip but bigger and dismissable. Use for help,
+  confirmation prompts, and richer hover/click info. Positioning is consumer's responsibility (CSS or Floating UI).
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
   </div>
 </div>
-{/body} {/include}
+{#include partials/example-card title="Basic" slug="basic" component="popover" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Click-triggered popover with header, body, footer, and close.</p>
+{/description} {#content}{#include components/popover/basic /}{/content} {/include} {#include partials/example-card
+title="Position variants" slug="positions" component="popover" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  One live popover per PF position modifier —
+  <code class="ws-code">pf-m-top/right/bottom/left</code> plus the corner variants (<code class="ws-code"
+    >pf-m-left-top</code
+  >, <code class="ws-code">pf-m-bottom-right</code>, …).
+</p>
+{/description} {#content}{#include components/popover/positions /}{/content} {/include} {#include partials/example-card
+title="Hoverable" slug="hoverable" component="popover" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Opens on hover or keyboard focus, closes on leave.</p>
+{/description} {#content}{#include components/popover/hoverable /}{/content} {/include} {#include partials/example-card
+title="Close popover from content" slug="close-from-content" component="popover" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  A footer action dismisses the popover — PF's controlled/uncontrolled close patterns.
+</p>
+{/description} {#content}{#include components/popover/close-from-content /}{/content} {/include} {#include
+partials/example-card title="Custom focus" slug="custom-focus" component="popover"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  On open, keyboard focus lands on the footer Cancel button instead of a close control.
+</p>
+{/description} {#content}{#include components/popover/custom-focus /}{/content} {/include} {#include
+partials/example-card title="Without header/footer/close and no padding" slug="no-header-footer" component="popover"
+javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Body only with <code class="ws-code">pf-m-no-padding</code>.</p>
+{/description} {#content}{#include components/popover/no-header-footer /}{/content} {/include} {#include
+partials/example-card title="No padding" slug="no-padding" component="popover" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">pf-m-no-padding</code> for content that brings its own padding.
+</p>
+{/description} {#content}{#include components/popover/no-padding /}{/content} {/include} {#include partials/example-card
+title="Width auto" slug="width-auto" component="popover" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p"><code class="ws-code">pf-m-width-auto</code> sizes to content.</p>
+{/description} {#content}{#include components/popover/width-auto /}{/content} {/include} {#include partials/example-card
+title="Advanced" slug="advanced" component="popover" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Title icon + close + footer actions together.</p>
+{/description} {#content}{#include components/popover/advanced /}{/content} {/include} {#include partials/example-card
+title="Popover with icon in the title" slug="icon-in-title" component="popover" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Any icon in <code class="ws-code">__title-icon</code>.</p>
+{/description} {#content}{#include components/popover/icon-in-title /}{/content} {/include} {#include
+partials/example-card title="Alert popover" slug="alert-variants" component="popover" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Severity variants — <code class="ws-code">pf-m-info / pf-m-success / pf-m-warning</code>.
+</p>
+{/description} {#content}{#include components/popover/alert-variants /}{/content} {/include} {#include
+partials/example-card title="Danger confirmation" slug="danger" component="popover" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Static danger-variant confirmation popover (always visible for markup reference).
+</p>
+{/description} {#content}{#include components/popover/danger /}{/content} {/include}
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+    Documentation
+  </h2>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-popover" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Popover props</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    Parameters accepted by
+    <code class="ws-code">{|{#include components/feedback/popover ... /}|}</code>. Model mode: pass
+    <code class="ws-code">popover=&lt;Popover&gt;</code> built in Java instead — the Java tab on each example shows the
+    builder.
+  </p>
+  <table
+    class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+    role="grid"
+    aria-label="Popover props"
+  >
+    <caption class="pf-v6-c-table__caption">
+      <span class="ws-prop-required">*</span>
+      required
+    </caption>
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+        <th scope="col" class="pf-v6-c-table__th">Description</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >DOM id — set as <code class="ws-code">aria-describedby</code> on the trigger.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">titleText</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Header text — wires <code class="ws-code">aria-labelledby</code> if set.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">position</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">top | bottom | left | right</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Arrow side. Default <code class="ws-code">top</code>.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">variant</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">danger | warning | success | info</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Semantic tinting.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >slots <code class="ws-code">body</code> + <code class="ws-code">footer</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Body content + optional footer with action buttons. Slot names avoid the &quot;content&quot; collision with
+            example-card.</span
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Popover vs. Tooltip vs. Modal.</strong> Tooltip is a one-line label, no actions. Popover is multi-line with
+    optional footer. Modal blocks the page until dismissed.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Positioning is consumer-side.</strong> The runtime template doesn't handle anchoring — wrap the popover in a
+    positioning element (CSS) or layer in Floating UI for collision avoidance.
+  </p>
+</div>
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/feedback/popover.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit popover.html on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

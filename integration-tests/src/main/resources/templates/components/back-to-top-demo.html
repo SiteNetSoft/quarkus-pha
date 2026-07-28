@@ -1,281 +1,157 @@
-{#include layouts/base} {#title}Back to top{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}Back to top{/title} {#head}
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
 <script src="/web/js/alpine/components/back-to-top.js?v={pha:assetVersion}"></script>
-{/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content">
-        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary">
-          <span class="pf-v6-c-button__text">Skip to content</span>
-        </a>
-      </div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-c-content pf-m-editorial">
-                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Back to top</h1>
-                    <p>
-                      A sticky button that appears after the user scrolls past a threshold and smooth-scrolls back to
-                      the top on click. Alpine.js handles the scroll-spy and the click-to-scroll-up behavior via the
-                      <code class="ws-code">phaBackToTop</code> component.
-                    </p>
-                  </div>
-                </div>
-              </section>
+{/head} {#body} {#include partials/showcase-page title="Back to top" toc=tocBackToTop} {#lede}
+<p>
+  A sticky button that appears after the user scrolls past a threshold and smooth-scrolls back to the top on click.
+  Alpine.js handles the scroll-spy and the click-to-scroll-up behavior via the
+  <code class="ws-code">phaBackToTop</code> component.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
+  </div>
+</div>
 
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-u-h-100">
-                    <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                      <nav
-                        class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
-                        aria-label="Table of contents"
-                      >
-                        <div class="pf-v6-c-jump-links__main">
-                          <ul class="pf-v6-c-jump-links__list" role="list">
-                            <li class="pf-v6-c-jump-links__item ws-toc-item">
-                              <span class="pf-v6-c-jump-links__link"
-                                ><a href="#examples" class="pf-v6-c-button pf-m-link"
-                                  ><span class="pf-v6-c-button__text"
-                                    ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
-                                  ></a
-                                ></span
-                              >
-                              <ul class="pf-v6-c-jump-links__list" role="list">
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#basic" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                              </ul>
-                            </li>
-                            <li class="pf-v6-c-jump-links__item ws-toc-item">
-                              <span class="pf-v6-c-jump-links__link"
-                                ><a href="#documentation" class="pf-v6-c-button pf-m-link"
-                                  ><span class="pf-v6-c-button__text"
-                                    ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
-                                  ></a
-                                ></span
-                              >
-                              <ul class="pf-v6-c-jump-links__list" role="list">
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#props-back-to-top" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Back to top props</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                                <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                  <span class="pf-v6-c-jump-links__link"
-                                    ><a href="#usage" class="pf-v6-c-button pf-m-link"
-                                      ><span class="pf-v6-c-button__text"
-                                        ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
-                                      ></a
-                                    ></span
-                                  >
-                                </li>
-                              </ul>
-                            </li>
-                          </ul>
-                        </div>
-                      </nav>
+{#include partials/example-card title="Basic" slug="basic" component="back-to-top" javaSource=true} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  The scroll-triggered button. Scroll past 400px to see it appear in the bottom-right; click to smooth-scroll back to
+  top. The example fragment includes enough filler text to make scrolling meaningful.
+</p>
+{/description} {#content}{#include components/back-to-top/basic /}{/content} {/include}
 
-                      <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                        <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
-                          <div>
-                            <h2
-                              id="examples"
-                              tabindex="-1"
-                              class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                            >
-                              Examples
-                            </h2>
-                          </div>
-                        </div>
-
-                        {#include partials/example-card title="Basic" slug="basic" component="back-to-top"
-                        javaSource=true} {#description}
-                        <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                          The scroll-triggered button. Scroll past 400px to see it appear in the bottom-right; click to
-                          smooth-scroll back to top. The example fragment includes enough filler text to make scrolling
-                          meaningful.
-                        </p>
-                        {/description} {#content}{#include components/back-to-top/basic /}{/content} {/include}
-
-                        <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
-                          <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
-                            <div>
-                              <h2
-                                id="documentation"
-                                tabindex="-1"
-                                class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                              >
-                                Documentation
-                              </h2>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="pf-v6-l-stack__item">
-                          <h3
-                            id="props-back-to-top"
-                            tabindex="-1"
-                            class="pf-v6-c-content--h3 pf-m-editorial ws-heading"
-                          >
-                            Back to top props
-                          </h3>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            Parameters accepted by
-                            <code class="ws-code">{|{#include components/navigation/back-to-top ... /}|}</code>. Model
-                            mode: pass <code class="ws-code">backToTop=&lt;BackToTop&gt;</code> built in Java instead —
-                            the Java tab on each example shows the builder.
-                          </p>
-                          <table
-                            class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
-                            role="grid"
-                            aria-label="Back to top props"
-                          >
-                            <caption class="pf-v6-c-table__caption">
-                              <span class="ws-prop-required">*</span>
-                              required
-                            </caption>
-                            <thead class="pf-v6-c-table__thead">
-                              <tr class="pf-v6-c-table__tr">
-                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
-                                <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
-                                <th scope="col" class="pf-v6-c-table__th">Default</th>
-                                <th scope="col" class="pf-v6-c-table__th">Description</th>
-                              </tr>
-                            </thead>
-                            <tbody role="rowgroup" class="pf-v6-c-table__tbody">
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
-                                  >
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text">DOM id on the container.</span>
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">title</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">"Back to top"</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Visible button label. Pair with a translated string to localise.</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">alwaysVisible</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Skip the 400-pixel scroll threshold and keep the button visible from the start.
-                                    Useful for testing or for pages where any scroll position justifies the button (e.g.
-                                    an infinite list).</span
-                                  >
-                                </td>
-                              </tr>
-                              <tr class="pf-v6-c-table__tr">
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    ><code class="ws-code">scrollableSelector</code></span
-                                  >
-                                </td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text">String (CSS selector)</span>
-                                </td>
-                                <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">window</span></td>
-                                <td class="pf-v6-c-table__td">
-                                  <span class="pf-v6-c-table__text"
-                                    >Selector for a specific scrollable element to spy on. Defaults to the window. Use
-                                    when the back-to-top button should track a scrollable panel inside the page (e.g. a
-                                    modal body) instead of the document scroll.</span
-                                  >
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Divergence from PF React.</strong> We skip
-                            <code class="ws-code">className</code> (React-specific). Our
-                            <code class="ws-code">alwaysVisible</code> is PF's
-                            <code class="ws-code">isAlwaysVisible</code> — same semantic, shorter name. The 400-pixel
-                            threshold is hardcoded; PF doesn't expose it as a prop either.
-                          </p>
-                        </div>
-
-                        <div class="pf-v6-l-stack__item">
-                          <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Where to place it.</strong> Render the include once near the bottom of the page's
-                            main content. PF v6's CSS positions it <code class="ws-code">fixed</code> at the
-                            bottom-right of the viewport regardless of where it sits in the DOM.
-                          </p>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Scoping to a scrollable container.</strong> When your scroll happens inside a panel
-                            instead of the page itself, pass
-                            <code class="ws-code">scrollableSelector="#panel-id"</code>. The Alpine component listens to
-                            that element's scroll events and scrolls it (not the window) back to 0 on click.
-                          </p>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Smooth scroll behavior.</strong> The component calls
-                            <code class="ws-code">scrollTo({|{ top: 0, behavior: 'smooth' }|})</code>. Browsers that
-                            prefer reduced motion (via <code class="ws-code">prefers-reduced-motion</code>)
-                            automatically jump instead of animating; no extra code needed.
-                          </p>
-                          <p class="pf-v6-c-content--p pf-m-editorial">
-                            <strong>Focus management.</strong> After a click-to-top, focus stays on the back-to-top
-                            button. If your page expects focus to land elsewhere (e.g. the top heading), wire an
-                            <code class="ws-code">@click</code> handler that calls
-                            <code class="ws-code">scrollToTop()</code> and then
-                            <code class="ws-code">document.getElementById('ws-page-title').focus()</code>.
-                          </p>
-                        </div>
-
-                        <div class="pf-v6-l-stack__item">
-                          <br /><a
-                            href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/navigation/back-to-top.html"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            >Edit back-to-top.html on GitHub</a
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </main>
-        </div>
-      </div>
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+    <div>
+      <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+        Documentation
+      </h2>
     </div>
   </div>
 </div>
-{/body} {/include}
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-back-to-top" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Back to top props</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    Parameters accepted by
+    <code class="ws-code">{|{#include components/navigation/back-to-top ... /}|}</code>. Model mode: pass
+    <code class="ws-code">backToTop=&lt;BackToTop&gt;</code> built in Java instead — the Java tab on each example shows
+    the builder.
+  </p>
+  <table
+    class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+    role="grid"
+    aria-label="Back to top props"
+  >
+    <caption class="pf-v6-c-table__caption">
+      <span class="ws-prop-required">*</span>
+      required
+    </caption>
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+        <th scope="col" class="pf-v6-c-table__th">Default</th>
+        <th scope="col" class="pf-v6-c-table__th">Description</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">DOM id on the container.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">title</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">"Back to top"</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Visible button label. Pair with a translated string to localise.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">alwaysVisible</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">false</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Skip the 400-pixel scroll threshold and keep the button visible from the start. Useful for testing or for
+            pages where any scroll position justifies the button (e.g. an infinite list).</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">scrollableSelector</code></span>
+        </td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">String (CSS selector)</span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">window</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Selector for a specific scrollable element to spy on. Defaults to the window. Use when the back-to-top
+            button should track a scrollable panel inside the page (e.g. a modal body) instead of the document
+            scroll.</span
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Divergence from PF React.</strong> We skip <code class="ws-code">className</code> (React-specific). Our
+    <code class="ws-code">alwaysVisible</code> is PF's <code class="ws-code">isAlwaysVisible</code> — same semantic,
+    shorter name. The 400-pixel threshold is hardcoded; PF doesn't expose it as a prop either.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Where to place it.</strong> Render the include once near the bottom of the page's main content. PF v6's CSS
+    positions it <code class="ws-code">fixed</code> at the bottom-right of the viewport regardless of where it sits in
+    the DOM.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Scoping to a scrollable container.</strong> When your scroll happens inside a panel instead of the page
+    itself, pass <code class="ws-code">scrollableSelector="#panel-id"</code>. The Alpine component listens to that
+    element's scroll events and scrolls it (not the window) back to 0 on click.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Smooth scroll behavior.</strong> The component calls
+    <code class="ws-code">scrollTo({|{ top: 0, behavior: 'smooth' }|})</code>. Browsers that prefer reduced motion (via
+    <code class="ws-code">prefers-reduced-motion</code>) automatically jump instead of animating; no extra code needed.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Focus management.</strong> After a click-to-top, focus stays on the back-to-top button. If your page expects
+    focus to land elsewhere (e.g. the top heading), wire an <code class="ws-code">@click</code> handler that calls
+    <code class="ws-code">scrollToTop()</code> and then
+    <code class="ws-code">document.getElementById('ws-page-title').focus()</code>.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/navigation/back-to-top.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit back-to-top.html on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

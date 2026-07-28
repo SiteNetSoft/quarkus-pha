@@ -1,253 +1,120 @@
-{#include layouts/base} {#title}Login page{/title} {#head}
+{#include layouts/base noThemeWidget=true} {#title}Login page{/title} {#head}
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
-{/head} {#body}
-<div id="root">
-  <div style="outline: none" tabindex="-1" id="ws-router">
-    <div id="ws-page" class="pf-v6-c-page pf-m-resize-observer">
-      <div class="pf-v6-c-skip-to-content">
-        <a href="#ws-page-main" class="pf-v6-c-button pf-m-primary"
-          ><span class="pf-v6-c-button__text">Skip to content</span></a
-        >
-      </div>
-      {#include structure/header /}
-      <div class="pf-v6-c-page__main-container">
-        <div id="ws-page-main" class="pf-v6-c-page__main" tabindex="-1">
-          <main style="outline: none" tabindex="-1" id="ws-page-content-router">
-            <div class="pf-v6-c-page__main-group">
-              <section class="pf-v6-c-page__main-section pf-m-limit-width">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-c-content pf-m-editorial">
-                    <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">Login page</h1>
-                    <p>
-                      A pre-styled login screen — header, main body with the form, and footer. PF v6 ships the layout
-                      shell; you fill in the form and brand.
-                    </p>
-                  </div>
-                </div>
-              </section>
-              <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">
-                <div class="pf-v6-c-page__main-body">
-                  <div class="pf-v6-l-flex pf-m-nowrap-on-2xl">
-                    <nav
-                      class="pf-v6-c-jump-links pf-m-vertical pf-m-expandable pf-m-non-expandable-on-2xl ws-toc"
-                      aria-label="Table of contents"
-                    >
-                      <div class="pf-v6-c-jump-links__main">
-                        <ul class="pf-v6-c-jump-links__list" role="list">
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#examples" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Examples</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#basic" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Basic</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#show-hide-password" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Show/hide password</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#header-utilities" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">With header utilities</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="pf-v6-c-jump-links__item ws-toc-item">
-                            <span class="pf-v6-c-jump-links__link"
-                              ><a href="#documentation" class="pf-v6-c-button pf-m-link"
-                                ><span class="pf-v6-c-button__text"
-                                  ><span class="pf-v6-c-jump-links__link-text">Documentation</span></span
-                                ></a
-                              ></span
-                            >
-                            <ul class="pf-v6-c-jump-links__list" role="list">
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#props-login-page" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Login page props</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                              <li class="pf-v6-c-jump-links__item ws-toc-item">
-                                <span class="pf-v6-c-jump-links__link"
-                                  ><a href="#usage" class="pf-v6-c-button pf-m-link"
-                                    ><span class="pf-v6-c-button__text"
-                                      ><span class="pf-v6-c-jump-links__link-text">Usage</span></span
-                                    ></a
-                                  ></span
-                                >
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </nav>
-                    <div class="pf-v6-l-stack pf-m-gutter ws-example-page-wrapper">
-                      <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
-                        <div>
-                          <h2
-                            id="examples"
-                            tabindex="-1"
-                            class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                          >
-                            Examples
-                          </h2>
-                        </div>
-                      </div>
-                      {#include partials/example-card title="Basic" slug="basic" component="login-page"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        The full PF login page — brand header, credentials form with an &quot;Invalid login
-                        credentials&quot; helper on empty submit, remember-me, social login links, sign-up/forgot band,
-                        and page footer. Pair with the
-                        <a href="/components/background-image">Background image</a> component for the full-screen
-                        backdrop. Composed from the runtime template's login-prefixed slots; the Alpine state lives on a
-                        wrapper div.
-                      </p>
-                      {/description} {#content}{#include components/login-page/basic /}{/content} {/include} {#include
-                      partials/example-card title="Show/hide password" slug="show-hide-password" component="login-page"}
-                      {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        The password field sits in an input group with a plain eye-icon button; Alpine flips the input
-                        between <code class="ws-code">type=&quot;password&quot;</code> and
-                        <code class="ws-code">type=&quot;text&quot;</code>.
-                      </p>
-                      {/description} {#content}{#include components/login-page/show-hide-password /}{/content}
-                      {/include} {#include partials/example-card title="With header utilities" slug="header-utilities"
-                      component="login-page"} {#description}
-                      <p class="pf-v6-c-content--p pf-m-editorial ws-p">
-                        <code class="ws-code">__main-header-utilities</code> hosts a language-select dropdown (menu
-                        toggle + menu) in the login card header.
-                      </p>
-                      {/description} {#content}{#include components/login-page/header-utilities /}{/content} {/include}
-                      <div class="pf-v6-l-stack__item" style="margin-top: 2rem">
-                        <h2
-                          id="documentation"
-                          tabindex="-1"
-                          class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2"
-                        >
-                          Documentation
-                        </h2>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="props-login-page" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
-                          Login page props
-                        </h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          Parameters accepted by
-                          <code class="ws-code">{|{#include components/forms/login-page ... /}|}</code>. The runtime
-                          template defines six login-prefixed slots — <code class="ws-code">loginHeader</code>,
-                          <code class="ws-code">loginHeaderDesc</code>,
-                          <code class="ws-code">loginHeaderUtilities</code>, <code class="ws-code">loginBody</code>,
-                          <code class="ws-code">loginFooter</code>, <code class="ws-code">loginPageFooter</code> —
-                          prefixed so they cannot collide with layout or example-card slot names. Optional regions
-                          render only when their <code class="ws-code">has*</code> guard is set.
-                        </p>
-                        <table
-                          class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
-                          role="grid"
-                          aria-label="Login page props"
-                        >
-                          <caption class="pf-v6-c-table__caption">
-                            <span class="ws-prop-required">*</span>
-                            required
-                          </caption>
-                          <thead class="pf-v6-c-table__thead">
-                            <tr class="pf-v6-c-table__tr">
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
-                              <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
-                              <th scope="col" class="pf-v6-c-table__th">Description</th>
-                            </tr>
-                          </thead>
-                          <tbody role="rowgroup" class="pf-v6-c-table__tbody">
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"><code class="ws-code">titleText</code></span>
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text">Heading rendered in the main-header.</span>
-                              </td>
-                            </tr>
-                            <tr class="pf-v6-c-table__tr">
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >slots <code class="ws-code">loginHeader</code> /
-                                  <code class="ws-code">loginHeaderDesc</code> /
-                                  <code class="ws-code">loginHeaderUtilities</code> /
-                                  <code class="ws-code">loginBody</code> / <code class="ws-code">loginFooter</code> /
-                                  <code class="ws-code">loginPageFooter</code> (guards
-                                  <code class="ws-code">hasLoginHeader</code> /
-                                  <code class="ws-code">hasHeaderUtilities</code> /
-                                  <code class="ws-code">hasLoginFooter</code> /
-                                  <code class="ws-code">hasPageFooter</code>)</span
-                                >
-                              </td>
-                              <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
-                              <td class="pf-v6-c-table__td">
-                                <span class="pf-v6-c-table__text"
-                                  >Brand, description, form, action links, and outer-footer regions respectively.</span
-                                >
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
-                        <p class="pf-v6-c-content--p pf-m-editorial">
-                          <strong>Server-side auth.</strong> Submit the form to a Quarkus route that issues the session
-                          cookie + redirects. Pair with the <a href="/components/alert">Alert</a> component for
-                          failed-login feedback.
-                        </p>
-                      </div>
-                      <div class="pf-v6-l-stack__item">
-                        <br /><a
-                          href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/forms/login-page.html"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          >Edit login-page.html on GitHub</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </main>
-        </div>
-      </div>
-    </div>
+{/head} {#body} {#include partials/showcase-page title="Login page" toc=tocLoginPage} {#lede}
+<p>
+  A pre-styled login screen — header, main body with the form, and footer. PF v6 ships the layout shell; you fill in the
+  form and brand.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
   </div>
 </div>
-{/body} {/include}
+{#include partials/example-card title="Basic" slug="basic" component="login-page"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  The full PF login page — brand header, credentials form with an &quot;Invalid login credentials&quot; helper on empty
+  submit, remember-me, social login links, sign-up/forgot band, and page footer. Pair with the
+  <a href="/components/background-image">Background image</a> component for the full-screen backdrop. Composed from the
+  runtime template's login-prefixed slots; the Alpine state lives on a wrapper div.
+</p>
+{/description} {#content}{#include components/login-page/basic /}{/content} {/include} {#include partials/example-card
+title="Show/hide password" slug="show-hide-password" component="login-page"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  The password field sits in an input group with a plain eye-icon button; Alpine flips the input between
+  <code class="ws-code">type=&quot;password&quot;</code> and <code class="ws-code">type=&quot;text&quot;</code>.
+</p>
+{/description} {#content}{#include components/login-page/show-hide-password /}{/content} {/include} {#include
+partials/example-card title="With header utilities" slug="header-utilities" component="login-page"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  <code class="ws-code">__main-header-utilities</code> hosts a language-select dropdown (menu toggle + menu) in the
+  login card header.
+</p>
+{/description} {#content}{#include components/login-page/header-utilities /}{/content} {/include}
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+    Documentation
+  </h2>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-login-page" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Login page props</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    Parameters accepted by
+    <code class="ws-code">{|{#include components/forms/login-page ... /}|}</code>. The runtime template defines six
+    login-prefixed slots — <code class="ws-code">loginHeader</code>, <code class="ws-code">loginHeaderDesc</code>,
+    <code class="ws-code">loginHeaderUtilities</code>, <code class="ws-code">loginBody</code>,
+    <code class="ws-code">loginFooter</code>, <code class="ws-code">loginPageFooter</code> — prefixed so they cannot
+    collide with layout or example-card slot names. Optional regions render only when their
+    <code class="ws-code">has*</code> guard is set.
+  </p>
+  <table
+    class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+    role="grid"
+    aria-label="Login page props"
+  >
+    <caption class="pf-v6-c-table__caption">
+      <span class="ws-prop-required">*</span>
+      required
+    </caption>
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+        <th scope="col" class="pf-v6-c-table__th">Description</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><span class="ws-prop-required">*</span> <code class="ws-code">id</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">DOM id.</span></td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">titleText</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Heading rendered in the main-header.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >slots <code class="ws-code">loginHeader</code> / <code class="ws-code">loginHeaderDesc</code> /
+            <code class="ws-code">loginHeaderUtilities</code> / <code class="ws-code">loginBody</code> /
+            <code class="ws-code">loginFooter</code> / <code class="ws-code">loginPageFooter</code> (guards
+            <code class="ws-code">hasLoginHeader</code> / <code class="ws-code">hasHeaderUtilities</code> /
+            <code class="ws-code">hasLoginFooter</code> / <code class="ws-code">hasPageFooter</code>)</span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Qute block</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Brand, description, form, action links, and outer-footer regions respectively.</span
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Server-side auth.</strong> Submit the form to a Quarkus route that issues the session cookie + redirects.
+    Pair with the <a href="/components/alert">Alert</a> component for failed-login feedback.
+  </p>
+</div>
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/forms/login-page.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit login-page.html on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}
