@@ -38,3 +38,10 @@ body {
 [x-cloak] {
   display: none !important;
 }
+
+/* The docs bundle makes .ws-toc position: sticky but never gives it a top —
+ * patternfly.org injects one from JS to sit below its sticky tab bar. We have
+ * no such bar, so a plain top engages the stickiness. */
+.ws-toc {
+  top: 0;
+}

@@ -59,4 +59,43 @@ test.describe("showcase shell pilot", () => {
     await expect(page.locator(".pf-v6-c-back-to-top")).toBeAttached();
     await expect(page.locator(".pha-theme-selector")).toHaveCount(1);
   });
+
+  test("toc scrollspy marks the section scrolled to as current", async ({ page }) => {
+    await page.setViewportSize({ width: 1600, height: 900 });
+    await page.reload();
+    const toc = page.locator(".ws-toc");
+    // On load the first item is current
+    await expect(toc.locator("li.pf-m-current")).toHaveCount(1);
+    await expect(toc.locator('li.pf-m-current a[href="#examples"]')).toBeVisible();
+    // Scroll the page main to the bottom: the last section becomes current
+    await page.evaluate(() => {
+      const main = document.querySelector("#ws-page-main");
+      main.scrollTo(0, main.scrollHeight);
+    });
+    await expect(toc.locator("li.pf-m-current")).toHaveCount(1);
+    await expect(toc.locator("li.pf-m-current").first()).not.toHaveText(/^Examples/);
+    await expect(toc.locator("li.pf-m-current")).toHaveAttribute("aria-current", "location");
+  });
+
+  test("toc link click scrolls the page main and updates the hash", async ({ page }) => {
+    await page.setViewportSize({ width: 1600, height: 900 });
+    await page.reload();
+    const link = page.locator('.ws-toc a[href="#documentation"]');
+    await link.click();
+    await expect(page).toHaveURL(/#documentation$/);
+    const scrolled = await page.evaluate(() => document.querySelector("#ws-page-main").scrollTop);
+    expect(scrolled).toBeGreaterThan(0);
+    await expect(page.locator('.ws-toc li.pf-m-current a[href="#documentation"]')).toBeVisible();
+  });
+
+  test("toc sticks to the top of the scrollport", async ({ page }) => {
+    await page.setViewportSize({ width: 1600, height: 900 });
+    await page.reload();
+    await page.evaluate(() => document.querySelector("#ws-page-main").scrollTo(0, 600));
+    const box = await page.locator(".ws-toc").boundingBox();
+    const mainBox = await page.locator("#ws-page-main").boundingBox();
+    // Sticky: the rail hugs the scrollport top instead of scrolling away
+    expect(box.y).toBeGreaterThanOrEqual(mainBox.y - 1);
+    expect(box.y).toBeLessThan(mainBox.y + 40);
+  });
 });

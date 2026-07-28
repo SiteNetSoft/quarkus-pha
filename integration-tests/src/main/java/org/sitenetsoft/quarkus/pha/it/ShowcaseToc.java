@@ -19,7 +19,8 @@ final class ShowcaseToc {
         JumpLinks.Builder b = JumpLinks.of("toc-" + pageId)
                 .ariaLabel("Table of contents")
                 .vertical()
-                .expandableResponsive("pf-m-non-expandable-on-2xl ws-toc", "Table of contents");
+                .expandableResponsive("pf-m-non-expandable-on-2xl ws-toc", "Table of contents")
+                .scrollspy("#ws-page-main");
         for (JumpLinkItem item : items) {
             b.item(item);
         }

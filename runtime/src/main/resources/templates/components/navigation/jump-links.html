@@ -5,7 +5,7 @@
    expandable shapes. !}
 {#if jumpLinks??}
 {#if jumpLinks.expandableSimple}
-<nav class="pf-v6-c-jump-links{#if jumpLinks.vertical} pf-m-vertical{/if}{#if jumpLinks.center} pf-m-center{/if} pf-m-expandable" id="{jumpLinks.id}" aria-label="{jumpLinks.ariaLabel}" x-data="{ open: {jumpLinks.startOpen} }" :class="{ 'pf-m-expanded': open }"{#if jumpLinks.style} style="{jumpLinks.style}"{/if}>
+<nav class="pf-v6-c-jump-links{#if jumpLinks.vertical} pf-m-vertical{/if}{#if jumpLinks.center} pf-m-center{/if} pf-m-expandable" id="{jumpLinks.id}" aria-label="{jumpLinks.ariaLabel}" x-data="{#if jumpLinks.scrollSelector??}phaJumpLinks({ open: {jumpLinks.startOpen}, scrollable: '{jumpLinks.scrollSelector}' }){#else}{ open: {jumpLinks.startOpen} }{/if}" :class="{ 'pf-m-expanded': open }"{#if jumpLinks.style} style="{jumpLinks.style}"{/if}>
   <div class="pf-v6-c-jump-links__header">
     <div class="pf-v6-c-jump-links__toggle">
       <button class="pf-v6-c-button pf-m-plain" type="button" :aria-expanded="open.toString()" @click="open = !open">
@@ -23,7 +23,7 @@
   </div>
 </nav>
 {#else if jumpLinks.expandableResponsive}
-<nav class="pf-v6-c-jump-links{#if jumpLinks.vertical} pf-m-vertical{/if}{#if jumpLinks.center} pf-m-center{/if} pf-m-expandable {jumpLinks.expandableModifiers}" id="{jumpLinks.id}" aria-label="{jumpLinks.ariaLabel}" x-data="{ open: false }" :class="{ 'pf-m-expanded': open }"{#if jumpLinks.style} style="{jumpLinks.style}"{/if}>
+<nav class="pf-v6-c-jump-links{#if jumpLinks.vertical} pf-m-vertical{/if}{#if jumpLinks.center} pf-m-center{/if} pf-m-expandable {jumpLinks.expandableModifiers}" id="{jumpLinks.id}" aria-label="{jumpLinks.ariaLabel}" x-data="{#if jumpLinks.scrollSelector??}phaJumpLinks({ scrollable: '{jumpLinks.scrollSelector}' }){#else}{ open: false }{/if}" :class="{ 'pf-m-expanded': open }"{#if jumpLinks.style} style="{jumpLinks.style}"{/if}>
   <div class="pf-v6-c-jump-links__header">
     <div class="pf-v6-c-jump-links__toggle">
       <button class="pf-v6-c-button pf-m-plain" type="button" :aria-expanded="open.toString()" @click="open = !open">
@@ -44,7 +44,7 @@
   </div>
 </nav>
 {#else if jumpLinks.hasMain}
-<nav class="pf-v6-c-jump-links{#if jumpLinks.vertical} pf-m-vertical{/if}{#if jumpLinks.center} pf-m-center{/if}" id="{jumpLinks.id}" aria-label="{jumpLinks.ariaLabel}"{#if jumpLinks.style} style="{jumpLinks.style}"{/if}>
+<nav class="pf-v6-c-jump-links{#if jumpLinks.vertical} pf-m-vertical{/if}{#if jumpLinks.center} pf-m-center{/if}" id="{jumpLinks.id}" aria-label="{jumpLinks.ariaLabel}"{#if jumpLinks.scrollSelector??} x-data="phaJumpLinks({ scrollable: '{jumpLinks.scrollSelector}' })"{/if}{#if jumpLinks.style} style="{jumpLinks.style}"{/if}>
   <div class="pf-v6-c-jump-links__main">
     <div class="pf-v6-c-jump-links__header">
       <div class="pf-v6-c-jump-links__label">{jumpLinks.label}</div>
@@ -57,7 +57,7 @@
   </div>
 </nav>
 {#else}
-<nav class="pf-v6-c-jump-links{#if jumpLinks.vertical} pf-m-vertical{/if}{#if jumpLinks.center} pf-m-center{/if}" id="{jumpLinks.id}" aria-label="{jumpLinks.ariaLabel}"{#if jumpLinks.style} style="{jumpLinks.style}"{/if}>
+<nav class="pf-v6-c-jump-links{#if jumpLinks.vertical} pf-m-vertical{/if}{#if jumpLinks.center} pf-m-center{/if}" id="{jumpLinks.id}" aria-label="{jumpLinks.ariaLabel}"{#if jumpLinks.scrollSelector??} x-data="phaJumpLinks({ scrollable: '{jumpLinks.scrollSelector}' })"{/if}{#if jumpLinks.style} style="{jumpLinks.style}"{/if}>
   <ul class="pf-v6-c-jump-links__list">
     {#for item in jumpLinks.items}
     {#include components/navigation/jump-links-model-item jumpLinks=jumpLinks item=item /}

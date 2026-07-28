@@ -37,6 +37,7 @@ public final class JumpLinks {
     private final String expandableModifiers;
     private final String toggleText;
     private final boolean startOpen;
+    private final String scrollSelector;
     private final List<JumpLinkItem> items;
 
     private JumpLinks(Builder b) {
@@ -51,6 +52,7 @@ public final class JumpLinks {
         this.expandableModifiers = b.expandableModifiers;
         this.toggleText = b.toggleText;
         this.startOpen = b.startOpen;
+        this.scrollSelector = b.scrollSelector;
         this.items = List.copyOf(b.items);
     }
 
@@ -113,6 +115,11 @@ public final class JumpLinks {
         return startOpen;
     }
 
+    /** Scrollable-container selector for the scrollspy, or null when static. */
+    public String scrollSelector() {
+        return scrollSelector;
+    }
+
     /** True when the list sits inside the __main wrapper (labeled or expandable shapes). */
     public boolean isHasMain() {
         return label != null || expandableMode != null;
@@ -135,6 +142,7 @@ public final class JumpLinks {
         private String expandableModifiers;
         private String toggleText;
         private boolean startOpen;
+        private String scrollSelector;
         private final List<JumpLinkItem> items = new ArrayList<>();
 
         private Builder() {
@@ -190,6 +198,16 @@ public final class JumpLinks {
             this.expandableMode = "responsive";
             this.expandableModifiers = Objects.requireNonNull(modifiers, "modifiers");
             this.toggleText = Objects.requireNonNull(toggleText, "toggleText");
+            return this;
+        }
+
+        /**
+         * Spy on the given scrollable container: the item whose section was
+         * scrolled past last gets pf-m-current, and link clicks become
+         * offset-aware scrolls (see jump-links.js).
+         */
+        public Builder scrollspy(String scrollableSelector) {
+            this.scrollSelector = Objects.requireNonNull(scrollableSelector, "scrollableSelector");
             return this;
         }
 
