@@ -45,3 +45,11 @@ body {
 .ws-toc {
   top: 0;
 }
+
+/* The docs tab row uses the tabs component's nav mode (link-style items, no
+ * ARIA tablist), but pf-m-nav restyles link hover to the pill radius — correct
+ * for horizontal-nav pills, not for patternfly.org-style docs tabs, which keep
+ * the default small corner radius. Restore the default token for this row. */
+.ws-docs-tabs .pf-v6-c-tabs.pf-m-nav {
+  --pf-v6-c-tabs__link--BorderRadius: var(--pf-t--global--border--radius--action--plain--default);
+}

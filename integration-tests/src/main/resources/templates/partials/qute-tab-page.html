@@ -1,0 +1,33 @@
+{! Qute-template docs tab — served at /components/{slug}/docs/qute. Documents pure-Qute usage: the include line and
+header doc comment of every runtime template belonging to the component, generated from the template sources by
+QuteTemplateDocs. Data: slug — the component id used in tab URLs; title — the display name; docs — TemplateDoc list
+(empty for compositions); toc — JumpLinks model or null. !} {#include layouts/base noThemeWidget=true} {#title}{title}
+Qute template{/title} {#body} {#include partials/showcase-page title=title docsTabs=slug docsTab='qute' toc=toc} {#lede}
+<p>
+  Use {title} straight from a Qute template — parameters and slots instead of Java builders. This reference is generated
+  from the runtime template sources: each template documents its parameters and slots in the header comment shown
+  beneath its include line.
+</p>
+{/lede} {#showcaseBody} {#if docs.size > 0}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="templates" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Templates</h2>
+  </div>
+</div>
+{#for t in docs}
+<div class="pf-v6-l-stack__item">
+  <h3 id="{t.name}" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">{t.name}</h3>
+  {#include components/data-display/code-block copyButton=true}{#content}{t.include}{/content}{/include} {#if
+  !t.doc.isEmpty()}
+  <div class="pf-v6-u-mt-md">{#include components/data-display/code-block}{#content}{t.doc}{/content}{/include}</div>
+  {/if}
+</div>
+{/for} {#else}
+<div class="pf-v6-l-stack__item">
+  <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+    {title} is a composition: it has no single runtime template to include. Its examples are already pure Qute — open
+    the Qute source on any example card of the <a href="/components/{slug}">Java Builder tab</a> for the exact markup to
+    copy.
+  </p>
+</div>
+{/if} {/showcaseBody} {/include} {/body} {/include}

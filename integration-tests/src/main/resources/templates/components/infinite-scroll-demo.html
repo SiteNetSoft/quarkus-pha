@@ -1,7 +1,8 @@
 {#include layouts/base noThemeWidget=true} {#title}Infinite scroll{/title} {#head}
 <script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
 <link rel="stylesheet" href="/web/css/components/htmx.css" />
-{/head} {#body} {#include partials/showcase-page title="Infinite scroll" toc=tocInfiniteScroll} {#lede}
+{/head} {#body} {#include partials/showcase-page docsTabs="infinite-scroll" title="Infinite scroll"
+toc=tocInfiniteScroll} {#lede}
 <p>
   HTMX-powered auto-loading. A zero-height <code class="ws-code">sentinel</code> sits at the end of the list with
   <code class="ws-code">hx-trigger="revealed"</code>; when the user scrolls it into view, HTMX fetches the next page

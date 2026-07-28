@@ -138,7 +138,13 @@ export const EXTENSION_PATHS = [
 export const DEMO_PATHS = ["/demos/dashboard", "/demos/data-management", "/demos/settings", "/demos/landing"];
 
 // Every showcase card, minus the index itself.
+// One representative Qute-tab stub page — all /components/{name}/docs/qute pages
+// render the same partials/qute-tab-page.html template, so one covers the markup.
+// In ALL_PATHS (sweeps) but NOT SHOWCASE_PATHS: the console-errors drift guard
+// diffs SHOWCASE_PATHS against the /components grid, which never lists stubs.
+export const DOCS_TAB_PATHS = ["/components/backdrop/docs/qute"];
+
 export const SHOWCASE_PATHS = [...COMPONENT_PATHS, ...EXTENSION_PATHS, ...DEMO_PATHS];
 
 // "/" is the home/landing page, "/components" the grid, "/licenses" the attributions page.
-export const ALL_PATHS = ["/", "/components", "/licenses", ...SHOWCASE_PATHS];
+export const ALL_PATHS = ["/", "/components", "/licenses", ...SHOWCASE_PATHS, ...DOCS_TAB_PATHS];
