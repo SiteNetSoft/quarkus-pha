@@ -1,7 +1,6 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Demo Pages", () => {
-
   // ── Dashboard ──
 
   test.describe("Dashboard", () => {
@@ -50,7 +49,7 @@ test.describe("Demo Pages", () => {
     });
 
     test("dashboard nav link is active", async ({ page }) => {
-      const activeLink = page.locator('a.pf-v6-c-nav__link.pf-m-current');
+      const activeLink = page.locator("a.pf-v6-c-nav__link.pf-m-current");
       await expect(activeLink).toContainText("Dashboard");
     });
   });
@@ -85,7 +84,7 @@ test.describe("Demo Pages", () => {
     });
 
     test("data management nav link is active", async ({ page }) => {
-      const activeLink = page.locator('a.pf-v6-c-nav__link.pf-m-current');
+      const activeLink = page.locator("a.pf-v6-c-nav__link.pf-m-current");
       await expect(activeLink).toContainText("Data Management");
     });
   });
@@ -133,7 +132,7 @@ test.describe("Demo Pages", () => {
     });
 
     test("settings nav link is active", async ({ page }) => {
-      const activeLink = page.locator('a.pf-v6-c-nav__link.pf-m-current');
+      const activeLink = page.locator("a.pf-v6-c-nav__link.pf-m-current");
       await expect(activeLink).toContainText("Settings");
     });
   });
@@ -178,7 +177,7 @@ test.describe("Demo Pages", () => {
     });
 
     test("landing page nav link is active", async ({ page }) => {
-      const activeLink = page.locator('.pf-v6-c-masthead a.pf-v6-c-nav__link.pf-m-current');
+      const activeLink = page.locator(".pf-v6-c-masthead a.pf-v6-c-nav__link.pf-m-current");
       await expect(activeLink).toContainText("Landing Page");
     });
 

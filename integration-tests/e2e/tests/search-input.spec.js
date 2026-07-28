@@ -161,10 +161,7 @@ test.describe("Search Input", () => {
     await demo.locator("#si-adv-has-words").fill("hello");
     await demo.locator("#si-adv-of-date").fill("2026-05-20");
     await demo.locator('button[type="submit"]').click();
-    await expect(demo.locator("#si-advanced-composable-input")).toHaveValue(
-      "hello date:2026-05-20 date-within:1 day",
-    );
+    await expect(demo.locator("#si-advanced-composable-input")).toHaveValue("hello date:2026-05-20 date-within:1 day");
     await expect(demo.locator('[role="dialog"]')).toBeHidden();
   });
-
 });

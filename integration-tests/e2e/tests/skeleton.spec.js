@@ -86,5 +86,4 @@ test.describe("Skeleton", () => {
     await expect(demo.locator(".pf-v6-c-card")).toHaveCount(7);
     await expect(demo.locator(".pf-v6-c-skeleton").first()).toBeVisible();
   });
-
 });

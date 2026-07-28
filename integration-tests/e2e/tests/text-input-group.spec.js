@@ -152,5 +152,4 @@ test.describe("Text Input Group", () => {
     await expect(demo.locator(".pf-v6-c-label", { hasText: "Namespace" })).toBeVisible();
     await expect(demo.locator("input")).toHaveValue("");
   });
-
 });

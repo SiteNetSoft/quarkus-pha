@@ -188,5 +188,4 @@ test.describe("Label", () => {
     await expect(backdrop.locator(".pf-v6-c-modal-box")).toBeHidden();
     await expect(demo.locator(".pf-v6-c-label", { hasText: "brand new" })).toBeVisible();
   });
-
 });
