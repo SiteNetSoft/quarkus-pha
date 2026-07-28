@@ -14,3 +14,31 @@
 .pha-theme-selector .pf-v6-c-toggle-group__button {
   white-space: nowrap;
 }
+
+/* Placement: floating bottom-left by default; the --masthead variant sits
+ * inline in the masthead toolbar and drops its menu down, anchored right. */
+.pha-theme-selector {
+  position: fixed;
+  bottom: var(--pf-t--global--spacer--md);
+  left: var(--pf-t--global--spacer--md);
+  z-index: var(--pf-t--global--z-index--lg);
+}
+
+.pha-theme-selector .pf-v6-c-menu {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+}
+
+.pha-theme-selector--masthead {
+  position: relative;
+  display: inline-block;
+  bottom: auto;
+  left: auto;
+  z-index: auto;
+}
+
+.pha-theme-selector--masthead .pf-v6-c-menu {
+  inset: 100% 0 auto auto;
+  z-index: var(--pf-t--global--z-index--lg);
+}
