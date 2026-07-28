@@ -139,6 +139,28 @@ final class QuteTemplateDocs {
     private static Map<String, String> scan() {
         try {
             ClassLoader cl = Thread.currentThread().getContextClassLoader();
+            // Preferred: the build-generated index (see generateTemplateIndex in build.gradle).
+            // Resources can be READ under every packaging mode — including native's resource:
+            // protocol — but only file/jar classpaths can be WALKED, so enumeration is baked in.
+            try (InputStream index = cl.getResourceAsStream("pha-template-index.txt")) {
+                if (index != null) {
+                    Map<String, String> out = new TreeMap<>();
+                    for (String rel : new String(index.readAllBytes(), StandardCharsets.UTF_8).split("\n")) {
+                        rel = rel.strip();
+                        if (rel.isEmpty()) {
+                            continue;
+                        }
+                        try (InputStream in = cl.getResourceAsStream(TEMPLATES_ROOT + rel + ".html")) {
+                            if (in != null) {
+                                out.put(rel, new String(in.readAllBytes(), StandardCharsets.UTF_8));
+                            }
+                        }
+                    }
+                    if (!out.isEmpty()) {
+                        return Map.copyOf(out);
+                    }
+                }
+            }
             URL anchor = cl.getResource(ANCHOR_RESOURCE);
             if (anchor == null) {
                 throw new IllegalStateException("Anchor resource not found: " + ANCHOR_RESOURCE);

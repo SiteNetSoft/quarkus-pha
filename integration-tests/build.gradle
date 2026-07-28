@@ -8,10 +8,11 @@ dependencies {
     implementation 'io.quarkus:quarkus-rest'
     implementation 'io.quarkus:quarkus-rest-qute'
 
+    // JSON-constructible models (the pha view-model contract): PhaRenderRoutes previews the VDP flow
+    implementation 'io.quarkus:quarkus-jackson'
+
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
-    // JSON-constructible model tests (the pha view-model contract)
-    testImplementation 'io.quarkus:quarkus-jackson'
 }
 
 // Live reload runtime templates and web assets in dev mode
@@ -19,9 +20,34 @@ sourceSets {
     main {
         resources {
             srcDir "${project(':quarkus-pha').projectDir}/src/main/resources"
+            srcDir layout.buildDirectory.dir('generated-resources')
         }
     }
 }
+
+// Index of the runtime component templates, baked as a resource. QuteTemplateDocs (the Qute docs
+// tab) prefers it over classpath enumeration: native images expose resources under the resource:
+// protocol, which cannot be walked — only read — so the index is what makes the docs tabs work
+// in every packaging mode.
+tasks.register('generateTemplateIndex') {
+    def templatesDir = project(':quarkus-pha').layout.projectDirectory.dir('src/main/resources/templates/components')
+    def outFile = layout.buildDirectory.file('generated-resources/pha-template-index.txt')
+    inputs.dir(templatesDir)
+    outputs.file(outFile)
+    doLast {
+        def root = templatesDir.asFile.toPath()
+        def entries = []
+        root.toFile().eachFileRecurse { f ->
+            if (f.isFile() && f.name.endsWith('.html')) {
+                entries << root.relativize(f.toPath()).toString().replace('\\', '/').replaceAll(/\.html$/, '')
+            }
+        }
+        def target = outFile.get().asFile
+        target.parentFile.mkdirs()
+        target.text = entries.sort().join('\n') + '\n'
+    }
+}
+processResources.dependsOn generateTemplateIndex
 
 test {
     exclude '**/*IT.class'
