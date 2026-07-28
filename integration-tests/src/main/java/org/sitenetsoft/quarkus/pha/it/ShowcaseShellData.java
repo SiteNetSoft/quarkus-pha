@@ -90,23 +90,8 @@ public class ShowcaseShellData {
     /** Masthead search: a search-filter menu over every showcase page. */
     public static Menu showcaseSearchMenu = buildSearchMenu();
 
-    /**
-     * Table of contents for a showcase page, in the ws-toc shape: vertical,
-     * collapsed behind a toggle below 2xl, a plain right-rail list at 2xl+.
-     */
-    private static JumpLinks toc(String pageId, JumpLinkItem... items) {
-        JumpLinks.Builder b = JumpLinks.of("toc-" + pageId)
-                .ariaLabel("Table of contents")
-                .vertical()
-                .expandableResponsive("pf-m-non-expandable-on-2xl ws-toc", "Table of contents");
-        for (JumpLinkItem item : items) {
-            b.item(item);
-        }
-        return b.build();
-    }
-
     /** ToC for the backdrop demo page (showcase-shell pilot). */
-    public static JumpLinks tocBackdrop = toc("backdrop",
+    public static JumpLinks tocBackdrop = ShowcaseToc.of("backdrop",
             JumpLinkItem.of("Examples", "#examples")
                     .sub(JumpLinkItem.of("Basic", "#basic"))
                     .sub(JumpLinkItem.of("With content", "#with-content"))
