@@ -1,7 +1,7 @@
 import org.sitenetsoft.quarkus.pha.model.*;
 
 Panel panel = Panel.of("panel-scrollable-hf")
-        .scrollable().bordered().maxHeight("14rem")
+        .scrollable().bordered().maxHeight("14rem").focusableMain()
         .header("<strong>Sticky header</strong>")
         .body("""
                 <p>
