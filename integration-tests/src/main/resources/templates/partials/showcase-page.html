@@ -130,10 +130,13 @@ Pages using this shell pass noThemeWidget=true to layouts/base — the theme sel
             </div>
             {/if}
           </main>
+          {! Inside the main like patternfly.org: the ws-back-to-top z-index lifts it above the page
+          content, and mounting it under the page__main-container stacking context keeps it painted —
+          as a sibling of the container it sat behind the container's own z-index. !}
+          {#let id=null title=null alwaysVisible=null scrollableSelector=null} {#include
+          components/navigation/back-to-top scrollableSelector="#ws-page-main" classes="ws-back-to-top" /} {/let}
         </div>
       </div>
-      {#let id=null title=null alwaysVisible=null scrollableSelector=null} {#include components/navigation/back-to-top
-      scrollableSelector="#ws-page-main" /} {/let}
     </div>
   </div>
 </div>
