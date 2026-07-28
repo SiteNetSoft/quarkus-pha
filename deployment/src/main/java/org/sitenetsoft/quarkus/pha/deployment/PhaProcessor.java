@@ -1,8 +1,10 @@
 package org.sitenetsoft.quarkus.pha.deployment;
 
+import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.builditem.SystemPropertyBuildItem;
+import io.quarkus.deployment.builditem.nativeimage.NativeImageResourcePatternsBuildItem;
 import io.quarkus.deployment.pkg.builditem.CurateOutcomeBuildItem;
 
 class PhaProcessor {
@@ -12,6 +14,23 @@ class PhaProcessor {
     @BuildStep
     FeatureBuildItem feature() {
         return new FeatureBuildItem(FEATURE);
+    }
+
+    /**
+     * The {@code pha:} template-URI scheme (the VDP bridge point): the locator is a CDI bean the
+     * Qute engine picks up; native images additionally need the raw template sources on the
+     * classpath because the locator reads them at runtime, unlike the build-time-parsed app
+     * templates.
+     */
+    @BuildStep
+    AdditionalBeanBuildItem phaTemplateLocator() {
+        return AdditionalBeanBuildItem.unremovableOf(
+            "org.sitenetsoft.quarkus.pha.qute.PhaTemplateLocator");
+    }
+
+    @BuildStep
+    NativeImageResourcePatternsBuildItem phaTemplateResources() {
+        return NativeImageResourcePatternsBuildItem.builder().includeGlob("templates/**").build();
     }
 
     /**
