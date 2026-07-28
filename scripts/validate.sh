@@ -90,6 +90,10 @@ discover_paths() {
     echo "/demos/data-management"
     echo "/demos/settings"
     echo "/demos/landing"
+    # Representative Qute-docs-tab stub — every /components/{name}/docs/qute
+    # page renders the same partials/qute-tab-page.html template, and the grid
+    # scrape above never finds them (only demo-page tab rows link them).
+    echo "/components/backdrop/docs/qute"
   }
 }
 

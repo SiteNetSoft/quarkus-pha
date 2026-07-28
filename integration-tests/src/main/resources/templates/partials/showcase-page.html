@@ -1,9 +1,12 @@
 {! Showcase page shell — the docs-site chrome assembled from pha components: skip-to-content, masthead (hamburger +
 global search + GitHub + theme selector), sidebar navigation, the title/lede sections, the ToC rail, and back-to-top.
 Replaces the per-page copy-pasted chrome. Params: title — the page h1. toc (optional) — a JumpLinks model for the table
-of contents (vertical + expandableResponsive "pf-m-non-expandable-on-2xl ws-toc"). Slots: {#lede} — optional intro
-content under the title (inside editorial content). {#showcaseBody} — the page's main content (example sections etc.).
-Pages using this shell pass noThemeWidget=true to layouts/base — the theme selector lives in the masthead here. !}
+of contents (vertical + expandableResponsive "pf-m-non-expandable-on-2xl ws-toc"). docsTabs (optional) — component slug;
+renders the patternfly.org-style docs tab row under the title (Java Builder → /components/{slug}, Qute template →
+/components/{slug}/docs/qute). docsTab (optional, default 'java') — which docs tab is current: 'java' | 'qute'. Slots:
+{#lede} — optional intro content under the title (inside editorial content). {#showcaseBody} — the page's main content
+(example sections etc.). Pages using this shell pass noThemeWidget=true to layouts/base — the theme selector lives in
+the masthead here. !}
 <div id="root">
   <div style="outline: none" tabindex="-1" id="ws-router">
     <div
@@ -117,6 +120,32 @@ Pages using this shell pass noThemeWidget=true to layouts/base — the theme sel
                     <h1 id="ws-page-title" class="pf-v6-c-title pf-m-4xl">{title}</h1>
                     {#insert lede}{/insert}
                   </div>
+                  {#if docsTabs??}
+                  <div class="ws-docs-tabs pf-v6-u-mt-md">
+                    {#let activeDocsTab=(docsTab ?: 'java')} {#let tabs=null id=null box=null vertical=null filled=null
+                    secondary=null subtab=null pageInsets=null noBorderBottom=null inset=null modifiers=null nav=null
+                    ariaLabel=null} {#include components/navigation/tabs nav=true ariaLabel='Documentation'} {#content}
+                    <li class="pf-v6-c-tabs__item{#if activeDocsTab == 'java'} pf-m-current{/if}">
+                      <a
+                        href="/components/{docsTabs}"
+                        class="pf-v6-c-tabs__link"
+                        aria-current="{activeDocsTab == 'java' ? 'page' : 'false'}"
+                      >
+                        <span class="pf-v6-c-tabs__item-text">Java Builder</span>
+                      </a>
+                    </li>
+                    <li class="pf-v6-c-tabs__item{#if activeDocsTab == 'qute'} pf-m-current{/if}">
+                      <a
+                        href="/components/{docsTabs}/docs/qute"
+                        class="pf-v6-c-tabs__link"
+                        aria-current="{activeDocsTab == 'qute' ? 'page' : 'false'}"
+                      >
+                        <span class="pf-v6-c-tabs__item-text">Qute template</span>
+                      </a>
+                    </li>
+                    {/content} {/include} {/let} {/let}
+                  </div>
+                  {/if}
                 </div>
               </section>
               <section id="main-content" class="pf-v6-c-page__main-section pf-m-fill">

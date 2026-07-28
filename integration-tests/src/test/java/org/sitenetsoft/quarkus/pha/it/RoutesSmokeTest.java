@@ -230,6 +230,32 @@ class RoutesSmokeTest {
     }
 
     /**
+     * The Qute-template docs tab: generated from the runtime template sources (include line +
+     * header doc comment per template), composition fallback for components without a runtime
+     * template; unknown or shell-less components 404. The include-line assertion also guards the
+     * QuteTemplateDocs classpath scan — a packaging change must fail here, not silently empty
+     * every Qute tab.
+     */
+    @Test
+    void qute_docs_tab_renders() {
+        given()
+            .when().get("/components/backdrop/docs/qute")
+            .then()
+                .statusCode(200)
+                .contentType(containsString("text/html"))
+                .body(containsString("{#include components/feedback/backdrop /}"))
+                .body(containsString("full-viewport semi-transparent overlay"));
+        given()
+            .when().get("/components/application-launcher/docs/qute")
+            .then()
+                .statusCode(200)
+                .body(containsString("is a composition"));
+        given().when().get("/components/definitely-not-real/docs/qute").then().statusCode(404);
+        given().when().get("/components/chip/docs/qute").then().statusCode(404);
+        given().when().get("/components/i18n/docs/qute").then().statusCode(404);
+    }
+
+    /**
      * Every rendered route must be free of the missing-icon placeholder marker.
      * The icon-demo page intentionally renders one to show the placeholder UX,
      * so it's excluded. A typo anywhere else fails CI loudly.
