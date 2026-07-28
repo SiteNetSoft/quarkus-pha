@@ -25,10 +25,7 @@ function writeReport(testPath, status, detail = "") {
   if (!REPORT_DIR) return;
   fs.mkdirSync(REPORT_DIR, { recursive: true });
   const file = path.join(REPORT_DIR, `${pathToSlug(testPath)}.json`);
-  fs.writeFileSync(
-    file,
-    JSON.stringify({ path: testPath, status, detail }, null, 2)
-  );
+  fs.writeFileSync(file, JSON.stringify({ path: testPath, status, detail }, null, 2));
 }
 
 // Page inventory shared with every sweeping spec (console-errors carries the
@@ -36,13 +33,13 @@ function writeReport(testPath, status, detail = "") {
 import { ALL_PATHS } from "./showcase-paths.js";
 
 const FOCUSABLE_SELECTOR = [
-  'a[href]',
-  'button:not([disabled])',
+  "a[href]",
+  "button:not([disabled])",
   'input:not([type="hidden"]):not([disabled])',
-  'select:not([disabled])',
-  'textarea:not([disabled])',
-  '[tabindex]:not([tabindex="-1"])'
-].join(',');
+  "select:not([disabled])",
+  "textarea:not([disabled])",
+  '[tabindex]:not([tabindex="-1"])',
+].join(",");
 
 test.describe("Keyboard navigation — page-level", () => {
   for (const p of ALL_PATHS) {
@@ -52,7 +49,7 @@ test.describe("Keyboard navigation — page-level", () => {
 
       const hasInteractive = await page.evaluate(
         (sel) => document.querySelectorAll(sel).length > 0,
-        FOCUSABLE_SELECTOR
+        FOCUSABLE_SELECTOR,
       );
 
       if (!hasInteractive) {
@@ -76,9 +73,7 @@ test.describe("Keyboard navigation — page-level", () => {
           isBody: a === document.body || a === null,
           tag: a ? a.tagName.toLowerCase() : "(null)",
           id: a && a.id ? `#${a.id}` : "",
-          cls: a && typeof a.className === "string"
-            ? a.className.trim().split(/\s+/).slice(0, 2).join(".")
-            : ""
+          cls: a && typeof a.className === "string" ? a.className.trim().split(/\s+/).slice(0, 2).join(".") : "",
         };
       });
 
@@ -108,7 +103,7 @@ test.describe("Keyboard navigation — targeted patterns", () => {
       return {
         tag: a?.tagName.toLowerCase(),
         href: a?.getAttribute("href"),
-        textIncludesSkip: (a?.textContent || "").toLowerCase().includes("skip")
+        textIncludesSkip: (a?.textContent || "").toLowerCase().includes("skip"),
       };
     });
 
@@ -155,7 +150,7 @@ test.describe("Keyboard navigation — targeted patterns", () => {
     // ArrowDown — we accept the latter as long as focus is still on a real
     // focusable element (i.e., didn't fall off the page).
     const stillFocused = await page.evaluate(
-      () => document.activeElement !== document.body && document.activeElement !== null
+      () => document.activeElement !== document.body && document.activeElement !== null,
     );
     expect(stillFocused).toBe(true);
     expect(afterText).toBeTruthy();

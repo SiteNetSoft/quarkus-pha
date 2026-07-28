@@ -182,5 +182,4 @@ test.describe("Description List", () => {
     await drawer.locator("button", { hasText: "Open drawer" }).click();
     await expect(drawer.locator(".pf-v6-c-description-list")).toBeVisible();
   });
-
 });

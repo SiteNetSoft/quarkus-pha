@@ -45,17 +45,16 @@ test.describe("HTMX swap target contract", () => {
       await page.waitForLoadState("networkidle").catch(() => {});
 
       const findings = await page.evaluate(() => {
-        const HTMX_VERB_ATTRS = [
-          "hx-get", "hx-post", "hx-put", "hx-delete", "hx-patch"
-        ];
+        const HTMX_VERB_ATTRS = ["hx-get", "hx-post", "hx-put", "hx-delete", "hx-patch"];
         const RELATIVE_PREFIXES = ["closest ", "find ", "next ", "previous "];
 
         function describeTrigger(el) {
           const tag = el.tagName.toLowerCase();
           const id = el.id ? `#${el.id}` : "";
-          const cls = (el.className && typeof el.className === "string")
-            ? "." + el.className.trim().split(/\s+/).slice(0, 2).join(".")
-            : "";
+          const cls =
+            el.className && typeof el.className === "string"
+              ? "." + el.className.trim().split(/\s+/).slice(0, 2).join(".")
+              : "";
           return `<${tag}${id}${cls}>`;
         }
 
@@ -107,12 +106,8 @@ test.describe("HTMX swap target contract", () => {
       writeReport(p, findings);
 
       if (findings.broken.length > 0) {
-        const lines = findings.broken.map(
-          (b) => `${b.trigger} hx-target="${b.target}" — selector matches no element`
-        );
-        throw new Error(
-          `${findings.broken.length} unresolved hx-target(s) on ${p}:\n  - ${lines.join("\n  - ")}`
-        );
+        const lines = findings.broken.map((b) => `${b.trigger} hx-target="${b.target}" — selector matches no element`);
+        throw new Error(`${findings.broken.length} unresolved hx-target(s) on ${p}:\n  - ${lines.join("\n  - ")}`);
       }
       expect(findings.broken).toEqual([]);
     });

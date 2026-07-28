@@ -58,7 +58,7 @@ test.describe("Chip", () => {
     test("close button has aria-labelledby linking to text", async ({ page }) => {
       await expect(page.locator("#chip-removable-static-remove")).toHaveAttribute(
         "aria-labelledby",
-        "chip-removable-static-remove chip-removable-static-text"
+        "chip-removable-static-remove chip-removable-static-text",
       );
     });
 

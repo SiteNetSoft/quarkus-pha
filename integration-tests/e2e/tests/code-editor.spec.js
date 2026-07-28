@@ -50,16 +50,11 @@ test.describe("Code editor", () => {
     });
 
     test("displays code in pre element", async ({ page }) => {
-      await expect(page.locator("#ce-basic .pf-v6-c-code-editor__code-pre")).toContainText(
-        "HelmChartRepository"
-      );
+      await expect(page.locator("#ce-basic .pf-v6-c-code-editor__code-pre")).toContainText("HelmChartRepository");
     });
 
     test("code area has ltr direction", async ({ page }) => {
-      await expect(page.locator("#ce-basic .pf-v6-c-code-editor__code")).toHaveAttribute(
-        "dir",
-        "ltr"
-      );
+      await expect(page.locator("#ce-basic .pf-v6-c-code-editor__code")).toHaveAttribute("dir", "ltr");
     });
   });
 
@@ -69,15 +64,11 @@ test.describe("Code editor", () => {
     });
 
     test("has language tab showing YAML", async ({ page }) => {
-      await expect(
-        page.locator("#ce-readonly .pf-v6-c-code-editor__tab-text")
-      ).toHaveText("YAML");
+      await expect(page.locator("#ce-readonly .pf-v6-c-code-editor__tab-text")).toHaveText("YAML");
     });
 
     test("has all three control buttons", async ({ page }) => {
-      const controls = page.locator(
-        "#ce-readonly .pf-v6-c-code-editor__controls .pf-v6-c-button"
-      );
+      const controls = page.locator("#ce-readonly .pf-v6-c-code-editor__controls .pf-v6-c-button");
       await expect(controls).toHaveCount(3);
       await expect(controls.first()).toHaveAttribute("aria-label", "Copy to clipboard");
     });
@@ -85,41 +76,29 @@ test.describe("Code editor", () => {
 
   test.describe("Without actions", () => {
     test("has no controls section", async ({ page }) => {
-      await expect(
-        page.locator("#ce-no-actions .pf-v6-c-code-editor__controls")
-      ).toHaveCount(0);
+      await expect(page.locator("#ce-no-actions .pf-v6-c-code-editor__controls")).toHaveCount(0);
     });
 
     test("has language tab showing JSON", async ({ page }) => {
-      await expect(
-        page.locator("#ce-no-actions .pf-v6-c-code-editor__tab-text")
-      ).toHaveText("JSON");
+      await expect(page.locator("#ce-no-actions .pf-v6-c-code-editor__tab-text")).toHaveText("JSON");
     });
 
     test("displays code content", async ({ page }) => {
-      await expect(
-        page.locator("#ce-no-actions .pf-v6-c-code-editor__code-pre")
-      ).toContainText("example");
+      await expect(page.locator("#ce-no-actions .pf-v6-c-code-editor__code-pre")).toContainText("example");
     });
   });
 
   test.describe("Minimal", () => {
     test("has no language tab", async ({ page }) => {
-      await expect(
-        page.locator("#ce-minimal .pf-v6-c-code-editor__tab")
-      ).toHaveCount(0);
+      await expect(page.locator("#ce-minimal .pf-v6-c-code-editor__tab")).toHaveCount(0);
     });
 
     test("has no controls", async ({ page }) => {
-      await expect(
-        page.locator("#ce-minimal .pf-v6-c-code-editor__controls")
-      ).toHaveCount(0);
+      await expect(page.locator("#ce-minimal .pf-v6-c-code-editor__controls")).toHaveCount(0);
     });
 
     test("displays code content", async ({ page }) => {
-      await expect(
-        page.locator("#ce-minimal .pf-v6-c-code-editor__code-pre")
-      ).toContainText("Hello, world!");
+      await expect(page.locator("#ce-minimal .pf-v6-c-code-editor__code-pre")).toContainText("Hello, world!");
     });
   });
 
@@ -127,12 +106,8 @@ test.describe("Code editor", () => {
     test("renders empty state inside the upload border", async ({ page }) => {
       const upload = page.locator("#ce-upload .pf-v6-c-code-editor__upload");
       await expect(upload).toBeVisible();
-      await expect(upload.locator(".pf-v6-c-empty-state__title-text")).toHaveText(
-        "Start editing"
-      );
-      await expect(
-        upload.getByRole("button", { name: "Browse" })
-      ).toBeVisible();
+      await expect(upload.locator(".pf-v6-c-empty-state__title-text")).toHaveText("Start editing");
+      await expect(upload.getByRole("button", { name: "Browse" })).toBeVisible();
     });
 
     test("drag-over applies pf-m-drag-hover to main, live", async ({ page }) => {
@@ -145,47 +120,35 @@ test.describe("Code editor", () => {
       await expect(main).not.toHaveClass(/pf-m-drag-hover/);
     });
 
-    test("start from scratch swaps the empty state for a code view", async ({
-      page,
-    }) => {
+    test("start from scratch swaps the empty state for a code view", async ({ page }) => {
       const root = page.locator("#ce-upload");
       await root.getByRole("button", { name: "Start from scratch" }).click();
       await expect(root.locator(".pf-v6-c-code-editor__upload")).toBeHidden();
       await expect(root.locator(".pf-v6-c-code-editor__code")).toBeVisible();
     });
 
-    test("picking a file loads its text into the code view, live", async ({
-      page,
-    }) => {
+    test("picking a file loads its text into the code view, live", async ({ page }) => {
       const root = page.locator("#ce-upload");
       await root.locator("input[type=file]").setInputFiles({
         name: "hello.yaml",
         mimeType: "text/yaml",
         buffer: Buffer.from("hello: world"),
       });
-      await expect(root.locator(".pf-v6-c-code-editor__code-pre")).toHaveText(
-        "hello: world"
-      );
+      await expect(root.locator(".pf-v6-c-code-editor__code-pre")).toHaveText("hello: world");
       await expect(root.locator(".pf-v6-c-code-editor__upload")).toBeHidden();
     });
   });
 
   test.describe("Header content and shortcuts", () => {
     test("shows header main text", async ({ page }) => {
-      await expect(
-        page.locator("#ce-header-content .pf-v6-c-code-editor__header-main")
-      ).toHaveText("Header main content");
+      await expect(page.locator("#ce-header-content .pf-v6-c-code-editor__header-main")).toHaveText(
+        "Header main content",
+      );
     });
 
-    test("shows the shortcuts button in the keyboard-shortcuts area", async ({
-      page,
-    }) => {
-      const shortcuts = page.locator(
-        "#ce-header-content .pf-v6-c-code-editor__keyboard-shortcuts"
-      );
-      await expect(
-        shortcuts.getByRole("button", { name: "View shortcuts" })
-      ).toBeVisible();
+    test("shows the shortcuts button in the keyboard-shortcuts area", async ({ page }) => {
+      const shortcuts = page.locator("#ce-header-content .pf-v6-c-code-editor__keyboard-shortcuts");
+      await expect(shortcuts.getByRole("button", { name: "View shortcuts" })).toBeVisible();
     });
   });
 
@@ -198,15 +161,9 @@ test.describe("Code editor", () => {
       await expect(container.locator(".pf-v6-c-code-editor__main")).toBeVisible();
     });
 
-    test("has all three control buttons and the upload empty state", async ({
-      page,
-    }) => {
-      await expect(
-        page.locator("#ce-container .pf-v6-c-code-editor__controls .pf-v6-c-button")
-      ).toHaveCount(3);
-      await expect(
-        page.locator("#ce-container .pf-v6-c-code-editor__upload .pf-v6-c-empty-state")
-      ).toBeVisible();
+    test("has all three control buttons and the upload empty state", async ({ page }) => {
+      await expect(page.locator("#ce-container .pf-v6-c-code-editor__controls .pf-v6-c-button")).toHaveCount(3);
+      await expect(page.locator("#ce-container .pf-v6-c-code-editor__upload .pf-v6-c-empty-state")).toBeVisible();
     });
   });
 
@@ -221,9 +178,7 @@ test.describe("Code editor", () => {
 
   test.describe("Custom control", () => {
     test("appends the Execute control after copy and download", async ({ page }) => {
-      const controls = page.locator(
-        "#ce-custom-control .pf-v6-c-code-editor__controls .pf-v6-c-button"
-      );
+      const controls = page.locator("#ce-custom-control .pf-v6-c-code-editor__controls .pf-v6-c-button");
       await expect(controls).toHaveCount(3);
       await expect(controls.nth(0)).toHaveAttribute("aria-label", "Copy to clipboard");
       await expect(controls.nth(1)).toHaveAttribute("aria-label", "Download code");
@@ -231,15 +186,11 @@ test.describe("Code editor", () => {
     });
 
     test("has no language tab", async ({ page }) => {
-      await expect(
-        page.locator("#ce-custom-control .pf-v6-c-code-editor__tab")
-      ).toHaveCount(0);
+      await expect(page.locator("#ce-custom-control .pf-v6-c-code-editor__tab")).toHaveCount(0);
     });
 
     test("execute click flips the icon state for 2s, live", async ({ page }) => {
-      const exec = page.locator(
-        "#ce-custom-control .pf-v6-c-code-editor__controls .pf-v6-c-button"
-      ).nth(2);
+      const exec = page.locator("#ce-custom-control .pf-v6-c-code-editor__controls .pf-v6-c-button").nth(2);
       await exec.click();
       await expect(exec).toHaveAttribute("aria-label", "Code executed");
       await expect(exec).toHaveAttribute("aria-label", "Execute code", {
@@ -273,10 +224,7 @@ test.describe("Code editor", () => {
       await backdrop.locator("#ce-config-dark + .pf-v6-c-switch__toggle").click();
       await expect(editor).toHaveClass(/pf-v6-theme-dark/);
       await backdrop.locator('button[aria-label="Increase font size"]').click();
-      await expect(editor.locator(".pf-v6-c-code-editor__code-pre")).toHaveAttribute(
-        "style",
-        /font-size: 15px/,
-      );
+      await expect(editor.locator(".pf-v6-c-code-editor__code-pre")).toHaveAttribute("style", /font-size: 15px/);
       await page.keyboard.press("Escape");
       await expect(backdrop.locator(".pf-v6-c-modal-box")).toBeHidden();
     });

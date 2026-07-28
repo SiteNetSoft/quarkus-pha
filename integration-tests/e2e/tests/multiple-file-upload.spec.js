@@ -116,5 +116,4 @@ test.describe("Multiple File Upload", () => {
       .setInputFiles({ name: "image.png", mimeType: "image/png", buffer: Buffer.from("fake") });
     await expect(demo.locator(".pf-v6-c-multiple-file-upload__status-item")).toHaveCount(1);
   });
-
 });

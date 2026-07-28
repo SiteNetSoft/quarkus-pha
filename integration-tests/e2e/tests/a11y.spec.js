@@ -59,12 +59,8 @@ test.describe("Accessibility (axe)", () => {
       writeReport(p, results, blocking.length);
 
       if (blocking.length > 0) {
-        const lines = blocking.map(
-          (v) => `[${v.impact}] ${v.id}: ${v.help} (${v.nodes.length} node(s))`
-        );
-        throw new Error(
-          `${blocking.length} critical/serious axe violation(s) on ${p}:\n  - ${lines.join("\n  - ")}`
-        );
+        const lines = blocking.map((v) => `[${v.impact}] ${v.id}: ${v.help} (${v.nodes.length} node(s))`);
+        throw new Error(`${blocking.length} critical/serious axe violation(s) on ${p}:\n  - ${lines.join("\n  - ")}`);
       }
       expect(blocking).toEqual([]);
     });
@@ -116,10 +112,7 @@ for (const theme of THEME_SWEEPS) {
       test(`no critical/serious axe violations on ${p} in ${theme.name}`, async ({ page }) => {
         await page.goto(p);
         await page.waitForLoadState("networkidle").catch(() => {});
-        await page.waitForFunction(
-          (cls) => document.documentElement.classList.contains(cls),
-          theme.themeClass
-        );
+        await page.waitForFunction((cls) => document.documentElement.classList.contains(cls), theme.themeClass);
 
         const results = await new AxeBuilder({ page }).analyze();
         const blocking = results.violations.filter((v) => FAIL_IMPACTS.has(v.impact));
@@ -127,11 +120,9 @@ for (const theme of THEME_SWEEPS) {
         writeReport(p, results, blocking.length, theme.suffix);
 
         if (blocking.length > 0) {
-          const lines = blocking.map(
-            (v) => `[${v.impact}] ${v.id}: ${v.help} (${v.nodes.length} node(s))`
-          );
+          const lines = blocking.map((v) => `[${v.impact}] ${v.id}: ${v.help} (${v.nodes.length} node(s))`);
           throw new Error(
-            `${blocking.length} critical/serious axe violation(s) on ${p} in ${theme.name}:\n  - ${lines.join("\n  - ")}`
+            `${blocking.length} critical/serious axe violation(s) on ${p} in ${theme.name}:\n  - ${lines.join("\n  - ")}`,
           );
         }
         expect(blocking).toEqual([]);

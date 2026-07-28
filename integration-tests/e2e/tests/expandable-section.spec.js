@@ -105,5 +105,4 @@ test.describe("Expandable section", () => {
     await es.locator("button", { hasText: "Show less truncated content" }).click();
     await expect(es.locator(".pf-v6-c-truncate")).toBeVisible();
   });
-
 });

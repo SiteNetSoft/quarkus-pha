@@ -108,7 +108,9 @@ test.describe("Smoke tests", () => {
     const emptyStateLink = page.locator('#ws-page-content-router a[href="/components/empty-state"]').first();
     await expect(emptyStateLink).toBeVisible();
 
-    const expandableSectionLink = page.locator('#ws-page-content-router a[href="/components/expandable-section"]').first();
+    const expandableSectionLink = page
+      .locator('#ws-page-content-router a[href="/components/expandable-section"]')
+      .first();
     await expect(expandableSectionLink).toBeVisible();
 
     const helperTextLink = page.locator('#ws-page-content-router a[href="/components/helper-text"]').first();
@@ -186,7 +188,9 @@ test.describe("Smoke tests", () => {
     const simpleListLink = page.locator('#ws-page-content-router a[href="/components/simple-list"]').first();
     await expect(simpleListLink).toBeVisible();
 
-    const simpleFileUploadLink = page.locator('#ws-page-content-router a[href="/components/simple-file-upload"]').first();
+    const simpleFileUploadLink = page
+      .locator('#ws-page-content-router a[href="/components/simple-file-upload"]')
+      .first();
     await expect(simpleFileUploadLink).toBeVisible();
 
     const tileLink = page.locator('#ws-page-content-router a[href="/components/tile"]').first();
@@ -219,10 +223,14 @@ test.describe("Smoke tests", () => {
     const modalLink = page.locator('#ws-page-content-router a[href="/components/modal"]').first();
     await expect(modalLink).toBeVisible();
 
-    const notificationBadgeLink = page.locator('#ws-page-content-router a[href="/components/notification-badge"]').first();
+    const notificationBadgeLink = page
+      .locator('#ws-page-content-router a[href="/components/notification-badge"]')
+      .first();
     await expect(notificationBadgeLink).toBeVisible();
 
-    const notificationDrawerLink = page.locator('#ws-page-content-router a[href="/components/notification-drawer"]').first();
+    const notificationDrawerLink = page
+      .locator('#ws-page-content-router a[href="/components/notification-drawer"]')
+      .first();
     await expect(notificationDrawerLink).toBeVisible();
 
     const overflowMenuLink = page.locator('#ws-page-content-router a[href="/components/overflow-menu"]').first();
@@ -279,28 +287,40 @@ test.describe("Smoke tests", () => {
     const wizardLink = page.locator('#ws-page-content-router a[href="/components/wizard"]').first();
     await expect(wizardLink).toBeVisible();
 
-    const applicationLauncherLink = page.locator('#ws-page-content-router a[href="/components/application-launcher"]').first();
+    const applicationLauncherLink = page
+      .locator('#ws-page-content-router a[href="/components/application-launcher"]')
+      .first();
     await expect(applicationLauncherLink).toBeVisible();
 
-    const dateAndTimePickerLink = page.locator('#ws-page-content-router a[href="/components/date-and-time-picker"]').first();
+    const dateAndTimePickerLink = page
+      .locator('#ws-page-content-router a[href="/components/date-and-time-picker"]')
+      .first();
     await expect(dateAndTimePickerLink).toBeVisible();
 
     const dragAndDropLink = page.locator('#ws-page-content-router a[href="/components/drag-and-drop"]').first();
     await expect(dragAndDropLink).toBeVisible();
 
-    const dualListSelectorLink = page.locator('#ws-page-content-router a[href="/components/dual-list-selector"]').first();
+    const dualListSelectorLink = page
+      .locator('#ws-page-content-router a[href="/components/dual-list-selector"]')
+      .first();
     await expect(dualListSelectorLink).toBeVisible();
 
-    const multipleFileUploadLink = page.locator('#ws-page-content-router a[href="/components/multiple-file-upload"]').first();
+    const multipleFileUploadLink = page
+      .locator('#ws-page-content-router a[href="/components/multiple-file-upload"]')
+      .first();
     await expect(multipleFileUploadLink).toBeVisible();
 
     const optionsMenuLink = page.locator('#ws-page-content-router a[href="/components/options-menu"]').first();
     await expect(optionsMenuLink).toBeVisible();
 
-    const passwordGeneratorLink = page.locator('#ws-page-content-router a[href="/components/password-generator"]').first();
+    const passwordGeneratorLink = page
+      .locator('#ws-page-content-router a[href="/components/password-generator"]')
+      .first();
     await expect(passwordGeneratorLink).toBeVisible();
 
-    const passwordStrengthLink = page.locator('#ws-page-content-router a[href="/components/password-strength"]').first();
+    const passwordStrengthLink = page
+      .locator('#ws-page-content-router a[href="/components/password-strength"]')
+      .first();
     await expect(passwordStrengthLink).toBeVisible();
 
     const tableLink = page.locator('#ws-page-content-router a[href="/components/table"]').first();
@@ -309,7 +329,9 @@ test.describe("Smoke tests", () => {
     const timePickerLink = page.locator('#ws-page-content-router a[href="/components/time-picker"]').first();
     await expect(timePickerLink).toBeVisible();
 
-    const rectangleSelectionLink = page.locator('#ws-page-content-router a[href="/components/rectangle-selection"]').first();
+    const rectangleSelectionLink = page
+      .locator('#ws-page-content-router a[href="/components/rectangle-selection"]')
+      .first();
     await expect(rectangleSelectionLink).toBeVisible();
 
     const mapLink = page.locator('#ws-page-content-router a[href="/components/map"]').first();
@@ -336,10 +358,10 @@ test.describe("Smoke tests", () => {
 
   test("demo page links are visible on index", async ({ page }) => {
     await page.goto("/components");
-    await expect(page.locator('#demo-dashboard')).toBeVisible();
-    await expect(page.locator('#demo-data-management')).toBeVisible();
-    await expect(page.locator('#demo-settings')).toBeVisible();
-    await expect(page.locator('#demo-landing')).toBeVisible();
+    await expect(page.locator("#demo-dashboard")).toBeVisible();
+    await expect(page.locator("#demo-data-management")).toBeVisible();
+    await expect(page.locator("#demo-settings")).toBeVisible();
+    await expect(page.locator("#demo-landing")).toBeVisible();
   });
 
   test("search input filters component cards", async ({ page }) => {
@@ -348,8 +370,8 @@ test.describe("Smoke tests", () => {
     await expect(searchInput).toBeVisible();
 
     await searchInput.fill("accordion");
-    const visibleCards = page.locator('#main-content .pf-v6-l-gallery > div:visible');
+    const visibleCards = page.locator("#main-content .pf-v6-l-gallery > div:visible");
     await expect(visibleCards).toHaveCount(1);
-    await expect(page.locator('#accordion')).toBeVisible();
+    await expect(page.locator("#accordion")).toBeVisible();
   });
 });
