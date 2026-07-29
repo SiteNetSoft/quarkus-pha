@@ -1,0 +1,155 @@
+{#include layouts/base noThemeWidget=true} {#title}JSON view models — quarkus-pha{/title} {#body} {#include
+partials/showcase-page title="JSON view models" toc=tocJsonModels} {#lede}
+<p>
+  Every pha model deserializes from plain JSON — the view-model contract. A service (or a
+  <a href="https://vdprotocol.org/" target="_blank" rel="noopener">View Descriptor Protocol</a> descriptor) names a
+  template, hands over a JSON payload, and the server renders PatternFly HTML: no Java builder code in the request path,
+  no HTML assembled in the browser.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="quick-start" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+      Quick start
+    </h2>
+  </div>
+</div>
+<div class="pf-v6-l-stack__item">
+  <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+    Bring Jackson yourself (<code class="ws-code">io.quarkus:quarkus-jackson</code> in a Quarkus app) — pha ships only
+    the annotations, so applications that never touch JSON pay nothing. Then bind and render:
+  </p>
+  <div class="pf-v6-c-code-block" role="group" aria-label="Quick start example">
+    <div class="pf-v6-c-code-block__content">
+      <pre class="pf-v6-c-code-block__pre"><code class="pf-v6-c-code-block__code">{|String payload = """
+    {"id": "mn-api", "items": [{"text": "Edit"}, {"text": "Delete", "danger": true}]}
+    """;
+Menu menu = objectMapper.readValue(payload, Menu.class);
+String html = engine.getTemplate("pha:components/navigation/menu").data("menu", menu).render();|}</code></pre>
+    </div>
+  </div>
+  <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+    Validation carried by the builders still applies on the JSON path — an empty menu, a badge without a
+    <code class="ws-code">value</code>, or a payload that does not bind is rejected at
+    <code class="ws-code">readValue</code> time, never half-rendered.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+    <div>
+      <h2 id="shape-rules" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+        Shape rules
+      </h2>
+    </div>
+  </div>
+  <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+    JSON property names are the model's <em>field names</em> — the same names the Java builders use, so the Java tab on
+    any example doubles as the property reference. The rules, by model shape:
+  </p>
+  <ul class="pf-v6-c-content--ul pf-m-editorial">
+    <li class="pf-v6-c-content--li">
+      <strong>Builder models</strong> (Menu, Table, Card, …): properties bind to the builder — booleans for the toggles
+      (<code class="ws-code">{|{"plain": true}|}</code>), arrays for item lists (<code class="ws-code"
+        >{|{"items": [...]}|}</code
+      >), nested objects for composed models. Java-only conveniences that set several fields at once (<code
+        class="ws-code"
+        >searchFilter(a,&nbsp;b)</code
+      >) are covered by their field-level properties (<code class="ws-code">searchPlaceholder</code>,
+      <code class="ws-code">searchAriaLabel</code>).
+    </li>
+    <li class="pf-v6-c-content--li">
+      <strong>Immutable item models</strong> (MenuItem, TabItem, Label, …): the fields bind directly —
+      <code class="ws-code">{|{"text": "Delete", "danger": true}|}</code> is the JSON form of
+      <code class="ws-code">MenuItem.of("Delete").asDanger()</code>.
+    </li>
+    <li class="pf-v6-c-content--li">
+      <strong>Internal state is not contract:</strong> computed wiring (Alpine state, resolved tree rows) has no JSON
+      property. The contract is enforced by a sweep test over all 100 models — a model that gains a field without a JSON
+      binding fails the build.
+    </li>
+  </ul>
+</div>
+
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+    <div>
+      <h2 id="template-uris" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+        The pha: template URI
+      </h2>
+    </div>
+  </div>
+  <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+    <code class="ws-code">pha:components/navigation/menu</code> is a stable, descriptor-friendly address for a Qute
+    template. The scheme resolves from any classpath <code class="ws-code">templates/</code> root — pha's own
+    components, your application's fragments, and template jars published by API services — so a descriptor can name any
+    fragment without knowing which artifact ships it. Traversal outside <code class="ws-code">templates/</code> does not
+    resolve.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+    <div>
+      <h2 id="try-it" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Try it</h2>
+    </div>
+  </div>
+  <p class="pf-v6-c-content--p pf-m-editorial ws-p">
+    This showcase exposes the flow as an endpoint (<code class="ws-code"
+      >POST /api/pha/render?template=…&amp;model=…</code
+    >
+    — showcase-only, not part of the extension). Edit the payload and render: the HTML below comes entirely from the
+    server.
+  </p>
+  <div
+    id="json-try-it"
+    x-data="{ error: '',
+      async render() {
+        this.error = '';
+        var r = await fetch('/api/pha/render?template=pha:components/navigation/menu&model=menu', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: this.$refs.payload.value
+        });
+        var text = await r.text();
+        if (r.ok) { this.$refs.out.innerHTML = text; } else { this.$refs.out.innerHTML = ''; this.error = text; }
+      } }"
+  >
+    <div class="pf-v6-l-grid pf-m-gutter pf-m-all-6-col-on-lg">
+      <div class="pf-v6-l-grid__item">
+        <span class="pf-v6-c-form-control pf-m-textarea">
+          <textarea x-ref="payload" rows="10" aria-label="JSON payload" spellcheck="false">
+{|{
+  "id": "mn-try",
+  "items": [
+    {"text": "Edit"},
+    {"text": "Duplicate", "description": "Copy into this project"},
+    {"divider": true},
+    {"text": "Delete", "danger": true}
+  ]
+}|}</textarea>
+        </span>
+        <div style="margin-top: 0.5rem">
+          {#let btn=null btnAttrs=null variant=null icon=null iconPosition=null disabled=null ariaDisabled=null
+          size=null inline=null block=null circle=null count=null countRead=null ariaLabel=null ariaExpanded=null
+          attrs=null type=null clicked=null state=null stateful=null href=null id=null component=null hamburger=null
+          hamburgerVariant=null hamburgerExpandExpr=null settings=null favorite=null favorited=null isLoading=null
+          spinnerLabel=null hasNoPadding=null danger=null} {#include components/actions/button variant="primary"
+          attrs='@click="render()"'}{#content}Render on the server{/content}{/include} {/let}
+        </div>
+      </div>
+      <div class="pf-v6-l-grid__item">
+        <div x-ref="out" aria-live="polite"></div>
+        <pre
+          class="pha-c-code-editor__error"
+          x-show="error"
+          x-text="error"
+          x-cloak
+          role="alert"
+          style="white-space: pre-wrap"
+        ></pre>
+      </div>
+    </div>
+  </div>
+</div>
+{/showcaseBody} {/include} {/body} {/include}

@@ -84,6 +84,7 @@ public class ShowcaseShellData {
             .expandable("Extensions", entries(extensionPages()))
             .expandable("Layouts", entries(layoutPages()))
             .expandable("Patterns", entries(patternPages()))
+            .item("JSON view models", "/json-models")
             .item("Licenses", "/licenses")
             .build();
 
@@ -110,6 +111,7 @@ public class ShowcaseShellData {
         extensionPages().forEach((name, href) -> b.item(MenuItem.of(name).href(href)));
         layoutPages().forEach((name, href) -> b.item(MenuItem.of(name).href(href)));
         patternPages().forEach((name, href) -> b.item(MenuItem.of(name).href(href)));
+        b.item(MenuItem.of("JSON view models").href("/json-models"));
         return b.build();
     }
 }

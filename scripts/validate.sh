@@ -93,6 +93,7 @@ discover_paths() {
     # Representative Qute-docs-tab stub — every /components/{name}/docs/qute
     # page renders the same partials/qute-tab-page.html template, and the grid
     # scrape above never finds them (only demo-page tab rows link them).
+    echo "/json-models"
     echo "/components/backdrop/docs/qute"
   }
 }

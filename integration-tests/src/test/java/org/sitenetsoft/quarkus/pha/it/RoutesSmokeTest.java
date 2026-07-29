@@ -263,6 +263,7 @@ class RoutesSmokeTest {
     @ParameterizedTest
     @ValueSource(strings = {
         "/",
+        "/json-models",
         "/components/about-modal",
         "/components/accordion",
         "/components/action-list",
