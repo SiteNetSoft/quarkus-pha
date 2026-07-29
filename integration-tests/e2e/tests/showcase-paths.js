@@ -147,4 +147,4 @@ export const DOCS_TAB_PATHS = ["/components/backdrop/docs/qute"];
 export const SHOWCASE_PATHS = [...COMPONENT_PATHS, ...EXTENSION_PATHS, ...DEMO_PATHS];
 
 // "/" is the home/landing page, "/components" the grid, "/licenses" the attributions page.
-export const ALL_PATHS = ["/", "/components", "/licenses", ...SHOWCASE_PATHS, ...DOCS_TAB_PATHS];
+export const ALL_PATHS = ["/", "/components", "/licenses", "/json-models", ...SHOWCASE_PATHS, ...DOCS_TAB_PATHS];

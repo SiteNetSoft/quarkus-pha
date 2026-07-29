@@ -23,6 +23,10 @@ public class HelloResource {
     @Inject
     Template licenses;
 
+    @io.quarkus.qute.Location("json-models")
+    @Inject
+    Template jsonModels;
+
     /**
      * Components without a homepage thumbnail in /web/images/components/.
      * Listed here so the template renders a placeholder instead of an
@@ -501,6 +505,14 @@ public class HelloResource {
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance licensesPage() {
         return licenses.instance();
+    }
+
+    /** The JSON view-model contract page. */
+    @GET
+    @Path("/json-models")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance jsonModelsPage() {
+        return jsonModels.instance();
     }
 
     /** Shared component-card data for the /components grid (served by ComponentRoutes). */

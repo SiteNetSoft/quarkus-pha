@@ -975,6 +975,13 @@ public class ShowcaseTocs {
                     .sub(JumpLinkItem.of("Page props", "#props-page"))
                     .sub(JumpLinkItem.of("Usage", "#usage")));
 
+    /** ToC for the JSON view-model contract page. */
+    public static JumpLinks tocJsonModels = ShowcaseToc.of("json-models",
+            JumpLinkItem.of("Quick start", "#quick-start"),
+            JumpLinkItem.of("Shape rules", "#shape-rules"),
+            JumpLinkItem.of("The pha: template URI", "#template-uris"),
+            JumpLinkItem.of("Try it", "#try-it"));
+
     /** ToC for the pagination demo page. */
     public static JumpLinks tocPagination = ShowcaseToc.of("pagination",
             JumpLinkItem.of("Examples", "#examples")

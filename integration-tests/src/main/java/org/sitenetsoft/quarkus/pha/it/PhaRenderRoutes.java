@@ -12,6 +12,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -49,21 +50,28 @@ public class PhaRenderRoutes {
     public String render(@QueryParam("template") String template, @QueryParam("model") String model,
             String payload) {
         if (template == null || !TEMPLATE_URI.matcher(template).matches()) {
-            throw new BadRequestException("template must be a pha:components/... URI");
+            throw badRequest("template must be a pha:components/... URI");
         }
         Class<?> type = MODELS.get(model);
         if (type == null) {
-            throw new BadRequestException("Unknown model: " + model + " (one of " + MODELS.keySet() + ")");
+            throw badRequest("Unknown model: " + model + " (one of " + MODELS.keySet() + ")");
         }
         Template t = engine.getTemplate(template);
         if (t == null) {
-            throw new NotFoundException("Template not found: " + template);
+            throw new NotFoundException(Response.status(Response.Status.NOT_FOUND)
+                    .entity("Template not found: " + template).type(MediaType.TEXT_PLAIN).build());
         }
         try {
             return t.data(model, mapper.readValue(payload, type)).render();
         } catch (com.fasterxml.jackson.core.JacksonException e) {
-            throw new BadRequestException("Payload does not bind to " + type.getSimpleName() + ": "
+            throw badRequest("Payload does not bind to " + type.getSimpleName() + ": "
                     + e.getOriginalMessage());
         }
+    }
+
+    /** 4xx with the reason as a plain-text body — the try-it panel displays it. */
+    private static BadRequestException badRequest(String reason) {
+        return new BadRequestException(Response.status(Response.Status.BAD_REQUEST)
+                .entity(reason).type(MediaType.TEXT_PLAIN).build());
     }
 }
