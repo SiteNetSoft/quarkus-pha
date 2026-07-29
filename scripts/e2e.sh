@@ -14,7 +14,7 @@ QUARKUS_APP="$PROJECT_ROOT/integration-tests/build/quarkus-app"
 QUARKUS_CONTAINER="quarkus-pha-e2e"
 PLAYWRIGHT_CONTAINER="quarkus-pha-e2e-playwright"
 QUARKUS_IMAGE="registry.access.redhat.com/ubi9/openjdk-25-runtime:1.24"
-PLAYWRIGHT_IMAGE="mcr.microsoft.com/playwright:v1.61.1-noble"
+PLAYWRIGHT_IMAGE="mcr.microsoft.com/playwright:v1.62.0-noble"
 
 # Local resource guardrail: this host's CPU hard-freezes under sustained
 # all-core load, so local runs cap the Playwright container's CPU/memory and
