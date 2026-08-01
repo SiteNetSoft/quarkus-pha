@@ -114,6 +114,15 @@ test.describe("showcase shell pilot", () => {
     await expect(page.locator('.ws-toc li.pf-m-current a[href="#documentation"]')).toBeVisible();
   });
 
+  test("sidebar nav has Overview under All components instead of a Components item", async ({ page }) => {
+    const nav = page.locator("#showcase-nav");
+    await expect(nav.getByRole("link", { name: "Components", exact: true })).toHaveCount(0);
+    await nav.getByRole("button", { name: "All components" }).click();
+    const overview = nav.getByRole("link", { name: "Overview", exact: true });
+    await expect(overview).toBeVisible();
+    await expect(overview).toHaveAttribute("href", "/components");
+  });
+
   test("toc sticks to the top of the scrollport", async ({ page }) => {
     await page.setViewportSize({ width: 1600, height: 900 });
     await page.reload();
