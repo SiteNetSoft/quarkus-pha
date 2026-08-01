@@ -1,0 +1,26 @@
+{! Chip removable — chips with a close button; the Alpine list removes clicked chips live. !}
+<div
+  id="chip-removable-list"
+  style="display: flex; gap: 0.5rem; flex-wrap: wrap"
+  x-data="{ chips: ['Chip 1', 'Chip 2', 'Chip 3'] }"
+>
+  <template x-for="(chip, i) in chips" :key="chip">
+    <span class="pf-v6-c-label pf-m-filled">
+      <span class="pf-v6-c-label__content">
+        <span class="pf-v6-c-label__text" x-text="chip" :id="'chip-removable-' + i + '-text'"></span>
+      </span>
+      <span class="pf-v6-c-label__actions">
+        <button
+          class="pf-v6-c-button pf-m-plain"
+          type="button"
+          aria-label="Remove"
+          @click="chips = chips.filter((_, idx) => idx !== i)"
+        >
+          {icons:svg('fa:times').raw}
+        </button>
+      </span>
+    </span>
+  </template>
+</div>
+<p style="margin-top: 1rem">Static removable chip:</p>
+{#include components/data-display/chip id="chip-removable-static" removable=true}Removable chip{/include}

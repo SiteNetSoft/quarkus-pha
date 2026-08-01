@@ -1,0 +1,113 @@
+{#include layouts/base noThemeWidget=true} {#title}Click to load{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
+<link rel="stylesheet" href="/web/css/components/htmx.css" />
+{/head} {#body} {#include partials/showcase-page docsTabs="click-to-load" title="Click to load" toc=tocClickToLoad}
+{#lede}
+<p>
+  HTMX-powered "Load more" pattern — click the button to fetch the next batch from the server. The manual counterpart to
+  <a href="/components/infinite-scroll">infinite scroll</a>, and its keyboard-friendly fallback.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
+  </div>
+</div>
+
+{#include partials/example-card title="Manual pagination" slug="basic" component="click-to-load"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Click the button to load more items from <code class="ws-code">/api/htmx/load-more</code>. Each response appends the
+  next rows and replaces the button with one pointing at the following page.
+</p>
+{/description} {#content}{#include components/click-to-load/basic /}{/content} {/include}
+
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+    <div>
+      <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+        Documentation
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-click-to-load" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+    Click-to-load props
+  </h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    Parameters accepted by
+    <code class="ws-code">{|{#include components/htmx/click-to-load id="..." loadUrl="..." /}|}</code>.
+  </p>
+  <table
+    class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+    role="grid"
+    aria-label="Click-to-load props"
+  >
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+        <th scope="col" class="pf-v6-c-table__th">Default</th>
+        <th scope="col" class="pf-v6-c-table__th">Description</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">— (required)</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Used for the <code class="ws-code">hx-target</code> self-reference and the
+            <code class="ws-code">{|{id}|}-indicator</code> spinner id.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">loadUrl</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String (URL)</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">— (required)</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Endpoint fetched on click. The response must contain the new rows followed by a fresh click-to-load button
+            pointing at the next page, or no button once the list is exhausted.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">buttonText</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">Load more</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Label of the load button.</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>The server owns the paging.</strong> Exactly like infinite scroll, each response carries the next button
+    with the incremented page baked into its <code class="ws-code">loadUrl</code> — the client keeps no page counter.
+    End the chain by omitting the button from the final batch.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/htmx/click-to-load.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit click-to-load.html on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

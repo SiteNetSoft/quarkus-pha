@@ -45,8 +45,8 @@ public class DocsTabRoutes {
             .filter(c -> name.equals(c.get("id")) && ("/components/" + name).equals(c.get("href")))
             .findFirst()
             .orElseThrow(() -> new NotFoundException("Unknown component: " + name));
-        // Only pages built on the showcase shell ({name}-demo.html) carry the tab row.
-        // i18n-demo.html predates the shell (MessageBundle page), so it has no tabs.
+        // Only component pages ({name}-demo.html) carry the tab row. i18n-demo.html is a
+        // MessageBundle demo, not a component — it uses the shell but has no docs tabs.
         if ("i18n".equals(name) || engine.getTemplate("components/" + name + "-demo") == null) {
             throw new NotFoundException("No demo page for: " + name);
         }

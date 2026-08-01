@@ -1,0 +1,59 @@
+{#include layouts/base noThemeWidget=true} {#title}Skeleton loading{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
+<link rel="stylesheet" href="/web/css/components/htmx.css" />
+{/head} {#body} {#include partials/showcase-page docsTabs="skeleton-loading" title="Skeleton loading"
+toc=tocSkeletonLoading} {#lede}
+<p>
+  A server-driven loading state. While an HTMX request is in flight, a skeleton placeholder is shown via
+  <code class="ws-code">hx-indicator</code> — its shape mirrors the real content so there is no spinner and no layout
+  shift when the response swaps in. The skeleton lives entirely in server-rendered markup; HTMX only toggles a class.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
+  </div>
+</div>
+
+{#include partials/example-card title="On-demand profile" slug="basic" component="skeleton-loading"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Click to fetch a profile card. The server is artificially slow (~700&nbsp;ms) so the skeleton is visible before the
+  real content replaces it.
+</p>
+{/description} {#content}{#include components/skeleton-loading/basic /}{/content} {/include}
+
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+    <div>
+      <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+        Documentation
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>hx-indicator does the toggling.</strong> The placeholder is hidden by default (<code class="ws-code"
+      >pha-c-skeleton-loading</code
+    >) and becomes visible while HTMX marks the request in flight; the swap target sits next to it and receives the real
+    markup. Build the placeholder from <a href="/components/skeleton">skeleton</a> components sized to match the
+    incoming content.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Skeletons over spinners.</strong> Because the placeholder occupies the same box as the final content,
+    nothing jumps when the response lands — reserve <a href="/components/spinner">spinner</a> for actions with no
+    predictable shape.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/integration-tests/src/main/java/org/sitenetsoft/quarkus/pha/it/HtmxRoutes.java"
+    target="_blank"
+    rel="noopener noreferrer"
+    >See the server side in HtmxRoutes.java on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

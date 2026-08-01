@@ -1,0 +1,35 @@
+{! Document editor with toolbar — PF-styled Save/Print/Download/Fullscreen actions via the Alpine API. !}
+{#include components/editors/document-editor id="editor-toolbar" collaboraUrl=collaboraUrl wopiSrc=wopiWelcome
+accessToken=accessToken fileName="Welcome.odt"}{#content}
+<div class="pha-c-document-editor__toolbar">
+  <span class="pha-c-document-editor__toolbar-title" x-text="fileName"></span>
+  <div class="pha-c-document-editor__toolbar-actions">
+    <button
+      class="pf-v6-c-button pf-m-plain"
+      type="button"
+      aria-label="Save"
+      x-on:click="save()"
+      :disabled="!connected || saving"
+    >
+      {icons:svg('fa:floppy-disk').raw}
+    </button>
+    <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Print" x-on:click="print()"
+      :disabled="!connected">
+      {icons:svg('fa:print').raw}
+    </button>
+    <button
+      class="pf-v6-c-button pf-m-plain"
+      type="button"
+      aria-label="Download"
+      x-on:click="download()"
+      :disabled="!connected"
+    >
+      {icons:svg('fa:download').raw}
+    </button>
+    <div class="pf-v6-c-divider pf-m-vertical" role="separator" style="height: 1.5rem"></div>
+    <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Fullscreen" x-on:click="fullscreen()">
+      {icons:svg('fa:expand').raw}
+    </button>
+  </div>
+</div>
+{/content}{/include}

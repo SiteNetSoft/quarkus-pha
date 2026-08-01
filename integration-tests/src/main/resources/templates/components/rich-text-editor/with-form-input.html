@@ -1,0 +1,19 @@
+{! Rich text editor with hidden form input — name= mirrors the HTML to a hidden input for plain form submits. !}
+<form
+  style="max-width: 720px"
+  onsubmit="
+    event.preventDefault();
+    alert(this.elements['body'].value);
+  "
+>
+  {#include components/editors/rich-text-editor id="rte-form" name="body" toolbar="basic"}{#content}
+  <p>Edit me and click Submit.</p>
+  {/content}{#footer}
+  <div class="pha-c-rich-text-editor__footer">
+    <span x-text="length + ' characters'"></span>
+    <button class="pf-v6-c-button pf-m-primary" type="submit">
+      <span class="pf-v6-c-button__text">Submit</span>
+    </button>
+  </div>
+  {/footer}{/include}
+</form>

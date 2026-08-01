@@ -6,7 +6,7 @@ test.describe("Lazy Modal", () => {
   });
 
   test("page loads with heading", async ({ page }) => {
-    await expect(page.locator("#lazy-modal-heading")).toBeVisible();
+    await expect(page.locator("h3#basic")).toBeVisible();
   });
 
   test("open button is present", async ({ page }) => {

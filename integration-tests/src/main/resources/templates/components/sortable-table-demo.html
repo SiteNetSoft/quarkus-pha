@@ -1,0 +1,58 @@
+{#include layouts/base noThemeWidget=true} {#title}Sortable table{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
+<link rel="stylesheet" href="/web/css/components/htmx.css" />
+{/head} {#body} {#include partials/showcase-page docsTabs="sortable-table" title="Sortable table" toc=tocSortableTable}
+{#lede}
+<p>
+  A fully server-driven data table: column-header sorting, text filtering, and pagination all run on the server and swap
+  the results region via HTMX. The browser holds no table state — every interaction is a fragment request to
+  <code class="ws-code">/api/htmx/data-table</code>.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
+  </div>
+</div>
+
+{#include partials/example-card title="Sort, filter, and paginate" slug="basic" component="sortable-table"}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Type to filter across all columns, click a header to sort (toggle ascending/descending), and page through the results.
+  The search box stays put while the results below it swap.
+</p>
+{/description} {#content}{#include components/sortable-table/basic /}{/content} {/include}
+
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+    <div>
+      <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+        Documentation
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>The results region is the swap unit.</strong> Sort headers (built on the
+    <code class="ws-code">table-sort-th</code> runtime template), pagination links, and the filter input all target the
+    same results container with <code class="ws-code">hx-swap="outerHTML"</code> — the server bakes the current sort,
+    query, and page into every link it returns, so the URL state lives entirely in the rendered markup.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>For client-side sorting</strong> of small, fully-loaded tables, see the Alpine variants on the
+    <a href="/components/table">table</a> page — this pattern is for data that lives on the server.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/integration-tests/src/main/java/org/sitenetsoft/quarkus/pha/it/HtmxRoutes.java"
+    target="_blank"
+    rel="noopener noreferrer"
+    >See the server side in HtmxRoutes.java on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

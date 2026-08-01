@@ -1,0 +1,11 @@
+{! Rich text editor read-only viewer — renders content but disables editing; handy for previews. !}
+<div style="max-width: 720px">
+  {#include components/editors/rich-text-editor id="rte-readonly" readOnly=true toolbar="minimal"}{#content}
+  <h3>Release notes</h3>
+  <p>This is read-only content rendered through the editor for consistent styling.</p>
+  <ul>
+    <li>Item one</li>
+    <li>Item two</li>
+  </ul>
+  {/content}{/include}
+</div>

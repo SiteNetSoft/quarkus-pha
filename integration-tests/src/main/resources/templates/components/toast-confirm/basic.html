@@ -1,0 +1,33 @@
+{! Toast & confirm — buttons post to the server, which replies with only an HX-Trigger header; toast.js renders
+   the PF toast. The danger button intercepts htmx:confirm and opens the PF modal instead of window.confirm(). !}
+<div class="pf-v6-l-flex pf-m-space-items-md">
+  <button class="pf-v6-c-button pf-m-primary" type="button" hx-post="/api/htmx/toast/save" hx-swap="none"
+    id="toast-save-btn">
+    <span class="pf-v6-c-button__text">Save (success toast)</span>
+  </button>
+  <button
+    class="pf-v6-c-button pf-m-danger"
+    type="button"
+    hx-post="/api/htmx/toast/delete"
+    hx-swap="none"
+    hx-confirm="Delete this item? This cannot be undone."
+    data-pha-confirm
+    id="toast-delete-btn"
+  >
+    <span class="pf-v6-c-button__text">Delete (confirm + toast)</span>
+  </button>
+</div>
+
+{! Confirm modal — opened by the htmx:confirm interceptor in toast.js. !} {#include components/feedback/modal
+id="pha-confirm-modal" size="sm" variant="warning" eventOpen=true} {#include components/feedback/modal-close /}
+{#include components/feedback/modal-header headingLevel="h2"}Confirm action{/include} {#include
+components/feedback/modal-body}
+<p id="pha-confirm-text">Are you sure?</p>
+{/include} {#include components/feedback/modal-footer}
+<button id="pha-confirm-yes" class="pf-v6-c-button pf-m-danger" type="button" @click="open = false">
+  <span class="pf-v6-c-button__text">Confirm</span>
+</button>
+<button class="pf-v6-c-button pf-m-link" type="button" @click="open = false">
+  <span class="pf-v6-c-button__text">Cancel</span>
+</button>
+{/include} {/include}

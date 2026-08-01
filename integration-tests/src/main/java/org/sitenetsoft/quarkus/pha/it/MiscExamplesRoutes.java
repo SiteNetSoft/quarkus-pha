@@ -213,6 +213,21 @@ public class MiscExamplesRoutes {
         m.put("navigation",            Set.of("vertical", "grouped", "expandable", "expandable-third-level",
                                                "mixed", "horizontal", "horizontal-subnav", "icons",
             "horizontal-overflow", "composable"));
+        m.put("video-player",          Set.of("basic", "mp4", "playback-rates", "with-toolbar"));
+        m.put("click-to-edit",         Set.of("basic"));
+        m.put("click-to-load",         Set.of("basic"));
+        m.put("form-validation",       Set.of("basic"));
+        m.put("lazy-modal",            Set.of("basic"));
+        m.put("live-search",           Set.of("basic"));
+        m.put("skeleton-loading",      Set.of("basic"));
+        m.put("sortable-table",        Set.of("basic"));
+        m.put("toast-confirm",         Set.of("basic"));
+        m.put("chip",                  Set.of("basic", "with-badge", "removable", "overflow"));
+        m.put("map",                   Set.of("basic", "markers", "dark-theme", "full-controls", "geojson",
+                                               "compact"));
+        m.put("rich-text-editor",      Set.of("basic", "basic-toolbar", "minimal-toolbar", "bubble", "readonly",
+                                               "with-form-input"));
+        m.put("rectangle-selection",   Set.of("basic", "with-cards"));
         EXAMPLES = Map.copyOf(m);
     }
 
@@ -224,7 +239,9 @@ public class MiscExamplesRoutes {
         "notification-drawer|drawer|toolbar|modal|multiple-file-upload|date-picker|menu|menu-toggle|" +
         "notification-badge|page|context-selector|dual-list-selector|calendar-month|dropdown|select|" +
         "application-launcher|infinite-scroll|options-menu|custom-menus|password-generator|password-strength|" +
-        "date-and-time-picker|time-picker|navigation|tile|hero|input-group|compass";
+        "date-and-time-picker|time-picker|navigation|tile|hero|input-group|compass|video-player|" +
+        "click-to-edit|click-to-load|form-validation|lazy-modal|live-search|skeleton-loading|" +
+        "sortable-table|toast-confirm|chip|map|rich-text-editor|rectangle-selection";
 
     @Inject
     Engine engine;

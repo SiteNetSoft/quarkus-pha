@@ -1,0 +1,61 @@
+{#include layouts/base noThemeWidget=true} {#title}Toast & confirm{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
+<link rel="stylesheet" href="/web/css/components/htmx.css" />
+<script src="/web/js/htmx/toast.js?v={pha:assetVersion}"></script>
+{/head} {#body} {#include partials/showcase-page docsTabs="toast-confirm" title="Toast & confirm" toc=tocToastConfirm}
+{#lede}
+<p>
+  Server-signalled toasts and a confirm dialog. Successful actions return an
+  <code class="ws-code">HX-Trigger</code> response header; a small client listener renders a PatternFly toast alert and
+  auto-dismisses it. Destructive actions intercept <code class="ws-code">htmx:confirm</code> and open the modal instead
+  of the browser's <code class="ws-code">confirm()</code>.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
+  </div>
+</div>
+
+{#include partials/example-card title="Toasts from the server" slug="basic" component="toast-confirm"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Each button posts to Quarkus; the server replies with only an <code class="ws-code">HX-Trigger</code> header. The
+  danger button asks for confirmation in a PF modal first.
+</p>
+{/description} {#content}{#include components/toast-confirm/basic /}{/content} {/include}
+
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+    <div>
+      <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+        Documentation
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>The server decides what deserves a toast.</strong> Actions respond
+    <code class="ws-code">hx-swap="none"</code> with an <code class="ws-code">HX-Trigger</code> header carrying the
+    toast payload; <code class="ws-code">/web/js/htmx/toast.js</code> listens for the event and renders a stacking PF
+    <a href="/components/alert">toast alert</a> that auto-dismisses. No toast state on the page, no polling.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Confirm without <code class="ws-code">window.confirm</code>.</strong> Buttons marked
+    <code class="ws-code">data-pha-confirm</code> have their <code class="ws-code">htmx:confirm</code> event
+    intercepted: the PF <a href="/components/modal">modal</a> opens with the
+    <code class="ws-code">hx-confirm</code> text, and only the modal's Confirm button lets the request proceed.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/META-INF/resources/web/js/htmx/toast.js"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit toast.js on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

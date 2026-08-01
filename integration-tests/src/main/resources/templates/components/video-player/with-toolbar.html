@@ -1,0 +1,21 @@
+{! Video player with toolbar — a PatternFly-styled toolbar drives playback through the Alpine API
+   (toggle/seek/mute, ready/playing state). !}
+<div style="max-width: 700px">
+  {#include components/media/video-player id="vp-toolbar" src="/web/vendor/media/sample-counter.mp4"
+  type="video/mp4"}{#content}
+  <div class="pha-c-video-player__toolbar">
+    <span class="pha-c-video-player__toolbar-title">Sample counter clip</span>
+    <div class="pha-c-video-player__toolbar-actions">
+      <button class="pf-v6-c-button pf-m-secondary" type="button" x-on:click="toggle()" :disabled="!ready">
+        <span class="pf-v6-c-button__text" x-text="playing ? 'Pause' : 'Play'"></span>
+      </button>
+      <button class="pf-v6-c-button pf-m-tertiary" type="button" x-on:click="seek(0)" :disabled="!ready">
+        <span class="pf-v6-c-button__text">Restart</span>
+      </button>
+      <button class="pf-v6-c-button pf-m-tertiary" type="button" x-on:click="mute()" :disabled="!ready">
+        <span class="pf-v6-c-button__text">Mute</span>
+      </button>
+    </div>
+  </div>
+  {/content}{/include}
+</div>

@@ -6,14 +6,14 @@ test.describe("Document Editor", () => {
   });
 
   test("page loads with correct heading", async ({ page }) => {
-    await expect(page.locator("h1")).toHaveText("Document Editor");
+    await expect(page.locator("h1")).toHaveText("Document editor");
   });
 
   test("all section headings are visible", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#toolbar-heading")).toBeVisible();
-    await expect(page.locator("#readonly-heading")).toBeVisible();
-    await expect(page.locator("#status-heading")).toBeVisible();
+    await expect(page.locator("h3#basic")).toBeVisible();
+    await expect(page.locator("h3#with-toolbar")).toBeVisible();
+    await expect(page.locator("h3#readonly")).toBeVisible();
+    await expect(page.locator("h3#with-status")).toBeVisible();
   });
 
   test.describe("Basic", () => {

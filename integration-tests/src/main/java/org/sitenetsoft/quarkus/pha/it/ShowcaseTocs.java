@@ -1743,4 +1743,141 @@ public class ShowcaseTocs {
             JumpLinkItem.of("Documentation", "#documentation")
                     .sub(JumpLinkItem.of("Props", "#props-user-feedback"))
                     .sub(JumpLinkItem.of("Usage", "#usage")));
+
+    /** ToC for the i18n demo page. */
+    public static JumpLinks tocI18n = ShowcaseToc.of("i18n",
+            JumpLinkItem.of("Examples", "#examples")
+                    .sub(JumpLinkItem.of("Language switcher", "#i18n-language"))
+                    .sub(JumpLinkItem.of("Localized profile card", "#i18n-profile")),
+            JumpLinkItem.of("Documentation", "#documentation")
+                    .sub(JumpLinkItem.of("Usage", "#usage")));
+
+    /** ToC for the chip demo page. */
+    public static JumpLinks tocChip = ShowcaseToc.of("chip",
+            JumpLinkItem.of("Examples", "#examples")
+                    .sub(JumpLinkItem.of("Basic", "#basic"))
+                    .sub(JumpLinkItem.of("With badge", "#with-badge"))
+                    .sub(JumpLinkItem.of("Removable", "#removable"))
+                    .sub(JumpLinkItem.of("Overflow", "#overflow")),
+            JumpLinkItem.of("Documentation", "#documentation")
+                    .sub(JumpLinkItem.of("Chip props", "#props-chip"))
+                    .sub(JumpLinkItem.of("Usage", "#usage")));
+
+    /** ToC for the map demo page. */
+    public static JumpLinks tocMap = ShowcaseToc.of("map",
+            JumpLinkItem.of("Examples", "#examples")
+                    .sub(JumpLinkItem.of("Basic", "#basic"))
+                    .sub(JumpLinkItem.of("With markers", "#markers"))
+                    .sub(JumpLinkItem.of("Dark theme", "#dark-theme"))
+                    .sub(JumpLinkItem.of("Full controls", "#full-controls"))
+                    .sub(JumpLinkItem.of("GeoJSON layer", "#geojson"))
+                    .sub(JumpLinkItem.of("Compact", "#compact")),
+            JumpLinkItem.of("Documentation", "#documentation")
+                    .sub(JumpLinkItem.of("Map props", "#props-map"))
+                    .sub(JumpLinkItem.of("Usage", "#usage")));
+
+    /** ToC for the rich-text-editor demo page. */
+    public static JumpLinks tocRichTextEditor = ShowcaseToc.of("rich-text-editor",
+            JumpLinkItem.of("Examples", "#examples")
+                    .sub(JumpLinkItem.of("Basic (Snow theme)", "#basic"))
+                    .sub(JumpLinkItem.of("Basic toolbar", "#basic-toolbar"))
+                    .sub(JumpLinkItem.of("Minimal toolbar", "#minimal-toolbar"))
+                    .sub(JumpLinkItem.of("Bubble theme", "#bubble"))
+                    .sub(JumpLinkItem.of("Read-only viewer", "#readonly"))
+                    .sub(JumpLinkItem.of("With hidden form input", "#with-form-input")),
+            JumpLinkItem.of("Documentation", "#documentation")
+                    .sub(JumpLinkItem.of("Rich text editor props", "#props-rich-text-editor"))
+                    .sub(JumpLinkItem.of("Usage", "#usage")));
+
+    /** ToC for the document-editor demo page. */
+    public static JumpLinks tocDocumentEditor = ShowcaseToc.of("document-editor",
+            JumpLinkItem.of("Examples", "#examples")
+                    .sub(JumpLinkItem.of("Basic (no document)", "#basic"))
+                    .sub(JumpLinkItem.of("Text document", "#text-document"))
+                    .sub(JumpLinkItem.of("Spreadsheet", "#spreadsheet"))
+                    .sub(JumpLinkItem.of("Presentation", "#presentation"))
+                    .sub(JumpLinkItem.of("With toolbar", "#with-toolbar"))
+                    .sub(JumpLinkItem.of("Read-only viewer", "#readonly"))
+                    .sub(JumpLinkItem.of("With status bar", "#with-status")),
+            JumpLinkItem.of("Documentation", "#documentation")
+                    .sub(JumpLinkItem.of("Document editor props", "#props-document-editor"))
+                    .sub(JumpLinkItem.of("Usage", "#usage")));
+
+    /** ToC for the rectangle-selection demo page. */
+    public static JumpLinks tocRectangleSelection = ShowcaseToc.of("rectangle-selection",
+            JumpLinkItem.of("Examples", "#examples")
+                    .sub(JumpLinkItem.of("Basic", "#basic"))
+                    .sub(JumpLinkItem.of("With PatternFly cards", "#with-cards")),
+            JumpLinkItem.of("Documentation", "#documentation")
+                    .sub(JumpLinkItem.of("Usage", "#usage")));
+
+    /** ToC for the click-to-edit demo page. */
+    public static JumpLinks tocClickToEdit = ShowcaseToc.of("click-to-edit",
+            JumpLinkItem.of("Examples", "#examples")
+                    .sub(JumpLinkItem.of("Edit a profile inline", "#basic")),
+            JumpLinkItem.of("Documentation", "#documentation")
+                    .sub(JumpLinkItem.of("Usage", "#usage")));
+
+    /** ToC for the click-to-load demo page. */
+    public static JumpLinks tocClickToLoad = ShowcaseToc.of("click-to-load",
+            JumpLinkItem.of("Examples", "#examples")
+                    .sub(JumpLinkItem.of("Manual pagination", "#basic")),
+            JumpLinkItem.of("Documentation", "#documentation")
+                    .sub(JumpLinkItem.of("Click-to-load props", "#props-click-to-load"))
+                    .sub(JumpLinkItem.of("Usage", "#usage")));
+
+    /** ToC for the form-validation demo page. */
+    public static JumpLinks tocFormValidation = ShowcaseToc.of("form-validation",
+            JumpLinkItem.of("Examples", "#examples")
+                    .sub(JumpLinkItem.of("Server-side validated signup", "#basic")),
+            JumpLinkItem.of("Documentation", "#documentation")
+                    .sub(JumpLinkItem.of("Usage", "#usage")));
+
+    /** ToC for the lazy-modal demo page. */
+    public static JumpLinks tocLazyModal = ShowcaseToc.of("lazy-modal",
+            JumpLinkItem.of("Examples", "#examples")
+                    .sub(JumpLinkItem.of("On-demand content loading", "#basic")),
+            JumpLinkItem.of("Documentation", "#documentation")
+                    .sub(JumpLinkItem.of("Lazy modal props", "#props-lazy-modal"))
+                    .sub(JumpLinkItem.of("Usage", "#usage")));
+
+    /** ToC for the live-search demo page. */
+    public static JumpLinks tocLiveSearch = ShowcaseToc.of("live-search",
+            JumpLinkItem.of("Examples", "#examples")
+                    .sub(JumpLinkItem.of("Server-filtered search", "#basic")),
+            JumpLinkItem.of("Documentation", "#documentation")
+                    .sub(JumpLinkItem.of("Live search props", "#props-live-search"))
+                    .sub(JumpLinkItem.of("Usage", "#usage")));
+
+    /** ToC for the skeleton-loading demo page. */
+    public static JumpLinks tocSkeletonLoading = ShowcaseToc.of("skeleton-loading",
+            JumpLinkItem.of("Examples", "#examples")
+                    .sub(JumpLinkItem.of("On-demand profile", "#basic")),
+            JumpLinkItem.of("Documentation", "#documentation")
+                    .sub(JumpLinkItem.of("Usage", "#usage")));
+
+    /** ToC for the sortable-table demo page. */
+    public static JumpLinks tocSortableTable = ShowcaseToc.of("sortable-table",
+            JumpLinkItem.of("Examples", "#examples")
+                    .sub(JumpLinkItem.of("Sort, filter, and paginate", "#basic")),
+            JumpLinkItem.of("Documentation", "#documentation")
+                    .sub(JumpLinkItem.of("Usage", "#usage")));
+
+    /** ToC for the toast-confirm demo page. */
+    public static JumpLinks tocToastConfirm = ShowcaseToc.of("toast-confirm",
+            JumpLinkItem.of("Examples", "#examples")
+                    .sub(JumpLinkItem.of("Toasts from the server", "#basic")),
+            JumpLinkItem.of("Documentation", "#documentation")
+                    .sub(JumpLinkItem.of("Usage", "#usage")));
+
+    /** ToC for the video-player demo page. */
+    public static JumpLinks tocVideoPlayer = ShowcaseToc.of("video-player",
+            JumpLinkItem.of("Examples", "#examples")
+                    .sub(JumpLinkItem.of("Basic (no source)", "#basic"))
+                    .sub(JumpLinkItem.of("MP4 source", "#mp4"))
+                    .sub(JumpLinkItem.of("Playback rates + muted autoplay", "#playback-rates"))
+                    .sub(JumpLinkItem.of("With toolbar", "#with-toolbar")),
+            JumpLinkItem.of("Documentation", "#documentation")
+                    .sub(JumpLinkItem.of("Video player props", "#props-video-player"))
+                    .sub(JumpLinkItem.of("Usage", "#usage")));
 }

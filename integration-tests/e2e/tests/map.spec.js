@@ -10,12 +10,12 @@ test.describe("Map", () => {
   });
 
   test("all section headings are visible", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#markers-heading")).toBeVisible();
-    await expect(page.locator("#dark-heading")).toBeVisible();
-    await expect(page.locator("#controls-heading")).toBeVisible();
-    await expect(page.locator("#geojson-heading")).toBeVisible();
-    await expect(page.locator("#compact-heading")).toBeVisible();
+    await expect(page.locator("h3#basic")).toBeVisible();
+    await expect(page.locator("h3#markers")).toBeVisible();
+    await expect(page.locator("h3#dark-theme")).toBeVisible();
+    await expect(page.locator("h3#full-controls")).toBeVisible();
+    await expect(page.locator("h3#geojson")).toBeVisible();
+    await expect(page.locator("h3#compact")).toBeVisible();
   });
 
   test.describe("Basic", () => {

@@ -1,0 +1,19 @@
+{! Map with markers — city markers with click-to-open popups; marker config rides in x-data. !}
+<div
+  class="pha-c-map"
+  id="map-markers"
+  x-data="phaMap({
+       center: [-96, 40],
+       zoom: 3,
+       markers: [
+         { lngLat: [-74.006, 40.7128], popup: '<strong>New York</strong><br>The Big Apple', color: '#06c' },
+         { lngLat: [-87.6298, 41.8781], popup: '<strong>Chicago</strong><br>The Windy City', color: '#06c' },
+         { lngLat: [-118.2437, 34.0522], popup: '<strong>Los Angeles</strong><br>City of Angels', color: '#06c' },
+         { lngLat: [-122.4194, 37.7749], popup: '<strong>San Francisco</strong><br>The Golden City', color: '#06c' },
+         { lngLat: [-75.6972, 45.4215], popup: '<strong>Ottawa</strong><br>Capital of Canada', color: '#c00' },
+         { lngLat: [-73.5674, 45.5019], popup: '<strong>Montréal</strong><br>La Métropole', color: '#c00' }
+       ]
+     })"
+>
+  <div class="pha-c-map__container"></div>
+</div>

@@ -1,0 +1,33 @@
+{! Document editor with status bar — toolbar plus a status bar showing connection state and saving indicator. !}
+{#include components/editors/document-editor id="editor-status" collaboraUrl=collaboraUrl wopiSrc=wopiBudget
+accessToken=accessToken fileName="Budget.ods" height="350px"}{#content}
+<div class="pha-c-document-editor__toolbar">
+  <span class="pha-c-document-editor__toolbar-title" x-text="fileName"></span>
+  <div class="pha-c-document-editor__toolbar-actions">
+    <button
+      class="pf-v6-c-button pf-m-plain"
+      type="button"
+      aria-label="Save"
+      x-on:click="save()"
+      :disabled="!connected || saving"
+    >
+      {icons:svg('fa:floppy-disk').raw}
+    </button>
+    <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Fullscreen" x-on:click="fullscreen()">
+      {icons:svg('fa:expand').raw}
+    </button>
+  </div>
+</div>
+{/content}{#footer}
+<div class="pha-c-document-editor__status" id="editor-status-bar">
+  <span x-text="connected ? (loaded ? 'Connected' : 'Connecting...') : 'Not connected'"></span>
+  <template x-if="saving">
+    <span>
+      <svg class="pf-v6-svg pf-v6-c-spinner pf-m-sm" viewBox="0 0 100 100" aria-label="Saving">
+        <circle class="pf-v6-c-spinner__path" cx="50" cy="50" r="45" fill="none" />
+      </svg>
+      Saving&hellip;
+    </span>
+  </template>
+</div>
+{/footer}{/include}

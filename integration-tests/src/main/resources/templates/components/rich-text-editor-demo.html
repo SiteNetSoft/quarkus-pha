@@ -1,0 +1,193 @@
+{#include layouts/base noThemeWidget=true} {#title}Rich text editor{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
+<link rel="stylesheet" href="/web/vendor/quill/quill.snow.css" />
+<link rel="stylesheet" href="/web/vendor/quill/quill.bubble.css" />
+<link rel="stylesheet" href="/web/css/components/rich-text-editor.css" />
+<script src="/web/vendor/quill/quill.js"></script>
+<script src="/web/js/alpine/components/rich-text-editor.js?v={pha:assetVersion}"></script>
+{/head} {#body} {#include partials/showcase-page docsTabs="rich-text-editor" title="Rich text editor"
+toc=tocRichTextEditor} {#lede}
+<p>
+  An embedded WYSIWYG editor powered by <a href="https://quilljs.com/">Quill</a>. Wraps a Quill instance with an
+  Alpine.js API for reading/writing HTML, optional hidden-input mirroring for plain form submission, and toolbar
+  presets.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
+  </div>
+</div>
+
+{#include partials/example-card title="Basic (Snow theme)" slug="basic" component="rich-text-editor"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Default snow toolbar with the full set of formatting controls and an initial HTML value.
+</p>
+{/description} {#content}{#include components/rich-text-editor/basic /}{/content} {/include} {#include
+partials/example-card title="Basic toolbar" slug="basic-toolbar" component="rich-text-editor"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Reduced toolbar: bold/italic/underline, lists, and links. Useful for comment fields or short-form inputs.
+</p>
+{/description} {#content}{#include components/rich-text-editor/basic-toolbar /}{/content} {/include} {#include
+partials/example-card title="Minimal toolbar" slug="minimal-toolbar" component="rich-text-editor"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Bare-bones controls — bold, italic, underline only.</p>
+{/description} {#content}{#include components/rich-text-editor/minimal-toolbar /}{/content} {/include} {#include
+partials/example-card title="Bubble theme" slug="bubble" component="rich-text-editor"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Floating bubble toolbar — formatting controls appear when text is selected.
+</p>
+{/description} {#content}{#include components/rich-text-editor/bubble /}{/content} {/include} {#include
+partials/example-card title="Read-only viewer" slug="readonly" component="rich-text-editor"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Read-only mode renders content but disables editing — handy for previews.
+</p>
+{/description} {#content}{#include components/rich-text-editor/readonly /}{/content} {/include} {#include
+partials/example-card title="With hidden form input" slug="with-form-input" component="rich-text-editor"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  When <code class="ws-code">name</code> is set the editor mirrors its HTML to a hidden input so the value travels with
+  a plain form submit (or HTMX request).
+</p>
+{/description} {#content}{#include components/rich-text-editor/with-form-input /}{/content} {/include}
+
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+    <div>
+      <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+        Documentation
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-rich-text-editor" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+    Rich text editor props
+  </h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    Parameters accepted by <code class="ws-code">{|{#include components/editors/rich-text-editor id="..." /}|}</code>.
+    The initial HTML value is the include's <code class="ws-code">{|{#content}{/content}|}</code> block; an optional
+    <code class="ws-code">{|{#footer}|}</code> slot renders below the editor surface.
+  </p>
+  <table
+    class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+    role="grid"
+    aria-label="Rich text editor props"
+  >
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+        <th scope="col" class="pf-v6-c-table__th">Default</th>
+        <th scope="col" class="pf-v6-c-table__th">Description</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">— (required)</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Derives <code class="ws-code">{|{id}|}-field</code> on the editor surface element.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">theme</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">snow</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><code class="ws-code">snow</code> (fixed toolbar) or <code class="ws-code">bubble</code> (floating toolbar
+            on selection).</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">toolbar</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">full</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Toolbar preset: <code class="ws-code">full</code>, <code class="ws-code">basic</code> or
+            <code class="ws-code">minimal</code>.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">placeholder</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Placeholder shown while the editor is empty.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">readOnly</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">false</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Renders content without allowing edits.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">height</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String (CSS length)</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Fixed height for the editing surface.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">name</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Mirrors the editor HTML to a hidden input with this name for plain form submission.</span
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Required assets.</strong> Load the vendored Quill bundle and theme CSS plus the pha wrapper on the host
+    page: <code class="ws-code">/web/vendor/quill/quill.js</code>, <code class="ws-code">quill.snow.css</code> /
+    <code class="ws-code">quill.bubble.css</code>,
+    <code class="ws-code">/web/css/components/rich-text-editor.css</code> and
+    <code class="ws-code">/web/js/alpine/components/rich-text-editor.js</code> (scripts before Alpine).
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Config travels as <code class="ws-code">data-*</code>.</strong> The wrapper reads its options in
+    <code class="ws-code">init()</code> rather than interpolating them into <code class="ws-code">x-data</code> — a
+    newline or apostrophe in an attribute value would otherwise break Alpine's expression parsing.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/editors/rich-text-editor.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit rich-text-editor.html on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

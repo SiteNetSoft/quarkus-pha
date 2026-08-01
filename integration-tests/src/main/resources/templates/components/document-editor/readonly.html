@@ -1,0 +1,26 @@
+{! Document editor read-only viewer — viewing without editing capabilities. !}
+{#include components/editors/document-editor id="editor-readonly" collaboraUrl=collaboraUrl wopiSrc=wopiPolicy
+accessToken=accessToken fileName="Policy.pdf" readOnly="true" height="400px"}{#content}
+<div class="pha-c-document-editor__toolbar">
+  <span class="pha-c-document-editor__toolbar-title" x-text="fileName"></span>
+  <div class="pha-c-document-editor__toolbar-actions">
+    <span class="pf-v6-c-label pf-m-compact pf-m-blue">
+      <span class="pf-v6-c-label__content">
+        <span class="pf-v6-c-label__text">Read-only</span>
+      </span>
+    </span>
+    <button
+      class="pf-v6-c-button pf-m-plain"
+      type="button"
+      aria-label="Download"
+      x-on:click="download()"
+      :disabled="!connected"
+    >
+      {icons:svg('fa:download').raw}
+    </button>
+    <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Fullscreen" x-on:click="fullscreen()">
+      {icons:svg('fa:expand').raw}
+    </button>
+  </div>
+</div>
+{/content}{/include}

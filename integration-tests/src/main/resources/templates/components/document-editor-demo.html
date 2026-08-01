@@ -1,0 +1,182 @@
+{#include layouts/base noThemeWidget=true} {#title}Document editor{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
+<link rel="stylesheet" href="/web/css/components/document-editor.css" />
+<script src="/web/js/alpine/components/document-editor.js?v={pha:assetVersion}"></script>
+{/head} {#body} {#include partials/showcase-page docsTabs="document-editor" title="Document editor"
+toc=tocDocumentEditor} {#lede}
+<p>
+  An embedded document editor component powered by
+  <a href="https://www.collaboraonline.com/">Collabora Online</a> (LibreOffice in the browser). Communicates via the
+  WOPI protocol and PostMessage API. Supports editing text documents, spreadsheets, and presentations.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
+  </div>
+</div>
+
+{#include partials/example-card title="Basic (no document)" slug="basic" component="document-editor"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Minimal editor container with no <code class="ws-code">collaboraUrl</code> or
+  <code class="ws-code">wopiSrc</code> configured. The empty state is shown because there is nothing to load.
+</p>
+{/description} {#content}{#include components/document-editor/basic /}{/content} {/include} {#include
+partials/example-card title="Text document (Welcome.odt)" slug="text-document" component="document-editor"}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Editor loaded with a real <code class="ws-code">.odt</code> file served by the integration-tests WOPI host. Requires a
+  running Collabora Online server (see <code class="ws-code">scripts/run-collabora.sh</code>).
+</p>
+{/description} {#content}{#include components/document-editor/text-document /}{/content} {/include} {#include
+partials/example-card title="Spreadsheet (Budget.ods)" slug="spreadsheet" component="document-editor"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Editor loaded with a real <code class="ws-code">.ods</code> spreadsheet.
+</p>
+{/description} {#content}{#include components/document-editor/spreadsheet /}{/content} {/include} {#include
+partials/example-card title="Presentation (Quarterly Slides.odp)" slug="presentation" component="document-editor"}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Editor loaded with a real <code class="ws-code">.odp</code> presentation.
+</p>
+{/description} {#content}{#include components/document-editor/presentation /}{/content} {/include} {#include
+partials/example-card title="With toolbar" slug="with-toolbar" component="document-editor"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Editor with a PatternFly-styled toolbar providing Save, Print, Download, and Fullscreen actions. The toolbar
+  integrates with the editor via Alpine.js methods.
+</p>
+{/description} {#content}{#include components/document-editor/with-toolbar /}{/content} {/include} {#include
+partials/example-card title="Read-only viewer" slug="readonly" component="document-editor"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Editor configured in read-only mode for document viewing without editing capabilities.
+</p>
+{/description} {#content}{#include components/document-editor/readonly /}{/content} {/include} {#include
+partials/example-card title="With status bar" slug="with-status" component="document-editor"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Editor with both a toolbar and a status bar showing connection state and saving indicator.
+</p>
+{/description} {#content}{#include components/document-editor/with-status /}{/content} {/include}
+
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+    <div>
+      <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+        Documentation
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-document-editor" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+    Document editor props
+  </h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    Parameters accepted by <code class="ws-code">{|{#include components/editors/document-editor /}|}</code>. The content
+    slot renders a toolbar area above the frame; an optional <code class="ws-code">{|{#footer}|}</code> slot renders a
+    status bar below it.
+  </p>
+  <table
+    class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+    role="grid"
+    aria-label="Document editor props"
+  >
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+        <th scope="col" class="pf-v6-c-table__th">Default</th>
+        <th scope="col" class="pf-v6-c-table__th">Description</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">DOM id on the root; omit unless something else references the editor.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">collaboraUrl</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String (URL)</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Base URL of the Collabora Online server.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">wopiSrc</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String (URL)</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">WOPI file endpoint identifying the document to load.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">accessToken</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">WOPI access token passed to the editing session.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">fileName</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Display name exposed to the Alpine scope (used by toolbar titles).</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><code class="ws-code">readOnly</code> / <code class="ws-code">lang</code> /
+            <code class="ws-code">height</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">View-only mode, UI language, and a fixed frame height.</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Needs a Collabora server.</strong> The examples with documents talk to the integration-tests WOPI host and
+    show their empty/error state unless a Collabora Online server is running — start one locally with
+    <code class="ws-code">scripts/run-collabora.sh</code>. The Alpine scope exposes <code class="ws-code">save()</code>,
+    <code class="ws-code">print()</code>, <code class="ws-code">download()</code>,
+    <code class="ws-code">fullscreen()</code> and the <code class="ws-code">connected</code>/<code class="ws-code"
+      >loaded</code
+    >/<code class="ws-code">saving</code>
+    state used by the toolbar and status-bar examples.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/editors/document-editor.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit document-editor.html on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}
