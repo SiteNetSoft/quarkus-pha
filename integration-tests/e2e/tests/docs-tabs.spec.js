@@ -83,7 +83,11 @@ test.describe("docs tabs", () => {
 
   test("qute stub 404s for unknown and non-demo components", async ({ page }) => {
     expect((await page.request.get("/components/definitely-not-real/docs/qute")).status()).toBe(404);
-    // chip is in the registry but has no {slug}-demo.html page (HTMX-era template) — no stub either.
-    expect((await page.request.get("/components/chip/docs/qute")).status()).toBe(404);
+    // i18n is registry-listed and shell-rendered, but it is a MessageBundle demo,
+    // not a component — DocsTabRoutes carves it out of the docs tabs deliberately.
+    expect((await page.request.get("/components/i18n/docs/qute")).status()).toBe(404);
+    // chip gained a chip-demo.html page in the pre-shell conversion sweep, so its
+    // qute tab serves — it used to be the no-demo-page 404 example here.
+    expect((await page.request.get("/components/chip/docs/qute")).status()).toBe(200);
   });
 });
