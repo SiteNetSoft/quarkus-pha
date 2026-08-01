@@ -46,6 +46,40 @@ body {
   top: 0;
 }
 
+/* Showcase-shell masthead search. Desktop: the results panel drops down from
+ * the toggle, right-anchored. The toggle sits left of the GitHub and theme
+ * buttons, so a right-anchored 320px panel needs ~450px of viewport; on
+ * anything narrower its left portion lands past the viewport's left edge,
+ * where it is unreachable (overflow to the left never produces a scrollbar).
+ * Below the PF sm breakpoint the panel therefore anchors to the masthead
+ * itself and spans the full width instead. */
+.pha-global-search {
+  position: relative;
+}
+
+.pha-global-search__menu {
+  position: absolute;
+  inset-block-start: 100%;
+  inset-inline-end: 0;
+  z-index: var(--pf-t--global--z-index--lg);
+  min-width: 320px;
+}
+
+@media (width <= 575.98px) {
+  .pf-v6-c-masthead:has(.pha-global-search) {
+    position: relative;
+  }
+
+  .pha-global-search {
+    position: static;
+  }
+
+  .pha-global-search__menu {
+    inset-inline: var(--pf-t--global--spacer--md);
+    min-width: 0;
+  }
+}
+
 /* The docs tab row uses the tabs component's nav mode (link-style items, no
  * ARIA tablist), but pf-m-nav restyles link hover to the pill radius — correct
  * for horizontal-nav pills, not for patternfly.org-style docs tabs, which keep

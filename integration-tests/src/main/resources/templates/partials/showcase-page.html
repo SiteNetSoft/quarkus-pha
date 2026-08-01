@@ -44,27 +44,11 @@ the masthead here. !}
           <div class="pf-v6-c-toolbar__content-section">
             <div class="pf-v6-c-toolbar__group pf-m-align-end">
               <div class="pf-v6-c-toolbar__item">
-                <div
-                  class="pha-global-search"
-                  x-data="{ open: false }"
-                  style="position: relative"
-                  @keydown.escape.window="open = false"
-                >
+                <div class="pha-global-search" x-data="{ open: false }" @keydown.escape.window="open = false">
                   {#let gsLabel='Search the showcase'} {#let id=null expanded=null disabled=null primary=null
                   plain=null} {#include components/navigation/menu-toggle plain=true toggleIcon='fa:magnifying-glass'
                   ariaLabel=gsLabel expandedExpr='open' /} {/let} {/let}
-                  <div
-                    x-show="open"
-                    x-cloak
-                    @click.outside="open = false"
-                    style="
-                      position: absolute;
-                      right: 0;
-                      top: 100%;
-                      z-index: var(--pf-t--global--z-index--lg);
-                      min-width: 320px;
-                    "
-                  >
+                  <div class="pha-global-search__menu" x-show="open" x-cloak @click.outside="open = false">
                     {#include components/navigation/menu menu=showcaseSearchMenu /}
                   </div>
                 </div>
