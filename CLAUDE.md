@@ -1,21 +1,21 @@
 # quarkus-pha
 
 ## Project Overview
-A Quarkus extension providing a framework-free frontend component library built on PatternFly, HTMX, and Alpine.js with Qute templates.
+A Quarkus extension providing a frontend component library with no SPA framework, built on PatternFly, HTMX, and Alpine.js with Qute templates.
 
 **GitHub:** https://github.com/SiteNetSoft/quarkus-pha
 
 ---
 
 ## What This Project Is
-A Quarkus extension that delivers ready-to-use HTML components to any Quarkus/Qute application. Components are server-rendered HTML fragments — no virtual DOM, no JS framework, no build step required for consumers.
+A Quarkus extension that delivers ready-to-use HTML components to any Quarkus/Qute application. Components are server-rendered HTML fragments — no virtual DOM, no SPA framework, no build step required for consumers.
 
 ## What This Project Is NOT
 - ❌ No React
 - ❌ No Angular
 - ❌ No Vue
 - ❌ No PatternFly React components or PatternFly JS
-- ❌ No JS framework of any kind
+- ❌ No SPA framework of any kind — Alpine.js and HTMX are small attribute-driven libraries, not client-side rendering frameworks
 
 ---
 
@@ -23,12 +23,14 @@ A Quarkus extension that delivers ready-to-use HTML components to any Quarkus/Qu
 
 | Layer | Technology | Purpose |
 |---|---|---|
-| Design System | PatternFly (CSS + tokens only) | UI components and design language |
+| Design System | PatternFly (CSS + design tokens only) | UI components and design language |
 | Interactivity | Alpine.js | Lightweight reactivity via HTML attributes |
-| Server UI | HTMX | Ajax, partial page updates, server-driven UI |
+| Partial updates | HTMX | Ajax, fragment swaps requested from the server |
 | Scripting | Vanilla JS | Anything Alpine and HTMX don't cover |
 | Data Viz | Apache ECharts, D3.js | Dashboards and charts |
 | Maps | MapLibre | Map components |
+| Rich widgets | Monaco Editor, Quill, Video.js, Cytoscape.js | Code editing, rich text, video, topology graphs |
+| Icons | Font Awesome Free, PatternFly pficons | Icon system (vendored SVGs via the `icons:` resolver) |
 | Templates | Qute | Quarkus-native templating engine |
 
 ---

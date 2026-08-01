@@ -91,7 +91,7 @@ cat > "$WORK_DIR/slides.fodp" <<'EOF'
         </draw:frame>
         <draw:frame presentation:style-name="body" draw:layer="layout"
                     svg:width="22cm" svg:height="3cm" svg:x="2cm" svg:y="11cm">
-          <draw:text-box><text:p>Framework-free frontend components on Quarkus</text:p></draw:text-box>
+          <draw:text-box><text:p>SPA-free frontend components on Quarkus</text:p></draw:text-box>
         </draw:frame>
       </draw:page>
       <draw:page draw:name="Stack" draw:style-name="dp1" draw:master-page-name="Default">

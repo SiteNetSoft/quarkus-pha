@@ -9,22 +9,33 @@
   </picture>
 </p>
 
-A Quarkus extension that delivers a framework-free frontend component library —
-PatternFly v6 components rendered server-side as Qute templates, made interactive
-with Alpine.js, and driven by the server through HTMX. No React, no virtual DOM,
-no build step for consumers.
+A Quarkus extension that delivers a frontend component library with no
+<abbr title="single-page application">SPA</abbr> framework — PatternFly v6
+components written as Qute templates that the server renders into plain HTML,
+made interactive with Alpine.js, with HTMX fetching partial updates when a
+page wants them. No React, no virtual DOM, no build step for consumers.
 
-**The contract:** the server renders the DOM, Alpine reacts, HTMX moves. JSON
-never reaches the browser to be templated there — Quarkus is the backend-for-frontend
-and every UI transition is a server-rendered fragment swap.
+**The contract:** the server renders the HTML, Alpine reacts to it locally,
+and HTMX swaps in whatever the server renders next. JSON never reaches the
+browser to be templated there — Quarkus is the backend-for-frontend
+(<abbr title="backend-for-frontend">BFF</abbr>), so any UI change that
+involves server state arrives as server-rendered HTML: an HTMX fragment swap
+or an ordinary full page load, whichever fits. Purely local interactions —
+an open menu, a switched tab — stay in Alpine and never leave the browser.
 
 | Layer | Technology |
 |---|---|
-| Design system | PatternFly v6 (CSS + tokens only) |
-| Interactivity | Alpine.js |
-| Server-driven UI | HTMX |
-| Data viz / maps | Apache ECharts, D3.js, MapLibre |
-| Templates | Qute (Quarkus-native) |
+| Design system | PatternFly v6 (CSS + design tokens only) |
+| Server-side rendering | Qute (Quarkus-native templates) |
+| Partial page updates | HTMX |
+| Local interactivity | Alpine.js |
+| Data viz / maps | Apache ECharts, D3.js, MapLibre GL |
+| Rich widgets | Monaco Editor (code), Quill (rich text), Video.js (video), Cytoscape.js (topology) |
+| Icons | Font Awesome Free, PatternFly pficons |
+
+*Design tokens* here means PatternFly's named CSS custom properties
+(`--pf-t--global--…`) for color, spacing, and typography — the design
+system's values expressed as variables, nothing to do with AI tokens.
 
 ## Why HTMX + Alpine.js instead of React or Angular
 
@@ -37,19 +48,21 @@ every mutation. The developer manages two state machines and the drift between
 them. Here there is nothing to synchronize: the DOM the server rendered *is*
 the application state ([HATEOAS](https://htmx.org/essays/hateoas/) — hypermedia
 as the engine of application state). When state changes, the server renders the
-new fragment and HTMX swaps it in. Alpine holds only throwaway view state —
+new HTML and HTMX swaps it in — or, where a page prefers, an ordinary full-page
+reload does the same job; partial swaps are optional. Alpine holds only throwaway view state —
 "is this menu open" — that no one needs to reconcile with the backend.
 
 **2. Business logic lives once, on the server.** Because React and Angular own
 a frontend state, the rules that govern that state — validation, permissions,
-what's visible when — end up implemented twice: once in Java, once in the
-framework. Two implementations drift, and the JSON API between them becomes a
+what's visible when — end up implemented twice: once on the server, once in
+the SPA framework. Two implementations drift, and the JSON API between them becomes a
 second public interface to secure and version. In this stack the server is the
 only place business logic exists; the browser receives its conclusions as HTML.
 
 **3. Lighter, faster, easier to learn.** htmx is ~16 kB gzipped and
-dependency-free; Alpine's entire API is [15 attributes, 6 properties and 2
-methods](https://alpinejs.dev/) — both libraries together ship ~32 kB gzipped,
+dependency-free; Alpine.js is another ~16 kB gzipped and its entire API is
+[15 attributes, 6 properties and 2 methods](https://alpinejs.dev/) — both
+libraries together ship ~33 kB gzipped,
 before React itself (let alone an app bundle) has loaded. The learning curve is
 "attributes in your HTML", not a framework's component lifecycle, hooks rules,
 and toolchain. And the end-user's machine does less: no bundle parse, no
@@ -64,8 +77,8 @@ Two more that follow from the architecture:
 - **No frontend build step.** Consumers add a Gradle dependency and write Qute.
   No Node toolchain, no bundler, no npm tree to audit.
 - **Immune to framework churn.** Tiny, stable APIs mean no framework-major
-  migration every couple of years — and PatternFly is consumed as CSS + tokens
-  only, so its React layer's churn never reaches this stack.
+  migration every couple of years — and PatternFly is consumed as CSS + design
+  tokens only, so its React layer's churn never reaches this stack.
 
 The honest trade-off: highly offline, optimistic-UI, or editor-like apps
 (think Figma, not dashboards) genuinely benefit from a client-side framework.
@@ -80,8 +93,8 @@ Four views, biggest picture first. Regenerate with `bash scripts/diagrams.sh`
 ### System context
 
 quarkus-pha is a Quarkus extension a consumer application depends on. The browser
-receives server-rendered PatternFly DOM; HTMX moves fragments, Alpine.js reacts
-locally. There is no JS framework and no client-side routing.
+receives server-rendered PatternFly HTML; HTMX fetches and swaps fragments,
+Alpine.js reacts locally. There is no SPA framework and no client-side routing.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/c4-context-dark.svg">
@@ -112,8 +125,8 @@ toggles, menus — is pure Alpine local state with zero round-trips.
 
 ### One HTMX interaction, end to end
 
-The core contract: the server always renders the DOM. JSON never becomes HTML in
-the browser.
+The core contract: the server always renders the HTML. JSON never becomes HTML
+in the browser.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/sequence-htmx-render-dark.svg">

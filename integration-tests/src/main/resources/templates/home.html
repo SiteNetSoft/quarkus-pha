@@ -1,4 +1,4 @@
-{#include layouts/base noThemeWidget=true} {#title}quarkus-pha — framework-free frontend components for Quarkus{/title}
+{#include layouts/base noThemeWidget=true} {#title}quarkus-pha — SPA-free frontend components for Quarkus{/title}
 {#body} {#include partials/showcase-page bare=true} {#showcaseBody} {! ── Hero ── !}
 <section class="pf-v6-c-page__main-section pf-m-limit-width" id="home-hero">
   <div class="pf-v6-c-page__main-body">
@@ -19,10 +19,10 @@
         style="height: 72px; max-width: 100%"
       />
       <div class="pf-v6-c-content pf-m-editorial" style="max-width: 44rem">
-        <h1 class="pf-v6-c-title pf-m-4xl" style="margin-top: 1rem">Framework-free frontend components for Quarkus</h1>
+        <h1 class="pf-v6-c-title pf-m-4xl" style="margin-top: 1rem">SPA-free frontend components for Quarkus</h1>
         <p class="pf-v6-c-title pf-m-lg" style="color: var(--pf-t--global--text--color--subtle)">
           A Quarkus extension delivering ready-to-use, server-rendered HTML components built on PatternFly, HTMX, and
-          Alpine.js — no React, no build step, no JS framework.
+          Alpine.js — no React, no build step, no SPA framework.
         </p>
       </div>
       <div class="pf-v6-l-flex pf-m-space-items-md" style="justify-content: center; flex-wrap: wrap">
@@ -46,8 +46,8 @@
       <h2 class="pf-v6-c-title pf-m-2xl">The stack</h2>
       <p>
         Pure HTML fragments rendered server-side with Qute, styled by PatternFly's design tokens, made interactive with
-        Alpine.js, and moved around the page with HTMX. Data visualisation uses Apache ECharts and D3; maps use
-        MapLibre.
+        Alpine.js, and fetched and swapped into the page with HTMX. Data visualisation uses Apache ECharts and D3; maps
+        use MapLibre.
       </p>
     </div>
     <div class="pf-v6-l-gallery pf-m-gutter" style="--pf-v6-l-gallery--GridTemplateColumns--min: 220px">
@@ -79,7 +79,7 @@
             >HTMX</span
           >
         </div>
-        <div class="pf-v6-c-card__body">Ajax, partial swaps, server-driven UI</div>
+        <div class="pf-v6-c-card__body">Ajax, partial swaps, no client-side routing</div>
       </div>
       <div class="pf-v6-c-card">
         <div class="pf-v6-c-card__title">
@@ -114,8 +114,8 @@
     </div>
     <div class="pf-v6-c-content pf-m-editorial" style="margin-top: 1rem">
       <p style="color: var(--pf-t--global--text--color--subtle)">
-        <strong>What this is not:</strong> no React, no Angular, no Vue, no PatternFly React components, no JS framework
-        of any kind.
+        <strong>What this is not:</strong> no React, no Angular, no Vue, no PatternFly React components, no SPA
+        framework of any kind.
       </p>
     </div>
   </div>
@@ -127,8 +127,8 @@
     <div class="pf-v6-c-content pf-m-editorial" style="margin-bottom: 1rem">
       <h2 class="pf-v6-c-title pf-m-2xl">How it works</h2>
       <p>
-        The server renders the DOM, Alpine reacts to it, and HTMX moves it. JSON becomes HTML server-side — never in the
-        browser. Add the extension, then include a component in any Qute template:
+        The server renders the HTML, Alpine reacts to it, and HTMX swaps in what the server renders next. JSON becomes
+        HTML server-side — never in the browser. Add the extension, then include a component in any Qute template:
       </p>
     </div>
     <div class="pf-v6-c-code-block" role="group" aria-label="Usage example">

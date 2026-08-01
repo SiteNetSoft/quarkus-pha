@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 test.describe("Smoke tests", () => {
   test("home page loads with hero and browse CTA", async ({ page }) => {
     await page.goto("/");
-    await expect(page.locator("h1")).toContainText("Framework-free frontend components");
+    await expect(page.locator("h1")).toContainText("SPA-free frontend components");
     await expect(page.locator('a[href="/components"]').first()).toBeVisible();
   });
 

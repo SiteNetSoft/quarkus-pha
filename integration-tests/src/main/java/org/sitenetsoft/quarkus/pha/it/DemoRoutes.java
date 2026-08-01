@@ -85,7 +85,7 @@ public class DemoRoutes {
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance landing() {
         List<Map<String, String>> features = List.of(
-            Map.of("title", "Server-Rendered Components", "description", "Pure HTML fragments rendered via Qute — no virtual DOM, no JS framework.", "icon", "fas fa-code"),
+            Map.of("title", "Server-Rendered Components", "description", "Pure HTML fragments rendered via Qute — no virtual DOM, no SPA framework.", "icon", "fas fa-code"),
             Map.of("title", "PatternFly v6 Design System", "description", "Enterprise-grade design with consistent tokens, spacing, and accessibility.", "icon", "fas fa-palette"),
             Map.of("title", "HTMX Server-Driven UI", "description", "Ajax, partial page updates, and server interactions with no client-side routing.", "icon", "fas fa-exchange-alt"),
             Map.of("title", "Alpine.js Reactivity", "description", "Lightweight reactivity via HTML attributes — no build step required.", "icon", "fas fa-bolt"),
