@@ -80,6 +80,27 @@ body {
   }
 }
 
+/* PatternFly's horizontal nav is designed as a scroll container — the core
+   CSS hides the list's webkit scrollbar and PF React adds scroll buttons —
+   but the plain CSS build never sets the overflow itself. A list wider than
+   the masthead (the landing demo's nav at phone widths) therefore inflates
+   the page and grows a document-level horizontal scrollbar. Restore the
+   intended scroll behavior; lists that fit are unaffected. */
+.pf-v6-c-nav:where(.pf-m-horizontal) .pf-v6-c-nav__list {
+  overflow-x: auto;
+}
+
+/* Companion to the rule above: the page grid sizes its single column from the
+   min-content of its rows, and the subnav row's flex default (min-width: auto)
+   reports the nav's full unshrunk width. That props the whole page grid wider
+   than the viewport (386px at a 360px phone on the landing demo) — the
+   masthead and every section stretch to match, and the document grows a
+   horizontal scrollbar. Letting the subnav shrink lets the list's scroll
+   behavior engage instead. */
+.pf-v6-c-page__main-subnav {
+  min-width: 0;
+}
+
 /* The docs tab row uses the tabs component's nav mode (link-style items, no
  * ARIA tablist), but pf-m-nav restyles link hover to the pill radius — correct
  * for horizontal-nav pills, not for patternfly.org-style docs tabs, which keep
