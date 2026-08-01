@@ -67,7 +67,15 @@ public class ShowcaseShellData {
     }
 
     private static NavEntry[] entries(Map<String, String> pages) {
+        return entries(pages, null);
+    }
+
+    /** overviewHref, when set, becomes a leading "Overview" entry (patternfly.org-style). */
+    private static NavEntry[] entries(Map<String, String> pages, String overviewHref) {
         List<NavEntry> items = new ArrayList<>();
+        if (overviewHref != null) {
+            items.add(Nav.item("Overview", overviewHref));
+        }
         for (Map.Entry<String, String> e : pages.entrySet()) {
             items.add(Nav.item(e.getKey(), e.getValue()));
         }
@@ -79,8 +87,7 @@ public class ShowcaseShellData {
             .id("showcase-nav")
             .ariaLabel("Showcase navigation")
             .item("Home", "/")
-            .item("Components", "/components")
-            .expandable("All components", entries(componentPages()))
+            .expandable("All components", entries(componentPages(), "/components"))
             .expandable("Extensions", entries(extensionPages()))
             .expandable("Layouts", entries(layoutPages()))
             .expandable("Patterns", entries(patternPages()))
