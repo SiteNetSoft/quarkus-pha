@@ -13,7 +13,7 @@ AboutModal aboutModal = AboutModal
                       <h2 class="pf-v6-c-title pf-m-xl">Hand-crafted UI components</h2>
                       <p>
                         A Quarkus extension that delivers ready-to-use HTML components to any Quarkus/Qute application —
-                        server-rendered, framework-free, HTMX-driven.
+                        server-rendered, SPA-free, HTMX-driven.
                       </p>
                     </div>
                     <div class="pf-v6-l-stack__item">
