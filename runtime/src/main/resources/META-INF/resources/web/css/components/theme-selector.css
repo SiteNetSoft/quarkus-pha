@@ -42,3 +42,27 @@
   inset: 100% 0 auto auto;
   z-index: var(--pf-t--global--z-index--lg);
 }
+
+/* Below the PF sm breakpoint the right-anchored, content-sized menu (the
+ * nowrap contrast row alone is ~350px) overhangs the viewport's left edge,
+ * where it is unreachable. Anchor it to the masthead instead, span the full
+ * width, and let the toggle groups wrap as whole buttons — labels stay on
+ * one line, rows break instead. */
+@media (width <= 575.98px) {
+  .pf-v6-c-masthead:has(.pha-theme-selector--masthead) {
+    position: relative;
+  }
+
+  .pha-theme-selector--masthead {
+    position: static;
+  }
+
+  .pha-theme-selector--masthead .pf-v6-c-menu {
+    inset: 100% var(--pf-t--global--spacer--md) auto var(--pf-t--global--spacer--md);
+  }
+
+  .pha-theme-selector--masthead .pf-v6-c-toggle-group {
+    flex-wrap: wrap;
+    row-gap: var(--pf-t--global--spacer--xs);
+  }
+}

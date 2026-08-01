@@ -60,6 +60,32 @@ test.describe("showcase shell pilot", () => {
     await expect(page.locator(".pha-theme-selector")).toHaveCount(1);
   });
 
+  test.describe("mobile viewport", () => {
+    test.use({ viewport: { width: 360, height: 740 } });
+
+    test("masthead search menu stays inside the viewport", async ({ page }) => {
+      await page.locator('.pha-global-search button[aria-label="Search the showcase"]').click();
+      const menu = page.locator("#pha-global-search-menu");
+      await expect(menu).toBeVisible();
+      const box = await menu.boundingBox();
+      expect(box.x).toBeGreaterThanOrEqual(0);
+      expect(box.x + box.width).toBeLessThanOrEqual(360);
+    });
+
+    test("masthead theme selector menu stays inside the viewport", async ({ page }) => {
+      await page.locator(".pha-theme-selector button").first().click();
+      const menu = page.locator(".pha-theme-selector .pf-v6-c-menu");
+      await expect(menu).toBeVisible();
+      const box = await menu.boundingBox();
+      expect(box.x).toBeGreaterThanOrEqual(0);
+      expect(box.x + box.width).toBeLessThanOrEqual(360);
+      // The widest toggle row must be reachable too, not just the menu box
+      const glass = await page.locator(".pha-theme-selector").getByRole("button", { name: "Glass" }).boundingBox();
+      expect(glass.x).toBeGreaterThanOrEqual(0);
+      expect(glass.x + glass.width).toBeLessThanOrEqual(360);
+    });
+  });
+
   test("toc scrollspy marks the section scrolled to as current", async ({ page }) => {
     await page.setViewportSize({ width: 1600, height: 900 });
     await page.reload();
