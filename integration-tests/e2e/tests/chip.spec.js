@@ -5,11 +5,11 @@ test.describe("Chip", () => {
     await page.goto("/components/chip");
   });
 
-  test("page loads with all 4 section headings", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#badge-heading")).toBeVisible();
-    await expect(page.locator("#removable-heading")).toBeVisible();
-    await expect(page.locator("#overflow-heading")).toBeVisible();
+  test("page loads with all 4 example headings", async ({ page }) => {
+    await expect(page.locator("h3#basic")).toBeVisible();
+    await expect(page.locator("h3#with-badge")).toBeVisible();
+    await expect(page.locator("h3#removable")).toBeVisible();
+    await expect(page.locator("h3#overflow")).toBeVisible();
   });
 
   test("deprecation notice is visible", async ({ page }) => {
@@ -63,7 +63,7 @@ test.describe("Chip", () => {
     });
 
     test("interactive chips can be removed by clicking close", async ({ page }) => {
-      const container = page.locator("#removable-heading + p + div");
+      const container = page.locator("#chip-removable-list");
       await expect(container.locator(".pf-v6-c-label")).toHaveCount(3);
       // Click close on the first chip
       await container.locator(".pf-v6-c-button.pf-m-plain").first().click();

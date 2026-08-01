@@ -1,0 +1,127 @@
+{#include layouts/base noThemeWidget=true} {#title}Chip{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
+{/head} {#body} {#include partials/showcase-page docsTabs="chip" title="Chip" toc=tocChip} {#lede}
+<p>PatternFly v6 chip — a compact element for displaying discrete information.</p>
+<div class="pf-v6-c-alert pf-m-warning pf-m-inline" style="margin-top: 1rem" id="deprecation-notice">
+  <div class="pf-v6-c-alert__icon">{icons:svg('fa:exclamation-triangle').raw}</div>
+  <h2 class="pf-v6-c-alert__title"><span class="pf-v6-screen-reader">Warning:</span> Deprecated</h2>
+  <div class="pf-v6-c-alert__description">
+    <p>
+      The Chip component is deprecated in PatternFly v6. Use the <a href="/components/label">Label</a> component
+      instead. This implementation wraps <code class="ws-code">pf-v6-c-label</code>.
+    </p>
+  </div>
+</div>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
+  </div>
+</div>
+
+{#include partials/example-card title="Basic" slug="basic" component="chip"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">A read-only chip displaying text.</p>
+{/description} {#content}{#include components/chip/basic /}{/content} {/include} {#include partials/example-card
+title="With badge" slug="with-badge" component="chip"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">A chip with a count badge.</p>
+{/description} {#content}{#include components/chip/with-badge /}{/content} {/include} {#include partials/example-card
+title="Removable" slug="removable" component="chip"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">A chip with a close button to remove it.</p>
+{/description} {#content}{#include components/chip/removable /}{/content} {/include} {#include partials/example-card
+title="Overflow" slug="overflow" component="chip"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">An overflow chip that acts as a button to show more items.</p>
+{/description} {#content}{#include components/chip/overflow /}{/content} {/include}
+
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+    <div>
+      <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+        Documentation
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-chip" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Chip props</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    Parameters accepted by
+    <code class="ws-code">{|{#include components/data-display/chip id="..."}text{/include}|}</code>
+    — the chip text is the include's main block.
+  </p>
+  <table
+    class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+    role="grid"
+    aria-label="Chip props"
+  >
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+        <th scope="col" class="pf-v6-c-table__th">Default</th>
+        <th scope="col" class="pf-v6-c-table__th">Description</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">DOM id on the chip root.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">badge</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Count badge appended to the chip text.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">removable</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">false</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Adds a close button that removes the chip (Alpine).</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">overflow</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">false</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Renders the chip as an overflow button ("N more").</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Prefer Label.</strong> PatternFly v6 removed <code class="ws-code">pf-v6-c-chip</code>; this component
+    exists for migration compatibility and renders label markup underneath. New code should use
+    <a href="/components/label">Label</a> (and label groups) directly.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/chip.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit chip.html on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

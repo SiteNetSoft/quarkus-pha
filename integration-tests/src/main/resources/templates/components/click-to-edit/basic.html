@@ -1,0 +1,5 @@
+{! Click to edit — the read-only view swaps to an edit form on demand; Save PUTs and returns the refreshed
+   display fragment. Every step is an HTMX fragment from /api/htmx/click-to-edit. !}
+<div style="max-width: 460px" hx-get="/api/htmx/click-to-edit" hx-trigger="load" hx-swap="innerHTML">
+  <p class="pf-v6-c-content--small">Loading…</p>
+</div>

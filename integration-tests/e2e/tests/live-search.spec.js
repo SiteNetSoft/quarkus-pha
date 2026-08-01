@@ -6,7 +6,7 @@ test.describe("Live Search", () => {
   });
 
   test("page loads with heading", async ({ page }) => {
-    await expect(page.locator("#live-search-heading")).toBeVisible();
+    await expect(page.locator("h3#basic")).toBeVisible();
   });
 
   test("search input is present", async ({ page }) => {

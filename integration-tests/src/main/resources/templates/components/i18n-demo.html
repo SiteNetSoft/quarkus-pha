@@ -1,36 +1,41 @@
-{#include layouts/base} {#title}{msg:i18n_title}{/title} {#body}
-<a href="#i18n-main" class="pf-v6-c-skip-to-content pf-v6-c-button pf-m-primary" id="i18n-skip"
-  >{msg:skip_to_content}</a
->
-<div style="padding: 2rem" id="i18n-main">
-  <a href="/" class="pf-v6-c-button pf-m-link pf-m-inline" style="margin-bottom: 1rem; display: inline-block"
-    >&larr; Back to showcase</a
-  >
+{#include layouts/base noThemeWidget=true} {#title}{msg:i18n_title}{/title} {#body} {#include partials/showcase-page
+title=msg:i18n_title toc=tocI18n} {#lede}
+<p>{msg:i18n_intro}</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
+  </div>
+</div>
 
-  <h1>{msg:i18n_title}</h1>
-  <p>{msg:i18n_intro}</p>
+<div class="pf-v6-l-stack__item" id="i18n-main">
+  {! Localized skip link — part of the demo: every string on this page, chrome included, comes from the bundle. !}
+  <a href="#i18n-main" class="pf-v6-c-skip-to-content pf-v6-c-button pf-m-primary" id="i18n-skip"
+    >{msg:skip_to_content}</a
+  >
 
   {! Language switcher — each link re-requests the page with a ?lang param that QueryLocaleResolver reads to pick the
   message bundle. !}
-  <div class="pf-v6-c-toggle-group" role="group" aria-label="{msg:i18n_language_label}" style="margin-top: 1rem">
-    <div class="pf-v6-c-toggle-group__item">
-      <a href="?lang=en" class="pf-v6-c-toggle-group__button" id="i18n-lang-en">
-        <span class="pf-v6-c-toggle-group__text">{msg:i18n_lang_english}</span>
-      </a>
+  <div id="i18n-language">
+    <div class="pf-v6-c-toggle-group" role="group" aria-label="{msg:i18n_language_label}">
+      <div class="pf-v6-c-toggle-group__item">
+        <a href="?lang=en" class="pf-v6-c-toggle-group__button" id="i18n-lang-en">
+          <span class="pf-v6-c-toggle-group__text">{msg:i18n_lang_english}</span>
+        </a>
+      </div>
+      <div class="pf-v6-c-toggle-group__item">
+        <a href="?lang=fr" class="pf-v6-c-toggle-group__button" id="i18n-lang-fr">
+          <span class="pf-v6-c-toggle-group__text">{msg:i18n_lang_french}</span>
+        </a>
+      </div>
     </div>
-    <div class="pf-v6-c-toggle-group__item">
-      <a href="?lang=fr" class="pf-v6-c-toggle-group__button" id="i18n-lang-fr">
-        <span class="pf-v6-c-toggle-group__text">{msg:i18n_lang_french}</span>
-      </a>
-    </div>
+    <p style="margin-top: 1rem" id="i18n-current">{msg:i18n_current_language}</p>
   </div>
 
-  <p style="margin-top: 1rem" id="i18n-current">{msg:i18n_current_language}</p>
-
-  <section style="margin-top: 2rem">
+  <div id="i18n-profile" style="margin-top: 2rem">
     <div class="pf-v6-c-card" style="max-width: 28rem">
       <div class="pf-v6-c-card__title">
-        <h2 class="pf-v6-c-card__title-text" id="i18n-greeting-heading">{msg:i18n_profile_heading}</h2>
+        <h3 class="pf-v6-c-card__title-text" id="i18n-greeting-heading">{msg:i18n_profile_heading}</h3>
       </div>
       <div class="pf-v6-c-card__body" id="i18n-greeting">{msg:i18n_greeting}</div>
       <div class="pf-v6-c-card__footer">
@@ -41,6 +46,28 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </div>
-{/body} {/include}
+
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+    <div>
+      <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+        Documentation
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Qute message bundles.</strong> Every string on this page — title, intro, buttons, even the demo skip link —
+    resolves through <code class="ws-code">{|{msg:...}|}</code> from a
+    <code class="ws-code">@MessageBundle</code> interface, with an English default and a French
+    <code class="ws-code">_fr</code> variant. A <code class="ws-code">LocaleResolver</code> reads the
+    <code class="ws-code">?lang</code> query parameter to pick the bundle per request — switching language is a plain
+    link, no client-side i18n runtime.
+  </p>
+</div>
+{/showcaseBody} {/include} {/body} {/include}

@@ -1,0 +1,57 @@
+{#include layouts/base noThemeWidget=true} {#title}Click to edit{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
+<link rel="stylesheet" href="/web/css/components/htmx.css" />
+{/head} {#body} {#include partials/showcase-page docsTabs="click-to-edit" title="Click to edit" toc=tocClickToEdit}
+{#lede}
+<p>
+  Server-driven inline editing. The display view swaps to an edit form on demand; saving PUTs the values back to
+  Quarkus, which persists them and returns the refreshed display fragment. The browser holds no edit state — every step
+  is an HTMX fragment from <code class="ws-code">/api/htmx/click-to-edit</code>.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
+  </div>
+</div>
+
+{#include partials/example-card title="Edit a profile inline" slug="basic" component="click-to-edit"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Click <strong>Edit</strong> to swap the read-only view for a form; Save persists, Cancel discards.
+</p>
+{/description} {#content}{#include components/click-to-edit/basic /}{/content} {/include}
+
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+    <div>
+      <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+        Documentation
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>The server owns the edit lifecycle.</strong> The display fragment carries an Edit button that
+    <code class="ws-code">hx-get</code>s the form; the form's Save <code class="ws-code">hx-put</code>s the values and
+    the server responds with the refreshed display fragment. Cancel simply re-fetches the display view — nothing to roll
+    back client-side.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Not a PatternFly component.</strong> This is an HTMX interaction pattern composing PF description-list and
+    form markup. For the Alpine-only variant that PatternFly documents as inline edit, see
+    <a href="/components/inline-edit">Inline edit</a>.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/integration-tests/src/main/java/org/sitenetsoft/quarkus/pha/it/HtmxRoutes.java"
+    target="_blank"
+    rel="noopener noreferrer"
+    >See the server side in HtmxRoutes.java on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

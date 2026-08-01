@@ -1,0 +1,154 @@
+{#include layouts/base noThemeWidget=true} {#title}Map{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
+<link rel="stylesheet" href="/web/vendor/maplibre/maplibre-gl.css" />
+<link rel="stylesheet" href="/web/css/components/map.css" />
+<script type="module">
+  import * as maplibregl from "/web/vendor/maplibre/maplibre-gl.mjs";
+  window.maplibregl = maplibregl;
+  window.dispatchEvent(new Event("maplibre-ready"));
+</script>
+<script src="/web/js/alpine/components/map.js?v={pha:assetVersion}"></script>
+{/head} {#body} {#include partials/showcase-page docsTabs="map" title="Map" toc=tocMap} {#lede}
+<p>
+  An interactive map component built on <a href="https://maplibre.org/">MapLibre GL JS</a> with Alpine.js integration
+  and PatternFly styling. Uses free OpenStreetMap and CARTO tiles — no API key required.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
+  </div>
+</div>
+
+{#include partials/example-card title="Basic" slug="basic" component="map"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Simple map centered on North America with navigation controls.</p>
+{/description} {#content}{#include components/map/basic /}{/content} {/include} {#include partials/example-card
+title="With markers" slug="markers" component="map"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Map with markers for major cities. Click a marker to see a popup.</p>
+{/description} {#content}{#include components/map/markers /}{/content} {/include} {#include partials/example-card
+title="Dark theme" slug="dark-theme" component="map"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Map using CARTO Dark Matter tiles for a dark UI.</p>
+{/description} {#content}{#include components/map/dark-theme /}{/content} {/include} {#include partials/example-card
+title="Full controls" slug="full-controls" component="map"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Map with navigation, scale bar, and fullscreen controls.</p>
+{/description} {#content}{#include components/map/full-controls /}{/content} {/include} {#include partials/example-card
+title="GeoJSON layer" slug="geojson" component="map"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Map with a GeoJSON polygon overlay highlighting Central Park, New York.
+</p>
+{/description} {#content}{#include components/map/geojson /}{/content} {/include} {#include partials/example-card
+title="Compact" slug="compact" component="map"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">A smaller map suitable for sidebars or cards.</p>
+{/description} {#content}{#include components/map/compact /}{/content} {/include}
+
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+    <div>
+      <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+        Documentation
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-map" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Map props</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    Parameters accepted by <code class="ws-code">{|{#include components/maps/map lng="..." lat="..." /}|}</code>. For
+    markers or GeoJSON overlays, use <code class="ws-code">phaMap({|{...}|})</code> directly in
+    <code class="ws-code">x-data</code> as in the examples above.
+  </p>
+  <table class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact" role="grid" aria-label="Map props">
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+        <th scope="col" class="pf-v6-c-table__th">Default</th>
+        <th scope="col" class="pf-v6-c-table__th">Description</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">DOM id on the root; omit unless something else references the map.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><code class="ws-code">lng</code> / <code class="ws-code">lat</code> /
+            <code class="ws-code">zoom</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String (number)</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Initial center coordinates and zoom level.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">style</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Tile style preset — <code class="ws-code">light</code> or <code class="ws-code">dark</code> (CARTO), or
+            OpenStreetMap by default.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">height</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String (CSS length)</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Fixed height for the map container.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><code class="ws-code">navigationControl</code> / <code class="ws-code">scaleControl</code> /
+            <code class="ws-code">fullscreenControl</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String (boolean)</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">navigation only</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Which MapLibre controls to mount.</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Required assets.</strong> MapLibre v6 ships as ESM only, so the host page needs the module shim from the
+    examples: a <code class="ws-code">type="module"</code> script importing
+    <code class="ws-code">/web/vendor/maplibre/maplibre-gl.mjs</code>, assigning
+    <code class="ws-code">window.maplibregl</code>, and firing the <code class="ws-code">maplibre-ready</code> event —
+    plus <code class="ws-code">maplibre-gl.css</code>, <code class="ws-code">map.css</code> and the
+    <code class="ws-code">map.js</code> Alpine factory.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/maps/map.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit map.html on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

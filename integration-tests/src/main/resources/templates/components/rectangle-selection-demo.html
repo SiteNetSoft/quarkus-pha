@@ -1,0 +1,64 @@
+{#include layouts/base noThemeWidget=true} {#title}Rectangle selection{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
+<link rel="stylesheet" href="/web/css/components/rectangle-selection.css" />
+<link rel="stylesheet" href="/web/css/demos/components/rectangle-selection.css" />
+<script src="/web/js/alpine/components/rectangle-selection.js?v={pha:assetVersion}"></script>
+{/head} {#body} {#include partials/showcase-page docsTabs="rectangle-selection" title="Rectangle selection"
+toc=tocRectangleSelection} {#lede}
+<p>
+  A rectangle selection component that lets users select multiple items by dragging a selection rectangle over them,
+  similar to desktop OS file selection. Translated from the original
+  <a href="https://github.com/jnbdz/RectangleSelection">MooTools RectangleSelection</a> to vanilla JS / Alpine.js. Drag
+  near the viewport edges to auto-scroll.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
+  </div>
+</div>
+
+{#include partials/example-card title="Basic" slug="basic" component="rectangle-selection"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Click and drag on the background to draw a selection rectangle. Items that overlap will be highlighted. Drag to the
+  bottom or top edge of the browser window to auto-scroll.
+</p>
+{/description} {#content}{#include components/rectangle-selection/basic /}{/content} {/include} {#include
+partials/example-card title="With PatternFly cards" slug="with-cards" component="rectangle-selection"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">Rectangle selection over a PatternFly gallery of cards.</p>
+{/description} {#content}{#include components/rectangle-selection/with-cards /}{/content} {/include}
+
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+    <div>
+      <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+        Documentation
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Mark items with <code class="ws-code">data-selectable</code>.</strong> The component wraps its content slot
+    and tracks any descendant carrying the attribute; items overlapped by the drag rectangle are highlighted and
+    reported. Listen for the <code class="ws-code">rectangle-selected</code> /
+    <code class="ws-code">rectangle-deselected</code> window events (the counter in the basic example does exactly that)
+    to react to selection changes.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Required assets.</strong> <code class="ws-code">/web/css/components/rectangle-selection.css</code> and
+    <code class="ws-code">/web/js/alpine/components/rectangle-selection.js</code> (before Alpine).
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/data-display/rectangle-selection.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit rectangle-selection.html on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

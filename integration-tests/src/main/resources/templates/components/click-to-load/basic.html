@@ -1,0 +1,4 @@
+{! Click to load — manual pagination: the button fetches the next batch from the server and replaces itself
+   with the new rows plus the next button. !}
+<div class="pf-v6-c-data-list" id="load-list" role="list"></div>
+{#include components/htmx/click-to-load id="load-more-btn-0" loadUrl="/api/htmx/load-more?page=0" /}

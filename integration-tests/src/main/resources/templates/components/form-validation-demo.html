@@ -1,0 +1,58 @@
+{#include layouts/base noThemeWidget=true} {#title}Form validation{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
+<link rel="stylesheet" href="/web/css/components/htmx.css" />
+{/head} {#body} {#include partials/showcase-page docsTabs="form-validation" title="Form validation"
+toc=tocFormValidation} {#lede}
+<p>
+  Server-driven form validation. The form posts to Quarkus on submit; the server validates every field and returns the
+  form fragment with PatternFly error states and helper text swapped back in — no client-side validation logic.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
+  </div>
+</div>
+
+{#include partials/example-card title="Server-side validated signup" slug="basic" component="form-validation"}
+{#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Try submitting an empty form, a 2-character username, an invalid email, or the username
+  <code class="ws-code">admin</code> (a server-only "already taken" rule). Validation runs at
+  <code class="ws-code">/api/htmx/form-validate</code>.
+</p>
+{/description} {#content}{#include components/form-validation/basic /}{/content} {/include}
+
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+    <div>
+      <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+        Documentation
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>One validator, on the server.</strong> Rules that need server data anyway (uniqueness, permissions) live in
+    one place, and the browser just renders the returned fragment — the same PF helper-text pattern used by the
+    <a href="/components/form">form</a> component, with error states applied server-side.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Don't rely on native popups.</strong> The inputs deliberately avoid browser-native validation UI (see the
+    <a href="/components/text-input">text input</a> guidance); the server response is the single source of error
+    presentation, announced via the helper-text live region.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/integration-tests/src/main/java/org/sitenetsoft/quarkus/pha/it/HtmxRoutes.java"
+    target="_blank"
+    rel="noopener noreferrer"
+    >See the server side in HtmxRoutes.java on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

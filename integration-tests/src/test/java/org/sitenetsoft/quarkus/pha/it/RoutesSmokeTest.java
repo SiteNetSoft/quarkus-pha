@@ -251,7 +251,11 @@ class RoutesSmokeTest {
                 .statusCode(200)
                 .body(containsString("is a composition"));
         given().when().get("/components/definitely-not-real/docs/qute").then().statusCode(404);
-        given().when().get("/components/chip/docs/qute").then().statusCode(404);
+        given()
+            .when().get("/components/chip/docs/qute")
+            .then()
+                .statusCode(200)
+                .body(containsString("components/data-display/chip"));
         given().when().get("/components/i18n/docs/qute").then().statusCode(404);
     }
 

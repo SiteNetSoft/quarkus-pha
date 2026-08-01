@@ -1,0 +1,11 @@
+{! Lazy modal — the modal body is fetched from /api/htmx/modal-content when the modal opens. !}
+<button
+  class="pf-v6-c-button pf-m-primary"
+  type="button"
+  id="open-lazy-modal-btn"
+  @click="$dispatch('open-modal', 'lazy-modal-demo')"
+>
+  Open lazy modal
+</button>
+{#include components/htmx/lazy-modal id="lazy-modal-demo" titleText="Server Details"
+loadUrl="/api/htmx/modal-content/details" size="md" /}

@@ -1,0 +1,220 @@
+{#include layouts/base noThemeWidget=true} {#title}Video player{/title} {#head}
+<script src="/web/js/alpine/components/code-example.js?v={pha:assetVersion}"></script>
+<link rel="stylesheet" href="/web/vendor/videojs/video-js.min.css" />
+<link rel="stylesheet" href="/web/css/components/video-player.css" />
+<script src="/web/vendor/videojs/video.min.js"></script>
+<script src="/web/js/alpine/components/video-player.js?v={pha:assetVersion}"></script>
+{/head} {#body} {#include partials/showcase-page docsTabs="video-player" title="Video player" toc=tocVideoPlayer}
+{#lede}
+<p>
+  An embeddable video player powered by <a href="https://videojs.org/">Video.js</a>. Wraps an HTML5
+  <code class="ws-code">&lt;video&gt;</code> element with a consistent UI, format fallbacks, and an Alpine.js API for
+  play/pause/seek and event hooks.
+</p>
+{/lede} {#showcaseBody}
+<div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+  <div>
+    <h2 id="examples" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">Examples</h2>
+  </div>
+</div>
+
+{#include partials/example-card title="Basic (no source)" slug="basic" component="video-player"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Minimal player with no <code class="ws-code">src</code> configured. Video.js renders its empty/error state for missing
+  media.
+</p>
+{/description} {#content}{#include components/video-player/basic /}{/content} {/include} {#include partials/example-card
+title="MP4 source" slug="mp4" component="video-player"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Standard MP4 playback with a poster image, using a locally vendored sample clip.
+</p>
+{/description} {#content}{#include components/video-player/mp4 /}{/content} {/include} {#include partials/example-card
+title="Playback rates + muted autoplay" slug="playback-rates" component="video-player"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Player configured with selectable playback rates and a muted autoplay loop (required by browsers for unattended
+  playback).
+</p>
+{/description} {#content}{#include components/video-player/playback-rates /}{/content} {/include} {#include
+partials/example-card title="With toolbar" slug="with-toolbar" component="video-player"} {#description}
+<p class="pf-v6-c-content--p pf-m-editorial ws-p">
+  Player paired with a PatternFly-styled toolbar that calls the Alpine API to control playback.
+</p>
+{/description} {#content}{#include components/video-player/with-toolbar /}{/content} {/include}
+
+<div class="pf-v6-l-stack__item" style="margin-top: 2rem">
+  <div class="pf-v6-l-flex pf-m-space-items-sm pf-m-align-items-center">
+    <div>
+      <h2 id="documentation" tabindex="-1" class="pf-v6-c-content--h2 pf-m-editorial ws-heading ws-title ws-h2">
+        Documentation
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="props-video-player" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">
+    Video player props
+  </h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    Parameters accepted by <code class="ws-code">{|{#include components/media/video-player id="..." /}|}</code>. The
+    main block (<code class="ws-code">{|{#content}{/content}|}</code>) renders above the video surface — use it for
+    toolbars or overlays that talk to the player's Alpine API.
+  </p>
+  <table
+    class="pf-v6-u-mt-md pf-v6-u-mb-lg pf-v6-c-table pf-m-grid-lg pf-m-compact"
+    role="grid"
+    aria-label="Video player props"
+  >
+    <thead class="pf-v6-c-table__thead">
+      <tr class="pf-v6-c-table__tr">
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Name</th>
+        <th scope="col" class="pf-v6-c-table__th pf-m-width-20">Type</th>
+        <th scope="col" class="pf-v6-c-table__th">Default</th>
+        <th scope="col" class="pf-v6-c-table__th">Description</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup" class="pf-v6-c-table__tbody">
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">id</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">— (required)</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >DOM id of the wrapper; derives <code class="ws-code">{|{id}|}-field</code> on the
+            <code class="ws-code">&lt;video-js&gt;</code> element that Video.js attaches to.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">src</code> / <code class="ws-code">type</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Media URL and its MIME type (e.g. <code class="ws-code">video/mp4</code>). Omit both for a source-less
+            player.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">poster</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String (URL)</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Image shown before playback starts.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">height</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String (CSS length)</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Fixed height for the video surface; by default the player is fluid and sizes to its container.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            ><code class="ws-code">autoplay</code> / <code class="ws-code">loop</code> /
+            <code class="ws-code">muted</code></span
+          >
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">false</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Standard media flags. Browsers only honor <code class="ws-code">autoplay</code> together with
+            <code class="ws-code">muted=true</code>.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">controls</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">true</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Show Video.js's own control bar.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">preload</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">auto</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Passed through to the media element: <code class="ws-code">auto</code>,
+            <code class="ws-code">metadata</code> or <code class="ws-code">none</code>.</span
+          >
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">fluid</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">boolean</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">true</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text">Scale the player to fit its container while keeping aspect ratio.</span>
+        </td>
+      </tr>
+      <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"><code class="ws-code">playbackRates</code></span>
+        </td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">String (JSON array)</span></td>
+        <td class="pf-v6-c-table__td"><span class="pf-v6-c-table__text">—</span></td>
+        <td class="pf-v6-c-table__td">
+          <span class="pf-v6-c-table__text"
+            >Selectable speeds for the control bar, e.g. <code class="ws-code">"[0.5, 1, 1.5, 2]"</code>.</span
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <h3 id="usage" tabindex="-1" class="pf-v6-c-content--h3 pf-m-editorial ws-heading">Usage</h3>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Required assets.</strong> The component needs the vendored Video.js bundle and the pha wrapper loaded on the
+    host page: <code class="ws-code">/web/vendor/videojs/video-js.min.css</code>,
+    <code class="ws-code">/web/css/components/video-player.css</code>,
+    <code class="ws-code">/web/vendor/videojs/video.min.js</code> and
+    <code class="ws-code">/web/js/alpine/components/video-player.js</code> (both scripts before Alpine).
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Alpine API.</strong> The wrapper exposes <code class="ws-code">toggle()</code>,
+    <code class="ws-code">seek(seconds)</code> and <code class="ws-code">mute()</code> plus
+    <code class="ws-code">ready</code> and <code class="ws-code">playing</code> state — anything placed in the
+    component's content slot (like the toolbar example) can bind to them directly.
+  </p>
+  <p class="pf-v6-c-content--p pf-m-editorial">
+    <strong>Autoplay policy.</strong> Browsers block unmuted autoplay; combine
+    <code class="ws-code">autoplay=true</code> with <code class="ws-code">muted=true</code> (and usually
+    <code class="ws-code">loop=true</code>) for ambient background video.
+  </p>
+</div>
+
+<div class="pf-v6-l-stack__item">
+  <br /><a
+    href="https://github.com/SiteNetSoft/quarkus-pha/blob/develop/runtime/src/main/resources/templates/components/media/video-player.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Edit video-player.html on GitHub</a
+  >
+</div>
+{/showcaseBody} {/include} {/body} {/include}

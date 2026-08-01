@@ -6,7 +6,7 @@ test.describe("Click to Load", () => {
   });
 
   test("page loads with heading", async ({ page }) => {
-    await expect(page.locator("#click-to-load-heading")).toBeVisible();
+    await expect(page.locator("h3#basic")).toBeVisible();
   });
 
   test("load more button is present", async ({ page }) => {

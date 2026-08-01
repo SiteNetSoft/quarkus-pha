@@ -6,12 +6,12 @@ test.describe("Rectangle Selection", () => {
   });
 
   test("page loads with correct heading", async ({ page }) => {
-    await expect(page.locator("h1")).toHaveText("Rectangle Selection");
+    await expect(page.locator("h1")).toHaveText("Rectangle selection");
   });
 
   test("all section headings are visible", async ({ page }) => {
-    await expect(page.locator("#basic-heading")).toBeVisible();
-    await expect(page.locator("#with-cards-heading")).toBeVisible();
+    await expect(page.locator("h3#basic")).toBeVisible();
+    await expect(page.locator("h3#with-cards")).toBeVisible();
   });
 
   test.describe("Basic", () => {

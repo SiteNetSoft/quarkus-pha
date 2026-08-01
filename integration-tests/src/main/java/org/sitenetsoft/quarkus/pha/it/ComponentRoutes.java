@@ -105,7 +105,7 @@ public class ComponentRoutes {
     @Inject
     Template checkboxPage;
 
-    @Location("components/chip")
+    @Location("components/chip-demo")
     @Inject
     Template chipPage;
 
@@ -421,35 +421,35 @@ public class ComponentRoutes {
     @Inject
     Template timePickerPage;
 
-    @Location("components/rectangle-selection")
+    @Location("components/rectangle-selection-demo")
     @Inject
     Template rectangleSelectionPage;
 
-    @Location("components/map")
+    @Location("components/map-demo")
     @Inject
     Template mapPage;
 
-    @Location("components/document-editor")
+    @Location("components/document-editor-demo")
     @Inject
     Template documentEditorPage;
 
-    @Location("components/form-validation")
+    @Location("components/form-validation-demo")
     @Inject
     Template formValidationPage;
 
-    @Location("components/sortable-table")
+    @Location("components/sortable-table-demo")
     @Inject
     Template sortableTablePage;
 
-    @Location("components/click-to-edit")
+    @Location("components/click-to-edit-demo")
     @Inject
     Template clickToEditPage;
 
-    @Location("components/toast-confirm")
+    @Location("components/toast-confirm-demo")
     @Inject
     Template toastConfirmPage;
 
-    @Location("components/skeleton-loading")
+    @Location("components/skeleton-loading-demo")
     @Inject
     Template skeletonLoadingPage;
 
@@ -457,7 +457,7 @@ public class ComponentRoutes {
     @Inject
     Template i18nPage;
 
-    @Location("components/live-search")
+    @Location("components/live-search-demo")
     @Inject
     Template liveSearchPage;
 
@@ -465,19 +465,19 @@ public class ComponentRoutes {
     @Inject
     Template infiniteScrollPage;
 
-    @Location("components/click-to-load")
+    @Location("components/click-to-load-demo")
     @Inject
     Template clickToLoadPage;
 
-    @Location("components/lazy-modal")
+    @Location("components/lazy-modal-demo")
     @Inject
     Template lazyModalPage;
 
-    @Location("components/video-player")
+    @Location("components/video-player-demo")
     @Inject
     Template videoPlayerPage;
 
-    @Location("components/rich-text-editor")
+    @Location("components/rich-text-editor-demo")
     @Inject
     Template richTextEditorPage;
 
