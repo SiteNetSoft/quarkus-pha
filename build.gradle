@@ -37,6 +37,11 @@ subprojects {
             // drop these forces once the BOM ships >= 2.22.1
             force 'com.fasterxml.jackson.core:jackson-core:2.22.1'
             force 'com.fasterxml.jackson.core:jackson-databind:2.22.1'
+            // GHSA-pmhh-3w7g-xqp8 (jsoup Cleaner): build-time only, pulled in by
+            // io.quarkus:quarkus-extension-processor (annotationProcessor) at
+            // 1.15.3; fixed in 1.23.1. Never ships to consumers.
+            // drop once quarkus-extension-processor depends on >= 1.23.1
+            force 'org.jsoup:jsoup:1.23.1'
         }
     }
 
