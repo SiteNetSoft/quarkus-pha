@@ -18,8 +18,8 @@ allprojects {
     buildscript {
         configurations.classpath {
             resolutionStrategy {
-                force 'com.fasterxml.jackson.core:jackson-core:2.22.1'
-                force 'com.fasterxml.jackson.core:jackson-databind:2.22.1'
+                force 'com.fasterxml.jackson.core:jackson-core:2.22.2'
+                force 'com.fasterxml.jackson.core:jackson-databind:2.22.2'
                 force 'org.codehaus.plexus:plexus-utils:4.0.3'
             }
         }
@@ -35,8 +35,8 @@ subprojects {
             // GHSA-5jmj-h7xm-6q6v (jackson-databind): Quarkus 3.37.4 still pins
             // jackson 2.22.0; all three are fixed in 2.22.1.
             // drop these forces once the BOM ships >= 2.22.1
-            force 'com.fasterxml.jackson.core:jackson-core:2.22.1'
-            force 'com.fasterxml.jackson.core:jackson-databind:2.22.1'
+            force 'com.fasterxml.jackson.core:jackson-core:2.22.2'
+            force 'com.fasterxml.jackson.core:jackson-databind:2.22.2'
             // GHSA-pmhh-3w7g-xqp8 (jsoup Cleaner): build-time only, pulled in by
             // io.quarkus:quarkus-extension-processor (annotationProcessor) at
             // 1.15.3; fixed in 1.23.1. Never ships to consumers.
